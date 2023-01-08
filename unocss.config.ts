@@ -41,13 +41,11 @@ const rules: Rule[] = [
 		}
 	}],
 
-	// (absolute|fixed|relative|sticky)
 	["absolute",            { "position": "absolute" }],
 	["fixed",               { "position": "fixed"    }],
 	["relative",            { "position": "relative" }],
 	["sticky",              { "position": "sticky"   }],
 
-	// inset-*, inset-(y|x|t|r|b|l|tr|br|bl|tl)-*, (t|r|b|l|z)-*
 	[/^(-?)inset-(.+)$/,    ([_, sign, value]) => ({ "inset":          desugar(value, { sign }) })],
 	[/^(-?)inset-y-(.+)$/,  ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": "auto",                    "bottom": desugar(value, { sign }), "left": "auto"                    })],
 	[/^(-?)inset-x-(.+)$/,  ([_, sign, value]) => ({ "top":            "auto",                   "right": desugar( value, { sign }), "bottom": "auto",                   "left": desugar( value, { sign }) })],
@@ -65,7 +63,6 @@ const rules: Rule[] = [
 	[/^(-?)l-(.+)$/,        ([_, sign, value]) => ({ "left":           desugar(value, { sign }) })],
 	[/^z-(.+)$/,            ([_, value]) =>       ({ "z-index":        desugar(value, { px: false })})],
 
-	// -?(m(y|x|t|r|b|l)?)-*, (p(y|x|t|r|b|l)?)-*
 	[/^(-?)m-(.+)$/,        ([_, sign, value]) => ({ "margin":         desugar(value, { sign }) })],
 	[/^(-?)my-(.+)$/,       ([_, sign, value]) => ({ "margin-top":     desugar(value, { sign }), "margin-bottom": desugar(value, { sign }) })],
 	[/^(-?)mx-(.+)$/,       ([_, sign, value]) => ({ "margin-right":   desugar(value, { sign }), "margin-left":   desugar(value, { sign }) })],
@@ -81,37 +78,31 @@ const rules: Rule[] = [
 	[/^pb-(.+)$/,           ([_, value])       => ({ "padding-bottom": desugar(value) })],
 	[/^pl-(.+)$/,           ([_, value])       => ({ "padding-left":   desugar(value) })],
 
-	// (justify|align)-self-*, flex-(grow|shrink|basis)-*
 	[/^justify-self-(.+)$/, ([_, value]) => ({ "justify-self":         desugar(value, { px: false }) })],
 	[/^align-self-(.+)$/,   ([_, value]) => ({ "align-self":           desugar(value, { px: false }) })],
 	[/^flex-grow-(.+)$/,    ([_, value]) => ({ "flex-grow":            desugar(value, { px: false }) })],
 	[/^flex-shrink-(.+)$/,  ([_, value]) => ({ "flex-shrink":          desugar(value, { px: false }) })],
 	[/^flex-basis-(.+)$/,   ([_, value]) => ({ "flex-basis":           desugar(value) })],
 
-	// flex, inline-flex, flex-(row|col)
 	["flex",                { "display": "flex"          }],
 	["inline-flex",         { "display": "inline-flex"   }],
 	["flex-row",            { "flex-direction": "row"    }],
 	["flex-col",            { "flex-direction": "column" }],
 
-	// justify-*, align-*, flex-wrap-*
 	[/^justify-(.+)$/,      ([_, value]) => ({ "justify-content":      desugar(value, { px: false }) })],
 	[/^align-(.+)$/,        ([_, value]) => ({ "align-items":          desugar(value, { px: false }) })],
 	[/^flex-wrap-(.+)$/,    ([_, value]) => ({ "flex-wrap":            desugar(value, { px: false }) })],
 	[/^order-(.+)$/,        ([_, value]) => ({ "order":                desugar(value, { px: false }) })],
 
-	// grid, grid-*, grid-(rows|cols)-*
 	["grid",                { "display": "grid" }],
 	[/^grid-(.+)$/,         ([_, value]) => ({ "display": "grid", "grid-template":         Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 	[/^grid-rows-(.+)$/,    ([_, value]) => ({ "display": "grid", "grid-template-rows":    Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 	[/^grid-cols-(.+)$/,    ([_, value]) => ({ "display": "grid", "grid-template-columns": Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 
-	// gap-*, gap-(y|x)-*
 	[/^gap-(.+)$/,          ([_, value]) => ({ "gap":                  desugar(value) })],
 	[/^gap-y-(.+)$/,        ([_, value]) => ({ "row-gap":              desugar(value) })],
 	[/^gap-x-(.+)$/,        ([_, value]) => ({ "column-gap":           desugar(value) })],
 
-	// h-*, (min|max)-h-*m w-*, (min|max)-w-*, aspect-*
 	[/^h-(.+)$/,            ([_, value]) => ({ "height":               desugar(value) })],
 	[/^min-h-(.+)$/,        ([_, value]) => ({ "min-height":           desugar(value) })],
 	[/^max-h-(.+)$/,        ([_, value]) => ({ "max-height":           desugar(value) })],
@@ -120,7 +111,6 @@ const rules: Rule[] = [
 	[/^max-w-(.+)$/,        ([_, value]) => ({ "max-width":            desugar(value) })],
 	[/^aspect-(.+)$/,       ([_, value]) => ({ "aspect-ratio":         desugar(value, { px: false }) })],
 
-	// rounded-*, rounded-(t|r|b|l|tr|br|bl|tl)-*
 	[/^rounded-(.+)$/,      ([_, value]) => ({ "border-radius":              desugar(value) })],
 	[/^rounded-t-(.+)$/,    ([_, value]) => ({ "border-top-left-radius":     desugar(value), "border-top-right-radius":    desugar(value) })],
 	[/^rounded-r-(.+)$/,    ([_, value]) => ({ "border-top-right-radius":    desugar(value), "border-bottom-right-radius": desugar(value) })],
@@ -131,7 +121,6 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,   ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,   ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
-	// color-*, bg-(color|image)-*, shadow-*
 	[/^color-(.+)$/,        ([_, value]) => ({ "color":                desugar(value, { px: false }) })],
 	[/^bg-color-(.+)$/,     ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
 	[/^bg-image-(.+)$/,     ([_, value]) => ({ "background-image":     desugar(value, { px: false }) })],
