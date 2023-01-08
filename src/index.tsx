@@ -6,5 +6,5 @@ function App() {
 	</>
 }
 
-createRoot(document.getElementById("root")!)
+createRoot(document.getElementById("app")!)
 	.render(<App />)
