@@ -121,9 +121,8 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,   ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,   ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
-	[/^color-(.+)$/,        ([_, value]) => ({ "color":                desugar(value, { px: false }) })],
-	[/^bg-color-(.+)$/,     ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
-	[/^bg-image-(.+)$/,     ([_, value]) => ({ "background-image":     desugar(value, { px: false }) })],
+	[/^c-(.+)$/,            ([_, value]) => ({ "color":                desugar(value, { px: false }) })],
+	[/^bg-(.+)$/,           ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
 	[/^shadow-(.+)$/,       ([_, value]) => ({ "box-shadow":           desugar(value, { px: false }) })],
 ]
 
