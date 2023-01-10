@@ -26,7 +26,7 @@ const sitemap = `
     <loc>https://feathericons.dev</loc>
     <lastmod>${DATE}</lastmod>
   </url>
-  ${manifest.map(name => `
+  ${manifest.slice(0, 6).map(name => `
   <url>
     <loc>https://feathericons.dev/${name}</loc>
     <lastmod>${DATE}</lastmod>

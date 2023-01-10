@@ -41,31 +41,11 @@ const rules: Rule[] = [
 		}
 	}],
 
-	//// // Arbitrary key-value e.g. property=value
-	//// [/-?([a-z][a-z-]*)=(.+)$/, ([_, property, value]) => {
-	//// 	const px = property in unitless
-	//// 	return {
-	//// 		[property]: desugar(value, { px }),
-	//// 	}
-	//// }],
-
 	["absolute",            { "position": "absolute" }],
 	["fixed",               { "position": "fixed"    }],
 	["relative",            { "position": "relative" }],
-	//// ["static",              { "position": "static" }],
+	["static",              { "position": "static" }],
 	["sticky",              { "position": "sticky"   }],
-
-	//// [/^(-?)inset-(.+)$/,    ([_, sign, value]) => ({ "inset":          desugar(value, { sign }) })],
-	//// [/^(-?)inset-y-(.+)$/,  ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": "auto",                    "bottom": desugar(value, { sign }), "left": "auto"                   })],
-	//// [/^(-?)inset-x-(.+)$/,  ([_, sign, value]) => ({ "top":            "auto",                   "right": desugar( value, { sign }), "bottom": "auto",                   "left": desugar(value, { sign }) })],
-	//// [/^(-?)inset-t-(.+)$/,  ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": "auto",                   "left": desugar(value, { sign }) })],
-	//// [/^(-?)inset-r-(.+)$/,  ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": desugar(value, { sign }), "left": "auto"                   })],
-	//// [/^(-?)inset-b-(.+)$/,  ([_, sign, value]) => ({ "top":            "auto",                   "right": desugar( value, { sign }), "bottom": desugar(value, { sign }), "left": desugar(value, { sign }) })],
-	//// [/^(-?)inset-l-(.+)$/,  ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": "auto",                    "bottom": desugar(value, { sign }), "left": desugar(value, { sign }) })],
-	//// [/^(-?)inset-tr-(.+)$/, ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": "auto",                   "left": "auto"                   })],
-	//// [/^(-?)inset-br-(.+)$/, ([_, sign, value]) => ({ "top":            "auto",                   "right": desugar( value, { sign }), "bottom": desugar(value, { sign }), "left": "auto"                   })],
-	//// [/^(-?)inset-bl-(.+)$/, ([_, sign, value]) => ({ "top":            "auto",                   "right": "auto",                    "bottom": desugar(value, { sign }), "left": desugar(value, { sign }) })],
-	//// [/^(-?)inset-tl-(.+)$/, ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": "auto",                    "bottom": "auto",                   "left": desugar(value, { sign }) })],
 
 	[/^(-?)tr-(.+)$/,       ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": "auto",                   "left": "auto"                   })],
 	[/^(-?)br-(.+)$/,       ([_, sign, value]) => ({ "top":            "auto",                   "right": desugar( value, { sign }), "bottom": desugar(value, { sign }), "left": "auto"                   })],
@@ -147,6 +127,8 @@ const rules: Rule[] = [
 ]
 
 export default defineConfig({
+	presets: [],
+	rules,
 	theme: {
 		breakpoints: {
 			sm:     "640px",
@@ -156,8 +138,6 @@ export default defineConfig({
 			"2xl": "1536px",
 		},
 	},
-	presets: [],
-	rules,
 	transformers: [transformerVariantGroup()],
 	variants: [
 		variantBreakpoints, // E.g. xl:x-y

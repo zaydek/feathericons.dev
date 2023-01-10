@@ -1,5 +1,5 @@
 import { manifest } from "./data/manifest"
-import { Home } from "./pages/home"
+import { Home } from "./pages/home-backup"
 import { Page } from "./pages/page"
 import { Route, Router, RouterProvider } from "./router"
 import { TransitionProvider } from "./transition"
