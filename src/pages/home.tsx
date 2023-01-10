@@ -34,15 +34,12 @@ export function Home() {
 		</div>
 		{/* Use negative margin-top here because of foreground obscure effect */}
 		<div className="mt-calc(-1_*_(200px_+_32px)) pb-64 px-32 bg-$gray-color">
-		{/* <div className="-mt-32 pb-64 px-32 bg-$gray-color"> */}
 			<div className="-mx-32 sticky t-0 z-10 flex [&_>_:nth-child(3)]:grow-1">
-				{/* LHS */}
 				<div className="h-64 w-32 bg-$trim-color"></div>
 				<div className="relative">
 					<div className="h-64 w-32 bg-$trim-color"></div>
 					<div className="absolute br-0 h-32 w-32 rounded-tl-1e3 bg-$base-color"></div>
 				</div>
-				{/* RHS */}
 				<div className="h-32 bg-$trim-color"></div>
 				<div className="relative">
 					<div className="h-64 w-32 bg-$trim-color"></div>
