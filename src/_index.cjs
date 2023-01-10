@@ -17372,7 +17372,7 @@ var require_jsx_runtime = __commonJS({
   }
 });
 
-// src/idea-2.tsx
+// src/idea.tsx
 var fs = __toESM(require("fs"), 1);
 var path = __toESM(require("path"), 1);
 var import_server = __toESM(require_server_node(), 1);
@@ -17471,7 +17471,7 @@ function App({ initialPath }) {
   ] }) }) });
 }
 
-// src/idea-2.tsx
+// src/idea.tsx
 var import_jsx_runtime6 = __toESM(require_jsx_runtime(), 1);
 var manifest = {
   "/": { title: "Home" },
@@ -17498,7 +17498,6 @@ for (const [pathname, info] of Object.entries(manifest)) {
 `, `<div id="root">${(0, import_server.renderToString)(/* @__PURE__ */ (0, import_jsx_runtime6.jsx)(App, { initialPath: pathname }))}</div>`).replace(/<title>[^<]*<\/title>/, `<title>${info.title}</title>`);
   console.log(`+ ${pathname}`);
   console.log(page);
-  console.log();
   const filename = `dist/${safePathname(pathname)}`;
   fs.mkdirSync(path.dirname(filename), { recursive: true });
   fs.writeFileSync(filename, page);

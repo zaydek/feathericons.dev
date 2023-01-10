@@ -1,6 +1,8 @@
 import "the-new-css-reset"
 import "uno.css"
 
+import "./idea.css"
+
 import { createRoot, hydrateRoot } from "react-dom/client"
 import { App } from "./app"
 

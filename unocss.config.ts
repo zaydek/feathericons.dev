@@ -126,8 +126,6 @@ const rules: Rule[] = [
 	[/^shadow-(.+)$/,       ([_, value]) => ({ "box-shadow":           desugar(value, { px: false }) })],
 ]
 
-////////////////////////////////////////////////////////////////////////////////
-
 export default defineConfig({
 	presets: [],
 	rules,
