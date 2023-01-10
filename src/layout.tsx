@@ -4,14 +4,15 @@ import { PathContext } from "./router"
 export function Layout({ children }: PropsWithChildren) {
 	const path = useContext(PathContext)!
 
-	//// const [count, setCount] = useState(0)
 	const [started, setStarted] = useState(false)
 
 	// On path changes...
 	useEffect(() => {
-		setTimeout(() => {
-			setStarted(true)
-		}, 100)
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				setStarted(true)
+			})
+		})
 		return () => {
 			setStarted(false)
 		}
@@ -21,10 +22,18 @@ export function Layout({ children }: PropsWithChildren) {
 		<div>
 			This is a wrapped component
 			<div style={{
+				opacity: started
+					? 1
+					: 0,
 				transform: started
 					? "translateX(0px)"
 					: "translateX(-16px)",
-				transition: "transform 300ms ease",
+				transition: started
+					? "1e3ms ease"
+					: "revert", // Transition only forwards
+				transitionProperty: started
+					? "opacity, transform"
+					: "revert",
 			}}>
 				{children}
 			</div>
