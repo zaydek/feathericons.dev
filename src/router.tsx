@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, createContext, Dispatch, LazyExoticComponent, PropsWithChildren, ReactElement, SetStateAction, useContext, useMemo, useState } from "react"
+import { AnchorHTMLAttributes, createContext, Dispatch, LazyExoticComponent, PropsWithChildren, ReactElement, SetStateAction, useContext, useEffect, useMemo, useState } from "react"
 
 export const PathContext =
 	createContext("")
@@ -43,6 +43,12 @@ export function Router({ children }: PropsWithChildren) {
 export function RouterProvider({ initialPath, children }: PropsWithChildren<{ initialPath: string }>) {
 	const [path, setPath] = useState(initialPath)
 	//// const [routes, setRoutes] = useState<Record<string, (() => JSX.Element) | LazyExoticComponent<any>>>({})
+
+	useEffect(() => {
+		window.addEventListener("popstate", e => {
+			setPath(window.location.pathname)
+		}, false)
+	}, [])
 
 	return <>
 		<PathContext.Provider value={path}>
