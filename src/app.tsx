@@ -1,8 +1,8 @@
-import PageFoo from "./page-foo"
-import PageFooBar from "./page-foo-bar"
 import Homepage from "./page-homepage"
+import PageName from "./page-name"
 
-import { AnchorHTMLAttributes, createContext, Dispatch, LazyExoticComponent, ReactNode, SetStateAction, Suspense, useContext, useEffect, useMemo, useState } from "react"
+import { AnchorHTMLAttributes, createContext, Dispatch, LazyExoticComponent, PropsWithChildren, ReactElement, SetStateAction, Suspense, useContext, useEffect, useMemo, useState } from "react"
+import { manifest } from "./manifest"
 
 const PathContext =
 	createContext("")
@@ -24,14 +24,17 @@ function Route({ path: href, component }: { path: string, component: (() => JSX.
 	return <></>
 }
 
-function Router({ initialPath, children }: { initialPath?: string, children?: ReactNode }) {
-	const [path, setPath] = useState(typeof window === "undefined" ? initialPath ?? "/" : window.location.pathname)
+function Router({ initialPath, children }: PropsWithChildren<{ initialPath: string }>) {
+	const [path, setPath] = useState(initialPath)
 	const [routes, setRoutes] = useState(new Map<string, (() => JSX.Element) | LazyExoticComponent<any>>())
 
 	const Component = useMemo(() => {
-		type RouteChildren = { props: { path: string, component: (() => JSX.Element) | LazyExoticComponent<any> } }[]
+		type RouteElement = ReactElement<{ path: string, component: (() => JSX.Element) | LazyExoticComponent<any> }, typeof Route>
+		type RouteElementChildren = RouteElement[]
 
-		const jsx = (children as RouteChildren).find(route => route.props.path === path)
+		const jsx = (children as RouteElementChildren)
+			.flat()
+			.find(route => route.props.path === path)
 		return jsx!.props.component // TODO: Add fallback or 404
 	}, [children, path])
 
@@ -63,30 +66,19 @@ export function Anchor({ href, children, ...props }: { href: string } & AnchorHT
 	</>
 }
 
-//// console.log(import.meta.env)
-
-export function App({ initialPath }: { initialPath?: string }) {
+export function App({ initialPath }: { initialPath: string }) {
 	return <>
 		<Suspense fallback="Loading...">
 			<Router initialPath={initialPath}>
-				<Route path="/"
-					component={Homepage} />
-				<Route path="/foo"
-					component={PageFoo} />
-				<Route path="/foo/bar"
-					component={PageFooBar} />
+				<Route path="/" component={Homepage} />
+				{manifest.map(name =>
+					<Route
+						key={name}
+						path={`/${name}`}
+						component={() => <PageName name={name} />}
+					/>
+				)}
 			</Router>
 		</Suspense>
 	</>
 }
-
-//// {/* <Suspense fallback="Loading">
-//// 	<nav className="flex justify-center align-center gap-16 h-100vh">
-//// 		<Link className="flex justify-center align-center w-96 h-32 rounded-1e3 bg-color-orange [cursor]-pointer" href="/" /* href={`/${element}`} */>
-//// 			App
-//// 		</Link>
-//// 		<Link className="flex justify-center align-center w-96 h-32 rounded-1e3 bg-color-orange [cursor]-pointer" href="/app-page" /* href={`/${element}`} */>
-//// 			App Page
-//// 		</Link>
-//// 	</nav>
-//// </Suspense> */}

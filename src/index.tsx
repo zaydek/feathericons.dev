@@ -7,8 +7,10 @@ import { createRoot, hydrateRoot } from "react-dom/client"
 import { App } from "./app"
 
 const root = document.getElementById("root")!
-if (typeof window === "undefined") {
-	hydrateRoot(root, <App />)
+if (import.meta.env.DEV) {
+	console.log("[DEBUG] createRoot")
+	createRoot(root).render(<App initialPath={window.location.pathname} />)
 } else {
-	createRoot(root).render(<App />)
+	console.log("[DEBUG] hydrateRoot")
+	hydrateRoot(root, <App initialPath={window.location.pathname} />)
 }
