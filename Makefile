@@ -1,3 +1,9 @@
+tailwind:
+	npx tailwind -i src/tailwind.css -o src/tailwind.generated.css
+
+tailwind-watch:
+	npx tailwind -i src/tailwind.css -o src/tailwind.generated.css -w
+
 ssg:
 	npx vite build
 	npx esbuild src/_ssg.tsx \
@@ -8,5 +14,3 @@ ssg:
 		--platform=node        \
 		--sourcemap
 	node --enable-source-maps src/_ssg.generated.cjs
-
-# npx vite preview --port=3000

@@ -1,7 +1,7 @@
 import "the-new-css-reset"
-import "uno.css"
 
-import "./idea.css"
+import "./css/base.scss"
+import "./tailwind.generated.css"
 
 import { createRoot, hydrateRoot } from "react-dom/client"
 import { App } from "./app"

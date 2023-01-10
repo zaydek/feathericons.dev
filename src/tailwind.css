@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--button-size:      48px;
+	--button-icon-size: 24px;
+
+	--hairline-color: hsl(0, 0%, 85%);
+	--fill-color:     hsl(0, 0%, 25%);
+}
