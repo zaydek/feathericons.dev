@@ -4,22 +4,9 @@ export const PathContext =
 	createContext("")
 export const SetPathContext =
 	createContext<Dispatch<SetStateAction<string>> | null>(null)
-//// export const RoutesContext =
-//// 	createContext<Record<string, (() => JSX.Element) | LazyExoticComponent<any>>>({})
-//// export const SetRoutesContext =
-//// 	createContext<Dispatch<SetStateAction<Record<string, (() => JSX.Element) | LazyExoticComponent<any>>>> | null>(null)
 
 // Container component
-export function Route({ path: href, component }: { path: string, component: (() => JSX.Element) | LazyExoticComponent<any> }) {
-	//// const setRoutes = useContext(SetRoutesContext)!
-	////
-	//// useEffect(() => {
-	//// 	setRoutes(curr => ({
-	//// 		...curr,
-	//// 		[href]: component,
-	//// 	}))
-	//// }, [component, href, setRoutes])
-
+export function Route(_: { path: string, component: (() => JSX.Element) | LazyExoticComponent<any> }) {
 	return <></>
 }
 
@@ -42,7 +29,6 @@ export function Router({ children }: PropsWithChildren) {
 
 export function RouterProvider({ initialPath, children }: PropsWithChildren<{ initialPath: string }>) {
 	const [path, setPath] = useState(initialPath)
-	//// const [routes, setRoutes] = useState<Record<string, (() => JSX.Element) | LazyExoticComponent<any>>>({})
 
 	useEffect(() => {
 		window.addEventListener("popstate", e => {
@@ -53,11 +39,7 @@ export function RouterProvider({ initialPath, children }: PropsWithChildren<{ in
 	return <>
 		<PathContext.Provider value={path}>
 			<SetPathContext.Provider value={setPath}>
-				{/* <RoutesContext.Provider value={routes}> */}
-					{/* <SetRoutesContext.Provider value={setRoutes}> */}
-						{children}
-					{/* </SetRoutesContext.Provider> */}
-				{/* </RoutesContext.Provider> */}
+				{children}
 			</SetPathContext.Provider>
 		</PathContext.Provider>
 	</>
