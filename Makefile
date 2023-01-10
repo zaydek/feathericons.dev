@@ -1,5 +1,4 @@
 ssg:
-	make tailwind
 	npx vite build
 	npx esbuild src/_ssg.tsx \
 		--bundle               \
@@ -9,9 +8,3 @@ ssg:
 		--platform=node        \
 		--sourcemap
 	node --enable-source-maps src/_ssg.generated.cjs
-
-tailwind:
-	npx tailwind --output src/css/_tailwind.generated.css
-
-tailwind-w:
-	npx tailwind --output src/css/_tailwind.generated.css -w

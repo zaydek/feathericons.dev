@@ -11,7 +11,7 @@ const pages = {
   "/": { title: "Home" },
 
   // Destructure pages
-  ...manifest.reduce<Record<typeof manifest[number], { title: string }>>((acc, name) => {
+  ...manifest.slice(0, 6).reduce<Record<typeof manifest[number], { title: string }>>((acc, name) => {
     acc[`/${name}`] = { title: `Page -- ${name}` }
     return acc
   }, {})
