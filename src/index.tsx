@@ -1,7 +1,8 @@
 import "the-new-css-reset"
 
 import "./css/base.scss"
-import "./tailwind.generated.css"
+import "./css/vars.scss"
+import "./css/_tailwind.generated.css"
 
 import { createRoot, hydrateRoot } from "react-dom/client"
 import { App } from "./app"

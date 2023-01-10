@@ -34,15 +34,14 @@ const sitemap = `
 </urlset>
 `.trimStart()
 
-
 let buffer: Buffer
 try {
-  // Try to read the cached _index.html file -- this is supposed to be the
-  // original index.html before static site generation
-  buffer = fs.readFileSync("dist/_index.html")
+	// Try to read the cached _index.html file -- this is supposed to be the
+	// original index.html before static site generation
+	buffer = fs.readFileSync("dist/_index.html")
 } catch {
-  buffer = fs.readFileSync("dist/index.html")
-  fs.writeFileSync("dist/index.html", "dist/_index.html")
+	buffer = fs.readFileSync("dist/index.html")
+	fs.cpSync("dist/index.html", "dist/_index.html")
 }
 
 function getDiskPathname(pathname: string) {
