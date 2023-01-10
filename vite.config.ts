@@ -1,8 +1,10 @@
 import reactJs from "@vitejs/plugin-react"
+import unoCss from "unocss/vite"
 import { defineConfig } from "vite"
 
 export default defineConfig({
 	plugins: [
+		unoCss(),
 		reactJs({
 			fastRefresh: false,
 		}),
