@@ -12,12 +12,12 @@ export function Home() {
 	return <>
 		<div className="h-320 bg-$trim-color"></div>
 		<div className="-mx-64 sticky t-32">
-			<div className="h-200 rounded-b-50% bg-$trim-color"></div>
+			<div className="h-$backdrop-height rounded-b-50% bg-$trim-color"></div>
 		</div>
 		{/* Use negative margin-top here because of foreground obscure effect */}
-		<div className="mt-calc(-1_*_(200px_+_32px)) pb-64 px-32 bg-$gray-color">
-			<div className="-mx-32 sticky t-0 z-10 flex [&_>_:nth-child(3)]:grow-1">
-				<div className="h-64 w-32 bg-$trim-color"></div>
+		<div className="mt-calc(-1_*_($backdrop-height_+_32px)) pb-64 px-$inset-x bg-$gray-color">
+			<div className="mx-calc(-1_*_$inset-x) sticky t-0 z-10 flex [&_>_:nth-child(3)]:grow-1">
+				<div className="h-64 w-$inset-x bg-$trim-color"></div>
 				<div className="relative">
 					<div className="h-64 w-32 bg-$trim-color"></div>
 					<div className="absolute br-0 h-32 w-32 rounded-tl-1e3 bg-$base-color"></div>
@@ -27,7 +27,7 @@ export function Home() {
 					<div className="h-64 w-32 bg-$trim-color"></div>
 					<div className="absolute bl-0 h-32 w-32 rounded-tr-1e3 bg-$gray-color"></div>
 				</div>
-				<div className="h-64 w-32 bg-$trim-color"></div>
+				<div className="h-64 w-$inset-x bg-$trim-color"></div>
 			</div>
 			{/* Use negative margin-top here because of foreground obscure effect */}
 			{/* Use relative here because of background obscure effect */}

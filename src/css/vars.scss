@@ -1,12 +1,17 @@
 :root {
+	--inset-x: 192px;
+	--inset-y: 32px;
+	--backdrop-height: 192px;
+	--navigation-height: 72px;
+	--panel-width: 400px;
+
 	--negative-hairline-thickness: -1px;
 	--hairline-thickness: 1px;
 	--rounding: 32px;
 
-	--base-h: 200;
-	--base-s: 25%;
-	--base-l: 50%;
-
+	--base-h:         200;
+	--base-s:         25%;
+	--base-l:         50%;
 	--base-color:     hsl(var(--base-h), var(--base-s), 100%);
 	--gray-color:     hsl(var(--base-h), var(--base-s), 98%);
 	--hairline-color: hsl(var(--base-h), var(--base-s), var(--base-l), 0.2);
