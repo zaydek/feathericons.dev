@@ -17,6 +17,24 @@ const pages = {
   }, {})
 }
 
+const DATE = new Date().toISOString().split("T")[0]
+
+const sitemap = `
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://feathericons.dev</loc>
+    <lastmod>${DATE}</lastmod>
+  </url>
+  ${manifest.map(name => `
+  <url>
+    <loc>https://feathericons.dev/${name}</loc>
+    <lastmod>${DATE}</lastmod>
+  </url>`.replace("\n  ", "  ")).join("\n").trimStart()}
+</urlset>
+`.trimStart()
+
+
 let buffer: Buffer
 try {
   // Try to read the cached _index.html file -- this is supposed to be the
@@ -44,19 +62,18 @@ function formatDuration(ms: number) {
 }
 
 async function main() {
-  const contents = buffer.toString()
+  fs.writeFileSync("dist/sitemap.xml", sitemap)
+  console.log("+ sitemap.xml")
 
-  const start = Date.now()
+  const contents = buffer.toString()
   for (const [pathname, info] of Object.entries(pages)) {
     const page = contents
-      //// .replace(`<div id="root"></div>\n`, `<div id="root">${renderToString(<App />)}</div>`)
       .replace(`<div id="root"></div>\n${" ".repeat(4)}`, `<div id="root">${renderToString(<App initialPath={pathname} />)}</div>`)
       .replace(/<title>[^<]*<\/title>/, `<title>${info.title}</title>`) // TODO: HTML entities need to be encoded
 
     const filename = `dist/${getDiskPathname(pathname)}`
     fs.mkdirSync(path.dirname(filename), { recursive: true })
     fs.writeFileSync(filename, page)
-
     console.log(`+ ${pathname}`)
     //// console.log(page)
   }
@@ -65,4 +82,5 @@ async function main() {
   console.log()
 }
 
+const start = Date.now()
 main()
