@@ -1,13 +1,13 @@
 import { manifest } from "./data/manifest"
-import { Layout } from "./layout"
 import { Home } from "./pages/home"
 import { Page } from "./pages/page"
 import { Route, Router, RouterProvider } from "./router"
+import { TransitionProvider } from "./transition"
 
 export function App({ initialPath }: { initialPath: string }) {
 	return <>
 		<RouterProvider initialPath={initialPath}>
-			<Layout>
+			<TransitionProvider>
 				<Router>
 					<Route path="/" component={Home} />
 					{manifest.map(name =>
@@ -18,7 +18,7 @@ export function App({ initialPath }: { initialPath: string }) {
 						/>
 					)}
 				</Router>
-			</Layout>
+			</TransitionProvider>
 		</RouterProvider>
 	</>
 }
