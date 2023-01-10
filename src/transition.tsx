@@ -23,7 +23,7 @@ export function Transition({ children }: PropsWithChildren) {
 				: "revert",
 		}}>
 			{children}
-		</div>,
+		</div>
 	</>
 }
 

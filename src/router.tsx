@@ -6,24 +6,31 @@ export const SetPathContext =
 	createContext<Dispatch<SetStateAction<string>> | null>(null)
 
 // Container component
-export function Route(_: { path: string, component: (() => JSX.Element) | LazyExoticComponent<any> }) {
+export function Route<ComponentProps extends {}>(_: {
+	path:            string
+	component:       ((_: ComponentProps) => JSX.Element) | LazyExoticComponent<any>
+	componentProps?: ComponentProps
+}) {
 	return <></>
 }
 
 export function Router({ children }: PropsWithChildren) {
 	const path = useContext(PathContext)!
 
-	const Component = useMemo(() => {
-		type RouteElement = ReactElement<{ path: string, component: (() => JSX.Element) | LazyExoticComponent<any> }, typeof Route>
+	const [Component, componentProps] = useMemo(() => {
+		type RouteElement = ReactElement<{ path: string, component: (() => JSX.Element) | LazyExoticComponent<any>, componentProps?: Record<string, any> }, typeof Route>
 		const route = (children as RouteElement[])
 			.flat()
 			.find(jsx => path === jsx.props.path)
-		return route?.props.component ??
-			(() => <div>/404</div>) // E.g. fallback
+		if (route === undefined) {
+			return [() => <div>/404</div>, {}] // E.g. fallback
+		} else {
+			return [route.props.component, route.props.componentProps]
+		}
 	}, [children, path])
 
 	return <>
-		<Component />
+		<Component {...componentProps} />
 	</>
 }
 

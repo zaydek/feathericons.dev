@@ -14,7 +14,8 @@ export function App({ initialPath }: { initialPath: string }) {
 						<Route
 							key={name}
 							path={`/${name}`}
-							component={() => <Page name={name} />}
+							component={Page}
+							componentProps={{ name: name }}
 						/>
 					)}
 				</Router>
