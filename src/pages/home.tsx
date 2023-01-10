@@ -1,10 +1,13 @@
 import { Navbar } from "../navbar"
+import { Transition } from "../transition"
 
 export function Home() {
 	return <>
 		<Navbar />
-		<div>
-			Hello /
-		</div>
+		<Transition>
+			<div>
+				Hello /
+			</div>
+		</Transition>
 	</>
 }

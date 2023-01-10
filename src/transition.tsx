@@ -14,14 +14,13 @@ export function Transition({ children }: PropsWithChildren) {
 			transform: started
 				? "translateX(0px)"
 				: forwards ? "translateX(16px)" : "translateX(-16px)",
+			// Transition only forwards
 			transition: started
 				? "600ms ease"
-				: "revert", // Transition only forwards
+				: "revert",
 			transitionProperty: started
 				? "opacity, transform"
 				: "revert",
-			//// transition: "600ms ease",
-			//// transitionProperty: "opacity, transform",
 		}}>
 			{children}
 		</div>,
@@ -41,9 +40,6 @@ export function TransitionProvider({ children }: PropsWithChildren) {
 				setStarted(true)
 			})
 		})
-		//// setTimeout(() => {
-		//// 	setStarted(true)
-		//// }, 3e3)
 		return () => {
 			setStarted(false)
 		}
