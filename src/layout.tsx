@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext, useEffect, useMemo, useState } from "react"
+import { PropsWithChildren, useContext, useLayoutEffect, useMemo, useState } from "react"
 import { PathContext } from "./router"
 
 export function Layout({ children }: PropsWithChildren) {
@@ -8,7 +8,7 @@ export function Layout({ children }: PropsWithChildren) {
 	const forwards = useMemo(() => path === "/", [path])
 
 	// On path changes...
-	useEffect(() => {
+	useLayoutEffect(() => {
 		requestAnimationFrame(() => {
 			requestAnimationFrame(() => {
 				setStarted(true)
