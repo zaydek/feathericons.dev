@@ -1,5 +1,5 @@
-import { Anchor } from "./app"
-import { manifest } from "./manifest"
+import { manifest } from "./data/manifest"
+import { Anchor } from "./router"
 
 export function Navbar() {
   return <>

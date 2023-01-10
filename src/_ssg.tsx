@@ -3,7 +3,7 @@ import * as path from "path"
 
 import { renderToString } from "react-dom/server"
 import { App } from "./app"
-import { manifest } from "./manifest"
+import { manifest } from "./data/manifest"
 
 // TODO: Pages can technically be sourced from disk, and names can be sourced
 // from exports

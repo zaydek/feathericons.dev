@@ -13,5 +13,5 @@ ssg:
 tailwind:
 	npx tailwind --output src/css/_tailwind.generated.css
 
-tailwind-watch:
+tailwind-w:
 	npx tailwind --output src/css/_tailwind.generated.css -w
