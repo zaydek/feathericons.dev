@@ -1,12 +1,10 @@
+import "./search-app.scss"
+
 import * as feather from "react-feather"
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { manifest } from "./data/manifest-v2"
 import { Icon } from "./lib/react/icon"
-
-function safe(str: string) {
-	return str.toLowerCase()
-}
 
 // name search v. tag search?
 // mode: filter / highlight?
@@ -115,7 +113,7 @@ export function SearchApp() {
 					{debouncedValues.map(([name, matches]) =>
 						<button
 							key={name}
-							className="flex justify-center align-center"
+							className="flex justify-center align-center effect-icon-hover"
 							onPointerOver={e => {
 								setHoverName(name)
 							}}
