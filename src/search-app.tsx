@@ -2,7 +2,7 @@ import "./search-app.scss"
 
 import * as feather from "react-feather"
 
-import { Dispatch, memo, SetStateAction, useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { manifest } from "./data/manifest-v2"
 import { Icon } from "./lib/react/icon"
 
@@ -60,6 +60,7 @@ function splitParts(str: string) {
 export function SearchApp() {
 	const [hoverName, setHoverName] = useState<IconValue | "">("")
 
+	const inputRef = useRef<HTMLInputElement | null>(null)
 	const [search, setSearch] = useState("")
 
 	//// const zeroValues = useMemo(() => {
@@ -74,16 +75,28 @@ export function SearchApp() {
 			values.push([
 				name as IconValue,
 				`-${$$name}`.includes(`-${$$search}`),
-				//// $$name.includes($$search),
 			])
-			//// if ($$name.includes($$search)) {
-			//// 	values.push([name as IconValue, true])
+			//// if (`-${$$name}`.includes(`-${$$search}`)) {
+			//// 	values.push([
+			//// 		name as IconValue,
+			//// 		true,
+			//// 	])
 			//// }
 		}
 		return values
 	}, [search])
 
 	const [debouncedValues, setDebouncedValues] = useState(values)
+
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				inputRef.current!.focus()
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [])
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -107,6 +120,7 @@ export function SearchApp() {
 		<div className="p-32 flex justify-center">
 			<div className="basis-1280 flex flex-col gap-32">
 				<input
+					ref={inputRef}
 					className="mx-16 px-32 h-64 rounded-1e3 [font]-400_18px_/_normal_$sans bg-#eee"
 					type="text"
 					value={search}
@@ -119,37 +133,41 @@ export function SearchApp() {
 					autoFocus
 				/>
 				<div className="grid grid-cols-repeat(auto-fill,_minmax(60px,_1fr)) grid-auto-rows-60">
-					{values.map(([name, matches]) =>
-						<MemoGridItem
-							key={name}
-							name={name}
-							matches={matches}
-							hoverName={hoverName}
-							setHoverName={setHoverName}
-						/>
-
-						//// <button
+					{debouncedValues.map(([name, matches], index) =>
+						//// <MemoGridItem
 						//// 	key={name}
-						//// 	className="flex justify-center align-center effect-icon-hover"
-						//// 	onPointerOver={e => {
-						//// 		setHoverName(name)
-						//// 	}}
-						//// 	onPointerLeave={e => {
-						//// 		setHoverName("")
-						//// 	}}
-						//// >
-						//// 	<Icon
-						//// 		className="h-40 w-40"
-						//// 		style={{
-						//// 			color: (matches || hoverName === name) ? "hsl(0, 0%, 0%)" : "hsl(0, 0%, 75%)",
-						//// 			transform: (matches || hoverName === name) ? "revert" : "scale(0.75)",
-						//// 			transition: "100ms cubic-bezier(0, 1, 1, 1.25)",
-						//// 			transitionProperty: "transform",
-						//// 		}}
-						//// 		// @ts-expect-error
-						//// 		icon={feather[name]}
-						//// 	/>
-						//// </button>
+						//// 	name={name}
+						//// 	matches={matches}
+						//// 	hoverName={hoverName}
+						//// 	setHoverName={setHoverName}
+						//// />
+
+						<button
+							key={name}
+							className="flex justify-center align-center effect-icon-hover"
+							onPointerOver={e => {
+								setHoverName(name)
+							}}
+							onPointerLeave={e => {
+								setHoverName("")
+							}}
+						>
+							<Icon
+								className="h-40 w-40"
+								style={{
+									color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 87.5%)",
+									transform: (matches || hoverName === name) ? "revert" : "scale(0.875)",
+									//// transition: `100ms cubic-bezier(0, 1, 1, 1.25) ${index * 2}ms`,
+									//// transition: `20ms cubic-bezier(0, 1, 1, 1)`,
+
+									//// transition: `100ms cubic-bezier(0, 1, 1, 1.25)`,
+									transition: `50ms cubic-bezier(0, 1, 1, 2)`,
+									transitionProperty: "transform",
+								}}
+								// @ts-expect-error
+								icon={feather[name]}
+							/>
+						</button>
 					)}
 				</div>
 			</div>
@@ -157,28 +175,28 @@ export function SearchApp() {
 	</>
 }
 
-const MemoGridItem = memo(function GridItem({ name, matches, hoverName, setHoverName }: { name: IconValue, matches: boolean, hoverName: IconValue | "", setHoverName: Dispatch<SetStateAction<IconValue | "">> }) {
-	return <>
-		<button
-			className="flex justify-center align-center effect-icon-hover"
-			onPointerOver={e => {
-				setHoverName(name)
-			}}
-			onPointerLeave={e => {
-				setHoverName("")
-			}}
-		>
-			<Icon
-				className="h-40 w-40"
-				style={{
-					color: (matches || hoverName === name) ? "hsl(0, 0%, 0%)" : "hsl(0, 0%, 75%)",
-					transform: (matches || hoverName === name) ? "revert" : "scale(0.75)",
-					transition: "100ms cubic-bezier(0, 1, 1, 1.25)",
-					transitionProperty: "transform",
-				}}
-				// @ts-expect-error
-				icon={feather[name]}
-			/>
-		</button>
-	</>
-})
+//// const MemoGridItem = memo(function GridItem({ name, matches, hoverName, setHoverName }: { name: IconValue, matches: boolean, hoverName: IconValue | "", setHoverName: Dispatch<SetStateAction<IconValue | "">> }) {
+//// 	return <>
+//// 		<button
+//// 			className="flex justify-center align-center effect-icon-hover"
+//// 			onPointerOver={e => {
+//// 				setHoverName(name)
+//// 			}}
+//// 			onPointerLeave={e => {
+//// 				setHoverName("")
+//// 			}}
+//// 		>
+//// 			<Icon
+//// 				className="h-40 w-40"
+//// 				style={{
+//// 					color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 90%)",
+//// 					transform: (matches || hoverName === name) ? "revert" : "scale(0.9)",
+//// 					transition: "100ms cubic-bezier(0, 1, 1, 1.25)",
+//// 					transitionProperty: "transform",
+//// 				}}
+//// 				// @ts-expect-error
+//// 				icon={feather[name]}
+//// 			/>
+//// 		</button>
+//// 	</>
+//// })

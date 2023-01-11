@@ -9,11 +9,11 @@
 	position: absolute;
 	inset: 0;
 	border-radius: 1e3px;
-	//// background-color: hsl(0, 0%, 92.5%);
+	//// background-color: hsl(0, 0%, 90%);
 	opacity: 0;
 	transform: scale(0)
 		translateZ(-1px);
-	transition: 100ms cubic-bezier(0, 1, 1, 1.25) 50ms;
+	transition: 100ms cubic-bezier(0, 1, 1, 1.25) 10ms;
 	transition-property: opacity, transform;
 }
 .effect-icon-hover:hover::before {
@@ -24,10 +24,10 @@
 }
 .effect-icon-hover:hover:active::before {
 	background-color: hsl(200, 100%, 50%); // Added
-	transform: scale(1.125)
-		translateZ(-1px);
-	//// transform: scale(1)
+	//// transform: scale(1.125)
 	//// 	translateZ(-1px);
+	transform: scale(1)
+		translateZ(-1px);
 	transition-duration: 10ms;
 	//// transition-delay: 0ms;
 }
