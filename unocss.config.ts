@@ -34,10 +34,10 @@ function desugar(rawValue: string | undefined, { sign, px }: { sign?: string, px
 
 const rules: Rule[] = [
 	// Arbitrary key-value e.g. [property]-value
-	[/^(-)?\[([^]]+)\]-(.+)$/, ([_, sign, property, value]) => {
+	[/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
 		const px = !(property in unitless)
 		return {
-			[property]: desugar(value, { sign, px }),
+			[property]: desugar(value, { px }),
 		}
 	}],
 
