@@ -101,9 +101,9 @@ export function SearchApp() {
 								<Icon
 									className="h-40 w-40"
 									style={{
-										color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 87.5%)",
-										transform: (matches || hoverName === name) ? "scale(1)" : "scale(0.875)",
-										transition: `50ms cubic-bezier(0, 1, 1, 2)`,
+										color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 25%)",
+										transform: (matches || hoverName === name) ? "scale(0.875)" : "scale(0.75)",
+										transition: `100ms cubic-bezier(0, 1, 1, 1.125)`,
 										transitionProperty: "transform",
 									}}
 									// @ts-expect-error
