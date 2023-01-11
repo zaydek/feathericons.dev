@@ -118,7 +118,7 @@ export function SearchApp() {
 
 	return <>
 		<div className="p-32 flex justify-center">
-			<div className="basis-1280 flex flex-col gap-32">
+			<div className="basis-2e3 flex flex-col gap-32">
 				<input
 					ref={inputRef}
 					className="mx-16 px-32 h-64 rounded-1e3 [font]-400_18px_/_normal_$sans bg-#eee"
