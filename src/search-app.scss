@@ -9,7 +9,7 @@
 	position: absolute;
 	inset: 0;
 	border-radius: 1e3px;
-	background-color: hsl(0, 0%, 95%);
+	//// background-color: hsl(0, 0%, 92.5%);
 	opacity: 0;
 	transform: scale(0)
 		translateZ(-1px);
@@ -26,7 +26,10 @@
 	background-color: hsl(200, 100%, 50%); // Added
 	transform: scale(1.125)
 		translateZ(-1px);
-	transition-duration: 25ms;
+	//// transform: scale(1)
+	//// 	translateZ(-1px);
+	transition-duration: 10ms;
+	//// transition-delay: 0ms;
 }
 .effect-icon-hover:hover:active * {
 	color: hsl(0, 0%, 100%);
