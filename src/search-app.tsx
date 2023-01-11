@@ -156,7 +156,7 @@ export function SearchApp() {
 								className="h-40 w-40"
 								style={{
 									color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 87.5%)",
-									transform: (matches || hoverName === name) ? "revert" : "scale(0.875)",
+									transform: (matches || hoverName === name) ? "scale(1)" : "scale(0.875)",
 									//// transition: `100ms cubic-bezier(0, 1, 1, 1.25) ${index * 2}ms`,
 									//// transition: `20ms cubic-bezier(0, 1, 1, 1)`,
 
