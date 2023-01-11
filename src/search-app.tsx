@@ -1,6 +1,6 @@
 import * as feather from "react-feather"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { manifest } from "./data/manifest-v2"
 import { Icon } from "./lib/react/icon"
 
@@ -61,6 +61,7 @@ function splitParts(str: string) {
 
 export function SearchApp() {
 	const [hoverName, setHoverName] = useState<IconValue | "">("")
+
 	const [search, setSearch] = useState("")
 
 	//// const zeroValues = useMemo(() => {
@@ -78,23 +79,31 @@ export function SearchApp() {
 			])
 		}
 		return values
-
-		//// const $$search = safe(search)
-		//// const values: (readonly [name: IconValue, matches: boolean])[] = []
-		//// for (const name of Object.keys(manifest)) {
-		//// 	const $$name = safe(name)
-		//// 	values.push([name as IconValue, $$name.includes($$search)])
-		//// }
-		//// return values
 	}, [search])
+
+	const [debouncedValues, setDebouncedValues] = useState(values)
+
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		const timeoutId = setTimeout(() => {
+			setDebouncedValues(values)
+		}, 100)
+		return () => {
+			clearTimeout(timeoutId)
+		}
+	}, [values])
 
 	useEffect(() => {
 		console.log(hoverName)
 	}, [hoverName])
 
 	return <>
-		<div className="py-64 px-32 flex justify-center">
-			<div className="basis-1280 flex flex-col gap-64">
+		<div className="p-32 flex justify-center">
+			<div className="basis-1280 flex flex-col gap-32">
 				<input
 					className="mx-16 px-32 h-64 rounded-1e3 [font]-400_18px_/_normal_$sans bg-#eee"
 					type="text"
@@ -102,8 +111,8 @@ export function SearchApp() {
 					onChange={e => setSearch(e.currentTarget.value)}
 					autoFocus
 				/>
-				<div className="grid grid-cols-repeat(auto-fill,_minmax(64px,_1fr)) grid-auto-rows-64">
-					{values.map(([name, matches]) =>
+				<div className="grid grid-cols-repeat(auto-fill,_minmax(60px,_1fr)) grid-auto-rows-60">
+					{debouncedValues.map(([name, matches]) =>
 						<button
 							key={name}
 							className="flex justify-center align-center"
