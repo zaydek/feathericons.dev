@@ -63,22 +63,6 @@ export function SearchApp() {
 	const inputRef = useRef<HTMLInputElement | null>(null)
 	const [search, setSearch] = useState("")
 
-	const [started, setStarted] = useState(true)
-
-	//// useEffect(() => {
-	//// 	//// requestAnimationFrame(() => {
-	//// 	//// 	requestAnimationFrame(() => {
-	//// 	//// 		setStarted(true)
-	//// 	//// 	})
-	//// 	//// })
-	//// 	setTimeout(() => {
-	//// 		setStarted(true)
-	//// 	}, 100)
-	//// 	return () => {
-	//// 		setStarted(false)
-	//// 	}
-	//// }, [search])
-
 	//// const zeroValues = useMemo(() => {
 	//// 	return Object.keys(manifest).map(name => [name, false] as readonly [name: IconValue, matches: boolean])
 	//// }, [])
@@ -88,16 +72,16 @@ export function SearchApp() {
 		const $$search = splitParts(search).map(v => v.toLowerCase()).join("-")
 		for (const name of Object.keys(manifest)) {
 			const $$name = splitParts(name).map(v => v.toLowerCase()).join("-")
-			//// values.push([
-			//// 	name as IconValue,
-			//// 	`-${$$name}`.includes(`-${$$search}`),
-			//// ])
-			if (`-${$$name}`.includes(`-${$$search}`)) {
-				values.push([
-					name as IconValue,
-					true,
-				])
-			}
+			values.push([
+				name as IconValue,
+				`-${$$name}`.includes(`-${$$search}`),
+			])
+			//// if (`-${$$name}`.includes(`-${$$search}`)) {
+			//// 	values.push([
+			//// 		name as IconValue,
+			//// 		true,
+			//// 	])
+			//// }
 		}
 		return values
 	}, [search])
@@ -122,26 +106,11 @@ export function SearchApp() {
 		}
 		const timeoutId = setTimeout(() => {
 			setDebouncedValues(values)
-		}, 100)
+		}, 0)
 		return () => {
 			clearTimeout(timeoutId)
 		}
 	}, [values])
-
-	useEffect(() => {
-		//// requestAnimationFrame(() => {
-		//// 	requestAnimationFrame(() => {
-		//// 		setStarted(true)
-		//// 	})
-		//// })
-		const timeoutId = setTimeout(() => {
-			setStarted(true)
-		}, 100)
-		return () => {
-			clearTimeout(timeoutId)
-			setStarted(false)
-		}
-	}, [debouncedValues])
 
 	useEffect(() => {
 		console.log(hoverName)
@@ -164,7 +133,9 @@ export function SearchApp() {
 					autoFocus
 				/>
 				<div className="grid grid-cols-repeat(auto-fill,_minmax(60px,_1fr)) grid-auto-rows-60">
-					{debouncedValues.map(([name, matches], index) =>
+					{debouncedValues
+						//// .filter(([, matches]) => matches)
+						.map(([name, matches], index) =>
 						//// <MemoGridItem
 						//// 	key={name}
 						//// 	name={name}
@@ -186,13 +157,13 @@ export function SearchApp() {
 							<Icon
 								className="h-40 w-40"
 								style={{
-									//// color: (started || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 87.5%)",
-									transform: started ? "scale(1)" : "scale(0.875)",
+									color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 87.5%)",
+									transform: (matches || hoverName === name) ? "scale(1)" : "scale(0.875)",
 									//// transition: `100ms cubic-bezier(0, 1, 1, 1.25) ${index * 2}ms`,
 									//// transition: `20ms cubic-bezier(0, 1, 1, 1)`,
 
 									//// transition: `100ms cubic-bezier(0, 1, 1, 1.25)`,
-									transition: `50ms cubic-bezier(0, 1, 1, 1)`,
+									transition: `50ms cubic-bezier(0, 1, 1, 2)`,
 									transitionProperty: "transform",
 								}}
 								// @ts-expect-error
@@ -206,20 +177,7 @@ export function SearchApp() {
 	</>
 }
 
-//// const MemoGridItem = memo(function GridItem({ name, /* matches, */ hoverName, setHoverName }: { name: IconValue, /* matches: boolean, */ hoverName: IconValue | "", setHoverName: Dispatch<SetStateAction<IconValue | "">> }) {
-//// 	const [bounce, setBounce] = useState(false)
-////
-//// 	useEffect(() => {
-//// 		requestAnimationFrame(() => {
-//// 			requestAnimationFrame(() => {
-//// 				setBounce(true)
-//// 			})
-//// 		})
-//// 		return () => {
-//// 			setBounce(false)
-//// 		}
-//// 	}, [])
-////
+//// const MemoGridItem = memo(function GridItem({ name, matches, hoverName, setHoverName }: { name: IconValue, matches: boolean, hoverName: IconValue | "", setHoverName: Dispatch<SetStateAction<IconValue | "">> }) {
 //// 	return <>
 //// 		<button
 //// 			className="flex justify-center align-center effect-icon-hover"
@@ -233,13 +191,9 @@ export function SearchApp() {
 //// 			<Icon
 //// 				className="h-40 w-40"
 //// 				style={{
-//// 					color: (bounce || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 87.5%)",
-//// 					transform: (bounce || hoverName === name) ? "scale(1)" : "scale(0.875)",
-//// 					//// transition: `100ms cubic-bezier(0, 1, 1, 1.25) ${index * 2}ms`,
-//// 					//// transition: `20ms cubic-bezier(0, 1, 1, 1)`,
-////
-//// 					//// transition: `100ms cubic-bezier(0, 1, 1, 1.25)`,
-//// 					transition: `50ms cubic-bezier(0, 1, 1, 2)`,
+//// 					color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 90%)",
+//// 					transform: (matches || hoverName === name) ? "revert" : "scale(0.9)",
+//// 					transition: "100ms cubic-bezier(0, 1, 1, 1.25)",
 //// 					transitionProperty: "transform",
 //// 				}}
 //// 				// @ts-expect-error
