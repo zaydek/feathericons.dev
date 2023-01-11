@@ -15,6 +15,50 @@ function safe(str: string) {
 
 type IconValue = keyof typeof manifest
 
+//// const isLower = (ch: string) => ch >= "a" && ch <= "z"
+
+//// function searchParts(str: string, substr: string) {
+//// 	if (substr.split("-"))
+////
+//// 	//// const index = str.indexOf(substr)
+//// 	//// if (index === -1 || (index > 0 && !isLower(str[index - 1]))) { return null }
+//// 	//// return [index, index + substr.length] as const
+//// }
+
+//// const isLower = (ch: string) => ch >= "a" && ch <= "z"
+//// const isUpper = (ch: string) => ch >= "A" && ch <= "Z"
+//// const isDigit = (ch: string) => ch >= "0" && ch <= "9"
+//// const isAlpha = (ch: string) => isLower(ch) || isUpper(ch) || isDigit(ch)
+////
+//// function splitParts(str: string) {
+//// 	const parts = []
+//// 	outer:
+//// 	for (let curr = 0; curr < str.length; curr++) {
+//// 		for (let next = curr; next < str.length; next++) {
+//// 			if ((isLower(str[next]) || isDigit(str[next])) &&        // E.g. [a-z0-9]
+//// 					(next + 1 < str.length && isUpper(str[next + 1]))) { // E.g. [A-Z]
+//// 				parts.push(str.slice(curr, next + 1))
+//// 				curr = next
+//// 				break
+//// 			} else if (!isAlpha(str[next]) &&                        // E.g. [^a-zA-Z0-9]
+//// 					(next + 1 < str.length && isAlpha(str[next + 1]))) { // E.g. [a-zA-Z0-9]
+//// 				parts.push(str.slice(curr, next + 0)) // Remove non-alpha
+//// 				curr = next
+//// 				break
+//// 			} else if (next + 1 === str.length) {
+//// 				parts.push(str.slice(curr))
+//// 				break outer // Done
+//// 			}
+//// 		}
+//// 	}
+//// 	return parts
+//// }
+
+function splitParts(str: string) {
+	return str.split(/(?=[A-Z])|[^a-zA-Z0-9]+/)
+		.filter(v => v !== "")
+}
+
 export function SearchApp() {
 	const [hoverName, setHoverName] = useState<IconValue | "">("")
 	const [search, setSearch] = useState("")
@@ -23,34 +67,26 @@ export function SearchApp() {
 	//// 	return Object.keys(manifest).map(name => [name, false] as readonly [name: IconValue, matches: boolean])
 	//// }, [])
 
-	//// for (const [name, tags /* TODO */] of Object.entries(manifest)) {
-
 	const values = useMemo(() => {
-		const $$search = safe(search)
-		//// const $$searchExists = $$search !== ""
-
 		const values: (readonly [name: IconValue, matches: boolean])[] = []
-		//// let empty = true
+		const $$search = splitParts(search).map(v => v.toLowerCase()).join("-")
 		for (const name of Object.keys(manifest)) {
-			const $$name = safe(name)
-			//// const matches = $$searchExists && $$name.includes($$search)
-			//// values.push([name as IconValue, matches])
-			values.push([name as IconValue, $$name.includes($$search)])
-
-			//// if (empty) {
-			//// 	if (matches) {
-			//// 		empty = false
-			//// 	}
-			//// }
+			const $$name = splitParts(name).map(v => v.toLowerCase()).join("-")
+			values.push([
+				name as IconValue,
+				$$name.includes($$search),
+			])
 		}
-		//// if (empty) {
-		//// 	return zeroValues
-		//// } else {
 		return values
-		//// }
-	}, [search])
 
-	//// console.log(values)
+		//// const $$search = safe(search)
+		//// const values: (readonly [name: IconValue, matches: boolean])[] = []
+		//// for (const name of Object.keys(manifest)) {
+		//// 	const $$name = safe(name)
+		//// 	values.push([name as IconValue, $$name.includes($$search)])
+		//// }
+		//// return values
+	}, [search])
 
 	useEffect(() => {
 		console.log(hoverName)
