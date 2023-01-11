@@ -21,7 +21,7 @@ export function Router({ children }: PropsWithChildren) {
 		type RouteElement = ReactElement<{ path: string, component: (() => JSX.Element) | LazyExoticComponent<any>, componentProps?: Record<string, any> }, typeof Route>
 		const route = (children as RouteElement[])
 			.flat()
-			.find(jsx => path === jsx.props.path)
+			.find(jsx => jsx.props.path === path)
 		if (route === undefined) {
 			return [() => <div>/404</div>, {}] // E.g. fallback
 		} else {
