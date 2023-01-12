@@ -63,7 +63,7 @@ function MainContents() {
 function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
 	return <>
 		{createElement(tag ?? "section", {
-			className: "py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-$sidebar-inset-y",
+			className: "py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-$sidebar-label-height",
 			...props,
 		}, children)}
 	</>
@@ -72,56 +72,56 @@ function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElement
 function IconPlaceholder() {
 	return <div className="h-24 w-24 rounded-1e3 bg-$placeholder-color"></div>
 }
-
 function TextPlaceholder() {
 	return <div className="h-6 w-72 rounded-1e3 bg-$dark-placeholder-color"></div>
+}
+function Hairline() {
+	return <hr className="h-$hairline-height bg-$hairline-color" />
 }
 
 function Label({ resetButton }: { resetButton?: boolean }) {
 	resetButton ??= false
 
 	return <>
-		<div className="flex justify-space-between align-center h-$form-label-height">
+		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-10">
 				<IconPlaceholder />
 				<TextPlaceholder />
 			</div>
 			{resetButton &&
-				<div className="flex flex-center h-$form-input-height w-$form-input-height rounded-1e3 bg-$placeholder-color">
-					<div className="h-50% aspect-1 rounded-1e3 bg-$dark-placeholder-color"></div>
+				<div className="px-4">
+					<div className="flex flex-center h-24 w-24 rounded-1e3 bg-$light-placeholder-color">
+						<div className="h-50% aspect-1 rounded-1e3 bg-$dark-placeholder-color"></div>
+					</div>
 				</div>
 			}
 		</div>
 	</>
 }
 
-function CheckboxInput() {
+function Checkbox() {
 	return <>
-		<div className="flex flex-col justify-center h-$form-label-height">
-			<div className="flex justify-end align-center h-12 w-48 rounded-1e3 bg-$alt-trim-color">
-				<div className="flex flex-center h-$form-input-height w-$form-input-height rounded-1e3 bg-$base-color shadow-$shadow-6">
-					<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
+		<div className="flex justify-space-between align-center h-$sidebar-label-height">
+			<TextPlaceholder />
+			<div className="flex flex-col justify-center h-$sidebar-label-height">
+				<div className="flex justify-end align-center h-12 w-48 rounded-1e3 bg-$alt-trim-color">
+					<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 bg-$base-color shadow-$shadow-6">
+						<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</>
 }
 
-function Checkbox() {
-	return <>
-		<div className="flex justify-space-between align-center h-$form-label-height">
-			<TextPlaceholder />
-			<CheckboxInput />
-		</div>
-	</>
-}
-
 function Slider() {
 	return <>
-		<div className="flex flex-col justify-center h-$form-label-height">
-			<div className="flex flex-center h-6 rounded-1e3 bg-$alt-trim-color">
-				<div className="flex flex-center h-calc($form-input-height_+_4px) w-calc($form-input-height_+_4px) rounded-1e3 bg-$base-color shadow-$shadow-6">
-					<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
+		<div className="px-4">
+			<div className="flex flex-col justify-center h-$sidebar-label-height">
+				<div className="flex flex-center h-6 rounded-1e3 bg-$alt-trim-color">
+					<div className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 bg-$base-color shadow-$shadow-6">
+						<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -132,7 +132,7 @@ function SidebarContents() {
 	return <>
 		<div className="relative">
 			<div className="flex flex-center aspect-1.5">
-				<div className="mb-calc(-1_*_$form-label-height) h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
+				<div className="mb-calc(-1_*_$sidebar-label-height) h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
 			</div>
 			<div className="absolute inset-0">
 				<Section tag="div">
@@ -140,24 +140,24 @@ function SidebarContents() {
 				</Section>
 			</div>
 		</div>
-		<hr className="h-$hairline-height bg-$hairline-color" />
+		<Hairline />
 		<Section>
 			<Label resetButton />
 			<Checkbox />
 			<Checkbox />
 			<Checkbox />
 		</Section>
-		<hr className="h-$hairline-height bg-$hairline-color" />
-		<Section>
-			<Label resetButton />
-			<Slider />
-		</Section>
-		<hr className="h-$hairline-height bg-$hairline-color" />
+		<Hairline />
 		<Section>
 			<Label resetButton />
 			<Slider />
 		</Section>
-		<hr className="h-$hairline-height bg-$hairline-color" />
+		<Hairline />
+		<Section>
+			<Label resetButton />
+			<Slider />
+		</Section>
+		<Hairline />
 	</>
 }
 

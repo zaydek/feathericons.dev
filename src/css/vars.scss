@@ -1,32 +1,30 @@
 :root {
-	--hero-height:            640px;
-	--ribbon-inset-y:         32px;
-	--ribbon-height:          256px;
-	--rounding:               36px;
-	--search-bar-height:      64px;
-	--main-width:             2304px;
-	--main-inset-y:           48px;
-	--main-inset-x:           96px;
-	--sidebar-width:          400px;
-	--sidebar-inset-y:        20px;
-	--sidebar-inset-x:        32px;
-	--hairline-height:        1px;
+	--hero-height:             640px;
+	--ribbon-inset-y:          32px;
+	--ribbon-height:           256px;
+	--rounding:                36px;
+	--search-bar-height:       64px;
+	--main-width:              2304px;
+	--main-inset-y:            48px;
+	--main-inset-x:            96px;
+	--sidebar-width:           400px;
+	--sidebar-inset-y:         20px;
+	--sidebar-inset-x:         32px;
+	--sidebar-label-height:    20px;
+	--sidebar-input-height:    32px;
+	--hairline-height:         1px;
 
-	// Use var(--form-label-height) for form labels
-	// and slider touch areas
-	--form-label-height:      var(--sidebar-inset-y);
-	--form-input-height:      32px;
-
-	--base-h:                 200;
-	--base-s:                 25%;
-	--base-l:                 50%;
-	--base-color:             hsl(var(--base-h), var(--base-s), 100%);
-	--gray-color:             hsl(var(--base-h), var(--base-s), 98%);
-	--dark-placeholder-color: hsl(var(--base-h), var(--base-s), 65%);
-	--placeholder-color:      hsl(var(--base-h), var(--base-s), 85%);
-	--hairline-color:         hsl(var(--base-h), var(--base-s), var(--base-l), 0.2);
-	--trim-color:             hsl(215, 100%, 60%);
-	--alt-trim-color:         hsl(200, 100%, 60%);
+	--base-h:                  200;
+	--base-s:                  25%;
+	--base-l:                  50%;
+	--base-color:              hsl(var(--base-h), var(--base-s), 100%);
+	--gray-color:              hsl(var(--base-h), var(--base-s), 98%);
+	--light-placeholder-color: hsl(var(--base-h), var(--base-s), 90%);
+	--dark-placeholder-color:  hsl(var(--base-h), var(--base-s), 65%);
+	--placeholder-color:       hsl(var(--base-h), var(--base-s), 85%);
+	--hairline-color:          hsl(var(--base-h), var(--base-s), var(--base-l), 0.2);
+	--trim-color:              hsl(215, 100%, 60%);
+	--alt-trim-color:          hsl(200, 100%, 60%);
 
 	--realistic-shadow-1:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
