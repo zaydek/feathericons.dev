@@ -193,12 +193,12 @@ export function Home() {
 			{/* TODO: Hero contents */}
 		</div>
 		{/* Use mt-calc(-1_*_$ribbon-inset-y) here to preserve h-$hero-height */}
-		<div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0 overflow-x-hidden">
+		{/* <div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0 overflow-x-hidden">
 			<div className="mx-calc(-1_*_$ribbon-height) h-calc($ribbon-height_+_$rounding) rounded-b-50% bg-$trim-color"></div>
-		</div>
-		{/* <div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0">
-			<div className="h-calc($ribbon-height_+_$rounding) bg-$trim-color"></div>
 		</div> */}
+		<div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0">
+			<div className="h-calc($ribbon-height_+_$rounding) bg-$trim-color"></div>
+		</div>
 		<div className="mt-calc(-1_*_($ribbon-height_+_$rounding)) pb-calc($ribbon-inset-y_*_2) flex justify-center">
 			<div className="basis-$main-width">
 				{/* Forward relative here because of sticky */}
