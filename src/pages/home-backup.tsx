@@ -60,29 +60,34 @@ function MainContents() {
 	</>
 }
 
-function FormSection({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
+function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
 	return <>
 		{createElement(tag ?? "section", {
-			className: "py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-20",
+			className: "py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-$sidebar-inset-y",
 			...props,
 		}, children)}
 	</>
 }
 
-function FormLabel({ resetButton }: { resetButton?: boolean }) {
+function IconPlaceholder() {
+	return <div className="h-24 w-24 rounded-1e3 bg-$placeholder-color"></div>
+}
+
+function TextPlaceholder() {
+	return <div className="h-6 w-72 rounded-1e3 bg-$dark-placeholder-color"></div>
+}
+
+function Label({ resetButton }: { resetButton?: boolean }) {
 	resetButton ??= false
 
 	return <>
-		{/* TODO: Remove h-6 */}
-		<div className="flex justify-space-between align-center h-$form-label-height [&_>_:nth-child(1)]:grow-1">
-			{/* LHS */}
+		<div className="flex justify-space-between align-center h-$form-label-height">
 			<div className="flex align-center gap-10">
-				<div className="h-24 w-24 rounded-1e3 bg-$placeholder-color"></div>
-				<div className="h-6 w-25% rounded-1e3 bg-$dark-placeholder-color"></div>
+				<IconPlaceholder />
+				<TextPlaceholder />
 			</div>
-			{/* RHS */}
 			{resetButton &&
-				<div className="flex flex-center h-32 w-32 rounded-1e3 bg-$placeholder-color">
+				<div className="flex flex-center h-$form-input-height w-$form-input-height rounded-1e3 bg-$placeholder-color">
 					<div className="h-50% aspect-1 rounded-1e3 bg-$dark-placeholder-color"></div>
 				</div>
 			}
@@ -90,18 +95,10 @@ function FormLabel({ resetButton }: { resetButton?: boolean }) {
 	</>
 }
 
-//// function Value() {
-//// 	return <>
-//// 		<div className="h-6 w-25% rounded-1e3 bg-$placeholder-color"></div>
-//// 	</>
-//// }
-
-function FormSlider() {
+function CheckboxInput() {
 	return <>
-		{/* <div className="px-calc($form-label-height_/_2) flex flex-col justify-center h-$form-label-height"> */}
 		<div className="flex flex-col justify-center h-$form-label-height">
-			{/* <div className="flex align-center h-6 rounded-1e3 bg-$trim-color"> */}
-			<div className="flex flex-center h-6 rounded-1e3 bg-$trim-color">
+			<div className="flex justify-end align-center h-12 w-48 rounded-1e3 bg-$alt-trim-color">
 				<div className="flex flex-center h-$form-input-height w-$form-input-height rounded-1e3 bg-$base-color shadow-$shadow-6">
 					<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
 				</div>
@@ -110,42 +107,56 @@ function FormSlider() {
 	</>
 }
 
-//// function SliderField() {
-//// 	return <>
-//// 		<div className="flex justify-space-between align-center h-6">
-//// 			<Value />
-////
-//// 		</div>
-//// 	</>
-//// }
+function Checkbox() {
+	return <>
+		<div className="flex justify-space-between align-center h-$form-label-height">
+			<TextPlaceholder />
+			<CheckboxInput />
+		</div>
+	</>
+}
+
+function Slider() {
+	return <>
+		<div className="flex flex-col justify-center h-$form-label-height">
+			<div className="flex flex-center h-6 rounded-1e3 bg-$alt-trim-color">
+				<div className="flex flex-center h-calc($form-input-height_+_4px) w-calc($form-input-height_+_4px) rounded-1e3 bg-$base-color shadow-$shadow-6">
+					<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
+				</div>
+			</div>
+		</div>
+	</>
+}
 
 function SidebarContents() {
 	return <>
 		<div className="relative">
-			<div className="flex flex-center aspect-5_/_4">
-				<div className="h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
+			<div className="flex flex-center aspect-1.5">
+				<div className="mb-calc(-1_*_$form-label-height) h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
 			</div>
 			<div className="absolute inset-0">
-				<FormSection tag="div">
-					<FormLabel />
-				</FormSection>
+				<Section tag="div">
+					<Label />
+				</Section>
 			</div>
 		</div>
 		<hr className="h-$hairline-height bg-$hairline-color" />
-		<FormSection>
-			<FormLabel resetButton />
-			{/* ... */}
-		</FormSection>
+		<Section>
+			<Label resetButton />
+			<Checkbox />
+			<Checkbox />
+			<Checkbox />
+		</Section>
 		<hr className="h-$hairline-height bg-$hairline-color" />
-		<FormSection>
-			<FormLabel resetButton />
-			<FormSlider />
-		</FormSection>
+		<Section>
+			<Label resetButton />
+			<Slider />
+		</Section>
 		<hr className="h-$hairline-height bg-$hairline-color" />
-		<FormSection>
-			<FormLabel resetButton />
-			<FormSlider />
-		</FormSection>
+		<Section>
+			<Label resetButton />
+			<Slider />
+		</Section>
 		<hr className="h-$hairline-height bg-$hairline-color" />
 	</>
 }
@@ -156,12 +167,12 @@ export function Home() {
 			{/* TODO: Hero contents */}
 		</div>
 		{/* Use mt-calc(-1_*_$ribbon-inset-y) here to preserve h-$hero-height */}
-		{/* <div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0 overflow-x-hidden">
-			<div className="mx-calc(-1_*_$ribbon-height_/_2) h-calc($ribbon-height_+_$rounding) rounded-b-25% bg-$trim-color"></div>
-		</div> */}
-		<div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0">
-			<div className="h-calc($ribbon-height_+_$rounding) bg-$trim-color"></div>
+		<div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0 overflow-x-hidden">
+			<div className="mx-calc(-1_*_$ribbon-height) h-calc($ribbon-height_+_$rounding) rounded-b-25% bg-$trim-color"></div>
 		</div>
+		{/* <div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0">
+			<div className="h-calc($ribbon-height_+_$rounding) bg-$trim-color"></div>
+		</div> */}
 		<div className="mt-calc(-1_*_($ribbon-height_+_$rounding)) pb-calc($ribbon-inset-y_*_2) flex justify-center">
 			<div className="basis-$main-width">
 				{/* Forward relative here because of sticky */}
