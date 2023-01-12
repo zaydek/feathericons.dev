@@ -27,13 +27,14 @@ export function Home() {
 				<div className="h-$inset-y bg-$trim-color"></div>
 				<div className="relative">
 					<div className="h-calc($inset-y_+_$rounding) w-$rounding bg-$trim-color"></div>
-					<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 bg-$gray-color"></div>
+					<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 bg-$base-color"></div>
 				</div>
 				<div className="h-calc($inset-y_+_$rounding) w-$inset-x bg-$trim-color"></div>
 			</div>
 			{/* Use relative here because of the ribbon */}
 			<div className="mt-calc(-1_*_$rounding) relative flex rounded-b-$rounding bg-$base-color shadow-$realistic-shadow [&_>_:nth-child(2)]:grow-1">
-				<aside className="w-$sidebar-1-width rounded-bl-$rounding bg-$gray-color shadow-inset_$hairline-thickness_0_0_$hairline-color">
+				{/* Use shadow-$inset-hairline-shadow-* because of <main> */}
+				<aside className="w-$sidebar-1-width shadow-$inset-hairline-shadow-r">
 					<div className="sticky t-$inset-y">
 						{iota(10).map(index =>
 							<div key={index}>
@@ -43,16 +44,16 @@ export function Home() {
 					</div>
 				</aside>
 				<main>
-					<div className="sticky t-$inset-y h-$navigation-height bg-$base-color shadow-0_$hairline-thickness_0_0_$hairline-color">
-						{/* <div>Hello, world!</div> */}
-					</div>
+					{/* TODO */}
+					<nav className="sticky t-$inset-y h-$navigation-height bg-$base-color"></nav>
 					{iota(400).map(index =>
 						<div key={index}>
 							Hello, world! ({index})
 						</div>
 					)}
 				</main>
-				<aside className="w-$sidebar-2-width rounded-br-$rounding bg-$gray-color shadow-inset_$hairline-thickness_0_0_$hairline-color">
+				{/* Use shadow-$inset-hairline-shadow-* because of <main> */}
+				<aside className="w-$sidebar-2-width shadow-$inset-hairline-shadow-l">
 					<div className="sticky t-$inset-y">
 						{iota(10).map(index =>
 							<div key={index}>
