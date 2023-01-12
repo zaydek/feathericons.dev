@@ -168,10 +168,11 @@ function SidebarContents() {
 			<Checkbox />
 			<Checkbox />
 		</Section> */}
-		<Hairline />
+		{/* <Hairline />
 		<Section>
+			<Label resetButton />
 			<Checkbox />
-		</Section>
+		</Section> */}
 		<Hairline />
 		<Section>
 			<Label resetButton />
