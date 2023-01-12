@@ -60,31 +60,63 @@ function MainContents() {
 	</>
 }
 
-function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
+function FormSection({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
 	return <>
 		{createElement(tag ?? "section", {
-			className: "py-$sidebar-inset-y px-$sidebar-inset-x",
+			className: "py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-20",
 			...props,
 		}, children)}
 	</>
 }
 
-function LabelTitle() {
+function FormLabel({ resetButton }: { resetButton?: boolean }) {
+	resetButton ??= false
+
 	return <>
 		{/* TODO: Remove h-6 */}
-		<div className="flex justify-space-between align-center h-6 [&_>_:nth-child(1)]:grow-1">
+		<div className="flex justify-space-between align-center h-$form-label-height [&_>_:nth-child(1)]:grow-1">
 			{/* LHS */}
 			<div className="flex align-center gap-10">
 				<div className="h-24 w-24 rounded-1e3 bg-$placeholder-color"></div>
 				<div className="h-6 w-25% rounded-1e3 bg-$dark-placeholder-color"></div>
 			</div>
 			{/* RHS */}
-			<div className="flex flex-center h-32 w-32 rounded-1e3 bg-$placeholder-color">
-				<div className="h-16 w-16 rounded-1e3 bg-$dark-placeholder-color"></div>
+			{resetButton &&
+				<div className="flex flex-center h-32 w-32 rounded-1e3 bg-$placeholder-color">
+					<div className="h-50% aspect-1 rounded-1e3 bg-$dark-placeholder-color"></div>
+				</div>
+			}
+		</div>
+	</>
+}
+
+//// function Value() {
+//// 	return <>
+//// 		<div className="h-6 w-25% rounded-1e3 bg-$placeholder-color"></div>
+//// 	</>
+//// }
+
+function FormSlider() {
+	return <>
+		<div className="flex flex-col justify-center h-$form-input-height">
+			{/* <div className="flex align-center h-6 rounded-1e3 bg-$trim-color"> */}
+			<div className="flex flex-center h-6 rounded-1e3 bg-$trim-color">
+				<div className="flex flex-center h-$form-input-height w-$form-input-height rounded-1e3 bg-$base-color shadow-$shadow-2">
+					<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
+				</div>
 			</div>
 		</div>
 	</>
 }
+
+//// function SliderField() {
+//// 	return <>
+//// 		<div className="flex justify-space-between align-center h-6">
+//// 			<Value />
+////
+//// 		</div>
+//// 	</>
+//// }
 
 function SidebarContents() {
 	return <>
@@ -93,35 +125,26 @@ function SidebarContents() {
 				<div className="h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
 			</div>
 			<div className="absolute inset-0">
-				<Section tag="div">
-					<LabelTitle />
-				</Section>
+				<FormSection tag="div">
+					<FormLabel />
+				</FormSection>
 			</div>
 		</div>
 		<hr className="h-$hairline-height bg-$hairline-color" />
-		<Section>
-			<LabelTitle />
-			{/* <div>Hello</div>
-			<div>Hello</div>
-			<div>Hello</div>
-			<div>Hello</div> */}
-		</Section>
+		<FormSection>
+			<FormLabel resetButton />
+			{/* ... */}
+		</FormSection>
 		<hr className="h-$hairline-height bg-$hairline-color" />
-		<Section>
-			<LabelTitle />
-			{/* <div>Hello</div>
-			<div>Hello</div>
-			<div>Hello</div>
-			<div>Hello</div> */}
-		</Section>
+		<FormSection>
+			<FormLabel resetButton />
+			<FormSlider />
+		</FormSection>
 		<hr className="h-$hairline-height bg-$hairline-color" />
-		<Section>
-			<LabelTitle />
-			{/* <div>Hello</div>
-			<div>Hello</div>
-			<div>Hello</div>
-			<div>Hello</div> */}
-		</Section>
+		<FormSection>
+			<FormLabel resetButton />
+			<FormSlider />
+		</FormSection>
 		<hr className="h-$hairline-height bg-$hairline-color" />
 	</>
 }
