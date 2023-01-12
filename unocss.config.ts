@@ -47,11 +47,6 @@ const rules: Rule[] = [
 	["static",                { "position": "static" }],
 	["sticky",                { "position": "sticky"   }],
 
-	//// [/^(-?)inset-t-(.+)$/,    ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": "auto",                   "left": "auto"                   })],
-	//// [/^(-?)inset-r-(.+)$/,    ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": "auto",                   "left": "auto"                   })],
-	//// [/^(-?)inset-b-(.+)$/,    ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": "auto",                   "left": "auto"                   })],
-	//// [/^(-?)inset-l-(.+)$/,    ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar( value, { sign }), "bottom": "auto",                   "left": "auto"                   })],
-
 	[/^(-?)inset-(.+)$/,      ([_, sign, value]) => ({ "inset":          desugar(value, { sign }) })],
 	[/^(-?)tr-(.+)$/,         ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right":  desugar(value, { sign }) })],
 	[/^(-?)br-(.+)$/,         ([_, sign, value]) => ({ "right":          desugar(value, { sign }), "bottom": desugar(value, { sign }) })],
