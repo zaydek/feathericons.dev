@@ -52,7 +52,7 @@ function MainContents() {
 			<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr)) grid-auto-rows-96">
 				{iota(400).map(index =>
 					<div key={index} className="flex flex-center">
-						<div className="h-40 w-40 rounded-1e3 bg-$placeholder-color"></div>
+						<div className="h-32 w-32 rounded-1e3 bg-$placeholder-color"></div>
 					</div>
 				)}
 			</div>
@@ -62,7 +62,7 @@ function MainContents() {
 
 function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
 	return <>
-		<section className="py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-$sidebar-label-height" {...props}>
+		<section className="py-$sidebar-inset-y [&:nth-child(1)]:pt-$main-inset-y px-$sidebar-inset-x flex flex-col gap-$sidebar-label-height" {...props}>
 			{children}
 		</section>
 	</>
@@ -127,23 +127,49 @@ function Slider() {
 	</>
 }
 
+//// <div className="relative">
+//// 	<div className="flex flex-center aspect-1.4">
+//// 		{/* <div className="mb-calc(-1_*_($main-inset-y_+_$sidebar-label-height)_/_2) h-64 w-64 rounded-1e3 bg-$placeholder-color"></div> */}
+//// 		<div className="h-48 w-48 rounded-1e3 bg-$placeholder-color"></div>
+//// 	</div>
+//// 	<div className="absolute t-0 x-0">
+//// 		{/* Use py-$main-inset-y for alignment */}
+//// 		<div className="py-$main-inset-y px-$sidebar-inset-x">
+//// 			<Label />
+//// 		</div>
+//// 	</div>
+//// 	<div className="absolute b-0 x-0">
+//// 		<div className="py-$sidebar-inset-y px-$sidebar-inset-x">
+//// 			<Checkbox />
+//// 		</div>
+//// 	</div>
+//// </div>
+
 function SidebarContents() {
 	return <>
-		<div className="relative">
-			<div className="flex flex-center aspect-1.5">
-				<div className="mb-calc(-1_*_($main-inset-y_+_$sidebar-label-height)_/_2) h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
+		<Section>
+			<Label />
+			{/* <div className="flex flex-center h-160 rounded-24 bg-$gray-color shadow-$inset-hairline-shadow"> */}
+			<div className="flex flex-center h-160">
+				<div className="h-48 w-48 rounded-1e3 bg-$dark-placeholder-color"></div>
 			</div>
-			<div className="absolute inset-0 [pointer-events]-none [&_>_*]:[pointer-events]-auto">
-				<div className="py-$main-inset-y px-$sidebar-inset-x">
-					<Label />
-				</div>
-			</div>
-		</div>
+			<Checkbox />
+			<Hairline />
+			<Checkbox />
+			<Checkbox />
+			<Checkbox />
+		</Section>
+		{/* <Section>
+			<Checkbox />
+		</Section> */}
+		{/* <Hairline /> */}
+		{/* <Section>
+			<Checkbox />
+			<Checkbox />
+			<Checkbox />
+		</Section> */}
 		<Hairline />
 		<Section>
-			<Label resetButton />
-			<Checkbox />
-			<Checkbox />
 			<Checkbox />
 		</Section>
 		<Hairline />
