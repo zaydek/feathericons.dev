@@ -7,6 +7,7 @@
 //// 	</>
 //// }
 
+import { createElement, HTMLAttributes } from "react"
 import { iota } from "../lib/iota"
 
 //// function Sidebar1Contents() {
@@ -37,16 +38,6 @@ import { iota } from "../lib/iota"
 //// 	</>
 //// }
 
-function Sidebar2Contents() {
-	return <>
-		{/* {iota(10).map(index =>
-			<div key={index}>
-				Hello, world! ({index})
-			</div>
-		)} */}
-	</>
-}
-
 function SearchBarContents() {
 	return <>
 		<div>
@@ -57,7 +48,7 @@ function SearchBarContents() {
 
 function MainContents() {
 	return <>
-		<div className="pb-$main-inset-y px-$main-inset-x">
+		<div className="py-$main-inset-y px-$main-inset-x">
 			<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr)) grid-auto-rows-96">
 				{iota(400).map(index =>
 					<div key={index} className="flex justify-center align-center">
@@ -69,23 +60,54 @@ function MainContents() {
 	</>
 }
 
-export function Home() {
-	//// return <>
-	//// 	<div className="h-320 bg-$trim-color"></div>
-	//// 	<div className="sticky t-0">
-	//// 		<div className="-mx-160 h-128 rounded-b-50% bg-$trim-color"></div>
-	//// 	</div>
-	//// 	<div className="-mt-160 pb-128 relative flex justify-center">
-	//// 		<div className="basis-1500 bg-$base-color rounded-$rounding shadow-$shadow-6">
-	//// 			{iota(1e3).map(index =>
-	//// 				<div key={index}>
-	//// 					Hello, world! ({index})
-	//// 				</div>
-	//// 			)}
-	//// 		</div>
-	//// 	</div>
-	//// </>
+function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
+	return <>
+		{createElement(tag ?? "section", {
+			className: "py-$sidebar-inset-y px-$sidebar-inset-x",
+			...props,
+		}, children)}
+	</>
+}
 
+function Label() {
+	return <>
+		{/* TODO: Remove h-6 */}
+		<div className="flex align-center gap-10 h-6">
+			<div className="h-24 w-24 rounded-1e3 bg-$placeholder-color"></div>
+			<div className="h-6 w-25% rounded-1e3 bg-$dark-placeholder-color"></div>
+		</div>
+	</>
+}
+
+function SidebarContents() {
+	return <>
+		<div className="relative">
+			<div className="flex justify-center align-center aspect-5_/_4">
+				<div className="h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
+			</div>
+			<div className="absolute inset-0">
+				<Section tag="div">
+					<Label />
+				</Section>
+			</div>
+		</div>
+		<hr className="h-$hairline-height bg-$hairline-color" />
+		<Section>
+			<div>Hello</div>
+		</Section>
+		<hr className="h-$hairline-height bg-$hairline-color" />
+		<Section>
+			<div>Hello</div>
+		</Section>
+		<hr className="h-$hairline-height bg-$hairline-color" />
+		<Section>
+			<div>Hello</div>
+		</Section>
+		<hr className="h-$hairline-height bg-$hairline-color" />
+	</>
+}
+
+export function Home() {
 	return <>
 		<div className="h-$hero-height bg-$trim-color">
 			{/* TODO: Hero contents */}
@@ -122,7 +144,7 @@ export function Home() {
 					</main>
 					<aside className="w-$sidebar-width shadow-$inset-hairline-shadow-l">
 						<div className="sticky t-$ribbon-inset-y z-10 flex flex-col">
-							<Sidebar2Contents />
+							<SidebarContents />
 						</div>
 					</aside>
 				</div>
