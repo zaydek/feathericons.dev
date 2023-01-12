@@ -33,14 +33,6 @@ function desugar(rawValue: string | undefined, { sign, px }: { sign?: string, px
 }
 
 const rules: Rule[] = [
-	// Arbitrary key-value e.g. [property]-value
-	[/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
-		const px = !(property in unitless)
-		return {
-			[property]: desugar(value, { px }),
-		}
-	}],
-
 	["absolute",              { "position": "absolute" }],
 	["fixed",                 { "position": "fixed"    }],
 	["relative",              { "position": "relative" }],
@@ -124,13 +116,16 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,     ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
-	//// [/^overflow-(.+)$/,       ([_, value]) => ({ "overflow":             desugar(value) })],
-	//// [/^overflow-y-(.+)$/,     ([_, value]) => ({ "overflow-y":           desugar(value) })],
-	//// [/^overflow-x-(.+)$/,     ([_, value]) => ({ "overflow-x":           desugar(value) })],
-
-	//// [/^c-(.+)$/,         ([_, value]) => ({ "color":                desugar(value, { px: false }) })],
 	[/^bg-(.+)$/,             ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
 	[/^shadow-(.+)$/,         ([_, value]) => ({ "box-shadow":           desugar(value, { px: false }) })],
+
+	// Arbitrary key-value e.g. [property]-value
+	[/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
+		const px = !(property in unitless)
+		return {
+			[property]: desugar(value, { px }),
+		}
+	}],
 ]
 
 export default defineConfig({
