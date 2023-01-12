@@ -14,7 +14,7 @@ function main() {
 	// For every name
 	for (const name of manifest) {
 		// For every part of every name
-		for (const part of name.split("-")) {
+		for (const part of name.split(/(?=[A-Z])/)) {
 			for (const value of manifest) {
 				if (value.includes(part)) {
 					if (part in seq) {
