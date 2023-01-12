@@ -98,10 +98,11 @@ function FormLabel({ resetButton }: { resetButton?: boolean }) {
 
 function FormSlider() {
 	return <>
-		<div className="flex flex-col justify-center h-$form-input-height">
+		{/* <div className="px-calc($form-label-height_/_2) flex flex-col justify-center h-$form-label-height"> */}
+		<div className="flex flex-col justify-center h-$form-label-height">
 			{/* <div className="flex align-center h-6 rounded-1e3 bg-$trim-color"> */}
 			<div className="flex flex-center h-6 rounded-1e3 bg-$trim-color">
-				<div className="flex flex-center h-$form-input-height w-$form-input-height rounded-1e3 bg-$base-color shadow-$shadow-2">
+				<div className="flex flex-center h-$form-input-height w-$form-input-height rounded-1e3 bg-$base-color shadow-$shadow-6">
 					<div className="h-50% aspect-1 rounded-1e3 bg-$placeholder-color"></div>
 				</div>
 			</div>

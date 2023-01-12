@@ -8,9 +8,12 @@
 	--main-inset-y:           48px;
 	--main-inset-x:           96px;
 	--sidebar-width:          400px;
-	--sidebar-inset-y:        32px;
+	--sidebar-inset-y:        24px;
 	--sidebar-inset-x:        32px;
 	--hairline-height:        1px;
+
+	// Use var(--form-label-height) for form labels
+	// and slider touch areas
 	--form-label-height:      20px;
 	--form-input-height:      36px;
 
