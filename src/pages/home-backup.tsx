@@ -162,15 +162,15 @@ function SidebarContents() {
 
 export function Home() {
 	return <>
-		<div className="h-$hero-height bg-$trim-color">
+		<div className="h-$hero-height bg-$alt-trim-color">
 			{/* TODO: Hero contents */}
 		</div>
 		{/* Use mt-calc(-1_*_$ribbon-inset-y) here to preserve h-$hero-height */}
 		<div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0 overflow-x-hidden">
-			<div className="mx-calc(-1_*_$ribbon-height) h-calc($ribbon-height_+_$rounding) rounded-b-50% bg-$trim-color"></div>
+			<div className="mx-calc(-1_*_$ribbon-height) h-calc($ribbon-height_+_$rounding) rounded-b-50% bg-$alt-trim-color"></div>
 		</div>
 		{/* <div className="mt-calc(-1_*_$ribbon-inset-y) sticky t-0">
-			<div className="h-calc($ribbon-height_+_$rounding) bg-$trim-color"></div>
+			<div className="h-calc($ribbon-height_+_$rounding) bg-$alt-trim-color"></div>
 		</div> */}
 		<div className="mt-calc(-1_*_($ribbon-height_+_$rounding)) pb-calc($ribbon-inset-y_*_2) flex justify-center">
 			<div className="basis-$main-width">
@@ -178,12 +178,12 @@ export function Home() {
 				{/* Use z-(>10) */}
 				<div className="mx-calc(-1_*_$rounding) sticky [&_+_*]:relative t-0 z-100 flex [&_>_:nth-child(2)]:grow-1">
 					<div className="relative">
-						<div className="h-calc($ribbon-inset-y_+_$rounding) w-calc($rounding_*_2) bg-$trim-color"></div>
+						<div className="h-calc($ribbon-inset-y_+_$rounding) w-calc($rounding_*_2) bg-$alt-trim-color"></div>
 						<div className="absolute br-0 h-$rounding w-$rounding rounded-tl-1e3 bg-$base-color"></div>
 					</div>
-					<div className="h-$ribbon-inset-y bg-$trim-color"></div>
+					<div className="h-$ribbon-inset-y bg-$alt-trim-color"></div>
 					<div className="relative">
-						<div className="h-calc($ribbon-inset-y_+_$rounding) w-calc($rounding_*_2) bg-$trim-color"></div>
+						<div className="h-calc($ribbon-inset-y_+_$rounding) w-calc($rounding_*_2) bg-$alt-trim-color"></div>
 						<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 bg-$base-color"></div>
 					</div>
 				</div>
