@@ -71,54 +71,56 @@ function MainContents() {
 }
 
 export function Home() {
+	//// return <>
+	//// 	<div className="h-320 bg-$trim-color"></div>
+	//// 	<div className="sticky t-0">
+	//// 		<div className="-mx-160 h-128 rounded-b-50% bg-$trim-color"></div>
+	//// 	</div>
+	//// 	<div className="-mt-160 pb-128 relative flex justify-center">
+	//// 		<div className="basis-1500 bg-$base-color rounded-$rounding shadow-$shadow-6">
+	//// 			{iota(1e3).map(index =>
+	//// 				<div key={index}>
+	//// 					Hello, world! ({index})
+	//// 				</div>
+	//// 			)}
+	//// 		</div>
+	//// 	</div>
+	//// </>
+
 	return <>
 		<div className="h-$hero-height bg-$trim-color"></div>
-		<div className="mx-calc(-1_*_$ribbon-height_/_2) sticky t-$rounding">
-			<div className="h-$ribbon-height rounded-b-50% bg-$trim-color"></div>
+		<div className="sticky t-0 overflow-x-hidden">
+			<div className="mx-calc(-1_*_$ribbon-height_/_2) h-calc($ribbon-height_+_$rounding) rounded-b-50% bg-$trim-color"></div>
 		</div>
-		{/* <div className="sticky t-$rounding">
-			<div className="h-$ribbon-height bg-$trim-color"></div>
-		</div> */}
-		<div className="mt-calc(-1_*_($ribbon-height_+_$rounding)) pb-calc($ribbon-py_*_2) px-$ribbon-px">
-			<div className="mx-calc(-1_*_$ribbon-px) sticky t-0 z-10 flex [&_>_:nth-child(3)]:grow-1">
-				<div className="h-calc($ribbon-py_+_$rounding) w-$ribbon-px bg-$trim-color"></div>
-				<div className="relative">
-					<div className="h-calc($ribbon-py_+_$rounding) w-$rounding bg-$trim-color"></div>
-					<div className="absolute br-0 h-$rounding w-$rounding rounded-tl-1e3 bg-$base-color"></div>
-				</div>
-				<div className="h-$ribbon-py bg-$trim-color"></div>
-				<div className="relative">
-					<div className="h-calc($ribbon-py_+_$rounding) w-$rounding bg-$trim-color"></div>
-					<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 bg-$base-color"></div>
-				</div>
-				<div className="h-calc($ribbon-py_+_$rounding) w-$ribbon-px bg-$trim-color"></div>
-			</div>
-			{/* Use relative here because of the obscuring caps. Don't use z-index
-			here; defer z-index to sidebars. */}
-			<div className="mt-calc(-1_*_$rounding) relative flex rounded-b-$rounding bg-$base-color shadow-$realistic-shadow-6 [&_>_:nth-child(2)]:grow-1">
-				<aside className="w-$sidebar-1-width shadow-$inset-hairline-shadow-r">
-					{/* Use flex flex-col for sidebars */}
-					<div className="sticky t-$ribbon-py z-10 flex flex-col">
-						<Sidebar1Contents />
+		<div className="mt-calc(-1_*_($ribbon-height_+_$rounding)) pb-calc($ribbon-py_*_2) flex justify-center">
+			<div className="basis-$main-width">
+				{/* Forward relative here because of sticky */}
+				<div className="mx-calc(-1_*_$rounding) sticky [&_+_*]:relative t-0 z-10 flex [&_>_:nth-child(2)]:grow-1">
+					<div className="relative">
+						<div className="h-calc($ribbon-py_+_$rounding) w-calc($rounding_*_2) bg-$trim-color"></div>
+						<div className="absolute br-0 h-$rounding w-$rounding rounded-tl-1e3 bg-$base-color"></div>
 					</div>
-				</aside>
-				<main>
-					{/* TODO */}
-					{/* <nav className="sticky t-$ribbon-py h-$search-bar-height bg-$base-color"></nav> */}
-					{/* <div className="px-$main-px py-$main-py sticky t-$ribbon-py [background-image]-linear-gradient(orange_calc($main-py_+_$search-bar-height),_blue_calc($main-py_+_$search-bar-height_+_calc($main-py_/_2)))"> */}
-					<div className="px-$main-px py-$main-py sticky t-$ribbon-py [background-image]-linear-gradient($base-color_calc($main-py_+_$search-bar-height),_transparent)">
-						<div className="h-$search-bar-height rounded-1e3 bg-hsl($base-h,_$base-s,_95%) [&:hover]:(bg-$base-color shadow-$shadow-2)">
-							{/* <div>Hello</div> */}
+					<div className="h-$ribbon-py bg-$trim-color"></div>
+					<div className="relative">
+						<div className="h-calc($ribbon-py_+_$rounding) w-calc($rounding_*_2) bg-$trim-color"></div>
+						<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 bg-$base-color"></div>
+					</div>
+				</div>
+				<div className="mt-calc(-1_*_$rounding) flex rounded-b-$rounding bg-$base-color shadow-$realistic-shadow-6 [&_>_:nth-child(1)]:grow-1">
+					<main>
+						<div className="px-$main-px py-$main-py sticky t-$ribbon-py [background-image]-linear-gradient($base-color_calc($main-py_+_$search-bar-height),_transparent)">
+							<div className="h-$search-bar-height rounded-1e3 bg-hsl($base-h,_$base-s,_95%) [&:hover]:(bg-$base-color shadow-$shadow-2)">
+								{/* <div>Hello</div> */}
+							</div>
 						</div>
-					</div>
-					<MainContents />
-				</main>
-				<aside className="w-$sidebar-2-width shadow-$inset-hairline-shadow-l">
-					{/* Use flex flex-col for sidebars */}
-					<div className="sticky t-$ribbon-py z-10 flex flex-col">
-						<Sidebar2Contents />
-					</div>
-				</aside>
+						<MainContents />
+					</main>
+					<aside className="w-$sidebar-2-width shadow-$inset-hairline-shadow-l">
+						<div className="sticky t-$ribbon-py z-10 flex flex-col">
+							<Sidebar2Contents />
+						</div>
+					</aside>
+				</div>
 			</div>
 		</div>
 	</>
