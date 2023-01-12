@@ -129,9 +129,9 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,     ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
-	[/^overflow-(.+)$/,       ([_, value]) => ({ "overflow":             desugar(value) })],
-	[/^overflow-y-(.+)$/,     ([_, value]) => ({ "overflow-y":           desugar(value) })],
-	[/^overflow-x-(.+)$/,     ([_, value]) => ({ "overflow-x":           desugar(value) })],
+	//// [/^overflow-(.+)$/,       ([_, value]) => ({ "overflow":             desugar(value) })],
+	//// [/^overflow-y-(.+)$/,     ([_, value]) => ({ "overflow-y":           desugar(value) })],
+	//// [/^overflow-x-(.+)$/,     ([_, value]) => ({ "overflow-x":           desugar(value) })],
 
 	//// [/^c-(.+)$/,         ([_, value]) => ({ "color":                desugar(value, { px: false }) })],
 	[/^bg-(.+)$/,             ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
