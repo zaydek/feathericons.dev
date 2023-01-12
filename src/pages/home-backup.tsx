@@ -1,7 +1,7 @@
 
 //// function NavigationIcon() {
 //// 	return <>
-//// 		<div className="flex justify-center align-center h-32 w-32 rounded-1e3 bg-orange">
+//// 		<div className="flex flex-center h-32 w-32 rounded-1e3 bg-orange">
 //// 			<div className="h-24 w-24 rounded-1e3 bg-white"></div>
 //// 		</div>
 //// 	</>
@@ -51,7 +51,7 @@ function MainContents() {
 		<div className="py-$main-inset-y px-$main-inset-x">
 			<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr)) grid-auto-rows-96">
 				{iota(400).map(index =>
-					<div key={index} className="flex justify-center align-center">
+					<div key={index} className="flex flex-center">
 						<div className="h-40 w-40 rounded-1e3 bg-$placeholder-color"></div>
 					</div>
 				)}
@@ -69,12 +69,19 @@ function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElement
 	</>
 }
 
-function Label() {
+function LabelTitle() {
 	return <>
 		{/* TODO: Remove h-6 */}
-		<div className="flex align-center gap-10 h-6">
-			<div className="h-24 w-24 rounded-1e3 bg-$placeholder-color"></div>
-			<div className="h-6 w-25% rounded-1e3 bg-$dark-placeholder-color"></div>
+		<div className="flex justify-space-between align-center h-6 [&_>_:nth-child(1)]:grow-1">
+			{/* LHS */}
+			<div className="flex align-center gap-10">
+				<div className="h-24 w-24 rounded-1e3 bg-$placeholder-color"></div>
+				<div className="h-6 w-25% rounded-1e3 bg-$dark-placeholder-color"></div>
+			</div>
+			{/* RHS */}
+			<div className="flex flex-center h-32 w-32 rounded-1e3 bg-$placeholder-color">
+				<div className="h-16 w-16 rounded-1e3 bg-$dark-placeholder-color"></div>
+			</div>
 		</div>
 	</>
 }
@@ -82,26 +89,38 @@ function Label() {
 function SidebarContents() {
 	return <>
 		<div className="relative">
-			<div className="flex justify-center align-center aspect-5_/_4">
+			<div className="flex flex-center aspect-5_/_4">
 				<div className="h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
 			</div>
 			<div className="absolute inset-0">
 				<Section tag="div">
-					<Label />
+					<LabelTitle />
 				</Section>
 			</div>
 		</div>
 		<hr className="h-$hairline-height bg-$hairline-color" />
 		<Section>
+			<LabelTitle />
+			{/* <div>Hello</div>
 			<div>Hello</div>
+			<div>Hello</div>
+			<div>Hello</div> */}
 		</Section>
 		<hr className="h-$hairline-height bg-$hairline-color" />
 		<Section>
+			<LabelTitle />
+			{/* <div>Hello</div>
 			<div>Hello</div>
+			<div>Hello</div>
+			<div>Hello</div> */}
 		</Section>
 		<hr className="h-$hairline-height bg-$hairline-color" />
 		<Section>
+			<LabelTitle />
+			{/* <div>Hello</div>
 			<div>Hello</div>
+			<div>Hello</div>
+			<div>Hello</div> */}
 		</Section>
 		<hr className="h-$hairline-height bg-$hairline-color" />
 	</>

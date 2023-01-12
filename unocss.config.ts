@@ -96,12 +96,16 @@ const rules: Rule[] = [
 	[/^flex-wrap-(.+)$/,      ([_, value]) => ({ "flex-wrap":            desugar(value, { px: false }) })],
 	[/^order-(.+)$/,          ([_, value]) => ({ "order":                desugar(value, { px: false }) })],
 
+	["flex-center",           { "justify-content": "center", "align-items": "center" }],
+
 	["grid",                  { "display": "grid" }],
 	[/^grid-(.+)$/,           ([_, value]) => ({ "display": "grid", "grid-template":         Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 	[/^grid-rows-(.+)$/,      ([_, value]) => ({ "display": "grid", "grid-template-rows":    Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 	[/^grid-cols-(.+)$/,      ([_, value]) => ({ "display": "grid", "grid-template-columns": Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 	[/^grid-auto-rows-(.+)$/, ([_, value]) => ({ "grid-auto-rows":       desugar(value, { px: true }) })],
 	[/^grid-auto-cols-(.+)$/, ([_, value]) => ({ "grid-auto-columns":    desugar(value, { px: true }) })],
+
+	["grid-center",           { "place-items": "center" }],
 
 	[/^gap-(.+)$/,            ([_, value]) => ({ "gap":                  desugar(value) })],
 	[/^gap-y-(.+)$/,          ([_, value]) => ({ "row-gap":              desugar(value) })],
