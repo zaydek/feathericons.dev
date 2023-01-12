@@ -7,7 +7,7 @@
 //// 	</>
 //// }
 
-import { createElement, HTMLAttributes } from "react"
+import { HTMLAttributes } from "react"
 import { iota } from "../lib/iota"
 
 //// function Sidebar1Contents() {
@@ -62,10 +62,9 @@ function MainContents() {
 
 function Section({ tag, children, ...props }: { tag?: keyof JSX.IntrinsicElements } & HTMLAttributes<HTMLElement>) {
 	return <>
-		{createElement(tag ?? "section", {
-			className: "py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-$sidebar-label-height",
-			...props,
-		}, children)}
+		<section className="py-$sidebar-inset-y px-$sidebar-inset-x flex flex-col gap-$sidebar-label-height" {...props}>
+			{children}
+		</section>
 	</>
 }
 
@@ -135,9 +134,9 @@ function SidebarContents() {
 				<div className="mb-calc(-1_*_$sidebar-label-height) h-64 w-64 rounded-1e3 bg-$placeholder-color"></div>
 			</div>
 			<div className="absolute inset-0">
-				<Section tag="div">
+				<div className="py-$main-inset-y px-$sidebar-inset-x">
 					<Label />
-				</Section>
+				</div>
 			</div>
 		</div>
 		<Hairline />
