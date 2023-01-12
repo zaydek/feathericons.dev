@@ -1,21 +1,25 @@
 :root {
-	--inset-x: 128px;
-	--inset-y: 16px;
-	--hero-height: 540px;
-	--ribbon-height: 320px;
-	--navigation-height: 72px;
-	--sidebar-1-width: 200px;
-	--sidebar-2-width: 400px;
+	--inset-y:            32px;
+	--inset-x:            128px;
+	--hero-height:        540px;
+	--ribbon-height:      320px;
+	--rounding:           36px;
+	--navigation-height:  72px;
+	--sidebar-1-width:    256px;
+	--sidebar-2-width:    384px;
+	--sidebar-inset-y:    24px;
+	--sidebar-inset-x:    32px;
 	--hairline-thickness: 1px;
-	--rounding: 36px;
 
-	--base-h:         200;
-	--base-s:         25%;
-	--base-l:         50%;
-	--base-color:     hsl(var(--base-h), var(--base-s), 100%);
-	--gray-color:     hsl(var(--base-h), var(--base-s), 98%);
-	--hairline-color: hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
-	--trim-color:     hsl(200, 100%, 60%);
+	--base-h:                 200;
+	--base-s:                 25%;
+	--base-l:                 50%;
+	--base-color:             hsl(var(--base-h), var(--base-s), 100%);
+	--gray-color:             hsl(var(--base-h), var(--base-s), 98%);
+	--dark-placeholder-color: hsl(var(--base-h), var(--base-s), 65%);
+	--placeholder-color:      hsl(var(--base-h), var(--base-s), 85%);
+	--hairline-color:         hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
+	--trim-color:             hsl(200, 100%, 60%);
 
 	--realistic-shadow:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
