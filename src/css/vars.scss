@@ -1,19 +1,17 @@
 :root {
-	--hero-height:        540px;
-	--ribbon-height:      256px;
-	--ribbon-py:          32px;
-	--ribbon-px:          128px;
-	--rounding:           40px;
-	--main-py:            48px;
-	--main-px:            64px;
-	--search-bar-height:  64px;
-	--sidebar-1-width:    275px;
-	--sidebar-2-width:    400px;
-	--sidebar-py:         24px;
-	--sidebar-px:         32px;
-	--hairline-thickness: 1px;
-
-	--main-width: 2000px;
+	--hero-height:       540px;
+	--ribbon-inset-y:    32px;
+	--ribbon-height:     256px;
+	--rounding:          40px;
+	--search-bar-height: 64px;
+	--main-width:        2000px;
+	--main-inset-y:      48px;
+	--main-inset-x:      64px;
+	--sidebar-1-width:   275px;
+	--sidebar-2-width:   400px;
+	--sidebar-inset-y:   24px;
+	--sidebar-inset-x:   32px;
+	--hairline-size:     1px;
 
 	--base-h:                 200;
 	--base-s:                 25%;
@@ -54,16 +52,16 @@
 		0 32px 64px -32px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
 
 	// Directional hairline shadows
-	--inset-hairline-shadow:   inset 0 0 0 var(--hairline-thickness) var(--hairline-color);
-	--inset-hairline-shadow-t: inset 0 var(--hairline-thickness) 0 0 var(--hairline-color);
-	--inset-hairline-shadow-r: inset calc(-1 * var(--hairline-thickness)) 0 0 0 var(--hairline-color);
-	--inset-hairline-shadow-b: inset 0 calc(-1 * var(--hairline-thickness)) 0 0 var(--hairline-color);
-	--inset-hairline-shadow-l: inset var(--hairline-thickness) 0 0 0 var(--hairline-color);
-	--hairline-shadow:         0 0 0 var(--hairline-thickness) var(--hairline-color);
-	--hairline-shadow-t:       0 calc(-1 * var(--hairline-thickness)) 0 0 var(--hairline-color);
-	--hairline-shadow-r:       var(--hairline-thickness) 0 0 0 var(--hairline-color);
-	--hairline-shadow-b:       0 var(--hairline-thickness) 0 0 var(--hairline-color);
-	--hairline-shadow-l:       calc(-1 * var(--hairline-thickness)) 0 0 0 var(--hairline-color);
+	--inset-hairline-shadow:   inset 0 0 0 var(--hairline-size) var(--hairline-color);
+	--inset-hairline-shadow-t: inset 0 var(--hairline-size) 0 0 var(--hairline-color);
+	--inset-hairline-shadow-r: inset calc(-1 * var(--hairline-size)) 0 0 0 var(--hairline-color);
+	--inset-hairline-shadow-b: inset 0 calc(-1 * var(--hairline-size)) 0 0 var(--hairline-color);
+	--inset-hairline-shadow-l: inset var(--hairline-size) 0 0 0 var(--hairline-color);
+	--hairline-shadow:         0 0 0 var(--hairline-size) var(--hairline-color);
+	--hairline-shadow-t:       0 calc(-1 * var(--hairline-size)) 0 0 var(--hairline-color);
+	--hairline-shadow-r:       var(--hairline-size) 0 0 0 var(--hairline-color);
+	--hairline-shadow-b:       0 var(--hairline-size) 0 0 var(--hairline-color);
+	--hairline-shadow-l:       calc(-1 * var(--hairline-size)) 0 0 0 var(--hairline-color);
 
 	// Composed hairline and realistic shadows
 	--inset-shadow-1: var(--inset-hairline-shadow), var(--realistic-shadow-1);
