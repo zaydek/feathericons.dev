@@ -48,7 +48,7 @@ function SearchBarContents() {
 
 function MainContents() {
 	return <>
-		<div className="py-$main-inset-y px-$main-inset-x">
+		<div className="py-$main-inset-y pb-calc($main-inset-y_*_2) px-$main-inset-x">
 			<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr)) grid-auto-rows-96">
 				{iota(400).map(index =>
 					<div key={index} className="flex flex-center">
@@ -214,7 +214,7 @@ export function Home() {
 						<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 bg-$base-color"></div>
 					</div>
 				</div>
-				<div className="mt-calc(-1_*_$rounding) flex rounded-b-$rounding bg-$base-color shadow-$shadow-3 [&_>_:nth-child(1)]:grow-1">
+				<div className="mt-calc(-1_*_$rounding) flex rounded-b-$rounding bg-$base-color shadow-$shadow-4 [&_>_:nth-child(1)]:grow-1">
 					<main>
 						<div className="py-$main-inset-y px-$main-inset-x sticky t-$ribbon-inset-y [background-image]-linear-gradient($base-color_calc($main-inset-y_+_$search-bar-height),_transparent)">
 							<div className="h-$search-bar-height rounded-1e3 bg-hsl($base-h,_$base-s,_95%) [&:hover]:(bg-$base-color shadow-$shadow-2)">
