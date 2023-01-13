@@ -1,10 +1,9 @@
 import "./search-app.scss"
 
-import * as feather from "react-feather"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { HTMLAttributes, useCallback, useLayoutEffect, useState } from "react"
 import { manifest } from "./data/manifest-v2"
-import { Icon } from "./lib/react/icon"
+import { detab } from "./lib/format"
 
 type IconValue = keyof typeof manifest
 
@@ -13,104 +12,93 @@ function splitParts(str: string) {
 		.filter(v => v !== "")
 }
 
+// TODO: Add icon
+function Tooltip({ text, data, children, ...props }: { text: string, data: any } & HTMLAttributes<HTMLElement>) {
+	const [show, setShow] = useState(true)
+
+	useLayoutEffect(() => {
+		setShow(false)
+		setTimeout(() => {
+			setShow(true)
+		}, 0)
+	}, [data])
+
+	return <>
+		<div className="relative" data-group {...props}>
+			{children}
+			{show && <>
+				<div className="py-10 absolute t-100% l-50% [transform]-translateX(-50%) [pointer-events]-none">
+					<div className={detab(`
+						[transform]-translateY(8px)
+						[opacity]-0
+						[transition]-100ms_cubic-bezier(0,_1,_1,_1)
+						[transition-property]-transform,_opacity
+							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
+					`)}>
+						<div className="px-10 flex align-center gap-10 h-32 rounded-10 [background-color]-#333 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
+							<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
+							<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
+								{text}
+							</div>
+						</div>
+					</div>
+				</div>
+			</>}
+		</div>
+	</>
+}
+
 export function SearchApp() {
-	const [hoverName, setHoverName] = useState<IconValue | "">("")
+	const [input, setInput] = useState("")
+	const [inputHistory, setInputHistory] = useState<string[]>([])
 
-	const inputRef = useRef<HTMLInputElement | null>(null)
-	const [search, setSearch] = useState("")
+	const [order, setOrder] = useState<"forwards" | "backwards">("forwards")
 
-	const values = useMemo(() => {
-		const values: (readonly [name: IconValue, matches: boolean])[] = []
-		const $$search = splitParts(search).map(v => v.toLowerCase()).join("-")
-		for (const name of Object.keys(manifest)) {
-			const $$name = splitParts(name).map(v => v.toLowerCase()).join("-")
-			values.push([
-				name as IconValue,
-				`-${$$name}`.includes(`-${$$search}`),
-			])
-			//// if (`-${$$name}`.includes(`-${$$search}`)) {
-			//// 	values.push([
-			//// 		name as IconValue,
-			//// 		true,
-			//// 	])
-			//// }
-		}
-		return values
-	}, [search])
-
-	const [debouncedValues, setDebouncedValues] = useState(values)
-
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				inputRef.current!.focus()
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	const toggleOrder = useCallback(() => {
+		setOrder(curr => curr === "forwards" ? "backwards" : "forwards")
 	}, [])
 
-	const onceRef = useRef(false)
-	useEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		const timeoutId = setTimeout(() => {
-			setDebouncedValues(values)
-		}, 0)
-		return () => {
-			clearTimeout(timeoutId)
-		}
-	}, [values])
+	useLayoutEffect(() => {
+		document.documentElement.style.backgroundColor = "#fff"
+	}, [])
 
-	useEffect(() => {
-		console.log(hoverName)
-	}, [hoverName])
+	//// useEffect(() => {
+	//// 	function handleKeyDown(e: KeyboardEvent) {
+	//// 		if (e.key === "d") {
+	//// 			if (order === "forwards") {
+	//// 				setOrder("backwards")
+	//// 			} else {
+	//// 				setOrder("forwards")
+	//// 			}
+	//// 		}
+	//// 	}
+	//// 	window.addEventListener("keydown", handleKeyDown, false)
+	//// 	return () => window.addEventListener("keydown", handleKeyDown, false)
+	//// }, [order])
 
 	return <>
 		<div className="p-32 flex justify-center">
-			<div className="basis-2e3 flex flex-col gap-32">
-				<input
-					ref={inputRef}
-					className="mx-16 px-32 h-64 rounded-1e3 [font]-400_18px_/_normal_$sans [background-color]-#eee"
-					type="text"
-					value={search}
-					onKeyDown={e => {
-						if (e.key === "Escape") {
-							setSearch("")
-						}
-					}}
-					onChange={e => setSearch(e.currentTarget.value)}
-					autoFocus
-				/>
-				<div className="grid grid-cols-repeat(auto-fill,_minmax(60px,_1fr)) grid-auto-rows-60">
-					{debouncedValues
-						//// .filter(([, matches]) => matches)
-						.map(([name, matches], index) =>
-							<button
-								key={name}
-								className="flex flex-center effect-icon-hover"
-								onPointerOver={e => {
-									setHoverName(name)
-								}}
-								onPointerLeave={e => {
-									setHoverName("")
-								}}
-							>
-								<Icon
-									className="h-40 w-40"
-									style={{
-										color: (matches || hoverName === name) ? "hsl(0, 0%, 10%)" : "hsl(0, 0%, 87.5%)",
-										transform: (matches || hoverName === name) ? "scale(1)" : "scale(0.875)",
-										transition: `50ms cubic-bezier(0, 1, 1, 2)`,
-										transitionProperty: "transform",
-									}}
-									// @ts-expect-error
-									icon={feather[name]}
-								/>
-							</button>
-						)}
+			<div className="basis-1e3 flex gap-20 [&_>_:nth-child(1)]:grow-1">
+				<div className="flex flex-col gap-20">
+					<div className="flex flex-col h-64 rounded-1e3 [background-color]-#eee [&:focus-within]:([background-color]-#fff [box-shadow]-$shadow-2)">
+						<input className="px-32 h-64" type="text" value={input} onChange={e => setInput(e.currentTarget.value)} />
+					</div>
+					<div>Search results</div>
+				</div>
+				<div className="flex flex-col gap-20 w-300" style={{ order: order === "forwards" ? undefined : -1 }}>
+					<div className="flex justify-end align-center h-64 [&_>_:nth-child(1)]:grow-1">
+						<div className="flex align-center gap-10">
+							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
+							<div>Hello, world!</div>
+						</div>
+						<Tooltip text="MOVE SIDEBAR TO START" data={order} onClick={toggleOrder}>
+							{/* TODO: Remove [cursor]-pointer */}
+							<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [cursor]-pointer [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+								<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
+							</div>
+						</Tooltip>
+					</div>
+					<div>Sidebar</div>
 				</div>
 			</div>
 		</div>
