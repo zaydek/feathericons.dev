@@ -35,10 +35,15 @@ function Tooltip({ text, data, children, ...props }: { text: string, data: any }
 						[transition-property]-transform,_opacity
 							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
 					`)}>
-						<div className="px-10 flex align-center gap-10 h-32 rounded-10 [background-color]-#333 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
-							<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
-							<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
-								{text}
+						<div className="relative">
+							<div className="px-10 flex align-center gap-10 h-32 rounded-10 [background-color]-#333 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
+								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
+								<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
+									{text}
+								</div>
+							</div>
+							<div className="absolute -t-2 x-0 flex justify-center">
+								<div className="h-8 w-8 rounded-2 [background-color]-#333 [transform]-rotate(45deg)"></div>
 							</div>
 						</div>
 					</div>
@@ -91,7 +96,7 @@ export function SearchApp() {
 							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
 							<div>Hello, world!</div>
 						</div>
-						<Tooltip text="MOVE SIDEBAR TO START" data={order} onClick={toggleOrder}>
+						<Tooltip text={`MOVE SIDEBAR TO ${order === "forwards" ? "START" : "END"}`} data={order} onClick={toggleOrder}>
 							{/* TODO: Remove [cursor]-pointer */}
 							<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [cursor]-pointer [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
