@@ -1,13 +1,14 @@
 import "./search-app.scss"
 
-import { HTMLAttributes, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { HTMLAttributes, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
 // TODO: Make icon required?
-function Tooltip({ icon, text, data, children, ...props }: { icon?: typeof Icon, text: string, data?: any } & HTMLAttributes<HTMLElement>) {
+function Tooltip({ icon, content, data, children, ...props }: { icon?: typeof Icon, content: ReactNode, data?: any } & HTMLAttributes<HTMLElement>) {
 	const [show, setShow] = useState(true)
 
+	// This is a trick to hide the tooltip on data changes
 	useLayoutEffect(() => {
 		if (data === undefined) { return }
 		setShow(false)
@@ -33,7 +34,7 @@ function Tooltip({ icon, text, data, children, ...props }: { icon?: typeof Icon,
 								{/* TODO: Draw icon here */}
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
 								<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
-									{text}
+									{content}
 								</div>
 							</div>
 							<div className="absolute -t-2 x-0 flex justify-center">
@@ -60,7 +61,6 @@ function useRestorableState<T>({ initialValue, zeroValue }: { initialValue: T, z
 	const [history, setHistory] = useState([state])
 	const [historyIndex, setHistoryIndex] = useState(history.length - 1)
 
-	// Cycles historyIndex by increment
 	const cycleState = useCallback((increment: number) => {
 		if (increment > 0) {
 			if (historyIndex + increment < history.length) {
@@ -153,7 +153,7 @@ export function SearchApp() {
 							}}
 							autoFocus
 						/>
-						<Tooltip text="TOGGLE DARK MODE">
+						<Tooltip content={<>TOGGLE DARK MODE&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+D</span></>}>
 							<SearchBarButton />
 						</Tooltip>
 					</div>
@@ -165,7 +165,7 @@ export function SearchApp() {
 							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
 							<div>Hello, world!</div>
 						</div>
-						<Tooltip text="TOGGLE SIDEBAR" data={order} onClick={toggleOrder}>
+						<Tooltip content={<>TOGGLE SIDEBAR ORIENTATION&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+\</span></>} data={order} onClick={toggleOrder}>
 							{/* TODO: Remove [cursor]-pointer */}
 							<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [cursor]-pointer [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
