@@ -116,8 +116,8 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,     ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
-	[/^bg-(.+)$/,             ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
-	[/^shadow-(.+)$/,         ([_, value]) => ({ "box-shadow":           desugar(value, { px: false }) })],
+	//// [/^bg-(.+)$/,             ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
+	//// [/^shadow-(.+)$/,         ([_, value]) => ({ "box-shadow":           desugar(value, { px: false }) })],
 
 	// Arbitrary key-value e.g. [property]-value
 	[/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
