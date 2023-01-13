@@ -5,7 +5,9 @@ import { defineConfig } from "vite"
 export default defineConfig({
 	plugins: [
 		unoCss(),
-		reactJs(),
+		reactJs({
+			//// fastRefresh: false,
+		}),
 	],
 	preview: { host: true, port: 3000 },
 	server:  { host: true, port: 3000 },
