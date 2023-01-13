@@ -4,58 +4,6 @@ import { HTMLAttributes, ReactNode, useCallback, useEffect, useLayoutEffect, use
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
-// TODO: Make icon required?
-function Tooltip({ icon, content, data, children, ...props }: { icon?: typeof Icon, content: ReactNode, data?: any } & HTMLAttributes<HTMLElement>) {
-	const [show, setShow] = useState(true)
-
-	// This is a trick to hide the tooltip on data changes
-	useLayoutEffect(() => {
-		if (data === undefined) { return }
-		setShow(false)
-		setTimeout(() => {
-			setShow(true)
-		}, 0)
-	}, [data])
-
-	return <>
-		<div className="relative" data-group {...props}>
-			{children}
-			{show && <>
-				<div className="py-10 absolute t-100% l-50% [transform]-translateX(-50%) [pointer-events]-none">
-					<div className={detab(`
-						[transform]-translateY(8px)
-						[opacity]-0
-						[transition]-100ms_cubic-bezier(0,_1,_1,_1)
-						[transition-property]-transform,_opacity
-							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
-					`)}>
-						<div className="relative">
-							<div className="px-10 flex align-center gap-10 h-32 rounded-10 [background-color]-#333 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
-								{/* TODO: Draw icon here */}
-								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
-								<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
-									{content}
-								</div>
-							</div>
-							<div className="absolute -t-2 x-0 flex justify-center">
-								<div className="h-8 w-8 rounded-2 [background-color]-#333 [transform]-rotate(45deg)"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</>}
-		</div>
-	</>
-}
-
-function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
-	return <>
-		<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
-			<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
-		</div>
-	</>
-}
-
 function useRestorableState<T>({ initialValue, zeroValue }: { initialValue: T, zeroValue: T }) {
 	const [state, setState] = useState(initialValue)
 	const [history, setHistory] = useState([state])
@@ -118,6 +66,58 @@ function useRestorableState<T>({ initialValue, zeroValue }: { initialValue: T, z
 	}, [history, historyIndex])
 
 	return [state, setState, cycleState] as const
+}
+
+// TODO: Make icon required?
+function Tooltip({ icon, content, data, children, ...props }: { icon?: typeof Icon, content: ReactNode, data?: any } & HTMLAttributes<HTMLElement>) {
+	const [show, setShow] = useState(true)
+
+	// This is a trick to hide the tooltip on data changes
+	useLayoutEffect(() => {
+		if (data === undefined) { return }
+		setShow(false)
+		setTimeout(() => {
+			setShow(true)
+		}, 0)
+	}, [data])
+
+	return <>
+		<div className="relative" data-group {...props}>
+			{children}
+			{show && <>
+				<div className="py-10 absolute t-100% l-50% [transform]-translateX(-50%) [pointer-events]-none">
+					<div className={detab(`
+						[transform]-translateY(8px)
+						[opacity]-0
+						[transition]-100ms_cubic-bezier(0,_1,_1,_1)
+						[transition-property]-transform,_opacity
+							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
+					`)}>
+						<div className="relative">
+							<div className="px-10 flex align-center gap-10 h-32 rounded-10 [background-color]-#333 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
+								{/* TODO: Draw icon here */}
+								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
+								<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
+									{content}
+								</div>
+							</div>
+							<div className="absolute -t-2 x-0 flex justify-center">
+								<div className="h-8 w-8 rounded-2 [background-color]-#333 [transform]-rotate(45deg)"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</>}
+		</div>
+	</>
+}
+
+function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
+	return <>
+		<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
+			<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
+		</div>
+	</>
 }
 
 // TODO

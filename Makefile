@@ -1,3 +1,6 @@
+dataset:
+	npx tsx scripts/dataset.ts
+
 ssg:
 	npx vite build
 	npx esbuild src/_ssg.tsx \
