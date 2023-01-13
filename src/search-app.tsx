@@ -4,10 +4,12 @@ import { HTMLAttributes, useCallback, useLayoutEffect, useState } from "react"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
-function Tooltip({ icon, text, data, children, ...props }: { icon: typeof Icon, text: string, data: any } & HTMLAttributes<HTMLElement>) {
+// TODO: Make icon required?
+function Tooltip({ icon, text, data, children, ...props }: { icon?: typeof Icon, text: string, data?: any } & HTMLAttributes<HTMLElement>) {
 	const [show, setShow] = useState(true)
 
 	useLayoutEffect(() => {
+		if (data === undefined) { return }
 		setShow(false)
 		setTimeout(() => {
 			setShow(true)
@@ -45,6 +47,14 @@ function Tooltip({ icon, text, data, children, ...props }: { icon: typeof Icon, 
 	</>
 }
 
+function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
+	return <>
+		<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
+			<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
+		</div>
+	</>
+}
+
 export function SearchApp() {
 	const [input, setInput] = useState("")
 	const [inputHistory, setInputHistory] = useState<string[]>([])
@@ -59,26 +69,16 @@ export function SearchApp() {
 		document.documentElement.style.backgroundColor = "#fff"
 	}, [])
 
-	//// useEffect(() => {
-	//// 	function handleKeyDown(e: KeyboardEvent) {
-	//// 		if (e.key === "d") {
-	//// 			if (order === "forwards") {
-	//// 				setOrder("backwards")
-	//// 			} else {
-	//// 				setOrder("forwards")
-	//// 			}
-	//// 		}
-	//// 	}
-	//// 	window.addEventListener("keydown", handleKeyDown, false)
-	//// 	return () => window.addEventListener("keydown", handleKeyDown, false)
-	//// }, [order])
-
 	return <>
 		<div className="p-32 flex justify-center">
 			<div className="basis-1e3 flex gap-20 [&_>_:nth-child(1)]:grow-1">
 				<div className="flex flex-col gap-20">
-					<div className="flex flex-col h-64 rounded-1e3 [background-color]-#eee [&:focus-within]:([background-color]-#fff [box-shadow]-$shadow-2)">
-						<input className="px-32 h-64" type="text" value={input} onChange={e => setInput(e.currentTarget.value)} />
+					<div className="px-16 flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1">
+						<SearchBarButton />
+						<input className="px-16 h-64" type="text" value={input} onChange={e => setInput(e.currentTarget.value)} />
+						<Tooltip text="TOGGLE DARK MODE">
+							<SearchBarButton />
+						</Tooltip>
 					</div>
 					<div>Search results</div>
 				</div>
@@ -88,7 +88,7 @@ export function SearchApp() {
 							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
 							<div>Hello, world!</div>
 						</div>
-						<Tooltip icon={() => <div>TODO</div>} text={`MOVE SIDEBAR TO ${order === "forwards" ? "START" : "END"}`} data={order} onClick={toggleOrder}>
+						<Tooltip text="TOGGLE SIDEBAR" data={order} onClick={toggleOrder}>
 							{/* TODO: Remove [cursor]-pointer */}
 							<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [cursor]-pointer [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
