@@ -1,19 +1,10 @@
 import "./search-app.scss"
 
-
 import { HTMLAttributes, useCallback, useLayoutEffect, useState } from "react"
-import { manifest } from "./data/manifest-v2"
 import { detab } from "./lib/format"
+import { Icon } from "./lib/react/icon"
 
-type IconValue = keyof typeof manifest
-
-function splitParts(str: string) {
-	return str.split(/(?=[A-Z])|[^a-zA-Z0-9]+/)
-		.filter(v => v !== "")
-}
-
-// TODO: Add icon
-function Tooltip({ text, data, children, ...props }: { text: string, data: any } & HTMLAttributes<HTMLElement>) {
+function Tooltip({ icon, text, data, children, ...props }: { icon: typeof Icon, text: string, data: any } & HTMLAttributes<HTMLElement>) {
 	const [show, setShow] = useState(true)
 
 	useLayoutEffect(() => {
@@ -37,6 +28,7 @@ function Tooltip({ text, data, children, ...props }: { text: string, data: any }
 					`)}>
 						<div className="relative">
 							<div className="px-10 flex align-center gap-10 h-32 rounded-10 [background-color]-#333 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
+								{/* TODO: Draw icon here */}
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
 								<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
 									{text}
@@ -96,7 +88,7 @@ export function SearchApp() {
 							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
 							<div>Hello, world!</div>
 						</div>
-						<Tooltip text={`MOVE SIDEBAR TO ${order === "forwards" ? "START" : "END"}`} data={order} onClick={toggleOrder}>
+						<Tooltip icon={() => <div>TODO</div>} text={`MOVE SIDEBAR TO ${order === "forwards" ? "START" : "END"}`} data={order} onClick={toggleOrder}>
 							{/* TODO: Remove [cursor]-pointer */}
 							<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [cursor]-pointer [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
