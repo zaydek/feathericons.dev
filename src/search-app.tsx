@@ -55,63 +55,81 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 	</>
 }
 
+function useRestorableState<T>({ initialValue, zeroValue }: { initialValue: T, zeroValue: T }) {
+	const [state, setState] = useState(initialValue)
+	const [history, setHistory] = useState([state])
+	const [historyIndex, setHistoryIndex] = useState(history.length - 1)
+
+	// Cycles historyIndex by increment
+	const cycleState = useCallback((increment: number) => {
+		if (increment > 0) {
+			if (historyIndex + increment < history.length) {
+				setHistoryIndex(curr => curr + increment)
+			}
+		} else {
+			if (historyIndex + increment >= 0) {
+				setHistoryIndex(curr => curr + increment)
+			}
+		}
+	}, [history.length, historyIndex])
+
+	// Commits state to history and historyIndex
+	const onceRef = useRef(false)
+	const commitState = useCallback(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		const timeoutId = setTimeout(() => {
+			if (state === zeroValue || state === history[historyIndex]) { return }
+			if (historyIndex === 0) { // At start
+				// Append state (preserve zeroValue)
+				setHistory(curr => [
+					zeroValue,
+					state,
+					...curr.slice(1)
+				])
+				setHistoryIndex(curr => curr + 1)
+			} else if (historyIndex + 1 === history.length) { // At end
+				// Append state
+				setHistory(curr => [
+					...curr,
+					state,
+				])
+				setHistoryIndex(curr => curr + 1)
+			} else {
+				// Insert state
+				setHistory(curr => [
+					...curr.slice(0, historyIndex),
+					state,
+					...curr.slice(historyIndex + 1),
+				])
+			}
+		}, 500)
+		return () => clearTimeout(timeoutId)
+	}, [history, historyIndex, state, zeroValue])
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(commitState, [state])
+
+	// history[historyIndex] -> state
+	useEffect(() => {
+		setState(history[historyIndex])
+	}, [history, historyIndex])
+
+	return [state, setState, cycleState] as const
+}
+
 // TODO
 document.documentElement.style.backgroundColor = "#fff"
 
 export function SearchApp() {
-	const inputRef = useRef<HTMLInputElement | null>(null)
-	const [input, setInput] = useState("")
-	const [inputHistory, setInputHistory] = useState([input])
-	const [inputHistoryIndex, setInputHistoryIndex] = useState(inputHistory.length - 1)
-
+	const [value, setValue, cycleValue] = useRestorableState({ initialValue: "", zeroValue: "" })
 	const [order, setOrder] = useState<"forwards" | "backwards">("forwards")
 
 	const toggleOrder = useCallback(() => {
 		setOrder(curr => curr === "forwards" ? "backwards" : "forwards")
 	}, [])
-
-	// On input, dedupe and append or insert
-	const onceRef = useRef(false)
-	useEffect( // eslint-disable-line react-hooks/exhaustive-deps
-		useCallback(() => {
-			if (!onceRef.current) {
-				onceRef.current = true
-				return
-			}
-			const timeoutId = setTimeout(() => {
-				if (input === "" || input === inputHistory[inputHistoryIndex]) { return }
-				if (inputHistoryIndex === 0) { // At start
-					// Append (preserve "")
-					setInputHistory(curr => [
-						"",
-						input,
-						...curr.slice(1)
-					])
-					setInputHistoryIndex(curr => curr + 1)
-				} else if (inputHistoryIndex + 1 === inputHistory.length) { // At end
-					// Append
-					setInputHistory(curr => [
-						...curr,
-						input,
-					])
-					setInputHistoryIndex(curr => curr + 1)
-				} else {
-					// Insert
-					setInputHistory(curr => [
-						...curr.slice(0, inputHistoryIndex),
-						input,
-						...curr.slice(inputHistoryIndex + 1),
-					])
-				}
-			}, 500)
-			return () => clearTimeout(timeoutId)
-		}, [input, inputHistory, inputHistoryIndex]),
-		[input],
-	)
-
-	useEffect(() => {
-		setInput(inputHistory[inputHistoryIndex])
-	}, [inputHistory, inputHistoryIndex])
 
 	return <>
 		<div className="p-32 flex justify-center">
@@ -120,22 +138,17 @@ export function SearchApp() {
 					<div className="px-16 flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1">
 						<SearchBarButton />
 						<input
-							ref={inputRef}
 							className="px-16 h-64"
 							type="text"
-							value={input}
-							onChange={e => setInput(e.currentTarget.value)}
+							value={value}
+							onChange={e => setValue(e.currentTarget.value)}
 							onKeyDown={e => {
 								if (e.key === "ArrowUp") {
 									e.preventDefault()
-									if (inputHistoryIndex - 1 >= 0) {
-										setInputHistoryIndex(curr => curr - 1)
-									}
+									cycleValue(-1)
 								} else if (e.key === "ArrowDown") {
 									e.preventDefault()
-									if (inputHistoryIndex + 1 < inputHistory.length) {
-										setInputHistoryIndex(curr => curr + 1)
-									}
+									cycleValue(+1)
 								}
 							}}
 							autoFocus
