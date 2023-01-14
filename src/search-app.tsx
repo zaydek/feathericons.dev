@@ -184,11 +184,11 @@ function SearchResultsContents() {
 			{Object.keys(searchResults).map(name => <Fragment key={name}>
 				<div id={name} className="flex flex-col">
 					<div className="flex flex-center h-80">
-						{/* TODO: Use x as FeatherIcon because of Object.keys */}
+						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
 						<Icon className="h-32 w-32" icon={feather[name as keyof typeof feather]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12">
-						{/* TODO: Use x as FeatherIcon because of Object.keys */}
+						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
 						<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 							{name}
 						</Highlight>
