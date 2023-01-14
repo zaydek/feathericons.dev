@@ -2,17 +2,17 @@ import "./search-app.scss"
 
 import * as feather from "./data/feather@4.29.0"
 
-import { Fragment, HTMLAttributes, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { manifest } from "./data/feather-manifest@4.29.0"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
-function useRestorableState<T>({ initialValue, zeroValue }: { initialValue: T, zeroValue: T }) {
+function useRestorableState<T>(initialValue: T, zeroValue: T) {
 	const [state, setState] = useState(initialValue)
 	const [history, setHistory] = useState([state])
 	const [historyIndex, setHistoryIndex] = useState(history.length - 1)
 
-	const cycleState = useCallback((increment: number) => {
+	const restoreState = useCallback((increment: number) => {
 		if (increment > 0) {
 			if (historyIndex + increment < history.length) {
 				setHistoryIndex(curr => curr + increment)
@@ -68,7 +68,7 @@ function useRestorableState<T>({ initialValue, zeroValue }: { initialValue: T, z
 		setState(history[historyIndex])
 	}, [history, historyIndex])
 
-	return [state, setState, cycleState] as const
+	return [state, setState, restoreState] as const
 }
 
 // TODO: Make icon required?
@@ -96,18 +96,18 @@ function Tooltip({ icon, content, data, children, ...props }: { icon?: typeof Ic
 						[transition-property]-transform,_opacity
 							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
 					`)}>
-						{/* <div className="relative"> */}
-							<div className="px-10 flex align-center gap-10 h-32 rounded-1e3 [background-color]-#000 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
+						<div className="relative">
+							<div className="px-10 flex align-center gap-10 h-32 rounded-1e3 [background-color]-#111 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
 								{/* TODO: Draw icon here */}
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
 								<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
 									{content}
 								</div>
 							</div>
-							{/* <div className="absolute -t-2 x-0 flex justify-center">
-								<div className="h-8 w-8 rounded-2 [background-color]-#000 [transform]-rotate(45deg)"></div>
-							</div> */}
-						{/* </div> */}
+							<div className="absolute -t-2 x-0 flex justify-center">
+								<div className="h-8 w-8 rounded-2 [background-color]-#111 [transform]-rotate(45deg)"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</>}
@@ -148,13 +148,9 @@ function SearchResultsContents() {
 // TODO
 document.documentElement.style.backgroundColor = "#fff"
 
-export function SearchApp() {
-	const [value, setValue, cycleValue] = useRestorableState({ initialValue: "", zeroValue: "" })
-	const [order, setOrder] = useState<"forwards" | "backwards">("forwards")
-
-	const toggleOrder = useCallback(() => {
-		setOrder(curr => curr === "forwards" ? "backwards" : "forwards")
-	}, [])
+function SearchApp() {
+	const { search, setSearch, restoreSearch } = useContext(SearchContext)!
+	const { sidebarOrder, setSidebarOrder } = useContext(SidebarContext)!
 
 	return <>
 		<div className="p-32 flex justify-center">
@@ -165,32 +161,32 @@ export function SearchApp() {
 						<input
 							className="px-16 h-64"
 							type="text"
-							value={value}
-							onChange={e => setValue(e.currentTarget.value)}
+							value={search}
+							onChange={e => setSearch(e.currentTarget.value)}
 							onKeyDown={e => {
 								if (e.key === "ArrowUp") {
 									e.preventDefault()
-									cycleValue(-1)
+									restoreSearch(-1)
 								} else if (e.key === "ArrowDown") {
 									e.preventDefault()
-									cycleValue(+1)
+									restoreSearch(+1)
 								}
 							}}
 							autoFocus
 						/>
-						<Tooltip content={<>TOGGLE DARK MODE&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+D</span></>}>
+						<Tooltip content={<>DARK MODE&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+D</span></>}>
 							<SearchBarButton />
 						</Tooltip>
 					</div>
 					<SearchResultsContents />
 				</div>
-				<div className="flex flex-col gap-20 w-300" style={{ order: order === "forwards" ? undefined : -1 }}>
+				<div className="flex flex-col gap-20 w-300" style={{ order: sidebarOrder === "forwards" ? undefined : -1 }}>
 					<div className="flex justify-end align-center h-64 [&_>_:nth-child(1)]:grow-1">
 						<div className="flex align-center gap-10">
 							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
 							<div>Hello, world!</div>
 						</div>
-						<Tooltip content={<>TOGGLE SIDEBAR ORIENTATION&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+\</span></>} data={order} onClick={toggleOrder}>
+						<Tooltip content={<>MOVE SIDEBAR&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+\</span></>} data={sidebarOrder} onClick={e => setSidebarOrder(curr => curr === "forwards" ? "backwards" : "forwards")}>
 							{/* TODO: Remove [cursor]-pointer */}
 							<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [cursor]-pointer [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
@@ -201,5 +197,44 @@ export function SearchApp() {
 				</div>
 			</div>
 		</div>
+	</>
+}
+
+const SearchContext = createContext<{
+	search:          string
+	setSearch:       Dispatch<SetStateAction<string>>
+	restoreSearch:   (_: number) => void
+} | null>(null)
+
+const SidebarContext = createContext<{
+	sidebarOrder:    "forwards" | "backwards"
+	setSidebarOrder: Dispatch<SetStateAction<"forwards" | "backwards">>
+} | null>(null)
+
+function StateProvider({ children }: PropsWithChildren) {
+	const [search, setSearch, restoreSearch] = useRestorableState("", "")
+	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
+
+	return <>
+		<SearchContext.Provider value={useMemo(() => ({
+			search,
+			setSearch,
+			restoreSearch,
+		}), [restoreSearch, search, setSearch])}>
+			<SidebarContext.Provider value={useMemo(() => ({
+				sidebarOrder,
+				setSidebarOrder,
+			}), [sidebarOrder])}>
+				{children}
+			</SidebarContext.Provider>
+		</SearchContext.Provider>
+	</>
+}
+
+export function ProvidedSearchApp() {
+	return <>
+		<StateProvider>
+			<SearchApp />
+		</StateProvider>
 	</>
 }
