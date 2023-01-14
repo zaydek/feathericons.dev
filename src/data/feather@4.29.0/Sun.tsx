@@ -3,7 +3,7 @@ import { SVGAttributes } from "react"
 // https://feathericons.dev/sun
 export function Sun(props: SVGAttributes<SVGElement>) {
 	return (
-		<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} {...props}>
 			<circle cx="12" cy="12" r="5" />
 			<line x1="12" x2="12" y1="1" y2="3" />
 			<line x1="12" x2="12" y1="21" y2="23" />

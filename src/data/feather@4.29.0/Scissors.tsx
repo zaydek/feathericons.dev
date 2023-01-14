@@ -3,7 +3,7 @@ import { SVGAttributes } from "react"
 // https://feathericons.dev/scissors
 export function Scissors(props: SVGAttributes<SVGElement>) {
 	return (
-		<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} {...props}>
 			<circle cx="6" cy="6" r="3" />
 			<circle cx="6" cy="18" r="3" />
 			<line x1="20" x2="8.12" y1="4" y2="15.88" />

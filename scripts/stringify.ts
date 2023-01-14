@@ -52,7 +52,15 @@ export function stringify(svgElement: SVGSVGElement, config: Configuration) {
 		const tag = ref.tagName
 		// <foo bar>
 		//      ^^^
-		const attrKeys = sortAttrKeys(Object.values(ref.attributes).map(attr => attr.name))
+		let attrKeys: string[]
+		if (tag === "svg") {
+			attrKeys = [
+				...["xmlns", "viewBox", "width", "height"],                                 // Viewbox uses w x h
+				...["fill", "stroke", "stroke-linecap", "stroke-linejoin", "stroke-width"], // Sorted
+			]
+		} else {
+			attrKeys = sortAttrKeys(Object.values(ref.attributes).map(attr => attr.name))
+		}
 
 		const str = stringifyAttrs(tag, attrKeys, ref.attributes, config)
 		if (ref.children.length > 0) {

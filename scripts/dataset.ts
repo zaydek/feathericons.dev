@@ -27,9 +27,7 @@ async function main() {
 		return anchors.map(a => a.href)
 	}, [ANCHOR_SELECTOR])
 	const dataset: { meta: { version: string }, data: { name: string, data: string }[] } = {
-		meta: {
-			version,
-		},
+		meta: { version },
 		data: [],
 	}
 

@@ -3,7 +3,7 @@ import "./search-app.scss"
 import * as feather from "./data/feather@4.29.0"
 
 import { Fragment, HTMLAttributes, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
-import { manifest } from "./data/manifest"
+import { manifest } from "./data/feather-manifest@4.29.0"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
@@ -126,7 +126,7 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 function SearchResultsContents() {
 	return <>
 		{manifest.map(name => <Fragment key={name}>
-			<Icon icon={feather[name as keyof typeof feather]} />
+			<Icon icon={feather[name]} className="w-50 h-50" width="24" height="24"  />
 		</Fragment>)}
 	</>
 }

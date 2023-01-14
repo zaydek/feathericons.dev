@@ -3,7 +3,7 @@ import { SVGAttributes } from "react"
 // https://feathericons.dev/pen-tool
 export function PenTool(props: SVGAttributes<SVGElement>) {
 	return (
-		<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} {...props}>
 			<path d="M12 19l7-7 3 3-7 7-3-3z" />
 			<path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
 			<path d="M2 2l7.586 7.586" />

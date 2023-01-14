@@ -3,7 +3,7 @@ import { SVGAttributes } from "react"
 // https://feathericons.dev/sliders
 export function Sliders(props: SVGAttributes<SVGElement>) {
 	return (
-		<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} {...props}>
 			<line x1="4" x2="4" y1="21" y2="14" />
 			<line x1="4" x2="4" y1="10" y2="3" />
 			<line x1="12" x2="12" y1="21" y2="12" />

@@ -9,7 +9,7 @@ import { reactify } from "./reactify"
 import { stringify } from "./stringify"
 
 // Remove these attributes
-const omitAttrs = ["class", "width", "height"]
+const omitAttrs = ["class"]
 
 async function main() {
 	// src/data/feather.json

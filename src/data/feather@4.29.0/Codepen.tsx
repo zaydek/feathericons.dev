@@ -3,7 +3,7 @@ import { SVGAttributes } from "react"
 // https://feathericons.dev/codepen
 export function Codepen(props: SVGAttributes<SVGElement>) {
 	return (
-		<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} {...props}>
 			<polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
 			<line x1="12" x2="12" y1="22" y2="15.5" />
 			<polyline points="22 8.5 12 15.5 2 8.5" />
