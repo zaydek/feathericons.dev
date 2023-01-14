@@ -123,6 +123,7 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 	</>
 }
 
+// TODO: We need to split on spaces, hyphens, and cases
 function splitParts(str: string) {
 	return str.split(/(?=[A-Z])|[^a-zA-Z0-9]+/)
 		.filter(v => v !== "")
