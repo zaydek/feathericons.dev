@@ -124,51 +124,55 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 	</>
 }
 
-//// // TODO: We need to split on spaces, hyphens, and cases
+//// function isDelimiter(ch: string) {
+//// 	return ch === " " || ch === "-" || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9")
+//// }
+////
 //// function splitParts(str: string) {
-//// 	return str.split(/(?=[A-Z])|[^a-zA-Z0-9]+/)
-//// 		.filter(v => v !== "")
+//// 	str = str.replace(/[^a-zA-Z0-9 -]/g, "")
+////
+//// 	const parts = []
+//// 	for (let x1 = 0; x1 < str.length; x1++) {
+//// 		let buffer = ""
+//// 		for (let x2 = x1; x2 < str.length; x2++) {
+//// 			if (!(str[x2] === " " || str[x2] === "-")) {
+//// 				buffer += str[x2]
+//// 			}
+//// 			if (x2 + 1 === str.length || (x2 + 1 < str.length && isDelimiter(str[x2 + 1]))) {
+//// 				// Guard empty buffers e.g. <space><upper> e.g. "Hello World!"
+//// 				//                                                    ^^
+//// 				if (buffer !== "") {
+//// 					//// parts.push(buffer.toLowerCase())
+//// 					parts.push(buffer)
+//// 				}
+//// 				x1 = x2
+//// 				break
+//// 			}
+//// 		}
+//// 	}
+//// 	return parts
 //// }
 
-function isDelimiter(ch: string) {
-	return ch === " " || ch === "-" || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9")
-}
-
-function splitParts(str: string) {
-	str = str.replace(/[^a-zA-Z0-9 -]/g, "")
-
-	const parts = []
-	for (let x1 = 0; x1 < str.length; x1++) {
-		let buffer = ""
-		for (let x2 = x1; x2 < str.length; x2++) {
-			if (!(str[x2] === " " || str[x2] === "-")) {
-				buffer += str[x2]
-			}
-			if (x2 + 1 === str.length || (x2 + 1 < str.length && isDelimiter(str[x2 + 1]))) {
-				// Guard empty buffers e.g. <space><upper> e.g. "Hello World!"
-				//                                                    ^^
-				if (buffer !== "") {
-					//// parts.push(buffer.toLowerCase())
-					parts.push(buffer)
-				}
-				x1 = x2
-				break
-			}
-		}
-	}
-	return parts
+function Wbr({ children }: { children: string }) {
+	const parts = children.split(/(?=[A-Z])/)
+	return <>
+		{parts.map((p, index) => <Fragment key={p}>
+			{index > 0 && <wbr />}
+			{p}
+		</Fragment>)}
+	</>
 }
 
 function Highlight({ indexes, children }: { indexes: readonly [number, number] | null, children: FeatherIcon }) {
 	if (indexes === null) {
-		return <>{children}</>
+		return <Wbr>{children}</Wbr>
 	} else {
 		return <>
-			{children.slice(0, indexes[0])}
+			<Wbr>{children.slice(0, indexes[0])}</Wbr>
 			<span className="[color]-#f00">
 				{children.slice(indexes[0], indexes[1])}
 			</span>
-			{children.slice(indexes[1])}
+			<Wbr>{children.slice(indexes[1])}</Wbr>
 		</>
 	}
 }
@@ -189,10 +193,6 @@ function SearchResultsContents() {
 							{/* TODO: Use x as FeatherIcon because of Object.keys */}
 							{name as FeatherIcon}
 						</Highlight>
-						{/* {splitParts(name).map(substr => <Fragment key={substr}>
-							<span>{substr}</span>
-						</Fragment>)} */}
-						{/* {name} */}
 					</div>
 				</div>
 			</Fragment>)}
@@ -278,50 +278,38 @@ const SidebarContext = createContext<{
 function getSubstringIndexes(str: string, substr: string) {
 	const index = str.indexOf(substr)
 	if (index === -1) { return null }
-	//// return [str.slice(0, index), substr, str.slice(index + substr.length)]
 	return [index, index + substr.length] as const
 }
-
-//// console.log(getSubstrings("Facebook", "ac"))
 
 function StateProvider({ children }: PropsWithChildren) {
 	const [search, setSearch, restoreSearch] = useRestorableState("", "")
 
-	//// const canonSearch = useMemo(() => {
-	//// 	const str = search.replace(/^[\s-]+|[\s-]+$/g, "") // [··]Hello,··world![··]
-	//// 		.replace(/[\s-]+/g, " ")                         // Hello[··]world!
-	//// 		.replace(/[^a-zA-Z0-9\s]/g, "")                  // Hello·world[!]
-	//// 	return toTitleCase(str)
-	//// }, [search])
-
+	// TODO: Rename to safeSearch or $$search?
 	const canonSearch = useMemo(() => {
-		return search.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
+		return search
+			.replace(/[^a-zA-Z0-9]/g, "")
+			.toLowerCase()
 	}, [search])
 
-	const searchResultsZeroValue = useMemo(() => {
-		return manifest.reduce<{ [P in FeatherIcon]?: readonly [number, number] | null }>((acc, each) => {
-			acc[each] = null
-			return acc
-		}, {})
+	const searchResultsFallback = useMemo(() => {
+		const ref: { [P in FeatherIcon]?: null } = {}
+		for (const name of manifest) {
+			ref[name] = null
+		}
+		return ref
 	}, [])
 
 	const searchResults = useMemo(() => {
-		if (search === "") { return searchResultsZeroValue }
-		const ref: { [P in FeatherIcon]?: readonly [number, number] | null } = {}
-		const searchParts = splitParts(search).map(p => p.toLowerCase())
+		if (search === "") { return searchResultsFallback }
+		const ref: { [P in FeatherIcon]?: readonly [number, number] } = {}
 		for (const name of manifest) {
-			for (const n of splitParts(name).map(p => p.toLowerCase())) {
-				for (const s of searchParts) {
-					if (n.includes(s)) {
-					//// if (n.startsWith(s)) {
-						//// console.log({ n, s, name, canonSearch }, getSubstrings(name, canonSearch))
-						ref[name] = getSubstringIndexes(name.toLowerCase(), canonSearch)
-					}
-				}
+			const indexes = getSubstringIndexes(name.toLowerCase(), canonSearch)
+			if (indexes !== null) {
+				ref[name] = indexes
 			}
 		}
 		return ref
-	}, [canonSearch, search, searchResultsZeroValue])
+	}, [canonSearch, search, searchResultsFallback])
 
 	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
 
