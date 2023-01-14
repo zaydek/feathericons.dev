@@ -13,8 +13,11 @@ const omitAttrs = ["class"]
 
 async function main() {
 	// src/data/feather.json
-	const data = Object.values(dataset.data).map(({ name }) => toTitleCase(name))
-	const imports = `import * as feather from "./feather@${dataset.meta.version}"\n\nexport const manifest: (keyof typeof feather)[] = ${JSON.stringify(data, null, 2).replace("\"\n]", "\",\n]")}`
+	const data = Object.values(dataset.data).reduce<Record<string, string[]>>((acc, { name, tags }) => {
+		acc[toTitleCase(name)] = tags
+		return acc
+	}, {})
+	const imports = `import * as feather from "./feather@${dataset.meta.version}"\n\nexport const manifest: Record<keyof typeof feather, string[]> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
 	await fs.promises.writeFile(`src/data/feather-manifest@${dataset.meta.version}.ts`, imports + "\n")
 
 	// src/data/feather/

@@ -26,19 +26,24 @@ async function main() {
 		const anchors = [...document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>].slice(3)
 		return anchors.map(a => a.href)
 	}, [ANCHOR_SELECTOR])
-	const dataset: { meta: { version: string }, data: { name: string, data: string }[] } = {
+	const dataset: { meta: { version: string }, data: { name: string, tags: string[], data: string }[] } = {
 		meta: { version },
 		data: [],
 	}
 
 	const page2 = await context.newPage()
+	await page2.goto("https://raw.githubusercontent.com/feathericons/feather/master/src/tags.json")
+	const tagset: Record<string, string[]> = JSON.parse(await page2.evaluate(async () => document.getElementsByTagName("pre")[0].innerHTML))
+
+	const page3 = await context.newPage()
 	for (const href of hrefs) {
-		await page2.goto(href.replace("/browse", ""))
+		await page3.goto(href.replace("/browse", ""))
 		const name = href.slice(href.lastIndexOf("/") + 1, -1 * ".svg".length)
-		const data = await page2.evaluate(async () => document.documentElement.outerHTML)
-		dataset.data.push({ name, data })
+		const tags = tagset[name] ?? []
+		const data = await page3.content()
+		dataset.data.push({ name, tags, data })
 	}
-	await fs.promises.writeFile(`scripts/dataset@${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
+	await fs.promises.writeFile(`scripts/_dataset@${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
 	await teardown()
 }
 
