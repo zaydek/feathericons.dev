@@ -123,10 +123,38 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 	</>
 }
 
-// TODO: We need to split on spaces, hyphens, and cases
+//// // TODO: We need to split on spaces, hyphens, and cases
+//// function splitParts(str: string) {
+//// 	return str.split(/(?=[A-Z])|[^a-zA-Z0-9]+/)
+//// 		.filter(v => v !== "")
+//// }
+
+function isDelimiter(ch: string) {
+	return ch === " " || ch === "-" || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9")
+}
+
 function splitParts(str: string) {
-	return str.split(/(?=[A-Z])|[^a-zA-Z0-9]+/)
-		.filter(v => v !== "")
+	str = str.replace(/[^a-zA-Z0-9 -]/g, "")
+
+	const parts = []
+	for (let x1 = 0; x1 < str.length; x1++) {
+		let buffer = ""
+		for (let x2 = x1; x2 < str.length; x2++) {
+			if (!(str[x2] === " " || str[x2] === "-")) {
+				buffer += str[x2]
+			}
+			if (x2 + 1 === str.length || (x2 + 1 < str.length && isDelimiter(str[x2 + 1]))) {
+				// Guard empty buffers e.g. <space><upper> e.g. "Hello World!"
+				//                                                    ^^
+				if (buffer !== "") {
+					parts.push(buffer.toLowerCase())
+				}
+				x1 = x2
+				break
+			}
+		}
+	}
+	return parts
 }
 
 function SearchResultsContents() {
@@ -140,9 +168,10 @@ function SearchResultsContents() {
 						<Icon className="h-32 w-32" icon={feather[name]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12">
-						{splitParts(name).map(name => <Fragment key={name}>
-							<span>{name}</span>
-						</Fragment>)}
+						{/* {splitParts(name).map(substr => <Fragment key={substr}>
+							<span>{substr}</span>
+						</Fragment>)} */}
+						{name}
 					</div>
 				</div>
 			</Fragment>)}
@@ -209,7 +238,7 @@ const SearchContext = createContext<{
 	search:          string
 	setSearch:       Dispatch<SetStateAction<string>>
 	restoreSearch:   (_: number) => void
-	searchResults:   typeof manifest
+	searchResults:   typeof manifest[number][]
 } | null>(null)
 
 const SidebarContext = createContext<{
@@ -220,13 +249,23 @@ const SidebarContext = createContext<{
 function StateProvider({ children }: PropsWithChildren) {
 	const [search, setSearch, restoreSearch] = useRestorableState("", "")
 	const arr = useMemo(() => {
-		const matches: typeof manifest = []
+		const set = new Set<typeof manifest[number]>()
+
+		if (search === "") { return manifest }
+
+		// This is a loose match; matches against one or more parts in common
+		const searchParts = splitParts(search)
 		for (const name of manifest) {
-			if (name.startsWith(search)) {
-				matches.push(name)
+			for (const n of splitParts(name)) {
+				for (const s of searchParts) {
+					//// if (n.startsWith(s)) {
+					if (n.includes(s)) {
+						set.add(name)
+					}
+				}
 			}
 		}
-		return matches
+		return [...set]
 	}, [search])
 
 	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
