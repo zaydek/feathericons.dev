@@ -147,7 +147,8 @@ function splitParts(str: string) {
 				// Guard empty buffers e.g. <space><upper> e.g. "Hello World!"
 				//                                                    ^^
 				if (buffer !== "") {
-					parts.push(buffer.toLowerCase())
+					//// parts.push(buffer.toLowerCase())
+					parts.push(buffer)
 				}
 				x1 = x2
 				break
@@ -168,10 +169,10 @@ function SearchResultsContents() {
 						<Icon className="h-32 w-32" icon={feather[name]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12">
-						{/* {splitParts(name).map(substr => <Fragment key={substr}>
+						{splitParts(name).map(substr => <Fragment key={substr}>
 							<span>{substr}</span>
-						</Fragment>)} */}
-						{name}
+						</Fragment>)}
+						{/* {name} */}
 					</div>
 				</div>
 			</Fragment>)}
@@ -249,14 +250,11 @@ const SidebarContext = createContext<{
 function StateProvider({ children }: PropsWithChildren) {
 	const [search, setSearch, restoreSearch] = useRestorableState("", "")
 	const arr = useMemo(() => {
-		const set = new Set<typeof manifest[number]>()
-
 		if (search === "") { return manifest }
-
-		// This is a loose match; matches against one or more parts in common
-		const searchParts = splitParts(search)
+		const set = new Set<typeof manifest[number]>()
+		const searchParts = splitParts(search).map(p => p.toLowerCase())
 		for (const name of manifest) {
-			for (const n of splitParts(name)) {
+			for (const n of splitParts(name).map(p => p.toLowerCase())) {
 				for (const s of searchParts) {
 					//// if (n.startsWith(s)) {
 					if (n.includes(s)) {
