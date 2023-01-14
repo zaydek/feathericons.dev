@@ -307,7 +307,7 @@ function StateProvider({ children }: PropsWithChildren) {
 				ref[name as keyof typeof feather] = indexes
 			} else {
 				for (const tag of tags) {
-					if (tag.includes(canonSearch)) {
+					if (tag.startsWith(canonSearch)) {
 						ref[name as keyof typeof feather] = null
 					}
 				}
