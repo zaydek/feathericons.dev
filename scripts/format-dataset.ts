@@ -12,27 +12,27 @@ import { stringify } from "./stringify"
 const omitAttrs = ["class", "width", "height"]
 
 async function main() {
-	// src/data/feather/
-	await fs.promises.rm(`src/data/feather${dataset.meta.version}`, { recursive: true, force: true })
-	await fs.promises.mkdir(`src/data/feather${dataset.meta.version}`, { recursive: true })
-
 	// src/data/feather.json
-	const data = Object.values(dataset.data).map($ => $.name)
-	const imports = `export const manifest = ${JSON.stringify(data, null, 2).replace("\"\n]", "\",\n]")}`
-	await fs.promises.writeFile(`src/data/feather${dataset.meta.version}/index.tsx`, imports + "\n")
+	const data = Object.values(dataset.data).map(({ name }) => toTitleCase(name))
+	const imports = `import * as feather from "./feather@${dataset.meta.version}"\n\nexport const manifest: (keyof typeof feather)[] = ${JSON.stringify(data, null, 2).replace("\"\n]", "\",\n]")}`
+	await fs.promises.writeFile(`src/data/feather-manifest@${dataset.meta.version}.ts`, imports + "\n")
 
-	// src/data/feather/index.tsx
+	// src/data/feather/
+	await fs.promises.rm(`src/data/feather@${dataset.meta.version}`, { recursive: true, force: true })
+	await fs.promises.mkdir(`src/data/feather@${dataset.meta.version}`, { recursive: true })
+
+	// src/data/feather/index.ts
 	const exports = dataset.data.map(({ name }) => detab(`
 		export * from "./${toTitleCase(name)}"
 	`).trim()).join("\n")
-	await fs.promises.writeFile(`src/data/feather${dataset.meta.version}/index.tsx`, exports + "\n")
+	await fs.promises.writeFile(`src/data/feather@${dataset.meta.version}/index.ts`, exports + "\n")
 
 	// src/data/feather/$Name.tsx
 	for (const { name, data } of dataset.data) {
 		const { window } = new JSDOM(data)
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: true, omitAttrs })
 		const reactCode = reactify(toTitleCase(name), code, { comment: `https://feathericons.dev/${name}` })
-		await fs.promises.writeFile(`src/data/feather${dataset.meta.version}/${toTitleCase(name)}.tsx`, reactCode + "\n")
+		await fs.promises.writeFile(`src/data/feather@${dataset.meta.version}/${toTitleCase(name)}.tsx`, reactCode + "\n")
 	}
 }
 

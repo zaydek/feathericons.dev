@@ -1,6 +1,9 @@
 import "./search-app.scss"
 
-import { HTMLAttributes, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import * as feather from "./data/feather@4.29.0"
+
+import { Fragment, HTMLAttributes, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { manifest } from "./data/manifest"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
@@ -120,6 +123,14 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 	</>
 }
 
+function SearchResultsContents() {
+	return <>
+		{manifest.map(name => <Fragment key={name}>
+			<Icon icon={feather[name as keyof typeof feather]} />
+		</Fragment>)}
+	</>
+}
+
 // TODO
 document.documentElement.style.backgroundColor = "#fff"
 
@@ -157,7 +168,7 @@ export function SearchApp() {
 							<SearchBarButton />
 						</Tooltip>
 					</div>
-					<div>Search results</div>
+					<SearchResultsContents />
 				</div>
 				<div className="flex flex-col gap-20 w-300" style={{ order: order === "forwards" ? undefined : -1 }}>
 					<div className="flex justify-end align-center h-64 [&_>_:nth-child(1)]:grow-1">

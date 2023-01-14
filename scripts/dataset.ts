@@ -14,7 +14,7 @@ async function main() {
 
 	const page1 = await context.newPage()
 	await page1.goto("https://unpkg.com/browse/feather-icons/dist/icons/")
-	const version = /(@\d+\.\d+\.\d+)/.exec(page1.url())![1]
+	const version = /@(\d+\.\d+\.\d+)/.exec(page1.url())![1]
 
 	// Extract hrefs from document anchor elements. Use x.slice(3) to step over:
 	//
@@ -40,7 +40,7 @@ async function main() {
 		const data = await page2.evaluate(async () => document.documentElement.outerHTML)
 		dataset.data.push({ name, data })
 	}
-	await fs.promises.writeFile(`scripts/dataset${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
+	await fs.promises.writeFile(`scripts/dataset@${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
 	await teardown()
 }
 
