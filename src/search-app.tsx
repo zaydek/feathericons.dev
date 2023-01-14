@@ -129,15 +129,19 @@ function splitParts(str: string) {
 }
 
 function SearchResultsContents() {
+	const { searchResults } = useContext(SearchContext)!
+
 	return <>
 		<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr))">
-			{manifest.map(name => <Fragment key={name}>
+			{searchResults.map(name => <Fragment key={name}>
 				<div className="flex flex-col">
 					<div className="flex flex-center h-80">
 						<Icon className="h-32 w-32" icon={feather[name]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12">
-						{splitParts(name).map(name => <span key={name}>{name}</span>)}
+						{splitParts(name).map(name => <Fragment key={name}>
+							<span>{name}</span>
+						</Fragment>)}
 					</div>
 				</div>
 			</Fragment>)}
@@ -204,6 +208,7 @@ const SearchContext = createContext<{
 	search:          string
 	setSearch:       Dispatch<SetStateAction<string>>
 	restoreSearch:   (_: number) => void
+	searchResults:   typeof manifest
 } | null>(null)
 
 const SidebarContext = createContext<{
@@ -213,6 +218,16 @@ const SidebarContext = createContext<{
 
 function StateProvider({ children }: PropsWithChildren) {
 	const [search, setSearch, restoreSearch] = useRestorableState("", "")
+	const arr = useMemo(() => {
+		const matches: typeof manifest = []
+		for (const name of manifest) {
+			if (name.startsWith(search)) {
+				matches.push(name)
+			}
+		}
+		return matches
+	}, [search])
+
 	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
 
 	return <>
@@ -220,7 +235,8 @@ function StateProvider({ children }: PropsWithChildren) {
 			search,
 			setSearch,
 			restoreSearch,
-		}), [restoreSearch, search, setSearch])}>
+			searchResults: arr,
+		}), [restoreSearch, search, arr, setSearch])}>
 			<SidebarContext.Provider value={useMemo(() => ({
 				sidebarOrder,
 				setSidebarOrder,
