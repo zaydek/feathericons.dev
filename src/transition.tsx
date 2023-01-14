@@ -1,6 +1,7 @@
 import { createContext, PropsWithChildren, useContext, useLayoutEffect, useMemo, useState } from "react"
 import { PathContext } from "./router"
 
+// Internal
 const _TransitionContext = createContext<{ started: boolean, forwards: boolean } | null>(null)
 
 export function Transition({ children }: PropsWithChildren) {
@@ -28,7 +29,7 @@ export function Transition({ children }: PropsWithChildren) {
 }
 
 export function TransitionProvider({ children }: PropsWithChildren) {
-	const path = useContext(PathContext)!
+	const { path } = useContext(PathContext)!
 
 	const [started, setStarted] = useState(false)
 	const forwards = useMemo(() => path === "/", [path])

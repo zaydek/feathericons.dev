@@ -6,6 +6,7 @@ import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, R
 import { manifest } from "./data/feather-manifest@4.29.0"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
+import { FeatherIcon } from "./types"
 
 function useRestorableState<T>(initialValue: T, zeroValue: T) {
 	const [state, setState] = useState(initialValue)
@@ -158,20 +159,39 @@ function splitParts(str: string) {
 	return parts
 }
 
+function Highlight({ indexes, children }: { indexes: readonly [number, number] | null, children: FeatherIcon }) {
+	if (indexes === null) {
+		return <>{children}</>
+	} else {
+		return <>
+			{children.slice(0, indexes[0])}
+			<span className="[color]-#f00">
+				{children.slice(indexes[0], indexes[1])}
+			</span>
+			{children.slice(indexes[1])}
+		</>
+	}
+}
+
 function SearchResultsContents() {
 	const { searchResults } = useContext(SearchContext)!
 
 	return <>
 		<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr))">
-			{searchResults.map(name => <Fragment key={name}>
-				<div className="flex flex-col">
+			{Object.keys(searchResults).map(name => <Fragment key={name}>
+				<div id={name} className="flex flex-col">
 					<div className="flex flex-center h-80">
-						<Icon className="h-32 w-32" icon={feather[name]} />
+						{/* TODO: Use x as FeatherIcon because of Object.keys */}
+						<Icon className="h-32 w-32" icon={feather[name as FeatherIcon]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12">
-						{splitParts(name).map(substr => <Fragment key={substr}>
+						<Highlight indexes={searchResults[name as FeatherIcon]!}>
+							{/* TODO: Use x as FeatherIcon because of Object.keys */}
+							{name as FeatherIcon}
+						</Highlight>
+						{/* {splitParts(name).map(substr => <Fragment key={substr}>
 							<span>{substr}</span>
-						</Fragment>)}
+						</Fragment>)} */}
 						{/* {name} */}
 					</div>
 				</div>
@@ -239,7 +259,7 @@ const SearchContext = createContext<{
 	search:          string
 	setSearch:       Dispatch<SetStateAction<string>>
 	restoreSearch:   (_: number) => void
-	searchResults:   typeof manifest[number][]
+	searchResults:   { [P in FeatherIcon]?: readonly [number, number] | null }
 } | null>(null)
 
 const SidebarContext = createContext<{
@@ -247,24 +267,61 @@ const SidebarContext = createContext<{
 	setSidebarOrder: Dispatch<SetStateAction<"forwards" | "backwards">>
 } | null>(null)
 
+//// function isLower(char: string) { return char >= "a" && char <= "z" }
+////
+//// function searchImpl(str: string, substr: string) {
+//// 	const index = str.indexOf(substr)
+//// 	if (index === -1 || (index > 0 && !isLower(str[index - 1]))) { return null }
+//// 	return [index, index + substr.length] as const
+//// }
+
+function getSubstringIndexes(str: string, substr: string) {
+	const index = str.indexOf(substr)
+	if (index === -1) { return null }
+	//// return [str.slice(0, index), substr, str.slice(index + substr.length)]
+	return [index, index + substr.length] as const
+}
+
+//// console.log(getSubstrings("Facebook", "ac"))
+
 function StateProvider({ children }: PropsWithChildren) {
 	const [search, setSearch, restoreSearch] = useRestorableState("", "")
-	const arr = useMemo(() => {
-		if (search === "") { return manifest }
-		const set = new Set<typeof manifest[number]>()
+
+	//// const canonSearch = useMemo(() => {
+	//// 	const str = search.replace(/^[\s-]+|[\s-]+$/g, "") // [··]Hello,··world![··]
+	//// 		.replace(/[\s-]+/g, " ")                         // Hello[··]world!
+	//// 		.replace(/[^a-zA-Z0-9\s]/g, "")                  // Hello·world[!]
+	//// 	return toTitleCase(str)
+	//// }, [search])
+
+	const canonSearch = useMemo(() => {
+		return search.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
+	}, [search])
+
+	const searchResultsZeroValue = useMemo(() => {
+		return manifest.reduce<{ [P in FeatherIcon]?: readonly [number, number] | null }>((acc, each) => {
+			acc[each] = null
+			return acc
+		}, {})
+	}, [])
+
+	const searchResults = useMemo(() => {
+		if (search === "") { return searchResultsZeroValue }
+		const ref: { [P in FeatherIcon]?: readonly [number, number] | null } = {}
 		const searchParts = splitParts(search).map(p => p.toLowerCase())
 		for (const name of manifest) {
 			for (const n of splitParts(name).map(p => p.toLowerCase())) {
 				for (const s of searchParts) {
-					//// if (n.startsWith(s)) {
 					if (n.includes(s)) {
-						set.add(name)
+					//// if (n.startsWith(s)) {
+						//// console.log({ n, s, name, canonSearch }, getSubstrings(name, canonSearch))
+						ref[name] = getSubstringIndexes(name.toLowerCase(), canonSearch)
 					}
 				}
 			}
 		}
-		return [...set]
-	}, [search])
+		return ref
+	}, [canonSearch, search, searchResultsZeroValue])
 
 	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
 
@@ -273,8 +330,8 @@ function StateProvider({ children }: PropsWithChildren) {
 			search,
 			setSearch,
 			restoreSearch,
-			searchResults: arr,
-		}), [restoreSearch, search, arr, setSearch])}>
+			searchResults,
+		}), [restoreSearch, search, searchResults, setSearch])}>
 			<SidebarContext.Provider value={useMemo(() => ({
 				sidebarOrder,
 				setSidebarOrder,
