@@ -258,7 +258,7 @@ const SearchContext = createContext<{
 	search:          string
 	setSearch:       Dispatch<SetStateAction<string>>
 	restoreSearch:   (_: number) => void
-	searchResults:   { [P in keyof typeof feather]?: readonly [number, number] | null }
+	searchResults:   Partial<Record<keyof typeof feather, readonly [number, number] | null>>
 } | null>(null)
 
 const SidebarContext = createContext<{
@@ -291,8 +291,7 @@ function StateProvider({ children }: PropsWithChildren) {
 	}, [search])
 
 	const searchResultsFallback = useMemo(() => {
-		// @ts-expect-error
-		const ref: { [P in keyof typeof feather]: null } = {}
+		const ref: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
 		for (const name of Object.keys(manifest)) {
 			ref[name as keyof typeof feather] = null
 		}
@@ -301,11 +300,17 @@ function StateProvider({ children }: PropsWithChildren) {
 
 	const searchResults = useMemo(() => {
 		if (search === "") { return searchResultsFallback }
-		const ref: { [P in keyof typeof feather]?: readonly [number, number] } = {}
-		for (const name of Object.keys(manifest)) {
+		const ref: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
+		for (const [name, tags] of Object.entries(manifest)) {
 			const indexes = getSubstringIndexes(name.toLowerCase(), canonSearch)
 			if (indexes !== null) {
 				ref[name as keyof typeof feather] = indexes
+			} else {
+				for (const tag of tags) {
+					if (tag.includes(canonSearch)) {
+						ref[name as keyof typeof feather] = null
+					}
+				}
 			}
 		}
 		return ref
