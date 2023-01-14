@@ -169,7 +169,7 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 	} else {
 		return <>
 			<Wbr>{children.slice(0, indexes[0])}</Wbr>
-			<span className="[color]-#f00">
+			<span className="[background-color]-hsl(60,_100%,_90%) [box-shadow]-inset_0_-1px_0_0_hsl(45,_100%,_50%)">
 				{children.slice(indexes[0], indexes[1])}
 			</span>
 			<Wbr>{children.slice(indexes[1])}</Wbr>
