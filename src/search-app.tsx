@@ -6,7 +6,6 @@ import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, R
 import { manifest } from "./data/feather-manifest@4.29.0"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
-import { FeatherIcon } from "./types"
 
 function useRestorableState<T>(initialValue: T, zeroValue: T) {
 	const [state, setState] = useState(initialValue)
@@ -163,7 +162,7 @@ function Wbr({ children }: { children: string }) {
 	</>
 }
 
-function Highlight({ indexes, children }: { indexes: readonly [number, number] | null, children: FeatherIcon }) {
+function Highlight({ indexes, children }: { indexes: readonly [number, number] | null, children: string }) {
 	if (indexes === null) {
 		return <Wbr>{children}</Wbr>
 	} else {
@@ -186,12 +185,12 @@ function SearchResultsContents() {
 				<div id={name} className="flex flex-col">
 					<div className="flex flex-center h-80">
 						{/* TODO: Use x as FeatherIcon because of Object.keys */}
-						<Icon className="h-32 w-32" icon={feather[name as FeatherIcon]} />
+						<Icon className="h-32 w-32" icon={feather[name as keyof typeof feather]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12">
-						<Highlight indexes={searchResults[name as FeatherIcon]!}>
-							{/* TODO: Use x as FeatherIcon because of Object.keys */}
-							{name as FeatherIcon}
+						{/* TODO: Use x as FeatherIcon because of Object.keys */}
+						<Highlight indexes={searchResults[name as keyof typeof feather]!}>
+							{name}
 						</Highlight>
 					</div>
 				</div>
@@ -259,7 +258,7 @@ const SearchContext = createContext<{
 	search:          string
 	setSearch:       Dispatch<SetStateAction<string>>
 	restoreSearch:   (_: number) => void
-	searchResults:   { [P in FeatherIcon]?: readonly [number, number] | null }
+	searchResults:   { [P in keyof typeof feather]?: readonly [number, number] | null }
 } | null>(null)
 
 const SidebarContext = createContext<{
@@ -292,20 +291,21 @@ function StateProvider({ children }: PropsWithChildren) {
 	}, [search])
 
 	const searchResultsFallback = useMemo(() => {
-		const ref: { [P in FeatherIcon]?: null } = {}
-		for (const name of manifest) {
-			ref[name] = null
+		// @ts-expect-error
+		const ref: { [P in keyof typeof feather]: null } = {}
+		for (const name of Object.keys(manifest)) {
+			ref[name as keyof typeof feather] = null
 		}
 		return ref
 	}, [])
 
 	const searchResults = useMemo(() => {
 		if (search === "") { return searchResultsFallback }
-		const ref: { [P in FeatherIcon]?: readonly [number, number] } = {}
-		for (const name of manifest) {
+		const ref: { [P in keyof typeof feather]?: readonly [number, number] } = {}
+		for (const name of Object.keys(manifest)) {
 			const indexes = getSubstringIndexes(name.toLowerCase(), canonSearch)
 			if (indexes !== null) {
-				ref[name] = indexes
+				ref[name as keyof typeof feather] = indexes
 			}
 		}
 		return ref
