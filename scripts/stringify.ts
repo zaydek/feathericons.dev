@@ -5,7 +5,6 @@ type Configuration = {
 	omitAttrs: string[]
 }
 
-// TODO: This should probably stringify elements not attributes?
 function stringifyAttrs(tag: string, attrKeys: string[], attrs: NamedNodeMap, config: Configuration) {
 	let str = ""
 	for (const key of attrKeys) {
@@ -54,6 +53,7 @@ export function stringify(svgElement: SVGSVGElement, config: Configuration) {
 		// <foo bar>
 		//      ^^^
 		const attrKeys = sortAttrKeys(Object.values(ref.attributes).map(attr => attr.name))
+
 		const str = stringifyAttrs(tag, attrKeys, ref.attributes, config)
 		if (ref.children.length > 0) {
 			arr.push(`${tabs}<${tag} ${str}>`)

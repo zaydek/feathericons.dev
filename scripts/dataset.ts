@@ -11,9 +11,11 @@ async function main() {
 		await context.close() // Reverse order
 		await browser.close()
 	}
+
 	const page1 = await context.newPage()
 	await page1.goto("https://unpkg.com/browse/feather-icons/dist/icons/")
 	const version = /(@\d+\.\d+\.\d+)/.exec(page1.url())![1]
+
 	// Extract hrefs from document anchor elements. Use x.slice(3) to step over:
 	//
 	// - <a href="feather-icons">
@@ -30,6 +32,7 @@ async function main() {
 		},
 		data: [],
 	}
+
 	const page2 = await context.newPage()
 	for (const href of hrefs) {
 		await page2.goto(href.replace("/browse", ""))
