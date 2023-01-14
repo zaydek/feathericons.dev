@@ -80,7 +80,7 @@ const rules: Rule[] = [
 
 	[/^justify-(.+)$/,        ([_, value]) => ({ "justify-content":      desugar(value, { px: false }) })],
 	[/^align-(.+)$/,          ([_, value]) => ({ "align-items":          desugar(value, { px: false }) })],
-	[/^flex-wrap-(.+)$/,      ([_, value]) => ({ "flex-wrap":            desugar(value, { px: false }) })],
+	[/^wrap-(.+)$/,           ([_, value]) => ({ "flex-wrap":            desugar(value, { px: false }) })],
 	[/^order-(.+)$/,          ([_, value]) => ({ "order":                desugar(value, { px: false }) })],
 
 	["flex-center",           { "justify-content": "center", "align-items": "center" }],

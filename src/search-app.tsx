@@ -123,11 +123,25 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 	</>
 }
 
+function splitParts(str: string) {
+	return str.split(/(?=[A-Z])|[^a-zA-Z0-9]+/)
+		.filter(v => v !== "")
+}
+
 function SearchResultsContents() {
 	return <>
-		{manifest.map(name => <Fragment key={name}>
-			<Icon icon={feather[name]} className="w-50 h-50" width="24" height="24"  />
-		</Fragment>)}
+		<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr))">
+			{manifest.map(name => <Fragment key={name}>
+				<div className="flex flex-col">
+					<div className="flex flex-center h-80">
+						<Icon className="h-32 w-32" icon={feather[name]} />
+					</div>
+					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12">
+						{splitParts(name).map(name => <span key={name}>{name}</span>)}
+					</div>
+				</div>
+			</Fragment>)}
+		</div>
 	</>
 }
 
@@ -144,8 +158,8 @@ export function SearchApp() {
 
 	return <>
 		<div className="p-32 flex justify-center">
-			<div className="basis-1e3 flex gap-20 [&_>_:nth-child(1)]:grow-1">
-				<div className="flex flex-col gap-20">
+			<div className="basis-2e3 flex gap-64 [&_>_:nth-child(1)]:grow-1">
+				<div className="flex flex-col gap-64">
 					<div className="px-16 flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1">
 						<SearchBarButton />
 						<input
