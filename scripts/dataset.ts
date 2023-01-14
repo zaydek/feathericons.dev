@@ -24,15 +24,20 @@ async function main() {
 		const anchors = [...document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>].slice(3)
 		return anchors.map(a => a.href)
 	}, [ANCHOR_SELECTOR])
-	const dataset: { name: string, data: string }[] = []
+	const dataset: { meta: { version: string }, data: { name: string, data: string }[] } = {
+		meta: {
+			version,
+		},
+		data: [],
+	}
 	const page2 = await context.newPage()
 	for (const href of hrefs) {
 		await page2.goto(href.replace("/browse", ""))
 		const name = href.slice(href.lastIndexOf("/") + 1, -1 * ".svg".length)
 		const data = await page2.evaluate(async () => document.documentElement.outerHTML)
-		dataset.push({ name, data })
+		dataset.data.push({ name, data })
 	}
-	await fs.promises.writeFile(`src/data/dataset${version}.json`, JSON.stringify(dataset, null, "  ") + "\n")
+	await fs.promises.writeFile(`scripts/dataset${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
 	await teardown()
 }
 

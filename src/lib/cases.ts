@@ -11,7 +11,7 @@ export function toSnakeCase(str: string) {
 }
 
 export function toCamelCase(str: string) {
-	return str.replace(/[\s-]+([a-zA-Z])/g, (_, $1) => $1.toUpperCase())
+	return str.replace(/-([a-zA-Z0-9])/g, (_, $1) => $1.toUpperCase())
 }
 
 export function toTitleCase(str: string) {

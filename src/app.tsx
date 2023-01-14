@@ -4,6 +4,7 @@ import { Page } from "./pages/page"
 import { Route, Router, RouterProvider } from "./router"
 import { TransitionProvider } from "./transition"
 
+
 export function App({ initialPath }: { initialPath: string }) {
 	return <>
 		<RouterProvider initialPath={initialPath}>

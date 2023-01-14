@@ -1,5 +1,6 @@
 dataset:
 	npx tsx scripts/dataset.ts
+	npx tsx scripts/format-dataset.ts
 
 ssg:
 	npx vite build

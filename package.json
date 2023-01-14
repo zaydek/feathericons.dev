@@ -13,6 +13,7 @@
     "the-new-css-reset": "^1.8.2"
   },
   "devDependencies": {
+    "@types/jsdom": "^20.0.1",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
@@ -21,6 +22,7 @@
     "esbuild": "^0.16.15",
     "eslint": "^8.31.0",
     "eslint-config-react-app": "^7.0.1",
+    "jsdom": "^21.0.0",
     "playwright": "^1.29.2",
     "sass": "^1.57.1",
     "typescript": "^4.9.3",
