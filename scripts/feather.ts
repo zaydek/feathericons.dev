@@ -26,26 +26,27 @@ async function main() {
 		return anchors.map(a => a.href)
 	}, [ANCHOR_SELECTOR])
 
-	const page2 = await context.newPage()
-	await page2.goto("https://raw.githubusercontent.com/feathericons/feather/master/src/tags.json")
-	const tagset = (await page2.evaluate(async () => document.getElementsByTagName("pre")[0].innerHTML))
-		.trim()
-		.replaceAll("  ", "\t")
-		.replaceAll("life-bouy", "life-buoy")
-	await fs.promises.writeFile(`scripts/_tagset@${version}.json`, tagset + "\n")
-
 	const dataset: { meta: { version: string }, data: Record<string, string> } = {
 		meta: { version },
 		data: {},
 	}
-	const page3 = await context.newPage()
+	const page2 = await context.newPage()
 	for (const href of hrefs) {
-		await page3.goto(href.replace("/browse", ""))
+		await page2.goto(href.replace("/browse", ""))
 		const name = href.slice(href.lastIndexOf("/") + 1, -1 * ".svg".length)
-		const data = await page3.content()
+		const data = await page2.content()
 		dataset.data[name] = data
 	}
-	await fs.promises.writeFile(`scripts/_dataset@${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
+	await fs.promises.writeFile(`scripts/_feather@${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
+
+	const page3 = await context.newPage()
+	await page3.goto("https://raw.githubusercontent.com/feathericons/feather/master/src/tags.json")
+	const tagset = (await page3.evaluate(async () => document.getElementsByTagName("pre")[0].innerHTML))
+		.trim()
+		.replaceAll("  ", "\t")
+		.replaceAll("life-bouy", "life-buoy")
+	await fs.promises.writeFile(`scripts/_feather-tags@${version}.json`, tagset + "\n")
+
 	await teardown()
 }
 

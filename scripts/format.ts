@@ -1,17 +1,17 @@
 import { detab, tab } from "../src/lib/format"
 
-export function formatAsSvg(name: string, code: string, { LICENSE, comment }: { LICENSE: string, comment: string }) {
+export function formatAsSvg(name: string, code: string, { license, comment }: { license: string, comment: string }) {
 	return detab(`
-		${LICENSE}
+		${license}
 
 		<!-- ${comment} -->
 		${tab(code.replace(/<svg ([^>]+)>/, `<svg class="feather feather-${name}" $1>`), 2, { omitStart: true })}
 	`)
 }
 
-export function formatAsTsx(name: string, code: string, { LICENSE, comment }: { LICENSE: string, comment: string }) {
+export function formatAsTsx(name: string, code: string, { license, comment }: { license: string, comment: string }) {
 	return detab(`
-		${LICENSE}
+		${license}
 
 		import { SVGAttributes } from "react"
 

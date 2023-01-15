@@ -1,6 +1,6 @@
-dataset:
-	npx tsx scripts/dataset.ts
-	npx tsx scripts/format-dataset.ts
+feather:
+	npx tsx scripts/feather.ts
+	npx tsx scripts/feather-format.ts
 
 ssg:
 	npx vite build
