@@ -25,10 +25,6 @@ async function main() {
 		const anchors = [...document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>].slice(3)
 		return anchors.map(a => a.href)
 	}, [ANCHOR_SELECTOR])
-	const dataset: { meta: { version: string }, data: Record<string, string> } = {
-		meta: { version },
-		data: {},
-	}
 
 	const page2 = await context.newPage()
 	await page2.goto("https://raw.githubusercontent.com/feathericons/feather/master/src/tags.json")
@@ -38,6 +34,10 @@ async function main() {
 		.replaceAll("life-bouy", "life-buoy")
 	await fs.promises.writeFile(`scripts/_tagset@${version}.json`, tagset + "\n")
 
+	const dataset: { meta: { version: string }, data: Record<string, string> } = {
+		meta: { version },
+		data: {},
+	}
 	const page3 = await context.newPage()
 	for (const href of hrefs) {
 		await page3.goto(href.replace("/browse", ""))

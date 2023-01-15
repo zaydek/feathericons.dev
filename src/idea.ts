@@ -1,58 +1,37 @@
-import { manifest } from "./data/manifest"
+import fs from "node:fs"
+import path from "node:path"
 
-//// function countArray<Value>(arr: Value[], callback: (x: Value) => boolean) {
-//// 	let count = 0
-//// 	for (const el of arr) {
-//// 		count += +callback(el)
-//// 	}
-//// 	return count
-//// }
+import { manifest } from "./data/feather-manifest@4.29.0"
 
-function main() {
-	const seq: Record<string, string[]> = {}
+async function main() {
+	const sequence: Record<string, number> = {}
+	const orderedSequence: Record<string, number> = {}
 
-	// For every name
-	for (const name of manifest) {
-		// For every part of every name
-		for (const part of name.split(/(?=[A-Z])/)) {
-			for (const value of manifest) {
-				if (value.includes(part)) {
-					if (part in seq) {
-						if (seq[part].includes(name)) { continue }
-						seq[part].push(name)
-					} else {
-						seq[part] = []
-					}
+	const parts = [...new Set(Object.keys(manifest).map(name => name.split(/(?=[A-Z])/)).flat())]
+
+	for (const part of parts) {
+		for (const name of Object.keys(manifest)) {
+			if (name.includes(part)) {
+				if (part in sequence) {
+					sequence[part]++
+				} else {
+					sequence[part] = 1
 				}
 			}
 		}
 	}
 
-	const ordered: Record<string, string[]> = {}
-
-	let longest = Math.max(...Object.values(seq).map(arr => arr.length))
+	let longest = Math.max(...Object.values(sequence).map(count => count))
 	for (; longest > 1; longest--) {
-		for (const [name, arr] of Object.entries(seq)) {
-			if (arr.length === longest) {
-				ordered[name] = arr
+		for (const [name, count] of Object.entries(sequence)) {
+			if (count === longest) {
+				orderedSequence[name] = count
 			}
 		}
 	}
 
-	for (const [key, arr] of Object.entries(ordered)) {
-		console.log(`# ${key}`)
-		for (const value of arr) {
-			console.log(`svg/${value}.svg`)
-		}
-		console.log()
-	}
-	//// console.log(YAML.stringify(ordered))
-	//// const contents = JSON.stringify(ordered, null, 2)
-	//// fs.writeFileSync(path.join("src", "idea.out.json"), contents)
-	// console.log(Object.entries(ordered).length)
-
-	//// console.log("arrows", countArray(manifest, v => v.includes("arrow")))
-	//// console.log("chevron", countArray(manifest, v => v.includes("chevron")))
+	const contents = JSON.stringify(orderedSequence, null, 2)
+	await fs.promises.writeFile(path.join("src", "idea2.out.json"), contents)
 }
 
 main()
