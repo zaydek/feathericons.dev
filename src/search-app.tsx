@@ -172,27 +172,31 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 }
 
 // TODO
-function SearchResultsContents({ density, setSelected }: { density: number, setSelected: Dispatch<SetStateAction<keyof typeof manifest>> }) {
+function SearchResultsContents({ compactMode, density, setSelected }: { compactMode: boolean, density: number, setSelected: Dispatch<SetStateAction<keyof typeof manifest>> }) {
 	const { searchResults } = useContext(SearchContext)!
 
 	return <>
-		<div className="grid grid-cols-repeat(auto-fill,_minmax(calc(96px_+_16px_*_$density),_1fr))">
+		<div className="grid grid-cols-repeat(auto-fill,_minmax(calc(96px_+_8px_*_$density),_1fr))">
 			{Object.keys(searchResults).map(name => <Fragment key={name}>
 				{/* <div id={name} className="flex flex-col" onMouseEnter={e => setSelected(name as keyof typeof manifest)}> */}
 				<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
-					{/* <div className={`flex flex-center ${density < 0 ? "h-calc(96px_+_16px_*_$density)" : "h-calc(80px_+_16px_*_$density)"}`}> */}
-					<div className="flex flex-center h-calc(80px_+_16px_*_$density)">
+					<div className="flex flex-center h-calc(80px_+_8px_*_$density)">
+					{/* <div className={`flex flex-center ${compactMode ? "h-calc(96px_+_8px_*_$density)" : "h-calc(80px_+_8px_*_$density)"}`}> */}
+					{/* <div className="flex flex-center h-calc(80px_+_8px_*_$density)"> */}
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
 						{/* <Icon className="h-32 w-32 [color]-#444" icon={feather[name as keyof typeof feather]} /> */}
 						<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
 					</div>
-					{density >= 0 && <>
+					{!compactMode ? <>
 						<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
 							{/* TODO: Use x as keyof typeof feather because of Object.keys */}
 							<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 								{name}
 							</Highlight>
 						</div>
+					</> : <>
+						{/* Haha... */}
+						<div className="h-16"></div>
 					</>}
 				</div>
 			</Fragment>)}
@@ -285,8 +289,8 @@ function App() {
 	const inputRef = useRef<HTMLInputElement | null>(null)
 
 	const [selected, setSelected] = useState<keyof typeof manifest>("Feather")
-	const [showIcon, setShowIcon] = useState(false)
-
+	const [previewIconMode, setPreviewIconMode] = useState(false)
+	const [compactMode, setCompactMode] = useState(false)
 	const [density, setDensity] = useState(densityInitial)
 	const [size, setSize] = useState(sizeInitial)
 	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
@@ -338,7 +342,7 @@ function App() {
 							<SearchBarButton end />
 						</Tooltip> */}
 					</div>
-					<SearchResultsContents density={density} setSelected={setSelected} />
+					<SearchResultsContents compactMode={compactMode} density={density} setSelected={setSelected} />
 				</div>
 				<div className="flex flex-col gap-20 w-350" style={{ order: sidebarOrder === "forwards" ? undefined : -1 }}>
 					<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
@@ -355,9 +359,15 @@ function App() {
 					<div className="flex flex-center aspect-2">
 						<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[selected]} />
 					</div>
-					<Checkbox checked={showIcon} setChecked={setShowIcon}>
+					<Checkbox checked={previewIconMode} setChecked={setPreviewIconMode}>
 						<div>
 							Code
+						</div>
+					</Checkbox>
+					<Hairline />
+					<Checkbox checked={compactMode} setChecked={setCompactMode}>
+						<div>
+							Compact mode
 						</div>
 					</Checkbox>
 					<Hairline />
