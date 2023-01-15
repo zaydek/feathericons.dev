@@ -1,5 +1,6 @@
 import fs from "node:fs"
 
+import JSZip from "jszip"
 import featherTags from "./_feather-tags@4.29.0.json"
 import feather from "./_feather@4.29.0.json"
 
@@ -12,6 +13,8 @@ import { stringify } from "./stringify"
 const omitAttrs = ["class"]
 
 async function feather_svg() {
+	const zip = new JSZip()
+
 	// src/data/feather/
 	try {
 		await fs.promises.rm(`src/data/feather@${feather.meta.version}`, { recursive: true, force: true })
@@ -22,13 +25,18 @@ async function feather_svg() {
 	for (const [name, data] of Object.entries(feather.data)) {
 		const { window } = new JSDOM(data)
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
-		const svgCode = formatAsSvg(name, code, {
+		const codeAsSvg = formatAsSvg(name, code, {
 			license: `<!-- Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather -->`,
 			comment: `https://feathericons.dev/${name}`,
 		})
-		// Prefer spaces here
-		await fs.promises.writeFile(`src/data/feather@${feather.meta.version}/${name}.svg`, svgCode.replaceAll("\t", "  ") + "\n")
+		// Prefer spaces because this can be downloaded
+		await fs.promises.writeFile(`src/data/feather@${feather.meta.version}/${name}.svg`, codeAsSvg)
+		zip.file(`${name}.svg`, codeAsSvg.replaceAll("\t", "  ") + "\n")
 	}
+
+	// src/data/feather.zip
+	const buffer = await zip.generateAsync({ type: "nodebuffer" })
+	await fs.promises.writeFile(`src/data/feather@${feather.meta.version}.zip`, buffer)
 }
 
 async function feather_tsx() {
@@ -56,11 +64,11 @@ async function feather_tsx() {
 	for (const [name, data] of Object.entries(feather.data)) {
 		const { window } = new JSDOM(data)
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: true, omitAttrs })
-		const reactCode = formatAsTsx(toTitleCase(name), code, {
+		const codeAsTsx = formatAsTsx(toTitleCase(name), code, {
 			license: `/*! Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather */`,
 			comment: `https://feathericons.dev/${name}`,
 		})
-		await fs.promises.writeFile(`src/data/react-feather@${feather.meta.version}/${toTitleCase(name)}.tsx`, reactCode + "\n")
+		await fs.promises.writeFile(`src/data/react-feather@${feather.meta.version}/${toTitleCase(name)}.tsx`, codeAsTsx + "\n")
 	}
 }
 

@@ -2,6 +2,6 @@
 
 <!-- https://feathericons.dev/arrow-up -->
 <svg class="feather feather-arrow-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-  <line x1="12" x2="12" y1="19" y2="5"></line>
-  <polyline points="5 12 12 5 19 12"></polyline>
+	<line x1="12" x2="12" y1="19" y2="5"></line>
+	<polyline points="5 12 12 5 19 12"></polyline>
 </svg>
