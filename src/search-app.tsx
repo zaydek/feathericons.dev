@@ -2,7 +2,7 @@ import "./search-app.scss"
 
 import * as feather from "./data/react-feather@4.29.0"
 
-import featherZip from "./data/feather@4.29.0.zip?url"
+//// import featherZip from "./data/feather@4.29.0.zip?url"
 
 import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
@@ -158,7 +158,7 @@ function SearchResultsContents() {
 				<div id={name} className="flex flex-col">
 					<div className="flex flex-center h-80">
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
-						<Icon className="h-32 w-32" icon={feather[name as keyof typeof feather]} />
+						<Icon className="h-32 w-32 [color]-#333" icon={feather[name as keyof typeof feather]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
@@ -181,9 +181,9 @@ function SearchApp() {
 	const { sidebarOrder, setSidebarOrder } = useContext(SidebarContext)!
 
 	return <>
-		<a href={featherZip} download>
+		{/* <a href={featherZip} download>
 			Click me
-		</a>
+		</a> */}
 		<div className="p-32 flex justify-center">
 			<div className="basis-2e3 flex gap-64 [&_>_:nth-child(1)]:grow-1">
 				<div className="flex flex-col gap-64">
@@ -226,7 +226,8 @@ function SearchApp() {
 							</div>
 						</Tooltip>
 					</div>
-					<div>Sidebar</div>
+					{/* Here */}
+					<div className="h-64 w-64 rounded-1e3 [background-color]-#333"></div>
 				</div>
 			</div>
 		</div>
