@@ -283,8 +283,7 @@ function getSubstringIndexes(str: string, substr: string) {
 function StateProvider({ children }: PropsWithChildren) {
 	const [search, setSearch, restoreSearch] = useRestorableState("", "")
 
-	// TODO: Rename to safeSearch or $$search?
-	const canonSearch = useMemo(() => {
+	const $$search = useMemo(() => {
 		return search
 			.replace(/[^a-zA-Z0-9]/g, "")
 			.toLowerCase()
@@ -302,19 +301,19 @@ function StateProvider({ children }: PropsWithChildren) {
 		if (search === "") { return searchResultsFallback }
 		const ref: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
 		for (const [name, tags] of Object.entries(manifest)) {
-			const indexes = getSubstringIndexes(name.toLowerCase(), canonSearch)
+			const indexes = getSubstringIndexes(name.toLowerCase(), $$search)
 			if (indexes !== null) {
 				ref[name as keyof typeof feather] = indexes
 			} else {
 				for (const tag of tags) {
-					if (tag.startsWith(canonSearch)) {
+					if (tag.startsWith($$search)) {
 						ref[name as keyof typeof feather] = null
 					}
 				}
 			}
 		}
 		return ref
-	}, [canonSearch, search, searchResultsFallback])
+	}, [$$search, search, searchResultsFallback])
 
 	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
 
