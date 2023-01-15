@@ -2,6 +2,8 @@ import "./search-app.scss"
 
 import * as feather from "./data/react-feather@4.29.0"
 
+import featherZip from "./data/feather@4.29.0.zip?url"
+
 import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { detab } from "./lib/format"
@@ -179,6 +181,9 @@ function SearchApp() {
 	const { sidebarOrder, setSidebarOrder } = useContext(SidebarContext)!
 
 	return <>
+		<a href={featherZip} download>
+			Click me
+		</a>
 		<div className="p-32 flex justify-center">
 			<div className="basis-2e3 flex gap-64 [&_>_:nth-child(1)]:grow-1">
 				<div className="flex flex-col gap-64">
