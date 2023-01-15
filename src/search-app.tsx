@@ -174,7 +174,8 @@ function SearchResultsContents() {
 document.documentElement.style.backgroundColor = "#fff"
 
 function SearchApp() {
-	const { search, setSearch, restoreSearch } = useContext(SearchContext)!
+	//// const { search, setSearch, restoreSearch } = useContext(SearchContext)!
+	const { search, setSearch } = useContext(SearchContext)!
 	const { sidebarOrder, setSidebarOrder } = useContext(SidebarContext)!
 
 	return <>
@@ -193,10 +194,10 @@ function SearchApp() {
 							onKeyDown={e => {
 								if (e.key === "ArrowUp") {
 									e.preventDefault()
-									restoreSearch(-1)
+									//// restoreSearch(-1)
 								} else if (e.key === "ArrowDown") {
 									e.preventDefault()
-									restoreSearch(+1)
+									//// restoreSearch(+1)
 								}
 							}}
 							autoFocus
@@ -230,7 +231,7 @@ function SearchApp() {
 const SearchContext = createContext<{
 	search:          string
 	setSearch:       Dispatch<SetStateAction<string>>
-	restoreSearch:   (_: number) => void
+	//// restoreSearch:   (_: number) => void
 	searchResults:   Partial<Record<keyof typeof feather, readonly [number, number] | null>>
 } | null>(null)
 
@@ -254,13 +255,18 @@ function getSubstringIndexes(str: string, substr: string) {
 }
 
 function StateProvider({ children }: PropsWithChildren) {
-	const [search, setSearch, restoreSearch] = useRestorableState("", "")
+	//// const [search, setSearch, restoreSearch] = useRestorableState("", "")
+	const [search, setSearch] = useState("")
 
 	const $$search = useMemo(() => {
 		return search
 			.replace(/[^a-zA-Z0-9]/g, "")
 			.toLowerCase()
 	}, [search])
+
+	//// const $$regex = useMemo(() => {
+	//// 	return new RegExp(search, "i")
+	//// }, [search])
 
 	const searchResultsFallback = useMemo(() => {
 		const ref: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
@@ -270,23 +276,33 @@ function StateProvider({ children }: PropsWithChildren) {
 		return ref
 	}, [])
 
+
 	// TODO: Sort results based on indexes
 	const searchResults = useMemo(() => {
 		if ($$search === "") { return searchResultsFallback }
-		const ref: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
+		const refA: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
+		const refB: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
 		for (const [name, tags] of Object.entries(manifest)) {
+			//// if (["^", "$", "|"].some(symbol => search.includes(symbol))) {
+			//// 	$$regex.lastIndex = 0
+			//// 	try {
+			//// 		const matches = $$regex.exec(name)
+			//// 		if (!(matches === null)) {
+			//// 			ref[name as keyof typeof feather] = null //// indexes
+			//// 		}
+			//// 	} catch {/* No-op */}
 			const indexes = getSubstringIndexes(name.toLowerCase(), $$search)
 			if (indexes !== null) {
-				ref[name as keyof typeof feather] = indexes
+				refA[name as keyof typeof feather] = indexes
 			} else {
 				for (const tag of tags) {
 					if (tag.startsWith($$search)) {
-						ref[name as keyof typeof feather] = null
+						refB[name as keyof typeof feather] = null
 					}
 				}
 			}
 		}
-		return ref
+		return { ...refA, ...refB }
 	}, [$$search, searchResultsFallback])
 
 	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
@@ -295,9 +311,10 @@ function StateProvider({ children }: PropsWithChildren) {
 		<SearchContext.Provider value={useMemo(() => ({
 			search,
 			setSearch,
-			restoreSearch,
+			//// restoreSearch,
 			searchResults,
-		}), [restoreSearch, search, searchResults, setSearch])}>
+		//// }), [restoreSearch, search, searchResults, setSearch])}>
+		}), [search, searchResults, setSearch])}>
 			<SidebarContext.Provider value={useMemo(() => ({
 				sidebarOrder,
 				setSidebarOrder,
