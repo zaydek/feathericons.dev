@@ -290,7 +290,7 @@ function StateProvider({ children }: PropsWithChildren) {
 			//// 		if (!(matches === null)) {
 			//// 			ref[name as keyof typeof feather] = null //// indexes
 			//// 		}
-			//// 	} catch {/* No-op */}
+			//// 	} catch { }
 			const indexes = getSubstringIndexes(name.toLowerCase(), $$search)
 			if (indexes !== null) {
 				refA[name as keyof typeof feather] = indexes

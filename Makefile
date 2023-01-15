@@ -1,6 +1,6 @@
 feather:
 	npx tsx scripts/feather.ts
-	npx tsx scripts/feather-format.ts
+	npx tsx scripts/format-feather.ts
 
 ssg:
 	npx vite build

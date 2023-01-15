@@ -2,6 +2,6 @@
 
 <!-- https://feathericons.dev/battery -->
 <svg class="feather feather-battery" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-	<rect height="12" rx="2" ry="2" width="18" x="1" y="6"></rect>
-	<line x1="23" x2="23" y1="13" y2="11"></line>
+  <rect height="12" rx="2" ry="2" width="18" x="1" y="6"></rect>
+  <line x1="23" x2="23" y1="13" y2="11"></line>
 </svg>

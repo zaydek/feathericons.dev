@@ -15,7 +15,7 @@ async function feather_svg() {
 	// src/data/feather/
 	try {
 		await fs.promises.rm(`src/data/feather@${feather.meta.version}`, { recursive: true, force: true })
-	} catch {/* No-op */}
+	} catch { }
 	await fs.promises.mkdir(`src/data/feather@${feather.meta.version}`, { recursive: true })
 
 	// src/data/react-feather/<name>.svg
@@ -26,7 +26,8 @@ async function feather_svg() {
 			license: `<!-- Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather -->`,
 			comment: `https://feathericons.dev/${name}`,
 		})
-		await fs.promises.writeFile(`src/data/feather@${feather.meta.version}/${name}.svg`, svgCode + "\n")
+		// Prefer spaces here
+		await fs.promises.writeFile(`src/data/feather@${feather.meta.version}/${name}.svg`, svgCode.replaceAll("\t", "  ") + "\n")
 	}
 }
 
@@ -42,7 +43,7 @@ async function feather_tsx() {
 	// src/data/react-feather/
 	try {
 		await fs.promises.rm(`src/data/react-feather@${feather.meta.version}`, { recursive: true, force: true })
-	} catch {/* No-op */}
+	} catch { }
 	await fs.promises.mkdir(`src/data/react-feather@${feather.meta.version}`, { recursive: true })
 
 	// src/data/react-feather/index.ts
