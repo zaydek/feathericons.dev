@@ -180,7 +180,7 @@ function SearchResultsContents({ compactMode, density, setSelected }: { compactM
 			{Object.keys(searchResults).map(name => <Fragment key={name}>
 				{/* <div id={name} className="flex flex-col" onMouseEnter={e => setSelected(name as keyof typeof manifest)}> */}
 				<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
-					<div className="flex flex-center h-calc(80px_+_8px_*_$density)">
+					<div className="flex flex-center h-96">
 					{/* <div className={`flex flex-center ${compactMode ? "h-calc(96px_+_8px_*_$density)" : "h-calc(80px_+_8px_*_$density)"}`}> */}
 					{/* <div className="flex flex-center h-calc(80px_+_8px_*_$density)"> */}
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
@@ -188,7 +188,7 @@ function SearchResultsContents({ compactMode, density, setSelected }: { compactM
 						<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
 					</div>
 					{!compactMode ? <>
-						<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
+						<div className="flex flex-center wrap-wrap h-20 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
 							{/* TODO: Use x as keyof typeof feather because of Object.keys */}
 							<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 								{name}
@@ -196,7 +196,7 @@ function SearchResultsContents({ compactMode, density, setSelected }: { compactM
 						</div>
 					</> : <>
 						{/* Haha... */}
-						<div className="h-16"></div>
+						<div className="h-20"></div>
 					</>}
 				</div>
 			</Fragment>)}
