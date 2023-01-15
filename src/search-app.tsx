@@ -5,11 +5,14 @@ import * as feather from "./data/react-feather@4.29.0"
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
 import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { AriaSlider } from "./aria/aria-slider"
+import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
-function CAPS({ children }: PropsWithChildren) {
+// TODO: Add font-feature-settings: "tnum" here?
+function TypographyCaps({ children }: PropsWithChildren) {
 	return <>
 		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#333">
 			{children}
@@ -113,9 +116,9 @@ function Tooltip({ pos, icon, tip, data, children, ...props }: { pos: "start" | 
 							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$realistic-shadow-6">
 								{/* TODO: Draw icon here */}
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
-								<CAPS>
+								<TypographyCaps>
 									{tip}
-								</CAPS>
+								</TypographyCaps>
 							</div>
 							{/* <div className="absolute -t-2 x-0 flex justify-center">
 								<div className="h-8 w-8 rounded-2 [background-color]-#fff [transform]-rotate(45deg)"></div>
@@ -176,7 +179,7 @@ function SearchResultsContents({ setSelected }: { setSelected: Dispatch<SetState
 		<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr))">
 			{Object.keys(searchResults).map(name => <Fragment key={name}>
 				{/* <div id={name} className="flex flex-col" onMouseEnter={e => setSelected(name as keyof typeof manifest)}> */}
-				<div id={name} className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
+				<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
 					<div className="flex flex-center h-80">
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
 						<Icon className="h-32 w-32 [color]-#333" icon={feather[name as keyof typeof feather]} />
@@ -243,17 +246,28 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 	</>
 }
 
-function Slider() {
+function Slider(props: {
+	min:      number
+	max:      number
+	step:     number
+	value:    number
+	setValue: Dispatch<SetStateAction<number>>
+}) {
+	const [track, setTrack] = useState<HTMLDivElement | null>(null)
+	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
+
 	return <>
-		<div className="px-4">
-			<div className="flex flex-col justify-center h-$sidebar-label-height">
-				<div className="flex flex-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
-					<div className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+		<AriaSlider track={track} thumb={thumb} {...props}>
+			{/* <div className="px-calc(6px_/_2)"> */}
+			<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
+				<div className="flex align-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
+					<div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
 					</div>
 				</div>
 			</div>
-		</div>
+			{/* </div> */}
+		</AriaSlider>
 	</>
 }
 
@@ -264,8 +278,13 @@ function App() {
 	const { search, setSearch, restoreSearch } = useContext(SearchContext)!
 	const { sidebarOrder, setSidebarOrder } = useContext(SidebarContext)!
 
+	const inputRef = useRef<HTMLInputElement | null>(null)
+
 	const [selected, setSelected] = useState<keyof typeof manifest>("Feather")
 	const [showIcon, setShowIcon] = useState(false)
+
+	const [size, setSize] = useState(sizeInitial)
+	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
 
 	return <>
 		{/* <a href={featherZip} download>
@@ -275,10 +294,11 @@ function App() {
 			<div className="basis-2e3 flex gap-64 [&_>_:nth-child(1)]:grow-1">
 				<div className="flex flex-col gap-64">
 					<div className="flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1">
-						<Tooltip pos="start" tip={<>SEARCH ICONS&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+/</span></>}>
-							<SearchBarButton start />
+						<Tooltip pos="start" tip={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+/</span></>}>
+							<SearchBarButton start onClick={e => inputRef.current!.select()} />
 						</Tooltip>
 						<input
+							ref={inputRef}
 							className="px-8 h-64"
 							type="text"
 							value={search}
@@ -297,7 +317,7 @@ function App() {
 						<Tooltip pos="end" tip={`USE ${sidebarOrder === "forwards" ? "RTL" : "LTR"} LAYOUT`} data={sidebarOrder} onClick={e => setSidebarOrder(curr => curr === "forwards" ? "backwards" : "forwards")}>
 							<SearchBarButton end />
 						</Tooltip>
-						{/* <Tooltip content={<>TOGGLE DARK MODE&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+D</span></>}>
+						{/* <Tooltip content={<>TOGGLE DARK MODE{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+D</span></>}>
 							<SearchBarButton end />
 						</Tooltip> */}
 					</div>
@@ -330,14 +350,14 @@ function App() {
 							Size
 						</div>
 					</Label>
-					<Slider />
+					<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 					<Hairline />
 					<Label>
 						<div>
 							Stroke Width
 						</div>
 					</Label>
-					<Slider />
+					<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
 				</div>
 			</div>
 		</div>
