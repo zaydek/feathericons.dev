@@ -15,7 +15,7 @@ import { Icon, IconComponent } from "./lib/react/icon"
 // TODO: Add font-feature-settings: "tnum" here?
 function TypographyCaps({ children }: PropsWithChildren) {
 	return <>
-		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#444">
+		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#333">
 			{children}
 		</div>
 	</>
@@ -122,7 +122,7 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 								{/* TODO */}
 								{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div> */}
 								{icon !== undefined && <>
-									<Icon className="h-16 w-16 [color]-#444" icon={icon} />
+									<Icon className="h-16 w-16 [color]-#333" icon={icon} />
 								</>}
 								<TypographyCaps>
 									{text}
@@ -191,7 +191,7 @@ function SearchResultsContents({ compactMode, setSelected }: { compactMode: bool
 					<button className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
 						<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
 							<div className="flex flex-center h-96">
-								<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
+								<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 							</div>
 						</Tooltip>
 					</button>
@@ -200,7 +200,7 @@ function SearchResultsContents({ compactMode, setSelected }: { compactMode: bool
 				{Object.keys(searchResults).map(name => <Fragment key={name}>
 					<button className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
 						<div className="flex flex-center h-96">
-							<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
+							<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 						</div>
 						{/* TODO: Extract typography? */}
 						{/* <div className="flex flex-center wrap-wrap h-20 [text-align]-center [font-]-12 [-webkit-user-select]-all [user-select]-all"> */}
@@ -359,7 +359,7 @@ function App() {
 				<div className="flex flex-col gap-20 w-350" style={{ order: sidebarOrder === "forwards" ? undefined : -1 }}>
 					<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
 						<div className="flex align-center gap-10 h-20">
-							<Icon className="h-16 w-16 [color]-#444" icon={feather[selected]} />
+							<Icon className="h-16 w-16 [color]-#333" icon={feather[selected]} />
 							<div>{selected}</div>
 						</div>
 						<Tooltip pos="end" text="OPEN DOCUMENTATION">
@@ -370,7 +370,7 @@ function App() {
 						</Tooltip>
 					</div>
 					<div className="flex flex-center aspect-2">
-						<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[selected]} />
+						<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selected]} />
 					</div>
 					<Checkbox checked={previewIconMode} setChecked={setPreviewIconMode}>
 						<div>
