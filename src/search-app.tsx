@@ -188,15 +188,17 @@ function SearchResultsContents({ compactMode, setSelected }: { compactMode: bool
 		<div className="grid grid-cols-repeat(auto-fill,_minmax(calc(96px_+_8px_*_$density),_1fr))">
 			{compactMode ? <>
 				{Object.keys(searchResults).map(name => <Fragment key={name}>
-					<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
-						<div className="flex flex-center h-96">
-							<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
-						</div>
-					</Tooltip>
+					<button className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
+						<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
+							<div className="flex flex-center h-96">
+								<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
+							</div>
+						</Tooltip>
+					</button>
 				</Fragment>)}
 			</> : <>
 				{Object.keys(searchResults).map(name => <Fragment key={name}>
-					<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
+					<button className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
 						<div className="flex flex-center h-96">
 							<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
 						</div>
@@ -207,7 +209,7 @@ function SearchResultsContents({ compactMode, setSelected }: { compactMode: bool
 								{name}
 							</Highlight>
 						</div>
-					</div>
+					</button>
 				</Fragment>)}
 			</>}
 		</div>
