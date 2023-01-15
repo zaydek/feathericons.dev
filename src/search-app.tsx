@@ -139,7 +139,7 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 	} else {
 		return <>
 			<BreakCases>{children.slice(0, indexes[0])}</BreakCases>
-			<span className="[background-color]-hsl(60,_100%,_90%) [box-shadow]-inset_0_-1px_0_0_hsl(45,_100%,_50%)">
+			<span className="[background-color]-hsl(200,_100%,_87.5%,_0.5) [box-shadow]-0_1px_0_0_hsl(200,_100%,_calc(87.5%_/_2),_0.5)">
 				{children.slice(indexes[0], indexes[1])}
 			</span>
 			<BreakCases>{children.slice(indexes[1])}</BreakCases>
