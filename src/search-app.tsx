@@ -97,7 +97,7 @@ function Tooltip({ icon, content, data, children, ...props }: { icon?: typeof Ic
 							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
 					`)}>
 						{/* <div className="relative"> */}
-							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_98%) [box-shadow]-$shadow-6,_$realistic-shadow-6">
+							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$realistic-shadow-6">
 								{/* TODO: Draw icon here */}
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
 								<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#333">
