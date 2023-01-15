@@ -479,7 +479,11 @@ export const manifest: Record<keyof typeof feather, string[]> = {
     "window",
     "webpage"
   ],
-  "LifeBuoy": [],
+  "LifeBuoy": [
+    "help",
+    "life ring",
+    "support"
+  ],
   "Link2": [
     "chain",
     "url"
