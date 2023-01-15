@@ -8,8 +8,9 @@ import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, R
 import { AriaSlider } from "./aria/aria-slider"
 import { densityInitial, densityMax, densityMin, densityStep, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
+import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
-import { Icon } from "./lib/react/icon"
+import { Icon, IconComponent } from "./lib/react/icon"
 
 // TODO: Add font-feature-settings: "tnum" here?
 function TypographyCaps({ children }: PropsWithChildren) {
@@ -84,8 +85,10 @@ function useRestorableState<T>(initialValue: T, zeroValue: T) {
 	return [state, setState, restoreState] as const
 }
 
+type Position = "start" | "center" | "end"
+
 // TODO: Make icon required?
-function Tooltip({ pos, icon, tip, data, children, ...props }: { pos: "start" | "end", icon?: typeof Icon, tip: ReactNode, data?: any } & HTMLAttributes<HTMLElement>) {
+function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position, icon?: IconComponent, text: ReactNode, data?: any } & HTMLAttributes<HTMLElement>) {
 	const [show, setShow] = useState(true)
 
 	// This is a trick to hide the tooltip on data changes
@@ -101,23 +104,28 @@ function Tooltip({ pos, icon, tip, data, children, ...props }: { pos: "start" | 
 		<div className="relative" data-group {...props}>
 			{children}
 			{show && <>
-				<div className={pos === "start"
-					? "py-12 absolute t-100% l-0 [pointer-events]-none"
-					: "py-12 absolute t-100% r-0 [pointer-events]-none"
-				}>
+				<div className={{
+					"start":  "absolute t-100% l-0 z-10 [pointer-events]-none",
+					"center": "absolute t-100% l-50% [transform]-translateX(-50%) z-10 [pointer-events]-none",
+					"end":    "absolute t-100% r-0 z-10 [pointer-events]-none",
+				}[pos]}>
+					{/* [[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms) */}
 					<div className={detab(`
 						[transform]-translateY(8px)
 						[opacity]-0
 						[transition]-100ms_cubic-bezier(0,_1,_1,_1)
 						[transition-property]-transform,_opacity
-							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
+							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-10ms)
 					`)}>
 						{/* <div className="relative"> */}
 							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$realistic-shadow-6">
-								{/* TODO: Draw icon here */}
-								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
+								{/* TODO */}
+								{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div> */}
+								{icon !== undefined && <>
+									<Icon className="h-16 w-16 [color]-#444" icon={icon} />
+								</>}
 								<TypographyCaps>
-									{tip}
+									{text}
 								</TypographyCaps>
 							</div>
 							{/* <div className="absolute -t-2 x-0 flex justify-center">
@@ -139,7 +147,8 @@ function SearchBarButton({ start, end, ...props }: { start?: boolean, end?: bool
 	[start, end] = [start ?? false, end ?? false]
 
 	return <>
-		<div className="px-8 flex align-center h-$search-bar-height" style={{ paddingLeft: start ? 16 : undefined, paddingRight: end ? 16 : undefined }}>
+		{/* Use my-* for <Tooltip> */}
+		<div className="my-8 px-8 flex align-center h-$search-bar-height" style={{ paddingLeft: start ? 16 : undefined, paddingRight: end ? 16 : undefined }}>
 			<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
 				<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
 			</div>
@@ -172,34 +181,35 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 }
 
 // TODO
-function SearchResultsContents({ compactMode, density, setSelected }: { compactMode: boolean, density: number, setSelected: Dispatch<SetStateAction<keyof typeof manifest>> }) {
+function SearchResultsContents({ compactMode, setSelected }: { compactMode: boolean, setSelected: Dispatch<SetStateAction<keyof typeof manifest>> }) {
 	const { searchResults } = useContext(SearchContext)!
 
 	return <>
 		<div className="grid grid-cols-repeat(auto-fill,_minmax(calc(96px_+_8px_*_$density),_1fr))">
-			{Object.keys(searchResults).map(name => <Fragment key={name}>
-				{/* <div id={name} className="flex flex-col" onMouseEnter={e => setSelected(name as keyof typeof manifest)}> */}
-				<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
-					<div className="flex flex-center h-96">
-					{/* <div className={`flex flex-center ${compactMode ? "h-calc(96px_+_8px_*_$density)" : "h-calc(80px_+_8px_*_$density)"}`}> */}
-					{/* <div className="flex flex-center h-calc(80px_+_8px_*_$density)"> */}
-						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
-						{/* <Icon className="h-32 w-32 [color]-#444" icon={feather[name as keyof typeof feather]} /> */}
-						<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
-					</div>
-					{!compactMode ? <>
-						<div className="flex flex-center wrap-wrap h-20 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
-							{/* TODO: Use x as keyof typeof feather because of Object.keys */}
+			{compactMode ? <>
+				{Object.keys(searchResults).map(name => <Fragment key={name}>
+					<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
+						<div className="flex flex-center h-96">
+							<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
+						</div>
+					</Tooltip>
+				</Fragment>)}
+			</> : <>
+				{Object.keys(searchResults).map(name => <Fragment key={name}>
+					<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
+						<div className="flex flex-center h-96">
+							<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
+						</div>
+						{/* TODO: Extract typography? */}
+						{/* <div className="flex flex-center wrap-wrap h-20 [text-align]-center [font-]-12 [-webkit-user-select]-all [user-select]-all"> */}
+						<div className="flex flex-center wrap-wrap h-20 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
 							<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 								{name}
 							</Highlight>
 						</div>
-					</> : <>
-						{/* Haha... */}
-						<div className="h-20"></div>
-					</>}
-				</div>
-			</Fragment>)}
+					</div>
+				</Fragment>)}
+			</>}
 		</div>
 	</>
 }
@@ -315,7 +325,7 @@ function App() {
 			<div className="basis-2e3 flex gap-64 [&_>_:nth-child(1)]:grow-1">
 				<div className="flex flex-col gap-64">
 					<div className="flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1">
-						<Tooltip pos="start" tip={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+/</span></>}>
+						<Tooltip pos="start" text={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+/</span></>}>
 							<SearchBarButton start onClick={e => inputRef.current!.select()} />
 						</Tooltip>
 						<input
@@ -335,14 +345,14 @@ function App() {
 							}}
 							autoFocus
 						/>
-						<Tooltip pos="end" tip={`USE ${sidebarOrder === "forwards" ? "RTL" : "LTR"} LAYOUT`} data={sidebarOrder} onClick={e => setSidebarOrder(curr => curr === "forwards" ? "backwards" : "forwards")}>
-							<SearchBarButton end />
-						</Tooltip>
-						{/* <Tooltip content={<>TOGGLE DARK MODE{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+D</span></>}>
+						{/* <Tooltip pos="end" text={`USE ${sidebarOrder === "forwards" ? "RTL" : "LTR"} LAYOUT`} data={sidebarOrder} onClick={e => setSidebarOrder(curr => curr === "forwards" ? "backwards" : "forwards")}>
 							<SearchBarButton end />
 						</Tooltip> */}
+						<Tooltip pos="end" text={<>TOGGLE DARK MODE{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+D</span></>}>
+							<SearchBarButton end />
+						</Tooltip>
 					</div>
-					<SearchResultsContents compactMode={compactMode} density={density} setSelected={setSelected} />
+					<SearchResultsContents compactMode={compactMode} setSelected={setSelected} />
 				</div>
 				<div className="flex flex-col gap-20 w-350" style={{ order: sidebarOrder === "forwards" ? undefined : -1 }}>
 					<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
@@ -350,8 +360,9 @@ function App() {
 							<Icon className="h-16 w-16 [color]-#444" icon={feather[selected]} />
 							<div>{selected}</div>
 						</div>
-						<Tooltip pos="end" tip="OPEN ICON DOCS">
-							<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+						<Tooltip pos="end" text="OPEN DOCUMENTATION">
+							{/* Use my-* for <Tooltip> */}
+							<div className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
 							</div>
 						</Tooltip>

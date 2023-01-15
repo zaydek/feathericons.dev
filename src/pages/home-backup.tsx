@@ -86,13 +86,13 @@ function Label({ resetButton }: { resetButton?: boolean }) {
 				<IconPlaceholder />
 				<TextPlaceholder />
 			</div>
-			{resetButton &&
+			{resetButton && <>
 				<div className="px-4">
 					<div className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-$light-placeholder-color">
 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$dark-placeholder-color"></div>
 					</div>
 				</div>
-			}
+			</>}
 		</div>
 	</>
 }

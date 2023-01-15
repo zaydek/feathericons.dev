@@ -1,6 +1,6 @@
 export const densityInitial     = 0
-export const densityMin         = densityInitial
-export const densityMax         = densityInitial + 4
+export const densityMin         = densityInitial - 2
+export const densityMax         = densityInitial + 2
 export const densityStep        = 1
 
 export const sizeInitial        = 32
