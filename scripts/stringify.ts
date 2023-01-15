@@ -5,7 +5,8 @@ type Configuration = {
 	omitAttrs: string[]
 }
 
-function stringifyAttrs(tag: string, attrKeys: string[], attrs: NamedNodeMap, config: Configuration) {
+//// function stringifyAttrs(tag: string, attrKeys: string[], attrs: NamedNodeMap, config: Configuration) {
+function stringifyAttrs(attrKeys: string[], attrs: NamedNodeMap, config: Configuration) {
 	let str = ""
 	for (const key of attrKeys) {
 		if (config.omitAttrs.includes(key)) { continue }
@@ -65,7 +66,7 @@ export function stringify(svgElement: SVGSVGElement, config: Configuration) {
 			attrKeys = sortAttrKeys(Object.values(ref.attributes).map(attr => attr.name))
 		}
 
-		const str = stringifyAttrs(tag, attrKeys, ref.attributes, config)
+		const str = stringifyAttrs(attrKeys, ref.attributes, config)
 		if (ref.children.length > 0) {
 			arr.push(`${tabs}<${tag} ${str}>`)
 			for (const child of ref.children) {

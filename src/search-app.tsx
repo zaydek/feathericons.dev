@@ -88,7 +88,7 @@ function Tooltip({ icon, content, data, children, ...props }: { icon?: typeof Ic
 		<div className="relative" data-group {...props}>
 			{children}
 			{show && <>
-				<div className="py-10 absolute t-100% l-50% [transform]-translateX(-50%) [pointer-events]-none">
+				<div className="py-12 absolute t-100% l-50% [transform]-translateX(-50%) [pointer-events]-none">
 					<div className={detab(`
 						[transform]-translateY(8px)
 						[opacity]-0
@@ -96,18 +96,18 @@ function Tooltip({ icon, content, data, children, ...props }: { icon?: typeof Ic
 						[transition-property]-transform,_opacity
 							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms)
 					`)}>
-						<div className="relative">
-							<div className="px-10 flex align-center gap-10 h-32 rounded-1e3 [background-color]-#111 [box-shadow]-$realistic-shadow-6,_$realistic-shadow-6">
+						{/* <div className="relative"> */}
+							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_98%) [box-shadow]-$shadow-6,_$realistic-shadow-6">
 								{/* TODO: Draw icon here */}
 								<div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div>
-								<div className="[white-space]-pre [font]-500_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#fff">
+								<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#333">
 									{content}
 								</div>
 							</div>
-							<div className="absolute -t-2 x-0 flex justify-center">
-								<div className="h-8 w-8 rounded-2 [background-color]-#111 [transform]-rotate(45deg)"></div>
-							</div>
-						</div>
+							{/* <div className="absolute -t-2 x-0 flex justify-center">
+								<div className="h-8 w-8 rounded-2 [background-color]-#fff [transform]-rotate(45deg)"></div>
+							</div> */}
+						{/* </div> */}
 					</div>
 				</div>
 			</>}
@@ -123,55 +123,26 @@ function SearchBarButton(props: HTMLAttributes<HTMLElement>) {
 	</>
 }
 
-//// function isDelimiter(ch: string) {
-//// 	return ch === " " || ch === "-" || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9")
-//// }
-////
-//// function splitParts(str: string) {
-//// 	str = str.replace(/[^a-zA-Z0-9 -]/g, "")
-////
-//// 	const parts = []
-//// 	for (let x1 = 0; x1 < str.length; x1++) {
-//// 		let buffer = ""
-//// 		for (let x2 = x1; x2 < str.length; x2++) {
-//// 			if (!(str[x2] === " " || str[x2] === "-")) {
-//// 				buffer += str[x2]
-//// 			}
-//// 			if (x2 + 1 === str.length || (x2 + 1 < str.length && isDelimiter(str[x2 + 1]))) {
-//// 				// Guard empty buffers e.g. <space><upper> e.g. "Hello World!"
-//// 				//                                                    ^^
-//// 				if (buffer !== "") {
-//// 					//// parts.push(buffer.toLowerCase())
-//// 					parts.push(buffer)
-//// 				}
-//// 				x1 = x2
-//// 				break
-//// 			}
-//// 		}
-//// 	}
-//// 	return parts
-//// }
-
-function Wbr({ children }: { children: string }) {
+function BreakCases({ children }: { children: string }) {
 	const parts = children.split(/(?=[A-Z])/)
 	return <>
-		{parts.map((p, index) => <Fragment key={p}>
+		{parts.map((part, index) => <Fragment key={part}>
 			{index > 0 && <wbr />}
-			{p}
+			{part}
 		</Fragment>)}
 	</>
 }
 
 function Highlight({ indexes, children }: { indexes: readonly [number, number] | null, children: string }) {
 	if (indexes === null) {
-		return <Wbr>{children}</Wbr>
+		return <BreakCases>{children}</BreakCases>
 	} else {
 		return <>
-			<Wbr>{children.slice(0, indexes[0])}</Wbr>
+			<BreakCases>{children.slice(0, indexes[0])}</BreakCases>
 			<span className="[background-color]-hsl(60,_100%,_90%) [box-shadow]-inset_0_-1px_0_0_hsl(45,_100%,_50%)">
 				{children.slice(indexes[0], indexes[1])}
 			</span>
-			<Wbr>{children.slice(indexes[1])}</Wbr>
+			<BreakCases>{children.slice(indexes[1])}</BreakCases>
 		</>
 	}
 }
@@ -211,7 +182,9 @@ function SearchApp() {
 			<div className="basis-2e3 flex gap-64 [&_>_:nth-child(1)]:grow-1">
 				<div className="flex flex-col gap-64">
 					<div className="px-16 flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1">
-						<SearchBarButton />
+						<Tooltip content={<>SEARCH ICONS&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+/</span></>}>
+							<SearchBarButton />
+						</Tooltip>
 						<input
 							className="px-16 h-64"
 							type="text"
@@ -228,7 +201,7 @@ function SearchApp() {
 							}}
 							autoFocus
 						/>
-						<Tooltip content={<>DARK MODE&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+D</span></>}>
+						<Tooltip content={<>TOGGLE DARK MODE&nbsp;&nbsp;<span className="[opacity]-0.75">CTRL+D</span></>}>
 							<SearchBarButton />
 						</Tooltip>
 					</div>
