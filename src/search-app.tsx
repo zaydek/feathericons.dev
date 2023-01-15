@@ -182,7 +182,7 @@ function SearchResultsContents({ setSelected }: { setSelected: Dispatch<SetState
 				<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
 					<div className="flex flex-center h-80">
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
-						<Icon className="h-$size w-$size [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
+						<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 					</div>
 					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
@@ -287,7 +287,7 @@ function App() {
 	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
 
 	useEffect(() => {
-		document.body.style.setProperty("--size", `${size}px`)
+		document.body.style.setProperty("--scale", `${size / sizeInitial}`)
 	}, [size])
 
 	useEffect(() => {
@@ -343,9 +343,8 @@ function App() {
 							</div>
 						</Tooltip>
 					</div>
-					{/* Here */}
 					<div className="flex flex-center aspect-2">
-						<Icon className="h-calc($size_*_2) w-calc($size_*_2) [stroke-width]-$stroke-width [color]-#333" icon={feather[selected]} />
+						<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selected]} />
 					</div>
 					<Checkbox checked={showIcon} setChecked={setShowIcon}>
 						<div>
