@@ -6,7 +6,7 @@ import * as feather from "./data/react-feather@4.29.0"
 
 import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { AriaSlider } from "./aria/aria-slider"
-import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
+import { densityInitial, densityMax, densityMin, densityStep, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
@@ -14,7 +14,7 @@ import { Icon } from "./lib/react/icon"
 // TODO: Add font-feature-settings: "tnum" here?
 function TypographyCaps({ children }: PropsWithChildren) {
 	return <>
-		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#333">
+		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#444">
 			{children}
 		</div>
 	</>
@@ -172,24 +172,28 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 }
 
 // TODO
-function SearchResultsContents({ setSelected }: { setSelected: Dispatch<SetStateAction<keyof typeof manifest>> }) {
+function SearchResultsContents({ density, setSelected }: { density: number, setSelected: Dispatch<SetStateAction<keyof typeof manifest>> }) {
 	const { searchResults } = useContext(SearchContext)!
 
 	return <>
-		<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr))">
+		<div className="grid grid-cols-repeat(auto-fill,_minmax(calc(96px_+_16px_*_$density),_1fr))">
 			{Object.keys(searchResults).map(name => <Fragment key={name}>
 				{/* <div id={name} className="flex flex-col" onMouseEnter={e => setSelected(name as keyof typeof manifest)}> */}
 				<div className="flex flex-col" onClick={e => setSelected(name as keyof typeof manifest)}>
-					<div className="flex flex-center h-80">
+					{/* <div className={`flex flex-center ${density < 0 ? "h-calc(96px_+_16px_*_$density)" : "h-calc(80px_+_16px_*_$density)"}`}> */}
+					<div className="flex flex-center h-calc(80px_+_16px_*_$density)">
 						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
-						<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
+						{/* <Icon className="h-32 w-32 [color]-#444" icon={feather[name as keyof typeof feather]} /> */}
+						<Icon className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[name as keyof typeof feather]} />
 					</div>
-					<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
-						{/* TODO: Use x as keyof typeof feather because of Object.keys */}
-						<Highlight indexes={searchResults[name as keyof typeof feather]!}>
-							{name}
-						</Highlight>
-					</div>
+					{density >= 0 && <>
+						<div className="flex flex-center wrap-wrap h-16 [text-align]-center [font-size]-12 [-webkit-user-select]-all [user-select]-all">
+							{/* TODO: Use x as keyof typeof feather because of Object.keys */}
+							<Highlight indexes={searchResults[name as keyof typeof feather]!}>
+								{name}
+							</Highlight>
+						</div>
+					</>}
 				</div>
 			</Fragment>)}
 		</div>
@@ -283,8 +287,13 @@ function App() {
 	const [selected, setSelected] = useState<keyof typeof manifest>("Feather")
 	const [showIcon, setShowIcon] = useState(false)
 
+	const [density, setDensity] = useState(densityInitial)
 	const [size, setSize] = useState(sizeInitial)
 	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
+
+	useEffect(() => {
+		document.body.style.setProperty("--density", `${density}`)
+	}, [density])
 
 	useEffect(() => {
 		document.body.style.setProperty("--scale", `${size / sizeInitial}`)
@@ -329,12 +338,12 @@ function App() {
 							<SearchBarButton end />
 						</Tooltip> */}
 					</div>
-					<SearchResultsContents setSelected={setSelected} />
+					<SearchResultsContents density={density} setSelected={setSelected} />
 				</div>
 				<div className="flex flex-col gap-20 w-350" style={{ order: sidebarOrder === "forwards" ? undefined : -1 }}>
 					<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
 						<div className="flex align-center gap-10 h-20">
-							<Icon className="h-16 w-16 [color]-#333" icon={feather[selected]} />
+							<Icon className="h-16 w-16 [color]-#444" icon={feather[selected]} />
 							<div>{selected}</div>
 						</div>
 						<Tooltip pos="end" tip="OPEN ICON DOCS">
@@ -344,13 +353,20 @@ function App() {
 						</Tooltip>
 					</div>
 					<div className="flex flex-center aspect-2">
-						<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selected]} />
+						<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#444" icon={feather[selected]} />
 					</div>
 					<Checkbox checked={showIcon} setChecked={setShowIcon}>
 						<div>
 							Code
 						</div>
 					</Checkbox>
+					<Hairline />
+					<Label>
+						<div>
+							Density
+						</div>
+					</Label>
+					<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} />
 					<Hairline />
 					<Label>
 						<div>
