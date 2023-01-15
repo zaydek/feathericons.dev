@@ -21,12 +21,15 @@ function stringifyAttrs(tag: string, attrKeys: string[], attrs: NamedNodeMap, co
 			if (attr.name === "viewBox" || attr.name === "aria-hidden") {
 				// Reserved keywords
 				str += `${attr.name}=${JSON.stringify(attr.value)}`
-			} else if (isNaN(+attr.value) || tag !== "svg") { // Don't use {...} syntax on non <svg> elements
-				// Non {...} syntax
-				str += `${toCamelCase(attr.name)}=${JSON.stringify(attr.value)}`
+			//// } else if (isNaN(+attr.value) || tag !== "svg") { // Don't use {...} syntax on non <svg> elements
+			//// 	// Non {...} syntax
+			//// 	str += `${toCamelCase(attr.name)}=${JSON.stringify(attr.value)}`
+			//// } else {
+			//// 	// {...} syntax
+			//// 	str += `${toCamelCase(attr.name)}={${attr.value}}`
+			//// }
 			} else {
-				// {...} syntax
-				str += `${toCamelCase(attr.name)}={${attr.value}}`
+				str += `${toCamelCase(attr.name)}=${JSON.stringify(attr.value)}`
 			}
 		} else {
 			str += `${attr.name}=${JSON.stringify(attr.value)}`

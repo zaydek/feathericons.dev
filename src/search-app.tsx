@@ -1,9 +1,9 @@
 import "./search-app.scss"
 
-import * as feather from "./data/feather@4.29.0"
+import * as feather from "./data/react-feather@4.29.0"
 
 import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
-import { manifest } from "./data/feather-manifest@4.29.0"
+import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { detab } from "./lib/format"
 import { Icon } from "./lib/react/icon"
 
@@ -299,7 +299,7 @@ function StateProvider({ children }: PropsWithChildren) {
 
 	// TODO: Sort results based on indexes
 	const searchResults = useMemo(() => {
-		if (search === "") { return searchResultsFallback }
+		if ($$search === "") { return searchResultsFallback }
 		const ref: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
 		for (const [name, tags] of Object.entries(manifest)) {
 			const indexes = getSubstringIndexes(name.toLowerCase(), $$search)
@@ -314,7 +314,7 @@ function StateProvider({ children }: PropsWithChildren) {
 			}
 		}
 		return ref
-	}, [$$search, search, searchResultsFallback])
+	}, [$$search, searchResultsFallback])
 
 	const [sidebarOrder, setSidebarOrder] = useState<"forwards" | "backwards">("forwards")
 
