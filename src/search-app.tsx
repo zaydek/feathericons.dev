@@ -184,7 +184,7 @@ function SearchBar() {
 				}}
 				autoFocus
 			/>
-			<Tooltip pos="end" text={<>DARK MODE{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+D</span></>}>
+			<Tooltip pos="end" text={<>TOGGLE THEME{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+D</span></>}>
 				<SearchBarButton end />
 			</Tooltip>
 		</div>
@@ -337,7 +337,7 @@ function SidebarContents() {
 				<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} />
 				<div>{selectedName}</div>
 			</div>
-			<Tooltip pos="end" text="OPEN DOCS">
+			<Tooltip pos="end" text="OPEN ICON DOCS">
 				{/* Use my-* for <Tooltip> */}
 				{/* TODO */}
 				<button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
