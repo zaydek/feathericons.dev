@@ -5,7 +5,7 @@ import "./css/vars.scss"
 
 import "uno.css"
 
-import { createRoot, hydrateRoot } from "react-dom/client"
+import { createRoot } from "react-dom/client"
 import { ProvidedApp } from "./search-app"
 //// import { App } from "./app"
 
@@ -17,5 +17,6 @@ if (import.meta.env.DEV) {
 } else {
 	console.log("[DEBUG] hydrateRoot")
 	//// hydrateRoot(root, <App initialPath={window.location.pathname} />)
-	hydrateRoot(root, <ProvidedApp />)
+	//// hydrateRoot(root, <ProvidedApp />)
+	createRoot(root).render(<ProvidedApp />)
 }
