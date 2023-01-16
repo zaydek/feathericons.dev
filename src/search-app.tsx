@@ -447,28 +447,31 @@ function SidebarContents() {
 				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[selectedName]} />
 			</div>
 			<div className="grid grid-cols-3 gap-10">
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2">
-					<Icon className="h-16 w-16 [color]-#ffb13b" icon={SVGIcon} />
-					<TypeCaps>
+				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
+					{/* Use h-18 instead of h-16 here */}
+					<Icon className="h-18 w-18 [color]-#ffb13b" icon={SVGIcon} />
+					{/* <TypeCaps>
 						SVG
-					</TypeCaps>
+					</TypeCaps> */}
 				</button>
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2">
-					<Icon className="h-16 w-16 [color]-#61dafb" icon={JSXIcon} />
-					<TypeCaps>
+				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
+					{/* Use h-18 instead of h-16 here */}
+					<Icon className="h-18 w-18 [color]-#61dafb" icon={JSXIcon} />
+					{/* <TypeCaps>
 						JSX
-					</TypeCaps>
+					</TypeCaps> */}
 				</button>
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2">
-					<Icon className="h-16 w-16 [color]-#3178c6" icon={TSXIcon} />
-					<TypeCaps>
+				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
+					{/* Use h-18 instead of h-16 here */}
+					<Icon className="h-18 w-18 [color]-#3178c6" icon={TSXIcon} />
+					{/* <TypeCaps>
 						TSX
-					</TypeCaps>
+					</TypeCaps> */}
 				</button>
 			</div>
-			<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+			<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
 				{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div> */}
-				<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
+				<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
 				<TypeInvertedSans>
 					Download
 				</TypeInvertedSans>
