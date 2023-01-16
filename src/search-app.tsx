@@ -25,11 +25,11 @@ export function SVGIcon(props: SVGAttributes<SVGElement>) {
 export function ReactIcon(props: SVGAttributes<SVGElement>) {
 	return <>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348" fill="currentColor" {...props}>
-			<circle cx={0} cy={0} r={2.05} />
+			<circle cx="0" cy="0" r="2.05" />
 			<g fill="none" stroke="currentColor" strokeWidth={1.5}>
-				<ellipse rx={11} ry={4.2} />
-				<ellipse rx={11} ry={4.2} transform="rotate(60)"  />
-				<ellipse rx={11} ry={4.2} transform="rotate(120)" />
+				<ellipse rx="11" ry="4.2" />
+				<ellipse rx="11" ry="4.2" transform="rotate(60)"  />
+				<ellipse rx="11" ry="4.2" transform="rotate(120)" />
 			</g>
 		</svg>
 	</>
@@ -220,7 +220,8 @@ function SearchBar() {
 	const inputRef = useRef<HTMLInputElement | null>(null)
 
 	return <>
-		<div className="flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1">
+		{/* <div className="flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1"> */}
+		<div className="flex align-center h-64 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&_>_:nth-child(2)]:grow-1">
 			<Tooltip pos="start" text={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+/</span></>}>
 				<SearchBarButton start onClick={e => inputRef.current!.select()} />
 			</Tooltip>
@@ -264,8 +265,10 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 	} else {
 		return <>
 			<Wbr>{children.slice(0, indexes[0])}</Wbr>
+			{/* <span className="[background-color]-hsl(52.5,_100%,_75%,_0.4) [box-shadow]-0_1px_0_0_hsl(52.5,_100%,_50%)"> */}
 			{/* <span className="[background-color]-hsl(200,_100%,_87.5%,_0.5) [box-shadow]-0_1px_0_0_hsl(200,_100%,_calc(87.5%_/_2),_0.5)"> */}
-			<span className="[background-color]-hsl(200,_100%,_87.5%,_0.5)">
+			{/* <span className="[background-color]-hsl(200,_100%,_90%) [box-shadow]-0_1px_0_0_hsl(200,_100%,_75%)"> */}
+			<span className="[background-color]-hsl(45,_100%,_90%) [box-shadow]-0_1px_0_0_hsl(45,_100%,_60%)">
 				{children.slice(indexes[0], indexes[1])}
 			</span>
 			<Wbr>{children.slice(indexes[1])}</Wbr>
@@ -302,11 +305,21 @@ function SearchResultsContents() {
 						<div className="flex flex-center h-96">
 							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 						</div>
-						{/* TODO: Extract typography? */}
-						<div className="flex flex-center wrap-wrap h-32 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
+
+						{/* <div className="flex justify-center align-baseline wrap-wrap h-32 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
 							<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 								{name}
 							</Highlight>
+						</div> */}
+
+						{/* This is a trick so wrapped text is optically centered */}
+						{/* TODO: Extract typography? */}
+						<div className="flex flex-center wrap-wrap h-32 [-webkit-user-select]-all [user-select]-all">
+							<div className="h-16 [text-align]-center [font]-12px_/_normal_$sans">
+								<Highlight indexes={searchResults[name as keyof typeof feather]!}>
+									{name}
+								</Highlight>
+							</div>
 						</div>
 					</button>
 				</Fragment>)}
@@ -348,7 +361,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 				}
 			}}>
 				<div className="flex flex-col justify-center h-$sidebar-label-height">
-					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$alt-trim-color" : "[background-color]-$hairline-color"}`}>
+					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$trim-color" : "[background-color]-$hairline-color"}`}>
 						<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
 						</div>
@@ -372,7 +385,7 @@ function Slider(props: {
 	return <>
 		<AriaSlider track={track} thumb={thumb} {...props}>
 			<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
-				<div className="flex align-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
+				<div className="flex align-center h-6 rounded-1e3 [background-color]-$trim-color">
 					<div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
 					</div>
@@ -388,7 +401,7 @@ function SidebarContents() {
 	const { compact, setCompact } = useContext(CompactContext)!
 	const { density, setDensity, size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
-	const [hover, setHover] = useState(false)
+	//// const [hover, setHover] = useState(false)
 
 	return <>
 		<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
@@ -404,44 +417,45 @@ function SidebarContents() {
 				</button>
 			</Tooltip>
 		</div>
-		<div
-			// Use -mt-* to invert gap-*
-			className="-mt-20 flex flex-center aspect-1.6 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
-			style={/* hover ? */ {
-				// https://30secondsofcode.org/css/s/polka-dot-pattern
-				backgroundImage:    "radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%)",
-				backgroundPosition: "center",
-				backgroundRepeat:   "repeat",
-				backgroundSize:     "16px 16px",
-			} /* : undefined */}
-			//// onMouseEnter={e => setHover(!!1)}
-			//// onMouseLeave={e => setHover(!!0)}
-		>
-			<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
-		</div>
-		<div className="flex flex-col gap-10">
+		<div className="-mt-20 flex flex-col gap-10">
+			<div
+				// Use -mt-* to invert gap-*
+				className="flex flex-center aspect-1.6 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
+				style={/* hover ? */ {
+					// https://30secondsofcode.org/css/s/polka-dot-pattern
+					backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%)",
+					backgroundPosition: "center",
+					backgroundRepeat: "repeat",
+					backgroundSize: "16px 16px",
+				} /* : undefined */}
+				//// onMouseEnter={e => setHover(!!1)}
+				//// onMouseLeave={e => setHover(!!0)}
+			>
+				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+			</div>
 			<div className="grid grid-cols-3 gap-10">
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-2">
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2">
 					<Icon className="h-16 w-16 [color]-#ffb13b" icon={SVGIcon} />
 					<TypeCaps>
 						SVG
 					</TypeCaps>
 				</button>
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-2">
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2">
 					<Icon className="h-16 w-16 [color]-#61dafb" icon={ReactIcon} />
 					<TypeCaps>
 						JSX
 					</TypeCaps>
 				</button>
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-2">
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2">
 					<Icon className="h-16 w-16 [color]-#3178c6" icon={TypeScriptIcon} />
 					<TypeCaps>
 						TSX
 					</TypeCaps>
 				</button>
 			</div>
-			<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-				<div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div>
+			<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+				{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div> */}
+				<Icon className="h-16 w-16 [color]-#fff [opacity]-0.875" icon={feather.DownloadCloud} strokeWidth={3} />
 				<TypeInvertedCaps>
 					DOWNLOAD
 				</TypeInvertedCaps>

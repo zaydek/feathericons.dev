@@ -1,0 +1,10 @@
+- regex (remove useRestorableState for now)
+groups
+selection
+
+download - one or all
+
+sidebar
+preview
+code
+syntax highlighting
