@@ -535,7 +535,6 @@ function SidebarContents() {
 			</div> */}
 			<div className="absolute b-16 x-16 grid grid-cols-2 gap-10">
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
 					{/* <div className="grow-1"></div> */}
 					<div className="flex justify-center w-32">
 						<TypeInvertedCaps>
@@ -544,9 +543,9 @@ function SidebarContents() {
 						</TypeInvertedCaps>
 					</div>
 					{/* <div className="grow-1"></div> */}
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
 				</button>
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
 					{/* <div className="grow-1"></div> */}
 					<div className="flex justify-center w-32">
 						<TypeInvertedCaps>
@@ -555,6 +554,7 @@ function SidebarContents() {
 						</TypeInvertedCaps>
 					</div>
 					{/* <div className="grow-1"></div> */}
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
 				</button>
 			</div>
 			<div className="absolute tl-16 flex gap-10">
