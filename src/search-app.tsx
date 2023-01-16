@@ -5,6 +5,7 @@ import * as feather from "./data/react-feather@4.29.0"
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
 import { createContext, Dispatch, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
 import { densityInitial, densityMax, densityMin, densityStep, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
@@ -257,7 +258,7 @@ function SearchResultsContents() {
 	</>
 }
 
-function Label({ handleReset, children }: PropsWithChildren<{ handleReset: MouseEventHandler<HTMLDivElement> }>) {
+function Label({ handleReset, children }: PropsWithChildren<{ handleReset: MouseEventHandler<HTMLButtonElement> }>) {
 	return <>
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			{/* LHS */}
@@ -265,9 +266,9 @@ function Label({ handleReset, children }: PropsWithChildren<{ handleReset: Mouse
 				{children}
 			</div>
 			{/* RHS */}
-			<div onClick={handleReset} className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+			<button onClick={handleReset} className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 				<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
-			</div>
+			</button>
 		</div>
 	</>
 }
@@ -278,17 +279,25 @@ function Hairline() {
 
 function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked: boolean, setChecked: Dispatch<SetStateAction<boolean>> }>) {
 	return <>
-		<div className="flex justify-space-between align-center h-$sidebar-label-height" onClick={e => setChecked(curr => !curr)}>
+		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			{/* LHS */}
 			{children}
 			{/* RHS */}
-			<div className="flex flex-col justify-center h-$sidebar-label-height">
-				<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$alt-trim-color" : "[background-color]-$hairline-color"}`}>
-					<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
-						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
+			<AriaCheckbox checked={checked} setChecked={setChecked} onKeyDown={e => {
+				if (e.key === "ArrowLeft") {
+					setChecked(false)
+				} else if (e.key === "ArrowRight") {
+					setChecked(true)
+				}
+			}}>
+				<div className="flex flex-col justify-center h-$sidebar-label-height">
+					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$alt-trim-color" : "[background-color]-$hairline-color"}`}>
+						<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
+						</div>
 					</div>
 				</div>
-			</div>
+			</AriaCheckbox>
 		</div>
 	</>
 }
@@ -330,9 +339,10 @@ function SidebarContents() {
 			</div>
 			<Tooltip pos="end" text="OPEN DOCS">
 				{/* Use my-* for <Tooltip> */}
-				<div className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+				{/* TODO */}
+				<button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 					<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
-				</div>
+				</button>
 			</Tooltip>
 		</div>
 		<div className="flex flex-center aspect-2">
@@ -366,7 +376,7 @@ function SidebarContents() {
 		<Hairline />
 		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
 			<div>
-				Stroke Width
+				Stroke width
 			</div>
 		</Label>
 		<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
