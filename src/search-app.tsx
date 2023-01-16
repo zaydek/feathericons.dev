@@ -7,7 +7,7 @@ import * as feather from "./data/react-feather@4.29.0"
 import { createContext, Dispatch, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, SVGAttributes, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
-import { densityInitial, densityMax, densityMin, densityStep, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
+import { densityInitial, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
@@ -389,7 +389,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 						{/* <div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
 						</div> */}
-						<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6,_$raw-shadow-6"></div>
+						<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div>
 					</div>
 				</div>
 			</AriaCheckbox>
@@ -414,7 +414,7 @@ function Slider(props: {
 					{/* <div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
 					</div> */}
-					<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6,_$raw-shadow-6"></div>
+					<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div>
 				</div>
 			</div>
 		</AriaSlider>
@@ -449,7 +449,7 @@ function SidebarContents() {
 			<div className="relative">
 				<div
 					// Use -mt-* to invert gap-*
-					className="flex flex-center h-224 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
+					className="flex flex-center aspect-1.5 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
 					style={/* hover ? */ {
 						// https://30secondsofcode.org/css/s/polka-dot-pattern
 						//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
@@ -541,13 +541,13 @@ function SidebarContents() {
 				Compact mode
 			</TypeSans>
 		</Checkbox>
-		<Hairline />
+		{/* <Hairline />
 		<Label handleReset={e => setDensity(densityInitial)}>
 			<TypeSans>
 				Columns
 			</TypeSans>
 		</Label>
-		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} />
+		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} /> */}
 		<Hairline />
 		<Label handleReset={e => setSize(sizeInitial)}>
 			<TypeSans>
