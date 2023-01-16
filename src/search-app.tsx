@@ -17,7 +17,7 @@ import { Icon, IconComponent } from "./lib/react/icon"
 
 function TypeTooltipCaps({ children }: PropsWithChildren) {
 	return <>
-		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#222">
+		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
 			{children}
 		</div>
 	</>
@@ -26,7 +26,7 @@ function TypeTooltipCaps({ children }: PropsWithChildren) {
 function TypeCaps({ children }: PropsWithChildren) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#222">
+		<div className="[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
 			{children}
 		</div>
 	</>
@@ -43,7 +43,7 @@ function TypeInvertedCaps({ children }: PropsWithChildren) {
 
 function TypeSans({ children }: PropsWithChildren) {
 	return <>
-		<div className="[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#222">
+		<div className="[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333">
 			{children}
 		</div>
 	</>
@@ -189,7 +189,7 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 								{/* TODO */}
 								{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div> */}
 								{icon !== undefined && <>
-									<Icon className="h-16 w-16 [color]-#222" icon={icon} />
+									<Icon className="h-16 w-16 [color]-#333" icon={icon} />
 								</>}
 								<TypeTooltipCaps>
 									{text}
@@ -315,7 +315,7 @@ function SearchResultsContents() {
 					}}>
 						<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
 							<div className="flex flex-center h-96">
-								<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[name as keyof typeof feather]} />
+								<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 							</div>
 						</Tooltip>
 					</button>
@@ -327,7 +327,7 @@ function SearchResultsContents() {
 						setSelectedIcon(document.getElementById(name)! as unknown as SVGSVGElement)
 					}}>
 						<div className="flex flex-center h-96">
-							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[name as keyof typeof feather]} />
+							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 						</div>
 
 						{/* <div className="flex justify-center align-baseline wrap-wrap h-32 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
@@ -386,10 +386,10 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 			}}>
 				<div className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$trim-color" : "[background-color]-$hairline-color"}`}>
-						{/* <div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
-							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
-						</div> */}
-						<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div>
+						<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
+						</div>
+						{/* <div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div> */}
 					</div>
 				</div>
 			</AriaCheckbox>
@@ -411,10 +411,10 @@ function Slider(props: {
 		<AriaSlider track={track} thumb={thumb} {...props}>
 			<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
 				<div className="flex align-center h-6 rounded-1e3 [background-color]-$trim-color">
-					{/* <div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
-						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
-					</div> */}
-					<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div>
+					<div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
+					</div>
+					{/* <div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div> */}
 				</div>
 			</div>
 		</AriaSlider>
@@ -432,7 +432,7 @@ function SidebarContents() {
 	return <>
 		<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
 			<div className="flex align-center gap-10 h-20">
-				<Icon className="h-16 w-16 [color]-#222" icon={feather[selectedName]} />
+				<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} />
 				<TypeSans>
 					{selectedName}
 				</TypeSans>
@@ -449,7 +449,7 @@ function SidebarContents() {
 			<div className="relative">
 				<div
 					// Use -mt-* to invert gap-*
-					className="flex flex-center aspect-1.5 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
+					className="flex flex-center aspect-1.5 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
 					style={/* hover ? */ {
 						// https://30secondsofcode.org/css/s/polka-dot-pattern
 						//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
@@ -461,7 +461,7 @@ function SidebarContents() {
 					//// onMouseEnter={e => setHover(!!1)}
 					//// onMouseLeave={e => setHover(!!0)}
 				>
-					<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[selectedName]} />
+					<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 				</div>
 				<div className="absolute br-16 flex gap-10">
 					<button className="px-16 flex flex-center gap-10 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
