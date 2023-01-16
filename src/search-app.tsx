@@ -647,35 +647,52 @@ function SidebarContents() {
 					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={3} />
 				</button>
 			</div> */}
-			<div className="absolute t-16 x-16 flex justify-space-between align-center">
+			<div className="absolute t-16 x-16 flex justify-space-between">
 				{/* <div className="flex justify-space-between align-center h-$search-bar-height"> */}
-					<div className="px-8 flex align-center gap-8">
+					{/* <div className="px-8 flex align-center gap-8">
 						<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} strokeWidth={2.5} />
 						<TypeSans>
-							{toKebabCase(selectedName)}.svg
+							{selectedName}
 						</TypeSans>
+					</div> */}
+					<Tooltip pos="start" text={`OPEN DOCS`}>
+						{/* TODO: Add offset prop to <Tooltip> */}
+						<button className="mb-8 px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
+							<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
+							<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
+								{toKebabCase(selectedName).toUpperCase()}.SVG
+							</TypeInvertedCaps>
+						</button>
+					</Tooltip>
+					<div className="flex gap-10">
+						<Tooltip pos="end" text={`COPY AS SVG`}>
+							{/* TODO: Add offset prop to <Tooltip> */}
+							<button className="mb-8 px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+								<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+							</button>
+						</Tooltip>
+						<Tooltip pos="end" text={`DOWNLOAD AS SVG`}>
+							{/* TODO: Add offset prop to <Tooltip> */}
+							<button className="mb-8 px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+								<Icon className="h-16 w-16 [color]-#fff" icon={feather.Download} strokeWidth={2.5} />
+							</button>
+						</Tooltip>
 					</div>
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-						<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-							OPEN DOCS
-						</TypeInvertedCaps>
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowRight} strokeWidth={2.5} />
-					</button>
 				{/* </div> */}
 			</div>
 			<div className="absolute br-16 flex gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#ffb13b [box-shadow]-$inset-shadow-2">
+				<button className="px-16 flex flex-center gap-8 h-32 w-80 rounded-1e3 [background-color]-#ffb13b [box-shadow]-$inset-shadow-2">
 					{/* <div className="grow-1"></div> */}
 					{/* <div className="flex justify-center w-32"> */}
 						<TypeInvertedCaps>
 							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							 COPY SVG
+							 SVG
 						</TypeInvertedCaps>
 					{/* </div> */}
 					{/* <div className="grow-1"></div> */}
 					<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
 				</button>
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#61dafb [box-shadow]-$inset-shadow-2">
+				<button className="px-16 flex flex-center gap-8 h-32 w-80 rounded-1e3 [background-color]-#61dafb [box-shadow]-$inset-shadow-2">
 					{/* <div className="grow-1"></div> */}
 					{/* <div className="flex justify-center w-32"> */}
 					<TypeInvertedCaps>
@@ -686,7 +703,7 @@ function SidebarContents() {
 					{/* <div className="grow-1"></div> */}
 					<Icon className="h-16 w-16 [color]-#fff" icon={JSXIcon} strokeWidth={2.5} />
 				</button>
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#3178c6 [box-shadow]-$inset-shadow-2">
+				<button className="px-16 flex flex-center gap-8 h-32 w-80 rounded-1e3 [background-color]-#3178c6 [box-shadow]-$inset-shadow-2">
 					{/* <div className="grow-1"></div> */}
 					{/* <div className="flex justify-center w-32"> */}
 					<TypeInvertedCaps>
