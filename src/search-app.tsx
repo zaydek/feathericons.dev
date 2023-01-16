@@ -26,7 +26,7 @@ function TypeTooltipCaps({ children }: PropsWithChildren) {
 function TypeCaps({ children }: PropsWithChildren) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-600_12px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#222">
+		<div className="[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#222">
 			{children}
 		</div>
 	</>
@@ -35,7 +35,7 @@ function TypeCaps({ children }: PropsWithChildren) {
 function TypeInvertedCaps({ children }: PropsWithChildren) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-600_12px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#fff">
+		<div className="[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#fff">
 			{children}
 		</div>
 	</>
@@ -206,16 +206,31 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 	</>
 }
 
+//// // TODO: Use button props here?
+//// //
+//// // NOTE: We can't use :first-of-type and :last-of-type because of <Tooltip>
+//// // wrappers
+//// function SearchBarButton({ start, end, ...props }: { start?: boolean, end?: boolean } & HTMLAttributes<HTMLDivElement>) {
+//// 	[start, end] = [start ?? false, end ?? false]
+////
+//// 	return <>
+//// 		{/* Use my-* for <Tooltip> */}
+//// 		<button className="my-8 px-8 flex align-center h-$search-bar-height" style={{ paddingLeft: start ? 16 : undefined, paddingRight: end ? 16 : undefined }}>
+//// 			<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
+//// 				<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
+//// 			</div>
+//// 		</button>
+//// 	</>
+//// }
+
 // TODO: Use button props here?
 //
 // NOTE: We can't use :first-of-type and :last-of-type because of <Tooltip>
 // wrappers
-function SearchBarButton({ start, end, ...props }: { start?: boolean, end?: boolean } & HTMLAttributes<HTMLDivElement>) {
-	[start, end] = [start ?? false, end ?? false]
-
+function SearchBarButton(props: HTMLAttributes<HTMLDivElement>) {
 	return <>
 		{/* Use my-* for <Tooltip> */}
-		<button className="my-8 px-8 flex align-center h-$search-bar-height" style={{ paddingLeft: start ? 16 : undefined, paddingRight: end ? 16 : undefined }}>
+		<button className="my-8 px-16 flex align-center h-$search-bar-height">
 			<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
 				<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
 			</div>
@@ -232,11 +247,11 @@ function SearchBar() {
 		{/* <div className="flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1"> */}
 		<div className="flex align-center h-64 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&_>_:nth-child(2)]:grow-1">
 			<Tooltip pos="start" text={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+/</span></>}>
-				<SearchBarButton start onClick={e => inputRef.current!.select()} />
+				<SearchBarButton onClick={e => inputRef.current!.select()} />
 			</Tooltip>
 			<input
 				ref={inputRef}
-				className="px-8 h-64"
+				className="h-$search-bar-height"
 				type="text"
 				value={search}
 				onChange={e => setSearch(e.currentTarget.value)}
@@ -252,7 +267,7 @@ function SearchBar() {
 				autoFocus
 			/>
 			<Tooltip pos="end" text={<>TOGGLE THEME{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+D</span></>}>
-				<SearchBarButton end />
+				<SearchBarButton />
 			</Tooltip>
 		</div>
 	</>
@@ -323,8 +338,8 @@ function SearchResultsContents() {
 
 						{/* This is a trick so wrapped text is optically centered */}
 						{/* TODO: Extract typography? */}
-						<div className="flex flex-center wrap-wrap h-32 [-webkit-user-select]-all [user-select]-all">
-							<div className="h-16 [text-align]-center [font]-12px_/_normal_$sans">
+						<div className="flex flex-center wrap-wrap h-48 [-webkit-user-select]-all [user-select]-all">
+							<div className="h-24 [text-align]-center [font]-12px_/_normal_$sans">
 								<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 									{name}
 								</Highlight>
@@ -431,51 +446,72 @@ function SidebarContents() {
 			</Tooltip>
 		</div>
 		<div className="-mt-20 flex flex-col gap-10">
-			<div
-				// Use -mt-* to invert gap-*
-				className="flex flex-center h-224 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
-				style={/* hover ? */ {
-					// https://30secondsofcode.org/css/s/polka-dot-pattern
-					backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%)",
-					backgroundPosition: "center",
-					backgroundRepeat: "repeat",
-					backgroundSize: "16px 16px",
-				} /* : undefined */}
-				//// onMouseEnter={e => setHover(!!1)}
-				//// onMouseLeave={e => setHover(!!0)}
-			>
-				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[selectedName]} />
+			<div className="relative">
+				<div
+					// Use -mt-* to invert gap-*
+					className="flex flex-center h-224 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
+					style={/* hover ? */ {
+						// https://30secondsofcode.org/css/s/polka-dot-pattern
+						//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
+						backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 8%, transparent 12%), radial-gradient(hsl(0, 0%, 90%) 8%, transparent 12%)",
+						backgroundPosition: "center",
+						backgroundRepeat: "repeat",
+						backgroundSize: "16px 16px",
+					} /* : undefined */}
+					//// onMouseEnter={e => setHover(!!1)}
+					//// onMouseLeave={e => setHover(!!0)}
+				>
+					<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[selectedName]} />
+				</div>
+				<div className="absolute br-16 flex gap-10">
+					<button className="px-16 flex flex-center gap-10 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Copy} strokeWidth={3} />
+						<TypeInvertedCaps>
+							COPY SVG
+						</TypeInvertedCaps>
+					</button>
+					<button className="px-16 flex flex-center gap-10 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={3} />
+					</button>
+					{/* <button className="px-16 flex flex-center gap-10 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={3} />
+						<TypeInvertedCaps>
+							SAVE
+						</TypeInvertedCaps>
+					</button> */}
+				</div>
 			</div>
-			<div className="grid grid-cols-3 gap-10">
+			{/* <div className="grid grid-cols-3 gap-10">
 				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
-					{/* Use h-18 instead of h-16 here */}
 					<Icon className="h-18 w-18 [color]-#ffb13b" icon={SVGIcon} />
-					{/* <TypeCaps>
+					<TypeCaps>
 						SVG
-					</TypeCaps> */}
+					</TypeCaps>
 				</button>
 				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
-					{/* Use h-18 instead of h-16 here */}
 					<Icon className="h-18 w-18 [color]-#61dafb" icon={JSXIcon} />
-					{/* <TypeCaps>
+					<TypeCaps>
 						JSX
-					</TypeCaps> */}
+					</TypeCaps>
 				</button>
 				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
-					{/* Use h-18 instead of h-16 here */}
 					<Icon className="h-18 w-18 [color]-#3178c6" icon={TSXIcon} />
-					{/* <TypeCaps>
+					<TypeCaps>
 						TSX
-					</TypeCaps> */}
+					</TypeCaps>
 				</button>
-			</div>
-			<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-				{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div> */}
-				<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
-				<TypeInvertedSans>
-					Download
-				</TypeInvertedSans>
-			</button>
+			</div> */}
+			{/* <div className="flex gap-10">
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Copy} strokeWidth={3} />
+					<TypeInvertedCaps>
+						COPY
+					</TypeInvertedCaps>
+				</button>
+				<button className="px-12 flex flex-center gap-10 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={3} />
+				</button>
+			</div> */}
 		</div>
 
 		{/* <Checkbox checked={inspect} setChecked={setInspect}>
@@ -508,7 +544,7 @@ function SidebarContents() {
 		<Hairline />
 		<Label handleReset={e => setDensity(densityInitial)}>
 			<TypeSans>
-				Density
+				Columns
 			</TypeSans>
 		</Label>
 		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} />
@@ -540,7 +576,7 @@ function App() {
 		</a> */}
 		<div className="p-32 flex justify-center">
 			<div className="basis-2e3 flex gap-64 [&_>_:nth-child(1)]:grow-1">
-				<div className="flex flex-col gap-32">
+				<div className="flex flex-col gap-64">
 					<SearchBar />
 					<SearchResultsContents />
 				</div>
