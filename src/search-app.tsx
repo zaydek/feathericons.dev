@@ -362,9 +362,10 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 			}}>
 				<div className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$trim-color" : "[background-color]-$hairline-color"}`}>
-						<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+						{/* <div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
-						</div>
+						</div> */}
+						<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6,_$raw-shadow-6"></div>
 					</div>
 				</div>
 			</AriaCheckbox>
@@ -386,9 +387,10 @@ function Slider(props: {
 		<AriaSlider track={track} thumb={thumb} {...props}>
 			<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
 				<div className="flex align-center h-6 rounded-1e3 [background-color]-$trim-color">
-					<div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+					{/* <div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
-					</div>
+					</div> */}
+					<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6,_$raw-shadow-6"></div>
 				</div>
 			</div>
 		</AriaSlider>
@@ -397,7 +399,7 @@ function Slider(props: {
 
 function SidebarContents() {
 	const { selectedName } = useContext(FocusContext)!
-	const { inspect, setInspect } = useContext(InspectContext)!
+	const { viewSource, setViewSource } = useContext(ViewSourceContext)!
 	const { compact, setCompact } = useContext(CompactContext)!
 	const { density, setDensity, size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
@@ -478,36 +480,36 @@ function SidebarContents() {
 			</div>
 		</Checkbox>
 		<Hairline /> */}
-		<Checkbox checked={inspect} setChecked={setInspect}>
-			<div>
-				Show source
-			</div>
+		<Checkbox checked={viewSource} setChecked={setViewSource}>
+			<TypeCaps>
+				VIEW SOURCE
+			</TypeCaps>
 		</Checkbox>
 		<Hairline />
 		<Checkbox checked={compact} setChecked={setCompact}>
-			<div>
-				Compact
-			</div>
+			<TypeCaps>
+				COMPACT MODE
+			</TypeCaps>
 		</Checkbox>
 		<Hairline />
 		<Label handleReset={e => setDensity(densityInitial)}>
-			<div>
-				Density
-			</div>
+			<TypeCaps>
+				DENSITY
+			</TypeCaps>
 		</Label>
 		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} />
 		<Hairline />
 		<Label handleReset={e => setSize(sizeInitial)}>
-			<div>
-				Size
-			</div>
+			<TypeCaps>
+				SIZE
+			</TypeCaps>
 		</Label>
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
 		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
-			<div>
-				Stroke width
-			</div>
+			<TypeCaps>
+				STROKE WIDTH
+			</TypeCaps>
 		</Label>
 		<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
 	</>
@@ -552,10 +554,10 @@ const FocusContext =
 		setSelectedIcon: Dispatch<SetStateAction<SVGSVGElement | null>>
 	} | null>(null)
 
-const InspectContext =
+const ViewSourceContext =
 	createContext<{
-		inspect:         boolean
-		setInspect:      Dispatch<SetStateAction<boolean>>
+		viewSource:      boolean
+		setViewSource:   Dispatch<SetStateAction<boolean>>
 	} | null>(null)
 
 const CompactContext =
@@ -625,7 +627,7 @@ function StateProvider({ children }: PropsWithChildren) {
 
 	const [selectedName, setSelectedName] = useState<keyof typeof manifest>("Feather")
 	const [selectedIcon, setSelectedIcon] = useState<SVGSVGElement | null>(null)
-	const [inspect, setInspect] = useState(false)
+	const [viewSource, setViewSource] = useState(false)
 	const [compact, setCompact] = useState(false)
 	const [density, setDensity] = useState(densityInitial)
 	const [size, setSize] = useState(sizeInitial)
@@ -646,10 +648,10 @@ function StateProvider({ children }: PropsWithChildren) {
 				selectedIcon,
 				setSelectedIcon,
 			}), [selectedIcon, selectedName])}>
-				<InspectContext.Provider value={useMemo(() => ({
-					inspect,
-					setInspect
-				}), [inspect])}>
+				<ViewSourceContext.Provider value={useMemo(() => ({
+					viewSource,
+					setViewSource
+				}), [viewSource])}>
 					<CompactContext.Provider value={useMemo(() => ({
 						compact,
 						setCompact,
@@ -668,7 +670,7 @@ function StateProvider({ children }: PropsWithChildren) {
 							{children}
 						</SliderContext.Provider>
 					</CompactContext.Provider>
-				</InspectContext.Provider>
+				</ViewSourceContext.Provider>
 			</FocusContext.Provider>
 		</SearchContext.Provider>
 	</>
