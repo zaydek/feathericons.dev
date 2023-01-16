@@ -338,8 +338,8 @@ function SearchResultsContents() {
 
 						{/* This is a trick so wrapped text is optically centered */}
 						{/* TODO: Extract typography? */}
-						<div className="flex flex-center wrap-wrap h-48 [-webkit-user-select]-all [user-select]-all">
-							<div className="h-24 [text-align]-center [font]-12px_/_normal_$sans">
+						<div className="flex flex-center wrap-wrap h-64 [-webkit-user-select]-all [user-select]-all">
+							<div className="h-32 [text-align]-center [font]-12px_/_normal_$sans">
 								<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 									{name}
 								</Highlight>
