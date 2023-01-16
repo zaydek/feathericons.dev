@@ -463,33 +463,47 @@ function SidebarContents() {
 	//// const [hover, setHover] = useState(false)
 
 	return <>
-		<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
-			<div className="flex align-center gap-8 h-20">
-				{/* TODO: Change to <button> */}
-				<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} />
-				<TypeSans className="[&:hover]:[text-decoration]-underline">
-					{selectedName}
-				</TypeSans>
-				{/* <Icon className="-ml-5 -mb-2 h-12 w-12 [color]-#333" icon={feather.ExternalLink} /> */}
-			</div>
-			<Tooltip pos="end" text="OPEN ICON DOCS">
-				{/* Use my-* for <Tooltip> */}
-				{/* TODO */}
-				{/* <button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
-					<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
+		{/* <div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1"> */}
+		{false && <>
+			<div className="flex align-center h-$search-bar-height">
+				{false && <>
+					<div className="flex align-center gap-8 h-20">
+						{/* TODO: Change to <button> */}
+						<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} />
+						<TypeSans className="[&:hover]:[text-decoration]-underline">
+							{selectedName}
+						</TypeSans>
+						{/* <Icon className="-ml-5 -mb-2 h-12 w-12 [color]-#333" icon={feather.ExternalLink} /> */}
+					</div>
+				</>}
+				{/* <button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
+					<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
+						{toKebabCase(selectedName).toUpperCase()}
+					</TypeInvertedCaps>
 				</button> */}
-				{/* TODO */}
-				<div className="my-8">
-					<button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee">
-						<Icon className="h-12 w-12 [color]-#444" icon={feather.RotateCcw} strokeWidth={2.5} />
-					</button>
-				</div>
-			</Tooltip>
-		</div>
-		<div className="-mt-20 relative">
+				{false && <>
+					{/* Or put creation / updated date here? */}
+					<Tooltip pos="end" text="RESET SETTINGS">
+						{/* Use my-* for <Tooltip> */}
+						{/* TODO */}
+						{/* <button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
+						</button> */}
+						{/* TODO */}
+						<div className="my-8">
+							<button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee">
+								<Icon className="h-12 w-12 [color]-#444" icon={feather.RotateCcw} strokeWidth={2.5} />
+							</button>
+						</div>
+					</Tooltip>
+				</>}
+			</div>
+		</>}
+		<div className="relative">
 			<div
 				// Use -mt-* to invert gap-*
-				className="flex flex-center aspect-1.5 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
+				className="flex flex-center aspect-1.4 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
 				style={/* hover ? */ {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
@@ -511,19 +525,19 @@ function SidebarContents() {
 					</TypeCaps>
 				</button>
 			</div> */}
-			<div className="absolute tr-16 flex gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 ~w-32 rounded-1e3 [background-color]-#eee [box-shadow]-$inset-shadow-2">
-					<TypeCaps>
-						OPEN DOCS
-					</TypeCaps>
-					<Icon className="h-16 w-16 [color]-#333" icon={feather.ExternalLink} />
+			<div className="absolute tl-16 flex gap-10">
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
+					<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
+						{toKebabCase(selectedName).toUpperCase()}
+					</TypeInvertedCaps>
 				</button>
 			</div>
 			<div className="absolute br-16 flex gap-10">
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
 					<TypeInvertedCaps>
 						{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-						COPY SVG
+						COPY
 					</TypeInvertedCaps>
 					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
 				</button>
