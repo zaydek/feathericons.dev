@@ -26,27 +26,27 @@
 	--trim-color:              #1570fb; //// #3D8AFF; //// hsl(215, 100%, 60%);
 	--alt-trim-color:          hsl(200, 100%, 60%);
 
-	--realistic-shadow-1:
+	--raw-shadow-1:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
-	--realistic-shadow-2:
+	--raw-shadow-2:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  2px  4px  -2px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
-	--realistic-shadow-3:
+	--raw-shadow-3:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  2px  4px  -2px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  4px  8px  -4px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
-	--realistic-shadow-4:
+	--raw-shadow-4:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  2px  4px  -2px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  4px  8px  -4px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  8px 16px  -8px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
-	--realistic-shadow-5:
+	--raw-shadow-5:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  2px  4px  -2px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  4px  8px  -4px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  8px 16px  -8px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0 16px 32px -16px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25);
-	--realistic-shadow-6:
+	--raw-shadow-6:
 		0  1px  2px  -1px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  2px  4px  -2px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
 		0  4px  8px  -4px hsl(var(--base-h), var(--base-s), var(--base-l), 0.25),
@@ -66,17 +66,17 @@
 	--hairline-shadow-b:       0 var(--hairline-height) 0 0 var(--hairline-color);
 	--hairline-shadow-l:       calc(-1 * var(--hairline-height)) 0 0 0 var(--hairline-color);
 
-	// Composed hairline and realistic shadows
-	--inset-shadow-1: var(--inset-hairline-shadow), var(--realistic-shadow-1);
-	--shadow-1:       var(--hairline-shadow), var(--realistic-shadow-1);
-	--inset-shadow-2: var(--inset-hairline-shadow), var(--realistic-shadow-2);
-	--shadow-2:       var(--hairline-shadow), var(--realistic-shadow-2);
-	--inset-shadow-3: var(--inset-hairline-shadow), var(--realistic-shadow-3);
-	--shadow-3:       var(--hairline-shadow), var(--realistic-shadow-3);
-	--inset-shadow-4: var(--inset-hairline-shadow), var(--realistic-shadow-4);
-	--shadow-4:       var(--hairline-shadow), var(--realistic-shadow-4);
-	--inset-shadow-5: var(--inset-hairline-shadow), var(--realistic-shadow-5);
-	--shadow-5:       var(--hairline-shadow), var(--realistic-shadow-5);
-	--inset-shadow-6: var(--inset-hairline-shadow), var(--realistic-shadow-6);
-	--shadow-6:       var(--hairline-shadow), var(--realistic-shadow-6);
+	// Composed hairline and raw shadows
+	--inset-shadow-1: var(--inset-hairline-shadow), var(--raw-shadow-1);
+	--shadow-1:       var(--hairline-shadow), var(--raw-shadow-1);
+	--inset-shadow-2: var(--inset-hairline-shadow), var(--raw-shadow-2);
+	--shadow-2:       var(--hairline-shadow), var(--raw-shadow-2);
+	--inset-shadow-3: var(--inset-hairline-shadow), var(--raw-shadow-3);
+	--shadow-3:       var(--hairline-shadow), var(--raw-shadow-3);
+	--inset-shadow-4: var(--inset-hairline-shadow), var(--raw-shadow-4);
+	--shadow-4:       var(--hairline-shadow), var(--raw-shadow-4);
+	--inset-shadow-5: var(--inset-hairline-shadow), var(--raw-shadow-5);
+	--shadow-5:       var(--hairline-shadow), var(--raw-shadow-5);
+	--inset-shadow-6: var(--inset-hairline-shadow), var(--raw-shadow-6);
+	--shadow-6:       var(--hairline-shadow), var(--raw-shadow-6);
 }
