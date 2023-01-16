@@ -54,7 +54,7 @@ function TypeTooltipCaps({ children }: PropsWithChildren) {
 function TypeCaps({ children }: PropsWithChildren) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-700_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.1em [color]-#333">
+		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' ~[letter-spacing]-0.0125em [color]-#333">
 			{children}
 		</div>
 	</>
@@ -64,7 +64,7 @@ function TypeCaps({ children }: PropsWithChildren) {
 function TypeInvertedCaps({ children }: PropsWithChildren) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-700_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.1em [color]-#fff">
+		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' ~[letter-spacing]-0.0125em [color]-#fff">
 			{children}
 		</div>
 	</>
@@ -450,7 +450,7 @@ function SidebarContents() {
 				{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div> */}
 				<Icon className="h-16 w-16 [color]-#fff [opacity]-0.875" icon={feather.DownloadCloud} strokeWidth={3} />
 				<TypeInvertedCaps>
-					DOWNLOAD
+					Download
 				</TypeInvertedCaps>
 			</button>
 		</div>
@@ -473,33 +473,33 @@ function SidebarContents() {
 		<Hairline /> */}
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
 			<TypeCaps>
-				VIEW SOURCE
+				View Source
 			</TypeCaps>
 		</Checkbox>
 		<Hairline />
 		<Checkbox checked={compact} setChecked={setCompact}>
 			<TypeCaps>
-				COMPACT MODE
+				Compact Mode
 			</TypeCaps>
 		</Checkbox>
 		<Hairline />
 		<Label handleReset={e => setDensity(densityInitial)}>
 			<TypeCaps>
-				DENSITY
+				Density
 			</TypeCaps>
 		</Label>
 		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} />
 		<Hairline />
 		<Label handleReset={e => setSize(sizeInitial)}>
 			<TypeCaps>
-				SIZE
+				Size
 			</TypeCaps>
 		</Label>
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
 		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
 			<TypeCaps>
-				STROKE WIDTH
+				Stroke Width
 			</TypeCaps>
 		</Label>
 		<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
