@@ -17,7 +17,7 @@ import { Icon, IconComponent } from "./lib/react/icon"
 
 function TypeTooltipCaps({ children }: PropsWithChildren) {
 	return <>
-		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
+		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#222">
 			{children}
 		</div>
 	</>
@@ -26,7 +26,7 @@ function TypeTooltipCaps({ children }: PropsWithChildren) {
 function TypeCaps({ children }: PropsWithChildren) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-600_12px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
+		<div className="[white-space]-pre [font]-600_12px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#222">
 			{children}
 		</div>
 	</>
@@ -43,7 +43,7 @@ function TypeInvertedCaps({ children }: PropsWithChildren) {
 
 function TypeSans({ children }: PropsWithChildren) {
 	return <>
-		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333">
+		<div className="[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#222">
 			{children}
 		</div>
 	</>
@@ -51,7 +51,7 @@ function TypeSans({ children }: PropsWithChildren) {
 
 function TypeInvertedSans({ children }: PropsWithChildren) {
 	return <>
-		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff">
+		<div className="[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff">
 			{children}
 		</div>
 	</>
@@ -189,7 +189,7 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 								{/* TODO */}
 								{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div> */}
 								{icon !== undefined && <>
-									<Icon className="h-16 w-16 [color]-#333" icon={icon} />
+									<Icon className="h-16 w-16 [color]-#222" icon={icon} />
 								</>}
 								<TypeTooltipCaps>
 									{text}
@@ -300,7 +300,7 @@ function SearchResultsContents() {
 					}}>
 						<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
 							<div className="flex flex-center h-96">
-								<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
+								<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[name as keyof typeof feather]} />
 							</div>
 						</Tooltip>
 					</button>
@@ -312,7 +312,7 @@ function SearchResultsContents() {
 						setSelectedIcon(document.getElementById(name)! as unknown as SVGSVGElement)
 					}}>
 						<div className="flex flex-center h-96">
-							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
+							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[name as keyof typeof feather]} />
 						</div>
 
 						{/* <div className="flex justify-center align-baseline wrap-wrap h-32 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
@@ -417,8 +417,10 @@ function SidebarContents() {
 	return <>
 		<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
 			<div className="flex align-center gap-10 h-20">
-				<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} />
-				<div>{selectedName}</div>
+				<Icon className="h-16 w-16 [color]-#222" icon={feather[selectedName]} />
+				<TypeSans>
+					{selectedName}
+				</TypeSans>
 			</div>
 			<Tooltip pos="end" text="OPEN ICON DOCS">
 				{/* Use my-* for <Tooltip> */}
@@ -442,7 +444,7 @@ function SidebarContents() {
 				//// onMouseEnter={e => setHover(!!1)}
 				//// onMouseLeave={e => setHover(!!0)}
 			>
-				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#222" icon={feather[selectedName]} />
 			</div>
 			<div className="grid grid-cols-3 gap-10">
 				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2">
@@ -466,7 +468,7 @@ function SidebarContents() {
 			</div>
 			<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
 				{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div> */}
-				<Icon className="h-16 w-16 [color]-#fff [opacity]-0.875" icon={feather.DownloadCloud} strokeWidth={3} />
+				<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
 				<TypeInvertedSans>
 					Download
 				</TypeInvertedSans>
@@ -491,13 +493,13 @@ function SidebarContents() {
 		<Hairline /> */}
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
 			<TypeSans>
-				View Source
+				View source
 			</TypeSans>
 		</Checkbox>
 		<Hairline />
 		<Checkbox checked={compact} setChecked={setCompact}>
 			<TypeSans>
-				Compact Mode
+				Compact mode
 			</TypeSans>
 		</Checkbox>
 		<Hairline />
@@ -517,7 +519,7 @@ function SidebarContents() {
 		<Hairline />
 		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
 			<TypeSans>
-				Stroke Width
+				Stroke width
 			</TypeSans>
 		</Label>
 		<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
