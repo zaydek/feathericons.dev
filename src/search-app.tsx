@@ -356,7 +356,7 @@ function SidebarContents() {
 		<Hairline />
 		<Checkbox checked={compact} setChecked={setCompact}>
 			<div>
-				Compact mode
+				Compact
 			</div>
 		</Checkbox>
 		<Hairline />
