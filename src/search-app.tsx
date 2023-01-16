@@ -456,9 +456,9 @@ function Slider(props: {
 
 function SidebarContents() {
 	const { selectedName } = useContext(FocusContext)!
-	const { viewSource, setViewSource } = useContext(ViewSourceContext)!
+	const { viewCode, setViewCode } = useContext(ViewCodeContext)!
 	const { compact, setCompact } = useContext(CompactContext)!
-	const { density, setDensity, size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
+	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	//// const [hover, setHover] = useState(false)
 
@@ -670,9 +670,9 @@ function SidebarContents() {
 			</div>
 		</>}
 
-		<Checkbox checked={viewSource} setChecked={setViewSource}>
+		<Checkbox checked={viewCode} setChecked={setViewCode}>
 			<TypeSans>
-				View source
+				View code
 			</TypeSans>
 		</Checkbox>
 		<Hairline />
@@ -744,10 +744,10 @@ const FocusContext =
 		setSelectedIcon: Dispatch<SetStateAction<SVGSVGElement | null>>
 	} | null>(null)
 
-const ViewSourceContext =
+const ViewCodeContext =
 	createContext<{
-		viewSource:      boolean
-		setViewSource:   Dispatch<SetStateAction<boolean>>
+		viewCode:        boolean
+		setViewCode:     Dispatch<SetStateAction<boolean>>
 	} | null>(null)
 
 const CompactContext =
@@ -817,7 +817,7 @@ function StateProvider({ children }: PropsWithChildren) {
 
 	const [selectedName, setSelectedName] = useState<keyof typeof manifest>("Feather")
 	const [selectedIcon, setSelectedIcon] = useState<SVGSVGElement | null>(null)
-	const [viewSource, setViewSource] = useState(false)
+	const [viewCode, setViewCode] = useState(false)
 	const [compact, setCompact] = useState(false)
 	const [density, setDensity] = useState(densityInitial)
 	const [size, setSize] = useState(sizeInitial)
@@ -838,10 +838,10 @@ function StateProvider({ children }: PropsWithChildren) {
 				selectedIcon,
 				setSelectedIcon,
 			}), [selectedIcon, selectedName])}>
-				<ViewSourceContext.Provider value={useMemo(() => ({
-					viewSource,
-					setViewSource
-				}), [viewSource])}>
+				<ViewCodeContext.Provider value={useMemo(() => ({
+					viewCode,
+					setViewCode
+				}), [viewCode])}>
 					<CompactContext.Provider value={useMemo(() => ({
 						compact,
 						setCompact,
@@ -860,7 +860,7 @@ function StateProvider({ children }: PropsWithChildren) {
 							{children}
 						</SliderContext.Provider>
 					</CompactContext.Provider>
-				</ViewSourceContext.Provider>
+				</ViewCodeContext.Provider>
 			</FocusContext.Provider>
 		</SearchContext.Provider>
 	</>
