@@ -500,10 +500,18 @@ function SidebarContents() {
 				</>}
 			</div>
 		</>}
+		{/* <div className="flex">
+			<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
+				<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
+				<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
+					{toKebabCase(selectedName).toUpperCase()}
+				</TypeInvertedCaps>
+			</button>
+		</div> */}
 		<div className="relative">
 			<div
 				// Use -mt-* to invert gap-*
-				className="flex flex-center aspect-1.4 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
+				className="flex flex-center aspect-1.25 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
 				style={/* hover ? */ {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
@@ -525,6 +533,30 @@ function SidebarContents() {
 					</TypeCaps>
 				</button>
 			</div> */}
+			<div className="absolute b-16 x-16 grid grid-cols-2 gap-10">
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+					{/* <div className="grow-1"></div> */}
+					<div className="flex justify-center w-32">
+						<TypeInvertedCaps>
+							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
+							COPY
+						</TypeInvertedCaps>
+					</div>
+					{/* <div className="grow-1"></div> */}
+				</button>
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
+					{/* <div className="grow-1"></div> */}
+					<div className="flex justify-center w-32">
+						<TypeInvertedCaps>
+							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
+							SAVE
+						</TypeInvertedCaps>
+					</div>
+					{/* <div className="grow-1"></div> */}
+				</button>
+			</div>
 			<div className="absolute tl-16 flex gap-10">
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
 					<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
@@ -533,22 +565,33 @@ function SidebarContents() {
 					</TypeInvertedCaps>
 				</button>
 			</div>
-			<div className="absolute br-16 flex gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-					<TypeInvertedCaps>
-						{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-						COPY
-					</TypeInvertedCaps>
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-				</button>
-				{/* Add w-32 */}
-				<button className="px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
-					{/* <TypeInvertedCaps>
-							DOWNLOAD
-						</TypeInvertedCaps> */}
-				</button>
+			{false && <>
+				<div className="absolute b-16 x-16 grid grid-cols-2 gap-10">
+					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+						<TypeInvertedCaps>
+							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
+							COPY
+						</TypeInvertedCaps>
+					</button>
+					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Save} strokeWidth={2.5} />
+						<TypeInvertedCaps>
+							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
+							SAVE
+						</TypeInvertedCaps>
+					</button>
+				{false && <>
+					{/* Add w-32 */}
+					<button className="px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
+						{/* <TypeInvertedCaps>
+								DOWNLOAD
+							</TypeInvertedCaps> */}
+					</button>
+				</>}
 			</div>
+			</>}
 			{/* <div className="grid grid-cols-3 gap-10">
 				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
 					<Icon className="h-18 w-18 [color]-#ffb13b" icon={SVGIcon} />
@@ -598,6 +641,35 @@ function SidebarContents() {
 			</div>
 		</Checkbox>
 		<Hairline /> */}
+
+		{false && <>
+			{/* <div className="grid grid-cols-2 gap-10"> */}
+			<div className="flex flex-col gap-10">
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+					{/* <div className="grow-1"></div> */}
+					<div className="flex justify-center w-32">
+						<TypeInvertedCaps>
+							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
+							COPY
+						</TypeInvertedCaps>
+					</div>
+					{/* <div className="grow-1"></div> */}
+				</button>
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
+					{/* <div className="grow-1"></div> */}
+					<div className="flex justify-center w-32">
+						<TypeInvertedCaps>
+							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
+							SAVE
+						</TypeInvertedCaps>
+					</div>
+					{/* <div className="grow-1"></div> */}
+				</button>
+			</div>
+		</>}
+
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
 			<TypeSans>
 				View source
