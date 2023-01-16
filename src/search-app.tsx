@@ -13,6 +13,51 @@ import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
 import { Icon, IconComponent } from "./lib/react/icon"
 
+////////////////////////////////////////////////////////////////////////////////
+
+function TypeTooltipCaps({ children }: PropsWithChildren) {
+	return <>
+		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
+			{children}
+		</div>
+	</>
+}
+
+function TypeCaps({ children }: PropsWithChildren) {
+	return <>
+		{/* Surprisingly, use +1px font-size here */}
+		<div className="[white-space]-pre [font]-600_12px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
+			{children}
+		</div>
+	</>
+}
+
+function TypeInvertedCaps({ children }: PropsWithChildren) {
+	return <>
+		{/* Surprisingly, use +1px font-size here */}
+		<div className="[white-space]-pre [font]-600_12px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#fff">
+			{children}
+		</div>
+	</>
+}
+
+function TypeSans({ children }: PropsWithChildren) {
+	return <>
+		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333">
+			{children}
+		</div>
+	</>
+}
+
+function TypeInvertedSans({ children }: PropsWithChildren) {
+	return <>
+		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff">
+			{children}
+		</div>
+	</>
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 export function SVGIcon(props: SVGAttributes<SVGElement>) {
 	return <>
@@ -40,33 +85,6 @@ export function TSXIcon(props: SVGAttributes<SVGElement>) {
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
 			<path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z" />
 		</svg>
-	</>
-}
-
-function TypeTooltipCaps({ children }: PropsWithChildren) {
-	return <>
-		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.1em [color]-#333">
-			{children}
-		</div>
-	</>
-}
-
-function TypeCaps({ children }: PropsWithChildren) {
-	return <>
-		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' ~[letter-spacing]-0.0125em [color]-#333">
-			{children}
-		</div>
-	</>
-}
-
-
-function TypeInvertedCaps({ children }: PropsWithChildren) {
-	return <>
-		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-500_14px_/_normal_$sans [font-feature-settings]-'tnum' ~[letter-spacing]-0.0125em [color]-#fff">
-			{children}
-		</div>
 	</>
 }
 
@@ -413,7 +431,7 @@ function SidebarContents() {
 		<div className="-mt-20 flex flex-col gap-10">
 			<div
 				// Use -mt-* to invert gap-*
-				className="flex flex-center aspect-1.6 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
+				className="flex flex-center h-224 rounded-32 [background-color]-#fff [box-shadow]-$inset-hairline-shadow"
 				style={/* hover ? */ {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%)",
@@ -449,9 +467,9 @@ function SidebarContents() {
 			<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
 				{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div> */}
 				<Icon className="h-16 w-16 [color]-#fff [opacity]-0.875" icon={feather.DownloadCloud} strokeWidth={3} />
-				<TypeInvertedCaps>
+				<TypeInvertedSans>
 					Download
-				</TypeInvertedCaps>
+				</TypeInvertedSans>
 			</button>
 		</div>
 
@@ -472,35 +490,35 @@ function SidebarContents() {
 		</Checkbox>
 		<Hairline /> */}
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
-			<TypeCaps>
+			<TypeSans>
 				View Source
-			</TypeCaps>
+			</TypeSans>
 		</Checkbox>
 		<Hairline />
 		<Checkbox checked={compact} setChecked={setCompact}>
-			<TypeCaps>
+			<TypeSans>
 				Compact Mode
-			</TypeCaps>
+			</TypeSans>
 		</Checkbox>
 		<Hairline />
 		<Label handleReset={e => setDensity(densityInitial)}>
-			<TypeCaps>
+			<TypeSans>
 				Density
-			</TypeCaps>
+			</TypeSans>
 		</Label>
 		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} />
 		<Hairline />
 		<Label handleReset={e => setSize(sizeInitial)}>
-			<TypeCaps>
+			<TypeSans>
 				Size
-			</TypeCaps>
+			</TypeSans>
 		</Label>
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
 		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
-			<TypeCaps>
+			<TypeSans>
 				Stroke Width
-			</TypeCaps>
+			</TypeSans>
 		</Label>
 		<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
 	</>
@@ -521,7 +539,7 @@ function App() {
 					<SearchBar />
 					<SearchResultsContents />
 				</div>
-				<div className="flex flex-col gap-20 w-350">
+				<div className="flex flex-col gap-20 w-384">
 					<SidebarContents />
 				</div>
 			</div>
