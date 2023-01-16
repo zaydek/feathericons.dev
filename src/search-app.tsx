@@ -561,7 +561,7 @@ function SidebarContents() {
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
 					<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
 					<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-						{toKebabCase(selectedName).toUpperCase()}
+						{toKebabCase(selectedName).toUpperCase()}.SVG
 					</TypeInvertedCaps>
 				</button>
 			</div>
