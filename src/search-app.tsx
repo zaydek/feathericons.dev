@@ -331,6 +331,8 @@ function SidebarContents() {
 	const { compact, setCompact } = useContext(CompactContext)!
 	const { density, setDensity, size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
+	const [hover, setHover] = useState(false)
+
 	return <>
 		<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
 			<div className="flex align-center gap-10 h-20">
@@ -345,7 +347,18 @@ function SidebarContents() {
 				</button>
 			</Tooltip>
 		</div>
-		<div className="flex flex-center aspect-2">
+		<div
+			className="flex flex-center aspect-1.6 rounded-32 [&:hover]:([background-color]-#fff [box-shadow]-$inset-shadow-2)"
+			style={hover ? {
+				// https://30secondsofcode.org/css/s/polka-dot-pattern
+				backgroundImage:    "radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%)",
+				backgroundPosition: "center",
+				backgroundRepeat:   "repeat",
+				backgroundSize:     "16px 16px",
+			} : undefined}
+			onMouseEnter={e => setHover(!!1)}
+			onMouseLeave={e => setHover(!!0)}
+		>
 			<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 		</div>
 		<Checkbox checked={inspect} setChecked={setInspect}>
