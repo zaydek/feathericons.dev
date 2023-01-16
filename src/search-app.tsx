@@ -4,7 +4,7 @@ import * as feather from "./data/react-feather@4.29.0"
 
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
-import { createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { createContext, Dispatch, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { AriaSlider } from "./aria/aria-slider"
 import { densityInitial, densityMax, densityMin, densityStep, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
@@ -88,7 +88,7 @@ function useRestorableState<T>(initialValue: T, zeroValue: T) {
 type Position = "start" | "center" | "end"
 
 // TODO: Make icon required?
-function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position, icon?: IconComponent, text: ReactNode, data?: any } & HTMLAttributes<HTMLElement>) {
+function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position, icon?: IconComponent, text: ReactNode, data?: any } & HTMLAttributes<HTMLDivElement>) {
 	const [show, setShow] = useState(true)
 
 	// This is a trick to hide the tooltip on data changes
@@ -143,16 +143,16 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 //
 // NOTE: We can't use :first-of-type and :last-of-type because of <Tooltip>
 // wrappers
-function SearchBarButton({ start, end, ...props }: { start?: boolean, end?: boolean } & HTMLAttributes<HTMLElement>) {
+function SearchBarButton({ start, end, ...props }: { start?: boolean, end?: boolean } & HTMLAttributes<HTMLDivElement>) {
 	[start, end] = [start ?? false, end ?? false]
 
 	return <>
 		{/* Use my-* for <Tooltip> */}
-		<div className="my-8 px-8 flex align-center h-$search-bar-height" style={{ paddingLeft: start ? 16 : undefined, paddingRight: end ? 16 : undefined }}>
+		<button className="my-8 px-8 flex align-center h-$search-bar-height" style={{ paddingLeft: start ? 16 : undefined, paddingRight: end ? 16 : undefined }}>
 			<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
 				<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
 			</div>
-		</div>
+		</button>
 	</>
 }
 
@@ -257,7 +257,7 @@ function SearchResultsContents() {
 	</>
 }
 
-function Label({ children }: PropsWithChildren) {
+function Label({ handleReset, children }: PropsWithChildren<{ handleReset: MouseEventHandler<HTMLDivElement> }>) {
 	return <>
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			{/* LHS */}
@@ -265,7 +265,7 @@ function Label({ children }: PropsWithChildren) {
 				{children}
 			</div>
 			{/* RHS */}
-			<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+			<div onClick={handleReset} className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 				<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
 			</div>
 		</div>
@@ -350,21 +350,21 @@ function SidebarContents() {
 			</div>
 		</Checkbox>
 		<Hairline />
-		<Label>
+		<Label handleReset={e => setDensity(densityInitial)}>
 			<div>
 				Density
 			</div>
 		</Label>
 		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} />
 		<Hairline />
-		<Label>
+		<Label handleReset={e => setSize(sizeInitial)}>
 			<div>
 				Size
 			</div>
 		</Label>
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
-		<Label>
+		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
 			<div>
 				Stroke Width
 			</div>
@@ -490,12 +490,6 @@ function StateProvider({ children }: PropsWithChildren) {
 	const [density, setDensity] = useState(densityInitial)
 	const [size, setSize] = useState(sizeInitial)
 	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
-
-	useEffect(() => {
-		document.body.style.setProperty("--density", `${density}`)
-		document.body.style.setProperty("--scale", `${size / sizeInitial}`)
-		document.body.style.setProperty("--stroke-width", `${strokeWidth}px`)
-	}, [density, size, strokeWidth])
 
 	//////////////////////////////////////////////////////////////////////////////
 
