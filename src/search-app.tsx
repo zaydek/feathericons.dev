@@ -4,7 +4,7 @@ import * as feather from "./data/react-feather@4.29.0"
 
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
-import { createContext, Dispatch, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { createContext, Dispatch, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, SVGAttributes, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
 import { densityInitial, densityMax, densityMin, densityStep, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
@@ -13,10 +13,67 @@ import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
 import { Icon, IconComponent } from "./lib/react/icon"
 
-// TODO: Add font-feature-settings: "tnum" here?
-function TypographyCaps({ children }: PropsWithChildren) {
+
+export function SVGIcon(props: SVGAttributes<SVGElement>) {
 	return <>
-		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [letter-spacing]-0.1em [color]-#333">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+			<path d="M12 0c-1.497 0-2.749.965-3.248 2.17a3.45 3.45 0 00-.238 1.416 3.459 3.459 0 00-1.168-.834 3.508 3.508 0 00-1.463-.256 3.513 3.513 0 00-2.367 1.02c-1.06 1.058-1.263 2.625-.764 3.83.179.432.47.82.82 1.154a3.49 3.49 0 00-1.402.252C.965 9.251 0 10.502 0 12c0 1.497.965 2.749 2.17 3.248.437.181.924.25 1.414.236-.357.338-.65.732-.832 1.17-.499 1.205-.295 2.772.764 3.83 1.058 1.06 2.625 1.263 3.83.764.437-.181.83-.476 1.168-.832-.014.49.057.977.238 1.414C9.251 23.035 10.502 24 12 24c1.497 0 2.749-.965 3.248-2.17a3.45 3.45 0 00.238-1.416c.338.356.73.653 1.168.834 1.205.499 2.772.295 3.83-.764 1.06-1.058 1.263-2.625.764-3.83a3.459 3.459 0 00-.834-1.168 3.45 3.45 0 001.416-.238C23.035 14.749 24 13.498 24 12c0-1.497-.965-2.749-2.17-3.248a3.455 3.455 0 00-1.414-.236c.357-.338.65-.732.832-1.17.499-1.205.295-2.772-.764-3.83a3.513 3.513 0 00-2.367-1.02 3.508 3.508 0 00-1.463.256c-.437.181-.83.475-1.168.832a3.45 3.45 0 00-.238-1.414C14.749.965 13.498 0 12 0zm-.041 1.613a1.902 1.902 0 011.387 3.246v3.893L16.098 6A1.902 1.902 0 1118 7.902l-2.752 2.752h3.893a1.902 1.902 0 110 2.692h-3.893L18 16.098A1.902 1.902 0 1116.098 18l-2.752-2.752v3.893a1.902 1.902 0 11-2.692 0v-3.893L7.902 18A1.902 1.902 0 116 16.098l2.752-2.752H4.859a1.902 1.902 0 110-2.692h3.893L6 7.902A1.902 1.902 0 117.902 6l2.752 2.752V4.859a1.902 1.902 0 011.305-3.246z" />
+		</svg>
+	</>
+}
+
+export function ReactIcon(props: SVGAttributes<SVGElement>) {
+	return <>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348" fill="currentColor" {...props}>
+			<circle cx={0} cy={0} r={2.05} />
+			<g fill="none" stroke="currentColor" strokeWidth={1.5}>
+				<ellipse rx={11} ry={4.2} />
+				<ellipse rx={11} ry={4.2} transform="rotate(60)"  />
+				<ellipse rx={11} ry={4.2} transform="rotate(120)" />
+			</g>
+		</svg>
+	</>
+}
+
+//// export function VueIcon(props: SVGAttributes<SVGElement>) {
+//// 	return <>
+//// 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" aria-hidden="true" {...props}>
+//// 			<path fill="#42b883" d="M78.8,10L64,35.4L49.2,10H0l64,110l64-110C128,10,78.8,10,78.8,10z" />
+//// 			<path fill="#35495e" d="M78.8,10L64,35.4L49.2,10H25.6L64,76l38.4-66H78.8z" />
+//// 		</svg>
+//// 	</>
+//// }
+
+export function TypeScriptIcon(props: SVGAttributes<SVGElement>) {
+	return <>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+			<path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z" />
+		</svg>
+	</>
+}
+
+function TypeTooltipCaps({ children }: PropsWithChildren) {
+	return <>
+		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.1em [color]-#333">
+			{children}
+		</div>
+	</>
+}
+
+function TypeCaps({ children }: PropsWithChildren) {
+	return <>
+		{/* Surprisingly, use +1px font-size here */}
+		<div className="[white-space]-pre [font]-700_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.1em [color]-#333">
+			{children}
+		</div>
+	</>
+}
+
+
+function TypeInvertedCaps({ children }: PropsWithChildren) {
+	return <>
+		{/* Surprisingly, use +1px font-size here */}
+		<div className="[white-space]-pre [font]-700_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.1em [color]-#fff">
 			{children}
 		</div>
 	</>
@@ -119,15 +176,15 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-10ms)
 					`)}>
 						{/* <div className="relative"> */}
-							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$realistic-shadow-6">
+							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
 								{/* TODO */}
 								{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div> */}
 								{icon !== undefined && <>
 									<Icon className="h-16 w-16 [color]-#333" icon={icon} />
 								</>}
-								<TypographyCaps>
+								<TypeTooltipCaps>
 									{text}
-								</TypographyCaps>
+								</TypeTooltipCaps>
 							</div>
 							{/* <div className="absolute -t-2 x-0 flex justify-center">
 								<div className="h-8 w-8 rounded-2 [background-color]-#fff [transform]-rotate(45deg)"></div>
@@ -246,7 +303,7 @@ function SearchResultsContents() {
 							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 						</div>
 						{/* TODO: Extract typography? */}
-						<div className="flex flex-center wrap-wrap h-20 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
+						<div className="flex flex-center wrap-wrap h-32 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
 							<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 								{name}
 							</Highlight>
@@ -348,22 +405,68 @@ function SidebarContents() {
 			</Tooltip>
 		</div>
 		<div
-			className="flex flex-center aspect-1.6 rounded-32 [&:hover]:([background-color]-#fff [box-shadow]-$inset-shadow-2)"
-			style={hover ? {
+			// Use -mt-* to invert gap-*
+			className="-mt-20 flex flex-center aspect-1.6 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
+			style={/* hover ? */ {
 				// https://30secondsofcode.org/css/s/polka-dot-pattern
 				backgroundImage:    "radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 5%, transparent 10%)",
 				backgroundPosition: "center",
 				backgroundRepeat:   "repeat",
 				backgroundSize:     "16px 16px",
-			} : undefined}
-			onMouseEnter={e => setHover(!!1)}
-			onMouseLeave={e => setHover(!!0)}
+			} /* : undefined */}
+			//// onMouseEnter={e => setHover(!!1)}
+			//// onMouseLeave={e => setHover(!!0)}
 		>
 			<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 		</div>
+		<div className="flex flex-col gap-10">
+			<div className="grid grid-cols-3 gap-10">
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-2">
+					<Icon className="h-16 w-16 [color]-#ffb13b" icon={SVGIcon} />
+					<TypeCaps>
+						SVG
+					</TypeCaps>
+				</button>
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-2">
+					<Icon className="h-16 w-16 [color]-#61dafb" icon={ReactIcon} />
+					<TypeCaps>
+						JSX
+					</TypeCaps>
+				</button>
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-2">
+					<Icon className="h-16 w-16 [color]-#3178c6" icon={TypeScriptIcon} />
+					<TypeCaps>
+						TSX
+					</TypeCaps>
+				</button>
+			</div>
+			<button className="px-12 flex flex-center gap-10 h-32 rounded-12 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+				<div className="h-16 w-16 rounded-1e3 [background-color]-#fff [opacity]-0.9"></div>
+				<TypeInvertedCaps>
+					DOWNLOAD
+				</TypeInvertedCaps>
+			</button>
+		</div>
+
+		{/* <Checkbox checked={inspect} setChecked={setInspect}>
+			<div>
+				SVG
+			</div>
+		</Checkbox>
 		<Checkbox checked={inspect} setChecked={setInspect}>
 			<div>
-				Code
+				React
+			</div>
+		</Checkbox>
+		<Checkbox checked={inspect} setChecked={setInspect}>
+			<div>
+				React TypeScript
+			</div>
+		</Checkbox>
+		<Hairline /> */}
+		<Checkbox checked={inspect} setChecked={setInspect}>
+			<div>
+				Show source
 			</div>
 		</Checkbox>
 		<Hairline />
