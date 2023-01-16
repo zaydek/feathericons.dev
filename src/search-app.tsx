@@ -10,48 +10,69 @@ import { AriaSlider } from "./aria/aria-slider"
 import { densityInitial, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { toKebabCase } from "./lib/cases"
+import { cx } from "./lib/cx"
 import { detab } from "./lib/format"
 import { Icon, IconComponent } from "./lib/react/icon"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function TypeTooltipCaps({ children }: PropsWithChildren) {
+function TypeTooltipCaps({
+	className,
+	children,
+	...props
+}: HTMLAttributes<HTMLDivElement>) {
 	return <>
-		<div className="[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
+		<div className={cx("[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333", className)} {...props}>
 			{children}
 		</div>
 	</>
 }
 
-function TypeCaps({ children }: PropsWithChildren) {
+function TypeCaps({
+	className,
+	children,
+	...props
+}: HTMLAttributes<HTMLDivElement>) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333">
+		<div className={cx("[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333", className)} {...props}>
 			{children}
 		</div>
 	</>
 }
 
-function TypeInvertedCaps({ children }: PropsWithChildren) {
+function TypeInvertedCaps({
+	className,
+	children,
+	...props
+}: HTMLAttributes<HTMLDivElement>) {
 	return <>
 		{/* Surprisingly, use +1px font-size here */}
-		<div className="[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#fff">
+		<div className={cx("[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#fff", className)} {...props}>
 			{children}
 		</div>
 	</>
 }
 
-function TypeSans({ children }: PropsWithChildren) {
+function TypeSans({
+	className,
+	children,
+	...props
+}: HTMLAttributes<HTMLDivElement>) {
 	return <>
-		<div className="[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333">
+		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333", className)} {...props}>
 			{children}
 		</div>
 	</>
 }
 
-function TypeInvertedSans({ children }: PropsWithChildren) {
+function TypeInvertedSans({
+	className,
+	children,
+	...props
+}: HTMLAttributes<HTMLDivElement>) {
 	return <>
-		<div className="[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff">
+		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff", className)} {...props}>
 			{children}
 		</div>
 	</>
@@ -185,7 +206,7 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-10ms)
 					`)}>
 						{/* <div className="relative"> */}
-							<div className="px-12 flex align-center gap-10 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
+							<div className="px-12 flex align-center gap-8 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
 								{/* TODO */}
 								{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div> */}
 								{icon !== undefined && <>
@@ -356,12 +377,22 @@ function Label({ handleReset, children }: PropsWithChildren<{ handleReset: Mouse
 	return <>
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			{/* LHS */}
-			<div className="flex align-center gap-10">
-				{children}
-			</div>
+			{/* <div className="flex align-center gap-8"> */}
+			{children}
+			{/* </div> */}
 			{/* RHS */}
-			<button onClick={handleReset} className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+			{/* <button className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)" onClick={handleReset}> */}
+			{/* <button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee" onClick={handleReset}>
+				<Icon className="h-12 w-12 [color]-#444" icon={feather.RotateCcw} strokeWidth={2.5} />
+			</button> */}
+			{/* Use my-* for <Tooltip> */}
+			{/* TODO */}
+			{/* <button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 				<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
+			</button> */}
+			{/* TODO */}
+			<button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee" onClick={handleReset}>
+				<Icon className="h-12 w-12 [color]-#444" icon={feather.RotateCcw} strokeWidth={2.5} />
 			</button>
 		</div>
 	</>
@@ -409,12 +440,14 @@ function Slider(props: {
 
 	return <>
 		<AriaSlider track={track} thumb={thumb} {...props}>
-			<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
-				<div className="flex align-center h-6 rounded-1e3 [background-color]-$trim-color">
-					<div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
-						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
+			<div className="px-4">
+				<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
+					<div className="flex align-center h-6 rounded-1e3 [background-color]-$trim-color">
+						<div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
+						</div>
+						{/* <div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div> */}
 					</div>
-					{/* <div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div> */}
 				</div>
 			</div>
 		</AriaSlider>
@@ -431,55 +464,76 @@ function SidebarContents() {
 
 	return <>
 		<div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1">
-			<div className="flex align-center gap-10 h-20">
+			<div className="flex align-center gap-8 h-20">
+				{/* TODO: Change to <button> */}
 				<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} />
-				<TypeSans>
+				<TypeSans className="[&:hover]:[text-decoration]-underline">
 					{selectedName}
 				</TypeSans>
+				{/* <Icon className="-ml-5 -mb-2 h-12 w-12 [color]-#333" icon={feather.ExternalLink} /> */}
 			</div>
 			<Tooltip pos="end" text="OPEN ICON DOCS">
 				{/* Use my-* for <Tooltip> */}
 				{/* TODO */}
-				<button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
+				{/* <button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
 					<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
-				</button>
+				</button> */}
+				{/* TODO */}
+				<div className="my-8">
+					<button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee">
+						<Icon className="h-12 w-12 [color]-#444" icon={feather.RotateCcw} strokeWidth={2.5} />
+					</button>
+				</div>
 			</Tooltip>
 		</div>
-		<div className="-mt-20 flex flex-col gap-10">
-			<div className="relative">
-				<div
-					// Use -mt-* to invert gap-*
-					className="flex flex-center aspect-1.5 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
-					style={/* hover ? */ {
-						// https://30secondsofcode.org/css/s/polka-dot-pattern
-						//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
-						backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 8%, transparent 12%), radial-gradient(hsl(0, 0%, 90%) 8%, transparent 12%)",
-						backgroundPosition: "center",
-						backgroundRepeat: "repeat",
-						backgroundSize: "16px 16px",
-					} /* : undefined */}
-					//// onMouseEnter={e => setHover(!!1)}
-					//// onMouseLeave={e => setHover(!!0)}
-				>
-					<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
-				</div>
-				<div className="absolute br-16 flex gap-10">
-					<button className="px-16 flex flex-center gap-10 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Copy} strokeWidth={3} />
-						<TypeInvertedCaps>
-							COPY SVG
-						</TypeInvertedCaps>
-					</button>
-					<button className="px-16 flex flex-center gap-10 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={3} />
-					</button>
-					{/* <button className="px-16 flex flex-center gap-10 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={3} />
-						<TypeInvertedCaps>
-							SAVE
-						</TypeInvertedCaps>
-					</button> */}
-				</div>
+		<div className="-mt-20 relative">
+			<div
+				// Use -mt-* to invert gap-*
+				className="flex flex-center aspect-1.5 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
+				style={/* hover ? */ {
+					// https://30secondsofcode.org/css/s/polka-dot-pattern
+					//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
+					backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 8%, transparent 12%), radial-gradient(hsl(0, 0%, 90%) 8%, transparent 12%)",
+					backgroundPosition: "center",
+					backgroundRepeat: "repeat",
+					backgroundSize: "16px 16px",
+				} /* : undefined */}
+				//// onMouseEnter={e => setHover(!!1)}
+				//// onMouseLeave={e => setHover(!!0)}
+			>
+				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+			</div>
+			{/* <div className="absolute tr-16 flex gap-10">
+				<button className="px-16 flex flex-center gap-8 h-32 ~w-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Star} fill="hsl(45, 100%, 60%)" stroke="hsl(45, 100%, 60%)" strokeWidth={2.5} />
+					<TypeCaps>
+						FAVORITE
+					</TypeCaps>
+				</button>
+			</div> */}
+			<div className="absolute tr-16 flex gap-10">
+				<button className="px-16 flex flex-center gap-8 h-32 ~w-32 rounded-1e3 [background-color]-#eee [box-shadow]-$inset-shadow-2">
+					<TypeCaps>
+						OPEN DOCS
+					</TypeCaps>
+					<Icon className="h-16 w-16 [color]-#333" icon={feather.ExternalLink} />
+				</button>
+			</div>
+			<div className="absolute br-16 flex gap-10">
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+					<TypeInvertedCaps>
+						{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
+						COPY SVG
+					</TypeInvertedCaps>
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+				</button>
+				{/* Add w-32 */}
+				<button className="px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
+					{/* <TypeInvertedCaps>
+							DOWNLOAD
+						</TypeInvertedCaps> */}
+				</button>
 			</div>
 			{/* <div className="grid grid-cols-3 gap-10">
 				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
