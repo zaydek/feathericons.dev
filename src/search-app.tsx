@@ -720,7 +720,7 @@ function App() {
 					<SearchBar />
 					<SearchResultsContents />
 				</div>
-				<div className="flex flex-col gap-20 w-384">
+				<div className="flex flex-col gap-20 w-400">
 					<SidebarContents />
 				</div>
 			</div>
