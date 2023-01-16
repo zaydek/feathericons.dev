@@ -511,7 +511,7 @@ function SidebarContents() {
 		<div className="relative">
 			<div
 				// Use -mt-* to invert gap-*
-				className="flex flex-center aspect-1.125 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
+				className="flex flex-center aspect-1.25 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
 				style={/* hover ? */ {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
