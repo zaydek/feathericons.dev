@@ -42,29 +42,30 @@ function TypeInvertedCaps({
 	</>
 }
 
-function TypeSans({
-	className,
-	children,
-	...props
-}: HTMLAttributes<HTMLDivElement>) {
-	return <>
-		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333", className)} {...props}>
-			{children}
-		</div>
-	</>
-}
-
-function TypeInvertedSans({
-	className,
-	children,
-	...props
-}: HTMLAttributes<HTMLDivElement>) {
-	return <>
-		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff", className)} {...props}>
-			{children}
-		</div>
-	</>
-}
+//// // TODO: Abstract search results typography here?
+//// function TypeSans({
+//// 	className,
+//// 	children,
+//// 	...props
+//// }: HTMLAttributes<HTMLDivElement>) {
+//// 	return <>
+//// 		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333", className)} {...props}>
+//// 			{children}
+//// 		</div>
+//// 	</>
+//// }
+////
+//// function TypeInvertedSans({
+//// 	className,
+//// 	children,
+//// 	...props
+//// }: HTMLAttributes<HTMLDivElement>) {
+//// 	return <>
+//// 		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff", className)} {...props}>
+//// 			{children}
+//// 		</div>
+//// 	</>
+//// }
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -124,7 +125,7 @@ function useRestorableState<T>(initialValue: T, zeroValue: T) {
 		const timeoutId = setTimeout(() => {
 			if (state === zeroValue || state === history[historyIndex]) { return }
 			if (historyIndex === 0) { // At start
-				// Append state (preserve zeroValue)
+				// Append state
 				setHistory(curr => [
 					zeroValue,
 					state,
@@ -204,23 +205,6 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 		</div>
 	</>
 }
-
-//// // TODO: Use button props here?
-//// //
-//// // NOTE: We can't use :first-of-type and :last-of-type because of <Tooltip>
-//// // wrappers
-//// function SearchBarButton({ start, end, ...props }: { start?: boolean, end?: boolean } & HTMLAttributes<HTMLDivElement>) {
-//// 	[start, end] = [start ?? false, end ?? false]
-////
-//// 	return <>
-//// 		{/* Use my-* for <Tooltip> */}
-//// 		<button className="my-8 px-8 flex align-center h-$search-bar-height" style={{ paddingLeft: start ? 16 : undefined, paddingRight: end ? 16 : undefined }}>
-//// 			<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
-//// 				<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
-//// 			</div>
-//// 		</button>
-//// 	</>
-//// }
 
 // TODO: Use button props here?
 //
@@ -439,21 +423,18 @@ function Slider(props: {
 function SidebarContents() {
 	const { selectedName } = useContext(FocusContext)!
 	const { viewCode, setViewCode } = useContext(ViewCodeContext)!
-	const { compact, setCompact } = useContext(CompactContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	return <>
 		<div className="relative">
 			<div
-				className="flex flex-center aspect-1.25 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
-				style={/* hover ? */ {
+				className="flex flex-center h-320 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
+				style={{
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
-					//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
-					backgroundImage:    "radial-gradient(hsl(0, 0%, 95%) 8%, transparent 12%), radial-gradient(hsl(0, 0%, 95%) 8%, transparent 12%)",
-					backgroundPosition: "center",
-					backgroundRepeat:   "repeat",
-					backgroundSize:     "16px 16px",
-				} /* : undefined */}
+					backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
+					backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
+					backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
+				}}
 			>
 				<Icon className="mt-calc(-1_*_(32px_+_10px_+_32px)) h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 			</div>
@@ -489,7 +470,7 @@ function SidebarContents() {
 		</div>
 		<Checkbox checked={viewCode} setChecked={setViewCode}>
 			<TypeCaps>
-				VIEW ICON SOURCE CODE
+				VIEW ICON CODE
 			</TypeCaps>
 		</Checkbox>
 		<Hairline />
