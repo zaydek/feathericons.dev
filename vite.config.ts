@@ -6,7 +6,7 @@ export default defineConfig({
 	plugins: [
 		unoCss(),
 		reactJs({
-			//// fastRefresh: false,
+			fastRefresh: false,
 		}),
 	],
 	preview: { host: true, port: 3000 },
