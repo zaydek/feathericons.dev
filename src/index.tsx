@@ -109,7 +109,7 @@ function Experiment() {
 			end={{
 				opacity: 1,
 			}}
-			duration={1_000}
+			duration={150}
 			easing={[0, 1, 0.5, 1]}
 		>
 			<div className="fixed inset-0 z-100 [background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => setOpenModal(false)}></div>
@@ -118,14 +118,14 @@ function Experiment() {
 			when={openModal}
 			unmount="start"
 			start={{
-				transform: "scale(0.9)",
+				transform: "scale(1.1)",
 				opacity: 0,
 			}}
 			end={{
 				transform: "scale(1)",
 				opacity: 1,
 			}}
-			duration={1_000}
+			duration={150}
 			easing={[0, 1, 0.5, 1.1]}
 		>
 			<div className="fixed inset-0 z-100 flex flex-center [pointer-events]-none [&_>_*]:[pointer-events]-auto">
