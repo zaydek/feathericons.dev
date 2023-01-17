@@ -16,18 +16,6 @@ import { Icon, IconComponent } from "./lib/react/icon"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function TypeTooltipCaps({
-	className,
-	children,
-	...props
-}: HTMLAttributes<HTMLDivElement>) {
-	return <>
-		<div className={cx("[white-space]-pre [font]-700_10px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333", className)} {...props}>
-			{children}
-		</div>
-	</>
-}
-
 function TypeCaps({
 	className,
 	children,
@@ -189,7 +177,7 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 	}, [data])
 
 	return <>
-		<div className="relative" data-group {...props}>
+		<div className="relative hover-group" {...props}>
 			{children}
 			{show && <>
 				<div className={{
@@ -197,19 +185,18 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 					"center": "absolute t-100% l-50% [transform]-translateX(-50%) z-10 [pointer-events]-none",
 					"end":    "absolute t-100% r-0 z-10 [pointer-events]-none",
 				}[pos]}>
-					{/* [[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-100ms) */}
 					<div className={detab(`
 						[transform]-translateY(8px)
 						[opacity]-0
 						[transition]-100ms_cubic-bezier(0,_1,_1,_1)
 						[transition-property]-transform,_opacity
-							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-10ms)
+							[.hover-group:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-10ms)
 					`)}>
 						<div className="px-12 flex align-center gap-8 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
 							{icon !== undefined && <Icon className="h-16 w-16 [color]-#333" icon={icon} />}
-							<TypeTooltipCaps>
+							<TypeCaps>
 								{text}
-							</TypeTooltipCaps>
+							</TypeCaps>
 						</div>
 					</div>
 				</div>
@@ -242,7 +229,7 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 function SearchBarButton(props: HTMLAttributes<HTMLDivElement>) {
 	return <>
 		{/* Use my-* for <Tooltip> */}
-		<button className="my-8 px-16 flex align-center h-$search-bar-height">
+		<button className="my-8 px-8 flex align-center h-$search-bar-height">
 			<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-pink" {...props}>
 				<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
 			</div>
@@ -252,18 +239,18 @@ function SearchBarButton(props: HTMLAttributes<HTMLDivElement>) {
 
 function SearchBar() {
 	const { search, setSearch, restoreSearch } = useContext(SearchContext)!
+	const { setCompact } = useContext(CompactContext)!
 
 	const inputRef = useRef<HTMLInputElement | null>(null)
 
 	return <>
-		{/* <div className="flex align-center h-64 rounded-1e3 [background-color]-#eee [&:is(:hover,_:focus-within)]:([background-color]-#fff [box-shadow]-$shadow-2) [&_>_:nth-child(2)]:grow-1"> */}
-		<div className="flex align-center h-64 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&_>_:nth-child(2)]:grow-1">
-			<Tooltip pos="start" text={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+/</span></>}>
+		<div className="px-8 flex align-center h-64 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&_>_:nth-child(2)]:grow-1">
+			<Tooltip pos="start" text={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+K</span></>}>
 				<SearchBarButton onClick={e => inputRef.current!.select()} />
 			</Tooltip>
 			<input
 				ref={inputRef}
-				className="h-$search-bar-height"
+				className="px-8 h-$search-bar-height"
 				type="text"
 				value={search}
 				onChange={e => setSearch(e.currentTarget.value)}
@@ -278,7 +265,10 @@ function SearchBar() {
 				}}
 				autoFocus
 			/>
-			<Tooltip pos="end" text={<>TOGGLE THEME{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+D</span></>}>
+			<Tooltip pos="end" text={<>COMPACT MODE</>}>
+				<SearchBarButton onClick={e => setCompact(curr => !curr)} />
+			</Tooltip>
+			<Tooltip pos="end" text={<>TOGGLE THEME</>}>
 				<SearchBarButton />
 			</Tooltip>
 		</div>
@@ -490,7 +480,7 @@ function SidebarContents() {
 							FORMAT AS SVG
 						</TypeInvertedCaps>
 						<div className="grow-1"></div>
-						<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff3 [button:hover_&]:[background-color]-#fff5">
+						<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [button:hover_&]:[background-color]-#fff5">
 							<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
 						</div>
 					</button>
@@ -498,28 +488,22 @@ function SidebarContents() {
 			</div>
 		</div>
 		<Checkbox checked={viewCode} setChecked={setViewCode}>
-			<TypeSans>
-				View code
-			</TypeSans>
-		</Checkbox>
-		<Hairline />
-		<Checkbox checked={compact} setChecked={setCompact}>
-			<TypeSans>
-				Compact mode
-			</TypeSans>
+			<TypeCaps>
+				VIEW ICON SOURCE CODE
+			</TypeCaps>
 		</Checkbox>
 		<Hairline />
 		<Label handleReset={e => setSize(sizeInitial)}>
-			<TypeSans>
-				Size
-			</TypeSans>
+			<TypeCaps>
+				ICON SIZE
+			</TypeCaps>
 		</Label>
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
 		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
-			<TypeSans>
-				Stroke width
-			</TypeSans>
+			<TypeCaps>
+				ICON STROKE WIDTH
+			</TypeCaps>
 		</Label>
 		<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
 	</>
