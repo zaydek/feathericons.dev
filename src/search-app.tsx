@@ -7,7 +7,7 @@ import * as feather from "./data/react-feather@4.29.0"
 import { createContext, Dispatch, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, SVGAttributes, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
-import { densityInitial, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
+import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
@@ -327,7 +327,7 @@ function SearchResultsContents() {
 	const { compact } = useContext(CompactContext)!
 
 	return <>
-		<div className="grid grid-cols-repeat(auto-fill,_minmax(calc(96px_+_8px_*_$density),_1fr))">
+		<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr))">
 			{compact ? <>
 				{Object.keys(searchResults).map(name => <Fragment key={name}>
 					<button className="flex flex-col" onClick={e => {
@@ -464,77 +464,8 @@ function SidebarContents() {
 	//// const [hover, setHover] = useState(false)
 
 	return <>
-		{/* <div className="flex align-center h-64 [&_>_:nth-child(1)]:grow-1"> */}
-		{false && <>
-			<div className="flex align-center h-$search-bar-height">
-				{false && <>
-					<div className="flex align-center gap-8 h-20">
-						{/* TODO: Change to <button> */}
-						<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} />
-						<TypeSans className="[&:hover]:[text-decoration]-underline">
-							{selectedName}
-						</TypeSans>
-						{/* <Icon className="-ml-5 -mb-2 h-12 w-12 [color]-#333" icon={feather.ExternalLink} /> */}
-					</div>
-				</>}
-				{/* <button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
-					<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-						{toKebabCase(selectedName).toUpperCase()}
-					</TypeInvertedCaps>
-				</button> */}
-				{false && <>
-					{/* Or put creation / updated date here? */}
-					<Tooltip pos="end" text="RESET SETTINGS">
-						{/* Use my-* for <Tooltip> */}
-						{/* TODO */}
-						{/* <button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
-							<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
-						</button> */}
-						{/* TODO */}
-						<div className="my-8">
-							<button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee">
-								<Icon className="h-12 w-12 [color]-#444" icon={feather.RotateCcw} strokeWidth={2.5} />
-							</button>
-						</div>
-					</Tooltip>
-				</>}
-			</div>
-		</>}
-		{/* <div className="flex">
-			<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-				<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
-				<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-					{toKebabCase(selectedName).toUpperCase()}
-				</TypeInvertedCaps>
-			</button>
-		</div> */}
-		{/* <div className="flex gap-10">
-			<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-				<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
-				<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-					{toKebabCase(selectedName).toUpperCase()}.SVG
-				</TypeInvertedCaps>
-			</button>
-		</div> */}
-		{/* <div className="flex justify-space-between align-center h-$search-bar-height">
-			<div className="flex align-center gap-8">
-				<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} strokeWidth={2.5} />
-				<TypeSans>
-					{selectedName}
-				</TypeSans>
-			</div>
-			<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-				<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-					DOCS
-				</TypeInvertedCaps>
-				<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowRight} strokeWidth={2.5} />
-			</button>
-		</div> */}
-		{/* TODO: Dots should scale with size like Primer */}
 		<div className="relative">
 			<div
-				// Use -mt-* to invert gap-*
 				className="flex flex-center aspect-1.25 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
 				style={/* hover ? */ {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
@@ -544,324 +475,56 @@ function SidebarContents() {
 					backgroundRepeat: "repeat",
 					backgroundSize: "16px 16px",
 				} /* : undefined */}
-				//// onMouseEnter={e => setHover(!!1)}
-				//// onMouseLeave={e => setHover(!!0)}
 			>
 				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 			</div>
-			{/* <div className="absolute tr-16 flex gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 ~w-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Star} fill="hsl(45, 100%, 60%)" stroke="hsl(45, 100%, 60%)" strokeWidth={2.5} />
-					<TypeCaps>
-						FAVORITE
-					</TypeCaps>
-				</button>
-			</div> */}
-			{false && <>
-				<div className="absolute b-16 x-16 grid grid-cols-2 gap-10">
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-						{/* <div className="grow-1"></div> */}
-						<div className="flex justify-center w-32">
-							<TypeInvertedCaps>
-								{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-								COPY
-							</TypeInvertedCaps>
-						</div>
-						{/* <div className="grow-1"></div> */}
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-					</button>
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-						{/* <div className="grow-1"></div> */}
-						<div className="flex justify-center w-32">
-							<TypeInvertedCaps>
-								{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-								SAVE
-							</TypeInvertedCaps>
-						</div>
-						{/* <div className="grow-1"></div> */}
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
-					</button>
-				</div>
-			</>}
-			{/* <div className="absolute tl-16 flex gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather[selectedName]} strokeWidth={2.5} />
-					<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-						{toKebabCase(selectedName).toUpperCase()}.SVG
-					</TypeInvertedCaps>
-				</button>
-			</div> */}
-			{false && <>
-				<div className="absolute b-16 x-16 grid grid-cols-2 gap-10">
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							COPY
-						</TypeInvertedCaps>
-					</button>
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Save} strokeWidth={2.5} />
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							SAVE
-						</TypeInvertedCaps>
-					</button>
-				{false && <>
-					{/* Add w-32 */}
-					<button className="px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
-						{/* <TypeInvertedCaps>
-								DOWNLOAD
-							</TypeInvertedCaps> */}
-					</button>
-				</>}
-			</div>
-			</>}
-			{/* <div className="grid grid-cols-3 gap-10">
-				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
-					<Icon className="h-18 w-18 [color]-#ffb13b" icon={SVGIcon} />
-					<TypeCaps>
-						SVG
-					</TypeCaps>
-				</button>
-				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
-					<Icon className="h-18 w-18 [color]-#61dafb" icon={JSXIcon} />
-					<TypeCaps>
-						JSX
-					</TypeCaps>
-				</button>
-				<button className="px-12 flex flex-center gap-10 h-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2">
-					<Icon className="h-18 w-18 [color]-#3178c6" icon={TSXIcon} />
-					<TypeCaps>
-						TSX
-					</TypeCaps>
-				</button>
-			</div> */}
-			{/* <div className="flex gap-10">
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Copy} strokeWidth={3} />
-					<TypeInvertedCaps>
-						COPY
-					</TypeInvertedCaps>
-				</button>
-				<button className="px-12 flex flex-center gap-10 h-32 w-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={3} />
-				</button>
-			</div> */}
-			{/* TODO: Change to tl-* for sidebar order */}
 			<div className="absolute tr-16 flex justify-space-between">
-				{/* <div className="flex justify-space-between align-center h-$search-bar-height"> */}
-					{/* <div className="px-8 flex align-center gap-8">
-						<Icon className="h-16 w-16 [color]-#333" icon={feather[selectedName]} strokeWidth={2.5} />
-						<TypeSans>
-							{selectedName}
-						</TypeSans>
-					</div> */}
-					<Tooltip pos="end" text={`CHANGE FORMAT`}>
-						{/* TODO: Add offset prop to <Tooltip> */}
-						<button className="mb-8 px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-							{/* <Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} /> */}
-							{/* <TypeInvertedSans className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-								{toKebabCase(selectedName)}.svg
-							</TypeInvertedSans> */}
-							<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-								{toKebabCase(selectedName).toUpperCase()}.SVG
-							</TypeInvertedCaps>
-							{/* <div></div> */}
-							<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#333 [button:hover_&]:[background-color]-#555">
-								<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={2.5} />
-							</div>
-						</button>
-					</Tooltip>
-					{false && <>
-						<div className="flex gap-10">
-							<Tooltip pos="end" text={`COPY AS SVG`}>
-								{/* TODO: Add offset prop to <Tooltip> */}
-								<button className="mb-8 px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-									<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-								</button>
-							</Tooltip>
-							<Tooltip pos="end" text={`DOWNLOAD AS SVG`}>
-								{/* TODO: Add offset prop to <Tooltip> */}
-								<button className="mb-8 px-16 flex flex-center gap-8 h-32 w-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-									<Icon className="h-16 w-16 [color]-#fff" icon={feather.Download} strokeWidth={2.5} />
-								</button>
-							</Tooltip>
+				<Tooltip pos="end" text={`CHANGE FORMAT`}>
+					{/* TODO: Add offset prop to <Tooltip> */}
+					<button className="mb-8 px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
+						{/* <Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} /> */}
+						{/* <TypeInvertedSans className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
+							{toKebabCase(selectedName)}.svg
+						</TypeInvertedSans> */}
+						<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
+							{toKebabCase(selectedName).toUpperCase()}.SVG
+						</TypeInvertedCaps>
+						{/* <div></div> */}
+						<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#333 [button:hover_&]:[background-color]-#555">
+							<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={2.5} />
 						</div>
-					</>}
-				{/* </div> */}
+					</button>
+				</Tooltip>
 			</div>
 
-			{/* <div className="absolute b-16 x-16 grid grid-cols-2 gap-10"> */}
 			<div className="absolute b-16 x-16 flex flex-col gap-10">
 				<div className="grid grid-cols-2 gap-10">
 					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
 						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-						{/* <div className="grow-1"></div> */}
-						{/* <div className="flex justify-center w-32"> */}
 						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
 							COPY
 						</TypeInvertedCaps>
-						{/* </div> */}
-						{/* <div className="grow-1"></div> */}
 					</button>
 					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-						{/* <div className="grow-1"></div> */}
-						{/* <div className="flex justify-center w-32"> */}
 						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
 						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
 							SAVE
 						</TypeInvertedCaps>
-						{/* </div> */}
-						{/* <div className="grow-1"></div> */}
-						{/* <Icon className="h-16 w-16 [color]-#fff" icon={TSXIcon} strokeWidth={2.5} /> */}
 					</button>
 				</div>
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$svg-color [box-shadow]-$inset-shadow-2">
 					<div className="grow-1"></div>
 					<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
-					{/* <div className="grow-1"></div> */}
-					{/* <div className="flex justify-center w-32"> */}
 					<TypeInvertedCaps>
-						{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
 						FORMAT AS SVG
 					</TypeInvertedCaps>
 					<div className="grow-1"></div>
 					<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff3 [button:hover_&]:[background-color]-#fff5">
 						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
 					</div>
-					{/* </div> */}
-					{/* <div className="grow-1"></div> */}
 				</button>
 			</div>
-
-			{false && <>
-				<div className="absolute br-16 flex gap-10">
-					<button className="px-16 flex flex-center gap-8 h-32 w-80 rounded-1e3 [background-color]-#ffb13b [box-shadow]-$inset-shadow-2">
-						{/* <div className="grow-1"></div> */}
-						{/* <div className="flex justify-center w-32"> */}
-							<TypeInvertedCaps>
-								{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-								SVG
-							</TypeInvertedCaps>
-						{/* </div> */}
-						{/* <div className="grow-1"></div> */}
-						<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
-					</button>
-					<button className="px-16 flex flex-center gap-8 h-32 w-80 rounded-1e3 [background-color]-#61dafb [box-shadow]-$inset-shadow-2">
-						{/* <div className="grow-1"></div> */}
-						{/* <div className="flex justify-center w-32"> */}
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							JSX
-						</TypeInvertedCaps>
-						{/* </div> */}
-						{/* <div className="grow-1"></div> */}
-						<Icon className="h-16 w-16 [color]-#fff" icon={JSXIcon} strokeWidth={2.5} />
-					</button>
-					<button className="px-16 flex flex-center gap-8 h-32 w-80 rounded-1e3 [background-color]-#3178c6 [box-shadow]-$inset-shadow-2">
-						{/* <div className="grow-1"></div> */}
-						{/* <div className="flex justify-center w-32"> */}
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							TSX
-						</TypeInvertedCaps>
-						{/* </div> */}
-						{/* <div className="grow-1"></div> */}
-						<Icon className="h-16 w-16 [color]-#fff" icon={TSXIcon} strokeWidth={2.5} />
-					</button>
-					{false && <>
-						<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-								{/* <div className="grow-1"></div> */}
-								{/* <div className="flex justify-center w-32"> */}
-									<TypeInvertedCaps>
-										{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-										DOWNLOAD
-									</TypeInvertedCaps>
-								{/* </div> */}
-								{/* <div className="grow-1"></div> */}
-							{/* <Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} /> */}
-							{/* <Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} /> */}
-						</button>
-					</>}
-				</div>
-			</>}
 		</div>
-
-		{/* <Checkbox checked={inspect} setChecked={setInspect}>
-			<div>
-				SVG
-			</div>
-		</Checkbox>
-		<Checkbox checked={inspect} setChecked={setInspect}>
-			<div>
-				React
-			</div>
-		</Checkbox>
-		<Checkbox checked={inspect} setChecked={setInspect}>
-			<div>
-				React TypeScript
-			</div>
-		</Checkbox>
-		<Hairline /> */}
-
-		{false && <>
-			{/* <div className="grid grid-cols-2 gap-10"> */}
-			<div className="flex flex-col gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-					{/* <div className="grow-1"></div> */}
-					<div className="flex justify-center w-32">
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							COPY
-						</TypeInvertedCaps>
-					</div>
-					{/* <div className="grow-1"></div> */}
-				</button>
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
-					{/* <div className="grow-1"></div> */}
-					<div className="flex justify-center w-32">
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							SAVE
-						</TypeInvertedCaps>
-					</div>
-					{/* <div className="grow-1"></div> */}
-				</button>
-			</div>
-		</>}
-
-		{false && <>
-			<div className="grid grid-cols-2 gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-					{/* <div className="grow-1"></div> */}
-					<div className="flex justify-center w-32">
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							COPY
-						</TypeInvertedCaps>
-					</div>
-					{/* <div className="grow-1"></div> */}
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-				</button>
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-					{/* <div className="grow-1"></div> */}
-					<div className="flex justify-center w-32">
-						<TypeInvertedCaps>
-							{/* COPY <span className="[font-family]-$code">{"<SVG>"}</span> */}
-							SAVE
-						</TypeInvertedCaps>
-					</div>
-					{/* <div className="grow-1"></div> */}
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.DownloadCloud} strokeWidth={2.5} />
-				</button>
-			</div>
-		</>}
 
 		<Checkbox checked={viewCode} setChecked={setViewCode}>
 			<TypeSans>
@@ -874,13 +537,6 @@ function SidebarContents() {
 				Compact mode
 			</TypeSans>
 		</Checkbox>
-		{/* <Hairline />
-		<Label handleReset={e => setDensity(densityInitial)}>
-			<TypeSans>
-				Columns
-			</TypeSans>
-		</Label>
-		<Slider min={densityMin} max={densityMax} step={densityStep} value={density} setValue={setDensity} /> */}
 		<Hairline />
 		<Label handleReset={e => setSize(sizeInitial)}>
 			<TypeSans>
@@ -951,8 +607,6 @@ const CompactContext =
 
 const SliderContext =
 	createContext<{
-		density:         number
-		setDensity:      Dispatch<SetStateAction<number>>
 		size:            number
 		setSize:         Dispatch<SetStateAction<number>>
 		strokeWidth:     number
@@ -1012,7 +666,6 @@ function StateProvider({ children }: PropsWithChildren) {
 	const [selectedIcon, setSelectedIcon] = useState<SVGSVGElement | null>(null)
 	const [viewCode, setViewCode] = useState(false)
 	const [compact, setCompact] = useState(false)
-	const [density, setDensity] = useState(densityInitial)
 	const [size, setSize] = useState(sizeInitial)
 	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
 
@@ -1042,13 +695,11 @@ function StateProvider({ children }: PropsWithChildren) {
 						<SliderContext.Provider value={useMemo(() => ({
 							compact,
 							setCompact,
-							density,
-							setDensity,
 							size,
 							setSize,
 							strokeWidth,
 							setStrokeWidth,
-						}), [compact, density, size, strokeWidth])}>
+						}), [compact, size, strokeWidth])}>
 							<CSSVariableEffect />
 							{children}
 						</SliderContext.Provider>
@@ -1060,13 +711,12 @@ function StateProvider({ children }: PropsWithChildren) {
 }
 
 function CSSVariableEffect() {
-	const { density, size, strokeWidth } = useContext(SliderContext)!
+	const { size, strokeWidth } = useContext(SliderContext)!
 
 	useEffect(() => {
-		document.body.style.setProperty("--density", `${density}`)
 		document.body.style.setProperty("--scale", `${size / sizeInitial}`)
 		document.body.style.setProperty("--stroke-width", `${strokeWidth}px`)
-	}, [density, size, strokeWidth])
+	}, [size, strokeWidth])
 
 	return <></>
 }
