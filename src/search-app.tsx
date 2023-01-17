@@ -205,21 +205,12 @@ function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position,
 						[transition-property]-transform,_opacity
 							[[data-group]:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-10ms)
 					`)}>
-						{/* <div className="relative"> */}
-							<div className="px-12 flex align-center gap-8 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
-								{/* TODO */}
-								{/* <div className="h-16 w-16 rounded-1e3 [background-color]-#666"></div> */}
-								{icon !== undefined && <>
-									<Icon className="h-16 w-16 [color]-#333" icon={icon} />
-								</>}
-								<TypeTooltipCaps>
-									{text}
-								</TypeTooltipCaps>
-							</div>
-							{/* <div className="absolute -t-2 x-0 flex justify-center">
-								<div className="h-8 w-8 rounded-2 [background-color]-#fff [transform]-rotate(45deg)"></div>
-							</div> */}
-						{/* </div> */}
+						<div className="px-12 flex align-center gap-8 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
+							{icon !== undefined && <Icon className="h-16 w-16 [color]-#333" icon={icon} />}
+							<TypeTooltipCaps>
+								{text}
+							</TypeTooltipCaps>
+						</div>
 					</div>
 				</div>
 			</>}
@@ -474,8 +465,7 @@ function SidebarContents() {
 					backgroundSize:     "16px 16px",
 				} /* : undefined */}
 			>
-				{/* Use -mt-74 because of flex flex-col ... */}
-				<Icon className="-mt-74 h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+				<Icon className="mt-calc(-1_*_(32px_+_10px_+_32px)) h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 			</div>
 			<div className="absolute inset-b-16">
 				<div className="flex flex-col gap-10">
@@ -507,7 +497,6 @@ function SidebarContents() {
 				</div>
 			</div>
 		</div>
-
 		<Checkbox checked={viewCode} setChecked={setViewCode}>
 			<TypeSans>
 				View code
@@ -551,7 +540,7 @@ function App() {
 					<SearchBar />
 					<SearchResultsContents />
 				</div>
-				<div className="flex flex-col gap-20 w-384">
+				<div className="flex flex-col gap-20 w-400">
 					<SidebarContents />
 				</div>
 			</div>
