@@ -14,31 +14,56 @@ type TransitionProps = {
 	unmount?: "start" | "end"
 	start:    CSSProperties
 	end:      CSSProperties
-	//// transition: {
 	duration: number
 	easing?:  string | readonly [number, number, number, number]
 	delay?:   number
-	//// }
 }
 
+//// function nextFrame(fn: () => void) {
+//// 	requestAnimationFrame(() => {
+//// 		requestAnimationFrame(fn)
+//// 	})
+//// }
+
 function Transition({ when, unmount, start, end, duration, easing = "ease", delay = 0, children }: PropsWithChildren<TransitionProps>) {
+	const ref = useRef<HTMLElement | null>(null)
+
 	const [show, setShow] = useState(!(
 		 (when && unmount === "end") ||
 		(!when && unmount === "start")
 	))
 	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
 
-	const ref = useRef<HTMLDivElement | null>(null)
+	// Eagerly compute for convenience
+	const transition = useMemo(() => {
+		return `${duration}ms ${Array.isArray(easing) ? `cubic-bezier(${easing.join(", ")})` : easing} ${delay}ms`
+	}, [delay, duration, easing])
+
+	// Eagerly compute for convenience
+	const transitionProperty = useMemo(() => {
+		return [
+			...new Set([
+				...Object.keys(start),
+				...Object.keys(end),
+			]),
+		].join(", ")
+	}, [end, start])
 
 	const Children = useMemo(() => {
-		return (props: HTMLAttributes<HTMLDivElement>) => <>
+		return (props: HTMLAttributes<HTMLElement>) => <>
 			{cloneElement(children as ReactElement, { ref, ...props })}
 		</>
 	}, [children])
 
+	const onceRef = useRef(false)
 	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
 		setShow(true)
-		setState(when ? "end" : "start")
+		/// nextFrame(() => setState(when ? "end" : "start"))
+		setTimeout(() => setState(when ? "end" : "start"), 10)
 		const timeoutId = setTimeout(() => {
 			setShow(!(
 				(when && unmount === "end") ||
@@ -57,13 +82,8 @@ function Transition({ when, unmount, start, end, duration, easing = "ease", dela
 					...state === "start"
 						? start
 						: end,
-					transition: `${duration}ms ${Array.isArray(easing) ? `cubic-bezier(${easing.join(", ")})` : easing} ${delay}ms`,
-					transitionProperty: [
-						...new Set([
-							...Object.keys(start),
-							...Object.keys(end),
-						]),
-					].join(", "),
+					transition,
+					transitionProperty,
 				}}
 			/>
 		</>}
@@ -90,16 +110,13 @@ function Experiment() {
 				opacity: 1,
 			}}
 			duration={1_000}
-			easing={[0, 1, 0.5, 1]} // No bounce here
+			easing={[0, 1, 0.5, 1]}
 		>
-			<div
-				id="A"
-				className="fixed inset-0 z-100 [background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
-				onClick={e => setOpenModal(false)}
-			></div>
+			<div className="fixed inset-0 z-100 [background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => setOpenModal(false)}></div>
 		</Transition>
 		<Transition
 			when={openModal}
+			unmount="start"
 			start={{
 				transform: "scale(0.9)",
 				opacity: 0,
@@ -111,10 +128,7 @@ function Experiment() {
 			duration={1_000}
 			easing={[0, 1, 0.5, 1.1]}
 		>
-			<div
-				id="B"
-				className="fixed inset-0 z-100 flex flex-center [pointer-events]-none [&_>_*]:[pointer-events]-auto"
-			>
+			<div className="fixed inset-0 z-100 flex flex-center [pointer-events]-none [&_>_*]:[pointer-events]-auto">
 				<div className="relative">
 					<div className="h-320 w-512 rounded-32 [background-color]-#fff [box-shadow]-$shadow-6"></div>
 					<div className="absolute tr-16">
