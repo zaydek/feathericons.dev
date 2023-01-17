@@ -418,10 +418,10 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 			}}>
 				<div className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$trim-color" : "[background-color]-$hairline-color"}`}>
-						<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+						{/* <div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
-						</div>
-						{/* <div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div> */}
+						</div> */}
+						<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
 					</div>
 				</div>
 			</AriaCheckbox>
@@ -444,10 +444,10 @@ function Slider(props: {
 			<div className="px-4">
 				<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className="flex align-center h-6 rounded-1e3 [background-color]-$trim-color">
-						<div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+						{/* <div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
-						</div>
-						{/* <div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-2"></div> */}
+						</div> */}
+						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
 					</div>
 				</div>
 			</div>
@@ -461,8 +461,6 @@ function SidebarContents() {
 	const { compact, setCompact } = useContext(CompactContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
-	//// const [hover, setHover] = useState(false)
-
 	return <>
 		<div className="relative">
 			<div
@@ -470,59 +468,43 @@ function SidebarContents() {
 				style={/* hover ? */ {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					//// backgroundImage: "radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 90%) 0%, transparent 10%)",
-					backgroundImage: "radial-gradient(hsl(0, 0%, 95%) 8%, transparent 12%), radial-gradient(hsl(0, 0%, 95%) 8%, transparent 12%)",
+					backgroundImage:    "radial-gradient(hsl(0, 0%, 95%) 8%, transparent 12%), radial-gradient(hsl(0, 0%, 95%) 8%, transparent 12%)",
 					backgroundPosition: "center",
-					backgroundRepeat: "repeat",
-					backgroundSize: "16px 16px",
+					backgroundRepeat:   "repeat",
+					backgroundSize:     "16px 16px",
 				} /* : undefined */}
 			>
-				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+				{/* Use -mt-74 because of flex flex-col ... */}
+				<Icon className="-mt-74 h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 			</div>
-			<div className="absolute tr-16 flex justify-space-between">
-				<Tooltip pos="end" text={`CHANGE FORMAT`}>
-					{/* TODO: Add offset prop to <Tooltip> */}
-					<button className="mb-8 px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#333 [box-shadow]-$inset-shadow-2">
-						{/* <Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} /> */}
-						{/* <TypeInvertedSans className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-							{toKebabCase(selectedName)}.svg
-						</TypeInvertedSans> */}
-						<TypeInvertedCaps className="[overflow]-hidden [text-overflow]-ellipsis [white-space]-nowrap">
-							{toKebabCase(selectedName).toUpperCase()}.SVG
+			<div className="absolute inset-b-16">
+				<div className="flex flex-col gap-10">
+					<div className="grid grid-cols-2 gap-10">
+						<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+							<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+							<TypeInvertedCaps>
+								COPY
+							</TypeInvertedCaps>
+						</button>
+						<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+							<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
+							<TypeInvertedCaps>
+								SAVE
+							</TypeInvertedCaps>
+						</button>
+					</div>
+					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$svg-color [box-shadow]-$inset-shadow-2">
+						<div className="grow-1"></div>
+						<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
+						<TypeInvertedCaps>
+							FORMAT AS SVG
 						</TypeInvertedCaps>
-						{/* <div></div> */}
-						<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#333 [button:hover_&]:[background-color]-#555">
-							<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={2.5} />
+						<div className="grow-1"></div>
+						<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff3 [button:hover_&]:[background-color]-#fff5">
+							<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
 						</div>
 					</button>
-				</Tooltip>
-			</div>
-
-			<div className="absolute b-16 x-16 flex flex-col gap-10">
-				<div className="grid grid-cols-2 gap-10">
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-						<TypeInvertedCaps>
-							COPY
-						</TypeInvertedCaps>
-					</button>
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
-						<TypeInvertedCaps>
-							SAVE
-						</TypeInvertedCaps>
-					</button>
 				</div>
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$svg-color [box-shadow]-$inset-shadow-2">
-					<div className="grow-1"></div>
-					<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
-					<TypeInvertedCaps>
-						FORMAT AS SVG
-					</TypeInvertedCaps>
-					<div className="grow-1"></div>
-					<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff3 [button:hover_&]:[background-color]-#fff5">
-						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
-					</div>
-				</button>
 			</div>
 		</div>
 
@@ -569,7 +551,7 @@ function App() {
 					<SearchBar />
 					<SearchResultsContents />
 				</div>
-				<div className="flex flex-col gap-20 w-400">
+				<div className="flex flex-col gap-20 w-384">
 					<SidebarContents />
 				</div>
 			</div>
