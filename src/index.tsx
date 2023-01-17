@@ -11,17 +11,21 @@ import { createRoot } from "react-dom/client"
 
 type TransitionProps = {
 	when:     boolean
+	unmount?: "start" | "end"
 	start:    CSSProperties
 	end:      CSSProperties
 	//// transition: {
 	duration: number
 	easing?:  string | readonly [number, number, number, number]
 	delay?:   number
-	unmount?: "start" | "end"
 	//// }
 }
 
-function Transition({ when, start, end, duration, easing = "ease", delay = 0, unmount, children }: PropsWithChildren<TransitionProps>) {
+function Transition({ when, unmount, start, end, duration, easing = "ease", delay = 0, children }: PropsWithChildren<TransitionProps>) {
+	const [show, setShow] = useState(!(
+		 (when && unmount === "end") ||
+		(!when && unmount === "start")
+	))
 	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
 
 	const ref = useRef<HTMLDivElement | null>(null)
@@ -32,29 +36,37 @@ function Transition({ when, start, end, duration, easing = "ease", delay = 0, un
 		</>
 	}, [children])
 
-	//// useEffect(() => {
-	//// 	setState(curr => curr === "start" ? "end" : "start")
-	//// }, [])
-
 	useEffect(() => {
+		setShow(true)
 		setState(when ? "end" : "start")
-	}, [when])
+		const timeoutId = setTimeout(() => {
+			setShow(!(
+				(when && unmount === "end") ||
+				(!when && unmount === "start")
+			))
+		}, duration)
+		return () => {
+			clearTimeout(timeoutId)
+		}
+	}, [duration, unmount, when])
 
 	return <>
-		<Children
-			style={{
-				...state === "start"
-					? start
-					: end,
-				transition: `${duration}ms ${Array.isArray(easing) ? `cubic-bezier(${easing.join(", ")})` : easing} ${delay}ms`,
-				transitionProperty: [
-					...new Set([
-						...Object.keys(start),
-						...Object.keys(end),
-					]),
-				].join(", "),
-			}}
-		/>
+		{show && <>
+			<Children
+				style={{
+					...state === "start"
+						? start
+						: end,
+					transition: `${duration}ms ${Array.isArray(easing) ? `cubic-bezier(${easing.join(", ")})` : easing} ${delay}ms`,
+					transitionProperty: [
+						...new Set([
+							...Object.keys(start),
+							...Object.keys(end),
+						]),
+					].join(", "),
+				}}
+			/>
+		</>}
 	</>
 }
 
@@ -70,16 +82,18 @@ function Experiment() {
 
 		<Transition
 			when={openModal}
+			unmount="start"
 			start={{
 				opacity: 0,
 			}}
 			end={{
 				opacity: 1,
 			}}
-			duration={300}
+			duration={1_000}
 			easing={[0, 1, 0.5, 1]} // No bounce here
 		>
 			<div
+				id="A"
 				className="fixed inset-0 z-100 [background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
 				onClick={e => setOpenModal(false)}
 			></div>
@@ -94,10 +108,11 @@ function Experiment() {
 				transform: "scale(1)",
 				opacity: 1,
 			}}
-			duration={300}
+			duration={1_000}
 			easing={[0, 1, 0.5, 1.1]}
 		>
 			<div
+				id="B"
 				className="fixed inset-0 z-100 flex flex-center [pointer-events]-none [&_>_*]:[pointer-events]-auto"
 			>
 				<div className="relative">
