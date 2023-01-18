@@ -463,7 +463,7 @@ function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$hairline-color ~[box-shadow]-$inset-shadow-2"
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2"
 			onClick={e => {
 				setClicked(true)
 				onClick?.(e)
@@ -494,7 +494,7 @@ function DownloadButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$hairline-color ~[box-shadow]-$inset-shadow-2"
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2"
 			onClick={e => {
 				setClicked(true)
 				onClick?.(e)
@@ -535,11 +535,11 @@ function FormatDropDownButton() {
 	return <>
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
-				<button className={`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
-					svg: "[background-color]-$hairline-color",
-					jsx: "[background-color]-$hairline-color",
-					tsx: "[background-color]-$hairline-color",
-				}[formatAs]} ~[box-shadow]-$inset-shadow-2`} onClick={e => setShow(curr => !curr)}>
+				<button className={cx(`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
+					svg: "[background-color]-#fff",
+					jsx: "[background-color]-#fff",
+					tsx: "[background-color]-#fff",
+				}[formatAs]} [box-shadow]-$shadow-2`)} onClick={e => setShow(curr => !curr)}>
 					<Icon className="h-16 w-16 [color]-#333" icon={{
 						"svg": SVGIcon,
 						"jsx": JSXIcon,
