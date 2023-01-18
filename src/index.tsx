@@ -5,12 +5,13 @@ import "./css/vars.scss"
 
 import "uno.css"
 
-import { ButtonHTMLAttributes, forwardRef, HTMLAttributes, useRef, useState } from "react"
+import { HTMLAttributes, useState } from "react"
 import { createRoot } from "react-dom/client"
 import { ChevronDown } from "./data/react-feather@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { Icon } from "./lib/react/icon"
+import { ProvidedApp } from "./search-app"
 import { Transition } from "./transition"
 //// import { App } from "./app"
 
@@ -99,48 +100,41 @@ function TypeInvertedCaps({
 	</>
 }
 
-function SelectMenuItem({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-	return <>
-		<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" {...props}>
-			{children}
-		</button>
-	</>
-}
+//// function SelectMenuItem({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+//// 	return <>
+//// 		<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" {...props}>
+//// 			{children}
+//// 		</button>
+//// 	</>
+//// }
 
-// Must expose props for <Transition> wrapper
-const SelectMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ children, ...props }, ref) => {
-	return <>
-		<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10" {...props}>
-			<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
-				{children}
-			</div>
-		</div>
-	</>
-})
+//// // Must expose props for <Transition> wrapper
+//// const SelectMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ children, ...props }, ref) => {
+//// 	return <>
+//// 		<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10" {...props}>
+//// 			<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
+//// 				{children}
+//// 			</div>
+//// 		</div>
+//// 	</>
+//// })
+
+//// function SelectMenu({ children, ...props }: HTMLAttributes<HTMLDivElement>) {
+//// 	return <>
+//// 		<div className="absolute t-calc(100%_+_10px) r-0 z-10" {...props}>
+//// 			<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
+//// 				{children}
+//// 			</div>
+//// 		</div>
+//// 	</>
+//// }
 
 function Idea() {
-	const ref = useRef<HTMLDivElement | null>(null)
-
 	const [show, setShow] = useState(false)
-
-	//// useEffect(() => {
-	//// 	function handleClick(e: MouseEvent) {
-	//// 		if (ref.current === null) { return }
-	//// 		//// if (e.target instanceof HTMLElement && !ref.current.contains(e.target)) {
-	//// 		//// 	setShow(false)
-	//// 		//// }
-	//// 	}
-	//// 	window.addEventListener("click", handleClick, false)
-	//// 	return () => window.removeEventListener("click", handleClick, false)
-	//// }, [])
 
 	return <>
 		<div className="flex flex-center h-100vh">
-			<div
-				className="relative flex flex-col"
-				//// onMouseEnter={e => setShow(true)}
-				//// onMouseLeave={e => setShow(false)}
-			>
+			<div className="relative flex flex-col">
 				<button
 					className="px-12 flex flex-center gap-10 h-32 rounded-16 [background-color]-orange"
 					onClick={e => setShow(curr => !curr)}
@@ -167,35 +161,37 @@ function Idea() {
 					duration={show ? 200 : 400}
 					easing={[0, 1, 0.5, 1.125]}
 				>
-					<SelectMenu ref={ref}>
-						<SelectMenuItem onClick={e => {
-							console.log("A")
-							setShow(false)
-						}}>
-							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
-							<TypeCaps>
-								SVG
-							</TypeCaps>
-						</SelectMenuItem>
-						<SelectMenuItem onClick={e => {
-							console.log("B")
-							setShow(false)
-						}}>
-							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
-							<TypeCaps>
-								REACT
-							</TypeCaps>
-						</SelectMenuItem>
-						<SelectMenuItem onClick={e => {
-							console.log("C")
-							setShow(false)
-						}}>
-							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
-							<TypeCaps>
-								TYPESCRIPT REACT
-							</TypeCaps>
-						</SelectMenuItem>
-					</SelectMenu>
+					<div className="absolute t-calc(100%_+_10px) r-0 z-10">
+						<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
+							<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+								console.log("A")
+								setShow(false)
+							}}>
+								<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
+								<TypeCaps>
+									SVG
+								</TypeCaps>
+							</button>
+							<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+								console.log("B")
+								setShow(false)
+							}}>
+								<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
+								<TypeCaps>
+									REACT
+								</TypeCaps>
+							</button>
+							<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+								console.log("C")
+								setShow(false)
+							}}>
+								<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
+								<TypeCaps>
+									TYPESCRIPT REACT
+								</TypeCaps>
+							</button>
+						</div>
+					</div>
 				</Transition>
 			</div>
 		</div>
@@ -206,12 +202,12 @@ const root = document.getElementById("root")!
 if (import.meta.env.DEV) {
 	console.log("[DEBUG] createRoot")
 	//// createRoot(root).render(<App initialPath={window.location.pathname} />)
-	//// createRoot(root).render(<ProvidedApp />)
-	createRoot(root).render(<Idea />)
+	createRoot(root).render(<ProvidedApp />)
+	//// createRoot(root).render(<Idea />)
 } else {
 	console.log("[DEBUG] hydrateRoot")
 	//// hydrateRoot(root, <App initialPath={window.location.pathname} />)
 	//// hydrateRoot(root, <ProvidedApp />)
-	//// createRoot(root).render(<ProvidedApp />)
-	createRoot(root).render(<Idea />)
+	createRoot(root).render(<ProvidedApp />)
+	//// createRoot(root).render(<Idea />)
 }

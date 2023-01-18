@@ -4,12 +4,12 @@ import * as feather from "./data/react-feather@4.29.0"
 
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
-import { ButtonHTMLAttributes, createContext, Dispatch, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { ButtonHTMLAttributes, createContext, Dispatch, forwardRef, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
-import { SVGIcon } from "./icon-config"
+import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
 import { Icon, IconComponent } from "./lib/react/icon"
@@ -18,26 +18,40 @@ import { Transition } from "./transition"
 ////////////////////////////////////////////////////////////////////////////////
 
 function TypeCaps({
-	className,
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
 	return <>
-		{/* Surprisingly, use +1px font-size here */}
-		<div className={cx("[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333", className)} {...props}>
+		<div
+			className={cx(`
+				[white-space]-pre
+				[font]-600_11px_/_normal_$sans
+				[font-feature-settings]-'tnum'
+				[letter-spacing]-0.0625em
+				[color]-#333
+			`)}
+			{...props}
+		>
 			{children}
 		</div>
 	</>
 }
 
 function TypeInvertedCaps({
-	className,
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
 	return <>
-		{/* Surprisingly, use +1px font-size here */}
-		<div className={cx("[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#fff", className)} {...props}>
+		<div
+			className={cx(`
+				[white-space]-pre
+				[font]-600_11px_/_normal_$sans
+				[font-feature-settings]-'tnum'
+				[letter-spacing]-0.0625em
+				[color]-#fff
+			`)}
+			{...props}
+		>
 			{children}
 		</div>
 	</>
@@ -178,6 +192,60 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 		</div>
 	</>
 }
+
+const ForwardClipboardSelectMenu = forwardRef<HTMLDivElement, PropsWithChildren<{ show: boolean, setShow: Dispatch<SetStateAction<boolean>>, setFormatAs: Dispatch<SetStateAction<"svg" | "jsx" | "tsx">> }>>(({ children, show, setShow, setFormatAs }, ref) => {
+	return <>
+		<div className="relative flex flex-col">
+			{children}
+			<Transition
+				when={show}
+				unmount="start"
+				start={{
+					transform: "translateY(-8px)",
+					opacity: 0,
+				}}
+				end={{
+					transform: "translateY(0px)",
+					opacity: 1,
+				}}
+				duration={100}
+				easing={[0, 1, 1, 1]}
+			>
+				<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10">
+					<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
+						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+							setFormatAs("svg")
+							setShow(false)
+						}}>
+							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
+							<TypeCaps>
+								SVG
+							</TypeCaps>
+						</button>
+						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+							setFormatAs("jsx")
+							setShow(false)
+						}}>
+							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
+							<TypeCaps>
+								REACT
+							</TypeCaps>
+						</button>
+						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+							setFormatAs("tsx")
+							setShow(false)
+						}}>
+							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
+							<TypeCaps>
+								TYPESCRIPT REACT
+							</TypeCaps>
+						</button>
+					</div>
+				</div>
+			</Transition>
+		</div>
+	</>
+})
 
 function SearchBarButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 	return <>
@@ -365,6 +433,22 @@ function SidebarContents() {
 	const { viewCode, setViewCode } = useContext(ViewCodeContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
+	const selectRef = useRef<HTMLDivElement | null>(null)
+
+	const [show, setShow] = useState(false)
+	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
+
+	useEffect(() => {
+		function handleClick(e: MouseEvent) {
+			if (selectRef.current === null) { return }
+			if (!(e.target instanceof HTMLElement && selectRef.current.contains(e.target))) {
+				setShow(false)
+			}
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [])
+
 	return <>
 		<div className="relative">
 			<div
@@ -394,19 +478,33 @@ function SidebarContents() {
 							</TypeInvertedCaps>
 						</button>
 					</div>
-					<Tooltip pos="end" text={<>YOLO</>}>
-						<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$svg-color [box-shadow]-$inset-shadow-2">
-							<div className="grow-1"></div>
-							<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
-							<TypeInvertedCaps>
-								FORMAT AS SVG
-							</TypeInvertedCaps>
-							<div className="grow-1"></div>
-							<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [button:hover_&]:[background-color]-#fff5">
-								<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
-							</div>
-						</button>
-					</Tooltip>
+					<ForwardClipboardSelectMenu ref={selectRef} show={show} setShow={setShow} setFormatAs={setFormatAs}>
+						<div className="relative flex flex-col">
+							<button className={`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
+								svg: "[background-color]-$svg-color",
+								jsx: "[background-color]-$jsx-color",
+								tsx: "[background-color]-$tsx-color",
+							}[formatAs]} [box-shadow]-$inset-shadow-2`} onClick={e => setShow(curr => !curr)}>
+								<Icon className="h-16 w-16 [color]-#fff" icon={{
+									"svg": SVGIcon,
+									"jsx": JSXIcon,
+									"tsx": TSXIcon,
+								}[formatAs]} strokeWidth={2.5} />
+								<TypeInvertedCaps>
+									FORMAT AS {{
+										"svg": "SVG",
+										"jsx": "REACT",
+										"tsx": "TYPESCRIPT REACT",
+									}[formatAs]}
+								</TypeInvertedCaps>
+								<div className="absolute inset-r-4">
+									<div className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff4">
+										<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
+									</div>
+								</div>
+							</button>
+						</div>
+					</ForwardClipboardSelectMenu>
 				</div>
 			</div>
 		</div>
