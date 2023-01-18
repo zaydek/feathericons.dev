@@ -175,7 +175,7 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 					opacity: 1,
 				}}
 				duration={100}
-				easing={[0, 1, 1, 1]}
+				ease={[0, 1, 1, 1]}
 				delay={hover ? 10 : 0}
 			>
 				<div className={{
@@ -211,7 +211,7 @@ const ClipboardSelect = forwardRef<HTMLDivElement, PropsWithChildren<{ pos: Posi
 					opacity: 1,
 				}}
 				duration={100}
-				easing={[0, 1, 1, 1]}
+				ease={[0, 1, 1, 1]}
 			>
 				<div ref={ref} className={{
 					"center": undefined,
@@ -377,9 +377,7 @@ function Hairline() {
 function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked: boolean, setChecked: Dispatch<SetStateAction<boolean>> }>) {
 	return <>
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
-			{/* LHS */}
 			{children}
-			{/* RHS */}
 			<AriaCheckbox checked={checked} setChecked={setChecked} onKeyDown={e => {
 				if (e.key === "ArrowLeft") {
 					setChecked(false)
@@ -393,7 +391,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 						start={{ backgroundColor: "var(--hairline-color)" }}
 						end={{   backgroundColor: "var(--alt-trim-color)" }}
 						duration={100}
-						easing={[0, 1, 1, 1]}
+						ease={[0, 1, 1, 1]}
 					>
 						<div className="flex align-center h-12 w-48 rounded-1e3">
 							<Transition
@@ -401,7 +399,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 								start={{ transform: "translateX(0%)"  }}
 								end={{   transform: "translateX(50%)" }}
 								duration={100}
-								easing={[0, 1, 1, 1]}
+								ease={[0, 1, 1, 1]}
 							>
 								<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
 							</Transition>

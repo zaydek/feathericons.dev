@@ -1,56 +1,33 @@
-import { cloneElement, CSSProperties, HTMLAttributes, PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react"
+import { cloneElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react"
+import { toKebabCase } from "./lib/cases"
 
-export type TransitionProps = {
+const MICRO_TIMEOUT = 10
+
+export type TransitionProps = PropsWithChildren<{
 	when:     boolean
 	unmount?: "start" | "end"
 	start:    CSSProperties
 	end:      CSSProperties
 	duration: number
-	easing?:  string | readonly [number, number, number, number]
+	ease?:    string | readonly [number, number, number, number]
 	delay?:   number
-}
+}>
 
-//// function nextFrame(fn: () => void) {
-//// 	requestAnimationFrame(() => {
-//// 		requestAnimationFrame(fn)
-//// 	})
-//// }
-
-const MICRO_TIMEOUT = 10
-
-export function Transition({ when, unmount, start, end, duration, easing = "ease", delay = 0, children }: PropsWithChildren<TransitionProps>) {
+export function Transition({ when, unmount, start, end, duration, ease = "ease", delay = 0, children }: TransitionProps) {
 	const [show, setShow] = useState(!(
 		 (when && unmount === "end") ||
 		(!when && unmount === "start")
 	))
 	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
 
-	//// // Eagerly compute
-	//// const transition = useMemo(() => {
-	//// 	return `${duration}ms ${typeof easing === "string" ? easing : `cubic-bezier(${easing.join(", ")})`} ${delay}ms`
-	//// }, [delay, duration, easing])
-
-	// Eagerly compute
 	const transitionProperty = useMemo(() => {
 		return [
 			...new Set([
-				...Object.keys(start),
-				...Object.keys(end),
+				...Object.keys(start).map(key => toKebabCase(key)),
+				...Object.keys(end).map(key => toKebabCase(key)),
 			]),
 		].join(", ")
 	}, [end, start])
-
-	const Children = useMemo(() => {
-		return (props: HTMLAttributes<HTMLElement>) => <>
-			{cloneElement(children as ReactElement, props)}
-		</>
-	}, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-	//// const Children = useMemo(() => {
-	//// 	return (props: HTMLAttributes<HTMLElement>) => <>
-	//// 		{cloneElement(children as ReactElement, props)}
-	//// 	</>
-	//// }, [children])
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -68,34 +45,34 @@ export function Transition({ when, unmount, start, end, duration, easing = "ease
 						(when && unmount === "end") ||
 						(!when && unmount === "start")
 					))
-				}, duration === 0 ? MICRO_TIMEOUT : duration)
+				}, Math.max(MICRO_TIMEOUT, duration))
 				ds.push(d)
 			}, MICRO_TIMEOUT)
 			ds.push(d)
-		}, delay === 0 ? MICRO_TIMEOUT : delay)
+		}, Math.max(MICRO_TIMEOUT, delay))
 		ds.push(d)
 		return () => {
 			ds
 				.reverse()
 				.forEach(tid => window.clearTimeout(tid))
 		}
-	}, [delay, duration, unmount, when])
+	}, [delay, duration, when, unmount])
 
 	return <>
 		{show && <>
-			<Children
-				style={{
+			{cloneElement(children as ReactElement, {
+				style: {
 					...state === "start"
 						? start
 						: end,
 					transitionProperty,
 					transitionDuration: `${duration}ms`,
-					transitionTimingFunction: typeof easing === "string"
-						? easing
-						: `cubic-bezier(${easing.join(", ")})`,
+					transitionTimingFunction: typeof ease === "string"
+						? ease
+						: `cubic-bezier(${ease.join(", ")})`,
 					transitionDelay: `${delay ?? 0}ms`,
-				}}
-			/>
+				},
+			})}
 		</>}
 	</>
 }
