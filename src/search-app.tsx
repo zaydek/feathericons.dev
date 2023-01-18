@@ -428,20 +428,37 @@ function Slider(props: {
 	</>
 }
 
+const placeholder = `
+/*! Feather v4.29.0 | MIT License | https://github.com/feathericons/feather */
+
+import { SVGAttributes } from "react"
+
+// https://feathericons.dev/feather
+export function Feather(props: SVGAttributes<SVGElement>) {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
+			<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
+			<line x1="16" x2="2" y1="8" y2="22" />
+			<line x1="17.5" x2="9" y1="15" y2="15" />
+		</svg>
+	)
+}
+`.trim() + "\n"
+
 function SidebarContents() {
 	const { selectedName } = useContext(FocusContext)!
 	const { viewCode, setViewCode } = useContext(ViewCodeContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
-	const selectRef = useRef<HTMLDivElement | null>(null)
+	const clipboardSelectRef = useRef<HTMLDivElement | null>(null)
 
 	const [show, setShow] = useState(false)
 	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
 
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {
-			if (selectRef.current === null) { return }
-			if (!(e.target instanceof HTMLElement && selectRef.current.contains(e.target))) {
+			if (clipboardSelectRef.current === null) { return }
+			if (!(e.target instanceof HTMLElement && clipboardSelectRef.current.contains(e.target))) {
 				setShow(false)
 			}
 		}
@@ -450,62 +467,76 @@ function SidebarContents() {
 	}, [])
 
 	return <>
-		<div className="relative">
-			<div
-				className="flex flex-center h-320 rounded-32 [background-color]-#fff [box-shadow]-$shadow-2"
-				style={{
-					// https://30secondsofcode.org/css/s/polka-dot-pattern
-					backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
-					backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
-					backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
-				}}
-			>
-				<Icon className="mt-calc(-1_*_(32px_+_10px_+_32px)) h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
-			</div>
-			<div className="absolute inset-b-16">
-				<div className="flex flex-col gap-10">
-					<div className="grid grid-cols-2 gap-10">
-						<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-							<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+		<div className="relative flex flex-col">
+			{viewCode ? <>
+				<textarea
+					className={cx(`
+						p-24 pb-calc(32px_+_10px_+_32px) min-h-320 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
+
+						[white-space]-pre
+						[font]-400_14px_/_normal_$code
+						[font-feature-settings]-'tnum'
+						[letter-spacing]-null
+						[color]-#333
+					`)}
+					rows={placeholder.split("\n").length}
+					defaultValue={placeholder}
+				/>
+			</> : <>
+				<div
+					className="pb-calc(32px_+_10px_+_32px) flex flex-center min-h-320 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
+					style={viewCode ? undefined : {
+						// https://30secondsofcode.org/css/s/polka-dot-pattern
+						backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
+						backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
+						backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
+					}}
+				>
+					<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+				</div>
+			</>}
+			<div className="absolute inset-b-16 flex flex-col gap-10">
+				<div className="grid grid-cols-2 gap-10">
+					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
+						<TypeInvertedCaps>
+							COPY
+						</TypeInvertedCaps>
+					</button>
+					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
+						<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
+						<TypeInvertedCaps>
+							SAVE
+						</TypeInvertedCaps>
+					</button>
+				</div>
+				<ForwardClipboardSelectMenu ref={clipboardSelectRef} show={show} setShow={setShow} setFormatAs={setFormatAs}>
+					<div className="relative flex flex-col">
+						<button className={`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
+							svg: "[background-color]-$svg-color",
+							jsx: "[background-color]-$jsx-color",
+							tsx: "[background-color]-$tsx-color",
+						}[formatAs]} [box-shadow]-$inset-shadow-2`} onClick={e => setShow(curr => !curr)}>
+							<Icon className="h-16 w-16 [color]-#fff" icon={{
+								"svg": SVGIcon,
+								"jsx": JSXIcon,
+								"tsx": TSXIcon,
+							}[formatAs]} strokeWidth={2.5} />
 							<TypeInvertedCaps>
-								COPY
+								FORMAT AS {{
+									"svg": "SVG",
+									"jsx": "REACT",
+									"tsx": "TYPESCRIPT REACT",
+								}[formatAs]}
 							</TypeInvertedCaps>
-						</button>
-						<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-							<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
-							<TypeInvertedCaps>
-								SAVE
-							</TypeInvertedCaps>
+							<div className="absolute inset-r-4">
+								<div className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff4">
+									<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
+								</div>
+							</div>
 						</button>
 					</div>
-					<ForwardClipboardSelectMenu ref={selectRef} show={show} setShow={setShow} setFormatAs={setFormatAs}>
-						<div className="relative flex flex-col">
-							<button className={`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
-								svg: "[background-color]-$svg-color",
-								jsx: "[background-color]-$jsx-color",
-								tsx: "[background-color]-$tsx-color",
-							}[formatAs]} [box-shadow]-$inset-shadow-2`} onClick={e => setShow(curr => !curr)}>
-								<Icon className="h-16 w-16 [color]-#fff" icon={{
-									"svg": SVGIcon,
-									"jsx": JSXIcon,
-									"tsx": TSXIcon,
-								}[formatAs]} strokeWidth={2.5} />
-								<TypeInvertedCaps>
-									FORMAT AS {{
-										"svg": "SVG",
-										"jsx": "REACT",
-										"tsx": "TYPESCRIPT REACT",
-									}[formatAs]}
-								</TypeInvertedCaps>
-								<div className="absolute inset-r-4">
-									<div className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff4">
-										<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
-									</div>
-								</div>
-							</button>
-						</div>
-					</ForwardClipboardSelectMenu>
-				</div>
+				</ForwardClipboardSelectMenu>
 			</div>
 		</div>
 		<Checkbox checked={viewCode} setChecked={setViewCode}>

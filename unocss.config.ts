@@ -14,7 +14,7 @@ function extractCSSVariables(value: string) {
 
 function desugar(rawValue: string | undefined, { sign, px }: { sign?: string, px?: boolean } = {}) {
 	// No such value; eager return
-	if (rawValue === undefined) {
+	if (rawValue === undefined || rawValue === "undefined" || rawValue === "null") {
 		return undefined
 	}
 	sign ??= ""
@@ -120,9 +120,6 @@ const rules: Rule[] = [
 	[/^rounded-br-(.+)$/,     ([_, value]) => ({ "border-bottom-right-radius": desugar(value) })],
 	[/^rounded-bl-(.+)$/,     ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
-
-	//// [/^bg-(.+)$/,             ([_, value]) => ({ "background-color":     desugar(value, { px: false }) })],
-	//// [/^shadow-(.+)$/,         ([_, value]) => ({ "box-shadow":           desugar(value, { px: false }) })],
 
 	// Arbitrary key-value e.g. [property]-value
 	[/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
