@@ -477,7 +477,7 @@ function SidebarContents() {
 	return <>
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
 			<TypeCaps>
-				VIEW ICON SOURCE
+				VIEW SOURCE
 			</TypeCaps>
 		</Checkbox>
 		{viewSource ? <>
@@ -534,11 +534,18 @@ function SidebarContents() {
 							"jsx": JSXIcon,
 							"tsx": TSXIcon,
 						}[formatAs]} strokeWidth={2.5} />
-						<TypeInvertedCaps>
+						{/* <TypeInvertedCaps>
 							FORMAT AS{" "}
 							<span className="inline-flex w-24">
 								{formatAs.toUpperCase()}
 							</span>
+						</TypeInvertedCaps> */}
+						<TypeInvertedCaps>
+							FORMAT AS {{
+								"svg": "SVG",
+								"jsx": "REACT",
+								"tsx": "TYPESCRIPT REACT",
+							}[formatAs]}
 						</TypeInvertedCaps>
 						<div className="absolute inset-r-4">
 							<div className="flex flex-center h-24 w-24 rounded-1e3">
@@ -552,7 +559,7 @@ function SidebarContents() {
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<TypeCaps>
-				ICON SIZE
+				SIZE
 			</TypeCaps>
 			<div className="flex align-center gap-10">
 				<TypeCaps>
@@ -567,7 +574,7 @@ function SidebarContents() {
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<TypeCaps>
-				ICON STROKE WIDTH
+				STROKE WIDTH
 			</TypeCaps>
 			<div className="flex align-center gap-10">
 				<TypeCaps>
