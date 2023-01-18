@@ -401,7 +401,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 								duration={100}
 								ease={[0, 1, 1, 1]}
 							>
-								<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
+								<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-#ffff [box-shadow]-$shadow-6"></div>
 							</Transition>
 						</div>
 					</Transition>
@@ -423,10 +423,10 @@ function Slider(props: {
 
 	return <>
 		<AriaSlider track={track} thumb={thumb} {...props}>
-			<div className="px-4">
+			<div className="px-8">
 				<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className="flex align-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
-						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
+						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-6"></div>
 					</div>
 				</div>
 			</div>
@@ -537,7 +537,7 @@ function SidebarContents() {
 	return <>
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
 			<div className="flex align-center gap-8">
-				<Icon className="h-16 w-16 [color]-$alt-trim-color" icon={feather.Code} />
+				<Icon className="h-16 w-16 [color]-#ccc" icon={feather.Code} />
 				<TypeCaps>
 					VIEW SOURCE
 				</TypeCaps>
@@ -612,7 +612,7 @@ function SidebarContents() {
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-8">
-				<Icon className="h-16 w-16 [color]-$alt-trim-color" icon={feather.Maximize2} />
+				<Icon className="h-16 w-16 [color]-#ccc" icon={feather.Maximize2} />
 				<TypeCaps>
 					PREVIEW SIZE
 				</TypeCaps>
@@ -630,7 +630,7 @@ function SidebarContents() {
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-8">
-				<Icon className="h-16 w-16 [color]-$alt-trim-color" icon={feather.Minimize2} />
+				<Icon className="h-16 w-16 [color]-#ccc" icon={feather.Minimize2} />
 				<TypeCaps>
 					PREVIEW STROKE WIDTH
 				</TypeCaps>
