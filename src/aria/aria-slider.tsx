@@ -15,7 +15,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 	const pointerDownRef = useRef(false)
 
 	const progress = useMemo(() => {
-		return round((value - min) / (max - min), { precision: 2 })
+		return round((value - min) / (max - min), { precision: 4 })
 	}, [max, min, value])
 
 	const translateX = useMemo(() => {

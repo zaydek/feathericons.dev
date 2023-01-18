@@ -425,7 +425,7 @@ function Slider(props: {
 		<AriaSlider track={track} thumb={thumb} {...props}>
 			<div className="px-8">
 				<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
-					<div className="flex align-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
+					<div className="flex align-center h-6 rounded-1e3 [background-image]-linear-gradient(to_right,_$alt-trim-color_calc($progress_*_100%),_$hairline-color_calc($progress_*_100%))">
 						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-6"></div>
 					</div>
 				</div>
