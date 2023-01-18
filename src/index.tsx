@@ -8,6 +8,7 @@ import "uno.css"
 import { cloneElement, CSSProperties, PropsWithChildren, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
 import { toKebabCase } from "./lib/cases"
+import { ProvidedApp } from "./search-app"
 //// import { App } from "./app"
 
 const MICRO_TIMEOUT = 10
@@ -157,11 +158,11 @@ if (import.meta.env.DEV) {
 	console.log("[DEBUG] createRoot")
 	//// createRoot(root).render(<App initialPath={window.location.pathname} />)
 	//// createRoot(root).render(<ProvidedApp />)
-	createRoot(root).render(<Idea />)
+	createRoot(root).render(<ProvidedApp />)
 } else {
 	console.log("[DEBUG] hydrateRoot")
 	//// hydrateRoot(root, <App initialPath={window.location.pathname} />)
 	//// hydrateRoot(root, <ProvidedApp />)
 	//// createRoot(root).render(<ProvidedApp />)
-	createRoot(root).render(<Idea />)
+	createRoot(root).render(<ProvidedApp />)
 }

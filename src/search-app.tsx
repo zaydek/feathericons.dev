@@ -496,7 +496,7 @@ function SidebarContents() {
 			/>
 		</> : <>
 			<div
-				className="flex flex-center h-256 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
+				className="flex flex-center aspect-1.5 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
 				style={viewSource ? undefined : {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
@@ -604,7 +604,7 @@ function App() {
 					<SearchBar />
 					<SearchResultsContents />
 				</div>
-				<div className="flex flex-col gap-20 w-400">
+				<div className="flex flex-col gap-20 w-384">
 					<SidebarContents />
 				</div>
 			</div>
