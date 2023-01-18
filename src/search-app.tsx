@@ -458,7 +458,7 @@ function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 		if (!clicked) { return }
 		setTimeout(() => {
 			setClicked(false)
-		}, 750)
+		}, 1e3)
 	}, [clicked])
 
 	return <>
@@ -489,7 +489,7 @@ function SaveButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 		if (!clicked) { return }
 		setTimeout(() => {
 			setClicked(false)
-		}, 750)
+		}, 1e3)
 	}, [clicked])
 
 	return <>
@@ -536,9 +536,12 @@ function SidebarContents() {
 
 	return <>
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
-			<TypeCaps>
-				VIEW SOURCE
-			</TypeCaps>
+			<div className="flex align-center gap-8">
+				<Icon className="h-16 w-16 [color]-$alt-trim-color" icon={feather.Code} />
+				<TypeCaps>
+					VIEW SOURCE
+				</TypeCaps>
+			</div>
 		</Checkbox>
 		{viewSource ? <>
 			<textarea
@@ -608,10 +611,13 @@ function SidebarContents() {
 		</div>
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
-			<TypeCaps>
-				SIZE
-			</TypeCaps>
-			<div className="flex align-center gap-10">
+			<div className="flex align-center gap-8">
+				<Icon className="h-16 w-16 [color]-$alt-trim-color" icon={feather.Maximize2} />
+				<TypeCaps>
+					PREVIEW SIZE
+				</TypeCaps>
+			</div>
+			<div className="flex align-center gap-8">
 				<TypeCaps>
 					{size} PX
 				</TypeCaps>
@@ -623,10 +629,13 @@ function SidebarContents() {
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
-			<TypeCaps>
-				STROKE WIDTH
-			</TypeCaps>
-			<div className="flex align-center gap-10">
+			<div className="flex align-center gap-8">
+				<Icon className="h-16 w-16 [color]-$alt-trim-color" icon={feather.Minimize2} />
+				<TypeCaps>
+					PREVIEW STROKE WIDTH
+				</TypeCaps>
+			</div>
+			<div className="flex align-center gap-8">
 				<TypeCaps>
 					{strokeWidth.toFixed(2)}
 				</TypeCaps>
