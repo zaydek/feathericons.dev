@@ -621,8 +621,10 @@ function SidebarContents() {
 
 	return <>
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
-			<div className="flex align-center gap-8">
-				<Icon className="h-16 w-16 [color]-#ccc" icon={feather.Code} />
+			<div className="flex align-center gap-10">
+				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-$hairline-color">
+					<Icon className="h-12 w-12 [color]-#333" icon={feather.Code} />
+				</div>
 				<TypeCaps>
 					VIEW SOURCE
 				</TypeCaps>
@@ -665,8 +667,11 @@ function SidebarContents() {
 		</div>
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
-			<div className="flex align-center gap-8">
-				<Icon className="h-16 w-16 [color]-#ccc" icon={feather.Maximize2} />
+			<div className="flex align-center gap-10">
+				{/* <Icon className="h-16 w-16 [color]-#ccc" icon={feather.Maximize2} /> */}
+				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-$hairline-color">
+					<Icon className="h-12 w-12 [color]-#333" icon={feather.Maximize2} />
+				</div>
 				<TypeCaps>
 					PREVIEW SIZE
 				</TypeCaps>
@@ -683,8 +688,11 @@ function SidebarContents() {
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
-			<div className="flex align-center gap-8">
-				<Icon className="h-16 w-16 [color]-#ccc" icon={feather.Minimize2} />
+			<div className="flex align-center gap-10">
+				{/* <Icon className="h-16 w-16 [color]-#ccc" icon={feather.Minimize2} /> */}
+				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-$hairline-color">
+					<Icon className="h-12 w-12 [color]-#333" icon={feather.Minimize2} />
+				</div>
 				<TypeCaps>
 					PREVIEW STROKE WIDTH
 				</TypeCaps>
