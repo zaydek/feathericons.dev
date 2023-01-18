@@ -471,7 +471,7 @@ function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 			{...props}
 		>
 			<Icon
-				className="h-16 w-16 [color]-#333"
+				className="h-16 w-16 [color]-$alt-trim-color"
 				icon={clicked ? feather.Check : feather.Clipboard}
 				strokeWidth={2.5}
 			/>
@@ -502,7 +502,7 @@ function DownloadButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 			{...props}
 		>
 			<Icon
-				className="h-16 w-16 [color]-#333"
+				className="h-16 w-16 [color]-$trim-color"
 				icon={clicked ? feather.Check : feather.Download}
 				strokeWidth={2.5}
 			/>
@@ -540,7 +540,11 @@ function FormatDropDownButton() {
 					jsx: "[background-color]-#fff",
 					tsx: "[background-color]-#fff",
 				}[formatAs]} [box-shadow]-$shadow-2`)} onClick={e => setShow(curr => !curr)}>
-					<Icon className="h-16 w-16 [color]-#333" icon={{
+					<Icon className={cx(`h-16 w-16  ${{
+						svg: "[color]-$svg-color",
+						jsx: "[color]-$jsx-color",
+						tsx: "[color]-$tsx-color",
+					}[formatAs]}`)} icon={{
 						"svg": SVGIcon,
 						"jsx": JSXIcon,
 						"tsx": TSXIcon,
