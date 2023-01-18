@@ -376,38 +376,30 @@ function Hairline() {
 
 function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked: boolean, setChecked: Dispatch<SetStateAction<boolean>> }>) {
 	return <>
-		<div className="flex justify-space-between align-center h-$sidebar-label-height">
+		<AriaCheckbox className="flex justify-space-between align-center h-$sidebar-label-height" checked={checked} setChecked={setChecked}>
 			{children}
-			<AriaCheckbox checked={checked} setChecked={setChecked} onKeyDown={e => {
-				if (e.key === "ArrowLeft") {
-					setChecked(false)
-				} else if (e.key === "ArrowRight") {
-					setChecked(true)
-				}
-			}}>
-				<div className="flex flex-col justify-center h-$sidebar-label-height">
-					<Transition
-						when={checked}
-						start={{ backgroundColor: "var(--hairline-color)" }}
-						end={{   backgroundColor: "var(--alt-trim-color)" }}
-						duration={100}
-						ease={[0, 1, 1, 1]}
-					>
-						<div className="flex align-center h-12 w-48 rounded-1e3">
-							<Transition
-								when={checked}
-								start={{ transform: "translateX(0%)"  }}
-								end={{   transform: "translateX(50%)" }}
-								duration={100}
-								ease={[0, 1, 1, 1]}
-							>
-								<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-#ffff [box-shadow]-$shadow-6"></div>
-							</Transition>
-						</div>
-					</Transition>
-				</div>
-			</AriaCheckbox>
-		</div>
+			<div className="flex flex-col justify-center h-$sidebar-label-height">
+				<Transition
+					when={checked}
+					start={{ backgroundColor: "var(--hairline-color)" }}
+					end={{ backgroundColor: "var(--alt-trim-color)" }}
+					duration={100}
+					ease={[0, 1, 1, 1]}
+				>
+					<div className="flex align-center h-12 w-48 rounded-1e3">
+						<Transition
+							when={checked}
+							start={{ transform: "translateX(0%)" }}
+							end={{ transform: "translateX(50%)" }}
+							duration={100}
+							ease={[0, 1, 1, 1]}
+						>
+							<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-#ffff [box-shadow]-$shadow-6"></div>
+						</Transition>
+					</div>
+				</Transition>
+			</div>
+		</AriaCheckbox>
 	</>
 }
 
@@ -464,7 +456,8 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff"
+			className={cx(`px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2
+				[&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff`)}
 			onPointerUp={e => {
 				setPressed(true)
 				onPointerUp?.(e)
@@ -474,7 +467,7 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 			<Icon
 				className="h-16 w-16 [color]-$alt-trim-color"
 				icon={pressed ? feather.Check : feather.Clipboard}
-				strokeWidth={2.5}
+				strokeWidth={pressed ? 3 : 2.5}
 			/>
 			<TypeCaps>
 				COPY
@@ -486,6 +479,7 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
 	const [pressed, setPressed] = useState(false)
 
+	// TODO: Add esc button support
 	useEffect(() => {
 		if (!pressed) { return }
 		const d = window.setTimeout(() => {
@@ -496,7 +490,8 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff"
+			className={cx(`px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2
+				[&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff`)}
 			onPointerUp={e => {
 				setPressed(true)
 				onPointerUp?.(e)
@@ -506,7 +501,7 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 			<Icon
 				className="h-16 w-16 [color]-$alt-trim-color"
 				icon={pressed ? feather.Check : feather.Download}
-				strokeWidth={2.5}
+				strokeWidth={pressed ? 3 : 2.5}
 			/>
 			<TypeCaps>
 				DOWNLOAD
@@ -637,40 +632,51 @@ function SidebarContents() {
 				</TypeCaps>
 			</div>
 		</Checkbox>
-		{viewSource ? <>
-			<textarea
-				className={cx(`
-					p-24 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
+		<div className="relative flex flex-col">
+			{viewSource ? <>
+				<textarea
+					className={cx(`
+						p-24 pb-calc(32px_+_10px_+_32px) rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
 
-					[white-space]-pre
-					[font]-400_14px_/_normal_$code
-					[font-feature-settings]-'tnum'
-					[letter-spacing]-null
-					[color]-#333
-				`)}
-				rows={placeholder.split("\n").length - 1}
-				defaultValue={placeholder}
-			/>
-		</> : <>
-			<div
-				className="flex flex-center aspect-1.5 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
-				style={viewSource ? undefined : {
-					// https://30secondsofcode.org/css/s/polka-dot-pattern
-					backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
-					backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
-					backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
-				}}
-			>
-				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+						[white-space]-pre
+						[font]-400_14px_/_normal_$code
+						[font-feature-settings]-'tnum'
+						[letter-spacing]-null
+						[color]-#333
+					`)}
+					rows={placeholder.split("\n").length}
+					defaultValue={placeholder}
+				/>
+			</> : <>
+				<div
+					className="pb-calc(32px_+_10px_+_32px) flex flex-center aspect-1.25 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
+					style={viewSource ? undefined : {
+						// https://30secondsofcode.org/css/s/polka-dot-pattern
+						backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
+						backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
+						backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
+					}}
+				>
+					<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+				</div>
+			</>}
+			<div className="absolute inset-b-16">
+				<div className="flex flex-col gap-10">
+					<div className="grid grid-cols-2 gap-10">
+						<CopyButton />
+						<DownloadButton />
+					</div>
+					<FormatDropDownButton />
+				</div>
 			</div>
-		</>}
-		<div className="flex flex-col gap-10">
+		</div>
+		{/* <div className="flex flex-col gap-10">
 			<div className="grid grid-cols-2 gap-10">
 				<CopyButton />
 				<DownloadButton />
 			</div>
 			<FormatDropDownButton />
-		</div>
+		</div> */}
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-8">
