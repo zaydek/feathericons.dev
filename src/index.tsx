@@ -60,32 +60,46 @@ import { Transition } from "./transition"
 //// }
 
 function TypeCaps({
-	className,
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
 	return <>
-		{/* Surprisingly, use +1px font-size here */}
-		<div className={cx("[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#333", className)} {...props}>
+		<div
+			className={cx(`
+				[white-space]-pre
+				[font]-600_11px_/_normal_$sans
+				[font-feature-settings]-'tnum'
+				[letter-spacing]-0.0625em
+				[color]-#333
+			`)}
+			{...props}
+		>
 			{children}
 		</div>
 	</>
 }
 
 function TypeInvertedCaps({
-	className,
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
 	return <>
-		{/* Surprisingly, use +1px font-size here */}
-		<div className={cx("[white-space]-pre [font]-600_11px_/_normal_$sans [font-feature-settings]-'tnum' [letter-spacing]-0.0625em [color]-#fff", className)} {...props}>
+		<div
+			className={cx(`
+				[white-space]-pre
+				[font]-600_11px_/_normal_$sans
+				[font-feature-settings]-'tnum'
+				[letter-spacing]-0.0625em
+				[color]-#fff
+			`)}
+			{...props}
+		>
 			{children}
 		</div>
 	</>
 }
 
-function SelectItem({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+function SelectMenuItem({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
 	return <>
 		<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" {...props}>
 			{children}
@@ -96,8 +110,7 @@ function SelectItem({ children, ...props }: ButtonHTMLAttributes<HTMLButtonEleme
 // Must expose props for <Transition> wrapper
 const SelectMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ children, ...props }, ref) => {
 	return <>
-		{/* Use [white-space]-pre to prevent text from wrapping */}
-		<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10 [white-space]-pre" {...props}>
+		<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10" {...props}>
 			<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
 				{children}
 			</div>
@@ -123,11 +136,15 @@ function Idea() {
 
 	return <>
 		<div className="flex flex-center h-100vh">
-			<div className="relative flex flex-col" data-group>
+			<div
+				className="relative flex flex-col"
+				//// onMouseEnter={e => setShow(true)}
+				//// onMouseLeave={e => setShow(false)}
+			>
 				<button
 					className="px-12 flex flex-center gap-10 h-32 rounded-16 [background-color]-orange"
-					onBlur={e => setShow(false)}
 					onClick={e => setShow(curr => !curr)}
+					onBlur={e => setShow(false)}
 				>
 					<TypeInvertedCaps>
 						COPY AS
@@ -151,33 +168,33 @@ function Idea() {
 					easing={[0, 1, 0.5, 1.125]}
 				>
 					<SelectMenu ref={ref}>
-						<SelectItem onClick={e => {
+						<SelectMenuItem onClick={e => {
 							console.log("A")
-							//// setShow(false)
+							setShow(false)
 						}}>
 							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
 							<TypeCaps>
 								SVG
 							</TypeCaps>
-						</SelectItem>
-						<SelectItem onClick={e => {
+						</SelectMenuItem>
+						<SelectMenuItem onClick={e => {
 							console.log("B")
-							//// setShow(false)
+							setShow(false)
 						}}>
 							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
 							<TypeCaps>
 								REACT
 							</TypeCaps>
-						</SelectItem>
-						<SelectItem onClick={e => {
+						</SelectMenuItem>
+						<SelectMenuItem onClick={e => {
 							console.log("C")
-							//// setShow(false)
+							setShow(false)
 						}}>
 							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
 							<TypeCaps>
 								TYPESCRIPT REACT
 							</TypeCaps>
-						</SelectItem>
+						</SelectMenuItem>
 					</SelectMenu>
 				</Transition>
 			</div>
