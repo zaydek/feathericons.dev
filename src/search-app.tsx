@@ -451,28 +451,29 @@ export function Feather(props: SVGAttributes<SVGElement>) {
 }
 `.trim() + "\n"
 
-function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-	const [clicked, setClicked] = useState(false)
+function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
-		if (!clicked) { return }
-		setTimeout(() => {
-			setClicked(false)
+		if (!pressed) { return }
+		const d = window.setTimeout(() => {
+			setPressed(false)
 		}, 1e3)
-	}, [clicked])
+		return () => window.clearTimeout(d)
+	}, [pressed])
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2"
-			onClick={e => {
-				setClicked(true)
-				onClick?.(e)
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff"
+			onPointerUp={e => {
+				setPressed(true)
+				onPointerUp?.(e)
 			}}
 			{...props}
 		>
 			<Icon
 				className="h-16 w-16 [color]-$alt-trim-color"
-				icon={clicked ? feather.Check : feather.Clipboard}
+				icon={pressed ? feather.Check : feather.Clipboard}
 				strokeWidth={2.5}
 			/>
 			<TypeCaps>
@@ -482,28 +483,29 @@ function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 	</>
 }
 
-function DownloadButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-	const [clicked, setClicked] = useState(false)
+function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
-		if (!clicked) { return }
-		setTimeout(() => {
-			setClicked(false)
+		if (!pressed) { return }
+		const d = window.setTimeout(() => {
+			setPressed(false)
 		}, 1e3)
-	}, [clicked])
+		return () => window.clearTimeout(d)
+	}, [pressed])
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2"
-			onClick={e => {
-				setClicked(true)
-				onClick?.(e)
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff"
+			onPointerUp={e => {
+				setPressed(true)
+				onPointerUp?.(e)
 			}}
 			{...props}
 		>
 			<Icon
-				className="h-16 w-16 [color]-$trim-color"
-				icon={clicked ? feather.Check : feather.Download}
+				className="h-16 w-16 [color]-$alt-trim-color"
+				icon={pressed ? feather.Check : feather.Download}
 				strokeWidth={2.5}
 			/>
 			<TypeCaps>
