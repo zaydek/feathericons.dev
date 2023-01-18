@@ -4,7 +4,7 @@ import * as feather from "./data/react-feather@4.29.0"
 
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
-import { ButtonHTMLAttributes, createContext, Dispatch, forwardRef, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { ButtonHTMLAttributes, createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
@@ -195,63 +195,63 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 	</>
 }
 
-const ClipboardSelect = forwardRef<HTMLDivElement, PropsWithChildren<{ pos: Position, show: boolean, setShow: Dispatch<SetStateAction<boolean>>, setFormatAs: Dispatch<SetStateAction<"svg" | "jsx" | "tsx">> }>>(({ pos, show, setShow, setFormatAs, children }, ref) => {
-	return <>
-		<div className="relative flex flex-col">
-			{children}
-			<Transition
-				when={show}
-				unmount="start"
-				start={{
-					transform: "translateY(-8px)",
-					opacity: 0,
-				}}
-				end={{
-					transform: "translateY(0px)",
-					opacity: 1,
-				}}
-				duration={100}
-				ease={[0, 1, 1, 1]}
-			>
-				<div ref={ref} className={{
-					"center": undefined,
-					"start":  "absolute t-calc(100%_+_10px) l-0 z-10",
-					"end":    "absolute t-calc(100%_+_10px) r-0 z-10",
-				}[pos]}>
-					<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
-						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
-							setFormatAs("svg")
-							setShow(false)
-						}}>
-							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
-							<TypeCaps>
-								SVG
-							</TypeCaps>
-						</button>
-						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
-							setFormatAs("jsx")
-							setShow(false)
-						}}>
-							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
-							<TypeCaps>
-								REACT
-							</TypeCaps>
-						</button>
-						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
-							setFormatAs("tsx")
-							setShow(false)
-						}}>
-							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
-							<TypeCaps>
-								TYPESCRIPT REACT
-							</TypeCaps>
-						</button>
-					</div>
-				</div>
-			</Transition>
-		</div>
-	</>
-})
+//// const ClipboardSelect = forwardRef<HTMLDivElement, PropsWithChildren<{ pos: Position, show: boolean, setShow: Dispatch<SetStateAction<boolean>>, setFormatAs: Dispatch<SetStateAction<"svg" | "jsx" | "tsx">> }>>(({ pos, show, setShow, setFormatAs, children }, ref) => {
+//// 	return <>
+//// 		<div className="relative flex flex-col">
+//// 			{children}
+//// 			<Transition
+//// 				when={show}
+//// 				unmount="start"
+//// 				start={{
+//// 					transform: "translateY(-8px)",
+//// 					opacity: 0,
+//// 				}}
+//// 				end={{
+//// 					transform: "translateY(0px)",
+//// 					opacity: 1,
+//// 				}}
+//// 				duration={100}
+//// 				ease={[0, 1, 1, 1]}
+//// 			>
+//// 				<div ref={ref} className={{
+//// 					"center": undefined,
+//// 					"start":  "absolute t-calc(100%_+_10px) l-0 z-10",
+//// 					"end":    "absolute t-calc(100%_+_10px) r-0 z-10",
+//// 				}[pos]}>
+//// 					<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
+//// 						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+//// 							setFormatAs("svg")
+//// 							setShow(false)
+//// 						}}>
+//// 							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
+//// 							<TypeCaps>
+//// 								SVG
+//// 							</TypeCaps>
+//// 						</button>
+//// 						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+//// 							setFormatAs("jsx")
+//// 							setShow(false)
+//// 						}}>
+//// 							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
+//// 							<TypeCaps>
+//// 								REACT
+//// 							</TypeCaps>
+//// 						</button>
+//// 						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
+//// 							setFormatAs("tsx")
+//// 							setShow(false)
+//// 						}}>
+//// 							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
+//// 							<TypeCaps>
+//// 								TYPESCRIPT REACT
+//// 							</TypeCaps>
+//// 						</button>
+//// 					</div>
+//// 				</div>
+//// 			</Transition>
+//// 		</div>
+//// 	</>
+//// })
 
 function SearchBarButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 	return <>
@@ -463,7 +463,7 @@ function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2"
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$hairline-color ~[box-shadow]-$inset-shadow-2"
 			onClick={e => {
 				setClicked(true)
 				onClick?.(e)
@@ -471,18 +471,18 @@ function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 			{...props}
 		>
 			<Icon
-				className="h-16 w-16 [color]-#fff"
+				className="h-16 w-16 [color]-#333"
 				icon={clicked ? feather.Check : feather.Clipboard}
 				strokeWidth={2.5}
 			/>
-			<TypeInvertedCaps>
+			<TypeCaps>
 				COPY
-			</TypeInvertedCaps>
+			</TypeCaps>
 		</button>
 	</>
 }
 
-function SaveButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+function DownloadButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
 	const [clicked, setClicked] = useState(false)
 
 	useEffect(() => {
@@ -494,7 +494,7 @@ function SaveButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 
 	return <>
 		<button
-			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2"
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$hairline-color ~[box-shadow]-$inset-shadow-2"
 			onClick={e => {
 				setClicked(true)
 				onClick?.(e)
@@ -502,14 +502,118 @@ function SaveButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
 			{...props}
 		>
 			<Icon
-				className="h-16 w-16 [color]-#fff"
+				className="h-16 w-16 [color]-#333"
 				icon={clicked ? feather.Check : feather.Download}
 				strokeWidth={2.5}
 			/>
-			<TypeInvertedCaps>
-				SAVE
-			</TypeInvertedCaps>
+			<TypeCaps>
+				DOWNLOAD
+			</TypeCaps>
 		</button>
+	</>
+}
+
+
+function FormatDropDownButton() {
+	const ref = useRef<HTMLDivElement | null>(null)
+
+	// TODO: Move to context
+	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
+	const [show, setShow] = useState(false)
+
+	useEffect(() => {
+		function handleClick(e: MouseEvent) {
+			if (ref.current === null) { return }
+			if (!(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
+				setShow(false)
+			}
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [])
+
+	return <>
+		<div className="relative flex flex-col">
+			<div className="relative flex flex-col">
+				<button className={`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
+					svg: "[background-color]-$hairline-color",
+					jsx: "[background-color]-$hairline-color",
+					tsx: "[background-color]-$hairline-color",
+				}[formatAs]} ~[box-shadow]-$inset-shadow-2`} onClick={e => setShow(curr => !curr)}>
+					<Icon className="h-16 w-16 [color]-#333" icon={{
+						"svg": SVGIcon,
+						"jsx": JSXIcon,
+						"tsx": TSXIcon,
+					}[formatAs]} strokeWidth={2.5} />
+					<TypeCaps>
+						FORMAT AS{" "}
+						<span className="inline-flex w-24">
+							{formatAs.toUpperCase()}
+						</span>
+					</TypeCaps>
+					<div className="absolute inset-r-0">
+						<div className="flex flex-center h-32 w-32 rounded-1e3">
+							<Icon className="h-16 w-16 [color]-#333" icon={feather.ChevronDown} strokeWidth={2.5} />
+						</div>
+					</div>
+				</button>
+			</div>
+			<Transition
+				when={show}
+				unmount="start"
+				start={{
+					transform: "translateY(-8px)",
+					opacity: 0,
+				}}
+				end={{
+					transform: "translateY(0px)",
+					opacity: 1,
+				}}
+				duration={100}
+				ease={[0, 1, 1, 1]}
+			>
+				<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10">
+					<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
+						<button
+							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
+							onClick={e => {
+								setFormatAs("svg")
+								setShow(false)
+							}}
+						>
+							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
+							<TypeCaps>
+								SVG
+							</TypeCaps>
+						</button>
+						<button
+							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
+							onClick={e => {
+								setFormatAs("jsx")
+								setShow(false)
+							}}
+						>
+							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
+							<TypeCaps>
+								REACT
+							</TypeCaps>
+						</button>
+						<button
+							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
+							onClick={e => {
+								setFormatAs("tsx")
+								setShow(false)
+							}}
+						>
+							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
+							<TypeCaps>
+								TYPESCRIPT REACT
+							</TypeCaps>
+						</button>
+					</div>
+				</div>
+			</Transition>
+		</div>
 	</>
 }
 
@@ -517,22 +621,6 @@ function SidebarContents() {
 	const { selectedName } = useContext(FocusContext)!
 	const { viewSource, setViewSource } = useContext(ViewSourceContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
-
-	const clipboardSelectRef = useRef<HTMLDivElement | null>(null)
-
-	const [show, setShow] = useState(false)
-	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
-
-	useEffect(() => {
-		function handleClick(e: MouseEvent) {
-			if (clipboardSelectRef.current === null) { return }
-			if (!(e.target instanceof HTMLElement && clipboardSelectRef.current.contains(e.target))) {
-				setShow(false)
-			}
-		}
-		window.addEventListener("click", handleClick, false)
-		return () => window.removeEventListener("click", handleClick, false)
-	}, [])
 
 	return <>
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
@@ -573,41 +661,9 @@ function SidebarContents() {
 		<div className="flex flex-col gap-10">
 			<div className="grid grid-cols-2 gap-10">
 				<CopyButton />
-				<SaveButton />
+				<DownloadButton />
 			</div>
-			<ClipboardSelect ref={clipboardSelectRef} pos="end" show={show} setShow={setShow} setFormatAs={setFormatAs}>
-				<div className="relative flex flex-col">
-					<button className={`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
-						svg: "[background-color]-$svg-color",
-						jsx: "[background-color]-$jsx-color",
-						tsx: "[background-color]-$tsx-color",
-					}[formatAs]} [box-shadow]-$inset-shadow-2`} onClick={e => setShow(curr => !curr)}>
-						<Icon className="h-16 w-16 [color]-#fff" icon={{
-							"svg": SVGIcon,
-							"jsx": JSXIcon,
-							"tsx": TSXIcon,
-						}[formatAs]} strokeWidth={2.5} />
-						<TypeInvertedCaps>
-							FORMAT AS{" "}
-							<span className="inline-flex w-24">
-								{formatAs.toUpperCase()}
-							</span>
-						</TypeInvertedCaps>
-						{/* <TypeInvertedCaps>
-							FORMAT AS {{
-								"svg": "SVG",
-								"jsx": "REACT",
-								"tsx": "TYPESCRIPT REACT",
-							}[formatAs]}
-						</TypeInvertedCaps> */}
-						<div className="absolute inset-r-4">
-							<div className="flex flex-center h-24 w-24 rounded-1e3">
-								<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
-							</div>
-						</div>
-					</button>
-				</div>
-			</ClipboardSelect>
+			<FormatDropDownButton />
 		</div>
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
