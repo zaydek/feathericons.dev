@@ -4,7 +4,7 @@ import * as feather from "./data/react-feather@4.29.0"
 
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
-import { ButtonHTMLAttributes, createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { ButtonHTMLAttributes, createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
@@ -86,69 +86,69 @@ function TypeInvertedCaps({
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useRestorableState<T>(initialValue: T, zeroValue: T) {
-	const [state, setState] = useState(initialValue)
-	const [history, setHistory] = useState([state])
-	const [historyIndex, setHistoryIndex] = useState(history.length - 1)
-
-	const restoreState = useCallback((increment: number) => {
-		if (increment > 0) {
-			if (historyIndex + increment < history.length) {
-				setHistoryIndex(curr => curr + increment)
-			}
-		} else {
-			if (historyIndex + increment >= 0) {
-				setHistoryIndex(curr => curr + increment)
-			}
-		}
-	}, [history.length, historyIndex])
-
-	// Commits state to history and historyIndex
-	const onceRef = useRef(false)
-	const commitState = useCallback(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		const timeoutId = setTimeout(() => {
-			if (state === zeroValue || state === history[historyIndex]) { return }
-			if (historyIndex === 0) { // At start
-				// Append state
-				setHistory(curr => [
-					zeroValue,
-					state,
-					...curr.slice(1)
-				])
-				setHistoryIndex(curr => curr + 1)
-			} else if (historyIndex + 1 === history.length) { // At end
-				// Append state
-				setHistory(curr => [
-					...curr,
-					state,
-				])
-				setHistoryIndex(curr => curr + 1)
-			} else {
-				// Insert state
-				setHistory(curr => [
-					...curr.slice(0, historyIndex),
-					state,
-					...curr.slice(historyIndex + 1),
-				])
-			}
-		}, 500)
-		return () => clearTimeout(timeoutId)
-	}, [history, historyIndex, state, zeroValue])
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(commitState, [state])
-
-	// history[historyIndex] -> state
-	useEffect(() => {
-		setState(history[historyIndex])
-	}, [history, historyIndex])
-
-	return [state, setState, restoreState] as const
-}
+//// function useRestorableState<T>(initialValue: T, zeroValue: T) {
+//// 	const [state, setState] = useState(initialValue)
+//// 	const [history, setHistory] = useState([state])
+//// 	const [historyIndex, setHistoryIndex] = useState(history.length - 1)
+////
+//// 	const restoreState = useCallback((increment: number) => {
+//// 		if (increment > 0) {
+//// 			if (historyIndex + increment < history.length) {
+//// 				setHistoryIndex(curr => curr + increment)
+//// 			}
+//// 		} else {
+//// 			if (historyIndex + increment >= 0) {
+//// 				setHistoryIndex(curr => curr + increment)
+//// 			}
+//// 		}
+//// 	}, [history.length, historyIndex])
+////
+//// 	// Commits state to history and historyIndex
+//// 	const onceRef = useRef(false)
+//// 	const commitState = useCallback(() => {
+//// 		if (!onceRef.current) {
+//// 			onceRef.current = true
+//// 			return
+//// 		}
+//// 		const timeoutId = setTimeout(() => {
+//// 			if (state === zeroValue || state === history[historyIndex]) { return }
+//// 			if (historyIndex === 0) { // At start
+//// 				// Append state
+//// 				setHistory(curr => [
+//// 					zeroValue,
+//// 					state,
+//// 					...curr.slice(1)
+//// 				])
+//// 				setHistoryIndex(curr => curr + 1)
+//// 			} else if (historyIndex + 1 === history.length) { // At end
+//// 				// Append state
+//// 				setHistory(curr => [
+//// 					...curr,
+//// 					state,
+//// 				])
+//// 				setHistoryIndex(curr => curr + 1)
+//// 			} else {
+//// 				// Insert state
+//// 				setHistory(curr => [
+//// 					...curr.slice(0, historyIndex),
+//// 					state,
+//// 					...curr.slice(historyIndex + 1),
+//// 				])
+//// 			}
+//// 		}, 500)
+//// 		return () => clearTimeout(timeoutId)
+//// 	}, [history, historyIndex, state, zeroValue])
+////
+//// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+//// 	useEffect(commitState, [state])
+////
+//// 	// history[historyIndex] -> state
+//// 	useEffect(() => {
+//// 		setState(history[historyIndex])
+//// 	}, [history, historyIndex])
+////
+//// 	return [state, setState, restoreState] as const
+//// }
 
 type Position = "start" | "center" | "end"
 
@@ -195,64 +195,6 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 	</>
 }
 
-//// const ClipboardSelect = forwardRef<HTMLDivElement, PropsWithChildren<{ pos: Position, show: boolean, setShow: Dispatch<SetStateAction<boolean>>, setFormatAs: Dispatch<SetStateAction<"svg" | "jsx" | "tsx">> }>>(({ pos, show, setShow, setFormatAs, children }, ref) => {
-//// 	return <>
-//// 		<div className="relative flex flex-col">
-//// 			{children}
-//// 			<Transition
-//// 				when={show}
-//// 				unmount="start"
-//// 				start={{
-//// 					transform: "translateY(-8px)",
-//// 					opacity: 0,
-//// 				}}
-//// 				end={{
-//// 					transform: "translateY(0px)",
-//// 					opacity: 1,
-//// 				}}
-//// 				duration={100}
-//// 				ease={[0, 1, 1, 1]}
-//// 			>
-//// 				<div ref={ref} className={{
-//// 					"center": undefined,
-//// 					"start":  "absolute t-calc(100%_+_10px) l-0 z-10",
-//// 					"end":    "absolute t-calc(100%_+_10px) r-0 z-10",
-//// 				}[pos]}>
-//// 					<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
-//// 						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
-//// 							setFormatAs("svg")
-//// 							setShow(false)
-//// 						}}>
-//// 							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
-//// 							<TypeCaps>
-//// 								SVG
-//// 							</TypeCaps>
-//// 						</button>
-//// 						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
-//// 							setFormatAs("jsx")
-//// 							setShow(false)
-//// 						}}>
-//// 							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
-//// 							<TypeCaps>
-//// 								REACT
-//// 							</TypeCaps>
-//// 						</button>
-//// 						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
-//// 							setFormatAs("tsx")
-//// 							setShow(false)
-//// 						}}>
-//// 							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
-//// 							<TypeCaps>
-//// 								TYPESCRIPT REACT
-//// 							</TypeCaps>
-//// 						</button>
-//// 					</div>
-//// 				</div>
-//// 			</Transition>
-//// 		</div>
-//// 	</>
-//// })
-
 function SearchBarButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 	return <>
 		<button className="px-8 flex align-center h-$search-bar-height" {...props}>
@@ -264,35 +206,34 @@ function SearchBarButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 }
 
 function SearchBar() {
-	const { search, setSearch, restoreSearch } = useContext(SearchContext)!
-	const { setCompact } = useContext(CompactContext)!
+	const { setCompactMode, search, setSearch } = useContext(SearchContext)!
 
-	const inputRef = useRef<HTMLInputElement | null>(null)
+	const ref = useRef<HTMLInputElement | null>(null)
 
 	return <>
 		<div className="px-8 flex align-center h-64 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&_>_:nth-child(2)]:grow-1">
 			<Tooltip pos="start" text={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+K</span></>}>
-				<SearchBarButton onClick={e => inputRef.current!.select()} />
+				<SearchBarButton onClick={e => ref.current!.select()} />
 			</Tooltip>
 			<input
-				ref={inputRef}
+				ref={ref}
 				className="px-8 h-$search-bar-height"
 				type="text"
 				value={search}
 				onChange={e => setSearch(e.currentTarget.value)}
-				onKeyDown={e => {
-					if (e.key === "ArrowUp") {
-						e.preventDefault()
-						restoreSearch(-1)
-					} else if (e.key === "ArrowDown") {
-						e.preventDefault()
-						restoreSearch(+1)
-					}
-				}}
+				//// onKeyDown={e => {
+				//// 	if (e.key === "ArrowUp") {
+				//// 		e.preventDefault()
+				//// 		restoreSearch(-1)
+				//// 	} else if (e.key === "ArrowDown") {
+				//// 		e.preventDefault()
+				//// 		restoreSearch(+1)
+				//// 	}
+				//// }}
 				autoFocus
 			/>
 			<Tooltip pos="end" text={<>COMPACT MODE</>}>
-				<SearchBarButton onClick={e => setCompact(curr => !curr)} />
+				<SearchBarButton onClick={e => setCompactMode(curr => !curr)} />
 			</Tooltip>
 			{/* <Tooltip pos="end" text={<>TOGGLE THEME</>}>
 				<SearchBarButton />
@@ -326,13 +267,12 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 }
 
 function SearchResultsContents() {
-	const { searchResults } = useContext(SearchContext)!
-	const { setSelectedName, setSelectedIcon } = useContext(FocusContext)!
-	const { compact } = useContext(CompactContext)!
+	const { compactMode, searchResults } = useContext(SearchContext)!
+	const { setSelectedName, setSelectedSvgElement: setSelectedIcon } = useContext(SelectedContext)!
 
 	return <>
 		<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr))">
-			{compact ? <>
+			{compactMode ? <>
 				{Object.keys(searchResults).map(name => <Fragment key={name}>
 					<button className="flex flex-col" onClick={e => {
 						setSelectedName(name as keyof typeof manifest)
@@ -512,10 +452,9 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 
 
 function FormatDropDownButton() {
-	const ref = useRef<HTMLDivElement | null>(null)
+	const { formatAs, setFormatAs } = useContext(SelectedContext)!
 
-	// TODO: Move to context
-	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
+	const ref = useRef<HTMLDivElement | null>(null)
 	const [show, setShow] = useState(false)
 
 	useEffect(() => {
@@ -615,8 +554,7 @@ function FormatDropDownButton() {
 }
 
 function SidebarContents() {
-	const { selectedName } = useContext(FocusContext)!
-	const { viewSource, setViewSource } = useContext(ViewSourceContext)!
+	const { selectedName, viewSource, setViewSource  } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	return <>
@@ -735,38 +673,32 @@ function App() {
 
 const SearchContext =
 	createContext<{
-		search:          string
-		setSearch:       Dispatch<SetStateAction<string>>
-		restoreSearch:   (_: number) => void
-		searchResults:   Partial<Record<keyof typeof feather, readonly [number, number] | null>>
+		compactMode:           boolean
+		setCompactMode:        Dispatch<SetStateAction<boolean>>
+		search:                string
+		setSearch:             Dispatch<SetStateAction<string>>
+		searchResults:         Partial<Record<keyof typeof feather, readonly [number, number] | null>>
 	} | null>(null)
 
-const FocusContext =
+const SelectedContext =
 	createContext<{
-		selectedName:    keyof typeof manifest
-		setSelectedName: Dispatch<SetStateAction<keyof typeof manifest>>
-		selectedIcon:    SVGSVGElement | null
-		setSelectedIcon: Dispatch<SetStateAction<SVGSVGElement | null>>
-	} | null>(null)
-
-const ViewSourceContext =
-	createContext<{
-		viewSource:        boolean
-		setViewSource:     Dispatch<SetStateAction<boolean>>
-	} | null>(null)
-
-const CompactContext =
-	createContext<{
-		compact:         boolean
-		setCompact:      Dispatch<SetStateAction<boolean>>
+		selectedName:          keyof typeof manifest
+		setSelectedName:       Dispatch<SetStateAction<keyof typeof manifest>>
+		selectedSvgElement:    SVGSVGElement | null
+		setSelectedSvgElement: Dispatch<SetStateAction<SVGSVGElement | null>>
+		viewSource:            boolean
+		setViewSource:         Dispatch<SetStateAction<boolean>>
+		formatAs:              "svg" | "jsx" | "tsx"
+		setFormatAs:           Dispatch<SetStateAction<"svg" | "jsx" | "tsx">>
+		clipboard:             string
 	} | null>(null)
 
 const SliderContext =
 	createContext<{
-		size:            number
-		setSize:         Dispatch<SetStateAction<number>>
-		strokeWidth:     number
-		setStrokeWidth:  Dispatch<SetStateAction<number>>
+		size:                  number
+		setSize:               Dispatch<SetStateAction<number>>
+		strokeWidth:           number
+		setStrokeWidth:        Dispatch<SetStateAction<number>>
 	} | null>(null)
 
 function getSubstringIndexes(str: string, substr: string) {
@@ -778,9 +710,10 @@ function getSubstringIndexes(str: string, substr: string) {
 function StateProvider({ children }: PropsWithChildren) {
 
 	//////////////////////////////////////////////////////////////////////////////
-	// Search
+	// SearchContext
 
-	const [search, setSearch, restoreSearch] = useRestorableState("", "")
+	const [compactMode, setCompactMode] = useState(false)
+	const [search, setSearch] = useState("")
 
 	const $$search = useMemo(() => {
 		return search
@@ -815,13 +748,22 @@ function StateProvider({ children }: PropsWithChildren) {
 		return { ...refA, ...refB }
 	}, [$$search, searchResultsFallback])
 
+
 	//////////////////////////////////////////////////////////////////////////////
-	// Sidebar
+	// SelectedContext
 
 	const [selectedName, setSelectedName] = useState<keyof typeof manifest>("Feather")
-	const [selectedIcon, setSelectedIcon] = useState<SVGSVGElement | null>(null)
+	const [selectedSvgElement, setSelectedSvgElement] = useState<SVGSVGElement | null>(null)
 	const [viewSource, setViewSource] = useState(false)
-	const [compact, setCompact] = useState(false)
+	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
+
+	const clipboard = useMemo(() => {
+		return ""
+	}, [])
+
+	//////////////////////////////////////////////////////////////////////////////
+	// SliderContext
+
 	const [size, setSize] = useState(sizeInitial)
 	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
 
@@ -829,39 +771,40 @@ function StateProvider({ children }: PropsWithChildren) {
 
 	return <>
 		<SearchContext.Provider value={useMemo(() => ({
+			compactMode,
+			setCompactMode,
+			/**/
 			search,
 			setSearch,
-			restoreSearch,
+			/**/
 			searchResults,
-		}), [restoreSearch, search, searchResults, setSearch])}>
-			<FocusContext.Provider value={useMemo(() => ({
+		}), [compactMode, search, searchResults])}>
+			<SelectedContext.Provider value={useMemo(() => ({
 				selectedName,
 				setSelectedName,
-				selectedIcon,
-				setSelectedIcon,
-			}), [selectedIcon, selectedName])}>
-				<ViewSourceContext.Provider value={useMemo(() => ({
-					viewSource,
-					setViewSource,
-				}), [viewSource])}>
-					<CompactContext.Provider value={useMemo(() => ({
-						compact,
-						setCompact,
-					}), [compact])}>
-						<SliderContext.Provider value={useMemo(() => ({
-							compact,
-							setCompact,
-							size,
-							setSize,
-							strokeWidth,
-							setStrokeWidth,
-						}), [compact, size, strokeWidth])}>
-							<CSSVariableEffect />
-							{children}
-						</SliderContext.Provider>
-					</CompactContext.Provider>
-				</ViewSourceContext.Provider>
-			</FocusContext.Provider>
+				/**/
+				selectedSvgElement,
+				setSelectedSvgElement,
+				/**/
+				viewSource,
+				setViewSource,
+				/**/
+				formatAs,
+				setFormatAs,
+				/**/
+				clipboard,
+			}), [clipboard, formatAs, selectedSvgElement, selectedName, viewSource])}>
+				<SliderContext.Provider value={useMemo(() => ({
+					size,
+					setSize,
+					/**/
+					strokeWidth,
+					setStrokeWidth,
+				}), [size, strokeWidth])}>
+					<CSSVariableEffect />
+					{children}
+				</SliderContext.Provider>
+			</SelectedContext.Provider>
 		</SearchContext.Provider>
 	</>
 }
