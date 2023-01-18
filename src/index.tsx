@@ -5,7 +5,7 @@ import "./css/vars.scss"
 
 import "uno.css"
 
-import { ButtonHTMLAttributes, forwardRef, HTMLAttributes, useEffect, useRef, useState } from "react"
+import { ButtonHTMLAttributes, forwardRef, HTMLAttributes, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
 import { ChevronDown } from "./data/react-feather@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
@@ -110,19 +110,25 @@ function Idea() {
 
 	const [show, setShow] = useState(false)
 
-	useEffect(() => {
-		function handleClick(e: MouseEvent) {
-			if (ref.current === null) { return }
-			setShow(e.target instanceof Element && ref.current.contains(e.target))
-		}
-		window.addEventListener("click", handleClick, false)
-		return () => window.removeEventListener("click", handleClick, false)
-	}, [])
+	//// useEffect(() => {
+	//// 	function handleClick(e: MouseEvent) {
+	//// 		if (ref.current === null) { return }
+	//// 		//// if (e.target instanceof HTMLElement && !ref.current.contains(e.target)) {
+	//// 		//// 	setShow(false)
+	//// 		//// }
+	//// 	}
+	//// 	window.addEventListener("click", handleClick, false)
+	//// 	return () => window.removeEventListener("click", handleClick, false)
+	//// }, [])
 
 	return <>
 		<div className="flex flex-center h-100vh">
 			<div className="relative flex flex-col" data-group>
-				<button className="px-12 flex flex-center gap-10 h-32 rounded-16 [background-color]-orange" onClick={e => setShow(curr => !curr)}>
+				<button
+					className="px-12 flex flex-center gap-10 h-32 rounded-16 [background-color]-orange"
+					onBlur={e => setShow(false)}
+					onClick={e => setShow(curr => !curr)}
+				>
 					<TypeInvertedCaps>
 						COPY AS
 					</TypeInvertedCaps>
@@ -144,10 +150,10 @@ function Idea() {
 					duration={show ? 200 : 400}
 					easing={[0, 1, 0.5, 1.125]}
 				>
-					<SelectMenu ref={ref} onTransitionEnd={e => console.log("Test")}>
+					<SelectMenu ref={ref}>
 						<SelectItem onClick={e => {
 							console.log("A")
-							setShow(false)
+							//// setShow(false)
 						}}>
 							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
 							<TypeCaps>
@@ -156,7 +162,7 @@ function Idea() {
 						</SelectItem>
 						<SelectItem onClick={e => {
 							console.log("B")
-							setShow(false)
+							//// setShow(false)
 						}}>
 							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
 							<TypeCaps>
@@ -165,7 +171,7 @@ function Idea() {
 						</SelectItem>
 						<SelectItem onClick={e => {
 							console.log("C")
-							setShow(false)
+							//// setShow(false)
 						}}>
 							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
 							<TypeCaps>
