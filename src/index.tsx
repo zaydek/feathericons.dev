@@ -5,11 +5,12 @@ import "./css/vars.scss"
 
 import "uno.css"
 
-import { ButtonHTMLAttributes, HTMLAttributes, PropsWithChildren } from "react"
+import { ButtonHTMLAttributes, forwardRef, HTMLAttributes, useEffect, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { Icon } from "./lib/react/icon"
+import { Transition } from "./transition"
 //// import { App } from "./app"
 
 //// type Position = "start" | "center" | "end"
@@ -91,45 +92,89 @@ function SelectItem({ children, ...props }: ButtonHTMLAttributes<HTMLButtonEleme
 	</>
 }
 
-function SelectMenu({ children }: PropsWithChildren) {
+// Must expose props for <Transition> wrapper
+const SelectMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ children, ...props }, ref) => {
 	return <>
 		{/* Use [white-space]-pre to prevent text from wrapping */}
-		<div className="absolute t-calc(100%_+_10px) r-0 z-10 [white-space]-pre">
-			{/* Use flex flex-col for <button> */}
+		<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10 [white-space]-pre" {...props}>
 			<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
 				{children}
 			</div>
 		</div>
 	</>
-}
+})
 
 function Idea() {
+	const ref = useRef<HTMLDivElement | null>(null)
+
+	const [show, setShow] = useState(false)
+
+	useEffect(() => {
+		function handleClick(e: MouseEvent) {
+			if (ref.current === null) { return }
+			setShow(e.target instanceof Element && ref.current.contains(e.target))
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [show])
+
 	return <>
 		<div className="flex flex-center h-100vh">
 			<div className="relative flex flex-col">
-				<div className="flex flex-center h-48 w-96 rounded-16 [background-color]-orange">
-					<div>Hello</div>
-				</div>
-				<SelectMenu>
-					<SelectItem>
-						<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
-						<TypeCaps>
-							SVG
-						</TypeCaps>
-					</SelectItem>
-					<SelectItem>
-						<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
-						<TypeCaps>
-							REACT
-						</TypeCaps>
-					</SelectItem>
-					<SelectItem>
-						<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
-						<TypeCaps>
-							TYPESCRIPT REACT
-						</TypeCaps>
-					</SelectItem>
-				</SelectMenu>
+				<button className="px-12 flex flex-center gap-10 h-32 rounded-16 [background-color]-orange" onClick={e => setShow(curr => !curr)}>
+					<TypeInvertedCaps>
+						COPY AS
+					</TypeInvertedCaps>
+					<div className="-mr-8 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fffa">
+						<div className="h-16 w-16 rounded-1e3 [background-color]-#fff"></div>
+					</div>
+				</button>
+				<Transition
+					when={show}
+					unmount="start"
+					start={{
+						transform: "translateY(-8px)",
+						transformOrigin: "top right",
+						opacity: 0,
+					}}
+					end={{
+						transform: "translateY(0px)",
+						transformOrigin: "top right",
+						opacity: 1,
+					}}
+					duration={100}
+					easing={[0, 1, 0.5, 1.1]}
+				>
+					<SelectMenu ref={ref}>
+						<SelectItem onClick={e => {
+							console.log("A")
+							setShow(false)
+						}}>
+							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
+							<TypeCaps>
+								SVG
+							</TypeCaps>
+						</SelectItem>
+						<SelectItem onClick={e => {
+							console.log("B")
+							setShow(false)
+						}}>
+							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
+							<TypeCaps>
+								REACT
+							</TypeCaps>
+						</SelectItem>
+						<SelectItem onClick={e => {
+							console.log("C")
+							setShow(false)
+						}}>
+							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
+							<TypeCaps>
+								TYPESCRIPT REACT
+							</TypeCaps>
+						</SelectItem>
+					</SelectMenu>
+				</Transition>
 			</div>
 		</div>
 	</>

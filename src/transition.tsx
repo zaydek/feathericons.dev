@@ -66,7 +66,7 @@ export function Transition({ when, unmount, start, end, duration, easing = "ease
 				ds.push(d)
 			}, MICRO_TIMEOUT)
 			ds.push(d)
-		}, delay)
+		}, delay === 0 ? MICRO_TIMEOUT : delay)
 		ds.push(d)
 		return () => {
 			ds
