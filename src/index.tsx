@@ -7,6 +7,7 @@ import "uno.css"
 
 import { ButtonHTMLAttributes, forwardRef, HTMLAttributes, useEffect, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
+import { ChevronDown } from "./data/react-feather@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { Icon } from "./lib/react/icon"
@@ -116,36 +117,34 @@ function Idea() {
 		}
 		window.addEventListener("click", handleClick, false)
 		return () => window.removeEventListener("click", handleClick, false)
-	}, [show])
+	}, [])
 
 	return <>
 		<div className="flex flex-center h-100vh">
-			<div className="relative flex flex-col">
+			<div className="relative flex flex-col" data-group>
 				<button className="px-12 flex flex-center gap-10 h-32 rounded-16 [background-color]-orange" onClick={e => setShow(curr => !curr)}>
 					<TypeInvertedCaps>
 						COPY AS
 					</TypeInvertedCaps>
-					<div className="-mr-8 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fffa">
-						<div className="h-16 w-16 rounded-1e3 [background-color]-#fff"></div>
+					<div className="-mr-8 flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff4">
+						<Icon className="h-16 w-16 [color]-#fff" icon={ChevronDown} strokeWidth={3} />
 					</div>
 				</button>
 				<Transition
 					when={show}
 					unmount="start"
 					start={{
-						transform: "translateY(-8px)",
-						transformOrigin: "top right",
+						transform: "translateY(-16px)",
 						opacity: 0,
 					}}
 					end={{
 						transform: "translateY(0px)",
-						transformOrigin: "top right",
 						opacity: 1,
 					}}
-					duration={100}
-					easing={[0, 1, 0.5, 1.1]}
+					duration={show ? 200 : 400}
+					easing={[0, 1, 0.5, 1.125]}
 				>
-					<SelectMenu ref={ref}>
+					<SelectMenu ref={ref} onTransitionEnd={e => console.log("Test")}>
 						<SelectItem onClick={e => {
 							console.log("A")
 							setShow(false)

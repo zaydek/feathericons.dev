@@ -25,10 +25,10 @@ export function Transition({ when, unmount, start, end, duration, easing = "ease
 	))
 	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
 
-	// Eagerly compute
-	const transition = useMemo(() => {
-		return `${duration}ms ${typeof easing === "string" ? easing : `cubic-bezier(${easing.join(", ")})`} ${delay}ms`
-	}, [delay, duration, easing])
+	//// // Eagerly compute
+	//// const transition = useMemo(() => {
+	//// 	return `${duration}ms ${typeof easing === "string" ? easing : `cubic-bezier(${easing.join(", ")})`} ${delay}ms`
+	//// }, [delay, duration, easing])
 
 	// Eagerly compute
 	const transitionProperty = useMemo(() => {
@@ -44,7 +44,7 @@ export function Transition({ when, unmount, start, end, duration, easing = "ease
 		return (props: HTMLAttributes<HTMLElement>) => <>
 			{cloneElement(children as ReactElement, props)}
 		</>
-	}, [children])
+	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -62,7 +62,7 @@ export function Transition({ when, unmount, start, end, duration, easing = "ease
 						(when && unmount === "end") ||
 						(!when && unmount === "start")
 					))
-				}, duration)
+				}, duration === 0 ? MICRO_TIMEOUT : duration)
 				ds.push(d)
 			}, MICRO_TIMEOUT)
 			ds.push(d)
@@ -82,8 +82,12 @@ export function Transition({ when, unmount, start, end, duration, easing = "ease
 					...state === "start"
 						? start
 						: end,
-					transition,
 					transitionProperty,
+					transitionDuration: `${duration}ms`,
+					transitionTimingFunction: typeof easing === "string"
+						? easing
+						: `cubic-bezier(${easing.join(", ")})`,
+					transitionDelay: `${delay ?? 0}ms`,
 				}}
 			/>
 		</>}
