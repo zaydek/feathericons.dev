@@ -18,11 +18,11 @@ export type TransitionProps = PropsWithChildren<{
 	start:    CSSProperties
 	end:      CSSProperties
 	duration: number
-	easing?:  string | readonly [number, number, number, number]
+	ease?:    string | readonly [number, number, number, number]
 	delay?:   number
 }>
 
-function Transition({ on, unmount, start, end, duration, easing = "ease", delay = 0, children }: TransitionProps) {
+function Transition({ on, unmount, start, end, duration, ease = "ease", delay = 0, children }: TransitionProps) {
 	const ref = useRef<HTMLElement | null>(null)
 
 	const [show, setShow] = useState(!(
@@ -42,16 +42,16 @@ function Transition({ on, unmount, start, end, duration, easing = "ease", delay 
 	const setStyle = useCallback((step: CSSProperties) => {
 		ref.current!.style.transitionProperty = transitionProperty
 		ref.current!.style.transitionDuration = `${duration}ms`
-		ref.current!.style.transitionTimingFunction = typeof easing === "string"
-			? easing
-			: `cubic-bezier(${easing.join(", ")})`
+		ref.current!.style.transitionTimingFunction = typeof ease === "string"
+			? ease
+			: `cubic-bezier(${ease.join(", ")})`
 		ref.current!.style.transitionDelay = `${delay ?? 0}ms`
 
 		for (const [k, v] of Object.entries(step)) {
 			// @ts-expect-error
 			ref.current!.style[k] = v
 		}
-	}, [delay, duration, easing, transitionProperty])
+	}, [delay, duration, ease, transitionProperty])
 
 	// On on...
 	const onceRef = useRef(false)
@@ -60,13 +60,28 @@ function Transition({ on, unmount, start, end, duration, easing = "ease", delay 
 			onceRef.current = true
 			return
 		}
-		const ds: number[] = []
-		const [from, to] = on ? [start, end] : [end, start]
+
 		setShow(true)
+
+		//// setShow(true)
+		//// setTimeout(() => {
+		//// 	setStyle(on ? start : end)
+		//// 	setTimeout(() => {
+		//// 		setStyle(on ? end : start)
+		//// 		setTimeout(() => {
+		//// 			setShow(!(
+		//// 				(on && unmount === "end") ||
+		//// 				(!on && unmount === "start")
+		//// 			))
+		//// 		}, Math.max(MICRO_TIMEOUT, duration))
+		//// 	}, MICRO_TIMEOUT)
+		//// }, Math.max(MICRO_TIMEOUT, delay))
+
+		const ds: number[] = []
 		const d = window.setTimeout(() => {
-			setStyle(from)
+			setShow(true)
 			const d = window.setTimeout(() => {
-				setStyle(to)
+				setStyle(on ? end : start)
 				const d = window.setTimeout(() => {
 					setShow(!(
 						(on && unmount === "end") ||
@@ -83,7 +98,7 @@ function Transition({ on, unmount, start, end, duration, easing = "ease", delay 
 				.reverse()
 				.forEach(tid => window.clearTimeout(tid))
 		}
-	}, [setStyle, duration, end, on, start, unmount, delay])
+	}, [delay, duration, end, on, setStyle, start, unmount])
 
 	return <>
 		{show && <>
@@ -91,13 +106,13 @@ function Transition({ on, unmount, start, end, duration, easing = "ease", delay 
 				ref,
 				style: {
 					...on
-						? end
-						: start,
+						? start
+						: end,
 					transitionProperty,
 					transitionDuration: `${duration}ms`,
-					transitionTimingFunction: typeof easing === "string"
-						? easing
-						: `cubic-bezier(${easing.join(", ")})`,
+					transitionTimingFunction: typeof ease === "string"
+						? ease
+						: `cubic-bezier(${ease.join(", ")})`,
 					transitionDelay: `${delay ?? 0}ms`,
 				},
 			})}
@@ -108,19 +123,32 @@ function Transition({ on, unmount, start, end, duration, easing = "ease", delay 
 function Idea() {
 	const [on, setOn] = useState(false)
 
-	useEffect(() => {
-		console.log({ on })
-	}, [on])
+	//// useEffect(() => {
+	//// 	console.log({ on })
+	//// }, [on])
 
 	return <>
-		<Transition
-			on={on}
-			start={{ backgroundColor: "red"  }}
-			end={{   backgroundColor: "blue" }}
-			duration={5_000}
-		>
-			<div onClick={e => setOn(curr => !curr)}>Hello</div>
-		</Transition>
+		<button className="fixed tl-8 z-100" onClick={e => setOn(curr => !curr)}>
+			Hello
+		</button>
+		<div className="flex flex-center h-100vh">
+			<Transition
+				unmount="start"
+				on={on}
+				start={{
+					transform: "scale(0.9)",
+					opacity: 0,
+				}}
+				end={{
+					transform: "scale(1)",
+					opacity: 1,
+				}}
+				duration={1e3}
+				ease={[0, 1, 1, 1.125]}
+			>
+				<div className="h-160 w-320 rounded-32 [background-color]-#fff [box-shadow]-$shadow-6"></div>
+			</Transition>
+		</div>
 	</>
 }
 
