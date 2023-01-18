@@ -5,10 +5,9 @@ import "./css/vars.scss"
 
 import "uno.css"
 
-import { cloneElement, CSSProperties, PropsWithChildren, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { cloneElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
 import { toKebabCase } from "./lib/cases"
-import { ProvidedApp } from "./search-app"
 //// import { App } from "./app"
 
 const MICRO_TIMEOUT = 10
@@ -24,12 +23,13 @@ export type TransitionProps = PropsWithChildren<{
 }>
 
 function Transition({ on, unmount, start, end, duration, ease = "ease", delay = 0, children }: TransitionProps) {
-	const ref = useRef<HTMLElement | null>(null)
+	//// const ref = useRef<HTMLElement | null>(null)
 
 	const [show, setShow] = useState(!(
 		 (on && unmount === "end") ||
 		(!on && unmount === "start")
 	))
+	const [state, setState] = useState<"start" | "end">(on ? "end" : "start")
 
 	const transitionProperty = useMemo(() => {
 		return [
@@ -40,19 +40,18 @@ function Transition({ on, unmount, start, end, duration, ease = "ease", delay = 
 		].join(", ")
 	}, [end, start])
 
-	const setStyle = useCallback((step: CSSProperties) => {
-		ref.current!.style.transitionProperty = transitionProperty
-		ref.current!.style.transitionDuration = `${duration}ms`
-		ref.current!.style.transitionTimingFunction = typeof ease === "string"
-			? ease
-			: `cubic-bezier(${ease.join(", ")})`
-		ref.current!.style.transitionDelay = `${delay ?? 0}ms`
-
-		for (const [k, v] of Object.entries(step)) {
-			// @ts-expect-error
-			ref.current!.style[k] = v
-		}
-	}, [delay, duration, ease, transitionProperty])
+	//// const setStyle = useCallback((step: CSSProperties) => {
+	//// 	for (const [k, v] of Object.entries(step)) {
+	//// 		// @ts-expect-error
+	//// 		ref.current!.style[k] = v
+	//// 	}
+	//// 	ref.current!.style.transitionProperty = transitionProperty
+	//// 	ref.current!.style.transitionDuration = `${duration}ms`
+	//// 	ref.current!.style.transitionTimingFunction = typeof ease === "string"
+	//// 		? ease
+	//// 		: `cubic-bezier(${ease.join(", ")})`
+	//// 	ref.current!.style.transitionDelay = `${delay ?? 0}ms`
+	//// }, [delay, duration, ease, transitionProperty])
 
 	// On on...
 	const onceRef = useRef(false)
@@ -61,28 +60,11 @@ function Transition({ on, unmount, start, end, duration, ease = "ease", delay = 
 			onceRef.current = true
 			return
 		}
-
-		setShow(true)
-
-		//// setShow(true)
-		//// setTimeout(() => {
-		//// 	setStyle(on ? start : end)
-		//// 	setTimeout(() => {
-		//// 		setStyle(on ? end : start)
-		//// 		setTimeout(() => {
-		//// 			setShow(!(
-		//// 				(on && unmount === "end") ||
-		//// 				(!on && unmount === "start")
-		//// 			))
-		//// 		}, Math.max(MICRO_TIMEOUT, duration))
-		//// 	}, MICRO_TIMEOUT)
-		//// }, Math.max(MICRO_TIMEOUT, delay))
-
 		const ds: number[] = []
 		const d = window.setTimeout(() => {
 			setShow(true)
 			const d = window.setTimeout(() => {
-				setStyle(on ? end : start)
+				setState(on ? "end" : "start")
 				const d = window.setTimeout(() => {
 					setShow(!(
 						(on && unmount === "end") ||
@@ -99,14 +81,14 @@ function Transition({ on, unmount, start, end, duration, ease = "ease", delay = 
 				.reverse()
 				.forEach(tid => window.clearTimeout(tid))
 		}
-	}, [delay, duration, end, on, setStyle, start, unmount])
+	}, [delay, duration, on, unmount])
 
 	return <>
 		{show && <>
 			{cloneElement(children as ReactElement, {
-				ref,
+				//// ref,
 				style: {
-					...on
+					...state === "start"
 						? start
 						: end,
 					transitionProperty,
@@ -144,7 +126,7 @@ function Idea() {
 					transform: "scale(1)",
 					opacity: 1,
 				}}
-				duration={1e3}
+				duration={200}
 				ease={[0, 1, 1, 1.125]}
 			>
 				<div className="h-160 w-320 rounded-32 [background-color]-#fff [box-shadow]-$shadow-6"></div>
@@ -158,11 +140,11 @@ if (import.meta.env.DEV) {
 	console.log("[DEBUG] createRoot")
 	//// createRoot(root).render(<App initialPath={window.location.pathname} />)
 	//// createRoot(root).render(<ProvidedApp />)
-	createRoot(root).render(<ProvidedApp />)
+	createRoot(root).render(<Idea />)
 } else {
 	console.log("[DEBUG] hydrateRoot")
 	//// hydrateRoot(root, <App initialPath={window.location.pathname} />)
 	//// hydrateRoot(root, <ProvidedApp />)
 	//// createRoot(root).render(<ProvidedApp />)
-	createRoot(root).render(<ProvidedApp />)
+	createRoot(root).render(<Idea />)
 }

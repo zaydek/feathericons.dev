@@ -534,19 +534,19 @@ function SidebarContents() {
 							"jsx": JSXIcon,
 							"tsx": TSXIcon,
 						}[formatAs]} strokeWidth={2.5} />
-						{/* <TypeInvertedCaps>
+						<TypeInvertedCaps>
 							FORMAT AS{" "}
 							<span className="inline-flex w-24">
 								{formatAs.toUpperCase()}
 							</span>
-						</TypeInvertedCaps> */}
-						<TypeInvertedCaps>
+						</TypeInvertedCaps>
+						{/* <TypeInvertedCaps>
 							FORMAT AS {{
 								"svg": "SVG",
 								"jsx": "REACT",
 								"tsx": "TYPESCRIPT REACT",
 							}[formatAs]}
-						</TypeInvertedCaps>
+						</TypeInvertedCaps> */}
 						<div className="absolute inset-r-4">
 							<div className="flex flex-center h-24 w-24 rounded-1e3">
 								<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
