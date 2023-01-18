@@ -451,6 +451,68 @@ export function Feather(props: SVGAttributes<SVGElement>) {
 }
 `.trim() + "\n"
 
+function CopyButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+	const [clicked, setClicked] = useState(false)
+
+	useEffect(() => {
+		if (!clicked) { return }
+		setTimeout(() => {
+			setClicked(false)
+		}, 750)
+	}, [clicked])
+
+	return <>
+		<button
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2"
+			onClick={e => {
+				setClicked(true)
+				onClick?.(e)
+			}}
+			{...props}
+		>
+			<Icon
+				className="h-16 w-16 [color]-#fff"
+				icon={clicked ? feather.Check : feather.Clipboard}
+				strokeWidth={2.5}
+			/>
+			<TypeInvertedCaps>
+				COPY
+			</TypeInvertedCaps>
+		</button>
+	</>
+}
+
+function SaveButton({ onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+	const [clicked, setClicked] = useState(false)
+
+	useEffect(() => {
+		if (!clicked) { return }
+		setTimeout(() => {
+			setClicked(false)
+		}, 750)
+	}, [clicked])
+
+	return <>
+		<button
+			className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2"
+			onClick={e => {
+				setClicked(true)
+				onClick?.(e)
+			}}
+			{...props}
+		>
+			<Icon
+				className="h-16 w-16 [color]-#fff"
+				icon={clicked ? feather.Check : feather.Download}
+				strokeWidth={2.5}
+			/>
+			<TypeInvertedCaps>
+				SAVE
+			</TypeInvertedCaps>
+		</button>
+	</>
+}
+
 function SidebarContents() {
 	const { selectedName } = useContext(FocusContext)!
 	const { viewSource, setViewSource } = useContext(ViewSourceContext)!
@@ -507,18 +569,8 @@ function SidebarContents() {
 		</>}
 		<div className="flex flex-col gap-10">
 			<div className="grid grid-cols-2 gap-10">
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Clipboard} strokeWidth={2.5} />
-					<TypeInvertedCaps>
-						COPY
-					</TypeInvertedCaps>
-				</button>
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Download} strokeWidth={2.5} />
-					<TypeInvertedCaps>
-						SAVE
-					</TypeInvertedCaps>
-				</button>
+				<CopyButton />
+				<SaveButton />
 			</div>
 			<ClipboardSelect ref={clipboardSelectRef} pos="end" show={show} setShow={setShow} setFormatAs={setFormatAs}>
 				<div className="relative flex flex-col">
