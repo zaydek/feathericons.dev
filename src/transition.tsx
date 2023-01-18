@@ -1,55 +1,91 @@
-import { createContext, PropsWithChildren, useContext, useLayoutEffect, useMemo, useState } from "react"
-import { PathContext } from "./router"
+import { cloneElement, CSSProperties, HTMLAttributes, PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react"
 
-// Internal
-const _TransitionContext = createContext<{ started: boolean, forwards: boolean } | null>(null)
-
-export function Transition({ children }: PropsWithChildren) {
-	const { started, forwards } = useContext(_TransitionContext)!
-
-	return <>
-		<div style={{
-			opacity: started
-				? 1
-				: 0,
-			transform: started
-				? "translateX(0px)"
-				: forwards ? "translateX(16px)" : "translateX(-16px)",
-			// Transition only forwards
-			transition: started
-				? "600ms ease"
-				: "revert",
-			transitionProperty: started
-				? "opacity, transform"
-				: "revert",
-		}}>
-			{children}
-		</div>
-	</>
+export type TransitionProps = {
+	when:     boolean
+	unmount?: "start" | "end"
+	start:    CSSProperties
+	end:      CSSProperties
+	duration: number
+	easing?:  string | readonly [number, number, number, number]
+	delay?:   number
 }
 
-export function TransitionProvider({ children }: PropsWithChildren) {
-	const { path } = useContext(PathContext)!
+//// function nextFrame(fn: () => void) {
+//// 	requestAnimationFrame(() => {
+//// 		requestAnimationFrame(fn)
+//// 	})
+//// }
 
-	const [started, setStarted] = useState(false)
-	const forwards = useMemo(() => path === "/", [path])
+const MICRO_TIMEOUT = 10
 
-	// On path changes...
-	useLayoutEffect(() => {
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => {
-				setStarted(true)
-			})
-		})
-		return () => {
-			setStarted(false)
+export function Transition({ when, unmount, start, end, duration, easing = "ease", delay = 0, children }: PropsWithChildren<TransitionProps>) {
+	const [show, setShow] = useState(!(
+		 (when && unmount === "end") ||
+		(!when && unmount === "start")
+	))
+	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
+
+	// Eagerly compute
+	const transition = useMemo(() => {
+		return `${duration}ms ${typeof easing === "string" ? easing : `cubic-bezier(${easing.join(", ")})`} ${delay}ms`
+	}, [delay, duration, easing])
+
+	// Eagerly compute
+	const transitionProperty = useMemo(() => {
+		return [
+			...new Set([
+				...Object.keys(start),
+				...Object.keys(end),
+			]),
+		].join(", ")
+	}, [end, start])
+
+	const Children = useMemo(() => {
+		return (props: HTMLAttributes<HTMLElement>) => <>
+			{cloneElement(children as ReactElement, props)}
+		</>
+	}, [children])
+
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
 		}
-	}, [path])
+		const ds: number[] = []
+		const d = window.setTimeout(() => {
+			setShow(true)
+			const d = window.setTimeout(() => {
+				setState(when ? "end" : "start")
+				const d = window.setTimeout(() => {
+					setShow(!(
+						(when && unmount === "end") ||
+						(!when && unmount === "start")
+					))
+				}, duration)
+				ds.push(d)
+			}, MICRO_TIMEOUT)
+			ds.push(d)
+		}, delay)
+		ds.push(d)
+		return () => {
+			ds
+				.reverse()
+				.forEach(tid => window.clearTimeout(tid))
+		}
+	}, [delay, duration, unmount, when])
 
 	return <>
-		{/* eslint-disable-next-line react/jsx-pascal-case */}
-		<_TransitionContext.Provider value={useMemo(() => ({ started, forwards }), [forwards, started])}>
-			{children}
-		</_TransitionContext.Provider>
+		{show && <>
+			<Children
+				style={{
+					...state === "start"
+						? start
+						: end,
+					transition,
+					transitionProperty,
+				}}
+			/>
+		</>}
 	</>
 }

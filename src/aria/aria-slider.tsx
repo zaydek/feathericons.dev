@@ -1,7 +1,7 @@
 import { CSSProperties, Dispatch, HTMLAttributes, PropsWithChildren, SetStateAction, useEffect, useMemo, useRef } from "react"
 import { clamp, round } from "../lib/precision"
 
-type AriaSliderProps = PropsWithChildren<{
+export type AriaSliderProps = PropsWithChildren<{
 	track:    HTMLElement | null
 	thumb:    HTMLElement | null
 	min:      number

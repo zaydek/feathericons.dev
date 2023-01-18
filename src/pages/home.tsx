@@ -1,13 +1,13 @@
 import { Navbar } from "../navbar"
-import { Transition } from "../transition"
+import { RouterTransition } from "../router-transition"
 
 export function Home() {
 	return <>
 		<Navbar />
-		<Transition>
+		<RouterTransition>
 			<div>
 				Hello /
 			</div>
-		</Transition>
+		</RouterTransition>
 	</>
 }
