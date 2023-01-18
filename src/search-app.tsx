@@ -4,7 +4,7 @@ import * as feather from "./data/react-feather@4.29.0"
 
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
-import { ButtonHTMLAttributes, createContext, Dispatch, forwardRef, Fragment, HTMLAttributes, MouseEventHandler, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { ButtonHTMLAttributes, createContext, Dispatch, forwardRef, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
@@ -21,15 +21,16 @@ function TypeCaps({
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
+	// FIXME: [font-feature-settings]-'tnum' doesn't work as expected
 	return <>
 		<div
 			className={cx(`
 				[white-space]-pre
 				[font]-600_11px_/_normal_$sans
-				[font-feature-settings]-'tnum'
 				[letter-spacing]-0.0625em
 				[color]-#333
 			`)}
+			style={{ fontFeatureSettings: "'tnum'" }}
 			{...props}
 		>
 			{children}
@@ -41,15 +42,16 @@ function TypeInvertedCaps({
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
+	// FIXME: [font-feature-settings]-'tnum' doesn't work as expected
 	return <>
 		<div
 			className={cx(`
 				[white-space]-pre
 				[font]-600_11px_/_normal_$sans
-				[font-feature-settings]-'tnum'
 				[letter-spacing]-0.0625em
 				[color]-#fff
 			`)}
+			style={{ fontFeatureSettings: "'tnum'" }}
 			{...props}
 		>
 			{children}
@@ -193,7 +195,7 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 	</>
 }
 
-const ForwardClipboardSelectMenu = forwardRef<HTMLDivElement, PropsWithChildren<{ show: boolean, setShow: Dispatch<SetStateAction<boolean>>, setFormatAs: Dispatch<SetStateAction<"svg" | "jsx" | "tsx">> }>>(({ children, show, setShow, setFormatAs }, ref) => {
+const ClipboardSelect = forwardRef<HTMLDivElement, PropsWithChildren<{ pos: Position, show: boolean, setShow: Dispatch<SetStateAction<boolean>>, setFormatAs: Dispatch<SetStateAction<"svg" | "jsx" | "tsx">> }>>(({ pos, show, setShow, setFormatAs, children }, ref) => {
 	return <>
 		<div className="relative flex flex-col">
 			{children}
@@ -211,7 +213,11 @@ const ForwardClipboardSelectMenu = forwardRef<HTMLDivElement, PropsWithChildren<
 				duration={100}
 				easing={[0, 1, 1, 1]}
 			>
-				<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10">
+				<div ref={ref} className={{
+					"center": undefined,
+					"start":  "absolute t-calc(100%_+_10px) l-0 z-10",
+					"end":    "absolute t-calc(100%_+_10px) r-0 z-10",
+				}[pos]}>
 					<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
 						<button className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)" onClick={e => {
 							setFormatAs("svg")
@@ -288,9 +294,9 @@ function SearchBar() {
 			<Tooltip pos="end" text={<>COMPACT MODE</>}>
 				<SearchBarButton onClick={e => setCompact(curr => !curr)} />
 			</Tooltip>
-			<Tooltip pos="end" text={<>TOGGLE THEME</>}>
+			{/* <Tooltip pos="end" text={<>TOGGLE THEME</>}>
 				<SearchBarButton />
-			</Tooltip>
+			</Tooltip> */}
 		</div>
 	</>
 }
@@ -364,20 +370,6 @@ function SearchResultsContents() {
 	</>
 }
 
-function Label({ handleReset, children }: PropsWithChildren<{ handleReset: MouseEventHandler<HTMLButtonElement> }>) {
-	return <>
-		{/* TODO: Remove align-center when using justify-space-between? */}
-		<div className="flex justify-space-between align-center h-$sidebar-label-height">
-			{/* LHS */}
-			{children}
-			{/* RHS */}
-			{/* <button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee" onClick={handleReset}> */}
-			<Icon className="h-16 w-16 [color]-#ccc" icon={feather.RotateCcw} strokeWidth={2.5} />
-			{/* </button> */}
-		</div>
-	</>
-}
-
 function Hairline() {
 	return <hr className="h-$hairline-height [background-color]-$hairline-color" />
 }
@@ -396,9 +388,25 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 				}
 			}}>
 				<div className="flex flex-col justify-center h-$sidebar-label-height">
-					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$alt-trim-color" : "[background-color]-$hairline-color"}`}>
-						<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
-					</div>
+					<Transition
+						when={checked}
+						start={{ backgroundColor: "var(--hairline-color)" }}
+						end={{   backgroundColor: "var(--alt-trim-color)" }}
+						duration={100}
+						easing={[0, 1, 1, 1]}
+					>
+						<div className="flex align-center h-12 w-48 rounded-1e3">
+							<Transition
+								when={checked}
+								start={{ transform: "translateX(0%)"  }}
+								end={{   transform: "translateX(50%)" }}
+								duration={100}
+								easing={[0, 1, 1, 1]}
+							>
+								<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
+							</Transition>
+						</div>
+					</Transition>
 				</div>
 			</AriaCheckbox>
 		</div>
@@ -447,7 +455,7 @@ export function Feather(props: SVGAttributes<SVGElement>) {
 
 function SidebarContents() {
 	const { selectedName } = useContext(FocusContext)!
-	const { viewCode, setViewCode } = useContext(ViewCodeContext)!
+	const { viewSource, setViewSource } = useContext(ViewSourceContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	const clipboardSelectRef = useRef<HTMLDivElement | null>(null)
@@ -467,8 +475,12 @@ function SidebarContents() {
 	}, [])
 
 	return <>
-		{/* <div className="relative flex flex-col"> */}
-		{viewCode ? <>
+		<Checkbox checked={viewSource} setChecked={setViewSource}>
+			<TypeCaps>
+				VIEW ICON SOURCE
+			</TypeCaps>
+		</Checkbox>
+		{viewSource ? <>
 			<textarea
 				className={cx(`
 					p-24 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
@@ -479,13 +491,13 @@ function SidebarContents() {
 					[letter-spacing]-null
 					[color]-#333
 				`)}
-				rows={placeholder.split("\n").length - 2}
+				rows={placeholder.split("\n").length - 1}
 				defaultValue={placeholder}
 			/>
 		</> : <>
 			<div
 				className="flex flex-center h-256 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
-				style={viewCode ? undefined : {
+				style={viewSource ? undefined : {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
 					backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
@@ -495,7 +507,6 @@ function SidebarContents() {
 				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 			</div>
 		</>}
-		{/* </div> */}
 		<div className="flex flex-col gap-10">
 			<div className="grid grid-cols-2 gap-10">
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$alt-trim-color [box-shadow]-$inset-shadow-2">
@@ -505,13 +516,13 @@ function SidebarContents() {
 					</TypeInvertedCaps>
 				</button>
 				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$trim-color [box-shadow]-$inset-shadow-2">
-					<Icon className="h-16 w-16 [color]-#fff" icon={feather.ArrowDown} strokeWidth={2.5} />
+					<Icon className="h-16 w-16 [color]-#fff" icon={feather.Download} strokeWidth={2.5} />
 					<TypeInvertedCaps>
 						SAVE
 					</TypeInvertedCaps>
 				</button>
 			</div>
-			<ForwardClipboardSelectMenu ref={clipboardSelectRef} show={show} setShow={setShow} setFormatAs={setFormatAs}>
+			<ClipboardSelect ref={clipboardSelectRef} pos="end" show={show} setShow={setShow} setFormatAs={setFormatAs}>
 				<div className="relative flex flex-col">
 					<button className={`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
 						svg: "[background-color]-$svg-color",
@@ -524,39 +535,49 @@ function SidebarContents() {
 							"tsx": TSXIcon,
 						}[formatAs]} strokeWidth={2.5} />
 						<TypeInvertedCaps>
-							FORMAT AS {{
-								"svg": "SVG",
-								"jsx": "REACT",
-								"tsx": "TYPESCRIPT REACT",
-							}[formatAs]}
+							FORMAT AS{" "}
+							<span className="inline-flex w-24">
+								{formatAs.toUpperCase()}
+							</span>
 						</TypeInvertedCaps>
 						<div className="absolute inset-r-4">
-							<div className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#fff4">
+							<div className="flex flex-center h-24 w-24 rounded-1e3">
 								<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
 							</div>
 						</div>
 					</button>
 				</div>
-			</ForwardClipboardSelectMenu>
+			</ClipboardSelect>
 		</div>
-		<Checkbox checked={viewCode} setChecked={setViewCode}>
-			<TypeCaps>
-				VIEW ICON CODE
-			</TypeCaps>
-		</Checkbox>
 		<Hairline />
-		<Label handleReset={e => setSize(sizeInitial)}>
+		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<TypeCaps>
 				ICON SIZE
 			</TypeCaps>
-		</Label>
+			<div className="flex align-center gap-10">
+				<TypeCaps>
+					{size} PX
+				</TypeCaps>
+				<button className="flex flex-center" onClick={e => setSize(sizeInitial)}>
+					<Icon className="h-16 w-16 [color]-#ccc [&:hover]:[color]-#333" icon={feather.RotateCcw} strokeWidth={2.5} onClick={e => setSize(sizeInitial)} />
+				</button>
+			</div>
+		</div>
 		<Slider min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize} />
 		<Hairline />
-		<Label handleReset={e => setStrokeWidth(strokeWidthInitial)}>
+		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<TypeCaps>
 				ICON STROKE WIDTH
 			</TypeCaps>
-		</Label>
+			<div className="flex align-center gap-10">
+				<TypeCaps>
+					{strokeWidth.toFixed(2)}
+				</TypeCaps>
+				<button className="flex flex-center" onClick={e => setStrokeWidth(strokeWidthInitial)}>
+					<Icon className="h-16 w-16 [color]-#ccc [&:hover]:[color]-#333" icon={feather.RotateCcw} strokeWidth={2.5} onClick={e => setStrokeWidth(strokeWidthInitial)} />
+				</button>
+			</div>
+		</div>
 		<Slider min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth} />
 	</>
 }
@@ -600,10 +621,10 @@ const FocusContext =
 		setSelectedIcon: Dispatch<SetStateAction<SVGSVGElement | null>>
 	} | null>(null)
 
-const ViewCodeContext =
+const ViewSourceContext =
 	createContext<{
-		viewCode:        boolean
-		setViewCode:     Dispatch<SetStateAction<boolean>>
+		viewSource:        boolean
+		setViewSource:     Dispatch<SetStateAction<boolean>>
 	} | null>(null)
 
 const CompactContext =
@@ -671,7 +692,7 @@ function StateProvider({ children }: PropsWithChildren) {
 
 	const [selectedName, setSelectedName] = useState<keyof typeof manifest>("Feather")
 	const [selectedIcon, setSelectedIcon] = useState<SVGSVGElement | null>(null)
-	const [viewCode, setViewCode] = useState(false)
+	const [viewSource, setViewSource] = useState(false)
 	const [compact, setCompact] = useState(false)
 	const [size, setSize] = useState(sizeInitial)
 	const [strokeWidth, setStrokeWidth] = useState(strokeWidthInitial)
@@ -691,10 +712,10 @@ function StateProvider({ children }: PropsWithChildren) {
 				selectedIcon,
 				setSelectedIcon,
 			}), [selectedIcon, selectedName])}>
-				<ViewCodeContext.Provider value={useMemo(() => ({
-					viewCode,
-					setViewCode
-				}), [viewCode])}>
+				<ViewSourceContext.Provider value={useMemo(() => ({
+					viewSource,
+					setViewSource,
+				}), [viewSource])}>
 					<CompactContext.Provider value={useMemo(() => ({
 						compact,
 						setCompact,
@@ -711,7 +732,7 @@ function StateProvider({ children }: PropsWithChildren) {
 							{children}
 						</SliderContext.Provider>
 					</CompactContext.Provider>
-				</ViewCodeContext.Provider>
+				</ViewSourceContext.Provider>
 			</FocusContext.Provider>
 		</SearchContext.Provider>
 	</>

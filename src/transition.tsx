@@ -46,6 +46,12 @@ export function Transition({ when, unmount, start, end, duration, easing = "ease
 		</>
 	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+	//// const Children = useMemo(() => {
+	//// 	return (props: HTMLAttributes<HTMLElement>) => <>
+	//// 		{cloneElement(children as ReactElement, props)}
+	//// 	</>
+	//// }, [children])
+
 	const onceRef = useRef(false)
 	useEffect(() => {
 		if (!onceRef.current) {
