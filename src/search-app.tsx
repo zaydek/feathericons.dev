@@ -532,11 +532,7 @@ function FormatDropDownButton() {
 	return <>
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
-				<button className={cx(`px-16 flex flex-center gap-8 h-32 rounded-1e3 ${{
-					svg: "[background-color]-#fff",
-					jsx: "[background-color]-#fff",
-					tsx: "[background-color]-#fff",
-				}[formatAs]} [box-shadow]-$shadow-2`)} onClick={e => setShow(curr => !curr)}>
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2" onClick={e => setShow(curr => !curr)}>
 					<Icon className={cx(`h-16 w-16  ${{
 						svg: "[color]-$svg-color",
 						jsx: "[color]-$jsx-color",
@@ -632,51 +628,41 @@ function SidebarContents() {
 				</TypeCaps>
 			</div>
 		</Checkbox>
-		<div className="relative flex flex-col">
-			{viewSource ? <>
-				<textarea
-					className={cx(`
-						p-24 pb-calc(32px_+_10px_+_32px) rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
+		{viewSource ? <>
+			<textarea
+				className={cx(`
+					p-24 min-h-256 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
 
-						[white-space]-pre
-						[font]-400_14px_/_normal_$code
-						[font-feature-settings]-'tnum'
-						[letter-spacing]-null
-						[color]-#333
-					`)}
-					rows={placeholder.split("\n").length}
-					defaultValue={placeholder}
-				/>
-			</> : <>
-				<div
-					className="pb-calc(32px_+_10px_+_32px) flex flex-center aspect-1.25 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
-					style={viewSource ? undefined : {
-						// https://30secondsofcode.org/css/s/polka-dot-pattern
-						backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
-						backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
-						backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
-					}}
-				>
-					<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
-				</div>
-			</>}
-			<div className="absolute inset-b-16">
-				<div className="flex flex-col gap-10">
-					<div className="grid grid-cols-2 gap-10">
-						<CopyButton />
-						<DownloadButton />
-					</div>
-					<FormatDropDownButton />
-				</div>
+					[white-space]-pre
+					[font]-400_14px_/_normal_$code
+					[font-feature-settings]-'tnum'
+					[letter-spacing]-null
+					[color]-#333
+				`)}
+				rows={placeholder.split("\n").length - 1}
+				defaultValue={placeholder}
+			/>
+		</> : <>
+			<div
+				//// className="flex flex-center aspect-1.5 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
+				className="flex flex-center min-h-256 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
+				style={viewSource ? undefined : {
+					// https://30secondsofcode.org/css/s/polka-dot-pattern
+					backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
+					backgroundPosition: "center calc(320px / 2 - (32px + 10px + 32px) / 2)",
+					backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
+				}}
+			>
+				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 			</div>
-		</div>
-		{/* <div className="flex flex-col gap-10">
+		</>}
+		<div className="flex flex-col gap-10">
 			<div className="grid grid-cols-2 gap-10">
 				<CopyButton />
 				<DownloadButton />
 			</div>
 			<FormatDropDownButton />
-		</div> */}
+		</div>
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-8">
