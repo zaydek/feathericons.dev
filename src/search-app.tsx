@@ -140,7 +140,8 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 	const [hover, setHover] = useState(false)
 
 	return <>
-		<div className="relative" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
+		{/* Use flex flex-col to preserve width */}
+		<div className="relative flex flex-col" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
 			{children}
 			<Transition
 				when={hover}
@@ -178,10 +179,6 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 	</>
 }
 
-// TODO: Use button props here?
-//
-// NOTE: We can't use :first-of-type and :last-of-type because of <Tooltip>
-// wrappers
 function SearchBarButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 	return <>
 		<button className="px-8 flex align-center h-$search-bar-height" {...props}>
@@ -397,17 +394,19 @@ function SidebarContents() {
 							</TypeInvertedCaps>
 						</button>
 					</div>
-					<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$svg-color [box-shadow]-$inset-shadow-2">
-						<div className="grow-1"></div>
-						<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
-						<TypeInvertedCaps>
-							FORMAT AS SVG
-						</TypeInvertedCaps>
-						<div className="grow-1"></div>
-						<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [button:hover_&]:[background-color]-#fff5">
-							<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
-						</div>
-					</button>
+					<Tooltip pos="end" text={<>YOLO</>}>
+						<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-$svg-color [box-shadow]-$inset-shadow-2">
+							<div className="grow-1"></div>
+							<Icon className="h-16 w-16 [color]-#fff" icon={SVGIcon} strokeWidth={2.5} />
+							<TypeInvertedCaps>
+								FORMAT AS SVG
+							</TypeInvertedCaps>
+							<div className="grow-1"></div>
+							<div className="-mr-12 flex flex-center h-24 w-24 rounded-1e3 [button:hover_&]:[background-color]-#fff5">
+								<Icon className="h-16 w-16 [color]-#fff" icon={feather.ChevronDown} strokeWidth={3} />
+							</div>
+						</button>
+					</Tooltip>
 				</div>
 			</div>
 		</div>
