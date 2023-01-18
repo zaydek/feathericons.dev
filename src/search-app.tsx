@@ -136,50 +136,7 @@ function useRestorableState<T>(initialValue: T, zeroValue: T) {
 
 type Position = "start" | "center" | "end"
 
-//// // TODO: Make icon required?
-//// function Tooltip({ pos, icon, text, data, children, ...props }: { pos: Position, icon?: IconComponent, text: ReactNode, data?: any } & HTMLAttributes<HTMLDivElement>) {
-//// 	const [show, setShow] = useState(true)
-////
-//// 	// This is a trick to hide the tooltip on data changes
-//// 	useLayoutEffect(() => {
-//// 		if (data === undefined) { return }
-//// 		setShow(false)
-//// 		setTimeout(() => {
-//// 			setShow(true)
-//// 		}, 0)
-//// 	}, [data])
-////
-//// 	return <>
-//// 		<div className="relative hover-group" {...props}>
-//// 			{children}
-//// 			{show && <>
-//// 				<div className={{
-//// 					"start":  "absolute t-100% l-0 z-10 [pointer-events]-none",
-//// 					"center": "absolute t-100% l-50% [transform]-translateX(-50%) z-10 [pointer-events]-none",
-//// 					"end":    "absolute t-100% r-0 z-10 [pointer-events]-none",
-//// 				}[pos]}>
-//// 					<div className={detab(`
-//// 						[transform]-translateY(8px)
-//// 						[opacity]-0
-//// 						[transition]-100ms_cubic-bezier(0,_1,_1,_1)
-//// 						[transition-property]-transform,_opacity
-//// 							[.hover-group:hover_&]:([transform]-translateY(0px) [opacity]-1 [transition-delay]-10ms)
-//// 					`)}>
-//// 						<div className="px-12 flex align-center gap-8 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
-//// 							{icon !== undefined && <Icon className="h-16 w-16 [color]-#333" icon={icon} />}
-//// 							<TypeCaps>
-//// 								{text}
-//// 							</TypeCaps>
-//// 						</div>
-//// 					</div>
-//// 				</div>
-//// 			</>}
-//// 		</div>
-//// 	</>
-//// }
-
-// TODO: Remove data prop
-function Tooltip({ pos, icon, text, /* data, */ children }: PropsWithChildren<{ pos: Position, icon?: IconComponent, text: ReactNode, data?: any }>) {
+function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Position, icon?: IconComponent, text: ReactNode, data?: any }>) {
 	const [hover, setHover] = useState(false)
 
 	return <>
@@ -189,11 +146,15 @@ function Tooltip({ pos, icon, text, /* data, */ children }: PropsWithChildren<{ 
 				when={hover}
 				unmount="start"
 				start={{
-					transform: pos === "center" ? "translateY(8px) translateX(-50%)" : "translateY(8px)",
+					transform: pos === "center"
+						? "translateY(8px) translateX(-50%)"
+						: "translateY(8px)",
 					opacity: 0,
 				}}
 				end={{
-					transform: pos === "center" ? "translateY(0px) translateX(-50%)" : "translateY(0px)",
+					transform: pos === "center"
+						? "translateY(0px) translateX(-50%)"
+						: "translateY(0px)",
 					opacity: 1,
 				}}
 				duration={100}
@@ -285,9 +246,6 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 	} else {
 		return <>
 			<Wbr>{children.slice(0, indexes[0])}</Wbr>
-			{/* <span className="[background-color]-hsl(52.5,_100%,_75%,_0.4) [box-shadow]-0_1px_0_0_hsl(52.5,_100%,_50%)"> */}
-			{/* <span className="[background-color]-hsl(200,_100%,_87.5%,_0.5) [box-shadow]-0_1px_0_0_hsl(200,_100%,_calc(87.5%_/_2),_0.5)"> */}
-			{/* <span className="[background-color]-hsl(200,_100%,_90%) [box-shadow]-0_1px_0_0_hsl(200,_100%,_75%)"> */}
 			<span className="[background-color]-hsl(45,_100%,_90%) [box-shadow]-0_1px_0_0_hsl(45,_100%,_60%)">
 				{children.slice(indexes[0], indexes[1])}
 			</span>
@@ -325,13 +283,6 @@ function SearchResultsContents() {
 						<div className="flex flex-center h-96">
 							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 						</div>
-
-						{/* <div className="flex justify-center align-baseline wrap-wrap h-32 [text-align]-center [font]-12px_/_normal_$sans [-webkit-user-select]-all [user-select]-all">
-							<Highlight indexes={searchResults[name as keyof typeof feather]!}>
-								{name}
-							</Highlight>
-						</div> */}
-
 						{/* This is a trick so wrapped text is optically centered */}
 						{/* TODO: Extract typography? */}
 						<div className="flex flex-center wrap-wrap h-64 [-webkit-user-select]-all [user-select]-all">
@@ -353,22 +304,10 @@ function Label({ handleReset, children }: PropsWithChildren<{ handleReset: Mouse
 		{/* TODO: Remove align-center when using justify-space-between? */}
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			{/* LHS */}
-			{/* <div className="flex align-center gap-8"> */}
 			{children}
-			{/* </div> */}
 			{/* RHS */}
-			{/* <button className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)" onClick={handleReset}> */}
-			{/* <button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee" onClick={handleReset}>
-				<Icon className="h-12 w-12 [color]-#444" icon={feather.RotateCcw} strokeWidth={2.5} />
-			</button> */}
-			{/* Use my-* for <Tooltip> */}
-			{/* TODO */}
-			{/* <button className="my-8 flex flex-center h-32 w-32 rounded-1e3 [background-color]-#eee [&:hover]:([background-color]-#fff [box-shadow]-$shadow-2)">
-				<div className="h-16 w-16 rounded-1e3 [background-color]-#aaa"></div>
-			</button> */}
-			{/* TODO */}
 			{/* <button className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-#eee" onClick={handleReset}> */}
-				<Icon className="h-16 w-16 [color]-#ccc" icon={feather.RotateCcw} strokeWidth={2.5} />
+			<Icon className="h-16 w-16 [color]-#ccc" icon={feather.RotateCcw} strokeWidth={2.5} />
 			{/* </button> */}
 		</div>
 	</>
@@ -393,9 +332,6 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 			}}>
 				<div className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className={`flex ${checked ? "justify-end" : "justify-start"} align-center h-12 w-48 rounded-1e3 ${checked ? "[background-color]-$alt-trim-color" : "[background-color]-$hairline-color"}`}>
-						{/* <div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
-							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
-						</div> */}
 						<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
 					</div>
 				</div>
@@ -419,9 +355,6 @@ function Slider(props: {
 			<div className="px-4">
 				<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className="flex align-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
-						{/* <div ref={setThumb} className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
-							<div className="h-50% aspect-1 rounded-1e3 [background-color]-$hairline-color"></div>
-						</div> */}
 						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6"></div>
 					</div>
 				</div>
