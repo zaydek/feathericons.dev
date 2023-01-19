@@ -7,7 +7,7 @@ export const svgPlaceholder = detab(`
 		<line x1="16" x2="2" y1="8" y2="22"></line>
 		<line x1="17.5" x2="9" y1="15" y2="15"></line>
 	</svg>
-`).replaceAll("\t", "  ") + "\n"
+`)
 
 export const jsxPlaceholder = detab(`
 	// https://feathericons.dev/feather
@@ -20,7 +20,7 @@ export const jsxPlaceholder = detab(`
 			</svg>
 		);
 	}
-`).replaceAll("\t", "  ") + "\n"
+`)
 
 export const tsxPlaceholder = detab(`
 	import { SVGAttributes } from "react"
@@ -35,7 +35,7 @@ export const tsxPlaceholder = detab(`
 			</svg>
 		);
 	}
-`).replaceAll("\t", "  ") + "\n"
+`)
 
 export const sizeInitial        = 32
 export const sizeMin            = sizeInitial - 16

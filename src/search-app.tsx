@@ -5,6 +5,8 @@ import * as feather from "./data/react-feather@4.29.0"
 //// import featherZip from "./data/feather@4.29.0.zip?url"
 
 import { ButtonHTMLAttributes, createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { formatAsReact, formatAsSvg, formatAsTypeScriptReact } from "../scripts/format"
+import { stringify } from "../scripts/stringify"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
 import { jsxPlaceholder, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep, svgPlaceholder, tsxPlaceholder } from "./constants"
@@ -379,7 +381,7 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 
 	return <>
 		<button
-			className={cx(`px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2
+			className={cx(`px-16 flex flex-center gap-8 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2
 				[&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff`)}
 			onPointerUp={e => {
 				setPressed(true)
@@ -413,7 +415,7 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 
 	return <>
 		<button
-			className={cx(`px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2
+			className={cx(`px-16 flex flex-center gap-8 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2
 				[&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff`)}
 			onPointerUp={e => {
 				setPressed(true)
@@ -464,7 +466,7 @@ function FormatDropDownButton() {
 	return <>
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
-				<button className="px-16 flex flex-center gap-8 h-32 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2" onClick={e => setShow(curr => !curr)}>
+				<button className="px-16 flex flex-center gap-8 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2" onClick={e => setShow(curr => !curr)}>
 					<Icon className={cx(`h-16 w-16  ${{
 						svg: "[color]-$svg-color",
 						jsx: "[color]-$jsx-color",
@@ -476,13 +478,15 @@ function FormatDropDownButton() {
 					}[formatAs]} strokeWidth={2.5} />
 					<TypeCaps>
 						FORMAT AS{" "}
-						<span className="inline-flex w-24">
-							{formatAs.toUpperCase()}
-						</span>
+						{{
+							"svg": "SVG",
+							"jsx": "REACT",
+							"tsx": "TS REACT",
+						}[formatAs]}
 					</TypeCaps>
 					<div className="absolute inset-r-0">
 						<div className="flex flex-center h-32 w-32 rounded-1e3">
-							<Icon className="h-16 w-16 [color]-#333" icon={feather.ChevronDown} strokeWidth={2.5} />
+							<Icon className="h-16 w-16 [color]-#555" icon={feather.ChevronDown} strokeWidth={2.5} />
 						</div>
 					</div>
 				</button>
@@ -570,7 +574,7 @@ function SidebarContents() {
 		{viewSource ? <>
 			<textarea
 				className={cx(`
-					p-24 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
+					p-24 min-h-256 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
 
 					[white-space]-pre
 					[font]-400_14px_/_normal_$code
@@ -762,32 +766,25 @@ function StateProvider({ children }: PropsWithChildren) {
 	const clipboard = useMemo(() => {
 		if (selectedSvgElement === null) {
 			return {
-				"svg": svgPlaceholder,
-				"jsx": jsxPlaceholder,
-				"tsx": tsxPlaceholder,
+				"svg": svgPlaceholder.replaceAll("\t", "  "),
+				"jsx": jsxPlaceholder.replaceAll("\t", "  "),
+				"tsx": tsxPlaceholder.replaceAll("\t", "  "),
 			}[formatAs]
 		}
-		return "lol"
-		//// if (formatAs === "svg") {
-		//// 	const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
-		//// 	return formatAsSvg(name, code, {
-		//// 		license: `<!-- Feather v${version} | MIT License | https://github.com/feathericons/feather -->`,
-		//// 		comment: `https://feathericons.dev/${name}`,
-		//// 	})
-		//// } else if (formatAs === "jsx") {
-		//// 	const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
-		//// 	return formatAsSvg(name, code, {
-		//// 		license: `<!-- Feather v${version} | MIT License | https://github.com/feathericons/feather -->`,
-		//// 		comment: `https://feathericons.dev/${name}`,
-		//// 	})
-		//// } else {
-		//// 	const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
-		//// 	return formatAsSvg(name, code, {
-		//// 		license: `<!-- Feather v${version} | MIT License | https://github.com/feathericons/feather -->`,
-		//// 		comment: `https://feathericons.dev/${name}`,
-		//// 	})
-		//// }
-	}, [formatAs, selectedSvgElement])
+		if (formatAs === "svg") {
+			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
+			return formatAsSvg(selectedName, code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}` })
+				.replaceAll("\t", "  ")
+		} else if (formatAs === "jsx") {
+			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
+			return formatAsReact(selectedName, code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=jsx` })
+				.replaceAll("\t", "  ")
+		} else {
+			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
+			return formatAsTypeScriptReact(selectedName, code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=tsx` })
+				.replaceAll("\t", "  ")
+		}
+	}, [formatAs, selectedName, selectedSvgElement])
 
 	//////////////////////////////////////////////////////////////////////////////
 	// SliderContext
