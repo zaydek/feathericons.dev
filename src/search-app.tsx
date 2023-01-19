@@ -89,70 +89,6 @@ function TypeInvertedCaps({
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// function useRestorableState<T>(initialValue: T, zeroValue: T) {
-//// 	const [state, setState] = useState(initialValue)
-//// 	const [history, setHistory] = useState([state])
-//// 	const [historyIndex, setHistoryIndex] = useState(history.length - 1)
-////
-//// 	const restoreState = useCallback((increment: number) => {
-//// 		if (increment > 0) {
-//// 			if (historyIndex + increment < history.length) {
-//// 				setHistoryIndex(curr => curr + increment)
-//// 			}
-//// 		} else {
-//// 			if (historyIndex + increment >= 0) {
-//// 				setHistoryIndex(curr => curr + increment)
-//// 			}
-//// 		}
-//// 	}, [history.length, historyIndex])
-////
-//// 	// Commits state to history and historyIndex
-//// 	const onceRef = useRef(false)
-//// 	const commitState = useCallback(() => {
-//// 		if (!onceRef.current) {
-//// 			onceRef.current = true
-//// 			return
-//// 		}
-//// 		const timeoutId = setTimeout(() => {
-//// 			if (state === zeroValue || state === history[historyIndex]) { return }
-//// 			if (historyIndex === 0) { // At start
-//// 				// Append state
-//// 				setHistory(curr => [
-//// 					zeroValue,
-//// 					state,
-//// 					...curr.slice(1)
-//// 				])
-//// 				setHistoryIndex(curr => curr + 1)
-//// 			} else if (historyIndex + 1 === history.length) { // At end
-//// 				// Append state
-//// 				setHistory(curr => [
-//// 					...curr,
-//// 					state,
-//// 				])
-//// 				setHistoryIndex(curr => curr + 1)
-//// 			} else {
-//// 				// Insert state
-//// 				setHistory(curr => [
-//// 					...curr.slice(0, historyIndex),
-//// 					state,
-//// 					...curr.slice(historyIndex + 1),
-//// 				])
-//// 			}
-//// 		}, 500)
-//// 		return () => clearTimeout(timeoutId)
-//// 	}, [history, historyIndex, state, zeroValue])
-////
-//// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-//// 	useEffect(commitState, [state])
-////
-//// 	// history[historyIndex] -> state
-//// 	useEffect(() => {
-//// 		setState(history[historyIndex])
-//// 	}, [history, historyIndex])
-////
-//// 	return [state, setState, restoreState] as const
-//// }
-
 type Position = "start" | "center" | "end"
 
 function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Position, icon?: IconComponent, text: ReactNode, data?: any }>) {
@@ -436,8 +372,7 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 	</>
 }
 
-
-function FormatDropDownButton() {
+function FormatButton() {
 	const { formatAs, setFormatAs } = useContext(SelectedContext)!
 
 	const ref = useRef<HTMLDivElement | null>(null)
@@ -602,7 +537,7 @@ function SidebarContents() {
 			</div>
 		</>}
 		<div className="flex flex-col gap-10">
-			<FormatDropDownButton />
+			<FormatButton />
 			<div className="grid grid-cols-2 gap-10">
 				<CopyButton onClick={async e => {
 					await navigator.clipboard.writeText(clipboard)
@@ -666,7 +601,6 @@ function SidebarContents() {
 document.documentElement.style.backgroundColor = "#fff"
 
 function App() {
-
 	return <>
 		{/* <a href={featherZip} download>
 			Click me
@@ -763,7 +697,6 @@ function StateProvider({ children }: PropsWithChildren) {
 		}
 		return { ...refA, ...refB }
 	}, [$$search, searchResultsFallback])
-
 
 	//////////////////////////////////////////////////////////////////////////////
 	// SelectedContext
