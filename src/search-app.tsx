@@ -198,7 +198,7 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 		return <>
 			<Wbr>{children.slice(0, indexes[0])}</Wbr>
 			<span className="[background-color]-hsl(45,_100%,_90%) [box-shadow]-0_1px_0_0_hsl(45,_100%,_60%)">
-				{children.slice(indexes[0], indexes[1])}
+				<Wbr>{children.slice(indexes[0], indexes[1])}</Wbr>
 			</span>
 			<Wbr>{children.slice(indexes[1])}</Wbr>
 		</>
@@ -233,10 +233,10 @@ function SearchResultsContents() {
 						<div className="flex flex-center h-96">
 							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 						</div>
-						{/* This is a trick so wrapped text is optically centered */}
 						{/* TODO: Extract typography? */}
-						<div className="flex flex-center wrap-wrap h-64 [-webkit-user-select]-all [user-select]-all">
-							<div className="h-32 [text-align]-center [font]-12px_/_normal_$sans">
+						{/* FIXME */}
+						<div className="px-4 flex flex-center h-64 [-webkit-user-select]-all [user-select]-all">
+							<div className="h-32 [text-align]-center [font]-400_12px_/_normal_$sans [color]-#333">
 								<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 									{name}
 								</Highlight>
