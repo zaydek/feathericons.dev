@@ -10,10 +10,10 @@ export function TypeCaps({
 			className={cx(`
 				white-space--pre
 				font--600_11px_/_normal_$sans
+				font-feature-settings--'tnum'
 				letter-spacing--0.0625em
 				color--#333
 			`)}
-			style={{ fontFeatureSettings: "'tnum'" }}
 			{...props}
 		>
 			{children}
@@ -31,10 +31,10 @@ export function TypeInvertedCaps({
 			className={cx(`
 				white-space--pre
 				font--600_11px_/_normal_$sans
+				font-feature-settings--'tnum'
 				letter-spacing--0.0625em
 				color--#fff
 			`)}
-			style={{ fontFeatureSettings: "'tnum'" }}
 			{...props}
 		>
 			{children}

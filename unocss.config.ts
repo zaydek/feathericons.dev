@@ -1,39 +1,49 @@
-import { variantBreakpoints, variantVariables } from "@unocss/preset-mini/variants"
+import { variantBreakpoints, variantImportant, variantVariables } from "@unocss/preset-mini/variants"
 import transformerVariantGroup from "@unocss/transformer-variant-group"
-import { Rule } from "unocss"
+import { Extractor, Rule } from "unocss"
 import { defineConfig } from "unocss/vite"
 
+// https://github.com/unocss/unocss/blob/464cdd19cfef2c7a7f195a1a187191c6f4bb5f48/packages/core/src/utils/helpers.ts#L12
+function isValidSelector(selector: string) {
+  return /[!-~]+/.test(selector)
+}
+
+// https://github.com/unocss/unocss/blob/fa0bf070d0bdc0c2591d05b6437482feccd62d03/packages/core/src/extractors/split.ts#L4
+function splitCode(code: string) {
+  return code.split(/\\?[\s"`;{}]+/g).filter(isValidSelector) // Remove '
+}
+
+// Fixes edge cases such as font-feature-settings--'tnum'
+const extractors: Extractor[] = [{
+  name: "custom-extractor",
+  order: -1,
+  extract({ code }) {
+    return new Set(splitCode(code))
+  },
+}]
 
 function resolve(str: string, { sign, px }: { sign: string, px: boolean }) {
 	if (sign === "-") {
 		if (str.startsWith("(") && str.endsWith(")")) { // E.g. calc
 			return `calc(-1 * (${str.slice(1, -1)}))`
 		} else {
-			if (px && Number.isFinite(+str)) { return `-${str}px` }
-			return `calc(-1 * (${str}))`
+			if (px && Number.isFinite(+str)) {
+				return `-${str}px`
+			} else {
+				return `calc(-1 * (${str}))`
+			}
 		}
 	} else {
 		if (str.startsWith("(") && str.endsWith(")")) { // E.g. calc
 			return `calc(${str.slice(1, -1)})`
 		} else {
-			if (px && Number.isFinite(+str)) { return `${str}px` }
-			return str
+			if (px && Number.isFinite(+str)) {
+				return `${str}px`
+			} else {
+				return str
+			}
 		}
 	}
-
-	//// if (str.startsWith("(") && str.endsWith(")")) {
-	//// 	if (sign === "-") {
-	//// 		return `calc(-1 * (${str.slice(1, -1)}))`
-	//// 	} else {
-	//// 		return `calc(${str.slice(1, -1)})`
-	//// 	}
-	//// } else {
-	//// 	if (px && Number.isFinite(+str)) {
-	//// 		return sign + str + "px"
-	//// 	} else {
-	//// 		return sign + str
-	//// 	}
-	//// }
 }
 
 function desugar(raw: string | undefined, { sign = "", px = true }: { sign?: string, px?: boolean } = {}) {
@@ -129,16 +139,6 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,     ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
-	//// // Arbitrary key-value e.g. property--value
-	//// //
-	//// // TODO: DEPRECATE
-	//// [/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
-	//// 	const px = !(property in unitless)
-	//// 	return {
-	//// 		[property]: desugar(value, { px }),
-	//// 	}
-	//// }],
-
 	// Arbitrary key-value e.g. k--v
 	[/^((?:--|-)?[a-z]+(?:-[a-z]+)*)--(.+)$/, ([_, property, value]) => {
 		//// const px = !(property in unitless)
@@ -149,6 +149,7 @@ const rules: Rule[] = [
 ]
 
 export default defineConfig({
+	extractors,
 	presets: [],
 	rules,
 	theme: {
@@ -163,6 +164,7 @@ export default defineConfig({
 	transformers: [transformerVariantGroup()],
 	variants: [
 		variantBreakpoints, // E.g. md:x-y
+		variantImportant,   // E.g. !x-y
 		variantVariables,   // E.g. [foo]:x-y
 	],
 })
