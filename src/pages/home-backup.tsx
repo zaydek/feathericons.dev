@@ -46,7 +46,7 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 ////
 //// function MainContents() {
 //// 	return <>
-//// 		<div className="py-$main-inset-y pb-calc($main-inset-y_*_2) px-$main-inset-x">
+//// 		<div className="py-$main-inset-y pb-($main-inset-y_*_2) px-$main-inset-x">
 //// 			<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr)) grid-auto-rows-96">
 //// 				{iota(400).map(index =>
 //// 					<div key={index} className="flex center">
@@ -116,7 +116,7 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 //// 		<div className="px-4">
 //// 			<div className="flex flex-col justify-center h-$sidebar-label-height">
 //// 				<div className="flex center h-6 rounded-1e3 background-color--$alt-trim-color">
-//// 					<div className="flex center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 background-color--$base-color box-shadow--$shadow-6">
+//// 					<div className="flex center h-($sidebar-input-height_+_4px) w-($sidebar-input-height_+_4px) rounded-1e3 background-color--$base-color box-shadow--$shadow-6">
 //// 						<div className="h-50% aspect-1 rounded-1e3 background-color--$placeholder-color"></div>
 //// 					</div>
 //// 				</div>
