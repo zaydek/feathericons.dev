@@ -1,33 +1,35 @@
-import { variantBreakpoints, variantVariables } from "@unocss/preset-mini/variants"
+import { variantBreakpoints, variantImportant, variantVariables } from "@unocss/preset-mini/variants"
 import transformerVariantGroup from "@unocss/transformer-variant-group"
 import { Rule } from "unocss"
 import { defineConfig } from "unocss/vite"
 import { unitless } from "./unitless"
 
-function resolve(str: string, { sign, px }: { sign: string, px: boolean }) {
-	if (str.startsWith("(") && str.endsWith(")")) {
-		if (sign === "-") {
-			return `calc(-1 * (${str.slice(1, -1)}))`
-		} else {
-			return `calc(${str.slice(1, -1)})`
-		}
-	} else {
-		if (px && Number.isFinite(+str)) {
-			return sign + str + "px"
-		} else {
-			return sign + str
-		}
-	}
+function convertSpaces(value: string) {
+	return value.replace(/_/g, " ")
 }
 
-function desugar(raw: string | undefined, { sign = "", px = true }: { sign?: string, px?: boolean } = {}) {
-	if (raw === undefined || raw === "undefined" || raw === "null") {
+function extractCSSVariables(value: string) {
+	return value.replace(/\$([a-zA-Z][a-zA-Z-0-9]*)/g, "var(--$1)")
+}
+
+function desugar(rawValue: string | undefined, { sign, px }: { sign?: string, px?: boolean } = {}) {
+	// No such value; eager return
+	if (rawValue === undefined || rawValue === "undefined" || rawValue === "null") {
 		return undefined
 	}
-	const str = raw
-		.replace(/_/g, " ")
-		.replace(/\$([a-zA-Z][a-zA-Z-0-9]*)/g, "var(--$1)")
-	return resolve(str, { sign, px })
+	sign ??= ""
+	px   ??= true
+	// CSS variable; passthrough
+	const value = convertSpaces(extractCSSVariables(rawValue))
+	if (value.startsWith("$")) {
+		return value
+	} else {
+		if (px) {
+			return sign + value + (Number.isNaN(+value) ? "" : "px")
+		} else {
+			return sign + value
+		}
+	}
 }
 
 const rules: Rule[] = [
@@ -36,22 +38,24 @@ const rules: Rule[] = [
 	["relative",              { "position": "relative" }],
 	["sticky",                { "position": "sticky"   }],
 
-	[/^(-?)inset-(.+)$/,      ([_, sign, value]) => ({ "inset":   desugar(value, { sign }) })],
-	[/^(-?)inset-t-(.+)$/,    ([_, sign, value]) => ({ "top":     desugar(value, { sign }), "right":  desugar(value, { sign }), "left":   desugar(value, { sign }) })],
-	[/^(-?)inset-r-(.+)$/,    ([_, sign, value]) => ({ "top":     desugar(value, { sign }), "right":  desugar(value, { sign }), "bottom": desugar(value, { sign }) })],
-	[/^(-?)inset-b-(.+)$/,    ([_, sign, value]) => ({ "right":   desugar(value, { sign }), "bottom": desugar(value, { sign }), "left":   desugar(value, { sign }) })],
-	[/^(-?)inset-l-(.+)$/,    ([_, sign, value]) => ({ "top":     desugar(value, { sign }), "bottom": desugar(value, { sign }), "left":   desugar(value, { sign }) })],
-	[/^(-?)tr-(.+)$/,         ([_, sign, value]) => ({ "top":     desugar(value, { sign }), "right":  desugar(value, { sign }) })],
-	[/^(-?)br-(.+)$/,         ([_, sign, value]) => ({ "right":   desugar(value, { sign }), "bottom": desugar(value, { sign }) })],
-	[/^(-?)bl-(.+)$/,         ([_, sign, value]) => ({ "bottom":  desugar(value, { sign }), "left":   desugar(value, { sign }) })],
-	[/^(-?)tl-(.+)$/,         ([_, sign, value]) => ({ "top":     desugar(value, { sign }), "left":   desugar(value, { sign }) })],
-	[/^(-?)y-(.+)$/,          ([_, sign, value]) => ({ "top":     desugar(value, { sign }), "bottom": desugar(value, { sign }) })],
-	[/^(-?)x-(.+)$/,          ([_, sign, value]) => ({ "right":   desugar(value, { sign }), "left":   desugar(value, { sign }) })],
-	[/^(-?)t-(.+)$/,          ([_, sign, value]) => ({ "top":     desugar(value, { sign }) })],
-	[/^(-?)r-(.+)$/,          ([_, sign, value]) => ({ "right":   desugar(value, { sign }) })],
-	[/^(-?)b-(.+)$/,          ([_, sign, value]) => ({ "bottom":  desugar(value, { sign }) })],
-	[/^(-?)l-(.+)$/,          ([_, sign, value]) => ({ "left":    desugar(value, { sign }) })],
-	[/^z-(.+)$/,              ([_, value]) =>       ({ "z-index": desugar(value, { px: false }) })],
+	[/^(-?)inset-(.+)$/,      ([_, sign, value]) => ({ "inset":          desugar(value, { sign }) })],
+
+	[/^(-?)inset-t-(.+)$/,    ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar(value, { sign }),                                     "left": desugar(value, { sign }) })],
+	[/^(-?)inset-r-(.+)$/,    ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right": desugar(value, { sign }), "bottom": desugar(value, { sign })                                   })],
+	[/^(-?)inset-b-(.+)$/,    ([_, sign, value]) => ({                                             "right": desugar(value, { sign }), "bottom": desugar(value, { sign }), "left": desugar(value, { sign }) })],
+	[/^(-?)inset-l-(.+)$/,    ([_, sign, value]) => ({ "top":            desugar(value, { sign }),                                    "bottom": desugar(value, { sign }), "left": desugar(value, { sign }) })],
+
+	[/^(-?)tr-(.+)$/,         ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "right":  desugar(value, { sign }) })],
+	[/^(-?)br-(.+)$/,         ([_, sign, value]) => ({ "right":          desugar(value, { sign }), "bottom": desugar(value, { sign }) })],
+	[/^(-?)bl-(.+)$/,         ([_, sign, value]) => ({ "bottom":         desugar(value, { sign }), "left":   desugar(value, { sign }) })],
+	[/^(-?)tl-(.+)$/,         ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "left":   desugar(value, { sign }) })],
+	[/^(-?)y-(.+)$/,          ([_, sign, value]) => ({ "top":            desugar(value, { sign }), "bottom": desugar(value, { sign }) })],
+	[/^(-?)x-(.+)$/,          ([_, sign, value]) => ({ "right":          desugar(value, { sign }), "left":   desugar(value, { sign }) })],
+	[/^(-?)t-(.+)$/,          ([_, sign, value]) => ({ "top":            desugar(value, { sign }) })],
+	[/^(-?)r-(.+)$/,          ([_, sign, value]) => ({ "right":          desugar(value, { sign }) })],
+	[/^(-?)b-(.+)$/,          ([_, sign, value]) => ({ "bottom":         desugar(value, { sign }) })],
+	[/^(-?)l-(.+)$/,          ([_, sign, value]) => ({ "left":           desugar(value, { sign }) })],
+	[/^z-(.+)$/,              ([_, value])       => ({ "z-index":        desugar(value, { px: false })})],
 
 	[/^(-?)m-(.+)$/,          ([_, sign, value]) => ({ "margin":         desugar(value, { sign }) })],
 	[/^(-?)my-(.+)$/,         ([_, sign, value]) => ({ "margin-top":     desugar(value, { sign }), "margin-bottom": desugar(value, { sign }) })],
@@ -68,39 +72,44 @@ const rules: Rule[] = [
 	[/^pb-(.+)$/,             ([_, value])       => ({ "padding-bottom": desugar(value) })],
 	[/^pl-(.+)$/,             ([_, value])       => ({ "padding-left":   desugar(value) })],
 
-	["flex",                  { "display":         "flex"          }],
-	["inline-flex",           { "display":         "inline-flex"   }],
-	["flex-col",              { "flex-direction":  "column"        }],
-	["flex-row",              { "flex-direction":  "row"           }],
-	["justify-start",	        { "justify-content": "flex-start"    }],
-	["justify-end",	          { "justify-content": "flex-end"      }],
-	["justify-center",        { "justify-content": "center"        }],
-	["justify-between",       { "justify-content": "space-between" }],
-	["justify-around",        { "justify-content": "space-around"  }],
-	["justify-evenly",        { "justify-content": "space-evenly"  }],
-	["align-start",           { "align-items":     "flex-start"    }],
-	["align-end",             { "align-items":     "flex-end"      }],
-	["align-center",          { "align-items":     "center"        }],
-	["align-baseline",        { "align-items":     "baseline"      }],
-	["align-stretch",         { "align-items":     "stretch"       }],
+	[/^justify-self-(.+)$/,   ([_, value]) => ({ "justify-self":         desugar(value, { px: false }) })],
+	[/^align-self-(.+)$/,     ([_, value]) => ({ "align-self":           desugar(value, { px: false }) })],
+	[/^grow-(.+)$/,           ([_, value]) => ({ "flex-grow":            desugar(value, { px: false }) })],
+	[/^shrink-(.+)$/,         ([_, value]) => ({ "flex-shrink":          desugar(value, { px: false }) })],
+	[/^basis-(.+)$/,          ([_, value]) => ({ "flex-basis":           desugar(value) })],
+
+	["flex",                  { "display": "flex"          }],
+	["inline-flex",           { "display": "inline-flex"   }],
+	["flex-row",              { "flex-direction": "row"    }],
+	["flex-col",              { "flex-direction": "column" }],
+
+	[/^justify-(.+)$/,        ([_, value]) => ({ "justify-content":      desugar(value, { px: false }) })],
+	[/^align-(.+)$/,          ([_, value]) => ({ "align-items":          desugar(value, { px: false }) })],
+	[/^wrap-(.+)$/,           ([_, value]) => ({ "flex-wrap":            desugar(value, { px: false }) })],
+	[/^order-(.+)$/,          ([_, value]) => ({ "order":                desugar(value, { px: false }) })],
+
+	["flex-center",           { "justify-content": "center", "align-items": "center" }],
 
 	["grid",                  { "display": "grid" }],
 	[/^grid-(.+)$/,           ([_, value]) => ({ "display": "grid", "grid-template":         Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
-	[/^grid-cols-(.+)$/,      ([_, value]) => ({ "display": "grid", "grid-template-columns": Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 	[/^grid-rows-(.+)$/,      ([_, value]) => ({ "display": "grid", "grid-template-rows":    Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
-	[/^grid-auto-cols-(.+)$/, ([_, value]) => ({ "grid-auto-columns":                        desugar(value, { px: true }) })],
-	[/^grid-auto-rows-(.+)$/, ([_, value]) => ({ "grid-auto-rows":                           desugar(value, { px: true }) })],
-	[/^gap-(.+)$/,            ([_, value]) => ({ "gap":                                      desugar(value) })],
-	[/^col-gap-(.+)$/,        ([_, value]) => ({ "column-gap":                               desugar(value) })],
-	[/^row-gap-(.+)$/,        ([_, value]) => ({ "row-gap":                                  desugar(value) })],
+	[/^grid-cols-(.+)$/,      ([_, value]) => ({ "display": "grid", "grid-template-columns": Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
+	[/^grid-auto-rows-(.+)$/, ([_, value]) => ({ "grid-auto-rows":       desugar(value, { px: true }) })],
+	[/^grid-auto-cols-(.+)$/, ([_, value]) => ({ "grid-auto-columns":    desugar(value, { px: true }) })],
 
-	[/^h-(.+)$/,              ([_, value]) => ({ "height":       desugar(value) })],
-	[/^min-h-(.+)$/,          ([_, value]) => ({ "min-height":   desugar(value) })],
-	[/^max-h-(.+)$/,          ([_, value]) => ({ "max-height":   desugar(value) })],
-	[/^w-(.+)$/,              ([_, value]) => ({ "width":        desugar(value) })],
-	[/^min-w-(.+)$/,          ([_, value]) => ({ "min-width":    desugar(value) })],
-	[/^max-w-(.+)$/,          ([_, value]) => ({ "max-width":    desugar(value) })],
-	[/^aspect-(.+)$/,         ([_, value]) => ({ "aspect-ratio": desugar(value, { px: false }) })],
+	["grid-center",           { "place-items": "center" }],
+
+	[/^gap-(.+)$/,            ([_, value]) => ({ "gap":                  desugar(value) })],
+	[/^gap-y-(.+)$/,          ([_, value]) => ({ "row-gap":              desugar(value) })],
+	[/^gap-x-(.+)$/,          ([_, value]) => ({ "column-gap":           desugar(value) })],
+
+	[/^h-(.+)$/,              ([_, value]) => ({ "height":               desugar(value) })],
+	[/^min-h-(.+)$/,          ([_, value]) => ({ "min-height":           desugar(value) })],
+	[/^max-h-(.+)$/,          ([_, value]) => ({ "max-height":           desugar(value) })],
+	[/^w-(.+)$/,              ([_, value]) => ({ "width":                desugar(value) })],
+	[/^min-w-(.+)$/,          ([_, value]) => ({ "min-width":            desugar(value) })],
+	[/^max-w-(.+)$/,          ([_, value]) => ({ "max-width":            desugar(value) })],
+	[/^aspect-(.+)$/,         ([_, value]) => ({ "aspect-ratio":         desugar(value, { px: false }) })],
 
 	[/^rounded-(.+)$/,        ([_, value]) => ({ "border-radius":              desugar(value) })],
 	[/^rounded-t-(.+)$/,      ([_, value]) => ({ "border-top-left-radius":     desugar(value), "border-top-right-radius":    desugar(value) })],
@@ -113,20 +122,10 @@ const rules: Rule[] = [
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
 	// Arbitrary key-value e.g. [property]-value
-	//
-	// TODO: DEPRECATE
 	[/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
 		const px = !(property in unitless)
 		return {
 			[property]: desugar(value, { px }),
-		}
-	}],
-
-	// Arbitrary key-value e.g. k--v
-	[/^((?:--|-)?[a-z]+(?:-[a-z]+)*)--(.+)$/, ([_, property, value]) => {
-		//// const px = !(property in unitless)
-		return {
-			[property]: desugar(value, { px: false }),
 		}
 	}],
 ]
@@ -145,7 +144,8 @@ export default defineConfig({
 	},
 	transformers: [transformerVariantGroup()],
 	variants: [
-		variantBreakpoints, // E.g. md:x-y
+		variantBreakpoints, // E.g. xl:x-y
+		variantImportant,   // E.g. !x-y
 		variantVariables,   // E.g. [foo]:x-y
 	],
 })

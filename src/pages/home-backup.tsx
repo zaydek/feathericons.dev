@@ -1,6 +1,6 @@
 //// function NavigationIcon() {
 //// 	return <>
-//// 		<div className="flex justify-center align-center h-32 w-32 rounded-1e3 [background-color]-orange">
+//// 		<div className="flex flex-center h-32 w-32 rounded-1e3 [background-color]-orange">
 //// 			<div className="h-24 w-24 rounded-1e3 [background-color]-white"></div>
 //// 		</div>
 //// 	</>
@@ -49,7 +49,7 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 //// 		<div className="py-$main-inset-y pb-calc($main-inset-y_*_2) px-$main-inset-x">
 //// 			<div className="grid grid-cols-repeat(auto-fill,_minmax(96px,_1fr)) grid-auto-rows-96">
 //// 				{iota(400).map(index =>
-//// 					<div key={index} className="flex justify-center align-center">
+//// 					<div key={index} className="flex flex-center">
 //// 						<div className="h-40 w-40 rounded-1e3 [background-color]-$placeholder-color"></div>
 //// 					</div>
 //// 				)}
@@ -80,14 +80,14 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 //// 	resetButton ??= false
 ////
 //// 	return <>
-//// 		<div className="flex justify-between align-center h-$sidebar-label-height">
+//// 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 //// 			<div className="flex align-center gap-10">
 //// 				<IconPlaceholder />
 //// 				<TextPlaceholder />
 //// 			</div>
 //// 			{resetButton && <>
 //// 				<div className="px-4">
-//// 					<div className="flex justify-center align-center h-24 w-24 rounded-1e3 [background-color]-$light-placeholder-color">
+//// 					<div className="flex flex-center h-24 w-24 rounded-1e3 [background-color]-$light-placeholder-color">
 //// 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$dark-placeholder-color"></div>
 //// 					</div>
 //// 				</div>
@@ -98,11 +98,11 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 ////
 //// function Checkbox() {
 //// 	return <>
-//// 		<div className="flex justify-between align-center h-$sidebar-label-height">
+//// 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 //// 			<TextPlaceholder />
 //// 			<div className="flex flex-col justify-center h-$sidebar-label-height">
 //// 				<div className="flex justify-end align-center h-12 w-48 rounded-1e3 [background-color]-$alt-trim-color">
-//// 					<div className="flex justify-center align-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+//// 					<div className="flex flex-center h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 //// 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
 //// 					</div>
 //// 				</div>
@@ -115,8 +115,8 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 //// 	return <>
 //// 		<div className="px-4">
 //// 			<div className="flex flex-col justify-center h-$sidebar-label-height">
-//// 				<div className="flex justify-center align-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
-//// 					<div className="flex justify-center align-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
+//// 				<div className="flex flex-center h-6 rounded-1e3 [background-color]-$alt-trim-color">
+//// 					<div className="flex flex-center h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-$base-color [box-shadow]-$shadow-6">
 //// 						<div className="h-50% aspect-1 rounded-1e3 [background-color]-$placeholder-color"></div>
 //// 					</div>
 //// 				</div>
@@ -126,7 +126,7 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 //// }
 
 //// <div className="relative">
-//// 	<div className="flex justify-center align-center aspect-1.4">
+//// 	<div className="flex flex-center aspect-1.4">
 //// 		{/* <div className="mb-calc(-1_*_($main-inset-y_+_$sidebar-label-height)_/_2) h-64 w-64 rounded-1e3 [background-color]-$placeholder-color"></div> */}
 //// 		<div className="h-48 w-48 rounded-1e3 [background-color]-$placeholder-color"></div>
 //// 	</div>
@@ -147,8 +147,8 @@ import { SearchBar, SearchResultsContents, SidebarContents } from "../search-app
 //// 	return <>
 //// 		<Section>
 //// 			<Label />
-//// 			{/* <div className="flex justify-center align-center h-160 rounded-24 [background-color]-$gray-color [box-shadow]-$inset-hairline-shadow"> */}
-//// 			<div className="flex justify-center align-center h-160">
+//// 			{/* <div className="flex flex-center h-160 rounded-24 [background-color]-$gray-color [box-shadow]-$inset-hairline-shadow"> */}
+//// 			<div className="flex flex-center h-160">
 //// 				<div className="h-60 w-60 rounded-1e3 [background-color]-$dark-placeholder-color"></div>
 //// 			</div>
 //// 			<Checkbox />
@@ -195,10 +195,10 @@ export function Home() {
 			<div className="mx-calc(-1_*_$ribbon-height) h-calc($ribbon-height_+_$rounding) rounded-b-50% [background-color]-$trim-color"></div>
 		</div>
 		<div className="mt-calc(-1_*_($ribbon-height_+_$rounding)) pb-calc($ribbon-inset-y_*_2) flex justify-center">
-			<div className="flex-basis--$main-width">
+			<div className="basis-$main-width">
 				{/* Forward relative here because of sticky */}
 				{/* Use z-(>10) */}
-				<div className="mx-calc(-1_*_$rounding) sticky [&_+_*]:relative t-0 z-100 flex [&_>_:nth-child(2)]:flex-grow--1">
+				<div className="mx-calc(-1_*_$rounding) sticky [&_+_*]:relative t-0 z-100 flex [&_>_:nth-child(2)]:grow-1">
 					<div className="relative">
 						<div className="h-calc($ribbon-inset-y_+_$rounding) w-calc($rounding_*_2) [background-color]-$trim-color"></div>
 						<div className="absolute br-0 h-$rounding w-$rounding rounded-tl-1e3 [background-color]-$base-color"></div>
@@ -209,7 +209,7 @@ export function Home() {
 						<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 [background-color]-$base-color"></div>
 					</div>
 				</div>
-				<div className="mt-calc(-1_*_$rounding) flex rounded-b-$rounding [background-color]-$base-color [box-shadow]-$shadow-4 [&_>_:nth-child(1)]:flex-grow--1">
+				<div className="mt-calc(-1_*_$rounding) flex rounded-b-$rounding [background-color]-$base-color [box-shadow]-$shadow-4 [&_>_:nth-child(1)]:grow-1">
 					{/* MAIN */}
 					<main>
 						<div className="py-$main-inset-y px-$main-inset-x sticky t-$ribbon-inset-y z-10 [background-image]-linear-gradient($base-color_calc($main-inset-y_+_$search-bar-height),_transparent)">
