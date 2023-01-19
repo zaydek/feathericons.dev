@@ -70,7 +70,7 @@ export function SearchApp() {
 
 	return <>
 		<div className="p-32 flex justify-center">
-			<div className="basis-2e3 flex flex-col gap-32">
+			<div className="flex-basis--2e3px flex flex-col gap-32">
 				<input
 					ref={inputRef}
 					className="mx-16 px-32 h-64 rounded-1e3 [font]-400_18px_/_normal_$sans bg-#eee"
@@ -90,7 +90,7 @@ export function SearchApp() {
 						.map(([name, matches], index) =>
 							<button
 								key={name}
-								className="flex flex-center effect-icon-hover"
+								className="flex justify-center align-center effect-icon-hover"
 								onPointerOver={e => {
 									setHoverName(name)
 								}}
