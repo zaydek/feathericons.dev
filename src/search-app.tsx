@@ -215,7 +215,7 @@ function SearchBar() {
 
 	return <>
 		<div className="px-8 flex align-center h-64 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&_>_:nth-child(2)]:grow-1">
-			<Tooltip pos="start" text={<>SEARCH ICONS{" ".repeat(2)}<span className="[opacity]-0.75">CTRL+K</span></>}>
+			<Tooltip pos="start" text={<>SEARCH FEATHER</>}>
 				<SearchBarButton onClick={e => ref.current!.select()} />
 			</Tooltip>
 			<input
@@ -326,7 +326,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 					when={checked}
 					start={{ backgroundColor: "var(--hairline-color)" }}
 					  end={{ backgroundColor: "var(--alt-trim-color)" }}
-					duration={75}
+					duration={50}
 					ease={[0, 1, 1, 1.25]}
 				>
 					<div className="flex align-center h-12 w-48 rounded-1e3">
@@ -334,7 +334,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 							when={checked}
 							start={{ transform: "translateX(0%)"  }}
 							  end={{ transform: "translateX(50%)" }}
-							duration={75}
+							duration={50}
 							ease={[0, 1, 1, 1.25]}
 						>
 							<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-#ffff [box-shadow]-$shadow-6"></div>
@@ -575,7 +575,7 @@ function SidebarContents() {
 		{viewSource ? <>
 			<textarea
 				className={cx(`
-					p-24 min-h-256 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
+					p-24 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
 
 					[white-space]-pre
 					[font]-400_14px_/_normal_$code
