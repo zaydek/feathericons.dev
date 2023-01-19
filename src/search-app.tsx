@@ -219,6 +219,7 @@ function SearchResultsContents() {
 					}}>
 						<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
 							<div className="flex flex-center h-96">
+								{/* Put [transform] next to [stroke-width] here */}
 								<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 							</div>
 						</Tooltip>
@@ -231,6 +232,7 @@ function SearchResultsContents() {
 						setSelectedIcon(document.getElementById(name)! as unknown as SVGSVGElement)
 					}}>
 						<div className="flex flex-center h-96">
+							{/* Put [transform] next to [stroke-width] here */}
 							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
 						</div>
 						{/* TODO: Extract typography? */}
@@ -533,6 +535,7 @@ function SidebarContents() {
 					backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
 				}}
 			>
+				{/* Put [transform] next to [stroke-width] here */}
 				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
 			</div>
 		</>}
