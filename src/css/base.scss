@@ -48,8 +48,8 @@ $code: (
     }
   }
 
-	background-color: var(--gray-color);
-	overflow-x: hidden;
+	background-color: var(--base-color);
+	//// overflow-x: hidden;
 }
 
 :root:not(.dark) { color-scheme: light; }

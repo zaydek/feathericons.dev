@@ -79,7 +79,7 @@ export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 
 	return <>
-		<div className="px-8 flex align-center h-64 rounded-1e3 background-color--#fff box-shadow--$shadow-2 [&_>_:nth-child(2)]:flex-grow--1">
+		<div className="px-8 flex align-center h-64 rounded-1e3 background-color--#fff box-shadow--$shadow-2 [&_>_:nth-child(2)]:grow">
 			<Tooltip pos="start" text={<>SEARCH FEATHER</>}>
 				<SearchBarButton onClick={e => ref.current!.select()} />
 			</Tooltip>
@@ -110,26 +110,26 @@ export function SearchBar() {
 	</>
 }
 
-function Wbr({ children }: { children: string }) {
-	const parts = children.split(/(?=[A-Z])/)
-	return <>
-		{parts.map((part, index) => <Fragment key={part}>
-			{index > 0 && <wbr />}
-			{part}
-		</Fragment>)}
-	</>
-}
+//// function Wbr({ children }: { children: string }) {
+//// 	const parts = children.split(/(?=[A-Z])/)
+//// 	return <>
+//// 		{parts.map((part, index) => <Fragment key={part}>
+//// 			{index > 0 && <wbr />}
+//// 			{part}
+//// 		</Fragment>)}
+//// 	</>
+//// }
 
 function Highlight({ indexes, children }: { indexes: readonly [number, number] | null, children: string }) {
 	if (indexes === null) {
-		return <Wbr>{children}</Wbr>
+		return <>{children}</>
 	} else {
 		return <>
-			<Wbr>{children.slice(0, indexes[0])}</Wbr>
-			<span className="background-color--hsl(45,_100%,_90%) box-shadow--0_1px_0_0_hsl(45,_100%,_60%)">
-				<Wbr>{children.slice(indexes[0], indexes[1])}</Wbr>
+			{children.slice(0, indexes[0])}
+			<span className="-mx-2 p-2 rounded-2 color--#111 background-color--hsl(45,_100%,_50%,_0.5)">
+				{children.slice(indexes[0], indexes[1])}
 			</span>
-			<Wbr>{children.slice(indexes[1])}</Wbr>
+			{children.slice(indexes[1])}
 		</>
 	}
 }
@@ -162,10 +162,8 @@ export function SearchResultsContents() {
 						<div className="flex center h-96">
 							<Icon id={name} className="h-32 w-32 transform--scale($scale) stroke-width--$stroke-width color--#333" icon={feather[name as keyof typeof feather]} />
 						</div>
-						{/* TODO: Extract typography? */}
-						{/* FIXME */}
-						<div className="px-4 flex center h-64 -webkit-user-select--all user-select--all">
-							<div className="h-32 text-align--center font--400_12px_/_normal_$sans color--#333">
+						<div className="px-4 flex center h-32 -webkit-user-select--all user-select--all">
+							<div className="font--400_12px_/_normal_$sans overflow--hidden text-overflow--ellipsis white-space--nowrap color--#333">
 								<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 									{name}
 								</Highlight>
@@ -191,7 +189,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 					when={checked}
 					start={{ backgroundColor: "var(--hairline-color)" }}
 					  end={{ backgroundColor: "var(--alt-trim-color)" }}
-					duration={50}
+					duration={75}
 					ease={[0, 1, 1, 1.25]}
 				>
 					<div className="flex align-center h-12 w-48 rounded-1e3">
@@ -199,7 +197,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 							when={checked}
 							start={{ transform: "translateX(0%)"  }}
 							  end={{ transform: "translateX(50%)" }}
-							duration={50}
+							duration={75}
 							ease={[0, 1, 1, 1.25]}
 						>
 							<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 background-color--#ffff box-shadow--$shadow-6"></div>
@@ -231,73 +229,6 @@ function Slider(props: {
 				</div>
 			</div>
 		</AriaSlider>
-	</>
-}
-
-function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-	const [pressed, setPressed] = useState(false)
-
-	useEffect(() => {
-		if (!pressed) { return }
-		const d = window.setTimeout(() => {
-			setPressed(false)
-		}, 500)
-		return () => window.clearTimeout(d)
-	}, [pressed])
-
-	return <>
-		<button
-			className={cx(`px-16 flex center gap-8 h-32 rounded-12 background-color--#fff box-shadow--$shadow-2
-				[&:hover:active]:background-color--$alt-trim-color [&:hover:active_*]:color--#fff`)}
-			onPointerUp={e => {
-				setPressed(true)
-				onPointerUp?.(e)
-			}}
-			{...props}
-		>
-			<Icon
-				className="h-16 w-16 color--$alt-trim-color"
-				icon={pressed ? feather.Check : feather.Clipboard}
-				strokeWidth={pressed ? 3 : 2.5}
-			/>
-			<TypeCaps>
-				COPY
-			</TypeCaps>
-		</button>
-	</>
-}
-
-function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-	const [pressed, setPressed] = useState(false)
-
-	// TODO: Add esc button support
-	useEffect(() => {
-		if (!pressed) { return }
-		const d = window.setTimeout(() => {
-			setPressed(false)
-		}, 500)
-		return () => window.clearTimeout(d)
-	}, [pressed])
-
-	return <>
-		<button
-			className={cx(`px-16 flex center gap-8 h-32 rounded-12 background-color--#fff box-shadow--$shadow-2
-				[&:hover:active]:background-color--$alt-trim-color [&:hover:active_*]:color--#fff`)}
-			onPointerUp={e => {
-				setPressed(true)
-				onPointerUp?.(e)
-			}}
-			{...props}
-		>
-			<Icon
-				className="h-16 w-16 color--$alt-trim-color"
-				icon={pressed ? feather.Check : feather.Download}
-				strokeWidth={pressed ? 3 : 2.5}
-			/>
-			<TypeCaps>
-				DOWNLOAD
-			</TypeCaps>
-		</button>
 	</>
 }
 
@@ -373,7 +304,9 @@ function FormatButton() {
 				<div ref={ref} className="absolute t-(100%_+_10px) r-0 z-10">
 					<div className="flex flex-col rounded-12 background-color--hsl(0,_0%,_99%) box-shadow--$shadow-6">
 						<button
-							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)"
+							className={cx(`px-12 flex align-center gap-8 h-32
+								[&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12
+									[&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)`)}
 							onClick={e => {
 								setFormatAs("svg")
 								setShow(false)
@@ -385,7 +318,9 @@ function FormatButton() {
 							</TypeCaps>
 						</button>
 						<button
-							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)"
+							className={cx(`px-12 flex align-center gap-8 h-32
+								[&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12
+									[&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)`)}
 							onClick={e => {
 								setFormatAs("jsx")
 								setShow(false)
@@ -397,7 +332,9 @@ function FormatButton() {
 							</TypeCaps>
 						</button>
 						<button
-							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)"
+							className={cx(`px-12 flex align-center gap-8 h-32
+								[&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12
+									[&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)`)}
 							onClick={e => {
 								setFormatAs("tsx")
 								setShow(false)
@@ -412,6 +349,73 @@ function FormatButton() {
 				</div>
 			</Transition>
 		</div>
+	</>
+}
+
+function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+	const [pressed, setPressed] = useState(false)
+
+	useEffect(() => {
+		if (!pressed) { return }
+		const d = window.setTimeout(() => {
+			setPressed(false)
+		}, 500)
+		return () => window.clearTimeout(d)
+	}, [pressed])
+
+	return <>
+		<button
+			className={cx(`px-16 flex center gap-8 h-32 rounded-12 background-color--#fff box-shadow--$shadow-2
+				[&:hover:active]:background-color--$alt-trim-color [&:hover:active_*]:color--#fff`)}
+			onPointerUp={e => {
+				setPressed(true)
+				onPointerUp?.(e)
+			}}
+			{...props}
+		>
+			<Icon
+				className="h-16 w-16 color--$alt-trim-color"
+				icon={pressed ? feather.Check : feather.Clipboard}
+				strokeWidth={pressed ? 3 : 2.5}
+			/>
+			<TypeCaps>
+				COPY
+			</TypeCaps>
+		</button>
+	</>
+}
+
+function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+	const [pressed, setPressed] = useState(false)
+
+	// TODO: Add esc button support
+	useEffect(() => {
+		if (!pressed) { return }
+		const d = window.setTimeout(() => {
+			setPressed(false)
+		}, 500)
+		return () => window.clearTimeout(d)
+	}, [pressed])
+
+	return <>
+		<button
+			className={cx(`px-16 flex center gap-8 h-32 rounded-12 background-color--#fff box-shadow--$shadow-2
+				[&:hover:active]:background-color--$alt-trim-color [&:hover:active_*]:color--#fff`)}
+			onPointerUp={e => {
+				setPressed(true)
+				onPointerUp?.(e)
+			}}
+			{...props}
+		>
+			<Icon
+				className="h-16 w-16 color--$alt-trim-color"
+				icon={pressed ? feather.Check : feather.Download}
+				strokeWidth={pressed ? 3 : 2.5}
+			/>
+			<TypeCaps>
+				DOWNLOAD
+			</TypeCaps>
+		</button>
 	</>
 }
 
@@ -453,7 +457,6 @@ export function SidebarContents() {
 			/>
 		</> : <>
 			<div
-				//// className="flex center aspect-1.5 rounded-24 background-color--#fff box-shadow--$shadow-2"
 				className="flex center aspect-1.5 rounded-24 background-color--#fff box-shadow--$shadow-2"
 				style={viewSource ? undefined : {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
@@ -462,8 +465,7 @@ export function SidebarContents() {
 					backgroundSize:     "calc(16px * var(--scale)) calc(16px * var(--scale))",
 				}}
 			>
-				{/* [transform] takes precedence to [stroke-width] here */}
-				<Icon className="h-64 w-64 transform--scale($scale) stroke-width--$stroke-width color--#333" icon={feather[selectedName]} />
+				<Icon className="h-64 w-64 transform--scale($scale) stroke-width--$stroke-width color--#111" icon={feather[selectedName]} />
 			</div>
 		</>}
 		<div className="flex flex-col gap-10">
@@ -527,9 +529,6 @@ export function SidebarContents() {
 	</>
 }
 
-// TODO
-document.documentElement.style.backgroundColor = "#fff"
-
 // TODO: DEPRECATE
 function App() {
 	return <>
@@ -537,7 +536,7 @@ function App() {
 			Click me
 		</a> */}
 		<div className="p-32 flex justify-center">
-			<div className="flex-basis--2e3px flex gap-64 [&_>_:nth-child(1)]:flex-grow--1">
+			<div className="flex-basis--2e3px flex gap-64 [&_>_:nth-child(1)]:grow">
 				<div className="flex flex-col gap-64">
 					<SearchBar />
 					<SearchResultsContents />

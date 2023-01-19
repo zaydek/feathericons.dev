@@ -111,6 +111,9 @@ const rules: Rule[] = [
 	["align-stretch",         { "align-items":     "stretch"       }],
 	["center",                { "justify-content": "center", "align-items": "center" }],
 
+	["grow",                  { "flex-grow": 1      }],
+	["wrap",                  { "flex-wrap": "wrap" }],
+
 	["grid",                  { "display": "grid" }],
 	[/^grid-(.+)$/,           ([_, value]) => ({ "display": "grid", "grid-template":         Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
 	[/^grid-cols-(.+)$/,      ([_, value]) => ({ "display": "grid", "grid-template-columns": Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
