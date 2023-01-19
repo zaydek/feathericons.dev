@@ -47,9 +47,9 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 				delay={hover ? 10 : 0}
 			>
 				<div className={{
-					"start":  cx("absolute t-calc(100%_+_10px) l-0   z-10 pointer-events--none"),
-					"center": cx("absolute t-calc(100%_+_10px) l-50% z-10 pointer-events--none"),
-					"end":    cx("absolute t-calc(100%_+_10px) r-0   z-10 pointer-events--none"),
+					"start":  cx("absolute t-(100%_+_10px) l-0   z-10 pointer-events--none"),
+					"center": cx("absolute t-(100%_+_10px) l-50% z-10 pointer-events--none"),
+					"end":    cx("absolute t-(100%_+_10px) r-0   z-10 pointer-events--none"),
 				}[pos]}>
 					<div className="px-12 flex align-center gap-8 h-32 rounded-12 background-color--hsl(0,_0%,_99%) box-shadow--$shadow-6,_$raw-shadow-6">
 						{icon !== undefined && <Icon className="h-16 w-16 color--#333" icon={icon} />}
@@ -228,7 +228,7 @@ function Slider(props: {
 			<div className="px-8">
 				<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
 					<div className="flex align-center h-6 rounded-1e3 background-image--linear-gradient(to_right,_$alt-trim-color_calc($progress_*_100%),_$hairline-color_calc($progress_*_100%))">
-						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 background-color--#fff box-shadow--$shadow-6"></div>
+						<div ref={setThumb} className="h-($sidebar-input-height_+_4px) w-($sidebar-input-height_+_4px) rounded-1e3 background-color--#fff box-shadow--$shadow-6"></div>
 					</div>
 				</div>
 			</div>
@@ -372,7 +372,7 @@ function FormatButton() {
 				duration={100}
 				ease={[0, 1, 1, 1]}
 			>
-				<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10">
+				<div ref={ref} className="absolute t-(100%_+_10px) r-0 z-10">
 					<div className="flex flex-col rounded-12 background-color--hsl(0,_0%,_99%) box-shadow--$shadow-6">
 						<button
 							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)"

@@ -200,12 +200,12 @@ export function Home() {
 				{/* Use z-(>10) */}
 				<div className="-mx-$rounding sticky [&_+_*]:relative t-0 z-100 flex [&_>_:nth-child(2)]:flex-grow--1">
 					<div className="relative">
-						<div className="h-calc($ribbon-inset-y_+_$rounding) w-calc($rounding_*_2) background-color--$trim-color"></div>
+						<div className="h-($ribbon-inset-y_+_$rounding) w-($rounding_*_2) background-color--$trim-color"></div>
 						<div className="absolute br-0 h-$rounding w-$rounding rounded-tl-1e3 background-color--$base-color"></div>
 					</div>
 					<div className="h-$ribbon-inset-y background-color--$trim-color"></div>
 					<div className="relative">
-						<div className="h-calc($ribbon-inset-y_+_$rounding) w-calc($rounding_*_2) background-color--$trim-color"></div>
+						<div className="h-($ribbon-inset-y_+_$rounding) w-($rounding_*_2) background-color--$trim-color"></div>
 						<div className="absolute bl-0 h-$rounding w-$rounding rounded-tr-1e3 background-color--$base-color"></div>
 					</div>
 				</div>
