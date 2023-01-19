@@ -90,7 +90,7 @@ export function SearchApp() {
 						.map(([name, matches], index) =>
 							<button
 								key={name}
-								className="flex justify-center align-center effect-icon-hover"
+								className="flex center effect-icon-hover"
 								onPointerOver={e => {
 									setHoverName(name)
 								}}

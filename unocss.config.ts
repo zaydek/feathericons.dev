@@ -5,19 +5,35 @@ import { defineConfig } from "unocss/vite"
 
 
 function resolve(str: string, { sign, px }: { sign: string, px: boolean }) {
-	if (str.startsWith("(") && str.endsWith(")")) {
-		if (sign === "-") {
+	if (sign === "-") {
+		if (str.startsWith("(") && str.endsWith(")")) { // E.g. calc
 			return `calc(-1 * (${str.slice(1, -1)}))`
 		} else {
-			return `calc(${str.slice(1, -1)})`
+			if (px && Number.isFinite(+str)) { return `-${str}px` }
+			return `calc(-1 * (${str}))`
 		}
 	} else {
-		if (px && Number.isFinite(+str)) {
-			return sign + str + "px"
+		if (str.startsWith("(") && str.endsWith(")")) { // E.g. calc
+			return `calc(${str.slice(1, -1)})`
 		} else {
-			return sign + str
+			if (px && Number.isFinite(+str)) { return `${str}px` }
+			return str
 		}
 	}
+
+	//// if (str.startsWith("(") && str.endsWith(")")) {
+	//// 	if (sign === "-") {
+	//// 		return `calc(-1 * (${str.slice(1, -1)}))`
+	//// 	} else {
+	//// 		return `calc(${str.slice(1, -1)})`
+	//// 	}
+	//// } else {
+	//// 	if (px && Number.isFinite(+str)) {
+	//// 		return sign + str + "px"
+	//// 	} else {
+	//// 		return sign + str
+	//// 	}
+	//// }
 }
 
 function desugar(raw: string | undefined, { sign = "", px = true }: { sign?: string, px?: boolean } = {}) {
@@ -83,6 +99,7 @@ const rules: Rule[] = [
 	["align-center",          { "align-items":     "center"        }],
 	["align-baseline",        { "align-items":     "baseline"      }],
 	["align-stretch",         { "align-items":     "stretch"       }],
+	["center",                { "justify-content": "center", "align-items": "center" }],
 
 	["grid",                  { "display": "grid" }],
 	[/^grid-(.+)$/,           ([_, value]) => ({ "display": "grid", "grid-template":         Number.isNaN(+value) ? desugar(value, { px: false }) : `repeat(${desugar(value, { px: false })}, 1fr)` })],
