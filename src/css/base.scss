@@ -31,6 +31,8 @@ $code: (
 	-moz-osx-font-smoothing: grayscale;
 
 	overflow-y: scroll; // COMPAT/Windows
+	overflow-x: hidden;
+	
 	scroll-behavior: smooth;
 
   // TODO: Only disable for mobile
