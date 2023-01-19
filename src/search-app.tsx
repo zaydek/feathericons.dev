@@ -14,6 +14,7 @@ import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
+import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
 import { Transition } from "./transition"
 
@@ -551,7 +552,7 @@ function FormatDropDownButton() {
 }
 
 function SidebarContents() {
-	const { selectedName, viewSource, setViewSource, clipboard } = useContext(SelectedContext)!
+	const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	const [value, setValue] = useState(clipboard)
@@ -603,8 +604,17 @@ function SidebarContents() {
 		<div className="flex flex-col gap-10">
 			<FormatDropDownButton />
 			<div className="grid grid-cols-2 gap-10">
-				<CopyButton />
-				<DownloadButton />
+				<CopyButton onClick={async e => {
+					await navigator.clipboard.writeText(clipboard)
+				}} />
+				<DownloadButton onClick={e => {
+					const filename = `${formatAs === "svg"
+						? toKebabCase(selectedName)
+						: selectedName
+					}.${formatAs}`
+					const contents = clipboard + "\n"
+					download(filename, contents)
+				}} />
 			</div>
 		</div>
 		<Hairline />
@@ -773,7 +783,7 @@ function StateProvider({ children }: PropsWithChildren) {
 		}
 		if (formatAs === "svg") {
 			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
-			return formatAsSvg(selectedName, code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}` })
+			return formatAsSvg(toKebabCase(selectedName), code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}` })
 				.replaceAll("\t", "  ")
 		} else if (formatAs === "jsx") {
 			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
