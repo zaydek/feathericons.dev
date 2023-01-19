@@ -1,5 +1,7 @@
 import * as feather from "./react-feather@4.29.0"
 
+export const version = "4.29.0"
+
 export const manifest: Record<keyof typeof feather, string[]> = {
   "Activity": [
     "pulse",

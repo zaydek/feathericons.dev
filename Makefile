@@ -1,5 +1,7 @@
 feather:
 	npx tsx scripts/feather.ts
+
+format-feather:
 	npx tsx scripts/format-feather.ts
 
 ssg:

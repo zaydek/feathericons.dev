@@ -1,5 +1,5 @@
 import { CSSProperties, Dispatch, HTMLAttributes, PropsWithChildren, SetStateAction, useEffect, useMemo, useRef } from "react"
-import { clamp, round } from "../lib/precision"
+import { clamp } from "../lib/precision"
 
 export type AriaSliderProps = PropsWithChildren<{
 	track:    HTMLElement | null
@@ -15,7 +15,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 	const pointerDownRef = useRef(false)
 
 	const progress = useMemo(() => {
-		return round((value - min) / (max - min), { precision: 4 })
+		return (value - min) / (max - min)
 	}, [max, min, value])
 
 	const translateX = useMemo(() => {

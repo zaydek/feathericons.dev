@@ -7,7 +7,7 @@ import * as feather from "./data/react-feather@4.29.0"
 import { ButtonHTMLAttributes, createContext, Dispatch, Fragment, HTMLAttributes, PropsWithChildren, ReactNode, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox } from "./aria/aria-checkbox"
 import { AriaSlider } from "./aria/aria-slider"
-import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
+import { jsxPlaceholder, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep, svgPlaceholder, tsxPlaceholder } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
@@ -322,17 +322,17 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 				<Transition
 					when={checked}
 					start={{ backgroundColor: "var(--hairline-color)" }}
-					end={{ backgroundColor: "var(--alt-trim-color)" }}
-					duration={100}
-					ease={[0, 1, 1, 1]}
+					  end={{ backgroundColor: "var(--alt-trim-color)" }}
+					duration={75}
+					ease={[0, 1, 1, 1.25]}
 				>
 					<div className="flex align-center h-12 w-48 rounded-1e3">
 						<Transition
 							when={checked}
-							start={{ transform: "translateX(0%)" }}
-							end={{ transform: "translateX(50%)" }}
-							duration={100}
-							ease={[0, 1, 1, 1]}
+							start={{ transform: "translateX(0%)"  }}
+							  end={{ transform: "translateX(50%)" }}
+							duration={75}
+							ease={[0, 1, 1, 1.25]}
 						>
 							<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-#ffff [box-shadow]-$shadow-6"></div>
 						</Transition>
@@ -366,23 +366,6 @@ function Slider(props: {
 	</>
 }
 
-const placeholder = `
-/*! Feather v4.29.0 | MIT License | https://github.com/feathericons/feather */
-
-import { SVGAttributes } from "react"
-
-// https://feathericons.dev/feather
-export function Feather(props: SVGAttributes<SVGElement>) {
-	return (
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
-			<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-			<line x1="16" x2="2" y1="8" y2="22" />
-			<line x1="17.5" x2="9" y1="15" y2="15" />
-		</svg>
-	)
-}
-`.trim() + "\n"
-
 function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
 	const [pressed, setPressed] = useState(false)
 
@@ -390,7 +373,7 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 		if (!pressed) { return }
 		const d = window.setTimeout(() => {
 			setPressed(false)
-		}, 1e3)
+		}, 500)
 		return () => window.clearTimeout(d)
 	}, [pressed])
 
@@ -424,7 +407,7 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 		if (!pressed) { return }
 		const d = window.setTimeout(() => {
 			setPressed(false)
-		}, 1e3)
+		}, 500)
 		return () => window.clearTimeout(d)
 	}, [pressed])
 
@@ -466,6 +449,16 @@ function FormatDropDownButton() {
 		}
 		window.addEventListener("click", handleClick, false)
 		return () => window.removeEventListener("click", handleClick, false)
+	}, [])
+
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				setShow(false)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [])
 
 	return <>
@@ -543,7 +536,7 @@ function FormatDropDownButton() {
 						>
 							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
 							<TypeCaps>
-								TYPESCRIPT REACT
+								TS REACT
 							</TypeCaps>
 						</button>
 					</div>
@@ -554,13 +547,19 @@ function FormatDropDownButton() {
 }
 
 function SidebarContents() {
-	const { selectedName, viewSource, setViewSource  } = useContext(SelectedContext)!
+	const { selectedName, viewSource, setViewSource, clipboard } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
+
+	const [value, setValue] = useState(clipboard)
+
+	useEffect(() => {
+		setValue(clipboard)
+	}, [clipboard])
 
 	return <>
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
 			<div className="flex align-center gap-10">
-				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-$hairline-color">
+				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-hsl($base-h,_$base-s,_$base-l,_0.125)">
 					<Icon className="h-12 w-12 [color]-#333" icon={feather.Code} />
 				</div>
 				<TypeCaps>
@@ -571,7 +570,7 @@ function SidebarContents() {
 		{viewSource ? <>
 			<textarea
 				className={cx(`
-					p-24 min-h-256 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
+					p-24 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
 
 					[white-space]-pre
 					[font]-400_14px_/_normal_$code
@@ -579,8 +578,9 @@ function SidebarContents() {
 					[letter-spacing]-null
 					[color]-#333
 				`)}
-				rows={placeholder.split("\n").length - 1}
-				defaultValue={placeholder}
+				value={value}
+				onChange={e => setValue(e.currentTarget.value)}
+				rows={clipboard.split("\n").length}
 			/>
 		</> : <>
 			<div
@@ -597,17 +597,17 @@ function SidebarContents() {
 			</div>
 		</>}
 		<div className="flex flex-col gap-10">
+			<FormatDropDownButton />
 			<div className="grid grid-cols-2 gap-10">
 				<CopyButton />
 				<DownloadButton />
 			</div>
-			<FormatDropDownButton />
 		</div>
 		<Hairline />
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-10">
 				{/* <Icon className="h-16 w-16 [color]-#ccc" icon={feather.Maximize2} /> */}
-				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-$hairline-color">
+				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-hsl($base-h,_$base-s,_$base-l,_0.125)">
 					<Icon className="h-12 w-12 [color]-#333" icon={feather.Maximize2} />
 				</div>
 				<TypeCaps>
@@ -628,7 +628,7 @@ function SidebarContents() {
 		<div className="flex justify-space-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-10">
 				{/* <Icon className="h-16 w-16 [color]-#ccc" icon={feather.Minimize2} /> */}
-				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-$hairline-color">
+				<div className="flex flex-center h-24 w-24 rounded-43.75% [background-color]-hsl($base-h,_$base-s,_$base-l,_0.125)">
 					<Icon className="h-12 w-12 [color]-#333" icon={feather.Minimize2} />
 				</div>
 				<TypeCaps>
@@ -707,6 +707,8 @@ function getSubstringIndexes(str: string, substr: string) {
 	return [index, index + substr.length] as const
 }
 
+const omitAttrs = ["class"]
+
 function StateProvider({ children }: PropsWithChildren) {
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -758,8 +760,34 @@ function StateProvider({ children }: PropsWithChildren) {
 	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
 
 	const clipboard = useMemo(() => {
-		return ""
-	}, [])
+		if (selectedSvgElement === null) {
+			return {
+				"svg": svgPlaceholder,
+				"jsx": jsxPlaceholder,
+				"tsx": tsxPlaceholder,
+			}[formatAs]
+		}
+		return "lol"
+		//// if (formatAs === "svg") {
+		//// 	const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
+		//// 	return formatAsSvg(name, code, {
+		//// 		license: `<!-- Feather v${version} | MIT License | https://github.com/feathericons/feather -->`,
+		//// 		comment: `https://feathericons.dev/${name}`,
+		//// 	})
+		//// } else if (formatAs === "jsx") {
+		//// 	const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
+		//// 	return formatAsSvg(name, code, {
+		//// 		license: `<!-- Feather v${version} | MIT License | https://github.com/feathericons/feather -->`,
+		//// 		comment: `https://feathericons.dev/${name}`,
+		//// 	})
+		//// } else {
+		//// 	const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
+		//// 	return formatAsSvg(name, code, {
+		//// 		license: `<!-- Feather v${version} | MIT License | https://github.com/feathericons/feather -->`,
+		//// 		comment: `https://feathericons.dev/${name}`,
+		//// 	})
+		//// }
+	}, [formatAs, selectedSvgElement])
 
 	//////////////////////////////////////////////////////////////////////////////
 	// SliderContext

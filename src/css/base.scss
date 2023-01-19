@@ -62,5 +62,8 @@ svg { overflow: visible; }
 :is(input[type=radio], [role=radio])       { cursor: pointer; user-select: none; }
 :is(input[type=range], [role=slider])      { cursor: pointer; user-select: none; &:active { cursor: grabbing; } }
 
+// By default render scrollbars for <textarea> because of Windows
+textarea { overflow: scroll; resize: vertical; }
+
 input[type=text]:focus { outline: none; }
 textarea:focus         { outline: none; }

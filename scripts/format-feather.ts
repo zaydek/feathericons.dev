@@ -45,7 +45,7 @@ async function feather_tsx() {
 		acc[toTitleCase(name)] = featherTags[name as keyof typeof featherTags] ?? []
 		return acc
 	}, {})
-	const imports = `import * as feather from "./react-feather@${feather.meta.version}"\n\nexport const manifest: Record<keyof typeof feather, string[]> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
+	const imports = `import * as feather from "./react-feather@${feather.meta.version}"\n\nexport const version = ${JSON.stringify(feather.meta.version)}\n\nexport const manifest: Record<keyof typeof feather, string[]> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
 	await fs.promises.writeFile(`src/data/react-feather-manifest@${feather.meta.version}.ts`, imports + "\n")
 
 	// src/data/react-feather/
