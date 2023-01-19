@@ -47,12 +47,12 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 				delay={hover ? 10 : 0}
 			>
 				<div className={{
-					"start":  cx("absolute t-calc(100%_+_10px) l-0   z-10 [pointer-events]-none"),
-					"center": cx("absolute t-calc(100%_+_10px) l-50% z-10 [pointer-events]-none"),
-					"end":    cx("absolute t-calc(100%_+_10px) r-0   z-10 [pointer-events]-none"),
+					"start":  cx("absolute t-calc(100%_+_10px) l-0   z-10 pointer-events--none"),
+					"center": cx("absolute t-calc(100%_+_10px) l-50% z-10 pointer-events--none"),
+					"end":    cx("absolute t-calc(100%_+_10px) r-0   z-10 pointer-events--none"),
 				}[pos]}>
-					<div className="px-12 flex align-center gap-8 h-32 rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6,_$raw-shadow-6">
-						{icon !== undefined && <Icon className="h-16 w-16 [color]-#333" icon={icon} />}
+					<div className="px-12 flex align-center gap-8 h-32 rounded-12 background-color--hsl(0,_0%,_99%) box-shadow--$shadow-6,_$raw-shadow-6">
+						{icon !== undefined && <Icon className="h-16 w-16 color--#333" icon={icon} />}
 						<TypeCaps>
 							{text}
 						</TypeCaps>
@@ -66,8 +66,8 @@ function Tooltip({ pos, icon, text, children }: PropsWithChildren<{ pos: Positio
 function SearchBarButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 	return <>
 		<button className="px-8 flex align-center h-$search-bar-height" {...props}>
-			<div className="flex justify-center align-center h-32 w-32 rounded-1e3 [background-color]-pink">
-				<div className="h-16 w-16 rounded-1e3 [background-color]-red"></div>
+			<div className="flex justify-center align-center h-32 w-32 rounded-1e3 background-color--pink">
+				<div className="h-16 w-16 rounded-1e3 background-color--red"></div>
 			</div>
 		</button>
 	</>
@@ -79,7 +79,7 @@ export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 
 	return <>
-		<div className="px-8 flex align-center h-64 rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-2 [&_>_:nth-child(2)]:flex-grow--1">
+		<div className="px-8 flex align-center h-64 rounded-1e3 background-color--#fff box-shadow--$shadow-2 [&_>_:nth-child(2)]:flex-grow--1">
 			<Tooltip pos="start" text={<>SEARCH FEATHER</>}>
 				<SearchBarButton onClick={e => ref.current!.select()} />
 			</Tooltip>
@@ -126,7 +126,7 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 	} else {
 		return <>
 			<Wbr>{children.slice(0, indexes[0])}</Wbr>
-			<span className="[background-color]-hsl(45,_100%,_90%) [box-shadow]-0_1px_0_0_hsl(45,_100%,_60%)">
+			<span className="background-color--hsl(45,_100%,_90%) box-shadow--0_1px_0_0_hsl(45,_100%,_60%)">
 				<Wbr>{children.slice(indexes[0], indexes[1])}</Wbr>
 			</span>
 			<Wbr>{children.slice(indexes[1])}</Wbr>
@@ -149,7 +149,7 @@ export function SearchResultsContents() {
 						<Tooltip pos="center" icon={feather[name as keyof typeof feather]} text={toKebabCase(name).toUpperCase()}>
 							<div className="flex justify-center align-center h-96">
 								{/* Put [transform] next to [stroke-width] here */}
-								<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
+								<Icon id={name} className="h-32 w-32 transform--scale($scale) stroke-width--$stroke-width color--#333" icon={feather[name as keyof typeof feather]} />
 							</div>
 						</Tooltip>
 					</button>
@@ -162,12 +162,12 @@ export function SearchResultsContents() {
 					}}>
 						<div className="flex justify-center align-center h-96">
 							{/* Put [transform] next to [stroke-width] here */}
-							<Icon id={name} className="h-32 w-32 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[name as keyof typeof feather]} />
+							<Icon id={name} className="h-32 w-32 transform--scale($scale) stroke-width--$stroke-width color--#333" icon={feather[name as keyof typeof feather]} />
 						</div>
 						{/* TODO: Extract typography? */}
 						{/* FIXME */}
-						<div className="px-4 flex justify-center align-center h-64 [-webkit-user-select]-all [user-select]-all">
-							<div className="h-32 [text-align]-center [font]-400_12px_/_normal_$sans [color]-#333">
+						<div className="px-4 flex justify-center align-center h-64 -webkit-user-select--all user-select--all">
+							<div className="h-32 text-align--center font--400_12px_/_normal_$sans color--#333">
 								<Highlight indexes={searchResults[name as keyof typeof feather]!}>
 									{name}
 								</Highlight>
@@ -181,7 +181,7 @@ export function SearchResultsContents() {
 }
 
 function Hairline() {
-	return <hr className="h-$hairline-height [background-color]-$hairline-color" />
+	return <hr className="h-$hairline-height background-color--$hairline-color" />
 }
 
 function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked: boolean, setChecked: Dispatch<SetStateAction<boolean>> }>) {
@@ -204,7 +204,7 @@ function Checkbox({ checked, setChecked, children }: PropsWithChildren<{ checked
 							duration={50}
 							ease={[0, 1, 1, 1.25]}
 						>
-							<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 [background-color]-#ffff [box-shadow]-$shadow-6"></div>
+							<div className="h-$sidebar-input-height w-$sidebar-input-height rounded-1e3 background-color--#ffff box-shadow--$shadow-6"></div>
 						</Transition>
 					</div>
 				</Transition>
@@ -227,8 +227,8 @@ function Slider(props: {
 		<AriaSlider track={track} thumb={thumb} {...props}>
 			<div className="px-8">
 				<div ref={setTrack} className="flex flex-col justify-center h-$sidebar-label-height">
-					<div className="flex align-center h-6 rounded-1e3 [background-image]-linear-gradient(to_right,_$alt-trim-color_calc($progress_*_100%),_$hairline-color_calc($progress_*_100%))">
-						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 [background-color]-#fff [box-shadow]-$shadow-6"></div>
+					<div className="flex align-center h-6 rounded-1e3 background-image--linear-gradient(to_right,_$alt-trim-color_calc($progress_*_100%),_$hairline-color_calc($progress_*_100%))">
+						<div ref={setThumb} className="h-calc($sidebar-input-height_+_4px) w-calc($sidebar-input-height_+_4px) rounded-1e3 background-color--#fff box-shadow--$shadow-6"></div>
 					</div>
 				</div>
 			</div>
@@ -249,8 +249,8 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 
 	return <>
 		<button
-			className={cx(`px-16 flex justify-center align-center gap-8 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2
-				[&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff`)}
+			className={cx(`px-16 flex justify-center align-center gap-8 h-32 rounded-12 background-color--#fff box-shadow--$shadow-2
+				[&:hover:active]:background-color--$alt-trim-color [&:hover:active_*]:color--#fff`)}
 			onPointerUp={e => {
 				setPressed(true)
 				onPointerUp?.(e)
@@ -258,7 +258,7 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 			{...props}
 		>
 			<Icon
-				className="h-16 w-16 [color]-$alt-trim-color"
+				className="h-16 w-16 color--$alt-trim-color"
 				icon={pressed ? feather.Check : feather.Clipboard}
 				strokeWidth={pressed ? 3 : 2.5}
 			/>
@@ -283,8 +283,8 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 
 	return <>
 		<button
-			className={cx(`px-16 flex justify-center align-center gap-8 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2
-				[&:hover:active]:[background-color]-$alt-trim-color [&:hover:active_*]:[color]-#fff`)}
+			className={cx(`px-16 flex justify-center align-center gap-8 h-32 rounded-12 background-color--#fff box-shadow--$shadow-2
+				[&:hover:active]:background-color--$alt-trim-color [&:hover:active_*]:color--#fff`)}
 			onPointerUp={e => {
 				setPressed(true)
 				onPointerUp?.(e)
@@ -292,7 +292,7 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 			{...props}
 		>
 			<Icon
-				className="h-16 w-16 [color]-$alt-trim-color"
+				className="h-16 w-16 color--$alt-trim-color"
 				icon={pressed ? feather.Check : feather.Download}
 				strokeWidth={pressed ? 3 : 2.5}
 			/>
@@ -333,11 +333,11 @@ function FormatButton() {
 	return <>
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
-				<button className="px-16 flex justify-center align-center gap-8 h-32 rounded-12 [background-color]-#fff [box-shadow]-$shadow-2" onClick={e => setShow(curr => !curr)}>
+				<button className="px-16 flex justify-center align-center gap-8 h-32 rounded-12 background-color--#fff box-shadow--$shadow-2" onClick={e => setShow(curr => !curr)}>
 					<Icon className={cx(`h-16 w-16  ${{
-						svg: "[color]-$svg-color",
-						jsx: "[color]-$jsx-color",
-						tsx: "[color]-$tsx-color",
+						svg: "color--$svg-color",
+						jsx: "color--$jsx-color",
+						tsx: "color--$tsx-color",
 					}[formatAs]}`)} icon={{
 						"svg": SVGIcon,
 						"jsx": JSXIcon,
@@ -353,7 +353,7 @@ function FormatButton() {
 					</TypeCaps>
 					<div className="absolute inset-r-0">
 						<div className="flex justify-center align-center h-32 w-32 rounded-1e3">
-							<Icon className="h-16 w-16 [color]-#555" icon={feather.ChevronDown} strokeWidth={2.5} />
+							<Icon className="h-16 w-16 color--#555" icon={feather.ChevronDown} strokeWidth={2.5} />
 						</div>
 					</div>
 				</button>
@@ -373,39 +373,39 @@ function FormatButton() {
 				ease={[0, 1, 1, 1]}
 			>
 				<div ref={ref} className="absolute t-calc(100%_+_10px) r-0 z-10">
-					<div className="flex flex-col rounded-12 [background-color]-hsl(0,_0%,_99%) [box-shadow]-$shadow-6">
+					<div className="flex flex-col rounded-12 background-color--hsl(0,_0%,_99%) box-shadow--$shadow-6">
 						<button
-							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
+							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)"
 							onClick={e => {
 								setFormatAs("svg")
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 [color]-$svg-color" icon={SVGIcon} />
+							<Icon className="h-16 w-16 color--$svg-color" icon={SVGIcon} />
 							<TypeCaps>
 								SVG
 							</TypeCaps>
 						</button>
 						<button
-							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
+							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)"
 							onClick={e => {
 								setFormatAs("jsx")
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 [color]-$jsx-color" icon={JSXIcon} />
+							<Icon className="h-16 w-16 color--$jsx-color" icon={JSXIcon} />
 							<TypeCaps>
 								REACT
 							</TypeCaps>
 						</button>
 						<button
-							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:[background-color]-hsl($base-h,_$base-s,_$base-l,_0.1)"
+							className="px-12 flex align-center gap-8 h-32 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12 [&:hover]:background-color--hsl($base-h,_$base-s,_$base-l,_0.1)"
 							onClick={e => {
 								setFormatAs("tsx")
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 [color]-$tsx-color" icon={TSXIcon} />
+							<Icon className="h-16 w-16 color--$tsx-color" icon={TSXIcon} />
 							<TypeCaps>
 								TS REACT
 							</TypeCaps>
@@ -430,8 +430,8 @@ export function SidebarContents() {
 	return <>
 		<Checkbox checked={viewSource} setChecked={setViewSource}>
 			<div className="flex align-center gap-10">
-				<div className="flex justify-center align-center h-24 w-24 rounded-43.75% [background-color]-hsl($base-h,_$base-s,_$base-l,_0.125)">
-					<Icon className="h-12 w-12 [color]-#333" icon={feather.Code} />
+				<div className="flex justify-center align-center h-24 w-24 rounded-43.75% background-color--hsl($base-h,_$base-s,_$base-l,_0.125)">
+					<Icon className="h-12 w-12 color--#333" icon={feather.Code} />
 				</div>
 				<TypeCaps>
 					VIEW SOURCE
@@ -441,13 +441,13 @@ export function SidebarContents() {
 		{viewSource ? <>
 			<textarea
 				className={cx(`
-					p-24 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2
+					p-24 rounded-24 background-color--#fff box-shadow--$shadow-2
 
-					[white-space]-pre
-					[font]-400_14px_/_normal_$code
-					[font-feature-settings]-'tnum'
-					[letter-spacing]-null
-					[color]-#333
+					white-space--pre
+					font--400_14px_/_normal_$code
+					font-feature-settings--'tnum'
+					letter-spacing--null
+					color--#333
 				`)}
 				value={value}
 				onChange={e => setValue(e.currentTarget.value)}
@@ -455,8 +455,8 @@ export function SidebarContents() {
 			/>
 		</> : <>
 			<div
-				//// className="flex justify-center align-center aspect-1.5 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
-				className="flex justify-center align-center aspect-1.5 rounded-24 [background-color]-#fff [box-shadow]-$shadow-2"
+				//// className="flex justify-center align-center aspect-1.5 rounded-24 background-color--#fff box-shadow--$shadow-2"
+				className="flex justify-center align-center aspect-1.5 rounded-24 background-color--#fff box-shadow--$shadow-2"
 				style={viewSource ? undefined : {
 					// https://30secondsofcode.org/css/s/polka-dot-pattern
 					backgroundImage:    "radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%), radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%)",
@@ -465,7 +465,7 @@ export function SidebarContents() {
 				}}
 			>
 				{/* Put [transform] next to [stroke-width] here */}
-				<Icon className="h-64 w-64 [transform]-scale($scale) [stroke-width]-$stroke-width [color]-#333" icon={feather[selectedName]} />
+				<Icon className="h-64 w-64 transform--scale($scale) stroke-width--$stroke-width color--#333" icon={feather[selectedName]} />
 			</div>
 		</>}
 		<div className="flex flex-col gap-10">
@@ -487,9 +487,9 @@ export function SidebarContents() {
 		<Hairline />
 		<div className="flex justify-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-10">
-				{/* <Icon className="h-16 w-16 [color]-#ccc" icon={feather.Maximize2} /> */}
-				<div className="flex justify-center align-center h-24 w-24 rounded-43.75% [background-color]-hsl($base-h,_$base-s,_$base-l,_0.125)">
-					<Icon className="h-12 w-12 [color]-#333" icon={feather.Maximize2} />
+				{/* <Icon className="h-16 w-16 color--#ccc" icon={feather.Maximize2} /> */}
+				<div className="flex justify-center align-center h-24 w-24 rounded-43.75% background-color--hsl($base-h,_$base-s,_$base-l,_0.125)">
+					<Icon className="h-12 w-12 color--#333" icon={feather.Maximize2} />
 				</div>
 				<TypeCaps>
 					PREVIEW SIZE
@@ -500,7 +500,7 @@ export function SidebarContents() {
 					{size} PX
 				</TypeCaps>
 				<button className="flex justify-center align-center" onClick={e => setSize(sizeInitial)}>
-					<Icon className="h-16 w-16 [color]-#ccc [&:hover]:[color]-#333" icon={feather.RotateCcw} strokeWidth={2.5} onClick={e => setSize(sizeInitial)} />
+					<Icon className="h-16 w-16 color--#ccc [&:hover]:color--#333" icon={feather.RotateCcw} strokeWidth={2.5} onClick={e => setSize(sizeInitial)} />
 				</button>
 			</div>
 		</div>
@@ -508,9 +508,9 @@ export function SidebarContents() {
 		<Hairline />
 		<div className="flex justify-between align-center h-$sidebar-label-height">
 			<div className="flex align-center gap-10">
-				{/* <Icon className="h-16 w-16 [color]-#ccc" icon={feather.Minimize2} /> */}
-				<div className="flex justify-center align-center h-24 w-24 rounded-43.75% [background-color]-hsl($base-h,_$base-s,_$base-l,_0.125)">
-					<Icon className="h-12 w-12 [color]-#333" icon={feather.Minimize2} />
+				{/* <Icon className="h-16 w-16 color--#ccc" icon={feather.Minimize2} /> */}
+				<div className="flex justify-center align-center h-24 w-24 rounded-43.75% background-color--hsl($base-h,_$base-s,_$base-l,_0.125)">
+					<Icon className="h-12 w-12 color--#333" icon={feather.Minimize2} />
 				</div>
 				<TypeCaps>
 					PREVIEW STROKE WIDTH
@@ -521,7 +521,7 @@ export function SidebarContents() {
 					{strokeWidth.toFixed(2)}
 				</TypeCaps>
 				<button className="flex justify-center align-center" onClick={e => setStrokeWidth(strokeWidthInitial)}>
-					<Icon className="h-16 w-16 [color]-#ccc [&:hover]:[color]-#333" icon={feather.RotateCcw} strokeWidth={2.5} onClick={e => setStrokeWidth(strokeWidthInitial)} />
+					<Icon className="h-16 w-16 color--#ccc [&:hover]:color--#333" icon={feather.RotateCcw} strokeWidth={2.5} onClick={e => setStrokeWidth(strokeWidthInitial)} />
 				</button>
 			</div>
 		</div>

@@ -2,7 +2,6 @@ import { variantBreakpoints, variantVariables } from "@unocss/preset-mini/varian
 import transformerVariantGroup from "@unocss/transformer-variant-group"
 import { Rule } from "unocss"
 import { defineConfig } from "unocss/vite"
-import { unitless } from "./unitless"
 
 
 function resolve(str: string, { sign, px }: { sign: string, px: boolean }) {
@@ -113,15 +112,15 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,     ([_, value]) => ({ "border-bottom-left-radius":  desugar(value) })],
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     desugar(value) })],
 
-	// Arbitrary key-value e.g. [property]-value
-	//
-	// TODO: DEPRECATE
-	[/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
-		const px = !(property in unitless)
-		return {
-			[property]: desugar(value, { px }),
-		}
-	}],
+	//// // Arbitrary key-value e.g. property--value
+	//// //
+	//// // TODO: DEPRECATE
+	//// [/^\[([^\]]+)\]-(.+)$/, ([_, property, value]) => {
+	//// 	const px = !(property in unitless)
+	//// 	return {
+	//// 		[property]: desugar(value, { px }),
+	//// 	}
+	//// }],
 
 	// Arbitrary key-value e.g. k--v
 	[/^((?:--|-)?[a-z]+(?:-[a-z]+)*)--(.+)$/, ([_, property, value]) => {

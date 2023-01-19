@@ -1,6 +1,6 @@
 import { cx } from "./lib/cx"
 
-// FIXME: [font-feature-settings]-'tnum' doesn't work as expected
+// FIXME: font-feature-settings--'tnum' doesn't work as expected
 export function TypeCaps({
 	children,
 	...props
@@ -8,10 +8,10 @@ export function TypeCaps({
 	return <>
 		<div
 			className={cx(`
-				[white-space]-pre
-				[font]-600_11px_/_normal_$sans
-				[letter-spacing]-0.0625em
-				[color]-#333
+				white-space--pre
+				font--600_11px_/_normal_$sans
+				letter-spacing--0.0625em
+				color--#333
 			`)}
 			style={{ fontFeatureSettings: "'tnum'" }}
 			{...props}
@@ -21,7 +21,7 @@ export function TypeCaps({
 	</>
 }
 
-// FIXME: [font-feature-settings]-'tnum' doesn't work as expected
+// FIXME: font-feature-settings--'tnum' doesn't work as expected
 export function TypeInvertedCaps({
 	children,
 	...props
@@ -29,10 +29,10 @@ export function TypeInvertedCaps({
 	return <>
 		<div
 			className={cx(`
-				[white-space]-pre
-				[font]-600_11px_/_normal_$sans
-				[letter-spacing]-0.0625em
-				[color]-#fff
+				white-space--pre
+				font--600_11px_/_normal_$sans
+				letter-spacing--0.0625em
+				color--#fff
 			`)}
 			style={{ fontFeatureSettings: "'tnum'" }}
 			{...props}
@@ -49,7 +49,7 @@ export function TypeInvertedCaps({
 //// 	...props
 //// }: HTMLAttributes<HTMLDivElement>) {
 //// 	return <>
-//// 		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#333", className)} {...props}>
+//// 		<div className={cx("white-space--pre font--400_15px_/_normal_$sans font-feature-settings--'tnum' color--#333", className)} {...props}>
 //// 			{children}
 //// 		</div>
 //// 	</>
@@ -61,7 +61,7 @@ export function TypeInvertedCaps({
 //// 	...props
 //// }: HTMLAttributes<HTMLDivElement>) {
 //// 	return <>
-//// 		<div className={cx("[white-space]-pre [font]-400_15px_/_normal_$sans [font-feature-settings]-'tnum' [color]-#fff", className)} {...props}>
+//// 		<div className={cx("white-space--pre font--400_15px_/_normal_$sans font-feature-settings--'tnum' color--#fff", className)} {...props}>
 //// 			{children}
 //// 		</div>
 //// 	</>

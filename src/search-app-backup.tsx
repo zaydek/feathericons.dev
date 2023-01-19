@@ -73,7 +73,7 @@ export function SearchApp() {
 			<div className="flex-basis--2e3px flex flex-col gap-32">
 				<input
 					ref={inputRef}
-					className="mx-16 px-32 h-64 rounded-1e3 [font]-400_18px_/_normal_$sans bg-#eee"
+					className="mx-16 px-32 h-64 rounded-1e3 font--400_18px_/_normal_$sans bg-#eee"
 					type="text"
 					value={search}
 					onKeyDown={e => {
