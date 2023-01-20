@@ -1,10 +1,13 @@
 import { Dispatch, HTMLAttributes, SetStateAction } from "react"
 
-export function AriaCheckbox({ checked, setChecked, children, ...props }: {
+// prettier-ignore
+export type AriaCheckboxProps = {
 	checked:    boolean
 	setChecked: Dispatch<SetStateAction<boolean>>
-} & HTMLAttributes<HTMLDivElement>) {
-	return <>
+} & HTMLAttributes<HTMLDivElement>
+
+export function AriaCheckbox({ checked, setChecked, children, ...props }: AriaCheckboxProps) {
+	return (
 		<div
 			onClick={e => {
 				e.preventDefault()
@@ -16,12 +19,14 @@ export function AriaCheckbox({ checked, setChecked, children, ...props }: {
 					e.currentTarget.click()
 				}
 			}}
+			// A11y
 			role="checkbox"
 			aria-checked={checked}
+			// /A11y
 			tabIndex={0}
 			{...props}
 		>
 			{children}
 		</div>
-	</>
+	)
 }

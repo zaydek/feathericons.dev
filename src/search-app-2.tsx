@@ -2,20 +2,16 @@ import { PropsWithChildren, useEffect, useRef, useState } from "react"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { iota } from "./lib/iota"
+import { createStyled } from "./lib/react/create-styled"
 import { Icon, IconComponent } from "./lib/react/icon"
+import { StateProvider } from "./state"
 import { Transition } from "./transition"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 const TYPE_CAPS = "type-caps"
 
-function TypeCaps({ className, children, ...props }: JSX.IntrinsicElements["div"]) {
-	return (
-		<div className={cx(TYPE_CAPS, className)} {...props}>
-			{children}
-		</div>
-	)
-}
+const TypeCaps = createStyled(TYPE_CAPS)
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -23,8 +19,8 @@ function HoverTooltip({
 	pos,
 	icon,
 	children,
-}: PropsWithChildren<{
-	pos: "start" | "center" | "end"
+}: /* prettier-ignore */ PropsWithChildren<{
+	pos:   "start" | "center" | "end"
 	icon?: IconComponent
 }>) {
 	const [hover, setHover] = useState(false)
@@ -36,11 +32,17 @@ function HoverTooltip({
 				when={hover}
 				unmount="start"
 				start={{
-					transform: pos === "center" ? "translateY(8px) translateX(-50%)" : "translateY(8px)",
+					// prettier-ignore
+					transform: pos === "center"
+						? "translateY(8px) translateX(-50%)"
+						: "translateY(8px)",
 					opacity: 0,
 				}}
 				end={{
-					transform: pos === "center" ? "translateY(0px) translateX(-50%)" : "translateY(0px)",
+					// prettier-ignore
+					transform: pos === "center"
+						? "translateY(0px) translateX(-50%)"
+						: "translateY(0px)",
 					opacity: 1,
 				}}
 				duration={100}
@@ -135,7 +137,8 @@ function FormatButton() {
 
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {
-			if (ref.current !== null && !(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
+			if (ref.current === null) { return } // prettier-ignore
+			if (!(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
 				setShow(false)
 			}
 		}
@@ -190,21 +193,24 @@ function FormatButton() {
 						className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--raw-shadow-6)]"
 					>
 						<button
-							className="flex h-32 items-center gap-8 px-12 [&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
+							className="flex h-32 items-center gap-8 px-12
+								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => setShow(false)}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[#ffb13b]" icon={SVGIcon} />
 							<TypeCaps>SVG</TypeCaps>
 						</button>
 						<button
-							className="flex h-32 items-center gap-8 px-12 [&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
+							className="flex h-32 items-center gap-8 px-12
+								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => setShow(false)}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[#61dafb]" icon={JSXIcon} />
 							<TypeCaps>REACT</TypeCaps>
 						</button>
 						<button
-							className="flex h-32 items-center gap-8 px-12 [&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
+							className="flex h-32 items-center gap-8 px-12
+								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => setShow(false)}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[#3178c6]" icon={TSXIcon} />
@@ -219,7 +225,10 @@ function FormatButton() {
 
 function CopyButton() {
 	return (
-		<button className="flex h-40 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)] [&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]">
+		<button
+			className="flex h-40 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
+		>
 			<div className="h-16 w-16 rounded-1e3 bg-orange-500 [button:hover:active_&]:bg-white"></div>
 			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">COPY</TypeCaps>
 		</button>
@@ -228,7 +237,10 @@ function CopyButton() {
 
 function DownloadButton() {
 	return (
-		<button className="flex h-40 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)] [&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]">
+		<button
+			className="flex h-40 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
+		>
 			<div className="h-16 w-16 rounded-1e3 bg-orange-500 [button:hover:active_&]:bg-white"></div>
 			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">DOWNLOAD</TypeCaps>
 		</button>
@@ -305,7 +317,7 @@ function SidebarFragment() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function ProvidedApp() {
+function App() {
 	return (
 		<div className="flex justify-center p-32">
 			<div className="flex basis-1792 gap-32 [&_>_:nth-child(1)]:grow">
@@ -318,5 +330,13 @@ export function ProvidedApp() {
 				</aside>
 			</div>
 		</div>
+	)
+}
+
+export function ProvidedApp() {
+	return (
+		<StateProvider>
+			<App />
+		</StateProvider>
 	)
 }

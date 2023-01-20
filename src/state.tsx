@@ -1,12 +1,22 @@
 import * as feather from "./data/react-feather@4.29.0"
 
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useMemo, useState } from "react"
+import {
+	createContext,
+	Dispatch,
+	PropsWithChildren,
+	SetStateAction,
+	useContext,
+	useEffect,
+	useMemo,
+	useState,
+} from "react"
 import { formatAsReact, formatAsSvg, formatAsTypeScriptReact } from "../scripts/format"
 import { stringify } from "../scripts/stringify"
 import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { toKebabCase } from "./lib/cases"
 
+// prettier-ignore
 export const SearchContext =
 	createContext<{
 		compactMode:           boolean
@@ -16,6 +26,7 @@ export const SearchContext =
 		searchResults:         Partial<Record<keyof typeof feather, readonly [number, number] | null>>
 	} | null>(null)
 
+// prettier-ignore
 export const SelectedContext =
 	createContext<{
 		selectedName:          keyof typeof manifest
@@ -29,6 +40,7 @@ export const SelectedContext =
 		clipboard:             string
 	} | null>(null)
 
+// prettier-ignore
 export const SliderContext =
 	createContext<{
 		size:                  number
@@ -39,14 +51,15 @@ export const SliderContext =
 
 function getSubstringIndexes(str: string, substr: string) {
 	const index = str.indexOf(substr)
-	if (index === -1) { return null }
+	if (index === -1) {
+		return null
+	}
 	return [index, index + substr.length] as const
 }
 
 const omitAttrs = ["class"]
 
 export function StateProvider({ children }: PropsWithChildren) {
-
 	//////////////////////////////////////////////////////////////////////////////
 	// SearchContext
 
@@ -54,9 +67,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useState("")
 
 	const $$search = useMemo(() => {
-		return search
-			.replace(/[^a-zA-Z0-9]/g, "")
-			.toLowerCase()
+		return search.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
 	}, [search])
 
 	const searchResultsFallback = useMemo(() => {
@@ -68,7 +79,9 @@ export function StateProvider({ children }: PropsWithChildren) {
 	}, [])
 
 	const searchResults = useMemo(() => {
-		if ($$search === "") { return searchResultsFallback }
+		if ($$search === "") {
+			return searchResultsFallback
+		}
 		const refA: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
 		const refB: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
 		for (const [name, tags] of Object.entries(manifest)) {
@@ -97,23 +110,35 @@ export function StateProvider({ children }: PropsWithChildren) {
 	const clipboard = useMemo(() => {
 		if (selectedSvgElement === null) {
 			return {
-				"svg": svgPlaceholder.replaceAll("\t", "  "),
-				"jsx": jsxPlaceholder.replaceAll("\t", "  "),
-				"tsx": tsxPlaceholder.replaceAll("\t", "  "),
+				svg: svgPlaceholder.replaceAll("\t", "  "),
+				jsx: jsxPlaceholder.replaceAll("\t", "  "),
+				tsx: tsxPlaceholder.replaceAll("\t", "  "),
 			}[formatAs]
 		}
 		if (formatAs === "svg") {
-			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
-			return formatAsSvg(toKebabCase(selectedName), code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}` })
-				.replaceAll("\t", "  ")
+			const code = stringify(selectedSvgElement, {
+				strictJsx: false,
+				omitAttrs,
+			})
+			return formatAsSvg(toKebabCase(selectedName), code, {
+				comment: `https://feathericons.dev/${toKebabCase(selectedName)}`,
+			}).replaceAll("\t", "  ")
 		} else if (formatAs === "jsx") {
-			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
-			return formatAsReact(selectedName, code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=jsx` })
-				.replaceAll("\t", "  ")
+			const code = stringify(selectedSvgElement, {
+				strictJsx: false,
+				omitAttrs,
+			})
+			return formatAsReact(selectedName, code, {
+				comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=jsx`,
+			}).replaceAll("\t", "  ")
 		} else {
-			const code = stringify(selectedSvgElement, { strictJsx: false, omitAttrs })
-			return formatAsTypeScriptReact(selectedName, code, { comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=tsx` })
-				.replaceAll("\t", "  ")
+			const code = stringify(selectedSvgElement, {
+				strictJsx: false,
+				omitAttrs,
+			})
+			return formatAsTypeScriptReact(selectedName, code, {
+				comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=tsx`,
+			}).replaceAll("\t", "  ")
 		}
 	}, [formatAs, selectedName, selectedSvgElement])
 
@@ -125,44 +150,61 @@ export function StateProvider({ children }: PropsWithChildren) {
 
 	//////////////////////////////////////////////////////////////////////////////
 
-	return <>
-		<SearchContext.Provider value={useMemo(() => ({
-			compactMode,
-			setCompactMode,
-			/**/
-			search,
-			setSearch,
-			/**/
-			searchResults,
-		}), [compactMode, search, searchResults])}>
-			<SelectedContext.Provider value={useMemo(() => ({
-				selectedName,
-				setSelectedName,
-				/**/
-				selectedSvgElement,
-				setSelectedSvgElement,
-				/**/
-				viewSource,
-				setViewSource,
-				/**/
-				formatAs,
-				setFormatAs,
-				/**/
-				clipboard,
-			}), [clipboard, formatAs, selectedSvgElement, selectedName, viewSource])}>
-				<SliderContext.Provider value={useMemo(() => ({
-					size,
-					setSize,
-					/**/
-					strokeWidth,
-					setStrokeWidth,
-				}), [size, strokeWidth])}>
-					<CSSVariableEffect />
-					{children}
-				</SliderContext.Provider>
-			</SelectedContext.Provider>
-		</SearchContext.Provider>
-	</>
+	return (
+		<>
+			<SearchContext.Provider
+				value={useMemo(
+					() => ({
+						compactMode,
+						setCompactMode,
+						/**/
+						search,
+						setSearch,
+						/**/
+						searchResults,
+					}),
+					[compactMode, search, searchResults]
+				)}
+			>
+				<SelectedContext.Provider
+					value={useMemo(
+						() => ({
+							selectedName,
+							setSelectedName,
+							/**/
+							selectedSvgElement,
+							setSelectedSvgElement,
+							/**/
+							viewSource,
+							setViewSource,
+							/**/
+							formatAs,
+							setFormatAs,
+							/**/
+							clipboard,
+						}),
+						[clipboard, formatAs, selectedSvgElement, selectedName, viewSource]
+					)}
+				>
+					<SliderContext.Provider
+						value={useMemo(
+							() => ({
+								size,
+								setSize,
+								/**/
+								strokeWidth,
+								setStrokeWidth,
+							}),
+							[size, strokeWidth]
+						)}
+					>
+						<CSSVariableEffect />
+						{children}
+					</SliderContext.Provider>
+				</SelectedContext.Provider>
+			</SearchContext.Provider>
+		</>
+	)
 }
 
 function CSSVariableEffect() {

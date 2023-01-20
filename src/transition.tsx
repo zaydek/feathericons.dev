@@ -1,8 +1,18 @@
-import { cloneElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react"
+import {
+	cloneElement,
+	CSSProperties,
+	PropsWithChildren,
+	ReactElement,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react"
 import { toKebabCase } from "./lib/cases"
 
 const MICRO_TIMEOUT = 10
 
+// prettier-ignore
 export type TransitionProps = PropsWithChildren<{
 	when:     boolean
 	unmount?: "start" | "end"
@@ -13,7 +23,17 @@ export type TransitionProps = PropsWithChildren<{
 	delay?:   number
 }>
 
-export function Transition({ when, unmount, start, end, duration, ease = "ease", delay = 0, children }: TransitionProps) {
+export function Transition({
+	when,
+	unmount,
+	start,
+	end,
+	duration,
+	ease = "ease",
+	delay = 0,
+	children,
+}: TransitionProps) {
+	// prettier-ignore
 	const [show, setShow] = useState(!(
 		 (when && unmount === "end") ||
 		(!when && unmount === "start")
@@ -41,6 +61,7 @@ export function Transition({ when, unmount, start, end, duration, ease = "ease",
 			const d = window.setTimeout(() => {
 				setState(when ? "end" : "start")
 				const d = window.setTimeout(() => {
+					// prettier-ignore
 					setShow(!(
 						(when && unmount === "end") ||
 						(!when && unmount === "start")
@@ -52,27 +73,25 @@ export function Transition({ when, unmount, start, end, duration, ease = "ease",
 		}, Math.max(MICRO_TIMEOUT, delay))
 		ds.push(d)
 		return () => {
-			ds
-				.reverse()
-				.forEach(tid => window.clearTimeout(tid))
+			ds.reverse().forEach(tid => window.clearTimeout(tid))
 		}
 	}, [delay, duration, when, unmount])
 
-	return <>
-		{show && <>
-			{cloneElement(children as ReactElement, {
-				style: {
-					...state === "start"
-						? start
-						: end,
-					transitionProperty,
-					transitionDuration: `${duration}ms`,
-					transitionTimingFunction: typeof ease === "string"
-						? ease
-						: `cubic-bezier(${ease.join(", ")})`,
-					transitionDelay: `${delay ?? 0}ms`,
-				},
-			})}
-		</>}
-	</>
+	return (
+		<>
+			{show &&
+				cloneElement(children as ReactElement, {
+					style: {
+						...(state === "start" ? start : end),
+						transitionProperty,
+						transitionDuration: `${duration}ms`,
+						// prettier-ignore
+						transitionTimingFunction: typeof ease === "string"
+							? ease
+							: `cubic-bezier(${ease.join(", ")})`,
+						transitionDelay: `${delay ?? 0}ms`,
+					},
+				})}
+		</>
+	)
 }

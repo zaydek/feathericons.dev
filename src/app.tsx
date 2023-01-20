@@ -6,23 +6,18 @@ import { RouterTransitionProvider } from "./router-transition"
 import { StateProvider } from "./state"
 
 export function App({ initialPath }: { initialPath: string }) {
-	return <>
+	return (
 		<StateProvider>
 			<RouterProvider initialPath={initialPath}>
 				<RouterTransitionProvider>
 					<Router>
 						<Route path="/" component={Home} />
-						{Object.keys(manifest).map(name =>
-							<Route
-								key={name}
-								path={`/${name}`}
-								component={Page}
-								componentProps={{ name: name }}
-							/>
-						)}
+						{Object.keys(manifest).map(name => (
+							<Route key={name} path={`/${name}`} component={Page} componentProps={{ name: name }} />
+						))}
 					</Router>
 				</RouterTransitionProvider>
 			</RouterProvider>
 		</StateProvider>
-	</>
+	)
 }
