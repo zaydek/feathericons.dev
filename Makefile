@@ -1,6 +1,10 @@
+tailwind-w:
+	npx tailwindcss -i src/css/tailwind.css -o src/css/tailwind.generated.css -w
+tailwind:
+	npx tailwindcss -i src/css/tailwind.css -o src/css/tailwind.generated.css
+
 feather:
 	npx tsx scripts/feather.ts
-
 format-feather:
 	npx tsx scripts/format-feather.ts
 
