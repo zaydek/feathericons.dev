@@ -1,3 +1,5 @@
+import * as feather from "./data/react-feather@4.29.0"
+
 import { PropsWithChildren, useEffect, useRef, useState } from "react"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
@@ -59,7 +61,7 @@ function HoverTooltip({
 						}[pos]
 					}
 				>
-					<div className="flex h-32 items-center gap-8 rounded-12 bg-white px-12 [box-shadow:_var(--shadow-6),_var(--raw-shadow-6)]">
+					<div className="flex h-32 items-center gap-8 rounded-12 bg-white px-12 [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
 						{icon && <div className="h-16 w-16 rounded-1e3 bg-gray-500"></div>}
 						<TypeCaps>ICON NAME</TypeCaps>
 					</div>
@@ -190,7 +192,7 @@ function FormatButton() {
 				<div className="absolute top-[calc(100%_+_10px)] right-0 z-10">
 					<div
 						ref={ref}
-						className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--raw-shadow-6)]"
+						className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
 					>
 						<button
 							className="flex h-32 items-center gap-8 px-12
@@ -256,8 +258,8 @@ function CheckboxField({ children }: PropsWithChildren) {
 		<div className="flex h-20 items-center justify-between">
 			{/* LHS */}
 			<div className="flex items-center gap-8">
-				<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-300">
-					<div className="h-12 w-12 rounded-1e3 bg-gray-800"></div>
+				<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
+					<Icon className="h-12 w-12 text-gray-800" icon={feather.Code} />
 				</div>
 				<TypeCaps>{children}</TypeCaps>
 			</div>
@@ -269,21 +271,21 @@ function CheckboxField({ children }: PropsWithChildren) {
 	)
 }
 
-function SliderFieldFragment({ children }: PropsWithChildren) {
+function SliderFieldFragment({ icon, children }: PropsWithChildren<{ icon: IconComponent }>) {
 	return (
 		<>
 			<div className="flex h-20 items-center justify-between">
 				{/* LHS */}
 				<div className="flex items-center gap-8">
-					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-300">
-						<div className="h-12 w-12 rounded-1e3 bg-gray-800"></div>
+					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
+						<Icon className="h-12 w-12 text-gray-800" icon={icon} />
 					</div>
 					<TypeCaps>{children}</TypeCaps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-8">
 					<TypeCaps>XX</TypeCaps>
-					<div className="h-24 w-24 rounded-1e3 bg-gray-500"></div>
+					<Icon className="h-16 w-16 text-gray-300" icon={feather.RotateCcw} />
 				</div>
 			</div>
 			<div className="h-20 px-12">
@@ -308,9 +310,9 @@ function SidebarFragment() {
 				</div>
 			</div>
 			<Hairline />
-			<SliderFieldFragment>PREVIEW SIZE</SliderFieldFragment>
+			<SliderFieldFragment icon={feather.Maximize2}>PREVIEW SIZE</SliderFieldFragment>
 			<Hairline />
-			<SliderFieldFragment>PREVIEW STROKE WIDTH</SliderFieldFragment>
+			<SliderFieldFragment icon={feather.Minimize2}>PREVIEW STROKE WIDTH</SliderFieldFragment>
 		</>
 	)
 }

@@ -8,7 +8,7 @@
 import "the-new-css-reset"
 
 import "./css/base.scss"
-import "./css/vars.scss"
+import "./css/vars-2.scss"
 
 import "./css/type.scss"
 
