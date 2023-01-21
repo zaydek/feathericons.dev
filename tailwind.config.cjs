@@ -1,18 +1,18 @@
-const percents = {
-    "0%":   "0%",
-   "10%":  "10%",
-   "20%":  "20%",
-   "30%":  "30%",
-   "40%":  "40%",
-   "50%":  "50%",
-   "60%":  "60%",
-   "70%":  "70%",
-   "80%":  "80%",
-   "90%":  "90%",
-  "100%": "100%",
-   "25%":  "25%",
-   "75%":  "75%",
-}
+//// const percents = {
+////     "0%":   "0%",
+////    "10%":  "10%",
+////    "20%":  "20%",
+////    "30%":  "30%",
+////    "40%":  "40%",
+////    "50%":  "50%",
+////    "60%":  "60%",
+////    "70%":  "70%",
+////    "80%":  "80%",
+////    "90%":  "90%",
+////   "100%": "100%",
+////    "25%":  "25%",
+////    "75%":  "75%",
+//// }
 
 const sizes = {
      0:    "0px",    1:    "1px",    2:    "2px",    3:    "3px",    4:    "4px",
@@ -36,8 +36,11 @@ module.exports = {
 	content: ["./src/**/*.tsx"],
   corePlugins: { preflight: false },
   theme: {
-    borderRadius: { ...sizes, ...percents },
-    opacity: percents,
-    spacing: { ...sizes, ...percents },
+    //// borderRadius: { ...sizes, ...percents },
+    //// opacity: percents,
+    //// spacing: { ...sizes, ...percents },
+
+    borderRadius: sizes,
+    spacing: sizes,
   },
 }
