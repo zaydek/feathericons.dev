@@ -23,7 +23,7 @@
 	// Hairlines
 
 	--hairline-height: 1px;
-	--hairline-color:  hsl(0, 0%, 50%, 0.25);
+	--hairline-color:  hsl(0, 0%, 50%, 0.2);
 
 	--hairline-shadow:         0 0 0 var(--hairline-height) var(--hairline-color);
 	--hairline-shadow-t:       0 calc(-1 * var(--hairline-height)) 0 0 var(--hairline-color);

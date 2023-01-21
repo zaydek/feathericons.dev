@@ -1,7 +1,7 @@
-import { createElement, SVGAttributes } from "react"
+import { createElement } from "react"
 
-export type IconComponent = (_: SVGAttributes<SVGSVGElement>) => JSX.Element
+export type SVG = (_: JSX.IntrinsicElements["svg"]) => JSX.Element
 
-export function Icon({ icon, ...props }: { icon: IconComponent } & SVGAttributes<SVGSVGElement>) {
-  return createElement(icon, props)
+export function Icon({ svg, ...props }: { svg: SVG } & JSX.IntrinsicElements["svg"]) {
+	return createElement(svg, props)
 }

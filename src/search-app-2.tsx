@@ -5,7 +5,7 @@ import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { iota } from "./lib/iota"
 import { createStyled } from "./lib/react/create-styled"
-import { Icon, IconComponent } from "./lib/react/icon"
+import { Icon, SVG } from "./lib/react/icon"
 import { StateProvider } from "./state"
 import { Transition } from "./transition"
 
@@ -15,6 +15,13 @@ const TYPE_CAPS = "type-caps"
 
 const TypeCaps = createStyled(TYPE_CAPS)
 
+export function ThickIcon({
+	svg,
+	...props
+}: { svg: SVG } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
+	return <Icon svg={svg} strokeWidth={2.5} {...props} />
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 function HoverTooltip({
@@ -23,7 +30,7 @@ function HoverTooltip({
 	children,
 }: /* prettier-ignore */ PropsWithChildren<{
 	pos:   "start" | "center" | "end"
-	icon?: IconComponent
+	icon?: SVG
 }>) {
 	const [hover, setHover] = useState(false)
 
@@ -61,7 +68,10 @@ function HoverTooltip({
 						}[pos]
 					}
 				>
-					<div className="flex h-32 items-center gap-8 rounded-12 bg-white px-12 [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
+					<div
+						className="flex h-32 items-center gap-8 rounded-12 bg-white px-12
+							[box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
+					>
 						{icon && <div className="h-16 w-16 rounded-1e3 bg-gray-500"></div>}
 						<TypeCaps>ICON NAME</TypeCaps>
 					</div>
@@ -162,15 +172,15 @@ function FormatButton() {
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
 				<button
-					className="flex h-40 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]"
+					className="flex h-36 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]"
 					onClick={e => setShow(curr => !curr)}
 				>
-					<div className="h-16 w-16 rounded-1e3 bg-orange-500"></div>
-					<TypeCaps className="text-gray-700">FORMAT</TypeCaps>
+					<Icon className="h-16 w-16 text-[var(--svg-color)]" svg={SVGIcon} />
+					<TypeCaps className="text-gray-700">FORMAT AS SVG</TypeCaps>
 				</button>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
-					<div className="flex h-40 w-40 items-center justify-center">
-						<div className="h-16 w-16 rounded-1e3 bg-orange-500"></div>
+					<div className="flex h-36 w-36 items-center justify-center">
+						<ThickIcon className="h-16 w-16 text-gray-500" svg={feather.ChevronDown} />
 					</div>
 				</div>
 			</div>
@@ -199,7 +209,7 @@ function FormatButton() {
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => setShow(false)}
 						>
-							<Icon className="h-16 w-16 rounded-1e3 text-[#ffb13b]" icon={SVGIcon} />
+							<Icon className="h-16 w-16 rounded-1e3 text-[var(--svg-color)]" svg={SVGIcon} />
 							<TypeCaps>SVG</TypeCaps>
 						</button>
 						<button
@@ -207,7 +217,7 @@ function FormatButton() {
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => setShow(false)}
 						>
-							<Icon className="h-16 w-16 rounded-1e3 text-[#61dafb]" icon={JSXIcon} />
+							<Icon className="h-16 w-16 rounded-1e3 text-[var(--jsx-color)]" svg={JSXIcon} />
 							<TypeCaps>REACT</TypeCaps>
 						</button>
 						<button
@@ -215,7 +225,7 @@ function FormatButton() {
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => setShow(false)}
 						>
-							<Icon className="h-16 w-16 rounded-1e3 text-[#3178c6]" icon={TSXIcon} />
+							<Icon className="h-16 w-16 rounded-1e3 text-[var(--tsx-color)]" svg={TSXIcon} />
 							<TypeCaps>TS REACT</TypeCaps>
 						</button>
 					</div>
@@ -225,26 +235,66 @@ function FormatButton() {
 	)
 }
 
-function CopyButton() {
+function CopyButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
+	const [pressed, setPressed] = useState(false)
+
+	useEffect(() => {
+		if (!pressed) {
+			return
+		}
+		const d = window.setTimeout(() => {
+			setPressed(false)
+		}, 1e3)
+		return () => window.clearTimeout(d)
+	}, [pressed])
+
 	return (
 		<button
-			className="flex h-40 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+			className="flex h-36 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
+			onClick={e => {
+				setPressed(true)
+				onClick?.(e)
+			}}
+			{...props}
 		>
-			<div className="h-16 w-16 rounded-1e3 bg-orange-500 [button:hover:active_&]:bg-white"></div>
-			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">COPY</TypeCaps>
+			<ThickIcon
+				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
+				svg={pressed ? feather.Check : icon}
+			/>
+			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypeCaps>
 		</button>
 	)
 }
 
-function DownloadButton() {
+function DownloadButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
+	const [pressed, setPressed] = useState(false)
+
+	useEffect(() => {
+		if (!pressed) {
+			return
+		}
+		const d = window.setTimeout(() => {
+			setPressed(false)
+		}, 1e3)
+		return () => window.clearTimeout(d)
+	}, [pressed])
+
 	return (
 		<button
-			className="flex h-40 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+			className="flex h-36 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
+			onClick={e => {
+				setPressed(true)
+				onClick?.(e)
+			}}
+			{...props}
 		>
-			<div className="h-16 w-16 rounded-1e3 bg-orange-500 [button:hover:active_&]:bg-white"></div>
-			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">DOWNLOAD</TypeCaps>
+			<ThickIcon
+				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
+				svg={pressed ? feather.Check : icon}
+			/>
+			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypeCaps>
 		</button>
 	)
 }
@@ -259,7 +309,7 @@ function CheckboxField({ children }: PropsWithChildren) {
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
-					<Icon className="h-12 w-12 text-gray-800" icon={feather.Code} />
+					<ThickIcon className="h-12 w-12 text-gray-700" svg={feather.Code} />
 				</div>
 				<TypeCaps>{children}</TypeCaps>
 			</div>
@@ -271,25 +321,25 @@ function CheckboxField({ children }: PropsWithChildren) {
 	)
 }
 
-function SliderFieldFragment({ icon, children }: PropsWithChildren<{ icon: IconComponent }>) {
+function SliderFieldFragment({ icon, children }: PropsWithChildren<{ icon: SVG }>) {
 	return (
 		<>
 			<div className="flex h-20 items-center justify-between">
 				{/* LHS */}
 				<div className="flex items-center gap-8">
 					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
-						<Icon className="h-12 w-12 text-gray-800" icon={icon} />
+						<ThickIcon className="h-12 w-12 text-gray-700" svg={icon} />
 					</div>
 					<TypeCaps>{children}</TypeCaps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-8">
 					<TypeCaps>XX</TypeCaps>
-					<Icon className="h-16 w-16 text-gray-300" icon={feather.RotateCcw} />
+					<ThickIcon className="h-16 w-16 text-gray-300" svg={feather.RotateCcw} />
 				</div>
 			</div>
 			<div className="h-20 px-12">
-				<div className="flex h-6 items-center justify-center rounded-1e3 bg-[var(--trim-color)]">
+				<div className="flex h-6 items-center justify-center rounded-1e3 bg-[linear-gradient(to_right,_var(--trim-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]">
 					<div className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
 				</div>
 			</div>
@@ -305,8 +355,8 @@ function SidebarFragment() {
 			<div className="flex flex-col gap-10">
 				<FormatButton />
 				<div className="grid grid-cols-2 gap-10">
-					<CopyButton />
-					<DownloadButton />
+					<CopyButton icon={feather.Clipboard}>COPY</CopyButton>
+					<DownloadButton icon={feather.Download}>DOWNLOAD</DownloadButton>
 				</div>
 			</div>
 			<Hairline />
