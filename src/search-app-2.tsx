@@ -147,10 +147,16 @@ function SearchGridContents() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function Preview() {
+function IconPreview() {
 	return (
-		<div className="flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
-			<div className="h-64 w-64 rounded-1e3 bg-red-500"></div>
+		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
+			{/* stroke-[var(--stroke-width)] doesn't work; use [stroke-width:_var(--stroke-width)] */}
+			{/* prettier-ignore */}
+			<Icon
+				className="h-64 w-64 text-gray-700
+					scale-[var(--scale)] [stroke:_var(--stroke-width)]"
+				svg={feather.Feather}
+			/>
 		</div>
 	)
 }
@@ -234,7 +240,7 @@ function FormatButton() {
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 rounded-1e3 text-[var(--svg-color)]" svg={SVGIcon} />
+							<Icon className="h-16 w-16 text-[var(--svg-color)]" svg={SVGIcon} />
 							<TypeCaps className="text-gray-700">SVG</TypeCaps>
 						</button>
 						<button
@@ -245,7 +251,7 @@ function FormatButton() {
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 rounded-1e3 text-[var(--jsx-color)]" svg={JSXIcon} />
+							<Icon className="h-16 w-16 text-[var(--jsx-color)]" svg={JSXIcon} />
 							<TypeCaps className="text-gray-700">REACT</TypeCaps>
 						</button>
 						<button
@@ -256,7 +262,7 @@ function FormatButton() {
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 rounded-1e3 text-[var(--tsx-color)]" svg={TSXIcon} />
+							<Icon className="h-16 w-16 text-[var(--tsx-color)]" svg={TSXIcon} />
 							<TypeCaps className="text-gray-700">TS REACT</TypeCaps>
 						</button>
 					</div>
@@ -431,7 +437,7 @@ function SidebarFragment() {
 			<CheckboxField checked={viewSource} setChecked={setViewSource}>
 				VIEW SOURCE
 			</CheckboxField>
-			<Preview />
+			<IconPreview />
 			<div className="flex flex-col gap-10">
 				<FormatButton />
 				<div className="grid grid-cols-2 gap-10">

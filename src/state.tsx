@@ -212,7 +212,7 @@ function CSSVariableEffect() {
 
 	useEffect(() => {
 		document.body.style.setProperty("--scale", `${size / sizeInitial}`)
-		document.body.style.setProperty("--stroke-width", `${strokeWidth}px`)
+		document.body.style.setProperty("--stroke-width", `${strokeWidth}`)
 	}, [size, strokeWidth])
 
 	return <></>
