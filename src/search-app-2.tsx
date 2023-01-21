@@ -1,6 +1,8 @@
 import * as feather from "./data/react-feather@4.29.0"
 
 import {
+	Fragment,
+	memo,
 	MouseEventHandler,
 	PropsWithChildren,
 	ReactNode,
@@ -24,8 +26,8 @@ import {
 } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
+import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
-import { iota } from "./lib/iota"
 import { createStyled } from "./lib/react/create-styled"
 import { Icon, SVG } from "./lib/react/icon"
 import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
@@ -46,7 +48,7 @@ export function ThickIcon({
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function HoverTooltip({
+function MouseTooltip({
 	pos,
 	svg,
 	text,
@@ -122,96 +124,110 @@ function SearchBar() {
 
 	return (
 		<div className="flex h-64 rounded-1e3 bg-white [box-shadow:_var(--shadow-2)] [&_>_:nth-child(2)]:grow">
-			<HoverTooltip pos="start" text={<>SEARCH FEATHER</>}>
+			<MouseTooltip pos="start" text={<>SEARCH FEATHER</>}>
 				<SearchBarButton
 					onClick={e => {
 						ref.current?.focus()
 					}}
 				/>
-			</HoverTooltip>
+			</MouseTooltip>
 			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
-			<HoverTooltip pos="end" text={<>COMPACT MODE</>}>
+			<MouseTooltip pos="end" text={<>COMPACT MODE</>}>
 				<SearchBarButton
 					onClick={e => {
 						setCompactMode(curr => !curr)
 					}}
 				/>
-			</HoverTooltip>
+			</MouseTooltip>
 		</div>
 	)
 }
 
-//// function SearchGridItem() {
-//// 	return (
-//// 		<div className="flex flex-col">
-//// 			{/* <HoverTooltip pos="center"> */}
-//// 			<div className="flex h-96 items-center justify-center">
-//// 				{/* prettier-ignore */}
-//// 				<Icon
-//// 					className="h-32 w-32 text-gray-800
-//// 						scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
-//// 					svg={feather.Feather}
-//// 				/>
-//// 			</div>
-//// 			{/* </HoverTooltip> */}
-//// 			{/* Use select-text here so users can easily copy-paste names */}
-//// 			<div className="flex h-20 select-text items-center justify-center px-4">
-//// 				<div className="truncate">Hello hello hello</div>
-//// 			</div>
-//// 		</div>
-//// 	)
-//// }
+function Wbr({ children }: { children: string }) {
+	const ws = children.split(/(?=[A-Z])/)
+
+	return (
+		<>
+			{ws.map((w, index) => (
+				<Fragment key={w}>
+					{index > 0 && <wbr />}
+					{w}
+				</Fragment>
+			))}
+		</>
+	)
+}
+
+const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
+	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
+
+	return (
+		<div className="flex flex-col">
+			<MouseTooltip pos="center" svg={feather.Feather} text={toKebabCase(name).toUpperCase()}>
+				<button
+					className="flex h-96 items-center justify-center"
+					onClick={e => {
+						setSelectedName(name)
+						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
+					}}
+				>
+					<Icon
+						id={name}
+						className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
+						svg={feather[name]}
+					/>
+				</button>
+			</MouseTooltip>
+		</div>
+	)
+})
+
+const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
+	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
+
+	return (
+		<div className="flex flex-col">
+			<button
+				className="flex h-96 items-center justify-center"
+				onClick={e => {
+					setSelectedName(name)
+					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
+				}}
+			>
+				<Icon
+					id={name}
+					className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
+					svg={feather[name]}
+				/>
+			</button>
+			{/* TODO */}
+			{/* <div className="flex h-20 select-text items-center justify-center px-4">
+				<div className="truncate">{name}</div>
+			</div> */}
+			<div className="flex h-40 items-center justify-center px-4">
+				<div className="h-20 text-center [font:_400_12px_/_normal_var(--sans)]">
+					<Wbr>{name}</Wbr>
+				</div>
+			</div>
+		</div>
+	)
+})
 
 function SearchGridContents() {
 	const { compactMode, searchResults } = useContext(SearchContext)!
-	const { setSelectedName, setSelectedSvgElement: setSelectedIcon } = useContext(SelectedContext)!
+
+	const GridItem = useMemo(() => {
+		if (compactMode) {
+			return MemoCompactGridItem
+		} else {
+			return MemoGridItem
+		}
+	}, [compactMode])
 
 	return (
 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(96px,_1fr))]">
-			{iota(100).map(index => (
-				<div key={index} className="flex flex-col">
-					{compactMode ? (
-						// COMPACT MODE
-						<HoverTooltip pos="center" svg={feather.Feather} text="FEATHER">
-							<button
-								className="flex h-96 items-center justify-center"
-								onClick={e => {
-									setSelectedName("Feather" as keyof typeof manifest)
-									setSelectedIcon(document.getElementById("Feather")! as unknown as SVGSVGElement)
-								}}
-							>
-								{/* prettier-ignore */}
-								<Icon
-									className="h-32 w-32 text-gray-800
-										scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
-									svg={feather.Feather}
-								/>
-							</button>
-						</HoverTooltip>
-					) : (
-						// NOT COMPACT MODE
-						<>
-							<button
-								className="flex h-96 items-center justify-center"
-								onClick={e => {
-									setSelectedName("Feather" as keyof typeof manifest)
-									setSelectedIcon(document.getElementById("Feather")! as unknown as SVGSVGElement)
-								}}
-							>
-								{/* prettier-ignore */}
-								<Icon
-									className="h-32 w-32 text-gray-800
-										scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
-									svg={feather.Feather}
-								/>
-							</button>
-							{/* Use select-text here so users can easily copy-paste names */}
-							<div className="flex h-20 select-text items-center justify-center px-4">
-								<div className="truncate">hello-world</div>
-							</div>
-						</>
-					)}
-				</div>
+			{Object.keys(searchResults).map(name => (
+				<GridItem key={name} name={name as keyof typeof manifest} />
 			))}
 		</div>
 	)
@@ -222,10 +238,8 @@ function SearchGridContents() {
 function IconPreview() {
 	return (
 		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
-			{/* prettier-ignore */}
 			<Icon
-				className="h-64 w-64 text-gray-800
-					scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
+				className="h-64 w-64 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
 				svg={feather.Feather}
 			/>
 		</div>
@@ -498,9 +512,45 @@ function SliderFieldFragment({
 	)
 }
 
+//// function SizeSlider() {
+//// 	const { size, setSize } = useContext(SliderContext)!
+////
+//// 	return (
+//// 		<SliderFieldFragment
+//// 			icon={feather.Maximize2}
+//// 			min={sizeMin}
+//// 			max={sizeMax}
+//// 			step={sizeStep}
+//// 			value={size}
+//// 			setValue={setSize}
+//// 			reset={e => setSize(sizeInitial)}
+//// 		>
+//// 			PREVIEW SIZE
+//// 		</SliderFieldFragment>
+//// 	)
+//// }
+////
+//// function StrokeWidthSlider() {
+//// 	const { strokeWidth, setStrokeWidth } = useContext(SliderContext)!
+////
+//// 	return (
+//// 		<SliderFieldFragment
+//// 			icon={feather.Minimize2}
+//// 			min={strokeWidthMin}
+//// 			max={strokeWidthMax}
+//// 			step={strokeWidthStep}
+//// 			value={strokeWidth}
+//// 			setValue={setStrokeWidth}
+//// 			reset={e => setStrokeWidth(strokeWidthInitial)}
+//// 		>
+//// 			PREVIEW STROKE WIDTH
+//// 		</SliderFieldFragment>
+//// 	)
+//// }
+
 function SidebarFragment() {
 	//// const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
-	const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
+	const { viewSource, setViewSource } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	return (
@@ -549,7 +599,7 @@ function SidebarFragment() {
 function App() {
 	return (
 		<div className="flex justify-center p-32">
-			<div className="flex basis-1792 gap-32 [&_>_:nth-child(1)]:grow">
+			<div className="flex basis-2304 gap-32 [&_>_:nth-child(1)]:grow">
 				<main className="flex flex-col gap-64">
 					<SearchBar />
 					<SearchGridContents />

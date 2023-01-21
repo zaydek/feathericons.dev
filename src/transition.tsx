@@ -75,7 +75,7 @@ export function Transition({
 		return () => {
 			ds.reverse().forEach(tid => window.clearTimeout(tid))
 		}
-	}, [delay, duration, when, unmount])
+	}, [delay, duration, unmount, when])
 
 	return (
 		<>
