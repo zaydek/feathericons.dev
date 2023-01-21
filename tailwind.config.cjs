@@ -41,6 +41,10 @@ module.exports = {
     //// spacing: { ...sizes, ...percents },
 
     borderRadius: sizes,
-    spacing: sizes,
+    maxHeight:    sizes,
+    maxWidth:     sizes,
+    minHeight:    sizes,
+    minWidth:     sizes,
+    spacing:      sizes,
   },
 }

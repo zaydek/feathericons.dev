@@ -268,7 +268,7 @@ function IconPreview() {
 		<div
 			className={cx(
 				TypeCode.className,
-				"aspect-[1.5] overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
+				"min-h-256 resize-y overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
 			)}
 		>
 			<pre className="m-0" data-lang={formatAs}>
@@ -359,8 +359,8 @@ function FormatButton() {
 					>
 						<button
 							className="flex h-32 items-center gap-10 px-12
-								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12
-									[&:last-child]:rounded-b-12 [&:hover:active]:bg-gray-200"
+								[&:hover:active]:bg-gray-200 [&:hover]:bg-gray-100
+									[&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => {
 								setFormatAs("svg")
 								setShow(false)
@@ -371,8 +371,8 @@ function FormatButton() {
 						</button>
 						<button
 							className="flex h-32 items-center gap-10 px-12
-								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12
-									[&:last-child]:rounded-b-12 [&:hover:active]:bg-gray-200"
+								[&:hover:active]:bg-gray-200 [&:hover]:bg-gray-100
+									[&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => {
 								setFormatAs("jsx")
 								setShow(false)
@@ -383,8 +383,8 @@ function FormatButton() {
 						</button>
 						<button
 							className="flex h-32 items-center gap-10 px-12
-								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12
-									[&:last-child]:rounded-b-12 [&:hover:active]:bg-gray-200"
+								[&:hover:active]:bg-gray-200 [&:hover]:bg-gray-100
+									[&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => {
 								setFormatAs("tsx")
 								setShow(false)
