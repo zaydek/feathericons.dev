@@ -3,8 +3,8 @@ import { clamp } from "../lib/precision"
 
 // prettier-ignore
 export type AriaSliderProps = {
-	track:    HTMLElement | null
-	thumb:    HTMLElement | null
+	track:    HTMLDivElement | null
+	thumb:    HTMLDivElement | null
 	min:      number
 	max:      number
 	step:     number

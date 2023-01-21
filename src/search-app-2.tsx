@@ -1,12 +1,14 @@
 import * as feather from "./data/react-feather@4.29.0"
 
-import { PropsWithChildren, useEffect, useRef, useState } from "react"
+import { PropsWithChildren, useContext, useEffect, useRef, useState } from "react"
+import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
+import { sizeMax, sizeMin, sizeStep, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { iota } from "./lib/iota"
 import { createStyled } from "./lib/react/create-styled"
 import { Icon, SVG } from "./lib/react/icon"
-import { StateProvider } from "./state"
+import { SliderContext, StateProvider } from "./state"
 import { Transition } from "./transition"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +75,7 @@ function HoverTooltip({
 							[box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
 					>
 						{icon && <div className="h-16 w-16 rounded-1e3 bg-gray-500"></div>}
-						<TypeCaps>ICON NAME</TypeCaps>
+						<TypeCaps className="text-gray-700">ICON NAME</TypeCaps>
 					</div>
 				</div>
 			</Transition>
@@ -210,7 +212,7 @@ function FormatButton() {
 							onClick={e => setShow(false)}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[var(--svg-color)]" svg={SVGIcon} />
-							<TypeCaps>SVG</TypeCaps>
+							<TypeCaps className="text-gray-700">SVG</TypeCaps>
 						</button>
 						<button
 							className="flex h-32 items-center gap-8 px-12
@@ -218,7 +220,7 @@ function FormatButton() {
 							onClick={e => setShow(false)}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[var(--jsx-color)]" svg={JSXIcon} />
-							<TypeCaps>REACT</TypeCaps>
+							<TypeCaps className="text-gray-700">REACT</TypeCaps>
 						</button>
 						<button
 							className="flex h-32 items-center gap-8 px-12
@@ -226,7 +228,7 @@ function FormatButton() {
 							onClick={e => setShow(false)}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[var(--tsx-color)]" svg={TSXIcon} />
-							<TypeCaps>TS REACT</TypeCaps>
+							<TypeCaps className="text-gray-700">TS REACT</TypeCaps>
 						</button>
 					</div>
 				</div>
@@ -244,7 +246,7 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.I
 		}
 		const d = window.setTimeout(() => {
 			setPressed(false)
-		}, 1e3)
+		}, 750)
 		return () => window.clearTimeout(d)
 	}, [pressed])
 
@@ -276,7 +278,7 @@ function DownloadButton({ icon, onClick, children, ...props }: { icon: SVG } & J
 		}
 		const d = window.setTimeout(() => {
 			setPressed(false)
-		}, 1e3)
+		}, 750)
 		return () => window.clearTimeout(d)
 	}, [pressed])
 
@@ -311,7 +313,7 @@ function CheckboxField({ children }: PropsWithChildren) {
 				<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
 					<ThickIcon className="h-12 w-12 text-gray-700" svg={feather.Code} />
 				</div>
-				<TypeCaps>{children}</TypeCaps>
+				<TypeCaps className="text-gray-700">{children}</TypeCaps>
 			</div>
 			{/* RHS */}
 			<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--trim-color)]">
@@ -321,33 +323,49 @@ function CheckboxField({ children }: PropsWithChildren) {
 	)
 }
 
-function SliderFieldFragment({ icon, children }: PropsWithChildren<{ icon: SVG }>) {
+function SliderFieldFragment({ icon, children, ...props }: { icon: SVG } & Omit<AriaSliderProps, "track" | "thumb">) {
+	const [track, setTrack] = useState<HTMLDivElement | null>(null)
+	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
+
 	return (
 		<>
 			<div className="flex h-20 items-center justify-between">
 				{/* LHS */}
-				<div className="flex items-center gap-8">
+				<div className="flex items-center gap-10">
 					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
 						<ThickIcon className="h-12 w-12 text-gray-700" svg={icon} />
 					</div>
-					<TypeCaps>{children}</TypeCaps>
+					<TypeCaps className="text-gray-700">{children}</TypeCaps>
 				</div>
 				{/* RHS */}
-				<div className="flex items-center gap-8">
-					<TypeCaps>XX</TypeCaps>
+				<div className="flex items-center gap-10">
+					{/* prettier-ignore */}
+					<TypeCaps className="text-gray-700">
+						{props.value < sizeMin
+							? props.value.toFixed(2)
+							: `${props.value} PX`
+						}
+					</TypeCaps>
 					<ThickIcon className="h-16 w-16 text-gray-300" svg={feather.RotateCcw} />
 				</div>
 			</div>
-			<div className="h-20 px-12">
-				<div className="flex h-6 items-center justify-center rounded-1e3 bg-[linear-gradient(to_right,_var(--trim-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]">
-					<div className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
+			<AriaSlider track={track} thumb={thumb} {...props}>
+				<div ref={setTrack} className="h-20 items-center px-12">
+					<div className="flex h-6 items-center rounded-1e3 bg-[linear-gradient(to_right,_var(--trim-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]">
+						<div ref={setThumb} className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
+					</div>
 				</div>
-			</div>
+			</AriaSlider>
 		</>
 	)
 }
 
 function SidebarFragment() {
+	//// const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
+	//// const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
+
+	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
+
 	return (
 		<>
 			<CheckboxField>VIEW SOURCE</CheckboxField>
@@ -360,9 +378,27 @@ function SidebarFragment() {
 				</div>
 			</div>
 			<Hairline />
-			<SliderFieldFragment icon={feather.Maximize2}>PREVIEW SIZE</SliderFieldFragment>
+			<SliderFieldFragment
+				icon={feather.Maximize2}
+				min={sizeMin}
+				max={sizeMax}
+				step={sizeStep}
+				value={size}
+				setValue={setSize}
+			>
+				PREVIEW SIZE
+			</SliderFieldFragment>
 			<Hairline />
-			<SliderFieldFragment icon={feather.Minimize2}>PREVIEW STROKE WIDTH</SliderFieldFragment>
+			<SliderFieldFragment
+				icon={feather.Minimize2}
+				min={strokeWidthMin}
+				max={strokeWidthMax}
+				step={strokeWidthStep}
+				value={strokeWidth}
+				setValue={setStrokeWidth}
+			>
+				PREVIEW STROKE WIDTH
+			</SliderFieldFragment>
 		</>
 	)
 }
