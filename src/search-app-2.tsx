@@ -268,7 +268,7 @@ function IconPreview() {
 		<div
 			className={cx(
 				TypeCode.className,
-				"min-h-256 resize-y overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
+				"min-h-256 overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
 			)}
 		>
 			<pre className="m-0" data-lang={formatAs}>
