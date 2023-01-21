@@ -1,7 +1,6 @@
 import * as feather from "./data/react-feather@4.29.0"
 
 import {
-	Fragment,
 	memo,
 	MouseEventHandler,
 	PropsWithChildren,
@@ -35,10 +34,11 @@ import { Transition } from "./transition"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const TYPE_CAPS = "type-caps"
+// Typography
+const TypeCaps = createStyled("type-caps")
+const TypeSmSans = createStyled("type-sm-sans")
 
-const TypeCaps = createStyled(TYPE_CAPS)
-
+// Iconography
 export function ThickIcon({
 	svg,
 	...props
@@ -143,21 +143,23 @@ function SearchBar() {
 	)
 }
 
-function Wbr({ children }: { children: string }) {
-	const ws = children.split(/(?=[A-Z])/)
+//// function Wbr({ children }: { children: string }) {
+//// 	const ws = children.split(/(?=[A-Z])/)
+////
+//// 	return (
+//// 		<>
+//// 			{ws.map((w, index) => (
+//// 				<Fragment key={w}>
+//// 					{index > 0 && <wbr />}
+//// 					{w}
+//// 				</Fragment>
+//// 			))}
+//// 		</>
+//// 	)
+//// }
 
-	return (
-		<>
-			{ws.map((w, index) => (
-				<Fragment key={w}>
-					{index > 0 && <wbr />}
-					{w}
-				</Fragment>
-			))}
-		</>
-	)
-}
-
+// TODO: It's not clear these need to be memoized, maybe if we add
+// highlighting...
 const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
@@ -165,7 +167,7 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 		<div className="flex flex-col">
 			<MouseTooltip pos="center" svg={feather.Feather} text={toKebabCase(name).toUpperCase()}>
 				<button
-					className="flex h-96 items-center justify-center"
+					className="flex h-112 items-center justify-center"
 					onClick={e => {
 						setSelectedName(name)
 						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -182,13 +184,15 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 	)
 })
 
+// TODO: It's not clear these need to be memoized, maybe if we add
+// highlighting...
 const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
 	return (
 		<div className="flex flex-col">
 			<button
-				className="flex h-96 items-center justify-center"
+				className="flex h-112 items-center justify-center"
 				onClick={e => {
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -200,15 +204,16 @@ const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 					svg={feather[name]}
 				/>
 			</button>
-			{/* TODO */}
-			{/* <div className="flex h-20 select-text items-center justify-center px-4">
-				<div className="truncate">{name}</div>
-			</div> */}
-			<div className="flex h-40 items-center justify-center px-4">
+			{/* Use select-all so users can copy-paste names. Note that select-text
+			doesn't work as expected */}
+			<div className="flex h-16 select-all items-center justify-center truncate px-4">
+				<TypeSmSans className="truncate text-gray-700">{name}</TypeSmSans>
+			</div>
+			{/* <div className="flex h-40 items-center justify-center px-4">
 				<div className="h-20 text-center [font:_400_12px_/_normal_var(--sans)]">
 					<Wbr>{name}</Wbr>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	)
 })
@@ -225,7 +230,7 @@ function SearchGridContents() {
 	}, [compactMode])
 
 	return (
-		<div className="grid grid-cols-[repeat(auto-fill,_minmax(96px,_1fr))]">
+		<div className="grid grid-cols-[repeat(auto-fill,_minmax(112px,_1fr))]">
 			{Object.keys(searchResults).map(name => (
 				<GridItem key={name} name={name as keyof typeof manifest} />
 			))}
@@ -557,7 +562,7 @@ function SidebarFragment() {
 function App() {
 	return (
 		<div className="flex justify-center p-32">
-			<div className="flex basis-2304 gap-32 [&_>_:nth-child(1)]:grow">
+			<div className="flex basis-2e3 gap-32 [&_>_:nth-child(1)]:grow">
 				<main className="flex flex-col gap-64">
 					<SearchBar />
 					<SearchGridContents />

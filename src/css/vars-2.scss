@@ -7,7 +7,7 @@
 
 :root {
 	--seed-h: 220;
-	--seed-s: 10%;
+	--seed-s: 100%;
 	--seed-l: 0%;
 	--seed: var(--seed-h), var(--seed-s);
 
@@ -16,14 +16,13 @@
 
 	--level-1-color: hsl(var(--seed), 100%);
 	--level-2-color: hsl(var(--seed), 100%);
-
-	--trim-color: hsl(200, 100%, 60%);
+	--trim-color:    hsl(200, 100%, 60%);
 
 	//////////////////////////////////////////////////////////////////////////////
 	// Hairlines
 
 	--hairline-height: 1px;
-	--hairline-color:  hsl(0, 0%, 50%, 0.2);
+	--hairline-color:  hsl(var(--seed), 15%, 0.1);
 
 	--hairline-shadow:         0 0 0 var(--hairline-height) var(--hairline-color);
 	--hairline-shadow-t:       0 calc(-1 * var(--hairline-height)) 0 0 var(--hairline-color);
@@ -40,7 +39,7 @@
 	//////////////////////////////////////////////////////////////////////////////
 	// Shadows
 
-	--base-shadow-color: hsl(var(--seed), 0%, 0.1);
+	--base-shadow-color: hsl(var(--seed), 15%, 0.1);
 	--base-shadow-1:
 		0  1px  2px  -1px var(--base-shadow-color);
 	--base-shadow-2:

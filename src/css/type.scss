@@ -1,6 +1,14 @@
+@use "sass:math";
+
 .type-caps {
 	white-space: pre;
 	font: 600 11px / normal var(--sans);
 	font-feature-settings: "tnum";
-	letter-spacing: 0.0625em;
+	letter-spacing: 0.05em;
+}
+.type-sm-sans {
+	white-space: normal;
+	font: 400 12px / normal var(--sans);
+	font-feature-settings: "tnum";
+	letter-spacing: 0.025em;
 }
