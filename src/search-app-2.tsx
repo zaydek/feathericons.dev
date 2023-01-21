@@ -111,7 +111,7 @@ function MouseTooltip({
 function SearchBarButton({ icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
-			<Icon className="h-24 w-24 text-gray-700" icon={icon} />
+			<ThickIcon className="h-24 w-24 text-gray-700" icon={icon} />
 		</button>
 	)
 }
