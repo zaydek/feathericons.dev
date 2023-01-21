@@ -10,3 +10,9 @@
 	font-feature-settings: "tnum";
 	letter-spacing: 0.025em;
 }
+.type-code {
+	white-space: pre;
+	font: 400 14px / normal var(--code);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}

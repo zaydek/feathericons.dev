@@ -32,8 +32,8 @@ import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
-import { download } from "./lib/download"
-import { Icon, SVG } from "./lib/react/icon"
+import { htmlDownload } from "./lib/download"
+import { Icon, IconComponent } from "./lib/react/icon"
 import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
 import { Transition } from "./transition"
 import { TypeCaps } from "./typography"
@@ -45,7 +45,7 @@ function Tooltip({
 	icon,
 	text,
 	children,
-}: PropsWithChildren<{ pos: Position; icon?: SVG; text: ReactNode; data?: any }>) {
+}: PropsWithChildren<{ pos: Position; icon?: IconComponent; text: ReactNode; data?: any }>) {
 	const [hover, setHover] = useState(false)
 
 	return (
@@ -78,7 +78,7 @@ function Tooltip({
 						}
 					>
 						<div className="align-center background-color--hsl(0,_0%,_99%) box-shadow--$shadow-6,_$raw-shadow-6 flex h-32 gap-8 rounded-12 px-12">
-							{icon !== undefined && <Icon className="color--#333 h-16 w-16" svg={icon} />}
+							{icon !== undefined && <Icon className="color--#333 h-16 w-16" icon={icon} />}
 							<TypeCaps>{text}</TypeCaps>
 						</div>
 					</div>
@@ -192,7 +192,7 @@ export function SearchResultsContents() {
 											<Icon
 												id={name}
 												className="transform--scale($scale) stroke-width--$stroke-width color--#333 h-32 w-32"
-												svg={feather[name as keyof typeof feather]}
+												icon={feather[name as keyof typeof feather]}
 											/>
 										</div>
 									</Tooltip>
@@ -215,7 +215,7 @@ export function SearchResultsContents() {
 										<Icon
 											id={name}
 											className="transform--scale($scale) stroke-width--$stroke-width color--#333 h-32 w-32"
-											svg={feather[name as keyof typeof feather]}
+											icon={feather[name as keyof typeof feather]}
 										/>
 									</div>
 									<div className="center -webkit-user-select--all user-select--all flex h-32 px-4">
@@ -351,7 +351,7 @@ function FormatButton() {
 									}[formatAs]
 								}`
 							)}
-							svg={
+							icon={
 								{
 									svg: SVGIcon,
 									jsx: JSXIcon,
@@ -372,7 +372,7 @@ function FormatButton() {
 						</TypeCaps>
 						<div className="inset-r-0 absolute">
 							<div className="center flex h-32 w-32 rounded-1e3">
-								<Icon className="color--#555 h-16 w-16" svg={feather.ChevronDown} strokeWidth={2.5} />
+								<Icon className="color--#555 h-16 w-16" icon={feather.ChevronDown} strokeWidth={2.5} />
 							</div>
 						</div>
 					</button>
@@ -402,7 +402,7 @@ function FormatButton() {
 									setShow(false)
 								}}
 							>
-								<Icon className="color--$svg-color h-16 w-16" svg={SVGIcon} />
+								<Icon className="color--$svg-color h-16 w-16" icon={SVGIcon} />
 								<TypeCaps>SVG</TypeCaps>
 							</button>
 							<button
@@ -414,7 +414,7 @@ function FormatButton() {
 									setShow(false)
 								}}
 							>
-								<Icon className="color--$jsx-color h-16 w-16" svg={JSXIcon} />
+								<Icon className="color--$jsx-color h-16 w-16" icon={JSXIcon} />
 								<TypeCaps>REACT</TypeCaps>
 							</button>
 							<button
@@ -426,7 +426,7 @@ function FormatButton() {
 									setShow(false)
 								}}
 							>
-								<Icon className="color--$tsx-color h-16 w-16" svg={TSXIcon} />
+								<Icon className="color--$tsx-color h-16 w-16" icon={TSXIcon} />
 								<TypeCaps>TS REACT</TypeCaps>
 							</button>
 						</div>
@@ -463,7 +463,7 @@ function CopyButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButtonEl
 			>
 				<Icon
 					className="color--$alt-trim-color h-16 w-16"
-					svg={pressed ? feather.Check : feather.Clipboard}
+					icon={pressed ? feather.Check : feather.Clipboard}
 					strokeWidth={pressed ? 3 : 2.5}
 				/>
 				<TypeCaps>COPY</TypeCaps>
@@ -499,7 +499,7 @@ function DownloadButton({ onPointerUp, ...props }: ButtonHTMLAttributes<HTMLButt
 			>
 				<Icon
 					className="color--$alt-trim-color h-16 w-16"
-					svg={pressed ? feather.Check : feather.Download}
+					icon={pressed ? feather.Check : feather.Download}
 					strokeWidth={pressed ? 3 : 2.5}
 				/>
 				<TypeCaps>DOWNLOAD</TypeCaps>
@@ -523,7 +523,7 @@ export function SidebarContents() {
 			<Checkbox checked={viewSource} setChecked={setViewSource}>
 				<div className="align-center flex gap-10">
 					<div className="center rounded-43.75% background-color--hsl($base-h,_$base-s,_$base-l,_0.125) flex h-24 w-24">
-						<Icon className="color--#333 h-12 w-12" svg={feather.Code} />
+						<Icon className="color--#333 h-12 w-12" icon={feather.Code} />
 					</div>
 					<TypeCaps>VIEW SOURCE</TypeCaps>
 				</div>
@@ -563,7 +563,7 @@ export function SidebarContents() {
 					>
 						<Icon
 							className="transform--scale($scale) stroke-width--$stroke-width color--#111 h-64 w-64"
-							svg={feather[selectedName]}
+							icon={feather[selectedName]}
 						/>
 					</div>
 				</>
@@ -580,7 +580,7 @@ export function SidebarContents() {
 						onClick={e => {
 							const filename = `${formatAs === "svg" ? toKebabCase(selectedName) : selectedName}.${formatAs}`
 							const contents = clipboard + "\n"
-							download(filename, contents)
+							htmlDownload(filename, contents)
 						}}
 					/>
 				</div>
@@ -590,7 +590,7 @@ export function SidebarContents() {
 				<div className="align-center flex gap-10">
 					{/* <Icon className="h-16 w-16 color--#ccc" icon={feather.Maximize2} /> */}
 					<div className="center rounded-43.75% background-color--hsl($base-h,_$base-s,_$base-l,_0.125) flex h-24 w-24">
-						<Icon className="color--#333 h-12 w-12" svg={feather.Maximize2} />
+						<Icon className="color--#333 h-12 w-12" icon={feather.Maximize2} />
 					</div>
 					<TypeCaps>PREVIEW SIZE</TypeCaps>
 				</div>
@@ -599,7 +599,7 @@ export function SidebarContents() {
 					<button className="center flex" onClick={e => setSize(sizeInitial)}>
 						<Icon
 							className="color--#ccc [&:hover]:color--#333 h-16 w-16"
-							svg={feather.RotateCcw}
+							icon={feather.RotateCcw}
 							strokeWidth={2.5}
 							onClick={e => setSize(sizeInitial)}
 						/>
@@ -612,7 +612,7 @@ export function SidebarContents() {
 				<div className="align-center flex gap-10">
 					{/* <Icon className="h-16 w-16 color--#ccc" icon={feather.Minimize2} /> */}
 					<div className="center rounded-43.75% background-color--hsl($base-h,_$base-s,_$base-l,_0.125) flex h-24 w-24">
-						<Icon className="color--#333 h-12 w-12" svg={feather.Minimize2} />
+						<Icon className="color--#333 h-12 w-12" icon={feather.Minimize2} />
 					</div>
 					<TypeCaps>PREVIEW STROKE WIDTH</TypeCaps>
 				</div>
@@ -621,7 +621,7 @@ export function SidebarContents() {
 					<button className="center flex" onClick={e => setStrokeWidth(strokeWidthInitial)}>
 						<Icon
 							className="color--#ccc [&:hover]:color--#333 h-16 w-16"
-							svg={feather.RotateCcw}
+							icon={feather.RotateCcw}
 							strokeWidth={2.5}
 							onClick={e => setStrokeWidth(strokeWidthInitial)}
 						/>

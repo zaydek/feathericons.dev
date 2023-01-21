@@ -10,7 +10,7 @@ import {
 	useMemo,
 	useState,
 } from "react"
-import { formatAsReact, formatAsSvg, formatAsTypeScriptReact } from "../scripts/format"
+import { formatAsJsx, formatAsSvg, formatAsTsx } from "../scripts/format"
 import { stringify } from "../scripts/stringify"
 import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "./constants"
 import { manifest } from "./data/react-feather-manifest@4.29.0"
@@ -128,7 +128,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				strictJsx: false,
 				omitAttrs,
 			})
-			return formatAsReact(selectedName, code, {
+			return formatAsJsx(selectedName, code, {
 				comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=jsx`,
 			}).replaceAll("\t", "  ")
 		} else {
@@ -136,7 +136,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				strictJsx: false,
 				omitAttrs,
 			})
-			return formatAsTypeScriptReact(selectedName, code, {
+			return formatAsTsx(selectedName, code, {
 				comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=tsx`,
 			}).replaceAll("\t", "  ")
 		}

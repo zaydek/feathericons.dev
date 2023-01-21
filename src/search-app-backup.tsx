@@ -108,7 +108,7 @@ export function SearchApp() {
 											transitionProperty: "transform",
 										}}
 										// @ts-expect-error
-										svg={feather[name]}
+										icon={feather[name]}
 									/>
 								</button>
 							))}

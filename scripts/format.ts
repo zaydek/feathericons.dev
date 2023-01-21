@@ -7,7 +7,7 @@ export function formatAsSvg(name: string, code: string, { comment }: { comment: 
 	`)
 }
 
-export function formatAsReact(name: string, code: string, { comment }: { comment: string }) {
+export function formatAsJsx(name: string, code: string, { comment }: { comment: string }) {
 	return detab(`
 		// ${comment}
 		export function ${name}(props) {
@@ -18,12 +18,10 @@ export function formatAsReact(name: string, code: string, { comment }: { comment
 	`)
 }
 
-export function formatAsTypeScriptReact(name: string, code: string, { comment }: { comment: string }) {
+export function formatAsTsx(name: string, code: string, { comment }: { comment: string }) {
 	return detab(`
-		import { SVGAttributes } from "react";
-
 		// ${comment}
-		export function ${name}(props: SVGAttributes<SVGElement>) {
+		export function ${name}(props: JSX.IntrinsicElements["svg"]) {
 			return (
 				${tab(code.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>"), 4, { omitStart: true })}
 			);

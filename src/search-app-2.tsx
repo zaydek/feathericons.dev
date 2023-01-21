@@ -27,8 +27,9 @@ import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
+import { htmlDownload } from "./lib/download"
 import { createStyled } from "./lib/react/create-styled"
-import { Icon, SVG } from "./lib/react/icon"
+import { Icon, IconComponent } from "./lib/react/icon"
 import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
 import { Transition } from "./transition"
 
@@ -37,25 +38,26 @@ import { Transition } from "./transition"
 // Typography
 const TypeCaps = createStyled("type-caps")
 const TypeSmSans = createStyled("type-sm-sans")
+const TypeCode = createStyled("type-code")
 
 // Iconography
 export function ThickIcon({
 	icon,
 	...props
-}: { icon: SVG } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
-	return <Icon svg={icon} strokeWidth={2.5} {...props} />
+}: { icon: IconComponent } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
+	return <Icon icon={icon} strokeWidth={2.5} {...props} />
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 function MouseTooltip({
 	pos,
-	svg,
+	icon,
 	text,
 	children,
 }: /* prettier-ignore */ PropsWithChildren<{
 	pos:   "start" | "center" | "end"
-	svg?: SVG
+	icon?: IconComponent
 	text:  ReactNode
 }>) {
 	const [hover, setHover] = useState(false)
@@ -88,14 +90,14 @@ function MouseTooltip({
 					className={
 						// prettier-ignore
 						{
-							start:  cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-0   z-10"),
-							center: cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-50% z-10"),
-							end:    cx("pointer-events-none absolute top-[calc(100%_+_10px)] right-0  z-10"),
+							start:  cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-0     z-10"),
+							center: cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-[50%] z-10"),
+							end:    cx("pointer-events-none absolute top-[calc(100%_+_10px)] right-0    z-10"),
 						}[pos]
 					}
 				>
 					<div className="flex h-32 items-center gap-10 rounded-12 bg-white px-12 [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
-						{svg && <Icon className="h-16 w-16 text-gray-700" svg={svg} />}
+						{icon && <Icon className="h-16 w-16 text-gray-700" icon={icon} />}
 						<TypeCaps className="text-gray-700">{text}</TypeCaps>
 					</div>
 				</div>
@@ -104,12 +106,10 @@ function MouseTooltip({
 	)
 }
 
-function SearchBarButton(props: JSX.IntrinsicElements["button"]) {
+function SearchBarButton({ icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
-			<div className="flex h-32 w-32 items-center justify-center rounded-1e3 bg-red-500">
-				<div className="h-16 w-16 rounded-1e3 bg-red-300"></div>
-			</div>
+			<Icon className="h-24 w-24 text-gray-700" icon={icon} />
 		</button>
 	)
 }
@@ -123,6 +123,7 @@ function SearchBar() {
 		<div className="flex h-64 rounded-1e3 bg-white [box-shadow:_var(--shadow-2)] [&_>_:nth-child(2)]:grow">
 			<MouseTooltip pos="start" text={<>SEARCH FEATHER</>}>
 				<SearchBarButton
+					icon={feather.Search}
 					onClick={e => {
 						ref.current?.focus()
 					}}
@@ -131,6 +132,7 @@ function SearchBar() {
 			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
 			<MouseTooltip pos="end" text={<>COMPACT MODE</>}>
 				<SearchBarButton
+					icon={feather.MoreHorizontal}
 					onClick={e => {
 						setCompactMode(curr => !curr)
 					}}
@@ -162,7 +164,7 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 
 	return (
 		<div className="flex flex-col">
-			<MouseTooltip pos="center" svg={feather[name]} text={toKebabCase(name).toUpperCase()}>
+			<MouseTooltip pos="center" icon={feather[name]} text={toKebabCase(name).toUpperCase()}>
 				<button
 					className="flex h-128 items-center justify-center"
 					onClick={e => {
@@ -173,7 +175,7 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 					<Icon
 						id={name}
 						className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-						svg={feather[name]}
+						icon={feather[name]}
 					/>
 				</button>
 			</MouseTooltip>
@@ -198,13 +200,13 @@ const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 				<Icon
 					id={name}
 					className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-					svg={feather[name]}
+					icon={feather[name]}
 				/>
 			</button>
 			{/* Use select-all so users can copy-paste names. Note that select-text
 			doesn't work as expected */}
 			<div className="flex h-16 select-all items-center justify-center truncate px-4">
-				<TypeSmSans className="truncate text-gray-700">{name}</TypeSmSans>
+				<TypeSmSans className="truncate text-gray-500">{name}</TypeSmSans>
 			</div>
 			{/* <div className="flex h-40 items-center justify-center px-4">
 				<div className="h-20 text-center [font:_400_12px_/_normal_var(--sans)]">
@@ -238,11 +240,29 @@ function SearchGridContents() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function IconPreview() {
-	return (
+	const { selectedName, viewSource, clipboard } = useContext(SelectedContext)!
+
+	const [value, setValue] = useState(clipboard)
+
+	useEffect(() => {
+		setValue(clipboard)
+	}, [clipboard])
+
+	return viewSource ? (
+		<textarea
+			className={cx(
+				TypeCode.className,
+				"aspect-[1.5] rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
+			)}
+			value={value}
+			onChange={e => setValue(e.currentTarget.value)}
+			rows={clipboard.split("\n").length}
+		/>
+	) : (
 		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
 			<Icon
 				className="h-64 w-64 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-				svg={feather.Feather}
+				icon={feather[selectedName]}
 			/>
 		</div>
 	)
@@ -287,10 +307,11 @@ function FormatButton() {
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
 				<button
-					className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]"
+					className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+						[&:hover:active]:bg-gray-200"
 					onClick={e => setShow(curr => !curr)}
 				>
-					<Icon className={`h-16 w-16 ${className}`} svg={svg} />
+					<Icon className={`h-16 w-16 ${className}`} icon={svg} />
 					<TypeCaps className="text-gray-700">FORMAT AS {format}</TypeCaps>
 				</button>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
@@ -321,35 +342,38 @@ function FormatButton() {
 					>
 						<button
 							className="flex h-32 items-center gap-10 px-12
-								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
+								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12
+									[&:last-child]:rounded-b-12 [&:hover:active]:bg-gray-200"
 							onClick={e => {
 								setFormatAs("svg")
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 text-[var(--svg-color)]" svg={SVGIcon} />
+							<Icon className="h-16 w-16 text-[var(--svg-color)]" icon={SVGIcon} />
 							<TypeCaps className="text-gray-700">SVG</TypeCaps>
 						</button>
 						<button
 							className="flex h-32 items-center gap-10 px-12
-								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
+								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12
+									[&:last-child]:rounded-b-12 [&:hover:active]:bg-gray-200"
 							onClick={e => {
 								setFormatAs("jsx")
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 text-[var(--jsx-color)]" svg={JSXIcon} />
+							<Icon className="h-16 w-16 text-[var(--jsx-color)]" icon={JSXIcon} />
 							<TypeCaps className="text-gray-700">REACT</TypeCaps>
 						</button>
 						<button
 							className="flex h-32 items-center gap-10 px-12
-								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
+								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12
+									[&:last-child]:rounded-b-12 [&:hover:active]:bg-gray-200"
 							onClick={e => {
 								setFormatAs("tsx")
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 text-[var(--tsx-color)]" svg={TSXIcon} />
+							<Icon className="h-16 w-16 text-[var(--tsx-color)]" icon={TSXIcon} />
 							<TypeCaps className="text-gray-700">TS REACT</TypeCaps>
 						</button>
 					</div>
@@ -359,7 +383,7 @@ function FormatButton() {
 	)
 }
 
-function CopyButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
+function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
 	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
@@ -391,7 +415,12 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.I
 	)
 }
 
-function DownloadButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
+function DownloadButton({
+	icon,
+	onClick,
+	children,
+	...props
+}: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
 	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
@@ -439,21 +468,19 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 					<TypeCaps className="text-gray-700">{children}</TypeCaps>
 				</div>
 				{/* RHS */}
-				{/* Transition background-color */}
 				<Transition
 					when={props.checked}
 					s1={{ backgroundColor: "var(--hairline-color)" }}
 					s2={{ backgroundColor: "var(--trim-color)" }}
-					duration={50}
+					duration={100}
 					ease={[0, 1, 1, 1]} // No bounce here
 				>
 					<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--trim-color)]">
-						{/* Transition transform */}
 						<Transition
 							when={props.checked}
 							s1={{ transform: "translateX(0%)" }}
 							s2={{ transform: "translateX(50%)" }}
-							duration={50}
+							duration={100}
 							ease={[0, 1, 0.5, 1.25]}
 						>
 							<div className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
@@ -470,7 +497,7 @@ function SliderFieldFragment({
 	reset,
 	children,
 	...props
-}: { icon: SVG } & { reset: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+}: { icon: IconComponent } & { reset: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -515,8 +542,7 @@ function SliderFieldFragment({
 }
 
 function SidebarFragment() {
-	//// const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
-	const { viewSource, setViewSource } = useContext(SelectedContext)!
+	const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	return (
@@ -528,8 +554,24 @@ function SidebarFragment() {
 			<div className="flex flex-col gap-10">
 				<FormatButton />
 				<div className="grid grid-cols-2 gap-10">
-					<CopyButton icon={feather.Clipboard}>COPY</CopyButton>
-					<DownloadButton icon={feather.Download}>DOWNLOAD</DownloadButton>
+					<CopyButton
+						icon={feather.Clipboard}
+						onClick={async e => {
+							await navigator.clipboard.writeText(clipboard)
+						}}
+					>
+						COPY
+					</CopyButton>
+					<DownloadButton
+						icon={feather.Download}
+						onClick={e => {
+							const filename = `${formatAs === "svg" ? toKebabCase(selectedName) : selectedName}.${formatAs}`
+							const contents = clipboard + "\n"
+							htmlDownload(filename, contents)
+						}}
+					>
+						DOWNLOAD
+					</DownloadButton>
 				</div>
 			</div>
 			<Hairline />

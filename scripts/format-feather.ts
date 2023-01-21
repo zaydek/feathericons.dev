@@ -7,7 +7,7 @@ import feather from "./_feather@4.29.0.json"
 import { JSDOM } from "jsdom"
 import { toTitleCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
-import { formatAsSvg, formatAsTypeScriptReact } from "./format"
+import { formatAsSvg, formatAsTsx } from "./format"
 import { stringify } from "./stringify"
 
 const omitAttrs = ["class"]
@@ -64,7 +64,7 @@ async function feather_tsx() {
 	for (const [name, data] of Object.entries(feather.data)) {
 		const { window } = new JSDOM(data)
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: true, omitAttrs })
-		const codeAsTsx = formatAsTypeScriptReact(toTitleCase(name), code, {
+		const codeAsTsx = formatAsTsx(toTitleCase(name), code, {
 			//// license: `/*! Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather */`,
 			comment: `https://feathericons.dev/${name}`,
 		})
