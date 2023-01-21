@@ -242,7 +242,7 @@ function SearchGridContents() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function IconPreview() {
-	const { selectedName, viewSource, clipboard } = useContext(SelectedContext)!
+	const { selectedName, viewSource, formatAs, clipboard } = useContext(SelectedContext)!
 
 	//// const [value, setValue] = useState(clipboard)
 	////
@@ -252,8 +252,8 @@ function IconPreview() {
 
 	// TODO: Not SSR safe
 	const html = useMemo(() => {
-		return window.Prism.highlight(clipboard, window.Prism.languages.tsx, "tsx")
-	}, [clipboard])
+		return window.Prism.highlight(clipboard, window.Prism.languages[formatAs], formatAs)
+	}, [clipboard, formatAs])
 
 	return viewSource ? (
 		//// <textarea
@@ -268,10 +268,10 @@ function IconPreview() {
 		<div
 			className={cx(
 				TypeCode.className,
-				"aspect-[1.5] overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
+				"aspect-[1.5] overflow-x-scroll rounded-24 bg-gray-900 p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
 			)}
 		>
-			<pre className="m-0">
+			<pre className="m-0" data-lang={formatAs}>
 				<code dangerouslySetInnerHTML={{ __html: html }}></code>
 			</pre>
 		</div>
