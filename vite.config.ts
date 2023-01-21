@@ -4,7 +4,7 @@ import { defineConfig } from "vite"
 export default defineConfig({
 	plugins: [
 		reactJs({
-			fastRefresh: false,
+			fastRefresh: true,
 		}),
 	],
 	preview: { host: true, port: 3000 },

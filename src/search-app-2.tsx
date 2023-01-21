@@ -40,10 +40,10 @@ const TypeSmSans = createStyled("type-sm-sans")
 
 // Iconography
 export function ThickIcon({
-	svg,
+	icon,
 	...props
-}: { svg: SVG } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
-	return <Icon svg={svg} strokeWidth={2.5} {...props} />
+}: { icon: SVG } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
+	return <Icon svg={icon} strokeWidth={2.5} {...props} />
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -164,7 +164,7 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 		<div className="flex flex-col">
 			<MouseTooltip pos="center" svg={feather[name]} text={toKebabCase(name).toUpperCase()}>
 				<button
-					className="flex h-112 items-center justify-center"
+					className="flex h-128 items-center justify-center"
 					onClick={e => {
 						setSelectedName(name)
 						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -189,7 +189,7 @@ const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 	return (
 		<div className="flex flex-col">
 			<button
-				className="flex h-112 items-center justify-center"
+				className="flex h-128 items-center justify-center"
 				onClick={e => {
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -295,7 +295,7 @@ function FormatButton() {
 				</button>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-36 w-36 items-center justify-center">
-						<ThickIcon className="h-16 w-16 text-gray-500" svg={feather.ChevronDown} />
+						<ThickIcon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
 					</div>
 				</div>
 			</div>
@@ -384,7 +384,7 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.I
 		>
 			<ThickIcon
 				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
-				svg={pressed ? feather.Check : icon}
+				icon={pressed ? feather.Check : icon}
 			/>
 			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypeCaps>
 		</button>
@@ -416,7 +416,7 @@ function DownloadButton({ icon, onClick, children, ...props }: { icon: SVG } & J
 		>
 			<ThickIcon
 				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
-				svg={pressed ? feather.Check : icon}
+				icon={pressed ? feather.Check : icon}
 			/>
 			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypeCaps>
 		</button>
@@ -433,8 +433,8 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 			<div className="flex h-20 items-center justify-between">
 				{/* LHS */}
 				<div className="flex items-center gap-10">
-					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
-						<ThickIcon className="h-12 w-12 text-gray-700" svg={feather.Code} />
+					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-100">
+						<ThickIcon className="h-12 w-12 text-gray-700" icon={feather.Code} />
 					</div>
 					<TypeCaps className="text-gray-700">{children}</TypeCaps>
 				</div>
@@ -479,8 +479,8 @@ function SliderFieldFragment({
 			<div className="flex h-20 items-center justify-between">
 				{/* LHS */}
 				<div className="flex items-center gap-10">
-					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
-						<ThickIcon className="h-12 w-12 text-gray-700" svg={icon} />
+					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-100">
+						<ThickIcon className="h-12 w-12 text-gray-700" icon={icon} />
 					</div>
 					<TypeCaps className="text-gray-700">{children}</TypeCaps>
 				</div>
@@ -494,7 +494,7 @@ function SliderFieldFragment({
 						}
 					</TypeCaps>
 					<button className="flex h-24 w-24 items-center justify-center" onClick={reset}>
-						<ThickIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" svg={feather.RotateCcw} />
+						<ThickIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
 					</button>
 				</div>
 			</div>
