@@ -1,6 +1,6 @@
 import * as feather from "./data/react-feather@4.29.0"
 
-import { MouseEvent, MouseEventHandler, PropsWithChildren, useContext, useEffect, useRef, useState } from "react"
+import { MouseEventHandler, PropsWithChildren, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import {
@@ -156,8 +156,18 @@ function Preview() {
 }
 
 function FormatButton() {
+	const { formatAs, setFormatAs } = useContext(SelectedContext)!
+
 	const ref = useRef<HTMLDivElement | null>(null)
 	const [show, setShow] = useState(false)
+
+	const [className, svg, format] = useMemo(() => {
+		return {
+			svg: ["text-[var(--svg-color)]", SVGIcon, "SVG"] as const,
+			jsx: ["text-[var(--jsx-color)]", JSXIcon, "REACT"] as const,
+			tsx: ["text-[var(--tsx-color)]", TSXIcon, "TYPESCRIPT REACT"] as const,
+		}[formatAs]
+	}, [formatAs])
 
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {
@@ -187,8 +197,8 @@ function FormatButton() {
 					className="flex h-36 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]"
 					onClick={e => setShow(curr => !curr)}
 				>
-					<Icon className="h-16 w-16 text-[var(--svg-color)]" svg={SVGIcon} />
-					<TypeCaps className="text-gray-700">FORMAT AS SVG</TypeCaps>
+					<Icon className={`h-16 w-16 ${className}`} svg={svg} />
+					<TypeCaps className="text-gray-700">FORMAT AS {format}</TypeCaps>
 				</button>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-36 w-36 items-center justify-center">
@@ -219,7 +229,10 @@ function FormatButton() {
 						<button
 							className="flex h-32 items-center gap-8 px-12
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
-							onClick={e => setShow(false)}
+							onClick={e => {
+								setFormatAs("svg")
+								setShow(false)
+							}}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[var(--svg-color)]" svg={SVGIcon} />
 							<TypeCaps className="text-gray-700">SVG</TypeCaps>
@@ -227,7 +240,10 @@ function FormatButton() {
 						<button
 							className="flex h-32 items-center gap-8 px-12
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
-							onClick={e => setShow(false)}
+							onClick={e => {
+								setFormatAs("jsx")
+								setShow(false)
+							}}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[var(--jsx-color)]" svg={JSXIcon} />
 							<TypeCaps className="text-gray-700">REACT</TypeCaps>
@@ -235,7 +251,10 @@ function FormatButton() {
 						<button
 							className="flex h-32 items-center gap-8 px-12
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
-							onClick={e => setShow(false)}
+							onClick={e => {
+								setFormatAs("tsx")
+								setShow(false)
+							}}
 						>
 							<Icon className="h-16 w-16 rounded-1e3 text-[var(--tsx-color)]" svg={TSXIcon} />
 							<TypeCaps className="text-gray-700">TS REACT</TypeCaps>
