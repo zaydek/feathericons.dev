@@ -512,42 +512,6 @@ function SliderFieldFragment({
 	)
 }
 
-//// function SizeSlider() {
-//// 	const { size, setSize } = useContext(SliderContext)!
-////
-//// 	return (
-//// 		<SliderFieldFragment
-//// 			icon={feather.Maximize2}
-//// 			min={sizeMin}
-//// 			max={sizeMax}
-//// 			step={sizeStep}
-//// 			value={size}
-//// 			setValue={setSize}
-//// 			reset={e => setSize(sizeInitial)}
-//// 		>
-//// 			PREVIEW SIZE
-//// 		</SliderFieldFragment>
-//// 	)
-//// }
-////
-//// function StrokeWidthSlider() {
-//// 	const { strokeWidth, setStrokeWidth } = useContext(SliderContext)!
-////
-//// 	return (
-//// 		<SliderFieldFragment
-//// 			icon={feather.Minimize2}
-//// 			min={strokeWidthMin}
-//// 			max={strokeWidthMax}
-//// 			step={strokeWidthStep}
-//// 			value={strokeWidth}
-//// 			setValue={setStrokeWidth}
-//// 			reset={e => setStrokeWidth(strokeWidthInitial)}
-//// 		>
-//// 			PREVIEW STROKE WIDTH
-//// 		</SliderFieldFragment>
-//// 	)
-//// }
-
 function SidebarFragment() {
 	//// const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
 	const { viewSource, setViewSource } = useContext(SelectedContext)!
@@ -567,26 +531,20 @@ function SidebarFragment() {
 				</div>
 			</div>
 			<Hairline />
+			{/* prettier-ignore */}
 			<SliderFieldFragment
 				icon={feather.Maximize2}
-				min={sizeMin}
-				max={sizeMax}
-				step={sizeStep}
-				value={size}
-				setValue={setSize}
-				reset={e => setSize(sizeInitial)}
+					min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize}
+						reset={e => setSize(sizeInitial)}
 			>
 				PREVIEW SIZE
 			</SliderFieldFragment>
 			<Hairline />
+			{/* prettier-ignore */}
 			<SliderFieldFragment
 				icon={feather.Minimize2}
-				min={strokeWidthMin}
-				max={strokeWidthMax}
-				step={strokeWidthStep}
-				value={strokeWidth}
-				setValue={setStrokeWidth}
-				reset={e => setStrokeWidth(strokeWidthInitial)}
+					min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth}
+						reset={e => setStrokeWidth(strokeWidthInitial)}
 			>
 				PREVIEW STROKE WIDTH
 			</SliderFieldFragment>
