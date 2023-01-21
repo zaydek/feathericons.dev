@@ -1,3 +1,5 @@
+import "./assets/prism/prism"
+
 import * as feather from "./data/react-feather@4.29.0"
 
 import {
@@ -242,22 +244,37 @@ function SearchGridContents() {
 function IconPreview() {
 	const { selectedName, viewSource, clipboard } = useContext(SelectedContext)!
 
-	const [value, setValue] = useState(clipboard)
+	//// const [value, setValue] = useState(clipboard)
+	////
+	//// useEffect(() => {
+	//// 	setValue(clipboard)
+	//// }, [clipboard])
 
-	useEffect(() => {
-		setValue(clipboard)
+	// TODO: Not SSR safe
+	const html = useMemo(() => {
+		return window.Prism.highlight(clipboard, window.Prism.languages.tsx, "tsx")
 	}, [clipboard])
 
 	return viewSource ? (
-		<textarea
+		//// <textarea
+		//// 	className={cx(
+		//// 		TypeCode.className,
+		//// 		"aspect-[1.5] rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
+		//// 	)}
+		//// 	value={value}
+		//// 	onChange={e => setValue(e.currentTarget.value)}
+		//// 	rows={clipboard.split("\n").length}
+		//// />
+		<div
 			className={cx(
 				TypeCode.className,
-				"aspect-[1.5] rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
+				"aspect-[1.5] overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
 			)}
-			value={value}
-			onChange={e => setValue(e.currentTarget.value)}
-			rows={clipboard.split("\n").length}
-		/>
+		>
+			<pre className="m-0">
+				<code dangerouslySetInnerHTML={{ __html: html }}></code>
+			</pre>
+		</div>
 	) : (
 		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
 			<Icon
