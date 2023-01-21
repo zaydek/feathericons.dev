@@ -32,7 +32,7 @@ import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
-import { htmlDownload } from "./lib/download"
+import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
 import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
 import { Transition } from "./transition"
@@ -580,7 +580,7 @@ export function SidebarContents() {
 						onClick={e => {
 							const filename = `${formatAs === "svg" ? toKebabCase(selectedName) : selectedName}.${formatAs}`
 							const contents = clipboard + "\n"
-							htmlDownload(filename, contents)
+							download(filename, contents)
 						}}
 					/>
 				</div>

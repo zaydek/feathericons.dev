@@ -1,5 +1,5 @@
 // https://stackoverflow.com/a/18197341
-export function htmlDownload(filename: string, content: string) {
+export function download(filename: string, content: string) {
 	// Create <a download={filename} href={encoded content}>
 	const anchorElement = document.createElement("a")
 	anchorElement.setAttribute("download", filename)

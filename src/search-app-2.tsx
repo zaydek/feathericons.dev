@@ -3,6 +3,7 @@ import "./assets/prism/prism"
 import * as feather from "./data/react-feather@4.29.0"
 
 import {
+	Fragment,
 	memo,
 	MouseEventHandler,
 	PropsWithChildren,
@@ -13,6 +14,7 @@ import {
 	useRef,
 	useState,
 } from "react"
+import { getHighlighter, Highlighter, IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import {
@@ -29,7 +31,7 @@ import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
-import { htmlDownload } from "./lib/download"
+import { download } from "./lib/download"
 import { createStyled } from "./lib/react/create-styled"
 import { Icon, IconComponent } from "./lib/react/icon"
 import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
@@ -39,7 +41,6 @@ import { Transition } from "./transition"
 
 const TypographyCaps = createStyled("typography-caps")
 const TypographySmallSans = createStyled("typography-small-sans")
-const TypographyCode = createStyled("typography-code")
 
 // Iconography
 export function ThickIcon({
@@ -240,35 +241,41 @@ function SearchGridContents() {
 function IconPreview() {
 	const { selectedName, viewSource, formatAs, clipboard } = useContext(SelectedContext)!
 
-	//// const [value, setValue] = useState(clipboard)
-	////
-	//// useEffect(() => {
-	//// 	setValue(clipboard)
-	//// }, [clipboard])
+	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
+	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
 
-	// TODO: Not SSR safe
-	const html = useMemo(() => {
-		return window.Prism.highlight(clipboard, window.Prism.languages[formatAs], formatAs)
-	}, [clipboard, formatAs])
+	useEffect(() => {
+		async function init() {
+			const highlighter = await getHighlighter({ theme: "github-light" })
+			setHighlighter(highlighter)
+		}
+		init()
+	}, [])
+
+	useEffect(() => {
+		if (highlighter === null) { return } // prettier-ignore
+		const tokens = highlighter.codeToThemedTokens(clipboard, formatAs === "svg" ? "xml" : "tsx", undefined, {
+			includeExplanation: false,
+		})
+		setTokens(tokens)
+	}, [clipboard, formatAs, highlighter])
 
 	return viewSource ? (
-		//// <textarea
-		//// 	className={cx(
-		//// 		TypeCode.className,
-		//// 		"aspect-[1.5] rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
-		//// 	)}
-		//// 	value={value}
-		//// 	onChange={e => setValue(e.currentTarget.value)}
-		//// 	rows={clipboard.split("\n").length}
-		//// />
-		<div
-			className={cx(
-				TypographyCode.className,
-				"min-h-256 overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
-			)}
-		>
-			<pre className="m-0" data-lang={formatAs}>
-				<code dangerouslySetInnerHTML={{ __html: html }}></code>
+		// Defer p-24 because of overflow-x-scroll
+		<div className="bg-whit min-h-256 overflow-x-scroll rounded-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
+			<pre>
+				<code className="inline-block p-24">
+					{tokens?.map((token, index) => (
+						<Fragment key={index}>
+							{index > 0 && "\n"}
+							{token.map(({ content, color }, ii) => (
+								<span key={ii} style={{ color }}>
+									{content}
+								</span>
+							))}
+						</Fragment>
+					))}
+				</code>
 			</pre>
 		</div>
 	) : (
@@ -580,7 +587,7 @@ function SidebarFragment() {
 						onClick={e => {
 							const filename = `${formatAs === "svg" ? toKebabCase(selectedName) : selectedName}.${formatAs}`
 							const contents = clipboard + "\n"
-							htmlDownload(filename, contents)
+							download(filename, contents)
 						}}
 					>
 						DOWNLOAD

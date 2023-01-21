@@ -1,3 +1,5 @@
+pre { margin: 0; }
+
 .typography-caps {
 	white-space: pre;
 	font: 600 11px / normal var(--sans);
@@ -10,7 +12,7 @@
 	font-feature-settings: "tnum";
 	letter-spacing: 0.0125em;
 }
-.typography-code {
+:is(pre, code) {
 	white-space: pre;
 	font: 400 14px / normal var(--code);
 	font-feature-settings: "tnum";
