@@ -1,6 +1,15 @@
 import * as feather from "./data/react-feather@4.29.0"
 
-import { MouseEventHandler, PropsWithChildren, useContext, useEffect, useMemo, useRef, useState } from "react"
+import {
+	MouseEventHandler,
+	PropsWithChildren,
+	ReactNode,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import {
@@ -18,7 +27,7 @@ import { cx } from "./lib/cx"
 import { iota } from "./lib/iota"
 import { createStyled } from "./lib/react/create-styled"
 import { Icon, SVG } from "./lib/react/icon"
-import { SelectedContext, SliderContext, StateProvider } from "./state"
+import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
 import { Transition } from "./transition"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,10 +48,12 @@ export function ThickIcon({
 function HoverTooltip({
 	pos,
 	icon,
+	text,
 	children,
 }: /* prettier-ignore */ PropsWithChildren<{
 	pos:   "start" | "center" | "end"
 	icon?: SVG
+	text:  ReactNode
 }>) {
 	const [hover, setHover] = useState(false)
 
@@ -81,11 +92,11 @@ function HoverTooltip({
 					}
 				>
 					<div
-						className="flex h-32 items-center gap-8 rounded-12 bg-white px-12
+						className="flex h-32 items-center gap-10 rounded-12 bg-white px-12
 							[box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
 					>
 						{icon && <div className="h-16 w-16 rounded-1e3 bg-gray-500"></div>}
-						<TypeCaps className="text-gray-700">ICON NAME</TypeCaps>
+						<TypeCaps className="text-gray-700">{text}</TypeCaps>
 					</div>
 				</div>
 			</Transition>
@@ -93,27 +104,37 @@ function HoverTooltip({
 	)
 }
 
-function SearchBarButton() {
+function SearchBarButton(props: JSX.IntrinsicElements["button"]) {
 	return (
-		<div className="flex h-64 w-64 items-center justify-center">
+		<button className="flex h-64 w-64 items-center justify-center" {...props}>
 			<div className="flex h-32 w-32 items-center justify-center rounded-1e3 bg-red-500">
 				<div className="h-16 w-16 rounded-1e3 bg-red-300"></div>
 			</div>
-		</div>
+		</button>
 	)
 }
 
 function SearchBar() {
+	const { setCompactMode, search, setSearch } = useContext(SearchContext)!
+
+	const ref = useRef<HTMLInputElement | null>(null)
+
 	return (
-		<div className="flex h-64 items-center rounded-1e3 bg-white [box-shadow:_var(--shadow-2)] [&_>_:nth-child(2)]:grow">
-			<HoverTooltip pos="start">
-				<SearchBarButton />
+		<div className="flex h-64 rounded-1e3 bg-white [box-shadow:_var(--shadow-2)] [&_>_:nth-child(2)]:grow">
+			<HoverTooltip pos="start" text={<>SEARCH FEATHER</>}>
+				<SearchBarButton
+					onClick={e => {
+						ref.current?.focus()
+					}}
+				/>
 			</HoverTooltip>
-			<div className="flex h-64 items-center px-16">
-				<div>Hello, world!</div>
-			</div>
-			<HoverTooltip pos="end">
-				<SearchBarButton />
+			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
+			<HoverTooltip pos="end" text={<>COMPACT MODE</>}>
+				<SearchBarButton
+					onClick={e => {
+						setCompactMode(curr => !curr)
+					}}
+				/>
 			</HoverTooltip>
 		</div>
 	)
@@ -124,7 +145,12 @@ function SearchGridItem() {
 		<div className="flex flex-col">
 			{/* <HoverTooltip pos="center"> */}
 			<div className="flex h-96 items-center justify-center">
-				<div className="h-32 w-32 rounded-1e3 bg-gray-500"></div>
+				{/* prettier-ignore */}
+				<Icon
+					className="h-32 w-32 text-gray-800
+						scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
+					svg={feather.Feather}
+				/>
 			</div>
 			{/* </HoverTooltip> */}
 			{/* Use select-text here so users can easily copy-paste names */}
@@ -150,7 +176,6 @@ function SearchGridContents() {
 function IconPreview() {
 	return (
 		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
-			{/* stroke-[var(--stroke-width)] doesn't work; use [stroke-width:_var(--stroke-width)] */}
 			{/* prettier-ignore */}
 			<Icon
 				className="h-64 w-64 text-gray-800
@@ -200,7 +225,7 @@ function FormatButton() {
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
 				<button
-					className="flex h-36 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]"
+					className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]"
 					onClick={e => setShow(curr => !curr)}
 				>
 					<Icon className={`h-16 w-16 ${className}`} svg={svg} />
@@ -233,7 +258,7 @@ function FormatButton() {
 						className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
 					>
 						<button
-							className="flex h-32 items-center gap-8 px-12
+							className="flex h-32 items-center gap-10 px-12
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => {
 								setFormatAs("svg")
@@ -244,7 +269,7 @@ function FormatButton() {
 							<TypeCaps className="text-gray-700">SVG</TypeCaps>
 						</button>
 						<button
-							className="flex h-32 items-center gap-8 px-12
+							className="flex h-32 items-center gap-10 px-12
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => {
 								setFormatAs("jsx")
@@ -255,7 +280,7 @@ function FormatButton() {
 							<TypeCaps className="text-gray-700">REACT</TypeCaps>
 						</button>
 						<button
-							className="flex h-32 items-center gap-8 px-12
+							className="flex h-32 items-center gap-10 px-12
 								[&:hover]:bg-gray-100 [&:first-child]:rounded-t-12 [&:last-child]:rounded-b-12"
 							onClick={e => {
 								setFormatAs("tsx")
@@ -287,7 +312,7 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.I
 
 	return (
 		<button
-			className="flex h-36 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+			className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
@@ -319,7 +344,7 @@ function DownloadButton({ icon, onClick, children, ...props }: { icon: SVG } & J
 
 	return (
 		<button
-			className="flex h-36 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+			className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
@@ -345,7 +370,7 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 		<AriaCheckbox {...props}>
 			<div className="flex h-20 items-center justify-between">
 				{/* LHS */}
-				<div className="flex items-center gap-8">
+				<div className="flex items-center gap-10">
 					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
 						<ThickIcon className="h-12 w-12 text-gray-700" svg={feather.Code} />
 					</div>
