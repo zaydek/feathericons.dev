@@ -140,32 +140,64 @@ function SearchBar() {
 	)
 }
 
-function SearchGridItem() {
-	return (
-		<div className="flex flex-col">
-			{/* <HoverTooltip pos="center"> */}
-			<div className="flex h-96 items-center justify-center">
-				{/* prettier-ignore */}
-				<Icon
-					className="h-32 w-32 text-gray-800
-						scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
-					svg={feather.Feather}
-				/>
-			</div>
-			{/* </HoverTooltip> */}
-			{/* Use select-text here so users can easily copy-paste names */}
-			<div className="flex h-20 select-text items-center justify-center px-4">
-				<div className="truncate">Hello hello hello</div>
-			</div>
-		</div>
-	)
-}
+//// function SearchGridItem() {
+//// 	return (
+//// 		<div className="flex flex-col">
+//// 			{/* <HoverTooltip pos="center"> */}
+//// 			<div className="flex h-96 items-center justify-center">
+//// 				{/* prettier-ignore */}
+//// 				<Icon
+//// 					className="h-32 w-32 text-gray-800
+//// 						scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
+//// 					svg={feather.Feather}
+//// 				/>
+//// 			</div>
+//// 			{/* </HoverTooltip> */}
+//// 			{/* Use select-text here so users can easily copy-paste names */}
+//// 			<div className="flex h-20 select-text items-center justify-center px-4">
+//// 				<div className="truncate">Hello hello hello</div>
+//// 			</div>
+//// 		</div>
+//// 	)
+//// }
 
 function SearchGridContents() {
+	const { compactMode, searchResults } = useContext(SearchContext)!
+	const { setSelectedName, setSelectedSvgElement: setSelectedIcon } = useContext(SelectedContext)!
+
 	return (
 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(96px,_1fr))]">
 			{iota(100).map(index => (
-				<SearchGridItem key={index} />
+				<div key={index} className="flex flex-col">
+					{compactMode ? (
+						<HoverTooltip pos="center" text="FEATHER">
+							<div className="flex h-96 items-center justify-center">
+								{/* prettier-ignore */}
+								<Icon
+									className="h-32 w-32 text-gray-800
+										scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
+									svg={feather.Feather}
+								/>
+							</div>
+						</HoverTooltip>
+					) : (
+						<>
+							<div className="flex h-96 items-center justify-center">
+								{/* prettier-ignore */}
+								<Icon
+									className="h-32 w-32 text-gray-800
+										scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
+									svg={feather.Feather}
+								/>
+							</div>
+							{/* </HoverTooltip> */}
+							{/* Use select-text here so users can easily copy-paste names */}
+							<div className="flex h-20 select-text items-center justify-center px-4">
+								<div className="truncate">Hello hello hello</div>
+							</div>
+						</>
+					)}
+				</div>
 			))}
 		</div>
 	)
