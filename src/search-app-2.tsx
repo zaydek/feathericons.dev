@@ -94,10 +94,7 @@ function MouseTooltip({
 						}[pos]
 					}
 				>
-					<div
-						className="flex h-32 items-center gap-10 rounded-12 bg-white px-12
-							[box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
-					>
+					<div className="flex h-32 items-center gap-10 rounded-12 bg-white px-12 [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
 						{svg && <Icon className="h-16 w-16 text-gray-700" svg={svg} />}
 						<TypeCaps className="text-gray-700">{text}</TypeCaps>
 					</div>
@@ -165,7 +162,7 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 
 	return (
 		<div className="flex flex-col">
-			<MouseTooltip pos="center" svg={feather.Feather} text={toKebabCase(name).toUpperCase()}>
+			<MouseTooltip pos="center" svg={feather[name]} text={toKebabCase(name).toUpperCase()}>
 				<button
 					className="flex h-112 items-center justify-center"
 					onClick={e => {
@@ -562,7 +559,7 @@ function SidebarFragment() {
 function App() {
 	return (
 		<div className="flex justify-center p-32">
-			<div className="flex basis-2e3 gap-32 [&_>_:nth-child(1)]:grow">
+			<div className="flex basis-2e3 gap-64 [&_>_:nth-child(1)]:grow">
 				<main className="flex flex-col gap-64">
 					<SearchBar />
 					<SearchGridContents />
