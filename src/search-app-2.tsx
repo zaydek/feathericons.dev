@@ -153,8 +153,8 @@ function IconPreview() {
 			{/* stroke-[var(--stroke-width)] doesn't work; use [stroke-width:_var(--stroke-width)] */}
 			{/* prettier-ignore */}
 			<Icon
-				className="h-64 w-64 text-gray-700
-					scale-[var(--scale)] [stroke:_var(--stroke-width)]"
+				className="h-64 w-64 text-gray-800
+					scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
 				svg={feather.Feather}
 			/>
 		</div>
