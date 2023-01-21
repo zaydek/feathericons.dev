@@ -22,6 +22,7 @@ import {
 	strokeWidthMin,
 	strokeWidthStep,
 } from "./constants"
+import { manifest } from "./data/react-feather-manifest@4.29.0"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { iota } from "./lib/iota"
@@ -47,18 +48,18 @@ export function ThickIcon({
 
 function HoverTooltip({
 	pos,
-	icon,
+	svg,
 	text,
 	children,
 }: /* prettier-ignore */ PropsWithChildren<{
 	pos:   "start" | "center" | "end"
-	icon?: SVG
+	svg?: SVG
 	text:  ReactNode
 }>) {
 	const [hover, setHover] = useState(false)
 
 	return (
-		<div className="relative" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
+		<div className="relative flex flex-col" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
 			{children}
 			<Transition
 				when={hover}
@@ -95,7 +96,7 @@ function HoverTooltip({
 						className="flex h-32 items-center gap-10 rounded-12 bg-white px-12
 							[box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
 					>
-						{icon && <div className="h-16 w-16 rounded-1e3 bg-gray-500"></div>}
+						{svg && <Icon className="h-16 w-16 text-gray-700" svg={svg} />}
 						<TypeCaps className="text-gray-700">{text}</TypeCaps>
 					</div>
 				</div>
@@ -170,30 +171,43 @@ function SearchGridContents() {
 			{iota(100).map(index => (
 				<div key={index} className="flex flex-col">
 					{compactMode ? (
-						<HoverTooltip pos="center" text="FEATHER">
-							<div className="flex h-96 items-center justify-center">
+						// COMPACT MODE
+						<HoverTooltip pos="center" svg={feather.Feather} text="FEATHER">
+							<button
+								className="flex h-96 items-center justify-center"
+								onClick={e => {
+									setSelectedName("Feather" as keyof typeof manifest)
+									setSelectedIcon(document.getElementById("Feather")! as unknown as SVGSVGElement)
+								}}
+							>
 								{/* prettier-ignore */}
 								<Icon
 									className="h-32 w-32 text-gray-800
 										scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
 									svg={feather.Feather}
 								/>
-							</div>
+							</button>
 						</HoverTooltip>
 					) : (
+						// NOT COMPACT MODE
 						<>
-							<div className="flex h-96 items-center justify-center">
+							<button
+								className="flex h-96 items-center justify-center"
+								onClick={e => {
+									setSelectedName("Feather" as keyof typeof manifest)
+									setSelectedIcon(document.getElementById("Feather")! as unknown as SVGSVGElement)
+								}}
+							>
 								{/* prettier-ignore */}
 								<Icon
 									className="h-32 w-32 text-gray-800
 										scale-[var(--scale)] [stroke-width:_var(--stroke-width)]"
 									svg={feather.Feather}
 								/>
-							</div>
-							{/* </HoverTooltip> */}
+							</button>
 							{/* Use select-text here so users can easily copy-paste names */}
 							<div className="flex h-20 select-text items-center justify-center px-4">
-								<div className="truncate">Hello hello hello</div>
+								<div className="truncate">hello-world</div>
 							</div>
 						</>
 					)}
