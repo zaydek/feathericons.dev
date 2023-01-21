@@ -37,10 +37,9 @@ import { Transition } from "./transition"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Typography
-const TypeCaps = createStyled("type-caps")
-const TypeSmSans = createStyled("type-sm-sans")
-const TypeCode = createStyled("type-code")
+const TypographyCaps = createStyled("typography-caps")
+const TypographySmallSans = createStyled("typography-small-sans")
+const TypographyCode = createStyled("typography-code")
 
 // Iconography
 export function ThickIcon({
@@ -54,13 +53,11 @@ export function ThickIcon({
 
 function MouseTooltip({
 	pos,
-	icon,
-	text,
+	content,
 	children,
 }: /* prettier-ignore */ PropsWithChildren<{
-	pos:   "start" | "center" | "end"
-	icon?: IconComponent
-	text:  ReactNode
+	pos:     "start" | "center" | "end"
+	content: ReactNode
 }>) {
 	const [hover, setHover] = useState(false)
 
@@ -99,8 +96,7 @@ function MouseTooltip({
 					}
 				>
 					<div className="flex h-32 items-center gap-10 rounded-12 bg-white px-12 [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
-						{icon && <Icon className="h-16 w-16 text-gray-700" icon={icon} />}
-						<TypeCaps className="text-gray-700">{text}</TypeCaps>
+						<TypographyCaps className="text-gray-700">{content}</TypographyCaps>
 					</div>
 				</div>
 			</Transition>
@@ -111,7 +107,7 @@ function MouseTooltip({
 function SearchBarButton({ icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
-			<ThickIcon className="h-24 w-24 text-gray-700" icon={icon} />
+			<Icon className="h-24 w-24 text-gray-400" icon={icon} />
 		</button>
 	)
 }
@@ -123,7 +119,7 @@ function SearchBar() {
 
 	return (
 		<div className="flex h-64 rounded-1e3 bg-white [box-shadow:_var(--shadow-2)] [&_>_:nth-child(2)]:grow">
-			<MouseTooltip pos="start" text={<>SEARCH FEATHER</>}>
+			<MouseTooltip pos="start" content={<>SEARCH FEATHER</>}>
 				<SearchBarButton
 					icon={feather.Search}
 					onClick={e => {
@@ -132,7 +128,7 @@ function SearchBar() {
 				/>
 			</MouseTooltip>
 			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
-			<MouseTooltip pos="end" text={<>COMPACT MODE</>}>
+			<MouseTooltip pos="end" content={<>COMPACT MODE</>}>
 				<SearchBarButton
 					icon={feather.MoreHorizontal}
 					onClick={e => {
@@ -166,9 +162,9 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 
 	return (
 		<div className="flex flex-col">
-			<MouseTooltip pos="center" icon={feather[name]} text={toKebabCase(name).toUpperCase()}>
+			<MouseTooltip pos="center" content={<>{toKebabCase(name).toUpperCase()}</>}>
 				<button
-					className="flex h-128 items-center justify-center"
+					className="flex h-112 items-center justify-center"
 					onClick={e => {
 						setSelectedName(name)
 						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -193,7 +189,7 @@ const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 	return (
 		<div className="flex flex-col">
 			<button
-				className="flex h-128 items-center justify-center"
+				className="flex h-112 items-center justify-center"
 				onClick={e => {
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -208,7 +204,7 @@ const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 			{/* Use select-all so users can copy-paste names. Note that select-text
 			doesn't work as expected */}
 			<div className="flex h-16 select-all items-center justify-center truncate px-4">
-				<TypeSmSans className="truncate text-gray-500">{name}</TypeSmSans>
+				<TypographySmallSans className="truncate text-gray-800">{name}</TypographySmallSans>
 			</div>
 			{/* <div className="flex h-40 items-center justify-center px-4">
 				<div className="h-20 text-center [font:_400_12px_/_normal_var(--sans)]">
@@ -267,7 +263,7 @@ function IconPreview() {
 		//// />
 		<div
 			className={cx(
-				TypeCode.className,
+				TypographyCode.className,
 				"min-h-256 overflow-x-scroll rounded-24 bg-white p-24 text-gray-800 [box-shadow:_var(--shadow-2)]"
 			)}
 		>
@@ -329,7 +325,7 @@ function FormatButton() {
 					onClick={e => setShow(curr => !curr)}
 				>
 					<Icon className={`h-16 w-16 ${className}`} icon={svg} />
-					<TypeCaps className="text-gray-700">FORMAT AS {format}</TypeCaps>
+					<TypographyCaps className="text-gray-700">FORMAT AS {format}</TypographyCaps>
 				</button>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-36 w-36 items-center justify-center">
@@ -367,7 +363,7 @@ function FormatButton() {
 							}}
 						>
 							<Icon className="h-16 w-16 text-[var(--svg-color)]" icon={SVGIcon} />
-							<TypeCaps className="text-gray-700">SVG</TypeCaps>
+							<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
 						</button>
 						<button
 							className="flex h-32 items-center gap-10 px-12
@@ -379,7 +375,7 @@ function FormatButton() {
 							}}
 						>
 							<Icon className="h-16 w-16 text-[var(--jsx-color)]" icon={JSXIcon} />
-							<TypeCaps className="text-gray-700">REACT</TypeCaps>
+							<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
 						</button>
 						<button
 							className="flex h-32 items-center gap-10 px-12
@@ -391,7 +387,7 @@ function FormatButton() {
 							}}
 						>
 							<Icon className="h-16 w-16 text-[var(--tsx-color)]" icon={TSXIcon} />
-							<TypeCaps className="text-gray-700">TS REACT</TypeCaps>
+							<TypographyCaps className="text-gray-700">TYPESCRIPT REACT</TypographyCaps>
 						</button>
 					</div>
 				</div>
@@ -427,7 +423,7 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent
 				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
 				icon={pressed ? feather.Check : icon}
 			/>
-			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypeCaps>
+			<TypographyCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypographyCaps>
 		</button>
 	)
 }
@@ -464,7 +460,7 @@ function DownloadButton({
 				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
 				icon={pressed ? feather.Check : icon}
 			/>
-			<TypeCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypeCaps>
+			<TypographyCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypographyCaps>
 		</button>
 	)
 }
@@ -482,7 +478,7 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-100">
 						<ThickIcon className="h-12 w-12 text-gray-700" icon={feather.Code} />
 					</div>
-					<TypeCaps className="text-gray-700">{children}</TypeCaps>
+					<TypographyCaps className="text-gray-700">{children}</TypographyCaps>
 				</div>
 				{/* RHS */}
 				<Transition
@@ -526,17 +522,17 @@ function SliderFieldFragment({
 					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-100">
 						<ThickIcon className="h-12 w-12 text-gray-700" icon={icon} />
 					</div>
-					<TypeCaps className="text-gray-700">{children}</TypeCaps>
+					<TypographyCaps className="text-gray-700">{children}</TypographyCaps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-10">
 					{/* prettier-ignore */}
-					<TypeCaps className="text-gray-700">
+					<TypographyCaps className="text-gray-700">
 						{props.value < sizeMin
 							? props.value.toFixed(2)
 							: `${props.value} PX`
 						}
-					</TypeCaps>
+					</TypographyCaps>
 					<button className="flex h-24 w-24 items-center justify-center" onClick={reset}>
 						<ThickIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
 					</button>
