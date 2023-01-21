@@ -108,58 +108,81 @@
 		calc(16px * var(--scale));
 }
 
+////////////////////////////////////////////////////////////////////////////////
 // SVG
-pre[data-lang="svg"] {
+
+pre {
 	color: #24292e;
 	.token {
-		// [<!-- ... -->]
+		// [// ...]
 		&.comment {
 			color: #6a737d;
 		}
-		// <[svg]
+		// [<svg] class="foo">
 		&.tag {
 			color: #22863a;
+			// [<]svg class="foo">
+			.punctuation {
+				color: #24292e;
+			}
 		}
-		// <svg [class]
+		// <svg [class]="foo">
 		&.attr-name {
 			color: #6f42c1;
 		}
-		// <svg class[="foo"]
+		// <svg class[="foo"]>
 		&.attr-value {
 			color: #032f62;
-			// <svg class[=]"foo"
+			// <svg class=["foo"]>
 			.punctuation:not(.attr-equals) {
 				color: #032f62;
 			}
 		}
+
+		// [export] [function] Feather(props) {
+		&.keyword   { color: #d73a49; }
+		// export function [Feather](props) {
+		&.function  { color: #6f42c1; }
+		// export function Feather([props]) {
+		&.parameter { color: #e36209; }
 	}
 }
 
 @media (prefers-color-scheme: dark) {
-	// SVG
-	pre[data-lang="svg"] {
+	pre {
+		color: #c9d1d9;
 		.token {
-			color: #c9d1d9;
-			// <!-- ... -->
+			// [// ...]
 			&.comment {
 				color: #8b949e;
 			}
-			// <[svg]
+			// [<svg] class="foo">
 			&.tag {
 				color: #7ee787;
+				// [<]svg class="foo">
+				.punctuation {
+					color: #c9d1d9;
+				}
 			}
-			// <svg [class]
+			// <svg [class]="foo">
 			&.attr-name {
 				color: #79c0ff;
 			}
-			// <svg class[="foo"]
+			// <svg class[="foo"]>
 			&.attr-value {
 				color: #a5d6ff;
-				// <svg class[=]"foo"
+				// <svg class=["foo"]>
 				.punctuation:not(.attr-equals) {
 					color: #a5d6ff;
 				}
 			}
+
+			// [export] [function] Feather(props) {
+			&.keyword   { color: #f97583; }
+			// export function [Feather](props) {
+			&.function  { color: #b392f0; }
+			// export function Feather([props]) {
+			&.parameter { color: #ffab70; }
 		}
 	}
 }
