@@ -16,8 +16,8 @@ const MICRO_TIMEOUT = 10
 export type TransitionProps = PropsWithChildren<{
 	when:     boolean
 	unmount?: "start" | "end"
-	start:    CSSProperties
-	end:      CSSProperties
+	s1:       CSSProperties
+	s2:       CSSProperties
 	duration: number
 	ease?:    string | readonly [number, number, number, number]
 	delay?:   number
@@ -26,8 +26,8 @@ export type TransitionProps = PropsWithChildren<{
 export function Transition({
 	when,
 	unmount,
-	start,
-	end,
+	s1: start,
+	s2: end,
 	duration,
 	ease = "ease",
 	delay = 0,

@@ -56,11 +56,11 @@ function Tooltip({
 				<Transition
 					when={hover}
 					unmount="start"
-					start={{
+					s1={{
 						transform: pos === "center" ? "translateY(8px) translateX(-50%)" : "translateY(8px)",
 						opacity: 0,
 					}}
-					end={{
+					s2={{
 						transform: pos === "center" ? "translateY(0px) translateX(-50%)" : "translateY(0px)",
 						opacity: 1,
 					}}
@@ -253,16 +253,16 @@ function Checkbox({
 				<div className="h-$sidebar-label-height flex flex-col justify-center">
 					<Transition
 						when={checked}
-						start={{ backgroundColor: "var(--hairline-color)" }}
-						end={{ backgroundColor: "var(--alt-trim-color)" }}
+						s1={{ backgroundColor: "var(--hairline-color)" }}
+						s2={{ backgroundColor: "var(--alt-trim-color)" }}
 						duration={75}
 						ease={[0, 1, 1, 1.25]}
 					>
 						<div className="align-center flex h-12 w-48 rounded-1e3">
 							<Transition
 								when={checked}
-								start={{ transform: "translateX(0%)" }}
-								end={{ transform: "translateX(50%)" }}
+								s1={{ transform: "translateX(0%)" }}
+								s2={{ transform: "translateX(50%)" }}
 								duration={75}
 								ease={[0, 1, 1, 1.25]}
 							>
@@ -380,11 +380,11 @@ function FormatButton() {
 				<Transition
 					when={show}
 					unmount="start"
-					start={{
+					s1={{
 						transform: "translateY(-8px)",
 						opacity: 0,
 					}}
-					end={{
+					s2={{
 						transform: "translateY(0px)",
 						opacity: 1,
 					}}

@@ -1,6 +1,7 @@
 import * as feather from "./data/react-feather@4.29.0"
 
 import { PropsWithChildren, useContext, useEffect, useRef, useState } from "react"
+import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import { sizeMax, sizeMin, sizeStep, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
@@ -8,7 +9,7 @@ import { cx } from "./lib/cx"
 import { iota } from "./lib/iota"
 import { createStyled } from "./lib/react/create-styled"
 import { Icon, SVG } from "./lib/react/icon"
-import { SliderContext, StateProvider } from "./state"
+import { SelectedContext, SliderContext, StateProvider } from "./state"
 import { Transition } from "./transition"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,14 +43,14 @@ function HoverTooltip({
 			<Transition
 				when={hover}
 				unmount="start"
-				start={{
+				s1={{
 					// prettier-ignore
 					transform: pos === "center"
 						? "translateY(8px) translateX(-50%)"
 						: "translateY(8px)",
 					opacity: 0,
 				}}
-				end={{
+				s2={{
 					// prettier-ignore
 					transform: pos === "center"
 						? "translateY(0px) translateX(-50%)"
@@ -189,11 +190,11 @@ function FormatButton() {
 			<Transition
 				when={show}
 				unmount="start"
-				start={{
+				s1={{
 					transform: "translateY(-8px)",
 					opacity: 0,
 				}}
-				end={{
+				s2={{
 					transform: "translateY(0px)",
 					opacity: 1,
 				}}
@@ -305,21 +306,41 @@ function Hairline() {
 	return <hr className="h-1 bg-gray-200" />
 }
 
-function CheckboxField({ children }: PropsWithChildren) {
+function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 	return (
-		<div className="flex h-20 items-center justify-between">
-			{/* LHS */}
-			<div className="flex items-center gap-8">
-				<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
-					<ThickIcon className="h-12 w-12 text-gray-700" svg={feather.Code} />
+		<AriaCheckbox {...props}>
+			<div className="flex h-20 items-center justify-between">
+				{/* LHS */}
+				<div className="flex items-center gap-8">
+					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-gray-200">
+						<ThickIcon className="h-12 w-12 text-gray-700" svg={feather.Code} />
+					</div>
+					<TypeCaps className="text-gray-700">{children}</TypeCaps>
 				</div>
-				<TypeCaps className="text-gray-700">{children}</TypeCaps>
+				{/* RHS */}
+				{/* Transition background-color */}
+				<Transition
+					when={props.checked}
+					s1={{ backgroundColor: "var(--hairline-color)" }}
+					s2={{ backgroundColor: "var(--trim-color)" }}
+					duration={50}
+					ease={[0, 1, 1, 1]} // No bounce here
+				>
+					<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--trim-color)]">
+						{/* Transition transform */}
+						<Transition
+							when={props.checked}
+							s1={{ transform: "translateX(0%)" }}
+							s2={{ transform: "translateX(50%)" }}
+							duration={50}
+							ease={[0, 1, 0.5, 1.25]}
+						>
+							<div className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
+						</Transition>
+					</div>
+				</Transition>
 			</div>
-			{/* RHS */}
-			<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--trim-color)]">
-				<div className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
-			</div>
-		</div>
+		</AriaCheckbox>
 	)
 }
 
@@ -362,13 +383,14 @@ function SliderFieldFragment({ icon, children, ...props }: { icon: SVG } & Omit<
 
 function SidebarFragment() {
 	//// const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
-	//// const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
-
+	const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	return (
 		<>
-			<CheckboxField>VIEW SOURCE</CheckboxField>
+			<CheckboxField checked={viewSource} setChecked={setViewSource}>
+				VIEW SOURCE
+			</CheckboxField>
 			<Preview />
 			<div className="flex flex-col gap-10">
 				<FormatButton />
