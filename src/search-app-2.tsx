@@ -1,9 +1,18 @@
 import * as feather from "./data/react-feather@4.29.0"
 
-import { PropsWithChildren, useContext, useEffect, useRef, useState } from "react"
+import { MouseEvent, MouseEventHandler, PropsWithChildren, useContext, useEffect, useRef, useState } from "react"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
-import { sizeMax, sizeMin, sizeStep, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
+import {
+	sizeInitial,
+	sizeMax,
+	sizeMin,
+	sizeStep,
+	strokeWidthInitial,
+	strokeWidthMax,
+	strokeWidthMin,
+	strokeWidthStep,
+} from "./constants"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { cx } from "./lib/cx"
 import { iota } from "./lib/iota"
@@ -344,7 +353,12 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 	)
 }
 
-function SliderFieldFragment({ icon, children, ...props }: { icon: SVG } & Omit<AriaSliderProps, "track" | "thumb">) {
+function SliderFieldFragment({
+	icon,
+	reset,
+	children,
+	...props
+}: { icon: SVG } & { reset: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -367,16 +381,20 @@ function SliderFieldFragment({ icon, children, ...props }: { icon: SVG } & Omit<
 							: `${props.value} PX`
 						}
 					</TypeCaps>
-					<ThickIcon className="h-16 w-16 text-gray-300" svg={feather.RotateCcw} />
+					<button className="flex h-24 w-24 items-center justify-center" onClick={reset}>
+						<ThickIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" svg={feather.RotateCcw} />
+					</button>
 				</div>
 			</div>
-			<AriaSlider track={track} thumb={thumb} {...props}>
-				<div ref={setTrack} className="h-20 items-center px-12">
-					<div className="flex h-6 items-center rounded-1e3 bg-[linear-gradient(to_right,_var(--trim-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]">
-						<div ref={setThumb} className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
+			<div className="px-12">
+				<AriaSlider track={track} thumb={thumb} {...props}>
+					<div ref={setTrack} className="flex h-20 flex-col justify-center">
+						<div className="flex h-6 items-center rounded-1e3 bg-[linear-gradient(to_right,_var(--trim-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]">
+							<div ref={setThumb} className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
+						</div>
 					</div>
-				</div>
-			</AriaSlider>
+				</AriaSlider>
+			</div>
 		</>
 	)
 }
@@ -407,6 +425,7 @@ function SidebarFragment() {
 				step={sizeStep}
 				value={size}
 				setValue={setSize}
+				reset={e => setSize(sizeInitial)}
 			>
 				PREVIEW SIZE
 			</SliderFieldFragment>
@@ -418,6 +437,7 @@ function SidebarFragment() {
 				step={strokeWidthStep}
 				value={strokeWidth}
 				setValue={setStrokeWidth}
+				reset={e => setStrokeWidth(strokeWidthInitial)}
 			>
 				PREVIEW STROKE WIDTH
 			</SliderFieldFragment>
