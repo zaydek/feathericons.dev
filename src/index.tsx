@@ -1,14 +1,8 @@
-//// import "the-new-css-reset"
-////
-//// import "./css/base.scss"
-//// import "./css/vars.scss"
-
 import "the-new-css-reset"
 
 import "./css/base.scss"
 import "./css/vars-2.scss"
 
-// TODO
 import "./css/globals.scss"
 import "./css/typography.scss"
 

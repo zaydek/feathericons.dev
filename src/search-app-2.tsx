@@ -1,5 +1,3 @@
-import "./assets/prism/prism"
-
 import * as feather from "./data/react-feather@4.29.0"
 
 import {
@@ -32,25 +30,10 @@ import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
 import { download } from "./lib/download"
-import { createStyled } from "./lib/react/create-styled"
 import { Icon, IconComponent } from "./lib/react/icon"
 import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
 import { Transition } from "./transition"
-
-////////////////////////////////////////////////////////////////////////////////
-
-const TypographyCaps = createStyled("typography-caps")
-const TypographySmallSans = createStyled("typography-small-sans")
-
-// Iconography
-export function ThickIcon({
-	icon,
-	...props
-}: { icon: IconComponent } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
-	return <Icon icon={icon} strokeWidth={2.5} {...props} />
-}
-
-////////////////////////////////////////////////////////////////////////////////
+import { ThickIcon, TypographyCaps, TypographySmallSans } from "./typography"
 
 function MouseTooltip({
 	pos,
@@ -257,7 +240,6 @@ function IconPreview() {
 		const tokens = highlighter.codeToThemedTokens(clipboard + "\n", formatAs === "svg" ? "xml" : "tsx", undefined, {
 			includeExplanation: false,
 		})
-		console.log(tokens)
 		setTokens(tokens)
 	}, [clipboard, formatAs, highlighter])
 
@@ -544,8 +526,7 @@ function SliderFieldFragment({
 					<TypographyCaps className="text-gray-700">
 						{props.value < sizeMin
 							? props.value.toFixed(2)
-							: `${props.value} PX`
-						}
+							: `${props.value} PX`}
 					</TypographyCaps>
 					<button className="flex h-24 w-24 items-center justify-center" onClick={reset}>
 						<ThickIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
@@ -605,8 +586,8 @@ function SidebarFragment() {
 			{/* prettier-ignore */}
 			<SliderFieldFragment
 				icon={feather.Maximize2}
-					min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize}
-						reset={e => setSize(sizeInitial)}
+				min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize}
+				reset={e => setSize(sizeInitial)}
 			>
 				PREVIEW SIZE
 			</SliderFieldFragment>
@@ -614,8 +595,8 @@ function SidebarFragment() {
 			{/* prettier-ignore */}
 			<SliderFieldFragment
 				icon={feather.Minimize2}
-					min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth}
-						reset={e => setStrokeWidth(strokeWidthInitial)}
+				min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth}
+				reset={e => setStrokeWidth(strokeWidthInitial)}
 			>
 				PREVIEW STROKE WIDTH
 			</SliderFieldFragment>

@@ -23,8 +23,6 @@ export const jsxPlaceholder = detab(`
 `)
 
 export const tsxPlaceholder = detab(`
-	import { SVGAttributes } from "react"
-
 	// https://feathericons.dev/feather
 	export function Feather(props: SVGAttributes<SVGElement>) {
 		return (
