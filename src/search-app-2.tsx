@@ -257,29 +257,32 @@ function IconPreview() {
 		const tokens = highlighter.codeToThemedTokens(clipboard + "\n", formatAs === "svg" ? "xml" : "tsx", undefined, {
 			includeExplanation: false,
 		})
+		console.log(tokens)
 		setTokens(tokens)
 	}, [clipboard, formatAs, highlighter])
 
 	return viewSource ? (
-		// Defer p-* because of overflow-x bug
+		// Use overflow-x-scroll > inline-block p-* because of overflow-x bug
 		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
-			{/* overlow-x bug */}
-			<code className="-mx-[1ch] inline-block p-24">
-				{tokens?.map((token, index) => (
-					<Fragment key={index}>
-						{/* {index > 0 && "\n"} */}
-						<div className="relative pl-[4ch]">
-							<div className="absolute top-0 bottom-0 left-0 select-none">
-								<div className="w-[2ch] text-right text-gray-300">{index + 1}</div>
+			<code className="inline-block p-24">
+				{tokens === null ? (
+					<div className="text-gray-400">Initializing shiki-es…</div>
+				) : (
+					tokens.map((token, index) => (
+						<Fragment key={index}>
+							<div className="relative -mx-[1ch] pl-[4ch]">
+								<div className="absolute top-0 bottom-0 left-0 select-none">
+									<div className="w-[2ch] text-right text-gray-300">{index + 1}</div>
+								</div>
+								{token.map(({ content, color }, ii) => (
+									<span key={ii} style={{ color }}>
+										{content}
+									</span>
+								))}
 							</div>
-							{token.map(({ content, color }, ii) => (
-								<span key={ii} style={{ color }}>
-									{content}
-								</span>
-							))}
-						</div>
-					</Fragment>
-				))}
+						</Fragment>
+					))
+				)}
 			</code>
 		</pre>
 	) : (
