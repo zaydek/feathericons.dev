@@ -155,7 +155,7 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 
 // TODO: It's not clear these need to be memoized, maybe if we add
 // highlighting...
-const Memo_CompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
+const Memo_CompactGridItem = memo(function CompactGridItem({ name }: { name: keyof typeof manifest }) {
 	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
 	return (
@@ -181,41 +181,45 @@ const Memo_CompactGridItem = memo(({ name }: { name: keyof typeof manifest }) =>
 
 // TODO: It's not clear these need to be memoized, maybe if we add
 // highlighting...
-const Memo_GridItem = memo(
-	({ name, indexes }: { name: keyof typeof manifest; indexes: readonly [number, number] | null }) => {
-		const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
+const Memo_GridItem = memo(function GridItem({
+	name,
+	indexes,
+}: {
+	name: keyof typeof manifest
+	indexes: readonly [number, number] | null
+}) {
+	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
-		return (
-			<div className="flex flex-col">
-				<button
-					className="flex h-112 items-center justify-center"
-					onClick={e => {
-						setSelectedName(name)
-						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
-					}}
-				>
-					<Icon
-						id={name}
-						className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-						icon={feather[name]}
-					/>
-				</button>
-				{/* Use select-all so users can copy-paste names. Note that select-text
+	return (
+		<div className="flex flex-col">
+			<button
+				className="flex h-112 items-center justify-center"
+				onClick={e => {
+					setSelectedName(name)
+					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
+				}}
+			>
+				<Icon
+					id={name}
+					className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
+					icon={feather[name]}
+				/>
+			</button>
+			{/* Use select-all so users can copy-paste names. Note that select-text
 			doesn't work as expected */}
-				<div className="flex h-16 select-all items-center justify-center truncate px-4">
-					<TypographySmallSans className="truncate text-gray-800">
-						<Highlight indexes={indexes}>{name}</Highlight>
-					</TypographySmallSans>
-				</div>
-				{/* <div className="flex h-40 items-center justify-center px-4">
+			<div className="flex h-16 select-all items-center justify-center truncate px-4">
+				<TypographySmallSans className="truncate text-gray-800">
+					<Highlight indexes={indexes}>{name}</Highlight>
+				</TypographySmallSans>
+			</div>
+			{/* <div className="flex h-40 items-center justify-center px-4">
 				<div className="h-20 text-center [font:_400_12px_/_normal_var(--sans)]">
 					<Wbr>{name}</Wbr>
 				</div>
 			</div> */}
-			</div>
-		)
-	}
-)
+		</div>
+	)
+})
 
 function SearchGridContents() {
 	const { compactMode, searchResults } = useContext(SearchContext)!
