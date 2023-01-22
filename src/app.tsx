@@ -1,22 +1,22 @@
-import { manifest } from "./data/react-feather-manifest@4.29.0"
-import { Home } from "./pages/home-backup"
-import { Page } from "./pages/page"
+import { manifest } from "./data/react-feather-manifest"
 import { Route, Router, RouterProvider } from "./router"
-import { RouterTransitionProvider } from "./router-transition"
+import { RouteTransitionProvider } from "./router-transition"
+import { Home } from "./routes/home"
+import { Page as IconRoute } from "./routes/icon-route"
 import { StateProvider } from "./state"
 
 export function App({ initialPath }: { initialPath: string }) {
 	return (
 		<StateProvider>
 			<RouterProvider initialPath={initialPath}>
-				<RouterTransitionProvider>
+				<RouteTransitionProvider>
 					<Router>
 						<Route path="/" component={Home} />
 						{Object.keys(manifest).map(name => (
-							<Route key={name} path={`/${name}`} component={Page} componentProps={{ name: name }} />
+							<Route key={name} path={`/${name}`} component={IconRoute} componentProps={{ name }} />
 						))}
 					</Router>
-				</RouterTransitionProvider>
+				</RouteTransitionProvider>
 			</RouterProvider>
 		</StateProvider>
 	)

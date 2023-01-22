@@ -1,5 +1,4 @@
 import {
-	AnchorHTMLAttributes,
 	createContext,
 	Dispatch,
 	LazyExoticComponent,
@@ -12,16 +11,20 @@ import {
 	useState,
 } from "react"
 
-export const PathContext = createContext<{
-	path: string
-	setPath: Dispatch<SetStateAction<string>>
-} | null>(null)
+// prettier-ignore
+export const PathContext =
+	createContext<{
+		path:    string
+		setPath: Dispatch<SetStateAction<string>>
+	} | null>(null)
 
 // Container component
-export function Route<ComponentProps extends {}>(_: {
-	path: string
-	component: ((_: ComponentProps) => JSX.Element) | LazyExoticComponent<any>
-	componentProps?: ComponentProps
+//
+// prettier-ignore
+export function Route<Props>(_: {
+	path:            string
+	component:       ((_: Props) => JSX.Element) | LazyExoticComponent<any>
+	componentProps?: Props
 }) {
 	return <></>
 }
@@ -75,7 +78,9 @@ export function RouterProvider({ initialPath, children }: PropsWithChildren<{ in
 }
 
 // Make href required
-export function Anchor({ href, children, ...props }: { href: string } & AnchorHTMLAttributes<HTMLAnchorElement>) {
+export type LinkProps = { href: string } & JSX.IntrinsicElements["a"]
+
+export function Link({ href, children, ...props }: LinkProps) {
 	const { setPath } = useContext(PathContext)!
 
 	return (

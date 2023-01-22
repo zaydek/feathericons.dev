@@ -2,34 +2,39 @@ import { createContext, PropsWithChildren, useContext, useLayoutEffect, useMemo,
 import { PathContext } from "./router"
 
 // Internal
-const _TransitionContext = createContext<{ started: boolean, forwards: boolean } | null>(null)
+const _TransitionContext = createContext<{ started: boolean; forwards: boolean } | null>(null)
 
-// TODO: Upgrade to use <Transition> API from transition.tsx?
 export function RouterTransition({ children }: PropsWithChildren) {
 	const { started, forwards } = useContext(_TransitionContext)!
 
-	return <>
-		<div style={{
-			opacity: started
-				? 1
-				: 0,
-			transform: started
-				? "translateX(0px)"
-				: forwards ? "translateX(16px)" : "translateX(-16px)",
-			// Transition only forwards
-			transition: started
-				? "600ms ease"
-				: "revert",
-			transitionProperty: started
-				? "opacity, transform"
-				: "revert",
-		}}>
-			{children}
-		</div>
-	</>
+	return (
+		<>
+			{/* TODO: Upgrade to <Transition> component */}
+			{/* prettier-ignore */}
+			<div
+				style={{
+					opacity: started
+						? 1
+						: 0,
+					transform: started
+						? "translateX(0px)"
+						: (forwards ? "translateX(16px)" : "translateX(-16px)"),
+					// Transition only forwards
+					transition: started
+						? "600ms ease"
+						: "revert",
+					transitionProperty: started
+						? "opacity, transform"
+						: "revert",
+				}}
+			>
+				{children}
+			</div>
+		</>
+	)
 }
 
-export function RouterTransitionProvider({ children }: PropsWithChildren) {
+export function RouteTransitionProvider({ children }: PropsWithChildren) {
 	const { path } = useContext(PathContext)!
 
 	const [started, setStarted] = useState(false)
@@ -47,10 +52,12 @@ export function RouterTransitionProvider({ children }: PropsWithChildren) {
 		}
 	}, [path])
 
-	return <>
-		{/* eslint-disable-next-line react/jsx-pascal-case */}
-		<_TransitionContext.Provider value={useMemo(() => ({ started, forwards }), [forwards, started])}>
-			{children}
-		</_TransitionContext.Provider>
-	</>
+	return (
+		<>
+			{/* eslint-disable-next-line react/jsx-pascal-case */}
+			<_TransitionContext.Provider value={useMemo(() => ({ started, forwards }), [forwards, started])}>
+				{children}
+			</_TransitionContext.Provider>
+		</>
+	)
 }
