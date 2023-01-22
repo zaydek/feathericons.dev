@@ -146,7 +146,7 @@ function Highlight({ indexes, children }: { indexes: readonly [number, number] |
 		return (
 			<>
 				{children.slice(0, indexes[0])}
-				<span className="bg-[hsl(45,_100%,_50%,_0.4)] text-yellow-900">{children.slice(indexes[0], indexes[1])}</span>
+				<span className="bg-amber-200 bg-opacity-60 text-amber-900">{children.slice(indexes[0], indexes[1])}</span>
 				{children.slice(indexes[1])}
 			</>
 		)
