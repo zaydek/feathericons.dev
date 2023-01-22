@@ -221,6 +221,70 @@ function SearchGridContents() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+//// function SvgAnchor({ children }: { children: string }) {
+//// 	const href = children.slice("<!-- ".length, -1 * " -->".length)
+////
+//// 	return (
+//// 		<>
+//// 			<span className="opacity-[0.5]">{"<!-- "}</span>
+//// 			<a className="underline" href={href} target="_blank" rel="noreferrer">
+//// 				{href}
+//// 			</a>
+//// 			<span className="opacity-[0.5]">{"--> "}</span>
+//// 		</>
+//// 	)
+//// }
+////
+//// function NonSvgAnchor({ children }: { children: string }) {
+//// 	const href = children.slice("// ".length)
+////
+//// 	return (
+//// 		<>
+//// 			<span className="opacity-[0.5]">{"// "}</span>
+//// 			<a className="underline" href={href} target="_blank" rel="noreferrer">
+//// 				{href}
+//// 			</a>
+//// 			<span className="opacity-[0.5]">{"// "}</span>
+//// 		</>
+//// 	)
+//// }
+
+function SvgAnchor({ children }: { children: string }) {
+	const href = children.slice("<!-- ".length, -1 * " -->".length)
+
+	return (
+		<>
+			{"<!-- "}
+			<a className="underline" href={href} target="_blank" rel="noreferrer">
+				{href}
+			</a>
+			{"--> "}
+		</>
+	)
+}
+
+function NonSvgAnchor({ children }: { children: string }) {
+	const href = children.slice("// ".length)
+
+	return (
+		<>
+			{"// "}
+			<a className="underline" href={href} target="_blank" rel="noreferrer">
+				{href}
+			</a>
+		</>
+	)
+}
+
+function Anchor({ children }: { children: string }) {
+	const { formatAs } = useContext(SelectedContext)!
+
+	// prettier-ignore
+	return formatAs === "svg"
+		? <SvgAnchor>{children}</SvgAnchor>
+		: <NonSvgAnchor>{children}</NonSvgAnchor>
+}
+
 function IconPreview() {
 	const { selectedName, viewSource, formatAs, clipboard } = useContext(SelectedContext)!
 
@@ -250,15 +314,15 @@ function IconPreview() {
 				{tokens === null ? (
 					<div className="text-gray-400">Initializing shiki-es…</div>
 				) : (
-					tokens.map((token, index) => (
-						<Fragment key={index}>
+					tokens.map((token, y) => (
+						<Fragment key={y}>
 							<div className="relative -mx-[1ch] pl-[4ch]">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-[2ch] text-right text-gray-300">{index + 1}</div>
+									<div className="w-[2ch] text-right text-gray-300">{y + 1}</div>
 								</div>
-								{token.map(({ content, color }, ii) => (
-									<span key={ii} style={{ color }}>
-										{content}
+								{token.map(({ content, color }, x) => (
+									<span key={x} style={{ color }}>
+										{y === 0 ? <Anchor>{content}</Anchor> : content}
 									</span>
 								))}
 							</div>
