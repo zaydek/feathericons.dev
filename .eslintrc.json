@@ -1,4 +1,3 @@
-// https://npmjs.com/package/eslint-config-react-app#usage-outside-of-create-react-app
 {
-	"extends": "react-app"
+	"extends": "next/core-web-vitals"
 }

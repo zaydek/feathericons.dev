@@ -1,4 +1,4 @@
-import { createElement, forwardRef, ForwardRefExoticComponent } from "react"
+import { createElement } from "react"
 import { cx } from "../cx"
 
 export type StyledComponent = {
@@ -8,7 +8,7 @@ export type StyledComponent = {
 			| ({ as?: (_: Props) => JSX.Element } & Props)
 		): JSX.Element
 
-	Forward: ForwardRefExoticComponent<any>
+	//// Forward: ForwardRefExoticComponent<any>
 	className: string
 }
 
@@ -23,16 +23,16 @@ export function createStyled(argClassName: string) {
 			...props,
 		}, children)
 	}
-	styledComponent.Forward = forwardRef(({ tag, as, className, children, ...props }, ref) => {
-		return createElement(as ?? tag ?? "div", {
-			ref,
-			className: cx(
-				argClassName,
-				className,
-			),
-			...props,
-		}, children)
-	})
+	//// styledComponent.Forward = forwardRef(({ tag, as, className, children, ...props }, ref) => {
+	//// 	return createElement(as ?? tag ?? "div", {
+	//// 		ref,
+	//// 		className: cx(
+	//// 			argClassName,
+	//// 			className,
+	//// 		),
+	//// 		...props,
+	//// 	}, children)
+	//// })
 	styledComponent.className = argClassName
 	return styledComponent
 }
