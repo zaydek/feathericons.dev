@@ -254,30 +254,34 @@ function IconPreview() {
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
-		const tokens = highlighter.codeToThemedTokens(clipboard, formatAs === "svg" ? "xml" : "tsx", undefined, {
+		const tokens = highlighter.codeToThemedTokens(clipboard + "\n", formatAs === "svg" ? "xml" : "tsx", undefined, {
 			includeExplanation: false,
 		})
 		setTokens(tokens)
 	}, [clipboard, formatAs, highlighter])
 
 	return viewSource ? (
-		// Defer p-24 because of overflow-x-scroll
-		<div className="bg-whit min-h-256 overflow-x-scroll rounded-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
-			<pre>
-				<code className="inline-block p-24">
-					{tokens?.map((token, index) => (
-						<Fragment key={index}>
-							{index > 0 && "\n"}
+		// Defer p-* because of overflow-x bug
+		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
+			{/* overlow-x bug */}
+			<code className="-mx-[1ch] inline-block p-24">
+				{tokens?.map((token, index) => (
+					<Fragment key={index}>
+						{/* {index > 0 && "\n"} */}
+						<div className="relative pl-[4ch]">
+							<div className="absolute top-0 bottom-0 left-0 select-none">
+								<div className="w-[2ch] text-right text-gray-300">{index + 1}</div>
+							</div>
 							{token.map(({ content, color }, ii) => (
 								<span key={ii} style={{ color }}>
 									{content}
 								</span>
 							))}
-						</Fragment>
-					))}
-				</code>
-			</pre>
-		</div>
+						</div>
+					</Fragment>
+				))}
+			</code>
+		</pre>
 	) : (
 		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
 			<Icon
