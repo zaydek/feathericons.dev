@@ -247,34 +247,6 @@ function SearchGridContents() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// function SvgAnchor({ children }: { children: string }) {
-//// 	const href = children.slice("<!-- ".length, -1 * " -->".length)
-////
-//// 	return (
-//// 		<>
-//// 			<span className="opacity-[0.5]">{"<!-- "}</span>
-//// 			<a className="underline" href={href} target="_blank" rel="noreferrer">
-//// 				{href}
-//// 			</a>
-//// 			<span className="opacity-[0.5]">{"--> "}</span>
-//// 		</>
-//// 	)
-//// }
-////
-//// function NonSvgAnchor({ children }: { children: string }) {
-//// 	const href = children.slice("// ".length)
-////
-//// 	return (
-//// 		<>
-//// 			<span className="opacity-[0.5]">{"// "}</span>
-//// 			<a className="underline" href={href} target="_blank" rel="noreferrer">
-//// 				{href}
-//// 			</a>
-//// 			<span className="opacity-[0.5]">{"// "}</span>
-//// 		</>
-//// 	)
-//// }
-
 function SvgAnchor({ children }: { children: string }) {
 	const href = children.slice("<!-- ".length, -1 * " -->".length)
 
