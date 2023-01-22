@@ -12,7 +12,13 @@ import "../css/tailwind.css"
 
 import { AppProps } from "next/app"
 import { SharedApp } from "../shared-app"
+import { StateProvider } from "../state"
 
 export default function App({ pageProps }: AppProps) {
-	return <SharedApp {...pageProps}>{JSON.stringify(pageProps, null, 2)}</SharedApp>
+	return (
+		<StateProvider>
+			{/* TODO: Remove debug JSON */}
+			<SharedApp {...pageProps}>{JSON.stringify(pageProps, null, 2)}</SharedApp>
+		</StateProvider>
+	)
 }

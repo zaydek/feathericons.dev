@@ -31,7 +31,7 @@ import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
-import { SearchContext, SelectedContext, SliderContext, StateProvider } from "./state"
+import { SearchContext, SelectedContext, SliderContext } from "./state"
 import { Transition } from "./transition"
 import { ThickIcon, TypographyCaps, TypographySmallSans } from "./typography"
 
@@ -668,7 +668,7 @@ function SidebarFragment() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function App() {
+export function SearchApp() {
 	return (
 		<div className="flex justify-center p-32">
 			<div className="flex basis-2e3 gap-64 [&_>_:nth-child(1)]:grow">
@@ -681,13 +681,5 @@ function App() {
 				</aside>
 			</div>
 		</div>
-	)
-}
-
-export function ProvidedApp() {
-	return (
-		<StateProvider>
-			<App />
-		</StateProvider>
 	)
 }

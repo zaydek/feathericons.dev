@@ -1,11 +1,10 @@
 import Head from "next/head"
 import Link, { LinkProps } from "next/link"
-
 import { PropsWithChildren } from "react"
 import { dataKeys } from "./data/data"
 import { IconProps } from "./pages/[icon]"
 import { RouteTransition } from "./route-transition"
-import { ProvidedApp } from "./search-app-2"
+import { SearchApp } from "./search-app"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 	return (
@@ -42,7 +41,7 @@ export function SharedApp({ name, children }: PropsWithChildren<Partial<IconProp
 			</Head>
 
 			{name === undefined ? (
-				<ProvidedApp />
+				<SearchApp />
 			) : (
 				<div className="p-16">
 					<nav className="flex flex-wrap gap-4">
