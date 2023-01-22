@@ -1,4 +1,4 @@
-//// [data-debug-css] :not(svg > *) {
+//// :not(svg > *) {
 //// 	outline: 1px solid hsl(200, 100%, 50%, 0.5);
 //// 	outline-offset: -0.5px;
 //// }
@@ -27,29 +27,30 @@ $code: (
 	monospace,
 );
 
+// Layout
 :root {
-	-webkit-font-smoothing:  antialiased;
-	-moz-osx-font-smoothing: grayscale;
-
 	overflow-y: scroll; // COMPAT/Windows
 	overflow-x: hidden;
 
 	scroll-behavior: smooth;
 }
 
+// Typography
 :root {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
 	--sans: #{$sans};
 	--code: #{$code};
 
   font-family: var(--sans);
-  @at-root {
-    pre, code {
-      font-family: var(--code);
-    }
-  }
+  //// @at-root {
+  ////   pre, code {
+  ////     font-family: var(--code);
+  ////   }
+  //// }
 
 	background-color: var(--base-color);
-	//// overflow-x: hidden;
 }
 
 :root:not(.dark) { color-scheme: light; }
@@ -61,9 +62,6 @@ svg { overflow: visible; }
 :is(input[type=checkbox], [role=checkbox]) { cursor: pointer; user-select: none; }
 :is(input[type=radio], [role=radio])       { cursor: pointer; user-select: none; }
 :is(input[type=range], [role=slider])      { cursor: pointer; user-select: none; &:active { cursor: grabbing; } }
-
-// By default render scrollbars for <textarea> because of Windows
-textarea { overflow: scroll; resize: vertical; }
 
 input[type=text]:focus { outline: none; }
 textarea:focus         { outline: none; }

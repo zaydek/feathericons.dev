@@ -139,9 +139,23 @@ function SearchBar() {
 //// 	)
 //// }
 
+function Highlight({ indexes, children }: { indexes: readonly [number, number] | null; children: string }) {
+	if (indexes === null) {
+		return <>{children}</>
+	} else {
+		return (
+			<>
+				{children.slice(0, indexes[0])}
+				<span className="bg-[hsl(45,_100%,_50%,_0.4)] text-yellow-900">{children.slice(indexes[0], indexes[1])}</span>
+				{children.slice(indexes[1])}
+			</>
+		)
+	}
+}
+
 // TODO: It's not clear these need to be memoized, maybe if we add
 // highlighting...
-const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
+const Memo_CompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
 	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
 	return (
@@ -167,53 +181,61 @@ const MemoCompactGridItem = memo(({ name }: { name: keyof typeof manifest }) => 
 
 // TODO: It's not clear these need to be memoized, maybe if we add
 // highlighting...
-const MemoGridItem = memo(({ name }: { name: keyof typeof manifest }) => {
-	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
+const Memo_GridItem = memo(
+	({ name, indexes }: { name: keyof typeof manifest; indexes: readonly [number, number] | null }) => {
+		const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
-	return (
-		<div className="flex flex-col">
-			<button
-				className="flex h-112 items-center justify-center"
-				onClick={e => {
-					setSelectedName(name)
-					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
-				}}
-			>
-				<Icon
-					id={name}
-					className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-					icon={feather[name]}
-				/>
-			</button>
-			{/* Use select-all so users can copy-paste names. Note that select-text
+		return (
+			<div className="flex flex-col">
+				<button
+					className="flex h-112 items-center justify-center"
+					onClick={e => {
+						setSelectedName(name)
+						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
+					}}
+				>
+					<Icon
+						id={name}
+						className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
+						icon={feather[name]}
+					/>
+				</button>
+				{/* Use select-all so users can copy-paste names. Note that select-text
 			doesn't work as expected */}
-			<div className="flex h-16 select-all items-center justify-center truncate px-4">
-				<TypographySmallSans className="truncate text-gray-800">{name}</TypographySmallSans>
-			</div>
-			{/* <div className="flex h-40 items-center justify-center px-4">
+				<div className="flex h-16 select-all items-center justify-center truncate px-4">
+					<TypographySmallSans className="truncate text-gray-800">
+						<Highlight indexes={indexes}>{name}</Highlight>
+					</TypographySmallSans>
+				</div>
+				{/* <div className="flex h-40 items-center justify-center px-4">
 				<div className="h-20 text-center [font:_400_12px_/_normal_var(--sans)]">
 					<Wbr>{name}</Wbr>
 				</div>
 			</div> */}
-		</div>
-	)
-})
+			</div>
+		)
+	}
+)
 
 function SearchGridContents() {
 	const { compactMode, searchResults } = useContext(SearchContext)!
 
 	const GridItem = useMemo(() => {
 		if (compactMode) {
-			return MemoCompactGridItem
+			return Memo_CompactGridItem
 		} else {
-			return MemoGridItem
+			return Memo_GridItem
 		}
 	}, [compactMode])
 
 	return (
 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(112px,_1fr))]">
 			{Object.keys(searchResults).map(name => (
-				<GridItem key={name} name={name as keyof typeof manifest} />
+				<GridItem
+					key={name}
+					name={name as keyof typeof manifest}
+					indexes={searchResults[name as keyof typeof manifest]!}
+				/>
 			))}
 		</div>
 	)
