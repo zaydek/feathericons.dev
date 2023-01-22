@@ -5,8 +5,8 @@ tailwind:
 
 feather:
 	npx tsx scripts/feather.ts
-format-feather:
-	npx tsx scripts/format-feather.ts
+feather-format:
+	npx tsx scripts/feather-format.ts
 
 ssg:
 	npx vite build

@@ -37,7 +37,7 @@ async function main() {
 		const data = await page2.content()
 		dataset.data[name] = data
 	}
-	await fs.promises.writeFile(`scripts/_feather@${version}.json`, JSON.stringify(dataset, null, "\t") + "\n")
+	await fs.promises.writeFile(`scripts/_feather.json`, JSON.stringify(dataset, null, "\t") + "\n")
 
 	const page3 = await context.newPage()
 	await page3.goto("https://raw.githubusercontent.com/feathericons/feather/master/src/tags.json")
@@ -45,7 +45,7 @@ async function main() {
 		.trim()
 		.replaceAll("  ", "\t")
 		.replaceAll("life-bouy", "life-buoy")
-	await fs.promises.writeFile(`scripts/_feather-tags@${version}.json`, tagset + "\n")
+	await fs.promises.writeFile(`scripts/_feather-tags.json`, tagset + "\n")
 
 	await teardown()
 }

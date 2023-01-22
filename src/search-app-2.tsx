@@ -1,4 +1,4 @@
-import * as feather from "./data/react-feather@4.29.0"
+import * as feather from "./data/react-feather"
 
 import {
 	Fragment,
@@ -25,7 +25,7 @@ import {
 	strokeWidthMin,
 	strokeWidthStep,
 } from "./constants"
-import { manifest } from "./data/react-feather-manifest@4.29.0"
+import { manifest } from "./data/react-feather-manifest"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"

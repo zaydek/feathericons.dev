@@ -1,4 +1,4 @@
-import * as feather from "./data/react-feather@4.29.0"
+import * as feather from "./data/react-feather"
 
 import {
 	createContext,
@@ -13,7 +13,7 @@ import {
 import { formatAsJsx, formatAsSvg, formatAsTsx } from "../scripts/format"
 import { stringify } from "../scripts/stringify"
 import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "./constants"
-import { manifest } from "./data/react-feather-manifest@4.29.0"
+import { manifest } from "./data/react-feather-manifest"
 import { toKebabCase } from "./lib/cases"
 
 // prettier-ignore
