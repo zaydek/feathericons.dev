@@ -34,7 +34,11 @@ function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = getIdAndHref(getString(children))
 
 	return (
-		<h1 id={id} className="relative scroll-mt-20 text-gray-900" {...props}>
+		<h1
+			id={id}
+			className="relative text-gray-900 [&:not(:first-child)]:mt-32 [&:not(:first-child)]:scroll-mt-32"
+			{...props}
+		>
 			{children}
 			<a
 				href={href}
@@ -50,7 +54,11 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = getIdAndHref(getString(children))
 
 	return (
-		<h2 id={id} className="relative scroll-mt-20 text-gray-800" {...props}>
+		<h2
+			id={id}
+			className="relative text-gray-800 [&:not(:first-child)]:mt-32 [&:not(:first-child)]:scroll-mt-32"
+			{...props}
+		>
 			{children}
 			<a
 				href={href}
@@ -67,7 +75,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 		// TODO: Add overflow here?
 		// Syntax highlighting?
 		// Line numbers?
-		<pre className="rounded-16 bg-gray-900 py-16 px-24 text-gray-200" {...props}>
+		<pre className="-mx-24 my-10 rounded-24 bg-gray-900 p-24 text-gray-200" {...props}>
 			<code>
 				{/* @ts-expect-error */}
 				{children.props.children}
@@ -78,7 +86,8 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 
 function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
-		<code className="mx-2 rounded-2 border border-solid border-gray-300 bg-white py-2 px-4 text-blue-500" {...props}>
+		// TODO
+		<code className="bg-gray-200/50 p-4 text-[12px] font-[600] tabular-nums text-gray-700" {...props}>
 			{children}
 		</code>
 	)
@@ -92,24 +101,6 @@ function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	)
 }
 
-//// relative pl-10 xl:grid grid-cols-5 gap-16 before:content-[counter(step)] before:absolute before:left-0 before:flex before:items-center before:justify-center before:w-[calc(1.375rem+1px)] before:h-[calc(1.375rem+1px)] before:text-[0.625rem] before:font-bold before:text-slate-700 before:rounded-md before:shadow-sm before:ring-1 before:ring-slate-900/5 dark:before:bg-slate-700 dark:before:text-slate-200 dark:before:ring-0 dark:before:shadow-none dark:before:highlight-white/5 pb-8 after:absolute after:top-[calc(1.875rem+1px)] after:bottom-0 after:left-[0.6875rem] after:w-px after:bg-slate-200 dark:after:bg-slate-200/5
-
-//// .a {
-//// 	counter-reset: step 0;
-//// }
-//// .b {
-//// 	position: relative;
-//// 	padding-left: 20px;
-//// 	&::before {
-//// 		content: counter(step);
-//// 		position: absolute;
-//// 		top: 0;
-//// 		bottom: 0;
-//// 		left: 0;
-//// 		margin: auto;
-//// 	}
-//// }
-
 // Hmm
 function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
@@ -117,7 +108,7 @@ function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 			className="relative rounded-1e3 pl-[calc(28px_+_10px)]
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-28 before:w-28 before:items-center before:justify-center
-						before:rounded-[43.75%] before:bg-gray-200/50
+						before:rounded-1e3 before:bg-gray-200/50
 							before:text-[12px] before:font-[600] before:tabular-nums before:text-gray-700
 								before:[content:_counter(li)]"
 			style={{ counterIncrement: "li 1" }}
@@ -133,13 +124,23 @@ function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
+function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
+	return (
+		<a className="text-gray-500 underline" {...props}>
+			{children}
+		</a>
+	)
+}
+
+// prettier-ignore
 const components = {
+	a:    Anchor,
 	code: Code,
-	h1: H1,
-	h2: H2,
-	ol: OrderedList,
-	li: ListItem,
-	pre: Pre,
+	h1:   H1,
+	h2:   H2,
+	li:   ListItem,
+	ol:   OrderedList,
+	pre:  Pre,
 }
 
 export default function Component() {
