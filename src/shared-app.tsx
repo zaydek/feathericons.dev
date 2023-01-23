@@ -4,7 +4,6 @@ import { PropsWithChildren } from "react"
 import { dataKeys } from "./data/data"
 import { IconProps } from "./pages/[icon]"
 import { RouteTransition } from "./route-transition"
-import { SearchApp } from "./search-app"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 	return (
@@ -41,7 +40,22 @@ export function SharedApp({ name, children }: PropsWithChildren<Partial<IconProp
 			</Head>
 
 			{name === undefined ? (
-				<SearchApp />
+				<div className="p-16">
+					<nav className="flex flex-wrap gap-4">
+						<OrangeLink href="/">
+							<div>Home</div>
+						</OrangeLink>
+						{dataKeys.map(name => (
+							<OrangeLink key={name} href={`/${name}`}>
+								<div>{name}</div>
+							</OrangeLink>
+						))}
+					</nav>
+					<main>
+						<RouteTransition>{children}</RouteTransition>
+						<RouteTransition>Hello world!</RouteTransition>
+					</main>
+				</div>
 			) : (
 				<div className="p-16">
 					<nav className="flex flex-wrap gap-4">
