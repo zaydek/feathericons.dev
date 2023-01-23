@@ -11,8 +11,8 @@ Feather can easily be used in most environments. Use this website to quickly sea
 Using a CDN (content delivery network) is the fastest way to start prototyping using Feather.
 
 1. Add `<script src="https://unpkg.com/feather-icons"></script>` to `<head>`
-2. Add `<script>feather.replace()</script>` to `<body>`
-3. Add `<i data-feather="circle"></i>` to draw the `circle` icon
+2. Add icons using `<i data-feather="{icon-name}"></i>` syntax
+3. Add `<script>feather.replace()</script>` to `<body>`
 
 For example:
 
@@ -20,13 +20,14 @@ For example:
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- ... -->
+		<!-- Step 1 -->
 		<script src="https://unpkg.com/feather-icons"></script>
 	</head>
 	<body>
-		<!-- ... -->
+		<!-- Step 2 -->
 		<i data-feather="circle"></i>
-		<!-- ... -->
+		<i data-feather="square"></i>
+		<!-- Step 3 -->
 		<script>
 			feather.replace()
 		</script>
@@ -34,7 +35,7 @@ For example:
 </html>
 ```
 
-This would draw the [`circle`](/circle) icon.
+This would draw a [`circle`](/circle) and [`square`](/square) icon.
 
 ## Feather with JavaScript (NPM)
 
