@@ -1,0 +1,72 @@
+//// @use "_svg-encode" as *;
+
+pre { margin: 0; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Typography
+
+.typography-caps {
+	white-space: pre;
+	font: 600 11px / normal var(--sans);
+	font-feature-settings: "tnum";
+	letter-spacing: 0.05em;
+}
+.typography-small-sans {
+	white-space: normal;
+	font: 400 13px / normal var(--sans);
+	font-feature-settings: "tnum";
+	letter-spacing: 0.0125em;
+}
+:is(pre, code) {
+	white-space: pre;
+	font: 400 14px / normal var(--code);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Prose
+
+.prose {
+	white-space: normal;
+	font: 400 16px / 1.4 var(--sans);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}
+.prose h1 {
+	white-space: normal;
+	font: 600 24px / 1.25 var(--sans);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}
+.prose h2 {
+	white-space: normal;
+	font: 600 20px / 1.25 var(--sans);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}
+.prose pre code {
+	white-space: pre;
+	font: 400 #{16px * 0.875} / 1.4 var(--code);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}
+.prose code {
+	white-space: pre;
+	font: 400 #{1em * 0.875} / normal var(--code);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}
+
+//// // When the fuck did Tailwind add Sass support?
+//// $icon-size: 20;
+//// $icon-color: hsl(200, 100%, 60%);
+////
+//// .prose :is(h1, h2, h3, h4, h5, h6) {
+//// 	@apply relative;
+//// 	&::after {
+//// 		content: "";
+//// 		@apply absolute top-0 bottom-0 left-[#{-$icon-size - 10}px] my-auto h-#{$icon-size} w-#{$icon-size};
+//// 		background-image: svg-encode('<svg class="feather feather-link-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="#{$icon-size}" height="#{$icon-size}" fill="none" stroke="#{$icon-color}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" x2="16" y1="12" y2="12"></line></svg>');
+//// 	}
+//// }
