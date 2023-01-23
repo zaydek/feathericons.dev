@@ -78,23 +78,75 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 
 function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
-		<code className="mx-2 rounded-2 border border-solid border-gray-300 bg-white p-4 text-blue-500" {...props}>
+		<code className="mx-2 rounded-2 border border-solid border-gray-300 bg-white py-2 px-4 text-blue-500" {...props}>
 			{children}
 		</code>
 	)
 }
 
+function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
+	return (
+		<ol className="flex flex-col gap-10" style={{ counterReset: "li 0" }} {...props}>
+			{children}
+		</ol>
+	)
+}
+
+//// relative pl-10 xl:grid grid-cols-5 gap-16 before:content-[counter(step)] before:absolute before:left-0 before:flex before:items-center before:justify-center before:w-[calc(1.375rem+1px)] before:h-[calc(1.375rem+1px)] before:text-[0.625rem] before:font-bold before:text-slate-700 before:rounded-md before:shadow-sm before:ring-1 before:ring-slate-900/5 dark:before:bg-slate-700 dark:before:text-slate-200 dark:before:ring-0 dark:before:shadow-none dark:before:highlight-white/5 pb-8 after:absolute after:top-[calc(1.875rem+1px)] after:bottom-0 after:left-[0.6875rem] after:w-px after:bg-slate-200 dark:after:bg-slate-200/5
+
+//// .a {
+//// 	counter-reset: step 0;
+//// }
+//// .b {
+//// 	position: relative;
+//// 	padding-left: 20px;
+//// 	&::before {
+//// 		content: counter(step);
+//// 		position: absolute;
+//// 		top: 0;
+//// 		bottom: 0;
+//// 		left: 0;
+//// 		margin: auto;
+//// 	}
+//// }
+
+// Hmm
+function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
+	return (
+		<li
+			className="relative rounded-1e3 pl-[calc(28px_+_10px)]
+				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
+					before:flex before:h-28 before:w-28 before:items-center before:justify-center
+						before:rounded-[43.75%] before:bg-gray-200/50
+							before:text-[12px] before:font-[600] before:tabular-nums before:text-gray-700
+								before:[content:_counter(li)]"
+			style={{ counterIncrement: "li 1" }}
+			{...props}
+		>
+			{/* <div className="flex items-center">
+				<div className="flex h-32 w-32 items-center justify-center rounded-1e3 bg-white [box-shadow:_var(--shadow-2)]">
+					<div className="tabular-nums">x</div>
+				</div>
+			</div> */}
+			{children}
+		</li>
+	)
+}
+
 const components = {
+	code: Code,
 	h1: H1,
 	h2: H2,
+	ol: OrderedList,
+	li: ListItem,
 	pre: Pre,
-	code: Code,
 }
 
 export default function Component() {
 	return (
+		// TODO: Move MDXProvider to root?
 		<MDXProvider components={components}>
-			<div className="flex justify-center">
+			<div className="flex justify-center py-64">
 				<article className="prose flex basis-1e3 flex-col gap-20">
 					<Markdown />
 				</article>

@@ -6,7 +6,35 @@
 
 Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as SVG, React or TypeScript React or use one of the [related projects](https://github.com/feathericons/feather#related-projects).
 
-## Feather with JavaScript (TS)
+## Feather with JavaScript (CDN)
+
+Using a CDN (content delivery network) is the fastest way to start prototyping using Feather.
+
+1. Add `<script src="https://unpkg.com/feather-icons"></script>` to `<head>`
+2. Add `<script>feather.replace()</script>` to `<body>`
+3. Add `<i data-feather="<icon-name>"></i>` anywhere.
+
+For example:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- ... -->
+		<script src="https://unpkg.com/feather-icons"></script>
+	</head>
+	<body>
+		<i data-feather="circle"></i>
+		<script>
+			feather.replace()
+		</script>
+	</body>
+</html>
+```
+
+This would create the [`circle`](/circle).
+
+## Feather with JavaScript (NPM)
 
 Get started with Feather by running one of the following commands:
 
@@ -23,19 +51,19 @@ pnpm i feather-icons
 
 // ...
 
-## Feather with React (JSX and TSX)
+## Feather with React (NPM)
 
 Get started with React Feather by running one of the following commands:
 
 ```sh
 # npm
-npm i feather-icons
+npm i react-feather
 
 # yarn
-yarn add feather-icons
+yarn add react-feather
 
 # pnpm
-pnpm i feather-icons
+pnpm i react-feather
 ```
 
 // ...
