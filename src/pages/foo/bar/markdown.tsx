@@ -61,7 +61,7 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h2
 			id={id}
-			className="relative text-gray-800
+			className="relative text-gray-900
 				[&:not(:first-child)]:mt-32
 				[&:not(:first-child)]:scroll-mt-32"
 			{...props}
@@ -134,9 +134,23 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 //// 	)
 //// }
 
+function getLangFromClassName(className: string | undefined) {
+	if (typeof className === "string") {
+		if (className.includes(".")) {
+			// E.g. "index.js"
+			const index = className.lastIndexOf(".")
+			return className.slice(index + 1)
+		} else {
+			// E.g. "language-js"
+			return className.slice("language-".length)
+		}
+	}
+	return undefined
+}
+
 function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 	const $children = children as ReactElement<{ className: string; children: string }>
-	const [lang, code] = [$children.props.className.slice("language-".length), $children.props.children.trim()] as const
+	const [lang, code] = [getLangFromClassName($children.props.className), $children.props.children.trim()] as const
 
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -170,7 +184,12 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 	}, [copy])
 
 	return (
-		<pre className="relative -mx-24 my-10 rounded-24 bg-gray-900 py-24 text-gray-200 [tab-size:_2]" {...props}>
+		<pre
+			className="relative -mx-24 my-10 rounded-24 bg-gray-900 py-24 text-gray-200 [tab-size:_2]
+				[pre_+_&]:-mt-32 [pre_+_&]:border [pre_+_&]:border-solid [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
+					[&:has(+_pre)]:rounded-b-0"
+			{...props}
+		>
 			<code>
 				{tokens === null
 					? // Loading syntax highlighting
@@ -200,7 +219,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 					className="flex h-48 w-48 items-center justify-center"
 					onClick={e => setCopy(true)}
 				>
-					<Icon className="h-16 w-16 text-gray-200" icon={copy ? feather.Check : feather.Copy} />
+					<Icon className="h-16 w-16 text-sky-300" icon={copy ? feather.Check : feather.Copy} />
 				</button>
 			</div>
 		</pre>
@@ -232,7 +251,7 @@ function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-28 before:w-28 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/50
-							before:text-[12px] before:font-[600] before:tabular-nums before:text-gray-700
+							before:text-[12px] before:font-[500] before:tabular-nums before:text-gray-700
 								before:[content:_counter(li)]"
 			style={{ counterIncrement: "li 1" }}
 			{...props}
@@ -255,15 +274,24 @@ function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	)
 }
 
+function Strong({ children, ...props }: JSX.IntrinsicElements["strong"]) {
+	return (
+		<strong className="font-[500]" {...props}>
+			{children}
+		</strong>
+	)
+}
+
 // prettier-ignore
 const components = {
-	a:    Anchor,
-	code: Code,
-	h1:   H1,
-	h2:   H2,
-	li:   ListItem,
-	ol:   OrderedList,
-	pre:  Pre,
+	a:      Anchor,
+	code:   Code,
+	h1:     H1,
+	h2:     H2,
+	li:     ListItem,
+	ol:     OrderedList,
+	pre:    Pre,
+	strong: Strong,
 }
 
 export default function Component() {
@@ -271,7 +299,7 @@ export default function Component() {
 		// TODO: Move MDXProvider to root?
 		<MDXProvider components={components}>
 			<div className="flex justify-center py-64">
-				<article className="prose flex basis-1e3 flex-col gap-20">
+				<article className="prose flex basis-1e3 flex-col gap-16">
 					<Markdown />
 				</article>
 			</div>
