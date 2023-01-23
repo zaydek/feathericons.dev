@@ -43,7 +43,7 @@ $code: (
 	--sans: #{$sans};
 	--code: #{$code};
 
-  font-family: var(--sans);
+  //// font-family: var(--sans);
   //// @at-root {
   ////   pre, code {
   ////     font-family: var(--code);

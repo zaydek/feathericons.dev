@@ -307,7 +307,7 @@ function IconPreview() {
 
 	return viewSource ? (
 		// Use overflow-x-scroll > inline-block p-* because of overflow-x bug
-		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
+		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)] [tab-size:_2]">
 			<code className="inline-block p-24">
 				{tokens === null ? (
 					<div className="text-gray-400">Initializing shiki-es…</div>

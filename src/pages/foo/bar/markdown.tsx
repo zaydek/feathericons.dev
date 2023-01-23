@@ -1,7 +1,7 @@
 import * as feather from "../../../data/react-feather"
 
 import { MDXProvider } from "@mdx-js/react"
-import { Fragment, ReactElement, ReactNode, useEffect, useState } from "react"
+import { ReactElement, ReactNode, useEffect, useState } from "react"
 import { getHighlighter, Highlighter, IThemedToken } from "shiki-es"
 import { ThickIcon } from "../../../typography"
 import Markdown from "./_markdown.mdx"
@@ -135,15 +135,14 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 	const $children = children as ReactElement<{ className: string; children: string }>
-
-	const [lang, code] = [$children.props.className.slice("language-".length), $children.props.children] as const
+	const [lang, code] = [$children.props.className.slice("language-".length), $children.props.children.trim()] as const
 
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
 
 	useEffect(() => {
 		async function init() {
-			const highlighter = await getHighlighter({ theme: "github-light" })
+			const highlighter = await getHighlighter({ theme: "github-dark" })
 			setHighlighter(highlighter)
 		}
 		init()
@@ -155,39 +154,32 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 			includeExplanation: false,
 		})
 		setTokens(tokens)
-		console.log(tokens)
 	}, [code, highlighter, lang])
 
 	return (
-		// TODO: Add overflow here?
-		// Syntax highlighting?
-		// Line numbers?
-		// <pre className="-mx-24 my-10 rounded-24 bg-gray-900 p-24 text-gray-200" {...props}>
-		// 	<code>
-		// 		{/* @ts-expect-error */}
-		// 		{children.props.children}
-		// 	</code>
-		// </pre>
-		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
-			<code className="inline-block p-24">
-				{tokens === null ? (
-					<div className="text-gray-400">Initializing shiki-es…</div>
-				) : (
-					tokens.map((token, y) => (
-						<Fragment key={y}>
-							<div className="relative -mx-[1ch] pl-[4ch]">
-								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-[2ch] text-right text-gray-300">{y + 1}</div>
-								</div>
-								{token.map(({ content, color }, x) => (
-									<span key={x} style={{ color }}>
-										{y === 0 ? <Anchor>{content}</Anchor> : content}
-									</span>
-								))}
+		<pre className="-mx-24 my-10 rounded-24 bg-gray-900 py-24 text-gray-200 [tab-size:_2]" {...props}>
+			<code>
+				{tokens === null
+					? code.split("\n").map((line, y) => (
+							// Loading syntax highlighting
+							<div key={y} className="px-24 hover:bg-gray-800">
+								{line || <br />}
 							</div>
-						</Fragment>
-					))
-				)}
+					  ))
+					: tokens.map((token, y) => (
+							// Syntax highlighting
+							<div key={y} className="px-24 hover:bg-gray-800">
+								{token.length > 0 ? (
+									token.map(({ content, color }, x) => (
+										<span key={x} style={{ color }}>
+											{content}
+										</span>
+									))
+								) : (
+									<br />
+								)}
+							</div>
+					  ))}
 			</code>
 		</pre>
 	)
