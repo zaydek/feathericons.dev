@@ -36,7 +36,10 @@ function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h1 id={id} className="relative scroll-mt-20 text-gray-900" {...props}>
 			{children}
-			<a href={href} className="absolute top-0 right-[100%] bottom-0 hidden items-center px-10 [h1:hover_&]:flex">
+			<a
+				href={href}
+				className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [&:hover]:opacity-100"
+			>
 				<ThickIcon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link2} />
 			</a>
 		</h1>
@@ -49,7 +52,10 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h2 id={id} className="relative scroll-mt-20 text-gray-800" {...props}>
 			{children}
-			<a href={href} className="absolute top-0 right-[100%] bottom-0 hidden items-center px-10 [h2:hover_&]:flex">
+			<a
+				href={href}
+				className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [&:hover]:opacity-100"
+			>
 				<ThickIcon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link2} />
 			</a>
 		</h2>
