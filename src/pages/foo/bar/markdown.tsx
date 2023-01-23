@@ -3,6 +3,7 @@ import * as feather from "../../../data/react-feather"
 import { MDXProvider } from "@mdx-js/react"
 import { ReactElement, ReactNode, useEffect, useState } from "react"
 import { getHighlighter, Highlighter, IThemedToken } from "shiki-es"
+import { Icon } from "../../../lib/react/icon"
 import { ThickIcon } from "../../../typography"
 import Markdown from "./_markdown.mdx"
 
@@ -140,6 +141,9 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
 
+	const [copy, setCopy] = useState(false)
+
+	// Load highlighter
 	useEffect(() => {
 		async function init() {
 			const highlighter = await getHighlighter({ theme: "github-dark" })
@@ -148,6 +152,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 		init()
 	}, [])
 
+	// Run highlighter
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
 		const tokens = highlighter.codeToThemedTokens(code, lang, undefined, {
@@ -156,18 +161,26 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 		setTokens(tokens)
 	}, [code, highlighter, lang])
 
+	// Revert copy
+	useEffect(() => {
+		const d = window.setTimeout(() => {
+			setCopy(false)
+		}, 1e3)
+		return () => window.clearTimeout(d)
+	}, [copy])
+
 	return (
-		<pre className="-mx-24 my-10 rounded-24 bg-gray-900 py-24 text-gray-200 [tab-size:_2]" {...props}>
+		<pre className="relative -mx-24 my-10 rounded-24 bg-gray-900 py-24 text-gray-200 [tab-size:_2]" {...props}>
 			<code>
 				{tokens === null
-					? code.split("\n").map((line, y) => (
-							// Loading syntax highlighting
+					? // Loading syntax highlighting
+					  code.split("\n").map((line, y) => (
 							<div key={y} className="px-24 hover:bg-gray-800">
 								{line || <br />}
 							</div>
 					  ))
-					: tokens.map((token, y) => (
-							// Syntax highlighting
+					: // Syntax highlighting
+					  tokens.map((token, y) => (
 							<div key={y} className="px-24 hover:bg-gray-800">
 								{token.length > 0 ? (
 									token.map(({ content, color }, x) => (
@@ -181,6 +194,15 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 							</div>
 					  ))}
 			</code>
+			<div className="absolute top-0 right-0">
+				<button
+					//// className="flex h-40 w-40 items-center justify-center rounded-1e3 bg-gray-800"
+					className="flex h-48 w-48 items-center justify-center"
+					onClick={e => setCopy(true)}
+				>
+					<Icon className="h-16 w-16 text-gray-200" icon={copy ? feather.Check : feather.Copy} />
+				</button>
+			</div>
 		</pre>
 	)
 }
