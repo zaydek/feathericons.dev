@@ -253,7 +253,7 @@ function SvgAnchor({ children }: { children: string }) {
 	return (
 		<>
 			{"<!-- "}
-			<a className="underline" href={href} target="_blank" rel="noreferrer">
+			<a href={href} target="_blank" rel="noreferrer" className="underline">
 				{href}
 			</a>
 			{"--> "}
@@ -267,7 +267,7 @@ function NonSvgAnchor({ children }: { children: string }) {
 	return (
 		<>
 			{"// "}
-			<a className="underline" href={href} target="_blank" rel="noreferrer">
+			<a href={href} target="_blank" rel="noreferrer" className="underline">
 				{href}
 			</a>
 		</>
