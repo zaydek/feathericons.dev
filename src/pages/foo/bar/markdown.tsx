@@ -39,8 +39,8 @@ function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		<h1
 			id={id}
 			className="relative text-gray-900
-				[&:not(:first-child)]:mt-32
-				[&:not(:first-child)]:scroll-mt-32"
+				[&:not(:first-child)]:mt-24
+				[&:not(:first-child)]:scroll-mt-24"
 			{...props}
 		>
 			{children}
@@ -62,8 +62,8 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		<h2
 			id={id}
 			className="relative text-gray-900
-				[&:not(:first-child)]:mt-32
-				[&:not(:first-child)]:scroll-mt-32"
+				[&:not(:first-child)]:mt-24
+				[&:not(:first-child)]:scroll-mt-24"
 			{...props}
 		>
 			{children}
@@ -160,7 +160,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 	// Load highlighter
 	useEffect(() => {
 		async function init() {
-			const highlighter = await getHighlighter({ theme: "github-dark" })
+			const highlighter = await getHighlighter({ theme: "github-dark-dimmed" })
 			setHighlighter(highlighter)
 		}
 		init()
@@ -185,8 +185,8 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 
 	return (
 		<pre
-			className="relative -mx-24 my-10 rounded-24 bg-gray-900 py-24 text-gray-200 [tab-size:_2]
-				[pre_+_&]:-mt-32 [pre_+_&]:border [pre_+_&]:border-solid [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
+			className="relative -mx-24 my-8 rounded-24 bg-gray-900 py-24 text-gray-200 [tab-size:_2]
+				[pre_+_&]:-mt-[calc(24px_+_1px)] [pre_+_&]:border [pre_+_&]:border-solid [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
 					[&:has(+_pre)]:rounded-b-0"
 			{...props}
 		>
@@ -229,7 +229,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		// TODO
-		<code className="bg-gray-200/50 p-4 text-[12px] font-[600] tabular-nums text-gray-700" {...props}>
+		<code className="mx-2 bg-gray-200/75 p-4 text-[12px] font-[600] tabular-nums text-gray-700" {...props}>
 			{children}
 		</code>
 	)
@@ -250,8 +250,8 @@ function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 			className="relative rounded-1e3 pl-[calc(28px_+_10px)]
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-28 before:w-28 before:items-center before:justify-center
-						before:rounded-1e3 before:bg-gray-200/50
-							before:text-[12px] before:font-[500] before:tabular-nums before:text-gray-700
+						before:rounded-1e3 before:bg-gray-200/75
+							before:text-[12px] before:font-[600] before:tabular-nums before:text-gray-700
 								before:[content:_counter(li)]"
 			style={{ counterIncrement: "li 1" }}
 			{...props}

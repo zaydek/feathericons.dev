@@ -1,5 +1,7 @@
 //// @use "_svg-encode" as *;
 
+@use "sass:math";
+
 pre { margin: 0; }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +49,7 @@ pre { margin: 0; }
 }
 .prose pre code {
 	white-space: pre;
-	font: 400 #{16px * 0.875} / 1.5 var(--code);
+	font: 400 #{math.ceil(16px * 0.875)} / 1.5 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
