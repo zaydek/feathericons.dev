@@ -1,8 +1,18 @@
-// Constants
+@use "sass:meta";
+
+@use "./tailwind-colors" as *;
+
+// --tw-*
 :root {
-	--svg-color: #ffb13b;
-	--jsx-color: #61dafb;
-	--tsx-color: #3178c6;
+	@each $k1, $v1 in $tailwind-colors {
+		@if meta.type-of($v1) == map {
+			@each $k2, $v2 in $v1 {
+				--tw-#{$k1}-#{$k2}: #{$v2};
+			}
+		} @else {
+			--tw-#{$k1}: #{$v1};
+		}
+	}
 }
 
 :root {
@@ -17,6 +27,11 @@
 	--level-1-color: hsl(var(--seed), 100%);
 	--level-2-color: hsl(var(--seed), 100%);
 	--trim-color:    hsl(200, 100%, 60%);
+
+	// Constants
+	--svg-color: #ffb13b;
+	--jsx-color: #61dafb;
+	--tsx-color: #3178c6;
 
 	//////////////////////////////////////////////////////////////////////////////
 	// Hairlines

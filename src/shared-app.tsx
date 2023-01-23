@@ -13,6 +13,7 @@ function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 	)
 }
 
+// TODO: Why are we using partial here?
 export function SharedApp({ name, children }: PropsWithChildren<Partial<IconProps>>) {
 	return (
 		<>
