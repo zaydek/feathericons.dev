@@ -1,5 +1,7 @@
 import * as fs from "fs"
-import { dataKeys } from "../src/data/data"
+
+import { manifest } from "../src/data/react-feather-manifest"
+import { toKebabCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
 
 const DATE = new Date().toISOString().split("T")[0]
@@ -12,9 +14,9 @@ async function main() {
 				<loc>https://feathericons.dev</loc>
 				<lastmod>${DATE}</lastmod>
 			</url>
-			${dataKeys.map(name => `
+			${Object.keys(manifest).map(name => `
 			<url>
-				<loc>https://feathericons.dev/${name}</loc>
+				<loc>https://feathericons.dev/${toKebabCase(name)}</loc>
 				<lastmod>${DATE}</lastmod>
 			</url>`.replace("\n\t\t", "\t\t")).join("\n").trimStart()}
 		</urlset>

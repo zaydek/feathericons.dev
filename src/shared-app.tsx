@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren } from "react"
-import { dataKeys } from "./data/data"
+import { keys } from "./data/keys"
 import { IconProps } from "./pages/[icon]"
 import { RouteTransition } from "./route-transition"
 
@@ -45,7 +45,7 @@ export function SharedApp({ name, children }: PropsWithChildren<Partial<IconProp
 						<OrangeLink href="/">
 							<div>Home</div>
 						</OrangeLink>
-						{dataKeys.map(name => (
+						{keys.map(name => (
 							<OrangeLink key={name} href={`/${name}`}>
 								<div>{name}</div>
 							</OrangeLink>
@@ -62,7 +62,7 @@ export function SharedApp({ name, children }: PropsWithChildren<Partial<IconProp
 						<OrangeLink href="/">
 							<div>Home</div>
 						</OrangeLink>
-						{dataKeys.map(name => (
+						{keys.map(name => (
 							<OrangeLink key={name} href={`/${name}`}>
 								<div>{name}</div>
 							</OrangeLink>

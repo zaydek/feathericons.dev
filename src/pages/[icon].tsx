@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { dataKeys } from "../data/data"
+import { keys } from "../data/keys"
 
 export interface IconParams extends ParsedUrlQuery {
 	icon: string
@@ -13,7 +13,7 @@ export type IconProps = {
 // Generate a URL parameter
 export const getStaticPaths: GetStaticPaths<IconParams> = async () => {
 	return {
-		paths: dataKeys.map(name => ({
+		paths: keys.map(name => ({
 			params: {
 				icon: name,
 			},
