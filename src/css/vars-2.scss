@@ -15,6 +15,9 @@
 //// 	}
 //// }
 
+:root:not(.dark) { color-scheme: light; }
+:root.dark       { color-scheme: dark;  }
+
 :root {
 	--seed-h: 220;
 	--seed-s: 100%;
@@ -120,6 +123,8 @@
 	--inset-shadow-6:
 		var(--inset-hairline-shadow),
 		var(--base-shadow-6);
+
+	background-color: var(--base-color);
 }
 
 @media (prefers-color-scheme: dark) {

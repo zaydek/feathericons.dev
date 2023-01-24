@@ -1,11 +1,36 @@
-//// @use "_svg-encode" as *;
-
 @use "sass:math";
 
-pre { margin: 0; }
+// https://github.com/sindresorhus/modern-normalize
+$sans: (
+	'Inter', // Added
+	system-ui,
+	'Segoe UI',
+	Roboto,
+	Helvetica,
+	Arial,
+	sans-serif,
+	'Apple Color Emoji',
+	'Segoe UI Emoji',
+);
 
-////////////////////////////////////////////////////////////////////////////////
-// Typography
+$code: (
+	ui-monospace,
+	SFMono-Regular,
+	Consolas,
+	'Liberation Mono',
+	Menlo,
+	monospace,
+);
+
+:root {
+	--sans: #{$sans};
+	--code: #{$code};
+	@at-root {
+		:is(pre, code) {
+			tab-size: 2;
+		}
+	}
+}
 
 .typography-caps {
 	white-space: pre;
@@ -25,9 +50,6 @@ pre { margin: 0; }
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// Prose
 
 .prose {
 	white-space: normal;

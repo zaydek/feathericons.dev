@@ -6,6 +6,7 @@ import "../css/type.scss"
 import "../css/tailwind.css"
 
 import { AppProps } from "next/app"
+//// import { SharedApp } from "../shared-app"
 import { StateProvider } from "../state"
 
 export default function App({ pageProps, Component }: AppProps) {

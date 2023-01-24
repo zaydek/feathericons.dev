@@ -153,7 +153,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 	const [lang, code] = [getLangFromClassName($children.props.className), $children.props.children.trim()] as const
 
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
-	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
+	const [ys, setTokens] = useState<IThemedToken[][] | null>(null)
 
 	const [copy, setCopy] = useState(false)
 
@@ -185,28 +185,30 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 
 	return (
 		<pre
-			className="relative my-8 -mx-[6ch] rounded-24 border-t-0 bg-gray-900 py-24 text-gray-400
+			className="relative my-8 -mx-48 rounded-24 border-t-0 bg-gray-900 py-24 text-gray-400
 				[tab-size:_2] [pre_+_&]:-mt-[calc(24px_+_1px)] [&_+_pre]:rounded-t-0 [&:has(+_pre)]:rounded-b-0"
 			{...props}
 		>
 			<code>
-				{tokens === null
+				{ys === null
 					? // Loading syntax highlighting
-					  code.split("\n").map((line, y) => (
-							<div key={y} className="px-24 hover:bg-gray-800">
-								{line || <br />}
+					  code.split("\n").map((xs, yIndex) => (
+							<div key={yIndex} className="relative px-48 hover:bg-gray-800">
+								<div className="absolute top-0 bottom-0 left-0 select-none">
+									<div className="w-32 text-right text-gray-500">{yIndex + 1}</div>
+								</div>
+								{xs || <br />}
 							</div>
 					  ))
 					: // Syntax highlighting
-					  tokens.map((token, y) => (
-							// <div key={y} className="px-24 hover:bg-gray-800">
-							<div key={y} className="relative px-[6ch] hover:bg-gray-800">
+					  ys.map((xs, yIndex) => (
+							<div key={yIndex} className="relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-[4ch] text-right text-gray-500">{y + 1}</div>
+									<div className="w-32 text-right text-gray-500">{yIndex + 1}</div>
 								</div>
-								{token.length > 0 ? (
-									token.map(({ content, color }, x) => (
-										<span key={x} style={{ color }}>
+								{xs.length > 0 ? (
+									xs.map(({ content, color }, xIndex) => (
+										<span key={xIndex} style={{ color }}>
 											{content}
 										</span>
 									))
