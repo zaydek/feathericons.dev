@@ -134,7 +134,7 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 
 	useEffect(() => {
 		async function initHighlighter() {
-			const highlighter = await getHighlighter({ theme: "github-light" satisfies Theme })
+			const highlighter = await getHighlighter({ theme: "github-dark-dimmed" satisfies Theme })
 			setHighlighter(highlighter)
 		}
 		initHighlighter()
@@ -158,16 +158,15 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 	return (
 		// TODO: [&:has(+_pre)]:rounded-b-0 is probably unsafe for Firefox
 		<pre
-			className="relative my-16 -mx-48 rounded-24 border-1 border-gray-300 bg-white py-24
-				text-gray-800 shadow-md [pre_+_&]:-mt-24 [&_+_pre]:rounded-t-0
-					[&:has(+_pre)]:rounded-b-0 [&:has(+_pre)]:border-b-0"
+			className="relative my-16 -mx-48 bg-gray-900 py-24 text-gray-300
+				[pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700"
 		>
 			<code>
 				{highlighted === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-400 group-hover:text-gray-300">{y + 1}</div>
+									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
 								</div>
 								{ys || <br />}
 							</div>
@@ -175,7 +174,7 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 					: highlighted.map((ys, y) => (
 							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-400 group-hover:text-gray-300">{y + 1}</div>
+									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
 								</div>
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
@@ -199,6 +198,8 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 }
 
 function Pre({ children }: JSX.IntrinsicElements["pre"]) {
+	console.log(children)
+
 	const [lang, code] = useMemo(() => {
 		const $children = children as ReactElement<{ className?: string; children: string }>
 		return [getLangFromClassName($children.props.className) as Lang | undefined, $children.props.children.trim()] as const
@@ -211,7 +212,7 @@ function Pre({ children }: JSX.IntrinsicElements["pre"]) {
 //// 	return (
 //// 		// TODO: Add font here?
 //// 		<code
-//// 			className="m-2 border-1 border-blue-500 bg-white p-2
+//// 			className="m-2 border border-blue-500 bg-white p-2
 //// 				text-[12px] font-[600] tabular-nums text-blue-500"
 //// 			{...props}
 //// 		>

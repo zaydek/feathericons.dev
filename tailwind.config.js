@@ -20,20 +20,23 @@ module.exports = {
 	content: ["./src/**/*.tsx"],
 	theme: {
 		borderRadius: sizes,
-		borderWidth:  sizes,
-		maxHeight:    sizes,
-		maxWidth:     sizes,
-		minHeight:    sizes,
-		minWidth:     sizes,
-		spacing:      sizes,
-		//// xtend: {
+		borderWidth:  {
+			...sizes,
+			DEFAULT: 1,
+		},
+		maxHeight: sizes,
+		maxWidth:  sizes,
+		minHeight: sizes,
+		minWidth:  sizes,
+		spacing:   sizes,
+		//// extend: {
 		//// 	colors: {
 		//// 		"trim-color": "hsl(200, 100%, 60%)",
 		//// 		"svg-color":  "#ffb13b",
 		//// 		"jsx-color":  "#61dafb",
 		//// 		"tsx-color":  "#3178c6",
 		//// 	},
-		//// ,
+		//// },
 	},
 	plugins: [],
 }
