@@ -4,7 +4,7 @@ import { Nextdotjs as NextJsIcon, ReactJs as ReactJsIcon, Sass as SassIcon, Svg 
 import { siNextdotjs as SiNextJs, siReact as SiReactJs, siSass as SiSass, siSvg as SiSvg, siTailwindcss as SiTailwindCss, siTwitter as SiTwitter, siTypescript as SiTypeScript } from "simple-icons"
 
 import { ReactElement, useEffect, useState } from "react"
-import { getHighlighter, Highlighter, IThemedToken, Lang, Theme } from "shiki-es"
+import { getHighlighter, Highlighter, IThemedToken, Lang } from "shiki-es"
 import { cx } from "./lib/cx"
 import { detab } from "./lib/format"
 import { Icon, IconComponent } from "./lib/react/icon"
@@ -101,7 +101,7 @@ function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 
 	useEffect(() => {
 		async function initHighlighter() {
-			const highlighter = await getHighlighter({ theme: "github-dark" satisfies Theme })
+			const highlighter = await getHighlighter({ theme: "github-dark", langs: ["sh", "html", "tsx"] })
 			setHighlighter(highlighter)
 		}
 		initHighlighter()
@@ -196,7 +196,9 @@ function TextIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.I
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default function Component() {
+export function Docs() {
+	// ...
+
 	return (
 		<div className="flex justify-center py-64">
 			<article className="prose flex basis-1e3 flex-col gap-8">

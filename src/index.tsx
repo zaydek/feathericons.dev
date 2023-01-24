@@ -2,6 +2,7 @@ import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren } from "react"
 import { keys } from "./data/keys"
+import { Docs } from "./docs"
 import { IconProps } from "./pages/[icon]"
 import { RouteTransition } from "./route-transition"
 
@@ -70,10 +71,13 @@ export function SharedApp({ name, children }: PropsWithChildren<Partial<IconProp
 							</OrangeLink>
 						))}
 					</nav>
-					<main>
+					{/* <main>
 						<RouteTransition>{children}</RouteTransition>
 						<RouteTransition>Hello world!</RouteTransition>
-					</main>
+					</main> */}
+					<RouteTransition>
+						<Docs />
+					</RouteTransition>
 				</div>
 			)}
 		</>
