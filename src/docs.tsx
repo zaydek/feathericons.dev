@@ -1,10 +1,8 @@
 import * as feather from "./data/react-feather"
 
-import { Nextdotjs as NextJsIcon, ReactJs as ReactJsIcon, Sass as SassIcon, Svg as SvgIcon, Tailwindcss as TailwindCssIcon, Twitter as TwitterIcon, Typescript as TypeScriptIcon } from "@icons-pack/react-simple-icons"
-import { siNextdotjs as SiNextJs, siReact as SiReactJs, siSass as SiSass, siSvg as SiSvg, siTailwindcss as SiTailwindCss, siTwitter as SiTwitter, siTypescript as SiTypeScript } from "simple-icons"
-
 import { ReactElement, useEffect, useState } from "react"
 import { getHighlighter, Highlighter, IThemedToken, Lang } from "shiki-es"
+import { NextJsColor, NextJsIcon, ReactJsColor, ReactJsIcon, SassColor, SassIcon, SvgColor, SvgIcon, TailwindCssColor, TailwindCssIcon, TwitterColor, TwitterIcon, TypeScriptColor, TypeScriptIcon } from "./icon-config-2"
 import { cx } from "./lib/cx"
 import { detab } from "./lib/format"
 import { Icon, IconComponent } from "./lib/react/icon"
@@ -211,9 +209,9 @@ export function Docs() {
 				</P>
 				<P>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as SVG&nbsp;
-					<TextIcon style={{ color: SiSvg.hex }} icon={SvgIcon as any} />, React.js&nbsp;
-					<TextIcon style={{ color: SiReactJs.hex }} icon={ReactJsIcon as any} />, or TypeScript React.js&nbsp;
-					<TextIcon style={{ color: SiTypeScript.hex }} icon={TypeScriptIcon as any} />, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
+					<TextIcon style={{ color: SvgColor }} icon={SvgIcon} />, React.js&nbsp;
+					<TextIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
+					<TextIcon style={{ color: TypeScriptColor }} icon={TypeScriptIcon} />, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
 				</P>
 				<Hr />
 				<H2>
@@ -251,7 +249,7 @@ export function Docs() {
 				<Hr />
 				<H2>
 					Using the <Code>Feather</Code> Icon With React.js&nbsp;
-					<TextIcon style={{ color: SiReactJs.hex }} icon={ReactJsIcon as any} />
+					<TextIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />
 				</H2>
 				<P>To get started with Feather using React.js, follow these steps:</P>
 				<Ol>
@@ -301,8 +299,8 @@ export function Docs() {
 				<P>
 					<small>
 						Icons by <A href="https://twitter.com/colebemis">@colebemis</A>&nbsp;
-						<TextIcon style={{ color: SiTwitter.hex }} icon={TwitterIcon as any} /> and website by <A href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</A>&nbsp;
-						<TextIcon style={{ color: SiTwitter.hex }} icon={TwitterIcon as any} />
+						<TextIcon style={{ color: TwitterColor }} icon={TwitterIcon} /> and website by <A href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</A>&nbsp;
+						<TextIcon style={{ color: TwitterColor }} icon={TwitterIcon} />
 					</small>
 					<br />
 					<small>
@@ -315,27 +313,27 @@ export function Docs() {
 						Built using{" "}
 						<A href="https://reactjs.org">
 							React.js&nbsp;
-							<TextIcon style={{ color: SiReactJs.hex }} icon={ReactJsIcon as any} />
+							<TextIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />
 						</A>
 						,{" "}
 						<A href="https://nextjs.org">
 							Next.js&nbsp;
-							<TextIcon style={{ color: SiNextJs.hex }} icon={NextJsIcon as any} />
+							<TextIcon style={{ color: NextJsColor }} icon={NextJsIcon} />
 						</A>
 						,{" "}
 						<A href="https://typescriptlang.org">
 							TypeScript&nbsp;
-							<TextIcon style={{ color: SiTypeScript.hex }} icon={TypeScriptIcon as any} />
+							<TextIcon style={{ color: TypeScriptColor }} icon={TypeScriptIcon} />
 						</A>
 						,{" "}
 						<A href="https://tailwindcss.com">
 							Tailwind CSS&nbsp;
-							<TextIcon style={{ color: SiTailwindCss.hex }} icon={TailwindCssIcon as any} />
+							<TextIcon style={{ color: TailwindCssColor }} icon={TailwindCssIcon} />
 						</A>
 						,{" "}
 						<A href="https://sass-lang.com">
 							and Sass&nbsp;
-							<TextIcon style={{ color: SiSass.hex }} icon={SassIcon as any} />
+							<TextIcon style={{ color: SassColor }} icon={SassIcon} />
 						</A>
 					</small>
 					<br />
