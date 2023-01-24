@@ -1,0 +1,184 @@
+import * as feather from "./data/react-feather"
+
+import { ReactElement, useContext, useEffect, useState } from "react"
+import { IThemedToken, Lang } from "shiki-es"
+import { cx } from "./lib/cx"
+import { Icon, IconComponent } from "./lib/react/icon"
+import { ShikiContext } from "./shiki"
+
+type Arrayable<T> = T | T[]
+
+// Recursively concatenate strings
+function getString(children: undefined | Arrayable<string> | Arrayable<ReactElement<{ children?: string }>>) {
+	if (children === undefined) { return "" } // prettier-ignore
+
+	let str = ""
+	const flatChildren = [children].flat()
+	for (const child of flatChildren) {
+		if (typeof child === "string") {
+			str += child
+		} else {
+			str += getString(child.props.children)
+		}
+	}
+	return str
+}
+
+function getId(str: string) {
+	return str
+		.trim()
+		.replace(/\s+/g, "-")
+		.replace(/[^a-zA-Z0-9-_]/g, "")
+		.toLowerCase()
+}
+
+export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+	const id = getId(getString(children as any))
+	const href = `#${id}`
+
+	return (
+		<h1 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
+			{children}
+			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [h1:hover_&]:opacity-100">
+				<Icon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link} />
+			</a>
+		</h1>
+	)
+}
+
+export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+	const id = getId(getString(children as any))
+	const href = `#${id}`
+
+	return (
+		<h2 id={id} className="relative my-16 scroll-my-16 text-gray-800" {...props}>
+			{children}
+			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [h2:hover_&]:opacity-100">
+				<Icon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link} />
+			</a>
+		</h2>
+	)
+}
+
+export function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
+	return <p {...props}>{children}</p>
+}
+
+export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
+	return (
+		<ol className="my-16 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
+			{children}
+		</ol>
+	)
+}
+
+export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
+	return (
+		<li
+			// TODO: Add font here?
+			className="relative rounded-1e3 pl-[calc(24px_+_12px)]
+				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
+					before:flex before:h-24 before:w-24 before:items-center before:justify-center
+						before:rounded-1e3 before:bg-gray-200/75
+							before:text-[10px] before:font-[600] before:tabular-nums before:text-gray-700
+								before:[content:_counter(li)]"
+			style={{ counterIncrement: "li 1" }}
+			{...props}
+		>
+			{children}
+		</li>
+	)
+}
+
+export function Pre({ lang, children: code }: { lang: Lang; children: string }) {
+	const highlighter = useContext(ShikiContext)
+
+	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
+	const [didCopy, setDidCopy] = useState(false)
+
+	useEffect(() => {
+		if (highlighter === null) { return } // prettier-ignore
+		const tokens = highlighter.codeToThemedTokens(code, lang, undefined, {
+			includeExplanation: false,
+		})
+		setTokens(tokens)
+	}, [code, highlighter, lang])
+
+	useEffect(() => {
+		const d = window.setTimeout(() => {
+			setDidCopy(false)
+		}, 1e3)
+		return () => window.clearTimeout(d)
+	}, [didCopy])
+
+	return (
+		<pre className="relative my-16 -mx-48 bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
+			<code>
+				{tokens === null
+					? code.split("\n").map((ys, y) => (
+							<div key={y} className="group relative px-48 hover:bg-gray-800">
+								<div className="absolute top-0 bottom-0 left-0 select-none">
+									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
+								</div>
+								{ys || <br />}
+							</div>
+					  ))
+					: tokens.map((ys, y) => (
+							<div key={y} className="group relative px-48 hover:bg-gray-800">
+								<div className="absolute top-0 bottom-0 left-0 select-none">
+									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
+								</div>
+								{ys.length > 0 ? (
+									ys.map(({ color, content }, x) => (
+										<span key={x} style={{ color }}>
+											{content}
+										</span>
+									))
+								) : (
+									<br />
+								)}
+							</div>
+					  ))}
+			</code>
+			<div className="absolute top-0 right-0">
+				<button
+					className="flex h-[calc(22.5px_+_24px_*_2)] w-[calc(22.5px_+_24px_*_2)] items-center justify-center"
+					onClick={async e => {
+						await navigator.clipboard.writeText(code + "\n")
+						setDidCopy(true)
+					}}
+				>
+					<Icon className="h-16 w-16 text-white" icon={didCopy ? feather.Check : feather.Copy} />
+				</button>
+			</div>
+		</pre>
+	)
+}
+
+export function Hr(props: JSX.IntrinsicElements["hr"]) {
+	return <hr className="my-16" {...props} />
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+export function A({ children, ...props }: JSX.IntrinsicElements["a"]) {
+	return (
+		<a className="text-gray-500 underline" {...props}>
+			{children}
+		</a>
+	)
+}
+
+export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
+	return (
+		// TODO: Add font here?
+		<code className="bg-gray-200/75 p-4 text-[12px] font-[600] tabular-nums text-gray-700" {...props}>
+			{children}
+		</code>
+	)
+}
+
+// Expose className for color or use style
+export function TextIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] align-[-0.125em]", className)} icon={icon} {...props} />
+}

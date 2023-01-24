@@ -1,12 +1,14 @@
 export function toKebabCase(str: string) {
-	return str.replace(/([a-z])([A-Z0-9])/g, "$1-$2") // -> column-1width
-	          .replace(/([0-9])([a-zA-Z])/g, "$1-$2") // -> column-1-width
+	return str.replace(/([a-z])([A-Z0-9])/g, "$1-$2")
+	          .replace(/([A-Z])([A-Z0-9])/g, "$1-$2")
+	          .replace(/([0-9])([a-zA-Z])/g, "$1-$2")
 	          .toLowerCase()
 }
 
 export function toSnakeCase(str: string) {
-	return str.replace(/([a-z])([A-Z0-9])/g, "$1_$2") // -> column_1width
-	          .replace(/([0-9])([a-zA-Z])/g, "$1_$2") // -> column_1_width
+	return str.replace(/([a-z])([A-Z0-9])/g, "$1_$2")
+	          .replace(/([A-Z])([A-Z0-9])/g, "$1-$2")
+	          .replace(/([0-9])([a-zA-Z])/g, "$1_$2")
 	          .toLowerCase()
 }
 

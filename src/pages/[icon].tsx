@@ -1,13 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { keys } from "../data/keys"
+import { toTitleCase } from "../lib/cases"
 
 export interface IconParams extends ParsedUrlQuery {
 	icon: string
 }
 
 export type IconProps = {
-	name: string
+	kebabCase: string
+	titleCase: string
 }
 
 // Generate a URL parameter
@@ -28,7 +30,8 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 
 	return {
 		props: {
-			name: params.icon,
+			kebabCase: params.icon,
+			titleCase: toTitleCase(params.icon),
 		},
 	}
 }

@@ -56,7 +56,8 @@ $code: (
 	white-space: normal;
 	font: 400 16px / 1.6 var(--sans);
 	font-feature-settings: "tnum";
-	letter-spacing: -0.005em;
+	//// letter-spacing: -0.005em;
+	letter-spacing: null;
 }
 .prose h1 {
 	white-space: normal;
