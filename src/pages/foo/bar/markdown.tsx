@@ -1,21 +1,21 @@
 import * as feather from "../../../data/react-feather"
 
-import { MDXProvider } from "@mdx-js/react"
-import { ReactElement, ReactNode, useEffect, useMemo, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { getHighlighter, Highlighter, IThemedToken, Lang, Theme } from "shiki-es"
+import { detab } from "../../../lib/format"
 import { Icon } from "../../../lib/react/icon"
-import Markdown from "./_markdown.mdx"
+
+type Arrayable<T> = T | T[]
 
 // Recursively concatenate strings
-function getString(children: ReactNode) {
+function getString(children: Arrayable<string> | Arrayable<ReactElement<{ children: string }>>) {
 	let str = ""
 	const flatChildren = [children].flat()
-	for (const substr of flatChildren) {
-		if (typeof substr === "string") {
-			str += substr
+	for (const child of flatChildren) {
+		if (typeof child === "string") {
+			str += child
 		} else {
-			// @ts-expect-error
-			str += getString(substr.props.children)
+			str += getString(child.props.children)
 		}
 	}
 	return str
@@ -29,15 +29,15 @@ function getId(str: string) {
 		.replace(/[^a-zA-Z0-9-_]/g, "")
 }
 
-function Header1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const id = getId(getString(children))
+function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+	const id = getId(getString(children as any))
 	const href = `#${id}`
 
 	return (
 		<h1
 			id={id}
 			className="relative text-gray-900
-				[&:not(:first-child)]:mt-32 [&:not(:first-child)]:mb-16 [&:not(:first-child)]:scroll-mt-32"
+				[&:not(:first-child)]:my-16 [&:not(:first-child)]:scroll-my-16"
 			{...props}
 		>
 			{children}
@@ -47,21 +47,21 @@ function Header1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					flex items-center px-10
 						opacity-0 [h1:hover_&]:opacity-100"
 			>
-				<Icon className="h-24 w-24 text-[var(--trim-color)]" icon={feather.Link} />
+				<Icon className="h-16 w-16 text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h1>
 	)
 }
 
-function Header2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const id = getId(getString(children))
+function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+	const id = getId(getString(children as any))
 	const href = `#${id}`
 
 	return (
 		<h2
 			id={id}
-			className="relative text-gray-900
-				[&:not(:first-child)]:mt-32 [&:not(:first-child)]:mb-16 [&:not(:first-child)]:scroll-mt-32"
+			className="relative text-gray-800
+				[&:not(:first-child)]:my-16 [&:not(:first-child)]:scroll-my-16"
 			{...props}
 		>
 			{children}
@@ -71,7 +71,7 @@ function Header2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					flex items-center px-10
 						opacity-0 [h2:hover_&]:opacity-100"
 			>
-				<Icon className="h-24 w-24 text-[var(--trim-color)]" icon={feather.Link} />
+				<Icon className="h-16 w-16 text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h2>
 	)
@@ -79,7 +79,7 @@ function Header2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
+function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
 		<ol className="my-16 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
 			{children}
@@ -88,7 +88,7 @@ function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 }
 
 // Hmm
-function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
+function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li
 			// TODO: Add font here?
@@ -126,7 +126,7 @@ function getLangFromClassName(className: string | undefined) {
 	return undefined
 }
 
-function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code: string }) {
+function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
 	const [highlighted, setHighlighted] = useState<IThemedToken[][] | null>(null)
 	const [copy, setCopy] = useState(false)
@@ -196,42 +196,40 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 	)
 }
 
-function Pre({ children }: JSX.IntrinsicElements["pre"]) {
-	console.log(children)
-
-	const [lang, code] = useMemo(() => {
-		const $children = children as ReactElement<{ className?: string; children: string }>
-		return [getLangFromClassName($children.props.className) as Lang | undefined, $children.props.children.trim()] as const
-	}, [children])
-
-	return <SyntaxHighlighting lang={lang} code={code} />
-}
-
-//// function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
-//// 	return (
-//// 		// TODO: Add font here?
-//// 		<code
-//// 			className="m-2 border border-gray-300 bg-white p-2
-//// 				text-[12px] font-[600] tabular-nums text-blue-500"
-//// 			{...props}
-//// 		>
-//// 			{children}
-//// 		</code>
-//// 	)
+//// function Pre({ children }: JSX.IntrinsicElements["pre"]) {
+//// 	const [lang, code] = useMemo(() => {
+//// 		const $children = children as ReactElement<{ className?: string; children: string }>
+//// 		return [getLangFromClassName($children.props.className) as Lang | undefined, $children.props.children.trim()] as const
+//// 	}, [children])
+////
+//// 	return <SyntaxHighlighting lang={lang} code={code} />
 //// }
 
 function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		// TODO: Add font here?
 		<code
-			className="bg-gray-200/75 p-4
-				text-[12px] font-[600] tabular-nums text-gray-700"
+			className="mx-2 border border-gray-300 bg-white p-2
+				text-[12px] font-[600] tabular-nums text-blue-500"
 			{...props}
 		>
 			{children}
 		</code>
 	)
 }
+
+//// function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
+//// 	return (
+//// 		// TODO: Add font here?
+//// 		<code
+//// 			className="bg-gray-200/75 p-4
+//// 				text-[12px] font-[600] tabular-nums text-gray-700"
+//// 			{...props}
+//// 		>
+//// 			`{children}`
+//// 		</code>
+//// 	)
+//// }
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -257,28 +255,74 @@ function Hairline(props: JSX.IntrinsicElements["hr"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// prettier-ignore
-const components = {
-	a:      Anchor,
-	code:   Code,
-	h1:     Header1,
-	h2:     Header2,
-	hr:     Hairline,
-	li:     ListItem,
-	ol:     OrderedList,
-	pre:    Pre,
-	strong: Strong,
+//// // prettier-ignore
+//// const components = {
+//// 	SelectedName: () => <Code>feather</Code>,
+////
+//// 	a:      Anchor,
+//// 	code:   Code,
+//// 	h1:     Header1,
+//// 	h2:     Header2,
+//// 	hr:     Hairline,
+//// 	li:     ListItem,
+//// 	ol:     OrderedList,
+//// 	pre:    Pre,
+//// 	strong: Strong,
+//// }
+
+function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
+	return <p {...props}>{children}</p>
 }
 
 export default function Component() {
+	//// return (
+	//// 	// TODO: Move MDXProvider to root?
+	//// 	<MDXProvider components={components}>
+	//// 		<div className="flex justify-center py-64">
+	//// 			<article className="prose flex basis-1e3 flex-col gap-8">
+	//// 				<Markdown />
+	//// 			</article>
+	//// 		</div>
+	//// 	</MDXProvider>
+	//// )
+
 	return (
-		// TODO: Move MDXProvider to root?
-		<MDXProvider components={components}>
-			<div className="flex justify-center py-64">
-				<article className="prose flex basis-1e3 flex-col gap-8">
-					<Markdown />
-				</article>
-			</div>
-		</MDXProvider>
+		<div className="flex justify-center py-64">
+			<article className="prose flex basis-1e3 flex-col gap-8">
+				<H1>Hello, world!</H1>
+				<H2>
+					Using <Code>Feather</Code> With a CDN
+				</H2>
+				<p>To get started with Feather using a CDN, follow these steps:</p>
+				<Ol>
+					<Li>
+						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to <Code>{`<head>`}</Code>
+					</Li>
+					<Li>
+						Add as many icons as desired using <Code>{`<i data-feather="{icon-name}"></i>`}</Code> syntax
+					</Li>
+					<Li>
+						Call <Code>{`feather.replace()`}</Code>
+					</Li>
+				</Ol>
+				<p>For example:</p>
+				<Pre lang="html">
+					{detab(`
+						<!DOCTYPE html>
+						<html lang="en">
+							<head>
+								<script src="https://unpkg.com/feather-icons"></script>
+							</head>
+							<body>
+								<i data-feather="circle"></i>
+								<script>
+									feather.replace()
+								</script>
+							</body>
+						</html>
+					`)}
+				</Pre>
+			</article>
+		</div>
 	)
 }
