@@ -82,7 +82,7 @@ function Header2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="my-8 flex flex-col gap-10" style={{ counterReset: "li 0" }} {...props}>
+		<ol className="my-8 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
 			{children}
 		</ol>
 	)
@@ -93,9 +93,10 @@ function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li
 			// TODO: Add font here?
-			className="relative rounded-1e3 pl-[calc(28px_+_10px)]
+			// TODO: Use 10px or 8px here?
+			className="relative rounded-1e3 pl-[calc(24px_+_10px)]
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
-					before:flex before:h-28 before:w-28 before:items-center before:justify-center
+					before:flex before:h-24 before:w-24 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/75
 							before:text-[10px] before:font-[700] before:tabular-nums before:text-gray-700
 								before:[content:_counter(li)]"
@@ -133,7 +134,7 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 
 	useEffect(() => {
 		async function initHighlighter() {
-			const highlighter = await getHighlighter({ theme: "github-dark-dimmed" satisfies Theme })
+			const highlighter = await getHighlighter({ theme: "github-light" satisfies Theme })
 			setHighlighter(highlighter)
 		}
 		initHighlighter()
@@ -157,16 +158,16 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 	return (
 		// TODO: [&:has(+_pre)]:rounded-b-0 is probably unsafe for Firefox
 		<pre
-			className="relative my-16 -mx-48 rounded-24 bg-gray-900 py-24 text-gray-300
-				[pre_+_&]:-mt-24 [pre_+_&]:border-t-1 [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
-					[&:has(+_pre)]:rounded-b-0"
+			className="relative my-16 -mx-48 rounded-24 border-1 border-gray-300 bg-white py-24
+				text-gray-800 shadow-md [pre_+_&]:-mt-24 [&_+_pre]:rounded-t-0
+					[&:has(+_pre)]:rounded-b-0 [&:has(+_pre)]:border-b-0"
 		>
 			<code>
 				{highlighted === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
+									<div className="w-32 text-right text-gray-400 group-hover:text-gray-300">{y + 1}</div>
 								</div>
 								{ys || <br />}
 							</div>
@@ -174,7 +175,7 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 					: highlighted.map((ys, y) => (
 							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
+									<div className="w-32 text-right text-gray-400 group-hover:text-gray-300">{y + 1}</div>
 								</div>
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
@@ -189,7 +190,7 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 					  ))}
 			</code>
 			<div className="absolute top-0 right-0">
-				<button className="flex h-48 w-48 items-center justify-center" onClick={e => setCopy(true)}>
+				<button className="flex h-[calc(22.5px_+_24px_*_2)] w-[calc(22.5px_+_24px_*_2)] items-center justify-center" onClick={e => setCopy(true)}>
 					<Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} />
 				</button>
 			</div>
@@ -206,10 +207,27 @@ function Pre({ children }: JSX.IntrinsicElements["pre"]) {
 	return <SyntaxHighlighting lang={lang} code={code} />
 }
 
+//// function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
+//// 	return (
+//// 		// TODO: Add font here?
+//// 		<code
+//// 			className="m-2 border-1 border-blue-500 bg-white p-2
+//// 				text-[12px] font-[600] tabular-nums text-blue-500"
+//// 			{...props}
+//// 		>
+//// 			{children}
+//// 		</code>
+//// 	)
+//// }
+
 function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		// TODO: Add font here?
-		<code className="bg-gray-200/75 p-4 text-[12px] font-[600] tabular-nums text-gray-700" {...props}>
+		<code
+			className="bg-gray-200/75 p-4
+				text-[12px] font-[600] tabular-nums text-gray-700"
+			{...props}
+		>
 			{children}
 		</code>
 	)

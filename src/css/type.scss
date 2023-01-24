@@ -71,13 +71,13 @@ $code: (
 }
 .prose pre code {
 	white-space: pre;
-	font: 400 #{math.ceil(16px * 0.875)} / 1.5 var(--code);
+	font: 400 #{16px * 0.9375} / 1.5 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 .prose code {
 	white-space: pre;
-	font: 400 #{1em * 0.875} / normal var(--code);
+	font: 400 0.9375em / normal var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
