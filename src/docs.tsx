@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
-import { A, Code, H1, H2, Hr, Li, Ol, P, Pre, TextIcon } from "./docs-components"
+import { Anchor, Code, CodeBlock, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph } from "./docs-components"
 import { NextJsColor, NextJsIcon, ReactJsColor, ReactJsIcon, SassColor, SassIcon, SvgColor, SvgIcon, TailwindCssColor, TailwindCssIcon, TwitterColor, TwitterIcon, TypeScriptColor, TypeScriptIcon } from "./icon-config-2"
 import { detab } from "./lib/format"
 
@@ -9,37 +9,37 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 	return (
 		<div className="flex justify-center py-64">
 			<article className="prose flex basis-1e3 flex-col gap-8">
-				<H1>
-					Getting Started With Feather&nbsp;
-					<TextIcon className="text-[var(--trim-color)]" icon={feather.Feather} />
-				</H1>
-				<P>
-					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
-				</P>
-				<P>
+				<Heading1>
+					Get Started With Feather&nbsp;
+					<InlineIcon icon={feather.Feather} />
+				</Heading1>
+				<Paragraph>
+					<Anchor href="https://github.com/feathericons/feather">Feather</Anchor> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
+				</Paragraph>
+				<Paragraph>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as SVG&nbsp;
-					<TextIcon style={{ color: SvgColor }} icon={SvgIcon} />, React.js&nbsp;
-					<TextIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
-					<TextIcon style={{ color: TypeScriptColor }} icon={TypeScriptIcon} />, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
-				</P>
-				<Hr />
-				<H2>
-					Using {name} <TextIcon className="text-gray-700" icon={feather[name]} /> With a CDN
-				</H2>
-				<P>To get started with Feather using a CDN (content delivery network), simply:</P>
-				<Ol>
-					<Li>
+					<InlineIcon style={{ color: SvgColor }} icon={SvgIcon} />, React.js&nbsp;
+					<InlineIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
+					<InlineIcon style={{ color: TypeScriptColor }} icon={TypeScriptIcon} />, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
+				</Paragraph>
+				<Hairline />
+				<Heading2>
+					Using {name} <InlineIcon icon={feather[name]} /> With a CDN
+				</Heading2>
+				<Paragraph>To get started with Feather using a CDN (content delivery network), simply:</Paragraph>
+				<OrderedList>
+					<ListItem>
 						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to <Code>{`<head>`}</Code>
-					</Li>
-					<Li>
+					</ListItem>
+					<ListItem>
 						Add as many icons as desired using <Code>{`<i data-feather="{icon-name}"></i>`}</Code> syntax
-					</Li>
-					<Li>
+					</ListItem>
+					<ListItem>
 						Call <Code>{`feather.replace()`}</Code>
-					</Li>
-				</Ol>
+					</ListItem>
+				</OrderedList>
 				<p>For example:</p>
-				<Pre lang="html">
+				<CodeBlock lang="html">
 					{detab(`
 						<!DOCTYPE html>
 						<html lang='en'>
@@ -54,33 +54,33 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							</body>
 						</html>
 					`).replaceAll("\t", "  ")}
-				</Pre>
-				<Hr />
-				<H2>
-					Using {name} <TextIcon className="text-gray-700" icon={feather[name]} /> With React.js&nbsp;
-					<TextIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />
-				</H2>
-				<P>To get started with Feather using React.js, simply:</P>
-				<Ol>
-					<Li>
+				</CodeBlock>
+				<Hairline />
+				<Heading2>
+					Using {name} <InlineIcon icon={feather[name]} /> With React.js&nbsp;
+					<InlineIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />
+				</Heading2>
+				<Paragraph>To get started with Feather using React.js, simply:</Paragraph>
+				<OrderedList>
+					<ListItem>
 						Run <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
-					</Li>
-					<Li>
+					</ListItem>
+					<ListItem>
 						Import icons using <Code>{`import { IconName } from "react-feather"`}</Code> syntax
-					</Li>
-					<Li>
+					</ListItem>
+					<ListItem>
 						Render icons using <Code>{`<IconName />`}</Code> syntax
-					</Li>
-				</Ol>
+					</ListItem>
+				</OrderedList>
 				<p>For example:</p>
-				<Pre lang="sh">
+				<CodeBlock lang="sh">
 					{detab(`
 						npm i react-feather
 						# Or yarn add react-feather
 						# Or pnpm i react-feather
 					`).replaceAll("\t", "  ")}
-				</Pre>
-				<Pre lang="tsx">
+				</CodeBlock>
+				<CodeBlock lang="tsx">
 					{detab(`
 						import { Smile } from 'react-feather';
 
@@ -95,58 +95,58 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							);
 						}
 					`).replaceAll("\t", "  ")}
-				</Pre>
-				<Hr />
-				<P>
+				</CodeBlock>
+				<Hairline />
+				<Paragraph>
 					<small>
-						Looking for the original Feather website? <A href="https://feathericons.com">Click here.</A>
+						Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
 						{/* &nbsp; */}
 						{/* <TextIcon className="text-gray-500" icon={feather.ExternalLink} /> */}
 					</small>
-				</P>
-				<Hr />
-				<P>
+				</Paragraph>
+				<Hairline />
+				<Paragraph>
 					<small>
-						Icons by <A href="https://twitter.com/colebemis">@colebemis</A>&nbsp;
-						<TextIcon style={{ color: TwitterColor }} icon={TwitterIcon} /> and website by <A href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</A>&nbsp;
-						<TextIcon style={{ color: TwitterColor }} icon={TwitterIcon} />
+						Icons by <Anchor href="https://twitter.com/colebemis">@colebemis</Anchor>&nbsp;
+						<InlineIcon style={{ color: TwitterColor }} icon={TwitterIcon} /> and website by <Anchor href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</Anchor>&nbsp;
+						<InlineIcon style={{ color: TwitterColor }} icon={TwitterIcon} />
 					</small>
 					<br />
 					<small>
 						{/* Feather&nbsp; */}
 						{/* <TextIcon className="text-gray-500" icon={feather.Feather} />  */}
-						Feather is licensed as <A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used for personal and commercial use without attribution.
+						Feather is licensed as <Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</Anchor>. Icons may be used for personal and commercial use without attribution.
 					</small>
 					<br />
 					<small>
 						Built using{" "}
-						<A href="https://reactjs.org">
+						<Anchor href="https://reactjs.org">
 							React.js&nbsp;
-							<TextIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />
-						</A>
+							<InlineIcon style={{ color: ReactJsColor }} icon={ReactJsIcon} />
+						</Anchor>
 						,{" "}
-						<A href="https://nextjs.org">
+						<Anchor href="https://nextjs.org">
 							Next.js&nbsp;
-							<TextIcon style={{ color: NextJsColor }} icon={NextJsIcon} />
-						</A>
+							<InlineIcon style={{ color: NextJsColor }} icon={NextJsIcon} />
+						</Anchor>
 						,{" "}
-						<A href="https://typescriptlang.org">
+						<Anchor href="https://typescriptlang.org">
 							TypeScript&nbsp;
-							<TextIcon style={{ color: TypeScriptColor }} icon={TypeScriptIcon} />
-						</A>
+							<InlineIcon style={{ color: TypeScriptColor }} icon={TypeScriptIcon} />
+						</Anchor>
 						,{" "}
-						<A href="https://tailwindcss.com">
+						<Anchor href="https://tailwindcss.com">
 							Tailwind CSS&nbsp;
-							<TextIcon style={{ color: TailwindCssColor }} icon={TailwindCssIcon} />
-						</A>
+							<InlineIcon style={{ color: TailwindCssColor }} icon={TailwindCssIcon} />
+						</Anchor>
 						,{" "}
-						<A href="https://sass-lang.com">
+						<Anchor href="https://sass-lang.com">
 							and Sass&nbsp;
-							<TextIcon style={{ color: SassColor }} icon={SassIcon} />
-						</A>
+							<InlineIcon style={{ color: SassColor }} icon={SassIcon} />
+						</Anchor>
 					</small>
 					<br />
-				</P>
+				</Paragraph>
 			</article>
 		</div>
 	)

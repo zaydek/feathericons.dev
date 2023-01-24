@@ -298,3 +298,22 @@ video {
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+/* :not(svg > *) { */
+/* 	outline: 1px solid hsl(200, 100%, 50%, 0.5); */
+/* 	outline-offset: -0.5px; */
+/* } */
+
+svg { overflow: visible; }
+
+:is(button, [role=button])                   { cursor: pointer; user-select: none; }
+:is(input[type=checkbox], [role=checkbox])   { cursor: pointer; user-select: none; }
+:is(input[type=radio], [role=radio])         { cursor: pointer; user-select: none; }
+:is(input[type=range], [role=slider])        { cursor: grab;    user-select: none; }
+:is(input[type=range], [role=slider]):active { cursor: grabbing; }
+
+input[type=text]:focus { outline: none; }
+textarea:focus         { outline: none; }
+
+/* input[type=text]:focus-visible { outline: none; } */
+/* svg { overflow: visible; } */

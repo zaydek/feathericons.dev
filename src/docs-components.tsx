@@ -32,7 +32,7 @@ function getId(str: string) {
 		.toLowerCase()
 }
 
-export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const id = getId(getString(children as any))
 	const href = `#${id}`
 
@@ -46,7 +46,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	)
 }
 
-export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const id = getId(getString(children as any))
 	const href = `#${id}`
 
@@ -60,19 +60,19 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	)
 }
 
-export function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
+export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 	return <p {...props}>{children}</p>
 }
 
-export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
+export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="my-16 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
+		<ol className="my-8 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
 			{children}
 		</ol>
 	)
 }
 
-export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
+export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li
 			// TODO: Add font here?
@@ -90,7 +90,7 @@ export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-export function Pre({ lang, children: code }: { lang: Lang; children: string }) {
+export function CodeBlock({ lang, children: code }: { lang: Lang; children: string }) {
 	const highlighter = useContext(ShikiContext)
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -155,13 +155,13 @@ export function Pre({ lang, children: code }: { lang: Lang; children: string }) 
 	)
 }
 
-export function Hr(props: JSX.IntrinsicElements["hr"]) {
+export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 	return <hr className="my-16" {...props} />
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function A({ children, ...props }: JSX.IntrinsicElements["a"]) {
+export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	return (
 		<a className="text-gray-500 underline" {...props}>
 			{children}
@@ -179,6 +179,6 @@ export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 }
 
 // Expose className for color or use style
-export function TextIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] align-[-0.125em]", className)} icon={icon} {...props} />
 }

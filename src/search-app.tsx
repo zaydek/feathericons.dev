@@ -1,30 +1,10 @@
 import * as feather from "./data/react-feather"
 
-import {
-	Fragment,
-	memo,
-	MouseEventHandler,
-	PropsWithChildren,
-	ReactNode,
-	useContext,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react"
+import { Fragment, memo, MouseEventHandler, PropsWithChildren, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { getHighlighter, Highlighter, IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
-import {
-	sizeInitial,
-	sizeMax,
-	sizeMin,
-	sizeStep,
-	strokeWidthInitial,
-	strokeWidthMax,
-	strokeWidthMin,
-	strokeWidthStep,
-} from "./constants"
+import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest"
 import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
@@ -35,11 +15,7 @@ import { SearchContext, SelectedContext, SliderContext } from "./state"
 import { Transition } from "./transition"
 import { ThickIcon, TypographyCaps, TypographySmallSans } from "./typography"
 
-function MouseTooltip({
-	pos,
-	content,
-	children,
-}: /* prettier-ignore */ PropsWithChildren<{
+function MouseTooltip({ pos, content, children }: /* prettier-ignore */ PropsWithChildren<{
 	pos:     "start" | "center" | "end"
 	content: ReactNode
 }>) {
@@ -168,11 +144,7 @@ const Memo_CompactGridItem = memo(function CompactGridItem({ name }: { name: key
 						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 					}}
 				>
-					<Icon
-						id={name}
-						className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-						icon={feather[name]}
-					/>
+					<Icon id={name} className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
 				</button>
 			</MouseTooltip>
 		</div>
@@ -181,13 +153,7 @@ const Memo_CompactGridItem = memo(function CompactGridItem({ name }: { name: key
 
 // TODO: It's not clear these need to be memoized, maybe if we add
 // highlighting...
-const Memo_GridItem = memo(function GridItem({
-	name,
-	indexes,
-}: {
-	name: keyof typeof manifest
-	indexes: readonly [number, number] | null
-}) {
+const Memo_GridItem = memo(function GridItem({ name, indexes }: { name: keyof typeof manifest; indexes: readonly [number, number] | null }) {
 	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
 	return (
@@ -199,11 +165,7 @@ const Memo_GridItem = memo(function GridItem({
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 				}}
 			>
-				<Icon
-					id={name}
-					className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-					icon={feather[name]}
-				/>
+				<Icon id={name} className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
 			</button>
 			{/* Use select-all so users can copy-paste names. Note that select-text
 			doesn't work as expected */}
@@ -235,11 +197,7 @@ function SearchGridContents() {
 	return (
 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(112px,_1fr))]">
 			{Object.keys(searchResults).map(name => (
-				<GridItem
-					key={name}
-					name={name as keyof typeof manifest}
-					indexes={searchResults[name as keyof typeof manifest]!}
-				/>
+				<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
 			))}
 		</div>
 	)
@@ -307,7 +265,7 @@ function IconPreview() {
 
 	return viewSource ? (
 		// Use overflow-x-scroll > inline-block p-* because of overflow-x bug
-		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)] [tab-size:_2]">
+		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
 			<code className="inline-block p-24">
 				{tokens === null ? (
 					<div className="text-gray-400">Initializing shiki-es…</div>
@@ -331,10 +289,7 @@ function IconPreview() {
 		</pre>
 	) : (
 		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
-			<Icon
-				className="h-64 w-64 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-				icon={feather[selectedName]}
-			/>
+			<Icon className="h-64 w-64 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[selectedName]} />
 		</div>
 	)
 }
@@ -407,10 +362,7 @@ function FormatButton() {
 				delay={show ? 10 : 0}
 			>
 				<div className="absolute top-[calc(100%_+_10px)] right-0 z-10">
-					<div
-						ref={ref}
-						className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]"
-					>
+					<div ref={ref} className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
 						<button
 							className="flex h-32 items-center gap-10 px-12
 								[&:hover:active]:bg-gray-200 [&:hover]:bg-gray-100
@@ -477,21 +429,13 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent
 			}}
 			{...props}
 		>
-			<ThickIcon
-				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
-				icon={pressed ? feather.Check : icon}
-			/>
+			<ThickIcon className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white" icon={pressed ? feather.Check : icon} />
 			<TypographyCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypographyCaps>
 		</button>
 	)
 }
 
-function DownloadButton({
-	icon,
-	onClick,
-	children,
-	...props
-}: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
+function DownloadButton({ icon, onClick, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
 	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
@@ -514,10 +458,7 @@ function DownloadButton({
 			}}
 			{...props}
 		>
-			<ThickIcon
-				className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white"
-				icon={pressed ? feather.Check : icon}
-			/>
+			<ThickIcon className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white" icon={pressed ? feather.Check : icon} />
 			<TypographyCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypographyCaps>
 		</button>
 	)
@@ -547,13 +488,7 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 					ease={[0, 1, 1, 1]} // No bounce here
 				>
 					<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--trim-color)]">
-						<Transition
-							when={props.checked}
-							s1={{ transform: "translateX(0%)" }}
-							s2={{ transform: "translateX(50%)" }}
-							duration={100}
-							ease={[0, 1, 0.5, 1.25]}
-						>
+						<Transition when={props.checked} s1={{ transform: "translateX(0%)" }} s2={{ transform: "translateX(50%)" }} duration={100} ease={[0, 1, 0.5, 1.25]}>
 							<div className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
 						</Transition>
 					</div>
@@ -563,12 +498,7 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 	)
 }
 
-function SliderFieldFragment({
-	icon,
-	reset,
-	children,
-	...props
-}: { icon: IconComponent } & { reset: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+function SliderFieldFragment({ icon, reset, children, ...props }: { icon: IconComponent } & { reset: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 

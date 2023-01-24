@@ -5,6 +5,7 @@ import { keys } from "./data/keys"
 import { Docs } from "./docs"
 import { IconProps } from "./pages/[icon]"
 import { RouteTransition } from "./route-transition"
+import { SearchApp } from "./search-app"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 	return (
@@ -54,10 +55,13 @@ export function SharedApp({ kebabCase, titleCase, children }: PropsWithChildren<
 							</OrangeLink>
 						))}
 					</nav>
-					<main>
+					<RouteTransition>
+						<SearchApp />
+					</RouteTransition>
+					{/* <main>
 						<RouteTransition>{children}</RouteTransition>
 						<RouteTransition>Hello world!</RouteTransition>
-					</main>
+					</main> */}
 				</div>
 			) : (
 				<div className="p-16">
