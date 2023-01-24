@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from "next/document"
+import Script from "next/script"
 import { CSSProperties } from "react"
 import { detab } from "../lib/format"
 
@@ -22,19 +23,16 @@ export default function Document() {
 		<Html className="overflow-x-hidden overflow-y-scroll scroll-smooth" lang="en">
 			<Head />
 
-			{/* Inter */}
+			{/* Google Fonts */}
 			<link rel="preconnect" href="https://fonts.googleapis.com" />
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-			{/* Fira Code */}
-			<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 			{/* Plausible Analytics */}
 			<script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js"></script>
 
 			{/* Theming */}
-			<script dangerouslySetInnerHTML={{ __html: initDarkMode }}></script>
+			<Script id="script-theme" dangerouslySetInnerHTML={{ __html: initDarkMode }} />
 			<body style={{ "--scale": 1, "--stroke-width": 2 } as CSSProperties}>
 				<Main />
 				<NextScript />

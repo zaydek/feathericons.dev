@@ -9,7 +9,7 @@ import { RouteTransition } from "./route-transition"
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 	return (
 		<Link className="flex h-24 items-center bg-[orange] px-12" {...props}>
-			<div>{children}</div>
+			{children}
 		</Link>
 	)
 }

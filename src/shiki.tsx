@@ -7,11 +7,11 @@ export function ShikiProvider({ children }: PropsWithChildren) {
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
 
 	useEffect(() => {
-		async function fn() {
+		async function cb() {
 			const highlighter = await getHighlighter({ theme: "github-dark", langs: ["sh", "html", "tsx"] })
 			setHighlighter(highlighter)
 		}
-		fn()
+		cb()
 	}, [])
 
 	return <ShikiContext.Provider value={highlighter}>{children}</ShikiContext.Provider>
