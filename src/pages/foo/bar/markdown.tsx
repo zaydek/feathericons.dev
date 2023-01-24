@@ -4,7 +4,6 @@ import { MDXProvider } from "@mdx-js/react"
 import { ReactElement, ReactNode, useEffect, useMemo, useState } from "react"
 import { getHighlighter, Highlighter, IThemedToken, Lang, Theme } from "shiki-es"
 import { Icon } from "../../../lib/react/icon"
-import { ThickIcon } from "../../../typography"
 import Markdown from "./_markdown.mdx"
 
 // Recursively concatenate strings
@@ -46,9 +45,9 @@ function Header1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				href={href}
 				className="absolute top-0 right-[100%] bottom-0
 					flex items-center px-10
-						opacity-0 [h2:hover_&]:opacity-100"
+						opacity-0 [h1:hover_&]:opacity-100"
 			>
-				<ThickIcon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link2} />
+				<Icon className="h-24 w-24 text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h1>
 	)
@@ -72,7 +71,7 @@ function Header2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					flex items-center px-10
 						opacity-0 [h2:hover_&]:opacity-100"
 			>
-				<ThickIcon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link2} />
+				<Icon className="h-24 w-24 text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h2>
 	)
