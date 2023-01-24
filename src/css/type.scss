@@ -45,12 +45,12 @@ $code: (
 	font-feature-settings: "tnum";
 	letter-spacing: 0.0125em;
 }
-:is(pre, code) {
-	white-space: pre;
-	font: 400 14px / normal var(--code);
-	font-feature-settings: "tnum";
-	letter-spacing: null;
-}
+//// :is(pre, code) {
+//// 	white-space: pre;
+//// 	font: 400 14px / normal var(--code);
+//// 	font-feature-settings: "tnum";
+//// 	letter-spacing: null;
+//// }
 
 .prose {
 	white-space: normal;
@@ -82,11 +82,3 @@ $code: (
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
-
-//// .type-h1 {
-//// 	white-space: normal;
-//// 	font: 600 24px /
-//// 		1.25 var(--sans);
-//// 	font-feature-settings: "tnum";
-//// 	letter-spacing: null;
-//// }

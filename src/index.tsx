@@ -18,6 +18,7 @@ export function SharedApp({ name, children }: PropsWithChildren<Partial<IconProp
 	return (
 		<>
 			{/* prettier-ignore */}
+			{/* TODO: Hook up feather.svg to meta tags */}
 			<Head>
 				{/* SEO */}
 				<title>{name}</title>

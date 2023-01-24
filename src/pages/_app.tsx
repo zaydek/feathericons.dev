@@ -6,15 +6,14 @@ import "../css/type.scss"
 import "../css/vars.scss"
 
 import { AppProps } from "next/app"
-//// import { SharedApp } from "../shared-app"
+import { SharedApp } from "../index"
 import { StateProvider } from "../state"
 
 export default function App({ pageProps, Component }: AppProps) {
 	return (
 		<StateProvider>
 			{/* TODO: Remove debug JSON */}
-			{/* <SharedApp {...pageProps}>{JSON.stringify(pageProps, null, 2)}</SharedApp> */}
-			<Component />
+			<SharedApp {...pageProps}>{JSON.stringify(pageProps, null, 2)}</SharedApp>
 		</StateProvider>
 	)
 }

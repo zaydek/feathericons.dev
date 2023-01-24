@@ -1,13 +1,13 @@
-import * as feather from "../../../data/react-feather"
+import * as feather from "./data/react-feather"
 
 import { Nextdotjs as NextJsIcon, ReactJs as ReactJsIcon, Sass as SassIcon, Svg as SvgIcon, Tailwindcss as TailwindCssIcon, Twitter as TwitterIcon, Typescript as TypeScriptIcon } from "@icons-pack/react-simple-icons"
 import { siNextdotjs as SiNextJs, siReact as SiReactJs, siSass as SiSass, siSvg as SiSvg, siTailwindcss as SiTailwindCss, siTwitter as SiTwitter, siTypescript as SiTypeScript } from "simple-icons"
 
 import { ReactElement, useEffect, useState } from "react"
 import { getHighlighter, Highlighter, IThemedToken, Lang, Theme } from "shiki-es"
-import { cx } from "../../../lib/cx"
-import { detab } from "../../../lib/format"
-import { Icon, IconComponent } from "../../../lib/react/icon"
+import { cx } from "./lib/cx"
+import { detab } from "./lib/format"
+import { Icon, IconComponent } from "./lib/react/icon"
 
 type Arrayable<T> = T | T[]
 
@@ -304,8 +304,9 @@ export default function Component() {
 					</small>
 					<br />
 					<small>
-						Feather&nbsp;
-						<TextIcon className="text-gray-500" icon={feather.Feather} /> is licensed as <A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used for personal and commercial use without attribution.
+						{/* Feather&nbsp; */}
+						{/* <TextIcon className="text-gray-500" icon={feather.Feather} />  */}
+						Feather is licensed as <A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used for personal and commercial use without attribution.
 					</small>
 					<br />
 					<small>
