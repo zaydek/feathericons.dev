@@ -83,13 +83,12 @@ function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	)
 }
 
-// Hmm
 function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li
 			// TODO: Add font here?
 			// TODO: Use 10px or 8px here?
-			className="relative rounded-1e3 pl-[calc(24px_+_10px)]
+			className="relative rounded-1e3 pl-[calc(24px_+_12px)]
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-24 before:w-24 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/75
@@ -98,29 +97,24 @@ function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 			style={{ counterIncrement: "li 1" }}
 			{...props}
 		>
-			{/* <div className="flex items-center">
-				<div className="flex h-32 w-32 items-center justify-center rounded-1e3 bg-white [box-shadow:_var(--shadow-2)]">
-					<div className="tabular-nums">x</div>
-				</div>
-			</div> */}
 			{children}
 		</li>
 	)
 }
 
-function getLangFromClassName(className: string | undefined) {
-	if (typeof className === "string") {
-		if (className.includes(".")) {
-			// E.g. "index.js"
-			const index = className.lastIndexOf(".")
-			return className.slice(index + 1)
-		} else {
-			// E.g. "language-js"
-			return className.slice("language-".length)
-		}
-	}
-	return undefined
-}
+//// function getLangFromClassName(className: string | undefined) {
+//// 	if (typeof className === "string") {
+//// 		if (className.includes(".")) {
+//// 			// E.g. "index.js"
+//// 			const index = className.lastIndexOf(".")
+//// 			return className.slice(index + 1)
+//// 		} else {
+//// 			// E.g. "language-js"
+//// 			return className.slice("language-".length)
+//// 		}
+//// 	}
+//// 	return undefined
+//// }
 
 function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
@@ -280,17 +274,6 @@ function TextIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.I
 }
 
 export default function Component() {
-	//// return (
-	//// 	// TODO: Move MDXProvider to root?
-	//// 	<MDXProvider components={components}>
-	//// 		<div className="flex justify-center py-64">
-	//// 			<article className="prose flex basis-1e3 flex-col gap-8">
-	//// 				<Markdown />
-	//// 			</article>
-	//// 		</div>
-	//// 	</MDXProvider>
-	//// )
-
 	return (
 		<div className="flex justify-center py-64">
 			<article className="prose flex basis-1e3 flex-col gap-8">
