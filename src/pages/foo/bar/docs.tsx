@@ -152,7 +152,13 @@ function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 					  ))}
 			</code>
 			<div className="absolute top-0 right-0">
-				<button className="flex h-[calc(22.5px_+_24px_*_2)] w-[calc(22.5px_+_24px_*_2)] items-center justify-center" onClick={e => setCopy(true)}>
+				<button
+					className="flex h-[calc(22.5px_+_24px_*_2)] w-[calc(22.5px_+_24px_*_2)] items-center justify-center"
+					onClick={async e => {
+						await navigator.clipboard.writeText(code + "\n")
+						setCopy(true)
+					}}
+				>
 					<Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} />
 				</button>
 			</div>
@@ -227,18 +233,18 @@ export default function Component() {
 				<Pre lang="html">
 					{detab(`
 						<!DOCTYPE html>
-						<html lang="en">
+						<html lang='en'>
 							<head>
-								<script src="https://unpkg.com/feather-icons"></script>
+								<script src='https://unpkg.com/feather-icons'></script>
 							</head>
 							<body>
-								<i data-feather="smile"></i>
+								<i data-feather='smile'></i>
 								<script>
-									feather.replace()
+									feather.replace();
 								</script>
 							</body>
 						</html>
-					`)}
+					`).replaceAll("\t", "  ")}
 				</Pre>
 				<Hr />
 				<H2>
@@ -263,23 +269,23 @@ export default function Component() {
 						npm i react-feather
 						# Or yarn add react-feather
 						# Or pnpm i react-feather
-					`)}
+					`).replaceAll("\t", "  ")}
 				</Pre>
 				<Pre lang="tsx">
 					{detab(`
-						import { Smile } from "react-feather"
+						import { Smile } from 'react-feather';
 
 						export default function App() {
 							return (
-								<div className="flex h-screen items-center justify-center">
-									<div className="flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4">
-										<Smile className="h-4 w-4 text-white" />
-										<div className="text-sm font-semibold tracking-wider text-white">HELLO WORLD</div>
+								<div className='flex h-screen items-center justify-center'>
+									<div className='flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4'>
+										<Smile className='h-4 w-4 text-white' />
+										<div className='text-sm font-semibold tracking-wider text-white'>HELLO WORLD</div>
 									</div>
 								</div>
-							)
+							);
 						}
-					`)}
+					`).replaceAll("\t", "  ")}
 				</Pre>
 				<Hr />
 				<P>

@@ -22,10 +22,13 @@ export default function Document() {
 		<Html className="overflow-x-hidden overflow-y-scroll scroll-smooth" lang="en">
 			<Head />
 
-			{/* Google Fonts */}
+			{/* Inter */}
 			<link rel="preconnect" href="https://fonts.googleapis.com" />
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+			{/* Fira Code */}
+			<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
 
 			{/* Plausible Analytics */}
 			<script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js"></script>
