@@ -1,11 +1,12 @@
 import * as feather from "./data/react-feather"
 
-import { ReactElement, useEffect, useState } from "react"
-import { getHighlighter, Highlighter, IThemedToken, Lang } from "shiki-es"
+import { ReactElement, useContext, useEffect, useState } from "react"
+import { IThemedToken, Lang } from "shiki-es"
 import { NextJsColor, NextJsIcon, ReactJsColor, ReactJsIcon, SassColor, SassIcon, SvgColor, SvgIcon, TailwindCssColor, TailwindCssIcon, TwitterColor, TwitterIcon, TypeScriptColor, TypeScriptIcon } from "./icon-config-2"
 import { cx } from "./lib/cx"
 import { detab } from "./lib/format"
 import { Icon, IconComponent } from "./lib/react/icon"
+import { ShikiContext } from "./shiki"
 
 type Arrayable<T> = T | T[]
 
@@ -93,37 +94,30 @@ function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 }
 
 function Pre({ lang, children: code }: { lang: Lang; children: string }) {
-	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
-	const [highlighted, setHighlighted] = useState<IThemedToken[][] | null>(null)
-	const [copy, setCopy] = useState(false)
+	const highlighter = useContext(ShikiContext)
 
-	useEffect(() => {
-		async function initHighlighter() {
-			const highlighter = await getHighlighter({ theme: "github-dark", langs: ["sh", "html", "tsx"] })
-			setHighlighter(highlighter)
-		}
-		initHighlighter()
-	}, [])
+	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
+	const [didCopy, setDidCopy] = useState(false)
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
 		const tokens = highlighter.codeToThemedTokens(code, lang, undefined, {
 			includeExplanation: false,
 		})
-		setHighlighted(tokens)
+		setTokens(tokens)
 	}, [code, highlighter, lang])
 
 	useEffect(() => {
 		const d = window.setTimeout(() => {
-			setCopy(false)
+			setDidCopy(false)
 		}, 1e3)
 		return () => window.clearTimeout(d)
-	}, [copy])
+	}, [didCopy])
 
 	return (
 		<pre className="relative my-16 -mx-48 bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
 			<code>
-				{highlighted === null
+				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
@@ -132,7 +126,7 @@ function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 								{ys || <br />}
 							</div>
 					  ))
-					: highlighted.map((ys, y) => (
+					: tokens.map((ys, y) => (
 							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
@@ -154,10 +148,10 @@ function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 					className="flex h-[calc(22.5px_+_24px_*_2)] w-[calc(22.5px_+_24px_*_2)] items-center justify-center"
 					onClick={async e => {
 						await navigator.clipboard.writeText(code + "\n")
-						setCopy(true)
+						setDidCopy(true)
 					}}
 				>
-					<Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} />
+					<Icon className="h-16 w-16 text-white" icon={didCopy ? feather.Check : feather.Copy} />
 				</button>
 			</div>
 		</pre>

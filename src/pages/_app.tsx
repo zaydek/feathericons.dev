@@ -7,13 +7,16 @@ import "../css/vars.scss"
 
 import { AppProps } from "next/app"
 import { SharedApp } from "../index"
+import { ShikiProvider } from "../shiki"
 import { StateProvider } from "../state"
 
 export default function App({ pageProps, Component }: AppProps) {
 	return (
-		<StateProvider>
-			{/* TODO: Remove debug JSON */}
-			<SharedApp {...pageProps}>{JSON.stringify(pageProps, null, 2)}</SharedApp>
-		</StateProvider>
+		<ShikiProvider>
+			<StateProvider>
+				{/* TODO: Remove debug JSON */}
+				<SharedApp {...pageProps}>{JSON.stringify(pageProps, null, 2)}</SharedApp>
+			</StateProvider>
+		</ShikiProvider>
 	)
 }
