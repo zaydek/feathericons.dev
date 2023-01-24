@@ -155,7 +155,7 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 
 	useEffect(() => {
 		async function initHighlighter() {
-			const highlighter = await getHighlighter({ theme: "github-dark" satisfies Theme })
+			const highlighter = await getHighlighter({ theme: "github-dark-dimmed" satisfies Theme })
 			setHighlighter(highlighter)
 		}
 		initHighlighter()
@@ -177,25 +177,26 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 	}, [copy])
 
 	return (
+		// TODO: [&:has(+_pre)]:rounded-b-0 is probably unsafe for Firefox
 		<pre
-			className="relative my-8 -mx-48 rounded-24 bg-gray-900 py-24 text-gray-400
+			className="relative my-8 -mx-48 rounded-24 bg-gray-900 py-24 text-gray-300
 				[pre_+_&]:-mt-[calc(24px_+_1px)] [pre_+_&]:border-t-1 [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
 					[&:has(+_pre)]:rounded-b-0"
 		>
 			<code>
 				{highlighted === null
 					? code.split("\n").map((ys, y) => (
-							<div key={y} className="relative px-48 hover:bg-gray-800">
+							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{y + 1}</div>
+									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
 								</div>
 								{ys || <br />}
 							</div>
 					  ))
 					: highlighted.map((ys, y) => (
-							<div key={y} className="relative px-48 hover:bg-gray-800">
+							<div key={y} className="group relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{y + 1}</div>
+									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
 								</div>
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
