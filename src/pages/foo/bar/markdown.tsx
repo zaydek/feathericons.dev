@@ -40,12 +40,7 @@ function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const href = `#${id}`
 
 	return (
-		<h1
-			id={id}
-			className="relative text-gray-900
-				[&:not(:first-child)]:my-16 [&:not(:first-child)]:scroll-my-16"
-			{...props}
-		>
+		<h1 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
 			{children}
 			<a
 				href={href}
@@ -64,12 +59,7 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const href = `#${id}`
 
 	return (
-		<h2
-			id={id}
-			className="relative text-gray-800
-				[&:not(:first-child)]:my-16 [&:not(:first-child)]:scroll-my-16"
-			{...props}
-		>
+		<h2 id={id} className="relative my-16 scroll-my-16 text-gray-800" {...props}>
 			{children}
 			<a
 				href={href}
@@ -211,31 +201,31 @@ function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 //// 	return <SyntaxHighlighting lang={lang} code={code} />
 //// }
 
+//// function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
+//// 	return (
+//// 		// TODO: Add font here?
+//// 		<code
+//// 			className="mx-2 border border-gray-300 bg-white p-2
+//// 				text-[12px] font-[600] tabular-nums text-blue-500"
+//// 			{...props}
+//// 		>
+//// 			{children}
+//// 		</code>
+//// 	)
+//// }
+
 function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		// TODO: Add font here?
 		<code
-			className="mx-2 border border-gray-300 bg-white p-2
-				text-[12px] font-[600] tabular-nums text-blue-500"
+			className="bg-gray-200/75 p-4
+				text-[12px] font-[600] tabular-nums text-gray-700"
 			{...props}
 		>
 			{children}
 		</code>
 	)
 }
-
-//// function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
-//// 	return (
-//// 		// TODO: Add font here?
-//// 		<code
-//// 			className="bg-gray-200/75 p-4
-//// 				text-[12px] font-[600] tabular-nums text-gray-700"
-//// 			{...props}
-//// 		>
-//// 			`{children}`
-//// 		</code>
-//// 	)
-//// }
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -281,9 +271,10 @@ function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
 }
 
 function Hr(props: JSX.IntrinsicElements["hr"]) {
-	return <hr {...props} />
+	return <hr className="my-16" {...props} />
 }
 
+// Expose className for color or use style
 function TextIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	return <Icon className={cx("inline-block h-[1.25em] w-[1.25em] align-[-0.1875em]", className)} icon={icon} {...props} />
 }
@@ -303,10 +294,12 @@ export default function Component() {
 	return (
 		<div className="flex justify-center py-64">
 			<article className="prose flex basis-1e3 flex-col gap-8">
-				<H1>Feather Icons</H1>
+				<H1>
+					Feather Icons&nbsp;
+					<TextIcon className="text-gray-500" icon={feather.Feather} />
+				</H1>
 				<P>
-					<A href="https://github.com/feathericons/feather">Feather</A>&nbsp;
-					<TextIcon className="text-gray-500" icon={feather.Feather} /> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
+					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
 				</P>
 				<P>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as SVG&nbsp;
@@ -314,8 +307,9 @@ export default function Component() {
 					<TextIcon className="text-[var(--jsx-color)]" icon={JSXIcon} /> or TypeScript React.js&nbsp;
 					<TextIcon className="text-[var(--tsx-color)]" icon={TSXIcon} /> or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
 				</P>
+				<Hr />
 				<H2>
-					Get Started Using the <Code>Feather</Code> Icon With a CDN
+					Using the <Code>Feather</Code> Icon With a CDN
 				</H2>
 				<P>To get started with Feather using a CDN (content delivery network), follow these steps:</P>
 				<Ol>
@@ -346,8 +340,9 @@ export default function Component() {
 						</html>
 					`)}
 				</Pre>
+				<Hr />
 				<H2>
-					Get Started Using the <Code>Feather</Code> Icon With React.js&nbsp;
+					Using the <Code>Feather</Code> Icon With React.js&nbsp;
 					<TextIcon className="text-[var(--jsx-color)]" icon={JSXIcon} />
 				</H2>
 				<P>To get started with Feather using React.js, follow these steps:</P>
@@ -389,18 +384,38 @@ export default function Component() {
 						}
 					`)}
 				</Pre>
+				<Hr />
 				<div>
 					<small>Feather is by @colebemis and feathericons.dev is by @username_ZAYDEK</small>
 					<br />
 					<small>Icons are licensed as MIT open source. Icons may be used for personal and commercial use without attribution.</small>
 					<br />
 					<small>
-						Built using React.js&nbsp;
-						<TextIcon style={{ color: ReactJs.hex }} icon={ReactJsIcon as any} />, Next.js&nbsp;
-						<TextIcon style={{ color: NextJs.hex }} icon={NextJsIcon as any} />, TypeScript&nbsp;
-						<TextIcon style={{ color: TypeScript.hex }} icon={TypeScriptIcon as any} />, Tailwind CSS&nbsp;
-						<TextIcon style={{ color: TailwindCss.hex }} icon={TailwindCssIcon as any} />, and Sass&nbsp;
-						<TextIcon style={{ color: Sass.hex }} icon={SassIcon as any} />
+						Built using{" "}
+						<A href="https://reactjs.org">
+							React.js&nbsp;
+							<TextIcon style={{ color: ReactJs.hex }} icon={ReactJsIcon as any} />
+						</A>
+						,{" "}
+						<A href="https://nextjs.org">
+							Next.js&nbsp;
+							<TextIcon style={{ color: NextJs.hex }} icon={NextJsIcon as any} />
+						</A>
+						,{" "}
+						<A href="https://typescriptlang.org">
+							TypeScript&nbsp;
+							<TextIcon style={{ color: TypeScript.hex }} icon={TypeScriptIcon as any} />
+						</A>
+						,{" "}
+						<A href="https://tailwindcss.com">
+							Tailwind CSS&nbsp;
+							<TextIcon style={{ color: TailwindCss.hex }} icon={TailwindCssIcon as any} />
+						</A>
+						,{" "}
+						<A href="https://sass-lang.com">
+							and Sass&nbsp;
+							<TextIcon style={{ color: Sass.hex }} icon={SassIcon as any} />
+						</A>
 					</small>
 					<br />
 				</div>
