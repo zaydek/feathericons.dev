@@ -200,10 +200,7 @@ function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code:
 function Pre({ children }: JSX.IntrinsicElements["pre"]) {
 	const [lang, code] = useMemo(() => {
 		const $children = children as ReactElement<{ className?: string; children: string }>
-		return [
-			getLangFromClassName($children.props.className) as Lang | undefined,
-			$children.props.children.trim(),
-		] as const
+		return [getLangFromClassName($children.props.className) as Lang | undefined, $children.props.children.trim()] as const
 	}, [children])
 
 	return <SyntaxHighlighting lang={lang} code={code} />
