@@ -81,7 +81,7 @@ function Header2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="my-8 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
+		<ol className="my-16 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
 			{children}
 		</ol>
 	)
@@ -97,7 +97,7 @@ function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-24 before:w-24 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/75
-							before:text-[10px] before:font-[700] before:tabular-nums before:text-gray-700
+							before:text-[10px] before:font-[600] before:tabular-nums before:text-gray-700
 								before:[content:_counter(li)]"
 			style={{ counterIncrement: "li 1" }}
 			{...props}
@@ -211,7 +211,7 @@ function Pre({ children }: JSX.IntrinsicElements["pre"]) {
 //// 	return (
 //// 		// TODO: Add font here?
 //// 		<code
-//// 			className="m-2 border border-blue-500 bg-white p-2
+//// 			className="m-2 border border-gray-300 bg-white p-2
 //// 				text-[12px] font-[600] tabular-nums text-blue-500"
 //// 			{...props}
 //// 		>

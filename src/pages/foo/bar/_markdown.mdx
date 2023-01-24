@@ -11,7 +11,7 @@ Feather can easily be used in most environments. Use this website to quickly sea
 To get started with Feather using a CDN, follow these steps:
 
 1. Add `<script src="https://unpkg.com/feather-icons"></script>` to `<head>`
-2. Add icons using `<i data-feather="{icon-name}"></i>` syntax
+2. Add as many icons as desired using `<i data-feather="{icon-name}"></i>` syntax
 3. Call `feather.replace()`
 
 For example:
@@ -39,8 +39,8 @@ For example:
 To get started with Feather using [NPM](https://npmjs.com), follow these steps:
 
 1. Add `<script src="https://unpkg.com/feather-icons"></script>` to `<head>`
-2. Add icons using `<i data-feather="{icon-name}"></i>` syntax
-3. Call `feather.icons`
+2. Add as many icons as desired using `<i data-feather="{icon-name}"></i>` syntax
+3. Call `feather.icons.{icon-name}.toSvg()`
 
 For example:
 
@@ -50,9 +50,7 @@ npm i feather-icons
 
 ```js
 import feather from "feather-icons"
-```
 
-```js
 feather.icons.feather.toSvg()
 // <svg class="feather feather-feather" ...><line ... /><line ... /></svg>
 
