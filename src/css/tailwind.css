@@ -294,10 +294,7 @@ video {
 /* 	--tw-backdrop-sepia: ; */
 /* } */
 
-/* @tailwind base; */
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+/******************************************************************************/
 
 /* :not(svg > *) { */
 /* 	outline: 1px solid hsl(200, 100%, 50%, 0.5); */
@@ -317,3 +314,10 @@ textarea:focus         { outline: none; }
 
 /* input[type=text]:focus-visible { outline: none; } */
 /* svg { overflow: visible; } */
+
+/******************************************************************************/
+
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;

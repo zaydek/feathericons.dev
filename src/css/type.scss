@@ -14,7 +14,7 @@ $sans: (
 );
 
 $code: (
-	'Fira Code', // Added
+	//// 'Fira Code', // Added
 	ui-monospace,
 	SFMono-Regular,
 	Consolas,
@@ -45,12 +45,6 @@ $code: (
 	font-feature-settings: "tnum";
 	letter-spacing: 0.0125em;
 }
-//// :is(pre, code) {
-//// 	white-space: pre;
-//// 	font: 400 14px / normal var(--code);
-//// 	font-feature-settings: "tnum";
-//// 	letter-spacing: null;
-//// }
 
 .prose {
 	white-space: normal;
@@ -59,25 +53,25 @@ $code: (
 	//// letter-spacing: -0.005em;
 	letter-spacing: null;
 }
-.prose h1 {
+h1 {
 	white-space: normal;
 	font: 600 24px / 1.25 var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
-.prose h2 {
+h2 {
 	white-space: normal;
 	font: 600 20px / 1.25 var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
-.prose pre code {
+pre code {
 	white-space: pre;
 	font: 400 #{16px * 0.875} / 1.6 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
-.prose code {
+code {
 	white-space: pre;
 	font: 400 0.875em / normal var(--code);
 	font-feature-settings: "tnum";

@@ -6,7 +6,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest"
-import { JSXIcon, SVGIcon, TSXIcon } from "./icon-config"
+import { ReactJsIcon, ReactJsIconColor, SvgIcon, SvgIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
 import { download } from "./lib/download"
@@ -300,11 +300,11 @@ function FormatButton() {
 	const ref = useRef<HTMLDivElement | null>(null)
 	const [show, setShow] = useState(false)
 
-	const [className, svg, format] = useMemo(() => {
+	const [color, svg, desc] = useMemo(() => {
 		return {
-			svg: ["text-[var(--svg-color)]", SVGIcon, "SVG"] as const,
-			jsx: ["text-[var(--jsx-color)]", JSXIcon, "REACT"] as const,
-			tsx: ["text-[var(--tsx-color)]", TSXIcon, "TYPESCRIPT REACT"] as const,
+			svg: [SvgIconColor, SvgIcon, "SVG"] as const,
+			jsx: [ReactJsIconColor, ReactJsIcon, "REACT"] as const,
+			tsx: [TypeScriptIconColor, TypeScriptIcon, "TYPESCRIPT REACT"] as const,
 		}[formatAs]
 	}, [formatAs])
 
@@ -337,8 +337,8 @@ function FormatButton() {
 						[&:hover:active]:bg-gray-200"
 					onClick={e => setShow(curr => !curr)}
 				>
-					<Icon className={`h-16 w-16 ${className}`} icon={svg} />
-					<TypographyCaps className="text-gray-700">FORMAT AS {format}</TypographyCaps>
+					<Icon className="h-16 w-16" style={{ color }} icon={svg} />
+					<TypographyCaps className="text-gray-700">FORMAT AS {desc}</TypographyCaps>
 				</button>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-36 w-36 items-center justify-center">
@@ -372,7 +372,7 @@ function FormatButton() {
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 text-[var(--svg-color)]" icon={SVGIcon} />
+							<Icon className="h-16 w-16" style={{ color: SvgIconColor }} icon={SvgIcon} />
 							<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
 						</button>
 						<button
@@ -384,7 +384,7 @@ function FormatButton() {
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 text-[var(--jsx-color)]" icon={JSXIcon} />
+							<Icon className="h-16 w-16" style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />
 							<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
 						</button>
 						<button
@@ -396,7 +396,7 @@ function FormatButton() {
 								setShow(false)
 							}}
 						>
-							<Icon className="h-16 w-16 text-[var(--tsx-color)]" icon={TSXIcon} />
+							<Icon className="h-16 w-16" style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />
 							<TypographyCaps className="text-gray-700">TYPESCRIPT REACT</TypographyCaps>
 						</button>
 					</div>
