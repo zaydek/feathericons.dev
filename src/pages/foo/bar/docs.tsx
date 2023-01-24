@@ -29,9 +29,10 @@ function getString(children: undefined | Arrayable<string> | Arrayable<ReactElem
 
 function getId(str: string) {
 	return str
-		.toLowerCase()
+		.trim()
 		.replace(/\s+/g, "-")
 		.replace(/[^a-zA-Z0-9-_]/g, "")
+		.toLowerCase()
 }
 
 function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
@@ -100,7 +101,7 @@ function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 
 	useEffect(() => {
 		async function initHighlighter() {
-			const highlighter = await getHighlighter({ theme: "github-dark-dimmed" satisfies Theme })
+			const highlighter = await getHighlighter({ theme: "github-dark" satisfies Theme })
 			setHighlighter(highlighter)
 		}
 		initHighlighter()
