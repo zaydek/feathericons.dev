@@ -27,7 +27,6 @@ function getString(children: undefined | Arrayable<string> | Arrayable<ReactElem
 	return str
 }
 
-// https://tomekdev.com/posts/anchors-for-headings-in-mdx#override-heading-component
 function getId(str: string) {
 	return str
 		.toLowerCase()
@@ -42,12 +41,7 @@ function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h1 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
 			{children}
-			<a
-				href={href}
-				className="absolute top-0 right-[100%] bottom-0
-					flex items-center px-10
-						opacity-0 [h1:hover_&]:opacity-100"
-			>
+			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [h1:hover_&]:opacity-100">
 				<Icon className="h-16 w-16 text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h1>
@@ -61,19 +55,16 @@ function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h2 id={id} className="relative my-16 scroll-my-16 text-gray-800" {...props}>
 			{children}
-			<a
-				href={href}
-				className="absolute top-0 right-[100%] bottom-0
-					flex items-center px-10
-						opacity-0 [h2:hover_&]:opacity-100"
-			>
+			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [h2:hover_&]:opacity-100">
 				<Icon className="h-16 w-16 text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h2>
 	)
 }
 
-////////////////////////////////////////////////////////////////////////////////
+function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
+	return <p {...props}>{children}</p>
+}
 
 function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
@@ -186,39 +177,8 @@ function Pre({ lang, children: code }: { lang: Lang; children: string }) {
 	)
 }
 
-//// function Pre({ children }: JSX.IntrinsicElements["pre"]) {
-//// 	const [lang, code] = useMemo(() => {
-//// 		const $children = children as ReactElement<{ className?: string; children: string }>
-//// 		return [getLangFromClassName($children.props.className) as Lang | undefined, $children.props.children.trim()] as const
-//// 	}, [children])
-////
-//// 	return <SyntaxHighlighting lang={lang} code={code} />
-//// }
-
-//// function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
-//// 	return (
-//// 		// TODO: Add font here?
-//// 		<code
-//// 			className="mx-2 border border-gray-300 bg-white p-2
-//// 				text-[12px] font-[600] tabular-nums text-blue-500"
-//// 			{...props}
-//// 		>
-//// 			{children}
-//// 		</code>
-//// 	)
-//// }
-
-function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
-	return (
-		// TODO: Add font here?
-		<code
-			className="bg-gray-200/75 p-4
-				text-[12px] font-[600] tabular-nums text-gray-700"
-			{...props}
-		>
-			{children}
-		</code>
-	)
+function Hr(props: JSX.IntrinsicElements["hr"]) {
+	return <hr className="my-16" {...props} />
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -231,47 +191,21 @@ function A({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	)
 }
 
-function Strong({ children, ...props }: JSX.IntrinsicElements["strong"]) {
+function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
-		<strong className="font-[500]" {...props}>
+		// TODO: Add font here?
+		<code className="bg-gray-200/75 p-4 text-[12px] font-[600] tabular-nums text-gray-700" {...props}>
 			{children}
-		</strong>
+		</code>
 	)
-}
-
-function Hairline(props: JSX.IntrinsicElements["hr"]) {
-	return <hr className="my-16" {...props} />
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-//// // prettier-ignore
-//// const components = {
-//// 	SelectedName: () => <Code>feather</Code>,
-////
-//// 	a:      Anchor,
-//// 	code:   Code,
-//// 	h1:     Header1,
-//// 	h2:     Header2,
-//// 	hr:     Hairline,
-//// 	li:     ListItem,
-//// 	ol:     OrderedList,
-//// 	pre:    Pre,
-//// 	strong: Strong,
-//// }
-
-function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
-	return <p {...props}>{children}</p>
-}
-
-function Hr(props: JSX.IntrinsicElements["hr"]) {
-	return <hr className="my-16" {...props} />
 }
 
 // Expose className for color or use style
 function TextIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	return <Icon className={cx("inline-block h-[1.25em] w-[1.25em] align-[-0.1875em]", className)} icon={icon} {...props} />
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 export default function Component() {
 	return (
@@ -287,8 +221,8 @@ export default function Component() {
 				<P>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as SVG&nbsp;
 					<TextIcon className="text-[var(--svg-color)]" icon={SVGIcon} />, React.js&nbsp;
-					<TextIcon className="text-[var(--jsx-color)]" icon={JSXIcon} /> or TypeScript React.js&nbsp;
-					<TextIcon className="text-[var(--tsx-color)]" icon={TSXIcon} /> or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
+					<TextIcon className="text-[var(--jsx-color)]" icon={JSXIcon} />, or TypeScript React.js&nbsp;
+					<TextIcon className="text-[var(--tsx-color)]" icon={TSXIcon} />, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
 				</P>
 				<Hr />
 				<H2>
@@ -329,10 +263,6 @@ export default function Component() {
 					<TextIcon className="text-[var(--jsx-color)]" icon={JSXIcon} />
 				</H2>
 				<P>To get started with Feather using React.js, follow these steps:</P>
-				{/* <P>
-					To get started with Feather using React.js&nbsp;
-					<Inline className="text-[var(--jsx-color)]" icon={JSXIcon} />, follow these steps:
-				</P> */}
 				<Ol>
 					<Li>
 						Run <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code>
