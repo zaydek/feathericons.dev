@@ -26,6 +26,14 @@ module.exports = {
 		minHeight:    sizes,
 		minWidth:     sizes,
 		spacing:      sizes,
+		//// xtend: {
+		//// 	colors: {
+		//// 		"trim-color": "hsl(200, 100%, 60%)",
+		//// 		"svg-color":  "#ffb13b",
+		//// 		"jsx-color":  "#61dafb",
+		//// 		"tsx-color":  "#3178c6",
+		//// 	},
+		//// ,
 	},
 	plugins: [],
 }
