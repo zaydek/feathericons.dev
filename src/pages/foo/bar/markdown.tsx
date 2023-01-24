@@ -185,7 +185,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 
 	return (
 		<pre
-			className="relative -mx-24 my-8 rounded-24 bg-gray-900 p-24 py-24 text-gray-400 [tab-size:_2]
+			className="relative my-8 rounded-24 bg-gray-900 py-24 text-gray-400 [tab-size:_2]
 				[pre_+_&]:-mt-[calc(24px_+_1px)] [pre_+_&]:border [pre_+_&]:border-solid [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
 					[&:has(+_pre)]:rounded-b-0"
 			{...props}
@@ -201,9 +201,9 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 					: // Syntax highlighting
 					  tokens.map((token, y) => (
 							// <div key={y} className="px-24 hover:bg-gray-800">
-							<div key={y} className="relative -mx-[1ch] px-24 pl-[4ch] hover:bg-gray-800">
+							<div key={y} className="relative px-[6ch] hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-[2ch] text-right text-gray-500">{y + 1}</div>
+									<div className="w-[4ch] text-right text-gray-500">{y + 1}</div>
 								</div>
 								{token.length > 0 ? (
 									token.map(({ content, color }, x) => (
