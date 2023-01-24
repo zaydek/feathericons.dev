@@ -2,7 +2,7 @@ import * as feather from "../../../data/react-feather"
 
 import { MDXProvider } from "@mdx-js/react"
 import { ReactElement, ReactNode, useEffect, useState } from "react"
-import { getHighlighter, Highlighter, IThemedToken } from "shiki-es"
+import { getHighlighter, Highlighter, IThemedToken, Theme } from "shiki-es"
 import { Icon } from "../../../lib/react/icon"
 import { ThickIcon } from "../../../typography"
 import Markdown from "./_markdown.mdx"
@@ -160,7 +160,7 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 	// Load highlighter
 	useEffect(() => {
 		async function init() {
-			const highlighter = await getHighlighter({ theme: "github-dark-dimmed" })
+			const highlighter = await getHighlighter({ theme: "github-dark" satisfies Theme })
 			setHighlighter(highlighter)
 		}
 		init()
@@ -185,9 +185,8 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 
 	return (
 		<pre
-			className="relative my-8 rounded-24 bg-gray-900 py-24 text-gray-400 [tab-size:_2]
-				[pre_+_&]:-mt-[calc(24px_+_1px)] [pre_+_&]:border [pre_+_&]:border-solid [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
-					[&:has(+_pre)]:rounded-b-0"
+			className="relative my-8 -mx-[6ch] rounded-24 border-t-0 bg-gray-900 py-24 text-gray-400
+				[tab-size:_2] [pre_+_&]:-mt-[calc(24px_+_1px)] [&_+_pre]:rounded-t-0 [&:has(+_pre)]:rounded-b-0"
 			{...props}
 		>
 			<code>

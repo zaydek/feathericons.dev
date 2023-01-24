@@ -1,19 +1,19 @@
-@use "sass:meta";
-
-@use "./tailwind-colors" as *;
-
-// --tw-*
-:root {
-	@each $k1, $v1 in $tailwind-colors {
-		@if meta.type-of($v1) == map {
-			@each $k2, $v2 in $v1 {
-				--tw-#{$k1}-#{$k2}: #{$v2};
-			}
-		} @else {
-			--tw-#{$k1}: #{$v1};
-		}
-	}
-}
+//// @use "sass:meta";
+////
+//// @use "./tailwind-colors" as *;
+////
+//// // --tw-*
+//// :root {
+//// 	@each $k1, $v1 in $tailwind-colors {
+//// 		@if meta.type-of($v1) == map {
+//// 			@each $k2, $v2 in $v1 {
+//// 				--tw-#{$k1}-#{$k2}: #{$v2};
+//// 			}
+//// 		} @else {
+//// 			--tw-#{$k1}: #{$v1};
+//// 		}
+//// 	}
+//// }
 
 :root {
 	--seed-h: 220;

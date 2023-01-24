@@ -1,12 +1,8 @@
-// TODO: Do we add or remove Tailwind's reset?
-import "the-new-css-reset"
-
-import "../css/vars-2.scss"
-
 import "../css/base.scss"
+import "../css/misc.scss"
 import "../css/type.scss"
+//// import "../css/vars-2.scss"
 
-import "../css/globals.scss"
 import "../css/tailwind.css"
 
 import { AppProps } from "next/app"
