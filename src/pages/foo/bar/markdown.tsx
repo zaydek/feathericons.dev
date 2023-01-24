@@ -1,8 +1,8 @@
 import * as feather from "../../../data/react-feather"
 
 import { MDXProvider } from "@mdx-js/react"
-import { ReactElement, ReactNode, useEffect, useState } from "react"
-import { getHighlighter, Highlighter, IThemedToken, Theme } from "shiki-es"
+import { ReactElement, ReactNode, useEffect, useMemo, useState } from "react"
+import { getHighlighter, Highlighter, IThemedToken, Lang, Theme } from "shiki-es"
 import { Icon } from "../../../lib/react/icon"
 import { ThickIcon } from "../../../typography"
 import Markdown from "./_markdown.mdx"
@@ -148,34 +148,27 @@ function getLangFromClassName(className: string | undefined) {
 	return undefined
 }
 
-function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
-	const $children = children as ReactElement<{ className: string; children: string }>
-	const [lang, code] = [getLangFromClassName($children.props.className), $children.props.children.trim()] as const
-
+function SyntaxHighlighting({ lang, code }: { wide?: boolean; lang?: Lang; code: string }) {
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
-	const [ys, setTokens] = useState<IThemedToken[][] | null>(null)
-
+	const [highlighted, setHighlighted] = useState<IThemedToken[][] | null>(null)
 	const [copy, setCopy] = useState(false)
 
-	// Load highlighter
 	useEffect(() => {
-		async function init() {
+		async function initHighlighter() {
 			const highlighter = await getHighlighter({ theme: "github-dark" satisfies Theme })
 			setHighlighter(highlighter)
 		}
-		init()
+		initHighlighter()
 	}, [])
 
-	// Run highlighter
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
 		const tokens = highlighter.codeToThemedTokens(code, lang, undefined, {
 			includeExplanation: false,
 		})
-		setTokens(tokens)
+		setHighlighted(tokens)
 	}, [code, highlighter, lang])
 
-	// Revert copy
 	useEffect(() => {
 		const d = window.setTimeout(() => {
 			setCopy(false)
@@ -185,30 +178,28 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 
 	return (
 		<pre
-			className="relative my-8 -mx-48 rounded-24 border-t-0 bg-gray-900 py-24 text-gray-400
-				[tab-size:_2] [pre_+_&]:-mt-[calc(24px_+_1px)] [&_+_pre]:rounded-t-0 [&:has(+_pre)]:rounded-b-0"
-			{...props}
+			className="relative my-8 -mx-48 rounded-24 bg-gray-900 py-24 text-gray-400
+				[pre_+_&]:-mt-[calc(24px_+_1px)] [pre_+_&]:border-t-1 [pre_+_&]:border-gray-700 [&_+_pre]:rounded-t-0
+					[&:has(+_pre)]:rounded-b-0"
 		>
 			<code>
-				{ys === null
-					? // Loading syntax highlighting
-					  code.split("\n").map((xs, yIndex) => (
-							<div key={yIndex} className="relative px-48 hover:bg-gray-800">
+				{highlighted === null
+					? code.split("\n").map((ys, y) => (
+							<div key={y} className="relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{yIndex + 1}</div>
+									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div>
-								{xs || <br />}
+								{ys || <br />}
 							</div>
 					  ))
-					: // Syntax highlighting
-					  ys.map((xs, yIndex) => (
-							<div key={yIndex} className="relative px-48 hover:bg-gray-800">
+					: highlighted.map((ys, y) => (
+							<div key={y} className="relative px-48 hover:bg-gray-800">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{yIndex + 1}</div>
+									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div>
-								{xs.length > 0 ? (
-									xs.map(({ content, color }, xIndex) => (
-										<span key={xIndex} style={{ color }}>
+								{ys.length > 0 ? (
+									ys.map(({ color, content }, x) => (
+										<span key={x} style={{ color }}>
 											{content}
 										</span>
 									))
@@ -219,16 +210,24 @@ function Pre({ children, ...props }: JSX.IntrinsicElements["pre"]) {
 					  ))}
 			</code>
 			<div className="absolute top-0 right-0">
-				<button
-					//// className="flex h-40 w-40 items-center justify-center rounded-1e3 bg-gray-800"
-					className="flex h-48 w-48 items-center justify-center"
-					onClick={e => setCopy(true)}
-				>
-					<Icon className="h-16 w-16 text-sky-300" icon={copy ? feather.Check : feather.Copy} />
+				<button className="flex h-48 w-48 items-center justify-center" onClick={e => setCopy(true)}>
+					<Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} />
 				</button>
 			</div>
 		</pre>
 	)
+}
+
+function Pre({ children }: JSX.IntrinsicElements["pre"]) {
+	const [lang, code] = useMemo(() => {
+		const $children = children as ReactElement<{ className?: string; children: string }>
+		return [
+			getLangFromClassName($children.props.className) as Lang | undefined,
+			$children.props.children.trim(),
+		] as const
+	}, [children])
+
+	return <SyntaxHighlighting lang={lang} code={code} />
 }
 
 function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {

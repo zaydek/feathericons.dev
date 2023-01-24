@@ -18,9 +18,9 @@ const sizes = {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.tsx"],
-  //// corePlugins: { preflight: false },
 	theme: {
 		borderRadius: sizes,
+		borderWidth:  sizes,
 		maxHeight:    sizes,
 		maxWidth:     sizes,
 		minHeight:    sizes,
