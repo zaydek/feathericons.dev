@@ -75,32 +75,40 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="my-8 flex flex-col gap-8" style={{ counterReset: "li 0" }} {...props}>
+		<ol className="my-8 flex flex-col gap-8" {...props}>
 			{children}
 		</ol>
 	)
 }
 
+//// export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
+//// 	return (
+//// 		<li
+//// 			// Use my-1 to optically align baseline
+//// 			// TODO: Is there a better way to do this? self-baseline?
+//// 			className="relative rounded-1e3 pl-[calc(28px_+_12px)]
+//// 				before:absolute before:top-0 before:bottom-0 before:left-0 before:-my-1
+//// 					before:flex before:h-28 before:w-28 before:items-center before:justify-center
+//// 						before:rounded-1e3 before:bg-gray-200/75
+//// 							before:font-sans before:text-[0.875em] before:tabular-nums before:text-gray-900
+//// 								before:[content:_counter(li)]"
+//// 			style={{ counterIncrement: "li 1" }}
+//// 			{...props}
+//// 		>
+//// 			{children}
+//// 		</li>
+//// 	)
+//// }
+
 export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
-		<li
-			// Use my-1 to optically align baseline
-			// TODO: Is there a better way to do this? self-baseline?
-			className="relative rounded-1e3 pl-[calc(24px_+_12px)]
-				before:absolute before:top-0 before:bottom-0 before:left-0 before:my-1
-					before:flex before:h-24 before:w-24 before:items-center before:justify-center
-						before:rounded-1e3 before:bg-gray-200/75
-							before:font-code before:text-[0.75em] before:tabular-nums before:text-gray-800
-								before:[content:_counter(li)]"
-			style={{ counterIncrement: "li 1" }}
-			{...props}
-		>
+		<li className="list-inside list-decimal" {...props}>
 			{children}
 		</li>
 	)
 }
 
-export function Pre({ lang, selected, children: code }: { lang: Lang; selected?: number[]; children: string }) {
+export function Pre({ language, children: code, ...props }: { language: Lang; children: string } & JSX.IntrinsicElements["pre"]) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -109,11 +117,11 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
 		//// const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
-		const tokens = highlighter.codeToThemedTokens(code, lang, "github-light", {
+		const tokens = highlighter.codeToThemedTokens(code, language, "github-light", {
 			includeExplanation: false,
 		})
 		setTokens(tokens)
-	}, [code, highlighter, lang])
+	}, [code, highlighter, language])
 
 	useEffect(() => {
 		if (!copy) { return } // prettier-ignore
@@ -133,14 +141,15 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 		//// 		[pre_+_&]:-mt-24"
 		//// >
 		<pre
-			className="relative my-16 overflow-auto bg-white text-gray-800
+			className="relative my-16 overflow-auto text-gray-800
 				[pre_+_&]:mt-0"
+			{...props}
 		>
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
-							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100" : "relative"}>
+							<div key={y} className="relative">
 								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div> */}
@@ -149,7 +158,7 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 					  ))
 					: tokens.map((ys, y) => (
 							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
-							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100" : "relative"}>
+							<div key={y} className="relative">
 								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div> */}
@@ -219,7 +228,7 @@ export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 
 export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	return (
-		<a className="text-gray-500 underline" {...props}>
+		<a className="text-gray-500 underline decoration-gray-400" {...props}>
 			{children}
 		</a>
 	)

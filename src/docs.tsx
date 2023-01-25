@@ -45,7 +45,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						</OrderedList>
 						<p>For example:</p>
 						{/* <Pre lang="html" selected={[3, 6, 8]}> */}
-						<Pre lang="html">
+						<Pre language="html">
 							{detab(`
 								<!DOCTYPE html>
 								<html lang="en">
@@ -84,7 +84,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						</OrderedList>
 						<p>For example:</p>
 						{/* <Pre lang="sh" selected={[0]}> */}
-						<Pre lang="sh">
+						<Pre language="sh">
 							{detab(`
 								npm i react-feather
 								# Or yarn add react-feather
@@ -92,7 +92,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							`)}
 						</Pre>
 						{/* <Pre lang="tsx" selected={[0, 6]}> */}
-						<Pre lang="tsx">
+						<Pre language="tsx">
 							{detab(`
 								import { ${name} } from "react-feather"
 
