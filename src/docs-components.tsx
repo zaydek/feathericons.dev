@@ -44,7 +44,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 [h1:hover_&]:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<InlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
+				<SmallInlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h1>
 	)
@@ -60,10 +60,10 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			{/* prettier-ignore */}
 			<a
 				href={href}
-				className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 [h1:hover_&]:opacity-100"
+				className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 [h2:hover_&]:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<InlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
+				<SmallInlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h2>
 	)
@@ -235,5 +235,9 @@ export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 
 // Expose className for color or use style
 export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return <Icon className={cx("mx-[0.125em] inline-block h-[1.125em] w-[1.125em] align-[-0.1875em]", className)} icon={icon} {...props} />
+	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] align-[-0.125em]", className)} icon={icon} {...props} />
+}
+
+export function SmallInlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+	return <Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
 }
