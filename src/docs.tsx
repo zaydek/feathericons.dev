@@ -9,6 +9,8 @@ import { RouteTransition } from "./route-transition"
 
 export function Docs({ name }: { name: keyof typeof manifest }) {
 	return (
+		//// <div className="flex justify-center">
+		//// 	<div className="w-100% max-w-1024">
 		<article className="prose flex flex-col gap-8">
 			<RouteTransition>
 				<Heading1>
@@ -158,5 +160,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 				</Paragraph>
 			</RouteTransition>
 		</article>
+		//// 	</div>
+		//// </div>
 	)
 }

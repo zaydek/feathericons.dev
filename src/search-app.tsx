@@ -257,7 +257,7 @@ function IconPreview() {
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
+		<pre className="min-h-256 overflow-scroll rounded-24 bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (

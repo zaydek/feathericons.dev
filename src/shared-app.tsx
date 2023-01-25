@@ -2,10 +2,10 @@ import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren, useEffect, useState } from "react"
 import { manifest } from "./data/react-feather-manifest"
+import { Docs } from "./docs"
 import { toKebabCase } from "./lib/cases"
 import { IconProps } from "./pages/[icon]"
-import { RouteTransition } from "./route-transition"
-import { SearchBar, SearchGridContents, SidebarFragment } from "./search-app"
+import { SearchBar, SidebarFragment } from "./search-app"
 import { Transition2 } from "./transition-2"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
@@ -172,11 +172,14 @@ export function SharedApp({ name }: Partial<IconProps>) {
 							>
 								<SearchBar />
 							</div>
-							<RouteTransition>
+							{/* <RouteTransition>
 								<div className="px-[var(--rounding)] pb-[calc(var(--rounding)_*_1.5)]">
 									<SearchGridContents />
 								</div>
-							</RouteTransition>
+							</RouteTransition> */}
+							<div className="p-[var(--rounding)] pt-[calc(var(--rounding)_/_2)]">
+								<Docs name={name ?? "Feather"} />
+							</div>
 						</div>
 						{/* RHS */}
 						{/* I seriously don't know a better way to manage width... */}

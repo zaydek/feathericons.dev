@@ -108,7 +108,8 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
-		const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
+		//// const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
+		const tokens = highlighter.codeToThemedTokens(code, lang, "github-light", {
 			includeExplanation: false,
 		})
 		setTokens(tokens)
@@ -123,15 +124,23 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 	}, [copy])
 
 	return (
-		//// <pre className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
+		//// <pre
+		//// 	className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300
+		//// 		[pre_+_&]:-mt-24"
+		//// >
+		//// <pre
+		//// 	className="relative my-16 overflow-scroll bg-gray-900 py-24 text-gray-300
+		//// 		[pre_+_&]:-mt-24"
+		//// >
 		<pre
-			className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300
+			className="relative my-16 overflow-scroll bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]
 				[pre_+_&]:-mt-24"
 		>
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
-							<div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
+							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
+							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100 px-48" : "relative px-48"}>
 								<div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div>
@@ -139,7 +148,8 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
-							<div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
+							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
+							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100 px-48" : "relative px-48"}>
 								<div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div>
@@ -164,7 +174,8 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 					}}
 					aria-label="Copy code to the clipboard"
 				>
-					<Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} />
+					{/* <Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} /> */}
+					<Icon className="h-16 w-16 text-gray-800" icon={copy ? feather.Check : feather.Copy} />
 				</button>
 			</div>
 		</pre>
