@@ -177,7 +177,7 @@ export function SharedApp({ name }: Partial<IconProps>) {
 									<SearchGridContents />
 								</div>
 							</RouteTransition> */}
-							<div className="p-[var(--rounding)] pb-[calc(var(--rounding)_*_2)]">
+							<div className="p-[var(--rounding)] pt-0 pb-[calc(var(--rounding)_*_2)]">
 								<Docs name={name ?? "Feather"} />
 							</div>
 						</div>

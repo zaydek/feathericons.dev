@@ -125,9 +125,11 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 								<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />, website by <Anchor href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</Anchor>&nbsp;
 								<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />
 							</small>
+							<br />
 							<small>
 								Feather is licensed as <Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</Anchor>. Icons may be used for personal and commercial use without attribution.
 							</small>
+							<br />
 							<small>
 								Built using{" "}
 								<Anchor href="https://reactjs.org">

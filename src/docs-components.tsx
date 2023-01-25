@@ -31,6 +31,7 @@ function getId(str: string) {
 		.toLowerCase()
 }
 
+// TODO: Update scroll-my-*
 export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const id = getId(getString(children as any))
 	const href = `#${id}`
@@ -44,12 +45,13 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 [h1:hover_&]:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<SmallInlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
+				<SmallInlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h1>
 	)
 }
 
+// TODO: Update scroll-my-*
 export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const id = getId(getString(children as any))
 	const href = `#${id}`
@@ -63,7 +65,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 [h2:hover_&]:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<SmallInlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
+				<SmallInlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h2>
 	)
@@ -234,9 +236,17 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	)
 }
 
+//// export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
+//// 	return (
+//// 		<code className="border border-gray-300 bg-white py-2 px-4 text-blue-700" {...props}>
+//// 			{children}
+//// 		</code>
+//// 	)
+//// }
+
 export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
-		<code className="bg-gray-200/75 p-4 text-gray-800" {...props}>
+		<code className="bg-gray-200/75 py-2 px-4 text-gray-800" {...props}>
 			{children}
 		</code>
 	)
@@ -244,9 +254,9 @@ export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 
 // Expose className for color or use style
 export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] align-[-0.125em]", className)} icon={icon} {...props} />
+	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] [transform:_translateY(-0.1em)]", className)} icon={icon} {...props} />
 }
 
 export function SmallInlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return <Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
+	return <Icon className={cx("inline-block h-[1em] w-[1em] [transform:_translateY(0.05em)]", className)} icon={icon} {...props} />
 }
