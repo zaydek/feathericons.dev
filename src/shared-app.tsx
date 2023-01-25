@@ -82,42 +82,46 @@ export function SharedApp({ name }: Partial<IconProps>) {
 
 			<Breakpoint minWidth={0} initial>
 				{/* <header> */}
-				<header className="h-320 bg-blue-500">
-					{/* ... */}
-					{/* ... */}
-				</header>
-				<div className="fixed top-0 right-0 left-0">
-					<div className="h-320 bg-[green]"></div>
-					<div className="mx-[-10%] h-320 rounded-b-[100%] bg-[green]"></div>
+				{/* Use z-* here */}
+				<div className="relative z-10">
+					<div className="h-[var(--header-h)] bg-[#1570fb]">
+						{/* ... */}
+						{/* ... */}
+					</div>
 				</div>
-				<div className="sticky top-0 z-10">
+				<div className="fixed top-0 right-0 left-0 hidden 2xl:block">
+					<div className="h-[var(--header-h)] bg-[#1570fb]"></div>
+					<div className="mx-[-10%] h-[var(--header-backdrop-h)] rounded-b-[100%] bg-[#1570fb]"></div>
+				</div>
+				{/* Use z-* here */}
+				<div className="sticky top-0 z-10 hidden 2xl:block">
 					<div className="flex justify-center">
 						<div className="relative">
-							<div className="h-64 w-64 bg-[orange]"></div>
+							<div className="h-[calc(var(--inset-x)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
 							<div className="absolute bottom-0 right-0">
-								<div className="h-32 w-32 rounded-tl-1e3 bg-[pink]"></div>
+								<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tl-1e3 bg-white"></div>
 							</div>
 						</div>
-						<div className="h-32 basis-[calc(2e3px_-_32px_*_2)] bg-[red]"></div>
+						<div className="h-[var(--inset-y)] basis-[calc(var(--main-w)_-_var(--rounding)_*_2)] bg-[#1570fb]"></div>
 						<div className="relative">
-							<div className="h-64 w-64 bg-[orange]"></div>
+							<div className="h-[calc(var(--inset-x)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
 							<div className="absolute bottom-0 left-0">
-								<div className="h-32 w-32 rounded-tr-1e3 bg-[pink]"></div>
+								<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tr-1e3 bg-white"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 				{/* <main> */}
-				<main className="relative -top-32">
-					<div className="flex justify-center px-32">
-						<div className="flex basis-2e3 rounded-32 bg-white [box-shadow:_var(--shadow-2)]">
+				<main className="relative top-0 2xl:-top-[var(--rounding)]">
+					<div className="flex justify-center 2xl:px-[var(--inset-x)]">
+						<div className="flex basis-[var(--main-w)] bg-white [box-shadow:_var(--shadow-2)] 2xl:rounded-[var(--rounding)]">
 							<div className="grow">
 								{iota(1e3).map(key => (
 									<div key={key}>Hello {key}</div>
 								))}
 							</div>
-							<div className="w-400">
-								<div className="sticky top-32">
+							<div className="w-[var(--sidebar-w)]">
+								<div className="sticky top-[var(--inset-y)]">
 									<div>Hello</div>
 								</div>
 							</div>

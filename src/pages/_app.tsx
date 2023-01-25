@@ -3,6 +3,7 @@ import "../css/tailwind.css"
 
 import "../css/misc.scss"
 import "../css/type.scss"
+import "../css/vars-layout.scss"
 import "../css/vars.scss"
 
 import { AppProps } from "next/app"
