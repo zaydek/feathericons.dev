@@ -210,41 +210,39 @@ function SearchGridContents() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// function SvgAnchor({ children }: { children: string }) {
-//// 	const href = children.slice("<!-- ".length, -1 * " -->".length)
-////
-//// 	return (
-//// 		<>
-//// 			{"<!-- "}
-//// 			<a href={href} target="_blank" rel="noreferrer" className="underline">
-//// 				{href}
-//// 			</a>
-//// 			{"--> "}
-//// 		</>
-//// 	)
-//// }
-////
-//// function NonSvgAnchor({ children }: { children: string }) {
-//// 	const href = children.slice("// ".length)
-////
-//// 	return (
-//// 		<>
-//// 			{"// "}
-//// 			<a href={href} target="_blank" rel="noreferrer" className="underline">
-//// 				{href}
-//// 			</a>
-//// 		</>
-//// 	)
-//// }
-////
-//// unction Anchor({ children }: { children: string }) {
-//// 	const { formatAs } = useContext(SelectedContext)!
-////
-//// 	// prettier-ignore
-//// 	return formatAs === "svg"
-//// 		? <SvgAnchor>{children}</SvgAnchor>
-//// 		: <NonSvgAnchor>{children}</NonSvgAnchor>
-////
+function HtmlCommentAnchor({ children }: { children: string }) {
+	const href = children.slice("<!-- ".length, -1 * " -->".length)
+
+	return (
+		<>
+			{"<!-- "}
+			<a href={href} target="_blank" rel="noreferrer" className="underline">
+				{href}
+			</a>
+			{"--> "}
+		</>
+	)
+}
+
+function NonHtmlCommentAnchor({ children }: { children: string }) {
+	const href = children.slice("// ".length)
+
+	return (
+		<>
+			{"// "}
+			<a href={href} target="_blank" rel="noreferrer" className="underline">
+				{href}
+			</a>
+		</>
+	)
+}
+
+function CommentAnchor({ formatAs, children }: { formatAs: "svg" | "jsx" | "tsx"; children: string }) {
+	// prettier-ignore
+	return formatAs === "svg"
+		? <HtmlCommentAnchor>{children}</HtmlCommentAnchor>
+		: <NonHtmlCommentAnchor>{children}</NonHtmlCommentAnchor>
+}
 
 function IconPreview() {
 	const { highlighter } = useContext(ShikiContext)!
@@ -280,7 +278,7 @@ function IconPreview() {
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>
-											{content}
+											{y === 0 ? <CommentAnchor formatAs={formatAs}>{content}</CommentAnchor> : content}
 										</span>
 									))
 								) : (
