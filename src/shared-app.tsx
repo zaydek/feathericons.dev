@@ -82,7 +82,8 @@ export function SharedApp({ name }: Partial<IconProps>) {
 
 			<Breakpoint minWidth={0} initial>
 				{/* <header> */}
-				<header className="h-[var(--header-h)] bg-[#1570fb]">
+				{/* TODO: Technically --header-h should be deprecated */}
+				<header className="hidden h-[var(--header-h)] bg-[#1570fb] lg:block">
 					{/* ... */}
 					{/* ... */}
 				</header>
@@ -116,13 +117,15 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				{/* <main> */}
 				<main className="relative top-0 2xl:-top-[var(--rounding)]">
 					<div className="flex justify-center 2xl:px-[var(--inset-x)]">
-						<div className="flex basis-[var(--main-w)] bg-white [box-shadow:_var(--shadow-2)] 2xl:rounded-[var(--rounding)]">
+						<div className="flex basis-[var(--main-w)] bg-white [box-shadow:_var(--shadow-4)] 2xl:rounded-[var(--rounding)]">
+							{/* LHS */}
 							<div className="grow">
 								{iota(1e3).map(key => (
 									<div key={key}>Hello {key}</div>
 								))}
 							</div>
-							<div className="w-[var(--sidebar-w)]">
+							{/* RHS */}
+							<div className="hidden w-[var(--sidebar-w)] [box-shadow:_var(--inset-hairline-shadow-l)] lg:block">
 								<div className="sticky top-[var(--inset-y)]">
 									<div>Hello</div>
 								</div>
