@@ -51,7 +51,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const href = `#${id}`
 
 	return (
-		<h2 id={id} className="relative my-16 scroll-my-16 text-gray-800" {...props}>
+		<h2 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [h2:hover_&]:opacity-100">
 				<Icon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link} />
@@ -180,5 +180,5 @@ export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 
 // Expose className for color or use style
 export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] align-[-0.125em]", className)} icon={icon} {...props} />
+	return <Icon className={cx("mx-[0.125em] inline-block h-[1.125em] w-[1.125em] align-[-0.125em]", className)} icon={icon} {...props} />
 }

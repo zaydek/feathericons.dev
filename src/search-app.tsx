@@ -480,15 +480,23 @@ function CheckboxField({ children, ...props }: AriaCheckboxProps) {
 					<TypographyCaps className="text-gray-700">{children}</TypographyCaps>
 				</div>
 				{/* RHS */}
+				{/* prettier-ignore */}
 				<Transition
 					when={props.checked}
 					s1={{ backgroundColor: "var(--hairline-color)" }}
-					s2={{ backgroundColor: "var(--trim-color)" }}
+					s2={{ backgroundColor: "var(--trim-color)"     }}
 					duration={100}
 					ease={[0, 1, 1, 1]} // No bounce here
 				>
 					<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--trim-color)]">
-						<Transition when={props.checked} s1={{ transform: "translateX(0%)" }} s2={{ transform: "translateX(50%)" }} duration={100} ease={[0, 1, 0.5, 1.25]}>
+						{/* prettier-ignore */}
+						<Transition
+							when={props.checked}
+							s1={{ transform: "translateX(0%)"  }}
+							s2={{ transform: "translateX(50%)" }}
+							duration={100}
+							ease={[0, 1, 0.5, 1.25]}
+						>
 							<div className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
 						</Transition>
 					</div>

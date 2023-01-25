@@ -79,9 +79,9 @@ export function SharedApp({ kebabCase, titleCase, children }: PropsWithChildren<
 						<RouteTransition>{children}</RouteTransition>
 						<RouteTransition>Hello world!</RouteTransition>
 					</main> */}
-					<RouteTransition>
-						<Docs name={titleCase as any} />
-					</RouteTransition>
+					{/* <RouteTransition> */}
+					<Docs name={titleCase as any} />
+					{/* </RouteTransition> */}
 				</div>
 			)}
 		</>
