@@ -1,6 +1,6 @@
 import Head from "next/head"
 import Link, { LinkProps } from "next/link"
-import { PropsWithChildren, useEffect } from "react"
+import { PropsWithChildren, useEffect, useState } from "react"
 import { toKebabCase } from "./lib/cases"
 import { iota } from "./lib/iota"
 import { IconProps } from "./pages/[icon]"
@@ -19,6 +19,34 @@ function ComponentA() {
 
 function ComponentB() {
 	return <>Hello, world! B</>
+}
+
+//// function useBreakpoint(minWidth: number) {
+//// 	const [matches, setMatches] = useState(typeof window === "undefined" ? true : window.innerWidth >= minWidth)
+//// 	useEffect(() => {
+//// 		const media = window.matchMedia(`(min-width: ${minWidth}px)`)
+//// 		media.addEventListener("change", e => {
+//// 			setMatches(e.matches)
+//// 		})
+//// 	}, [minWidth])
+//// 	return matches
+//// }
+
+function Breakpoint({ minWidth, initial, children }: PropsWithChildren<{ minWidth: number; initial?: boolean }>) {
+	const [matches, setMatches] = useState(initial ?? false)
+
+	useEffect(() => {
+		const media = window.matchMedia(`(min-width: ${minWidth}px)`)
+		media.addEventListener("change", e => {
+			setMatches(e.matches)
+		})
+	}, [minWidth])
+
+	if (matches) {
+		return <>{children}</>
+	} else {
+		return null
+	}
 }
 
 export function SharedApp({ name }: Partial<IconProps>) {
@@ -52,50 +80,51 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				<meta property="twitter:image" content="https://feathericons.dev/feather-og.png" />
 			</Head>
 
-			{/* <header> */}
-			<header className="h-320 bg-blue-500">
-				{/* ... */}
-				{/* ... */}
-			</header>
-
-			{/* Backdrop */}
-			<div className="fixed top-0 right-0 left-0">
-				<div className="h-320 bg-[green]"></div>
-				<div className="mx-[-10%] h-320 rounded-b-[100%] bg-[green]"></div>
-			</div>
-			<div className="sticky top-0 z-10">
-				<div className="flex justify-center">
-					<div className="relative">
-						<div className="h-64 w-64 bg-[orange]"></div>
-						<div className="absolute bottom-0 right-0">
-							<div className="h-32 w-32 rounded-tl-1e3 bg-[pink]"></div>
+			<Breakpoint minWidth={0} initial>
+				{/* <header> */}
+				<header className="h-320 bg-blue-500">
+					{/* ... */}
+					{/* ... */}
+				</header>
+				<div className="fixed top-0 right-0 left-0">
+					<div className="h-320 bg-[green]"></div>
+					<div className="mx-[-10%] h-320 rounded-b-[100%] bg-[green]"></div>
+				</div>
+				<div className="sticky top-0 z-10">
+					<div className="flex justify-center">
+						<div className="relative">
+							<div className="h-64 w-64 bg-[orange]"></div>
+							<div className="absolute bottom-0 right-0">
+								<div className="h-32 w-32 rounded-tl-1e3 bg-[pink]"></div>
+							</div>
 						</div>
-					</div>
-					<div className="h-32 w-[calc(2e3px_-_64px)] bg-[red]"></div>
-					<div className="relative">
-						<div className="h-64 w-64 bg-[orange]"></div>
-						<div className="absolute bottom-0 left-0">
-							<div className="h-32 w-32 rounded-tr-1e3 bg-[pink]"></div>
+						<div className="h-32 basis-[calc(2e3px_-_32px_*_2)] bg-[red]"></div>
+						<div className="relative">
+							<div className="h-64 w-64 bg-[orange]"></div>
+							<div className="absolute bottom-0 left-0">
+								<div className="h-32 w-32 rounded-tr-1e3 bg-[pink]"></div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
-			{/* <main> */}
-			<main className="relative -top-32 flex justify-center">
-				<div className="flex w-2e3 rounded-32 bg-white [box-shadow:_var(--shadow-2)]">
-					<div className="grow">
-						{iota(1e3).map(key => (
-							<div key={key}>Hello {key}</div>
-						))}
-					</div>
-					<div className="w-400">
-						<div className="sticky top-32">
-							<div>Hello</div>
+				{/* <main> */}
+				<main className="relative -top-32">
+					<div className="flex justify-center px-32">
+						<div className="flex basis-2e3 rounded-32 bg-white [box-shadow:_var(--shadow-2)]">
+							<div className="grow">
+								{iota(1e3).map(key => (
+									<div key={key}>Hello {key}</div>
+								))}
+							</div>
+							<div className="w-400">
+								<div className="sticky top-32">
+									<div>Hello</div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</main>
+				</main>
+			</Breakpoint>
 		</>
 	)
 }

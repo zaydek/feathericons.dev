@@ -212,7 +212,6 @@ function SearchGridContents() {
 
 function HtmlCommentAnchor({ children }: { children: string }) {
 	const href = children.slice("<!-- ".length, -1 * " -->".length)
-
 	return (
 		<>
 			{"<!-- "}
@@ -226,7 +225,6 @@ function HtmlCommentAnchor({ children }: { children: string }) {
 
 function NonHtmlCommentAnchor({ children }: { children: string }) {
 	const href = children.slice("// ".length)
-
 	return (
 		<>
 			{"// "}
