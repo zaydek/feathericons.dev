@@ -2,6 +2,7 @@ import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren, useEffect } from "react"
 import { toKebabCase } from "./lib/cases"
+import { iota } from "./lib/iota"
 import { IconProps } from "./pages/[icon]"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
@@ -51,7 +52,7 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				<meta property="twitter:image" content="https://feathericons.dev/feather-og.png" />
 			</Head>
 
-			{/* Header */}
+			{/* <header> */}
 			<header className="h-320 bg-blue-500">
 				{/* ... */}
 				{/* ... */}
@@ -80,11 +81,19 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				</div>
 			</div>
 
-			{/* Main */}
+			{/* <main> */}
 			<main className="relative -top-32 flex justify-center">
-				<div className="h-2e3 w-2e3 rounded-32 bg-white [box-shadow:_var(--shadow-2)]">
-					{/* ... */}
-					{/* ... */}
+				<div className="flex w-2e3 rounded-32 bg-white [box-shadow:_var(--shadow-2)]">
+					<div className="grow">
+						{iota(1e3).map(key => (
+							<div key={key}>Hello {key}</div>
+						))}
+					</div>
+					<div className="w-400">
+						<div className="sticky top-32">
+							<div>Hello</div>
+						</div>
+					</div>
 				</div>
 			</main>
 		</>
