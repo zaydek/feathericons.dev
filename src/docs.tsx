@@ -59,7 +59,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						`)}
 					</CodeBlock>
 					<Paragraph>
-						Click here to get started with a general <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
+						Click here to get started with a <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
 						<InlineIcon style={{ color: CodePenIconColor }} icon={CodePenIcon} /> template.
 					</Paragraph>
 					<Hairline />
@@ -95,7 +95,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 								return (
 									<div className="flex h-screen items-center justify-center">
 										<div className="flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4">
-											<${name} className="h-4 w-4 text-white" />
+											<${name} className="h-5 w-5 text-white" />
 											<div className="text-sm font-semibold tracking-wider text-white">HELLO WORLD</div>
 										</div>
 									</div>
@@ -103,6 +103,10 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							}
 						`)}
 					</CodeBlock>
+					<Paragraph>
+						Click here to get started with a <Anchor href="https://play.tailwindcss.com/VWngwPjpyy">Tailwind CSS</Anchor>&nbsp;
+						<InlineIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon} /> template.
+					</Paragraph>
 					<Hairline />
 					<Paragraph>
 						<small>
