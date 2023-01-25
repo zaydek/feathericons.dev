@@ -123,8 +123,11 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 	}, [copy])
 
 	return (
-		// <pre className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
-		<pre className="relative my-16 overflow-auto bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
+		//// <pre className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
+		<pre
+			className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300
+				[pre_+_&]:-mt-24"
+		>
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (

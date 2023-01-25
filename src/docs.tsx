@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
-import { Anchor, Code, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph, Pre } from "./docs-components"
+import { Anchor, Code, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph, Pre } from "./docs-components"
 import { CodePenIcon, CodePenIconColor, NextJsIcon, NextJsIconColor, ReactJsIcon, ReactJsIconColor, SassIcon, SassIconColor, SvgIcon, SvgIconColor, TailwindCssIcon, TailwindCssIconColor, TwitterIcon, TwitterIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
@@ -109,15 +109,13 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 					Click here to get started with a <Anchor href="https://play.tailwindcss.com/VWngwPjpyy">Tailwind CSS</Anchor>&nbsp;
 					<InlineIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon} /> template.
 				</Paragraph>
-				{/* <Hairline /> */}
-				<br />
+				<Hairline />
 				<Paragraph>
 					<small>
 						Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
 					</small>
 				</Paragraph>
-				{/* <Hairline /> */}
-				<br />
+				<Hairline />
 				<Paragraph>
 					<small>
 						Icons by <Anchor href="https://twitter.com/colebemis">@colebemis</Anchor>&nbsp;

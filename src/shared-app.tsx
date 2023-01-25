@@ -88,26 +88,29 @@ function Meta({ name }: { name?: keyof typeof manifest }) {
 }
 
 export function SharedApp({ name }: Partial<IconProps>) {
+	const sm = useBreakpoint(640)
 	const lg = useBreakpoint(1024, { initialValue: true })
 
 	const [showSidebar, setShowSidebar] = useState(!lg)
 
 	useEffect(() => {
-		setShowSidebar(!lg)
-	}, [lg])
+		if (!sm) { setShowSidebar(false) } // prettier-ignore
+		if (!lg) { setShowSidebar(true)  } // prettier-ignore
+		setShowSidebar(false)
+	}, [lg, sm])
 
-	return (
-		<div className="flex justify-center">
-			<div className="flex w-100% max-w-1536">
-				<div className="min-w-0">
-					<Docs name="Feather" />
-				</div>
-				<div className="min-w-400">
-					<div>Hello</div>
-				</div>
-			</div>
-		</div>
-	)
+	//// return (
+	//// 	<div className="flex justify-center">
+	//// 		<div className="flex w-100% max-w-1536">
+	//// 			<div className="min-w-0">
+	//// 				<Docs name="Feather" />
+	//// 			</div>
+	//// 			<div className="min-w-400">
+	//// 				<div>Hello</div>
+	//// 			</div>
+	//// 		</div>
+	//// 	</div>
+	//// )
 
 	return (
 		<>
@@ -120,56 +123,53 @@ export function SharedApp({ name }: Partial<IconProps>) {
 			</header>
 
 			{/* Use z-* here */}
-			{false && (
-				<>
-					<div className="sticky top-0 z-10 hidden 2xl:block">
-						<div className="flex">
-							{/* LHS */}
-							<div className="h-[calc(var(--inset-y)_+_var(--rounding))] flex-1 bg-[#1570fb]"></div>
-							<div className="relative">
-								<div className="h-[calc(var(--inset-y)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
-								<div className="absolute bottom-0 right-0">
-									<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tl-1e3 bg-white"></div>
-								</div>
-							</div>
-							<div className="h-[var(--inset-y)] w-100% max-w-[calc(var(--main-w)_-_var(--rounding)_*_2)] bg-[#1570fb]"></div>
-							{/* RHS */}
-							<div className="relative">
-								<div className="h-[calc(var(--inset-y)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
-								<div className="absolute bottom-0 left-0">
-									<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tr-1e3 bg-white"></div>
-								</div>
-							</div>
-							<div className="h-[calc(var(--inset-y)_+_var(--rounding))] flex-1 bg-[#1570fb]"></div>
+			<div className="sticky top-0 z-10 hidden 2xl:block">
+				<div className="flex">
+					{/* LHS */}
+					<div className="h-[calc(var(--inset-y)_+_var(--rounding))] flex-1 bg-[#1570fb]"></div>
+					<div className="relative">
+						<div className="h-[calc(var(--inset-y)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
+						<div className="absolute bottom-0 right-0">
+							<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tl-1e3 bg-white"></div>
 						</div>
 					</div>
-					<div className="sticky top-[calc(var(--inset-y)_+_var(--rounding))] hidden 2xl:block">
-						<div className="h-0">
-							<div className="mx-[-10%] h-[var(--header-backdrop-h)] rounded-b-[100%] bg-[#1570fb]"></div>
+					<div className="h-[var(--inset-y)] w-100% max-w-[calc(var(--main-w)_-_var(--rounding)_*_2)] bg-[#1570fb]"></div>
+					{/* RHS */}
+					<div className="relative">
+						<div className="h-[calc(var(--inset-y)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
+						<div className="absolute bottom-0 left-0">
+							<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tr-1e3 bg-white"></div>
 						</div>
 					</div>
-				</>
-			)}
+					<div className="h-[calc(var(--inset-y)_+_var(--rounding))] flex-1 bg-[#1570fb]"></div>
+				</div>
+			</div>
+			<div className="sticky top-[calc(var(--inset-y)_+_var(--rounding))] hidden 2xl:block">
+				<div className="h-0">
+					<div className="mx-[-10%] h-[var(--header-backdrop-h)] rounded-b-[100%] bg-[#1570fb]"></div>
+				</div>
+			</div>
 
 			{/* <main> */}
 			<main className="relative top-0 2xl:-top-[var(--rounding)]">
 				<div className="flex justify-center 2xl:px-[var(--inset-x)]">
 					<div className="flex w-100% max-w-[var(--main-w)] bg-white [box-shadow:_var(--shadow-4)] 2xl:rounded-[var(--rounding)]">
 						{/* LHS */}
-						<div className="grow">
+						{/* I seriously don't know a better way to manage width... */}
+						<div className="min-w-0 flex-1">
 							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
 								<div>Hello, world!</div>
 							</div>
 							{/* {iota(1e3).map(key => (
 								<div key={key}>Hello {key}</div>
 							))} */}
-							{/* <div className="p-48"> */}
-							<Docs name={name ?? "Feather"} />
-							{/* </div> */}
+							<div className="p-48">
+								<Docs name={name ?? "Feather"} />
+							</div>
 						</div>
 						{/* RHS */}
-						{/* Use shrink-0 to ensure */}
-						<div className="hidden min-w-[var(--sidebar-w)] [box-shadow:_var(--inset-hairline-shadow-l)] lg:block">
+						{/* I seriously don't know a better way to manage width... */}
+						<div className="hidden w-[var(--sidebar-w)] [box-shadow:_var(--inset-hairline-shadow-l)] lg:block">
 							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
 								<SidebarFragment />
 							</div>

@@ -257,7 +257,7 @@ function IconPreview() {
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		<pre className="min-h-256 overflow-x-auto rounded-24 bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
+		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -332,7 +332,7 @@ function FormatButton() {
 		<div className="relative flex flex-col">
 			<div className="relative flex flex-col">
 				<button
-					className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+					className="flex h-32 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 						[&:hover:active]:bg-gray-200"
 					onClick={e => {
 						setShow(curr => !curr)
@@ -426,7 +426,7 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent
 
 	return (
 		<button
-			className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+			className="flex h-32 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
 				setCopy(true)
@@ -458,7 +458,7 @@ function DownloadButton({ icon, onClick, children, ...props }: { icon: IconCompo
 
 	return (
 		<button
-			className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+			className="flex h-32 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
