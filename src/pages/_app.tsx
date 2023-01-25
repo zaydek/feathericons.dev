@@ -1,4 +1,5 @@
 // TODO: Move to _document.tsx?
+import "../css/tailwind-custom-base.css"
 import "../css/tailwind.css"
 
 import "../css/misc.scss"

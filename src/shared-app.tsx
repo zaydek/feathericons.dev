@@ -96,6 +96,8 @@ export function SharedApp({ name }: Partial<IconProps>) {
 		setShowSidebar(!lg)
 	}, [lg])
 
+	//// return <Docs name="Feather" />
+
 	return (
 		<>
 			<Meta />
@@ -110,7 +112,7 @@ export function SharedApp({ name }: Partial<IconProps>) {
 			<div className="sticky top-0 z-10 hidden 2xl:block">
 				<div className="flex">
 					{/* LHS */}
-					<div className="h-[calc(var(--inset-y)_+_var(--rounding))] grow bg-[#1570fb]"></div>
+					<div className="h-[calc(var(--inset-y)_+_var(--rounding))] flex-1 bg-[#1570fb]"></div>
 					<div className="relative">
 						<div className="h-[calc(var(--inset-y)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
 						<div className="absolute bottom-0 right-0">
@@ -125,7 +127,7 @@ export function SharedApp({ name }: Partial<IconProps>) {
 							<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tr-1e3 bg-white"></div>
 						</div>
 					</div>
-					<div className="h-[calc(var(--inset-y)_+_var(--rounding))] grow bg-[#1570fb]"></div>
+					<div className="h-[calc(var(--inset-y)_+_var(--rounding))] flex-1 bg-[#1570fb]"></div>
 				</div>
 			</div>
 			<div className="sticky top-[calc(var(--inset-y)_+_var(--rounding))] hidden 2xl:block">
@@ -139,16 +141,19 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				<div className="flex justify-center 2xl:px-[var(--inset-x)]">
 					<div className="flex basis-[var(--main-w)] bg-white [box-shadow:_var(--shadow-4)] 2xl:rounded-[var(--rounding)]">
 						{/* LHS */}
-						<div className="grow">
+						<div className="flex-1">
 							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
 								<div>Hello, world!</div>
 							</div>
 							{/* {iota(1e3).map(key => (
 								<div key={key}>Hello {key}</div>
 							))} */}
-							<Docs name={name ?? "Feather"} />
+							<div className="p-48">
+								<Docs name={name ?? "Feather"} />
+							</div>
 						</div>
 						{/* RHS */}
+						{/* Use shrink-0 to ensure */}
 						<div className="hidden w-[var(--sidebar-w)] [box-shadow:_var(--inset-hairline-shadow-l)] lg:block">
 							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
 								<div className="flex flex-col gap-16 p-32">
