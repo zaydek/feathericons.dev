@@ -90,9 +90,9 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				<div className="sticky top-0 z-10 hidden 2xl:block">
 					<div className="flex">
 						{/* LHS */}
-						<div className="h-[calc(var(--inset-x)_+_var(--rounding))] grow bg-[#1570fb]"></div>
+						<div className="h-[calc(var(--inset-y)_+_var(--rounding))] grow bg-[#1570fb]"></div>
 						<div className="relative">
-							<div className="h-[calc(var(--inset-x)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
+							<div className="h-[calc(var(--inset-y)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
 							<div className="absolute bottom-0 right-0">
 								<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tl-1e3 bg-white"></div>
 							</div>
@@ -100,15 +100,15 @@ export function SharedApp({ name }: Partial<IconProps>) {
 						<div className="h-[var(--inset-y)] basis-[calc(var(--main-w)_-_var(--rounding)_*_2)] bg-[#1570fb]"></div>
 						{/* RHS */}
 						<div className="relative">
-							<div className="h-[calc(var(--inset-x)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
+							<div className="h-[calc(var(--inset-y)_+_var(--rounding))] w-[calc(var(--inset-x)_+_var(--rounding))] bg-[#1570fb]"></div>
 							<div className="absolute bottom-0 left-0">
 								<div className="h-[var(--rounding)] w-[var(--rounding)] rounded-tr-1e3 bg-white"></div>
 							</div>
 						</div>
-						<div className="h-[calc(var(--inset-x)_+_var(--rounding))] grow bg-[#1570fb]"></div>
+						<div className="h-[calc(var(--inset-y)_+_var(--rounding))] grow bg-[#1570fb]"></div>
 					</div>
 				</div>
-				<div className="sticky top-[calc(var(--inset-x)_+_var(--rounding))] hidden 2xl:block">
+				<div className="sticky top-[calc(var(--inset-y)_+_var(--rounding))] hidden 2xl:block">
 					<div className="h-0">
 						<div className="mx-[-10%] h-[var(--header-backdrop-h)] rounded-b-[100%] bg-[#1570fb]"></div>
 					</div>
