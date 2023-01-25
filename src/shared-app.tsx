@@ -1,8 +1,6 @@
 import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren, useEffect } from "react"
-import { manifest } from "./data/react-feather-manifest"
-import { Docs } from "./docs"
 import { toKebabCase } from "./lib/cases"
 import { IconProps } from "./pages/[icon]"
 
@@ -53,29 +51,50 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				<meta property="twitter:image" content="https://feathericons.dev/feather-og.png" />
 			</Head>
 
-			{/* App */}
-			<div className="p-16">
-				<nav className="flex flex-wrap gap-4">
-					<OrangeLink href="/" aria-label="Navigate to home">
-						<div>Home</div>
-					</OrangeLink>
-					{Object.keys(manifest).map(name => (
-						<OrangeLink key={name} href={`/${toKebabCase(name)}`} aria-label={`Navigate to /${toKebabCase(name)}`}>
-							<div>{name}</div>
-						</OrangeLink>
-					))}
-				</nav>
+			{/* Header */}
+			<header className="h-320 bg-blue-500">
+				{/* ... */}
+				{/* ... */}
+			</header>
+
+			{/* Backdrop */}
+			<div className="fixed top-0 right-0 left-0">
+				<div className="h-320 bg-[green]"></div>
+				<div className="mx-[-10%] h-320 rounded-b-[100%] bg-[green]"></div>
+			</div>
+			<div className="sticky top-0 z-10">
+				<div className="flex justify-center">
+					<div className="relative">
+						<div className="h-64 w-64 bg-[orange]"></div>
+						<div className="absolute bottom-0 right-0">
+							<div className="h-32 w-32 rounded-tl-1e3 bg-[pink]"></div>
+						</div>
+					</div>
+					<div className="h-32 w-[calc(2e3px_-_64px)] bg-[red]"></div>
+					<div className="relative">
+						<div className="h-64 w-64 bg-[orange]"></div>
+						<div className="absolute bottom-0 left-0">
+							<div className="h-32 w-32 rounded-tr-1e3 bg-[pink]"></div>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			{name === undefined ? <ComponentA /> : <Docs name={name as keyof typeof manifest} />}
-
-			{/* {kebabCase === undefined ? (
-				<RouteTransition>
-					<SearchApp />
-				</RouteTransition>
-			) : (
-				<Docs name={titleCase as any} />
-			)} */}
+			{/* Main */}
+			<main className="relative -top-32 flex justify-center">
+				<div className="h-2e3 w-2e3 rounded-32 bg-white [box-shadow:_var(--shadow-2)]">
+					{/* ... */}
+					{/* ... */}
+				</div>
+			</main>
 		</>
 	)
 }
+
+//// {/* {kebabCase === undefined ? (
+//// 	<RouteTransition>
+//// 		<SearchApp />
+//// 	</RouteTransition>
+//// ) : (
+//// 	<Docs name={titleCase as any} />
+//// )} */}
