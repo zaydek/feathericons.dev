@@ -88,7 +88,7 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-24 before:w-24 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/75
-							before:text-[11px] before:font-[600] before:text-gray-700
+							before:font-code before:text-[0.75em] before:tabular-nums before:text-gray-700
 								before:[content:_counter(li)]"
 			style={{ counterIncrement: "li 1" }}
 			{...props}
@@ -181,7 +181,6 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 
 export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
-		// TODO: Add font here?
 		<code className="bg-gray-200/75 p-4 text-gray-700" {...props}>
 			{children}
 		</code>

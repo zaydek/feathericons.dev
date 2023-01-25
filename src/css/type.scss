@@ -23,14 +23,12 @@ $code: (
 	monospace,
 );
 
-:root {
+:root, ::before, ::after {
+	tab-size: 2;
 	--sans: #{$sans};
 	--code: #{$code};
-	@at-root {
-		:is(pre, code) {
-			tab-size: 2;
-		}
-	}
+	line-height: normal;
+
 }
 
 .typography-caps {

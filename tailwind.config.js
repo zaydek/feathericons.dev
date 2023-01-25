@@ -19,6 +19,10 @@ const sizes = {
 module.exports = {
 	content: ["./src/**/*.tsx"],
 	theme: {
+		fontFamily: {
+			"sans": "var(--sans)",
+			"code": "var(--code)",
+		},
 		borderRadius: sizes,
 		borderWidth:  {
 			...sizes,
