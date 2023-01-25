@@ -26,6 +26,20 @@ const sizes = {
 	"2e3": "2e3px",
 }
 
+const zIndexes = {
+	  0:   0,
+	 10:  10,
+	 20:  20,
+	 30:  30,
+	 40:  40,
+	 50:  50,
+	 60:  60,
+	 70:  70,
+	 80:  80,
+	 90:  90,
+	100: 100,
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.tsx"],
@@ -44,6 +58,7 @@ module.exports = {
 		minHeight: sizes,
 		minWidth:  sizes,
 		spacing:   sizes,
+		zIndex:    zIndexes,
 		//// extend: {
 		//// 	colors: {
 		//// 		"trim-color": "hsl(200, 100%, 60%)",
