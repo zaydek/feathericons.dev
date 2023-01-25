@@ -36,7 +36,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const href = `#${id}`
 
 	return (
-		<h1 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
+		<h1 id={id} className="relative my-16 scroll-my-16 text-black" {...props}>
 			{children}
 			{/* prettier-ignore */}
 			<a
@@ -55,7 +55,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const href = `#${id}`
 
 	return (
-		<h2 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
+		<h2 id={id} className="relative my-16 scroll-my-16 text-black" {...props}>
 			{children}
 			{/* prettier-ignore */}
 			<a
@@ -88,7 +88,7 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-24 before:w-24 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/75
-							before:font-code before:text-[0.75em] before:tabular-nums before:text-gray-700
+							before:font-code before:text-[0.75em] before:tabular-nums before:text-gray-800
 								before:[content:_counter(li)]"
 			style={{ counterIncrement: "li 1" }}
 			{...props}
@@ -181,7 +181,7 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 
 export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
-		<code className="bg-gray-200/75 p-4 text-gray-700" {...props}>
+		<code className="bg-gray-200/75 p-4 text-gray-800" {...props}>
 			{children}
 		</code>
 	)
