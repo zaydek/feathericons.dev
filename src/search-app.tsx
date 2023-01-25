@@ -564,7 +564,7 @@ export function SidebarFragment() {
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
 	return (
-		<>
+		<div className="flex flex-col gap-16 p-32">
 			<CheckboxField checked={viewSource} setChecked={setViewSource}>
 				VIEW SOURCE
 			</CheckboxField>
@@ -610,7 +610,7 @@ export function SidebarFragment() {
 			>
 				PREVIEW STROKE WIDTH
 			</SliderFieldFragment>
-		</>
+		</div>
 	)
 }
 

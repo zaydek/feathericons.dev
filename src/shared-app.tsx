@@ -96,7 +96,18 @@ export function SharedApp({ name }: Partial<IconProps>) {
 		setShowSidebar(!lg)
 	}, [lg])
 
-	//// return <Docs name="Feather" />
+	return (
+		<div className="flex justify-center">
+			<div className="flex w-[100%] max-w-[var(--main-w)]">
+				<div className="grow">
+					<Docs name="Feather" />
+				</div>
+				<div className="w-400 shrink-0">
+					<div>Hello, world!</div>
+				</div>
+			</div>
+		</div>
+	)
 
 	return (
 		<>
@@ -148,17 +159,15 @@ export function SharedApp({ name }: Partial<IconProps>) {
 							{/* {iota(1e3).map(key => (
 								<div key={key}>Hello {key}</div>
 							))} */}
-							<div className="p-48">
-								<Docs name={name ?? "Feather"} />
-							</div>
+							{/* <div className="p-48"> */}
+							<Docs name={name ?? "Feather"} />
+							{/* </div> */}
 						</div>
 						{/* RHS */}
 						{/* Use shrink-0 to ensure */}
 						<div className="hidden w-[var(--sidebar-w)] [box-shadow:_var(--inset-hairline-shadow-l)] lg:block">
 							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
-								<div className="flex flex-col gap-16 p-32">
-									<SidebarFragment />
-								</div>
+								<SidebarFragment />
 							</div>
 						</div>
 					</div>
@@ -202,7 +211,7 @@ export function SharedApp({ name }: Partial<IconProps>) {
 				{/* Use flex to forward bounding box dimensions */}
 				<aside className="fixed top-0 right-0 bottom-0 z-100 flex">
 					<div className="w-[var(--sidebar-w)] bg-white [box-shadow:_var(--shadow-1)]">
-						<div>Hello</div>
+						<SidebarFragment />
 					</div>
 				</aside>
 			</Transition2>
