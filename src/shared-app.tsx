@@ -98,13 +98,8 @@ export function SharedApp({ name }: Partial<IconProps>) {
 
 	return (
 		<div className="flex justify-center">
-			<div className="flex w-[100%] max-w-[var(--main-w)]">
-				<div className="grow">
-					<Docs name="Feather" />
-				</div>
-				<div className="w-400 shrink-0">
-					<div>Hello, world!</div>
-				</div>
+			<div className="w-100% max-w-1536">
+				<Docs name="Feather" />
 			</div>
 		</div>
 	)

@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
-import { Anchor, Code, CodeBlock, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph } from "./docs-components"
+import { Anchor, Code, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph, Pre } from "./docs-components"
 import { CodePenIcon, CodePenIconColor, NextJsIcon, NextJsIconColor, ReactJsIcon, ReactJsIconColor, SassIcon, SassIconColor, SvgIcon, SvgIconColor, TailwindCssIcon, TailwindCssIconColor, TwitterIcon, TwitterIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
@@ -43,22 +43,22 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 					</ListItem>
 				</OrderedList>
 				<p>For example:</p>
-				<CodeBlock lang="html" selected={[3, 6, 8]}>
+				<Pre lang="html" selected={[3, 6, 8]}>
 					{detab(`
-							<!DOCTYPE html>
-							<html lang="en">
-								<head>
-									<script src="https://unpkg.com/feather-icons"></script>
-								</head>
-								<body>
-									<i data-feather="${toKebabCase(name)}"></i>
-									<script>
-										feather.replace()
-									</script>
-								</body>
-							</html>
-						`)}
-				</CodeBlock>
+						<!DOCTYPE html>
+						<html lang="en">
+							<head>
+								<script src="https://unpkg.com/feather-icons"></script>
+							</head>
+							<body>
+								<i data-feather="${toKebabCase(name)}"></i>
+								<script>
+									feather.replace()
+								</script>
+							</body>
+						</html>
+					`)}
+				</Pre>
 				<Paragraph>
 					Click here to get started with a <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
 					<InlineIcon style={{ color: CodePenIconColor }} icon={CodePenIcon} /> template.
@@ -82,29 +82,29 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 					</ListItem>
 				</OrderedList>
 				<p>For example:</p>
-				<CodeBlock lang="sh" selected={[0]}>
+				<Pre lang="sh" selected={[0]}>
 					{detab(`
-							npm i react-feather
-							# Or yarn add react-feather
-							# Or pnpm i react-feather
-						`)}
-				</CodeBlock>
-				<CodeBlock lang="tsx" selected={[0, 6]}>
+						npm i react-feather
+						# Or yarn add react-feather
+						# Or pnpm i react-feather
+					`)}
+				</Pre>
+				<Pre lang="tsx" selected={[0, 6]}>
 					{detab(`
-							import { ${name} } from "react-feather"
+						import { ${name} } from "react-feather"
 
-							export default function App() {
-								return (
-									<div className="flex h-screen items-center justify-center">
-										<div className="flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4">
-											<${name} className="h-5 w-5 text-white" />
-											<div className="text-sm font-semibold tracking-wider text-white">HELLO WORLD</div>
-										</div>
+						export default function App() {
+							return (
+								<div className="flex h-screen items-center justify-center">
+									<div className="flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4">
+										<${name} className="h-5 w-5 text-white" />
+										<div className="text-sm font-semibold tracking-wider text-white">HELLO WORLD</div>
 									</div>
-								)
-							}
-						`)}
-				</CodeBlock>
+								</div>
+							)
+						}
+					`)}
+				</Pre>
 				<Paragraph>
 					Click here to get started with a <Anchor href="https://play.tailwindcss.com/VWngwPjpyy">Tailwind CSS</Anchor>&nbsp;
 					<InlineIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon} /> template.

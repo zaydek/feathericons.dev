@@ -84,8 +84,10 @@ export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"])
 export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li
+			// Use my-1 to optically align baseline
+			// TODO: Is there a better way to do this? self-baseline?
 			className="relative rounded-1e3 pl-[calc(24px_+_12px)]
-				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
+				before:absolute before:top-0 before:bottom-0 before:left-0 before:my-1
 					before:flex before:h-24 before:w-24 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/75
 							before:font-code before:text-[0.75em] before:tabular-nums before:text-gray-800
@@ -98,7 +100,7 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-export function CodeBlock({ lang, selected, children: code }: { lang: Lang; selected?: number[]; children: string }) {
+export function Pre({ lang, selected, children: code }: { lang: Lang; selected?: number[]; children: string }) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -121,7 +123,8 @@ export function CodeBlock({ lang, selected, children: code }: { lang: Lang; sele
 	}, [copy])
 
 	return (
-		<pre className="relative my-16 -mx-48 overflow-x-auto bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
+		// <pre className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
+		<pre className="relative my-16 overflow-auto bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -164,6 +167,35 @@ export function CodeBlock({ lang, selected, children: code }: { lang: Lang; sele
 		</pre>
 	)
 }
+
+//// export function Pre({ lang, selected, children: code }: { lang: Lang; selected?: number[]; children: string }) {
+//// 	const { highlighter } = useContext(ShikiContext)!
+////
+//// 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
+//// 	const [copy, setCopy] = useState(false)
+////
+//// 	useEffect(() => {
+//// 		if (highlighter === null) { return } // prettier-ignore
+//// 		const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
+//// 			includeExplanation: false,
+//// 		})
+//// 		setTokens(tokens)
+//// 	}, [code, highlighter, lang])
+////
+//// 	useEffect(() => {
+//// 		if (!copy) { return } // prettier-ignore
+//// 		const d = window.setTimeout(() => {
+//// 			setCopy(false)
+//// 		}, 1e3)
+//// 		return () => window.clearTimeout(d)
+//// 	}, [copy])
+////
+//// 	return (
+//// 		<pre className="overflow-scroll bg-gray-900 py-24 text-gray-300">
+//// 			<code>{code}</code>
+//// 		</pre>
+//// 	)
+//// }
 
 export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 	return <hr className="my-16" {...props} />
