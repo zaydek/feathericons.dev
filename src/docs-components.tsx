@@ -150,7 +150,7 @@ export function CodeBlock({ lang, children: code }: { lang: Lang; children: stri
 			</code>
 			<div className="absolute top-0 right-0">
 				<button
-					className="flex h-[calc(22.5px_+_24px_*_2)] w-[calc(22.5px_+_24px_*_2)] items-center justify-center"
+					className="flex h-[calc(21px_+_24px_*_2)] w-[calc(21px_+_24px_*_2)] items-center justify-center"
 					onClick={async e => {
 						await navigator.clipboard.writeText(code + "\n")
 						setCopy(true)

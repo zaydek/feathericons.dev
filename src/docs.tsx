@@ -2,9 +2,10 @@ import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
 import { Anchor, Code, CodeBlock, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph } from "./docs-components"
-import { NextJsIcon, NextJsIconColor, ReactJsIcon, ReactJsIconColor, SassIcon, SassIconColor, SvgIcon, SvgIconColor, TailwindCssIcon, TailwindCssIconColor, TwitterIcon, TwitterIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
+import { CodePenIcon, CodePenIconColor, NextJsIcon, NextJsIconColor, ReactJsIcon, ReactJsIconColor, SassIcon, SassIconColor, SvgIcon, SvgIconColor, TailwindCssIcon, TailwindCssIconColor, TwitterIcon, TwitterIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
+import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
-import { RouteTransition } from "./route-transition-2"
+import { RouteTransition } from "./route-transition"
 
 export function Docs({ name }: { name: keyof typeof manifest }) {
 	return (
@@ -34,7 +35,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to <Code>{`<head>`}</Code>
 						</ListItem>
 						<ListItem>
-							Add as many icons as desired using <Code>{`<i data-feather="{icon-name}"></i>`}</Code> syntax
+							Add <Code>{`<i data-feather="${toKebabCase(name)}"></i>`}</Code> syntax
 						</ListItem>
 						<ListItem>
 							Call <Code>{`feather.replace()`}</Code>
@@ -44,19 +45,23 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 					<CodeBlock lang="html">
 						{detab(`
 							<!DOCTYPE html>
-							<html lang='en'>
+							<html lang="en">
 								<head>
-									<script src='https://unpkg.com/feather-icons'></script>
+									<script src="https://unpkg.com/feather-icons"></script>
 								</head>
 								<body>
-									<i data-feather='smile'></i>
+									<i data-feather="${toKebabCase(name)}"></i>
 									<script>
-										feather.replace();
+										feather.replace()
 									</script>
 								</body>
 							</html>
-						`).replaceAll("\t", "  ")}
+						`)}
 					</CodeBlock>
+					<Paragraph>
+						Click here to get started with a general <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
+						<InlineIcon style={{ color: CodePenIconColor }} icon={CodePenIcon} /> template.
+					</Paragraph>
 					<Hairline />
 					<Heading2>
 						Using {name} <InlineIcon icon={feather[name]} /> With React.js&nbsp;
@@ -68,10 +73,10 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							Run <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
 						</ListItem>
 						<ListItem>
-							Import icons using <Code>{`import { IconName } from "react-feather"`}</Code> syntax
+							Add <Code>{`import { ${name} } from "react-feather"`}</Code>
 						</ListItem>
 						<ListItem>
-							Render icons using <Code>{`<IconName />`}</Code> syntax
+							Call <Code>{`<${name} />`}</Code>
 						</ListItem>
 					</OrderedList>
 					<p>For example:</p>
@@ -80,23 +85,23 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							npm i react-feather
 							# Or yarn add react-feather
 							# Or pnpm i react-feather
-						`).replaceAll("\t", "  ")}
+						`)}
 					</CodeBlock>
 					<CodeBlock lang="tsx">
 						{detab(`
-							import { Smile } from 'react-feather';
+							import { ${name} } from "react-feather"
 
 							export default function App() {
 								return (
-									<div className='flex h-screen items-center justify-center'>
-										<div className='flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4'>
-											<Smile className='h-4 w-4 text-white' />
-											<div className='text-sm font-semibold tracking-wider text-white'>HELLO WORLD</div>
+									<div className="flex h-screen items-center justify-center">
+										<div className="flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4">
+											<${name} className="h-4 w-4 text-white" />
+											<div className="text-sm font-semibold tracking-wider text-white">HELLO WORLD</div>
 										</div>
 									</div>
-								);
+								)
 							}
-						`).replaceAll("\t", "  ")}
+						`)}
 					</CodeBlock>
 					<Hairline />
 					<Paragraph>
