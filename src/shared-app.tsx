@@ -2,6 +2,7 @@ import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren, useEffect } from "react"
 import { manifest } from "./data/react-feather-manifest"
+import { Docs } from "./docs"
 import { toKebabCase } from "./lib/cases"
 import { IconProps } from "./pages/[icon]"
 
@@ -11,6 +12,14 @@ function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 			{children}
 		</Link>
 	)
+}
+
+function ComponentA() {
+	return <>Hello, world! A</>
+}
+
+function ComponentB() {
+	return <>Hello, world! B</>
 }
 
 export function SharedApp({ name }: Partial<IconProps>) {
@@ -57,7 +66,9 @@ export function SharedApp({ name }: Partial<IconProps>) {
 					))}
 				</nav>
 			</div>
-			{JSON.stringify({ name }, null, 2)}
+
+			{name === undefined ? <ComponentA /> : <Docs name={name as keyof typeof manifest} />}
+
 			{/* {kebabCase === undefined ? (
 				<RouteTransition>
 					<SearchApp />
