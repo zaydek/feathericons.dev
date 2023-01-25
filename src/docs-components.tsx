@@ -98,7 +98,7 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-export function CodeBlock({ lang, children: code }: { lang: Lang; children: string }) {
+export function CodeBlock({ lang, selected, children: code }: { lang: Lang; selected?: number[]; children: string }) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -125,17 +125,17 @@ export function CodeBlock({ lang, children: code }: { lang: Lang; children: stri
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
-							<div key={y} className="group relative px-48 hover:bg-gray-800">
+							<div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
+									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div>
 								{ys || <br />}
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
-							<div key={y} className="group relative px-48 hover:bg-gray-800">
+							<div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500 group-hover:text-gray-300">{y + 1}</div>
+									<div className="w-32 text-right text-gray-500">{y + 1}</div>
 								</div>
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (

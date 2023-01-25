@@ -42,7 +42,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						</ListItem>
 					</OrderedList>
 					<p>For example:</p>
-					<CodeBlock lang="html">
+					<CodeBlock lang="html" selected={[3, 6, 8]}>
 						{detab(`
 							<!DOCTYPE html>
 							<html lang="en">
@@ -80,14 +80,14 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						</ListItem>
 					</OrderedList>
 					<p>For example:</p>
-					<CodeBlock lang="sh">
+					<CodeBlock lang="sh" selected={[0]}>
 						{detab(`
 							npm i react-feather
 							# Or yarn add react-feather
 							# Or pnpm i react-feather
 						`)}
 					</CodeBlock>
-					<CodeBlock lang="tsx">
+					<CodeBlock lang="tsx" selected={[0, 6]}>
 						{detab(`
 							import { ${name} } from "react-feather"
 
