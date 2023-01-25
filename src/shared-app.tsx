@@ -1,9 +1,11 @@
 import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren, useEffect, useState } from "react"
+import { manifest } from "./data/react-feather-manifest"
+import { Docs } from "./docs"
 import { toKebabCase } from "./lib/cases"
-import { iota } from "./lib/iota"
 import { IconProps } from "./pages/[icon]"
+import { SidebarFragment } from "./search-app"
 import { Transition2 } from "./transition-2"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
@@ -53,7 +55,7 @@ function useBreakpoint(minWidth: number, { initialValue }: { initialValue?: bool
 //// 	}
 //// }
 
-function Meta({ name }: { name?: string }) {
+function Meta({ name }: { name?: keyof typeof manifest }) {
 	// Shorten <title>
 	useEffect(() => {
 		if (name !== undefined) { return } // prettier-ignore
@@ -141,14 +143,17 @@ export function SharedApp({ name }: Partial<IconProps>) {
 							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
 								<div>Hello, world!</div>
 							</div>
-							{iota(1e3).map(key => (
+							{/* {iota(1e3).map(key => (
 								<div key={key}>Hello {key}</div>
-							))}
+							))} */}
+							<Docs name={name ?? "Feather"} />
 						</div>
 						{/* RHS */}
 						<div className="hidden w-[var(--sidebar-w)] [box-shadow:_var(--inset-hairline-shadow-l)] lg:block">
 							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
-								<div>Hello</div>
+								<div className="flex flex-col gap-16 p-32">
+									<SidebarFragment />
+								</div>
 							</div>
 						</div>
 					</div>

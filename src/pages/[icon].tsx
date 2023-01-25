@@ -8,7 +8,7 @@ export interface IconParams extends ParsedUrlQuery {
 }
 
 export type IconProps = {
-	name: string
+	name: keyof typeof manifest
 }
 
 // Generate a URL parameter
@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 
 	return {
 		props: {
-			name: toTitleCase(params.icon),
+			name: toTitleCase(params.icon) as keyof typeof manifest,
 		},
 	}
 }

@@ -559,7 +559,7 @@ function SliderFieldFragment({ icon, reset, children, ...props }: { icon: IconCo
 	)
 }
 
-function SidebarFragment() {
+export function SidebarFragment() {
 	const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
