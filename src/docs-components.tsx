@@ -182,7 +182,7 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		// TODO: Add font here?
-		<code className="bg-gray-200/75 p-4 text-[12px] text-gray-700" {...props}>
+		<code className="bg-gray-200/75 p-4 text-gray-700" {...props}>
 			{children}
 		</code>
 	)
@@ -190,5 +190,5 @@ export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 
 // Expose className for color or use style
 export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return <Icon className={cx("mx-[0.125em] inline-block h-[1.125em] w-[1.125em] align-[-0.125em]", className)} icon={icon} {...props} />
+	return <Icon className={cx("mx-[0.125em] inline-block h-[1.125em] w-[1.125em] align-[-0.1875em]", className)} icon={icon} {...props} />
 }
