@@ -2,10 +2,7 @@ import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren } from "react"
 import { keys } from "./data/keys"
-import { Docs } from "./docs"
 import { IconProps } from "./pages/[icon]"
-import { RouteTransition } from "./route-transition"
-import { SearchApp } from "./search-app"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 	return (
@@ -58,13 +55,14 @@ export function SharedApp({ kebabCase, titleCase }: Partial<IconProps>) {
 			</div>
 
 			{/* Docs */}
-			{kebabCase === undefined ? (
+			{JSON.stringify({ kebabCase }, null, 2)}
+			{/* {kebabCase === undefined ? (
 				<RouteTransition>
 					<SearchApp />
 				</RouteTransition>
 			) : (
 				<Docs name={titleCase as any} />
-			)}
+			)} */}
 		</>
 	)
 }

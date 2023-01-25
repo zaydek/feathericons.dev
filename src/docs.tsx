@@ -13,8 +13,9 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 			<article className="prose flex basis-1e3 flex-col gap-8">
 				<RouteTransition>
 					<Heading1>
-						Get Started With Feather&nbsp;
-						<InlineIcon icon={feather.Feather} />
+						Get Started With Feather
+						{/* &nbsp; */}
+						{/* <InlineIcon icon={feather.Feather} /> */}
 					</Heading1>
 					<Paragraph>
 						<Anchor href="https://github.com/feathericons/feather">Feather</Anchor> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
