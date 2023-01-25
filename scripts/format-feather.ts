@@ -15,13 +15,13 @@ const omitAttrs = ["class"]
 async function feather_svg() {
 	const zip = new JSZip()
 
-	// src/data/feather/
+	// src/data/feather
 	try {
 		await fs.promises.rm(`src/data/feather`, { recursive: true, force: true })
 	} catch { }
 	await fs.promises.mkdir(`src/data/feather`, { recursive: true })
 
-	// src/data/react-feather/<name>.svg
+	// src/data/feather/<name>.svg
 	for (const [name, data] of Object.entries(feather.data)) {
 		const { window } = new JSDOM(data)
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
@@ -37,6 +37,15 @@ async function feather_svg() {
 	// src/data/feather.zip
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
 	await fs.promises.writeFile(`src/data/feather.zip`, buffer)
+
+	// public/feather
+	try {
+		await fs.promises.rm(`public/feather`, { recursive: true, force: true })
+	} catch { }
+	await fs.promises.mkdir(`public/feather`, { recursive: true })
+
+	// public/feather/<name>.svg
+	await fs.promises.cp(`src/data/feather`, `public/feather`, { recursive: true })
 }
 
 async function feather_tsx() {
@@ -48,7 +57,7 @@ async function feather_tsx() {
 	const imports = `import * as feather from "./react-feather"\n\nexport const version = ${JSON.stringify(feather.meta.version)}\n\nexport const manifest: Record<keyof typeof feather, string[]> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
 	await fs.promises.writeFile(`src/data/react-feather-manifest.ts`, imports + "\n")
 
-	// src/data/react-feather/
+	// src/data/react-feather
 	try {
 		await fs.promises.rm(`src/data/react-feather`, { recursive: true, force: true })
 	} catch { }

@@ -1,15 +1,6 @@
 import * as feather from "./data/react-feather"
 
-import {
-	createContext,
-	Dispatch,
-	PropsWithChildren,
-	SetStateAction,
-	useContext,
-	useEffect,
-	useMemo,
-	useState,
-} from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useMemo, useState } from "react"
 import { formatAsJsx, formatAsSvg, formatAsTsx } from "../scripts/format"
 import { stringify } from "../scripts/stringify"
 import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "./constants"
