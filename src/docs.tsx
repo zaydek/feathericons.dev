@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
-import { Anchor, Code, CodeBlock, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph } from "./docs-components"
+import { Anchor, Code, CodeBlock, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph } from "./docs-components"
 import { CodePenIcon, CodePenIconColor, NextJsIcon, NextJsIconColor, ReactJsIcon, ReactJsIconColor, SassIcon, SassIconColor, SvgIcon, SvgIconColor, TailwindCssIcon, TailwindCssIconColor, TwitterIcon, TwitterIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
@@ -25,7 +25,8 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						<InlineIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
 						<InlineIcon style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 					</Paragraph>
-					<Hairline />
+					{/* <Hairline /> */}
+					<br />
 					<Heading2>
 						Using {name} <InlineIcon icon={feather[name]} /> With a CDN
 					</Heading2>
@@ -62,7 +63,8 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						Click here to get started with a <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
 						<InlineIcon style={{ color: CodePenIconColor }} icon={CodePenIcon} /> template.
 					</Paragraph>
-					<Hairline />
+					{/* <Hairline /> */}
+					<br />
 					<Heading2>
 						Using {name} <InlineIcon icon={feather[name]} /> With React.js&nbsp;
 						<InlineIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />
@@ -107,13 +109,15 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						Click here to get started with a <Anchor href="https://play.tailwindcss.com/VWngwPjpyy">Tailwind CSS</Anchor>&nbsp;
 						<InlineIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon} /> template.
 					</Paragraph>
-					<Hairline />
+					{/* <Hairline /> */}
+					<br />
 					<Paragraph>
 						<small>
 							Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
 						</small>
 					</Paragraph>
-					<Hairline />
+					{/* <Hairline /> */}
+					<br />
 					<Paragraph>
 						<small>
 							Icons by <Anchor href="https://twitter.com/colebemis">@colebemis</Anchor>&nbsp;
