@@ -106,13 +106,14 @@ export function CodeBlock({ lang, children: code }: { lang: Lang; children: stri
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
-		const tokens = highlighter.codeToThemedTokens(code, lang, undefined, {
+		const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
 			includeExplanation: false,
 		})
 		setTokens(tokens)
 	}, [code, highlighter, lang])
 
 	useEffect(() => {
+		if (!copy) { return } // prettier-ignore
 		const d = window.setTimeout(() => {
 			setCopy(false)
 		}, 1e3)
@@ -120,7 +121,7 @@ export function CodeBlock({ lang, children: code }: { lang: Lang; children: stri
 	}, [copy])
 
 	return (
-		<pre className="relative my-16 -mx-48 bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
+		<pre className="relative my-16 -mx-48 overflow-x-auto bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (

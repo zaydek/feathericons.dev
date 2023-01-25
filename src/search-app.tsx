@@ -1,6 +1,6 @@
 import * as feather from "./data/react-feather"
 
-import { Fragment, memo, MouseEventHandler, PropsWithChildren, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { memo, MouseEventHandler, PropsWithChildren, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
@@ -210,82 +210,88 @@ function SearchGridContents() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function SvgAnchor({ children }: { children: string }) {
-	const href = children.slice("<!-- ".length, -1 * " -->".length)
-
-	return (
-		<>
-			{"<!-- "}
-			<a href={href} target="_blank" rel="noreferrer" className="underline">
-				{href}
-			</a>
-			{"--> "}
-		</>
-	)
-}
-
-function NonSvgAnchor({ children }: { children: string }) {
-	const href = children.slice("// ".length)
-
-	return (
-		<>
-			{"// "}
-			<a href={href} target="_blank" rel="noreferrer" className="underline">
-				{href}
-			</a>
-		</>
-	)
-}
-
-function Anchor({ children }: { children: string }) {
-	const { formatAs } = useContext(SelectedContext)!
-
-	// prettier-ignore
-	return formatAs === "svg"
-		? <SvgAnchor>{children}</SvgAnchor>
-		: <NonSvgAnchor>{children}</NonSvgAnchor>
-}
+//// function SvgAnchor({ children }: { children: string }) {
+//// 	const href = children.slice("<!-- ".length, -1 * " -->".length)
+////
+//// 	return (
+//// 		<>
+//// 			{"<!-- "}
+//// 			<a href={href} target="_blank" rel="noreferrer" className="underline">
+//// 				{href}
+//// 			</a>
+//// 			{"--> "}
+//// 		</>
+//// 	)
+//// }
+////
+//// function NonSvgAnchor({ children }: { children: string }) {
+//// 	const href = children.slice("// ".length)
+////
+//// 	return (
+//// 		<>
+//// 			{"// "}
+//// 			<a href={href} target="_blank" rel="noreferrer" className="underline">
+//// 				{href}
+//// 			</a>
+//// 		</>
+//// 	)
+//// }
+////
+//// unction Anchor({ children }: { children: string }) {
+//// 	const { formatAs } = useContext(SelectedContext)!
+////
+//// 	// prettier-ignore
+//// 	return formatAs === "svg"
+//// 		? <SvgAnchor>{children}</SvgAnchor>
+//// 		: <NonSvgAnchor>{children}</NonSvgAnchor>
+////
 
 function IconPreview() {
 	const { highlighter } = useContext(ShikiContext)!
-	const { selectedName, viewSource, formatAs, clipboard } = useContext(SelectedContext)!
+	const { selectedName, viewSource, formatAs, clipboard: code } = useContext(SelectedContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
-		const tokens = highlighter.codeToThemedTokens(clipboard + "\n", formatAs === "svg" ? "xml" : "tsx", undefined, {
+		const tokens = highlighter.codeToThemedTokens(code + "\n", formatAs === "svg" ? "html" : "tsx", "github-light", {
 			includeExplanation: false,
 		})
 		setTokens(tokens)
-	}, [clipboard, formatAs, highlighter])
+	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		// Use overflow-x-scroll > inline-block p-* because of overflow-x bug
-		<pre className="min-h-256 overflow-x-scroll rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
-			<code className="inline-block p-24">
-				{tokens === null ? (
-					<div className="text-gray-400">Initializing shiki-es…</div>
-				) : (
-					tokens.map((token, y) => (
-						<Fragment key={y}>
-							<div className="relative -mx-[1ch] pl-[4ch]">
+		<pre className="min-h-256 overflow-x-auto rounded-24 bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
+			<code>
+				{tokens === null
+					? code.split("\n").map((ys, y) => (
+							<div key={y} className="relative px-48">
 								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-[2ch] text-right text-gray-300">{y + 1}</div>
+									<div className="w-32 text-right text-gray-400">{y + 1}</div>
 								</div>
-								{token.map(({ content, color }, x) => (
-									<span key={x} style={{ color }}>
-										{y === 0 ? <Anchor>{content}</Anchor> : content}
-									</span>
-								))}
+								{ys || <br />}
 							</div>
-						</Fragment>
-					))
-				)}
+					  ))
+					: tokens.map((ys, y) => (
+							<div key={y} className="relative px-48">
+								<div className="absolute top-0 bottom-0 left-0 select-none">
+									<div className="w-32 text-right text-gray-400">{y + 1}</div>
+								</div>
+								{ys.length > 0 ? (
+									ys.map(({ color, content }, x) => (
+										<span key={x} style={{ color }}>
+											{content}
+										</span>
+									))
+								) : (
+									<br />
+								)}
+							</div>
+					  ))}
 			</code>
 		</pre>
 	) : (
-		<div className="dots-pattern flex aspect-[1.5] items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
+		<div className="dots-pattern flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
 			<Icon className="h-64 w-64 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[selectedName]} />
 		</div>
 	)
@@ -412,30 +418,28 @@ function FormatButton() {
 function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
 	const { selectedName, formatAs } = useContext(SelectedContext)!
 
-	const [pressed, setPressed] = useState(false)
+	const [copy, setCopy] = useState(false)
 
 	useEffect(() => {
-		if (!pressed) {
-			return
-		}
+		if (!copy) { return } // prettier-ignore
 		const d = window.setTimeout(() => {
-			setPressed(false)
-		}, 750)
+			setCopy(false)
+		}, 1e3)
 		return () => window.clearTimeout(d)
-	}, [pressed])
+	}, [copy])
 
 	return (
 		<button
 			className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				[&:hover:active]:bg-[var(--trim-color)] [&:hover:active]:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
-				setPressed(true)
+				setCopy(true)
 				onClick?.(e)
 			}}
 			aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
 			{...props}
 		>
-			<ThickIcon className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white" icon={pressed ? feather.Check : icon} />
+			<ThickIcon className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white" icon={copy ? feather.Check : icon} />
 			<TypographyCaps className="text-gray-700 [button:hover:active_&]:text-white">{children}</TypographyCaps>
 		</button>
 	)

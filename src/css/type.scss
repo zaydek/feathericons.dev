@@ -2,7 +2,7 @@
 
 // https://github.com/sindresorhus/modern-normalize
 $sans: (
-	'Inter', // Added
+	//// 'var(--inter)', // TODO
 	system-ui,
 	'Segoe UI',
 	Roboto,
@@ -14,7 +14,7 @@ $sans: (
 );
 
 $code: (
-	//// 'Fira Code', // Added
+	//// 'var(--fira-code)', // TODO
 	ui-monospace,
 	SFMono-Regular,
 	Consolas,

@@ -111,8 +111,6 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 					<Paragraph>
 						<small>
 							Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
-							{/* &nbsp; */}
-							{/* <TextIcon className="text-gray-500" icon={feather.ExternalLink} /> */}
 						</small>
 					</Paragraph>
 					<Hairline />
@@ -124,8 +122,6 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						</small>
 						<br />
 						<small>
-							{/* Feather&nbsp; */}
-							{/* <TextIcon className="text-gray-500" icon={feather.Feather} />  */}
 							Feather is licensed as <Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</Anchor>. Icons may be used for personal and commercial use without attribution.
 						</small>
 						<br />
