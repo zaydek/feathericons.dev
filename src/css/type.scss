@@ -50,7 +50,7 @@ $code: (
 	white-space: normal;
 	font: 400 16px / 1.6 var(--sans);
 	font-feature-settings: "tnum";
-	//// letter-spacing: -0.005em;
+	//// letter-spacing: -0.005emq;
 	letter-spacing: null;
 }
 h1 {
@@ -67,7 +67,7 @@ h2 {
 }
 pre code {
 	white-space: pre;
-	font: 400 #{16px * 0.875} / 1.6 var(--code);
+	font: 400 #{16px * 0.875} / 1.5 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }

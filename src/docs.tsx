@@ -9,6 +9,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 	return (
 		<div className="flex justify-center py-64">
 			<article className="prose flex basis-1e3 flex-col gap-8">
+				{/* <RouteTransition> */}
 				<Heading1>
 					Get Started With Feather&nbsp;
 					<InlineIcon icon={feather.Feather} />
@@ -41,19 +42,19 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 				<p>For example:</p>
 				<CodeBlock lang="html">
 					{detab(`
-						<!DOCTYPE html>
-						<html lang='en'>
-							<head>
-								<script src='https://unpkg.com/feather-icons'></script>
-							</head>
-							<body>
-								<i data-feather='smile'></i>
-								<script>
-									feather.replace();
-								</script>
-							</body>
-						</html>
-					`).replaceAll("\t", "  ")}
+							<!DOCTYPE html>
+							<html lang='en'>
+								<head>
+									<script src='https://unpkg.com/feather-icons'></script>
+								</head>
+								<body>
+									<i data-feather='smile'></i>
+									<script>
+										feather.replace();
+									</script>
+								</body>
+							</html>
+						`).replaceAll("\t", "  ")}
 				</CodeBlock>
 				<Hairline />
 				<Heading2>
@@ -75,26 +76,26 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 				<p>For example:</p>
 				<CodeBlock lang="sh">
 					{detab(`
-						npm i react-feather
-						# Or yarn add react-feather
-						# Or pnpm i react-feather
-					`).replaceAll("\t", "  ")}
+							npm i react-feather
+							# Or yarn add react-feather
+							# Or pnpm i react-feather
+						`).replaceAll("\t", "  ")}
 				</CodeBlock>
 				<CodeBlock lang="tsx">
 					{detab(`
-						import { Smile } from 'react-feather';
+							import { Smile } from 'react-feather';
 
-						export default function App() {
-							return (
-								<div className='flex h-screen items-center justify-center'>
-									<div className='flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4'>
-										<Smile className='h-4 w-4 text-white' />
-										<div className='text-sm font-semibold tracking-wider text-white'>HELLO WORLD</div>
+							export default function App() {
+								return (
+									<div className='flex h-screen items-center justify-center'>
+										<div className='flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4'>
+											<Smile className='h-4 w-4 text-white' />
+											<div className='text-sm font-semibold tracking-wider text-white'>HELLO WORLD</div>
+										</div>
 									</div>
-								</div>
-							);
-						}
-					`).replaceAll("\t", "  ")}
+								);
+							}
+						`).replaceAll("\t", "  ")}
 				</CodeBlock>
 				<Hairline />
 				<Paragraph>
@@ -108,7 +109,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 				<Paragraph>
 					<small>
 						Icons by <Anchor href="https://twitter.com/colebemis">@colebemis</Anchor>&nbsp;
-						<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} /> and website by <Anchor href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</Anchor>&nbsp;
+						<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />, website by <Anchor href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</Anchor>&nbsp;
 						<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />
 					</small>
 					<br />
@@ -147,6 +148,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 					</small>
 					<br />
 				</Paragraph>
+				{/* </RouteTransition> */}
 			</article>
 		</div>
 	)

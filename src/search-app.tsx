@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { Fragment, memo, MouseEventHandler, PropsWithChildren, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { getHighlighter, Highlighter, IThemedToken } from "shiki-es"
+import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
@@ -11,6 +11,7 @@ import { toKebabCase } from "./lib/cases"
 import { cx } from "./lib/cx"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
+import { ShikiContext } from "./shiki"
 import { SearchContext, SelectedContext, SliderContext } from "./state"
 import { Transition } from "./transition"
 import { ThickIcon, TypographyCaps, TypographySmallSans } from "./typography"
@@ -85,6 +86,7 @@ function SearchBar() {
 					onClick={e => {
 						ref.current?.focus()
 					}}
+					aria-label="Search Feather"
 				/>
 			</MouseTooltip>
 			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
@@ -94,6 +96,7 @@ function SearchBar() {
 					onClick={e => {
 						setCompactMode(curr => !curr)
 					}}
+					aria-label="Toggle compact mode"
 				/>
 			</MouseTooltip>
 		</div>
@@ -143,6 +146,7 @@ const Memo_CompactGridItem = memo(function CompactGridItem({ name }: { name: key
 						setSelectedName(name)
 						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 					}}
+					aria-label={`Icon ${name}`}
 				>
 					<Icon id={name} className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
 				</button>
@@ -164,6 +168,7 @@ const Memo_GridItem = memo(function GridItem({ name, indexes }: { name: keyof ty
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 				}}
+				aria-label={`Icon ${name}`}
 			>
 				<Icon id={name} className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
 			</button>
@@ -242,18 +247,10 @@ function Anchor({ children }: { children: string }) {
 }
 
 function IconPreview() {
+	const { highlighter } = useContext(ShikiContext)!
 	const { selectedName, viewSource, formatAs, clipboard } = useContext(SelectedContext)!
 
-	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
-
-	useEffect(() => {
-		async function init() {
-			const highlighter = await getHighlighter({ theme: "github-light" })
-			setHighlighter(highlighter)
-		}
-		init()
-	}, [])
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
@@ -335,7 +332,10 @@ function FormatButton() {
 				<button
 					className="flex h-36 items-center justify-center gap-10 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 						[&:hover:active]:bg-gray-200"
-					onClick={e => setShow(curr => !curr)}
+					onClick={e => {
+						setShow(curr => !curr)
+					}}
+					aria-label="Click to select formatting"
 				>
 					<Icon className="h-16 w-16" style={{ color }} icon={svg} />
 					<TypographyCaps className="text-gray-700">FORMAT AS {desc}</TypographyCaps>
@@ -371,6 +371,7 @@ function FormatButton() {
 								setFormatAs("svg")
 								setShow(false)
 							}}
+							aria-label="SVG"
 						>
 							<Icon className="h-16 w-16" style={{ color: SvgIconColor }} icon={SvgIcon} />
 							<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
@@ -383,6 +384,7 @@ function FormatButton() {
 								setFormatAs("jsx")
 								setShow(false)
 							}}
+							aria-label="React"
 						>
 							<Icon className="h-16 w-16" style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />
 							<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
@@ -395,6 +397,7 @@ function FormatButton() {
 								setFormatAs("tsx")
 								setShow(false)
 							}}
+							aria-label="TypeScript React"
 						>
 							<Icon className="h-16 w-16" style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />
 							<TypographyCaps className="text-gray-700">TYPESCRIPT REACT</TypographyCaps>
@@ -407,6 +410,8 @@ function FormatButton() {
 }
 
 function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
+	const { selectedName, formatAs } = useContext(SelectedContext)!
+
 	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
@@ -427,6 +432,7 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent
 				setPressed(true)
 				onClick?.(e)
 			}}
+			aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
 			{...props}
 		>
 			<ThickIcon className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white" icon={pressed ? feather.Check : icon} />
@@ -436,6 +442,8 @@ function CopyButton({ icon, onClick, children, ...props }: { icon: IconComponent
 }
 
 function DownloadButton({ icon, onClick, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
+	const { selectedName, formatAs } = useContext(SelectedContext)!
+
 	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
@@ -456,6 +464,7 @@ function DownloadButton({ icon, onClick, children, ...props }: { icon: IconCompo
 				setPressed(true)
 				onClick?.(e)
 			}}
+			aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}
 			{...props}
 		>
 			<ThickIcon className="h-16 w-16 text-[var(--trim-color)] [button:hover:active_&]:text-white" icon={pressed ? feather.Check : icon} />
@@ -528,6 +537,7 @@ function SliderFieldFragment({ icon, reset, children, ...props }: { icon: IconCo
 							? props.value.toFixed(2)
 							: `${props.value} PX`}
 					</TypographyCaps>
+					{/* TODO: Add aria-label here */}
 					<button className="flex h-24 w-24 items-center justify-center" onClick={reset}>
 						<ThickIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
 					</button>

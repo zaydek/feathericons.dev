@@ -26,10 +26,13 @@ export default function Document() {
 			{/* Google Fonts */}
 			<link rel="preconnect" href="https://fonts.googleapis.com" />
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-			<link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+			{/* <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" /> */}
 
 			{/* Plausible Analytics */}
-			<script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js"></script>
+			{process.env.NODE_ENV === "production" && (
+				// <script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js"></script>
+				<Script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js" />
+			)}
 
 			{/* Theming */}
 			<Script id="script-theme" dangerouslySetInnerHTML={{ __html: initDarkMode }} />

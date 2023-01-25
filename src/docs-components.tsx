@@ -4,9 +4,8 @@ import { ReactElement, useContext, useEffect, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { cx } from "./lib/cx"
 import { Icon, IconComponent } from "./lib/react/icon"
+import { Arrayable } from "./lib/types"
 import { ShikiContext } from "./shiki"
-
-type Arrayable<T> = T | T[]
 
 // Recursively concatenate strings
 function getString(children: undefined | Arrayable<string> | Arrayable<ReactElement<{ children?: string }>>) {
@@ -39,8 +38,8 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h1 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
 			{children}
-			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [h1:hover_&]:opacity-100">
-				<Icon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link} />
+			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 [h1:hover_&]:opacity-100">
+				<InlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h1>
 	)
@@ -53,8 +52,8 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h2 id={id} className="relative my-16 scroll-my-16 text-gray-900" {...props}>
 			{children}
-			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-10 opacity-0 [h2:hover_&]:opacity-100">
-				<Icon className="h-20 w-20 text-[var(--trim-color)]" icon={feather.Link} />
+			<a href={href} className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 [h2:hover_&]:opacity-100">
+				<InlineIcon className="text-[var(--trim-color)]" icon={feather.Link} />
 			</a>
 		</h2>
 	)
@@ -75,12 +74,11 @@ export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"])
 export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li
-			// TODO: Add font here?
 			className="relative rounded-1e3 pl-[calc(24px_+_12px)]
 				before:absolute before:top-0 before:bottom-0 before:left-0 before:m-auto
 					before:flex before:h-24 before:w-24 before:items-center before:justify-center
 						before:rounded-1e3 before:bg-gray-200/75
-							before:text-[10px] before:font-[600] before:tabular-nums before:text-gray-700
+							before:text-[11px] before:font-[600] before:text-gray-700
 								before:[content:_counter(li)]"
 			style={{ counterIncrement: "li 1" }}
 			{...props}
@@ -91,10 +89,10 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 }
 
 export function CodeBlock({ lang, children: code }: { lang: Lang; children: string }) {
-	const highlighter = useContext(ShikiContext)
+	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
-	const [didCopy, setDidCopy] = useState(false)
+	const [copy, setCopy] = useState(false)
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
@@ -106,10 +104,10 @@ export function CodeBlock({ lang, children: code }: { lang: Lang; children: stri
 
 	useEffect(() => {
 		const d = window.setTimeout(() => {
-			setDidCopy(false)
+			setCopy(false)
 		}, 1e3)
 		return () => window.clearTimeout(d)
-	}, [didCopy])
+	}, [copy])
 
 	return (
 		<pre className="relative my-16 -mx-48 bg-gray-900 py-24 text-gray-300 [pre_+_&]:-mt-24 [pre_+_&]:border-t [pre_+_&]:border-gray-700">
@@ -145,10 +143,11 @@ export function CodeBlock({ lang, children: code }: { lang: Lang; children: stri
 					className="flex h-[calc(22.5px_+_24px_*_2)] w-[calc(22.5px_+_24px_*_2)] items-center justify-center"
 					onClick={async e => {
 						await navigator.clipboard.writeText(code + "\n")
-						setDidCopy(true)
+						setCopy(true)
 					}}
+					aria-label="Copy code to the clipboard"
 				>
-					<Icon className="h-16 w-16 text-white" icon={didCopy ? feather.Check : feather.Copy} />
+					<Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} />
 				</button>
 			</div>
 		</pre>
@@ -172,7 +171,7 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		// TODO: Add font here?
-		<code className="bg-gray-200/75 p-4 text-[12px] font-[600] tabular-nums text-gray-700" {...props}>
+		<code className="bg-gray-200/75 p-4 text-[12px] text-gray-700" {...props}>
 			{children}
 		</code>
 	)

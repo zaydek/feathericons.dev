@@ -6,9 +6,6 @@ export const TypographyCaps = createStyled("typography-caps")
 export const TypographySmallSans = createStyled("typography-small-sans")
 
 // Iconography
-export function ThickIcon({
-	icon,
-	...props
-}: { icon: IconComponent } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
+export function ThickIcon({ icon, ...props }: { icon: IconComponent } & Exclude<JSX.IntrinsicElements["svg"], "strokeWidth">): JSX.Element {
 	return <Icon icon={icon} strokeWidth={2.5} {...props} />
 }
