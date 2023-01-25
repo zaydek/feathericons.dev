@@ -1,23 +1,22 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { keys } from "../data/keys"
-import { toTitleCase } from "../lib/cases"
+import { manifest } from "../data/react-feather-manifest"
+import { toKebabCase, toTitleCase } from "../lib/cases"
 
 export interface IconParams extends ParsedUrlQuery {
 	icon: string
 }
 
 export type IconProps = {
-	kebabCase: string
-	titleCase: string
+	name: string
 }
 
 // Generate a URL parameter
 export const getStaticPaths: GetStaticPaths<IconParams> = async () => {
 	return {
-		paths: keys.map(name => ({
+		paths: Object.keys(manifest).map(name => ({
 			params: {
-				icon: name,
+				icon: toKebabCase(name),
 			},
 		})),
 		fallback: false,
@@ -30,8 +29,7 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 
 	return {
 		props: {
-			kebabCase: params.icon,
-			titleCase: toTitleCase(params.icon),
+			name: toTitleCase(params.icon),
 		},
 	}
 }
