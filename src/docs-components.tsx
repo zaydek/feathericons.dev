@@ -133,26 +133,26 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 		//// 		[pre_+_&]:-mt-24"
 		//// >
 		<pre
-			className="relative my-16 overflow-scroll bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]
-				[pre_+_&]:-mt-24"
+			className="relative my-16 overflow-auto bg-white text-gray-800
+				[pre_+_&]:mt-0"
 		>
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
-							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100 px-48" : "relative px-48"}>
-								<div className="absolute top-0 bottom-0 left-0 select-none">
+							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100" : "relative"}>
+								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-500">{y + 1}</div>
-								</div>
+								</div> */}
 								{ys || <br />}
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
 							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
-							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100 px-48" : "relative px-48"}>
-								<div className="absolute top-0 bottom-0 left-0 select-none">
+							<div key={y} className={selected?.includes(y) ? "relative bg-gray-100" : "relative"}>
+								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-500">{y + 1}</div>
-								</div>
+								</div> */}
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>
@@ -167,7 +167,7 @@ export function Pre({ lang, selected, children: code }: { lang: Lang; selected?:
 			</code>
 			<div className="absolute top-0 right-0">
 				<button
-					className="flex h-[calc(21px_+_24px_*_2)] w-[calc(21px_+_24px_*_2)] items-center justify-center"
+					className="flex h-[21px] w-[21px] items-center justify-center"
 					onClick={async e => {
 						await navigator.clipboard.writeText(code + "\n")
 						setCopy(true)

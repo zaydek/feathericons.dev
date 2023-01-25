@@ -27,8 +27,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							<InlineIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
 							<InlineIcon style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 						</Paragraph>
-						{/* <Hairline /> */}
-						<br />
+						<Hairline />
 						<Heading2>
 							Using {name} <InlineIcon icon={feather[name]} /> With a CDN
 						</Heading2>
@@ -45,7 +44,8 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
-						<Pre lang="html" selected={[3, 6, 8]}>
+						{/* <Pre lang="html" selected={[3, 6, 8]}> */}
+						<Pre lang="html">
 							{detab(`
 								<!DOCTYPE html>
 								<html lang="en">
@@ -65,8 +65,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							Click here to get started with a <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
 							<InlineIcon style={{ color: CodePenIconColor }} icon={CodePenIcon} /> template.
 						</Paragraph>
-						{/* <Hairline /> */}
-						<br />
+						<Hairline />
 						<Heading2>
 							Using {name} <InlineIcon icon={feather[name]} /> With React.js&nbsp;
 							<InlineIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />
@@ -84,14 +83,16 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
-						<Pre lang="sh" selected={[0]}>
+						{/* <Pre lang="sh" selected={[0]}> */}
+						<Pre lang="sh">
 							{detab(`
 								npm i react-feather
 								# Or yarn add react-feather
 								# Or pnpm i react-feather
 							`)}
 						</Pre>
-						<Pre lang="tsx" selected={[0, 6]}>
+						{/* <Pre lang="tsx" selected={[0, 6]}> */}
+						<Pre lang="tsx">
 							{detab(`
 								import { ${name} } from "react-feather"
 
@@ -124,11 +125,9 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 								<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />, website by <Anchor href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</Anchor>&nbsp;
 								<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />
 							</small>
-							<br />
 							<small>
 								Feather is licensed as <Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</Anchor>. Icons may be used for personal and commercial use without attribution.
 							</small>
-							<br />
 							<small>
 								Built using{" "}
 								<Anchor href="https://reactjs.org">
@@ -156,7 +155,6 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 									<InlineIcon style={{ color: SassIconColor }} icon={SassIcon} />
 								</Anchor>
 							</small>
-							<br />
 						</Paragraph>
 					</RouteTransition>
 				</article>
