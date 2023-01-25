@@ -5,7 +5,7 @@ import "../css/type.scss"
 import "../css/vars.scss"
 
 import { AppProps } from "next/app"
-import { SharedApp } from "../app"
+import { SharedApp } from "../shared-app"
 import { ShikiProvider } from "../shiki"
 import { StateProvider } from "../state"
 

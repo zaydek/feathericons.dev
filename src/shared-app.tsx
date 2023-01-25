@@ -15,12 +15,12 @@ function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
 	)
 }
 
-// TODO: Why are we using partial here?
-export function SharedApp({ kebabCase, titleCase, children }: PropsWithChildren<Partial<IconProps>>) {
+export function SharedApp({ kebabCase, titleCase }: Partial<IconProps>) {
 	return (
 		<>
 			{/* prettier-ignore */}
 			{/* TODO: Hook up feather.svg to meta tags */}
+			{/* Shouldn't kebabCase be optional because of home? */}
 			<Head>
 				{/* SEO */}
 				<title>{kebabCase}</title>
@@ -43,46 +43,27 @@ export function SharedApp({ kebabCase, titleCase, children }: PropsWithChildren<
 				<meta property="twitter:image" content="https://dapper-kataifi-254e93.netlify.app/feather-og.png" />
 			</Head>
 
+			{/* Home */}
+			<div className="p-16">
+				<nav className="flex flex-wrap gap-4">
+					<OrangeLink href="/" aria-label="Navigate to home">
+						<div>Home</div>
+					</OrangeLink>
+					{keys.map(name => (
+						<OrangeLink key={name} href={`/${name}`} aria-label={`Navigate to /${name}`}>
+							<div>{name}</div>
+						</OrangeLink>
+					))}
+				</nav>
+			</div>
+
+			{/* Docs */}
 			{kebabCase === undefined ? (
-				<div className="p-16">
-					<nav className="flex flex-wrap gap-4">
-						<OrangeLink href="/">
-							<div>Home</div>
-						</OrangeLink>
-						{keys.map(name => (
-							<OrangeLink key={name} href={`/${name}`}>
-								<div>{name}</div>
-							</OrangeLink>
-						))}
-					</nav>
-					<RouteTransition>
-						<SearchApp />
-					</RouteTransition>
-					{/* <main>
-						<RouteTransition>{children}</RouteTransition>
-						<RouteTransition>Hello world!</RouteTransition>
-					</main> */}
-				</div>
+				<RouteTransition>
+					<SearchApp />
+				</RouteTransition>
 			) : (
-				<div className="p-16">
-					<nav className="flex flex-wrap gap-4">
-						<OrangeLink href="/">
-							<div>Home</div>
-						</OrangeLink>
-						{keys.map(name => (
-							<OrangeLink key={name} href={`/${name}`}>
-								<div>{name}</div>
-							</OrangeLink>
-						))}
-					</nav>
-					{/* <main>
-						<RouteTransition>{children}</RouteTransition>
-						<RouteTransition>Hello world!</RouteTransition>
-					</main> */}
-					{/* <RouteTransition> */}
-					<Docs name={titleCase as any} />
-					{/* </RouteTransition> */}
-				</div>
+				<Docs name={titleCase as any} />
 			)}
 		</>
 	)
