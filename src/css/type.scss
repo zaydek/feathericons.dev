@@ -32,46 +32,46 @@ $code: (
 }
 
 .typography-caps {
-	//// white-space: pre;
+	white-space: pre;
 	font: 600 11px / normal var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: 0.05em;
 }
 .typography-small-sans {
-	//// white-space: normal;
+	white-space: normal;
 	font: 400 13px / normal var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: 0.0125em;
 }
 
 .prose {
-	//// white-space: normal;
+	white-space: normal;
 	font: 400 16px / 1.6 var(--sans);
 	font-feature-settings: "tnum";
 	//// letter-spacing: -0.005em;
 	letter-spacing: null;
 }
 h1 {
-	//// white-space: normal;
+	white-space: normal;
 	font: 600 1.5em / 1.25 var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 h2 {
-	//// white-space: normal;
+	white-space: normal;
 	font: 600 1.25em / 1.25 var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 pre code {
-	//// white-space: pre;
-	font: 400 #{16px * 0.9375} / 1.6 var(--code);
+	white-space: pre;
+	font: 400 #{16px * 0.875} / 1.5 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 code {
-	//// white-space: pre;
-	font: 400 0.9375em / normal var(--code);
+	white-space: pre;
+	font: 400 0.875em / normal var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }

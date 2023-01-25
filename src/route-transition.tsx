@@ -8,7 +8,8 @@ export function RouteTransition({ children }: { children: Arrayable<ReactElement
 	const [started, setStarted] = useState(false)
 	const [ended, setEnded] = useState(false)
 
-	const forwards = path !== "/"
+	//// const forwards = path !== "/"
+	const forwards = true
 
 	useEffect(() => {
 		setTimeout(() => {

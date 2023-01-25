@@ -1,12 +1,18 @@
 :root {
-	// Layout
+	// Abstract
+	//
+	// TODO: Remove inset-y and inset-x and use
+	// fractions of rounding?
+	//
+	--inset-y:  16px;
+	--inset-x:  16px;
+	--rounding: 48px;
+
 	--header-h: 480px;
 	--header-backdrop-h: 320px;
 	--sidebar-w: 448px;
-	--main-w: 2e3px;
-
-	// General
-	--inset-x:  16px;
-	--inset-y:  16px;
-	--rounding: 48px;
+	// --main-w: 2304px;
+	--main-w: 1792px;
+	--search-bar-h: 64px;
+	--grid-size: 96px;
 }

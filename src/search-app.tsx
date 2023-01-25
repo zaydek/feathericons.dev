@@ -73,7 +73,7 @@ function SearchBarButton({ icon, ...props }: { icon: IconComponent } & JSX.Intri
 	)
 }
 
-function SearchBar() {
+export function SearchBar() {
 	const { setCompactMode, search, setSearch } = useContext(SearchContext)!
 
 	const ref = useRef<HTMLInputElement | null>(null)
@@ -141,7 +141,7 @@ const Memo_CompactGridItem = memo(function CompactGridItem({ name }: { name: key
 		<div className="flex flex-col">
 			<MouseTooltip pos="center" content={<>{toKebabCase(name).toUpperCase()}</>}>
 				<button
-					className="flex h-112 items-center justify-center"
+					className="flex h-[var(--grid-size)] items-center justify-center"
 					onClick={e => {
 						setSelectedName(name)
 						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -163,7 +163,7 @@ const Memo_GridItem = memo(function GridItem({ name, indexes }: { name: keyof ty
 	return (
 		<div className="flex flex-col">
 			<button
-				className="flex h-112 items-center justify-center"
+				className="flex h-[var(--grid-size)] items-center justify-center"
 				onClick={e => {
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
@@ -188,7 +188,7 @@ const Memo_GridItem = memo(function GridItem({ name, indexes }: { name: keyof ty
 	)
 })
 
-function SearchGridContents() {
+export function SearchGridContents() {
 	const { compactMode, searchResults } = useContext(SearchContext)!
 
 	const GridItem = useMemo(() => {
@@ -200,7 +200,7 @@ function SearchGridContents() {
 	}, [compactMode])
 
 	return (
-		<div className="grid grid-cols-[repeat(auto-fill,_minmax(112px,_1fr))]">
+		<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))]">
 			{Object.keys(searchResults).map(name => (
 				<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
 			))}

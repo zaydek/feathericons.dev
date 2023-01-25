@@ -2,10 +2,10 @@ import Head from "next/head"
 import Link, { LinkProps } from "next/link"
 import { PropsWithChildren, useEffect, useState } from "react"
 import { manifest } from "./data/react-feather-manifest"
-import { Docs } from "./docs"
 import { toKebabCase } from "./lib/cases"
 import { IconProps } from "./pages/[icon]"
-import { SidebarFragment } from "./search-app"
+import { RouteTransition } from "./route-transition"
+import { SearchBar, SearchGridContents, SidebarFragment } from "./search-app"
 import { Transition2 } from "./transition-2"
 
 function OrangeLink({ children, ...props }: PropsWithChildren<LinkProps>) {
@@ -119,11 +119,11 @@ export function SharedApp({ name }: Partial<IconProps>) {
 			{/* <header> */}
 			<header className="hidden bg-[#1570fb] lg:block">
 				{/* TODO */}
-				<div className="h-320"></div>
+				<div className="h-640"></div>
 			</header>
 
 			{/* Use z-* here */}
-			<div className="sticky top-0 z-10 hidden 2xl:block">
+			<div className="pointer-events-none sticky top-0 z-20 hidden 2xl:block">
 				<div className="flex">
 					{/* LHS */}
 					<div className="h-[calc(var(--inset-y)_+_var(--rounding))] flex-1 bg-[#1570fb]"></div>
@@ -153,19 +153,30 @@ export function SharedApp({ name }: Partial<IconProps>) {
 			{/* <main> */}
 			<main className="relative top-0 2xl:-top-[var(--rounding)]">
 				<div className="flex justify-center 2xl:px-[var(--inset-x)]">
-					<div className="flex w-100% max-w-[var(--main-w)] bg-white [box-shadow:_var(--shadow-4)] 2xl:rounded-[var(--rounding)]">
+					<div
+						//// className="flex min-h-[100dvh] w-100% max-w-[var(--main-w)] bg-white [box-shadow:_var(--shadow-4)]
+						//// 	2xl:min-h-[110dvh] 2xl:rounded-[var(--rounding)]"
+						className="flex min-h-[100dvh] w-100% max-w-[var(--main-w)] bg-white [box-shadow:_var(--shadow-4)] 2xl:min-h-[calc(100dvh_-_var(--rounding))]
+							2xl:rounded-[var(--rounding)]"
+					>
 						{/* LHS */}
 						{/* I seriously don't know a better way to manage width... */}
 						<div className="min-w-0 flex-1">
-							<div className="sticky top-0 2xl:top-[var(--inset-y)]">
+							{/* <div className="sticky top-0 2xl:top-[var(--inset-y)]">
 								<div>Hello, world!</div>
+							</div> */}
+							<div
+								className="sticky top-0 z-10 h-[calc(var(--search-bar-h)_+_var(--inset-y)_*_4)] py-[calc(var(--inset-y)_*_2)] px-[calc(var(--rounding)_+_1px_*_2)]
+									[background-image:_linear-gradient(to_bottom,_white_calc(var(--inset-y)_+_var(--search-bar-h)),_transparent)]
+										2xl:top-[var(--inset-y)]"
+							>
+								<SearchBar />
 							</div>
-							{/* {iota(1e3).map(key => (
-								<div key={key}>Hello {key}</div>
-							))} */}
-							<div className="p-48">
-								<Docs name={name ?? "Feather"} />
-							</div>
+							<RouteTransition>
+								<div className="px-[var(--rounding)] pb-[calc(var(--rounding)_*_1.5)]">
+									<SearchGridContents />
+								</div>
+							</RouteTransition>
 						</div>
 						{/* RHS */}
 						{/* I seriously don't know a better way to manage width... */}
