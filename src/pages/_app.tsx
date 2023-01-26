@@ -7,7 +7,12 @@
 //// import "../css/vars-layout.scss"
 //// import "../css/vars.scss"
 
+import "the-new-css-reset"
+
+import "../css/base.scss"
 import "../shared-app-2.scss"
+
+import "../css/tailwind.css"
 
 import { AppProps } from "next/app"
 import { ShikiProvider } from "../shiki"

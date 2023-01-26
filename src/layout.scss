@@ -1,0 +1,127 @@
+html {
+	overflow-x: hidden;
+}
+
+:root {
+	--rounding: 48px;
+	--inset-y: 16px;
+	--inset-x: 16px;
+
+	--main-width: 1536px;
+	--main-col-2-width: 400px;
+}
+
+//// ////////////////////////////////////////////////////////////////////////////////
+//// // main-bg-mask
+////
+//// .main-bg-mask-sticky {
+//// 	position: sticky;
+//// 	top: 0;
+//// 	height: 0; // 😎
+//// }
+//// .main-bg-mask {
+//// 	margin: 0 -10%;
+//// 	height: 320px;
+//// 	border-radius: 0 0 100% 100%;
+//// 	background-color: green;
+//// }
+//// @media (max-width: #{1536px + 16px * 3}px) {
+//// 	* { display: none; }
+//// }
+////
+//// ////////////////////////////////////////////////////////////////////////////////
+//// // main-fg-mask
+////
+//// .main-fg-mask-sticky {
+//// 	position: sticky;
+//// 	top: 0;
+//// 	z-index: 10;
+//// 	display: flex;
+//// 	justify-content: center;
+//// 	pointer-events: none;
+//// }
+//// .main-fg-mask-sticky + * {
+//// 	position: relative;
+//// 	top: calc(-1 * var(--rounding));
+//// }
+//// .bit-1 {
+//// 	position: relative;
+//// 	height: calc(var(--rounding) + var(--inset-y));
+//// 	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
+//// 	background-color: orange;
+//// }
+//// .bit-2 {
+//// 	height: var(--inset-y);
+//// 	width: 100%;
+//// 	max-width: calc(1536px - var(--rounding) * 2);
+//// 	background-color: yellow;
+//// }
+//// .bit-3 {
+//// 	position: relative;
+//// 	height: calc(var(--rounding) + var(--inset-y));
+//// 	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
+//// 	background-color: orange;
+//// }
+//// // Absolutely positioned masks
+//// .bit-1-mask-absolute {
+//// 	position: absolute;
+//// 	bottom: 0;
+//// 	right: 0;
+//// 	height: var(--rounding);
+//// 	width: var(--rounding);
+//// 	border-top-left-radius: 1e3px;
+//// 	background-color: pink;
+//// }
+//// .bit-3-mask-absolute {
+//// 	position: absolute;
+//// 	bottom: 0;
+//// 	left: 0;
+//// 	height: var(--rounding);
+//// 	width: var(--rounding);
+//// 	border-top-right-radius: 1e3px;
+//// 	background-color: pink;
+//// }
+//// @media (max-width: #{1536px + 16px * 3}px) {
+//// 	.main-fg-mask-sticky + * { top: 0; }
+//// }
+//// @media (max-width: #{1536px + 16px * 3}px) {
+//// 	* { display: none; }
+//// }
+////
+//// ////////////////////////////////////////////////////////////////////////////////
+//// // main
+////
+//// .main-container {
+//// 	display: flex;
+//// 	justify-content: center;
+//// 	padding: 0 var(--inset-x);
+//// }
+//// .main {
+//// 	display: flex;
+//// 	min-height: calc(100vh - (var(--rounding) + var(--inset-x))); // Fallback
+//// 	min-height: calc(100dvh - (var(--rounding) + var(--inset-x)));
+//// 	width: 100%;
+//// 	max-width: var(--main-width);
+//// 	border-radius: var(--rounding);
+//// 	background-color: var(--white);
+//// 	box-shadow: var(--shadow-4);
+//// }
+//// .main-col-1 {
+//// 	flex-grow: 1;
+//// }
+//// .main-col-2 {
+//// 	width: var(--main-col-2-width);
+//// 	box-shadow: var(--hairline-shadow-l);
+//// }
+//// .main-col-sticky {
+//// 	position: sticky;
+//// 	top: var(--inset-y);
+//// }
+//// @media (max-width: #{1536px + 16px * 3}px) {
+//// 	.main-container  { padding: 0; }
+//// 	.main            { border-radius: 0; }
+//// 	.main-col-sticky { top: 0; }
+//// }
+//// @media (max-width: 1024px) {
+//// 	.main-col-2 { display: none; }
+//// }

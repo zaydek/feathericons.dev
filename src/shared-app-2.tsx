@@ -8,120 +8,168 @@ const MAIN_WIDTH = 1536 // prettier-ignore
 const SM_BREAKPOINT = 1024
 const LG_BREAKPOINT = MAIN_WIDTH + INSET_X * 2 + WINDOWS_SCROLLBAR_WIDTH
 
-function ExternalLink({ pos }: { pos: "start" | "end" }) {
+function NavLink({ pos }: { pos: "tl" | "tr" }) {
 	return (
-		<>
-			<style jsx>{`
-				.ext-link {
-					// POSITION
-					position: absolute;
-					${pos === "start"
-						? // prettier-ignore
-						  `top: var(--inset-y); left:  var(--inset-x);`
-						: `top: var(--inset-y); right: var(--inset-x);`}
-					// FLEXBOX
-					display: flex;
-					align-items: center;
-					gap: 8px;
-					// BORDER BOX
-					padding: 0 8px;
-					padding-right: 16px; // Override
-					height: 32px;
-					border-radius: 1e3px;
-					// BOX DECORATION
-					background-color: hsl(var(--black-raw), 0.1);
-				}
-				.placeholder-icon {
-					height: 16px;
-					width: 16px;
-					border-radius: 1e3px;
-					background-color: var(--white);
-				}
-				.placeholder-text {
-					height: 6px;
-					width: 96px;
-					border-radius: 1e3px;
-					background-color: var(--white);
-				}
-			`}</style>
-			<div className="ext-link">
-				<div className="placeholder-icon"></div>
-				<div className="placeholder-text"></div>
+		<div
+			className="absolute
+				[&[data-pos=tl]]:top-16 [&[data-pos=tl]]:left-16
+					[&[data-pos=tr]]:top-16 [&[data-pos=tr]]:right-16"
+			data-pos={pos.toLowerCase()}
+		>
+			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-white/10% px-8 pr-16">
+				<div className="h-16 w-16 rounded-1e3 bg-white"></div>
+				<div className="h-6 w-96 rounded-1e3 bg-white"></div>
 			</div>
-		</>
+		</div>
 	)
 }
 
-function SponsorContents() {
+function Logo() {
+	return <div className="h-64 w-64 rounded-1e3 bg-white/90%"></div>
+}
+
+function LogoSubtext() {
 	return (
-		<>
-			<style jsx>{`
-				.sponsors-container {
-					display: flex;
-					justify-content: center;
-					gap: 16px;
-					flex-wrap: wrap;
-				}
-				.sponsor {
-					// BORDER BOX
-					height: 48px;
-					width: 160px;
-					border-radius: 1e3px;
-					// BOX DECORATION
-					background-color: hsl(var(--white-raw), 10%);
-				}
-			`}</style>
-			<div className="sponsors-container">
-				{iota(5).map(index => (
-					<div key={index} className="sponsor"></div>
-				))}
-			</div>
-		</>
+		<div className="flex flex-col items-center gap-12">
+			<div className="h-6 w-128 rounded-1e3 bg-white"></div>
+			<div className="h-6 w-256 rounded-1e3 bg-white"></div>
+		</div>
 	)
 }
+
+function CallToActionButton({ primary }: { primary?: boolean }) {
+	primary ||= undefined
+
+	return (
+		<div
+			className="h-56 rounded-[calc(56px_*_0.375)] bg-white/25%
+				md:aspect-[3.5] md:rounded-1e3
+					[&[data-primary]]:bg-white"
+			data-primary={primary}
+		></div>
+	)
+}
+
+function Middot() {
+	return <div className="h-2 w-2 rounded-1e3 bg-white"></div>
+}
+
+function SponsorMeta() {
+	return (
+		<div className="flex items-center gap-12">
+			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
+			<Middot />
+			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
+		</div>
+	)
+}
+
+function Sponsor() {
+	return (
+		<div className="flex flex-col items-center gap-12">
+			<div className="aspect-[3.5] h-48 rounded-1e3 bg-white/25%"></div>
+			<div className="h-6 w-96 rounded-1e3 bg-white/90%"></div>
+		</div>
+	)
+}
+
+//// function Breakpoint({ fallback, children, ...props }: PropsWithChildren<({ minWidth: number } | { maxWidth: number }) & { fallback?: boolean }>) {
+//// 	fallback ??= false
+////
+//// 	// Disambiguate props
+//// 	let minWidth: number | undefined
+//// 	let maxWidth: number | undefined
+//// 	if ("minWidth" in props) {
+//// 		minWidth = props.minWidth
+//// 	} else {
+//// 		maxWidth = props.maxWidth
+//// 	}
+////
+//// 	const [matches, setMatches] = useState(fallback)
+////
+//// 	useEffect(() => {
+//// 		if (typeof minWidth === "number" && typeof maxWidth === "undefined") {
+//// 			const media = window.matchMedia(`(min-width: ${minWidth}px)`)
+//// 			setMatches(media.matches)
+//// 			function handleChange(e: MediaQueryListEvent) {
+//// 				setMatches(e.matches)
+//// 			}
+//// 			media.addEventListener("change", handleChange)
+//// 			return () => media.removeEventListener("change", handleChange)
+//// 		} else if (typeof minWidth === "undefined" && typeof maxWidth === "number") {
+//// 			const media = window.matchMedia(`(max-width: ${maxWidth}px)`)
+//// 			setMatches(media.matches)
+//// 			function handleChange(e: MediaQueryListEvent) {
+//// 				setMatches(e.matches)
+//// 			}
+//// 			media.addEventListener("change", handleChange)
+//// 			return () => media.removeEventListener("change", handleChange)
+//// 		}
+//// 	}, [maxWidth, minWidth])
+////
+//// 	return <>{matches ? children : null}</>
+//// }
+
+//// <Breakpoint maxWidth={1280}>
+//// 	<header className="flex flex-col items-center gap-64 bg-[#1570fb] py-64">
+//// 		<Logo />
+//// 		{/* Placeholders */}
+//// 		<div className="flex flex-col items-center gap-12">
+//// 			<div className="h-6 w-128 rounded-1e3 bg-white"></div>
+//// 			<div className="h-6 w-256 rounded-1e3 bg-white"></div>
+//// 		</div>
+//// 		<div className="flex gap-16">
+//// 			<CTAButton primary />
+//// 			<CTAButton />
+//// 		</div>
+//// 		<div className="flex items-center gap-12">
+//// 			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
+//// 			{/* TODO */}
+//// 			<div className="h-2 w-2 rounded-1e3 bg-white"></div>
+//// 			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
+//// 		</div>
+//// 		<div className="flex flex-wrap justify-center gap-16">
+//// 			{iota(5).map(index => (
+//// 				<Sponsor key={index} />
+//// 			))}
+//// 		</div>
+//// 	</header>
+//// </Breakpoint>
 
 function Header() {
 	return (
 		<>
-			<style jsx>{`
-				.header-container {
-					// FLEXBOX
-					display: flex;
-					justify-content: center;
-					gap: 32px;
-					// BORDER BOX
-					padding: 64px 0;
-					// BOX DECORATION
-					background-color: var(--blue-500);
-				}
-				.header {
-					// FLEXBOX
-					display: flex;
-					align-items: center;
-					// BORDER BOX
-					width: 100%;
-					max-width: 1024px;
-				}
-				.header-col-1 {
-					// BORDER BOX
-					flex-grow: 1;
-				}
-				.header-col-2 {
-					// BORDER BOX
-					width: 640px;
-				}
-				// prettier-ignore
-				@media (max-width: ${SM_BREAKPOINT}px) {
-					* { display: none; }
-				}
-			`}</style>
-			<header className="header-container">
-				<ExternalLink pos="start" />
-				<ExternalLink pos="end" />
-				<div className="header">
-					<div className="header-col-1">Hello</div>
-					<div className="header-col-2">
-						<SponsorContents />
+			<NavLink pos="tl" />
+			<NavLink pos="tr" />
+			<header className="flex justify-center bg-[#1570fb] py-96 px-[var(--inset-x)]">
+				<div
+					className="flex flex-col gap-64
+						xl:w-100% xl:max-w-1024 xl:flex-row xl:items-center"
+				>
+					{/* LHS */}
+					<div className="flex grow flex-col items-center gap-32">
+						<Logo />
+						<LogoSubtext />
+						<div
+							className="flex w-384 flex-col gap-16
+								md:flex-row"
+						>
+							<CallToActionButton primary />
+							<CallToActionButton />
+						</div>
+					</div>
+					{/* RHS */}
+					<div
+						className="hidden
+							md:flex md:flex-col md:items-center md:gap-32
+								xl:w-100% xl:max-w-640"
+					>
+						<SponsorMeta />
+						<div className="flex flex-wrap justify-center gap-16">
+							{iota(5).map(index => (
+								<Sponsor key={index} />
+							))}
+						</div>
 					</div>
 				</div>
 			</header>

@@ -1,20 +1,14 @@
-/* :not(svg > *) { */
-/* 	outline: 1px solid hsl(200, 100%, 50%, 0.5); */
-/* 	outline-offset: -0.5px; */
-/* } */
-
-svg { overflow: visible; }
-
-:is(button, [role=button])                   { cursor: pointer; user-select: none; }
-:is(input[type=checkbox], [role=checkbox])   { cursor: pointer; user-select: none; }
-:is(input[type=radio], [role=radio])         { cursor: pointer; user-select: none; }
-:is(input[type=range], [role=slider])        { cursor: grab;    user-select: none; }
-:is(input[type=range], [role=slider]):active { cursor: grabbing; }
-
-input[type=text]:focus { outline: none; }
-/* textarea:focus         { outline: none; } */
-
 /* @tailwind base; */
+
+*,
+::before,
+::after {
+	box-sizing:   border-box;
+	border-width: 0;
+	border-style: solid;
+	border-color: #e5e7eb;
+}
+
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;

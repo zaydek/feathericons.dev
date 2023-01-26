@@ -31,7 +31,7 @@ export function Transition2({
 		 (when && unmount === "end") ||
 		(!when && unmount === "start")
 	))
-	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
+	const [state, setState] = useState<"tl" | "end">(when ? "end" : "start")
 
 	// prettier-ignore
 	const transitionProperty = useMemo(() => {
@@ -78,7 +78,7 @@ export function Transition2({
 					cloneElement(child, {
 						key: index,
 						style: {
-							...(state === "start" ? start : end),
+							...(state === "tl" ? start : end),
 							transitionProperty,
 							transitionDuration: `${duration}ms`,
 							transitionTimingFunction: typeof ease === "string"

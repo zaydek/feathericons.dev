@@ -1,13 +1,4 @@
-import {
-	cloneElement,
-	CSSProperties,
-	PropsWithChildren,
-	ReactElement,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react"
+import { cloneElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react"
 import { toKebabCase } from "./lib/cases"
 
 const MICRO_TIMEOUT = 10
@@ -23,30 +14,16 @@ export type TransitionProps = PropsWithChildren<{
 	delay?:   number
 }>
 
-export function Transition({
-	when,
-	unmount,
-	s1: start,
-	s2: end,
-	duration,
-	ease = "ease",
-	delay = 0,
-	children,
-}: TransitionProps) {
+export function Transition({ when, unmount, s1: start, s2: end, duration, ease = "ease", delay = 0, children }: TransitionProps) {
 	// prettier-ignore
 	const [show, setShow] = useState(!(
 		 (when && unmount === "end") ||
 		(!when && unmount === "start")
 	))
-	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
+	const [state, setState] = useState<"tl" | "end">(when ? "end" : "start")
 
 	const transitionProperty = useMemo(() => {
-		return [
-			...new Set([
-				...Object.keys(start).map(key => toKebabCase(key)),
-				...Object.keys(end).map(key => toKebabCase(key)),
-			]),
-		].join(", ")
+		return [...new Set([...Object.keys(start).map(key => toKebabCase(key)), ...Object.keys(end).map(key => toKebabCase(key))])].join(", ")
 	}, [end, start])
 
 	const onceRef = useRef(false)
@@ -82,7 +59,7 @@ export function Transition({
 			{show &&
 				cloneElement(children as ReactElement, {
 					style: {
-						...(state === "start" ? start : end),
+						...(state === "tl" ? start : end),
 						transitionProperty,
 						transitionDuration: `${duration}ms`,
 						// prettier-ignore
