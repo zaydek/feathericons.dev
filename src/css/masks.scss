@@ -16,7 +16,7 @@ $main-width: 1536px;
 	border-radius: 0 0 100% 100%;
 	background-color: green;
 }
-@media (max-width: #{$main-width + $inset-x + $windows-scrollbar-width}) {
+@media (max-width: #{$main-width + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.bg-mask-sticky { display: none; }
 }
 
@@ -73,9 +73,9 @@ $main-width: 1536px;
 	border-top-right-radius: 1e3px;
 	background-color: pink;
 }
-@media (max-width: #{$main-width + $inset-x + $windows-scrollbar-width}) {
+@media (max-width: #{$main-width + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.fg-mask-sticky + * { top: 0; }
 }
-@media (max-width: #{$main-width + $inset-x + $windows-scrollbar-width}) {
+@media (max-width: #{$main-width + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.fg-mask-sticky { display: none; }
 }

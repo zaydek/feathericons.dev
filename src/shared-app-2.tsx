@@ -116,7 +116,10 @@ function Header() {
 function MainContents() {
 	return (
 		<>
-			<div className="sticky top-0 2xl:top-[var(--inset-y)]">
+			<div
+				className="sticky top-0
+					2xl:top-[var(--inset-y)]"
+			>
 				<div>Hello, world!</div>
 			</div>
 			{iota(100).map(index => (
@@ -129,7 +132,10 @@ function MainContents() {
 function AsideContents() {
 	return (
 		<>
-			<div className="sticky top-0 2xl:top-[var(--inset-y)]">
+			<div
+				className="sticky top-0
+					2xl:top-[var(--inset-y)]"
+			>
 				<div>Hello, world!</div>
 			</div>
 			<div>Hello, world!</div>
@@ -147,7 +153,7 @@ export function SharedApp2() {
 			<FgMask />
 			<div
 				className="flex justify-center
-					xl:px-[var(--inset-x)]"
+					2xl:px-[var(--inset-x)]"
 			>
 				<div
 					className="flex min-h-[var(--main-min-h)] w-100% max-w-[var(--app-w)] bg-white
