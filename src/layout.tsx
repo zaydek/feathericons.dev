@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useEffect } from "react"
 import { manifest } from "./data/react-feather-manifest"
-import { SearchResultsContents } from "./layout-search-results"
+import { Docs } from "./docs"
 import { SidebarContents } from "./layout-sidebar-contents"
 import { toKebabCase } from "./lib/cases"
 import { iota } from "./lib/iota"
@@ -218,7 +218,7 @@ export function Layout({ name }: Partial<IconProps>) {
 					2xl:px-[var(--inset-x)]"
 			>
 				<div
-					className="flex min-h-[var(--computed-app-min-h)] w-100% max-w-[var(--app-w)] bg-white
+					className="flex min-h-[calc(100dvh_-_(var(--rounding)_+_var(--inset-y)))] w-100% max-w-[var(--app-w)] bg-white
 						2xl:rounded-[var(--rounding)] 2xl:[box-shadow:_var(--shadow-4)]"
 				>
 					{/* LHS */}
@@ -232,7 +232,8 @@ export function Layout({ name }: Partial<IconProps>) {
 							<div>Hello, world!</div>
 						</div>
 						<div className="p-48 pb-64">
-							<SearchResultsContents />
+							{/* <SearchResultsContents /> */}
+							<Docs name={name ?? "Feather"} />
 						</div>
 					</main>
 					{/* RHS */}

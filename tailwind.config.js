@@ -22,7 +22,7 @@ module.exports = {
 		extend: {
 			screens: {
 				// $app-w + $inset-x * 2 + $windows-scrollbar-width (see masks.scss)
-				"2xl": `${1696 + 16 * 2 + 16}px`,
+				"2xl": `${1536 + 16 * 2 + 16}px`,
 			},
 		},
 	},

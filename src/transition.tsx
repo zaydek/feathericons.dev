@@ -1,10 +1,11 @@
-import { cloneElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react"
+import { cloneElement, CSSProperties, ReactElement, useEffect, useMemo, useRef, useState } from "react"
 import { toKebabCase } from "./lib/cases"
+import { Arrayable } from "./lib/types"
 
 const MICRO_TIMEOUT = 10
 
 // prettier-ignore
-export type TransitionProps = PropsWithChildren<{
+export type TransitionProps = {
 	when:     boolean
 	unmount?: "start" | "end"
 	s1:       CSSProperties
@@ -12,7 +13,7 @@ export type TransitionProps = PropsWithChildren<{
 	duration: number
 	ease?:    string | readonly [number, number, number, number]
 	delay?:   number
-}>
+} & { children: Arrayable<ReactElement> }
 
 export function Transition({ when, unmount, s1: start, s2: end, duration, ease = "ease", delay = 0, children }: TransitionProps) {
 	// prettier-ignore
@@ -20,10 +21,16 @@ export function Transition({ when, unmount, s1: start, s2: end, duration, ease =
 		 (when && unmount === "end") ||
 		(!when && unmount === "start")
 	))
-	const [state, setState] = useState<"tl" | "end">(when ? "end" : "start")
+	const [state, setState] = useState<"start" | "end">(when ? "end" : "start")
 
+	// prettier-ignore
 	const transitionProperty = useMemo(() => {
-		return [...new Set([...Object.keys(start).map(key => toKebabCase(key)), ...Object.keys(end).map(key => toKebabCase(key))])].join(", ")
+		return [
+			...new Set([
+				...Object.keys(start).map(key => toKebabCase(key)),
+				...Object.keys(end).map(key => toKebabCase(key)),
+			]),
+		].join(", ")
 	}, [end, start])
 
 	const onceRef = useRef(false)
@@ -40,7 +47,7 @@ export function Transition({ when, unmount, s1: start, s2: end, duration, ease =
 				const d = window.setTimeout(() => {
 					// prettier-ignore
 					setShow(!(
-						(when && unmount === "end") ||
+						 (when && unmount === "end") ||
 						(!when && unmount === "start")
 					))
 				}, Math.max(MICRO_TIMEOUT, duration))
@@ -57,18 +64,18 @@ export function Transition({ when, unmount, s1: start, s2: end, duration, ease =
 	return (
 		<>
 			{show &&
-				cloneElement(children as ReactElement, {
-					style: {
-						...(state === "tl" ? start : end),
-						transitionProperty,
-						transitionDuration: `${duration}ms`,
-						// prettier-ignore
-						transitionTimingFunction: typeof ease === "string"
-							? ease
-							: `cubic-bezier(${ease.join(", ")})`,
-						transitionDelay: `${delay ?? 0}ms`,
-					},
-				})}
+				[children].flat().map((child, index) =>
+					cloneElement(child, {
+						key: index,
+						style: {
+							...(state === "start" ? start : end),
+							transitionProperty,
+							transitionDuration: `${duration}ms`,
+							transitionTimingFunction: typeof ease === "string" ? ease : `cubic-bezier(${ease.join(", ")})`,
+							transitionDelay: `${delay ?? 0}ms`,
+						},
+					})
+				)}
 		</>
 	)
 }

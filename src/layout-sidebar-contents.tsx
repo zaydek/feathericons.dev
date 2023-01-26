@@ -12,7 +12,7 @@ import { Icon, IconComponent } from "./lib/react/icon"
 import { Hairline } from "./random"
 import { ShikiContext } from "./shiki"
 import { SelectedContext, SliderContext } from "./state"
-import { Transition2 } from "./transition-2"
+import { Transition } from "./transition"
 import { TypographyCaps } from "./typography"
 
 function CommentLink({ formatAs, children }: { formatAs: "svg" | "jsx" | "tsx"; children: string }) {
@@ -175,7 +175,7 @@ function FormatButton() {
 				</div>
 			</div>
 			{/* Drop down */}
-			<Transition2
+			<Transition
 				when={show}
 				unmount="start"
 				s1={{
@@ -223,7 +223,7 @@ function FormatButton() {
 						</DropDownItem>
 					</div>
 				</div>
-			</Transition2>
+			</Transition>
 		</div>
 	)
 }
@@ -285,7 +285,7 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 			</div>
 			{/* RHS */}
 			{/* prettier-ignore */}
-			<Transition2
+			<Transition
 				when={props.checked}
 				s1={{ backgroundColor: "var(--hairline-color)"   }}
 				s2={{ backgroundColor: "var(--theme-color-cyan)" }}
@@ -294,7 +294,7 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 			>
 				<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--theme-color-cyan)]">
 					{/* prettier-ignore */}
-					<Transition2
+					<Transition
 						when={props.checked}
 						s1={{ transform: "translateX(0%)"  }}
 						s2={{ transform: "translateX(50%)" }}
@@ -302,9 +302,9 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 						ease={[0, 1, 0.5, 1.25]} // Bounce here
 					>
 						<div className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
-					</Transition2>
+					</Transition>
 				</div>
-			</Transition2>
+			</Transition>
 		</AriaCheckbox>
 	)
 }

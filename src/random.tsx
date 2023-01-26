@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode, useState } from "react"
 import { cx } from "./lib/cx"
-import { Transition2 } from "./transition-2"
+import { Transition } from "./transition"
 import { TypographyCaps } from "./typography"
 
 export function Hairline() {
@@ -20,7 +20,7 @@ export function HoverTip({
 	return (
 		<div className="relative flex flex-col" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
 			{children}
-			<Transition2
+			<Transition
 				when={hover}
 				unmount="start"
 				s1={{
@@ -55,7 +55,7 @@ export function HoverTip({
 						<TypographyCaps className="text-gray-700">{content}</TypographyCaps>
 					</div>
 				</div>
-			</Transition2>
+			</Transition>
 		</div>
 	)
 }
