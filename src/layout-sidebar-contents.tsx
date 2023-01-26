@@ -309,6 +309,8 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 	)
 }
 
+const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color-cyan)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
+
 function Slider({ icon, resetHandler, children, ...props }: { icon: IconComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
@@ -337,7 +339,7 @@ function Slider({ icon, resetHandler, children, ...props }: { icon: IconComponen
 			<div className="px-12">
 				<AriaSlider track={track} thumb={thumb} {...props}>
 					<div ref={setTrack} className="flex h-24 flex-col justify-center">
-						<div className="flex h-6 items-center rounded-1e3 [background-image:_var(--computed-progress-bar-bg)]">
+						<div className={`flex h-6 items-center rounded-1e3 ${linearGradientFromHell}`}>
 							<div ref={setThumb} className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]" style={{ transform: "translateX(50%)" }}></div>
 						</div>
 					</div>
