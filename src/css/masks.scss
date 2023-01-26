@@ -14,7 +14,7 @@ $app-w: 1536px;
 	margin: 0 -10%;
 	height: 320px;
 	border-radius: 0 0 100% 100%;
-	// Defer to data-bg-hero for background-image
+	// Defer to [data-bg-hero] for background-image
 }
 @media (max-width: #{$app-w + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.bg-mask-sticky { display: none; }
@@ -39,19 +39,19 @@ $app-w: 1536px;
 	position: relative;
 	height: calc(var(--rounding) + var(--inset-y));
 	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
-	// Defer to data-bg-hero for background-image
+	// Defer to [data-bg-hero] for background-image
 }
 .fg-mask-bit-2 {
 	height: var(--inset-y);
 	width: 100%;
 	max-width: calc(1536px - var(--rounding) * 2);
-	// Defer to data-bg-hero for background-image
+	// Defer to [data-bg-hero] for background-image
 }
 .fg-mask-bit-3 {
 	position: relative;
 	height: calc(var(--rounding) + var(--inset-y));
 	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
-	// Defer to data-bg-hero for background-image
+	// Defer to [data-bg-hero] for background-image
 }
 .fg-mask-bit-1-nested {
 	position: absolute;
@@ -60,7 +60,8 @@ $app-w: 1536px;
 	height: var(--rounding);
 	width: var(--rounding);
 	border-top-left-radius: 1e3px;
-	background-color: pink;
+	//// border-bottom-right-radius: 1e3px;
+	background-color: white;
 }
 .fg-mask-bit-3-nested {
 	position: absolute;
@@ -69,7 +70,8 @@ $app-w: 1536px;
 	height: var(--rounding);
 	width: var(--rounding);
 	border-top-right-radius: 1e3px;
-	background-color: pink;
+	//// border-bottom-left-radius: 1e3px;
+	background-color: white;
 }
 @media (max-width: #{$app-w + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.fg-mask-sticky + * { top: 0; }

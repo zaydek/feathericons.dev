@@ -1,3 +1,5 @@
+@use "tailwind-colors" as *;
+
 :root:not(.dark) { color-scheme: light; }
 :root.dark       { color-scheme: dark;  }
 
@@ -8,4 +10,16 @@
 	--seed-l:   0%;
 	--seed-raw: 220, 100%, 0%
 	--seed:     hsl(220, 100%, 0%);
+
+	--theme-color: #1570fb;
+	--theme-color-cyan: #{#3bf};
+	--theme-color-purple: #{purple(600)};
+
+	--computed-progress-bar-bg: linear-gradient(
+		to right,
+		var(--theme-color-cyan) calc(var(--progress, 0.5) * 100%),
+		var(--hairline-color)   calc(var(--progress, 0.5) * 100%)
+	);
+
+	background-color: gray(50);
 }

@@ -19,14 +19,14 @@ module.exports = {
 		minWidth:           { ...sizes, ...percents },
 		spacing:            { ...sizes, ...percents },
 		zIndex:             zIndexes,
-		backdropOpacity:    percents,
-		backgroundOpacity:  percents,
-		borderOpacity:      percents,
-		divideOpacity:      percents,
-		opacity:            percents,
-		placeholderOpacity: percents,
-		ringOpacity:        percents,
-		textOpacity:        percents,
+		//// backdropOpacity:    percents,
+		//// backgroundOpacity:  percents,
+		//// borderOpacity:      percents,
+		//// divideOpacity:      percents,
+		//// opacity:            percents,
+		//// placeholderOpacity: percents,
+		//// ringOpacity:        percents,
+		//// textOpacity:        percents,
 		extend: {
 			screens: {
 				// 1536px + $inset-x * 2 + $windows-scrollbar-width

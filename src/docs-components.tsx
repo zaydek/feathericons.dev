@@ -119,9 +119,7 @@ export function Pre({ language, children: code, ...props }: { language: Lang; ch
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
 		//// const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
-		const tokens = highlighter.codeToThemedTokens(code, language, "github-light", {
-			includeExplanation: false,
-		})
+		const tokens = highlighter.codeToThemedTokens(code, language, "github-light")
 		setTokens(tokens)
 	}, [code, highlighter, language])
 
@@ -201,9 +199,7 @@ export function Pre({ language, children: code, ...props }: { language: Lang; ch
 ////
 //// 	useEffect(() => {
 //// 		if (highlighter === null) { return } // prettier-ignore
-//// 		const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
-//// 			includeExplanation: false,
-//// 		})
+//// 		const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark")
 //// 		setTokens(tokens)
 //// 	}, [code, highlighter, lang])
 ////

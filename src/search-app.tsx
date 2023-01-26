@@ -250,9 +250,7 @@ function IconPreview() {
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
-		const tokens = highlighter.codeToThemedTokens(code + "\n", formatAs === "svg" ? "html" : "tsx", "github-light", {
-			includeExplanation: false,
-		})
+		const tokens = highlighter.codeToThemedTokens(code + "\n", formatAs === "svg" ? "html" : "tsx", "github-light")
 		setTokens(tokens)
 	}, [code, formatAs, highlighter])
 
