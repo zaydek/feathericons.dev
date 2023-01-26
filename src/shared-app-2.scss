@@ -1392,17 +1392,25 @@
 :root:not(.dark) { color-scheme: light; }
 :root.dark       { color-scheme: dark;  }
 
-html {
-	overflow-x: hidden;
-}
+//// :root {
+//// 	--rounding: 48px;
+//// 	--inset-y:  16px;
+//// 	--inset-x:  16px;
+////
+//// 	--main-width:       1536px;
+//// 	--main-col-2-width: 400px;
+//// }
 
+// TODO: Move to vars?
 :root {
 	--rounding: 48px;
 	--inset-y:  16px;
 	--inset-x:  16px;
+	--app-w:    1536px;
+	--aside-w:  400px;
 
-	--main-width:       1536px;
-	--main-col-2-width: 400px;
+	// Computed
+	--main-min-h: calc(100dvh - (var(--rounding) + var(--inset-y)));
 }
 
 :root {

@@ -10,6 +10,7 @@
 import "the-new-css-reset"
 
 import "../css/base.scss"
+import "../css/masks.scss"
 import "../shared-app-2.scss"
 
 import "../css/tailwind.css"

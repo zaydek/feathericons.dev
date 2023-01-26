@@ -1,0 +1,81 @@
+$windows-scrollbar-width: 16px;
+$inset-x: 16px;
+$main-width: 1536px;
+
+////////////////////////////////////////////////////////////////////////////////
+// .bg-mask
+
+.bg-mask-sticky {
+	position: sticky;
+	top: 0;
+	height: 0; // 😎
+}
+.bg-mask {
+	margin: 0 -10%;
+	height: 320px;
+	border-radius: 0 0 100% 100%;
+	background-color: green;
+}
+@media (max-width: #{$main-width + $inset-x + $windows-scrollbar-width}) {
+	.bg-mask-sticky { display: none; }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// .fg-mask
+
+.fg-mask-sticky {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	pointer-events: none;
+}
+.fg-mask-sticky + * {
+	position: relative;
+	top: calc(-1 * var(--rounding));
+}
+.fg-mask-bit-1 {
+	position: relative;
+	height: calc(var(--rounding) + var(--inset-y));
+	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
+	background-color: orange;
+}
+.fg-mask-bit-2 {
+	height: var(--inset-y);
+	width: 100%;
+	max-width: calc(1536px - var(--rounding) * 2);
+	background-color: yellow;
+}
+.fg-mask-bit-3 {
+	position: relative;
+	height: calc(var(--rounding) + var(--inset-y));
+	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
+	background-color: orange;
+}
+.fg-mask-bit-1::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: var(--rounding);
+	width: var(--rounding);
+	border-top-left-radius: 1e3px;
+	background-color: pink;
+}
+.fg-mask-bit-3::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: var(--rounding);
+	width: var(--rounding);
+	border-top-right-radius: 1e3px;
+	background-color: pink;
+}
+@media (max-width: #{$main-width + $inset-x + $windows-scrollbar-width}) {
+	.fg-mask-sticky + * { top: 0; }
+}
+@media (max-width: #{$main-width + $inset-x + $windows-scrollbar-width}) {
+	.fg-mask-sticky { display: none; }
+}
