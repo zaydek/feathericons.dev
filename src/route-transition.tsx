@@ -29,7 +29,7 @@ export function RouteTransition({ children }: { children: Arrayable<ReactElement
 					style: ended
 						? null
 						: {
-								transform: started ? "translateX(0)" : `translateX(${forwards ? -16 : 16}px)`,
+								transform: started ? "translateX(0px)" : `translateX(${forwards ? -16 : 16}px)`,
 								opacity: started ? 1 : 0,
 								// prettier-ignore
 								transition: started ? [

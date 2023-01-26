@@ -1,9 +1,10 @@
 :root {
-	--rounding: 48px;
-	--inset-y:  16px;
-	--inset-x:  16px;
-	--app-w:    1536px;
-	--aside-w:  448px;
+	--rounding:  48px;
+	--inset-y:   16px;
+	--inset-x:   16px;
+	--app-w:     1696px;
+	--aside-w:   448px;
+	--grid-size: 96px;
 
 	--computed-app-min-h: calc(100dvh - (var(--rounding) + var(--inset-y)));
 }

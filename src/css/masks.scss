@@ -1,6 +1,6 @@
 $windows-scrollbar-width: 16px;
 $inset-x: 16px;
-$app-w: 1536px;
+$app-w: 1696px;
 
 ////////////////////////////////////////////////////////////////////////////////
 // .bg-mask
@@ -44,7 +44,7 @@ $app-w: 1536px;
 .fg-mask-bit-2 {
 	height: var(--inset-y);
 	width: 100%;
-	max-width: calc(1536px - var(--rounding) * 2);
+	max-width: calc(var(--app-w) - var(--rounding) * 2);
 	// Defer to [data-bg-hero] for background-image
 }
 .fg-mask-bit-3 {
