@@ -23,7 +23,7 @@ function Logo() {
 	return <div className="h-64 w-64 rounded-1e3 bg-white/90%"></div>
 }
 
-function Heading() {
+function LogoText() {
 	return (
 		<div className="flex flex-col items-center gap-12">
 			<div className="h-6 w-128 rounded-1e3 bg-white"></div>
@@ -38,7 +38,7 @@ function CTAButton({ primary }: { primary?: boolean }) {
 	return (
 		<div
 			className="h-56 rounded-[calc(56px_*_0.375)] bg-white/50%
-				md:aspect-[3.5] md:rounded-1e3
+				sm:aspect-[3.5] sm:rounded-1e3
 					[&[data-primary]]:bg-white"
 			data-primary={primary}
 		></div>
@@ -85,10 +85,10 @@ function Header() {
 					{/* LHS */}
 					<div className="flex grow flex-col items-center gap-32">
 						<Logo />
-						<Heading />
+						<LogoText />
 						<div
-							className="flex w-384 flex-col gap-16
-								md:flex-row"
+							className="flex w-384 flex-col gap-12
+								sm:flex-row sm:gap-16"
 						>
 							<CTAButton primary />
 							<CTAButton />
@@ -97,7 +97,7 @@ function Header() {
 					{/* RHS */}
 					<div
 						className="hidden
-							md:flex md:flex-col md:items-center md:gap-32
+							sm:flex sm:flex-col sm:items-center sm:gap-32
 								xl:w-100% xl:max-w-640"
 					>
 						<SponsorMeta />
@@ -112,6 +112,8 @@ function Header() {
 		</>
 	)
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 function MainContents() {
 	return (
@@ -129,6 +131,8 @@ function MainContents() {
 	)
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 function AsideContents() {
 	return (
 		<>
@@ -144,6 +148,8 @@ function AsideContents() {
 		</>
 	)
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 export function SharedApp2() {
 	return (
