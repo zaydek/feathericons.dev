@@ -125,13 +125,13 @@ export function Pre({ language, children: code, ...props }: { language: Lang; ch
 		setTokens(tokens)
 	}, [code, highlighter, language])
 
-	useEffect(() => {
-		if (!copy) { return } // prettier-ignore
-		const d = window.setTimeout(() => {
-			setCopy(false)
-		}, 1e3)
-		return () => window.clearTimeout(d)
-	}, [copy])
+	//// useEffect(() => {
+	//// 	if (!copy) { return } // prettier-ignore
+	//// 	const d = window.setTimeout(() => {
+	//// 		setCopy(false)
+	//// 	}, 1e3)
+	//// 	return () => window.clearTimeout(d)
+	//// }, [copy])
 
 	return (
 		//// <pre
@@ -143,7 +143,8 @@ export function Pre({ language, children: code, ...props }: { language: Lang; ch
 		//// 		[pre_+_&]:-mt-24"
 		//// >
 		<pre
-			className="relative my-16 overflow-auto text-gray-800
+			//// className="relative my-16 overflow-auto text-gray-800
+			className="my-16 overflow-auto text-gray-800
 				[pre_+_&]:mt-0"
 			{...props}
 		>
@@ -176,7 +177,7 @@ export function Pre({ language, children: code, ...props }: { language: Lang; ch
 							</div>
 					  ))}
 			</code>
-			<div className="absolute top-0 right-0">
+			{/* <div className="absolute top-0 right-0">
 				<button
 					className="flex h-[21px] w-[21px] items-center justify-center"
 					onClick={async e => {
@@ -185,10 +186,9 @@ export function Pre({ language, children: code, ...props }: { language: Lang; ch
 					}}
 					aria-label="Copy code to the clipboard"
 				>
-					{/* <Icon className="h-16 w-16 text-white" icon={copy ? feather.Check : feather.Copy} /> */}
 					<Icon className="h-16 w-16 text-gray-800" icon={copy ? feather.Check : feather.Copy} />
 				</button>
-			</div>
+			</div> */}
 		</pre>
 	)
 }

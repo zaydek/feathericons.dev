@@ -257,38 +257,44 @@ function IconPreview() {
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		<pre className="min-h-256 overflow-auto rounded-24 bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
-			<code>
-				{tokens === null
-					? code.split("\n").map((ys, y) => (
-							<div key={y} className="relative px-48">
-								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-400">{y + 1}</div>
+		// TODO: Add card styling here. Does aspect-ratio work the same as min-height?
+		<div>
+			<pre className="min-h-256 overflow-auto rounded-24 bg-white py-24 text-gray-800 [box-shadow:_var(--shadow-2)]">
+				<code>
+					{tokens === null
+						? code.split("\n").map((ys, y) => (
+								<div key={y} className="relative px-48">
+									<div className="absolute top-0 bottom-0 left-0 select-none">
+										<div className="w-32 text-right text-gray-400">{y + 1}</div>
+									</div>
+									{ys || <br />}
 								</div>
-								{ys || <br />}
-							</div>
-					  ))
-					: tokens.map((ys, y) => (
-							<div key={y} className="relative px-48">
-								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-400">{y + 1}</div>
+						  ))
+						: tokens.map((ys, y) => (
+								<div key={y} className="relative px-48">
+									<div className="absolute top-0 bottom-0 left-0 select-none">
+										<div className="w-32 text-right text-gray-400">{y + 1}</div>
+									</div>
+									{ys.length > 0 ? (
+										ys.map(({ color, content }, x) => (
+											<span key={x} style={{ color }}>
+												{y === 0 ? <CommentAnchor formatAs={formatAs}>{content}</CommentAnchor> : content}
+											</span>
+										))
+									) : (
+										<br />
+									)}
 								</div>
-								{ys.length > 0 ? (
-									ys.map(({ color, content }, x) => (
-										<span key={x} style={{ color }}>
-											{y === 0 ? <CommentAnchor formatAs={formatAs}>{content}</CommentAnchor> : content}
-										</span>
-									))
-								) : (
-									<br />
-								)}
-							</div>
-					  ))}
-			</code>
-		</pre>
+						  ))}
+				</code>
+			</pre>
+		</div>
 	) : (
-		<div className="dots-pattern flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
-			<Icon className="h-64 w-64 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[selectedName]} />
+		// TODO: Add card styling here. Does aspect-ratio work the same as min-height?
+		<div>
+			<div className="dots-pattern flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
+				<Icon className="h-64 w-64 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[selectedName]} />
+			</div>
 		</div>
 	)
 }
