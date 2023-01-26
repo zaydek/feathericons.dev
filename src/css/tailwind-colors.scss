@@ -1,11 +1,12 @@
-// https://github.com/tailwindlabs/tailwindcss/blob/master/src/public/colors.js
+@use "sass:map";
 
+// https://github.com/tailwindlabs/tailwindcss/blob/master/src/public/colors.js
 $tailwind-colors: (
-	inherit:     inherit,
-	current:     currentColor,
-	transparent: transparent,
-	black:       #000,
-	white:       #fff,
+	//// inherit:     inherit,
+	//// current:     currentColor,
+	//// transparent: transparent,
+	black: #000,
+	white: #fff,
 
 	slate: (
 		50:  #f8fafc,

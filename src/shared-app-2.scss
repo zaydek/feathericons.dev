@@ -1,0 +1,1511 @@
+@use "sass:color";
+@use "sass:meta";
+
+@use "the-new-css-reset";
+
+//// @use "css/tailwind-colors" as *;
+////
+//// :root {
+//// 	@each $k1, $v1 in $tailwind-colors {
+//// 		@if meta.type-of($v1) == map {
+//// 			@each $k2, $v2 in $v1 {
+//// 				---{$k1}-#{$k2}: #{$v2};
+//// 			}
+//// 		} @else {
+//// 			---{$k1}: #{$v1};
+//// 		}
+//// 	}
+//// }
+
+@use "sass:map";
+
+// https://github.com/tailwindlabs/tailwindcss/blob/master/src/public/colors.js
+:root {
+	//// inherit:     inherit,
+	//// current:     currentColor,
+	//// transparent: transparent,
+
+	--black-h:         #{color.hue(#000)};
+	--black-s:         #{color.saturation(#000)};
+	--black-l:         #{color.lightness(#000)};
+	--black-raw:       #{color.hue(#000), color.saturation(#000), color.lightness(#000)};
+	--black:           #{#000};
+
+	--white-h:         #{color.hue(#fff)};
+	--white-s:         #{color.saturation(#fff)};
+	--white-l:         #{color.lightness(#fff)};
+	--white-raw:       #{color.hue(#fff), color.saturation(#fff), color.lightness(#fff)};
+	--white:           #{#fff};
+
+	--slate-50-h:      #{color.hue(#f8fafc)};
+	--slate-50-s:      #{color.saturation(#f8fafc)};
+	--slate-50-l:      #{color.lightness(#f8fafc)};
+	--slate-50-raw:    #{color.hue(#f8fafc), color.saturation(#f8fafc), color.lightness(#f8fafc)};
+	--slate-50:        #{#f8fafc};
+
+	--slate-100-h:     #{color.hue(#f1f5f9)};
+	--slate-100-s:     #{color.saturation(#f1f5f9)};
+	--slate-100-l:     #{color.lightness(#f1f5f9)};
+	--slate-100-raw:   #{color.hue(#f1f5f9), color.saturation(#f1f5f9), color.lightness(#f1f5f9)};
+	--slate-100:       #{#f1f5f9};
+
+	--slate-200-h:     #{color.hue(#e2e8f0)};
+	--slate-200-s:     #{color.saturation(#e2e8f0)};
+	--slate-200-l:     #{color.lightness(#e2e8f0)};
+	--slate-200-raw:   #{color.hue(#e2e8f0), color.saturation(#e2e8f0), color.lightness(#e2e8f0)};
+	--slate-200:       #{#e2e8f0};
+
+	--slate-300-h:     #{color.hue(#cbd5e1)};
+	--slate-300-s:     #{color.saturation(#cbd5e1)};
+	--slate-300-l:     #{color.lightness(#cbd5e1)};
+	--slate-300-raw:   #{color.hue(#cbd5e1), color.saturation(#cbd5e1), color.lightness(#cbd5e1)};
+	--slate-300:       #{#cbd5e1};
+
+	--slate-400-h:     #{color.hue(#94a3b8)};
+	--slate-400-s:     #{color.saturation(#94a3b8)};
+	--slate-400-l:     #{color.lightness(#94a3b8)};
+	--slate-400-raw:   #{color.hue(#94a3b8), color.saturation(#94a3b8), color.lightness(#94a3b8)};
+	--slate-400:       #{#94a3b8};
+
+	--slate-500-h:     #{color.hue(#64748b)};
+	--slate-500-s:     #{color.saturation(#64748b)};
+	--slate-500-l:     #{color.lightness(#64748b)};
+	--slate-500-raw:   #{color.hue(#64748b), color.saturation(#64748b), color.lightness(#64748b)};
+	--slate-500:       #{#64748b};
+
+	--slate-600-h:     #{color.hue(#475569)};
+	--slate-600-s:     #{color.saturation(#475569)};
+	--slate-600-l:     #{color.lightness(#475569)};
+	--slate-600-raw:   #{color.hue(#475569), color.saturation(#475569), color.lightness(#475569)};
+	--slate-600:       #{#475569};
+
+	--slate-700-h:     #{color.hue(#334155)};
+	--slate-700-s:     #{color.saturation(#334155)};
+	--slate-700-l:     #{color.lightness(#334155)};
+	--slate-700-raw:   #{color.hue(#334155), color.saturation(#334155), color.lightness(#334155)};
+	--slate-700:       #{#334155};
+
+	--slate-800-h:     #{color.hue(#1e293b)};
+	--slate-800-s:     #{color.saturation(#1e293b)};
+	--slate-800-l:     #{color.lightness(#1e293b)};
+	--slate-800-raw:   #{color.hue(#1e293b), color.saturation(#1e293b), color.lightness(#1e293b)};
+	--slate-800:       #{#1e293b};
+
+	--slate-900-h:     #{color.hue(#0f172a)};
+	--slate-900-s:     #{color.saturation(#0f172a)};
+	--slate-900-l:     #{color.lightness(#0f172a)};
+	--slate-900-raw:   #{color.hue(#0f172a), color.saturation(#0f172a), color.lightness(#0f172a)};
+	--slate-900:       #{#0f172a};
+
+	--gray-50-h:       #{color.hue(#f9fafb)};
+	--gray-50-s:       #{color.saturation(#f9fafb)};
+	--gray-50-l:       #{color.lightness(#f9fafb)};
+	--gray-50-raw:     #{color.hue(#f9fafb), color.saturation(#f9fafb), color.lightness(#f9fafb)};
+	--gray-50:         #{#f9fafb};
+
+	--gray-100-h:      #{color.hue(#f3f4f6)};
+	--gray-100-s:      #{color.saturation(#f3f4f6)};
+	--gray-100-l:      #{color.lightness(#f3f4f6)};
+	--gray-100-raw:    #{color.hue(#f3f4f6), color.saturation(#f3f4f6), color.lightness(#f3f4f6)};
+	--gray-100:        #{#f3f4f6};
+
+	--gray-200-h:      #{color.hue(#e5e7eb)};
+	--gray-200-s:      #{color.saturation(#e5e7eb)};
+	--gray-200-l:      #{color.lightness(#e5e7eb)};
+	--gray-200-raw:    #{color.hue(#e5e7eb), color.saturation(#e5e7eb), color.lightness(#e5e7eb)};
+	--gray-200:        #{#e5e7eb};
+
+	--gray-300-h:      #{color.hue(#d1d5db)};
+	--gray-300-s:      #{color.saturation(#d1d5db)};
+	--gray-300-l:      #{color.lightness(#d1d5db)};
+	--gray-300-raw:    #{color.hue(#d1d5db), color.saturation(#d1d5db), color.lightness(#d1d5db)};
+	--gray-300:        #{#d1d5db};
+
+	--gray-400-h:      #{color.hue(#9ca3af)};
+	--gray-400-s:      #{color.saturation(#9ca3af)};
+	--gray-400-l:      #{color.lightness(#9ca3af)};
+	--gray-400-raw:    #{color.hue(#9ca3af), color.saturation(#9ca3af), color.lightness(#9ca3af)};
+	--gray-400:        #{#9ca3af};
+
+	--gray-500-h:      #{color.hue(#6b7280)};
+	--gray-500-s:      #{color.saturation(#6b7280)};
+	--gray-500-l:      #{color.lightness(#6b7280)};
+	--gray-500-raw:    #{color.hue(#6b7280), color.saturation(#6b7280), color.lightness(#6b7280)};
+	--gray-500:        #{#6b7280};
+
+	--gray-600-h:      #{color.hue(#4b5563)};
+	--gray-600-s:      #{color.saturation(#4b5563)};
+	--gray-600-l:      #{color.lightness(#4b5563)};
+	--gray-600-raw:    #{color.hue(#4b5563), color.saturation(#4b5563), color.lightness(#4b5563)};
+	--gray-600:        #{#4b5563};
+
+	--gray-700-h:      #{color.hue(#374151)};
+	--gray-700-s:      #{color.saturation(#374151)};
+	--gray-700-l:      #{color.lightness(#374151)};
+	--gray-700-raw:    #{color.hue(#374151), color.saturation(#374151), color.lightness(#374151)};
+	--gray-700:        #{#374151};
+
+	--gray-800-h:      #{color.hue(#1f2937)};
+	--gray-800-s:      #{color.saturation(#1f2937)};
+	--gray-800-l:      #{color.lightness(#1f2937)};
+	--gray-800-raw:    #{color.hue(#1f2937), color.saturation(#1f2937), color.lightness(#1f2937)};
+	--gray-800:        #{#1f2937};
+
+	--gray-900-h:      #{color.hue(#111827)};
+	--gray-900-s:      #{color.saturation(#111827)};
+	--gray-900-l:      #{color.lightness(#111827)};
+	--gray-900-raw:    #{color.hue(#111827), color.saturation(#111827), color.lightness(#111827)};
+	--gray-900:        #{#111827};
+
+	--zinc-50-h:       #{color.hue(#fafafa)};
+	--zinc-50-s:       #{color.saturation(#fafafa)};
+	--zinc-50-l:       #{color.lightness(#fafafa)};
+	--zinc-50-raw:     #{color.hue(#fafafa), color.saturation(#fafafa), color.lightness(#fafafa)};
+	--zinc-50:         #{#fafafa};
+
+	--zinc-100-h:      #{color.hue(#f4f4f5)};
+	--zinc-100-s:      #{color.saturation(#f4f4f5)};
+	--zinc-100-l:      #{color.lightness(#f4f4f5)};
+	--zinc-100-raw:    #{color.hue(#f4f4f5), color.saturation(#f4f4f5), color.lightness(#f4f4f5)};
+	--zinc-100:        #{#f4f4f5};
+
+	--zinc-200-h:      #{color.hue(#e4e4e7)};
+	--zinc-200-s:      #{color.saturation(#e4e4e7)};
+	--zinc-200-l:      #{color.lightness(#e4e4e7)};
+	--zinc-200-raw:    #{color.hue(#e4e4e7), color.saturation(#e4e4e7), color.lightness(#e4e4e7)};
+	--zinc-200:        #{#e4e4e7};
+
+	--zinc-300-h:      #{color.hue(#d4d4d8)};
+	--zinc-300-s:      #{color.saturation(#d4d4d8)};
+	--zinc-300-l:      #{color.lightness(#d4d4d8)};
+	--zinc-300-raw:    #{color.hue(#d4d4d8), color.saturation(#d4d4d8), color.lightness(#d4d4d8)};
+	--zinc-300:        #{#d4d4d8};
+
+	--zinc-400-h:      #{color.hue(#a1a1aa)};
+	--zinc-400-s:      #{color.saturation(#a1a1aa)};
+	--zinc-400-l:      #{color.lightness(#a1a1aa)};
+	--zinc-400-raw:    #{color.hue(#a1a1aa), color.saturation(#a1a1aa), color.lightness(#a1a1aa)};
+	--zinc-400:        #{#a1a1aa};
+
+	--zinc-500-h:      #{color.hue(#71717a)};
+	--zinc-500-s:      #{color.saturation(#71717a)};
+	--zinc-500-l:      #{color.lightness(#71717a)};
+	--zinc-500-raw:    #{color.hue(#71717a), color.saturation(#71717a), color.lightness(#71717a)};
+	--zinc-500:        #{#71717a};
+
+	--zinc-600-h:      #{color.hue(#52525b)};
+	--zinc-600-s:      #{color.saturation(#52525b)};
+	--zinc-600-l:      #{color.lightness(#52525b)};
+	--zinc-600-raw:    #{color.hue(#52525b), color.saturation(#52525b), color.lightness(#52525b)};
+	--zinc-600:        #{#52525b};
+
+	--zinc-700-h:      #{color.hue(#3f3f46)};
+	--zinc-700-s:      #{color.saturation(#3f3f46)};
+	--zinc-700-l:      #{color.lightness(#3f3f46)};
+	--zinc-700-raw:    #{color.hue(#3f3f46), color.saturation(#3f3f46), color.lightness(#3f3f46)};
+	--zinc-700:        #{#3f3f46};
+
+	--zinc-800-h:      #{color.hue(#27272a)};
+	--zinc-800-s:      #{color.saturation(#27272a)};
+	--zinc-800-l:      #{color.lightness(#27272a)};
+	--zinc-800-raw:    #{color.hue(#27272a), color.saturation(#27272a), color.lightness(#27272a)};
+	--zinc-800:        #{#27272a};
+
+	--zinc-900-h:      #{color.hue(#18181b)};
+	--zinc-900-s:      #{color.saturation(#18181b)};
+	--zinc-900-l:      #{color.lightness(#18181b)};
+	--zinc-900-raw:    #{color.hue(#18181b), color.saturation(#18181b), color.lightness(#18181b)};
+	--zinc-900:        #{#18181b};
+
+	--neutral-50-h:    #{color.hue(#fafafa)};
+	--neutral-50-s:    #{color.saturation(#fafafa)};
+	--neutral-50-l:    #{color.lightness(#fafafa)};
+	--neutral-50-raw:  #{color.hue(#fafafa), color.saturation(#fafafa), color.lightness(#fafafa)};
+	--neutral-50:      #{#fafafa};
+
+	--neutral-100-h:   #{color.hue(#f5f5f5)};
+	--neutral-100-s:   #{color.saturation(#f5f5f5)};
+	--neutral-100-l:   #{color.lightness(#f5f5f5)};
+	--neutral-100-raw: #{color.hue(#f5f5f5), color.saturation(#f5f5f5), color.lightness(#f5f5f5)};
+	--neutral-100:     #{#f5f5f5};
+
+	--neutral-200-h:   #{color.hue(#e5e5e5)};
+	--neutral-200-s:   #{color.saturation(#e5e5e5)};
+	--neutral-200-l:   #{color.lightness(#e5e5e5)};
+	--neutral-200-raw: #{color.hue(#e5e5e5), color.saturation(#e5e5e5), color.lightness(#e5e5e5)};
+	--neutral-200:     #{#e5e5e5};
+
+	--neutral-300-h:   #{color.hue(#d4d4d4)};
+	--neutral-300-s:   #{color.saturation(#d4d4d4)};
+	--neutral-300-l:   #{color.lightness(#d4d4d4)};
+	--neutral-300-raw: #{color.hue(#d4d4d4), color.saturation(#d4d4d4), color.lightness(#d4d4d4)};
+	--neutral-300:     #{#d4d4d4};
+
+	--neutral-400-h:   #{color.hue(#a3a3a3)};
+	--neutral-400-s:   #{color.saturation(#a3a3a3)};
+	--neutral-400-l:   #{color.lightness(#a3a3a3)};
+	--neutral-400-raw: #{color.hue(#a3a3a3), color.saturation(#a3a3a3), color.lightness(#a3a3a3)};
+	--neutral-400:     #{#a3a3a3};
+
+	--neutral-500-h:   #{color.hue(#737373)};
+	--neutral-500-s:   #{color.saturation(#737373)};
+	--neutral-500-l:   #{color.lightness(#737373)};
+	--neutral-500-raw: #{color.hue(#737373), color.saturation(#737373), color.lightness(#737373)};
+	--neutral-500:     #{#737373};
+
+	--neutral-600-h:   #{color.hue(#525252)};
+	--neutral-600-s:   #{color.saturation(#525252)};
+	--neutral-600-l:   #{color.lightness(#525252)};
+	--neutral-600-raw: #{color.hue(#525252), color.saturation(#525252), color.lightness(#525252)};
+	--neutral-600:     #{#525252};
+
+	--neutral-700-h:   #{color.hue(#404040)};
+	--neutral-700-s:   #{color.saturation(#404040)};
+	--neutral-700-l:   #{color.lightness(#404040)};
+	--neutral-700-raw: #{color.hue(#404040), color.saturation(#404040), color.lightness(#404040)};
+	--neutral-700:     #{#404040};
+
+	--neutral-800-h:   #{color.hue(#262626)};
+	--neutral-800-s:   #{color.saturation(#262626)};
+	--neutral-800-l:   #{color.lightness(#262626)};
+	--neutral-800-raw: #{color.hue(#262626), color.saturation(#262626), color.lightness(#262626)};
+	--neutral-800:     #{#262626};
+
+	--neutral-900-h:   #{color.hue(#171717)};
+	--neutral-900-s:   #{color.saturation(#171717)};
+	--neutral-900-l:   #{color.lightness(#171717)};
+	--neutral-900-raw: #{color.hue(#171717), color.saturation(#171717), color.lightness(#171717)};
+	--neutral-900:     #{#171717};
+
+	--stone-50-h:      #{color.hue(#fafaf9)};
+	--stone-50-s:      #{color.saturation(#fafaf9)};
+	--stone-50-l:      #{color.lightness(#fafaf9)};
+	--stone-50-raw:    #{color.hue(#fafaf9), color.saturation(#fafaf9), color.lightness(#fafaf9)};
+	--stone-50:        #{#fafaf9};
+
+	--stone-100-h:     #{color.hue(#f5f5f4)};
+	--stone-100-s:     #{color.saturation(#f5f5f4)};
+	--stone-100-l:     #{color.lightness(#f5f5f4)};
+	--stone-100-raw:   #{color.hue(#f5f5f4), color.saturation(#f5f5f4), color.lightness(#f5f5f4)};
+	--stone-100:       #{#f5f5f4};
+
+	--stone-200-h:     #{color.hue(#e7e5e4)};
+	--stone-200-s:     #{color.saturation(#e7e5e4)};
+	--stone-200-l:     #{color.lightness(#e7e5e4)};
+	--stone-200-raw:   #{color.hue(#e7e5e4), color.saturation(#e7e5e4), color.lightness(#e7e5e4)};
+	--stone-200:       #{#e7e5e4};
+
+	--stone-300-h:     #{color.hue(#d6d3d1)};
+	--stone-300-s:     #{color.saturation(#d6d3d1)};
+	--stone-300-l:     #{color.lightness(#d6d3d1)};
+	--stone-300-raw:   #{color.hue(#d6d3d1), color.saturation(#d6d3d1), color.lightness(#d6d3d1)};
+	--stone-300:       #{#d6d3d1};
+
+	--stone-400-h:     #{color.hue(#a8a29e)};
+	--stone-400-s:     #{color.saturation(#a8a29e)};
+	--stone-400-l:     #{color.lightness(#a8a29e)};
+	--stone-400-raw:   #{color.hue(#a8a29e), color.saturation(#a8a29e), color.lightness(#a8a29e)};
+	--stone-400:       #{#a8a29e};
+
+	--stone-500-h:     #{color.hue(#78716c)};
+	--stone-500-s:     #{color.saturation(#78716c)};
+	--stone-500-l:     #{color.lightness(#78716c)};
+	--stone-500-raw:   #{color.hue(#78716c), color.saturation(#78716c), color.lightness(#78716c)};
+	--stone-500:       #{#78716c};
+
+	--stone-600-h:     #{color.hue(#57534e)};
+	--stone-600-s:     #{color.saturation(#57534e)};
+	--stone-600-l:     #{color.lightness(#57534e)};
+	--stone-600-raw:   #{color.hue(#57534e), color.saturation(#57534e), color.lightness(#57534e)};
+	--stone-600:       #{#57534e};
+
+	--stone-700-h:     #{color.hue(#44403c)};
+	--stone-700-s:     #{color.saturation(#44403c)};
+	--stone-700-l:     #{color.lightness(#44403c)};
+	--stone-700-raw:   #{color.hue(#44403c), color.saturation(#44403c), color.lightness(#44403c)};
+	--stone-700:       #{#44403c};
+
+	--stone-800-h:     #{color.hue(#292524)};
+	--stone-800-s:     #{color.saturation(#292524)};
+	--stone-800-l:     #{color.lightness(#292524)};
+	--stone-800-raw:   #{color.hue(#292524), color.saturation(#292524), color.lightness(#292524)};
+	--stone-800:       #{#292524};
+
+	--stone-900-h:     #{color.hue(#1c1917)};
+	--stone-900-s:     #{color.saturation(#1c1917)};
+	--stone-900-l:     #{color.lightness(#1c1917)};
+	--stone-900-raw:   #{color.hue(#1c1917), color.saturation(#1c1917), color.lightness(#1c1917)};
+	--stone-900:       #{#1c1917};
+
+	--red-50-h:        #{color.hue(#fef2f2)};
+	--red-50-s:        #{color.saturation(#fef2f2)};
+	--red-50-l:        #{color.lightness(#fef2f2)};
+	--red-50-raw:      #{color.hue(#fef2f2), color.saturation(#fef2f2), color.lightness(#fef2f2)};
+	--red-50:          #{#fef2f2};
+
+	--red-100-h:       #{color.hue(#fee2e2)};
+	--red-100-s:       #{color.saturation(#fee2e2)};
+	--red-100-l:       #{color.lightness(#fee2e2)};
+	--red-100-raw:     #{color.hue(#fee2e2), color.saturation(#fee2e2), color.lightness(#fee2e2)};
+	--red-100:         #{#fee2e2};
+
+	--red-200-h:       #{color.hue(#fecaca)};
+	--red-200-s:       #{color.saturation(#fecaca)};
+	--red-200-l:       #{color.lightness(#fecaca)};
+	--red-200-raw:     #{color.hue(#fecaca), color.saturation(#fecaca), color.lightness(#fecaca)};
+	--red-200:         #{#fecaca};
+
+	--red-300-h:       #{color.hue(#fca5a5)};
+	--red-300-s:       #{color.saturation(#fca5a5)};
+	--red-300-l:       #{color.lightness(#fca5a5)};
+	--red-300-raw:     #{color.hue(#fca5a5), color.saturation(#fca5a5), color.lightness(#fca5a5)};
+	--red-300:         #{#fca5a5};
+
+	--red-400-h:       #{color.hue(#f87171)};
+	--red-400-s:       #{color.saturation(#f87171)};
+	--red-400-l:       #{color.lightness(#f87171)};
+	--red-400-raw:     #{color.hue(#f87171), color.saturation(#f87171), color.lightness(#f87171)};
+	--red-400:         #{#f87171};
+
+	--red-500-h:       #{color.hue(#ef4444)};
+	--red-500-s:       #{color.saturation(#ef4444)};
+	--red-500-l:       #{color.lightness(#ef4444)};
+	--red-500-raw:     #{color.hue(#ef4444), color.saturation(#ef4444), color.lightness(#ef4444)};
+	--red-500:         #{#ef4444};
+
+	--red-600-h:       #{color.hue(#dc2626)};
+	--red-600-s:       #{color.saturation(#dc2626)};
+	--red-600-l:       #{color.lightness(#dc2626)};
+	--red-600-raw:     #{color.hue(#dc2626), color.saturation(#dc2626), color.lightness(#dc2626)};
+	--red-600:         #{#dc2626};
+
+	--red-700-h:       #{color.hue(#b91c1c)};
+	--red-700-s:       #{color.saturation(#b91c1c)};
+	--red-700-l:       #{color.lightness(#b91c1c)};
+	--red-700-raw:     #{color.hue(#b91c1c), color.saturation(#b91c1c), color.lightness(#b91c1c)};
+	--red-700:         #{#b91c1c};
+
+	--red-800-h:       #{color.hue(#991b1b)};
+	--red-800-s:       #{color.saturation(#991b1b)};
+	--red-800-l:       #{color.lightness(#991b1b)};
+	--red-800-raw:     #{color.hue(#991b1b), color.saturation(#991b1b), color.lightness(#991b1b)};
+	--red-800:         #{#991b1b};
+
+	--red-900-h:       #{color.hue(#7f1d1d)};
+	--red-900-s:       #{color.saturation(#7f1d1d)};
+	--red-900-l:       #{color.lightness(#7f1d1d)};
+	--red-900-raw:     #{color.hue(#7f1d1d), color.saturation(#7f1d1d), color.lightness(#7f1d1d)};
+	--red-900:         #{#7f1d1d};
+
+	--orange-50-h:     #{color.hue(#fff7ed)};
+	--orange-50-s:     #{color.saturation(#fff7ed)};
+	--orange-50-l:     #{color.lightness(#fff7ed)};
+	--orange-50-raw:   #{color.hue(#fff7ed), color.saturation(#fff7ed), color.lightness(#fff7ed)};
+	--orange-50:       #{#fff7ed};
+
+	--orange-100-h:    #{color.hue(#ffedd5)};
+	--orange-100-s:    #{color.saturation(#ffedd5)};
+	--orange-100-l:    #{color.lightness(#ffedd5)};
+	--orange-100-raw:  #{color.hue(#ffedd5), color.saturation(#ffedd5), color.lightness(#ffedd5)};
+	--orange-100:      #{#ffedd5};
+
+	--orange-200-h:    #{color.hue(#fed7aa)};
+	--orange-200-s:    #{color.saturation(#fed7aa)};
+	--orange-200-l:    #{color.lightness(#fed7aa)};
+	--orange-200-raw:  #{color.hue(#fed7aa), color.saturation(#fed7aa), color.lightness(#fed7aa)};
+	--orange-200:      #{#fed7aa};
+
+	--orange-300-h:    #{color.hue(#fdba74)};
+	--orange-300-s:    #{color.saturation(#fdba74)};
+	--orange-300-l:    #{color.lightness(#fdba74)};
+	--orange-300-raw:  #{color.hue(#fdba74), color.saturation(#fdba74), color.lightness(#fdba74)};
+	--orange-300:      #{#fdba74};
+
+	--orange-400-h:    #{color.hue(#fb923c)};
+	--orange-400-s:    #{color.saturation(#fb923c)};
+	--orange-400-l:    #{color.lightness(#fb923c)};
+	--orange-400-raw:  #{color.hue(#fb923c), color.saturation(#fb923c), color.lightness(#fb923c)};
+	--orange-400:      #{#fb923c};
+
+	--orange-500-h:    #{color.hue(#f97316)};
+	--orange-500-s:    #{color.saturation(#f97316)};
+	--orange-500-l:    #{color.lightness(#f97316)};
+	--orange-500-raw:  #{color.hue(#f97316), color.saturation(#f97316), color.lightness(#f97316)};
+	--orange-500:      #{#f97316};
+
+	--orange-600-h:    #{color.hue(#ea580c)};
+	--orange-600-s:    #{color.saturation(#ea580c)};
+	--orange-600-l:    #{color.lightness(#ea580c)};
+	--orange-600-raw:  #{color.hue(#ea580c), color.saturation(#ea580c), color.lightness(#ea580c)};
+	--orange-600:      #{#ea580c};
+
+	--orange-700-h:    #{color.hue(#c2410c)};
+	--orange-700-s:    #{color.saturation(#c2410c)};
+	--orange-700-l:    #{color.lightness(#c2410c)};
+	--orange-700-raw:  #{color.hue(#c2410c), color.saturation(#c2410c), color.lightness(#c2410c)};
+	--orange-700:      #{#c2410c};
+
+	--orange-800-h:    #{color.hue(#9a3412)};
+	--orange-800-s:    #{color.saturation(#9a3412)};
+	--orange-800-l:    #{color.lightness(#9a3412)};
+	--orange-800-raw:  #{color.hue(#9a3412), color.saturation(#9a3412), color.lightness(#9a3412)};
+	--orange-800:      #{#9a3412};
+
+	--orange-900-h:    #{color.hue(#7c2d12)};
+	--orange-900-s:    #{color.saturation(#7c2d12)};
+	--orange-900-l:    #{color.lightness(#7c2d12)};
+	--orange-900-raw:  #{color.hue(#7c2d12), color.saturation(#7c2d12), color.lightness(#7c2d12)};
+	--orange-900:      #{#7c2d12};
+
+	--amber-50-h:      #{color.hue(#fffbeb)};
+	--amber-50-s:      #{color.saturation(#fffbeb)};
+	--amber-50-l:      #{color.lightness(#fffbeb)};
+	--amber-50-raw:    #{color.hue(#fffbeb), color.saturation(#fffbeb), color.lightness(#fffbeb)};
+	--amber-50:        #{#fffbeb};
+
+	--amber-100-h:     #{color.hue(#fef3c7)};
+	--amber-100-s:     #{color.saturation(#fef3c7)};
+	--amber-100-l:     #{color.lightness(#fef3c7)};
+	--amber-100-raw:   #{color.hue(#fef3c7), color.saturation(#fef3c7), color.lightness(#fef3c7)};
+	--amber-100:       #{#fef3c7};
+
+	--amber-200-h:     #{color.hue(#fde68a)};
+	--amber-200-s:     #{color.saturation(#fde68a)};
+	--amber-200-l:     #{color.lightness(#fde68a)};
+	--amber-200-raw:   #{color.hue(#fde68a), color.saturation(#fde68a), color.lightness(#fde68a)};
+	--amber-200:       #{#fde68a};
+
+	--amber-300-h:     #{color.hue(#fcd34d)};
+	--amber-300-s:     #{color.saturation(#fcd34d)};
+	--amber-300-l:     #{color.lightness(#fcd34d)};
+	--amber-300-raw:   #{color.hue(#fcd34d), color.saturation(#fcd34d), color.lightness(#fcd34d)};
+	--amber-300:       #{#fcd34d};
+
+	--amber-400-h:     #{color.hue(#fbbf24)};
+	--amber-400-s:     #{color.saturation(#fbbf24)};
+	--amber-400-l:     #{color.lightness(#fbbf24)};
+	--amber-400-raw:   #{color.hue(#fbbf24), color.saturation(#fbbf24), color.lightness(#fbbf24)};
+	--amber-400:       #{#fbbf24};
+
+	--amber-500-h:     #{color.hue(#f59e0b)};
+	--amber-500-s:     #{color.saturation(#f59e0b)};
+	--amber-500-l:     #{color.lightness(#f59e0b)};
+	--amber-500-raw:   #{color.hue(#f59e0b), color.saturation(#f59e0b), color.lightness(#f59e0b)};
+	--amber-500:       #{#f59e0b};
+
+	--amber-600-h:     #{color.hue(#d97706)};
+	--amber-600-s:     #{color.saturation(#d97706)};
+	--amber-600-l:     #{color.lightness(#d97706)};
+	--amber-600-raw:   #{color.hue(#d97706), color.saturation(#d97706), color.lightness(#d97706)};
+	--amber-600:       #{#d97706};
+
+	--amber-700-h:     #{color.hue(#b45309)};
+	--amber-700-s:     #{color.saturation(#b45309)};
+	--amber-700-l:     #{color.lightness(#b45309)};
+	--amber-700-raw:   #{color.hue(#b45309), color.saturation(#b45309), color.lightness(#b45309)};
+	--amber-700:       #{#b45309};
+
+	--amber-800-h:     #{color.hue(#92400e)};
+	--amber-800-s:     #{color.saturation(#92400e)};
+	--amber-800-l:     #{color.lightness(#92400e)};
+	--amber-800-raw:   #{color.hue(#92400e), color.saturation(#92400e), color.lightness(#92400e)};
+	--amber-800:       #{#92400e};
+
+	--amber-900-h:     #{color.hue(#78350f)};
+	--amber-900-s:     #{color.saturation(#78350f)};
+	--amber-900-l:     #{color.lightness(#78350f)};
+	--amber-900-raw:   #{color.hue(#78350f), color.saturation(#78350f), color.lightness(#78350f)};
+	--amber-900:       #{#78350f};
+
+	--yellow-50-h:     #{color.hue(#fefce8)};
+	--yellow-50-s:     #{color.saturation(#fefce8)};
+	--yellow-50-l:     #{color.lightness(#fefce8)};
+	--yellow-50-raw:   #{color.hue(#fefce8), color.saturation(#fefce8), color.lightness(#fefce8)};
+	--yellow-50:       #{#fefce8};
+
+	--yellow-100-h:    #{color.hue(#fef9c3)};
+	--yellow-100-s:    #{color.saturation(#fef9c3)};
+	--yellow-100-l:    #{color.lightness(#fef9c3)};
+	--yellow-100-raw:  #{color.hue(#fef9c3), color.saturation(#fef9c3), color.lightness(#fef9c3)};
+	--yellow-100:      #{#fef9c3};
+
+	--yellow-200-h:    #{color.hue(#fef08a)};
+	--yellow-200-s:    #{color.saturation(#fef08a)};
+	--yellow-200-l:    #{color.lightness(#fef08a)};
+	--yellow-200-raw:  #{color.hue(#fef08a), color.saturation(#fef08a), color.lightness(#fef08a)};
+	--yellow-200:      #{#fef08a};
+
+	--yellow-300-h:    #{color.hue(#fde047)};
+	--yellow-300-s:    #{color.saturation(#fde047)};
+	--yellow-300-l:    #{color.lightness(#fde047)};
+	--yellow-300-raw:  #{color.hue(#fde047), color.saturation(#fde047), color.lightness(#fde047)};
+	--yellow-300:      #{#fde047};
+
+	--yellow-400-h:    #{color.hue(#facc15)};
+	--yellow-400-s:    #{color.saturation(#facc15)};
+	--yellow-400-l:    #{color.lightness(#facc15)};
+	--yellow-400-raw:  #{color.hue(#facc15), color.saturation(#facc15), color.lightness(#facc15)};
+	--yellow-400:      #{#facc15};
+
+	--yellow-500-h:    #{color.hue(#eab308)};
+	--yellow-500-s:    #{color.saturation(#eab308)};
+	--yellow-500-l:    #{color.lightness(#eab308)};
+	--yellow-500-raw:  #{color.hue(#eab308), color.saturation(#eab308), color.lightness(#eab308)};
+	--yellow-500:      #{#eab308};
+
+	--yellow-600-h:    #{color.hue(#ca8a04)};
+	--yellow-600-s:    #{color.saturation(#ca8a04)};
+	--yellow-600-l:    #{color.lightness(#ca8a04)};
+	--yellow-600-raw:  #{color.hue(#ca8a04), color.saturation(#ca8a04), color.lightness(#ca8a04)};
+	--yellow-600:      #{#ca8a04};
+
+	--yellow-700-h:    #{color.hue(#a16207)};
+	--yellow-700-s:    #{color.saturation(#a16207)};
+	--yellow-700-l:    #{color.lightness(#a16207)};
+	--yellow-700-raw:  #{color.hue(#a16207), color.saturation(#a16207), color.lightness(#a16207)};
+	--yellow-700:      #{#a16207};
+
+	--yellow-800-h:    #{color.hue(#854d0e)};
+	--yellow-800-s:    #{color.saturation(#854d0e)};
+	--yellow-800-l:    #{color.lightness(#854d0e)};
+	--yellow-800-raw:  #{color.hue(#854d0e), color.saturation(#854d0e), color.lightness(#854d0e)};
+	--yellow-800:      #{#854d0e};
+
+	--yellow-900-h:    #{color.hue(#713f12)};
+	--yellow-900-s:    #{color.saturation(#713f12)};
+	--yellow-900-l:    #{color.lightness(#713f12)};
+	--yellow-900-raw:  #{color.hue(#713f12), color.saturation(#713f12), color.lightness(#713f12)};
+	--yellow-900:      #{#713f12};
+
+	--lime-50-h:       #{color.hue(#f7fee7)};
+	--lime-50-s:       #{color.saturation(#f7fee7)};
+	--lime-50-l:       #{color.lightness(#f7fee7)};
+	--lime-50-raw:     #{color.hue(#f7fee7), color.saturation(#f7fee7), color.lightness(#f7fee7)};
+	--lime-50:         #{#f7fee7};
+
+	--lime-100-h:      #{color.hue(#ecfccb)};
+	--lime-100-s:      #{color.saturation(#ecfccb)};
+	--lime-100-l:      #{color.lightness(#ecfccb)};
+	--lime-100-raw:    #{color.hue(#ecfccb), color.saturation(#ecfccb), color.lightness(#ecfccb)};
+	--lime-100:        #{#ecfccb};
+
+	--lime-200-h:      #{color.hue(#d9f99d)};
+	--lime-200-s:      #{color.saturation(#d9f99d)};
+	--lime-200-l:      #{color.lightness(#d9f99d)};
+	--lime-200-raw:    #{color.hue(#d9f99d), color.saturation(#d9f99d), color.lightness(#d9f99d)};
+	--lime-200:        #{#d9f99d};
+
+	--lime-300-h:      #{color.hue(#bef264)};
+	--lime-300-s:      #{color.saturation(#bef264)};
+	--lime-300-l:      #{color.lightness(#bef264)};
+	--lime-300-raw:    #{color.hue(#bef264), color.saturation(#bef264), color.lightness(#bef264)};
+	--lime-300:        #{#bef264};
+
+	--lime-400-h:      #{color.hue(#a3e635)};
+	--lime-400-s:      #{color.saturation(#a3e635)};
+	--lime-400-l:      #{color.lightness(#a3e635)};
+	--lime-400-raw:    #{color.hue(#a3e635), color.saturation(#a3e635), color.lightness(#a3e635)};
+	--lime-400:        #{#a3e635};
+
+	--lime-500-h:      #{color.hue(#84cc16)};
+	--lime-500-s:      #{color.saturation(#84cc16)};
+	--lime-500-l:      #{color.lightness(#84cc16)};
+	--lime-500-raw:    #{color.hue(#84cc16), color.saturation(#84cc16), color.lightness(#84cc16)};
+	--lime-500:        #{#84cc16};
+
+	--lime-600-h:      #{color.hue(#65a30d)};
+	--lime-600-s:      #{color.saturation(#65a30d)};
+	--lime-600-l:      #{color.lightness(#65a30d)};
+	--lime-600-raw:    #{color.hue(#65a30d), color.saturation(#65a30d), color.lightness(#65a30d)};
+	--lime-600:        #{#65a30d};
+
+	--lime-700-h:      #{color.hue(#4d7c0f)};
+	--lime-700-s:      #{color.saturation(#4d7c0f)};
+	--lime-700-l:      #{color.lightness(#4d7c0f)};
+	--lime-700-raw:    #{color.hue(#4d7c0f), color.saturation(#4d7c0f), color.lightness(#4d7c0f)};
+	--lime-700:        #{#4d7c0f};
+
+	--lime-800-h:      #{color.hue(#3f6212)};
+	--lime-800-s:      #{color.saturation(#3f6212)};
+	--lime-800-l:      #{color.lightness(#3f6212)};
+	--lime-800-raw:    #{color.hue(#3f6212), color.saturation(#3f6212), color.lightness(#3f6212)};
+	--lime-800:        #{#3f6212};
+
+	--lime-900-h:      #{color.hue(#365314)};
+	--lime-900-s:      #{color.saturation(#365314)};
+	--lime-900-l:      #{color.lightness(#365314)};
+	--lime-900-raw:    #{color.hue(#365314), color.saturation(#365314), color.lightness(#365314)};
+	--lime-900:        #{#365314};
+
+	--green-50-h:      #{color.hue(#f0fdf4)};
+	--green-50-s:      #{color.saturation(#f0fdf4)};
+	--green-50-l:      #{color.lightness(#f0fdf4)};
+	--green-50-raw:    #{color.hue(#f0fdf4), color.saturation(#f0fdf4), color.lightness(#f0fdf4)};
+	--green-50:        #{#f0fdf4};
+
+	--green-100-h:     #{color.hue(#dcfce7)};
+	--green-100-s:     #{color.saturation(#dcfce7)};
+	--green-100-l:     #{color.lightness(#dcfce7)};
+	--green-100-raw:   #{color.hue(#dcfce7), color.saturation(#dcfce7), color.lightness(#dcfce7)};
+	--green-100:       #{#dcfce7};
+
+	--green-200-h:     #{color.hue(#bbf7d0)};
+	--green-200-s:     #{color.saturation(#bbf7d0)};
+	--green-200-l:     #{color.lightness(#bbf7d0)};
+	--green-200-raw:   #{color.hue(#bbf7d0), color.saturation(#bbf7d0), color.lightness(#bbf7d0)};
+	--green-200:       #{#bbf7d0};
+
+	--green-300-h:     #{color.hue(#86efac)};
+	--green-300-s:     #{color.saturation(#86efac)};
+	--green-300-l:     #{color.lightness(#86efac)};
+	--green-300-raw:   #{color.hue(#86efac), color.saturation(#86efac), color.lightness(#86efac)};
+	--green-300:       #{#86efac};
+
+	--green-400-h:     #{color.hue(#4ade80)};
+	--green-400-s:     #{color.saturation(#4ade80)};
+	--green-400-l:     #{color.lightness(#4ade80)};
+	--green-400-raw:   #{color.hue(#4ade80), color.saturation(#4ade80), color.lightness(#4ade80)};
+	--green-400:       #{#4ade80};
+
+	--green-500-h:     #{color.hue(#22c55e)};
+	--green-500-s:     #{color.saturation(#22c55e)};
+	--green-500-l:     #{color.lightness(#22c55e)};
+	--green-500-raw:   #{color.hue(#22c55e), color.saturation(#22c55e), color.lightness(#22c55e)};
+	--green-500:       #{#22c55e};
+
+	--green-600-h:     #{color.hue(#16a34a)};
+	--green-600-s:     #{color.saturation(#16a34a)};
+	--green-600-l:     #{color.lightness(#16a34a)};
+	--green-600-raw:   #{color.hue(#16a34a), color.saturation(#16a34a), color.lightness(#16a34a)};
+	--green-600:       #{#16a34a};
+
+	--green-700-h:     #{color.hue(#15803d)};
+	--green-700-s:     #{color.saturation(#15803d)};
+	--green-700-l:     #{color.lightness(#15803d)};
+	--green-700-raw:   #{color.hue(#15803d), color.saturation(#15803d), color.lightness(#15803d)};
+	--green-700:       #{#15803d};
+
+	--green-800-h:     #{color.hue(#166534)};
+	--green-800-s:     #{color.saturation(#166534)};
+	--green-800-l:     #{color.lightness(#166534)};
+	--green-800-raw:   #{color.hue(#166534), color.saturation(#166534), color.lightness(#166534)};
+	--green-800:       #{#166534};
+
+	--green-900-h:     #{color.hue(#14532d)};
+	--green-900-s:     #{color.saturation(#14532d)};
+	--green-900-l:     #{color.lightness(#14532d)};
+	--green-900-raw:   #{color.hue(#14532d), color.saturation(#14532d), color.lightness(#14532d)};
+	--green-900:       #{#14532d};
+
+	--emerald-50-h:    #{color.hue(#ecfdf5)};
+	--emerald-50-s:    #{color.saturation(#ecfdf5)};
+	--emerald-50-l:    #{color.lightness(#ecfdf5)};
+	--emerald-50-raw:  #{color.hue(#ecfdf5), color.saturation(#ecfdf5), color.lightness(#ecfdf5)};
+	--emerald-50:      #{#ecfdf5};
+
+	--emerald-100-h:   #{color.hue(#d1fae5)};
+	--emerald-100-s:   #{color.saturation(#d1fae5)};
+	--emerald-100-l:   #{color.lightness(#d1fae5)};
+	--emerald-100-raw: #{color.hue(#d1fae5), color.saturation(#d1fae5), color.lightness(#d1fae5)};
+	--emerald-100:     #{#d1fae5};
+
+	--emerald-200-h:   #{color.hue(#a7f3d0)};
+	--emerald-200-s:   #{color.saturation(#a7f3d0)};
+	--emerald-200-l:   #{color.lightness(#a7f3d0)};
+	--emerald-200-raw: #{color.hue(#a7f3d0), color.saturation(#a7f3d0), color.lightness(#a7f3d0)};
+	--emerald-200:     #{#a7f3d0};
+
+	--emerald-300-h:   #{color.hue(#6ee7b7)};
+	--emerald-300-s:   #{color.saturation(#6ee7b7)};
+	--emerald-300-l:   #{color.lightness(#6ee7b7)};
+	--emerald-300-raw: #{color.hue(#6ee7b7), color.saturation(#6ee7b7), color.lightness(#6ee7b7)};
+	--emerald-300:     #{#6ee7b7};
+
+	--emerald-400-h:   #{color.hue(#34d399)};
+	--emerald-400-s:   #{color.saturation(#34d399)};
+	--emerald-400-l:   #{color.lightness(#34d399)};
+	--emerald-400-raw: #{color.hue(#34d399), color.saturation(#34d399), color.lightness(#34d399)};
+	--emerald-400:     #{#34d399};
+
+	--emerald-500-h:   #{color.hue(#10b981)};
+	--emerald-500-s:   #{color.saturation(#10b981)};
+	--emerald-500-l:   #{color.lightness(#10b981)};
+	--emerald-500-raw: #{color.hue(#10b981), color.saturation(#10b981), color.lightness(#10b981)};
+	--emerald-500:     #{#10b981};
+
+	--emerald-600-h:   #{color.hue(#059669)};
+	--emerald-600-s:   #{color.saturation(#059669)};
+	--emerald-600-l:   #{color.lightness(#059669)};
+	--emerald-600-raw: #{color.hue(#059669), color.saturation(#059669), color.lightness(#059669)};
+	--emerald-600:     #{#059669};
+
+	--emerald-700-h:   #{color.hue(#047857)};
+	--emerald-700-s:   #{color.saturation(#047857)};
+	--emerald-700-l:   #{color.lightness(#047857)};
+	--emerald-700-raw: #{color.hue(#047857), color.saturation(#047857), color.lightness(#047857)};
+	--emerald-700:     #{#047857};
+
+	--emerald-800-h:   #{color.hue(#065f46)};
+	--emerald-800-s:   #{color.saturation(#065f46)};
+	--emerald-800-l:   #{color.lightness(#065f46)};
+	--emerald-800-raw: #{color.hue(#065f46), color.saturation(#065f46), color.lightness(#065f46)};
+	--emerald-800:     #{#065f46};
+
+	--emerald-900-h:   #{color.hue(#064e3b)};
+	--emerald-900-s:   #{color.saturation(#064e3b)};
+	--emerald-900-l:   #{color.lightness(#064e3b)};
+	--emerald-900-raw: #{color.hue(#064e3b), color.saturation(#064e3b), color.lightness(#064e3b)};
+	--emerald-900:     #{#064e3b};
+
+	--teal-50-h:       #{color.hue(#f0fdfa)};
+	--teal-50-s:       #{color.saturation(#f0fdfa)};
+	--teal-50-l:       #{color.lightness(#f0fdfa)};
+	--teal-50-raw:     #{color.hue(#f0fdfa), color.saturation(#f0fdfa), color.lightness(#f0fdfa)};
+	--teal-50:         #{#f0fdfa};
+
+	--teal-100-h:      #{color.hue(#ccfbf1)};
+	--teal-100-s:      #{color.saturation(#ccfbf1)};
+	--teal-100-l:      #{color.lightness(#ccfbf1)};
+	--teal-100-raw:    #{color.hue(#ccfbf1), color.saturation(#ccfbf1), color.lightness(#ccfbf1)};
+	--teal-100:        #{#ccfbf1};
+
+	--teal-200-h:      #{color.hue(#99f6e4)};
+	--teal-200-s:      #{color.saturation(#99f6e4)};
+	--teal-200-l:      #{color.lightness(#99f6e4)};
+	--teal-200-raw:    #{color.hue(#99f6e4), color.saturation(#99f6e4), color.lightness(#99f6e4)};
+	--teal-200:        #{#99f6e4};
+
+	--teal-300-h:      #{color.hue(#5eead4)};
+	--teal-300-s:      #{color.saturation(#5eead4)};
+	--teal-300-l:      #{color.lightness(#5eead4)};
+	--teal-300-raw:    #{color.hue(#5eead4), color.saturation(#5eead4), color.lightness(#5eead4)};
+	--teal-300:        #{#5eead4};
+
+	--teal-400-h:      #{color.hue(#2dd4bf)};
+	--teal-400-s:      #{color.saturation(#2dd4bf)};
+	--teal-400-l:      #{color.lightness(#2dd4bf)};
+	--teal-400-raw:    #{color.hue(#2dd4bf), color.saturation(#2dd4bf), color.lightness(#2dd4bf)};
+	--teal-400:        #{#2dd4bf};
+
+	--teal-500-h:      #{color.hue(#14b8a6)};
+	--teal-500-s:      #{color.saturation(#14b8a6)};
+	--teal-500-l:      #{color.lightness(#14b8a6)};
+	--teal-500-raw:    #{color.hue(#14b8a6), color.saturation(#14b8a6), color.lightness(#14b8a6)};
+	--teal-500:        #{#14b8a6};
+
+	--teal-600-h:      #{color.hue(#0d9488)};
+	--teal-600-s:      #{color.saturation(#0d9488)};
+	--teal-600-l:      #{color.lightness(#0d9488)};
+	--teal-600-raw:    #{color.hue(#0d9488), color.saturation(#0d9488), color.lightness(#0d9488)};
+	--teal-600:        #{#0d9488};
+
+	--teal-700-h:      #{color.hue(#0f766e)};
+	--teal-700-s:      #{color.saturation(#0f766e)};
+	--teal-700-l:      #{color.lightness(#0f766e)};
+	--teal-700-raw:    #{color.hue(#0f766e), color.saturation(#0f766e), color.lightness(#0f766e)};
+	--teal-700:        #{#0f766e};
+
+	--teal-800-h:      #{color.hue(#115e59)};
+	--teal-800-s:      #{color.saturation(#115e59)};
+	--teal-800-l:      #{color.lightness(#115e59)};
+	--teal-800-raw:    #{color.hue(#115e59), color.saturation(#115e59), color.lightness(#115e59)};
+	--teal-800:        #{#115e59};
+
+	--teal-900-h:      #{color.hue(#134e4a)};
+	--teal-900-s:      #{color.saturation(#134e4a)};
+	--teal-900-l:      #{color.lightness(#134e4a)};
+	--teal-900-raw:    #{color.hue(#134e4a), color.saturation(#134e4a), color.lightness(#134e4a)};
+	--teal-900:        #{#134e4a};
+
+	--cyan-50-h:       #{color.hue(#ecfeff)};
+	--cyan-50-s:       #{color.saturation(#ecfeff)};
+	--cyan-50-l:       #{color.lightness(#ecfeff)};
+	--cyan-50-raw:     #{color.hue(#ecfeff), color.saturation(#ecfeff), color.lightness(#ecfeff)};
+	--cyan-50:         #{#ecfeff};
+
+	--cyan-100-h:      #{color.hue(#cffafe)};
+	--cyan-100-s:      #{color.saturation(#cffafe)};
+	--cyan-100-l:      #{color.lightness(#cffafe)};
+	--cyan-100-raw:    #{color.hue(#cffafe), color.saturation(#cffafe), color.lightness(#cffafe)};
+	--cyan-100:        #{#cffafe};
+
+	--cyan-200-h:      #{color.hue(#a5f3fc)};
+	--cyan-200-s:      #{color.saturation(#a5f3fc)};
+	--cyan-200-l:      #{color.lightness(#a5f3fc)};
+	--cyan-200-raw:    #{color.hue(#a5f3fc), color.saturation(#a5f3fc), color.lightness(#a5f3fc)};
+	--cyan-200:        #{#a5f3fc};
+
+	--cyan-300-h:      #{color.hue(#67e8f9)};
+	--cyan-300-s:      #{color.saturation(#67e8f9)};
+	--cyan-300-l:      #{color.lightness(#67e8f9)};
+	--cyan-300-raw:    #{color.hue(#67e8f9), color.saturation(#67e8f9), color.lightness(#67e8f9)};
+	--cyan-300:        #{#67e8f9};
+
+	--cyan-400-h:      #{color.hue(#22d3ee)};
+	--cyan-400-s:      #{color.saturation(#22d3ee)};
+	--cyan-400-l:      #{color.lightness(#22d3ee)};
+	--cyan-400-raw:    #{color.hue(#22d3ee), color.saturation(#22d3ee), color.lightness(#22d3ee)};
+	--cyan-400:        #{#22d3ee};
+
+	--cyan-500-h:      #{color.hue(#06b6d4)};
+	--cyan-500-s:      #{color.saturation(#06b6d4)};
+	--cyan-500-l:      #{color.lightness(#06b6d4)};
+	--cyan-500-raw:    #{color.hue(#06b6d4), color.saturation(#06b6d4), color.lightness(#06b6d4)};
+	--cyan-500:        #{#06b6d4};
+
+	--cyan-600-h:      #{color.hue(#0891b2)};
+	--cyan-600-s:      #{color.saturation(#0891b2)};
+	--cyan-600-l:      #{color.lightness(#0891b2)};
+	--cyan-600-raw:    #{color.hue(#0891b2), color.saturation(#0891b2), color.lightness(#0891b2)};
+	--cyan-600:        #{#0891b2};
+
+	--cyan-700-h:      #{color.hue(#0e7490)};
+	--cyan-700-s:      #{color.saturation(#0e7490)};
+	--cyan-700-l:      #{color.lightness(#0e7490)};
+	--cyan-700-raw:    #{color.hue(#0e7490), color.saturation(#0e7490), color.lightness(#0e7490)};
+	--cyan-700:        #{#0e7490};
+
+	--cyan-800-h:      #{color.hue(#155e75)};
+	--cyan-800-s:      #{color.saturation(#155e75)};
+	--cyan-800-l:      #{color.lightness(#155e75)};
+	--cyan-800-raw:    #{color.hue(#155e75), color.saturation(#155e75), color.lightness(#155e75)};
+	--cyan-800:        #{#155e75};
+
+	--cyan-900-h:      #{color.hue(#164e63)};
+	--cyan-900-s:      #{color.saturation(#164e63)};
+	--cyan-900-l:      #{color.lightness(#164e63)};
+	--cyan-900-raw:    #{color.hue(#164e63), color.saturation(#164e63), color.lightness(#164e63)};
+	--cyan-900:        #{#164e63};
+
+	--sky-50-h:        #{color.hue(#f0f9ff)};
+	--sky-50-s:        #{color.saturation(#f0f9ff)};
+	--sky-50-l:        #{color.lightness(#f0f9ff)};
+	--sky-50-raw:      #{color.hue(#f0f9ff), color.saturation(#f0f9ff), color.lightness(#f0f9ff)};
+	--sky-50:          #{#f0f9ff};
+
+	--sky-100-h:       #{color.hue(#e0f2fe)};
+	--sky-100-s:       #{color.saturation(#e0f2fe)};
+	--sky-100-l:       #{color.lightness(#e0f2fe)};
+	--sky-100-raw:     #{color.hue(#e0f2fe), color.saturation(#e0f2fe), color.lightness(#e0f2fe)};
+	--sky-100:         #{#e0f2fe};
+
+	--sky-200-h:       #{color.hue(#bae6fd)};
+	--sky-200-s:       #{color.saturation(#bae6fd)};
+	--sky-200-l:       #{color.lightness(#bae6fd)};
+	--sky-200-raw:     #{color.hue(#bae6fd), color.saturation(#bae6fd), color.lightness(#bae6fd)};
+	--sky-200:         #{#bae6fd};
+
+	--sky-300-h:       #{color.hue(#7dd3fc)};
+	--sky-300-s:       #{color.saturation(#7dd3fc)};
+	--sky-300-l:       #{color.lightness(#7dd3fc)};
+	--sky-300-raw:     #{color.hue(#7dd3fc), color.saturation(#7dd3fc), color.lightness(#7dd3fc)};
+	--sky-300:         #{#7dd3fc};
+
+	--sky-400-h:       #{color.hue(#38bdf8)};
+	--sky-400-s:       #{color.saturation(#38bdf8)};
+	--sky-400-l:       #{color.lightness(#38bdf8)};
+	--sky-400-raw:     #{color.hue(#38bdf8), color.saturation(#38bdf8), color.lightness(#38bdf8)};
+	--sky-400:         #{#38bdf8};
+
+	--sky-500-h:       #{color.hue(#0ea5e9)};
+	--sky-500-s:       #{color.saturation(#0ea5e9)};
+	--sky-500-l:       #{color.lightness(#0ea5e9)};
+	--sky-500-raw:     #{color.hue(#0ea5e9), color.saturation(#0ea5e9), color.lightness(#0ea5e9)};
+	--sky-500:         #{#0ea5e9};
+
+	--sky-600-h:       #{color.hue(#0284c7)};
+	--sky-600-s:       #{color.saturation(#0284c7)};
+	--sky-600-l:       #{color.lightness(#0284c7)};
+	--sky-600-raw:     #{color.hue(#0284c7), color.saturation(#0284c7), color.lightness(#0284c7)};
+	--sky-600:         #{#0284c7};
+
+	--sky-700-h:       #{color.hue(#0369a1)};
+	--sky-700-s:       #{color.saturation(#0369a1)};
+	--sky-700-l:       #{color.lightness(#0369a1)};
+	--sky-700-raw:     #{color.hue(#0369a1), color.saturation(#0369a1), color.lightness(#0369a1)};
+	--sky-700:         #{#0369a1};
+
+	--sky-800-h:       #{color.hue(#075985)};
+	--sky-800-s:       #{color.saturation(#075985)};
+	--sky-800-l:       #{color.lightness(#075985)};
+	--sky-800-raw:     #{color.hue(#075985), color.saturation(#075985), color.lightness(#075985)};
+	--sky-800:         #{#075985};
+
+	--sky-900-h:       #{color.hue(#0c4a6e)};
+	--sky-900-s:       #{color.saturation(#0c4a6e)};
+	--sky-900-l:       #{color.lightness(#0c4a6e)};
+	--sky-900-raw:     #{color.hue(#0c4a6e), color.saturation(#0c4a6e), color.lightness(#0c4a6e)};
+	--sky-900:         #{#0c4a6e};
+
+	--blue-50-h:       #{color.hue(#eff6ff)};
+	--blue-50-s:       #{color.saturation(#eff6ff)};
+	--blue-50-l:       #{color.lightness(#eff6ff)};
+	--blue-50-raw:     #{color.hue(#eff6ff), color.saturation(#eff6ff), color.lightness(#eff6ff)};
+	--blue-50:         #{#eff6ff};
+
+	--blue-100-h:      #{color.hue(#dbeafe)};
+	--blue-100-s:      #{color.saturation(#dbeafe)};
+	--blue-100-l:      #{color.lightness(#dbeafe)};
+	--blue-100-raw:    #{color.hue(#dbeafe), color.saturation(#dbeafe), color.lightness(#dbeafe)};
+	--blue-100:        #{#dbeafe};
+
+	--blue-200-h:      #{color.hue(#bfdbfe)};
+	--blue-200-s:      #{color.saturation(#bfdbfe)};
+	--blue-200-l:      #{color.lightness(#bfdbfe)};
+	--blue-200-raw:    #{color.hue(#bfdbfe), color.saturation(#bfdbfe), color.lightness(#bfdbfe)};
+	--blue-200:        #{#bfdbfe};
+
+	--blue-300-h:      #{color.hue(#93c5fd)};
+	--blue-300-s:      #{color.saturation(#93c5fd)};
+	--blue-300-l:      #{color.lightness(#93c5fd)};
+	--blue-300-raw:    #{color.hue(#93c5fd), color.saturation(#93c5fd), color.lightness(#93c5fd)};
+	--blue-300:        #{#93c5fd};
+
+	--blue-400-h:      #{color.hue(#60a5fa)};
+	--blue-400-s:      #{color.saturation(#60a5fa)};
+	--blue-400-l:      #{color.lightness(#60a5fa)};
+	--blue-400-raw:    #{color.hue(#60a5fa), color.saturation(#60a5fa), color.lightness(#60a5fa)};
+	--blue-400:        #{#60a5fa};
+
+	--blue-500-h:      #{color.hue(#3b82f6)};
+	--blue-500-s:      #{color.saturation(#3b82f6)};
+	--blue-500-l:      #{color.lightness(#3b82f6)};
+	--blue-500-raw:    #{color.hue(#3b82f6), color.saturation(#3b82f6), color.lightness(#3b82f6)};
+	--blue-500:        #{#3b82f6};
+
+	--blue-600-h:      #{color.hue(#2563eb)};
+	--blue-600-s:      #{color.saturation(#2563eb)};
+	--blue-600-l:      #{color.lightness(#2563eb)};
+	--blue-600-raw:    #{color.hue(#2563eb), color.saturation(#2563eb), color.lightness(#2563eb)};
+	--blue-600:        #{#2563eb};
+
+	--blue-700-h:      #{color.hue(#1d4ed8)};
+	--blue-700-s:      #{color.saturation(#1d4ed8)};
+	--blue-700-l:      #{color.lightness(#1d4ed8)};
+	--blue-700-raw:    #{color.hue(#1d4ed8), color.saturation(#1d4ed8), color.lightness(#1d4ed8)};
+	--blue-700:        #{#1d4ed8};
+
+	--blue-800-h:      #{color.hue(#1e40af)};
+	--blue-800-s:      #{color.saturation(#1e40af)};
+	--blue-800-l:      #{color.lightness(#1e40af)};
+	--blue-800-raw:    #{color.hue(#1e40af), color.saturation(#1e40af), color.lightness(#1e40af)};
+	--blue-800:        #{#1e40af};
+
+	--blue-900-h:      #{color.hue(#1e3a8a)};
+	--blue-900-s:      #{color.saturation(#1e3a8a)};
+	--blue-900-l:      #{color.lightness(#1e3a8a)};
+	--blue-900-raw:    #{color.hue(#1e3a8a), color.saturation(#1e3a8a), color.lightness(#1e3a8a)};
+	--blue-900:        #{#1e3a8a};
+
+	--indigo-50-h:     #{color.hue(#eef2ff)};
+	--indigo-50-s:     #{color.saturation(#eef2ff)};
+	--indigo-50-l:     #{color.lightness(#eef2ff)};
+	--indigo-50-raw:   #{color.hue(#eef2ff), color.saturation(#eef2ff), color.lightness(#eef2ff)};
+	--indigo-50:       #{#eef2ff};
+
+	--indigo-100-h:    #{color.hue(#e0e7ff)};
+	--indigo-100-s:    #{color.saturation(#e0e7ff)};
+	--indigo-100-l:    #{color.lightness(#e0e7ff)};
+	--indigo-100-raw:  #{color.hue(#e0e7ff), color.saturation(#e0e7ff), color.lightness(#e0e7ff)};
+	--indigo-100:      #{#e0e7ff};
+
+	--indigo-200-h:    #{color.hue(#c7d2fe)};
+	--indigo-200-s:    #{color.saturation(#c7d2fe)};
+	--indigo-200-l:    #{color.lightness(#c7d2fe)};
+	--indigo-200-raw:  #{color.hue(#c7d2fe), color.saturation(#c7d2fe), color.lightness(#c7d2fe)};
+	--indigo-200:      #{#c7d2fe};
+
+	--indigo-300-h:    #{color.hue(#a5b4fc)};
+	--indigo-300-s:    #{color.saturation(#a5b4fc)};
+	--indigo-300-l:    #{color.lightness(#a5b4fc)};
+	--indigo-300-raw:  #{color.hue(#a5b4fc), color.saturation(#a5b4fc), color.lightness(#a5b4fc)};
+	--indigo-300:      #{#a5b4fc};
+
+	--indigo-400-h:    #{color.hue(#818cf8)};
+	--indigo-400-s:    #{color.saturation(#818cf8)};
+	--indigo-400-l:    #{color.lightness(#818cf8)};
+	--indigo-400-raw:  #{color.hue(#818cf8), color.saturation(#818cf8), color.lightness(#818cf8)};
+	--indigo-400:      #{#818cf8};
+
+	--indigo-500-h:    #{color.hue(#6366f1)};
+	--indigo-500-s:    #{color.saturation(#6366f1)};
+	--indigo-500-l:    #{color.lightness(#6366f1)};
+	--indigo-500-raw:  #{color.hue(#6366f1), color.saturation(#6366f1), color.lightness(#6366f1)};
+	--indigo-500:      #{#6366f1};
+
+	--indigo-600-h:    #{color.hue(#4f46e5)};
+	--indigo-600-s:    #{color.saturation(#4f46e5)};
+	--indigo-600-l:    #{color.lightness(#4f46e5)};
+	--indigo-600-raw:  #{color.hue(#4f46e5), color.saturation(#4f46e5), color.lightness(#4f46e5)};
+	--indigo-600:      #{#4f46e5};
+
+	--indigo-700-h:    #{color.hue(#4338ca)};
+	--indigo-700-s:    #{color.saturation(#4338ca)};
+	--indigo-700-l:    #{color.lightness(#4338ca)};
+	--indigo-700-raw:  #{color.hue(#4338ca), color.saturation(#4338ca), color.lightness(#4338ca)};
+	--indigo-700:      #{#4338ca};
+
+	--indigo-800-h:    #{color.hue(#3730a3)};
+	--indigo-800-s:    #{color.saturation(#3730a3)};
+	--indigo-800-l:    #{color.lightness(#3730a3)};
+	--indigo-800-raw:  #{color.hue(#3730a3), color.saturation(#3730a3), color.lightness(#3730a3)};
+	--indigo-800:      #{#3730a3};
+
+	--indigo-900-h:    #{color.hue(#312e81)};
+	--indigo-900-s:    #{color.saturation(#312e81)};
+	--indigo-900-l:    #{color.lightness(#312e81)};
+	--indigo-900-raw:  #{color.hue(#312e81), color.saturation(#312e81), color.lightness(#312e81)};
+	--indigo-900:      #{#312e81};
+
+	--violet-50-h:     #{color.hue(#f5f3ff)};
+	--violet-50-s:     #{color.saturation(#f5f3ff)};
+	--violet-50-l:     #{color.lightness(#f5f3ff)};
+	--violet-50-raw:   #{color.hue(#f5f3ff), color.saturation(#f5f3ff), color.lightness(#f5f3ff)};
+	--violet-50:       #{#f5f3ff};
+
+	--violet-100-h:    #{color.hue(#ede9fe)};
+	--violet-100-s:    #{color.saturation(#ede9fe)};
+	--violet-100-l:    #{color.lightness(#ede9fe)};
+	--violet-100-raw:  #{color.hue(#ede9fe), color.saturation(#ede9fe), color.lightness(#ede9fe)};
+	--violet-100:      #{#ede9fe};
+
+	--violet-200-h:    #{color.hue(#ddd6fe)};
+	--violet-200-s:    #{color.saturation(#ddd6fe)};
+	--violet-200-l:    #{color.lightness(#ddd6fe)};
+	--violet-200-raw:  #{color.hue(#ddd6fe), color.saturation(#ddd6fe), color.lightness(#ddd6fe)};
+	--violet-200:      #{#ddd6fe};
+
+	--violet-300-h:    #{color.hue(#c4b5fd)};
+	--violet-300-s:    #{color.saturation(#c4b5fd)};
+	--violet-300-l:    #{color.lightness(#c4b5fd)};
+	--violet-300-raw:  #{color.hue(#c4b5fd), color.saturation(#c4b5fd), color.lightness(#c4b5fd)};
+	--violet-300:      #{#c4b5fd};
+
+	--violet-400-h:    #{color.hue(#a78bfa)};
+	--violet-400-s:    #{color.saturation(#a78bfa)};
+	--violet-400-l:    #{color.lightness(#a78bfa)};
+	--violet-400-raw:  #{color.hue(#a78bfa), color.saturation(#a78bfa), color.lightness(#a78bfa)};
+	--violet-400:      #{#a78bfa};
+
+	--violet-500-h:    #{color.hue(#8b5cf6)};
+	--violet-500-s:    #{color.saturation(#8b5cf6)};
+	--violet-500-l:    #{color.lightness(#8b5cf6)};
+	--violet-500-raw:  #{color.hue(#8b5cf6), color.saturation(#8b5cf6), color.lightness(#8b5cf6)};
+	--violet-500:      #{#8b5cf6};
+
+	--violet-600-h:    #{color.hue(#7c3aed)};
+	--violet-600-s:    #{color.saturation(#7c3aed)};
+	--violet-600-l:    #{color.lightness(#7c3aed)};
+	--violet-600-raw:  #{color.hue(#7c3aed), color.saturation(#7c3aed), color.lightness(#7c3aed)};
+	--violet-600:      #{#7c3aed};
+
+	--violet-700-h:    #{color.hue(#6d28d9)};
+	--violet-700-s:    #{color.saturation(#6d28d9)};
+	--violet-700-l:    #{color.lightness(#6d28d9)};
+	--violet-700-raw:  #{color.hue(#6d28d9), color.saturation(#6d28d9), color.lightness(#6d28d9)};
+	--violet-700:      #{#6d28d9};
+
+	--violet-800-h:    #{color.hue(#5b21b6)};
+	--violet-800-s:    #{color.saturation(#5b21b6)};
+	--violet-800-l:    #{color.lightness(#5b21b6)};
+	--violet-800-raw:  #{color.hue(#5b21b6), color.saturation(#5b21b6), color.lightness(#5b21b6)};
+	--violet-800:      #{#5b21b6};
+
+	--violet-900-h:    #{color.hue(#4c1d95)};
+	--violet-900-s:    #{color.saturation(#4c1d95)};
+	--violet-900-l:    #{color.lightness(#4c1d95)};
+	--violet-900-raw:  #{color.hue(#4c1d95), color.saturation(#4c1d95), color.lightness(#4c1d95)};
+	--violet-900:      #{#4c1d95};
+
+	--purple-50-h:     #{color.hue(#faf5ff)};
+	--purple-50-s:     #{color.saturation(#faf5ff)};
+	--purple-50-l:     #{color.lightness(#faf5ff)};
+	--purple-50-raw:   #{color.hue(#faf5ff), color.saturation(#faf5ff), color.lightness(#faf5ff)};
+	--purple-50:       #{#faf5ff};
+
+	--purple-100-h:    #{color.hue(#f3e8ff)};
+	--purple-100-s:    #{color.saturation(#f3e8ff)};
+	--purple-100-l:    #{color.lightness(#f3e8ff)};
+	--purple-100-raw:  #{color.hue(#f3e8ff), color.saturation(#f3e8ff), color.lightness(#f3e8ff)};
+	--purple-100:      #{#f3e8ff};
+
+	--purple-200-h:    #{color.hue(#e9d5ff)};
+	--purple-200-s:    #{color.saturation(#e9d5ff)};
+	--purple-200-l:    #{color.lightness(#e9d5ff)};
+	--purple-200-raw:  #{color.hue(#e9d5ff), color.saturation(#e9d5ff), color.lightness(#e9d5ff)};
+	--purple-200:      #{#e9d5ff};
+
+	--purple-300-h:    #{color.hue(#d8b4fe)};
+	--purple-300-s:    #{color.saturation(#d8b4fe)};
+	--purple-300-l:    #{color.lightness(#d8b4fe)};
+	--purple-300-raw:  #{color.hue(#d8b4fe), color.saturation(#d8b4fe), color.lightness(#d8b4fe)};
+	--purple-300:      #{#d8b4fe};
+
+	--purple-400-h:    #{color.hue(#c084fc)};
+	--purple-400-s:    #{color.saturation(#c084fc)};
+	--purple-400-l:    #{color.lightness(#c084fc)};
+	--purple-400-raw:  #{color.hue(#c084fc), color.saturation(#c084fc), color.lightness(#c084fc)};
+	--purple-400:      #{#c084fc};
+
+	--purple-500-h:    #{color.hue(#a855f7)};
+	--purple-500-s:    #{color.saturation(#a855f7)};
+	--purple-500-l:    #{color.lightness(#a855f7)};
+	--purple-500-raw:  #{color.hue(#a855f7), color.saturation(#a855f7), color.lightness(#a855f7)};
+	--purple-500:      #{#a855f7};
+
+	--purple-600-h:    #{color.hue(#9333ea)};
+	--purple-600-s:    #{color.saturation(#9333ea)};
+	--purple-600-l:    #{color.lightness(#9333ea)};
+	--purple-600-raw:  #{color.hue(#9333ea), color.saturation(#9333ea), color.lightness(#9333ea)};
+	--purple-600:      #{#9333ea};
+
+	--purple-700-h:    #{color.hue(#7e22ce)};
+	--purple-700-s:    #{color.saturation(#7e22ce)};
+	--purple-700-l:    #{color.lightness(#7e22ce)};
+	--purple-700-raw:  #{color.hue(#7e22ce), color.saturation(#7e22ce), color.lightness(#7e22ce)};
+	--purple-700:      #{#7e22ce};
+
+	--purple-800-h:    #{color.hue(#6b21a8)};
+	--purple-800-s:    #{color.saturation(#6b21a8)};
+	--purple-800-l:    #{color.lightness(#6b21a8)};
+	--purple-800-raw:  #{color.hue(#6b21a8), color.saturation(#6b21a8), color.lightness(#6b21a8)};
+	--purple-800:      #{#6b21a8};
+
+	--purple-900-h:    #{color.hue(#581c87)};
+	--purple-900-s:    #{color.saturation(#581c87)};
+	--purple-900-l:    #{color.lightness(#581c87)};
+	--purple-900-raw:  #{color.hue(#581c87), color.saturation(#581c87), color.lightness(#581c87)};
+	--purple-900:      #{#581c87};
+
+	--fuchsia-50-h:    #{color.hue(#fdf4ff)};
+	--fuchsia-50-s:    #{color.saturation(#fdf4ff)};
+	--fuchsia-50-l:    #{color.lightness(#fdf4ff)};
+	--fuchsia-50-raw:  #{color.hue(#fdf4ff), color.saturation(#fdf4ff), color.lightness(#fdf4ff)};
+	--fuchsia-50:      #{#fdf4ff};
+
+	--fuchsia-100-h:   #{color.hue(#fae8ff)};
+	--fuchsia-100-s:   #{color.saturation(#fae8ff)};
+	--fuchsia-100-l:   #{color.lightness(#fae8ff)};
+	--fuchsia-100-raw: #{color.hue(#fae8ff), color.saturation(#fae8ff), color.lightness(#fae8ff)};
+	--fuchsia-100:     #{#fae8ff};
+
+	--fuchsia-200-h:   #{color.hue(#f5d0fe)};
+	--fuchsia-200-s:   #{color.saturation(#f5d0fe)};
+	--fuchsia-200-l:   #{color.lightness(#f5d0fe)};
+	--fuchsia-200-raw: #{color.hue(#f5d0fe), color.saturation(#f5d0fe), color.lightness(#f5d0fe)};
+	--fuchsia-200:     #{#f5d0fe};
+
+	--fuchsia-300-h:   #{color.hue(#f0abfc)};
+	--fuchsia-300-s:   #{color.saturation(#f0abfc)};
+	--fuchsia-300-l:   #{color.lightness(#f0abfc)};
+	--fuchsia-300-raw: #{color.hue(#f0abfc), color.saturation(#f0abfc), color.lightness(#f0abfc)};
+	--fuchsia-300:     #{#f0abfc};
+
+	--fuchsia-400-h:   #{color.hue(#e879f9)};
+	--fuchsia-400-s:   #{color.saturation(#e879f9)};
+	--fuchsia-400-l:   #{color.lightness(#e879f9)};
+	--fuchsia-400-raw: #{color.hue(#e879f9), color.saturation(#e879f9), color.lightness(#e879f9)};
+	--fuchsia-400:     #{#e879f9};
+
+	--fuchsia-500-h:   #{color.hue(#d946ef)};
+	--fuchsia-500-s:   #{color.saturation(#d946ef)};
+	--fuchsia-500-l:   #{color.lightness(#d946ef)};
+	--fuchsia-500-raw: #{color.hue(#d946ef), color.saturation(#d946ef), color.lightness(#d946ef)};
+	--fuchsia-500:     #{#d946ef};
+
+	--fuchsia-600-h:   #{color.hue(#c026d3)};
+	--fuchsia-600-s:   #{color.saturation(#c026d3)};
+	--fuchsia-600-l:   #{color.lightness(#c026d3)};
+	--fuchsia-600-raw: #{color.hue(#c026d3), color.saturation(#c026d3), color.lightness(#c026d3)};
+	--fuchsia-600:     #{#c026d3};
+
+	--fuchsia-700-h:   #{color.hue(#a21caf)};
+	--fuchsia-700-s:   #{color.saturation(#a21caf)};
+	--fuchsia-700-l:   #{color.lightness(#a21caf)};
+	--fuchsia-700-raw: #{color.hue(#a21caf), color.saturation(#a21caf), color.lightness(#a21caf)};
+	--fuchsia-700:     #{#a21caf};
+
+	--fuchsia-800-h:   #{color.hue(#86198f)};
+	--fuchsia-800-s:   #{color.saturation(#86198f)};
+	--fuchsia-800-l:   #{color.lightness(#86198f)};
+	--fuchsia-800-raw: #{color.hue(#86198f), color.saturation(#86198f), color.lightness(#86198f)};
+	--fuchsia-800:     #{#86198f};
+
+	--fuchsia-900-h:   #{color.hue(#701a75)};
+	--fuchsia-900-s:   #{color.saturation(#701a75)};
+	--fuchsia-900-l:   #{color.lightness(#701a75)};
+	--fuchsia-900-raw: #{color.hue(#701a75), color.saturation(#701a75), color.lightness(#701a75)};
+	--fuchsia-900:     #{#701a75};
+
+	--pink-50-h:       #{color.hue(#fdf2f8)};
+	--pink-50-s:       #{color.saturation(#fdf2f8)};
+	--pink-50-l:       #{color.lightness(#fdf2f8)};
+	--pink-50-raw:     #{color.hue(#fdf2f8), color.saturation(#fdf2f8), color.lightness(#fdf2f8)};
+	--pink-50:         #{#fdf2f8};
+
+	--pink-100-h:      #{color.hue(#fce7f3)};
+	--pink-100-s:      #{color.saturation(#fce7f3)};
+	--pink-100-l:      #{color.lightness(#fce7f3)};
+	--pink-100-raw:    #{color.hue(#fce7f3), color.saturation(#fce7f3), color.lightness(#fce7f3)};
+	--pink-100:        #{#fce7f3};
+
+	--pink-200-h:      #{color.hue(#fbcfe8)};
+	--pink-200-s:      #{color.saturation(#fbcfe8)};
+	--pink-200-l:      #{color.lightness(#fbcfe8)};
+	--pink-200-raw:    #{color.hue(#fbcfe8), color.saturation(#fbcfe8), color.lightness(#fbcfe8)};
+	--pink-200:        #{#fbcfe8};
+
+	--pink-300-h:      #{color.hue(#f9a8d4)};
+	--pink-300-s:      #{color.saturation(#f9a8d4)};
+	--pink-300-l:      #{color.lightness(#f9a8d4)};
+	--pink-300-raw:    #{color.hue(#f9a8d4), color.saturation(#f9a8d4), color.lightness(#f9a8d4)};
+	--pink-300:        #{#f9a8d4};
+
+	--pink-400-h:      #{color.hue(#f472b6)};
+	--pink-400-s:      #{color.saturation(#f472b6)};
+	--pink-400-l:      #{color.lightness(#f472b6)};
+	--pink-400-raw:    #{color.hue(#f472b6), color.saturation(#f472b6), color.lightness(#f472b6)};
+	--pink-400:        #{#f472b6};
+
+	--pink-500-h:      #{color.hue(#ec4899)};
+	--pink-500-s:      #{color.saturation(#ec4899)};
+	--pink-500-l:      #{color.lightness(#ec4899)};
+	--pink-500-raw:    #{color.hue(#ec4899), color.saturation(#ec4899), color.lightness(#ec4899)};
+	--pink-500:        #{#ec4899};
+
+	--pink-600-h:      #{color.hue(#db2777)};
+	--pink-600-s:      #{color.saturation(#db2777)};
+	--pink-600-l:      #{color.lightness(#db2777)};
+	--pink-600-raw:    #{color.hue(#db2777), color.saturation(#db2777), color.lightness(#db2777)};
+	--pink-600:        #{#db2777};
+
+	--pink-700-h:      #{color.hue(#be185d)};
+	--pink-700-s:      #{color.saturation(#be185d)};
+	--pink-700-l:      #{color.lightness(#be185d)};
+	--pink-700-raw:    #{color.hue(#be185d), color.saturation(#be185d), color.lightness(#be185d)};
+	--pink-700:        #{#be185d};
+
+	--pink-800-h:      #{color.hue(#9d174d)};
+	--pink-800-s:      #{color.saturation(#9d174d)};
+	--pink-800-l:      #{color.lightness(#9d174d)};
+	--pink-800-raw:    #{color.hue(#9d174d), color.saturation(#9d174d), color.lightness(#9d174d)};
+	--pink-800:        #{#9d174d};
+
+	--pink-900-h:      #{color.hue(#831843)};
+	--pink-900-s:      #{color.saturation(#831843)};
+	--pink-900-l:      #{color.lightness(#831843)};
+	--pink-900-raw:    #{color.hue(#831843), color.saturation(#831843), color.lightness(#831843)};
+	--pink-900:        #{#831843};
+
+	--rose-50-h:       #{color.hue(#fff1f2)};
+	--rose-50-s:       #{color.saturation(#fff1f2)};
+	--rose-50-l:       #{color.lightness(#fff1f2)};
+	--rose-50-raw:     #{color.hue(#fff1f2), color.saturation(#fff1f2), color.lightness(#fff1f2)};
+	--rose-50:         #{#fff1f2};
+
+	--rose-100-h:      #{color.hue(#ffe4e6)};
+	--rose-100-s:      #{color.saturation(#ffe4e6)};
+	--rose-100-l:      #{color.lightness(#ffe4e6)};
+	--rose-100-raw:    #{color.hue(#ffe4e6), color.saturation(#ffe4e6), color.lightness(#ffe4e6)};
+	--rose-100:        #{#ffe4e6};
+
+	--rose-200-h:      #{color.hue(#fecdd3)};
+	--rose-200-s:      #{color.saturation(#fecdd3)};
+	--rose-200-l:      #{color.lightness(#fecdd3)};
+	--rose-200-raw:    #{color.hue(#fecdd3), color.saturation(#fecdd3), color.lightness(#fecdd3)};
+	--rose-200:        #{#fecdd3};
+
+	--rose-300-h:      #{color.hue(#fda4af)};
+	--rose-300-s:      #{color.saturation(#fda4af)};
+	--rose-300-l:      #{color.lightness(#fda4af)};
+	--rose-300-raw:    #{color.hue(#fda4af), color.saturation(#fda4af), color.lightness(#fda4af)};
+	--rose-300:        #{#fda4af};
+
+	--rose-400-h:      #{color.hue(#fb7185)};
+	--rose-400-s:      #{color.saturation(#fb7185)};
+	--rose-400-l:      #{color.lightness(#fb7185)};
+	--rose-400-raw:    #{color.hue(#fb7185), color.saturation(#fb7185), color.lightness(#fb7185)};
+	--rose-400:        #{#fb7185};
+
+	--rose-500-h:      #{color.hue(#f43f5e)};
+	--rose-500-s:      #{color.saturation(#f43f5e)};
+	--rose-500-l:      #{color.lightness(#f43f5e)};
+	--rose-500-raw:    #{color.hue(#f43f5e), color.saturation(#f43f5e), color.lightness(#f43f5e)};
+	--rose-500:        #{#f43f5e};
+
+	--rose-600-h:      #{color.hue(#e11d48)};
+	--rose-600-s:      #{color.saturation(#e11d48)};
+	--rose-600-l:      #{color.lightness(#e11d48)};
+	--rose-600-raw:    #{color.hue(#e11d48), color.saturation(#e11d48), color.lightness(#e11d48)};
+	--rose-600:        #{#e11d48};
+
+	--rose-700-h:      #{color.hue(#be123c)};
+	--rose-700-s:      #{color.saturation(#be123c)};
+	--rose-700-l:      #{color.lightness(#be123c)};
+	--rose-700-raw:    #{color.hue(#be123c), color.saturation(#be123c), color.lightness(#be123c)};
+	--rose-700:        #{#be123c};
+
+	--rose-800-h:      #{color.hue(#9f1239)};
+	--rose-800-s:      #{color.saturation(#9f1239)};
+	--rose-800-l:      #{color.lightness(#9f1239)};
+	--rose-800-raw:    #{color.hue(#9f1239), color.saturation(#9f1239), color.lightness(#9f1239)};
+	--rose-800:        #{#9f1239};
+
+	--rose-900-h:      #{color.hue(#881337)};
+	--rose-900-s:      #{color.saturation(#881337)};
+	--rose-900-l:      #{color.lightness(#881337)};
+	--rose-900-raw:    #{color.hue(#881337), color.saturation(#881337), color.lightness(#881337)};
+	--rose-900:        #{#881337};
+}
+
+//// @use "sass:meta";
+////
+//// @use "./tailwind-colors" as *;
+////
+//// // ---
+//// :root {
+//// 	@each $k1, $v1 in $tailwind-colors {
+//// 		@if meta.type-of($v1) == map {
+//// 			@each $k2, $v2 in $v1 {
+//// 				---{$k1}-#{$k2}: #{$v2};
+//// 			}
+//// 		} @else {
+//// 			---{$k1}: #{$v1};
+//// 		}
+//// 	}
+//// }
+
+//// $range: (
+//// 	   0,    1,    2,    3,    4,
+//// 	   5,    6,    7,    8,    9,
+//// 	  10,   12,   14,   16,   18,
+//// 	  20,   24,   28,   32,   36,
+//// 	  40,   48,   56,   64,   72,
+//// 	  80,   96,  112,  128,  144,
+//// 	////  160,  192,  224,  256,  288,
+//// 	////  320,  384,  448,  512,  576,
+//// 	////  640,  768,  896, 1024, 1152,
+//// 	//// 1280, 1536, 1792, 2048, 2304,
+//// 	//// 2560, 3072, 3584, 4096,
+//// );
+
+:root:not(.dark) { color-scheme: light; }
+:root.dark       { color-scheme: dark;  }
+
+html {
+	overflow-x: hidden;
+}
+
+:root {
+	--rounding: 48px;
+	--inset-y:  16px;
+	--inset-x:  16px;
+
+	--main-width:       1536px;
+	--main-col-2-width: 400px;
+}
+
+:root {
+	// TODO
+	--seed-h: 220;
+	--seed-s: 100%;
+	--seed-l: 0%;
+	--seed:   var(--seed-h), var(--seed-s);
+
+	//////////////////////////////////////////////////////////////////////////////
+	// Hairlines
+
+	--hairline-height: 1px;
+	--hairline-color:  hsl(var(--seed), 15%, 0.1);
+
+	--hairline-shadow:         0 0 0 var(--hairline-height) var(--hairline-color);
+	--hairline-shadow-t:       0 calc(-1 * var(--hairline-height)) 0 0 var(--hairline-color);
+	--hairline-shadow-r:       var(--hairline-height) 0 0 0 var(--hairline-color);
+	--hairline-shadow-b:       0 var(--hairline-height) 0 0 var(--hairline-color);
+	--hairline-shadow-l:       calc(-1 * var(--hairline-height)) 0 0 0 var(--hairline-color);
+
+	--inset-hairline-shadow:   inset 0 0 0 var(--hairline-height) var(--hairline-color);
+	--inset-hairline-shadow-t: inset 0 var(--hairline-height) 0 0 var(--hairline-color);
+	--inset-hairline-shadow-r: inset calc(-1 * var(--hairline-height)) 0 0 0 var(--hairline-color);
+	--inset-hairline-shadow-b: inset 0 calc(-1 * var(--hairline-height)) 0 0 var(--hairline-color);
+	--inset-hairline-shadow-l: inset var(--hairline-height) 0 0 0 var(--hairline-color);
+
+	//////////////////////////////////////////////////////////////////////////////
+	// Shadows
+
+	--base-shadow-color: hsl(var(--seed), 15%, 0.1);
+	--base-shadow-1:
+		0  1px  2px  -1px var(--base-shadow-color);
+	--base-shadow-2:
+		0  1px  2px  -1px var(--base-shadow-color),
+		0  2px  4px  -2px var(--base-shadow-color);
+	--base-shadow-3:
+		0  1px  2px  -1px var(--base-shadow-color),
+		0  2px  4px  -2px var(--base-shadow-color),
+		0  4px  8px  -4px var(--base-shadow-color);
+	--base-shadow-4:
+		0  1px  2px  -1px var(--base-shadow-color),
+		0  2px  4px  -2px var(--base-shadow-color),
+		0  4px  8px  -4px var(--base-shadow-color),
+		0  8px 16px  -8px var(--base-shadow-color);
+	--base-shadow-5:
+		0  1px  2px  -1px var(--base-shadow-color),
+		0  2px  4px  -2px var(--base-shadow-color),
+		0  4px  8px  -4px var(--base-shadow-color),
+		0  8px 16px  -8px var(--base-shadow-color),
+		0 16px 32px -16px var(--base-shadow-color);
+	--base-shadow-6:
+		0  1px  2px  -1px var(--base-shadow-color),
+		0  2px  4px  -2px var(--base-shadow-color),
+		0  4px  8px  -4px var(--base-shadow-color),
+		0  8px 16px  -8px var(--base-shadow-color),
+		0 16px 32px -16px var(--base-shadow-color),
+		0 32px 64px -32px var(--base-shadow-color);
+
+	--shadow-1:
+		var(--hairline-shadow),
+		var(--base-shadow-1);
+	--shadow-2:
+		var(--hairline-shadow),
+		var(--base-shadow-2);
+	--shadow-3:
+		var(--hairline-shadow),
+		var(--base-shadow-3);
+	--shadow-4:
+		var(--hairline-shadow),
+		var(--base-shadow-4);
+	--shadow-5:
+		var(--hairline-shadow),
+		var(--base-shadow-5);
+	--shadow-6:
+		var(--hairline-shadow),
+		var(--base-shadow-6);
+
+	--inset-shadow-1:
+		var(--inset-hairline-shadow),
+		var(--base-shadow-1);
+	--inset-shadow-2:
+		var(--inset-hairline-shadow),
+		var(--base-shadow-2);
+	--inset-shadow-3:
+		var(--inset-hairline-shadow),
+		var(--base-shadow-3);
+	--inset-shadow-4:
+		var(--inset-hairline-shadow),
+		var(--base-shadow-4);
+	--inset-shadow-5:
+		var(--inset-hairline-shadow),
+		var(--base-shadow-5);
+	--inset-shadow-6:
+		var(--inset-hairline-shadow),
+		var(--base-shadow-6);
+
+	background-color: var(--base-color);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--level-1-color: hsl(var(--seed), calc(var(--seed-l) + 7.5%));
+		--level-2-color: hsl(var(--seed), calc(var(--seed-l) + 10%));
+	}
+}
