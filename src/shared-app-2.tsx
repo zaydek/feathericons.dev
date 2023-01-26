@@ -9,7 +9,7 @@ function NavLink({ pos }: { pos: "tl" | "tr" }) {
 					[&[data-pos=tr]]:top-16 [&[data-pos=tr]]:right-16"
 			data-pos={pos.toLowerCase()}
 		>
-			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-white/10% px-8 pr-16">
+			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-black/25% px-8 pr-16">
 				<div className="h-16 w-16 rounded-1e3 bg-white"></div>
 				<div className="h-6 w-96 rounded-1e3 bg-white"></div>
 			</div>
@@ -37,7 +37,7 @@ function CTAButton({ primary }: { primary?: boolean }) {
 
 	return (
 		<div
-			className="h-56 rounded-[calc(56px_*_0.375)] bg-white/25%
+			className="h-56 rounded-[calc(56px_*_0.375)] bg-white/50%
 				md:aspect-[3.5] md:rounded-1e3
 					[&[data-primary]]:bg-white"
 			data-primary={primary}

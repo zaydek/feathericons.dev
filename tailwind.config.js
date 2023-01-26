@@ -1,4 +1,8 @@
-const { percents, sizes, zIndexes } = require("./tailwind.config.tokens")
+const {
+	percents,
+	sizes,
+	zIndexes,
+} = require("./tailwind.config.tokens")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -8,12 +12,12 @@ module.exports = {
 			"sans": "var(--sans)",
 			"code": "var(--code)",
 		},
-		borderRadius:       sizes,
-		maxHeight:          sizes,
-		maxWidth:           sizes,
-		minHeight:          sizes,
-		minWidth:           sizes,
-		spacing:            sizes,
+		borderRadius:       { ...sizes, ...percents },
+		maxHeight:          { ...sizes, ...percents },
+		maxWidth:           { ...sizes, ...percents },
+		minHeight:          { ...sizes, ...percents },
+		minWidth:           { ...sizes, ...percents },
+		spacing:            { ...sizes, ...percents },
 		zIndex:             zIndexes,
 		backdropOpacity:    percents,
 		backgroundOpacity:  percents,

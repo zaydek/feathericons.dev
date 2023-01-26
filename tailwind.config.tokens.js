@@ -22,6 +22,30 @@ const percents = {
 	"100%": "100%",
 }
 
+//// const decimalPercents = {
+//// 	[ 0.00]:  "0.0", // eslint-disable-line no-useless-computed-key
+//// 	[ 0.05]:  "0.5", // eslint-disable-line no-useless-computed-key
+//// 	[0.100]: "0.10", // eslint-disable-line no-useless-computed-key
+//// 	[0.150]: "0.15", // eslint-disable-line no-useless-computed-key
+//// 	[0.200]: "0.20", // eslint-disable-line no-useless-computed-key
+//// 	[0.250]: "0.25", // eslint-disable-line no-useless-computed-key
+//// 	[0.300]: "0.30", // eslint-disable-line no-useless-computed-key
+//// 	[0.350]: "0.35", // eslint-disable-line no-useless-computed-key
+//// 	[0.400]: "0.40", // eslint-disable-line no-useless-computed-key
+//// 	[0.450]: "0.45", // eslint-disable-line no-useless-computed-key
+//// 	[0.500]: "0.50", // eslint-disable-line no-useless-computed-key
+//// 	[0.550]: "0.55", // eslint-disable-line no-useless-computed-key
+//// 	[0.600]: "0.60", // eslint-disable-line no-useless-computed-key
+//// 	[0.650]: "0.65", // eslint-disable-line no-useless-computed-key
+//// 	[0.700]: "0.70", // eslint-disable-line no-useless-computed-key
+//// 	[0.750]: "0.75", // eslint-disable-line no-useless-computed-key
+//// 	[0.800]: "0.80", // eslint-disable-line no-useless-computed-key
+//// 	[0.850]: "0.85", // eslint-disable-line no-useless-computed-key
+//// 	[0.900]: "0.90", // eslint-disable-line no-useless-computed-key
+//// 	[0.950]: "0.95", // eslint-disable-line no-useless-computed-key
+//// 	[1.000]: "1.00", // eslint-disable-line no-useless-computed-key
+//// }
+
 const sizes = {
 	   0:    "0px",    1:    "1px",    2:    "2px",    3:    "3px",    4:    "4px",
 	   5:    "5px",    6:    "6px",    7:    "7px",    8:    "8px",    9:    "9px",
@@ -55,8 +79,6 @@ const sizes = {
 	 1800: "1800px",
 	 1900: "1900px",
 	"2e3": "2000px",
-
-	...percents,
 }
 
 const zIndexes = {
@@ -73,4 +95,8 @@ const zIndexes = {
 	100: 100,
 }
 
-module.exports = { percents, sizes, zIndexes }
+module.exports = {
+	percents,
+	sizes,
+	zIndexes,
+}
