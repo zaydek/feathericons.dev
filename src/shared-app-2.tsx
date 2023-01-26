@@ -32,7 +32,7 @@ function Heading() {
 	)
 }
 
-function CallToActionButton({ primary }: { primary?: boolean }) {
+function CTAButton({ primary }: { primary?: boolean }) {
 	primary ||= undefined
 
 	return (
@@ -90,8 +90,8 @@ function Header() {
 							className="flex w-384 flex-col gap-16
 								md:flex-row"
 						>
-							<CallToActionButton primary />
-							<CallToActionButton />
+							<CTAButton primary />
+							<CTAButton />
 						</div>
 					</div>
 					{/* RHS */}

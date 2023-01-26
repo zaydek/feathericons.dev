@@ -1,17 +1,31 @@
-/* :not(svg > *) { */
-/* 	outline: 1px solid hsl(200, 100%, 50%, 0.5); */
-/* 	outline-offset: -0.5px; */
-/* } */
+//// :not(svg > *) {
+//// 	outline: 1px solid hsl(200, 100%, 50%, 0.5);
+//// 	outline-offset: -0.5px;
+//// }
 
 :focus-visible { outline: revert; }
 
+:root {
+	-webkit-font-smoothing: antialiased;  // E.g. antialiased
+	-moz-osx-font-smoothing: grayscale;   // E.g. antialiased
+	overflow-y: scroll; // COMPAT/Windows // E.g. overflow-x-scroll
+	overflow-x: hidden;                   // E.g. overflow-x-hidden
+	scroll-behavior: smooth;              // E.g. scroll-smooth
+}
+
 svg { overflow: visible; }
 
-:is(button, [role=button])                   { cursor: pointer; user-select: none; }
-:is(input[type=checkbox], [role=checkbox])   { cursor: pointer; user-select: none; }
-:is(input[type=radio], [role=radio])         { cursor: pointer; user-select: none; }
-:is(input[type=range], [role=slider])        { cursor: grab;    user-select: none; }
-:is(input[type=range], [role=slider]):active { cursor: grabbing; }
+button, [role=button]                 { cursor: pointer; user-select: none; }
+input[type=checkbox], [role=checkbox] { cursor: pointer; user-select: none; }
+input[type=radio], [role=radio]       { cursor: pointer; user-select: none; }
+
+input[type=range], [role=slider] {
+	cursor: grab;
+	user-select: none;
+	&:active {
+		cursor: grabbing;
+	}
+}
 
 input[type=text]:focus { outline: none; }
-/* textarea:focus         { outline: none; } */
+textarea:focus         { outline: none; }

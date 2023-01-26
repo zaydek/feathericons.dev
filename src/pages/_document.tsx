@@ -20,7 +20,7 @@ const initDarkMode = "\n" + detab(`
 
 export default function Document() {
 	return (
-		<Html className="overflow-x-hidden overflow-y-scroll scroll-smooth" lang="en">
+		<Html lang="en">
 			<Head />
 
 			{/* Google Fonts */}
