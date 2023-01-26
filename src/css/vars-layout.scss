@@ -1,19 +1,9 @@
 :root {
-	// Abstract
-	//
-	// TODO: Remove inset-y and inset-x and use
-	// fractions of rounding?
-	//
+	--rounding: 48px;
 	--inset-y:  16px;
 	--inset-x:  16px;
-	--rounding: 48px;
+	--app-w:    1536px;
+	--aside-w:  400px;
 
-	--header-h: 480px;
-	--header-backdrop-h: 320px;
-	--sidebar-w: 448px;
-	//// --main-w: 2304px;
-	//// --main-w: 1792px;
-	--main-w: 1536px;
-	--search-bar-h: 64px;
-	--grid-size: 96px;
+	--computed-app-min-h: calc(100dvh - (var(--rounding) + var(--inset-y)));
 }

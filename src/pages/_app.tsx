@@ -1,18 +1,4 @@
-//// // TODO: Move to _document.tsx?
-//// import "../css/tailwind-custom-base.css"
-//// import "../css/tailwind.css"
-////
-//// import "../css/misc.scss"
-//// import "../css/type.scss"
-//// import "../css/vars-layout.scss"
-//// import "../css/vars.scss"
-
-import "the-new-css-reset"
-
-import "../css/base.scss"
-import "../css/masks.scss"
-import "../shared-app-2.scss"
-
+import "../css/index.scss"
 import "../css/tailwind.css"
 
 import { AppProps } from "next/app"

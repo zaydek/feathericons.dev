@@ -1,0 +1,11 @@
+:root:not(.dark) { color-scheme: light; }
+:root.dark       { color-scheme: dark;  }
+
+:root {
+	// TODO: Use Tailwind channels / colors here?
+	--seed-h:   220;
+	--seed-s:   100%;
+	--seed-l:   0%;
+	--seed-raw: 220, 100%, 0%
+	--seed:     hsl(220, 100%, 0%);
+}

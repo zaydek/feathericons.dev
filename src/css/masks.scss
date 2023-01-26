@@ -1,6 +1,6 @@
 $windows-scrollbar-width: 16px;
 $inset-x: 16px;
-$main-width: 1536px;
+$app-w: 1536px;
 
 ////////////////////////////////////////////////////////////////////////////////
 // .bg-mask
@@ -14,9 +14,9 @@ $main-width: 1536px;
 	margin: 0 -10%;
 	height: 320px;
 	border-radius: 0 0 100% 100%;
-	background-color: green;
+	// Defer to data-bg-hero for background-image
 }
-@media (max-width: #{$main-width + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
+@media (max-width: #{$app-w + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.bg-mask-sticky { display: none; }
 }
 
@@ -39,22 +39,21 @@ $main-width: 1536px;
 	position: relative;
 	height: calc(var(--rounding) + var(--inset-y));
 	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
-	background-color: orange;
+	// Defer to data-bg-hero for background-image
 }
 .fg-mask-bit-2 {
 	height: var(--inset-y);
 	width: 100%;
 	max-width: calc(1536px - var(--rounding) * 2);
-	background-color: yellow;
+	// Defer to data-bg-hero for background-image
 }
 .fg-mask-bit-3 {
 	position: relative;
 	height: calc(var(--rounding) + var(--inset-y));
 	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
-	background-color: orange;
+	// Defer to data-bg-hero for background-image
 }
-.fg-mask-bit-1::before {
-	content: "";
+.fg-mask-bit-1-nested {
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -63,8 +62,7 @@ $main-width: 1536px;
 	border-top-left-radius: 1e3px;
 	background-color: pink;
 }
-.fg-mask-bit-3::before {
-	content: "";
+.fg-mask-bit-3-nested {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -73,9 +71,9 @@ $main-width: 1536px;
 	border-top-right-radius: 1e3px;
 	background-color: pink;
 }
-@media (max-width: #{$main-width + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
+@media (max-width: #{$app-w + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.fg-mask-sticky + * { top: 0; }
 }
-@media (max-width: #{$main-width + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
+@media (max-width: #{$app-w + $inset-x * 2 + $windows-scrollbar-width - 1px}) {
 	.fg-mask-sticky { display: none; }
 }

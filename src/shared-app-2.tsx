@@ -77,7 +77,7 @@ function Header() {
 		<>
 			<NavLink pos="tl" />
 			<NavLink pos="tr" />
-			<header className="flex justify-center bg-[#1570fb] py-96 px-[var(--inset-x)]">
+			<header className="flex justify-center py-96 px-[var(--inset-x)]" data-bg-hero>
 				<div
 					className="flex flex-col gap-64
 						xl:w-100% xl:max-w-1024 xl:flex-row xl:items-center"
@@ -156,7 +156,7 @@ export function SharedApp2() {
 					2xl:px-[var(--inset-x)]"
 			>
 				<div
-					className="flex min-h-[var(--main-min-h)] w-100% max-w-[var(--app-w)] bg-white
+					className="flex min-h-[var(--computed-app-min-h)] w-100% max-w-[var(--app-w)] bg-white
 						2xl:rounded-[var(--rounding)] 2xl:[box-shadow:_var(--shadow-4)]"
 				>
 					<main className="grow">
