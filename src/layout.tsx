@@ -117,7 +117,7 @@ export function Layout({ name }: Partial<IconProps>) {
 						</div>
 					</main>
 					{/* RHS */}
-					<aside className="min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)]">
+					<aside className="exact-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)]">
 						<div
 							// Use z-* here because of masks
 							className="sticky top-0 z-10

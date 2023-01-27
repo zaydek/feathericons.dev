@@ -34,7 +34,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			{/* prettier-ignore */}
 			<a
 				href={href}
-				className="absolute y-0 r-100% flex items-center px-8 opacity-0
+				className="absolute top-0 right	-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/h1:opacity-100"
 				aria-label={`Link ${id}`}
 			>
@@ -63,7 +63,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			{/* prettier-ignore */}
 			<a
 				href={href}
-				className="absolute y-0 r-100% flex items-center px-8 opacity-0
+				className="absolute top-0 right	-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/h2:opacity-100"
 				aria-label={`Link ${id}`}
 			>
