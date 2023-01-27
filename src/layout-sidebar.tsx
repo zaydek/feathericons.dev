@@ -3,6 +3,7 @@ import * as feather from "./data/react-feather"
 import { Dispatch, MouseEventHandler, MutableRefObject, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
+import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "./aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "./icon-config"
@@ -13,9 +14,10 @@ import { Hairline } from "./random"
 import { ShikiContext } from "./shiki"
 import { SelectedContext, SliderContext } from "./state"
 import { Transition } from "./transition"
+import { FormatAs } from "./types"
 import { TypographyCaps } from "./typography"
 
-function CommentLink({ formatAs, children }: { formatAs: "svg" | "jsx" | "tsx"; children: string }) {
+function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: string }) {
 	if (formatAs === "svg") {
 		const href = children.slice("<!-- ".length, -1 * " -->".length)
 		return (
@@ -122,16 +124,17 @@ function useCancelable(ref: MutableRefObject<HTMLDivElement | null>, setShow: Di
 	return null
 }
 
-function DropDownItem({ children, ...props }: JSX.IntrinsicElements["button"]) {
+function DropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps<FormatAs>) {
 	return (
-		<button
+		<AriaSimpleDropDownItem
+			id={id}
 			className="flex h-32 items-center gap-8 px-12
 				first:rounded-t-12 last:rounded-b-12
 					hover:bg-gray-100 hover:active:bg-gray-200"
 			{...props}
 		>
 			{children}
-		</button>
+		</AriaSimpleDropDownItem>
 	)
 }
 
@@ -149,91 +152,63 @@ function FormatButton() {
 		}[formatAs]
 	}, [formatAs])
 
-	useCancelable(ref, setShow)
+	//// useCancelable(ref, setShow)
 
 	return (
-		<div className="relative flex flex-col">
-			{/* Button */}
+		<AriaSimpleDropDown<FormatAs> className="relative flex flex-col" show={show} setShow={setShow} currentId={formatAs} setCurrentId={setFormatAs}>
 			<div className="relative flex flex-col">
-				<button
+				<div
 					className="group
 						flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 							hover:active:bg-gray-200 hover:active:[box-shadow:_var(--inset-shadow-2)]"
-					onClick={e => {
-						setShow(curr => !curr)
-					}}
-					onKeyDown={e => {
-						if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-							e.preventDefault()
-							console.log("Hello, world!")
-						} else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-							e.preventDefault()
-							console.log("Hello, world!")
-						}
-					}}
-					aria-label="Click to select formatting"
 				>
 					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
 					<TypographyCaps className="text-gray-700">FORMAT AS {desc}</TypographyCaps>
-				</button>
-				{/* Arrow */}
+				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-32 w-32 items-center justify-center">
 						<Icon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
 					</div>
 				</div>
 			</div>
-			{/* Drop down */}
 			<Transition
 				when={show}
-				unmount="start"
+				//// unmount="start"
 				s1={{
 					transform: "translateY(-8px)",
 					opacity: 0,
+					// FIXME: This is sort of a hack. Note that unmount="start" is safe
+					// because of a race condition with setTimeout(() => setTimeout(() => { ... }, 0), 0)
+					pointerEvents: "none",
 				}}
 				s2={{
 					transform: "translateY(0px)",
 					opacity: 1,
+					// FIXME: This is sort of a hack. Note that unmount="start" is safe
+					// because of a race condition with setTimeout(() => setTimeout(() => { ... }, 0), 0)
+					pointerEvents: "auto",
 				}}
 				duration={100}
 				ease={[0, 1, 1, 1]}
 			>
 				<div className="absolute top-[calc(100%_+_8px)] right-0 z-10">
 					<div ref={ref} className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
-						<DropDownItem
-							onClick={e => {
-								setFormatAs("svg")
-								setShow(false)
-							}}
-							aria-label="SVG"
-						>
+						<DropDownItem id="svg">
 							<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
 							<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
 						</DropDownItem>
-						<DropDownItem
-							onClick={e => {
-								setFormatAs("jsx")
-								setShow(false)
-							}}
-							aria-label="React"
-						>
+						<DropDownItem id="jsx">
 							<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
 							<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
 						</DropDownItem>
-						<DropDownItem
-							onClick={e => {
-								setFormatAs("tsx")
-								setShow(false)
-							}}
-							aria-label="TypeScript React"
-						>
+						<DropDownItem id="tsx">
 							<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
 							<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
 						</DropDownItem>
 					</div>
 				</div>
 			</Transition>
-		</div>
+		</AriaSimpleDropDown>
 	)
 }
 

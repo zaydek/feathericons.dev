@@ -1,7 +1,4 @@
-// https://github.com/microsoft/TypeScript/issues/24509#issue-327938554
-type Mutable<T> = T & {
-	-readonly [P in keyof T]: T[P]
-}
+import { Mutable } from "./types"
 
 function createSearchParams(url: string) {
 	const urlSearchParams = new URLSearchParams(url)

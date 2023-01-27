@@ -26,7 +26,7 @@ type GenericContextData<T extends string = any> = {
 const _SimpleDropDownContext = createContext<GenericContextData | null>(null)
 
 // prettier-ignore
-type AriaSimpleDropDownProps<T extends string> = {
+export type AriaSimpleDropDownProps<T extends string> = {
 	show:         boolean
 	setShow:      Dispatch<SetStateAction<boolean>>
 	currentId:    T
@@ -81,12 +81,15 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 		incrementRef.current = increment
 	}, [decrement, increment])
 
+	const onceRef = useRef(false)
 	useEffect(() => {
-		if (items.length === 0) { return } // prettier-ignore
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
 		if (show) {
-			// prettier-ignore
-			const element = document.getElementById(currentId) ??
-				document.getElementById(items[0].id)
+			if (items.length === 0) { return } // prettier-ignore
+			const element = document.getElementById(currentId) ?? document.getElementById(items[0].id)
 			element?.focus()
 		} else {
 			ref.current!.focus()
@@ -163,7 +166,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 	)
 }
 
-type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Omit<JSX.IntrinsicElements["div"], "id">
+export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Omit<JSX.IntrinsicElements["div"], "id">
 
 export function AriaSimpleDropDownItem<T extends string>({ id, children, ...props }: AriaSimpleDropDownItemProps<T>) {
 	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!

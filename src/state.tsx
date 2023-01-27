@@ -6,6 +6,7 @@ import { stringify } from "../scripts/stringify"
 import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "./constants"
 import { manifest } from "./data/react-feather-manifest"
 import { toKebabCase } from "./lib/cases"
+import { FormatAs } from "./types"
 
 // prettier-ignore
 export const SearchContext =
@@ -26,8 +27,8 @@ export const SelectedContext =
 		setSelectedSvgElement: Dispatch<SetStateAction<SVGSVGElement | null>>
 		viewSource:            boolean
 		setViewSource:         Dispatch<SetStateAction<boolean>>
-		formatAs:              "svg" | "jsx" | "tsx"
-		setFormatAs:           Dispatch<SetStateAction<"svg" | "jsx" | "tsx">>
+		formatAs:              FormatAs
+		setFormatAs:           Dispatch<SetStateAction<FormatAs>>
 		clipboard:             string
 	} | null>(null)
 
@@ -96,7 +97,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 	const [selectedName, setSelectedName] = useState<keyof typeof manifest>("Feather")
 	const [selectedSvgElement, setSelectedSvgElement] = useState<SVGSVGElement | null>(null)
 	const [viewSource, setViewSource] = useState(false)
-	const [formatAs, setFormatAs] = useState<"svg" | "jsx" | "tsx">("svg")
+	const [formatAs, setFormatAs] = useState<FormatAs>("svg")
 
 	const clipboard = useMemo(() => {
 		if (selectedSvgElement === null) {

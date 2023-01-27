@@ -1,8 +1,8 @@
 import Head from "next/head"
 import { useEffect } from "react"
 import { manifest } from "./data/react-feather-manifest"
-import { Docs } from "./docs"
 import { Header } from "./layout-header"
+import { SearchResultsContents } from "./layout-search-results"
 import { SidebarContents } from "./layout-sidebar"
 import { toKebabCase } from "./lib/cases"
 import { IconProps } from "./pages/[icon]"
@@ -112,8 +112,8 @@ export function Layout({ name }: Partial<IconProps>) {
 							<div>Hello, world!</div>
 						</div>
 						<div className="p-48 pb-64">
-							{/* <SearchResultsContents /> */}
-							<Docs name={name ?? "Feather"} />
+							<SearchResultsContents />
+							{/* <Docs name={name ?? "Feather"} /> */}
 						</div>
 					</main>
 					{/* RHS */}
