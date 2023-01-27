@@ -179,10 +179,31 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 }
 
 // Expose className for color or use style
+//
+// TODO: DEPRECATE
 export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] [transform:_translateY(-0.1em)]", className)} icon={icon} {...props} />
 }
 
+// TODO: DEPRECATE
 export function SmallInlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	return <Icon className={cx("inline-block h-[1em] w-[1em] [transform:_translateY(0.05em)]", className)} icon={icon} {...props} />
+}
+
+export function TextIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+	return (
+		<span className="inline-flex items-center">
+			{children}&nbsp;
+			<Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
+		</span>
+	)
+}
+
+export function SmallTextIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+	return (
+		<span className="inline-flex items-center">
+			{children}&nbsp;
+			<Icon className={cx("inline-block h-[1.1em] w-[1.1em]", className)} icon={icon} {...props} />
+		</span>
+	)
 }

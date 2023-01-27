@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
-import { Anchor, Code, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph, Pre } from "./docs-components"
+import { Anchor, Code, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph, Pre, TextIcon } from "./docs-components"
 import { CodePenIcon, CodePenIconColor, NextJsIcon, NextJsIconColor, ReactJsIcon, ReactJsIconColor, SassIcon, SassIconColor, SvgIcon, SvgIconColor, TailwindCssIcon, TailwindCssIconColor, TwitterIcon, TwitterIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
@@ -44,7 +44,6 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
-						{/* <Pre lang="html" selected={[3, 6, 8]}> */}
 						<Pre lang="html">
 							{detab(`
 								<!DOCTYPE html>
@@ -83,7 +82,6 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
-						{/* <Pre lang="sh" selected={[0]}> */}
 						<Pre lang="sh">
 							{detab(`
 								npm i react-feather
@@ -91,7 +89,6 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 								# Or pnpm i react-feather
 							`)}
 						</Pre>
-						{/* <Pre lang="tsx" selected={[0, 6]}> */}
 						<Pre lang="tsx">
 							{detab(`
 								import { ${name} } from "react-feather"
@@ -99,9 +96,9 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 								export default function App() {
 									return (
 										<div className="flex h-screen items-center justify-center">
-											<div className="flex h-10 items-center gap-2 rounded-2xl bg-sky-500 px-4">
-												<${name} className="h-5 w-5 text-white" />
-												<div className="text-sm font-semibold tracking-wider text-white">HELLO WORLD</div>
+											<div className="flex h-10 items-center gap-2 rounded-full bg-sky-500 px-4">
+												<${name} classNameName="h-5 w-5 text-white" />
+												<div className="text-[12px] font-[700] tracking-wider text-white">HELLO WORLD</div>
 											</div>
 										</div>
 									)
@@ -109,7 +106,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							`)}
 						</Pre>
 						<Paragraph>
-							Click here to get started with a <Anchor href="https://play.tailwindcss.com/VWngwPjpyy">Tailwind CSS</Anchor>&nbsp;
+							Click here to get started with a <Anchor href="https://play.tailwindcss.com/jPEYvRowr3">Tailwind CSS</Anchor>&nbsp;
 							<InlineIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon} /> template.
 						</Paragraph>
 						<Hairline />
@@ -133,28 +130,33 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							<small>
 								Built using{" "}
 								<Anchor href="https://reactjs.org">
-									React.js&nbsp;
-									<InlineIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />
+									<TextIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon}>
+										React.js
+									</TextIcon>
 								</Anchor>
 								,{" "}
 								<Anchor href="https://nextjs.org">
-									Next.js&nbsp;
-									<InlineIcon style={{ color: NextJsIconColor }} icon={NextJsIcon} />
+									<TextIcon style={{ color: NextJsIconColor }} icon={NextJsIcon}>
+										Next.js
+									</TextIcon>
 								</Anchor>
 								,{" "}
 								<Anchor href="https://typescriptlang.org">
-									TypeScript&nbsp;
-									<InlineIcon style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />
+									<TextIcon style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon}>
+										TypeScript
+									</TextIcon>
 								</Anchor>
 								,{" "}
 								<Anchor href="https://tailwindcss.com">
-									Tailwind CSS&nbsp;
-									<InlineIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon} />
+									<TextIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon}>
+										Tailwind CSS
+									</TextIcon>
 								</Anchor>
-								,{" "}
+								, and{" "}
 								<Anchor href="https://sass-lang.com">
-									and Sass&nbsp;
-									<InlineIcon style={{ color: SassIconColor }} icon={SassIcon} />
+									<TextIcon style={{ color: SassIconColor }} icon={SassIcon}>
+										Sass
+									</TextIcon>
 								</Anchor>
 							</small>
 						</Paragraph>
