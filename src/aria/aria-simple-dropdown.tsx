@@ -96,6 +96,8 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 		}
 	}, [currentId, items, show])
 
+	// TODO: Add useCancelable equivalent
+
 	return (
 		// eslint-disable-next-line react/jsx-pascal-case
 		<_SimpleDropDownContext.Provider

@@ -1,5 +1,6 @@
 import * as feather from "./data/react-feather"
 
+import { AnimatePresence, motion } from "framer-motion"
 import { Dispatch, MouseEventHandler, MutableRefObject, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
@@ -130,7 +131,9 @@ function DropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps<Fo
 			id={id}
 			className="flex h-32 items-center gap-8 px-12
 				first:rounded-t-12 last:rounded-b-12
-					hover:bg-gray-100 hover:active:bg-gray-200"
+					hover:bg-gray-100 focus:bg-gray-100
+						hover:active:bg-[var(--theme-color-cyan)] aria-selected:bg-[var(--theme-color-cyan)]
+							[&[aria-selected=true]_*]:text-white [&:hover:active_*]:text-white"
 			{...props}
 		>
 			{children}
@@ -171,43 +174,44 @@ function FormatButton() {
 					</div>
 				</div>
 			</div>
-			<Transition
-				when={show}
-				//// unmount="start"
-				s1={{
-					transform: "translateY(-8px)",
-					opacity: 0,
-					// FIXME: This is sort of a hack. Note that unmount="start" is safe
-					// because of a race condition with setTimeout(() => setTimeout(() => { ... }, 0), 0)
-					pointerEvents: "none",
-				}}
-				s2={{
-					transform: "translateY(0px)",
-					opacity: 1,
-					// FIXME: This is sort of a hack. Note that unmount="start" is safe
-					// because of a race condition with setTimeout(() => setTimeout(() => { ... }, 0), 0)
-					pointerEvents: "auto",
-				}}
-				duration={100}
-				ease={[0, 1, 1, 1]}
-			>
-				<div className="absolute top-[calc(100%_+_8px)] right-0 z-10">
-					<div ref={ref} className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
-						<DropDownItem id="svg">
-							<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
-							<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
-						</DropDownItem>
-						<DropDownItem id="jsx">
-							<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
-							<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
-						</DropDownItem>
-						<DropDownItem id="tsx">
-							<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
-							<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
-						</DropDownItem>
-					</div>
-				</div>
-			</Transition>
+			<AnimatePresence>
+				{show && (
+					<motion.div
+						initial={{
+							y: 16,
+							opacity: 0,
+						}}
+						animate={{
+							y: 0,
+							opacity: 1,
+						}}
+						exit={{
+							y: 16,
+							opacity: 0,
+						}}
+						transition={{
+							duration: 0.2,
+							ease: [0, 1, 1, 1],
+						}}
+						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
+					>
+						<div ref={ref} className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
+							<DropDownItem id="svg">
+								<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
+								<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
+							</DropDownItem>
+							<DropDownItem id="jsx">
+								<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
+								<TypographyCaps className="text-gray-700">JSX</TypographyCaps>
+							</DropDownItem>
+							<DropDownItem id="tsx">
+								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
+								<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
+							</DropDownItem>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</AriaSimpleDropDown>
 	)
 }
