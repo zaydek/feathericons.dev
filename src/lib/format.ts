@@ -1,5 +1,4 @@
-export function tab(str: string, count: number, { omitStart }: { omitStart?: boolean } = {}) {
-	omitStart ??= false
+export function tab(str: string, count: number, { omitStart = false }: { omitStart?: boolean } = {}) {
 	const lines = str.split("\n")
 	return lines.map((line, index) => {
 		if (omitStart && index === 0) {

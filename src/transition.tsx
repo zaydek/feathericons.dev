@@ -71,7 +71,10 @@ export function Transition({ when, unmount, s1: start, s2: end, duration, ease =
 							...(state === "start" ? start : end),
 							transitionProperty,
 							transitionDuration: `${duration}ms`,
-							transitionTimingFunction: typeof ease === "string" ? ease : `cubic-bezier(${ease.join(", ")})`,
+							// prettier-ignore
+							transitionTimingFunction: typeof ease === "string"
+								? ease
+								: `cubic-bezier(${ease.join(", ")})`,
 							transitionDelay: `${delay ?? 0}ms`,
 						},
 					})

@@ -21,10 +21,9 @@ const bases = {
 // Deterministic random number generator
 //
 // https://stackoverflow.com/a/19303725
-export function createRandomFactory(seed?: number) {
-	seed ??= 1 as number
+export function createRandomFactory({ seed = 0 }: { seed?: number } = {}) {
 	return () => {
-		const x = Math.sin(seed!++) * 10_000
+		const x = Math.sin(++seed) * 10_000
 		return x - Math.floor(x)
 	}
 }
