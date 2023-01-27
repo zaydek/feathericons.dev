@@ -1,15 +1,24 @@
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	border-width: 0;
+	border-style: solid;
+	border-color: #e5e7eb;
+}
+
+*,
+::before,
+::after {
+	--tw-ring-inset: ;
+	--tw-ring-offset-width: 0px;
+	--tw-ring-offset-color: #fff;
+	--tw-ring-color: rgb(59 130 246 / 0.5);
+	--tw-ring-offset-shadow: 0 0 #0000;
+	--tw-ring-shadow: 0 0 #0000;
+}
+
 /* @tailwind base; */
-
-/* *, */
-/* ::before, */
-/* ::after { */
-/* 	box-sizing:   border-box; */
-/* 	border-width: 0; */
-/* 	border-style: solid; */
-/* 	border-color: #e5e7eb; */
-/* } */
-
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
