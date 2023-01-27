@@ -2,12 +2,10 @@ import "../css/_index.scss"
 import "../css/_tailwind.css"
 
 import { AppProps } from "next/app"
-import { ShikiProvider } from "../shiki"
-import { StateProvider } from "../state"
 
 // TODO: Move to _document.tsx?
 //// import { Fira_Code, Inter } from "@next/font/google"
-import { Layout } from "../layout"
+import { AriaSimpleDropDown, AriaSimpleDropDownItem } from "../aria/aria-simple-dropdown"
 import { IconProps } from "./[icon]"
 
 //// // TODO
@@ -23,14 +21,35 @@ import { IconProps } from "./[icon]"
 //// })
 
 export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
-	const name = pageProps.name
+	//// const [open, setOpen] = useState(false)
 
 	return (
-		<ShikiProvider>
-			<StateProvider>
-				{/* <SharedApp name={name} /> */}
-				<Layout />
-			</StateProvider>
-		</ShikiProvider>
+		<div className="flex h-screen items-center justify-center bg-gray-200">
+			<AriaSimpleDropDown className="flex w-640 flex-col gap-8 rounded-32 bg-white p-16 shadow">
+				<AriaSimpleDropDownItem className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16 aria-selected:bg-gray-200">
+					<div>foo</div>
+				</AriaSimpleDropDownItem>
+				<AriaSimpleDropDownItem className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16 aria-selected:bg-gray-200">
+					<div>bar</div>
+				</AriaSimpleDropDownItem>
+				<AriaSimpleDropDownItem className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16 aria-selected:bg-gray-200">
+					<div>baz</div>
+				</AriaSimpleDropDownItem>
+				<AriaSimpleDropDownItem className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16 aria-selected:bg-gray-200">
+					<div>qux</div>
+				</AriaSimpleDropDownItem>
+			</AriaSimpleDropDown>
+		</div>
 	)
+
+	//// const name = pageProps.name
+	////
+	//// return (
+	//// 	<ShikiProvider>
+	//// 		<StateProvider>
+	//// 			{/* <SharedApp name={name} /> */}
+	//// 			<Layout />
+	//// 		</StateProvider>
+	//// 	</ShikiProvider>
+	//// )
 }

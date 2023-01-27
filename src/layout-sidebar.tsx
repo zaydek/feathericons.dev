@@ -145,7 +145,7 @@ function FormatButton() {
 		return {
 			svg: [SvgIconColor, SvgIcon, "SVG"] as const,
 			jsx: [ReactJsIconColor, ReactJsIcon, "REACT"] as const,
-			tsx: [TypeScriptIconColor, TypeScriptIcon, "TYPESCRIPT REACT"] as const,
+			tsx: [TypeScriptIconColor, TypeScriptIcon, "TS REACT"] as const,
 		}[formatAs]
 	}, [formatAs])
 
@@ -162,12 +162,21 @@ function FormatButton() {
 					onClick={e => {
 						setShow(curr => !curr)
 					}}
+					onKeyDown={e => {
+						if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+							e.preventDefault()
+							console.log("Hello, world!")
+						} else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+							e.preventDefault()
+							console.log("Hello, world!")
+						}
+					}}
 					aria-label="Click to select formatting"
 				>
 					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
 					<TypographyCaps className="text-gray-700">FORMAT AS {desc}</TypographyCaps>
 				</button>
-				{/* Drop down arrow */}
+				{/* Arrow */}
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-32 w-32 items-center justify-center">
 						<Icon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
@@ -219,7 +228,7 @@ function FormatButton() {
 							aria-label="TypeScript React"
 						>
 							<Icon className="h-16 w-16" style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />
-							<TypographyCaps className="text-gray-700">TYPESCRIPT REACT</TypographyCaps>
+							<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
 						</DropDownItem>
 					</div>
 				</div>

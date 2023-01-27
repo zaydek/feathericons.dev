@@ -38,7 +38,8 @@ $app-w: 1536px;
 .fg-mask-bit-1 {
 	position: relative;
 	height: calc(var(--rounding) + var(--inset-y));
-	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
+	min-width: calc(var(--rounding) + var(--inset-x));
+	max-width: calc(var(--rounding) + var(--inset-x));
 	// Defer to [data-bg-hero] for background-image
 }
 .fg-mask-bit-2 {
@@ -50,7 +51,8 @@ $app-w: 1536px;
 .fg-mask-bit-3 {
 	position: relative;
 	height: calc(var(--rounding) + var(--inset-y));
-	min-width: calc(var(--rounding) + var(--inset-x)); // Use min-width to ensure no shrinking
+	min-width: calc(var(--rounding) + var(--inset-x));
+	max-width: calc(var(--rounding) + var(--inset-x));
 	// Defer to [data-bg-hero] for background-image
 }
 .fg-mask-bit-1-nested {

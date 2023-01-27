@@ -22,8 +22,8 @@ export function AriaCheckbox({ checked, setChecked, children, ...props }: AriaCh
 			// A11y
 			role="checkbox"
 			aria-checked={checked}
-			// /A11y
 			tabIndex={0}
+			// /A11y
 			{...props}
 		>
 			{children}

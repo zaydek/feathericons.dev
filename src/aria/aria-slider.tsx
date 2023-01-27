@@ -86,8 +86,8 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 			aria-valuemin={min}
 			aria-valuemax={max}
 			aria-valuenow={value}
-			// /A11y
 			tabIndex={0}
+			// /A11y
 			{...props}
 		>
 			{children}

@@ -1,14 +1,4 @@
-import {
-	createContext,
-	Dispatch,
-	HTMLAttributes,
-	SetStateAction,
-	useContext,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react"
+import { createContext, Dispatch, HTMLAttributes, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from "react"
 
 // prettier-ignore
 const InternalRadiogroupContext = createContext<{
@@ -40,7 +30,12 @@ export function AriaRadiogroup({ groupValue, setGroupValue, children, ...props }
 				[groupValue, setGroupValue, values]
 			)}
 		>
-			<div /* A11y */ role="radiogroup" /* /A11y */ {...props}>
+			<div
+				// A11y
+				role="radiogroup"
+				// /A11y
+				{...props}
+			>
 				{children}
 			</div>
 		</InternalRadiogroupContext.Provider>
@@ -110,8 +105,8 @@ export function AriaRadio({ value, children, ...props }: AriaRadioProps) {
 			// A11y
 			role="radio"
 			aria-checked={checked}
-			// /A11y
 			tabIndex={checked ? 0 : -1}
+			// /A11y
 			{...props}
 		>
 			{children}
