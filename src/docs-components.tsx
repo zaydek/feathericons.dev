@@ -34,7 +34,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			{/* prettier-ignore */}
 			<a
 				href={href}
-				className="absolute t-0 r-100% b-0 flex items-center px-8 opacity-0
+				className="absolute y-0 r-100% flex items-center px-8 opacity-0
 					group-hover/h1:opacity-100"
 				aria-label={`Link ${id}`}
 			>
@@ -63,7 +63,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			{/* prettier-ignore */}
 			<a
 				href={href}
-				className="absolute t-0 r-100% b-0 flex items-center px-8 opacity-0
+				className="absolute y-0 r-100% flex items-center px-8 opacity-0
 					group-hover/h2:opacity-100"
 				aria-label={`Link ${id}`}
 			>
@@ -145,14 +145,6 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 		</a>
 	)
 }
-
-//// export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
-//// 	return (
-//// 		<code className="border border-gray-300 bg-white py-2 px-4 text-blue-700" {...props}>
-//// 			{children}
-//// 		</code>
-//// 	)
-//// }
 
 export function Code({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["code"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!

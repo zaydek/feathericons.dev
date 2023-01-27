@@ -73,7 +73,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						<Paragraph>To get started with Feather using React.js, simply:</Paragraph>
 						<OrderedList>
 							<ListItem>
-								Run <Code lang="sh">{`npm i react-feather`}</Code> or <Code lang="sh">{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
+								Run <Code lang="sh">{`npm i react-feather`}</Code> or <Code lang="sh">{`yarn add react-feather`}</Code> or <Code lang="sh">{`pnpm i react-feather`}</Code>
 							</ListItem>
 							<ListItem>
 								Add <Code lang="tsx">{`import { ${name} } from "react-feather"`}</Code>
