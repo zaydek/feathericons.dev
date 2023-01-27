@@ -34,7 +34,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			{/* prettier-ignore */}
 			<a
 				href={href}
-				className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0 tr-[16px]
+				className="absolute t-0 r-100% b-0 flex items-center px-8 opacity-0
 					group-hover/h1:opacity-100"
 				aria-label={`Link ${id}`}
 			>
@@ -63,7 +63,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			{/* prettier-ignore */}
 			<a
 				href={href}
-				className="absolute top-0 right-[100%] bottom-0 flex items-center px-8 opacity-0
+				className="absolute t-0 r-100% b-0 flex items-center px-8 opacity-0
 					group-hover/h2:opacity-100"
 				aria-label={`Link ${id}`}
 			>
@@ -79,30 +79,11 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="my-8 flex flex-col gap-8" {...props}>
+		<ol className="my-16 flex flex-col gap-8 px-16" {...props}>
 			{children}
 		</ol>
 	)
 }
-
-//// export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
-//// 	return (
-//// 		<li
-//// 			// Use my-1 to optically align baseline
-//// 			// TODO: Is there a better way to do this? self-baseline?
-//// 			className="relative rounded-1e3 pl-[calc(28px_+_12px)]
-//// 				before:absolute before:top-0 before:bottom-0 before:left-0 before:-my-1
-//// 					before:flex before:h-28 before:w-28 before:items-center before:justify-center
-//// 						before:rounded-1e3 before:bg-gray-200/75
-//// 							before:font-sans before:text-[0.875em] before:tabular-nums before:text-gray-900
-//// 								before:[content:_counter(li)]"
-//// 			style={{ counterIncrement: "li 1" }}
-//// 			{...props}
-//// 		>
-//// 			{children}
-//// 		</li>
-//// 	)
-//// }
 
 export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
@@ -112,59 +93,29 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-export function Pre({ language, children: code, ...props }: { language: Lang; children: string } & JSX.IntrinsicElements["pre"]) {
+export function Pre({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
-	const [copy, setCopy] = useState(false)
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
-		//// const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark", {
-		const tokens = highlighter.codeToThemedTokens(code, language, "github-light")
+		const tokens = highlighter.codeToThemedTokens(code, lang, "github-light")
 		setTokens(tokens)
-	}, [code, highlighter, language])
-
-	//// useEffect(() => {
-	//// 	if (!copy) { return } // prettier-ignore
-	//// 	const d = window.setTimeout(() => {
-	//// 		setCopy(false)
-	//// 	}, 1e3)
-	//// 	return () => window.clearTimeout(d)
-	//// }, [copy])
+	}, [code, highlighter, lang])
 
 	return (
-		//// <pre
-		//// 	className="relative my-16 -mx-48 overflow-scroll bg-gray-900 py-24 text-gray-300
-		//// 		[pre_+_&]:-mt-24"
-		//// >
-		//// <pre
-		//// 	className="relative my-16 overflow-scroll bg-gray-900 py-24 text-gray-300
-		//// 		[pre_+_&]:-mt-24"
-		//// >
 		<pre
-			//// className="relative my-16 overflow-auto text-gray-800
+			// Use [pre_+_&] so sibling <pre> elements collapse margins
 			className="my-16 overflow-auto text-gray-800
 				[pre_+_&]:mt-0"
 			{...props}
 		>
 			<code>
 				{tokens === null
-					? code.split("\n").map((ys, y) => (
-							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
-							<div key={y} className="relative">
-								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{y + 1}</div>
-								</div> */}
-								{ys || <br />}
-							</div>
-					  ))
+					? code.split("\n").map((ys, y) => <div key={y}>{ys || <br />}</div>)
 					: tokens.map((ys, y) => (
-							// <div key={y} className={selected?.includes(y) ? "relative bg-gray-800 px-48" : "relative px-48"}>
-							<div key={y} className="relative">
-								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{y + 1}</div>
-								</div> */}
+							<div key={y}>
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>
@@ -177,48 +128,9 @@ export function Pre({ language, children: code, ...props }: { language: Lang; ch
 							</div>
 					  ))}
 			</code>
-			{/* <div className="absolute top-0 right-0">
-				<button
-					className="flex h-[21px] w-[21px] items-center justify-center"
-					onClick={async e => {
-						await navigator.clipboard.writeText(code + "\n")
-						setCopy(true)
-					}}
-					aria-label="Copy code to the clipboard"
-				>
-					<Icon className="h-16 w-16 text-gray-800" icon={copy ? feather.Check : feather.Copy} />
-				</button>
-			</div> */}
 		</pre>
 	)
 }
-
-//// export function Pre({ lang, selected, children: code }: { lang: Lang; selected?: number[]; children: string }) {
-//// 	const { highlighter } = useContext(ShikiContext)!
-////
-//// 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
-//// 	const [copy, setCopy] = useState(false)
-////
-//// 	useEffect(() => {
-//// 		if (highlighter === null) { return } // prettier-ignore
-//// 		const tokens = highlighter.codeToThemedTokens(code, lang, "github-dark")
-//// 		setTokens(tokens)
-//// 	}, [code, highlighter, lang])
-////
-//// 	useEffect(() => {
-//// 		if (!copy) { return } // prettier-ignore
-//// 		const d = window.setTimeout(() => {
-//// 			setCopy(false)
-//// 		}, 1e3)
-//// 		return () => window.clearTimeout(d)
-//// 	}, [copy])
-////
-//// 	return (
-//// 		<pre className="overflow-scroll bg-gray-900 py-24 text-gray-300">
-//// 			<code>{code}</code>
-//// 		</pre>
-//// 	)
-//// }
 
 export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 	return <hr className="my-16" {...props} />
@@ -242,13 +154,46 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 //// 	)
 //// }
 
-export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
+export function Code({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["code"], "lang">) {
+	const { highlighter } = useContext(ShikiContext)!
+
+	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
+
+	useEffect(() => {
+		if (highlighter === null) { return } // prettier-ignore
+		const tokens = highlighter.codeToThemedTokens(code, lang, "github-light")
+		setTokens(tokens)
+	}, [code, highlighter, lang])
+
 	return (
-		<code className="bg-gray-200/75 py-2 px-4 text-gray-800" {...props}>
-			{children}
+		//// <code {...props}>
+		<code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8 text-blue-700" {...props}>
+			{tokens === null
+				? code.split("\n").map((ys, y) => <span key={y}>{ys || <br />}</span>)
+				: tokens.map((ys, y) => (
+						<span key={y}>
+							{ys.length > 0 ? (
+								ys.map(({ color, content }, x) => (
+									<span key={x} style={{ color }}>
+										{content}
+									</span>
+								))
+							) : (
+								<br />
+							)}
+						</span>
+				  ))}
 		</code>
 	)
 }
+
+//// export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
+//// 	return (
+//// 		<code className="bg-gray-200/75 py-2 px-4 text-gray-800" {...props}>
+//// 			{children}
+//// 		</code>
+//// 	)
+//// }
 
 // Expose className for color or use style
 export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {

@@ -34,18 +34,18 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						<Paragraph>To get started with Feather using a CDN (content delivery network), simply:</Paragraph>
 						<OrderedList>
 							<ListItem>
-								Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to <Code>{`<head>`}</Code>
+								Add <Code lang="html">{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to <Code>{`<head>`}</Code>
 							</ListItem>
 							<ListItem>
-								Add <Code>{`<i data-feather="${toKebabCase(name)}"></i>`}</Code> syntax
+								Add <Code lang="html">{`<i data-feather="${toKebabCase(name)}"></i>`}</Code> syntax
 							</ListItem>
 							<ListItem>
-								Call <Code>{`feather.replace()`}</Code>
+								Call <Code lang="js">{`feather.replace()`}</Code>
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
 						{/* <Pre lang="html" selected={[3, 6, 8]}> */}
-						<Pre language="html">
+						<Pre lang="html">
 							{detab(`
 								<!DOCTYPE html>
 								<html lang="en">
@@ -73,18 +73,18 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						<Paragraph>To get started with Feather using React.js, simply:</Paragraph>
 						<OrderedList>
 							<ListItem>
-								Run <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
+								Run <Code lang="sh">{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
 							</ListItem>
 							<ListItem>
-								Add <Code>{`import { ${name} } from "react-feather"`}</Code>
+								Add <Code lang="tsx">{`import { ${name} } from "react-feather"`}</Code>
 							</ListItem>
 							<ListItem>
-								Call <Code>{`<${name} />`}</Code>
+								Call <Code lang="tsx">{`<${name} />`}</Code>
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
 						{/* <Pre lang="sh" selected={[0]}> */}
-						<Pre language="sh">
+						<Pre lang="sh">
 							{detab(`
 								npm i react-feather
 								# Or yarn add react-feather
@@ -92,7 +92,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							`)}
 						</Pre>
 						{/* <Pre lang="tsx" selected={[0, 6]}> */}
-						<Pre language="tsx">
+						<Pre lang="tsx">
 							{detab(`
 								import { ${name} } from "react-feather"
 
