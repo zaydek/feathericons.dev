@@ -45,8 +45,8 @@ export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
-								hover:active:bg-blue-200
-								aria-selected:bg-blue-200"
+								hover:active:bg-blue-300
+								aria-selected:bg-blue-300"
 						>
 							<div>foo</div>
 						</AriaSimpleDropDownItem>
@@ -55,8 +55,8 @@ export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
-								hover:active:bg-blue-200
-								aria-selected:bg-blue-200"
+								hover:active:bg-blue-300
+								aria-selected:bg-blue-300"
 						>
 							<div>bar</div>
 						</AriaSimpleDropDownItem>
@@ -65,8 +65,8 @@ export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
-								hover:active:bg-blue-200
-								aria-selected:bg-blue-200"
+								hover:active:bg-blue-300
+								aria-selected:bg-blue-300"
 						>
 							<div>baz</div>
 						</AriaSimpleDropDownItem>
@@ -75,8 +75,8 @@ export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
-								hover:active:bg-blue-200
-								aria-selected:bg-blue-200"
+								hover:active:bg-blue-300
+								aria-selected:bg-blue-300"
 						>
 							<div>qux</div>
 						</AriaSimpleDropDownItem>
