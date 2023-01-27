@@ -89,7 +89,13 @@ const MemoGridItem = memo(function GridItem({ name, indexes }: { name: keyof typ
 					icon={feather[name]}
 				/>
 			</button>
-			<Link href={`/${toKebabCase(name)}`}>
+			<Link
+				href={`/${toKebabCase(name)}`}
+				onClick={e => {
+					setSelectedName(name)
+					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
+				}}
+			>
 				<div className="flex h-16 items-center justify-center truncate px-4">
 					<TypographySmallSans className="truncate text-gray-800">
 						<Highlight indexes={indexes}>{name}</Highlight>
