@@ -1,10 +1,12 @@
 import * as feather from "./data/react-feather"
 
+import Link from "next/link"
 import { memo, useContext, useMemo } from "react"
 import { manifest } from "./data/react-feather-manifest"
 import { toKebabCase } from "./lib/cases"
 import { Icon } from "./lib/react/icon"
 import { HoverTip } from "./random"
+import { RouteTransition } from "./route-transition"
 import { SearchContext, SelectedContext } from "./state"
 import { TypographySmallSans } from "./typography"
 
@@ -87,13 +89,13 @@ const MemoGridItem = memo(function GridItem({ name, indexes }: { name: keyof typ
 					icon={feather[name]}
 				/>
 			</button>
-			{/* Use select-all so users can copy-paste names. Note that select-text
-			doesn't work as expected */}
-			<div className="flex h-16 select-all items-center justify-center truncate px-4">
-				<TypographySmallSans className="truncate text-gray-800">
-					<Highlight indexes={indexes}>{name}</Highlight>
-				</TypographySmallSans>
-			</div>
+			<Link href={`/${toKebabCase(name)}`}>
+				<div className="flex h-16 items-center justify-center truncate px-4">
+					<TypographySmallSans className="truncate text-gray-800">
+						<Highlight indexes={indexes}>{name}</Highlight>
+					</TypographySmallSans>
+				</div>
+			</Link>
 		</div>
 	)
 })
@@ -110,10 +112,12 @@ export function SearchResultsContents() {
 	}, [compactMode])
 
 	return (
-		<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))]">
-			{Object.keys(searchResults).map(name => (
-				<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
-			))}
-		</div>
+		<RouteTransition>
+			<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))]">
+				{Object.keys(searchResults).map(name => (
+					<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
+				))}
+			</div>
+		</RouteTransition>
 	)
 }

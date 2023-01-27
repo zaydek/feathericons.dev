@@ -1,6 +1,7 @@
 import Head from "next/head"
 import { useEffect } from "react"
 import { manifest } from "./data/react-feather-manifest"
+import { Documentation } from "./docs"
 import { Header } from "./layout-header"
 import { SearchResultsContents } from "./layout-search-results"
 import { SidebarContents } from "./layout-sidebar"
@@ -112,8 +113,8 @@ export function Layout({ name }: Partial<IconProps>) {
 							<div>Hello, world!</div>
 						</div>
 						<div className="p-48 pb-64">
-							<SearchResultsContents />
-							{/* <Docs name={name ?? "Feather"} /> */}
+							{/* TODO: Technically we don't need to pass name ... use useRouter */}
+							{name === undefined ? <SearchResultsContents /> : <Documentation name={name} />}
 						</div>
 					</main>
 					{/* RHS */}

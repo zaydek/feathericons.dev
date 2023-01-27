@@ -7,7 +7,7 @@ import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
 import { RouteTransition } from "./route-transition"
 
-export function Docs({ name }: { name: keyof typeof manifest }) {
+export function Documentation({ name }: { name: keyof typeof manifest }) {
 	return (
 		<div className="flex justify-center">
 			<div className="w-100% max-w-1024">
