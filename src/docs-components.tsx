@@ -166,7 +166,6 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 	}, [code, highlighter, lang])
 
 	return (
-		//// <code {...props}>
 		<code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8 text-gray-800" {...props}>
 			{tokens === null
 				? code.split("\n").map((ys, y) => <span key={y}>{ys || <br />}</span>)
@@ -186,14 +185,6 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 		</code>
 	)
 }
-
-//// export function Code({ children, ...props }: JSX.IntrinsicElements["code"]) {
-//// 	return (
-//// 		<code className="bg-gray-200/75 py-2 px-4 text-gray-800" {...props}>
-//// 			{children}
-//// 		</code>
-//// 	)
-//// }
 
 // Expose className for color or use style
 export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
