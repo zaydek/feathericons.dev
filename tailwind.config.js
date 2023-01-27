@@ -2,27 +2,6 @@ const plugin = require("tailwindcss/plugin")
 
 const { percents, sizes, zIndexes } = require("./tailwind.config.tokens")
 
-const cornersConfig = {
-	tr: ["top", "right"],
-	br: ["bottom", "right"],
-	bl: ["bottom", "left"],
-	tl: ["top", "left"],
-}
-
-// https://tailwindcss.com/docs/plugins
-const cornersPlugin = plugin(function ({ addUtilities, matchUtilities, addComponents, matchComponents, addBase, addVariant, matchVariant, theme, config, corePlugins, e }) {
-	const newUtilities = {}
-	for (const [shorthand, props] of Object.entries(cornersConfig)) {
-		for (const [k, v] of Object.entries(theme("spacing"))) {
-			newUtilities[e(`${shorthand}-${k}`)] = props.reduce((acc, prop) => {
-				acc[prop] = v
-				return acc
-			}, {})
-		}
-	}
-	addUtilities(newUtilities)
-})
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.tsx"],
@@ -46,18 +25,37 @@ module.exports = {
 		},
 	},
 	plugins: [
-		//// plugin(function ({ addUtilities, matchUtilities, addComponents, matchComponents, addBase, addVariant, matchVariant, theme, config, corePlugins, e }) {
-		plugin(function ({ addUtilities, theme, e }) {
-			const newUtilities = {}
-			for (const [shorthand, props] of Object.entries(cornersConfig)) {
-				for (const [k, v] of Object.entries(theme("spacing"))) {
-					newUtilities[`.${e(`${shorthand}-${k}`)}`] = props.reduce((acc, prop) => {
-						acc[prop] = v
-						return acc
-					}, {})
-				}
-			}
-			addUtilities(newUtilities)
+		plugin(function ({ matchUtilities, theme }) {
+			matchUtilities(
+				{
+					"strong-w": value => {
+						return {
+							minWidth: value,
+							maxWidth: value,
+						}
+					},
+				},
+				{ values: theme("spacing") }
+			)
+		}),
+		plugin(function ({ matchUtilities, theme }) {
+			// prettier-ignore
+			matchUtilities(
+				{
+					inset: value => ({ inset:  value, }),
+					y:     value => ({ top:    value, bottom: value }),
+					x:     value => ({ right:  value, left:   value }),
+					tr:    value => ({ top:    value, right:  value }),
+					br:    value => ({ bottom: value, right:  value }),
+					bl:    value => ({ bottom: value, left:   value }),
+					tl:    value => ({ top:    value, left:   value }),
+					t:     value => ({ top:    value }),
+					r:     value => ({ right:  value }),
+					b:     value => ({ bottom: value }),
+					l:     value => ({ left:   value }),
+				},
+				{ values: theme("spacing") }
+			)
 		}),
 	],
 }
