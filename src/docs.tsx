@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
-import { Anchor, Code, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph, Pre, TextIcon } from "./docs-components"
+import { Anchor, Code, Hairline, Heading1, Heading2, ListItem, OrderedList, Paragraph, Pre, TextIcon } from "./docs-components"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
@@ -13,23 +13,28 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 			<div className="w-100% max-w-1024">
 				<article className="prose flex flex-col gap-8">
 					<RouteTransition>
-						<Heading1>
-							Get Started With Feather
-							{/* &nbsp; */}
-							{/* <InlineIcon icon={feather.Feather} /> */}
-						</Heading1>
+						<Heading1>Get Started With Feather</Heading1>
 						<Paragraph>
 							<Anchor href="https://github.com/feathericons/feather">Feather</Anchor> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
 						</Paragraph>
 						<Paragraph>
-							Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as SVG&nbsp;
-							<InlineIcon style={{ color: SvgHex }} icon={SvgIcon} />, React.js&nbsp;
-							<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
-							<InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
+							Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as{" "}
+							<TextIcon style={{ color: SvgHex }} icon={SvgIcon}>
+								SVG
+							</TextIcon>
+							,{" "}
+							<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
+								React.js
+							</TextIcon>
+							, or{" "}
+							<TextIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
+								TypeScript React.js
+							</TextIcon>
+							, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 						</Paragraph>
 						<Hairline />
 						<Heading2>
-							Using {name} <InlineIcon icon={feather[name]} /> With a CDN
+							Using <TextIcon icon={feather[name]}>{name}</TextIcon> With a CDN
 						</Heading2>
 						<Paragraph>To get started with Feather using a CDN (content delivery network), simply:</Paragraph>
 						<OrderedList>
@@ -61,13 +66,20 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							`)}
 						</Pre>
 						<Paragraph>
-							Click here to get started with a <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
-							<InlineIcon style={{ color: CodePenHex }} icon={CodePenIcon} /> template.
+							Click here to get started with a{" "}
+							<Anchor href="https://codepen.io/pen?template=WOJZdM">
+								<TextIcon style={{ color: CodePenHex }} icon={CodePenIcon}>
+									CodePen
+								</TextIcon>
+							</Anchor>{" "}
+							template.
 						</Paragraph>
 						<Hairline />
 						<Heading2>
-							Using {name} <InlineIcon icon={feather[name]} /> With React.js&nbsp;
-							<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon} />
+							Using <TextIcon icon={feather[name]}>{name}</TextIcon> With{" "}
+							<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
+								React.js
+							</TextIcon>
 						</Heading2>
 						<Paragraph>To get started with Feather using React.js, simply:</Paragraph>
 						<OrderedList>
@@ -135,6 +147,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 										@username_ZAYDEK
 									</TextIcon>
 								</Anchor>
+								{/* . */}
 							</small>
 							<br />
 							<small>
@@ -143,6 +156,12 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							<br />
 							<small>
 								Built using{" "}
+								<Anchor href="https://typescriptlang.org">
+									<TextIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
+										TypeScript
+									</TextIcon>
+								</Anchor>
+								,{" "}
 								<Anchor href="https://reactjs.org">
 									<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
 										React.js
@@ -152,12 +171,6 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 								<Anchor href="https://nextjs.org">
 									<TextIcon style={{ color: NextJsHex }} icon={NextJsIcon}>
 										Next.js
-									</TextIcon>
-								</Anchor>
-								,{" "}
-								<Anchor href="https://typescriptlang.org">
-									<TextIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
-										TypeScript
 									</TextIcon>
 								</Anchor>
 								,{" "}
@@ -172,6 +185,7 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 										Sass
 									</TextIcon>
 								</Anchor>
+								{/* . */}
 							</small>
 						</Paragraph>
 					</RouteTransition>

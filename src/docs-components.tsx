@@ -38,7 +38,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					group-hover/h1:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<SmallInlineIcon className="text-[#1570fb]" icon={feather.Link2} />
+				<HeadingIcon className="text-[#1570fb] [transform:_translateY(2px)]" icon={feather.Link2} />
 			</a>
 		</h1>
 	)
@@ -67,7 +67,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					group-hover/h2:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<SmallInlineIcon className="text-[#1570fb]" icon={feather.Link2} />
+				<HeadingIcon className="text-[#1570fb] [transform:_translateY(2px)]" icon={feather.Link2} />
 			</a>
 		</h2>
 	)
@@ -140,7 +140,11 @@ export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 
 export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	return (
-		<a className="text-gray-500 decoration-gray-400 hover:underline" {...props}>
+		<a
+			className="text-gray-500 decoration-gray-400
+				hover:underline"
+			{...props}
+		>
 			{children}
 		</a>
 	)
@@ -178,32 +182,30 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 	)
 }
 
-// Expose className for color or use style
-//
-// TODO: DEPRECATE
-export function InlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return <Icon className={cx("inline-block h-[1.125em] w-[1.125em] [transform:_translateY(-0.1em)]", className)} icon={icon} {...props} />
-}
-
-// TODO: DEPRECATE
-export function SmallInlineIcon({ className, icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return <Icon className={cx("inline-block h-[1em] w-[1em] [transform:_translateY(0.05em)]", className)} icon={icon} {...props} />
+export function HeadingIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+	if (children === undefined || children === null) {
+		return <Icon className={cx("inline-block h-[1.1em] w-[1.1em]", className)} icon={icon} {...props} />
+	} else {
+		return (
+			// Use inline-flex h-0 items-center to optically center
+			<span className="inline-flex h-0 items-center">
+				{children}&nbsp;
+				<Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
+			</span>
+		)
+	}
 }
 
 export function TextIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return (
-		<span className="inline-flex items-center">
-			{children}&nbsp;
-			<Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
-		</span>
-	)
-}
-
-export function SmallTextIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
-	return (
-		<span className="inline-flex items-center">
-			{children}&nbsp;
-			<Icon className={cx("inline-block h-[1.1em] w-[1.1em]", className)} icon={icon} {...props} />
-		</span>
-	)
+	if (children === undefined || children === null) {
+		return <Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
+	} else {
+		return (
+			// Use inline-flex h-0 items-center to optically center
+			<span className="inline-flex h-0 items-center">
+				{children}&nbsp;
+				<Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
+			</span>
+		)
+	}
 }
