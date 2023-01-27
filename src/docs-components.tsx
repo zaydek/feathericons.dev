@@ -1,29 +1,13 @@
 import * as feather from "./data/react-feather"
 
-import { ReactElement, useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
+import { getStringFromReactElements } from "./aria/utils"
 import { cx } from "./lib/cx"
 import { Icon, IconComponent } from "./lib/react/icon"
-import { Arrayable } from "./lib/types"
 import { ShikiContext } from "./shiki"
 
-// Recursively concatenate strings
-function getString(children: undefined | Arrayable<string> | Arrayable<ReactElement<{ children?: string }>>) {
-	if (children === undefined) { return "" } // prettier-ignore
-
-	let str = ""
-	const flatChildren = [children].flat()
-	for (const child of flatChildren) {
-		if (typeof child === "string") {
-			str += child
-		} else {
-			str += getString(child.props.children)
-		}
-	}
-	return str
-}
-
-function getId(str: string) {
+function parseId(str: string) {
 	return str
 		.trim()
 		.replace(/\s+/g, "-")
@@ -33,8 +17,11 @@ function getId(str: string) {
 
 // TODO: Update scroll-my-*
 export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const id = getId(getString(children as any))
-	const href = `#${id}`
+	const [id, href] = useMemo(() => {
+		const id = parseId(getStringFromReactElements(children as any))
+		const href = `#${id}`
+		return [id, href] as const
+	}, [children]) // 🤷‍♀️
 
 	return (
 		<h1 id={id} className="relative my-16 scroll-my-16 text-black" {...props}>
@@ -53,8 +40,11 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 // TODO: Update scroll-my-*
 export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const id = getId(getString(children as any))
-	const href = `#${id}`
+	const [id, href] = useMemo(() => {
+		const id = parseId(getStringFromReactElements(children as any))
+		const href = `#${id}`
+		return [id, href] as const
+	}, [children]) // 🤷‍♀️
 
 	return (
 		<h2 id={id} className="relative my-16 scroll-my-16 text-black" {...props}>

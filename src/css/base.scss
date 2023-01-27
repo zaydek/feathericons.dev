@@ -16,11 +16,13 @@ pre { margin: 0; }
 
 svg { overflow: visible; }
 
-button, [role=button]                 { cursor: pointer; user-select: none; }
-input[type=checkbox], [role=checkbox] { cursor: pointer; user-select: none; }
-input[type=radio], [role=radio]       { cursor: pointer; user-select: none; }
+[role] { cursor: pointer; user-select: none; }
 
-input[type=range], [role=slider] {
+//// button, [role=button]                 { cursor: pointer; user-select: none; }
+//// input[type=checkbox], [role=checkbox] { cursor: pointer; user-select: none; }
+//// input[type=radio], [role=radio]       { cursor: pointer; user-select: none; }
+
+[role=slider] {
 	cursor: grab;
 	user-select: none;
 	&:active {

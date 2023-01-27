@@ -1,35 +1,42 @@
 // https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
 
 import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { v4 as uuid } from "uuid"
+import { getStringFromReactElements } from "./utils"
 
 // prettier-ignore
 const _SimpleDropDownContext =
 	createContext<{
+		show:         boolean
+		setShow:      Dispatch<SetStateAction<boolean>>
 		currentId:    string
 		setCurrentId: Dispatch<SetStateAction<string>>
-		ids:          string[]
-		setIds:       Dispatch<SetStateAction<string[]>>
-		open:         boolean
-		setOpen:      Dispatch<SetStateAction<boolean>>
-		add:          (id: string) => void
+		items:        { id: string, string: string }[]
+		setItems:     Dispatch<SetStateAction<{ id: string, string: string }[]>>
+		add:          (id: string, string: string) => void
 		remove:       (id: string) => void
 		decrement:    (by?: number | undefined) => void
 		increment:    (by?: number | undefined) => void
 	} | null>(null)
 
-export function AriaSimpleDropDown({ children, ...props }: JSX.IntrinsicElements["div"]) {
-	const [currentId, setCurrentId] = useState("")
-	const [ids, setIds] = useState<string[]>([])
-	const [open, setOpen] = useState(false)
+// prettier-ignore
+type AriaSimpleDropDownProps = {
+	show:         boolean
+	setShow:      Dispatch<SetStateAction<boolean>>
+	currentId:    string
+	setCurrentId: Dispatch<SetStateAction<string>>
+} & JSX.IntrinsicElements["div"]
 
-	const add = useCallback((id: string) => {
-		setIds(curr => [...curr, id])
+export function AriaSimpleDropDown({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps) {
+	const ref = useRef<HTMLDivElement | null>(null)
+	const [items, setItems] = useState<{ id: string; string: string }[]>([])
+
+	const add = useCallback((id: string, string: string) => {
+		setItems(curr => [...curr, { id, string }])
 	}, [])
 
 	const remove = useCallback((id: string) => {
-		setIds(curr => {
-			const index = curr.indexOf(id)
+		setItems(curr => {
+			const index = curr.findIndex(f => f.id === id)
 			return [...curr.slice(0, index), ...curr.slice(index + 1)]
 		})
 	}, [])
@@ -37,75 +44,108 @@ export function AriaSimpleDropDown({ children, ...props }: JSX.IntrinsicElements
 	const decrement = useCallback(
 		(by: number | undefined = 1) => {
 			if (by === -1) {
-				setCurrentId(ids[0])
+				setCurrentId(items[0].id)
 			} else {
-				const index = ids.indexOf(currentId)
-				setCurrentId(ids[Math.max(0, index - by)])
+				const index = items.findIndex(f => f.id === currentId)
+				setCurrentId(items[Math.max(0, index - by)].id)
 			}
 		},
-		[currentId, ids]
+		[currentId, items, setCurrentId]
 	)
 
 	const increment = useCallback(
 		(by: number | undefined = 1) => {
 			if (by === -1) {
-				setCurrentId(ids[ids.length - 1])
+				setCurrentId(items[items.length - 1].id)
 			} else {
-				const index = ids.indexOf(currentId)
-				setCurrentId(ids[Math.min(ids.length - 1, index + by)])
+				const index = items.findIndex(f => f.id === currentId)
+				setCurrentId(items[Math.min(items.length - 1, index + by)].id)
 			}
 		},
-		[currentId, ids]
+		[currentId, items, setCurrentId]
 	)
+
+	// FIXME: Hmm...
+	const decrementRef = useRef(decrement)
+	const incrementRef = useRef(increment)
+
+	useEffect(() => {
+		decrementRef.current = decrement
+		incrementRef.current = increment
+	}, [decrement, increment])
+
+	useEffect(() => {
+		if (items.length === 0) { return } // prettier-ignore
+		if (show) {
+			// prettier-ignore
+			const element = document.getElementById(currentId) ??
+				document.getElementById(items[0].id)
+			element?.focus()
+		} else {
+			ref.current!.focus()
+		}
+	}, [currentId, items, show])
 
 	return (
 		// eslint-disable-next-line react/jsx-pascal-case
 		<_SimpleDropDownContext.Provider
 			value={useMemo(
 				() => ({
+					show,
+					setShow,
+					/**/
 					currentId,
 					setCurrentId,
-					ids,
-					setIds,
-					open,
-					setOpen,
+					/**/
+					items,
+					setItems,
+					/**/
 					add,
 					remove,
 					increment,
 					decrement,
 				}),
-				[add, currentId, decrement, ids, increment, open, remove]
+				[add, currentId, decrement, increment, items, remove, setCurrentId, setShow, show]
 			)}
 		>
 			<div
+				ref={ref}
 				onClick={e => {
-					setOpen(curr => !curr)
+					setShow(curr => !curr)
 				}}
 				onKeyDown={e => {
 					if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 						e.preventDefault()
-						setOpen(true)
+						setShow(true)
 					} else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
 						e.preventDefault()
-						setOpen(true)
+						setShow(true)
 					}
 					if (e.key === " " || e.key === "Enter") {
 						e.preventDefault()
-						setOpen(curr => !curr)
+						setShow(curr => !curr)
 					} else if (e.key === "Home") {
 						e.preventDefault()
-						setOpen(true)
-						setCurrentId(ids[0])
+						setShow(true)
+						setTimeout(() => {
+							setTimeout(() => {
+								decrementRef.current(-1)
+							}, 0)
+						}, 0)
 					} else if (e.key === "End") {
 						e.preventDefault()
-						setOpen(true)
-						setCurrentId(ids[ids.length - 1])
+						setShow(true)
+						setTimeout(() => {
+							setTimeout(() => {
+								incrementRef.current(-1)
+							}, 0)
+						}, 0)
 					}
 				}}
 				// A11y
 				role="combobox"
 				aria-controls="listbox1"
-				aria-expanded={open}
+				aria-expanded={show}
 				tabIndex={0}
 				// /A11y
 				{...props}
@@ -116,30 +156,19 @@ export function AriaSimpleDropDown({ children, ...props }: JSX.IntrinsicElements
 	)
 }
 
-export function AriaSimpleDropDownItem({ children, ...props }: JSX.IntrinsicElements["div"]) {
-	const { currentId, setCurrentId, setOpen, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!
+type AriaSimpleDropDownItemProps = { id: string } & Omit<JSX.IntrinsicElements["div"], "id">
+
+export function AriaSimpleDropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps) {
+	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!
 
 	const ref = useRef<HTMLDivElement | null>(null)
-	const [id] = useState(() => uuid())
+	const string = useMemo(() => getStringFromReactElements(children as any), [children]) // 🤷‍♀️
 	const selected = useMemo(() => currentId === id, [currentId, id])
 
-	// TODO: Change to useLayoutEffect?
 	useEffect(() => {
-		add(id)
+		add(id, string)
 		return () => remove(id)
-	}, [add, id, remove])
-
-	//// const onceRef = useRef(false)
-	useEffect(() => {
-		////if (!onceRef.current) {
-		////	onceRef.current = true
-		////	return
-		////}
-		if (ref.current === null) { return } // prettier-ignore
-		if (selected) {
-			ref.current.focus()
-		}
-	}, [selected])
+	}, [add, id, remove, string])
 
 	return (
 		<div
@@ -147,25 +176,31 @@ export function AriaSimpleDropDownItem({ children, ...props }: JSX.IntrinsicElem
 			id={id}
 			onClick={e => {
 				e.preventDefault()
+				e.stopPropagation()
 				setCurrentId(id)
-				setOpen(false)
+				setShow(false)
 			}}
 			onKeyDown={e => {
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 					e.preventDefault()
+					e.stopPropagation()
 					decrement()
 				} else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
 					e.preventDefault()
+					e.stopPropagation()
 					increment()
 				} else if (e.key === " " || e.key === "Enter" || e.key === "Tab") {
 					e.preventDefault()
+					e.stopPropagation()
 					setCurrentId(id)
-					setOpen(false)
+					setShow(false)
 				} else if (e.key === "Home") {
 					e.preventDefault()
+					e.stopPropagation()
 					decrement(-1)
 				} else if (e.key === "End") {
 					e.preventDefault()
+					e.stopPropagation()
 					increment(-1)
 				}
 			}}
