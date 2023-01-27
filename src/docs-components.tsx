@@ -106,7 +106,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		<pre
-			// Use [pre_+_&] so sibling <pre> elements collapse margins
+			// Use [pre_+_&] so sibling <pre> elements noop margins
 			className="my-16 overflow-auto text-gray-800
 				[pre_+_&]:mt-0"
 			{...props}
