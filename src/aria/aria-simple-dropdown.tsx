@@ -134,16 +134,16 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 					} else if (e.key === "Home") {
 						e.preventDefault()
 						setShow(true)
-						setTimeout(() => {
-							setTimeout(() => {
+						window.setTimeout(() => {
+							window.setTimeout(() => {
 								decrementRef.current(-1)
 							}, 0)
 						}, 0)
 					} else if (e.key === "End") {
 						e.preventDefault()
 						setShow(true)
-						setTimeout(() => {
-							setTimeout(() => {
+						window.setTimeout(() => {
+							window.setTimeout(() => {
 								incrementRef.current(-1)
 							}, 0)
 						}, 0)

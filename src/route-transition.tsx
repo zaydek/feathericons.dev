@@ -12,9 +12,11 @@ export function RouteTransition({ children }: { children: Arrayable<ReactElement
 	const forwards = true
 
 	useEffect(() => {
-		setTimeout(() => {
-			setStarted(true)
-		}, 10)
+		window.setTimeout(() => {
+			window.setTimeout(() => {
+				setStarted(true)
+			}, 0)
+		}, 0)
 		return () => {
 			setStarted(false)
 			setEnded(false)
