@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import { cloneElement, ReactElement, TransitionEvent, useEffect, useState } from "react"
+import { queue } from "./aria/utils"
 import { Arrayable } from "./lib/types"
 
 export function RouteTransition({ children }: { children: Arrayable<ReactElement> }) {
@@ -12,11 +13,7 @@ export function RouteTransition({ children }: { children: Arrayable<ReactElement
 	const forwards = true
 
 	useEffect(() => {
-		window.setTimeout(() => {
-			window.setTimeout(() => {
-				setStarted(true)
-			}, 0)
-		}, 0)
+		queue(() => setStarted(true))
 		return () => {
 			setStarted(false)
 			setEnded(false)

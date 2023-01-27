@@ -16,3 +16,12 @@ export function getStringFromReactElements(children: Arrayable<string> | Arrayab
 	}
 	return str
 }
+
+// 1x setTimeout doesn't always work and Safari doesn't support requestIdleCallback
+export function queue(fn: () => void) {
+	window.setTimeout(() => {
+		window.setTimeout(() => {
+			fn()
+		}, 0)
+	}, 0)
+}

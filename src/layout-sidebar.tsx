@@ -178,7 +178,7 @@ function FormatButton() {
 				{show && (
 					<motion.div
 						initial={{
-							y: 16,
+							y: -8,
 							opacity: 0,
 						}}
 						animate={{
@@ -186,7 +186,7 @@ function FormatButton() {
 							opacity: 1,
 						}}
 						exit={{
-							y: 16,
+							y: -8,
 							opacity: 0,
 						}}
 						transition={{

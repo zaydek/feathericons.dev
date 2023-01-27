@@ -1,7 +1,7 @@
 // https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
 
-import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { getStringFromReactElements } from "./utils"
+import { createContext, Dispatch, MutableRefObject, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { getStringFromReactElements, queue } from "./utils"
 
 // prettier-ignore
 type Item<T extends string> = {
@@ -24,6 +24,31 @@ type GenericContextData<T extends string = any> = {
 }
 
 const _SimpleDropDownContext = createContext<GenericContextData | null>(null)
+
+function useCancelable(ref: MutableRefObject<HTMLDivElement | null>, setShow: Dispatch<SetStateAction<boolean>>) {
+	useEffect(() => {
+		function handleClick(e: MouseEvent) {
+			if (ref.current === null) { return } // prettier-ignore
+			if (!(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
+				setShow(false)
+			}
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [ref, setShow])
+
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				setShow(false)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [setShow])
+
+	return void 0
+}
 
 // prettier-ignore
 export type AriaSimpleDropDownProps<T extends string> = {
@@ -72,7 +97,6 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 		[currentId, items, setCurrentId]
 	)
 
-	// FIXME: Hmm...
 	const decrementRef = useRef(decrement)
 	const incrementRef = useRef(increment)
 
@@ -96,7 +120,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 		}
 	}, [currentId, items, show])
 
-	// TODO: Add useCancelable equivalent
+	useCancelable(ref, setShow)
 
 	return (
 		// eslint-disable-next-line react/jsx-pascal-case
@@ -139,19 +163,11 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 					} else if (e.key === "Home") {
 						e.preventDefault()
 						setShow(true)
-						window.setTimeout(() => {
-							window.setTimeout(() => {
-								decrementRef.current(-1)
-							}, 0)
-						}, 0)
+						queue(() => decrementRef.current(-1))
 					} else if (e.key === "End") {
 						e.preventDefault()
 						setShow(true)
-						window.setTimeout(() => {
-							window.setTimeout(() => {
-								incrementRef.current(-1)
-							}, 0)
-						}, 0)
+						queue(() => incrementRef.current(-1))
 					}
 				}}
 				// A11y
