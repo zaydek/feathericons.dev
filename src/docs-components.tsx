@@ -167,7 +167,7 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 
 	return (
 		//// <code {...props}>
-		<code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8 text-blue-700" {...props}>
+		<code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8 text-gray-800" {...props}>
 			{tokens === null
 				? code.split("\n").map((ys, y) => <span key={y}>{ys || <br />}</span>)
 				: tokens.map((ys, y) => (

@@ -34,13 +34,13 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						<Paragraph>To get started with Feather using a CDN (content delivery network), simply:</Paragraph>
 						<OrderedList>
 							<ListItem>
-								Add <Code lang="html">{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to <Code>{`<head>`}</Code>
+								Add <Code lang="html">{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to <Code lang="html">{`<head>`}</Code>
 							</ListItem>
 							<ListItem>
 								Add <Code lang="html">{`<i data-feather="${toKebabCase(name)}"></i>`}</Code> syntax
 							</ListItem>
 							<ListItem>
-								Call <Code lang="js">{`feather.replace()`}</Code>
+								Invoke <Code lang="js">{`feather.replace()`}</Code>
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
@@ -73,13 +73,13 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						<Paragraph>To get started with Feather using React.js, simply:</Paragraph>
 						<OrderedList>
 							<ListItem>
-								Run <Code lang="sh">{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
+								Run <Code lang="sh">{`npm i react-feather`}</Code> or <Code lang="sh">{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
 							</ListItem>
 							<ListItem>
 								Add <Code lang="tsx">{`import { ${name} } from "react-feather"`}</Code>
 							</ListItem>
 							<ListItem>
-								Call <Code lang="tsx">{`<${name} />`}</Code>
+								Invoke <Code lang="tsx">{`<${name} />`}</Code>
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
