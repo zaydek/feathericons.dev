@@ -21,14 +21,16 @@ import { IconProps } from "./[icon]"
 //// 	variable: "--font-fira-code",
 //// })
 
+type Options = "foo" | "bar" | "baz" | "qux" | ""
+
 export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
 	const [show, setShow] = useState(false)
-	const [currentId, setCurrentId] = useState("")
+	const [currentId, setCurrentId] = useState<Options>("")
 
 	return (
 		<div className="flex h-screen items-start justify-center bg-gray-200 py-256">
-			<AriaSimpleDropDown
-				className="flex w-640 flex-col gap-8 rounded-32 bg-white p-16 shadow
+			<AriaSimpleDropDown<Options>
+				className="flex w-448 flex-col gap-8 rounded-32 bg-white p-16 shadow
 					focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-200"
 				show={show}
 				setShow={setShow}
@@ -38,46 +40,42 @@ export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
 				<div className="p-16">Click me</div>
 				{show && (
 					<>
-						<AriaSimpleDropDownItem
+						<AriaSimpleDropDownItem<Options>
 							id="foo"
-							// prettier-ignore
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
-								hover:active:bg-blue-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
+								hover:active:bg-blue-200
 								aria-selected:bg-blue-200"
 						>
 							<div>foo</div>
 						</AriaSimpleDropDownItem>
-						<AriaSimpleDropDownItem
+						<AriaSimpleDropDownItem<Options>
 							id="bar"
-							// prettier-ignore
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
-								hover:active:bg-blue-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
+								hover:active:bg-blue-200
 								aria-selected:bg-blue-200"
 						>
 							<div>bar</div>
 						</AriaSimpleDropDownItem>
-						<AriaSimpleDropDownItem
+						<AriaSimpleDropDownItem<Options>
 							id="baz"
-							// prettier-ignore
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
-								hover:active:bg-blue-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
+								hover:active:bg-blue-200
 								aria-selected:bg-blue-200"
 						>
 							<div>baz</div>
 						</AriaSimpleDropDownItem>
-						<AriaSimpleDropDownItem
+						<AriaSimpleDropDownItem<Options>
 							id="qux"
-							// prettier-ignore
 							className="flex h-32 items-center rounded-1e3 bg-gray-100 px-16
 								hover:bg-gray-200
-								hover:active:bg-blue-200
 								focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white
+								hover:active:bg-blue-200
 								aria-selected:bg-blue-200"
 						>
 							<div>qux</div>

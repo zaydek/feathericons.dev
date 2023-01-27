@@ -4,37 +4,44 @@ import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEf
 import { getStringFromReactElements } from "./utils"
 
 // prettier-ignore
-const _SimpleDropDownContext =
-	createContext<{
-		show:         boolean
-		setShow:      Dispatch<SetStateAction<boolean>>
-		currentId:    string
-		setCurrentId: Dispatch<SetStateAction<string>>
-		items:        { id: string, string: string }[]
-		setItems:     Dispatch<SetStateAction<{ id: string, string: string }[]>>
-		add:          (id: string, string: string) => void
-		remove:       (id: string) => void
-		decrement:    (by?: number | undefined) => void
-		increment:    (by?: number | undefined) => void
-	} | null>(null)
+type Item<T extends string> = {
+	id:  T
+	str: string
+}
 
 // prettier-ignore
-type AriaSimpleDropDownProps = {
+type GenericContextData<T extends string = any> = {
 	show:         boolean
 	setShow:      Dispatch<SetStateAction<boolean>>
-	currentId:    string
-	setCurrentId: Dispatch<SetStateAction<string>>
+	currentId:    T
+	setCurrentId: Dispatch<SetStateAction<T>>
+	items:        Item<T>[]
+	setItems:     Dispatch<SetStateAction<Item<T>[]>>
+	add:          (_: Item<T>) => void
+	remove:       (id: T) => void
+	decrement:    (by?: number | undefined) => void
+	increment:    (by?: number | undefined) => void
+}
+
+const _SimpleDropDownContext = createContext<GenericContextData | null>(null)
+
+// prettier-ignore
+type AriaSimpleDropDownProps<T extends string> = {
+	show:         boolean
+	setShow:      Dispatch<SetStateAction<boolean>>
+	currentId:    T
+	setCurrentId: Dispatch<SetStateAction<T>>
 } & JSX.IntrinsicElements["div"]
 
-export function AriaSimpleDropDown({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps) {
+export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps<T>) {
 	const ref = useRef<HTMLDivElement | null>(null)
-	const [items, setItems] = useState<{ id: string; string: string }[]>([])
+	const [items, setItems] = useState<Item<T>[]>([])
 
-	const add = useCallback((id: string, string: string) => {
-		setItems(curr => [...curr, { id, string }])
+	const add = useCallback((item: Item<T>) => {
+		setItems(curr => [...curr, item])
 	}, [])
 
-	const remove = useCallback((id: string) => {
+	const remove = useCallback((id: T) => {
 		setItems(curr => {
 			const index = curr.findIndex(f => f.id === id)
 			return [...curr.slice(0, index), ...curr.slice(index + 1)]
@@ -156,19 +163,19 @@ export function AriaSimpleDropDown({ show, setShow, currentId, setCurrentId, chi
 	)
 }
 
-type AriaSimpleDropDownItemProps = { id: string } & Omit<JSX.IntrinsicElements["div"], "id">
+type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Omit<JSX.IntrinsicElements["div"], "id">
 
-export function AriaSimpleDropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps) {
+export function AriaSimpleDropDownItem<T extends string>({ id, children, ...props }: AriaSimpleDropDownItemProps<T>) {
 	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!
 
 	const ref = useRef<HTMLDivElement | null>(null)
-	const string = useMemo(() => getStringFromReactElements(children as any), [children]) // 🤷‍♀️
+	const str = useMemo(() => getStringFromReactElements(children as any), [children]) // 🤷‍♀️
 	const selected = useMemo(() => currentId === id, [currentId, id])
 
 	useEffect(() => {
-		add(id, string)
+		add({ id, str })
 		return () => remove(id)
-	}, [add, id, remove, string])
+	}, [add, id, remove, str])
 
 	return (
 		<div
