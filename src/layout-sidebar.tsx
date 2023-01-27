@@ -382,7 +382,7 @@ export function SidebarContents() {
 		<div className="flex flex-col gap-16 py-24">
 			<SectionWrapper>
 				<Checkbox checked={viewSource} setChecked={setViewSource}>
-					VIEW SOURCE
+					VIEW SOURCE FOR {toKebabCase(selectedName).toUpperCase()}
 				</Checkbox>
 			</SectionWrapper>
 			<SectionWrapper>
