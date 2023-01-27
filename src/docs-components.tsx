@@ -24,18 +24,12 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h1
-			id={id}
-			className="group/h1
-				relative my-16 scroll-my-16 text-black"
-			{...props}
-		>
+		<h1 id={id} className="group/header relative my-16 scroll-my-16 text-black" {...props}>
 			{children}
-			{/* prettier-ignore */}
 			<a
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
-					group-hover/h1:opacity-100"
+					group-hover/header:opacity-100"
 				aria-label={`Link ${id}`}
 			>
 				<HeadingIcon className="text-[#1570fb] [transform:_translateY(2px)]" icon={feather.Link2} />
@@ -55,16 +49,15 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h2
 			id={id}
-			className="group/h2
+			className="group/header
 				relative my-16 scroll-my-16 text-black"
 			{...props}
 		>
 			{children}
-			{/* prettier-ignore */}
 			<a
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
-					group-hover/h2:opacity-100"
+					group-hover/header:opacity-100"
 				aria-label={`Link ${id}`}
 			>
 				<HeadingIcon className="text-[#1570fb] [transform:_translateY(2px)]" icon={feather.Link2} />

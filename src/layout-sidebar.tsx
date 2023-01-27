@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { Dispatch, MouseEventHandler, MutableRefObject, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { MouseEventHandler, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "./aria/aria-simple-dropdown"
@@ -100,31 +100,6 @@ function IconPreview() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useCancelable(ref: MutableRefObject<HTMLDivElement | null>, setShow: Dispatch<SetStateAction<boolean>>) {
-	useEffect(() => {
-		function handleClick(e: MouseEvent) {
-			if (ref.current === null) { return } // prettier-ignore
-			if (!(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
-				setShow(false)
-			}
-		}
-		window.addEventListener("click", handleClick, false)
-		return () => window.removeEventListener("click", handleClick, false)
-	}, [ref, setShow])
-
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				setShow(false)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setShow])
-
-	return null
-}
-
 function DropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps<FormatAs>) {
 	return (
 		<AriaSimpleDropDownItem
@@ -155,8 +130,6 @@ function FormatButton() {
 		}[formatAs]
 	}, [formatAs])
 
-	//// useCancelable(ref, setShow)
-
 	return (
 		<AriaSimpleDropDown<FormatAs> className="relative flex flex-col" show={show} setShow={setShow} currentId={formatAs} setCurrentId={setFormatAs}>
 			<div className="relative flex flex-col">
@@ -168,7 +141,8 @@ function FormatButton() {
 					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
 					<TypographyCaps className="text-gray-700">FORMAT AS {desc}</TypographyCaps>
 				</div>
-				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
+				{/* Use right-8 to make optically centered */}
+				<div className="pointer-events-none absolute top-0 right-8 bottom-0">
 					<div className="flex h-32 w-32 items-center justify-center">
 						<Icon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
 					</div>
@@ -190,7 +164,7 @@ function FormatButton() {
 							opacity: 0,
 						}}
 						transition={{
-							duration: 0.2,
+							duration: 0.1,
 							ease: [0, 1, 1, 1],
 						}}
 						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
@@ -265,7 +239,7 @@ function DecorativeIcon({ icon }: { icon: IconComponent }) {
 
 function Checkbox({ children, ...props }: AriaCheckboxProps) {
 	return (
-		<AriaCheckbox className="flex h-24 items-center justify-between" {...props}>
+		<AriaCheckbox className="group/checkbox flex h-24 items-center justify-between" {...props}>
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<DecorativeIcon icon={feather.Code} />
@@ -273,26 +247,39 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 			</div>
 			{/* RHS */}
 			{/* prettier-ignore */}
-			<Transition
+			{/* <Transition
 				when={props.checked}
 				s1={{ backgroundColor: "var(--hairline-color)"   }}
 				s2={{ backgroundColor: "var(--theme-color-cyan)" }}
 				duration={100}
 				ease={[0, 1, 1, 1]} // No bounce here
+			> */}
+			<div
+				className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--hairline-color)]
+					group-aria-checked/checkbox:bg-[var(--theme-color-cyan)]"
 			>
-				<div className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--theme-color-cyan)]">
+				<Transition
+					when={props.checked}
+					s1={{
+						transform: "translateX(0%)",
+					}}
+					s2={{
+						transform: "translateX(50%)",
+					}}
+					duration={100}
+					ease={[0, 1, 0.5, 1.25]} // Bounce here
+				>
 					{/* prettier-ignore */}
-					<Transition
-						when={props.checked}
-						s1={{ transform: "translateX(0%)"  }}
-						s2={{ transform: "translateX(50%)" }}
-						duration={100}
-						ease={[0, 1, 0.5, 1.25]} // Bounce here
-					>
-						<div className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"></div>
-					</Transition>
-				</div>
-			</Transition>
+					<motion.div
+						animate={{ x: props.checked ? "50%" : 0 }}
+						transition={{
+							duration: 0.1,
+							ease: [0, 1, 1, 1.25],
+						}}
+						className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
+					></motion.div>
+				</Transition>
+			</div>
 		</AriaCheckbox>
 	)
 }
