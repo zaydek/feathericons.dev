@@ -14,7 +14,6 @@ import { Icon, IconComponent } from "./lib/react/icon"
 import { Hairline } from "./random"
 import { ShikiContext } from "./shiki"
 import { SelectedContext, SliderContext } from "./state"
-import { Transition } from "./transition"
 import { FormatAs } from "./types"
 import { TypographyCaps } from "./typography"
 
@@ -246,39 +245,19 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 				<TypographyCaps className="text-gray-700">{children}</TypographyCaps>
 			</div>
 			{/* RHS */}
-			{/* prettier-ignore */}
-			{/* <Transition
-				when={props.checked}
-				s1={{ backgroundColor: "var(--hairline-color)"   }}
-				s2={{ backgroundColor: "var(--theme-color-cyan)" }}
-				duration={100}
-				ease={[0, 1, 1, 1]} // No bounce here
-			> */}
 			<div
 				className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--hairline-color)]
 					group-aria-checked/checkbox:bg-[var(--theme-color-cyan)]"
 			>
-				<Transition
-					when={props.checked}
-					s1={{
-						transform: "translateX(0%)",
+				{/* prettier-ignore */}
+				<motion.div
+					animate={{ x: props.checked ? "50%" : 0 }}
+					transition={{
+						duration: 0.1,
+						ease: [0, 1, 1, 1.25],
 					}}
-					s2={{
-						transform: "translateX(50%)",
-					}}
-					duration={100}
-					ease={[0, 1, 0.5, 1.25]} // Bounce here
-				>
-					{/* prettier-ignore */}
-					<motion.div
-						animate={{ x: props.checked ? "50%" : 0 }}
-						transition={{
-							duration: 0.1,
-							ease: [0, 1, 1, 1.25],
-						}}
-						className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
-					></motion.div>
-				</Transition>
+					className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
+				></motion.div>
 			</div>
 		</AriaCheckbox>
 	)
