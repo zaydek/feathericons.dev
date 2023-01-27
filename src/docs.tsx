@@ -2,7 +2,7 @@ import * as feather from "./data/react-feather"
 
 import { manifest } from "./data/react-feather-manifest"
 import { Anchor, Code, Hairline, Heading1, Heading2, InlineIcon, ListItem, OrderedList, Paragraph, Pre, TextIcon } from "./docs-components"
-import { CodePenIcon, CodePenIconColor, NextJsIcon, NextJsIconColor, ReactJsIcon, ReactJsIconColor, SassIcon, SassIconColor, SvgIcon, SvgIconColor, TailwindCssIcon, TailwindCssIconColor, TwitterIcon, TwitterIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
+import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { detab } from "./lib/format"
 import { RouteTransition } from "./route-transition"
@@ -23,9 +23,9 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						</Paragraph>
 						<Paragraph>
 							Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as SVG&nbsp;
-							<InlineIcon style={{ color: SvgIconColor }} icon={SvgIcon} />, React.js&nbsp;
-							<InlineIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
-							<InlineIcon style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
+							<InlineIcon style={{ color: SvgHex }} icon={SvgIcon} />, React.js&nbsp;
+							<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon} />, or TypeScript React.js&nbsp;
+							<InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 						</Paragraph>
 						<Hairline />
 						<Heading2>
@@ -62,12 +62,12 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						</Pre>
 						<Paragraph>
 							Click here to get started with a <Anchor href="https://codepen.io/pen?template=WOJZdM">CodePen</Anchor>&nbsp;
-							<InlineIcon style={{ color: CodePenIconColor }} icon={CodePenIcon} /> template.
+							<InlineIcon style={{ color: CodePenHex }} icon={CodePenIcon} /> template.
 						</Paragraph>
 						<Hairline />
 						<Heading2>
 							Using {name} <InlineIcon icon={feather[name]} /> With React.js&nbsp;
-							<InlineIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />
+							<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon} />
 						</Heading2>
 						<Paragraph>To get started with Feather using React.js, simply:</Paragraph>
 						<OrderedList>
@@ -106,8 +106,13 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							`)}
 						</Pre>
 						<Paragraph>
-							Click here to get started with a <Anchor href="https://play.tailwindcss.com/jPEYvRowr3">Tailwind CSS</Anchor>&nbsp;
-							<InlineIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon} /> template.
+							Click here to get started with a{" "}
+							<Anchor href="https://play.tailwindcss.com/jPEYvRowr3">
+								<TextIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
+									Tailwind CSS
+								</TextIcon>
+							</Anchor>{" "}
+							template.
 						</Paragraph>
 						<Hairline />
 						<Paragraph>
@@ -118,9 +123,18 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 						<Hairline />
 						<Paragraph>
 							<small>
-								Icons by <Anchor href="https://twitter.com/colebemis">@colebemis</Anchor>&nbsp;
-								<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />, website by <Anchor href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</Anchor>&nbsp;
-								<InlineIcon style={{ color: TwitterIconColor }} icon={TwitterIcon} />
+								Icons by{" "}
+								<Anchor href="https://twitter.com/colebemis">
+									<TextIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
+										@colebemis
+									</TextIcon>
+								</Anchor>
+								, website by{" "}
+								<Anchor href="https://twitter.com/username_ZAYDEK">
+									<TextIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
+										@username_ZAYDEK
+									</TextIcon>
+								</Anchor>
 							</small>
 							<br />
 							<small>
@@ -130,31 +144,31 @@ export function Docs({ name }: { name: keyof typeof manifest }) {
 							<small>
 								Built using{" "}
 								<Anchor href="https://reactjs.org">
-									<TextIcon style={{ color: ReactJsIconColor }} icon={ReactJsIcon}>
+									<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
 										React.js
 									</TextIcon>
 								</Anchor>
 								,{" "}
 								<Anchor href="https://nextjs.org">
-									<TextIcon style={{ color: NextJsIconColor }} icon={NextJsIcon}>
+									<TextIcon style={{ color: NextJsHex }} icon={NextJsIcon}>
 										Next.js
 									</TextIcon>
 								</Anchor>
 								,{" "}
 								<Anchor href="https://typescriptlang.org">
-									<TextIcon style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon}>
+									<TextIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
 										TypeScript
 									</TextIcon>
 								</Anchor>
 								,{" "}
 								<Anchor href="https://tailwindcss.com">
-									<TextIcon style={{ color: TailwindCssIconColor }} icon={TailwindCssIcon}>
+									<TextIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
 										Tailwind CSS
 									</TextIcon>
 								</Anchor>
 								, and{" "}
 								<Anchor href="https://sass-lang.com">
-									<TextIcon style={{ color: SassIconColor }} icon={SassIcon}>
+									<TextIcon style={{ color: SassHex }} icon={SassIcon}>
 										Sass
 									</TextIcon>
 								</Anchor>

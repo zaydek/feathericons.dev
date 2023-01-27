@@ -140,7 +140,7 @@ export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 
 export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	return (
-		<a className="text-gray-500 underline decoration-gray-400" {...props}>
+		<a className="text-gray-500 decoration-gray-400 hover:underline" {...props}>
 			{children}
 		</a>
 	)

@@ -1,3 +1,5 @@
+/* https://github.com/tailwindlabs/tailwindcss/blob/master/src/css/preflight.css */
+
 *,
 ::before,
 ::after {
@@ -16,6 +18,12 @@
 	--tw-ring-color: rgb(59 130 246 / 0.5);
 	--tw-ring-offset-shadow: 0 0 #0000;
 	--tw-ring-shadow: 0 0 #0000;
+}
+
+hr {
+  height: 0;
+  color: inherit;
+  border-top-width: 1px;
 }
 
 /* @tailwind base; */

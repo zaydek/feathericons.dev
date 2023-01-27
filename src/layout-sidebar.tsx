@@ -5,7 +5,7 @@ import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
-import { ReactJsIcon, ReactJsIconColor, SvgIcon, SvgIconColor, TypeScriptIcon, TypeScriptIconColor } from "./icon-config"
+import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "./icon-config"
 import { toKebabCase } from "./lib/cases"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
@@ -143,9 +143,9 @@ function FormatButton() {
 
 	const [hex, icon, desc] = useMemo(() => {
 		return {
-			svg: [SvgIconColor, SvgIcon, "SVG"] as const,
-			jsx: [ReactJsIconColor, ReactJsIcon, "REACT"] as const,
-			tsx: [TypeScriptIconColor, TypeScriptIcon, "TS REACT"] as const,
+			svg: [SvgHex, SvgIcon, "SVG"] as const,
+			jsx: [ReactJsHex, ReactJsIcon, "REACT"] as const,
+			tsx: [TypeScriptHex, TypeScriptIcon, "TS REACT"] as const,
 		}[formatAs]
 	}, [formatAs])
 
@@ -207,7 +207,7 @@ function FormatButton() {
 							}}
 							aria-label="SVG"
 						>
-							<Icon className="h-16 w-16" style={{ color: SvgIconColor }} icon={SvgIcon} />
+							<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
 							<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
 						</DropDownItem>
 						<DropDownItem
@@ -217,7 +217,7 @@ function FormatButton() {
 							}}
 							aria-label="React"
 						>
-							<Icon className="h-16 w-16" style={{ color: ReactJsIconColor }} icon={ReactJsIcon} />
+							<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
 							<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
 						</DropDownItem>
 						<DropDownItem
@@ -227,7 +227,7 @@ function FormatButton() {
 							}}
 							aria-label="TypeScript React"
 						>
-							<Icon className="h-16 w-16" style={{ color: TypeScriptIconColor }} icon={TypeScriptIcon} />
+							<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
 							<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
 						</DropDownItem>
 					</div>

@@ -1,13 +1,13 @@
 // https://simpleicons.org
 
-export const SvgIconColor         = "#ffb13b" // prettier-ignore
-export const ReactJsIconColor     = "#61dafb" // prettier-ignore
-export const NextJsIconColor      = "#000000" // prettier-ignore
-export const TypeScriptIconColor  = "#3178c6" // prettier-ignore
-export const TailwindCssIconColor = "#06b6d4" // prettier-ignore
-export const SassIconColor        = "#cc6699" // prettier-ignore
-export const TwitterIconColor     = "#1da1f2" // prettier-ignore
-export const CodePenIconColor     = "#000000" // prettier-ignore
+export const SvgHex         = "#ffb13b" // prettier-ignore
+export const ReactJsHex     = "#61dafb" // prettier-ignore
+export const NextJsHex      = "#000000" // prettier-ignore
+export const TypeScriptHex  = "#3178c6" // prettier-ignore
+export const TailwindCssHex = "#06b6d4" // prettier-ignore
+export const SassHex        = "#cc6699" // prettier-ignore
+export const TwitterHex     = "#1da1f2" // prettier-ignore
+export const CodePenHex     = "#000000" // prettier-ignore
 
 export function SvgIcon(props: JSX.IntrinsicElements["svg"]) {
 	return (
