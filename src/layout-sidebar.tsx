@@ -245,14 +245,14 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconCompone
 	return (
 		<button
 			className="group flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
-				hover:active:bg-[var(--theme-color-cyan)] hover:active:[box-shadow:_var(--inset-shadow-2)]"
+				hover:active:bg-[var(--theme-color)] hover:active:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
 				onClick?.(e)
 			}}
 			{...props}
 		>
-			<Icon className="h-16 w-16 text-[var(--theme-color-cyan)] group-hover:group-active:text-white" icon={pressed ? feather.Check : icon} />
+			<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover:group-active:text-white" icon={pressed ? feather.Check : icon} />
 			<TypographyCaps className="text-gray-700 group-hover:group-active:text-white">{children}</TypographyCaps>
 		</button>
 	)
@@ -279,7 +279,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 			{/* RHS */}
 			<div
 				className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--hairline-color)]
-					group-aria-checked/checkbox:bg-[var(--theme-color-cyan)]"
+					group-aria-checked/checkbox:bg-[var(--theme-color)]"
 			>
 				{/* prettier-ignore */}
 				<motion.div
@@ -295,7 +295,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 	)
 }
 
-const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color-cyan)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
+const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
 
 function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: IconComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)

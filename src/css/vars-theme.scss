@@ -8,7 +8,6 @@
 	--seed-raw: 220, 100%, 0%
 	--seed:     hsl(220, 100%, 0%);
 
-	--theme-color: #1570fb;
-	--theme-color-gradient-end: #{sky(400)};
-	--theme-color-cyan: #{#3bf};
+	--theme-color:        #{sky(400)};
+	--theme-color-darker: #{sky(600)};
 }
