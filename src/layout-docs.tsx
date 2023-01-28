@@ -22,11 +22,11 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 					</TextIcon>
 					,{" "}
 					<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
-						React.js
+						React
 					</TextIcon>
 					, or{" "}
 					<TextIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
-						TypeScript React.js
+						TypeScript React
 					</TextIcon>
 					, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 				</Paragraph>
@@ -76,10 +76,10 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 				<Heading2>
 					Using <TextIcon icon={feather[name]}>{name}</TextIcon> With{" "}
 					<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
-						React.js
+						React
 					</TextIcon>
 				</Heading2>
-				<Paragraph>To get started with Feather using React.js, simply:</Paragraph>
+				<Paragraph>To get started with Feather using React, simply:</Paragraph>
 				<OrderedList>
 					<ListItem>
 						Add <Code lang="sh">{`npm i react-feather`}</Code> or <Code lang="sh">{`yarn add react-feather`}</Code> or <Code lang="sh">{`pnpm i react-feather`}</Code>
@@ -145,7 +145,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 						,{" "}
 						<Anchor href="https://reactjs.org">
 							<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
-								React.js
+								React
 							</TextIcon>
 						</Anchor>
 						,{" "}

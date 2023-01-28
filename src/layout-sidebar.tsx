@@ -153,7 +153,15 @@ function FormatButton() {
 	}, [formatAs])
 
 	return (
-		<AriaSimpleDropDown<FormatAs> className="relative flex flex-col" show={show} setShow={setShow} currentId={formatAs} setCurrentId={setFormatAs}>
+		<AriaSimpleDropDown<FormatAs>
+			// prettier-ignore
+			className="relative flex flex-col"
+			show={show}
+			setShow={setShow}
+			currentId={formatAs}
+			setCurrentId={setFormatAs}
+			aria-label="Click to format as SVG, JSX, or TSX"
+		>
 			<div className="relative flex flex-col">
 				<div
 					className="group flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
@@ -191,15 +199,27 @@ function FormatButton() {
 						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
 					>
 						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
-							<DropDownItem id="svg">
+							<DropDownItem
+								// prettier-ignore
+								id="svg"
+								aria-label="Format as SVG"
+							>
 								<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
 								<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
 							</DropDownItem>
-							<DropDownItem id="jsx">
+							<DropDownItem
+								// prettier-ignore
+								id="jsx"
+								aria-label="Format as React"
+							>
 								<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
 								<TypographyCaps className="text-gray-700">JSX</TypographyCaps>
 							</DropDownItem>
-							<DropDownItem id="tsx">
+							<DropDownItem
+								// prettier-ignore
+								id="tsx"
+								aria-label="Format as TypeScript React"
+							>
 								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
 								<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
 							</DropDownItem>
@@ -242,13 +262,13 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconCompone
 
 function DecorativeIcon({ icon }: { icon: IconComponent }) {
 	return (
-		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200/75">
+		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
 			<Icon className="h-12 w-12 text-gray-700" icon={icon} />
 		</div>
 	)
 }
 
-function Checkbox({ children, ...props }: AriaCheckboxProps) {
+function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 	return (
 		<AriaCheckbox className="group/checkbox flex h-24 items-center justify-between" {...props}>
 			{/* LHS */}
@@ -277,7 +297,7 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 
 const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color-cyan)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
 
-function Slider({ icon, resetHandler, children, ...props }: { icon: IconComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: IconComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -297,7 +317,12 @@ function Slider({ icon, resetHandler, children, ...props }: { icon: IconComponen
 							? props.value.toFixed(2)
 							: `${props.value} PX`}
 					</TypographyCaps>
-					<button className="flex h-24 w-24 items-center justify-center" onClick={resetHandler}>
+					<button
+						// prettier-ignore
+						className="flex h-24 w-24 items-center justify-center"
+						onClick={resetHandler}
+						aria-label={`Reset ${props.value < sizeMin ? "stroke-width" : "size"}`}
+					>
 						<Icon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
 					</button>
 				</div>
@@ -347,9 +372,9 @@ export function SidebarContents() {
 	return (
 		<div className="flex flex-col gap-16 py-24">
 			<Section>
-				<Checkbox checked={viewSource} setChecked={setViewSource}>
+				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
 					VIEW SOURCE FOR {toKebabCase(selectedName).toUpperCase()}
-				</Checkbox>
+				</CompoundCheckbox>
 			</Section>
 			<Section>
 				<Preview />
@@ -370,24 +395,26 @@ export function SidebarContents() {
 			<hr />
 			<Section>
 				{/* prettier-ignore */}
-				<Slider
+				<CompoundSlider
 					icon={feather.Maximize2}
 					min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize}
 					resetHandler={e => setSize(sizeInitial)}
+					aria-label="Preview size"
 				>
 					PREVIEW SIZE
-				</Slider>
+				</CompoundSlider>
 			</Section>
 			<hr />
 			<Section>
 				{/* prettier-ignore */}
-				<Slider
+				<CompoundSlider
 					icon={feather.Minimize2}
 					min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth}
 					resetHandler={e => setStrokeWidth(strokeWidthInitial)}
+					aria-label="Preview stroke-width"
 				>
 					PREVIEW STROKE WIDTH
-				</Slider>
+				</CompoundSlider>
 			</Section>
 		</div>
 	)
