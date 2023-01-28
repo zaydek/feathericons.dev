@@ -4,17 +4,13 @@ $app-w: 1536px;
 :root {
 	--inset-y:       16px;
 	--inset-x:       16px;
-
 	--app-min-h:     calc(100dvh - (var(--app-rounding) + var(--inset-y)));
 	--app-w:         #{$app-w};
 	--app-rounding:  40px;
-
 	--main-inset-y:  48px;
 	--main-inset-x:  48px;
-
 	--aside-w:       448px;
 	--aside-inset-y: 24px;
 	--aside-inset-x: 24px;
-
 	--grid-size:     96px;
 }
