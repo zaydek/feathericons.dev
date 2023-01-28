@@ -1,16 +1,19 @@
 import * as feather from "./data/react-feather"
 
 import { AnimatePresence, motion } from "framer-motion"
+import { useRouter } from "next/router"
 import { MouseEventHandler, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "./aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
 import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
+import { manifest } from "./data/react-feather-manifest"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "./icon-config"
-import { toKebabCase } from "./lib/cases"
+import { toKebabCase, toTitleCase } from "./lib/cases"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
+import { RouteTransition } from "./route-transition"
 import { ShikiContext } from "./shiki"
 import { SelectedContext, SliderContext } from "./state"
 import { FormatAs } from "./types"
@@ -42,9 +45,25 @@ function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: str
 	}
 }
 
-function IconPreview() {
+function useRouterName() {
+	const router = useRouter()
+
+	let name: keyof typeof manifest
+	if (router.query.icon === undefined) {
+		name = "Feather"
+	} else {
+		// Cast string | string[] to string and string to keyof typeof manifest
+		name = toTitleCase(router.query.icon as string) as keyof typeof manifest
+	}
+
+	return name
+}
+
+function Preview() {
+	const name = useRouterName()
+
 	const { highlighter } = useContext(ShikiContext)!
-	const { selectedName, viewSource, formatAs, clipboard: code } = useContext(SelectedContext)!
+	const { viewSource, formatAs, clipboard: code } = useContext(SelectedContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
 
@@ -87,11 +106,16 @@ function IconPreview() {
 	) : (
 		<div>
 			<div className="flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]" data-bg-dots>
-				<Icon
-					className="h-64 w-64 text-gray-800
-						[stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-					icon={feather[selectedName]}
-				/>
+				<RouteTransition>
+					{/* Use <div> so preserve [transform:_scale(var(--scale))] */}
+					<div>
+						<Icon
+							className="h-64 w-64 text-gray-800
+								[stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
+							icon={feather[name]}
+						/>
+					</div>
+				</RouteTransition>
 			</div>
 		</div>
 	)
@@ -293,7 +317,7 @@ function Slider({ icon, resetHandler, children, ...props }: { icon: IconComponen
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function SectionWrapper({ children, ...props }: JSX.IntrinsicElements["section"]) {
+function Section({ children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
 		<section className="flex flex-col gap-16 px-24" {...props}>
 			{children}
@@ -322,15 +346,15 @@ export function SidebarContents() {
 
 	return (
 		<div className="flex flex-col gap-16 py-24">
-			<SectionWrapper>
+			<Section>
 				<Checkbox checked={viewSource} setChecked={setViewSource}>
 					VIEW SOURCE FOR {toKebabCase(selectedName).toUpperCase()}
 				</Checkbox>
-			</SectionWrapper>
-			<SectionWrapper>
-				<IconPreview />
-			</SectionWrapper>
-			<SectionWrapper>
+			</Section>
+			<Section>
+				<Preview />
+			</Section>
+			<Section>
 				<div className="flex flex-col gap-8">
 					<FormatButton />
 					<div className="grid grid-cols-2 gap-8">
@@ -342,9 +366,9 @@ export function SidebarContents() {
 						</ActionButton>
 					</div>
 				</div>
-			</SectionWrapper>
+			</Section>
 			<hr />
-			<SectionWrapper>
+			<Section>
 				{/* prettier-ignore */}
 				<Slider
 					icon={feather.Maximize2}
@@ -353,9 +377,9 @@ export function SidebarContents() {
 				>
 					PREVIEW SIZE
 				</Slider>
-			</SectionWrapper>
+			</Section>
 			<hr />
-			<SectionWrapper>
+			<Section>
 				{/* prettier-ignore */}
 				<Slider
 					icon={feather.Minimize2}
@@ -364,7 +388,7 @@ export function SidebarContents() {
 				>
 					PREVIEW STROKE WIDTH
 				</Slider>
-			</SectionWrapper>
+			</Section>
 		</div>
 	)
 }

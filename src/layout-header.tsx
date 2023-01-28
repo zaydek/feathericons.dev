@@ -36,7 +36,7 @@ function CTAButton({ primary }: { primary?: boolean }) {
 
 	return (
 		<div
-			className="h-56 rounded-[calc(56px_*_0.375)] bg-white/50 sm:aspect-[3.5] sm:rounded-1e3
+			className="h-56 rounded-1e3 bg-white/50 sm:aspect-[3.5]
 				[&[data-primary]]:bg-white"
 			data-primary={primary}
 		></div>

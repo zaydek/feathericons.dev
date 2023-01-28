@@ -9,8 +9,6 @@ import { RouteTransition } from "./route-transition"
 
 export function Documentation({ name }: { name: keyof typeof manifest }) {
 	return (
-		//// <div className="flex justify-center">
-		//// 	<div className="w-100% max-w-1024">
 		<article className="prose space-y-8 text-gray-900">
 			<RouteTransition>
 				<Heading1>Get Started With Feather</Heading1>
@@ -94,13 +92,6 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 					</ListItem>
 				</OrderedList>
 				<Paragraph>For example:</Paragraph>
-				{/* <Pre lang="sh">
-					{detab(`
-						npm i react-feather
-						# Or yarn add react-feather
-						# Or pnpm i react-feather
-					`)}
-				</Pre> */}
 				<Pre lang="tsx">
 					{detab(`
 						import { ${name} } from "react-feather"
@@ -183,7 +174,5 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 				</Paragraph>
 			</RouteTransition>
 		</article>
-		//// 	</div>
-		//// </div>
 	)
 }
