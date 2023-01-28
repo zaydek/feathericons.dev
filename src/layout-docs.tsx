@@ -11,7 +11,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 	return (
 		<div className="flex justify-center">
 			<div className="w-100% max-w-1024">
-				<article className="prose space-y-8">
+				<article className="prose space-y-8 text-gray-900">
 					<RouteTransition>
 						<Heading1>Get Started With Feather</Heading1>
 						<Paragraph>

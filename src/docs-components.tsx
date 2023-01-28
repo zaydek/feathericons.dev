@@ -27,7 +27,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		// Use !my-* because of space-y-*
 		<h1
 			id={id}
-			className="group/header relative !mb-32 scroll-my-32 text-gray-900
+			className="group/header relative !mb-32 scroll-my-32 text-black
 				[&:not(:first-child)]:!mt-64"
 			{...props}
 		>
@@ -56,7 +56,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		// Use !my-* because of space-y-*
 		<h2
 			id={id}
-			className="group/header relative !mb-32 scroll-my-32 text-gray-900
+			className="group/header relative !mb-32 scroll-my-32 text-black
 				[&:not(:first-child)]:!mt-64"
 			{...props}
 		>
@@ -79,7 +79,11 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="mx-16 !mt-16 !mb-32 flex flex-col gap-8" {...props}>
+		<ol
+			className="mx-16 flex flex-col gap-8
+				[&:not(:first-child)]:!my-32"
+			{...props}
+		>
 			{children}
 		</ol>
 	)
@@ -107,7 +111,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	return (
 		<pre
 			// Use !my-* because of space-y-*
-			className="mx-16 overflow-auto text-gray-800
+			className="mx-16 overflow-auto
 				[&:not(:first-child)]:!my-32 "
 			{...props}
 		>
@@ -162,7 +166,7 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 	}, [code, highlighter, lang])
 
 	return (
-		<code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8 text-gray-800" {...props}>
+		<code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8" {...props}>
 			{tokens === null
 				? code.split("\n").map((ys, y) => <span key={y}>{ys || <br />}</span>)
 				: tokens.map((ys, y) => (

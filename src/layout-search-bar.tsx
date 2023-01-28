@@ -1,8 +1,8 @@
 import * as feather from "./data/react-feather"
 
 import { useContext, useRef } from "react"
+import { HoverTip } from "./hover-tooltip"
 import { Icon, IconComponent } from "./lib/react/icon"
-import { HoverTip } from "./random"
 import { SearchContext } from "./state"
 
 function SearchBarButton({ icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {

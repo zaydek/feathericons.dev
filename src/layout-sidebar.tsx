@@ -25,8 +25,8 @@ function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: str
 				{"<!-- "}
 				<a href={href} target="_blank" rel="noreferrer" className="underline">
 					{href}
-				</a>
-				{"--> "}
+				</a>{" "}
+				✨ {"--> "}
 			</>
 		)
 	} else {
@@ -36,7 +36,8 @@ function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: str
 				{"// "}
 				<a href={href} target="_blank" rel="noreferrer" className="underline">
 					{href}
-				</a>
+				</a>{" "}
+				✨{" "}
 			</>
 		)
 	}
@@ -59,18 +60,18 @@ function IconPreview() {
 			<code className="inline-block py-24">
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
-							<div key={y} className="relative px-48 pr-24">
-								<div className="absolute top-0 bottom-0 left-0 select-none">
+							<div key={y} className="px-24">
+								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-400">{y + 1}</div>
-								</div>
+								</div> */}
 								{ys || <br />}
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
-							<div key={y} className="relative px-48 pr-24">
-								<div className="absolute top-0 bottom-0 left-0 select-none">
+							<div key={y} className="px-24">
+								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-400">{y + 1}</div>
-								</div>
+								</div> */}
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>

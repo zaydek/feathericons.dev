@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useEffect } from "react"
 import { manifest } from "./data/react-feather-manifest"
-import { Documentation } from "./docs"
+import { Documentation } from "./layout-docs"
 import { Header } from "./layout-header"
 import { SearchResultsContents } from "./layout-search-results"
 import { SidebarContents } from "./layout-sidebar"
