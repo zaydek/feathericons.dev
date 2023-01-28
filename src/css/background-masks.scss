@@ -5,8 +5,11 @@
 // .bg-mask
 
 .bg-mask-sticky {
+	// POSITION
 	position: sticky;
 	top: 0;
+	// BORDER BOX
+	margin-top: calc(-1 * var(--header-inset-y));
 	height: 0; // 😎
 }
 .bg-mask {
