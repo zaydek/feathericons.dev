@@ -76,28 +76,18 @@ export function Header() {
 			<NavLink pos="tl" />
 			<NavLink pos="tr" />
 			<header className="hero-background-image flex justify-center py-96 px-[var(--inset-x)]">
-				<div
-					className="flex flex-col gap-64
-						xl:w-100% xl:max-w-1280 xl:flex-row xl:items-center"
-				>
+				<div className="flex flex-col gap-64 xl:w-100% xl:max-w-1280 xl:flex-row xl:items-center">
 					{/* LHS */}
 					<div className="flex grow flex-col items-center gap-32">
 						<Logo />
 						<HeadingSubheading />
-						<div
-							className="flex w-384 flex-col gap-12
-								sm:flex-row sm:gap-16"
-						>
+						<div className="flex w-100% max-w-384 flex-col gap-10 sm:flex-row sm:gap-16">
 							<CTAButton primary />
 							<CTAButton />
 						</div>
 					</div>
 					{/* RHS */}
-					<div
-						className="hidden
-							sm:flex sm:flex-col sm:items-center sm:gap-32
-								xl:w-100% xl:max-w-640"
-					>
+					<div className="hidden sm:flex sm:flex-col sm:items-center sm:gap-32 xl:w-100% xl:max-w-640">
 						<SponsorMeta />
 						<div className="flex flex-wrap justify-center gap-16">
 							{iota(5).map(index => (

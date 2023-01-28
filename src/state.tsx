@@ -96,7 +96,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 
 	const [selectedName, setSelectedName] = useState<keyof typeof manifest>("Feather")
 	const [selectedSvgElement, setSelectedSvgElement] = useState<SVGSVGElement | null>(null)
-	const [viewSource, setViewSource] = useState(true)
+	const [viewSource, setViewSource] = useState(false)
 	const [formatAs, setFormatAs] = useState<FormatAs>("svg")
 
 	const clipboard = useMemo(() => {

@@ -1,8 +1,5 @@
 @use "tailwind-colors" as *;
 
-:root:not(.dark) { color-scheme: light; }
-:root.dark       { color-scheme: dark;  }
-
 :root {
 	// TODO: Use Tailwind channels / colors here?
 	--seed-h:   220;
@@ -14,6 +11,4 @@
 	--theme-color: #1570fb;
 	--theme-color-gradient-end: #{sky(400)};
 	--theme-color-cyan: #{#3bf};
-
-	background-color: white;
 }

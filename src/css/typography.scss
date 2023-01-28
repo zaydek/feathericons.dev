@@ -10,7 +10,9 @@
 }
 
 pre code {
-	font: 400 #{16px * 0.875} / 1.5 var(--code);
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
+	font: 400 #{16px * 0.875} / 1.6 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
@@ -30,7 +32,9 @@ pre code {
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
-.prose code {
+.prose :not(pre) code {
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
 	font: 400 0.875em / normal var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;

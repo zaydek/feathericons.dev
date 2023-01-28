@@ -3,26 +3,28 @@
 //// 	outline-offset: -0.5px;
 //// }
 
+// the-new-css-reset
 :focus-visible { outline: revert; }
-
 pre { margin: 0; }
 
 :root {
-	-webkit-font-smoothing: antialiased;  // E.g. antialiased
-	-moz-osx-font-smoothing: grayscale;   // E.g. antialiased
-	overflow-y: scroll; // COMPAT/Windows // E.g. overflow-x-scroll
-	overflow-x: hidden;                   // E.g. overflow-x-hidden
-	scroll-behavior: smooth;              // E.g. scroll-smooth
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-y: scroll; // COMPAT/Windows
+	overflow-x: clip;
+	scroll-behavior: smooth;
+	//// overscroll-behavior-y: none;
+
+	background-color: white;
 }
+
+:root:not(.dark) { color-scheme: light; }
+:root.dark       { color-scheme: dark;  }
 
 svg { overflow: visible; }
 
+// TODO
 [role] { cursor: pointer; user-select: none; }
-
-//// button, [role=button]                 { cursor: pointer; user-select: none; }
-//// input[type=checkbox], [role=checkbox] { cursor: pointer; user-select: none; }
-//// input[type=radio], [role=radio]       { cursor: pointer; user-select: none; }
-
 [role=slider] {
 	cursor: grab;
 	user-select: none;

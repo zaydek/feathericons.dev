@@ -198,7 +198,7 @@ function FormatButton() {
 						}}
 						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
 					>
-						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
+						<div ref={ref} className="flex flex-col overflow-clip rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem
 								// prettier-ignore
 								id="svg"

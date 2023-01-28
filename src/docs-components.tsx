@@ -59,7 +59,7 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="flex flex-col gap-8 2xl:mx-16 [&:not(:first-child)]:!my-32" {...props}>
+		<ol className="flex flex-col gap-8 xl:mx-16 [&:not(:first-child)]:!my-32" {...props}>
 			{children}
 		</ol>
 	)
@@ -86,8 +86,33 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		// Use !my-* because of space-y-*
-		<pre className="overflow-auto 2xl:mx-16 [&:not(:first-child)]:!my-32 " {...props}>
+		<pre className="overflow-auto xl:mx-16 [&:not(:first-child)]:!my-32 " {...props}>
 			<code>
+				{/* {tokens === null
+					? code.split("\n").map((ys, y) => (
+							<div key={y} className="relative px-48">
+								<div className="absolute top-0 bottom-0 left-0 select-none">
+									<div className="w-32 text-right text-gray-500">{y + 1}</div>
+								</div>
+								{ys || <br />}
+							</div>
+					  ))
+					: tokens.map((ys, y) => (
+							<div key={y} className="relative px-48">
+								<div className="absolute top-0 bottom-0 left-0 select-none">
+									<div className="w-32 text-right text-gray-500">{y + 1}</div>
+								</div>
+								{ys.length > 0 ? (
+									ys.map(({ color, content }, x) => (
+										<span key={x} style={{ color }}>
+											{content}
+										</span>
+									))
+								) : (
+									<br />
+								)}
+							</div>
+					  ))} */}
 				{tokens === null
 					? code.split("\n").map((ys, y) => <div key={y}>{ys || <br />}</div>)
 					: tokens.map((ys, y) => (
@@ -134,7 +159,9 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 	}, [code, highlighter, lang])
 
 	return (
-		<code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8" {...props}>
+		//// <code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8" {...props}>
+		//// <code className="bg-gray-100 p-4" {...props}>
+		<code className="rounded-1e3 bg-gray-100 py-4 px-8" {...props}>
 			{tokens === null
 				? code.split("\n").map((ys, y) => <span key={y}>{ys || <br />}</span>)
 				: tokens.map((ys, y) => (
