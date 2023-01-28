@@ -285,8 +285,8 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 				<motion.div
 					animate={{ x: props.checked ? "50%" : 0 }}
 					transition={{
-						duration: 0.1,
-						ease: [0, 1, 1, 1.25],
+						duration: 0.075,
+						ease: [0, 1, 1, 1],
 					}}
 					className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
 				></motion.div>
