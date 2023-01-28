@@ -172,8 +172,8 @@ function FormatButton() {
 					</TypographyCaps>
 				</div>
 				{/* Use right-8 to make optically centered */}
-				<div className="pointer-events-none absolute top-0 right-8 bottom-0">
-					<div className="flex h-32 w-32 items-center justify-center">
+				<div className="pointer-events-none absolute top-0 right-[calc(var(--form-size)_/_8)] bottom-0">
+					<div className="flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 						<Icon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
 					</div>
 				</div>
@@ -197,7 +197,7 @@ function FormatButton() {
 							duration: 0.1,
 							ease: [0, 1, 1, 1],
 						}}
-						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
+						className="absolute top-[calc(100%_+_16px)] right-0 z-10"
 					>
 						<div ref={ref} className="flex flex-col overflow-clip rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem
@@ -370,12 +370,12 @@ export function SidebarContents() {
 	return (
 		<div className="flex flex-col gap-16 py-24">
 			<Section>
-				<Preview />
-			</Section>
-			<Section>
 				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
 					VIEW SOURCE {toKebabCase(selectedName).toUpperCase()}
 				</CompoundCheckbox>
+			</Section>
+			<Section>
+				<Preview />
 			</Section>
 			<Section>
 				<div className="flex flex-col gap-8">
