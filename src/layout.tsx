@@ -1,6 +1,5 @@
 import Head from "next/head"
 import { useEffect } from "react"
-import { manifest } from "./data/react-feather-manifest"
 import { Documentation } from "./layout-docs"
 import { Header } from "./layout-header"
 import { SearchResultsContents } from "./layout-search-results"
@@ -32,7 +31,7 @@ function FgMask() {
 	)
 }
 
-function SearchEngineOptimization({ name }: { name?: keyof typeof manifest }) {
+function SearchEngineOptimization({ name }: Partial<IconProps>) {
 	useEffect(() => {
 		if (name !== undefined) { return } // prettier-ignore
 		document.title = "Feather"
@@ -81,7 +80,7 @@ function SearchEngineOptimization({ name }: { name?: keyof typeof manifest }) {
 export function Layout({ name }: Partial<IconProps>) {
 	return (
 		<>
-			<SearchEngineOptimization />
+			<SearchEngineOptimization name={name} />
 
 			<Header />
 			<BgMask />
