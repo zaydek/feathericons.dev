@@ -72,7 +72,7 @@ function Preview() {
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		<pre className="min-h-256 overflow-auto rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
+		<pre className="h-256 overflow-auto rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
 			<code className="inline-block py-24">
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -126,7 +126,7 @@ function DropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps<Fo
 	return (
 		<AriaSimpleDropDownItem
 			id={id}
-			className="flex h-32 items-center gap-8 px-12
+			className="flex h-[var(--form-size)] items-center gap-8 px-16
 				hover:bg-gray-100
 					hover:active:bg-gray-200
 						aria-selected:bg-gray-100"
@@ -163,7 +163,7 @@ function FormatButton() {
 		>
 			<div className="relative flex flex-col">
 				<div
-					className="group flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+					className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 						hover:active:bg-gray-200 hover:active:[box-shadow:_var(--inset-shadow-2)]"
 				>
 					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
@@ -222,7 +222,7 @@ function FormatButton() {
 								aria-label="Format as TypeScript React"
 							>
 								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
-								<TypographyCaps className="text-gray-700">TYPESCRIPT REACT</TypographyCaps>
+								<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
 							</DropDownItem>
 						</div>
 					</motion.div>
@@ -245,7 +245,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconCompone
 
 	return (
 		<button
-			className="group flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+			className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
 				hover:active:bg-[var(--theme-color)] hover:active:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
@@ -278,10 +278,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 				<TypographyCaps className="text-gray-700">{children}</TypographyCaps>
 			</div>
 			{/* RHS */}
-			<div
-				className="flex h-12 w-48 items-center rounded-1e3 bg-[var(--hairline-color)]
-					group-aria-checked/checkbox:bg-[var(--theme-color)]"
-			>
+			<div className="flex h-16 w-48 items-center rounded-1e3 bg-[var(--hairline-color)] group-aria-checked/checkbox:bg-[var(--theme-color)]">
 				{/* prettier-ignore */}
 				<motion.div
 					animate={{ x: props.checked ? "50%" : 0 }}
@@ -289,7 +286,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 						duration: 0.075,
 						ease: [0, 1, 1, 1],
 					}}
-					className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
+					className="h-[var(--reduced-form-size)] w-[var(--reduced-form-size)] rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
 				></motion.div>
 			</div>
 		</AriaCheckbox>
@@ -332,7 +329,7 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: Icon
 				<AriaSlider track={track} thumb={thumb} {...props}>
 					<div ref={setTrack} className="flex h-24 flex-col justify-center">
 						<div className={`flex h-6 items-center rounded-1e3 ${linearGradientFromHell}`}>
-							<div ref={setThumb} className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]" style={{ transform: "translateX(50%)" }}></div>
+							<div ref={setThumb} className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]" style={{ transform: "translateX(50%)" }}></div>
 						</div>
 					</div>
 				</AriaSlider>
@@ -373,12 +370,12 @@ export function SidebarContents() {
 	return (
 		<div className="flex flex-col gap-16 py-24">
 			<Section>
-				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
-					VIEW SOURCE FOR {toKebabCase(selectedName).toUpperCase()}
-				</CompoundCheckbox>
+				<Preview />
 			</Section>
 			<Section>
-				<Preview />
+				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
+					VIEW SOURCE {toKebabCase(selectedName).toUpperCase()}
+				</CompoundCheckbox>
 			</Section>
 			<Section>
 				<div className="flex flex-col gap-8">

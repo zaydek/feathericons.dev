@@ -24,20 +24,22 @@ function Logo() {
 
 function HeadingSubheading() {
 	return (
-		<div className="flex flex-col items-center gap-12">
-			<div className="h-6 w-128 rounded-1e3 bg-white"></div>
-			<div className="h-6 w-256 rounded-1e3 bg-white"></div>
+		<div className="flex flex-col items-center">
+			<div className="flex h-16 items-center">
+				<div className="h-6 w-128 rounded-1e3 bg-white"></div>
+			</div>
+			<div className="flex h-16 items-center">
+				<div className="h-6 w-256 rounded-1e3 bg-white"></div>
+			</div>
 		</div>
 	)
 }
 
-function CTAButton({ primary }: { primary?: boolean }) {
-	primary ||= undefined
-
+function CTAButton({ primary = false }: { primary?: boolean }) {
 	return (
 		<div
 			className="h-56 rounded-1e3 bg-white/50 sm:aspect-[3.5]
-				[&[data-primary]]:bg-white"
+				[&[data-primary=true]]:bg-white"
 			data-primary={primary}
 		></div>
 	)
@@ -51,7 +53,7 @@ function Middot() {
 
 function SponsorMeta() {
 	return (
-		<div className="flex items-center gap-12">
+		<div className="flex items-center gap-16">
 			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
 			<Middot />
 			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
@@ -61,9 +63,11 @@ function SponsorMeta() {
 
 function Sponsor() {
 	return (
-		<div className="flex flex-col items-center gap-12">
+		<div className="flex flex-col items-center gap-8">
 			<div className="aspect-[3.5] h-48 rounded-1e3 bg-white/25"></div>
-			<div className="h-6 w-96 rounded-1e3 bg-white/90"></div>
+			<div className="flex h-16 items-center">
+				<div className="h-6 w-96 rounded-1e3 bg-white/90"></div>
+			</div>
 		</div>
 	)
 }
@@ -81,7 +85,7 @@ export function Header() {
 					<div className="flex grow flex-col items-center gap-32">
 						<Logo />
 						<HeadingSubheading />
-						<div className="flex w-100% max-w-384 flex-col gap-10 sm:flex-row sm:gap-16">
+						<div className="flex w-100% max-w-384 flex-col gap-12 sm:flex-row sm:gap-16">
 							<CTAButton primary />
 							<CTAButton />
 						</div>
