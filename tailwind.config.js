@@ -25,19 +25,19 @@ module.exports = {
 		},
 	},
 	plugins: [
-		plugin(function ({ matchUtilities, theme }) {
-			matchUtilities(
-				{
-					"exact-w": value => {
-						return {
-							minWidth: value,
-							maxWidth: value,
-						}
-					},
-				},
-				{ values: theme("spacing") }
-			)
-		}),
+		//// plugin(function ({ matchUtilities, theme }) {
+		//// 	matchUtilities(
+		//// 		{
+		//// 			"exact-w": value => {
+		//// 				return {
+		//// 					minWidth: value,
+		//// 					maxWidth: value,
+		//// 				}
+		//// 			},
+		//// 		},
+		//// 		{ values: theme("spacing") }
+		//// 	)
+		//// }),
 		//// plugin(function ({ matchUtilities, theme }) {
 		//// 	// prettier-ignore
 		//// 	matchUtilities(
