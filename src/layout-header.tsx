@@ -79,7 +79,7 @@ export function Header() {
 			<header className="flex justify-center py-96 px-[var(--inset-x)]" data-bg-hero>
 				<div
 					className="flex flex-col gap-64
-						xl:w-100% xl:max-w-1024 xl:flex-row xl:items-center"
+						xl:w-100% xl:max-w-1280 xl:flex-row xl:items-center"
 				>
 					{/* LHS */}
 					<div className="flex grow flex-col items-center gap-32">

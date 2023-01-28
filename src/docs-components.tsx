@@ -24,7 +24,13 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h1 id={id} className="group/header relative my-16 scroll-my-16 text-black" {...props}>
+		// Use !my-* because of space-y-*
+		<h1
+			id={id}
+			className="group/header relative !mb-32 scroll-my-16 text-black
+				[&:not(:first-child)]:!mt-64"
+			{...props}
+		>
 			{children}
 			<a
 				href={href}
@@ -47,10 +53,11 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
+		// Use !my-* because of space-y-*
 		<h2
 			id={id}
-			className="group/header
-				relative my-16 scroll-my-16 text-black"
+			className="group/header relative !mb-32 scroll-my-16 text-black
+				[&:not(:first-child)]:!mt-64"
 			{...props}
 		>
 			{children}
@@ -72,7 +79,7 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="my-16 flex flex-col gap-8 px-16" {...props}>
+		<ol className="mx-16 !mt-16 !mb-32 flex flex-col gap-8" {...props}>
 			{children}
 		</ol>
 	)
@@ -99,9 +106,9 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		<pre
-			// Use [pre_+_&] so sibling <pre> elements noop margins
-			className="my-16 overflow-auto text-gray-800
-				[pre_+_&]:mt-0"
+			// Use !my-* because of space-y-*
+			className="mx-16 overflow-auto text-gray-800
+				[&:not(:first-child)]:!my-32 "
 			{...props}
 		>
 			<code>
@@ -126,7 +133,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 }
 
 export function Hairline(props: JSX.IntrinsicElements["hr"]) {
-	return <hr className="my-16" {...props} />
+	return <hr className="[&:not(:first-child)]:!my-32" {...props} />
 }
 
 ////////////////////////////////////////////////////////////////////////////////

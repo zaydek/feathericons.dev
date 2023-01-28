@@ -110,10 +110,9 @@ function DropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps<Fo
 		<AriaSimpleDropDownItem
 			id={id}
 			className="flex h-32 items-center gap-8 px-12
-				first:rounded-t-12 last:rounded-b-12
-					hover:bg-gray-100 focus:bg-gray-100
-						hover:active:bg-[var(--theme-color-cyan)] aria-selected:bg-[var(--theme-color-cyan)]
-							[&[aria-selected=true]_*]:text-white [&:hover:active_*]:text-white"
+				hover:bg-gray-100
+					hover:active:bg-gray-200
+						aria-selected:bg-gray-100"
 			{...props}
 		>
 			{children}
@@ -173,7 +172,7 @@ function FormatButton() {
 						}}
 						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
 					>
-						<div ref={ref} className="flex flex-col rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
+						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem id="svg">
 								<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
 								<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
@@ -260,7 +259,7 @@ function Checkbox({ children, ...props }: AriaCheckboxProps) {
 						duration: 0.1,
 						ease: [0, 1, 1, 1.25],
 					}}
-					className="h-36 w-36 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
+					className="h-32 w-32 rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
 				></motion.div>
 			</div>
 		</AriaCheckbox>

@@ -11,7 +11,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 	return (
 		<div className="flex justify-center">
 			<div className="w-100% max-w-1024">
-				<article className="prose flex flex-col gap-8">
+				<article className="prose space-y-8">
 					<RouteTransition>
 						<Heading1>Get Started With Feather</Heading1>
 						<Paragraph>
@@ -32,7 +32,6 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 							</TextIcon>
 							, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 						</Paragraph>
-						<Hairline />
 						<Heading2>
 							Using <TextIcon icon={feather[name]}>{name}</TextIcon> With a CDN
 						</Heading2>
@@ -74,7 +73,6 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 							</Anchor>{" "}
 							template.
 						</Paragraph>
-						<Hairline />
 						<Heading2>
 							Using <TextIcon icon={feather[name]}>{name}</TextIcon> With{" "}
 							<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
@@ -94,13 +92,13 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 							</ListItem>
 						</OrderedList>
 						<p>For example:</p>
-						<Pre lang="sh">
+						{/* <Pre lang="sh">
 							{detab(`
 								npm i react-feather
 								# Or yarn add react-feather
 								# Or pnpm i react-feather
 							`)}
-						</Pre>
+						</Pre> */}
 						<Pre lang="tsx">
 							{detab(`
 								import { ${name} } from "react-feather"
@@ -129,12 +127,6 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 						<Hairline />
 						<Paragraph>
 							<small>
-								Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
-							</small>
-						</Paragraph>
-						<Hairline />
-						<Paragraph>
-							<small>
 								Icons by{" "}
 								<Anchor href="https://twitter.com/colebemis">
 									<TextIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
@@ -147,14 +139,10 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 										@username_ZAYDEK
 									</TextIcon>
 								</Anchor>
-								{/* . */}
-							</small>
-							<br />
-							<small>
+								.
+								<br />
 								Feather is licensed as <Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</Anchor>. Icons may be used for personal and commercial use without attribution.
-							</small>
-							<br />
-							<small>
+								<br />
 								Built using{" "}
 								<Anchor href="https://typescriptlang.org">
 									<TextIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
@@ -185,7 +173,10 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 										Sass
 									</TextIcon>
 								</Anchor>
-								{/* . */}
+								.
+								<br />
+								<br />
+								Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
 							</small>
 						</Paragraph>
 					</RouteTransition>

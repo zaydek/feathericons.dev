@@ -110,9 +110,9 @@ export function Layout({ name }: Partial<IconProps>) {
 								2xl:top-[var(--inset-y)]"
 						>
 							{/* TODO */}
-							<div>Hello, world!</div>
+							{/* <div>Hello, world!</div> */}
 						</div>
-						<div className="p-48 pb-64">
+						<div className="p-64">
 							{/* TODO: Technically we don't need to pass name ... use useRouter */}
 							{name === undefined ? <SearchResultsContents /> : <Documentation name={name} />}
 						</div>
