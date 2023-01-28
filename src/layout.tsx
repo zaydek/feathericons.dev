@@ -41,38 +41,23 @@ function SearchEngineOptimization({ name }: Partial<IconProps>) {
 		<Head>
 			{/* GOOG */}
 			<title>{name === undefined ? "Feather – Simply beautiful open source icons" : `Icon: ${name}`}</title>
-			<meta
-				name="description"
-				content="
-					Feather is a collection of simply beautiful open source icons.
-					Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability."
-			/>
+			<meta name="description" content="Feather is a collection of simply beautiful open source icons. Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability." />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<link rel="icon" href={`/feather/${toKebabCase(name ?? "Feather")}.svg`} />
-
-			{/* FB */}
-			<meta property="og:type" content="website" />
-			<meta property="og:url" content="https://feathericons.dev" />
-			<meta property="og:title" content="Feather – Simply beautiful open source icons" />
-			<meta
-				property="og:description"
-				content="
-					Feather is a collection of simply beautiful open source icons.
-					Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability."
-			/>
-			<meta property="og:image" content="https://feathericons.dev/feather-og.png" />
 
 			{/* TWTR */}
 			<meta property="twitter:card" content="summary_large_image" />
 			<meta property="twitter:url" content="https://feathericons.dev" />
 			<meta property="twitter:title" content="Feather – Simply beautiful open source icons" />
-			<meta
-				property="twitter:description"
-				content="
-					Feather is a collection of simply beautiful open source icons.
-					Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability."
-			/>
+			<meta property="twitter:description" content="Feather is a collection of simply beautiful open source icons. Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability." />
 			<meta property="twitter:image" content="https://feathericons.dev/feather-og.png" />
+
+			{/* META */}
+			<meta property="og:type" content="website" />
+			<meta property="og:url" content="https://feathericons.dev" />
+			<meta property="og:title" content="Feather – Simply beautiful open source icons" />
+			<meta property="og:description" content="Feather is a collection of simply beautiful open source icons. Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability." />
+			<meta property="og:image" content="https://feathericons.dev/feather-og.png" />
 		</Head>
 	)
 }
@@ -83,21 +68,17 @@ export function Layout({ name }: Partial<IconProps>) {
 			<SearchEngineOptimization name={name} />
 
 			<Header />
+
 			<BgMask />
 			<FgMask />
-			{/* TODO: Extract to CSS variables? */}
+
 			<div className="flex justify-center">
-				{/* TODO: Extract to CSS variables? */}
-				<div
-					className="flex min-h-[calc(100dvh_-_(var(--rounding)_+_var(--inset-y)))] w-100% max-w-[var(--app-w)] bg-white
-						2xl:rounded-[var(--rounding)] 2xl:[box-shadow:_var(--shadow-4)]"
-				>
+				<div className="flex min-h-[var(--app-min-h)] w-100% max-w-[var(--app-w)] rounded-[var(--app-rounding)] bg-white [box-shadow:_var(--shadow-4)]">
 					{/* LHS */}
 					<main className="min-w-0 grow">
-						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">{/* <div>Hello, world!</div> */}</div>
-						{/* TODO: Extract to CSS variables? */}
+						<div className="sticky top-[var(--nav-sticky-t)] z-10">{/* <div>Hello, world!</div> */}</div>
 						{/* prettier-ignore */}
-						<div className="py-48 px-24 2xl:px-48">
+						<div className="py-[var(--main-inset-y)] px-[var(--main-inset-x)]">
 							{name === undefined
 								? <SearchResultsContents />
 								: <Documentation name={name} />}
@@ -105,7 +86,7 @@ export function Layout({ name }: Partial<IconProps>) {
 					</main>
 					{/* RHS */}
 					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)] lg:block">
-						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">
+						<div className="sticky top-[var(--nav-sticky-t)] z-10">
 							<SidebarContents />
 						</div>
 					</aside>

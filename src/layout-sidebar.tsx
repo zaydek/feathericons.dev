@@ -344,7 +344,7 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: Icon
 
 function Section({ children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
-		<section className="flex flex-col gap-16 px-24" {...props}>
+		<section className="flex flex-col gap-16 px-[var(--aside-inset-x)]" {...props}>
 			{children}
 		</section>
 	)
@@ -370,7 +370,7 @@ export function SidebarContents() {
 	}, [clipboard, formatAs, selectedName])
 
 	return (
-		<div className="flex flex-col gap-16 py-24">
+		<div className="flex flex-col gap-16 py-[var(--aside-inset-y)]">
 			<Section>
 				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
 					VIEW SOURCE FOR {toKebabCase(selectedName).toUpperCase()}
@@ -383,10 +383,20 @@ export function SidebarContents() {
 				<div className="flex flex-col gap-8">
 					<FormatButton />
 					<div className="grid grid-cols-2 gap-8">
-						<ActionButton icon={feather.Clipboard} onClick={handleClickCopy} aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}>
+						<ActionButton
+							// prettier-ignore
+							icon={feather.Clipboard}
+							onClick={handleClickCopy}
+							aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
+						>
 							COPY
 						</ActionButton>
-						<ActionButton icon={feather.Download} onClick={handleClickDownload} aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}>
+						<ActionButton
+							// prettier-ignore
+							icon={feather.Download}
+							onClick={handleClickDownload}
+							aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}
+						>
 							DOWNLOAD
 						</ActionButton>
 					</div>

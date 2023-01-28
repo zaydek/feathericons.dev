@@ -19,46 +19,10 @@ module.exports = {
 		zIndex:       zIndexes, // prettier-ignore
 		extend: {
 			screens: {
-				//// // E.g. $app-w + $inset-x * 2 + $windows-scrollbar-width
-				//// "2xl": `${1728 + 16 * 2 + 16}px`,
-
-				//// // E.g. $app-w + $windows-scrollbar-width
+				// E.g. $app-w + $windows-scrollbar-width
 				"2xl": `${1536 + 16}px`,
 			},
 		},
 	},
-	plugins: [
-		//// plugin(function ({ matchUtilities, theme }) {
-		//// 	matchUtilities(
-		//// 		{
-		//// 			"exact-w": value => {
-		//// 				return {
-		//// 					minWidth: value,
-		//// 					maxWidth: value,
-		//// 				}
-		//// 			},
-		//// 		},
-		//// 		{ values: theme("spacing") }
-		//// 	)
-		//// }),
-		//// plugin(function ({ matchUtilities, theme }) {
-		//// 	// prettier-ignore
-		//// 	matchUtilities(
-		//// 		{
-		//// 			inset: value => ({ inset:  value, }),
-		//// 			y:     value => ({ top:    value, bottom: value }),
-		//// 			x:     value => ({ right:  value, left:   value }),
-		//// 			tr:    value => ({ top:    value, right:  value }),
-		//// 			br:    value => ({ bottom: value, right:  value }),
-		//// 			bl:    value => ({ bottom: value, left:   value }),
-		//// 			tl:    value => ({ top:    value, left:   value }),
-		//// 			t:     value => ({ top:    value }),
-		//// 			r:     value => ({ right:  value }),
-		//// 			b:     value => ({ bottom: value }),
-		//// 			l:     value => ({ left:   value }),
-		//// 		},
-		//// 		{ values: theme("spacing") }
-		//// 	)
-		//// }),
-	],
+	plugins: [],
 }
