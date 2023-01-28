@@ -8,7 +8,7 @@ import { SidebarContents } from "./layout-sidebar"
 import { toKebabCase } from "./lib/cases"
 import { IconProps } from "./pages/[icon]"
 
-// See masks.scss
+// See css/masks.scss
 function BgMask() {
 	return (
 		<div className="bg-mask-sticky">
@@ -17,7 +17,7 @@ function BgMask() {
 	)
 }
 
-// See masks.scss
+// See css/masks.scss
 function FgMask() {
 	return (
 		<div className="fg-mask-sticky">
@@ -44,7 +44,8 @@ function SearchEngineOptimization({ name }: { name?: keyof typeof manifest }) {
 			<title>{name === undefined ? "Feather – Simply beautiful open source icons" : `Icon: ${name}`}</title>
 			<meta
 				name="description"
-				content="Feather is a collection of simply beautiful open source icons.
+				content="
+					Feather is a collection of simply beautiful open source icons.
 					Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability."
 			/>
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,7 +57,8 @@ function SearchEngineOptimization({ name }: { name?: keyof typeof manifest }) {
 			<meta property="og:title" content="Feather – Simply beautiful open source icons" />
 			<meta
 				property="og:description"
-				content="Feather is a collection of simply beautiful open source icons.
+				content="
+					Feather is a collection of simply beautiful open source icons.
 					Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability."
 			/>
 			<meta property="og:image" content="https://feathericons.dev/feather-og.png" />
@@ -67,7 +69,8 @@ function SearchEngineOptimization({ name }: { name?: keyof typeof manifest }) {
 			<meta property="twitter:title" content="Feather – Simply beautiful open source icons" />
 			<meta
 				property="twitter:description"
-				content="Feather is a collection of simply beautiful open source icons.
+				content="
+					Feather is a collection of simply beautiful open source icons.
 					Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability."
 			/>
 			<meta property="twitter:image" content="https://feathericons.dev/feather-og.png" />
@@ -76,17 +79,6 @@ function SearchEngineOptimization({ name }: { name?: keyof typeof manifest }) {
 }
 
 export function Layout({ name }: Partial<IconProps>) {
-	//// const sm = useBreakpoint(640)
-	//// const lg = useBreakpoint(1024, { initialValue: true })
-	////
-	//// const [showSidebar, setShowSidebar] = useState(!lg)
-	////
-	//// useEffect(() => {
-	//// 	if (!sm) { setShowSidebar(false) } // prettier-ignore
-	//// 	if (!lg) { setShowSidebar(true)  } // prettier-ignore
-	//// 	setShowSidebar(false)
-	//// }, [lg, sm])
-
 	return (
 		<>
 			<SearchEngineOptimization />
@@ -94,42 +86,29 @@ export function Layout({ name }: Partial<IconProps>) {
 			<Header />
 			<BgMask />
 			<FgMask />
-			<div
-				className="flex justify-center
-					2xl:px-[var(--inset-x)]"
-			>
+			{/* TODO: Extract to CSS variables? */}
+			<div className="flex justify-center 2xl:px-[var(--inset-x)]">
+				{/* TODO: Extract to CSS variables? */}
 				<div
 					className="flex min-h-[calc(100dvh_-_(var(--rounding)_+_var(--inset-y)))] w-100% max-w-[var(--app-w)] bg-white
 						2xl:rounded-[var(--rounding)] 2xl:[box-shadow:_var(--shadow-4)]"
 				>
 					{/* LHS */}
 					<main className="min-w-0 grow">
-						<div
-							// Use z-* here because of masks
-							className="sticky top-0 z-10
-								2xl:top-[var(--inset-y)]"
-						>
-							{/* TODO */}
-							{/* <div>Hello, world!</div> */}
-						</div>
-						<div
-							className="py-48 px-24
-								2xl:px-48"
-						>
-							{/* TODO: Technically we don't need to pass name ... use useRouter */}
-							{name === undefined ? <SearchResultsContents /> : <Documentation name={name} />}
+						{/* Use z-* here because of masks */}
+						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">{/* <div>Hello, world!</div> */}</div>
+						{/* TODO: Extract to CSS variables? */}
+						{/* prettier-ignore */}
+						<div className="py-48 px-24 2xl:px-48">
+							{name === undefined
+								? <SearchResultsContents />
+								: <Documentation name={name} />}
 						</div>
 					</main>
 					{/* RHS */}
-					<aside
-						className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)]
-							lg:block"
-					>
-						<div
-							// Use z-* here because of masks
-							className="sticky top-0 z-10
-								2xl:top-[var(--inset-y)]"
-						>
+					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)] lg:block">
+						{/* Use z-* here because of masks */}
+						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">
 							<SidebarContents />
 						</div>
 					</aside>

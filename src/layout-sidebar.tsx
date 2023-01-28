@@ -11,7 +11,6 @@ import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon
 import { toKebabCase } from "./lib/cases"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
-import { RouteTransition } from "./route-transition"
 import { ShikiContext } from "./shiki"
 import { SelectedContext, SliderContext } from "./state"
 import { FormatAs } from "./types"
@@ -88,16 +87,11 @@ function IconPreview() {
 	) : (
 		<div>
 			<div className="flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]" data-bg-dots>
-				<RouteTransition>
-					{/* Use a <div> to preserve var(--scale) */}
-					<div>
-						<Icon
-							className="h-64 w-64 text-gray-800
-								[stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-							icon={feather[selectedName]}
-						/>
-					</div>
-				</RouteTransition>
+				<Icon
+					className="h-64 w-64 text-gray-800
+						[stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
+					icon={feather[selectedName]}
+				/>
 			</div>
 		</div>
 	)
@@ -214,17 +208,8 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconCompone
 			}}
 			{...props}
 		>
-			<Icon
-				className="h-16 w-16 text-[var(--theme-color-cyan)]
-					group-hover:group-active:text-white"
-				icon={pressed ? feather.Check : icon}
-			/>
-			<TypographyCaps
-				className="text-gray-700
-					group-hover:group-active:text-white"
-			>
-				{children}
-			</TypographyCaps>
+			<Icon className="h-16 w-16 text-[var(--theme-color-cyan)] group-hover:group-active:text-white" icon={pressed ? feather.Check : icon} />
+			<TypographyCaps className="text-gray-700 group-hover:group-active:text-white">{children}</TypographyCaps>
 		</button>
 	)
 }
