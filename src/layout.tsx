@@ -103,7 +103,7 @@ export function Layout({ name }: Partial<IconProps>) {
 						2xl:rounded-[var(--rounding)] 2xl:[box-shadow:_var(--shadow-4)]"
 				>
 					{/* LHS */}
-					<main className="grow">
+					<main className="min-w-0 grow">
 						<div
 							// Use z-* here because of masks
 							className="sticky top-0 z-10
@@ -112,13 +112,19 @@ export function Layout({ name }: Partial<IconProps>) {
 							{/* TODO */}
 							{/* <div>Hello, world!</div> */}
 						</div>
-						<div className="p-48">
+						<div
+							className="py-48 px-24
+								2xl:px-48"
+						>
 							{/* TODO: Technically we don't need to pass name ... use useRouter */}
 							{name === undefined ? <SearchResultsContents /> : <Documentation name={name} />}
 						</div>
 					</main>
 					{/* RHS */}
-					<aside className="min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)]">
+					<aside
+						className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)]
+							lg:block"
+					>
 						<div
 							// Use z-* here because of masks
 							className="sticky top-0 z-10

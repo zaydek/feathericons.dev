@@ -40,6 +40,7 @@ export default function App({ pageProps }: AppProps<Partial<IconProps>>) {
 			<ShikiProvider>
 				<StateProvider>
 					<Layout name={name} />
+					{/* <Documentation name={"Feather"} /> */}
 				</StateProvider>
 			</ShikiProvider>
 		</>
