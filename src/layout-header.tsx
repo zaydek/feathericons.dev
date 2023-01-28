@@ -75,7 +75,7 @@ export function Header() {
 		<>
 			<NavLink pos="tl" />
 			<NavLink pos="tr" />
-			<header className="flex justify-center py-96 px-[var(--inset-x)]" data-bg-hero>
+			<header className="hero-background-image flex justify-center py-96 px-[var(--inset-x)]">
 				<div
 					className="flex flex-col gap-64
 						xl:w-100% xl:max-w-1280 xl:flex-row xl:items-center"

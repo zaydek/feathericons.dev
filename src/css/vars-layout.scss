@@ -1,8 +1,12 @@
+$windows-scrollbar-width: 16px;
+$inset-x: 16px;
+$app-w: 1536px;
+
 :root {
 	--rounding:  40px;
 	--inset-y:   16px;
-	--inset-x:   16px;
-	--app-w:     1536px;
+	--inset-x:   #{$inset-x};
+	--app-w:     #{$app-w};
 	--aside-w:   448px;
 	--grid-size: 96px;
 }

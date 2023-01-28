@@ -105,7 +105,7 @@ function Preview() {
 		</pre>
 	) : (
 		<div>
-			<div className="flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]" data-bg-dots>
+			<div className="dots-background-image flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
 				<RouteTransition>
 					{/* Use <div> so preserve [transform:_scale(var(--scale))] */}
 					<div>

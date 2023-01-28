@@ -86,7 +86,7 @@ export function Layout({ name }: Partial<IconProps>) {
 			<BgMask />
 			<FgMask />
 			{/* TODO: Extract to CSS variables? */}
-			<div className="flex justify-center 2xl:px-[var(--inset-x)]">
+			<div className="flex justify-center">
 				{/* TODO: Extract to CSS variables? */}
 				<div
 					className="flex min-h-[calc(100dvh_-_(var(--rounding)_+_var(--inset-y)))] w-100% max-w-[var(--app-w)] bg-white
@@ -94,7 +94,6 @@ export function Layout({ name }: Partial<IconProps>) {
 				>
 					{/* LHS */}
 					<main className="min-w-0 grow">
-						{/* Use z-* here because of masks */}
 						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">{/* <div>Hello, world!</div> */}</div>
 						{/* TODO: Extract to CSS variables? */}
 						{/* prettier-ignore */}
@@ -106,7 +105,6 @@ export function Layout({ name }: Partial<IconProps>) {
 					</main>
 					{/* RHS */}
 					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)] lg:block">
-						{/* Use z-* here because of masks */}
 						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">
 							<SidebarContents />
 						</div>

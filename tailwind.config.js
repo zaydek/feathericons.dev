@@ -19,8 +19,11 @@ module.exports = {
 		zIndex:       zIndexes, // prettier-ignore
 		extend: {
 			screens: {
-				// FIXME: Hmm...
-				"2xl": `${1536 + 16 * 2 + 16}px`,
+				//// // E.g. $app-w + $inset-x * 2 + $windows-scrollbar-width
+				//// "2xl": `${1728 + 16 * 2 + 16}px`,
+
+				//// // E.g. $app-w + $windows-scrollbar-width
+				"2xl": `${1536 + 16}px`,
 			},
 		},
 	},
