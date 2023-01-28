@@ -9,14 +9,6 @@
 	letter-spacing: 0.0125em;
 }
 
-pre code {
-	-webkit-font-smoothing: auto;
-	-moz-osx-font-smoothing: auto;
-	font: 400 #{16px * 0.875} / 1.6 var(--code);
-	font-feature-settings: "tnum";
-	letter-spacing: null;
-}
-
 .prose {
 	font: 400 16px / 1.6 var(--sans);
 	font-feature-settings: "tnum";
@@ -29,6 +21,13 @@ pre code {
 }
 .prose h2 {
 	font: 500 1em / 1.25 var(--sans);
+	font-feature-settings: "tnum";
+	letter-spacing: null;
+}
+pre code {
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
+	font: 400 #{16px * 0.875} / 1.6 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }

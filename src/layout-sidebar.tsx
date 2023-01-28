@@ -47,7 +47,6 @@ function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: str
 
 function useRouterName() {
 	const router = useRouter()
-
 	let name: keyof typeof manifest
 	if (router.query.icon === undefined) {
 		name = "Feather"
@@ -55,7 +54,6 @@ function useRouterName() {
 		// Cast string | string[] to string and string to keyof typeof manifest
 		name = toTitleCase(router.query.icon as string) as keyof typeof manifest
 	}
-
 	return name
 }
 
@@ -82,7 +80,8 @@ function Preview() {
 								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
 									<div className="w-32 text-right text-gray-400">{y + 1}</div>
 								</div> */}
-								{ys || <br />}
+								{/* {ys || <br />} */}
+								{ys.length > 0 ? y === 0 ? <CommentLink formatAs={formatAs}>{ys}</CommentLink> : ys : <br />}
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
