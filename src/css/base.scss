@@ -1,3 +1,5 @@
+@use "tailwind-colors" as *;
+
 //// :not(svg > *) {
 //// 	outline: 1px solid hsl(200, 100%, 50%, 0.5);
 //// 	outline-offset: -0.5px;
@@ -15,7 +17,7 @@ pre { margin: 0; }
 	scroll-behavior: smooth;
 	//// overscroll-behavior-y: none;
 
-	background-color: white;
+	background-color: gray(50);
 }
 
 :root:not(.dark) { color-scheme: light; }
