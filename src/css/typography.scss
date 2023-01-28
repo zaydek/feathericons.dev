@@ -1,37 +1,37 @@
-// https://github.com/sindresorhus/modern-normalize
-$sans: (
-	//// 'var(--inter)', // TODO
-	system-ui,
-	'Segoe UI',
-	Roboto,
-	Helvetica,
-	Arial,
-	sans-serif,
-	'Apple Color Emoji',
-	'Segoe UI Emoji',
-);
-
-$code: (
-	//// 'var(--fira-code)', // TODO
-	ui-monospace,
-	SFMono-Regular,
-	Consolas,
-	'Liberation Mono',
-	Menlo,
-	monospace,
-);
-
-////////////////////////////////////////////////////////////////////////////////
-
-:root, ::before, ::after {
-	--sans: #{$sans};
-	--code: #{$code};
-	font-family: var(--sans);
-}
-pre, code {
-	font-family: var(--code);
-	tab-size: 2;
-}
+//// // https://github.com/sindresorhus/modern-normalize
+//// $sans: (
+//// 	//// 'var(--inter)', // TODO
+//// 	system-ui,
+//// 	'Segoe UI',
+//// 	Roboto,
+//// 	Helvetica,
+//// 	Arial,
+//// 	sans-serif,
+//// 	'Apple Color Emoji',
+//// 	'Segoe UI Emoji',
+//// );
+////
+//// $code: (
+//// 	//// 'var(--fira-code)', // TODO
+//// 	ui-monospace,
+//// 	SFMono-Regular,
+//// 	Consolas,
+//// 	'Liberation Mono',
+//// 	Menlo,
+//// 	monospace,
+//// );
+////
+//// ////////////////////////////////////////////////////////////////////////////////
+////
+//// :root, ::before, ::after {
+//// 	--sans: #{$sans};
+//// 	--code: #{$code};
+//// 	font-family: var(--sans);
+//// }
+//// pre, code {
+//// 	font-family: var(--code);
+//// 	tab-size: 2;
+//// }
 
 ////////////////////////////////////////////////////////////////////////////////
 
