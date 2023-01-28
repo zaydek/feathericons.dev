@@ -89,11 +89,14 @@ function IconPreview() {
 		<div>
 			<div className="flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]" data-bg-dots>
 				<RouteTransition>
-					<Icon
-						className="h-64 w-64 text-gray-800
-							[stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-						icon={feather[selectedName]}
-					/>
+					{/* Use a <div> to preserve var(--scale) */}
+					<div>
+						<Icon
+							className="h-64 w-64 text-gray-800
+								[stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
+							icon={feather[selectedName]}
+						/>
+					</div>
 				</RouteTransition>
 			</div>
 		</div>
@@ -136,9 +139,8 @@ function FormatButton() {
 		<AriaSimpleDropDown<FormatAs> className="relative flex flex-col" show={show} setShow={setShow} currentId={formatAs} setCurrentId={setFormatAs}>
 			<div className="relative flex flex-col">
 				<div
-					className="group
-						flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
-							hover:active:bg-gray-200 hover:active:[box-shadow:_var(--inset-shadow-2)]"
+					className="group flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+						hover:active:bg-gray-200 hover:active:[box-shadow:_var(--inset-shadow-2)]"
 				>
 					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
 					<TypographyCaps className="text-gray-700">FORMAT AS {desc}</TypographyCaps>
@@ -205,9 +207,8 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconCompone
 
 	return (
 		<button
-			className="group
-				flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
-					hover:active:bg-[var(--theme-color-cyan)] hover:active:[box-shadow:_var(--inset-shadow-2)]"
+			className="group flex h-32 items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
+				hover:active:bg-[var(--theme-color-cyan)] hover:active:[box-shadow:_var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
 				onClick?.(e)

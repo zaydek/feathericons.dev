@@ -3,7 +3,9 @@
 [data-bg-hero] {
 	background-image: linear-gradient(35deg, var(--theme-color), var(--theme-color-purple));
 	background-attachment: fixed;
-	//// background-size: 1e3px 1e3px;
+	//// background-size:
+	//// 	100vmax
+	//// 	100vmax;
 }
 
 /* https://30secondsofcode.org/css/s/polka-dot-pattern */
