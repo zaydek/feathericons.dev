@@ -113,6 +113,7 @@ export function SearchResultsContents() {
 		if (compactMode) {
 			return MemoTextlessGridItem
 		} else {
+			return MemoTextlessGridItem
 			return MemoGridItem
 		}
 	}, [compactMode])

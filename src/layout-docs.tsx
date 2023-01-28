@@ -128,7 +128,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 								@colebemis
 							</TextIcon>
 						</Anchor>
-						, website by{" "}
+						. App by{" "}
 						<Anchor href="https://twitter.com/username_ZAYDEK">
 							<TextIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
 								@username_ZAYDEK
@@ -147,7 +147,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 						,{" "}
 						<Anchor href="https://reactjs.org">
 							<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
-								React
+								React.js
 							</TextIcon>
 						</Anchor>
 						,{" "}
