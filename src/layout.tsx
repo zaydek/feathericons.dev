@@ -68,12 +68,11 @@ export function Layout({ name }: Partial<IconProps>) {
 			<SearchEngineOptimization name={name} />
 
 			<Header />
-
 			<BgMask />
 			<FgMask />
 
 			<div className="flex justify-center">
-				<div className="flex min-h-[100dvh] w-100% max-w-[var(--app-w)] rounded-[var(--app-rounding)] bg-white [box-shadow:_var(--shadow-4)] 2xl:min-h-[var(--app-min-h)]">
+				<div className="rounding-0 flex min-h-[100dvh] w-100% max-w-[var(--app-w)] bg-white [box-shadow:_var(--shadow-4)] 2xl:min-h-[var(--app-min-h)] 2xl:rounded-[var(--app-rounding)]">
 					{/* LHS */}
 					<main className="min-w-0 grow">
 						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">{/* <div>Hello, world!</div> */}</div>
