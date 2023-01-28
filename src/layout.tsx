@@ -73,12 +73,12 @@ export function Layout({ name }: Partial<IconProps>) {
 			<FgMask />
 
 			<div className="flex justify-center">
-				<div className="flex min-h-[var(--app-min-h)] w-100% max-w-[var(--app-w)] rounded-[var(--app-rounding)] bg-white [box-shadow:_var(--shadow-4)]">
+				<div className="flex min-h-[100dvh] w-100% max-w-[var(--app-w)] rounded-[var(--app-rounding)] bg-white [box-shadow:_var(--shadow-4)] 2xl:min-h-[var(--app-min-h)]">
 					{/* LHS */}
 					<main className="min-w-0 grow">
-						<div className="sticky top-[var(--nav-sticky-t)] z-10">{/* <div>Hello, world!</div> */}</div>
+						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">{/* <div>Hello, world!</div> */}</div>
 						{/* prettier-ignore */}
-						<div className="py-[var(--main-inset-y)] px-[var(--main-inset-x)]">
+						<div className="py-48 px-24 xl:px-48">
 							{name === undefined
 								? <SearchResultsContents />
 								: <Documentation name={name} />}
@@ -86,7 +86,7 @@ export function Layout({ name }: Partial<IconProps>) {
 					</main>
 					{/* RHS */}
 					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)] lg:block">
-						<div className="sticky top-[var(--nav-sticky-t)] z-10">
+						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">
 							<SidebarContents />
 						</div>
 					</aside>

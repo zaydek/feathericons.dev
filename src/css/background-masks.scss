@@ -9,7 +9,7 @@
 	position: sticky;
 	top: 0;
 	// BORDER BOX
-	margin-top: calc(-1 * var(--header-inset-y));
+	margin-top: calc(-1 * var(--inset-y));
 	height: 0; // 😎
 }
 .bg-mask {
@@ -34,7 +34,7 @@
 	display: flex;
 	justify-content: center;
 	// BORDER BOX
-	margin: 0 calc(-1 * var(--header-inset-x) * 2);
+	margin: 0 calc(-1 * var(--inset-x) * 2);
 	// MISC.
 	pointer-events: none;
 }
@@ -44,22 +44,22 @@
 }
 .fg-mask-bit-1 {
 	position: relative;
-	height: calc(var(--app-rounding) + var(--header-inset-y));
-	min-width: calc(var(--app-rounding) + var(--header-inset-x));
-	max-width: calc(var(--app-rounding) + var(--header-inset-x));
+	height: calc(var(--app-rounding) + var(--inset-y));
+	min-width: calc(var(--app-rounding) + var(--inset-x));
+	max-width: calc(var(--app-rounding) + var(--inset-x));
 	@include hero-background-image;
 }
 .fg-mask-bit-2 {
-	height: var(--header-inset-y);
+	height: var(--inset-y);
 	width: 100%;
 	max-width: calc(var(--app-w) - var(--app-rounding) * 2);
 	@include hero-background-image;
 }
 .fg-mask-bit-3 {
 	position: relative;
-	height: calc(var(--app-rounding) + var(--header-inset-y));
-	min-width: calc(var(--app-rounding) + var(--header-inset-x));
-	max-width: calc(var(--app-rounding) + var(--header-inset-x));
+	height: calc(var(--app-rounding) + var(--inset-y));
+	min-width: calc(var(--app-rounding) + var(--inset-x));
+	max-width: calc(var(--app-rounding) + var(--inset-x));
 	@include hero-background-image;
 }
 .fg-mask-bit-1-nested {

@@ -344,7 +344,7 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: Icon
 
 function Section({ children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
-		<section className="flex flex-col gap-16 px-[var(--aside-inset-x)]" {...props}>
+		<section className="flex flex-col gap-16 px-24" {...props}>
 			{children}
 		</section>
 	)
@@ -370,7 +370,7 @@ export function SidebarContents() {
 	}, [clipboard, formatAs, selectedName])
 
 	return (
-		<div className="flex flex-col gap-16 py-[var(--aside-inset-y)]">
+		<div className="flex flex-col gap-16 py-24">
 			<Section>
 				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
 					VIEW SOURCE FOR {toKebabCase(selectedName).toUpperCase()}
