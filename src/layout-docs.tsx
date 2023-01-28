@@ -32,7 +32,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 					</TextIcon>
 					, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 				</Paragraph>
-				{/* <Hairline /> */}
+				<Hairline />
 				<Heading2>
 					Using <TextIcon icon={feather[name]}>{name}</TextIcon> With a CDN
 				</Heading2>
@@ -74,7 +74,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 					</Anchor>{" "}
 					template.
 				</Paragraph>
-				{/* <Hairline /> */}
+				<Hairline />
 				<Heading2>
 					Using <TextIcon icon={feather[name]}>{name}</TextIcon> With{" "}
 					<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>

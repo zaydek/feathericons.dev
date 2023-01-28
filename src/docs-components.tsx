@@ -25,19 +25,9 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 	return (
 		// Use !my-* because of space-y-*
-		<h1
-			id={id}
-			className="group/header relative !mb-32 scroll-my-32 text-black
-				[&:not(:first-child)]:!mt-64"
-			{...props}
-		>
+		<h1 id={id} className="group/header relative !mb-32 scroll-my-32 text-black [&:not(:first-child)]:!mt-64" {...props}>
 			{children}
-			<a
-				href={href}
-				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
-					group-hover/header:opacity-100"
-				aria-label={`Link ${id}`}
-			>
+			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100" aria-label={`Link ${id}`}>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h1>
@@ -54,19 +44,9 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 	return (
 		// Use !my-* because of space-y-*
-		<h2
-			id={id}
-			className="group/header relative !mb-32 scroll-my-32 text-black
-				[&:not(:first-child)]:!mt-64"
-			{...props}
-		>
+		<h2 id={id} className="group/header relative !mb-32 scroll-my-32 text-black [&:not(:first-child)]:!mt-64" {...props}>
 			{children}
-			<a
-				href={href}
-				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
-					group-hover/header:opacity-100"
-				aria-label={`Link ${id}`}
-			>
+			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100" aria-label={`Link ${id}`}>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h2>
@@ -79,11 +59,7 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol
-			className="mx-16 flex flex-col gap-8
-				[&:not(:first-child)]:!my-32"
-			{...props}
-		>
+		<ol className="flex flex-col gap-8 2xl:mx-16 [&:not(:first-child)]:!my-32" {...props}>
 			{children}
 		</ol>
 	)
@@ -109,12 +85,8 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	}, [code, highlighter, lang])
 
 	return (
-		<pre
-			// Use !my-* because of space-y-*
-			className="mx-16 overflow-auto
-				[&:not(:first-child)]:!my-32 "
-			{...props}
-		>
+		// Use !my-* because of space-y-*
+		<pre className="overflow-auto 2xl:mx-16 [&:not(:first-child)]:!my-32 " {...props}>
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => <div key={y}>{ys || <br />}</div>)
@@ -144,11 +116,7 @@ export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 
 export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	return (
-		<a
-			className="text-gray-500 decoration-gray-400
-				hover:underline"
-			{...props}
-		>
+		<a className="text-gray-500 decoration-gray-400 hover:underline" {...props}>
 			{children}
 		</a>
 	)

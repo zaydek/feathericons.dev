@@ -1,80 +1,36 @@
-//// // https://github.com/sindresorhus/modern-normalize
-//// $sans: (
-//// 	//// 'var(--inter)', // TODO
-//// 	system-ui,
-//// 	'Segoe UI',
-//// 	Roboto,
-//// 	Helvetica,
-//// 	Arial,
-//// 	sans-serif,
-//// 	'Apple Color Emoji',
-//// 	'Segoe UI Emoji',
-//// );
-////
-//// $code: (
-//// 	//// 'var(--fira-code)', // TODO
-//// 	ui-monospace,
-//// 	SFMono-Regular,
-//// 	Consolas,
-//// 	'Liberation Mono',
-//// 	Menlo,
-//// 	monospace,
-//// );
-////
-//// ////////////////////////////////////////////////////////////////////////////////
-////
-//// :root, ::before, ::after {
-//// 	--sans: #{$sans};
-//// 	--code: #{$code};
-//// 	font-family: var(--sans);
-//// }
-//// pre, code {
-//// 	font-family: var(--code);
-//// 	tab-size: 2;
-//// }
-
-////////////////////////////////////////////////////////////////////////////////
-
 .typography-caps {
-	//// white-space: pre;
 	font: 500 11px / normal var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: 0.05em;
 }
 .typography-small-sans {
-	//// white-space: normal;
 	font: 400 13px / normal var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: 0.0125em;
 }
 
 pre code {
-	//// white-space: pre;
 	font: 400 #{16px * 0.875} / 1.5 var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 
 .prose {
-	//// white-space: normal;
 	font: 400 16px / 1.6 var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 .prose h1 {
-	//// white-space: normal;
 	font: 500 1.25em / 1.25 var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 .prose h2 {
-	//// white-space: normal;
 	font: 500 1.125em / 1.25 var(--sans);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
 }
 .prose code {
-	//// white-space: pre;
 	font: 400 0.875em / normal var(--code);
 	font-feature-settings: "tnum";
 	letter-spacing: null;
