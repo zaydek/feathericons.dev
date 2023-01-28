@@ -147,8 +147,8 @@ function FormatButton() {
 	const [hex, icon, desc] = useMemo(() => {
 		return {
 			svg: [SvgHex, SvgIcon, "SVG"] as const,
-			jsx: [ReactJsHex, ReactJsIcon, "REACT"] as const,
-			tsx: [TypeScriptHex, TypeScriptIcon, "TS REACT"] as const,
+			jsx: [ReactJsHex, ReactJsIcon, "JSX"] as const,
+			tsx: [TypeScriptHex, TypeScriptIcon, "TSX"] as const,
 		}[formatAs]
 	}, [formatAs])
 
@@ -168,7 +168,9 @@ function FormatButton() {
 						hover:active:bg-gray-200 hover:active:[box-shadow:_var(--inset-shadow-2)]"
 				>
 					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
-					<TypographyCaps className="text-gray-700">FORMAT AS {desc}</TypographyCaps>
+					<TypographyCaps className="text-gray-700">
+						FORMAT: <span className="inline-flex h-0 w-24">{desc}</span>
+					</TypographyCaps>
 				</div>
 				{/* Use right-8 to make optically centered */}
 				<div className="pointer-events-none absolute top-0 right-8 bottom-0">
@@ -213,7 +215,7 @@ function FormatButton() {
 								aria-label="Format as React"
 							>
 								<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
-								<TypographyCaps className="text-gray-700">JSX</TypographyCaps>
+								<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -221,7 +223,7 @@ function FormatButton() {
 								aria-label="Format as TypeScript React"
 							>
 								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
-								<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
+								<TypographyCaps className="text-gray-700">TYPESCRIPT REACT</TypographyCaps>
 							</DropDownItem>
 						</div>
 					</motion.div>

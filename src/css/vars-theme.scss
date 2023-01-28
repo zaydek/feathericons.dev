@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @use "tailwind-colors" as *;
 
 :root {
@@ -8,6 +10,8 @@
 	--seed-raw: 220, 100%, 0%
 	--seed:     hsl(220, 100%, 0%);
 
-	--theme-color:        #{sky(400)};
-	--theme-color-darker: #{sky(600)};
+	--theme-color:         #{color.mix(#44bbff, #0062ff)};
+	--hero-gradient-angle: 195deg;
+	--hero-gradient-start: #44bbff;
+	--hero-gradient-end:   #0062ff;
 }

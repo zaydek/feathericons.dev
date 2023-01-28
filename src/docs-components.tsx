@@ -24,8 +24,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		// Use !my-* because of space-y-*
-		<h1 id={id} className="group/header relative !mb-32 scroll-my-32 text-black [&:not(:first-child)]:!mt-32" {...props}>
+		<h1 id={id} className="group/header relative scroll-my-32 text-black [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />
@@ -43,8 +42,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		// Use !my-* because of space-y-*
-		<h2 id={id} className="group/header relative !mb-32 scroll-my-32 text-black [&:not(:first-child)]:!mt-32" {...props}>
+		<h2 id={id} className="group/header relative scroll-my-32 text-black [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />
@@ -59,7 +57,7 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="flex flex-col gap-8 xl:mx-16 [&:not(:first-child)]:!my-32" {...props}>
+		<ol className="flex flex-col gap-8 xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 		</ol>
 	)
@@ -85,8 +83,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	}, [code, highlighter, lang])
 
 	return (
-		// Use !my-* because of space-y-*
-		<pre className="overflow-auto xl:mx-16 [&:not(:first-child)]:!my-32 " {...props}>
+		<pre className="overflow-auto xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			<code>
 				{/* {tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -134,7 +131,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 }
 
 export function Hairline(props: JSX.IntrinsicElements["hr"]) {
-	return <hr className="[&:not(:first-child)]:!my-32" {...props} />
+	return <hr className="[&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props} />
 }
 
 ////////////////////////////////////////////////////////////////////////////////

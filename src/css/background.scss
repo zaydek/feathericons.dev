@@ -1,9 +1,10 @@
 @use "tailwind-colors" as *;
 
 @mixin hero-background-image {
-	background-image: linear-gradient(225deg,
-		var(--theme-color),
-		var(--theme-color-darker)
+	background-image: linear-gradient(
+		var(--hero-gradient-angle),
+		var(--hero-gradient-start),
+		var(--hero-gradient-end)
 	);
 	background-attachment: fixed;
 }
