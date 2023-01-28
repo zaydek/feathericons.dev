@@ -27,7 +27,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		// Use !my-* because of space-y-*
 		<h1
 			id={id}
-			className="group/header relative !mb-32 scroll-my-16 text-black
+			className="group/header relative !mb-32 scroll-my-32 text-gray-900
 				[&:not(:first-child)]:!mt-64"
 			{...props}
 		>
@@ -38,7 +38,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					group-hover/header:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<HeadingIcon className="text-[#1570fb] [transform:_translateY(2px)]" icon={feather.Link2} />
+				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h1>
 	)
@@ -56,7 +56,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		// Use !my-* because of space-y-*
 		<h2
 			id={id}
-			className="group/header relative !mb-32 scroll-my-16 text-black
+			className="group/header relative !mb-32 scroll-my-32 text-gray-900
 				[&:not(:first-child)]:!mt-64"
 			{...props}
 		>
@@ -67,7 +67,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					group-hover/header:opacity-100"
 				aria-label={`Link ${id}`}
 			>
-				<HeadingIcon className="text-[#1570fb] [transform:_translateY(2px)]" icon={feather.Link2} />
+				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h2>
 	)

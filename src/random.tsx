@@ -3,10 +3,6 @@ import { cx } from "./lib/cx"
 import { Transition } from "./transition"
 import { TypographyCaps } from "./typography"
 
-export function Hairline() {
-	return <hr className="h-1 bg-gray-200" />
-}
-
 export function HoverTip({
 	pos,
 	content,

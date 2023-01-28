@@ -11,7 +11,6 @@ import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon
 import { toKebabCase } from "./lib/cases"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
-import { Hairline } from "./random"
 import { RouteTransition } from "./route-transition"
 import { ShikiContext } from "./shiki"
 import { SelectedContext, SliderContext } from "./state"
@@ -358,7 +357,7 @@ export function SidebarContents() {
 					</div>
 				</div>
 			</SectionWrapper>
-			<Hairline />
+			<hr />
 			<SectionWrapper>
 				{/* prettier-ignore */}
 				<Slider
@@ -369,7 +368,7 @@ export function SidebarContents() {
 					PREVIEW SIZE
 				</Slider>
 			</SectionWrapper>
-			<Hairline />
+			<hr />
 			<SectionWrapper>
 				{/* prettier-ignore */}
 				<Slider

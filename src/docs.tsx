@@ -32,6 +32,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 							</TextIcon>
 							, or use one of the <Anchor href="https://github.com/feathericons/feather#related-projects">related projects</Anchor>.
 						</Paragraph>
+						{/* <Hairline /> */}
 						<Heading2>
 							Using <TextIcon icon={feather[name]}>{name}</TextIcon> With a CDN
 						</Heading2>
@@ -47,7 +48,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 								Invoke <Code lang="js">{`feather.replace()`}</Code>
 							</ListItem>
 						</OrderedList>
-						<p>For example:</p>
+						<Paragraph>For example:</Paragraph>
 						<Pre lang="html">
 							{detab(`
 								<!DOCTYPE html>
@@ -73,6 +74,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 							</Anchor>{" "}
 							template.
 						</Paragraph>
+						{/* <Hairline /> */}
 						<Heading2>
 							Using <TextIcon icon={feather[name]}>{name}</TextIcon> With{" "}
 							<TextIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
@@ -91,7 +93,7 @@ export function Documentation({ name }: { name: keyof typeof manifest }) {
 								Invoke <Code lang="tsx">{`<${name} />`}</Code>
 							</ListItem>
 						</OrderedList>
-						<p>For example:</p>
+						<Paragraph>For example:</Paragraph>
 						{/* <Pre lang="sh">
 							{detab(`
 								npm i react-feather

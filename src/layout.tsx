@@ -112,7 +112,7 @@ export function Layout({ name }: Partial<IconProps>) {
 							{/* TODO */}
 							{/* <div>Hello, world!</div> */}
 						</div>
-						<div className="p-64">
+						<div className="p-48">
 							{/* TODO: Technically we don't need to pass name ... use useRouter */}
 							{name === undefined ? <SearchResultsContents /> : <Documentation name={name} />}
 						</div>
