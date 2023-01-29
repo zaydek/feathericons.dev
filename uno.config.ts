@@ -34,7 +34,7 @@ function resolve(rawValue: string, { px = true }: { px?: boolean } = {}) {
 
 const rules: Rule[] = [
 	// Arbitrary key-value e.g. k-[v]
-	[/^(?:-|--)?([a-z][a-z-]*)-\[([^\]]+)\]$/, ([_, property, value]) => {
+	[/^((?:--)?[a-z][a-z-]*)-\[([^\]]+)\]$/, ([_, property, value]) => {
 		const px = !(property in unitless)
 		return {
 			[property]: resolve(value, { px }),
@@ -79,20 +79,20 @@ const rules: Rule[] = [
 	[/^gap-(.+)$/,            ([_, value]) => ({ "gap":            resolve(value) })],
 	[/^gap-y-(.+)$/,          ([_, value]) => ({ "row-gap":        resolve(value) })],
 	[/^gap-x-(.+)$/,          ([_, value]) => ({ "column-gap":     resolve(value) })],
-	[/^mar-(.+)$/,            ([_, value]) => ({ "margin":         resolve(value) })],
-	[/^mar-y-(.+)$/,          ([_, value]) => ({ "margin-top":     resolve(value), "margin-bottom": resolve(value) })],
-	[/^mar-x-(.+)$/,          ([_, value]) => ({ "margin-right":   resolve(value), "margin-left":   resolve(value) })],
-	[/^mar-t-(.+)$/,          ([_, value]) => ({ "margin-top":     resolve(value) })],
-	[/^mar-r-(.+)$/,          ([_, value]) => ({ "margin-right":   resolve(value) })],
-	[/^mar-b-(.+)$/,          ([_, value]) => ({ "margin-bottom":  resolve(value) })],
-	[/^mar-l-(.+)$/,          ([_, value]) => ({ "margin-left":    resolve(value) })],
-	[/^pad-(.+)$/,            ([_, value]) => ({ "padding":        resolve(value) })],
-	[/^pad-y-(.+)$/,          ([_, value]) => ({ "padding-top":    resolve(value), "padding-bottom": resolve(value) })],
-	[/^pad-x-(.+)$/,          ([_, value]) => ({ "padding-right":  resolve(value), "padding-left":   resolve(value) })],
-	[/^pad-t-(.+)$/,          ([_, value]) => ({ "padding-top":    resolve(value) })],
-	[/^pad-r-(.+)$/,          ([_, value]) => ({ "padding-right":  resolve(value) })],
-	[/^pad-b-(.+)$/,          ([_, value]) => ({ "padding-bottom": resolve(value) })],
-	[/^pad-l-(.+)$/,          ([_, value]) => ({ "padding-left":   resolve(value) })],
+	[/^m-(.+)$/,              ([_, value]) => ({ "margin":         resolve(value) })],
+	[/^my-(.+)$/,             ([_, value]) => ({ "margin-top":     resolve(value), "margin-bottom": resolve(value) })],
+	[/^mx-(.+)$/,             ([_, value]) => ({ "margin-right":   resolve(value), "margin-left":   resolve(value) })],
+	[/^mt-(.+)$/,             ([_, value]) => ({ "margin-top":     resolve(value) })],
+	[/^mr-(.+)$/,             ([_, value]) => ({ "margin-right":   resolve(value) })],
+	[/^mb-(.+)$/,             ([_, value]) => ({ "margin-bottom":  resolve(value) })],
+	[/^ml-(.+)$/,             ([_, value]) => ({ "margin-left":    resolve(value) })],
+	[/^p-(.+)$/,              ([_, value]) => ({ "padding":        resolve(value) })],
+	[/^py-(.+)$/,             ([_, value]) => ({ "padding-top":    resolve(value), "padding-bottom": resolve(value) })],
+	[/^px-(.+)$/,             ([_, value]) => ({ "padding-right":  resolve(value), "padding-left":   resolve(value) })],
+	[/^pt-(.+)$/,             ([_, value]) => ({ "padding-top":    resolve(value) })],
+	[/^pr-(.+)$/,             ([_, value]) => ({ "padding-right":  resolve(value) })],
+	[/^pb-(.+)$/,             ([_, value]) => ({ "padding-bottom": resolve(value) })],
+	[/^pl-(.+)$/,             ([_, value]) => ({ "padding-left":   resolve(value) })],
 
 	[/^h-(.+)$/,              ([_, value]) => ({ "height":       resolve(value) })],
 	[/^min-h-(.+)$/,          ([_, value]) => ({ "min-height":   resolve(value) })],

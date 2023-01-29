@@ -28,9 +28,9 @@ function BackgroundMask() {
 	return (
 		<div className="hide 2xl:show sticky t-0 z-[var(--mask-bg-z-index)]">
 			{/* Use h-0 here prevents masks from stacking */}
-			{/* Use overflow-x-[clip] here to prevent mar-x--10% from side-scrolling */}
+			{/* Use overflow-x-[clip] here to prevent mx--10% from side-scrolling */}
 			<div className="h-0 overflow-x-[clip]">
-				<HeroBackgroundImage className="mar-x--10% h-160 rounded-b-50%" />
+				<HeroBackgroundImage className="mx--10% h-160 rounded-b-50%" />
 			</div>
 		</div>
 	)
@@ -42,7 +42,7 @@ function ForegroundMask() {
 			{/* Use h-0 here prevents masks from stacking */}
 			<div className="flex h-0">
 				{/* LHS */}
-				<div className="relative flex-grow-[1]">
+				<div className="relative w-100%">
 					<HeroBackgroundImage className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
 					<div className="absolute br-0">
 						<HeroBackgroundImage className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tl-[var(--app-rounding)]" />
@@ -50,7 +50,7 @@ function ForegroundMask() {
 				</div>
 				{/* RHS */}
 				<HeroBackgroundImage className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)]" />
-				<div className="relative flex-grow-[1]">
+				<div className="relative w-100%">
 					<HeroBackgroundImage className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
 					<div className="absolute bl-0">
 						<HeroBackgroundImage className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tr-[var(--app-rounding)]" />
@@ -61,17 +61,30 @@ function ForegroundMask() {
 	)
 }
 
-function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr" }>) {
+function Logo() {
+	return <div className="h-64 w-64 rounded-1e3 bg-[#fff]"></div>
+}
+
+function HeadingSubheading() {
+	return (
+		<div className="flex flex-col align-items-[center]">
+			<div className="flex align-items-[center] h-16">
+				<div className="h-6 aspect-16 rounded-1e3 bg-[#fff]"></div>
+			</div>
+			<div className="flex align-items-[center] h-16">
+				<div className="h-6 aspect-32 rounded-1e3 bg-[#fff]"></div>
+			</div>
+		</div>
+	)
+}
+
+function CTAButton({ primary = undefined }: { primary?: true }) {
 	return (
 		<div
-			// TODO: Do we really want bg- here?
-			className="sticky t-0 2xl:t-[var(--inset-y)] z-[var(--card-z-index)] bg-[#fff]
-				2xl:[&[data-pos=tr]]:rounded-tr-[var(--app-rounding)]
-				2xl:[&[data-pos=tl]]:rounded-tl-[var(--app-rounding)]"
-			data-pos={pos}
-		>
-			{children}
-		</div>
+			className="h-64 aspect-3 rounded-1e3 bg-[#fff7]
+				[&[data-primary]]:bg-[#fff]"
+			data-primary={primary}
+		></div>
 	)
 }
 
@@ -93,7 +106,7 @@ function SponsorSlot() {
 	return (
 		<div className="flex flex-col gap-8">
 			{/* Logo placeholder */}
-			<div className="h-[calc((48px_+_64px)_/_2)] aspect-3 rounded-1e3 bg-[#fff]"></div>
+			<div className="h-48 aspect-3 rounded-1e3 bg-[#fff]"></div>
 			{/* Name placeholder */}
 			<div className="flex justify-content-[center] align-items-[center] h-16">
 				<div className="h-6 aspect-16 rounded-1e3 bg-[#fff]"></div>
@@ -102,19 +115,37 @@ function SponsorSlot() {
 	)
 }
 
+function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr" }>) {
+	return (
+		<div
+			// TODO: Do we really want bg- here?
+			className="sticky t-0 2xl:t-[var(--inset-y)] z-[var(--card-z-index)] bg-[#fff]
+				2xl:[&[data-pos=tr]]:rounded-tr-[var(--app-rounding)]
+				2xl:[&[data-pos=tl]]:rounded-tl-[var(--app-rounding)]"
+			data-pos={pos}
+		>
+			{children}
+		</div>
+	)
+}
+
 function Layout() {
 	return (
 		<>
 			{/* Header */}
-			<HeroBackgroundImage tag="header" className="flex justify-content-[center] pad-y-64">
-				<div className="flex align-items-[center] w-100% max-w-1024">
+			<HeroBackgroundImage tag="header" className="flex justify-content-[center] py-96">
+				<div className="flex align-items-[center] gap-64 w-100% max-w-1024">
 					{/* LHS */}
-					<div className="flex flex-col flex-grow-[1]">
-						{/* <div className="h-48 aspect-3 rounded-1e3 bg-[#fff]"></div>
-						<div className="h-48 aspect-3 rounded-1e3 bg-[#fff]"></div> */}
+					<div className="flex flex-col align-items-[center] gap-32 w-100%">
+						<Logo />
+						<HeadingSubheading />
+						<div className="flex gap-16">
+							<CTAButton primary />
+							<CTAButton />
+						</div>
 					</div>
 					{/* RHS */}
-					<div className="flex flex-col align-items-[center] gap-32 w-100% max-w-640">
+					<div className="flex flex-col align-items-[center] gap-16 w-100% max-w-512">
 						<SponsorMeta />
 						<div className="flex justify-content-[center] flex-wrap-[wrap] gap-16">
 							{iota(5).map(index => (
@@ -130,11 +161,11 @@ function Layout() {
 			<ForegroundMask />
 
 			{/* Card */}
-			<div className="flex justify-content-[center] pad-b-[calc(var(--inset-y)_*_2)]">
+			<div className="flex justify-content-[center] pb-[calc(var(--inset-y)_*_2)]">
 				<div className="flex w-100% max-w-1536 bg-[#fff] sh-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">
 					{/* LHS */}
 					{/* TODO: Use min-w max-w here? */}
-					<main className="flex-grow-[1]">
+					<main className="w-100%">
 						<StickyContainer pos="tl">
 							{iota(4).map(index => (
 								<div key={index}>Hello, world!</div>
