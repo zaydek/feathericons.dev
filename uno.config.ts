@@ -111,7 +111,6 @@ const rules: Rule[] = [
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     resolve(value) })],
 
 	[/^bg-(.+)$/,             ([_, value]) => ({ "background-color": resolve(value) })],
-	[/^bg-image-(.+)$/,       ([_, value]) => ({ "background-image": resolve(value) })],
 	[/^sh-(.+)$/,             ([_, value]) => ({ "box-shadow":       resolve(value) })],
 ]
 
@@ -120,13 +119,13 @@ export default defineConfig({
 	rules,
 	theme: {
 		breakpoints: {
-			// TODO: Change to 500px for production
-			xs:     "501px",
+			// TODO: Change to 500px for production?
+			xs:     "512px",
 			sm:     "640px",
 			md:     "768px",
 			lg:    "1024px",
 			xl:    "1280px",
-			"2xl": "1536px",
+			"2xl": `${1536 + 16}px`,
 		},
 	},
 	variants: [...presetWind({}).variants!],

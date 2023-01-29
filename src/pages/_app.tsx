@@ -137,7 +137,7 @@ function Layout() {
 	return (
 		<>
 			{/* Header */}
-			<HeroLinearGradient tag="header" className="flex justify-content-[center] py-96 px-16">
+			<HeroLinearGradient tag="header" className="flex justify-content-[center] py-64 xl:py-96">
 				<div className="flex flex-col xl:flex-row align-items-[center] gap-64 w-100% max-w-1024">
 					{/* LHS */}
 					<div className="flex flex-col align-items-[center] gap-32">
@@ -149,7 +149,7 @@ function Layout() {
 						</div>
 					</div>
 					{/* RHS */}
-					<div className="hide xs:flex flex-col align-items-[center] gap-16 2xl:w-100% 2xl:max-w-512">
+					<div className="hide xs:flex flex-col align-items-[center] gap-16 xl:w-100% xl:max-w-512">
 						<SponsorMeta />
 						<div className="flex justify-content-[center] flex-wrap-[wrap] gap-16">
 							{iota(5).map(index => (
