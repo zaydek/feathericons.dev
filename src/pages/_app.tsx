@@ -68,9 +68,11 @@ function Logo() {
 function HeadingSubheading() {
 	return (
 		<div className="flex flex-col align-items-[center]">
+			{/* H1 */}
 			<div className="flex align-items-[center] h-16">
 				<div className="h-6 aspect-16 rounded-1e3 bg-[#fff]"></div>
 			</div>
+			{/* H2 */}
 			<div className="flex align-items-[center] h-16">
 				<div className="h-6 aspect-32 rounded-1e3 bg-[#fff]"></div>
 			</div>
@@ -91,9 +93,11 @@ function CTAButton({ primary = undefined }: { primary?: true }) {
 function SponsorMeta() {
 	return (
 		<div className="flex align-items-[center] gap-16">
+			{/* LHS */}
 			<div className="flex align-items-[center] h-16">
 				<div className="h-6 aspect-16 rounded-1e3 bg-[#fff]"></div>
 			</div>
+			{/* RHS */}
 			<div className="h-3 w-3 rounded-1e3 bg-[#fff]"></div>
 			<div className="flex align-items-[center] h-16">
 				<div className="h-6 aspect-16 rounded-1e3 bg-[#fff]"></div>
@@ -195,11 +199,11 @@ export default function App({ pageProps: { name } }: AppProps<Partial<IconProps>
 			{/* prettier-ignore */}
 			<style dangerouslySetInnerHTML={{
 				__html: "\n" + detab(`
-				:root, ::before, ::after {
-					--sans: ${sans.style.fontFamily};
-					--code: ${code.style.fontFamily};
-				}
-			`).replaceAll("\t", "  ") + "\n"
+					:root, ::before, ::after {
+						--sans: ${sans.style.fontFamily};
+						--code: ${code.style.fontFamily};
+					}
+				`).replaceAll("\t", "  ") + "\n"
 			}} />
 
 			<Layout />
