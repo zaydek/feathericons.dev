@@ -145,7 +145,7 @@ function Layout() {
 						</div>
 					</div>
 					{/* RHS */}
-					<div className="hide md:(flex flex-col align-items-[center] gap-16) 2xl:(w-100% max-w-512)">
+					<div className="hide md:flex md:flex-col md:align-items-[center] md:gap-16 2xl:w-100% 2xl:max-w-512">
 						<SponsorMeta />
 						<div className="flex justify-content-[center] flex-wrap-[wrap] gap-16">
 							{iota(5).map(index => (
