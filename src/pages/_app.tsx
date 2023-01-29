@@ -21,8 +21,13 @@ const code = Fira_Code({
 
 function BackgroundMask() {
 	return (
-		<div className="sticky t-0 h-0 z-[var(--mask-bg-z-index)]">
-			<div className="-mx-10% h-160 rounded-b-50% bg-[orange]"></div>
+		// NOTE: Must use overflow-x-[clip]; overflow-x-[hidden] breaks z-index?
+		<div className="sticky t-0 h-0 z-[var(--mask-bg-z-index)] overflow-x-[clip]">
+			<div
+				// prettier-ignore
+				className="-mx-10% h-160 rounded-b-50%"
+				data-hero-background-image
+			></div>
 		</div>
 	)
 }
@@ -33,17 +38,37 @@ function ForegroundMask() {
 			<div className="flex">
 				{/* LHS */}
 				<div className="relative flex-grow-[1]">
-					<div className="h-[calc(var(--inset-y)_+_var(--app-rounding))] bg-[pink]"></div>
+					<div
+						// prettier-ignore
+						className="h-[calc(var(--inset-y)_+_var(--app-rounding))]"
+						data-hero-background-image
+					></div>
 					<div className="absolute br-0">
-						<div className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tl-[var(--app-rounding)] bg-[yellow]"></div>
+						<div
+							// prettier-ignore
+							className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tl-[var(--app-rounding)]"
+							data-bg-hero-background-image
+						></div>
 					</div>
 				</div>
 				{/* RHS */}
-				<div className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)] bg-[blue]"></div>
+				<div
+					// prettier-ignore
+					className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)]"
+					data-hero-background-image
+				></div>
 				<div className="relative flex-grow-[1]">
-					<div className="h-[calc(var(--inset-y)_+_var(--app-rounding))] bg-[pink]"></div>
+					<div
+						// prettier-ignore
+						className="h-[calc(var(--inset-y)_+_var(--app-rounding))]"
+						data-hero-background-image
+					></div>
 					<div className="absolute bl-0">
-						<div className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tr-[var(--app-rounding)] bg-[yellow]"></div>
+						<div
+							// prettier-ignore
+							className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tr-[var(--app-rounding)]"
+							data-bg-hero-background-image
+						></div>
 					</div>
 				</div>
 			</div>
@@ -68,7 +93,7 @@ function Layout({ children }: PropsWithChildren) {
 	return (
 		<>
 			{/* Header */}
-			<header className="h-320 bg-[var(--theme-color)]"></header>
+			<header className="h-320" data-hero-background-image></header>
 
 			{/* Masks */}
 			<BackgroundMask />

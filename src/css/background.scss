@@ -8,9 +8,11 @@
 	);
 	background-attachment: fixed;
 }
-.hero-background-image { @include hero-background-image; }
+[data-hero-background-image] { @include hero-background-image; }
 
 /* https://30secondsofcode.org/css/s/polka-dot-pattern */
+//
+// TODO: Rename to sass-
 .dots-background-image {
 	background-image:
 		radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%),
