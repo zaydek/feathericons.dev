@@ -20,7 +20,7 @@ const code = Fira_Code({
 })
 
 // NOTE: TypeScript doesn't accept { tag = "div" ... } so use tag ?? "div"
-function HeroBackgroundImage<Tag extends keyof JSX.IntrinsicElements>({ tag, children, ...props }: { tag?: Tag } & JSX.IntrinsicElements[Tag]) {
+function HeroLinearGradient<Tag extends keyof JSX.IntrinsicElements>({ tag, children, ...props }: { tag?: Tag } & JSX.IntrinsicElements[Tag]) {
 	return <>{createElement(tag ?? "div", { ...props, "data-hero-background-image": true }, children)}</>
 }
 
@@ -30,7 +30,7 @@ function BackgroundMask() {
 			{/* Use h-0 here prevents masks from stacking */}
 			{/* Use overflow-x-[clip] here to prevent mx--10% from side-scrolling */}
 			<div className="h-0 overflow-x-[clip]">
-				<HeroBackgroundImage className="mx--10% h-160 rounded-b-50%" />
+				<HeroLinearGradient className="mx--10% h-160 rounded-b-50%" />
 			</div>
 		</div>
 	)
@@ -43,17 +43,17 @@ function ForegroundMask() {
 			<div className="flex h-0">
 				{/* LHS */}
 				<div className="relative w-100%">
-					<HeroBackgroundImage className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
+					<HeroLinearGradient className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
 					<div className="absolute br-0">
-						<HeroBackgroundImage className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tl-[var(--app-rounding)]" />
+						<HeroLinearGradient className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tl-[var(--app-rounding)]" />
 					</div>
 				</div>
 				{/* RHS */}
-				<HeroBackgroundImage className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)]" />
+				<HeroLinearGradient className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)]" />
 				<div className="relative w-100%">
-					<HeroBackgroundImage className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
+					<HeroLinearGradient className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
 					<div className="absolute bl-0">
-						<HeroBackgroundImage className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tr-[var(--app-rounding)]" />
+						<HeroLinearGradient className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tr-[var(--app-rounding)]" />
 					</div>
 				</div>
 			</div>
@@ -133,19 +133,19 @@ function Layout() {
 	return (
 		<>
 			{/* Header */}
-			<HeroBackgroundImage tag="header" className="flex justify-content-[center] py-96">
-				<div className="flex align-items-[center] gap-64 w-100% max-w-1024">
+			<HeroLinearGradient tag="header" className="flex justify-content-[center] py-96 px-16">
+				<div className="flex flex-col xl:flex-row align-items-[center] gap-64 w-100% max-w-1024">
 					{/* LHS */}
-					<div className="flex flex-col align-items-[center] gap-32 w-100%">
+					<div className="flex flex-col align-items-[center] gap-32">
 						<Logo />
 						<HeadingSubheading />
-						<div className="flex gap-16">
+						<div className="flex flex-col md:flex-row gap-16">
 							<CTAButton primary />
 							<CTAButton />
 						</div>
 					</div>
 					{/* RHS */}
-					<div className="flex flex-col align-items-[center] gap-16 w-100% max-w-512">
+					<div className="hide md:(flex flex-col align-items-[center] gap-16) 2xl:(w-100% max-w-512)">
 						<SponsorMeta />
 						<div className="flex justify-content-[center] flex-wrap-[wrap] gap-16">
 							{iota(5).map(index => (
@@ -154,7 +154,7 @@ function Layout() {
 						</div>
 					</div>
 				</div>
-			</HeroBackgroundImage>
+			</HeroLinearGradient>
 
 			{/* Masks */}
 			<BackgroundMask />
