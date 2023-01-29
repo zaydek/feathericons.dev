@@ -119,10 +119,9 @@ function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr"
 	return (
 		<div className="sticky t-0 2xl:t-[var(--inset-y)] z-[var(--card-z-index)]" data-pos={pos}>
 			<div
-				className="
-					2xl:[[data-pos=tr]_&]:rounded-tr-[var(--app-rounding)]
-					2xl:[[data-pos=tl]_&]:rounded-tl-[var(--app-rounding)]
-						bg-[#fff]"
+				className="2xl:[[data-pos=tr]_&]:rounded-tr-[var(--app-rounding)]
+				           2xl:[[data-pos=tl]_&]:rounded-tl-[var(--app-rounding)]
+				             bg-[#fff]"
 			>
 				{children}
 			</div>
