@@ -1,5 +1,4 @@
 import presetWind from "@unocss/preset-wind"
-import transformerVariantGroup from "@unocss/transformer-variant-group"
 import { Rule } from "unocss"
 import { defineConfig } from "unocss/vite"
 import { unitless } from "./uno.config.unitless"
@@ -128,8 +127,5 @@ export default defineConfig({
 			"2xl": "1536px",
 		},
 	},
-	// E.g. hover:(foo-bar foo-baz)
-	transformers: [transformerVariantGroup()],
-	// E.g. md:hover:(foo-bar foo-baz)
 	variants: [...presetWind({}).variants!],
 })
