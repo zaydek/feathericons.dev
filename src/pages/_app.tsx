@@ -117,14 +117,15 @@ function SponsorSlot() {
 
 function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr" }>) {
 	return (
-		<div
-			// TODO: Do we really want bg- here?
-			className="sticky t-0 2xl:t-[var(--inset-y)] z-[var(--card-z-index)] bg-[#fff]
-				2xl:[&[data-pos=tr]]:rounded-tr-[var(--app-rounding)]
-				2xl:[&[data-pos=tl]]:rounded-tl-[var(--app-rounding)]"
-			data-pos={pos}
-		>
-			{children}
+		<div className="sticky t-0 2xl:t-[var(--inset-y)] z-[var(--card-z-index)]" data-pos={pos}>
+			<div
+				className="
+					2xl:[[data-pos=tr]_&]:rounded-tr-[var(--app-rounding)]
+					2xl:[[data-pos=tl]_&]:rounded-tl-[var(--app-rounding)]
+						bg-[#fff]"
+			>
+				{children}
+			</div>
 		</div>
 	)
 }
@@ -162,7 +163,7 @@ function Layout() {
 
 			{/* Card */}
 			<div className="flex justify-content-[center] pb-[calc(var(--inset-y)_*_2)]">
-				<div className="flex w-100% max-w-1536 bg-[#fff] sh-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">
+				<div className="flex w-100% max-w-1536 2xl:rounded-[var(--app-rounding)] bg-[#fff] sh-[var(--shadow-3)]">
 					{/* LHS */}
 					{/* TODO: Use min-w max-w here? */}
 					<main className="w-100%">
@@ -187,34 +188,6 @@ function Layout() {
 			</div>
 		</>
 	)
-
-	//// return (
-	//// 	<>
-	//// 		{/* Rounded background */}
-	//// 		<div className="sticky t-0">
-	//// 			{/* 😎 */}
-	//// 			<div className="h-0 overflow-x-[clip]">
-	//// 				<div className="-mx-10% h-160 rounded-b-50% bg-[var(--theme-color)]"></div>
-	//// 			</div>
-	//// 		</div>
-	//// 		{/* Card */}
-	//// 		<div className="sticky t-0">
-	//// 			<div className="relative">
-	//// 				{/* This is the background layer */}
-	//// 				<div className="h-[calc(var(--inset-y)_+_var(--app-rounding))] bg-[orange]">
-	//// 					{/* This is the foreground layer */}
-	//// 					<div className="absolute inset-b-0">
-	//// 						<div className="flex justify-content-[center]">
-	//// 							{/* This is the card */}
-	//// 							<div className="h-[var(--app-rounding)] w-100% max-w-1536 rounded-t-1e3 bg-[#fff] sh-[var(--shadow-1)]"></div>
-	//// 						</div>
-	//// 					</div>
-	//// 				</div>
-	//// 			</div>
-	//// 		</div>
-	//// 		<div className="relative t-[calc(-1_*_var(--app-rounding))]">{children}</div>
-	//// 	</>
-	//// )
 }
 
 export default function App({ pageProps: { name } }: AppProps<Partial<IconProps>>) {
@@ -231,47 +204,6 @@ export default function App({ pageProps: { name } }: AppProps<Partial<IconProps>
 			}} />
 
 			<Layout />
-
-			{/* App */}
-			{/* <div className="flex justify-content-[center] -mt-160">
-				<div className="flex w-100% max-w-1536px rounded-48 bg-[var(--white)] shadow-[var(--shadow-1)]">
-					<div className="flex-grow-[1]">
-						{iota(64).map(index => (
-							<div key={index}>Hello</div>
-						))}
-					</div>
-					<div className="min-w-[var(--aside-w)] max-w-[var(--aside-w)] shadow-[var(--hairline-shadow-l)]">
-						{iota(10).map(index => (
-							<div key={index}>Hello</div>
-						))}
-					</div>
-				</div>
-			</div> */}
-			{/* {iota(100).map(index => (
-				<div key={index}>Hello</div>
-			))} */}
 		</>
 	)
-
-	//// return (
-	//// 	<>
-	//// 		{/* prettier-ignore */}
-	//// 		<style dangerouslySetInnerHTML={{ __html: "\n" + detab(`
-	//// 			:root, ::before, ::after {
-	//// 				--sans: ${sans.style.fontFamily};
-	//// 				--code: ${code.style.fontFamily};
-	//// 				font-family: var(--sans);
-	//// 			}
-	//// 			pre, code {
-	//// 				font-family: var(--code);
-	//// 				tab-size: 2;
-	//// 			}
-	//// 		`).replaceAll("\t", "  ") + "\n" }} />
-	//// 		<ShikiProvider>
-	//// 			<StateProvider>
-	//// 				<Layout name={name} />
-	//// 			</StateProvider>
-	//// 		</ShikiProvider>
-	//// 	</>
-	//// )
 }
