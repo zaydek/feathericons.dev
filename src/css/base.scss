@@ -18,7 +18,12 @@ pre { margin: 0; }
 	scroll-behavior: smooth;
 	//// overscroll-behavior-y: none;
 
+	font-family: var(--sans);
 	background-color: gray(50);
+}
+pre, code {
+	font-family: var(--code);
+	tab-size: 2;
 }
 
 :root:not(.dark) { color-scheme: light; }
