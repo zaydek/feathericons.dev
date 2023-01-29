@@ -111,7 +111,7 @@ const rules: Rule[] = [
 
 	[/^bg-(.+)$/,             ([_, value]) => ({ "background-color": resolve(value) })],
 	[/^bg-image-(.+)$/,       ([_, value]) => ({ "background-image": resolve(value) })],
-	[/^shadow-(.+)$/,         ([_, value]) => ({ "box-shadow":       resolve(value) })],
+	[/^sh-(.+)$/,             ([_, value]) => ({ "box-shadow":       resolve(value) })],
 ]
 
 export default defineConfig({

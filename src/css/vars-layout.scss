@@ -2,6 +2,10 @@ $windows-scrollbar-width: 16px;
 $app-w: 1536px;
 
 :root {
+	--mask-bg-z-index: -10;
+	--mask-fg-z-index:  10;
+	--card-z-index:     20;
+
 	--inset-y:           16px;
 	--inset-x:           16px;
 
