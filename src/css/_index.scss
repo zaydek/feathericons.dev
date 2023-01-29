@@ -1,13 +1,12 @@
 @use "the-new-css-reset";
-@use "./base";
+@use "base";
 
 @use "vars-tailwind";
+@use "vars-layout";
+@use "vars-theme";
+@use "vars-shadow";
 
-@use "./vars-layout";
-@use "./vars-theme";
-@use "./vars-shadow";
+@use "typography";
 
-@use "./background";
-@use "./background-masks";
-
-@use "./typography";
+@use "background";
+@use "background-masks";

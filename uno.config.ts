@@ -32,6 +32,14 @@ function resolve(rawValue: string, { px = true }: { px?: boolean } = {}) {
 }
 
 const rules: Rule[] = [
+	// Arbitrary key-value e.g. k-[v]
+	[/^((?:--)?[a-z][a-z-]*)-\[([^\]]+)\]$/, ([_, property, value]) => {
+		const px = !(property in unitless)
+		return {
+			[property]: resolve(value, { px }),
+		}
+	}],
+
 	["absolute",              { "position": "absolute" }],
 	["fixed",                 { "position": "fixed"    }],
 	["relative",              { "position": "relative" }],
@@ -105,17 +113,7 @@ const rules: Rule[] = [
 	[/^bg-(.+)$/,             ([_, value]) => ({ "background-color": resolve(value) })],
 	[/^bg-image-(.+)$/,       ([_, value]) => ({ "background-image": resolve(value) })],
 	[/^sh-(.+)$/,             ([_, value]) => ({ "box-shadow":       resolve(value) })],
-
-	// Arbitrary key-value e.g. k-[v]
-	[/^((?:--)?[a-z][a-z-]*)-\[([^\]]+)\]$/, ([_, property, value]) => {
-		const px = !(property in unitless)
-		return {
-			[property]: resolve(value, { px }),
-		}
-	}],
 ]
-
-const breakpoints
 
 export default defineConfig({
 	presets: [],

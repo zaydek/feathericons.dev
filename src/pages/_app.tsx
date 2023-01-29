@@ -49,7 +49,7 @@ function ForegroundMask() {
 					</div>
 				</div>
 				{/* RHS */}
-				<HeroLinearGradient className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)]" />
+				<HeroLinearGradient className="h-[var(--inset-y)] w-100% max-w-[calc(var(--app-w)_-_var(--app-rounding)_*_2)]" />
 				<div className="relative w-100%">
 					<HeroLinearGradient className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
 					<div className="absolute bl-0">
@@ -166,7 +166,7 @@ function Layout() {
 
 			{/* Card */}
 			<div className="flex justify-content-[center] pb-[calc(var(--inset-y)_*_2)]">
-				<div className="flex w-100% max-w-1536 2xl:rounded-[var(--app-rounding)] bg-[#fff] sh-[var(--shadow-3)]">
+				<div className="flex w-100% max-w-[var(--app-w)] 2xl:rounded-[var(--app-rounding)] bg-[#fff] sh-[var(--shadow-3)]">
 					{/* LHS */}
 					{/* TODO: Use min-w max-w here? */}
 					<main className="w-100%">
