@@ -62,6 +62,8 @@ const rules: Rule[] = [
 	[/^l-(.+)$/,              ([_, value]) => ({ "left":    resolve(value) })],
 	[/^z-(.+)$/,              ([_, value]) => ({ "z-index": resolve(value, { px: false }) })],
 
+	["hide",                  { "display":        "none"          }],
+	["show",                  { "display":        "revert"        }],
 	["flex",                  { "display":        "flex"          }],
 	["inline-flex",           { "display":        "inline-flex"   }],
 	["flex-col",              { "flex-direction": "column"        }],

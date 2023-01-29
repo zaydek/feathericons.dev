@@ -5,6 +5,7 @@ import "../css/uno.generated.css"
 import { Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
 import { createElement, PropsWithChildren } from "react"
+import { cx } from "../lib/cx"
 import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
 import { IconProps } from "./[icon]"
@@ -26,24 +27,21 @@ function HeroBackgroundImage<Tag extends keyof JSX.IntrinsicElements>({ tag, chi
 
 function BackgroundMask() {
 	return (
-		<div
-			className="display-[none] 2xl:display-[revert]
-				sticky t-0 z-[var(--mask-bg-z-index)]"
-			style={{ height: "var(--inset-y)", overflowX: "clip" /* Must use "clip"; "hidden" breaks z-index? */ }} // 😎
-		>
-			<HeroBackgroundImage className="-mx-10% h-160 rounded-b-50%" />
+		<div className="hide 2xl:show sticky t-0 z-[var(--mask-bg-z-index)]">
+			{/* Use h-0 here prevents masks from stacking */}
+			{/* Use overflow-x-[clip] here to prevent -mx-10% from side-scrolling */}
+			<div className="h-0 overflow-x-[clip]">
+				<HeroBackgroundImage className="-mx-10% h-160 rounded-b-50%" />
+			</div>
 		</div>
 	)
 }
 
 function ForegroundMask() {
 	return (
-		<div
-			className="display-[none] 2xl:display-[revert]
-				sticky t-0 z-[var(--mask-fg-z-index)]"
-			style={{ height: 0 }} // 😎
-		>
-			<div className="flex">
+		<div className="hide 2xl:show sticky t-0 z-[var(--mask-fg-z-index)]">
+			{/* Use h-0 here prevents masks from stacking */}
+			<div className="flex h-0">
 				{/* LHS */}
 				<div className="relative flex-grow-[1]">
 					<HeroBackgroundImage className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
@@ -67,11 +65,12 @@ function ForegroundMask() {
 function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr" }>) {
 	return (
 		<div
-			className="display-[none] 2xl:display-[revert]
-				sticky t-[var(--inset-y)] z-[var(--card-z-index)] bg-[#fff]
-					[&[data-pos=tl]]:rounded-tl-[var(--app-rounding)]
-					[&[data-pos=tr]]:rounded-tr-[var(--app-rounding)]"
-			data-pos={pos}
+			// prettier-ignore
+			className={cx(`sticky t-0 2xl:t-[var(--inset-y)] z-[var(--card-z-index)]
+				${pos === "tl"
+					? "2xl:rounded-tl-[var(--app-rounding)]"
+					: "2xl:rounded-tr-[var(--app-rounding)]"}
+				bg-[#fff]`)}
 		>
 			{children}
 		</div>
@@ -92,7 +91,7 @@ function Layout() {
 
 			{/* Card */}
 			<div className="flex justify-content-[center] pb-[calc(var(--inset-y)_*_2)]">
-				<div className="flex w-100% max-w-1536 rounded-[var(--app-rounding)] bg-[#fff] sh-[var(--shadow-3)]">
+				<div className="flex w-100% max-w-1536 bg-[#fff] sh-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">
 					{/* LHS */}
 					{/* TODO: Use min-w max-w here? */}
 					<main className="flex-grow-[1]">
@@ -106,7 +105,7 @@ function Layout() {
 						))}
 					</main>
 					{/* RHS */}
-					<aside className="w-[var(--aside-w)] sh-[var(--hairline-shadow-l)]">
+					<aside className="hide lg:show w-[var(--aside-w)] sh-[var(--hairline-shadow-l)]">
 						<StickyContainer pos="tr">
 							{iota(4).map(index => (
 								<div key={index}>Hello, world!</div>
