@@ -205,7 +205,6 @@ export default function App({ pageProps: { name } }: AppProps<Partial<IconProps>
 					}
 				`).replaceAll("\t", "  ") + "\n"
 			}} />
-
 			<Layout />
 		</>
 	)
