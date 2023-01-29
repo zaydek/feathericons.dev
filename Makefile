@@ -4,6 +4,9 @@ feather:
 format-feather:
 	npx tsx scripts/format-feather.ts
 
+uno:
+	npx unocss */**.tsx -c uno.config.ts -o src/css/uno.generated.css -w
+
 build:
 	npx next build
 	npx next export

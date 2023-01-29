@@ -2,45 +2,49 @@ import presetWind from "@unocss/preset-wind"
 import transformerVariantGroup from "@unocss/transformer-variant-group"
 import { Rule } from "unocss"
 import { defineConfig } from "unocss/vite"
-import { unitless } from "./unocss.config.unitless"
+import { unitless } from "./uno.config.unitless"
 
-//// // https://github.com/unocss/unocss/blob/464cdd19cfef2c7a7f195a1a187191c6f4bb5f48/packages/core/src/utils/helpers.ts#L12
-//// function isValidSelector(selector: string) {
-////   return /[!-~]+/.test(selector)
-//// }
-////
-//// // https://github.com/unocss/unocss/blob/fa0bf070d0bdc0c2591d05b6437482feccd62d03/packages/core/src/extractors/split.ts#L4
-//// function splitCode(code: string) {
-////   //// return code.split(/\\?[\s"`;{}]+/g).filter(isValidSelector) // Remove '
-////   return code.split(/\\?[\s"`;]+/g).filter(isValidSelector) // Remove '
-//// }
-////
-//// // Fixes edge cases such as font-feature-settings--'tnum'
-//// const extractors: Extractor[] = [{
-////   name: "custom-extractor",
-////   order: -1,
-////   extract({ code }) {
-////     return new Set(splitCode(code))
-////   },
-//// }]
-
-function resolve(raw: string | undefined, { px = true }: { px?: boolean } = {}) {
-	if (raw === undefined || raw === "undefined" || raw === "null") { return undefined }
-	const str = raw
-		.replace(/_/g, " ")
-	if (px && Number.isFinite(+str)) {
-		return `${str}px`
+// Safely remove braces from a value
+function removeBraces(value: string) {
+	if (value.startsWith("[") && value.endsWith("]")) {
+		return value.slice(1, -1)
 	} else {
-		return str
+		return value
+	}
+}
+
+// Safely remove spaces from a value
+function removeSpaces(value: string) {
+	if (value.includes("_")) {
+		return value.replaceAll("_", " ")
+	} else {
+		return value
+	}
+}
+
+function resolve(rawValue: string, { px = true }: { px?: boolean } = {}) {
+	if (rawValue === "[null]") { return undefined }
+	const value = removeSpaces(removeBraces(rawValue))
+	if (px && Number.isFinite(+value)) {
+		return `${value}px`
+	} else {
+		return value
 	}
 }
 
 const rules: Rule[] = [
+	// Arbitrary key-value e.g. k-[v]
+	[/^(?:-|--)?([a-z][a-z-]*)-\[([^\]]+)\]$/, ([_, property, value]) => {
+		const px = !(property in unitless)
+		return {
+			[property]: resolve(value, { px }),
+		}
+	}],
+
 	["absolute",              { "position": "absolute" }],
 	["fixed",                 { "position": "fixed"    }],
 	["relative",              { "position": "relative" }],
 	["sticky",                { "position": "sticky"   }],
-
 	[/^inset-(.+)$/,          ([_, value]) => ({ "inset":   resolve(value) })],
 	[/^inset-t-(.+)$/,        ([_, value]) => ({ "top":     resolve(value), "right":  resolve(value), "left":   resolve(value) })],
 	[/^inset-r-(.+)$/,        ([_, value]) => ({ "top":     resolve(value), "right":  resolve(value), "bottom": resolve(value) })],
@@ -58,10 +62,10 @@ const rules: Rule[] = [
 	[/^l-(.+)$/,              ([_, value]) => ({ "left":    resolve(value) })],
 	[/^z-(.+)$/,              ([_, value]) => ({ "z-index": resolve(value, { px: false }) })],
 
-	["flex",                  { "display":         "flex"          }],
-	["inline-flex",           { "display":         "inline-flex"   }],
-	["flex-col",              { "flex-direction":  "column"        }],
-	["flex-row",              { "flex-direction":  "row"           }],
+	["flex",                  { "display":        "flex"          }],
+	["inline-flex",           { "display":        "inline-flex"   }],
+	["flex-col",              { "flex-direction": "column"        }],
+	["flex-row",              { "flex-direction": "row"           }],
 
 	["grid",                  { "display": "grid" }],
 	[/^grid-(.+)$/,           ([_, value]) => ({ "display": "grid", "grid-template":         Number.isNaN(+value) ? resolve(value, { px: false }) : `repeat(${resolve(value, { px: false })}, 1fr)` })],
@@ -70,9 +74,9 @@ const rules: Rule[] = [
 	[/^grid-auto-cols-(.+)$/, ([_, value]) => ({ "grid-auto-columns":                        resolve(value, { px: true }) })],
 	[/^grid-auto-rows-(.+)$/, ([_, value]) => ({ "grid-auto-rows":                           resolve(value, { px: true }) })],
 
-	[/^g-(.+)$/,              ([_, value]) => ({ "gap":        resolve(value) })],
-	[/^gy-(.+)$/,             ([_, value]) => ({ "row-gap":    resolve(value) })],
-	[/^gx-(.+)$/,             ([_, value]) => ({ "column-gap": resolve(value) })],
+	[/^g-(.+)$/,              ([_, value]) => ({ "gap":            resolve(value) })],
+	[/^gy-(.+)$/,             ([_, value]) => ({ "row-gap":        resolve(value) })],
+	[/^gx-(.+)$/,             ([_, value]) => ({ "column-gap":     resolve(value) })],
 	[/^m-(.+)$/,              ([_, value]) => ({ "margin":         resolve(value) })],
 	[/^my-(.+)$/,             ([_, value]) => ({ "margin-top":     resolve(value), "margin-bottom": resolve(value) })],
 	[/^mx-(.+)$/,             ([_, value]) => ({ "margin-right":   resolve(value), "margin-left":   resolve(value) })],
@@ -88,8 +92,6 @@ const rules: Rule[] = [
 	[/^pb-(.+)$/,             ([_, value]) => ({ "padding-bottom": resolve(value) })],
 	[/^pl-(.+)$/,             ([_, value]) => ({ "padding-left":   resolve(value) })],
 
-	[/^size-(.+)$/,           ([_, value]) => ({ "height": resolve(value), "width": resolve(value) })],
-
 	[/^h-(.+)$/,              ([_, value]) => ({ "height":       resolve(value) })],
 	[/^min-h-(.+)$/,          ([_, value]) => ({ "min-height":   resolve(value) })],
 	[/^max-h-(.+)$/,          ([_, value]) => ({ "max-height":   resolve(value) })],
@@ -97,7 +99,6 @@ const rules: Rule[] = [
 	[/^min-w-(.+)$/,          ([_, value]) => ({ "min-width":    resolve(value) })],
 	[/^max-w-(.+)$/,          ([_, value]) => ({ "max-width":    resolve(value) })],
 	[/^aspect-(.+)$/,         ([_, value]) => ({ "aspect-ratio": resolve(value, { px: false }) })],
-
 	[/^rounded-(.+)$/,        ([_, value]) => ({ "border-radius":              resolve(value) })],
 	[/^rounded-t-(.+)$/,      ([_, value]) => ({ "border-top-left-radius":     resolve(value), "border-top-right-radius":    resolve(value) })],
 	[/^rounded-r-(.+)$/,      ([_, value]) => ({ "border-top-right-radius":    resolve(value), "border-bottom-right-radius": resolve(value) })],
@@ -108,13 +109,9 @@ const rules: Rule[] = [
 	[/^rounded-bl-(.+)$/,     ([_, value]) => ({ "border-bottom-left-radius":  resolve(value) })],
 	[/^rounded-tl-(.+)$/,     ([_, value]) => ({ "border-top-left-radius":     resolve(value) })],
 
-	// Arbitrary key-value e.g. k-[v]
-	[/^(?:-|--)?([a-z][a-z-]*)-\[([^\]]+)\]$/, ([_, property, value]) => {
-		const px = !(property in unitless)
-		return {
-			[property]: resolve(value, { px }),
-		}
-	}],
+	[/^bg-(.+)$/,             ([_, value]) => ({ "background-color": resolve(value) })],
+	[/^bg-image-(.+)$/,       ([_, value]) => ({ "background-image": resolve(value) })],
+	[/^shadow-(.+)$/,         ([_, value]) => ({ "box-shadow":       resolve(value) })],
 ]
 
 export default defineConfig({
@@ -129,6 +126,8 @@ export default defineConfig({
 			"2xl": "1536px",
 		},
 	},
+	// E.g. hover:(foo-bar foo-baz)
 	transformers: [transformerVariantGroup()],
+	// E.g. md:hover:(foo-bar foo-baz)
 	variants: [...presetWind({}).variants!],
 })

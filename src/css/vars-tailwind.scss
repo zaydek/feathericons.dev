@@ -2,1335 +2,1335 @@
 
 // https://github.com/tailwindlabs/tailwindcss/blob/master/src/public/colors.js
 :root {
-	--tw-black-h:         #{hue(#000)};
-	--tw-black-s:         #{saturation(#000)};
-	--tw-black-l:         #{lightness(#000)};
-	--tw-black-raw:       #{hue(#000), saturation(#000), lightness(#000)};
-	--tw-black:           #{#000};
-
-	--tw-white-h:         #{hue(#fff)};
-	--tw-white-s:         #{saturation(#fff)};
-	--tw-white-l:         #{lightness(#fff)};
-	--tw-white-raw:       #{hue(#fff), saturation(#fff), lightness(#fff)};
-	--tw-white:           #{#fff};
-
-	--tw-slate-50-h:      #{hue(#f8fafc)};
-	--tw-slate-50-s:      #{saturation(#f8fafc)};
-	--tw-slate-50-l:      #{lightness(#f8fafc)};
-	--tw-slate-50-raw:    #{hue(#f8fafc), saturation(#f8fafc), lightness(#f8fafc)};
-	--tw-slate-50:        #{#f8fafc};
-
-	--tw-slate-100-h:     #{hue(#f1f5f9)};
-	--tw-slate-100-s:     #{saturation(#f1f5f9)};
-	--tw-slate-100-l:     #{lightness(#f1f5f9)};
-	--tw-slate-100-raw:   #{hue(#f1f5f9), saturation(#f1f5f9), lightness(#f1f5f9)};
-	--tw-slate-100:       #{#f1f5f9};
-
-	--tw-slate-200-h:     #{hue(#e2e8f0)};
-	--tw-slate-200-s:     #{saturation(#e2e8f0)};
-	--tw-slate-200-l:     #{lightness(#e2e8f0)};
-	--tw-slate-200-raw:   #{hue(#e2e8f0), saturation(#e2e8f0), lightness(#e2e8f0)};
-	--tw-slate-200:       #{#e2e8f0};
-
-	--tw-slate-300-h:     #{hue(#cbd5e1)};
-	--tw-slate-300-s:     #{saturation(#cbd5e1)};
-	--tw-slate-300-l:     #{lightness(#cbd5e1)};
-	--tw-slate-300-raw:   #{hue(#cbd5e1), saturation(#cbd5e1), lightness(#cbd5e1)};
-	--tw-slate-300:       #{#cbd5e1};
-
-	--tw-slate-400-h:     #{hue(#94a3b8)};
-	--tw-slate-400-s:     #{saturation(#94a3b8)};
-	--tw-slate-400-l:     #{lightness(#94a3b8)};
-	--tw-slate-400-raw:   #{hue(#94a3b8), saturation(#94a3b8), lightness(#94a3b8)};
-	--tw-slate-400:       #{#94a3b8};
-
-	--tw-slate-500-h:     #{hue(#64748b)};
-	--tw-slate-500-s:     #{saturation(#64748b)};
-	--tw-slate-500-l:     #{lightness(#64748b)};
-	--tw-slate-500-raw:   #{hue(#64748b), saturation(#64748b), lightness(#64748b)};
-	--tw-slate-500:       #{#64748b};
-
-	--tw-slate-600-h:     #{hue(#475569)};
-	--tw-slate-600-s:     #{saturation(#475569)};
-	--tw-slate-600-l:     #{lightness(#475569)};
-	--tw-slate-600-raw:   #{hue(#475569), saturation(#475569), lightness(#475569)};
-	--tw-slate-600:       #{#475569};
-
-	--tw-slate-700-h:     #{hue(#334155)};
-	--tw-slate-700-s:     #{saturation(#334155)};
-	--tw-slate-700-l:     #{lightness(#334155)};
-	--tw-slate-700-raw:   #{hue(#334155), saturation(#334155), lightness(#334155)};
-	--tw-slate-700:       #{#334155};
-
-	--tw-slate-800-h:     #{hue(#1e293b)};
-	--tw-slate-800-s:     #{saturation(#1e293b)};
-	--tw-slate-800-l:     #{lightness(#1e293b)};
-	--tw-slate-800-raw:   #{hue(#1e293b), saturation(#1e293b), lightness(#1e293b)};
-	--tw-slate-800:       #{#1e293b};
-
-	--tw-slate-900-h:     #{hue(#0f172a)};
-	--tw-slate-900-s:     #{saturation(#0f172a)};
-	--tw-slate-900-l:     #{lightness(#0f172a)};
-	--tw-slate-900-raw:   #{hue(#0f172a), saturation(#0f172a), lightness(#0f172a)};
-	--tw-slate-900:       #{#0f172a};
-
-	--tw-gray-50-h:       #{hue(#f9fafb)};
-	--tw-gray-50-s:       #{saturation(#f9fafb)};
-	--tw-gray-50-l:       #{lightness(#f9fafb)};
-	--tw-gray-50-raw:     #{hue(#f9fafb), saturation(#f9fafb), lightness(#f9fafb)};
-	--tw-gray-50:         #{#f9fafb};
-
-	--tw-gray-100-h:      #{hue(#f3f4f6)};
-	--tw-gray-100-s:      #{saturation(#f3f4f6)};
-	--tw-gray-100-l:      #{lightness(#f3f4f6)};
-	--tw-gray-100-raw:    #{hue(#f3f4f6), saturation(#f3f4f6), lightness(#f3f4f6)};
-	--tw-gray-100:        #{#f3f4f6};
-
-	--tw-gray-200-h:      #{hue(#e5e7eb)};
-	--tw-gray-200-s:      #{saturation(#e5e7eb)};
-	--tw-gray-200-l:      #{lightness(#e5e7eb)};
-	--tw-gray-200-raw:    #{hue(#e5e7eb), saturation(#e5e7eb), lightness(#e5e7eb)};
-	--tw-gray-200:        #{#e5e7eb};
-
-	--tw-gray-300-h:      #{hue(#d1d5db)};
-	--tw-gray-300-s:      #{saturation(#d1d5db)};
-	--tw-gray-300-l:      #{lightness(#d1d5db)};
-	--tw-gray-300-raw:    #{hue(#d1d5db), saturation(#d1d5db), lightness(#d1d5db)};
-	--tw-gray-300:        #{#d1d5db};
-
-	--tw-gray-400-h:      #{hue(#9ca3af)};
-	--tw-gray-400-s:      #{saturation(#9ca3af)};
-	--tw-gray-400-l:      #{lightness(#9ca3af)};
-	--tw-gray-400-raw:    #{hue(#9ca3af), saturation(#9ca3af), lightness(#9ca3af)};
-	--tw-gray-400:        #{#9ca3af};
-
-	--tw-gray-500-h:      #{hue(#6b7280)};
-	--tw-gray-500-s:      #{saturation(#6b7280)};
-	--tw-gray-500-l:      #{lightness(#6b7280)};
-	--tw-gray-500-raw:    #{hue(#6b7280), saturation(#6b7280), lightness(#6b7280)};
-	--tw-gray-500:        #{#6b7280};
-
-	--tw-gray-600-h:      #{hue(#4b5563)};
-	--tw-gray-600-s:      #{saturation(#4b5563)};
-	--tw-gray-600-l:      #{lightness(#4b5563)};
-	--tw-gray-600-raw:    #{hue(#4b5563), saturation(#4b5563), lightness(#4b5563)};
-	--tw-gray-600:        #{#4b5563};
-
-	--tw-gray-700-h:      #{hue(#374151)};
-	--tw-gray-700-s:      #{saturation(#374151)};
-	--tw-gray-700-l:      #{lightness(#374151)};
-	--tw-gray-700-raw:    #{hue(#374151), saturation(#374151), lightness(#374151)};
-	--tw-gray-700:        #{#374151};
-
-	--tw-gray-800-h:      #{hue(#1f2937)};
-	--tw-gray-800-s:      #{saturation(#1f2937)};
-	--tw-gray-800-l:      #{lightness(#1f2937)};
-	--tw-gray-800-raw:    #{hue(#1f2937), saturation(#1f2937), lightness(#1f2937)};
-	--tw-gray-800:        #{#1f2937};
-
-	--tw-gray-900-h:      #{hue(#111827)};
-	--tw-gray-900-s:      #{saturation(#111827)};
-	--tw-gray-900-l:      #{lightness(#111827)};
-	--tw-gray-900-raw:    #{hue(#111827), saturation(#111827), lightness(#111827)};
-	--tw-gray-900:        #{#111827};
-
-	--tw-zinc-50-h:       #{hue(#fafafa)};
-	--tw-zinc-50-s:       #{saturation(#fafafa)};
-	--tw-zinc-50-l:       #{lightness(#fafafa)};
-	--tw-zinc-50-raw:     #{hue(#fafafa), saturation(#fafafa), lightness(#fafafa)};
-	--tw-zinc-50:         #{#fafafa};
-
-	--tw-zinc-100-h:      #{hue(#f4f4f5)};
-	--tw-zinc-100-s:      #{saturation(#f4f4f5)};
-	--tw-zinc-100-l:      #{lightness(#f4f4f5)};
-	--tw-zinc-100-raw:    #{hue(#f4f4f5), saturation(#f4f4f5), lightness(#f4f4f5)};
-	--tw-zinc-100:        #{#f4f4f5};
-
-	--tw-zinc-200-h:      #{hue(#e4e4e7)};
-	--tw-zinc-200-s:      #{saturation(#e4e4e7)};
-	--tw-zinc-200-l:      #{lightness(#e4e4e7)};
-	--tw-zinc-200-raw:    #{hue(#e4e4e7), saturation(#e4e4e7), lightness(#e4e4e7)};
-	--tw-zinc-200:        #{#e4e4e7};
-
-	--tw-zinc-300-h:      #{hue(#d4d4d8)};
-	--tw-zinc-300-s:      #{saturation(#d4d4d8)};
-	--tw-zinc-300-l:      #{lightness(#d4d4d8)};
-	--tw-zinc-300-raw:    #{hue(#d4d4d8), saturation(#d4d4d8), lightness(#d4d4d8)};
-	--tw-zinc-300:        #{#d4d4d8};
-
-	--tw-zinc-400-h:      #{hue(#a1a1aa)};
-	--tw-zinc-400-s:      #{saturation(#a1a1aa)};
-	--tw-zinc-400-l:      #{lightness(#a1a1aa)};
-	--tw-zinc-400-raw:    #{hue(#a1a1aa), saturation(#a1a1aa), lightness(#a1a1aa)};
-	--tw-zinc-400:        #{#a1a1aa};
-
-	--tw-zinc-500-h:      #{hue(#71717a)};
-	--tw-zinc-500-s:      #{saturation(#71717a)};
-	--tw-zinc-500-l:      #{lightness(#71717a)};
-	--tw-zinc-500-raw:    #{hue(#71717a), saturation(#71717a), lightness(#71717a)};
-	--tw-zinc-500:        #{#71717a};
-
-	--tw-zinc-600-h:      #{hue(#52525b)};
-	--tw-zinc-600-s:      #{saturation(#52525b)};
-	--tw-zinc-600-l:      #{lightness(#52525b)};
-	--tw-zinc-600-raw:    #{hue(#52525b), saturation(#52525b), lightness(#52525b)};
-	--tw-zinc-600:        #{#52525b};
-
-	--tw-zinc-700-h:      #{hue(#3f3f46)};
-	--tw-zinc-700-s:      #{saturation(#3f3f46)};
-	--tw-zinc-700-l:      #{lightness(#3f3f46)};
-	--tw-zinc-700-raw:    #{hue(#3f3f46), saturation(#3f3f46), lightness(#3f3f46)};
-	--tw-zinc-700:        #{#3f3f46};
-
-	--tw-zinc-800-h:      #{hue(#27272a)};
-	--tw-zinc-800-s:      #{saturation(#27272a)};
-	--tw-zinc-800-l:      #{lightness(#27272a)};
-	--tw-zinc-800-raw:    #{hue(#27272a), saturation(#27272a), lightness(#27272a)};
-	--tw-zinc-800:        #{#27272a};
-
-	--tw-zinc-900-h:      #{hue(#18181b)};
-	--tw-zinc-900-s:      #{saturation(#18181b)};
-	--tw-zinc-900-l:      #{lightness(#18181b)};
-	--tw-zinc-900-raw:    #{hue(#18181b), saturation(#18181b), lightness(#18181b)};
-	--tw-zinc-900:        #{#18181b};
-
-	--tw-neutral-50-h:    #{hue(#fafafa)};
-	--tw-neutral-50-s:    #{saturation(#fafafa)};
-	--tw-neutral-50-l:    #{lightness(#fafafa)};
-	--tw-neutral-50-raw:  #{hue(#fafafa), saturation(#fafafa), lightness(#fafafa)};
-	--tw-neutral-50:      #{#fafafa};
-
-	--tw-neutral-100-h:   #{hue(#f5f5f5)};
-	--tw-neutral-100-s:   #{saturation(#f5f5f5)};
-	--tw-neutral-100-l:   #{lightness(#f5f5f5)};
-	--tw-neutral-100-raw: #{hue(#f5f5f5), saturation(#f5f5f5), lightness(#f5f5f5)};
-	--tw-neutral-100:     #{#f5f5f5};
-
-	--tw-neutral-200-h:   #{hue(#e5e5e5)};
-	--tw-neutral-200-s:   #{saturation(#e5e5e5)};
-	--tw-neutral-200-l:   #{lightness(#e5e5e5)};
-	--tw-neutral-200-raw: #{hue(#e5e5e5), saturation(#e5e5e5), lightness(#e5e5e5)};
-	--tw-neutral-200:     #{#e5e5e5};
-
-	--tw-neutral-300-h:   #{hue(#d4d4d4)};
-	--tw-neutral-300-s:   #{saturation(#d4d4d4)};
-	--tw-neutral-300-l:   #{lightness(#d4d4d4)};
-	--tw-neutral-300-raw: #{hue(#d4d4d4), saturation(#d4d4d4), lightness(#d4d4d4)};
-	--tw-neutral-300:     #{#d4d4d4};
-
-	--tw-neutral-400-h:   #{hue(#a3a3a3)};
-	--tw-neutral-400-s:   #{saturation(#a3a3a3)};
-	--tw-neutral-400-l:   #{lightness(#a3a3a3)};
-	--tw-neutral-400-raw: #{hue(#a3a3a3), saturation(#a3a3a3), lightness(#a3a3a3)};
-	--tw-neutral-400:     #{#a3a3a3};
-
-	--tw-neutral-500-h:   #{hue(#737373)};
-	--tw-neutral-500-s:   #{saturation(#737373)};
-	--tw-neutral-500-l:   #{lightness(#737373)};
-	--tw-neutral-500-raw: #{hue(#737373), saturation(#737373), lightness(#737373)};
-	--tw-neutral-500:     #{#737373};
-
-	--tw-neutral-600-h:   #{hue(#525252)};
-	--tw-neutral-600-s:   #{saturation(#525252)};
-	--tw-neutral-600-l:   #{lightness(#525252)};
-	--tw-neutral-600-raw: #{hue(#525252), saturation(#525252), lightness(#525252)};
-	--tw-neutral-600:     #{#525252};
-
-	--tw-neutral-700-h:   #{hue(#404040)};
-	--tw-neutral-700-s:   #{saturation(#404040)};
-	--tw-neutral-700-l:   #{lightness(#404040)};
-	--tw-neutral-700-raw: #{hue(#404040), saturation(#404040), lightness(#404040)};
-	--tw-neutral-700:     #{#404040};
-
-	--tw-neutral-800-h:   #{hue(#262626)};
-	--tw-neutral-800-s:   #{saturation(#262626)};
-	--tw-neutral-800-l:   #{lightness(#262626)};
-	--tw-neutral-800-raw: #{hue(#262626), saturation(#262626), lightness(#262626)};
-	--tw-neutral-800:     #{#262626};
-
-	--tw-neutral-900-h:   #{hue(#171717)};
-	--tw-neutral-900-s:   #{saturation(#171717)};
-	--tw-neutral-900-l:   #{lightness(#171717)};
-	--tw-neutral-900-raw: #{hue(#171717), saturation(#171717), lightness(#171717)};
-	--tw-neutral-900:     #{#171717};
-
-	--tw-stone-50-h:      #{hue(#fafaf9)};
-	--tw-stone-50-s:      #{saturation(#fafaf9)};
-	--tw-stone-50-l:      #{lightness(#fafaf9)};
-	--tw-stone-50-raw:    #{hue(#fafaf9), saturation(#fafaf9), lightness(#fafaf9)};
-	--tw-stone-50:        #{#fafaf9};
-
-	--tw-stone-100-h:     #{hue(#f5f5f4)};
-	--tw-stone-100-s:     #{saturation(#f5f5f4)};
-	--tw-stone-100-l:     #{lightness(#f5f5f4)};
-	--tw-stone-100-raw:   #{hue(#f5f5f4), saturation(#f5f5f4), lightness(#f5f5f4)};
-	--tw-stone-100:       #{#f5f5f4};
-
-	--tw-stone-200-h:     #{hue(#e7e5e4)};
-	--tw-stone-200-s:     #{saturation(#e7e5e4)};
-	--tw-stone-200-l:     #{lightness(#e7e5e4)};
-	--tw-stone-200-raw:   #{hue(#e7e5e4), saturation(#e7e5e4), lightness(#e7e5e4)};
-	--tw-stone-200:       #{#e7e5e4};
-
-	--tw-stone-300-h:     #{hue(#d6d3d1)};
-	--tw-stone-300-s:     #{saturation(#d6d3d1)};
-	--tw-stone-300-l:     #{lightness(#d6d3d1)};
-	--tw-stone-300-raw:   #{hue(#d6d3d1), saturation(#d6d3d1), lightness(#d6d3d1)};
-	--tw-stone-300:       #{#d6d3d1};
-
-	--tw-stone-400-h:     #{hue(#a8a29e)};
-	--tw-stone-400-s:     #{saturation(#a8a29e)};
-	--tw-stone-400-l:     #{lightness(#a8a29e)};
-	--tw-stone-400-raw:   #{hue(#a8a29e), saturation(#a8a29e), lightness(#a8a29e)};
-	--tw-stone-400:       #{#a8a29e};
-
-	--tw-stone-500-h:     #{hue(#78716c)};
-	--tw-stone-500-s:     #{saturation(#78716c)};
-	--tw-stone-500-l:     #{lightness(#78716c)};
-	--tw-stone-500-raw:   #{hue(#78716c), saturation(#78716c), lightness(#78716c)};
-	--tw-stone-500:       #{#78716c};
-
-	--tw-stone-600-h:     #{hue(#57534e)};
-	--tw-stone-600-s:     #{saturation(#57534e)};
-	--tw-stone-600-l:     #{lightness(#57534e)};
-	--tw-stone-600-raw:   #{hue(#57534e), saturation(#57534e), lightness(#57534e)};
-	--tw-stone-600:       #{#57534e};
-
-	--tw-stone-700-h:     #{hue(#44403c)};
-	--tw-stone-700-s:     #{saturation(#44403c)};
-	--tw-stone-700-l:     #{lightness(#44403c)};
-	--tw-stone-700-raw:   #{hue(#44403c), saturation(#44403c), lightness(#44403c)};
-	--tw-stone-700:       #{#44403c};
-
-	--tw-stone-800-h:     #{hue(#292524)};
-	--tw-stone-800-s:     #{saturation(#292524)};
-	--tw-stone-800-l:     #{lightness(#292524)};
-	--tw-stone-800-raw:   #{hue(#292524), saturation(#292524), lightness(#292524)};
-	--tw-stone-800:       #{#292524};
-
-	--tw-stone-900-h:     #{hue(#1c1917)};
-	--tw-stone-900-s:     #{saturation(#1c1917)};
-	--tw-stone-900-l:     #{lightness(#1c1917)};
-	--tw-stone-900-raw:   #{hue(#1c1917), saturation(#1c1917), lightness(#1c1917)};
-	--tw-stone-900:       #{#1c1917};
-
-	--tw-red-50-h:        #{hue(#fef2f2)};
-	--tw-red-50-s:        #{saturation(#fef2f2)};
-	--tw-red-50-l:        #{lightness(#fef2f2)};
-	--tw-red-50-raw:      #{hue(#fef2f2), saturation(#fef2f2), lightness(#fef2f2)};
-	--tw-red-50:          #{#fef2f2};
-
-	--tw-red-100-h:       #{hue(#fee2e2)};
-	--tw-red-100-s:       #{saturation(#fee2e2)};
-	--tw-red-100-l:       #{lightness(#fee2e2)};
-	--tw-red-100-raw:     #{hue(#fee2e2), saturation(#fee2e2), lightness(#fee2e2)};
-	--tw-red-100:         #{#fee2e2};
-
-	--tw-red-200-h:       #{hue(#fecaca)};
-	--tw-red-200-s:       #{saturation(#fecaca)};
-	--tw-red-200-l:       #{lightness(#fecaca)};
-	--tw-red-200-raw:     #{hue(#fecaca), saturation(#fecaca), lightness(#fecaca)};
-	--tw-red-200:         #{#fecaca};
-
-	--tw-red-300-h:       #{hue(#fca5a5)};
-	--tw-red-300-s:       #{saturation(#fca5a5)};
-	--tw-red-300-l:       #{lightness(#fca5a5)};
-	--tw-red-300-raw:     #{hue(#fca5a5), saturation(#fca5a5), lightness(#fca5a5)};
-	--tw-red-300:         #{#fca5a5};
-
-	--tw-red-400-h:       #{hue(#f87171)};
-	--tw-red-400-s:       #{saturation(#f87171)};
-	--tw-red-400-l:       #{lightness(#f87171)};
-	--tw-red-400-raw:     #{hue(#f87171), saturation(#f87171), lightness(#f87171)};
-	--tw-red-400:         #{#f87171};
-
-	--tw-red-500-h:       #{hue(#ef4444)};
-	--tw-red-500-s:       #{saturation(#ef4444)};
-	--tw-red-500-l:       #{lightness(#ef4444)};
-	--tw-red-500-raw:     #{hue(#ef4444), saturation(#ef4444), lightness(#ef4444)};
-	--tw-red-500:         #{#ef4444};
-
-	--tw-red-600-h:       #{hue(#dc2626)};
-	--tw-red-600-s:       #{saturation(#dc2626)};
-	--tw-red-600-l:       #{lightness(#dc2626)};
-	--tw-red-600-raw:     #{hue(#dc2626), saturation(#dc2626), lightness(#dc2626)};
-	--tw-red-600:         #{#dc2626};
-
-	--tw-red-700-h:       #{hue(#b91c1c)};
-	--tw-red-700-s:       #{saturation(#b91c1c)};
-	--tw-red-700-l:       #{lightness(#b91c1c)};
-	--tw-red-700-raw:     #{hue(#b91c1c), saturation(#b91c1c), lightness(#b91c1c)};
-	--tw-red-700:         #{#b91c1c};
-
-	--tw-red-800-h:       #{hue(#991b1b)};
-	--tw-red-800-s:       #{saturation(#991b1b)};
-	--tw-red-800-l:       #{lightness(#991b1b)};
-	--tw-red-800-raw:     #{hue(#991b1b), saturation(#991b1b), lightness(#991b1b)};
-	--tw-red-800:         #{#991b1b};
-
-	--tw-red-900-h:       #{hue(#7f1d1d)};
-	--tw-red-900-s:       #{saturation(#7f1d1d)};
-	--tw-red-900-l:       #{lightness(#7f1d1d)};
-	--tw-red-900-raw:     #{hue(#7f1d1d), saturation(#7f1d1d), lightness(#7f1d1d)};
-	--tw-red-900:         #{#7f1d1d};
-
-	--tw-orange-50-h:     #{hue(#fff7ed)};
-	--tw-orange-50-s:     #{saturation(#fff7ed)};
-	--tw-orange-50-l:     #{lightness(#fff7ed)};
-	--tw-orange-50-raw:   #{hue(#fff7ed), saturation(#fff7ed), lightness(#fff7ed)};
-	--tw-orange-50:       #{#fff7ed};
-
-	--tw-orange-100-h:    #{hue(#ffedd5)};
-	--tw-orange-100-s:    #{saturation(#ffedd5)};
-	--tw-orange-100-l:    #{lightness(#ffedd5)};
-	--tw-orange-100-raw:  #{hue(#ffedd5), saturation(#ffedd5), lightness(#ffedd5)};
-	--tw-orange-100:      #{#ffedd5};
-
-	--tw-orange-200-h:    #{hue(#fed7aa)};
-	--tw-orange-200-s:    #{saturation(#fed7aa)};
-	--tw-orange-200-l:    #{lightness(#fed7aa)};
-	--tw-orange-200-raw:  #{hue(#fed7aa), saturation(#fed7aa), lightness(#fed7aa)};
-	--tw-orange-200:      #{#fed7aa};
-
-	--tw-orange-300-h:    #{hue(#fdba74)};
-	--tw-orange-300-s:    #{saturation(#fdba74)};
-	--tw-orange-300-l:    #{lightness(#fdba74)};
-	--tw-orange-300-raw:  #{hue(#fdba74), saturation(#fdba74), lightness(#fdba74)};
-	--tw-orange-300:      #{#fdba74};
-
-	--tw-orange-400-h:    #{hue(#fb923c)};
-	--tw-orange-400-s:    #{saturation(#fb923c)};
-	--tw-orange-400-l:    #{lightness(#fb923c)};
-	--tw-orange-400-raw:  #{hue(#fb923c), saturation(#fb923c), lightness(#fb923c)};
-	--tw-orange-400:      #{#fb923c};
-
-	--tw-orange-500-h:    #{hue(#f97316)};
-	--tw-orange-500-s:    #{saturation(#f97316)};
-	--tw-orange-500-l:    #{lightness(#f97316)};
-	--tw-orange-500-raw:  #{hue(#f97316), saturation(#f97316), lightness(#f97316)};
-	--tw-orange-500:      #{#f97316};
-
-	--tw-orange-600-h:    #{hue(#ea580c)};
-	--tw-orange-600-s:    #{saturation(#ea580c)};
-	--tw-orange-600-l:    #{lightness(#ea580c)};
-	--tw-orange-600-raw:  #{hue(#ea580c), saturation(#ea580c), lightness(#ea580c)};
-	--tw-orange-600:      #{#ea580c};
-
-	--tw-orange-700-h:    #{hue(#c2410c)};
-	--tw-orange-700-s:    #{saturation(#c2410c)};
-	--tw-orange-700-l:    #{lightness(#c2410c)};
-	--tw-orange-700-raw:  #{hue(#c2410c), saturation(#c2410c), lightness(#c2410c)};
-	--tw-orange-700:      #{#c2410c};
-
-	--tw-orange-800-h:    #{hue(#9a3412)};
-	--tw-orange-800-s:    #{saturation(#9a3412)};
-	--tw-orange-800-l:    #{lightness(#9a3412)};
-	--tw-orange-800-raw:  #{hue(#9a3412), saturation(#9a3412), lightness(#9a3412)};
-	--tw-orange-800:      #{#9a3412};
-
-	--tw-orange-900-h:    #{hue(#7c2d12)};
-	--tw-orange-900-s:    #{saturation(#7c2d12)};
-	--tw-orange-900-l:    #{lightness(#7c2d12)};
-	--tw-orange-900-raw:  #{hue(#7c2d12), saturation(#7c2d12), lightness(#7c2d12)};
-	--tw-orange-900:      #{#7c2d12};
-
-	--tw-amber-50-h:      #{hue(#fffbeb)};
-	--tw-amber-50-s:      #{saturation(#fffbeb)};
-	--tw-amber-50-l:      #{lightness(#fffbeb)};
-	--tw-amber-50-raw:    #{hue(#fffbeb), saturation(#fffbeb), lightness(#fffbeb)};
-	--tw-amber-50:        #{#fffbeb};
-
-	--tw-amber-100-h:     #{hue(#fef3c7)};
-	--tw-amber-100-s:     #{saturation(#fef3c7)};
-	--tw-amber-100-l:     #{lightness(#fef3c7)};
-	--tw-amber-100-raw:   #{hue(#fef3c7), saturation(#fef3c7), lightness(#fef3c7)};
-	--tw-amber-100:       #{#fef3c7};
-
-	--tw-amber-200-h:     #{hue(#fde68a)};
-	--tw-amber-200-s:     #{saturation(#fde68a)};
-	--tw-amber-200-l:     #{lightness(#fde68a)};
-	--tw-amber-200-raw:   #{hue(#fde68a), saturation(#fde68a), lightness(#fde68a)};
-	--tw-amber-200:       #{#fde68a};
-
-	--tw-amber-300-h:     #{hue(#fcd34d)};
-	--tw-amber-300-s:     #{saturation(#fcd34d)};
-	--tw-amber-300-l:     #{lightness(#fcd34d)};
-	--tw-amber-300-raw:   #{hue(#fcd34d), saturation(#fcd34d), lightness(#fcd34d)};
-	--tw-amber-300:       #{#fcd34d};
-
-	--tw-amber-400-h:     #{hue(#fbbf24)};
-	--tw-amber-400-s:     #{saturation(#fbbf24)};
-	--tw-amber-400-l:     #{lightness(#fbbf24)};
-	--tw-amber-400-raw:   #{hue(#fbbf24), saturation(#fbbf24), lightness(#fbbf24)};
-	--tw-amber-400:       #{#fbbf24};
-
-	--tw-amber-500-h:     #{hue(#f59e0b)};
-	--tw-amber-500-s:     #{saturation(#f59e0b)};
-	--tw-amber-500-l:     #{lightness(#f59e0b)};
-	--tw-amber-500-raw:   #{hue(#f59e0b), saturation(#f59e0b), lightness(#f59e0b)};
-	--tw-amber-500:       #{#f59e0b};
-
-	--tw-amber-600-h:     #{hue(#d97706)};
-	--tw-amber-600-s:     #{saturation(#d97706)};
-	--tw-amber-600-l:     #{lightness(#d97706)};
-	--tw-amber-600-raw:   #{hue(#d97706), saturation(#d97706), lightness(#d97706)};
-	--tw-amber-600:       #{#d97706};
-
-	--tw-amber-700-h:     #{hue(#b45309)};
-	--tw-amber-700-s:     #{saturation(#b45309)};
-	--tw-amber-700-l:     #{lightness(#b45309)};
-	--tw-amber-700-raw:   #{hue(#b45309), saturation(#b45309), lightness(#b45309)};
-	--tw-amber-700:       #{#b45309};
-
-	--tw-amber-800-h:     #{hue(#92400e)};
-	--tw-amber-800-s:     #{saturation(#92400e)};
-	--tw-amber-800-l:     #{lightness(#92400e)};
-	--tw-amber-800-raw:   #{hue(#92400e), saturation(#92400e), lightness(#92400e)};
-	--tw-amber-800:       #{#92400e};
-
-	--tw-amber-900-h:     #{hue(#78350f)};
-	--tw-amber-900-s:     #{saturation(#78350f)};
-	--tw-amber-900-l:     #{lightness(#78350f)};
-	--tw-amber-900-raw:   #{hue(#78350f), saturation(#78350f), lightness(#78350f)};
-	--tw-amber-900:       #{#78350f};
-
-	--tw-yellow-50-h:     #{hue(#fefce8)};
-	--tw-yellow-50-s:     #{saturation(#fefce8)};
-	--tw-yellow-50-l:     #{lightness(#fefce8)};
-	--tw-yellow-50-raw:   #{hue(#fefce8), saturation(#fefce8), lightness(#fefce8)};
-	--tw-yellow-50:       #{#fefce8};
-
-	--tw-yellow-100-h:    #{hue(#fef9c3)};
-	--tw-yellow-100-s:    #{saturation(#fef9c3)};
-	--tw-yellow-100-l:    #{lightness(#fef9c3)};
-	--tw-yellow-100-raw:  #{hue(#fef9c3), saturation(#fef9c3), lightness(#fef9c3)};
-	--tw-yellow-100:      #{#fef9c3};
-
-	--tw-yellow-200-h:    #{hue(#fef08a)};
-	--tw-yellow-200-s:    #{saturation(#fef08a)};
-	--tw-yellow-200-l:    #{lightness(#fef08a)};
-	--tw-yellow-200-raw:  #{hue(#fef08a), saturation(#fef08a), lightness(#fef08a)};
-	--tw-yellow-200:      #{#fef08a};
-
-	--tw-yellow-300-h:    #{hue(#fde047)};
-	--tw-yellow-300-s:    #{saturation(#fde047)};
-	--tw-yellow-300-l:    #{lightness(#fde047)};
-	--tw-yellow-300-raw:  #{hue(#fde047), saturation(#fde047), lightness(#fde047)};
-	--tw-yellow-300:      #{#fde047};
-
-	--tw-yellow-400-h:    #{hue(#facc15)};
-	--tw-yellow-400-s:    #{saturation(#facc15)};
-	--tw-yellow-400-l:    #{lightness(#facc15)};
-	--tw-yellow-400-raw:  #{hue(#facc15), saturation(#facc15), lightness(#facc15)};
-	--tw-yellow-400:      #{#facc15};
-
-	--tw-yellow-500-h:    #{hue(#eab308)};
-	--tw-yellow-500-s:    #{saturation(#eab308)};
-	--tw-yellow-500-l:    #{lightness(#eab308)};
-	--tw-yellow-500-raw:  #{hue(#eab308), saturation(#eab308), lightness(#eab308)};
-	--tw-yellow-500:      #{#eab308};
-
-	--tw-yellow-600-h:    #{hue(#ca8a04)};
-	--tw-yellow-600-s:    #{saturation(#ca8a04)};
-	--tw-yellow-600-l:    #{lightness(#ca8a04)};
-	--tw-yellow-600-raw:  #{hue(#ca8a04), saturation(#ca8a04), lightness(#ca8a04)};
-	--tw-yellow-600:      #{#ca8a04};
-
-	--tw-yellow-700-h:    #{hue(#a16207)};
-	--tw-yellow-700-s:    #{saturation(#a16207)};
-	--tw-yellow-700-l:    #{lightness(#a16207)};
-	--tw-yellow-700-raw:  #{hue(#a16207), saturation(#a16207), lightness(#a16207)};
-	--tw-yellow-700:      #{#a16207};
-
-	--tw-yellow-800-h:    #{hue(#854d0e)};
-	--tw-yellow-800-s:    #{saturation(#854d0e)};
-	--tw-yellow-800-l:    #{lightness(#854d0e)};
-	--tw-yellow-800-raw:  #{hue(#854d0e), saturation(#854d0e), lightness(#854d0e)};
-	--tw-yellow-800:      #{#854d0e};
-
-	--tw-yellow-900-h:    #{hue(#713f12)};
-	--tw-yellow-900-s:    #{saturation(#713f12)};
-	--tw-yellow-900-l:    #{lightness(#713f12)};
-	--tw-yellow-900-raw:  #{hue(#713f12), saturation(#713f12), lightness(#713f12)};
-	--tw-yellow-900:      #{#713f12};
-
-	--tw-lime-50-h:       #{hue(#f7fee7)};
-	--tw-lime-50-s:       #{saturation(#f7fee7)};
-	--tw-lime-50-l:       #{lightness(#f7fee7)};
-	--tw-lime-50-raw:     #{hue(#f7fee7), saturation(#f7fee7), lightness(#f7fee7)};
-	--tw-lime-50:         #{#f7fee7};
-
-	--tw-lime-100-h:      #{hue(#ecfccb)};
-	--tw-lime-100-s:      #{saturation(#ecfccb)};
-	--tw-lime-100-l:      #{lightness(#ecfccb)};
-	--tw-lime-100-raw:    #{hue(#ecfccb), saturation(#ecfccb), lightness(#ecfccb)};
-	--tw-lime-100:        #{#ecfccb};
-
-	--tw-lime-200-h:      #{hue(#d9f99d)};
-	--tw-lime-200-s:      #{saturation(#d9f99d)};
-	--tw-lime-200-l:      #{lightness(#d9f99d)};
-	--tw-lime-200-raw:    #{hue(#d9f99d), saturation(#d9f99d), lightness(#d9f99d)};
-	--tw-lime-200:        #{#d9f99d};
-
-	--tw-lime-300-h:      #{hue(#bef264)};
-	--tw-lime-300-s:      #{saturation(#bef264)};
-	--tw-lime-300-l:      #{lightness(#bef264)};
-	--tw-lime-300-raw:    #{hue(#bef264), saturation(#bef264), lightness(#bef264)};
-	--tw-lime-300:        #{#bef264};
-
-	--tw-lime-400-h:      #{hue(#a3e635)};
-	--tw-lime-400-s:      #{saturation(#a3e635)};
-	--tw-lime-400-l:      #{lightness(#a3e635)};
-	--tw-lime-400-raw:    #{hue(#a3e635), saturation(#a3e635), lightness(#a3e635)};
-	--tw-lime-400:        #{#a3e635};
-
-	--tw-lime-500-h:      #{hue(#84cc16)};
-	--tw-lime-500-s:      #{saturation(#84cc16)};
-	--tw-lime-500-l:      #{lightness(#84cc16)};
-	--tw-lime-500-raw:    #{hue(#84cc16), saturation(#84cc16), lightness(#84cc16)};
-	--tw-lime-500:        #{#84cc16};
-
-	--tw-lime-600-h:      #{hue(#65a30d)};
-	--tw-lime-600-s:      #{saturation(#65a30d)};
-	--tw-lime-600-l:      #{lightness(#65a30d)};
-	--tw-lime-600-raw:    #{hue(#65a30d), saturation(#65a30d), lightness(#65a30d)};
-	--tw-lime-600:        #{#65a30d};
-
-	--tw-lime-700-h:      #{hue(#4d7c0f)};
-	--tw-lime-700-s:      #{saturation(#4d7c0f)};
-	--tw-lime-700-l:      #{lightness(#4d7c0f)};
-	--tw-lime-700-raw:    #{hue(#4d7c0f), saturation(#4d7c0f), lightness(#4d7c0f)};
-	--tw-lime-700:        #{#4d7c0f};
-
-	--tw-lime-800-h:      #{hue(#3f6212)};
-	--tw-lime-800-s:      #{saturation(#3f6212)};
-	--tw-lime-800-l:      #{lightness(#3f6212)};
-	--tw-lime-800-raw:    #{hue(#3f6212), saturation(#3f6212), lightness(#3f6212)};
-	--tw-lime-800:        #{#3f6212};
-
-	--tw-lime-900-h:      #{hue(#365314)};
-	--tw-lime-900-s:      #{saturation(#365314)};
-	--tw-lime-900-l:      #{lightness(#365314)};
-	--tw-lime-900-raw:    #{hue(#365314), saturation(#365314), lightness(#365314)};
-	--tw-lime-900:        #{#365314};
-
-	--tw-green-50-h:      #{hue(#f0fdf4)};
-	--tw-green-50-s:      #{saturation(#f0fdf4)};
-	--tw-green-50-l:      #{lightness(#f0fdf4)};
-	--tw-green-50-raw:    #{hue(#f0fdf4), saturation(#f0fdf4), lightness(#f0fdf4)};
-	--tw-green-50:        #{#f0fdf4};
-
-	--tw-green-100-h:     #{hue(#dcfce7)};
-	--tw-green-100-s:     #{saturation(#dcfce7)};
-	--tw-green-100-l:     #{lightness(#dcfce7)};
-	--tw-green-100-raw:   #{hue(#dcfce7), saturation(#dcfce7), lightness(#dcfce7)};
-	--tw-green-100:       #{#dcfce7};
-
-	--tw-green-200-h:     #{hue(#bbf7d0)};
-	--tw-green-200-s:     #{saturation(#bbf7d0)};
-	--tw-green-200-l:     #{lightness(#bbf7d0)};
-	--tw-green-200-raw:   #{hue(#bbf7d0), saturation(#bbf7d0), lightness(#bbf7d0)};
-	--tw-green-200:       #{#bbf7d0};
-
-	--tw-green-300-h:     #{hue(#86efac)};
-	--tw-green-300-s:     #{saturation(#86efac)};
-	--tw-green-300-l:     #{lightness(#86efac)};
-	--tw-green-300-raw:   #{hue(#86efac), saturation(#86efac), lightness(#86efac)};
-	--tw-green-300:       #{#86efac};
-
-	--tw-green-400-h:     #{hue(#4ade80)};
-	--tw-green-400-s:     #{saturation(#4ade80)};
-	--tw-green-400-l:     #{lightness(#4ade80)};
-	--tw-green-400-raw:   #{hue(#4ade80), saturation(#4ade80), lightness(#4ade80)};
-	--tw-green-400:       #{#4ade80};
-
-	--tw-green-500-h:     #{hue(#22c55e)};
-	--tw-green-500-s:     #{saturation(#22c55e)};
-	--tw-green-500-l:     #{lightness(#22c55e)};
-	--tw-green-500-raw:   #{hue(#22c55e), saturation(#22c55e), lightness(#22c55e)};
-	--tw-green-500:       #{#22c55e};
-
-	--tw-green-600-h:     #{hue(#16a34a)};
-	--tw-green-600-s:     #{saturation(#16a34a)};
-	--tw-green-600-l:     #{lightness(#16a34a)};
-	--tw-green-600-raw:   #{hue(#16a34a), saturation(#16a34a), lightness(#16a34a)};
-	--tw-green-600:       #{#16a34a};
-
-	--tw-green-700-h:     #{hue(#15803d)};
-	--tw-green-700-s:     #{saturation(#15803d)};
-	--tw-green-700-l:     #{lightness(#15803d)};
-	--tw-green-700-raw:   #{hue(#15803d), saturation(#15803d), lightness(#15803d)};
-	--tw-green-700:       #{#15803d};
-
-	--tw-green-800-h:     #{hue(#166534)};
-	--tw-green-800-s:     #{saturation(#166534)};
-	--tw-green-800-l:     #{lightness(#166534)};
-	--tw-green-800-raw:   #{hue(#166534), saturation(#166534), lightness(#166534)};
-	--tw-green-800:       #{#166534};
-
-	--tw-green-900-h:     #{hue(#14532d)};
-	--tw-green-900-s:     #{saturation(#14532d)};
-	--tw-green-900-l:     #{lightness(#14532d)};
-	--tw-green-900-raw:   #{hue(#14532d), saturation(#14532d), lightness(#14532d)};
-	--tw-green-900:       #{#14532d};
-
-	--tw-emerald-50-h:    #{hue(#ecfdf5)};
-	--tw-emerald-50-s:    #{saturation(#ecfdf5)};
-	--tw-emerald-50-l:    #{lightness(#ecfdf5)};
-	--tw-emerald-50-raw:  #{hue(#ecfdf5), saturation(#ecfdf5), lightness(#ecfdf5)};
-	--tw-emerald-50:      #{#ecfdf5};
-
-	--tw-emerald-100-h:   #{hue(#d1fae5)};
-	--tw-emerald-100-s:   #{saturation(#d1fae5)};
-	--tw-emerald-100-l:   #{lightness(#d1fae5)};
-	--tw-emerald-100-raw: #{hue(#d1fae5), saturation(#d1fae5), lightness(#d1fae5)};
-	--tw-emerald-100:     #{#d1fae5};
-
-	--tw-emerald-200-h:   #{hue(#a7f3d0)};
-	--tw-emerald-200-s:   #{saturation(#a7f3d0)};
-	--tw-emerald-200-l:   #{lightness(#a7f3d0)};
-	--tw-emerald-200-raw: #{hue(#a7f3d0), saturation(#a7f3d0), lightness(#a7f3d0)};
-	--tw-emerald-200:     #{#a7f3d0};
-
-	--tw-emerald-300-h:   #{hue(#6ee7b7)};
-	--tw-emerald-300-s:   #{saturation(#6ee7b7)};
-	--tw-emerald-300-l:   #{lightness(#6ee7b7)};
-	--tw-emerald-300-raw: #{hue(#6ee7b7), saturation(#6ee7b7), lightness(#6ee7b7)};
-	--tw-emerald-300:     #{#6ee7b7};
-
-	--tw-emerald-400-h:   #{hue(#34d399)};
-	--tw-emerald-400-s:   #{saturation(#34d399)};
-	--tw-emerald-400-l:   #{lightness(#34d399)};
-	--tw-emerald-400-raw: #{hue(#34d399), saturation(#34d399), lightness(#34d399)};
-	--tw-emerald-400:     #{#34d399};
-
-	--tw-emerald-500-h:   #{hue(#10b981)};
-	--tw-emerald-500-s:   #{saturation(#10b981)};
-	--tw-emerald-500-l:   #{lightness(#10b981)};
-	--tw-emerald-500-raw: #{hue(#10b981), saturation(#10b981), lightness(#10b981)};
-	--tw-emerald-500:     #{#10b981};
-
-	--tw-emerald-600-h:   #{hue(#059669)};
-	--tw-emerald-600-s:   #{saturation(#059669)};
-	--tw-emerald-600-l:   #{lightness(#059669)};
-	--tw-emerald-600-raw: #{hue(#059669), saturation(#059669), lightness(#059669)};
-	--tw-emerald-600:     #{#059669};
-
-	--tw-emerald-700-h:   #{hue(#047857)};
-	--tw-emerald-700-s:   #{saturation(#047857)};
-	--tw-emerald-700-l:   #{lightness(#047857)};
-	--tw-emerald-700-raw: #{hue(#047857), saturation(#047857), lightness(#047857)};
-	--tw-emerald-700:     #{#047857};
-
-	--tw-emerald-800-h:   #{hue(#065f46)};
-	--tw-emerald-800-s:   #{saturation(#065f46)};
-	--tw-emerald-800-l:   #{lightness(#065f46)};
-	--tw-emerald-800-raw: #{hue(#065f46), saturation(#065f46), lightness(#065f46)};
-	--tw-emerald-800:     #{#065f46};
-
-	--tw-emerald-900-h:   #{hue(#064e3b)};
-	--tw-emerald-900-s:   #{saturation(#064e3b)};
-	--tw-emerald-900-l:   #{lightness(#064e3b)};
-	--tw-emerald-900-raw: #{hue(#064e3b), saturation(#064e3b), lightness(#064e3b)};
-	--tw-emerald-900:     #{#064e3b};
-
-	--tw-teal-50-h:       #{hue(#f0fdfa)};
-	--tw-teal-50-s:       #{saturation(#f0fdfa)};
-	--tw-teal-50-l:       #{lightness(#f0fdfa)};
-	--tw-teal-50-raw:     #{hue(#f0fdfa), saturation(#f0fdfa), lightness(#f0fdfa)};
-	--tw-teal-50:         #{#f0fdfa};
-
-	--tw-teal-100-h:      #{hue(#ccfbf1)};
-	--tw-teal-100-s:      #{saturation(#ccfbf1)};
-	--tw-teal-100-l:      #{lightness(#ccfbf1)};
-	--tw-teal-100-raw:    #{hue(#ccfbf1), saturation(#ccfbf1), lightness(#ccfbf1)};
-	--tw-teal-100:        #{#ccfbf1};
-
-	--tw-teal-200-h:      #{hue(#99f6e4)};
-	--tw-teal-200-s:      #{saturation(#99f6e4)};
-	--tw-teal-200-l:      #{lightness(#99f6e4)};
-	--tw-teal-200-raw:    #{hue(#99f6e4), saturation(#99f6e4), lightness(#99f6e4)};
-	--tw-teal-200:        #{#99f6e4};
-
-	--tw-teal-300-h:      #{hue(#5eead4)};
-	--tw-teal-300-s:      #{saturation(#5eead4)};
-	--tw-teal-300-l:      #{lightness(#5eead4)};
-	--tw-teal-300-raw:    #{hue(#5eead4), saturation(#5eead4), lightness(#5eead4)};
-	--tw-teal-300:        #{#5eead4};
-
-	--tw-teal-400-h:      #{hue(#2dd4bf)};
-	--tw-teal-400-s:      #{saturation(#2dd4bf)};
-	--tw-teal-400-l:      #{lightness(#2dd4bf)};
-	--tw-teal-400-raw:    #{hue(#2dd4bf), saturation(#2dd4bf), lightness(#2dd4bf)};
-	--tw-teal-400:        #{#2dd4bf};
-
-	--tw-teal-500-h:      #{hue(#14b8a6)};
-	--tw-teal-500-s:      #{saturation(#14b8a6)};
-	--tw-teal-500-l:      #{lightness(#14b8a6)};
-	--tw-teal-500-raw:    #{hue(#14b8a6), saturation(#14b8a6), lightness(#14b8a6)};
-	--tw-teal-500:        #{#14b8a6};
-
-	--tw-teal-600-h:      #{hue(#0d9488)};
-	--tw-teal-600-s:      #{saturation(#0d9488)};
-	--tw-teal-600-l:      #{lightness(#0d9488)};
-	--tw-teal-600-raw:    #{hue(#0d9488), saturation(#0d9488), lightness(#0d9488)};
-	--tw-teal-600:        #{#0d9488};
-
-	--tw-teal-700-h:      #{hue(#0f766e)};
-	--tw-teal-700-s:      #{saturation(#0f766e)};
-	--tw-teal-700-l:      #{lightness(#0f766e)};
-	--tw-teal-700-raw:    #{hue(#0f766e), saturation(#0f766e), lightness(#0f766e)};
-	--tw-teal-700:        #{#0f766e};
-
-	--tw-teal-800-h:      #{hue(#115e59)};
-	--tw-teal-800-s:      #{saturation(#115e59)};
-	--tw-teal-800-l:      #{lightness(#115e59)};
-	--tw-teal-800-raw:    #{hue(#115e59), saturation(#115e59), lightness(#115e59)};
-	--tw-teal-800:        #{#115e59};
-
-	--tw-teal-900-h:      #{hue(#134e4a)};
-	--tw-teal-900-s:      #{saturation(#134e4a)};
-	--tw-teal-900-l:      #{lightness(#134e4a)};
-	--tw-teal-900-raw:    #{hue(#134e4a), saturation(#134e4a), lightness(#134e4a)};
-	--tw-teal-900:        #{#134e4a};
-
-	--tw-cyan-50-h:       #{hue(#ecfeff)};
-	--tw-cyan-50-s:       #{saturation(#ecfeff)};
-	--tw-cyan-50-l:       #{lightness(#ecfeff)};
-	--tw-cyan-50-raw:     #{hue(#ecfeff), saturation(#ecfeff), lightness(#ecfeff)};
-	--tw-cyan-50:         #{#ecfeff};
-
-	--tw-cyan-100-h:      #{hue(#cffafe)};
-	--tw-cyan-100-s:      #{saturation(#cffafe)};
-	--tw-cyan-100-l:      #{lightness(#cffafe)};
-	--tw-cyan-100-raw:    #{hue(#cffafe), saturation(#cffafe), lightness(#cffafe)};
-	--tw-cyan-100:        #{#cffafe};
-
-	--tw-cyan-200-h:      #{hue(#a5f3fc)};
-	--tw-cyan-200-s:      #{saturation(#a5f3fc)};
-	--tw-cyan-200-l:      #{lightness(#a5f3fc)};
-	--tw-cyan-200-raw:    #{hue(#a5f3fc), saturation(#a5f3fc), lightness(#a5f3fc)};
-	--tw-cyan-200:        #{#a5f3fc};
-
-	--tw-cyan-300-h:      #{hue(#67e8f9)};
-	--tw-cyan-300-s:      #{saturation(#67e8f9)};
-	--tw-cyan-300-l:      #{lightness(#67e8f9)};
-	--tw-cyan-300-raw:    #{hue(#67e8f9), saturation(#67e8f9), lightness(#67e8f9)};
-	--tw-cyan-300:        #{#67e8f9};
-
-	--tw-cyan-400-h:      #{hue(#22d3ee)};
-	--tw-cyan-400-s:      #{saturation(#22d3ee)};
-	--tw-cyan-400-l:      #{lightness(#22d3ee)};
-	--tw-cyan-400-raw:    #{hue(#22d3ee), saturation(#22d3ee), lightness(#22d3ee)};
-	--tw-cyan-400:        #{#22d3ee};
-
-	--tw-cyan-500-h:      #{hue(#06b6d4)};
-	--tw-cyan-500-s:      #{saturation(#06b6d4)};
-	--tw-cyan-500-l:      #{lightness(#06b6d4)};
-	--tw-cyan-500-raw:    #{hue(#06b6d4), saturation(#06b6d4), lightness(#06b6d4)};
-	--tw-cyan-500:        #{#06b6d4};
-
-	--tw-cyan-600-h:      #{hue(#0891b2)};
-	--tw-cyan-600-s:      #{saturation(#0891b2)};
-	--tw-cyan-600-l:      #{lightness(#0891b2)};
-	--tw-cyan-600-raw:    #{hue(#0891b2), saturation(#0891b2), lightness(#0891b2)};
-	--tw-cyan-600:        #{#0891b2};
-
-	--tw-cyan-700-h:      #{hue(#0e7490)};
-	--tw-cyan-700-s:      #{saturation(#0e7490)};
-	--tw-cyan-700-l:      #{lightness(#0e7490)};
-	--tw-cyan-700-raw:    #{hue(#0e7490), saturation(#0e7490), lightness(#0e7490)};
-	--tw-cyan-700:        #{#0e7490};
-
-	--tw-cyan-800-h:      #{hue(#155e75)};
-	--tw-cyan-800-s:      #{saturation(#155e75)};
-	--tw-cyan-800-l:      #{lightness(#155e75)};
-	--tw-cyan-800-raw:    #{hue(#155e75), saturation(#155e75), lightness(#155e75)};
-	--tw-cyan-800:        #{#155e75};
-
-	--tw-cyan-900-h:      #{hue(#164e63)};
-	--tw-cyan-900-s:      #{saturation(#164e63)};
-	--tw-cyan-900-l:      #{lightness(#164e63)};
-	--tw-cyan-900-raw:    #{hue(#164e63), saturation(#164e63), lightness(#164e63)};
-	--tw-cyan-900:        #{#164e63};
-
-	--tw-sky-50-h:        #{hue(#f0f9ff)};
-	--tw-sky-50-s:        #{saturation(#f0f9ff)};
-	--tw-sky-50-l:        #{lightness(#f0f9ff)};
-	--tw-sky-50-raw:      #{hue(#f0f9ff), saturation(#f0f9ff), lightness(#f0f9ff)};
-	--tw-sky-50:          #{#f0f9ff};
-
-	--tw-sky-100-h:       #{hue(#e0f2fe)};
-	--tw-sky-100-s:       #{saturation(#e0f2fe)};
-	--tw-sky-100-l:       #{lightness(#e0f2fe)};
-	--tw-sky-100-raw:     #{hue(#e0f2fe), saturation(#e0f2fe), lightness(#e0f2fe)};
-	--tw-sky-100:         #{#e0f2fe};
-
-	--tw-sky-200-h:       #{hue(#bae6fd)};
-	--tw-sky-200-s:       #{saturation(#bae6fd)};
-	--tw-sky-200-l:       #{lightness(#bae6fd)};
-	--tw-sky-200-raw:     #{hue(#bae6fd), saturation(#bae6fd), lightness(#bae6fd)};
-	--tw-sky-200:         #{#bae6fd};
-
-	--tw-sky-300-h:       #{hue(#7dd3fc)};
-	--tw-sky-300-s:       #{saturation(#7dd3fc)};
-	--tw-sky-300-l:       #{lightness(#7dd3fc)};
-	--tw-sky-300-raw:     #{hue(#7dd3fc), saturation(#7dd3fc), lightness(#7dd3fc)};
-	--tw-sky-300:         #{#7dd3fc};
-
-	--tw-sky-400-h:       #{hue(#38bdf8)};
-	--tw-sky-400-s:       #{saturation(#38bdf8)};
-	--tw-sky-400-l:       #{lightness(#38bdf8)};
-	--tw-sky-400-raw:     #{hue(#38bdf8), saturation(#38bdf8), lightness(#38bdf8)};
-	--tw-sky-400:         #{#38bdf8};
-
-	--tw-sky-500-h:       #{hue(#0ea5e9)};
-	--tw-sky-500-s:       #{saturation(#0ea5e9)};
-	--tw-sky-500-l:       #{lightness(#0ea5e9)};
-	--tw-sky-500-raw:     #{hue(#0ea5e9), saturation(#0ea5e9), lightness(#0ea5e9)};
-	--tw-sky-500:         #{#0ea5e9};
-
-	--tw-sky-600-h:       #{hue(#0284c7)};
-	--tw-sky-600-s:       #{saturation(#0284c7)};
-	--tw-sky-600-l:       #{lightness(#0284c7)};
-	--tw-sky-600-raw:     #{hue(#0284c7), saturation(#0284c7), lightness(#0284c7)};
-	--tw-sky-600:         #{#0284c7};
-
-	--tw-sky-700-h:       #{hue(#0369a1)};
-	--tw-sky-700-s:       #{saturation(#0369a1)};
-	--tw-sky-700-l:       #{lightness(#0369a1)};
-	--tw-sky-700-raw:     #{hue(#0369a1), saturation(#0369a1), lightness(#0369a1)};
-	--tw-sky-700:         #{#0369a1};
-
-	--tw-sky-800-h:       #{hue(#075985)};
-	--tw-sky-800-s:       #{saturation(#075985)};
-	--tw-sky-800-l:       #{lightness(#075985)};
-	--tw-sky-800-raw:     #{hue(#075985), saturation(#075985), lightness(#075985)};
-	--tw-sky-800:         #{#075985};
-
-	--tw-sky-900-h:       #{hue(#0c4a6e)};
-	--tw-sky-900-s:       #{saturation(#0c4a6e)};
-	--tw-sky-900-l:       #{lightness(#0c4a6e)};
-	--tw-sky-900-raw:     #{hue(#0c4a6e), saturation(#0c4a6e), lightness(#0c4a6e)};
-	--tw-sky-900:         #{#0c4a6e};
-
-	--tw-blue-50-h:       #{hue(#eff6ff)};
-	--tw-blue-50-s:       #{saturation(#eff6ff)};
-	--tw-blue-50-l:       #{lightness(#eff6ff)};
-	--tw-blue-50-raw:     #{hue(#eff6ff), saturation(#eff6ff), lightness(#eff6ff)};
-	--tw-blue-50:         #{#eff6ff};
-
-	--tw-blue-100-h:      #{hue(#dbeafe)};
-	--tw-blue-100-s:      #{saturation(#dbeafe)};
-	--tw-blue-100-l:      #{lightness(#dbeafe)};
-	--tw-blue-100-raw:    #{hue(#dbeafe), saturation(#dbeafe), lightness(#dbeafe)};
-	--tw-blue-100:        #{#dbeafe};
-
-	--tw-blue-200-h:      #{hue(#bfdbfe)};
-	--tw-blue-200-s:      #{saturation(#bfdbfe)};
-	--tw-blue-200-l:      #{lightness(#bfdbfe)};
-	--tw-blue-200-raw:    #{hue(#bfdbfe), saturation(#bfdbfe), lightness(#bfdbfe)};
-	--tw-blue-200:        #{#bfdbfe};
-
-	--tw-blue-300-h:      #{hue(#93c5fd)};
-	--tw-blue-300-s:      #{saturation(#93c5fd)};
-	--tw-blue-300-l:      #{lightness(#93c5fd)};
-	--tw-blue-300-raw:    #{hue(#93c5fd), saturation(#93c5fd), lightness(#93c5fd)};
-	--tw-blue-300:        #{#93c5fd};
-
-	--tw-blue-400-h:      #{hue(#60a5fa)};
-	--tw-blue-400-s:      #{saturation(#60a5fa)};
-	--tw-blue-400-l:      #{lightness(#60a5fa)};
-	--tw-blue-400-raw:    #{hue(#60a5fa), saturation(#60a5fa), lightness(#60a5fa)};
-	--tw-blue-400:        #{#60a5fa};
-
-	--tw-blue-500-h:      #{hue(#3b82f6)};
-	--tw-blue-500-s:      #{saturation(#3b82f6)};
-	--tw-blue-500-l:      #{lightness(#3b82f6)};
-	--tw-blue-500-raw:    #{hue(#3b82f6), saturation(#3b82f6), lightness(#3b82f6)};
-	--tw-blue-500:        #{#3b82f6};
-
-	--tw-blue-600-h:      #{hue(#2563eb)};
-	--tw-blue-600-s:      #{saturation(#2563eb)};
-	--tw-blue-600-l:      #{lightness(#2563eb)};
-	--tw-blue-600-raw:    #{hue(#2563eb), saturation(#2563eb), lightness(#2563eb)};
-	--tw-blue-600:        #{#2563eb};
-
-	--tw-blue-700-h:      #{hue(#1d4ed8)};
-	--tw-blue-700-s:      #{saturation(#1d4ed8)};
-	--tw-blue-700-l:      #{lightness(#1d4ed8)};
-	--tw-blue-700-raw:    #{hue(#1d4ed8), saturation(#1d4ed8), lightness(#1d4ed8)};
-	--tw-blue-700:        #{#1d4ed8};
-
-	--tw-blue-800-h:      #{hue(#1e40af)};
-	--tw-blue-800-s:      #{saturation(#1e40af)};
-	--tw-blue-800-l:      #{lightness(#1e40af)};
-	--tw-blue-800-raw:    #{hue(#1e40af), saturation(#1e40af), lightness(#1e40af)};
-	--tw-blue-800:        #{#1e40af};
-
-	--tw-blue-900-h:      #{hue(#1e3a8a)};
-	--tw-blue-900-s:      #{saturation(#1e3a8a)};
-	--tw-blue-900-l:      #{lightness(#1e3a8a)};
-	--tw-blue-900-raw:    #{hue(#1e3a8a), saturation(#1e3a8a), lightness(#1e3a8a)};
-	--tw-blue-900:        #{#1e3a8a};
-
-	--tw-indigo-50-h:     #{hue(#eef2ff)};
-	--tw-indigo-50-s:     #{saturation(#eef2ff)};
-	--tw-indigo-50-l:     #{lightness(#eef2ff)};
-	--tw-indigo-50-raw:   #{hue(#eef2ff), saturation(#eef2ff), lightness(#eef2ff)};
-	--tw-indigo-50:       #{#eef2ff};
-
-	--tw-indigo-100-h:    #{hue(#e0e7ff)};
-	--tw-indigo-100-s:    #{saturation(#e0e7ff)};
-	--tw-indigo-100-l:    #{lightness(#e0e7ff)};
-	--tw-indigo-100-raw:  #{hue(#e0e7ff), saturation(#e0e7ff), lightness(#e0e7ff)};
-	--tw-indigo-100:      #{#e0e7ff};
-
-	--tw-indigo-200-h:    #{hue(#c7d2fe)};
-	--tw-indigo-200-s:    #{saturation(#c7d2fe)};
-	--tw-indigo-200-l:    #{lightness(#c7d2fe)};
-	--tw-indigo-200-raw:  #{hue(#c7d2fe), saturation(#c7d2fe), lightness(#c7d2fe)};
-	--tw-indigo-200:      #{#c7d2fe};
-
-	--tw-indigo-300-h:    #{hue(#a5b4fc)};
-	--tw-indigo-300-s:    #{saturation(#a5b4fc)};
-	--tw-indigo-300-l:    #{lightness(#a5b4fc)};
-	--tw-indigo-300-raw:  #{hue(#a5b4fc), saturation(#a5b4fc), lightness(#a5b4fc)};
-	--tw-indigo-300:      #{#a5b4fc};
-
-	--tw-indigo-400-h:    #{hue(#818cf8)};
-	--tw-indigo-400-s:    #{saturation(#818cf8)};
-	--tw-indigo-400-l:    #{lightness(#818cf8)};
-	--tw-indigo-400-raw:  #{hue(#818cf8), saturation(#818cf8), lightness(#818cf8)};
-	--tw-indigo-400:      #{#818cf8};
-
-	--tw-indigo-500-h:    #{hue(#6366f1)};
-	--tw-indigo-500-s:    #{saturation(#6366f1)};
-	--tw-indigo-500-l:    #{lightness(#6366f1)};
-	--tw-indigo-500-raw:  #{hue(#6366f1), saturation(#6366f1), lightness(#6366f1)};
-	--tw-indigo-500:      #{#6366f1};
-
-	--tw-indigo-600-h:    #{hue(#4f46e5)};
-	--tw-indigo-600-s:    #{saturation(#4f46e5)};
-	--tw-indigo-600-l:    #{lightness(#4f46e5)};
-	--tw-indigo-600-raw:  #{hue(#4f46e5), saturation(#4f46e5), lightness(#4f46e5)};
-	--tw-indigo-600:      #{#4f46e5};
-
-	--tw-indigo-700-h:    #{hue(#4338ca)};
-	--tw-indigo-700-s:    #{saturation(#4338ca)};
-	--tw-indigo-700-l:    #{lightness(#4338ca)};
-	--tw-indigo-700-raw:  #{hue(#4338ca), saturation(#4338ca), lightness(#4338ca)};
-	--tw-indigo-700:      #{#4338ca};
-
-	--tw-indigo-800-h:    #{hue(#3730a3)};
-	--tw-indigo-800-s:    #{saturation(#3730a3)};
-	--tw-indigo-800-l:    #{lightness(#3730a3)};
-	--tw-indigo-800-raw:  #{hue(#3730a3), saturation(#3730a3), lightness(#3730a3)};
-	--tw-indigo-800:      #{#3730a3};
-
-	--tw-indigo-900-h:    #{hue(#312e81)};
-	--tw-indigo-900-s:    #{saturation(#312e81)};
-	--tw-indigo-900-l:    #{lightness(#312e81)};
-	--tw-indigo-900-raw:  #{hue(#312e81), saturation(#312e81), lightness(#312e81)};
-	--tw-indigo-900:      #{#312e81};
-
-	--tw-violet-50-h:     #{hue(#f5f3ff)};
-	--tw-violet-50-s:     #{saturation(#f5f3ff)};
-	--tw-violet-50-l:     #{lightness(#f5f3ff)};
-	--tw-violet-50-raw:   #{hue(#f5f3ff), saturation(#f5f3ff), lightness(#f5f3ff)};
-	--tw-violet-50:       #{#f5f3ff};
-
-	--tw-violet-100-h:    #{hue(#ede9fe)};
-	--tw-violet-100-s:    #{saturation(#ede9fe)};
-	--tw-violet-100-l:    #{lightness(#ede9fe)};
-	--tw-violet-100-raw:  #{hue(#ede9fe), saturation(#ede9fe), lightness(#ede9fe)};
-	--tw-violet-100:      #{#ede9fe};
-
-	--tw-violet-200-h:    #{hue(#ddd6fe)};
-	--tw-violet-200-s:    #{saturation(#ddd6fe)};
-	--tw-violet-200-l:    #{lightness(#ddd6fe)};
-	--tw-violet-200-raw:  #{hue(#ddd6fe), saturation(#ddd6fe), lightness(#ddd6fe)};
-	--tw-violet-200:      #{#ddd6fe};
-
-	--tw-violet-300-h:    #{hue(#c4b5fd)};
-	--tw-violet-300-s:    #{saturation(#c4b5fd)};
-	--tw-violet-300-l:    #{lightness(#c4b5fd)};
-	--tw-violet-300-raw:  #{hue(#c4b5fd), saturation(#c4b5fd), lightness(#c4b5fd)};
-	--tw-violet-300:      #{#c4b5fd};
-
-	--tw-violet-400-h:    #{hue(#a78bfa)};
-	--tw-violet-400-s:    #{saturation(#a78bfa)};
-	--tw-violet-400-l:    #{lightness(#a78bfa)};
-	--tw-violet-400-raw:  #{hue(#a78bfa), saturation(#a78bfa), lightness(#a78bfa)};
-	--tw-violet-400:      #{#a78bfa};
-
-	--tw-violet-500-h:    #{hue(#8b5cf6)};
-	--tw-violet-500-s:    #{saturation(#8b5cf6)};
-	--tw-violet-500-l:    #{lightness(#8b5cf6)};
-	--tw-violet-500-raw:  #{hue(#8b5cf6), saturation(#8b5cf6), lightness(#8b5cf6)};
-	--tw-violet-500:      #{#8b5cf6};
-
-	--tw-violet-600-h:    #{hue(#7c3aed)};
-	--tw-violet-600-s:    #{saturation(#7c3aed)};
-	--tw-violet-600-l:    #{lightness(#7c3aed)};
-	--tw-violet-600-raw:  #{hue(#7c3aed), saturation(#7c3aed), lightness(#7c3aed)};
-	--tw-violet-600:      #{#7c3aed};
-
-	--tw-violet-700-h:    #{hue(#6d28d9)};
-	--tw-violet-700-s:    #{saturation(#6d28d9)};
-	--tw-violet-700-l:    #{lightness(#6d28d9)};
-	--tw-violet-700-raw:  #{hue(#6d28d9), saturation(#6d28d9), lightness(#6d28d9)};
-	--tw-violet-700:      #{#6d28d9};
-
-	--tw-violet-800-h:    #{hue(#5b21b6)};
-	--tw-violet-800-s:    #{saturation(#5b21b6)};
-	--tw-violet-800-l:    #{lightness(#5b21b6)};
-	--tw-violet-800-raw:  #{hue(#5b21b6), saturation(#5b21b6), lightness(#5b21b6)};
-	--tw-violet-800:      #{#5b21b6};
-
-	--tw-violet-900-h:    #{hue(#4c1d95)};
-	--tw-violet-900-s:    #{saturation(#4c1d95)};
-	--tw-violet-900-l:    #{lightness(#4c1d95)};
-	--tw-violet-900-raw:  #{hue(#4c1d95), saturation(#4c1d95), lightness(#4c1d95)};
-	--tw-violet-900:      #{#4c1d95};
-
-	--tw-purple-50-h:     #{hue(#faf5ff)};
-	--tw-purple-50-s:     #{saturation(#faf5ff)};
-	--tw-purple-50-l:     #{lightness(#faf5ff)};
-	--tw-purple-50-raw:   #{hue(#faf5ff), saturation(#faf5ff), lightness(#faf5ff)};
-	--tw-purple-50:       #{#faf5ff};
-
-	--tw-purple-100-h:    #{hue(#f3e8ff)};
-	--tw-purple-100-s:    #{saturation(#f3e8ff)};
-	--tw-purple-100-l:    #{lightness(#f3e8ff)};
-	--tw-purple-100-raw:  #{hue(#f3e8ff), saturation(#f3e8ff), lightness(#f3e8ff)};
-	--tw-purple-100:      #{#f3e8ff};
-
-	--tw-purple-200-h:    #{hue(#e9d5ff)};
-	--tw-purple-200-s:    #{saturation(#e9d5ff)};
-	--tw-purple-200-l:    #{lightness(#e9d5ff)};
-	--tw-purple-200-raw:  #{hue(#e9d5ff), saturation(#e9d5ff), lightness(#e9d5ff)};
-	--tw-purple-200:      #{#e9d5ff};
-
-	--tw-purple-300-h:    #{hue(#d8b4fe)};
-	--tw-purple-300-s:    #{saturation(#d8b4fe)};
-	--tw-purple-300-l:    #{lightness(#d8b4fe)};
-	--tw-purple-300-raw:  #{hue(#d8b4fe), saturation(#d8b4fe), lightness(#d8b4fe)};
-	--tw-purple-300:      #{#d8b4fe};
-
-	--tw-purple-400-h:    #{hue(#c084fc)};
-	--tw-purple-400-s:    #{saturation(#c084fc)};
-	--tw-purple-400-l:    #{lightness(#c084fc)};
-	--tw-purple-400-raw:  #{hue(#c084fc), saturation(#c084fc), lightness(#c084fc)};
-	--tw-purple-400:      #{#c084fc};
-
-	--tw-purple-500-h:    #{hue(#a855f7)};
-	--tw-purple-500-s:    #{saturation(#a855f7)};
-	--tw-purple-500-l:    #{lightness(#a855f7)};
-	--tw-purple-500-raw:  #{hue(#a855f7), saturation(#a855f7), lightness(#a855f7)};
-	--tw-purple-500:      #{#a855f7};
-
-	--tw-purple-600-h:    #{hue(#9333ea)};
-	--tw-purple-600-s:    #{saturation(#9333ea)};
-	--tw-purple-600-l:    #{lightness(#9333ea)};
-	--tw-purple-600-raw:  #{hue(#9333ea), saturation(#9333ea), lightness(#9333ea)};
-	--tw-purple-600:      #{#9333ea};
-
-	--tw-purple-700-h:    #{hue(#7e22ce)};
-	--tw-purple-700-s:    #{saturation(#7e22ce)};
-	--tw-purple-700-l:    #{lightness(#7e22ce)};
-	--tw-purple-700-raw:  #{hue(#7e22ce), saturation(#7e22ce), lightness(#7e22ce)};
-	--tw-purple-700:      #{#7e22ce};
-
-	--tw-purple-800-h:    #{hue(#6b21a8)};
-	--tw-purple-800-s:    #{saturation(#6b21a8)};
-	--tw-purple-800-l:    #{lightness(#6b21a8)};
-	--tw-purple-800-raw:  #{hue(#6b21a8), saturation(#6b21a8), lightness(#6b21a8)};
-	--tw-purple-800:      #{#6b21a8};
-
-	--tw-purple-900-h:    #{hue(#581c87)};
-	--tw-purple-900-s:    #{saturation(#581c87)};
-	--tw-purple-900-l:    #{lightness(#581c87)};
-	--tw-purple-900-raw:  #{hue(#581c87), saturation(#581c87), lightness(#581c87)};
-	--tw-purple-900:      #{#581c87};
-
-	--tw-fuchsia-50-h:    #{hue(#fdf4ff)};
-	--tw-fuchsia-50-s:    #{saturation(#fdf4ff)};
-	--tw-fuchsia-50-l:    #{lightness(#fdf4ff)};
-	--tw-fuchsia-50-raw:  #{hue(#fdf4ff), saturation(#fdf4ff), lightness(#fdf4ff)};
-	--tw-fuchsia-50:      #{#fdf4ff};
-
-	--tw-fuchsia-100-h:   #{hue(#fae8ff)};
-	--tw-fuchsia-100-s:   #{saturation(#fae8ff)};
-	--tw-fuchsia-100-l:   #{lightness(#fae8ff)};
-	--tw-fuchsia-100-raw: #{hue(#fae8ff), saturation(#fae8ff), lightness(#fae8ff)};
-	--tw-fuchsia-100:     #{#fae8ff};
-
-	--tw-fuchsia-200-h:   #{hue(#f5d0fe)};
-	--tw-fuchsia-200-s:   #{saturation(#f5d0fe)};
-	--tw-fuchsia-200-l:   #{lightness(#f5d0fe)};
-	--tw-fuchsia-200-raw: #{hue(#f5d0fe), saturation(#f5d0fe), lightness(#f5d0fe)};
-	--tw-fuchsia-200:     #{#f5d0fe};
-
-	--tw-fuchsia-300-h:   #{hue(#f0abfc)};
-	--tw-fuchsia-300-s:   #{saturation(#f0abfc)};
-	--tw-fuchsia-300-l:   #{lightness(#f0abfc)};
-	--tw-fuchsia-300-raw: #{hue(#f0abfc), saturation(#f0abfc), lightness(#f0abfc)};
-	--tw-fuchsia-300:     #{#f0abfc};
-
-	--tw-fuchsia-400-h:   #{hue(#e879f9)};
-	--tw-fuchsia-400-s:   #{saturation(#e879f9)};
-	--tw-fuchsia-400-l:   #{lightness(#e879f9)};
-	--tw-fuchsia-400-raw: #{hue(#e879f9), saturation(#e879f9), lightness(#e879f9)};
-	--tw-fuchsia-400:     #{#e879f9};
-
-	--tw-fuchsia-500-h:   #{hue(#d946ef)};
-	--tw-fuchsia-500-s:   #{saturation(#d946ef)};
-	--tw-fuchsia-500-l:   #{lightness(#d946ef)};
-	--tw-fuchsia-500-raw: #{hue(#d946ef), saturation(#d946ef), lightness(#d946ef)};
-	--tw-fuchsia-500:     #{#d946ef};
-
-	--tw-fuchsia-600-h:   #{hue(#c026d3)};
-	--tw-fuchsia-600-s:   #{saturation(#c026d3)};
-	--tw-fuchsia-600-l:   #{lightness(#c026d3)};
-	--tw-fuchsia-600-raw: #{hue(#c026d3), saturation(#c026d3), lightness(#c026d3)};
-	--tw-fuchsia-600:     #{#c026d3};
-
-	--tw-fuchsia-700-h:   #{hue(#a21caf)};
-	--tw-fuchsia-700-s:   #{saturation(#a21caf)};
-	--tw-fuchsia-700-l:   #{lightness(#a21caf)};
-	--tw-fuchsia-700-raw: #{hue(#a21caf), saturation(#a21caf), lightness(#a21caf)};
-	--tw-fuchsia-700:     #{#a21caf};
-
-	--tw-fuchsia-800-h:   #{hue(#86198f)};
-	--tw-fuchsia-800-s:   #{saturation(#86198f)};
-	--tw-fuchsia-800-l:   #{lightness(#86198f)};
-	--tw-fuchsia-800-raw: #{hue(#86198f), saturation(#86198f), lightness(#86198f)};
-	--tw-fuchsia-800:     #{#86198f};
-
-	--tw-fuchsia-900-h:   #{hue(#701a75)};
-	--tw-fuchsia-900-s:   #{saturation(#701a75)};
-	--tw-fuchsia-900-l:   #{lightness(#701a75)};
-	--tw-fuchsia-900-raw: #{hue(#701a75), saturation(#701a75), lightness(#701a75)};
-	--tw-fuchsia-900:     #{#701a75};
-
-	--tw-pink-50-h:       #{hue(#fdf2f8)};
-	--tw-pink-50-s:       #{saturation(#fdf2f8)};
-	--tw-pink-50-l:       #{lightness(#fdf2f8)};
-	--tw-pink-50-raw:     #{hue(#fdf2f8), saturation(#fdf2f8), lightness(#fdf2f8)};
-	--tw-pink-50:         #{#fdf2f8};
-
-	--tw-pink-100-h:      #{hue(#fce7f3)};
-	--tw-pink-100-s:      #{saturation(#fce7f3)};
-	--tw-pink-100-l:      #{lightness(#fce7f3)};
-	--tw-pink-100-raw:    #{hue(#fce7f3), saturation(#fce7f3), lightness(#fce7f3)};
-	--tw-pink-100:        #{#fce7f3};
-
-	--tw-pink-200-h:      #{hue(#fbcfe8)};
-	--tw-pink-200-s:      #{saturation(#fbcfe8)};
-	--tw-pink-200-l:      #{lightness(#fbcfe8)};
-	--tw-pink-200-raw:    #{hue(#fbcfe8), saturation(#fbcfe8), lightness(#fbcfe8)};
-	--tw-pink-200:        #{#fbcfe8};
-
-	--tw-pink-300-h:      #{hue(#f9a8d4)};
-	--tw-pink-300-s:      #{saturation(#f9a8d4)};
-	--tw-pink-300-l:      #{lightness(#f9a8d4)};
-	--tw-pink-300-raw:    #{hue(#f9a8d4), saturation(#f9a8d4), lightness(#f9a8d4)};
-	--tw-pink-300:        #{#f9a8d4};
-
-	--tw-pink-400-h:      #{hue(#f472b6)};
-	--tw-pink-400-s:      #{saturation(#f472b6)};
-	--tw-pink-400-l:      #{lightness(#f472b6)};
-	--tw-pink-400-raw:    #{hue(#f472b6), saturation(#f472b6), lightness(#f472b6)};
-	--tw-pink-400:        #{#f472b6};
-
-	--tw-pink-500-h:      #{hue(#ec4899)};
-	--tw-pink-500-s:      #{saturation(#ec4899)};
-	--tw-pink-500-l:      #{lightness(#ec4899)};
-	--tw-pink-500-raw:    #{hue(#ec4899), saturation(#ec4899), lightness(#ec4899)};
-	--tw-pink-500:        #{#ec4899};
-
-	--tw-pink-600-h:      #{hue(#db2777)};
-	--tw-pink-600-s:      #{saturation(#db2777)};
-	--tw-pink-600-l:      #{lightness(#db2777)};
-	--tw-pink-600-raw:    #{hue(#db2777), saturation(#db2777), lightness(#db2777)};
-	--tw-pink-600:        #{#db2777};
-
-	--tw-pink-700-h:      #{hue(#be185d)};
-	--tw-pink-700-s:      #{saturation(#be185d)};
-	--tw-pink-700-l:      #{lightness(#be185d)};
-	--tw-pink-700-raw:    #{hue(#be185d), saturation(#be185d), lightness(#be185d)};
-	--tw-pink-700:        #{#be185d};
-
-	--tw-pink-800-h:      #{hue(#9d174d)};
-	--tw-pink-800-s:      #{saturation(#9d174d)};
-	--tw-pink-800-l:      #{lightness(#9d174d)};
-	--tw-pink-800-raw:    #{hue(#9d174d), saturation(#9d174d), lightness(#9d174d)};
-	--tw-pink-800:        #{#9d174d};
-
-	--tw-pink-900-h:      #{hue(#831843)};
-	--tw-pink-900-s:      #{saturation(#831843)};
-	--tw-pink-900-l:      #{lightness(#831843)};
-	--tw-pink-900-raw:    #{hue(#831843), saturation(#831843), lightness(#831843)};
-	--tw-pink-900:        #{#831843};
-
-	--tw-rose-50-h:       #{hue(#fff1f2)};
-	--tw-rose-50-s:       #{saturation(#fff1f2)};
-	--tw-rose-50-l:       #{lightness(#fff1f2)};
-	--tw-rose-50-raw:     #{hue(#fff1f2), saturation(#fff1f2), lightness(#fff1f2)};
-	--tw-rose-50:         #{#fff1f2};
-
-	--tw-rose-100-h:      #{hue(#ffe4e6)};
-	--tw-rose-100-s:      #{saturation(#ffe4e6)};
-	--tw-rose-100-l:      #{lightness(#ffe4e6)};
-	--tw-rose-100-raw:    #{hue(#ffe4e6), saturation(#ffe4e6), lightness(#ffe4e6)};
-	--tw-rose-100:        #{#ffe4e6};
-
-	--tw-rose-200-h:      #{hue(#fecdd3)};
-	--tw-rose-200-s:      #{saturation(#fecdd3)};
-	--tw-rose-200-l:      #{lightness(#fecdd3)};
-	--tw-rose-200-raw:    #{hue(#fecdd3), saturation(#fecdd3), lightness(#fecdd3)};
-	--tw-rose-200:        #{#fecdd3};
-
-	--tw-rose-300-h:      #{hue(#fda4af)};
-	--tw-rose-300-s:      #{saturation(#fda4af)};
-	--tw-rose-300-l:      #{lightness(#fda4af)};
-	--tw-rose-300-raw:    #{hue(#fda4af), saturation(#fda4af), lightness(#fda4af)};
-	--tw-rose-300:        #{#fda4af};
-
-	--tw-rose-400-h:      #{hue(#fb7185)};
-	--tw-rose-400-s:      #{saturation(#fb7185)};
-	--tw-rose-400-l:      #{lightness(#fb7185)};
-	--tw-rose-400-raw:    #{hue(#fb7185), saturation(#fb7185), lightness(#fb7185)};
-	--tw-rose-400:        #{#fb7185};
-
-	--tw-rose-500-h:      #{hue(#f43f5e)};
-	--tw-rose-500-s:      #{saturation(#f43f5e)};
-	--tw-rose-500-l:      #{lightness(#f43f5e)};
-	--tw-rose-500-raw:    #{hue(#f43f5e), saturation(#f43f5e), lightness(#f43f5e)};
-	--tw-rose-500:        #{#f43f5e};
-
-	--tw-rose-600-h:      #{hue(#e11d48)};
-	--tw-rose-600-s:      #{saturation(#e11d48)};
-	--tw-rose-600-l:      #{lightness(#e11d48)};
-	--tw-rose-600-raw:    #{hue(#e11d48), saturation(#e11d48), lightness(#e11d48)};
-	--tw-rose-600:        #{#e11d48};
-
-	--tw-rose-700-h:      #{hue(#be123c)};
-	--tw-rose-700-s:      #{saturation(#be123c)};
-	--tw-rose-700-l:      #{lightness(#be123c)};
-	--tw-rose-700-raw:    #{hue(#be123c), saturation(#be123c), lightness(#be123c)};
-	--tw-rose-700:        #{#be123c};
-
-	--tw-rose-800-h:      #{hue(#9f1239)};
-	--tw-rose-800-s:      #{saturation(#9f1239)};
-	--tw-rose-800-l:      #{lightness(#9f1239)};
-	--tw-rose-800-raw:    #{hue(#9f1239), saturation(#9f1239), lightness(#9f1239)};
-	--tw-rose-800:        #{#9f1239};
-
-	--tw-rose-900-h:      #{hue(#881337)};
-	--tw-rose-900-s:      #{saturation(#881337)};
-	--tw-rose-900-l:      #{lightness(#881337)};
-	--tw-rose-900-raw:    #{hue(#881337), saturation(#881337), lightness(#881337)};
-	--tw-rose-900:        #{#881337};
+	--black-h:         #{hue(#000)};
+	--black-s:         #{saturation(#000)};
+	--black-l:         #{lightness(#000)};
+	--black-raw:       #{hue(#000), saturation(#000), lightness(#000)};
+	--black:           #{#000};
+
+	--white-h:         #{hue(#fff)};
+	--white-s:         #{saturation(#fff)};
+	--white-l:         #{lightness(#fff)};
+	--white-raw:       #{hue(#fff), saturation(#fff), lightness(#fff)};
+	--white:           #{#fff};
+
+	--slate-50-h:      #{hue(#f8fafc)};
+	--slate-50-s:      #{saturation(#f8fafc)};
+	--slate-50-l:      #{lightness(#f8fafc)};
+	--slate-50-raw:    #{hue(#f8fafc), saturation(#f8fafc), lightness(#f8fafc)};
+	--slate-50:        #{#f8fafc};
+
+	--slate-100-h:     #{hue(#f1f5f9)};
+	--slate-100-s:     #{saturation(#f1f5f9)};
+	--slate-100-l:     #{lightness(#f1f5f9)};
+	--slate-100-raw:   #{hue(#f1f5f9), saturation(#f1f5f9), lightness(#f1f5f9)};
+	--slate-100:       #{#f1f5f9};
+
+	--slate-200-h:     #{hue(#e2e8f0)};
+	--slate-200-s:     #{saturation(#e2e8f0)};
+	--slate-200-l:     #{lightness(#e2e8f0)};
+	--slate-200-raw:   #{hue(#e2e8f0), saturation(#e2e8f0), lightness(#e2e8f0)};
+	--slate-200:       #{#e2e8f0};
+
+	--slate-300-h:     #{hue(#cbd5e1)};
+	--slate-300-s:     #{saturation(#cbd5e1)};
+	--slate-300-l:     #{lightness(#cbd5e1)};
+	--slate-300-raw:   #{hue(#cbd5e1), saturation(#cbd5e1), lightness(#cbd5e1)};
+	--slate-300:       #{#cbd5e1};
+
+	--slate-400-h:     #{hue(#94a3b8)};
+	--slate-400-s:     #{saturation(#94a3b8)};
+	--slate-400-l:     #{lightness(#94a3b8)};
+	--slate-400-raw:   #{hue(#94a3b8), saturation(#94a3b8), lightness(#94a3b8)};
+	--slate-400:       #{#94a3b8};
+
+	--slate-500-h:     #{hue(#64748b)};
+	--slate-500-s:     #{saturation(#64748b)};
+	--slate-500-l:     #{lightness(#64748b)};
+	--slate-500-raw:   #{hue(#64748b), saturation(#64748b), lightness(#64748b)};
+	--slate-500:       #{#64748b};
+
+	--slate-600-h:     #{hue(#475569)};
+	--slate-600-s:     #{saturation(#475569)};
+	--slate-600-l:     #{lightness(#475569)};
+	--slate-600-raw:   #{hue(#475569), saturation(#475569), lightness(#475569)};
+	--slate-600:       #{#475569};
+
+	--slate-700-h:     #{hue(#334155)};
+	--slate-700-s:     #{saturation(#334155)};
+	--slate-700-l:     #{lightness(#334155)};
+	--slate-700-raw:   #{hue(#334155), saturation(#334155), lightness(#334155)};
+	--slate-700:       #{#334155};
+
+	--slate-800-h:     #{hue(#1e293b)};
+	--slate-800-s:     #{saturation(#1e293b)};
+	--slate-800-l:     #{lightness(#1e293b)};
+	--slate-800-raw:   #{hue(#1e293b), saturation(#1e293b), lightness(#1e293b)};
+	--slate-800:       #{#1e293b};
+
+	--slate-900-h:     #{hue(#0f172a)};
+	--slate-900-s:     #{saturation(#0f172a)};
+	--slate-900-l:     #{lightness(#0f172a)};
+	--slate-900-raw:   #{hue(#0f172a), saturation(#0f172a), lightness(#0f172a)};
+	--slate-900:       #{#0f172a};
+
+	--gray-50-h:       #{hue(#f9fafb)};
+	--gray-50-s:       #{saturation(#f9fafb)};
+	--gray-50-l:       #{lightness(#f9fafb)};
+	--gray-50-raw:     #{hue(#f9fafb), saturation(#f9fafb), lightness(#f9fafb)};
+	--gray-50:         #{#f9fafb};
+
+	--gray-100-h:      #{hue(#f3f4f6)};
+	--gray-100-s:      #{saturation(#f3f4f6)};
+	--gray-100-l:      #{lightness(#f3f4f6)};
+	--gray-100-raw:    #{hue(#f3f4f6), saturation(#f3f4f6), lightness(#f3f4f6)};
+	--gray-100:        #{#f3f4f6};
+
+	--gray-200-h:      #{hue(#e5e7eb)};
+	--gray-200-s:      #{saturation(#e5e7eb)};
+	--gray-200-l:      #{lightness(#e5e7eb)};
+	--gray-200-raw:    #{hue(#e5e7eb), saturation(#e5e7eb), lightness(#e5e7eb)};
+	--gray-200:        #{#e5e7eb};
+
+	--gray-300-h:      #{hue(#d1d5db)};
+	--gray-300-s:      #{saturation(#d1d5db)};
+	--gray-300-l:      #{lightness(#d1d5db)};
+	--gray-300-raw:    #{hue(#d1d5db), saturation(#d1d5db), lightness(#d1d5db)};
+	--gray-300:        #{#d1d5db};
+
+	--gray-400-h:      #{hue(#9ca3af)};
+	--gray-400-s:      #{saturation(#9ca3af)};
+	--gray-400-l:      #{lightness(#9ca3af)};
+	--gray-400-raw:    #{hue(#9ca3af), saturation(#9ca3af), lightness(#9ca3af)};
+	--gray-400:        #{#9ca3af};
+
+	--gray-500-h:      #{hue(#6b7280)};
+	--gray-500-s:      #{saturation(#6b7280)};
+	--gray-500-l:      #{lightness(#6b7280)};
+	--gray-500-raw:    #{hue(#6b7280), saturation(#6b7280), lightness(#6b7280)};
+	--gray-500:        #{#6b7280};
+
+	--gray-600-h:      #{hue(#4b5563)};
+	--gray-600-s:      #{saturation(#4b5563)};
+	--gray-600-l:      #{lightness(#4b5563)};
+	--gray-600-raw:    #{hue(#4b5563), saturation(#4b5563), lightness(#4b5563)};
+	--gray-600:        #{#4b5563};
+
+	--gray-700-h:      #{hue(#374151)};
+	--gray-700-s:      #{saturation(#374151)};
+	--gray-700-l:      #{lightness(#374151)};
+	--gray-700-raw:    #{hue(#374151), saturation(#374151), lightness(#374151)};
+	--gray-700:        #{#374151};
+
+	--gray-800-h:      #{hue(#1f2937)};
+	--gray-800-s:      #{saturation(#1f2937)};
+	--gray-800-l:      #{lightness(#1f2937)};
+	--gray-800-raw:    #{hue(#1f2937), saturation(#1f2937), lightness(#1f2937)};
+	--gray-800:        #{#1f2937};
+
+	--gray-900-h:      #{hue(#111827)};
+	--gray-900-s:      #{saturation(#111827)};
+	--gray-900-l:      #{lightness(#111827)};
+	--gray-900-raw:    #{hue(#111827), saturation(#111827), lightness(#111827)};
+	--gray-900:        #{#111827};
+
+	--zinc-50-h:       #{hue(#fafafa)};
+	--zinc-50-s:       #{saturation(#fafafa)};
+	--zinc-50-l:       #{lightness(#fafafa)};
+	--zinc-50-raw:     #{hue(#fafafa), saturation(#fafafa), lightness(#fafafa)};
+	--zinc-50:         #{#fafafa};
+
+	--zinc-100-h:      #{hue(#f4f4f5)};
+	--zinc-100-s:      #{saturation(#f4f4f5)};
+	--zinc-100-l:      #{lightness(#f4f4f5)};
+	--zinc-100-raw:    #{hue(#f4f4f5), saturation(#f4f4f5), lightness(#f4f4f5)};
+	--zinc-100:        #{#f4f4f5};
+
+	--zinc-200-h:      #{hue(#e4e4e7)};
+	--zinc-200-s:      #{saturation(#e4e4e7)};
+	--zinc-200-l:      #{lightness(#e4e4e7)};
+	--zinc-200-raw:    #{hue(#e4e4e7), saturation(#e4e4e7), lightness(#e4e4e7)};
+	--zinc-200:        #{#e4e4e7};
+
+	--zinc-300-h:      #{hue(#d4d4d8)};
+	--zinc-300-s:      #{saturation(#d4d4d8)};
+	--zinc-300-l:      #{lightness(#d4d4d8)};
+	--zinc-300-raw:    #{hue(#d4d4d8), saturation(#d4d4d8), lightness(#d4d4d8)};
+	--zinc-300:        #{#d4d4d8};
+
+	--zinc-400-h:      #{hue(#a1a1aa)};
+	--zinc-400-s:      #{saturation(#a1a1aa)};
+	--zinc-400-l:      #{lightness(#a1a1aa)};
+	--zinc-400-raw:    #{hue(#a1a1aa), saturation(#a1a1aa), lightness(#a1a1aa)};
+	--zinc-400:        #{#a1a1aa};
+
+	--zinc-500-h:      #{hue(#71717a)};
+	--zinc-500-s:      #{saturation(#71717a)};
+	--zinc-500-l:      #{lightness(#71717a)};
+	--zinc-500-raw:    #{hue(#71717a), saturation(#71717a), lightness(#71717a)};
+	--zinc-500:        #{#71717a};
+
+	--zinc-600-h:      #{hue(#52525b)};
+	--zinc-600-s:      #{saturation(#52525b)};
+	--zinc-600-l:      #{lightness(#52525b)};
+	--zinc-600-raw:    #{hue(#52525b), saturation(#52525b), lightness(#52525b)};
+	--zinc-600:        #{#52525b};
+
+	--zinc-700-h:      #{hue(#3f3f46)};
+	--zinc-700-s:      #{saturation(#3f3f46)};
+	--zinc-700-l:      #{lightness(#3f3f46)};
+	--zinc-700-raw:    #{hue(#3f3f46), saturation(#3f3f46), lightness(#3f3f46)};
+	--zinc-700:        #{#3f3f46};
+
+	--zinc-800-h:      #{hue(#27272a)};
+	--zinc-800-s:      #{saturation(#27272a)};
+	--zinc-800-l:      #{lightness(#27272a)};
+	--zinc-800-raw:    #{hue(#27272a), saturation(#27272a), lightness(#27272a)};
+	--zinc-800:        #{#27272a};
+
+	--zinc-900-h:      #{hue(#18181b)};
+	--zinc-900-s:      #{saturation(#18181b)};
+	--zinc-900-l:      #{lightness(#18181b)};
+	--zinc-900-raw:    #{hue(#18181b), saturation(#18181b), lightness(#18181b)};
+	--zinc-900:        #{#18181b};
+
+	--neutral-50-h:    #{hue(#fafafa)};
+	--neutral-50-s:    #{saturation(#fafafa)};
+	--neutral-50-l:    #{lightness(#fafafa)};
+	--neutral-50-raw:  #{hue(#fafafa), saturation(#fafafa), lightness(#fafafa)};
+	--neutral-50:      #{#fafafa};
+
+	--neutral-100-h:   #{hue(#f5f5f5)};
+	--neutral-100-s:   #{saturation(#f5f5f5)};
+	--neutral-100-l:   #{lightness(#f5f5f5)};
+	--neutral-100-raw: #{hue(#f5f5f5), saturation(#f5f5f5), lightness(#f5f5f5)};
+	--neutral-100:     #{#f5f5f5};
+
+	--neutral-200-h:   #{hue(#e5e5e5)};
+	--neutral-200-s:   #{saturation(#e5e5e5)};
+	--neutral-200-l:   #{lightness(#e5e5e5)};
+	--neutral-200-raw: #{hue(#e5e5e5), saturation(#e5e5e5), lightness(#e5e5e5)};
+	--neutral-200:     #{#e5e5e5};
+
+	--neutral-300-h:   #{hue(#d4d4d4)};
+	--neutral-300-s:   #{saturation(#d4d4d4)};
+	--neutral-300-l:   #{lightness(#d4d4d4)};
+	--neutral-300-raw: #{hue(#d4d4d4), saturation(#d4d4d4), lightness(#d4d4d4)};
+	--neutral-300:     #{#d4d4d4};
+
+	--neutral-400-h:   #{hue(#a3a3a3)};
+	--neutral-400-s:   #{saturation(#a3a3a3)};
+	--neutral-400-l:   #{lightness(#a3a3a3)};
+	--neutral-400-raw: #{hue(#a3a3a3), saturation(#a3a3a3), lightness(#a3a3a3)};
+	--neutral-400:     #{#a3a3a3};
+
+	--neutral-500-h:   #{hue(#737373)};
+	--neutral-500-s:   #{saturation(#737373)};
+	--neutral-500-l:   #{lightness(#737373)};
+	--neutral-500-raw: #{hue(#737373), saturation(#737373), lightness(#737373)};
+	--neutral-500:     #{#737373};
+
+	--neutral-600-h:   #{hue(#525252)};
+	--neutral-600-s:   #{saturation(#525252)};
+	--neutral-600-l:   #{lightness(#525252)};
+	--neutral-600-raw: #{hue(#525252), saturation(#525252), lightness(#525252)};
+	--neutral-600:     #{#525252};
+
+	--neutral-700-h:   #{hue(#404040)};
+	--neutral-700-s:   #{saturation(#404040)};
+	--neutral-700-l:   #{lightness(#404040)};
+	--neutral-700-raw: #{hue(#404040), saturation(#404040), lightness(#404040)};
+	--neutral-700:     #{#404040};
+
+	--neutral-800-h:   #{hue(#262626)};
+	--neutral-800-s:   #{saturation(#262626)};
+	--neutral-800-l:   #{lightness(#262626)};
+	--neutral-800-raw: #{hue(#262626), saturation(#262626), lightness(#262626)};
+	--neutral-800:     #{#262626};
+
+	--neutral-900-h:   #{hue(#171717)};
+	--neutral-900-s:   #{saturation(#171717)};
+	--neutral-900-l:   #{lightness(#171717)};
+	--neutral-900-raw: #{hue(#171717), saturation(#171717), lightness(#171717)};
+	--neutral-900:     #{#171717};
+
+	--stone-50-h:      #{hue(#fafaf9)};
+	--stone-50-s:      #{saturation(#fafaf9)};
+	--stone-50-l:      #{lightness(#fafaf9)};
+	--stone-50-raw:    #{hue(#fafaf9), saturation(#fafaf9), lightness(#fafaf9)};
+	--stone-50:        #{#fafaf9};
+
+	--stone-100-h:     #{hue(#f5f5f4)};
+	--stone-100-s:     #{saturation(#f5f5f4)};
+	--stone-100-l:     #{lightness(#f5f5f4)};
+	--stone-100-raw:   #{hue(#f5f5f4), saturation(#f5f5f4), lightness(#f5f5f4)};
+	--stone-100:       #{#f5f5f4};
+
+	--stone-200-h:     #{hue(#e7e5e4)};
+	--stone-200-s:     #{saturation(#e7e5e4)};
+	--stone-200-l:     #{lightness(#e7e5e4)};
+	--stone-200-raw:   #{hue(#e7e5e4), saturation(#e7e5e4), lightness(#e7e5e4)};
+	--stone-200:       #{#e7e5e4};
+
+	--stone-300-h:     #{hue(#d6d3d1)};
+	--stone-300-s:     #{saturation(#d6d3d1)};
+	--stone-300-l:     #{lightness(#d6d3d1)};
+	--stone-300-raw:   #{hue(#d6d3d1), saturation(#d6d3d1), lightness(#d6d3d1)};
+	--stone-300:       #{#d6d3d1};
+
+	--stone-400-h:     #{hue(#a8a29e)};
+	--stone-400-s:     #{saturation(#a8a29e)};
+	--stone-400-l:     #{lightness(#a8a29e)};
+	--stone-400-raw:   #{hue(#a8a29e), saturation(#a8a29e), lightness(#a8a29e)};
+	--stone-400:       #{#a8a29e};
+
+	--stone-500-h:     #{hue(#78716c)};
+	--stone-500-s:     #{saturation(#78716c)};
+	--stone-500-l:     #{lightness(#78716c)};
+	--stone-500-raw:   #{hue(#78716c), saturation(#78716c), lightness(#78716c)};
+	--stone-500:       #{#78716c};
+
+	--stone-600-h:     #{hue(#57534e)};
+	--stone-600-s:     #{saturation(#57534e)};
+	--stone-600-l:     #{lightness(#57534e)};
+	--stone-600-raw:   #{hue(#57534e), saturation(#57534e), lightness(#57534e)};
+	--stone-600:       #{#57534e};
+
+	--stone-700-h:     #{hue(#44403c)};
+	--stone-700-s:     #{saturation(#44403c)};
+	--stone-700-l:     #{lightness(#44403c)};
+	--stone-700-raw:   #{hue(#44403c), saturation(#44403c), lightness(#44403c)};
+	--stone-700:       #{#44403c};
+
+	--stone-800-h:     #{hue(#292524)};
+	--stone-800-s:     #{saturation(#292524)};
+	--stone-800-l:     #{lightness(#292524)};
+	--stone-800-raw:   #{hue(#292524), saturation(#292524), lightness(#292524)};
+	--stone-800:       #{#292524};
+
+	--stone-900-h:     #{hue(#1c1917)};
+	--stone-900-s:     #{saturation(#1c1917)};
+	--stone-900-l:     #{lightness(#1c1917)};
+	--stone-900-raw:   #{hue(#1c1917), saturation(#1c1917), lightness(#1c1917)};
+	--stone-900:       #{#1c1917};
+
+	--red-50-h:        #{hue(#fef2f2)};
+	--red-50-s:        #{saturation(#fef2f2)};
+	--red-50-l:        #{lightness(#fef2f2)};
+	--red-50-raw:      #{hue(#fef2f2), saturation(#fef2f2), lightness(#fef2f2)};
+	--red-50:          #{#fef2f2};
+
+	--red-100-h:       #{hue(#fee2e2)};
+	--red-100-s:       #{saturation(#fee2e2)};
+	--red-100-l:       #{lightness(#fee2e2)};
+	--red-100-raw:     #{hue(#fee2e2), saturation(#fee2e2), lightness(#fee2e2)};
+	--red-100:         #{#fee2e2};
+
+	--red-200-h:       #{hue(#fecaca)};
+	--red-200-s:       #{saturation(#fecaca)};
+	--red-200-l:       #{lightness(#fecaca)};
+	--red-200-raw:     #{hue(#fecaca), saturation(#fecaca), lightness(#fecaca)};
+	--red-200:         #{#fecaca};
+
+	--red-300-h:       #{hue(#fca5a5)};
+	--red-300-s:       #{saturation(#fca5a5)};
+	--red-300-l:       #{lightness(#fca5a5)};
+	--red-300-raw:     #{hue(#fca5a5), saturation(#fca5a5), lightness(#fca5a5)};
+	--red-300:         #{#fca5a5};
+
+	--red-400-h:       #{hue(#f87171)};
+	--red-400-s:       #{saturation(#f87171)};
+	--red-400-l:       #{lightness(#f87171)};
+	--red-400-raw:     #{hue(#f87171), saturation(#f87171), lightness(#f87171)};
+	--red-400:         #{#f87171};
+
+	--red-500-h:       #{hue(#ef4444)};
+	--red-500-s:       #{saturation(#ef4444)};
+	--red-500-l:       #{lightness(#ef4444)};
+	--red-500-raw:     #{hue(#ef4444), saturation(#ef4444), lightness(#ef4444)};
+	--red-500:         #{#ef4444};
+
+	--red-600-h:       #{hue(#dc2626)};
+	--red-600-s:       #{saturation(#dc2626)};
+	--red-600-l:       #{lightness(#dc2626)};
+	--red-600-raw:     #{hue(#dc2626), saturation(#dc2626), lightness(#dc2626)};
+	--red-600:         #{#dc2626};
+
+	--red-700-h:       #{hue(#b91c1c)};
+	--red-700-s:       #{saturation(#b91c1c)};
+	--red-700-l:       #{lightness(#b91c1c)};
+	--red-700-raw:     #{hue(#b91c1c), saturation(#b91c1c), lightness(#b91c1c)};
+	--red-700:         #{#b91c1c};
+
+	--red-800-h:       #{hue(#991b1b)};
+	--red-800-s:       #{saturation(#991b1b)};
+	--red-800-l:       #{lightness(#991b1b)};
+	--red-800-raw:     #{hue(#991b1b), saturation(#991b1b), lightness(#991b1b)};
+	--red-800:         #{#991b1b};
+
+	--red-900-h:       #{hue(#7f1d1d)};
+	--red-900-s:       #{saturation(#7f1d1d)};
+	--red-900-l:       #{lightness(#7f1d1d)};
+	--red-900-raw:     #{hue(#7f1d1d), saturation(#7f1d1d), lightness(#7f1d1d)};
+	--red-900:         #{#7f1d1d};
+
+	--orange-50-h:     #{hue(#fff7ed)};
+	--orange-50-s:     #{saturation(#fff7ed)};
+	--orange-50-l:     #{lightness(#fff7ed)};
+	--orange-50-raw:   #{hue(#fff7ed), saturation(#fff7ed), lightness(#fff7ed)};
+	--orange-50:       #{#fff7ed};
+
+	--orange-100-h:    #{hue(#ffedd5)};
+	--orange-100-s:    #{saturation(#ffedd5)};
+	--orange-100-l:    #{lightness(#ffedd5)};
+	--orange-100-raw:  #{hue(#ffedd5), saturation(#ffedd5), lightness(#ffedd5)};
+	--orange-100:      #{#ffedd5};
+
+	--orange-200-h:    #{hue(#fed7aa)};
+	--orange-200-s:    #{saturation(#fed7aa)};
+	--orange-200-l:    #{lightness(#fed7aa)};
+	--orange-200-raw:  #{hue(#fed7aa), saturation(#fed7aa), lightness(#fed7aa)};
+	--orange-200:      #{#fed7aa};
+
+	--orange-300-h:    #{hue(#fdba74)};
+	--orange-300-s:    #{saturation(#fdba74)};
+	--orange-300-l:    #{lightness(#fdba74)};
+	--orange-300-raw:  #{hue(#fdba74), saturation(#fdba74), lightness(#fdba74)};
+	--orange-300:      #{#fdba74};
+
+	--orange-400-h:    #{hue(#fb923c)};
+	--orange-400-s:    #{saturation(#fb923c)};
+	--orange-400-l:    #{lightness(#fb923c)};
+	--orange-400-raw:  #{hue(#fb923c), saturation(#fb923c), lightness(#fb923c)};
+	--orange-400:      #{#fb923c};
+
+	--orange-500-h:    #{hue(#f97316)};
+	--orange-500-s:    #{saturation(#f97316)};
+	--orange-500-l:    #{lightness(#f97316)};
+	--orange-500-raw:  #{hue(#f97316), saturation(#f97316), lightness(#f97316)};
+	--orange-500:      #{#f97316};
+
+	--orange-600-h:    #{hue(#ea580c)};
+	--orange-600-s:    #{saturation(#ea580c)};
+	--orange-600-l:    #{lightness(#ea580c)};
+	--orange-600-raw:  #{hue(#ea580c), saturation(#ea580c), lightness(#ea580c)};
+	--orange-600:      #{#ea580c};
+
+	--orange-700-h:    #{hue(#c2410c)};
+	--orange-700-s:    #{saturation(#c2410c)};
+	--orange-700-l:    #{lightness(#c2410c)};
+	--orange-700-raw:  #{hue(#c2410c), saturation(#c2410c), lightness(#c2410c)};
+	--orange-700:      #{#c2410c};
+
+	--orange-800-h:    #{hue(#9a3412)};
+	--orange-800-s:    #{saturation(#9a3412)};
+	--orange-800-l:    #{lightness(#9a3412)};
+	--orange-800-raw:  #{hue(#9a3412), saturation(#9a3412), lightness(#9a3412)};
+	--orange-800:      #{#9a3412};
+
+	--orange-900-h:    #{hue(#7c2d12)};
+	--orange-900-s:    #{saturation(#7c2d12)};
+	--orange-900-l:    #{lightness(#7c2d12)};
+	--orange-900-raw:  #{hue(#7c2d12), saturation(#7c2d12), lightness(#7c2d12)};
+	--orange-900:      #{#7c2d12};
+
+	--amber-50-h:      #{hue(#fffbeb)};
+	--amber-50-s:      #{saturation(#fffbeb)};
+	--amber-50-l:      #{lightness(#fffbeb)};
+	--amber-50-raw:    #{hue(#fffbeb), saturation(#fffbeb), lightness(#fffbeb)};
+	--amber-50:        #{#fffbeb};
+
+	--amber-100-h:     #{hue(#fef3c7)};
+	--amber-100-s:     #{saturation(#fef3c7)};
+	--amber-100-l:     #{lightness(#fef3c7)};
+	--amber-100-raw:   #{hue(#fef3c7), saturation(#fef3c7), lightness(#fef3c7)};
+	--amber-100:       #{#fef3c7};
+
+	--amber-200-h:     #{hue(#fde68a)};
+	--amber-200-s:     #{saturation(#fde68a)};
+	--amber-200-l:     #{lightness(#fde68a)};
+	--amber-200-raw:   #{hue(#fde68a), saturation(#fde68a), lightness(#fde68a)};
+	--amber-200:       #{#fde68a};
+
+	--amber-300-h:     #{hue(#fcd34d)};
+	--amber-300-s:     #{saturation(#fcd34d)};
+	--amber-300-l:     #{lightness(#fcd34d)};
+	--amber-300-raw:   #{hue(#fcd34d), saturation(#fcd34d), lightness(#fcd34d)};
+	--amber-300:       #{#fcd34d};
+
+	--amber-400-h:     #{hue(#fbbf24)};
+	--amber-400-s:     #{saturation(#fbbf24)};
+	--amber-400-l:     #{lightness(#fbbf24)};
+	--amber-400-raw:   #{hue(#fbbf24), saturation(#fbbf24), lightness(#fbbf24)};
+	--amber-400:       #{#fbbf24};
+
+	--amber-500-h:     #{hue(#f59e0b)};
+	--amber-500-s:     #{saturation(#f59e0b)};
+	--amber-500-l:     #{lightness(#f59e0b)};
+	--amber-500-raw:   #{hue(#f59e0b), saturation(#f59e0b), lightness(#f59e0b)};
+	--amber-500:       #{#f59e0b};
+
+	--amber-600-h:     #{hue(#d97706)};
+	--amber-600-s:     #{saturation(#d97706)};
+	--amber-600-l:     #{lightness(#d97706)};
+	--amber-600-raw:   #{hue(#d97706), saturation(#d97706), lightness(#d97706)};
+	--amber-600:       #{#d97706};
+
+	--amber-700-h:     #{hue(#b45309)};
+	--amber-700-s:     #{saturation(#b45309)};
+	--amber-700-l:     #{lightness(#b45309)};
+	--amber-700-raw:   #{hue(#b45309), saturation(#b45309), lightness(#b45309)};
+	--amber-700:       #{#b45309};
+
+	--amber-800-h:     #{hue(#92400e)};
+	--amber-800-s:     #{saturation(#92400e)};
+	--amber-800-l:     #{lightness(#92400e)};
+	--amber-800-raw:   #{hue(#92400e), saturation(#92400e), lightness(#92400e)};
+	--amber-800:       #{#92400e};
+
+	--amber-900-h:     #{hue(#78350f)};
+	--amber-900-s:     #{saturation(#78350f)};
+	--amber-900-l:     #{lightness(#78350f)};
+	--amber-900-raw:   #{hue(#78350f), saturation(#78350f), lightness(#78350f)};
+	--amber-900:       #{#78350f};
+
+	--yellow-50-h:     #{hue(#fefce8)};
+	--yellow-50-s:     #{saturation(#fefce8)};
+	--yellow-50-l:     #{lightness(#fefce8)};
+	--yellow-50-raw:   #{hue(#fefce8), saturation(#fefce8), lightness(#fefce8)};
+	--yellow-50:       #{#fefce8};
+
+	--yellow-100-h:    #{hue(#fef9c3)};
+	--yellow-100-s:    #{saturation(#fef9c3)};
+	--yellow-100-l:    #{lightness(#fef9c3)};
+	--yellow-100-raw:  #{hue(#fef9c3), saturation(#fef9c3), lightness(#fef9c3)};
+	--yellow-100:      #{#fef9c3};
+
+	--yellow-200-h:    #{hue(#fef08a)};
+	--yellow-200-s:    #{saturation(#fef08a)};
+	--yellow-200-l:    #{lightness(#fef08a)};
+	--yellow-200-raw:  #{hue(#fef08a), saturation(#fef08a), lightness(#fef08a)};
+	--yellow-200:      #{#fef08a};
+
+	--yellow-300-h:    #{hue(#fde047)};
+	--yellow-300-s:    #{saturation(#fde047)};
+	--yellow-300-l:    #{lightness(#fde047)};
+	--yellow-300-raw:  #{hue(#fde047), saturation(#fde047), lightness(#fde047)};
+	--yellow-300:      #{#fde047};
+
+	--yellow-400-h:    #{hue(#facc15)};
+	--yellow-400-s:    #{saturation(#facc15)};
+	--yellow-400-l:    #{lightness(#facc15)};
+	--yellow-400-raw:  #{hue(#facc15), saturation(#facc15), lightness(#facc15)};
+	--yellow-400:      #{#facc15};
+
+	--yellow-500-h:    #{hue(#eab308)};
+	--yellow-500-s:    #{saturation(#eab308)};
+	--yellow-500-l:    #{lightness(#eab308)};
+	--yellow-500-raw:  #{hue(#eab308), saturation(#eab308), lightness(#eab308)};
+	--yellow-500:      #{#eab308};
+
+	--yellow-600-h:    #{hue(#ca8a04)};
+	--yellow-600-s:    #{saturation(#ca8a04)};
+	--yellow-600-l:    #{lightness(#ca8a04)};
+	--yellow-600-raw:  #{hue(#ca8a04), saturation(#ca8a04), lightness(#ca8a04)};
+	--yellow-600:      #{#ca8a04};
+
+	--yellow-700-h:    #{hue(#a16207)};
+	--yellow-700-s:    #{saturation(#a16207)};
+	--yellow-700-l:    #{lightness(#a16207)};
+	--yellow-700-raw:  #{hue(#a16207), saturation(#a16207), lightness(#a16207)};
+	--yellow-700:      #{#a16207};
+
+	--yellow-800-h:    #{hue(#854d0e)};
+	--yellow-800-s:    #{saturation(#854d0e)};
+	--yellow-800-l:    #{lightness(#854d0e)};
+	--yellow-800-raw:  #{hue(#854d0e), saturation(#854d0e), lightness(#854d0e)};
+	--yellow-800:      #{#854d0e};
+
+	--yellow-900-h:    #{hue(#713f12)};
+	--yellow-900-s:    #{saturation(#713f12)};
+	--yellow-900-l:    #{lightness(#713f12)};
+	--yellow-900-raw:  #{hue(#713f12), saturation(#713f12), lightness(#713f12)};
+	--yellow-900:      #{#713f12};
+
+	--lime-50-h:       #{hue(#f7fee7)};
+	--lime-50-s:       #{saturation(#f7fee7)};
+	--lime-50-l:       #{lightness(#f7fee7)};
+	--lime-50-raw:     #{hue(#f7fee7), saturation(#f7fee7), lightness(#f7fee7)};
+	--lime-50:         #{#f7fee7};
+
+	--lime-100-h:      #{hue(#ecfccb)};
+	--lime-100-s:      #{saturation(#ecfccb)};
+	--lime-100-l:      #{lightness(#ecfccb)};
+	--lime-100-raw:    #{hue(#ecfccb), saturation(#ecfccb), lightness(#ecfccb)};
+	--lime-100:        #{#ecfccb};
+
+	--lime-200-h:      #{hue(#d9f99d)};
+	--lime-200-s:      #{saturation(#d9f99d)};
+	--lime-200-l:      #{lightness(#d9f99d)};
+	--lime-200-raw:    #{hue(#d9f99d), saturation(#d9f99d), lightness(#d9f99d)};
+	--lime-200:        #{#d9f99d};
+
+	--lime-300-h:      #{hue(#bef264)};
+	--lime-300-s:      #{saturation(#bef264)};
+	--lime-300-l:      #{lightness(#bef264)};
+	--lime-300-raw:    #{hue(#bef264), saturation(#bef264), lightness(#bef264)};
+	--lime-300:        #{#bef264};
+
+	--lime-400-h:      #{hue(#a3e635)};
+	--lime-400-s:      #{saturation(#a3e635)};
+	--lime-400-l:      #{lightness(#a3e635)};
+	--lime-400-raw:    #{hue(#a3e635), saturation(#a3e635), lightness(#a3e635)};
+	--lime-400:        #{#a3e635};
+
+	--lime-500-h:      #{hue(#84cc16)};
+	--lime-500-s:      #{saturation(#84cc16)};
+	--lime-500-l:      #{lightness(#84cc16)};
+	--lime-500-raw:    #{hue(#84cc16), saturation(#84cc16), lightness(#84cc16)};
+	--lime-500:        #{#84cc16};
+
+	--lime-600-h:      #{hue(#65a30d)};
+	--lime-600-s:      #{saturation(#65a30d)};
+	--lime-600-l:      #{lightness(#65a30d)};
+	--lime-600-raw:    #{hue(#65a30d), saturation(#65a30d), lightness(#65a30d)};
+	--lime-600:        #{#65a30d};
+
+	--lime-700-h:      #{hue(#4d7c0f)};
+	--lime-700-s:      #{saturation(#4d7c0f)};
+	--lime-700-l:      #{lightness(#4d7c0f)};
+	--lime-700-raw:    #{hue(#4d7c0f), saturation(#4d7c0f), lightness(#4d7c0f)};
+	--lime-700:        #{#4d7c0f};
+
+	--lime-800-h:      #{hue(#3f6212)};
+	--lime-800-s:      #{saturation(#3f6212)};
+	--lime-800-l:      #{lightness(#3f6212)};
+	--lime-800-raw:    #{hue(#3f6212), saturation(#3f6212), lightness(#3f6212)};
+	--lime-800:        #{#3f6212};
+
+	--lime-900-h:      #{hue(#365314)};
+	--lime-900-s:      #{saturation(#365314)};
+	--lime-900-l:      #{lightness(#365314)};
+	--lime-900-raw:    #{hue(#365314), saturation(#365314), lightness(#365314)};
+	--lime-900:        #{#365314};
+
+	--green-50-h:      #{hue(#f0fdf4)};
+	--green-50-s:      #{saturation(#f0fdf4)};
+	--green-50-l:      #{lightness(#f0fdf4)};
+	--green-50-raw:    #{hue(#f0fdf4), saturation(#f0fdf4), lightness(#f0fdf4)};
+	--green-50:        #{#f0fdf4};
+
+	--green-100-h:     #{hue(#dcfce7)};
+	--green-100-s:     #{saturation(#dcfce7)};
+	--green-100-l:     #{lightness(#dcfce7)};
+	--green-100-raw:   #{hue(#dcfce7), saturation(#dcfce7), lightness(#dcfce7)};
+	--green-100:       #{#dcfce7};
+
+	--green-200-h:     #{hue(#bbf7d0)};
+	--green-200-s:     #{saturation(#bbf7d0)};
+	--green-200-l:     #{lightness(#bbf7d0)};
+	--green-200-raw:   #{hue(#bbf7d0), saturation(#bbf7d0), lightness(#bbf7d0)};
+	--green-200:       #{#bbf7d0};
+
+	--green-300-h:     #{hue(#86efac)};
+	--green-300-s:     #{saturation(#86efac)};
+	--green-300-l:     #{lightness(#86efac)};
+	--green-300-raw:   #{hue(#86efac), saturation(#86efac), lightness(#86efac)};
+	--green-300:       #{#86efac};
+
+	--green-400-h:     #{hue(#4ade80)};
+	--green-400-s:     #{saturation(#4ade80)};
+	--green-400-l:     #{lightness(#4ade80)};
+	--green-400-raw:   #{hue(#4ade80), saturation(#4ade80), lightness(#4ade80)};
+	--green-400:       #{#4ade80};
+
+	--green-500-h:     #{hue(#22c55e)};
+	--green-500-s:     #{saturation(#22c55e)};
+	--green-500-l:     #{lightness(#22c55e)};
+	--green-500-raw:   #{hue(#22c55e), saturation(#22c55e), lightness(#22c55e)};
+	--green-500:       #{#22c55e};
+
+	--green-600-h:     #{hue(#16a34a)};
+	--green-600-s:     #{saturation(#16a34a)};
+	--green-600-l:     #{lightness(#16a34a)};
+	--green-600-raw:   #{hue(#16a34a), saturation(#16a34a), lightness(#16a34a)};
+	--green-600:       #{#16a34a};
+
+	--green-700-h:     #{hue(#15803d)};
+	--green-700-s:     #{saturation(#15803d)};
+	--green-700-l:     #{lightness(#15803d)};
+	--green-700-raw:   #{hue(#15803d), saturation(#15803d), lightness(#15803d)};
+	--green-700:       #{#15803d};
+
+	--green-800-h:     #{hue(#166534)};
+	--green-800-s:     #{saturation(#166534)};
+	--green-800-l:     #{lightness(#166534)};
+	--green-800-raw:   #{hue(#166534), saturation(#166534), lightness(#166534)};
+	--green-800:       #{#166534};
+
+	--green-900-h:     #{hue(#14532d)};
+	--green-900-s:     #{saturation(#14532d)};
+	--green-900-l:     #{lightness(#14532d)};
+	--green-900-raw:   #{hue(#14532d), saturation(#14532d), lightness(#14532d)};
+	--green-900:       #{#14532d};
+
+	--emerald-50-h:    #{hue(#ecfdf5)};
+	--emerald-50-s:    #{saturation(#ecfdf5)};
+	--emerald-50-l:    #{lightness(#ecfdf5)};
+	--emerald-50-raw:  #{hue(#ecfdf5), saturation(#ecfdf5), lightness(#ecfdf5)};
+	--emerald-50:      #{#ecfdf5};
+
+	--emerald-100-h:   #{hue(#d1fae5)};
+	--emerald-100-s:   #{saturation(#d1fae5)};
+	--emerald-100-l:   #{lightness(#d1fae5)};
+	--emerald-100-raw: #{hue(#d1fae5), saturation(#d1fae5), lightness(#d1fae5)};
+	--emerald-100:     #{#d1fae5};
+
+	--emerald-200-h:   #{hue(#a7f3d0)};
+	--emerald-200-s:   #{saturation(#a7f3d0)};
+	--emerald-200-l:   #{lightness(#a7f3d0)};
+	--emerald-200-raw: #{hue(#a7f3d0), saturation(#a7f3d0), lightness(#a7f3d0)};
+	--emerald-200:     #{#a7f3d0};
+
+	--emerald-300-h:   #{hue(#6ee7b7)};
+	--emerald-300-s:   #{saturation(#6ee7b7)};
+	--emerald-300-l:   #{lightness(#6ee7b7)};
+	--emerald-300-raw: #{hue(#6ee7b7), saturation(#6ee7b7), lightness(#6ee7b7)};
+	--emerald-300:     #{#6ee7b7};
+
+	--emerald-400-h:   #{hue(#34d399)};
+	--emerald-400-s:   #{saturation(#34d399)};
+	--emerald-400-l:   #{lightness(#34d399)};
+	--emerald-400-raw: #{hue(#34d399), saturation(#34d399), lightness(#34d399)};
+	--emerald-400:     #{#34d399};
+
+	--emerald-500-h:   #{hue(#10b981)};
+	--emerald-500-s:   #{saturation(#10b981)};
+	--emerald-500-l:   #{lightness(#10b981)};
+	--emerald-500-raw: #{hue(#10b981), saturation(#10b981), lightness(#10b981)};
+	--emerald-500:     #{#10b981};
+
+	--emerald-600-h:   #{hue(#059669)};
+	--emerald-600-s:   #{saturation(#059669)};
+	--emerald-600-l:   #{lightness(#059669)};
+	--emerald-600-raw: #{hue(#059669), saturation(#059669), lightness(#059669)};
+	--emerald-600:     #{#059669};
+
+	--emerald-700-h:   #{hue(#047857)};
+	--emerald-700-s:   #{saturation(#047857)};
+	--emerald-700-l:   #{lightness(#047857)};
+	--emerald-700-raw: #{hue(#047857), saturation(#047857), lightness(#047857)};
+	--emerald-700:     #{#047857};
+
+	--emerald-800-h:   #{hue(#065f46)};
+	--emerald-800-s:   #{saturation(#065f46)};
+	--emerald-800-l:   #{lightness(#065f46)};
+	--emerald-800-raw: #{hue(#065f46), saturation(#065f46), lightness(#065f46)};
+	--emerald-800:     #{#065f46};
+
+	--emerald-900-h:   #{hue(#064e3b)};
+	--emerald-900-s:   #{saturation(#064e3b)};
+	--emerald-900-l:   #{lightness(#064e3b)};
+	--emerald-900-raw: #{hue(#064e3b), saturation(#064e3b), lightness(#064e3b)};
+	--emerald-900:     #{#064e3b};
+
+	--teal-50-h:       #{hue(#f0fdfa)};
+	--teal-50-s:       #{saturation(#f0fdfa)};
+	--teal-50-l:       #{lightness(#f0fdfa)};
+	--teal-50-raw:     #{hue(#f0fdfa), saturation(#f0fdfa), lightness(#f0fdfa)};
+	--teal-50:         #{#f0fdfa};
+
+	--teal-100-h:      #{hue(#ccfbf1)};
+	--teal-100-s:      #{saturation(#ccfbf1)};
+	--teal-100-l:      #{lightness(#ccfbf1)};
+	--teal-100-raw:    #{hue(#ccfbf1), saturation(#ccfbf1), lightness(#ccfbf1)};
+	--teal-100:        #{#ccfbf1};
+
+	--teal-200-h:      #{hue(#99f6e4)};
+	--teal-200-s:      #{saturation(#99f6e4)};
+	--teal-200-l:      #{lightness(#99f6e4)};
+	--teal-200-raw:    #{hue(#99f6e4), saturation(#99f6e4), lightness(#99f6e4)};
+	--teal-200:        #{#99f6e4};
+
+	--teal-300-h:      #{hue(#5eead4)};
+	--teal-300-s:      #{saturation(#5eead4)};
+	--teal-300-l:      #{lightness(#5eead4)};
+	--teal-300-raw:    #{hue(#5eead4), saturation(#5eead4), lightness(#5eead4)};
+	--teal-300:        #{#5eead4};
+
+	--teal-400-h:      #{hue(#2dd4bf)};
+	--teal-400-s:      #{saturation(#2dd4bf)};
+	--teal-400-l:      #{lightness(#2dd4bf)};
+	--teal-400-raw:    #{hue(#2dd4bf), saturation(#2dd4bf), lightness(#2dd4bf)};
+	--teal-400:        #{#2dd4bf};
+
+	--teal-500-h:      #{hue(#14b8a6)};
+	--teal-500-s:      #{saturation(#14b8a6)};
+	--teal-500-l:      #{lightness(#14b8a6)};
+	--teal-500-raw:    #{hue(#14b8a6), saturation(#14b8a6), lightness(#14b8a6)};
+	--teal-500:        #{#14b8a6};
+
+	--teal-600-h:      #{hue(#0d9488)};
+	--teal-600-s:      #{saturation(#0d9488)};
+	--teal-600-l:      #{lightness(#0d9488)};
+	--teal-600-raw:    #{hue(#0d9488), saturation(#0d9488), lightness(#0d9488)};
+	--teal-600:        #{#0d9488};
+
+	--teal-700-h:      #{hue(#0f766e)};
+	--teal-700-s:      #{saturation(#0f766e)};
+	--teal-700-l:      #{lightness(#0f766e)};
+	--teal-700-raw:    #{hue(#0f766e), saturation(#0f766e), lightness(#0f766e)};
+	--teal-700:        #{#0f766e};
+
+	--teal-800-h:      #{hue(#115e59)};
+	--teal-800-s:      #{saturation(#115e59)};
+	--teal-800-l:      #{lightness(#115e59)};
+	--teal-800-raw:    #{hue(#115e59), saturation(#115e59), lightness(#115e59)};
+	--teal-800:        #{#115e59};
+
+	--teal-900-h:      #{hue(#134e4a)};
+	--teal-900-s:      #{saturation(#134e4a)};
+	--teal-900-l:      #{lightness(#134e4a)};
+	--teal-900-raw:    #{hue(#134e4a), saturation(#134e4a), lightness(#134e4a)};
+	--teal-900:        #{#134e4a};
+
+	--cyan-50-h:       #{hue(#ecfeff)};
+	--cyan-50-s:       #{saturation(#ecfeff)};
+	--cyan-50-l:       #{lightness(#ecfeff)};
+	--cyan-50-raw:     #{hue(#ecfeff), saturation(#ecfeff), lightness(#ecfeff)};
+	--cyan-50:         #{#ecfeff};
+
+	--cyan-100-h:      #{hue(#cffafe)};
+	--cyan-100-s:      #{saturation(#cffafe)};
+	--cyan-100-l:      #{lightness(#cffafe)};
+	--cyan-100-raw:    #{hue(#cffafe), saturation(#cffafe), lightness(#cffafe)};
+	--cyan-100:        #{#cffafe};
+
+	--cyan-200-h:      #{hue(#a5f3fc)};
+	--cyan-200-s:      #{saturation(#a5f3fc)};
+	--cyan-200-l:      #{lightness(#a5f3fc)};
+	--cyan-200-raw:    #{hue(#a5f3fc), saturation(#a5f3fc), lightness(#a5f3fc)};
+	--cyan-200:        #{#a5f3fc};
+
+	--cyan-300-h:      #{hue(#67e8f9)};
+	--cyan-300-s:      #{saturation(#67e8f9)};
+	--cyan-300-l:      #{lightness(#67e8f9)};
+	--cyan-300-raw:    #{hue(#67e8f9), saturation(#67e8f9), lightness(#67e8f9)};
+	--cyan-300:        #{#67e8f9};
+
+	--cyan-400-h:      #{hue(#22d3ee)};
+	--cyan-400-s:      #{saturation(#22d3ee)};
+	--cyan-400-l:      #{lightness(#22d3ee)};
+	--cyan-400-raw:    #{hue(#22d3ee), saturation(#22d3ee), lightness(#22d3ee)};
+	--cyan-400:        #{#22d3ee};
+
+	--cyan-500-h:      #{hue(#06b6d4)};
+	--cyan-500-s:      #{saturation(#06b6d4)};
+	--cyan-500-l:      #{lightness(#06b6d4)};
+	--cyan-500-raw:    #{hue(#06b6d4), saturation(#06b6d4), lightness(#06b6d4)};
+	--cyan-500:        #{#06b6d4};
+
+	--cyan-600-h:      #{hue(#0891b2)};
+	--cyan-600-s:      #{saturation(#0891b2)};
+	--cyan-600-l:      #{lightness(#0891b2)};
+	--cyan-600-raw:    #{hue(#0891b2), saturation(#0891b2), lightness(#0891b2)};
+	--cyan-600:        #{#0891b2};
+
+	--cyan-700-h:      #{hue(#0e7490)};
+	--cyan-700-s:      #{saturation(#0e7490)};
+	--cyan-700-l:      #{lightness(#0e7490)};
+	--cyan-700-raw:    #{hue(#0e7490), saturation(#0e7490), lightness(#0e7490)};
+	--cyan-700:        #{#0e7490};
+
+	--cyan-800-h:      #{hue(#155e75)};
+	--cyan-800-s:      #{saturation(#155e75)};
+	--cyan-800-l:      #{lightness(#155e75)};
+	--cyan-800-raw:    #{hue(#155e75), saturation(#155e75), lightness(#155e75)};
+	--cyan-800:        #{#155e75};
+
+	--cyan-900-h:      #{hue(#164e63)};
+	--cyan-900-s:      #{saturation(#164e63)};
+	--cyan-900-l:      #{lightness(#164e63)};
+	--cyan-900-raw:    #{hue(#164e63), saturation(#164e63), lightness(#164e63)};
+	--cyan-900:        #{#164e63};
+
+	--sky-50-h:        #{hue(#f0f9ff)};
+	--sky-50-s:        #{saturation(#f0f9ff)};
+	--sky-50-l:        #{lightness(#f0f9ff)};
+	--sky-50-raw:      #{hue(#f0f9ff), saturation(#f0f9ff), lightness(#f0f9ff)};
+	--sky-50:          #{#f0f9ff};
+
+	--sky-100-h:       #{hue(#e0f2fe)};
+	--sky-100-s:       #{saturation(#e0f2fe)};
+	--sky-100-l:       #{lightness(#e0f2fe)};
+	--sky-100-raw:     #{hue(#e0f2fe), saturation(#e0f2fe), lightness(#e0f2fe)};
+	--sky-100:         #{#e0f2fe};
+
+	--sky-200-h:       #{hue(#bae6fd)};
+	--sky-200-s:       #{saturation(#bae6fd)};
+	--sky-200-l:       #{lightness(#bae6fd)};
+	--sky-200-raw:     #{hue(#bae6fd), saturation(#bae6fd), lightness(#bae6fd)};
+	--sky-200:         #{#bae6fd};
+
+	--sky-300-h:       #{hue(#7dd3fc)};
+	--sky-300-s:       #{saturation(#7dd3fc)};
+	--sky-300-l:       #{lightness(#7dd3fc)};
+	--sky-300-raw:     #{hue(#7dd3fc), saturation(#7dd3fc), lightness(#7dd3fc)};
+	--sky-300:         #{#7dd3fc};
+
+	--sky-400-h:       #{hue(#38bdf8)};
+	--sky-400-s:       #{saturation(#38bdf8)};
+	--sky-400-l:       #{lightness(#38bdf8)};
+	--sky-400-raw:     #{hue(#38bdf8), saturation(#38bdf8), lightness(#38bdf8)};
+	--sky-400:         #{#38bdf8};
+
+	--sky-500-h:       #{hue(#0ea5e9)};
+	--sky-500-s:       #{saturation(#0ea5e9)};
+	--sky-500-l:       #{lightness(#0ea5e9)};
+	--sky-500-raw:     #{hue(#0ea5e9), saturation(#0ea5e9), lightness(#0ea5e9)};
+	--sky-500:         #{#0ea5e9};
+
+	--sky-600-h:       #{hue(#0284c7)};
+	--sky-600-s:       #{saturation(#0284c7)};
+	--sky-600-l:       #{lightness(#0284c7)};
+	--sky-600-raw:     #{hue(#0284c7), saturation(#0284c7), lightness(#0284c7)};
+	--sky-600:         #{#0284c7};
+
+	--sky-700-h:       #{hue(#0369a1)};
+	--sky-700-s:       #{saturation(#0369a1)};
+	--sky-700-l:       #{lightness(#0369a1)};
+	--sky-700-raw:     #{hue(#0369a1), saturation(#0369a1), lightness(#0369a1)};
+	--sky-700:         #{#0369a1};
+
+	--sky-800-h:       #{hue(#075985)};
+	--sky-800-s:       #{saturation(#075985)};
+	--sky-800-l:       #{lightness(#075985)};
+	--sky-800-raw:     #{hue(#075985), saturation(#075985), lightness(#075985)};
+	--sky-800:         #{#075985};
+
+	--sky-900-h:       #{hue(#0c4a6e)};
+	--sky-900-s:       #{saturation(#0c4a6e)};
+	--sky-900-l:       #{lightness(#0c4a6e)};
+	--sky-900-raw:     #{hue(#0c4a6e), saturation(#0c4a6e), lightness(#0c4a6e)};
+	--sky-900:         #{#0c4a6e};
+
+	--blue-50-h:       #{hue(#eff6ff)};
+	--blue-50-s:       #{saturation(#eff6ff)};
+	--blue-50-l:       #{lightness(#eff6ff)};
+	--blue-50-raw:     #{hue(#eff6ff), saturation(#eff6ff), lightness(#eff6ff)};
+	--blue-50:         #{#eff6ff};
+
+	--blue-100-h:      #{hue(#dbeafe)};
+	--blue-100-s:      #{saturation(#dbeafe)};
+	--blue-100-l:      #{lightness(#dbeafe)};
+	--blue-100-raw:    #{hue(#dbeafe), saturation(#dbeafe), lightness(#dbeafe)};
+	--blue-100:        #{#dbeafe};
+
+	--blue-200-h:      #{hue(#bfdbfe)};
+	--blue-200-s:      #{saturation(#bfdbfe)};
+	--blue-200-l:      #{lightness(#bfdbfe)};
+	--blue-200-raw:    #{hue(#bfdbfe), saturation(#bfdbfe), lightness(#bfdbfe)};
+	--blue-200:        #{#bfdbfe};
+
+	--blue-300-h:      #{hue(#93c5fd)};
+	--blue-300-s:      #{saturation(#93c5fd)};
+	--blue-300-l:      #{lightness(#93c5fd)};
+	--blue-300-raw:    #{hue(#93c5fd), saturation(#93c5fd), lightness(#93c5fd)};
+	--blue-300:        #{#93c5fd};
+
+	--blue-400-h:      #{hue(#60a5fa)};
+	--blue-400-s:      #{saturation(#60a5fa)};
+	--blue-400-l:      #{lightness(#60a5fa)};
+	--blue-400-raw:    #{hue(#60a5fa), saturation(#60a5fa), lightness(#60a5fa)};
+	--blue-400:        #{#60a5fa};
+
+	--blue-500-h:      #{hue(#3b82f6)};
+	--blue-500-s:      #{saturation(#3b82f6)};
+	--blue-500-l:      #{lightness(#3b82f6)};
+	--blue-500-raw:    #{hue(#3b82f6), saturation(#3b82f6), lightness(#3b82f6)};
+	--blue-500:        #{#3b82f6};
+
+	--blue-600-h:      #{hue(#2563eb)};
+	--blue-600-s:      #{saturation(#2563eb)};
+	--blue-600-l:      #{lightness(#2563eb)};
+	--blue-600-raw:    #{hue(#2563eb), saturation(#2563eb), lightness(#2563eb)};
+	--blue-600:        #{#2563eb};
+
+	--blue-700-h:      #{hue(#1d4ed8)};
+	--blue-700-s:      #{saturation(#1d4ed8)};
+	--blue-700-l:      #{lightness(#1d4ed8)};
+	--blue-700-raw:    #{hue(#1d4ed8), saturation(#1d4ed8), lightness(#1d4ed8)};
+	--blue-700:        #{#1d4ed8};
+
+	--blue-800-h:      #{hue(#1e40af)};
+	--blue-800-s:      #{saturation(#1e40af)};
+	--blue-800-l:      #{lightness(#1e40af)};
+	--blue-800-raw:    #{hue(#1e40af), saturation(#1e40af), lightness(#1e40af)};
+	--blue-800:        #{#1e40af};
+
+	--blue-900-h:      #{hue(#1e3a8a)};
+	--blue-900-s:      #{saturation(#1e3a8a)};
+	--blue-900-l:      #{lightness(#1e3a8a)};
+	--blue-900-raw:    #{hue(#1e3a8a), saturation(#1e3a8a), lightness(#1e3a8a)};
+	--blue-900:        #{#1e3a8a};
+
+	--indigo-50-h:     #{hue(#eef2ff)};
+	--indigo-50-s:     #{saturation(#eef2ff)};
+	--indigo-50-l:     #{lightness(#eef2ff)};
+	--indigo-50-raw:   #{hue(#eef2ff), saturation(#eef2ff), lightness(#eef2ff)};
+	--indigo-50:       #{#eef2ff};
+
+	--indigo-100-h:    #{hue(#e0e7ff)};
+	--indigo-100-s:    #{saturation(#e0e7ff)};
+	--indigo-100-l:    #{lightness(#e0e7ff)};
+	--indigo-100-raw:  #{hue(#e0e7ff), saturation(#e0e7ff), lightness(#e0e7ff)};
+	--indigo-100:      #{#e0e7ff};
+
+	--indigo-200-h:    #{hue(#c7d2fe)};
+	--indigo-200-s:    #{saturation(#c7d2fe)};
+	--indigo-200-l:    #{lightness(#c7d2fe)};
+	--indigo-200-raw:  #{hue(#c7d2fe), saturation(#c7d2fe), lightness(#c7d2fe)};
+	--indigo-200:      #{#c7d2fe};
+
+	--indigo-300-h:    #{hue(#a5b4fc)};
+	--indigo-300-s:    #{saturation(#a5b4fc)};
+	--indigo-300-l:    #{lightness(#a5b4fc)};
+	--indigo-300-raw:  #{hue(#a5b4fc), saturation(#a5b4fc), lightness(#a5b4fc)};
+	--indigo-300:      #{#a5b4fc};
+
+	--indigo-400-h:    #{hue(#818cf8)};
+	--indigo-400-s:    #{saturation(#818cf8)};
+	--indigo-400-l:    #{lightness(#818cf8)};
+	--indigo-400-raw:  #{hue(#818cf8), saturation(#818cf8), lightness(#818cf8)};
+	--indigo-400:      #{#818cf8};
+
+	--indigo-500-h:    #{hue(#6366f1)};
+	--indigo-500-s:    #{saturation(#6366f1)};
+	--indigo-500-l:    #{lightness(#6366f1)};
+	--indigo-500-raw:  #{hue(#6366f1), saturation(#6366f1), lightness(#6366f1)};
+	--indigo-500:      #{#6366f1};
+
+	--indigo-600-h:    #{hue(#4f46e5)};
+	--indigo-600-s:    #{saturation(#4f46e5)};
+	--indigo-600-l:    #{lightness(#4f46e5)};
+	--indigo-600-raw:  #{hue(#4f46e5), saturation(#4f46e5), lightness(#4f46e5)};
+	--indigo-600:      #{#4f46e5};
+
+	--indigo-700-h:    #{hue(#4338ca)};
+	--indigo-700-s:    #{saturation(#4338ca)};
+	--indigo-700-l:    #{lightness(#4338ca)};
+	--indigo-700-raw:  #{hue(#4338ca), saturation(#4338ca), lightness(#4338ca)};
+	--indigo-700:      #{#4338ca};
+
+	--indigo-800-h:    #{hue(#3730a3)};
+	--indigo-800-s:    #{saturation(#3730a3)};
+	--indigo-800-l:    #{lightness(#3730a3)};
+	--indigo-800-raw:  #{hue(#3730a3), saturation(#3730a3), lightness(#3730a3)};
+	--indigo-800:      #{#3730a3};
+
+	--indigo-900-h:    #{hue(#312e81)};
+	--indigo-900-s:    #{saturation(#312e81)};
+	--indigo-900-l:    #{lightness(#312e81)};
+	--indigo-900-raw:  #{hue(#312e81), saturation(#312e81), lightness(#312e81)};
+	--indigo-900:      #{#312e81};
+
+	--violet-50-h:     #{hue(#f5f3ff)};
+	--violet-50-s:     #{saturation(#f5f3ff)};
+	--violet-50-l:     #{lightness(#f5f3ff)};
+	--violet-50-raw:   #{hue(#f5f3ff), saturation(#f5f3ff), lightness(#f5f3ff)};
+	--violet-50:       #{#f5f3ff};
+
+	--violet-100-h:    #{hue(#ede9fe)};
+	--violet-100-s:    #{saturation(#ede9fe)};
+	--violet-100-l:    #{lightness(#ede9fe)};
+	--violet-100-raw:  #{hue(#ede9fe), saturation(#ede9fe), lightness(#ede9fe)};
+	--violet-100:      #{#ede9fe};
+
+	--violet-200-h:    #{hue(#ddd6fe)};
+	--violet-200-s:    #{saturation(#ddd6fe)};
+	--violet-200-l:    #{lightness(#ddd6fe)};
+	--violet-200-raw:  #{hue(#ddd6fe), saturation(#ddd6fe), lightness(#ddd6fe)};
+	--violet-200:      #{#ddd6fe};
+
+	--violet-300-h:    #{hue(#c4b5fd)};
+	--violet-300-s:    #{saturation(#c4b5fd)};
+	--violet-300-l:    #{lightness(#c4b5fd)};
+	--violet-300-raw:  #{hue(#c4b5fd), saturation(#c4b5fd), lightness(#c4b5fd)};
+	--violet-300:      #{#c4b5fd};
+
+	--violet-400-h:    #{hue(#a78bfa)};
+	--violet-400-s:    #{saturation(#a78bfa)};
+	--violet-400-l:    #{lightness(#a78bfa)};
+	--violet-400-raw:  #{hue(#a78bfa), saturation(#a78bfa), lightness(#a78bfa)};
+	--violet-400:      #{#a78bfa};
+
+	--violet-500-h:    #{hue(#8b5cf6)};
+	--violet-500-s:    #{saturation(#8b5cf6)};
+	--violet-500-l:    #{lightness(#8b5cf6)};
+	--violet-500-raw:  #{hue(#8b5cf6), saturation(#8b5cf6), lightness(#8b5cf6)};
+	--violet-500:      #{#8b5cf6};
+
+	--violet-600-h:    #{hue(#7c3aed)};
+	--violet-600-s:    #{saturation(#7c3aed)};
+	--violet-600-l:    #{lightness(#7c3aed)};
+	--violet-600-raw:  #{hue(#7c3aed), saturation(#7c3aed), lightness(#7c3aed)};
+	--violet-600:      #{#7c3aed};
+
+	--violet-700-h:    #{hue(#6d28d9)};
+	--violet-700-s:    #{saturation(#6d28d9)};
+	--violet-700-l:    #{lightness(#6d28d9)};
+	--violet-700-raw:  #{hue(#6d28d9), saturation(#6d28d9), lightness(#6d28d9)};
+	--violet-700:      #{#6d28d9};
+
+	--violet-800-h:    #{hue(#5b21b6)};
+	--violet-800-s:    #{saturation(#5b21b6)};
+	--violet-800-l:    #{lightness(#5b21b6)};
+	--violet-800-raw:  #{hue(#5b21b6), saturation(#5b21b6), lightness(#5b21b6)};
+	--violet-800:      #{#5b21b6};
+
+	--violet-900-h:    #{hue(#4c1d95)};
+	--violet-900-s:    #{saturation(#4c1d95)};
+	--violet-900-l:    #{lightness(#4c1d95)};
+	--violet-900-raw:  #{hue(#4c1d95), saturation(#4c1d95), lightness(#4c1d95)};
+	--violet-900:      #{#4c1d95};
+
+	--purple-50-h:     #{hue(#faf5ff)};
+	--purple-50-s:     #{saturation(#faf5ff)};
+	--purple-50-l:     #{lightness(#faf5ff)};
+	--purple-50-raw:   #{hue(#faf5ff), saturation(#faf5ff), lightness(#faf5ff)};
+	--purple-50:       #{#faf5ff};
+
+	--purple-100-h:    #{hue(#f3e8ff)};
+	--purple-100-s:    #{saturation(#f3e8ff)};
+	--purple-100-l:    #{lightness(#f3e8ff)};
+	--purple-100-raw:  #{hue(#f3e8ff), saturation(#f3e8ff), lightness(#f3e8ff)};
+	--purple-100:      #{#f3e8ff};
+
+	--purple-200-h:    #{hue(#e9d5ff)};
+	--purple-200-s:    #{saturation(#e9d5ff)};
+	--purple-200-l:    #{lightness(#e9d5ff)};
+	--purple-200-raw:  #{hue(#e9d5ff), saturation(#e9d5ff), lightness(#e9d5ff)};
+	--purple-200:      #{#e9d5ff};
+
+	--purple-300-h:    #{hue(#d8b4fe)};
+	--purple-300-s:    #{saturation(#d8b4fe)};
+	--purple-300-l:    #{lightness(#d8b4fe)};
+	--purple-300-raw:  #{hue(#d8b4fe), saturation(#d8b4fe), lightness(#d8b4fe)};
+	--purple-300:      #{#d8b4fe};
+
+	--purple-400-h:    #{hue(#c084fc)};
+	--purple-400-s:    #{saturation(#c084fc)};
+	--purple-400-l:    #{lightness(#c084fc)};
+	--purple-400-raw:  #{hue(#c084fc), saturation(#c084fc), lightness(#c084fc)};
+	--purple-400:      #{#c084fc};
+
+	--purple-500-h:    #{hue(#a855f7)};
+	--purple-500-s:    #{saturation(#a855f7)};
+	--purple-500-l:    #{lightness(#a855f7)};
+	--purple-500-raw:  #{hue(#a855f7), saturation(#a855f7), lightness(#a855f7)};
+	--purple-500:      #{#a855f7};
+
+	--purple-600-h:    #{hue(#9333ea)};
+	--purple-600-s:    #{saturation(#9333ea)};
+	--purple-600-l:    #{lightness(#9333ea)};
+	--purple-600-raw:  #{hue(#9333ea), saturation(#9333ea), lightness(#9333ea)};
+	--purple-600:      #{#9333ea};
+
+	--purple-700-h:    #{hue(#7e22ce)};
+	--purple-700-s:    #{saturation(#7e22ce)};
+	--purple-700-l:    #{lightness(#7e22ce)};
+	--purple-700-raw:  #{hue(#7e22ce), saturation(#7e22ce), lightness(#7e22ce)};
+	--purple-700:      #{#7e22ce};
+
+	--purple-800-h:    #{hue(#6b21a8)};
+	--purple-800-s:    #{saturation(#6b21a8)};
+	--purple-800-l:    #{lightness(#6b21a8)};
+	--purple-800-raw:  #{hue(#6b21a8), saturation(#6b21a8), lightness(#6b21a8)};
+	--purple-800:      #{#6b21a8};
+
+	--purple-900-h:    #{hue(#581c87)};
+	--purple-900-s:    #{saturation(#581c87)};
+	--purple-900-l:    #{lightness(#581c87)};
+	--purple-900-raw:  #{hue(#581c87), saturation(#581c87), lightness(#581c87)};
+	--purple-900:      #{#581c87};
+
+	--fuchsia-50-h:    #{hue(#fdf4ff)};
+	--fuchsia-50-s:    #{saturation(#fdf4ff)};
+	--fuchsia-50-l:    #{lightness(#fdf4ff)};
+	--fuchsia-50-raw:  #{hue(#fdf4ff), saturation(#fdf4ff), lightness(#fdf4ff)};
+	--fuchsia-50:      #{#fdf4ff};
+
+	--fuchsia-100-h:   #{hue(#fae8ff)};
+	--fuchsia-100-s:   #{saturation(#fae8ff)};
+	--fuchsia-100-l:   #{lightness(#fae8ff)};
+	--fuchsia-100-raw: #{hue(#fae8ff), saturation(#fae8ff), lightness(#fae8ff)};
+	--fuchsia-100:     #{#fae8ff};
+
+	--fuchsia-200-h:   #{hue(#f5d0fe)};
+	--fuchsia-200-s:   #{saturation(#f5d0fe)};
+	--fuchsia-200-l:   #{lightness(#f5d0fe)};
+	--fuchsia-200-raw: #{hue(#f5d0fe), saturation(#f5d0fe), lightness(#f5d0fe)};
+	--fuchsia-200:     #{#f5d0fe};
+
+	--fuchsia-300-h:   #{hue(#f0abfc)};
+	--fuchsia-300-s:   #{saturation(#f0abfc)};
+	--fuchsia-300-l:   #{lightness(#f0abfc)};
+	--fuchsia-300-raw: #{hue(#f0abfc), saturation(#f0abfc), lightness(#f0abfc)};
+	--fuchsia-300:     #{#f0abfc};
+
+	--fuchsia-400-h:   #{hue(#e879f9)};
+	--fuchsia-400-s:   #{saturation(#e879f9)};
+	--fuchsia-400-l:   #{lightness(#e879f9)};
+	--fuchsia-400-raw: #{hue(#e879f9), saturation(#e879f9), lightness(#e879f9)};
+	--fuchsia-400:     #{#e879f9};
+
+	--fuchsia-500-h:   #{hue(#d946ef)};
+	--fuchsia-500-s:   #{saturation(#d946ef)};
+	--fuchsia-500-l:   #{lightness(#d946ef)};
+	--fuchsia-500-raw: #{hue(#d946ef), saturation(#d946ef), lightness(#d946ef)};
+	--fuchsia-500:     #{#d946ef};
+
+	--fuchsia-600-h:   #{hue(#c026d3)};
+	--fuchsia-600-s:   #{saturation(#c026d3)};
+	--fuchsia-600-l:   #{lightness(#c026d3)};
+	--fuchsia-600-raw: #{hue(#c026d3), saturation(#c026d3), lightness(#c026d3)};
+	--fuchsia-600:     #{#c026d3};
+
+	--fuchsia-700-h:   #{hue(#a21caf)};
+	--fuchsia-700-s:   #{saturation(#a21caf)};
+	--fuchsia-700-l:   #{lightness(#a21caf)};
+	--fuchsia-700-raw: #{hue(#a21caf), saturation(#a21caf), lightness(#a21caf)};
+	--fuchsia-700:     #{#a21caf};
+
+	--fuchsia-800-h:   #{hue(#86198f)};
+	--fuchsia-800-s:   #{saturation(#86198f)};
+	--fuchsia-800-l:   #{lightness(#86198f)};
+	--fuchsia-800-raw: #{hue(#86198f), saturation(#86198f), lightness(#86198f)};
+	--fuchsia-800:     #{#86198f};
+
+	--fuchsia-900-h:   #{hue(#701a75)};
+	--fuchsia-900-s:   #{saturation(#701a75)};
+	--fuchsia-900-l:   #{lightness(#701a75)};
+	--fuchsia-900-raw: #{hue(#701a75), saturation(#701a75), lightness(#701a75)};
+	--fuchsia-900:     #{#701a75};
+
+	--pink-50-h:       #{hue(#fdf2f8)};
+	--pink-50-s:       #{saturation(#fdf2f8)};
+	--pink-50-l:       #{lightness(#fdf2f8)};
+	--pink-50-raw:     #{hue(#fdf2f8), saturation(#fdf2f8), lightness(#fdf2f8)};
+	--pink-50:         #{#fdf2f8};
+
+	--pink-100-h:      #{hue(#fce7f3)};
+	--pink-100-s:      #{saturation(#fce7f3)};
+	--pink-100-l:      #{lightness(#fce7f3)};
+	--pink-100-raw:    #{hue(#fce7f3), saturation(#fce7f3), lightness(#fce7f3)};
+	--pink-100:        #{#fce7f3};
+
+	--pink-200-h:      #{hue(#fbcfe8)};
+	--pink-200-s:      #{saturation(#fbcfe8)};
+	--pink-200-l:      #{lightness(#fbcfe8)};
+	--pink-200-raw:    #{hue(#fbcfe8), saturation(#fbcfe8), lightness(#fbcfe8)};
+	--pink-200:        #{#fbcfe8};
+
+	--pink-300-h:      #{hue(#f9a8d4)};
+	--pink-300-s:      #{saturation(#f9a8d4)};
+	--pink-300-l:      #{lightness(#f9a8d4)};
+	--pink-300-raw:    #{hue(#f9a8d4), saturation(#f9a8d4), lightness(#f9a8d4)};
+	--pink-300:        #{#f9a8d4};
+
+	--pink-400-h:      #{hue(#f472b6)};
+	--pink-400-s:      #{saturation(#f472b6)};
+	--pink-400-l:      #{lightness(#f472b6)};
+	--pink-400-raw:    #{hue(#f472b6), saturation(#f472b6), lightness(#f472b6)};
+	--pink-400:        #{#f472b6};
+
+	--pink-500-h:      #{hue(#ec4899)};
+	--pink-500-s:      #{saturation(#ec4899)};
+	--pink-500-l:      #{lightness(#ec4899)};
+	--pink-500-raw:    #{hue(#ec4899), saturation(#ec4899), lightness(#ec4899)};
+	--pink-500:        #{#ec4899};
+
+	--pink-600-h:      #{hue(#db2777)};
+	--pink-600-s:      #{saturation(#db2777)};
+	--pink-600-l:      #{lightness(#db2777)};
+	--pink-600-raw:    #{hue(#db2777), saturation(#db2777), lightness(#db2777)};
+	--pink-600:        #{#db2777};
+
+	--pink-700-h:      #{hue(#be185d)};
+	--pink-700-s:      #{saturation(#be185d)};
+	--pink-700-l:      #{lightness(#be185d)};
+	--pink-700-raw:    #{hue(#be185d), saturation(#be185d), lightness(#be185d)};
+	--pink-700:        #{#be185d};
+
+	--pink-800-h:      #{hue(#9d174d)};
+	--pink-800-s:      #{saturation(#9d174d)};
+	--pink-800-l:      #{lightness(#9d174d)};
+	--pink-800-raw:    #{hue(#9d174d), saturation(#9d174d), lightness(#9d174d)};
+	--pink-800:        #{#9d174d};
+
+	--pink-900-h:      #{hue(#831843)};
+	--pink-900-s:      #{saturation(#831843)};
+	--pink-900-l:      #{lightness(#831843)};
+	--pink-900-raw:    #{hue(#831843), saturation(#831843), lightness(#831843)};
+	--pink-900:        #{#831843};
+
+	--rose-50-h:       #{hue(#fff1f2)};
+	--rose-50-s:       #{saturation(#fff1f2)};
+	--rose-50-l:       #{lightness(#fff1f2)};
+	--rose-50-raw:     #{hue(#fff1f2), saturation(#fff1f2), lightness(#fff1f2)};
+	--rose-50:         #{#fff1f2};
+
+	--rose-100-h:      #{hue(#ffe4e6)};
+	--rose-100-s:      #{saturation(#ffe4e6)};
+	--rose-100-l:      #{lightness(#ffe4e6)};
+	--rose-100-raw:    #{hue(#ffe4e6), saturation(#ffe4e6), lightness(#ffe4e6)};
+	--rose-100:        #{#ffe4e6};
+
+	--rose-200-h:      #{hue(#fecdd3)};
+	--rose-200-s:      #{saturation(#fecdd3)};
+	--rose-200-l:      #{lightness(#fecdd3)};
+	--rose-200-raw:    #{hue(#fecdd3), saturation(#fecdd3), lightness(#fecdd3)};
+	--rose-200:        #{#fecdd3};
+
+	--rose-300-h:      #{hue(#fda4af)};
+	--rose-300-s:      #{saturation(#fda4af)};
+	--rose-300-l:      #{lightness(#fda4af)};
+	--rose-300-raw:    #{hue(#fda4af), saturation(#fda4af), lightness(#fda4af)};
+	--rose-300:        #{#fda4af};
+
+	--rose-400-h:      #{hue(#fb7185)};
+	--rose-400-s:      #{saturation(#fb7185)};
+	--rose-400-l:      #{lightness(#fb7185)};
+	--rose-400-raw:    #{hue(#fb7185), saturation(#fb7185), lightness(#fb7185)};
+	--rose-400:        #{#fb7185};
+
+	--rose-500-h:      #{hue(#f43f5e)};
+	--rose-500-s:      #{saturation(#f43f5e)};
+	--rose-500-l:      #{lightness(#f43f5e)};
+	--rose-500-raw:    #{hue(#f43f5e), saturation(#f43f5e), lightness(#f43f5e)};
+	--rose-500:        #{#f43f5e};
+
+	--rose-600-h:      #{hue(#e11d48)};
+	--rose-600-s:      #{saturation(#e11d48)};
+	--rose-600-l:      #{lightness(#e11d48)};
+	--rose-600-raw:    #{hue(#e11d48), saturation(#e11d48), lightness(#e11d48)};
+	--rose-600:        #{#e11d48};
+
+	--rose-700-h:      #{hue(#be123c)};
+	--rose-700-s:      #{saturation(#be123c)};
+	--rose-700-l:      #{lightness(#be123c)};
+	--rose-700-raw:    #{hue(#be123c), saturation(#be123c), lightness(#be123c)};
+	--rose-700:        #{#be123c};
+
+	--rose-800-h:      #{hue(#9f1239)};
+	--rose-800-s:      #{saturation(#9f1239)};
+	--rose-800-l:      #{lightness(#9f1239)};
+	--rose-800-raw:    #{hue(#9f1239), saturation(#9f1239), lightness(#9f1239)};
+	--rose-800:        #{#9f1239};
+
+	--rose-900-h:      #{hue(#881337)};
+	--rose-900-s:      #{saturation(#881337)};
+	--rose-900-l:      #{lightness(#881337)};
+	--rose-900-raw:    #{hue(#881337), saturation(#881337), lightness(#881337)};
+	--rose-900:        #{#881337};
 }
