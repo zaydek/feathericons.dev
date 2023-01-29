@@ -81,7 +81,7 @@ function HeadingSubheading() {
 function CTAButton({ primary = undefined }: { primary?: true }) {
 	return (
 		<div
-			className="h-64 aspect-3 rounded-1e3 bg-[#fff7]
+			className="h-64 aspect-6 md:aspect-3 rounded-[calc(64px_*_0.375)] md:rounded-1e3 bg-[#fff7]
 				[&[data-primary]]:bg-[#fff]"
 			data-primary={primary}
 		></div>
