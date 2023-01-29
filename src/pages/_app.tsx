@@ -81,7 +81,7 @@ function HeadingSubheading() {
 function CTAButton({ primary = undefined }: { primary?: true }) {
 	return (
 		<div
-			className="h-64 aspect-6 md:aspect-3 rounded-[calc(64px_*_0.375)] md:rounded-1e3 bg-[#fff7]
+			className="h-64 aspect-6 xs:aspect-3 rounded-[calc(64px_*_0.375)] xs:rounded-1e3 bg-[#fff7]
 				[&[data-primary]]:bg-[#fff]"
 			data-primary={primary}
 		></div>
@@ -139,13 +139,13 @@ function Layout() {
 					<div className="flex flex-col align-items-[center] gap-32">
 						<Logo />
 						<HeadingSubheading />
-						<div className="flex flex-col md:flex-row gap-16">
+						<div className="flex flex-col xs:flex-row gap-16">
 							<CTAButton primary />
 							<CTAButton />
 						</div>
 					</div>
 					{/* RHS */}
-					<div className="hide md:flex flex-col align-items-[center] gap-16 2xl:w-100% 2xl:max-w-512">
+					<div className="hide xs:flex flex-col align-items-[center] gap-16 2xl:w-100% 2xl:max-w-512">
 						<SponsorMeta />
 						<div className="flex justify-content-[center] flex-wrap-[wrap] gap-16">
 							{iota(5).map(index => (

@@ -120,6 +120,8 @@ export default defineConfig({
 	rules,
 	theme: {
 		breakpoints: {
+			// TODO: Change to 500px for production
+			xs:     "501px",
 			sm:     "640px",
 			md:     "768px",
 			lg:    "1024px",
