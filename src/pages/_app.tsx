@@ -4,7 +4,7 @@ import "../css/uno.generated.css"
 
 import { Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
-import { PropsWithChildren } from "react"
+import { createElement, PropsWithChildren } from "react"
 import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
 import { IconProps } from "./[icon]"
@@ -19,56 +19,44 @@ const code = Fira_Code({
 	variable: "--font-fira-code",
 })
 
+// NOTE: TypeScript doesn't accept { tag = "div" ... } so use tag ?? "div"
+function HeroBackgroundImage<Tag extends keyof JSX.IntrinsicElements>({ tag, children, ...props }: { tag?: Tag } & JSX.IntrinsicElements[Tag]) {
+	return <>{createElement(tag ?? "div", { ...props, "data-hero-background-image": true }, children)}</>
+}
+
 function BackgroundMask() {
 	return (
-		// NOTE: Must use overflow-x-[clip]; overflow-x-[hidden] breaks z-index?
-		<div className="sticky t-0 h-0 z-[var(--mask-bg-z-index)] overflow-x-[clip]">
-			<div
-				// prettier-ignore
-				className="-mx-10% h-160 rounded-b-50%"
-				data-hero-background-image
-			></div>
+		<div
+			className="display-[none] 2xl:display-[revert]
+				sticky t-0 z-[var(--mask-bg-z-index)]"
+			style={{ height: "var(--inset-y)", overflowX: "clip" /* Must use "clip"; "hidden" breaks z-index? */ }} // 😎
+		>
+			<HeroBackgroundImage className="-mx-10% h-160 rounded-b-50%" />
 		</div>
 	)
 }
 
 function ForegroundMask() {
 	return (
-		<div className="sticky t-0 h-[var(--inset-y)] z-[var(--mask-fg-z-index)]">
+		<div
+			className="display-[none] 2xl:display-[revert]
+				sticky t-0 z-[var(--mask-fg-z-index)]"
+			style={{ height: 0 }} // 😎
+		>
 			<div className="flex">
 				{/* LHS */}
 				<div className="relative flex-grow-[1]">
-					<div
-						// prettier-ignore
-						className="h-[calc(var(--inset-y)_+_var(--app-rounding))]"
-						data-hero-background-image
-					></div>
+					<HeroBackgroundImage className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
 					<div className="absolute br-0">
-						<div
-							// prettier-ignore
-							className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tl-[var(--app-rounding)]"
-							data-bg-hero-background-image
-						></div>
+						<HeroBackgroundImage className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tl-[var(--app-rounding)]" />
 					</div>
 				</div>
 				{/* RHS */}
-				<div
-					// prettier-ignore
-					className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)]"
-					data-hero-background-image
-				></div>
+				<HeroBackgroundImage className="h-[var(--inset-y)] w-100% max-w-[calc(1536px_-_var(--app-rounding)_*_2)]" />
 				<div className="relative flex-grow-[1]">
-					<div
-						// prettier-ignore
-						className="h-[calc(var(--inset-y)_+_var(--app-rounding))]"
-						data-hero-background-image
-					></div>
+					<HeroBackgroundImage className="h-[calc(var(--inset-y)_+_var(--app-rounding))]" />
 					<div className="absolute bl-0">
-						<div
-							// prettier-ignore
-							className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tr-[var(--app-rounding)]"
-							data-bg-hero-background-image
-						></div>
+						<HeroBackgroundImage className="h-[var(--app-rounding)] w-[var(--app-rounding)] rounded-tr-[var(--app-rounding)]" />
 					</div>
 				</div>
 			</div>
@@ -79,9 +67,10 @@ function ForegroundMask() {
 function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr" }>) {
 	return (
 		<div
-			className="sticky t-[var(--inset-y)] z-[var(--card-z-index)] bg-[#fff]
-				[&[data-pos=tl]]:rounded-tl-[var(--app-rounding)]
-				[&[data-pos=tr]]:rounded-tr-[var(--app-rounding)]"
+			className="display-[none] 2xl:display-[revert]
+				sticky t-[var(--inset-y)] z-[var(--card-z-index)] bg-[#fff]
+					[&[data-pos=tl]]:rounded-tl-[var(--app-rounding)]
+					[&[data-pos=tr]]:rounded-tr-[var(--app-rounding)]"
 			data-pos={pos}
 		>
 			{children}
@@ -89,11 +78,13 @@ function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr"
 	)
 }
 
-function Layout({ children }: PropsWithChildren) {
+function Layout() {
 	return (
 		<>
 			{/* Header */}
-			<header className="h-320" data-hero-background-image></header>
+			<HeroBackgroundImage tag="header" className="h-320">
+				{/* TODO */}
+			</HeroBackgroundImage>
 
 			{/* Masks */}
 			<BackgroundMask />
