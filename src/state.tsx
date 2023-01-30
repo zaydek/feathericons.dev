@@ -3,10 +3,9 @@ import * as feather from "./data/react-feather"
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useMemo, useState } from "react"
 import { formatAsJsx, formatAsSvg, formatAsTsx } from "../scripts/format"
 import { stringify } from "../scripts/stringify"
-import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "./constants"
+import { FormatAs, jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "./constants"
 import { manifest } from "./data/react-feather-manifest"
 import { toKebabCase } from "./lib/cases"
-import { FormatAs } from "./types"
 
 // prettier-ignore
 export const SearchContext =

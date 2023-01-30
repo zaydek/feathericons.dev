@@ -73,7 +73,7 @@ function Preview() {
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		<pre className="h-256 overflow-auto rounded-24 bg-[#fff] text-gray-800 shadow-[var(--shadow-2)]">
+		<pre className="aspect-[1.5] overflow-auto rounded-24 bg-[#fff] text-gray-800 shadow-[var(--shadow-2)]">
 			<code className="inline-block py-24">
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -105,7 +105,11 @@ function Preview() {
 		</pre>
 	) : (
 		<div>
-			<div className="dots-background-image flex h-256 items-center justify-center rounded-24 bg-[#fff] shadow-[var(--shadow-2)]">
+			<div
+				// prettier-ignore
+				className="flex aspect-[1.5] items-center justify-center rounded-24 bg-[#fff] shadow-[var(--shadow-2)]"
+				data-dots-background-image
+			>
 				<RouteTransition>
 					{/* Use <div> so preserve [transform:_scale(var(--scale))] */}
 					<div>
