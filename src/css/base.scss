@@ -13,13 +13,12 @@ pre { margin: 0; }
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow:
-		hidden
-		scroll; // COMPAT/Windows
+		hidden  // X-axis
+		scroll; // Y-axis; COMPAT/Windows
 	scroll-behavior: smooth;
-	//// overscroll-behavior-y: none;
 
 	font-family: var(--sans);
-	background-color: gray(50);
+	//// background-color: gray(50);
 }
 pre, code {
 	font-family: var(--code);

@@ -23,3 +23,13 @@
 	--reduced-form-size: 32px;
 	--form-size:         36px;
 }
+
+@media not all and (min-width: 640px) {
+	:root {
+		--grid-size:    64px;
+	}
+	body {
+		--scale:        1 !important;
+		--stroke-width: 2 !important;
+	}
+}
