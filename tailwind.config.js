@@ -5,7 +5,6 @@ const defaultTheme = require("./tailwind.default-theme")
 module.exports = {
 	content: ["./src/**/*.tsx"],
 	corePlugins: {
-		// Noop CSS variable composition
 		boxShadow:       false,
 		boxShadowColor:  false,
 		ringColor:       false,
@@ -18,7 +17,6 @@ module.exports = {
 		optimizeUniversalDefaults: true,
 	},
 	future: {
-		// Noop CSS variable composition
 		disableColorOpacityUtilitiesByDefault: true,
 		hoverOnlyWhenSupported: true,
 	},
@@ -26,6 +24,8 @@ module.exports = {
 		...defaultTheme,
 		extend: {
 			screens: {
+				//// // TODO: Change to 500 for production?
+				//// "xs":  "512px",
 				"2xl": `${1536 + 16}px`,
 			},
 		},
