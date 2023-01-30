@@ -16,6 +16,6 @@
 	background-position:
 		center;
 	background-size:
-		calc(16px * var(--scale))
-		calc(16px * var(--scale));
+		calc(16px * var(--scale))  // X-axis
+		calc(16px * var(--scale)); // Y-axis
 }

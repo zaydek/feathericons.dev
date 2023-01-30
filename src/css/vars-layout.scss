@@ -25,9 +25,7 @@
 }
 
 @media not all and (min-width: 640px) {
-	:root {
-		--grid-size:    64px;
-	}
+	:root { --grid-size: 64px; }
 	body {
 		--scale:        1 !important;
 		--stroke-width: 2 !important;

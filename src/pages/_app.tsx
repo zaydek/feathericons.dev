@@ -1,4 +1,3 @@
-//// import "the-new-css-reset"
 import "../css/index.scss"
 import "../css/tailwind.css"
 
@@ -150,7 +149,7 @@ function LayoutContainer({ children }: PropsWithChildren) {
 		<>
 			<BackgroundMask />
 			<ForegroundMask />
-			<div className="flex justify-center pb-[calc(var(--inset-y)_*_2)]">
+			<div className="flex justify-center 2xl:pb-[calc(var(--inset-y)_*_2)]">
 				<div className="flex w-100% max-w-[var(--app-w)] bg-[#fff] shadow-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">{children}</div>
 			</div>
 		</>
