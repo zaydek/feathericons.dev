@@ -6,8 +6,8 @@ import { manifest } from "../data/react-feather-manifest"
 import { HoverTip } from "../hover-tooltip"
 import { toKebabCase } from "../lib/cases"
 import { Icon } from "../lib/react/icon"
+import { SearchContext, SelectedContext } from "../providers/state"
 import { RouteTransition } from "../route-transition"
-import { SearchContext, SelectedContext } from "../state"
 import { TypographySmallSans } from "../typography"
 
 //// function Wbr({ children }: { children: string }) {

@@ -5,7 +5,7 @@ import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromReactElements } from "./aria/utils"
 import { cx } from "./lib/cx"
 import { Icon, IconComponent } from "./lib/react/icon"
-import { ShikiContext } from "./shiki"
+import { ShikiContext } from "./providers/shiki"
 
 function parseId(str: string) {
 	return str

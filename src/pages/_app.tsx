@@ -8,10 +8,10 @@ import Script from "next/script"
 import { PropsWithChildren, useEffect } from "react"
 import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
+import { ShikiProvider } from "../providers/shiki"
+import { StateProvider } from "../providers/state"
 import { SEO } from "../seo"
 import { SharedSidebar } from "../shared-sidebar"
-import { ShikiProvider } from "../shiki"
-import { StateProvider } from "../state"
 import { IconProps } from "./[icon]"
 
 function NavLink({ pos }: { pos: "tl" | "tr" }) {

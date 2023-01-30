@@ -14,9 +14,9 @@ import { toKebabCase, toTitleCase } from "./lib/cases"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
 import { Mutable } from "./lib/types"
+import { ShikiContext } from "./providers/shiki"
+import { SelectedContext, SliderContext } from "./providers/state"
 import { RouteTransition } from "./route-transition"
-import { ShikiContext } from "./shiki"
-import { SelectedContext, SliderContext } from "./state"
 import { TypographyCaps } from "./typography"
 
 function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: string }) {
