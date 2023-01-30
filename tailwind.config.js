@@ -26,7 +26,7 @@ module.exports = {
 			screens: {
 				//// // TODO: Change to 500 for production?
 				//// "xs":  "512px",
-				"2xl": `${1536 + 16}px`,
+				"2xl": `${1792 + 16}px`,
 			},
 		},
 	},
