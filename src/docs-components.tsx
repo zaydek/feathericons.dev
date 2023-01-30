@@ -83,7 +83,8 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	}, [code, highlighter, lang])
 
 	return (
-		<pre className="overflow-auto 2xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		// TODO
+		<pre className="-mr-16 overflow-auto lg:-mr-32 2xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			<code>
 				{/* {tokens === null
 					? code.split("\n").map((ys, y) => (

@@ -4,7 +4,9 @@ import "../css/tailwind.css"
 
 import { Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
-import { PropsWithChildren } from "react"
+import { useRouter } from "next/router"
+import Script from "next/script"
+import { PropsWithChildren, useEffect } from "react"
 import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
 import { ShikiProvider } from "../shiki"
@@ -190,7 +192,7 @@ function Layout({ children }: PropsWithChildren) {
 							<div key={index}>Hello, world!</div>
 						))}
 					</StickyContainer>
-					<div className="p-32 2xl:p-64">{children}</div>
+					<div className="p-16 lg:p-32 2xl:p-64">{children}</div>
 				</main>
 				{/* RHS */}
 				<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] shadow-[var(--hairline-shadow-l)] lg:block">
@@ -209,24 +211,51 @@ const fontSans = Inter({
 	subsets: ["latin"],
 	variable: "--font-inter",
 })
-
 const fontCode = Fira_Code({
 	subsets: ["latin"],
 	variable: "--font-fira-code",
 })
 
+function GoogleFonts() {
+	return (
+		// prettier-ignore
+		<style dangerouslySetInnerHTML={{
+			__html: "\n" + detab(`
+				:root, ::before, ::after {
+					--sans: ${fontSans.style.fontFamily};
+					--code: ${fontCode.style.fontFamily};
+				}
+			`).replaceAll("\t", "  ") + "\n"
+		}} />
+	)
+}
+
+// https://github.com/vercel/next.js/issues/20951#issuecomment-1003746732
+function NoopScrollRestoration() {
+	const router = useRouter()
+
+	useEffect(() => {
+		router.beforePopState(state => {
+			state.options.scroll = false
+			return true
+		})
+	}, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+	return (
+		// prettier-ignore
+		<Script id="noop-scroll-restoration" dangerouslySetInnerHTML={{
+			__html: "\n" + detab(`
+				window.history.scrollRestoration = "manual"
+			`) + "\n"
+		}} />
+	)
+}
+
 export default function App({ Component, pageProps }: AppProps<Partial<IconProps>>) {
 	return (
 		<>
-			{/* prettier-ignore */}
-			<style dangerouslySetInnerHTML={{
-				__html: "\n" + detab(`
-					:root, ::before, ::after {
-						--sans: ${fontSans.style.fontFamily};
-						--code: ${fontCode.style.fontFamily};
-					}
-				`).replaceAll("\t", "  ") + "\n"
-			}} />
+			<GoogleFonts />
+			<NoopScrollRestoration />
 			<ShikiProvider>
 				<StateProvider>
 					<Layout>
