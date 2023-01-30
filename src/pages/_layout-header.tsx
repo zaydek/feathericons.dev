@@ -74,12 +74,12 @@ export function LayoutHeader() {
 	return (
 		<header
 			// prettier-ignore
-			className="flex justify-center py-64 px-16 xl:py-96"
+			className="flex justify-center py-64 px-16 py-96"
 			data-background-hero
 		>
 			<NavLink pos="tl" />
 			<NavLink pos="tr" />
-			<div className="flex w-100% max-w-1024 flex-col items-center gap-64 xl:flex-row">
+			<div className="flex w-100% max-w-[var(--header-w)] flex-col items-center justify-evenly gap-64 xl:flex-row">
 				{/* LHS */}
 				<div className="flex flex-col items-center gap-32">
 					<Logo />

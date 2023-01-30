@@ -26,7 +26,7 @@ const GoogleFontsFiraCode = Fira_Code({
 function InlineGoogleFonts() {
 	return (
 		// prettier-ignore
-		<style dangerouslySetInnerHTML={{
+		<style id="google-fonts" dangerouslySetInnerHTML={{
 			__html: "\n" + detab(`
 				:root, ::before, ::after {
 					--sans: ${GoogleFontsInter.style.fontFamily};
