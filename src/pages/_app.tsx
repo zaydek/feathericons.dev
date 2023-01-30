@@ -9,6 +9,7 @@ import Script from "next/script"
 import { PropsWithChildren, useEffect } from "react"
 import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
+import { SEO } from "../seo"
 import { ShikiProvider } from "../shiki"
 import { StateProvider } from "../state"
 import { IconProps } from "./[icon]"
@@ -274,6 +275,7 @@ export default function App({ Component, pageProps }: AppProps<Partial<IconProps
 			<NoopScrollRestoration />
 			<ShikiProvider>
 				<StateProvider>
+					<SEO />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
