@@ -3,11 +3,13 @@ import * as feather from "../data/react-feather"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
-import { A, Code, H1, H2, Hairline as Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
+import { A, Code, H1, H2, Hairline, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
 import { RouteTransition } from "../components/route-transition"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
+
+////////////////////////////////////////////////////////////////////////////////
 
 interface IconParams extends ParsedUrlQuery {
 	icon: string
@@ -34,6 +36,8 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 	return { props: { name } }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
 		<article className="prose space-y-8 text-gray-900">
@@ -57,20 +61,20 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					</InlineIcon>
 					, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
 				</P>
-				<Hr />
+				<Hairline />
 				<H2>
 					Using <InlineIcon icon={feather[name]}>{name}</InlineIcon> With a CDN
 				</H2>
 				<P>To get started with Feather using a CDN (content delivery network), simply:</P>
 				<Ol>
 					<Li>
-						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code> tag
+						Add <Code lang="html">{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code lang="html">{`<head>`}</Code> tag
 					</Li>
 					<Li>
-						Add <Code>{`<i data-feather="${toKebabCase(name)}"></i>`}</Code>
+						Add <Code lang="html">{`<i data-feather="${toKebabCase(name)}"></i>`}</Code>
 					</Li>
 					<Li>
-						Invoke <Code>{`feather.replace()`}</Code>
+						Invoke <Code lang="js">{`feather.replace()`}</Code>
 					</Li>
 				</Ol>
 				<P>For example:</P>
@@ -99,7 +103,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					</A>{" "}
 					template.
 				</P>
-				<Hr />
+				<Hairline />
 				<H2>
 					Using <InlineIcon icon={feather[name]}>{name}</InlineIcon> With{" "}
 					<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
@@ -109,13 +113,13 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<P>To get started with Feather using React, simply:</P>
 				<Ol>
 					<Li>
-						Add <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
+						Add <Code lang="sh">{`npm i react-feather`}</Code> or <Code lang="sh">{`yarn add react-feather`}</Code> or <Code lang="sh">{`pnpm i react-feather`}</Code>
 					</Li>
 					<Li>
-						Add <Code>{`import { ${name} } from "react-feather"`}</Code>
+						Add <Code lang="tsx">{`import { ${name} } from "react-feather"`}</Code>
 					</Li>
 					<Li>
-						Invoke <Code>{`<${name} />`}</Code>
+						Invoke <Code lang="tsx">{`<${name} />`}</Code>
 					</Li>
 				</Ol>
 				<P>For example:</P>
@@ -144,7 +148,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					</A>{" "}
 					template.
 				</P>
-				<Hr />
+				<Hairline />
 				<P>
 					<small>
 						Icons by{" "}

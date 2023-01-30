@@ -1,4 +1,4 @@
-//// @use "tailwind-colors" as *;
+@use "tailwind-colors" as *;
 
 //// :not(svg > *) {
 //// 	outline: 1px solid hsl(200, 100%, 50%, 0.5);
@@ -12,6 +12,8 @@
 		hidden  //                X-axis
 		scroll; // COMPAT/Window; Y-axis
 	scroll-behavior: smooth;
+
+	background-color: gray(50);
 }
 
 :root, ::before, ::after {

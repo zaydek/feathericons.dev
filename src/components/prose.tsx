@@ -16,7 +16,7 @@ function parseId(str: string) {
 }
 
 // TODO: Update scroll-my-*
-export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = useMemo(() => {
 		const id = parseId(getStringFromReactElements(children as any))
 		const href = `#${id}`
@@ -34,7 +34,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 }
 
 // TODO: Update scroll-my-*
-export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = useMemo(() => {
 		const id = parseId(getStringFromReactElements(children as any))
 		const href = `#${id}`
@@ -51,19 +51,19 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	)
 }
 
-export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
+export function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
 	return <p {...props}>{children}</p>
 }
 
-export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
+export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="flex flex-col gap-8 2xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<ol className="flex flex-col gap-8 lg:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 		</ol>
 	)
 }
 
-export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
+export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li className="list-inside list-decimal" {...props}>
 			{children}
@@ -84,7 +84,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		// TODO
-		<pre className="-mr-16 overflow-auto lg:-mr-32 2xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<pre className="overflow-auto lg:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			<code>
 				{/* {tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -137,7 +137,7 @@ export function Hairline(props: JSX.IntrinsicElements["hr"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
+export function A({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	return (
 		<a className="text-gray-500 decoration-gray-400 hover:underline" {...props}>
 			{children}
@@ -145,21 +145,22 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 	)
 }
 
-export function Code({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["code"], "lang">) {
-	const { highlighter } = useContext(ShikiContext)!
+export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
+	//// const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
 
-	useEffect(() => {
-		if (highlighter === null) { return } // prettier-ignore
-		const tokens = highlighter.codeToThemedTokens(code, lang, "github-light")
-		setTokens(tokens)
-	}, [code, highlighter, lang])
+	//// useEffect(() => {
+	//// 	if (highlighter === null) { return } // prettier-ignore
+	//// 	const tokens = highlighter.codeToThemedTokens(code, lang, "github-light")
+	//// 	setTokens(tokens)
+	//// }, [code, highlighter, lang])
 
 	return (
 		//// <code className="rounded-1e3 border border-gray-300 bg-[#fff] py-2 px-8" {...props}>
 		//// <code className="bg-gray-100 p-4" {...props}>
-		<code className="rounded-1e3 bg-gray-100 py-4 px-8" {...props}>
+		//// <code className="rounded-1e3 bg-gray-100 py-3 px-6" {...props}>
+		<code className="rounded-1e3 border border-gray-200 bg-gray-100 py-2 px-8" {...props}>
 			{tokens === null
 				? code.split("\n").map((ys, y) => <span key={y}>{ys || <br />}</span>)
 				: tokens.map((ys, y) => (
@@ -179,7 +180,7 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 	)
 }
 
-export function HeadingIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+function HeadingIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	if (children === undefined || children === null) {
 		return <Icon className={cx("inline-block h-[1.1em] w-[1.1em]", className)} icon={icon} {...props} />
 	} else {
@@ -193,7 +194,7 @@ export function HeadingIcon({ className, icon, children, ...props }: { icon: Ico
 	}
 }
 
-export function TextIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+export function InlineIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	if (children === undefined || children === null) {
 		return <Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
 	} else {
