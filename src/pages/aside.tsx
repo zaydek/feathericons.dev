@@ -58,6 +58,32 @@ function useRouterName() {
 	return name
 }
 
+//// ? code.split("\n").map((ys, y) => (
+//// 		<div key={y} className="relative px-24 pl-48">
+//// 			<div className="absolute top-0 bottom-0 left-0 select-none">
+//// 				<div className="w-32 text-right text-gray-400">{y + 1}</div>
+//// 			</div>
+//// 			{ys || <br />}
+//// 			{ys.length > 0 ? y === 0 ? <CommentLink formatAs={formatAs}>{ys}</CommentLink> : ys : <br />}
+//// 		</div>
+////   ))
+//// : tokens.map((ys, y) => (
+//// 		<div key={y} className="relative px-24 pl-48">
+//// 			<div className="absolute top-0 bottom-0 left-0 select-none">
+//// 				<div className="w-32 text-right text-gray-400">{y + 1}</div>
+//// 			</div>
+//// 			{ys.length > 0 ? (
+//// 				ys.map(({ color, content }, x) => (
+//// 					<span key={x} style={{ color }}>
+//// 						{y === 0 ? <CommentLink formatAs={formatAs}>{content}</CommentLink> : content}
+//// 					</span>
+//// 				))
+//// 			) : (
+//// 				<br />
+//// 			)}
+//// 		</div>
+////   ))}
+
 function Preview() {
 	const name = useRouterName()
 
@@ -74,7 +100,7 @@ function Preview() {
 
 	return viewSource ? (
 		<pre className="aspect-[1.5] overflow-auto rounded-24 bg-[#fff] text-gray-800 shadow-[var(--shadow-2)]">
-			<code className="inline-block py-24">
+			<code className="inline-block py-24 text-[13px] leading-[1.5]">
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-24">
@@ -198,7 +224,7 @@ function FormatButton() {
 							duration: 0.1,
 							ease: [0, 1, 1, 1],
 						}}
-						className="absolute top-[calc(100%_+_16px)] right-0 z-10"
+						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
 					>
 						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-[#fff] shadow-[var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem

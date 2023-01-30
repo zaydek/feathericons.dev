@@ -11,7 +11,7 @@
 	overflow:
 		hidden  //                X-axis
 		scroll; // COMPAT/Window; Y-axis
-	scroll-behavior: smooth;
+	//// scroll-behavior: smooth;
 
 	background-color: gray(50);
 }
