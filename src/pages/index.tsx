@@ -55,7 +55,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 					}}
 					aria-label={`Icon ${name}`}
 				>
-					<Icon id={name} className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
+					<Icon id={name} className="h-32 w-32 text-gray-800 [transform:_scale(var(--SCALE))] [stroke-width:_var(--STROKE-WIDTH)]" icon={feather[name]} />
 				</button>
 			</HoverTip>
 		</div>
@@ -77,7 +77,7 @@ const MemoGridItem = memo(function GridItem({ name, indexes }: { name: keyof typ
 				}}
 				aria-label={`Icon ${name}`}
 			>
-				<Icon id={name} className="h-32 w-32 text-gray-800 [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
+				<Icon id={name} className="h-32 w-32 text-gray-800 [transform:_scale(var(--SCALE))] [stroke-width:_var(--STROKE-WIDTH)]" icon={feather[name]} />
 			</button>
 			<Link
 				href={`/${toKebabCase(name)}`}

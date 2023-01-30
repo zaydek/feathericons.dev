@@ -202,8 +202,8 @@ function CSSVariableEffect() {
 	const { size, strokeWidth } = useContext(SliderContext)!
 
 	useEffect(() => {
-		document.body.style.setProperty("--scale", `${size / sizeInitial}`)
-		document.body.style.setProperty("--stroke-width", `${strokeWidth}`)
+		document.body.style.setProperty("--SCALE", `${size / sizeInitial}`)
+		document.body.style.setProperty("--STROKE-WIDTH", `${strokeWidth}`)
 	}, [size, strokeWidth])
 
 	return <></>

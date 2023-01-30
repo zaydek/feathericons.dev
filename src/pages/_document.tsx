@@ -31,7 +31,7 @@ export default function Document() {
 					})
 				`).replaceAll("\t", "  ") + "\n" }} />
 			</Head>
-			<body style={{ "--scale": 1, "--stroke-width": 2 } as CSSProperties}>
+			<body style={{ "--SCALE": 1, "--STROKE-WIDTH": 2 } as CSSProperties}>
 				<Main />
 				<NextScript />
 			</body>

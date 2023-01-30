@@ -30,6 +30,8 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		function handlePointerDown(e: PointerEvent) {
 			if (!(e.button === 0 && e.composedPath().includes(track!))) { return } // prettier-ignore
 			pointerDownRef.current = true
+			// FIXME: Temporarily disable; this breaks Next.js navigation when using
+			// mouse side buttons
 			//// e.preventDefault()
 			const trackClient = track!.getBoundingClientRect()
 			const thumbClient = thumb!.getBoundingClientRect()
@@ -39,6 +41,8 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		}
 		function handlePointerMove(e: PointerEvent) {
 			if (!pointerDownRef.current) { return } // prettier-ignore
+			// FIXME: Temporarily disable; this breaks Next.js navigation when using
+			// mouse side buttons
 			//// e.preventDefault()
 			const trackClient = track!.getBoundingClientRect()
 			const thumbClient = thumb!.getBoundingClientRect()
@@ -48,6 +52,8 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		}
 		function handlePointerUp(e: PointerEvent) {
 			pointerDownRef.current = false
+			// FIXME: Temporarily disable; this breaks Next.js navigation when using
+			// mouse side buttons
 			//// e.preventDefault()
 		}
 		document.addEventListener("pointerdown", handlePointerDown, false)

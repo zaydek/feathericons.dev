@@ -111,9 +111,9 @@ function Preview() {
 				data-background-dots
 			>
 				<RouteTransition>
-					{/* Use <div> so preserve [transform:_scale(var(--scale))] */}
+					{/* Use <div> so preserve [transform:_scale(var(--SCALE))] */}
 					<div>
-						<Icon className="h-64 w-64 text-[#000] [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
+						<Icon className="h-64 w-64 text-[#000] [transform:_scale(var(--SCALE))] [stroke-width:_var(--STROKE-WIDTH)]" icon={feather[name]} />
 					</div>
 				</RouteTransition>
 			</div>
