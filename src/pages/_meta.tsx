@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useEffect } from "react"
-import { manifest } from "./data/react-feather-manifest"
-import { toKebabCase } from "./lib/cases"
+import { manifest } from "../data/react-feather-manifest"
+import { toKebabCase } from "../lib/cases"
 
 // prettier-ignore
 const URL =
@@ -19,7 +19,7 @@ const TITLE =
 const DESCRIPTION =
 	"Feather is a collection of simply beautiful open source icons. Each icon is designed on a 24x24 grid with an emphasis on simplicity, consistency and readability."
 
-export function SEO({ name }: { name?: keyof typeof manifest }) {
+export function Meta({ name }: { name?: keyof typeof manifest }) {
 	useEffect(() => {
 		if (name !== undefined) { return } // prettier-ignore
 		document.title = "Feather"

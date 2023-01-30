@@ -10,9 +10,9 @@ import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
 import { ShikiProvider } from "../providers/shiki"
 import { StateProvider } from "../providers/state"
-import { SEO } from "../seo"
 import { SharedSidebar } from "../shared-sidebar"
 import { IconProps } from "./[icon]"
+import { Meta } from "./_meta"
 
 function NavLink({ pos }: { pos: "tl" | "tr" }) {
 	return (
@@ -274,7 +274,7 @@ export default function App({ Component, pageProps }: AppProps<Partial<IconProps
 			<NoopScrollRestoration />
 			<ShikiProvider>
 				<StateProvider>
-					<SEO />
+					<Meta />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
