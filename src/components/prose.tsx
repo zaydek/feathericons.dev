@@ -57,7 +57,7 @@ export function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="flex flex-col gap-8 lg:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<ol className="flex flex-col gap-8 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 		</ol>
 	)
@@ -84,7 +84,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		// TODO
-		<pre className="overflow-auto lg:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<pre className="overflow-auto [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			<code>
 				{/* {tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -146,36 +146,9 @@ export function A({ children, ...props }: JSX.IntrinsicElements["a"]) {
 }
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
-	//// const { highlighter } = useContext(ShikiContext)!
-
-	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
-
-	//// useEffect(() => {
-	//// 	if (highlighter === null) { return } // prettier-ignore
-	//// 	const tokens = highlighter.codeToThemedTokens(code, lang, "github-light")
-	//// 	setTokens(tokens)
-	//// }, [code, highlighter, lang])
-
 	return (
-		//// <code className="rounded-1e3 border border-gray-300 bg-[#fff] py-2 px-8" {...props}>
-		//// <code className="bg-gray-100 p-4" {...props}>
-		//// <code className="rounded-1e3 bg-gray-100 py-3 px-6" {...props}>
 		<code className="rounded-1e3 border border-gray-200 bg-gray-100 py-2 px-8" {...props}>
-			{tokens === null
-				? code.split("\n").map((ys, y) => <span key={y}>{ys || <br />}</span>)
-				: tokens.map((ys, y) => (
-						<span key={y}>
-							{ys.length > 0 ? (
-								ys.map(({ color, content }, x) => (
-									<span key={x} style={{ color }}>
-										{content}
-									</span>
-								))
-							) : (
-								<br />
-							)}
-						</span>
-				  ))}
+			{code}
 		</code>
 	)
 }

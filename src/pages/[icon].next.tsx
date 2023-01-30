@@ -1,5 +1,3 @@
-import * as feather from "../data/react-feather"
-
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
@@ -36,7 +34,7 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
-		<article className="prose space-y-8 text-gray-900">
+		<article className="prose cols space-y-8 text-gray-900">
 			<RouteTransition>
 				<H1>Get Started With Feather</H1>
 				<P>
@@ -58,9 +56,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
 				</P>
 				<Hr />
-				<H2>
-					Using <InlineIcon icon={feather[name]}>{name}</InlineIcon> With a CDN
-				</H2>
+				<H2>Using {name} With a CDN</H2>
 				<P>To get started with Feather using a CDN (content delivery network), simply:</P>
 				<Ol>
 					<Li>
@@ -101,7 +97,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</P>
 				<Hr />
 				<H2>
-					Using <InlineIcon icon={feather[name]}>{name}</InlineIcon> With{" "}
+					Using {name} With{" "}
 					<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
 						React
 					</InlineIcon>

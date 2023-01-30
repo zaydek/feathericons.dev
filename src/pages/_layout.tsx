@@ -32,7 +32,8 @@ export function Layout({ children }: PropsWithChildren) {
 								<div key={index}>Hello, world!</div>
 							))}
 						</Sticky>
-						<div className="p-16 lg:p-32 2xl:p-64">{children}</div>
+						{/* <div className="p-16 lg:p-32 2xl:p-64">{children}</div> */}
+						{children}
 					</main>
 					{/* RHS */}
 					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] border-l lg:block">
