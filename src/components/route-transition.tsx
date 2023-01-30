@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { cloneElement, ReactElement, TransitionEvent, useEffect, useState } from "react"
-import { queue } from "./aria/utils"
-import { Arrayable } from "./lib/types"
+import { queue } from "../aria/utils"
+import { Arrayable } from "../lib/types"
 
 export function RouteTransition({ children }: { children: Arrayable<ReactElement> }) {
 	const path = useRouter().asPath
@@ -9,7 +9,6 @@ export function RouteTransition({ children }: { children: Arrayable<ReactElement
 	const [started, setStarted] = useState(false)
 	const [ended, setEnded] = useState(false)
 
-	//// const forwards = true
 	const forwards = path !== "/"
 
 	useEffect(() => {
@@ -28,13 +27,18 @@ export function RouteTransition({ children }: { children: Arrayable<ReactElement
 					style: ended
 						? null
 						: {
-								transform: started ? "translateX(0px)" : `translateX(${forwards ? -16 : 16}px)`,
-								opacity: started ? 1 : 0,
 								// prettier-ignore
-								transition: started ? [
-									"transform 300ms ease",
-									"opacity 300ms ease",
-								].join(", ") : "none",
+								transform: started
+									? "translateX(0px)"
+									: `translateX(${forwards ? -16 : 16}px)`,
+								// prettier-ignore
+								opacity: started
+									? 1
+									: 0,
+								// prettier-ignore
+								transition: started
+									? ["transform 300ms ease", "opacity 300ms ease"].join(", ")
+									: "none",
 						  },
 					onTransitionEnd:
 						index === 0

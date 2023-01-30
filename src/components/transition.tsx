@@ -1,6 +1,6 @@
 import { cloneElement, CSSProperties, ReactElement, useEffect, useMemo, useRef, useState } from "react"
-import { toKebabCase } from "./lib/cases"
-import { Arrayable } from "./lib/types"
+import { toKebabCase } from "../lib/cases"
+import { Arrayable } from "../lib/types"
 
 const MICRO_TIMEOUT = 10
 

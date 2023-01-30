@@ -1,9 +1,10 @@
 import { PropsWithChildren, ReactNode, useState } from "react"
-import { cx } from "./lib/cx"
+import { cx } from "../lib/cx"
 import { Transition } from "./transition"
 import { TypographyCaps } from "./typography"
 
-export function HoverTip({
+// TODO: Convert to using Framer Motion and deprecate <Transition>?
+export function MouseTooltip({
 	pos,
 	content,
 	children,

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react"
 import { iota } from "../lib/iota"
-import { SharedSidebar } from "../shared-sidebar"
+import { Aside } from "./_aside"
 import { LayoutHeader } from "./_layout-header"
 import { LayoutMasks } from "./_layout-masks"
 
@@ -37,7 +37,7 @@ export function Layout({ children }: PropsWithChildren) {
 					{/* RHS */}
 					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] border-l lg:block">
 						<Sticky pos="tr">
-							<SharedSidebar />
+							<Aside />
 						</Sticky>
 					</aside>
 				</div>

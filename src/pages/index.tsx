@@ -2,13 +2,13 @@ import * as feather from "../data/react-feather"
 
 import Link from "next/link"
 import { memo, useContext, useMemo } from "react"
+import { MouseTooltip } from "../components/mouse-tooltip"
+import { RouteTransition } from "../components/route-transition"
+import { TypographySmallSans } from "../components/typography"
 import { manifest } from "../data/react-feather-manifest"
-import { HoverTip } from "../hover-tooltip"
 import { toKebabCase } from "../lib/cases"
 import { Icon } from "../lib/react/icon"
 import { SearchContext, SelectedContext } from "../providers/state"
-import { RouteTransition } from "../route-transition"
-import { TypographySmallSans } from "../typography"
 
 //// function Wbr({ children }: { children: string }) {
 //// 	const ws = children.split(/(?=[A-Z])/)
@@ -46,7 +46,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 
 	return (
 		<div className="flex flex-col">
-			<HoverTip pos="center" content={<>{toKebabCase(name).toUpperCase()}</>}>
+			<MouseTooltip pos="center" content={<>{toKebabCase(name).toUpperCase()}</>}>
 				<button
 					className="flex h-[var(--grid-size)] items-center justify-center"
 					onClick={e => {
@@ -57,7 +57,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 				>
 					<Icon id={name} className="h-32 w-32 text-gray-800 [transform:_scale(var(--SCALE))] [stroke-width:_var(--STROKE-WIDTH)]" icon={feather[name]} />
 				</button>
-			</HoverTip>
+			</MouseTooltip>
 		</div>
 	)
 })

@@ -1,11 +1,11 @@
-import * as feather from "./data/react-feather"
+import * as feather from "../data/react-feather"
 
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
-import { getStringFromReactElements } from "./aria/utils"
-import { cx } from "./lib/cx"
-import { Icon, IconComponent } from "./lib/react/icon"
-import { ShikiContext } from "./providers/shiki"
+import { getStringFromReactElements } from "../aria/utils"
+import { cx } from "../lib/cx"
+import { Icon, IconComponent } from "../lib/react/icon"
+import { ShikiContext } from "../providers/shiki"
 
 function parseId(str: string) {
 	return str

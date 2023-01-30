@@ -2,12 +2,12 @@ import * as feather from "../data/react-feather"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
+import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
+import { Anchor, Code, Hairline, Heading1, Heading2, ListItem, OrderedList, Paragraph, Pre, TextIcon } from "../components/prose"
+import { RouteTransition } from "../components/route-transition"
 import { manifest } from "../data/react-feather-manifest"
-import { Anchor, Code, Hairline, Heading1, Heading2, ListItem, OrderedList, Paragraph, Pre, TextIcon } from "../docs-components"
-import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../icon-config"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
-import { RouteTransition } from "../route-transition"
 
 ////////////////////////////////////////////////////////////////////////////////
 

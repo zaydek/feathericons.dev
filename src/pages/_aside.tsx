@@ -1,23 +1,23 @@
-import * as feather from "./data/react-feather"
+import * as feather from "../data/react-feather"
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from "next/router"
 import { MouseEventHandler, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
-import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
-import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "./aria/aria-simple-dropdown"
-import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
-import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
-import { manifest } from "./data/react-feather-manifest"
-import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "./icon-config"
-import { toKebabCase, toTitleCase } from "./lib/cases"
-import { download } from "./lib/download"
-import { Icon, IconComponent } from "./lib/react/icon"
-import { Mutable } from "./lib/types"
-import { ShikiContext } from "./providers/shiki"
-import { SelectedContext, SliderContext } from "./providers/state"
-import { RouteTransition } from "./route-transition"
-import { TypographyCaps } from "./typography"
+import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
+import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
+import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
+import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
+import { RouteTransition } from "../components/route-transition"
+import { TypographyCaps } from "../components/typography"
+import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
+import { manifest } from "../data/react-feather-manifest"
+import { toKebabCase, toTitleCase } from "../lib/cases"
+import { download } from "../lib/download"
+import { Icon, IconComponent } from "../lib/react/icon"
+import { Mutable } from "../lib/types"
+import { ShikiContext } from "../providers/shiki"
+import { SelectedContext, SliderContext } from "../providers/state"
 
 function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: string }) {
 	if (formatAs === "svg") {
@@ -351,7 +351,7 @@ function Section({ children, ...props }: JSX.IntrinsicElements["section"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function SharedSidebar() {
+export function Aside() {
 	const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 
