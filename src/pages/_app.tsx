@@ -13,6 +13,22 @@ import { ShikiProvider } from "../shiki"
 import { StateProvider } from "../state"
 import { IconProps } from "./[icon]"
 
+function NavLink({ pos }: { pos: "tl" | "tr" }) {
+	return (
+		<div
+			className="absolute
+				[&[data-pos=tl]]:top-16 [&[data-pos=tl]]:left-16
+				[&[data-pos=tr]]:top-16 [&[data-pos=tr]]:right-16"
+			data-pos={pos}
+		>
+			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-black/25 px-8 pr-16">
+				<div className="h-16 w-16 rounded-1e3 bg-[#fff]"></div>
+				<div className="h-6 w-96 rounded-1e3 bg-[#fff]"></div>
+			</div>
+		</div>
+	)
+}
+
 function Logo() {
 	return <div className="h-64 w-64 rounded-1e3 bg-[#fff]"></div>
 }
@@ -20,11 +36,9 @@ function Logo() {
 function HeadingSubheading() {
 	return (
 		<div className="flex flex-col items-center">
-			{/* TODO: <h1> */}
 			<div className="flex h-16 items-center">
 				<div className="aspect-[16] h-6 rounded-1e3 bg-[#fff]"></div>
 			</div>
-			{/* TODO: <h2> */}
 			<div className="flex h-16 items-center">
 				<div className="aspect-[32] h-6 rounded-1e3 bg-[#fff]"></div>
 			</div>
@@ -163,6 +177,8 @@ function Layout({ children }: PropsWithChildren) {
 				className="flex justify-center py-64 px-16 xl:py-96"
 				data-hero-background-image
 			>
+				<NavLink pos="tl" />
+				<NavLink pos="tr" />
 				<div className="flex w-100% max-w-1024 flex-col items-center gap-64 xl:flex-row">
 					{/* LHS */}
 					<div className="flex flex-col items-center gap-32">
