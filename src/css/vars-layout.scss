@@ -1,7 +1,9 @@
 :root {
-	--bg-mask-z:             -10;
-	--fg-mask-z:              10;
+	// Z indexes
+	--background-mask-z:     -10;
+	--foreground-mask-z:      10;
 	--app-z:                  20;
+
 	--inset-y:                16px;
 	--inset-x:                16px;
 	--header-w:               1536px;
