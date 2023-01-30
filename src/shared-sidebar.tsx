@@ -7,16 +7,16 @@ import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "./aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "./aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "./aria/aria-slider"
-import { sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
+import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "./constants"
 import { manifest } from "./data/react-feather-manifest"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "./icon-config"
 import { toKebabCase, toTitleCase } from "./lib/cases"
 import { download } from "./lib/download"
 import { Icon, IconComponent } from "./lib/react/icon"
+import { Mutable } from "./lib/types"
 import { RouteTransition } from "./route-transition"
 import { ShikiContext } from "./shiki"
 import { SelectedContext, SliderContext } from "./state"
-import { FormatAs } from "./types"
 import { TypographyCaps } from "./typography"
 
 function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: string }) {
@@ -45,6 +45,7 @@ function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: str
 	}
 }
 
+// TODO
 function useRouterName() {
 	const router = useRouter()
 	let name: keyof typeof manifest
@@ -148,7 +149,7 @@ function FormatButton() {
 			svg: [SvgHex, SvgIcon, "SVG"] as const,
 			jsx: [ReactJsHex, ReactJsIcon, "JSX"] as const,
 			tsx: [TypeScriptHex, TypeScriptIcon, "TSX"] as const,
-		}[formatAs]
+		}[formatAs as Mutable<FormatAs>]
 	}, [formatAs])
 
 	return (
@@ -350,7 +351,7 @@ function Section({ children, ...props }: JSX.IntrinsicElements["section"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function SidebarContents() {
+export function SharedSidebar() {
 	const { selectedName, viewSource, setViewSource, formatAs, clipboard } = useContext(SelectedContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(SliderContext)!
 

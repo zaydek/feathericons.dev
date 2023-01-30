@@ -10,6 +10,7 @@ import { PropsWithChildren, useEffect } from "react"
 import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
 import { SEO } from "../seo"
+import { SharedSidebar } from "../shared-sidebar"
 import { ShikiProvider } from "../shiki"
 import { StateProvider } from "../state"
 import { IconProps } from "./[icon]"
@@ -212,11 +213,10 @@ function Layout({ children }: PropsWithChildren) {
 					<div className="p-16 lg:p-32 2xl:p-64">{children}</div>
 				</main>
 				{/* RHS */}
-				<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] shadow-[var(--hairline-shadow-l)] lg:block">
+				{/* Use border-l instead of shadow-[hairline-shadow-l] */}
+				<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] border-l lg:block">
 					<StickyContainer pos="tr">
-						{iota(4).map(index => (
-							<div key={index}>Hello, world!</div>
-						))}
+						<SharedSidebar />
 					</StickyContainer>
 				</aside>
 			</LayoutContainer>
