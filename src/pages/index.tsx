@@ -87,8 +87,8 @@ const MemoGridItem = memo(function GridItem({ name, indexes }: { name: keyof typ
 				}}
 				scroll={false}
 			>
-				<div className="group/name flex h-16 items-center justify-center truncate px-4">
-					<TypographySmallSans className="truncate text-gray-800 group-hover/name:underline group-hover/name:decoration-gray-400">
+				<div className="group/name flex h-32 items-center justify-center truncate px-4">
+					<TypographySmallSans className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
 						<Highlight indexes={indexes}>{name}</Highlight>
 					</TypographySmallSans>
 				</div>

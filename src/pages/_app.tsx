@@ -23,7 +23,7 @@ function NavLink({ pos }: { pos: "tl" | "tr" }) {
 				[&[data-pos=tr]]:top-16 [&[data-pos=tr]]:right-16"
 			data-pos={pos}
 		>
-			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-black/25 px-8 pr-16">
+			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-[#000]/25 px-8 pr-16">
 				<div className="h-16 w-16 rounded-1e3 bg-[#fff]"></div>
 				<div className="h-6 w-96 rounded-1e3 bg-[#fff]"></div>
 			</div>

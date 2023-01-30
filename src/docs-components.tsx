@@ -24,7 +24,7 @@ export function Heading1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h1 id={id} className="group/header relative scroll-my-32 text-black [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<h1 id={id} className="group/header relative scroll-my-32 text-[#000] [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />
@@ -42,7 +42,7 @@ export function Heading2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h2 id={id} className="group/header relative scroll-my-32 text-black [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<h2 id={id} className="group/header relative scroll-my-32 text-[#000] [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />

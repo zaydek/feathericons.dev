@@ -113,11 +113,7 @@ function Preview() {
 				<RouteTransition>
 					{/* Use <div> so preserve [transform:_scale(var(--scale))] */}
 					<div>
-						<Icon
-							className="h-64 w-64 text-gray-800
-								[stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]"
-							icon={feather[name]}
-						/>
+						<Icon className="h-64 w-64 text-[#000] [stroke-width:_var(--stroke-width)] [transform:_scale(var(--scale))]" icon={feather[name]} />
 					</div>
 				</RouteTransition>
 			</div>
