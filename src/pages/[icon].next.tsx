@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default function RouteDocs({ name }: { name: keyof typeof manifest }) {
+export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
 		<article className="prose space-y-8 text-gray-900">
 			<RouteTransition>

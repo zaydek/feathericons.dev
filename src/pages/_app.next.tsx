@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import { detab } from "../lib/format"
 import { ShikiProvider } from "../providers/shiki"
 import { StateProvider } from "../providers/state"
-import { IconProps } from "./[icon]"
+import { IconProps } from "./[icon].next"
 import { Layout } from "./_layout"
 import { Meta } from "./_meta"
 

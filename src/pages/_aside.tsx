@@ -330,7 +330,7 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: Icon
 				<AriaSlider track={track} thumb={thumb} {...props}>
 					<div ref={setTrack} className="flex h-24 flex-col justify-center">
 						<div className={`flex h-6 items-center rounded-1e3 ${linearGradientFromHell}`}>
-							<div ref={setThumb} className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-[#fff] shadow-[var(--shadow-6)]" style={{ transform: "translateX(50%)" }}></div>
+							<div ref={setThumb} className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-[#fff] shadow-[var(--shadow-6)]"></div>
 						</div>
 					</div>
 				</AriaSlider>

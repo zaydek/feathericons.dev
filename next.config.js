@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-	reactStrictMode: false,
 	eslint: { ignoreDuringBuilds: true },
+	pageExtensions: ["next.tsx"],
+	reactStrictMode: false,
 }

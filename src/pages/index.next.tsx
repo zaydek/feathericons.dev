@@ -97,7 +97,7 @@ const MemoGridItem = memo(function GridItem({ name, indexes }: { name: keyof typ
 	)
 })
 
-export default function RouteHome() {
+export default function Component() {
 	const { compactMode, searchResults } = useContext(SearchContext)!
 
 	const GridItem = useMemo(() => {
