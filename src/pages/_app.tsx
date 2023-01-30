@@ -93,7 +93,7 @@ function BackgroundMask() {
 			{/* Use overflow-x-clip to prevent side-scrolling. Note that
 			overflow-x-hidden doesn't work as expected. */}
 			<div className="h-[var(--inset-y)] overflow-x-clip">
-				<div className="-mx-16 h-160 rounded-b-50%" data-background-hero />
+				<div className="-mx-[calc(160px_/_2)] h-160 rounded-b-50%" data-background-hero />
 			</div>
 		</div>
 	)
