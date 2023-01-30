@@ -1,6 +1,6 @@
 import { Head, Html, Main, NextScript } from "next/document"
 import Script from "next/script"
-import { CSSProperties, PropsWithChildren } from "react"
+import { PropsWithChildren } from "react"
 import { detab } from "../lib/format"
 
 function Production({ children }: PropsWithChildren) {
@@ -31,7 +31,7 @@ export default function Document() {
 					})
 				`).replaceAll("\t", "  ") + "\n" }} />
 			</Head>
-			<body style={{ "--SCALE": 1, "--STROKE-WIDTH": 2 } as CSSProperties}>
+			<body>
 				<Main />
 				<NextScript />
 			</body>
