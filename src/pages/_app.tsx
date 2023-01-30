@@ -93,7 +93,7 @@ function BackgroundMask() {
 			{/* Use overflow-x-clip to prevent side-scrolling. Note that
 			overflow-x-hidden doesn't work as expected. */}
 			<div className="h-[var(--inset-y)] overflow-x-clip">
-				<div className="-mx-16 h-160 rounded-b-50%" data-hero-background-image />
+				<div className="-mx-16 h-160 rounded-b-50%" data-background-hero />
 			</div>
 		</div>
 	)
@@ -110,13 +110,13 @@ function ForegroundMask() {
 					<div
 						// prettier-ignore
 						className="h-[calc(var(--app-rounding)_+_var(--inset-y))]"
-						data-hero-background-image
+						data-background-hero
 					/>
 					<div className="absolute top-0 right-0">
 						<div
 							// prettier-ignore
 							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
-							data-hero-background-image
+							data-background-hero
 						/>
 					</div>
 				</div>
@@ -124,19 +124,19 @@ function ForegroundMask() {
 				<div
 					// prettier-ignore
 					className="h-[var(--inset-y)] w-100% max-w-[calc(var(--app-w)_-_var(--app-rounding)_*_2)]"
-					data-hero-background-image
+					data-background-hero
 				/>
 				<div className="relative">
 					<div
 						// prettier-ignore
 						className="h-[calc(var(--app-rounding)_+_var(--inset-y))]"
-						data-hero-background-image
+						data-background-hero
 					/>
 					<div className="absolute top-0 left-0">
 						<div
 							// prettier-ignore
 							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
-							data-hero-background-image
+							data-background-hero
 						/>
 					</div>
 				</div>
@@ -177,7 +177,7 @@ function Layout({ children }: PropsWithChildren) {
 			<header
 				// prettier-ignore
 				className="flex justify-center py-64 px-16 xl:py-96"
-				data-hero-background-image
+				data-background-hero
 			>
 				<NavLink pos="tl" />
 				<NavLink pos="tr" />

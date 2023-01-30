@@ -108,7 +108,7 @@ function Preview() {
 			<div
 				// prettier-ignore
 				className="flex aspect-[1.5] items-center justify-center rounded-24 bg-[#fff] shadow-[var(--shadow-2)]"
-				data-dots-background-image
+				data-background-dots
 			>
 				<RouteTransition>
 					{/* Use <div> so preserve [transform:_scale(var(--scale))] */}

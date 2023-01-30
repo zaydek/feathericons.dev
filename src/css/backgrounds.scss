@@ -1,15 +1,15 @@
-@mixin hero-background-image {
-	background-image: linear-gradient(
-		var(--hero-gradient-angle),
-		var(--hero-gradient-start),
-		var(--hero-gradient-end)
-	);
-	background-attachment: fixed;
+[data-background-hero] {
+	//// background-image: linear-gradient(
+	//// 	var(--hero-gradient-angle),
+	//// 	var(--hero-gradient-start),
+	//// 	var(--hero-gradient-end)
+	//// );
+	//// background-attachment: fixed;
+	background-color: #1570fb;
 }
-[data-hero-background-image] { @include hero-background-image; }
 
 /* https://30secondsofcode.org/css/s/polka-dot-pattern */
-[data-dots-background-image] {
+[data-background-dots] {
 	background-image:
 		radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%),
 		radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%);
