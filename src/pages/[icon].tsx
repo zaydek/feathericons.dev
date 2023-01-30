@@ -11,12 +11,10 @@ import { RouteTransition } from "../route-transition"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Does this need to be exported?
-export interface IconParams extends ParsedUrlQuery {
+interface IconParams extends ParsedUrlQuery {
 	icon: string
 }
 
-// TODO: Does this need to be exported?
 export type IconProps = {
 	name: keyof typeof manifest
 }
@@ -40,7 +38,7 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default function Component({ name }: { name: keyof typeof manifest }) {
+export default function RouteDocs({ name }: { name: keyof typeof manifest }) {
 	return (
 		<article className="prose space-y-8 text-gray-900">
 			<RouteTransition>
