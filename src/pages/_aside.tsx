@@ -8,7 +8,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
-import { RouteTransition } from "../components/route-transition"
+import { PageTransition } from "../components/page-transition"
 import { TypographyCaps } from "../components/typography"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/react-feather-manifest"
@@ -110,12 +110,12 @@ function Preview() {
 				className="flex aspect-[1.5] items-center justify-center rounded-24 bg-[#fff] shadow-[var(--shadow-2)]"
 				data-background-dots
 			>
-				<RouteTransition>
+				<PageTransition>
 					{/* Use <div> so preserve [transform:_scale(var(--grid-icon-scale))] */}
 					<div>
 						<Icon className="h-64 w-64 text-[#000] [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather[name]} />
 					</div>
-				</RouteTransition>
+				</PageTransition>
 			</div>
 		</div>
 	)
@@ -296,20 +296,20 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 
 const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
 
-function useMedia(query: string, initialValue: boolean) {
-	const [state, setState] = useState(initialValue)
-
-	useEffect(() => {
-		const media = window.matchMedia(query)
-		function handleChange(e: MediaQueryListEvent) {
-			setState(e.matches)
-		}
-		media.addEventListener("change", handleChange)
-		return () => media.removeEventListener("change", handleChange)
-	}, [query])
-
-	return state
-}
+//// function useMedia(query: string, initialValue: boolean) {
+//// 	const [state, setState] = useState(initialValue)
+////
+//// 	useEffect(() => {
+//// 		const media = window.matchMedia(query)
+//// 		function handleChange(e: MediaQueryListEvent) {
+//// 			setState(e.matches)
+//// 		}
+//// 		media.addEventListener("change", handleChange)
+//// 		return () => media.removeEventListener("change", handleChange)
+//// 	}, [query])
+////
+//// 	return state
+//// }
 
 function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: IconComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)

@@ -10,30 +10,47 @@
 }
 
 .prose {
-	--gutter-1: 16px;
-	--gutter-2: 16px;
-
-	display: grid;
-	grid-template-columns: var(--gutter-1) var(--gutter-2) 1fr var(--gutter-2) var(--gutter-1);
-
-	@media (min-width: 512px)  { --gutter-1: 24px; --gutter-2: 24px; }
-	@media (min-width: 1024px) { --gutter-1: 32px; --gutter-2: 32px; }
+	--gutter-x-1: 16px;
+	--gutter-x-2: 16px;
 }
-.prose * {
-	grid-column: 2 / 5;
+@media (min-width: 640px)  { .prose { --gutter-x-1: 24px; --gutter-x-2: 12px; } }
+@media (min-width: 1024px) { .prose { --gutter-x-1: 48px; --gutter-x-2: 24px; } }
+
+.prose > * + * {
+	margin:
+		8px
+		var(--gutter-x-1);
 }
-.prose hr {
-	grid-column: 1 / 6;
-	@media (min-width: 1024px) {
-		grid-column: 2 / 5;
+.prose > :first-child { margin-top:    0; }
+.prose > :last-child  { margin-bottom: 0; }
+
+.prose > :is(h1, h2, h3, h4, h5, h6) {
+	margin:
+		32px
+		var(--gutter-x-1);
+}
+.prose > ol {
+	margin:
+		16px
+		calc(var(--gutter-x-1) + var(--gutter-x-2));
+}
+.prose > pre {
+	margin:
+		16px
+		0;
+	padding:
+		0
+		calc(var(--gutter-x-1) + var(--gutter-x-2));
+}
+.prose > hr {
+	margin:
+		32px
+		0;
+	@media (min-width: 512px) {
+		margin:
+			32px
+			var(--gutter-x-1);
 	}
-}
-.prose pre {
-	grid-column: 1 / 6;
-	padding: 0 calc(var(--gutter-1) + var(--gutter-2)); // Use px because of overflow-x-auto
-}
-.prose ol {
-	grid-column: 3 / 4;
 }
 
 .prose {

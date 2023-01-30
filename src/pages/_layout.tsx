@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react"
-import { iota } from "../lib/iota"
 import { Aside } from "./_aside"
 import { LayoutHeader } from "./_layout-header"
 import { LayoutMasks } from "./_layout-masks"
@@ -27,13 +26,13 @@ export function Layout({ children }: PropsWithChildren) {
 				<div className="flex w-100% max-w-[var(--app-w)] bg-[#fff] shadow-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">
 					{/* LHS */}
 					<main className="w-100% min-w-0">
-						<Sticky pos="tl">
+						{/* <Sticky pos="tl">
 							{iota(4).map(index => (
 								<div key={index}>Hello, world!</div>
 							))}
-						</Sticky>
+						</Sticky> */}
 						{/* <div className="p-16 lg:p-32 2xl:p-64">{children}</div> */}
-						{children}
+						<div className="py-64">{children}</div>
 					</main>
 					{/* RHS */}
 					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] border-l lg:block">

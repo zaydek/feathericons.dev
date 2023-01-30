@@ -1,11 +1,15 @@
 import * as feather from "../data/react-feather"
 
-import { useContext, useEffect, useMemo, useState } from "react"
+import { PropsWithChildren, useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromReactElements } from "../aria/utils"
 import { cx } from "../lib/cx"
 import { Icon, IconComponent } from "../lib/react/icon"
 import { ShikiContext } from "../providers/shiki"
+
+export function Article({ children }: PropsWithChildren) {
+	return <article className="prose text-gray-900">{children}</article>
+}
 
 function parseId(str: string) {
 	return str
@@ -15,7 +19,6 @@ function parseId(str: string) {
 		.toLowerCase()
 }
 
-// TODO: Update scroll-my-*
 export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = useMemo(() => {
 		const id = parseId(getStringFromReactElements(children as any))
@@ -24,7 +27,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h1 id={id} className="group/header relative scroll-my-32 text-[#000] [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<h1 id={id} className="group/header relative text-[#000]" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />
@@ -33,7 +36,6 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	)
 }
 
-// TODO: Update scroll-my-*
 export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = useMemo(() => {
 		const id = parseId(getStringFromReactElements(children as any))
@@ -42,7 +44,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h2 id={id} className="group/header relative scroll-my-32 text-[#000] [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<h2 id={id} className="group/header relative text-[#000]" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />
@@ -57,7 +59,7 @@ export function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="flex flex-col gap-8 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<ol className="flex flex-col gap-8" {...props}>
 			{children}
 		</ol>
 	)
@@ -84,7 +86,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		// TODO
-		<pre className="overflow-auto [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<pre className="overflow-auto" {...props}>
 			<code>
 				{/* {tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -131,8 +133,8 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	)
 }
 
-export function Hairline(props: JSX.IntrinsicElements["hr"]) {
-	return <hr className="[&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props} />
+export function Hr(props: JSX.IntrinsicElements["hr"]) {
+	return <hr {...props} />
 }
 
 ////////////////////////////////////////////////////////////////////////////////

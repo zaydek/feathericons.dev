@@ -3,7 +3,7 @@ import { cloneElement, ReactElement, TransitionEvent, useEffect, useState } from
 import { queue } from "../aria/utils"
 import { Arrayable } from "../lib/types"
 
-export function RouteTransition({ children }: { children: Arrayable<ReactElement> }) {
+export function PageTransition({ children }: { children: Arrayable<ReactElement> }) {
 	const path = useRouter().asPath
 
 	const [started, setStarted] = useState(false)

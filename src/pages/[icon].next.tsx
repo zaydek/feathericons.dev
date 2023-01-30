@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
-import { A, Code, H1, H2, Hairline as Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
-import { RouteTransition } from "../components/route-transition"
+import { PageTransition } from "../components/page-transition"
+import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
@@ -34,8 +34,9 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
-		<article className="prose cols space-y-8 text-gray-900">
-			<RouteTransition>
+		// TODO: Should <PageTransition> be nested?
+		<Article>
+			<PageTransition>
 				<H1>Get Started With Feather</H1>
 				<P>
 					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
@@ -195,7 +196,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						Looking for the original Feather website? <A href="https://feathericons.com">Click here.</A>
 					</small>
 				</P>
-			</RouteTransition>
-		</article>
+			</PageTransition>
+		</Article>
 	)
 }
