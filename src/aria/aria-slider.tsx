@@ -30,7 +30,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		function handlePointerDown(e: PointerEvent) {
 			if (!(e.button === 0 && e.composedPath().includes(track!))) { return } // prettier-ignore
 			pointerDownRef.current = true
-			e.preventDefault()
+			//// e.preventDefault()
 			const trackClient = track!.getBoundingClientRect()
 			const thumbClient = thumb!.getBoundingClientRect()
 			const range = clamp((e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width), { min: 0, max: 1 })
@@ -39,7 +39,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		}
 		function handlePointerMove(e: PointerEvent) {
 			if (!pointerDownRef.current) { return } // prettier-ignore
-			e.preventDefault()
+			//// e.preventDefault()
 			const trackClient = track!.getBoundingClientRect()
 			const thumbClient = thumb!.getBoundingClientRect()
 			const range = clamp((e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width), { min: 0, max: 1 })
@@ -48,7 +48,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		}
 		function handlePointerUp(e: PointerEvent) {
 			pointerDownRef.current = false
-			e.preventDefault()
+			//// e.preventDefault()
 		}
 		document.addEventListener("pointerdown", handlePointerDown, false)
 		document.addEventListener("pointermove", handlePointerMove, false)
