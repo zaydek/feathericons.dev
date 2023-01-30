@@ -1,5 +1,3 @@
-@use "tailwind-colors" as *;
-
 @mixin hero-background-image {
 	background-image: linear-gradient(
 		var(--hero-gradient-angle),
