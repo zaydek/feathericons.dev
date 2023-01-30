@@ -5,7 +5,7 @@ const defaultTheme = require("./tailwind.default-theme")
 module.exports = {
 	content: ["./src/**/*.tsx"],
 	corePlugins: {
-		// Noop composition for box-shadow
+		// Noop CSS variable composition
 		boxShadow:       false,
 		boxShadowColor:  false,
 		ringColor:       false,
@@ -18,7 +18,7 @@ module.exports = {
 		optimizeUniversalDefaults: true,
 	},
 	future: {
-		// Noop composition for color, background-color
+		// Noop CSS variable composition
 		disableColorOpacityUtilitiesByDefault: true,
 		hoverOnlyWhenSupported: true,
 	},

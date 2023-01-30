@@ -1,6 +1,7 @@
-import "../css/_index.scss"
-//// import "../css/_tailwind.css"
-import "../css/uno.generated.css"
+import "the-new-css-reset"
+import "../css/index.scss"
+import "../css/tailwind.css"
+//// import "../css/uno.generated.css"
 
 import { Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
