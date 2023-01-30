@@ -24,6 +24,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		return progress * (track.getBoundingClientRect().width - thumb.getBoundingClientRect().width)
 	}, [progress, thumb, track])
 
+	// TODO
 	//// useEffect(() => {
 	//// 	function handleResize(e: UIEvent) {
 	//// 		// ...
@@ -31,11 +32,6 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 	//// 	window.addEventListener("resize", handleResize, false)
 	//// 	return () => window.removeEventListener("resize", handleResize, false)
 	//// }, [])
-
-	useEffect(() => {
-		if (thumb === null) { return } // prettier-ignore
-		thumb.style.transform = `translateX(${translateX!}px)`
-	}, [thumb, translateX])
 
 	useEffect(() => {
 		if (track === null || thumb === null) { return } // prettier-ignore
@@ -77,6 +73,11 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 			document.removeEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
 		}
 	}, [max, min, setValue, step, thumb, track])
+
+	useEffect(() => {
+		if (thumb === null) { return } // prettier-ignore
+		thumb.style.transform = `translateX(${translateX!}px)`
+	}, [thumb, translateX])
 
 	return (
 		<div
