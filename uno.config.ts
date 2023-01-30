@@ -63,6 +63,8 @@ const rules: Rule[] = [
 
 	["hide",                  { "display":        "none"          }],
 	["show",                  { "display":        "block"         }],
+	["inline",                { "display":        "inline"        }],
+	["inline-block",          { "display":        "inline-block"  }],
 	["flex",                  { "display":        "flex"          }],
 	["inline-flex",           { "display":        "inline-flex"   }],
 	["flex-col",              { "flex-direction": "column"        }],
