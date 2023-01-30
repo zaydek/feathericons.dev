@@ -9,9 +9,9 @@ import { useEffect } from "react"
 import { detab } from "../lib/format"
 import { ShikiProvider } from "../providers/shiki"
 import { StateProvider } from "../providers/state"
-import { IconProps } from "./[icon].next"
-import { Layout } from "./_layout"
-import { Meta } from "./_meta"
+import { Layout } from "./layout"
+import { Meta } from "./meta"
+import { IconProps } from "./[name].page"
 
 const GoogleFontsInter = Inter({
 	subsets: ["latin"],

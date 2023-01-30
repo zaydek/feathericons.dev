@@ -1,20 +1,22 @@
 .typography-caps {
 	font: 500 11px / normal var(--sans);
-	font-feature-settings: "tnum", "zero"; // FIXME
+	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: 0.05em;
 }
 .typography-small-sans {
 	font: 400 12px / normal var(--sans);
-	font-feature-settings: "tnum", "zero"; // FIXME
+	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: 0.0125em;
 }
 
-.prose {
+////////////////////////////////////////////////////////////////////////////////
+
+:root {
 	--gutter-x-1: 16px;
 	--gutter-x-2: 16px;
 }
-@media (min-width: 640px)  { .prose { --gutter-x-1: 24px; --gutter-x-2: 12px; } }
-@media (min-width: 1024px) { .prose { --gutter-x-1: 48px; --gutter-x-2: 24px; } }
+@media (min-width: 640px)  { :root { --gutter-x-1: 24px; --gutter-x-2: 12px; } }
+@media (min-width: 1024px) { :root { --gutter-x-1: 48px; --gutter-x-2: 24px; } }
 
 .prose > * + * {
 	margin:
@@ -53,32 +55,34 @@
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 .prose {
 	font: 400 16px / 1.6 var(--sans);
-	font-feature-settings: "tnum", "zero"; // FIXME
+	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
 }
 .prose h1 {
 	font: 500 1.25em / 1.25 var(--sans);
-	font-feature-settings: "tnum", "zero"; // FIXME
+	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
 }
 .prose h2 {
 	font: 500 1.125em / 1.25 var(--sans);
-	font-feature-settings: "tnum", "zero"; // FIXME
+	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
 }
 pre code {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
 	font: 400 #{16px * 0.875} / 1.6 var(--code);
-	font-feature-settings: "tnum", "zero"; // FIXME
+	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
 }
 .prose :not(pre) code {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
 	font: 400 0.875em / normal var(--code);
-	font-feature-settings: "tnum", "zero"; // FIXME
+	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
 }

@@ -58,7 +58,7 @@ function ForegroundMask() {
 	)
 }
 
-export function LayoutMasks() {
+export function Masks() {
 	return (
 		<>
 			<ForegroundMask />

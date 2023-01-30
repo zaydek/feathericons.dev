@@ -1,14 +1,18 @@
 import * as feather from "../data/react-feather"
 
-import { PropsWithChildren, useContext, useEffect, useMemo, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromReactElements } from "../aria/utils"
 import { cx } from "../lib/cx"
 import { Icon, IconComponent } from "../lib/react/icon"
 import { ShikiContext } from "../providers/shiki"
 
-export function Article({ children }: PropsWithChildren) {
-	return <article className="prose text-gray-900">{children}</article>
+export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
+	return (
+		<article className="prose text-gray-900" {...props}>
+			{children}
+		</article>
+	)
 }
 
 function parseId(str: string) {
@@ -30,7 +34,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		<h1 id={id} className="group/header relative text-[#000]" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
-				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />
+				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h1>
 	)
@@ -47,7 +51,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 		<h2 id={id} className="group/header relative text-[#000]" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
-				<HeadingIcon className="text-[var(--theme-color)]" icon={feather.Link2} />
+				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h2>
 	)

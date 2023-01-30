@@ -8,7 +8,7 @@ import { toKebabCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
 
 interface IconParams extends ParsedUrlQuery {
-	icon: string
+	name: string
 }
 
 export type IconProps = {
@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths<IconParams> = async () => {
 	return {
 		paths: Object.keys(manifest).map(name => ({
 			params: {
-				icon: toKebabCase(name),
+				name: toKebabCase(name),
 			},
 		})),
 		fallback: false,
@@ -28,15 +28,14 @@ export const getStaticPaths: GetStaticPaths<IconParams> = async () => {
 
 export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => {
 	const params = context.params!
-	const name = toTitleCase(params.icon) as keyof typeof manifest
+	const name = toTitleCase(params.name) as keyof typeof manifest
 	return { props: { name } }
 }
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
-		// TODO: Should <PageTransition> be nested?
-		<Article>
-			<PageTransition>
+		<PageTransition>
+			<Article>
 				<H1>Get Started With Feather</H1>
 				<P>
 					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
@@ -196,7 +195,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						Looking for the original Feather website? <A href="https://feathericons.com">Click here.</A>
 					</small>
 				</P>
-			</PageTransition>
-		</Article>
+			</Article>
+		</PageTransition>
 	)
 }

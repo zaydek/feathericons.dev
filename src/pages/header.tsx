@@ -70,7 +70,7 @@ function SponsorSlot() {
 	)
 }
 
-export function LayoutHeader() {
+export function Header() {
 	return (
 		<header
 			// prettier-ignore
