@@ -36,7 +36,7 @@ function HeadingSubheading() {
 function CTAButton({ primary = undefined }: { primary?: true }) {
 	return (
 		<div
-			className="aspect-[6] h-64 rounded-[calc(64px_*_0.375)] bg-[#fff7] sm:aspect-[3] sm:rounded-1e3
+			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff7] sm:aspect-[3] sm:rounded-1e3
 				[&[data-primary]]:bg-[#fff]"
 			data-primary={primary}
 		></div>
@@ -74,17 +74,18 @@ export function LayoutHeader() {
 	return (
 		<header
 			// prettier-ignore
-			className="flex justify-center py-64 px-16 py-96"
+			className="flex justify-center py-64 pt-96 px-16 sm:py-96"
 			data-background-hero
 		>
 			<NavLink pos="tl" />
 			<NavLink pos="tr" />
-			<div className="flex w-100% max-w-[var(--header-w)] flex-col items-center justify-evenly gap-64 xl:flex-row">
+			<div className="flex w-100% max-w-[var(--header-w)] flex-col justify-evenly gap-64 sm:items-center xl:flex-row">
 				{/* LHS */}
 				<div className="flex flex-col items-center gap-32">
 					<Logo />
 					<HeadingSubheading />
-					<div className="flex flex-col gap-16 sm:flex-row">
+					{/* Use items-center ... self-stretch to conditionally center y-axis */}
+					<div className="flex flex-col items-center gap-16 self-stretch sm:flex-row sm:self-start">
 						<CTAButton primary />
 						<CTAButton />
 					</div>
