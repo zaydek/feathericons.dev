@@ -12,6 +12,11 @@ export type AriaSliderProps = {
 	setValue: Dispatch<SetStateAction<number>>
 } & HTMLAttributes<HTMLDivElement>
 
+// https://stackoverflow.com/a/21696585
+function someHidden(...args: HTMLElement[]) {
+	return args.some(arg => arg.offsetParent === null)
+}
+
 export function AriaSlider({ track, thumb, min, max, step, value, setValue, children, ...props }: AriaSliderProps) {
 	const pointerDownRef = useRef(false)
 
@@ -21,17 +26,9 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 
 	const translateX = useMemo(() => {
 		if (track === null || thumb === null) { return null } // prettier-ignore
+		if (someHidden(track, thumb)) { return null } // prettier-ignore
 		return progress * (track.getBoundingClientRect().width - thumb.getBoundingClientRect().width)
 	}, [progress, thumb, track])
-
-	// TODO
-	//// useEffect(() => {
-	//// 	function handleResize(e: UIEvent) {
-	//// 		// ...
-	//// 	}
-	//// 	window.addEventListener("resize", handleResize, false)
-	//// 	return () => window.removeEventListener("resize", handleResize, false)
-	//// }, [])
 
 	useEffect(() => {
 		if (track === null || thumb === null) { return } // prettier-ignore
@@ -75,8 +72,8 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 	}, [max, min, setValue, step, thumb, track])
 
 	useEffect(() => {
-		if (thumb === null) { return } // prettier-ignore
-		thumb.style.transform = `translateX(${translateX!}px)`
+		if (thumb === null || translateX === null) { return } // prettier-ignore
+		thumb.style.transform = `translateX(${translateX}px)`
 	}, [thumb, translateX])
 
 	return (

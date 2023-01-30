@@ -296,6 +296,21 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 
 const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
 
+function useMedia(query: string, initialValue: boolean) {
+	const [state, setState] = useState(initialValue)
+
+	useEffect(() => {
+		const media = window.matchMedia(query)
+		function handleChange(e: MediaQueryListEvent) {
+			setState(e.matches)
+		}
+		media.addEventListener("change", handleChange)
+		return () => media.removeEventListener("change", handleChange)
+	}, [query])
+
+	return state
+}
+
 function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: IconComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
