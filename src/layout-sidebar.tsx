@@ -72,7 +72,7 @@ function Preview() {
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		<pre className="h-256 overflow-auto rounded-24 bg-white text-gray-800 [box-shadow:_var(--shadow-2)]">
+		<pre className="h-256 overflow-auto rounded-24 bg-[#fff] text-gray-800 shadow-[var(--shadow-2)]">
 			<code className="inline-block py-24">
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -104,7 +104,7 @@ function Preview() {
 		</pre>
 	) : (
 		<div>
-			<div className="dots-background-image flex h-256 items-center justify-center rounded-24 bg-white [box-shadow:_var(--shadow-2)]">
+			<div className="dots-background-image flex h-256 items-center justify-center rounded-24 bg-[#fff] shadow-[var(--shadow-2)]">
 				<RouteTransition>
 					{/* Use <div> so preserve [transform:_scale(var(--scale))] */}
 					<div>
@@ -163,8 +163,8 @@ function FormatButton() {
 		>
 			<div className="relative flex flex-col">
 				<div
-					className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
-						hover:active:bg-gray-200 hover:active:[box-shadow:_var(--inset-shadow-2)]"
+					className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-[#fff] px-16 shadow-[var(--shadow-2)]
+						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
 				>
 					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
 					<TypographyCaps className="text-gray-700">
@@ -199,7 +199,7 @@ function FormatButton() {
 						}}
 						className="absolute top-[calc(100%_+_16px)] right-0 z-10"
 					>
-						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white [box-shadow:_var(--shadow-6),_var(--base-shadow-6)]">
+						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-[#fff] shadow-[var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem
 								// prettier-ignore
 								id="svg"
@@ -245,8 +245,8 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconCompone
 
 	return (
 		<button
-			className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-white px-16 [box-shadow:_var(--shadow-2)]
-				hover:active:bg-[var(--theme-color)] hover:active:[box-shadow:_var(--inset-shadow-2)]"
+			className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-[#fff] px-16 shadow-[var(--shadow-2)]
+				hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
 				onClick?.(e)
@@ -286,7 +286,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 						duration: 0.075,
 						ease: [0, 1, 1, 1],
 					}}
-					className="h-[var(--reduced-form-size)] w-[var(--reduced-form-size)] rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]"
+					className="h-[var(--reduced-form-size)] w-[var(--reduced-form-size)] rounded-1e3 bg-[#fff] shadow-[var(--shadow-6)]"
 				></motion.div>
 			</div>
 		</AriaCheckbox>
@@ -329,7 +329,7 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: Icon
 				<AriaSlider track={track} thumb={thumb} {...props}>
 					<div ref={setTrack} className="flex h-24 flex-col justify-center">
 						<div className={`flex h-6 items-center rounded-1e3 ${linearGradientFromHell}`}>
-							<div ref={setThumb} className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white [box-shadow:_var(--shadow-6)]" style={{ transform: "translateX(50%)" }}></div>
+							<div ref={setThumb} className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-[#fff] shadow-[var(--shadow-6)]" style={{ transform: "translateX(50%)" }}></div>
 						</div>
 					</div>
 				</AriaSlider>

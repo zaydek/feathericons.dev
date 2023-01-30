@@ -1,28 +1,15 @@
-import "the-new-css-reset"
+//// import "the-new-css-reset"
 import "../css/index.scss"
 import "../css/tailwind.css"
 
 import { Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
-import { createElement, PropsWithChildren } from "react"
+import { PropsWithChildren } from "react"
 import { detab } from "../lib/format"
 import { iota } from "../lib/iota"
+import { ShikiProvider } from "../shiki"
+import { StateProvider } from "../state"
 import { IconProps } from "./[icon]"
-
-const sans = Inter({
-	subsets: ["latin"],
-	variable: "--font-inter",
-})
-
-const code = Fira_Code({
-	subsets: ["latin"],
-	variable: "--font-fira-code",
-})
-
-// NOTE: TypeScript doesn't accept { tag = "div" ... } so use tag ?? "div"
-function Hero<Tag extends keyof JSX.IntrinsicElements>({ tag, children, ...props }: { tag?: Tag } & JSX.IntrinsicElements[Tag]) {
-	return <>{createElement(tag ?? "div", { ...props, "data-hero-background-image": true }, children)}</>
-}
 
 function Logo() {
 	return <div className="h-64 w-64 rounded-1e3 bg-[#fff]"></div>
@@ -88,7 +75,7 @@ function BackgroundMask() {
 			{/* Use overflow-x-clip to prevent side-scrolling. Note that
 			overflow-x-hidden doesn't work as expected. */}
 			<div className="h-[var(--inset-y)] overflow-x-clip">
-				<Hero className="-mx-16 h-160 rounded-b-50%" />
+				<div className="-mx-16 h-160 rounded-b-50%" data-hero-background-image />
 			</div>
 		</div>
 	)
@@ -102,17 +89,37 @@ function ForegroundMask() {
 			<div className="flex h-[var(--inset-y)] justify-center">
 				{/* LHS */}
 				<div className="relative">
-					<Hero className="h-[calc(var(--app-rounding)_+_var(--inset-y))]" />
+					<div
+						// prettier-ignore
+						className="h-[calc(var(--app-rounding)_+_var(--inset-y))]"
+						data-hero-background-image
+					/>
 					<div className="absolute top-0 right-0">
-						<Hero className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]" />
+						<div
+							// prettier-ignore
+							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
+							data-hero-background-image
+						/>
 					</div>
 				</div>
 				{/* RHS */}
-				<Hero className="h-[var(--inset-y)] w-100% max-w-[calc(var(--app-w)_-_var(--app-rounding)_*_2)]" />
+				<div
+					// prettier-ignore
+					className="h-[var(--inset-y)] w-100% max-w-[calc(var(--app-w)_-_var(--app-rounding)_*_2)]"
+					data-hero-background-image
+				/>
 				<div className="relative">
-					<Hero className="h-[calc(var(--app-rounding)_+_var(--inset-y))]" />
+					<div
+						// prettier-ignore
+						className="h-[calc(var(--app-rounding)_+_var(--inset-y))]"
+						data-hero-background-image
+					/>
 					<div className="absolute top-0 left-0">
-						<Hero className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]" />
+						<div
+							// prettier-ignore
+							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
+							data-hero-background-image
+						/>
 					</div>
 				</div>
 			</div>
@@ -146,10 +153,14 @@ function StickyContainer({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr"
 	)
 }
 
-function Layout() {
+function Layout({ children }: PropsWithChildren) {
 	return (
 		<>
-			<Hero tag="header" className="flex justify-center py-64 px-16 xl:py-96">
+			<header
+				// prettier-ignore
+				className="flex justify-center py-64 px-16 xl:py-96"
+				data-hero-background-image
+			>
 				<div className="flex w-100% max-w-1024 flex-col items-center gap-64 xl:flex-row">
 					{/* LHS */}
 					<div className="flex flex-col items-center gap-32">
@@ -170,7 +181,7 @@ function Layout() {
 						</div>
 					</div>
 				</div>
-			</Hero>
+			</header>
 			<LayoutContainer>
 				{/* LHS */}
 				<main className="w-100% min-w-0">
@@ -179,9 +190,7 @@ function Layout() {
 							<div key={index}>Hello, world!</div>
 						))}
 					</StickyContainer>
-					{iota(100).map(index => (
-						<div key={index}>Hello, world!</div>
-					))}
+					<div className="p-32 2xl:p-64">{children}</div>
 				</main>
 				{/* RHS */}
 				<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] shadow-[var(--hairline-shadow-l)] lg:block">
@@ -196,19 +205,35 @@ function Layout() {
 	)
 }
 
-export default function App({ pageProps: { name } }: AppProps<Partial<IconProps>>) {
+const fontSans = Inter({
+	subsets: ["latin"],
+	variable: "--font-inter",
+})
+
+const fontCode = Fira_Code({
+	subsets: ["latin"],
+	variable: "--font-fira-code",
+})
+
+export default function App({ Component, pageProps }: AppProps<Partial<IconProps>>) {
 	return (
 		<>
 			{/* prettier-ignore */}
 			<style dangerouslySetInnerHTML={{
 				__html: "\n" + detab(`
 					:root, ::before, ::after {
-						--sans: ${sans.style.fontFamily};
-						--code: ${code.style.fontFamily};
+						--sans: ${fontSans.style.fontFamily};
+						--code: ${fontCode.style.fontFamily};
 					}
 				`).replaceAll("\t", "  ") + "\n"
 			}} />
-			<Layout />
+			<ShikiProvider>
+				<StateProvider>
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</StateProvider>
+			</ShikiProvider>
 		</>
 	)
 }

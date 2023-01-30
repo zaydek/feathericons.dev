@@ -73,8 +73,8 @@ export function Layout({ name }: Partial<IconProps>) {
 
 			<div className="flex justify-center">
 				<div
-					className="rounding-0 flex min-h-[100dvh] w-100% max-w-[var(--app-w)] bg-white
-						2xl:min-h-[var(--app-min-h)] 2xl:rounded-[var(--app-rounding)] 2xl:[box-shadow:_var(--shadow-4)]"
+					className="rounding-0 flex min-h-[100dvh] w-100% max-w-[var(--app-w)] bg-[#fff]
+						2xl:min-h-[var(--app-min-h)] 2xl:rounded-[var(--app-rounding)] 2xl:shadow-[var(--shadow-4)]"
 				>
 					{/* LHS */}
 					<main className="min-w-0 grow">
@@ -87,7 +87,7 @@ export function Layout({ name }: Partial<IconProps>) {
 						</div>
 					</main>
 					{/* RHS */}
-					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] [box-shadow:_var(--hairline-shadow-l)] xl:block">
+					<aside className="hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] shadow-[var(--hairline-shadow-l)] xl:block">
 						<div className="sticky top-0 z-10 2xl:top-[var(--inset-y)]">
 							<SidebarContents />
 						</div>
@@ -130,7 +130,7 @@ export function Layout({ name }: Partial<IconProps>) {
 			>
 				{/!* Use flex to forward bounding box dimensions *!/}
 				<aside className="fixed top-0 right-0 bottom-0 z-100 flex">
-					<div className="w-[var(--sidebar-w)] bg-white [box-shadow:_var(--shadow-1)]">
+					<div className="w-[var(--sidebar-w)] bg-[#fff] shadow-[var(--shadow-1)]">
 						<SidebarFragment />
 					</div>
 				</aside>

@@ -9,8 +9,8 @@ function NavLink({ pos }: { pos: "tl" | "tr" }) {
 			data-pos={pos.toLowerCase()}
 		>
 			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-black/25 px-8 pr-16">
-				<div className="h-16 w-16 rounded-1e3 bg-white"></div>
-				<div className="h-6 w-96 rounded-1e3 bg-white"></div>
+				<div className="h-16 w-16 rounded-1e3 bg-[#fff]"></div>
+				<div className="h-6 w-96 rounded-1e3 bg-[#fff]"></div>
 			</div>
 		</div>
 	)
@@ -19,17 +19,17 @@ function NavLink({ pos }: { pos: "tl" | "tr" }) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function Logo() {
-	return <div className="h-64 w-64 rounded-1e3 bg-white/90"></div>
+	return <div className="h-64 w-64 rounded-1e3 bg-[#fff]/90"></div>
 }
 
 function HeadingSubheading() {
 	return (
 		<div className="flex flex-col items-center">
 			<div className="flex h-16 items-center">
-				<div className="h-6 w-128 rounded-1e3 bg-white"></div>
+				<div className="h-6 w-128 rounded-1e3 bg-[#fff]"></div>
 			</div>
 			<div className="flex h-16 items-center">
-				<div className="h-6 w-256 rounded-1e3 bg-white"></div>
+				<div className="h-6 w-256 rounded-1e3 bg-[#fff]"></div>
 			</div>
 		</div>
 	)
@@ -38,8 +38,8 @@ function HeadingSubheading() {
 function CTAButton({ primary = false }: { primary?: boolean }) {
 	return (
 		<div
-			className="h-56 rounded-1e3 bg-white/50 sm:aspect-[3.5]
-				[&[data-primary=true]]:bg-white"
+			className="h-56 rounded-1e3 bg-[#fff]/50 sm:aspect-[3.5]
+				[&[data-primary=true]]:bg-[#fff]"
 			data-primary={primary}
 		></div>
 	)
@@ -48,15 +48,15 @@ function CTAButton({ primary = false }: { primary?: boolean }) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function Middot() {
-	return <div className="h-2 w-2 rounded-1e3 bg-white"></div>
+	return <div className="h-2 w-2 rounded-1e3 bg-[#fff]"></div>
 }
 
 function SponsorMeta() {
 	return (
 		<div className="flex items-center gap-16">
-			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
+			<div className="h-6 w-96 rounded-1e3 bg-[#fff]"></div>
 			<Middot />
-			<div className="h-6 w-96 rounded-1e3 bg-white"></div>
+			<div className="h-6 w-96 rounded-1e3 bg-[#fff]"></div>
 		</div>
 	)
 }
@@ -64,9 +64,9 @@ function SponsorMeta() {
 function Sponsor() {
 	return (
 		<div className="flex flex-col items-center gap-8">
-			<div className="aspect-[3.5] h-48 rounded-1e3 bg-white/25"></div>
+			<div className="aspect-[3.5] h-48 rounded-1e3 bg-[#fff]/25"></div>
 			<div className="flex h-16 items-center">
-				<div className="h-6 w-96 rounded-1e3 bg-white/90"></div>
+				<div className="h-6 w-96 rounded-1e3 bg-[#fff]/90"></div>
 			</div>
 		</div>
 	)

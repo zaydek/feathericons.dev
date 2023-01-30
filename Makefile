@@ -8,4 +8,4 @@ build:
 	npx next export
 	npx tsx scripts/sitemap.ts
 serve:
-	npx serve out -l 3000
+	npx serve out -l 3000 -n

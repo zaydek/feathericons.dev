@@ -57,7 +57,7 @@ export function Paragraph({ children, ...props }: JSX.IntrinsicElements["p"]) {
 
 export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
-		<ol className="flex flex-col gap-8 xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<ol className="flex flex-col gap-8 2xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			{children}
 		</ol>
 	)
@@ -83,7 +83,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	}, [code, highlighter, lang])
 
 	return (
-		<pre className="overflow-auto xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
+		<pre className="overflow-auto 2xl:mx-16 [&:not(:first-child)]:!mt-32 [&:not(:last-child)]:!mb-32" {...props}>
 			<code>
 				{/* {tokens === null
 					? code.split("\n").map((ys, y) => (
@@ -156,7 +156,7 @@ export function Code({ lang, children: code, ...props }: { lang: Lang; children:
 	}, [code, highlighter, lang])
 
 	return (
-		//// <code className="rounded-1e3 border border-gray-300 bg-white py-2 px-8" {...props}>
+		//// <code className="rounded-1e3 border border-gray-300 bg-[#fff] py-2 px-8" {...props}>
 		//// <code className="bg-gray-100 p-4" {...props}>
 		<code className="rounded-1e3 bg-gray-100 py-4 px-8" {...props}>
 			{tokens === null
