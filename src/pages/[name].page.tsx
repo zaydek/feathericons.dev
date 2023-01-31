@@ -168,7 +168,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 
 					<Container>
 						<div className="flex h-100% flex-col items-center justify-center">
-							<div className="flex flex-col gap-8">
+							<div className="flex flex-col gap-12">
 								<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-[#fff] pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
 									{/* LHS */}
 									<div className="flex h-48 w-48 items-center justify-center">
