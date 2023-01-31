@@ -50,7 +50,7 @@ function Container({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
 		//// <div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots {...props}>
 		//// <div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--shadow-2)]" data-background-dots {...props}>
-		<div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--hairline-shadow)]" data-background-dots {...props}>
+		<div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--hairline-shadow)]" data-background-dots {...props}>
 			{children}
 		</div>
 	)
@@ -114,14 +114,14 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
 					<Container>
 						<div className="flex h-100% items-center justify-center">
-							<div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.375)] bg-white shadow-[var(--shadow-2)]">
+							<div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.25)] bg-white shadow-[var(--shadow-2)]">
 								<div className="flex justify-between">
 									{/* LHS */}
 									<div className="flex items-center">
 										<div className="flex h-48 w-48 items-center justify-center">
 											<ResponsiveIcon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
 										</div>
-										<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300"></div>
+										<div className="aspect-[24] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
 								</div>
 								<hr />
@@ -131,7 +131,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 										<div className="flex h-48 w-48 items-center justify-center">
 											<ResponsiveIcon className="h-20 w-20 text-gray-300" icon={feather.Lock} />
 										</div>
-										<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
+										<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
 									{/* RHS */}
 									{/* eslint-disable jsx-a11y/click-events-have-key-events */}

@@ -24,7 +24,7 @@ export function Layout({ children }: PropsWithChildren) {
 			<Header />
 			<Masks />
 			<div className="flex justify-center 2xl:pb-[calc(var(--inset-y)_*_2)]">
-				<div className="flex w-100% max-w-[var(--app-w)] bg-white shadow-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">
+				<div className="flex w-100% max-w-[var(--app-w)] bg-white shadow-[var(--shadow-2)] 2xl:rounded-[var(--app-rounding)]">
 					{/* LHS */}
 					<main className="w-100% min-w-0">
 						<Sticky pos="tl">
