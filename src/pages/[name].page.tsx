@@ -48,8 +48,9 @@ function ResponsiveIcon({ className, ...props }: IconProps) {
 
 function Container({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		//// <div className="bg-gray h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--shadow-2)]" data-background-dots {...props}>
-		<div className="bg-gray h-256 overflow-clip rounded-24 border bg-gray-50" data-background-dots {...props}>
+		//// <div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots {...props}>
+		//// <div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--shadow-2)]" data-background-dots {...props}>
+		<div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--hairline-shadow)]" data-background-dots {...props}>
 			{children}
 		</div>
 	)
@@ -233,12 +234,14 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									</div>
 								</div>
 								<div className="flex h-32 grow justify-between rounded-1e3 bg-gray-100 p-2">
+									{/* LHS */}
 									<div className="flex items-center gap-2">
 										<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
 											<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Info} />
 										</div>
 										<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
+									{/* RHS */}
 									<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
 										<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Star} />
 									</div>

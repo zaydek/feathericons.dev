@@ -190,17 +190,18 @@ function FormatButton() {
 		>
 			<div className="relative flex flex-col">
 				<div
-					className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-white px-16 shadow-[var(--shadow-2)]
+					className="group flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white px-16 shadow-[var(--shadow-2)]
 						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
 				>
-					<Icon className="h-16 w-16" style={{ color: hex }} icon={icon} />
+					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
+						<Icon className="h-16 w-16 group-hover:group-active:text-white" style={{ color: hex }} icon={icon} />
+					</div>
 					<TypographyCaps className="text-gray-700">
 						FORMAT: <span className="inline-flex h-0 w-24">{desc}</span>
 					</TypographyCaps>
 				</div>
-				{/* Use right-8 to make optically centered */}
-				<div className="pointer-events-none absolute top-0 right-[calc(var(--form-size)_/_8)] bottom-0">
-					<div className="flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
+				<div className="absolute top-0 right-0 bottom-0">
+					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
 						<Icon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
 					</div>
 				</div>
@@ -272,7 +273,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 
 	return (
 		<button
-			className="group flex h-[var(--form-size)] items-center justify-center gap-8 rounded-1e3 bg-white px-16 shadow-[var(--shadow-2)]
+			className="group flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white px-16 shadow-[var(--shadow-2)]
 				hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
@@ -280,7 +281,9 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 			}}
 			{...props}
 		>
-			<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover:group-active:text-white" icon={pressed ? feather.Check : icon} />
+			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
+				<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover:group-active:text-white" icon={pressed ? feather.Check : icon} />
+			</div>
 			<TypographyCaps className="text-gray-700 group-hover:group-active:text-white">{children}</TypographyCaps>
 		</button>
 	)
@@ -377,7 +380,7 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: SVG 
 								className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white shadow-[var(--shadow-6)]"
 								// Statically determine the width and then translateX to center
 								// before <AriaSlider> mounts
-								style={{ transform: "translateX(calc((var(--aside-w) - 1px - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))" }}
+								style={{ transform: "translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))" }}
 							></div>
 						</div>
 					</div>

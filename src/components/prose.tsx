@@ -153,7 +153,7 @@ export function A({ children, ...props }: JSX.IntrinsicElements["a"]) {
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (
-		<code className="rounded-1e3 border border-gray-200 bg-gray-100 py-2 px-8" {...props}>
+		<code className="rounded-1e3 bg-gray-100 py-2 px-8 shadow-[var(--hairline-shadow)]" {...props}>
 			{code}
 		</code>
 	)

@@ -93,7 +93,8 @@ pre code {
 .prose :not(pre) code {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
-	white-space: pre;
+	// Use pre-wrap here
+	white-space: pre-wrap;
 	font: 400 0.875em / normal var(--code);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
