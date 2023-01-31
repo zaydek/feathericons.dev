@@ -97,6 +97,8 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 					const clampedNextValue = clamp(nextValue, { min, max })
 					setValue(clampedNextValue)
 				}
+				// Preserve props events
+				props.onKeyDown?.(e)
 			}}
 			// A11y
 			role="slider"

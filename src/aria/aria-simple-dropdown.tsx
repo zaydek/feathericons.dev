@@ -3,7 +3,6 @@
 import {
 	createContext,
 	Dispatch,
-	MutableRefObject,
 	SetStateAction,
 	useCallback,
 	useContext,
@@ -12,13 +11,10 @@ import {
 	useRef,
 	useState,
 } from "react"
-import { getStringFromChildren, queue } from "./utils"
+import { queue } from "../lib/queue"
+import { getStringFromChildren, useCancelable } from "./utils"
 
-// prettier-ignore
-type Item<T extends string> = {
-	id:  T
-	str: string
-}
+type Item<T extends string> = { id: T; str: string }
 
 // prettier-ignore
 type GenericContextData<T extends string = any> = {
@@ -35,31 +31,6 @@ type GenericContextData<T extends string = any> = {
 }
 
 const _SimpleDropDownContext = createContext<GenericContextData | null>(null)
-
-function useCancelable(ref: MutableRefObject<HTMLDivElement | null>, setShow: Dispatch<SetStateAction<boolean>>) {
-	useEffect(() => {
-		function handleClick(e: MouseEvent) {
-			if (ref.current === null) { return } // prettier-ignore
-			if (!(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
-				setShow(false)
-			}
-		}
-		window.addEventListener("click", handleClick, false)
-		return () => window.removeEventListener("click", handleClick, false)
-	}, [ref, setShow])
-
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				setShow(false)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setShow])
-
-	return void 0
-}
 
 // prettier-ignore
 export type AriaSimpleDropDownProps<T extends string> = {
@@ -165,7 +136,10 @@ export function AriaSimpleDropDown<T extends string>({
 			<div
 				ref={ref}
 				onClick={e => {
+					e.preventDefault()
 					setShow(curr => !curr)
+					// Preserve props events
+					props.onClick?.(e)
 				}}
 				onKeyDown={e => {
 					if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
@@ -187,6 +161,8 @@ export function AriaSimpleDropDown<T extends string>({
 						setShow(true)
 						queue(() => incrementRef.current(-1))
 					}
+					// Preserve props events
+					props.onKeyDown?.(e)
 				}}
 				// A11y
 				role="combobox"
@@ -221,12 +197,16 @@ export function AriaSimpleDropDownItem<T extends string>({ id, children, ...prop
 			ref={ref}
 			id={id}
 			onClick={e => {
+				// Must stop propagation because of <AriaSimpleDropDown>
 				e.preventDefault()
 				e.stopPropagation()
 				setCurrentId(id)
 				setShow(false)
+				// Preserve props events
+				props.onClick?.(e)
 			}}
 			onKeyDown={e => {
+				// Must stop propagation because of <AriaSimpleDropDown>
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 					e.preventDefault()
 					e.stopPropagation()
@@ -249,6 +229,8 @@ export function AriaSimpleDropDownItem<T extends string>({ id, children, ...prop
 					e.stopPropagation()
 					increment(-1)
 				}
+				// Preserve props events
+				props.onKeyDown?.(e)
 			}}
 			// A11y
 			role="option"

@@ -166,7 +166,6 @@ function FormatButton() {
 			aria-label="Click to format as SVG, JSX, or TSX"
 		>
 			<div className="relative flex flex-col">
-				{/* group/button */}
 				<div
 					className="group/button flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white shadow-[var(--shadow-2)]
 						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
@@ -257,7 +256,6 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 	}, [pressed])
 
 	return (
-		// group/button
 		<button
 			className="group/button flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white shadow-[var(--shadow-2)]
 				hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"

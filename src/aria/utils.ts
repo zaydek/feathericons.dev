@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import { Dispatch, MutableRefObject, ReactElement, SetStateAction, useEffect } from "react"
 import { Arrayable } from "../lib/types"
 
 export function getStringFromChildren(children: Arrayable<string> | Arrayable<ReactElement<{ children?: string }>> | undefined) {
@@ -16,12 +16,27 @@ export function getStringFromChildren(children: Arrayable<string> | Arrayable<Re
 	return str
 }
 
-// 1x setTimeout doesn't always work and Safari doesn't support
-// requestIdleCallback so YOLO
-export function queue(fn: () => void) {
-	window.setTimeout(() => {
-		window.setTimeout(() => {
-			fn()
-		}, 0)
-	}, 0)
+export function useCancelable(ref: MutableRefObject<HTMLDivElement | null>, setShow: Dispatch<SetStateAction<boolean>>) {
+	useEffect(() => {
+		function handleClick(e: MouseEvent) {
+			if (ref.current === null) { return } // prettier-ignore
+			if (!(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
+				setShow(false)
+			}
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [ref, setShow])
+
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				setShow(false)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [setShow])
+
+	return void 0
 }

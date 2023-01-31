@@ -12,12 +12,22 @@ export function AriaCheckbox({ checked, setChecked, children, ...props }: AriaCh
 			onClick={e => {
 				e.preventDefault()
 				setChecked(curr => !curr)
+				// Preserve props events
+				props.onClick?.(e)
 			}}
 			onKeyDown={e => {
-				if (e.key === " ") {
+				if (e.key === "ArrowRight") {
+					e.preventDefault()
+					setChecked(true)
+				} else if (e.key === "ArrowLeft") {
+					e.preventDefault()
+					setChecked(false)
+				} else if (e.key === " ") {
 					e.preventDefault()
 					e.currentTarget.click()
 				}
+				// Preserve props events
+				props.onKeyDown?.(e)
 			}}
 			// A11y
 			role="checkbox"

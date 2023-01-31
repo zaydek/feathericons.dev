@@ -92,6 +92,8 @@ export function AriaRadio({ value, children, ...props }: AriaRadioProps) {
 			onClick={e => {
 				e.preventDefault()
 				setGroupValue(value)
+				// Preserve props events
+				props.onClick?.(e)
 			}}
 			onKeyDown={e => {
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
@@ -111,6 +113,8 @@ export function AriaRadio({ value, children, ...props }: AriaRadioProps) {
 						setGroupValue(values[nextValue])
 					}
 				}
+				// Preserve props events
+				props.onKeyDown?.(e)
 			}}
 			// A11y
 			role="radio"
