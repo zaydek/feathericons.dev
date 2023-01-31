@@ -232,14 +232,14 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 										<ResponsiveIcon className="h-20 w-20 rounded-1e3 text-gray-500" icon={feather.RotateCw} />
 									</div>
 								</div>
-								<div className="-my-2 flex h-36 grow justify-between rounded-1e3 bg-gray-100 p-2">
+								<div className="flex h-32 grow justify-between rounded-1e3 bg-gray-100 p-2">
 									<div className="flex items-center gap-2">
-										<div className="flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
+										<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
 											<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Info} />
 										</div>
 										<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
-									<div className="flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
+									<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
 										<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Star} />
 									</div>
 								</div>
