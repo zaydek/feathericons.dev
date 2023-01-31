@@ -8,18 +8,19 @@ import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
+import { cx } from "../lib/cx"
 import { detab } from "../lib/format"
-import { Icon } from "../lib/react/icon"
+import { Icon, IconProps } from "../lib/react/icon"
 
-interface IconParams extends ParsedUrlQuery {
+interface NameParams extends ParsedUrlQuery {
 	name: string
 }
 
-export type IconProps = {
+export type NameProps = {
 	name: keyof typeof manifest
 }
 
-export const getStaticPaths: GetStaticPaths<IconParams> = async () => {
+export const getStaticPaths: GetStaticPaths<NameParams> = async () => {
 	return {
 		paths: Object.keys(manifest).map(name => ({
 			params: {
@@ -30,10 +31,14 @@ export const getStaticPaths: GetStaticPaths<IconParams> = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => {
+export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => {
 	const params = context.params!
 	const name = toTitleCase(params.name) as keyof typeof manifest
 	return { props: { name } }
+}
+
+function ResponsiveIcon({ className, ...props }: IconProps) {
+	return <Icon className={cx(className, "[transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]")} {...props} />
 }
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
@@ -70,7 +75,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									{/* LHS */}
 									<div className="flex items-center">
 										<div className="flex h-48 w-48 items-center justify-center">
-											<Icon className="h-20 w-20 text-gray-700 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather.Feather} />
+											<ResponsiveIcon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
 										</div>
 										<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
@@ -80,7 +85,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									{/* LHS */}
 									<div className="flex items-center">
 										<div className="flex h-48 w-48 items-center justify-center">
-											<Icon className="h-20 w-20 text-gray-300 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather.Lock} />
+											<ResponsiveIcon className="h-20 w-20 text-gray-300" icon={feather.Lock} />
 										</div>
 										<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
@@ -89,7 +94,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									{/* eslint-disable jsx-a11y/no-static-element-interactions */}
 									<div className="group/eye flex h-48 w-48 cursor-pointer items-center justify-center" onClick={e => setEye(curr => !curr)}>
 										<div className="flex h-32 w-32 items-center justify-center rounded-1e3 group-hover/eye:group-active/eye:bg-gray-200">
-											<Icon className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
+											<ResponsiveIcon className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
 										</div>
 									</div>
 								</div>
@@ -108,7 +113,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 								<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-[#fff] pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
 									{/* LHS */}
 									<div className="flex h-48 w-48 items-center justify-center">
-										<Icon className="h-20 w-20 text-gray-700 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)] group-hover/button:group-active/button:text-[#fff]" icon={feather.Feather} />
+										<ResponsiveIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-[#fff]" icon={feather.Feather} />
 									</div>
 									{/* RHS */}
 									<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-[#fff]"></div>
@@ -117,7 +122,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									{/* LHS */}
 									<div className="flex h-48 w-48 items-center justify-center">
 										{/* Use gray-400 here because of bg-gray-200 */}
-										<Icon className="h-20 w-20 text-gray-400 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather.LifeBuoy} />
+										<ResponsiveIcon className="h-20 w-20 text-gray-400" icon={feather.LifeBuoy} />
 									</div>
 									{/* RHS */}
 									{/* Use gray-400 here because of bg-gray-200 */}

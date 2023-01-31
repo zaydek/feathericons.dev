@@ -2,10 +2,10 @@ import * as feather from "./data/react-feather"
 
 import { useContext, useRef } from "react"
 import { MouseTooltip } from "./components/mouse-tooltip"
-import { Icon, IconComponent } from "./lib/react/icon"
+import { Icon, SVG } from "./lib/react/icon"
 import { SearchContext } from "./providers/state"
 
-function SearchBarButton({ icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
+function SearchBarButton({ icon, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
 			<Icon className="h-24 w-24 text-gray-400" icon={icon} />

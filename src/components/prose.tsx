@@ -4,7 +4,7 @@ import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromReactElements } from "../aria/utils"
 import { cx } from "../lib/cx"
-import { Icon, IconComponent } from "../lib/react/icon"
+import { Icon, SVG } from "../lib/react/icon"
 import { ShikiContext } from "../providers/shiki"
 
 export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
@@ -159,7 +159,7 @@ export function Code({ children: code, ...props }: { children: string } & JSX.In
 	)
 }
 
-function HeadingIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+function HeadingIcon({ className, icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["svg"]) {
 	if (children === undefined || children === null) {
 		return <Icon className={cx("inline-block h-[1.1em] w-[1.1em]", className)} icon={icon} {...props} />
 	} else {
@@ -173,7 +173,7 @@ function HeadingIcon({ className, icon, children, ...props }: { icon: IconCompon
 	}
 }
 
-export function InlineIcon({ className, icon, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+export function InlineIcon({ className, icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["svg"]) {
 	if (children === undefined || children === null) {
 		return <Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
 	} else {

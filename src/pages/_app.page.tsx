@@ -11,7 +11,7 @@ import { ShikiProvider } from "../providers/shiki"
 import { StateProvider } from "../providers/state"
 import { Layout } from "./layout"
 import { Meta } from "./meta"
-import { IconProps } from "./[name].page"
+import { NameProps } from "./[name].page"
 
 const GoogleFontsInter = Inter({
 	display: "swap",
@@ -62,7 +62,7 @@ function InlineNoopScrollRestoration() {
 	)
 }
 
-export default function App({ Component, pageProps }: AppProps<Partial<IconProps>>) {
+export default function App({ Component, pageProps }: AppProps<Partial<NameProps>>) {
 	return (
 		<>
 			<InlineGoogleFonts />

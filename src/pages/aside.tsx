@@ -14,7 +14,7 @@ import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, 
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { download } from "../lib/download"
-import { Icon, IconComponent } from "../lib/react/icon"
+import { Icon, SVG } from "../lib/react/icon"
 import { Mutable } from "../lib/types"
 import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
@@ -259,7 +259,7 @@ function FormatButton() {
 	)
 }
 
-function ActionButton({ icon, onClick, children, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["button"]) {
+function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
 	const [pressed, setPressed] = useState(false)
 
 	useEffect(() => {
@@ -288,7 +288,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconCompone
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function DecorativeIcon({ icon }: { icon: IconComponent }) {
+function DecorativeIcon({ icon }: { icon: SVG }) {
 	return (
 		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
 			<Icon className="h-12 w-12 text-gray-700" icon={icon} />
@@ -337,7 +337,7 @@ const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color)
 //// 	return state
 //// }
 
-function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: IconComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: SVG } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
