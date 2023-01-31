@@ -141,22 +141,22 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 							}
 						>
 							<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)}>
 									<ResponsiveIcon className="rounded text-700 h-[var(--step-1)] w-[var(--step-1)]" icon={feather.Feather} />
 								</div>
 							</MouseTooltip>
 							<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)}>
 									<ResponsiveIcon className="rounded text-700 h-[var(--step-2)] w-[var(--step-2)]" icon={feather.Feather} />
 								</div>
 							</MouseTooltip>
 							<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)}>
 									<ResponsiveIcon className="rounded text-700 h-[var(--step-3)] w-[var(--step-3)]" icon={feather.Feather} />
 								</div>
 							</MouseTooltip>
 							<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)}>
 									<ResponsiveIcon className="rounded text-700 h-[var(--step-4)] w-[var(--step-4)]" icon={feather.Feather} />
 								</div>
 							</MouseTooltip>
