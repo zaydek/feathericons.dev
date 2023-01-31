@@ -1,31 +1,39 @@
 :root {
-	// Z indexes
-	--background-mask-z:     -10;
-	--foreground-mask-z:      50;
-	--app-z:                  100;
+	// This is how we control icon scale and stroke-width. Instead of using
+	// context or props, which generally requires virtualization or memoization --
+	// even when using performant libraries such as Solid.js -- use CSS instead.
+	//
+	// That being said utility CSS libraries such as Tailwind CSS, WindiCSS, and
+	// UnoCSS meaningfully degrade performance because they CSS variable resets
+	// per element. Instead, use { optimizeUniversalDefaults: true } and some
+	// other optimizations in Tailwind CSS (see tailwind.config.js).
+	//
+	--icon-scale:        1;
+	--icon-stroke-width: 2;
 
-	--inset-y:                16px;
-	--inset-x:                16px;
-	--header-w:               1536px;
-	--app-min-h:              calc(100dvh - (var(--app-rounding) + var(--inset-y)));
-	--app-w:                  1792px;
-	--app-rounding:           40px; // Use 40 because <Checkbox> uses rounded-32 and p-24 -> p-40
-	--main-inset-y:           48px;
-	--main-inset-x:           48px;
-	--aside-w:                416px;
-	--aside-inset-y:          24px;
-	--aside-inset-x:          24px;
-	--grid-size:              96px;
-	--grid-icon-scale:        1;
-	--grid-icon-stroke-width: 2;
-	--reduced-form-size:      32px;
-	--form-size:              36px;
+	--background-mask-z: -10;
+	--foreground-mask-z: 50;
+	--app-z:             100;
+	--inset-y:           16px;
+	--inset-x:           16px;
+	--header-w:          calc(var(--app-w) - 256px);
+	--app-min-h:         calc(100dvh - (var(--app-rounding) + var(--inset-y)));
+	--app-w:             1792px;
+	--app-rounding:      40px; // Use 40 because <Checkbox> uses rounded-32 and p-24 -> p-40
+	--main-inset-y:      48px;
+	--main-inset-x:      48px;
+	--aside-w:           416px;
+	--aside-inset-y:     24px;
+	--aside-inset-x:     24px;
+	--grid-size:         96px;
+	--reduced-form-size: 32px;
+	--form-size:         36px;
 }
 
 @media not all and (min-width: 640px) {
 	:root { --grid-size: 64px; }
 	body {
-		--grid-icon-scale:        1 !important;
-		--grid-icon-stroke-width: 2 !important;
+		--icon-scale:        1 !important;
+		--icon-stroke-width: 2 !important;
 	}
 }

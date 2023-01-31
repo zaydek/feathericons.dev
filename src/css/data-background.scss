@@ -18,6 +18,6 @@
 	background-position:
 		center;
 	background-size:
-		calc(16px * var(--grid-icon-scale))  // X-axis
-		calc(16px * var(--grid-icon-scale)); // Y-axis
+		calc(16px * var(--icon-scale))  // X-axis
+		calc(16px * var(--icon-scale)); // Y-axis
 }
