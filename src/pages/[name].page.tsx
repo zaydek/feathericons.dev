@@ -1,19 +1,14 @@
-import * as feather from "../data/react-feather"
-
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { useContext, useState } from "react"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
-import { MouseTooltip } from "../components/mouse-tooltip"
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
-import { sizeInitial } from "../constants"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
-import { cx } from "../lib/cx"
 import { detab } from "../lib/format"
-import { Icon, IconProps } from "../lib/react/icon"
 import { SliderContext } from "../providers/state"
+import { Demo1, Demo2, Demo3, Demo4, Demo5, Demo6 } from "./demos"
 
 interface NameParams extends ParsedUrlQuery {
 	name: string
@@ -41,47 +36,6 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
-function ResponsiveIcon({ className, ...props }: IconProps) {
-	return <Icon className={cx(className, "[transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]")} {...props} />
-}
-
-function Container({ children, ...props }: JSX.IntrinsicElements["div"]) {
-	return (
-		//// <div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots {...props}>
-		//// <div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--shadow-2)]" data-background-dots {...props}>
-		<div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--hairline-shadow)]" data-background-dots {...props}>
-			{children}
-		</div>
-	)
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-//// <Container>
-//// 	<div className="flex h-100% flex-col items-center justify-center">
-//// 		<div className="flex flex-col gap-12">
-//// 			<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-white pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
-//// 				{/* LHS */}
-//// 				<div className="flex h-48 w-48 items-center justify-center">
-//// 					<ResponsiveIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather.Feather} />
-//// 				</div>
-//// 				{/* RHS */}
-//// 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
-//// 			</div>
-//// 			<div className="group/button flex h-48 cursor-not-allowed items-center rounded-1e3 bg-gray-200 pr-32">
-//// 				{/* LHS */}
-//// 				<div className="flex h-48 w-48 items-center justify-center">
-//// 					{/* Use gray-400 here because of bg-gray-200 */}
-//// 					<ResponsiveIcon className="h-20 w-20 text-gray-400" icon={feather.LifeBuoy} />
-//// 				</div>
-//// 				{/* RHS */}
-//// 				{/* Use gray-400 here because of bg-gray-200 */}
-//// 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-400"></div>
-//// 			</div>
-//// 		</div>
-//// 	</div>
-//// </Container>
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	const { size } = useContext(SliderContext)!
@@ -117,209 +71,12 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</P>
 
 				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
-					<Container>
-						<div className="flex h-100% items-center justify-center">
-							{/* <div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.3125)] bg-white shadow-[var(--shadow-2)]"> */}
-							<div className="w-[calc(48px_*_5)] rounded-16 bg-white shadow-[var(--shadow-2)]">
-								<div className="flex justify-between">
-									{/* LHS */}
-									<div className="flex items-center">
-										<div className="flex h-48 w-48 items-center justify-center">
-											<ResponsiveIcon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
-										</div>
-										<div className="aspect-[24] h-6 rounded-1e3 bg-gray-300"></div>
-									</div>
-								</div>
-								<hr />
-								<div className="flex justify-between">
-									{/* LHS */}
-									<div className="flex items-center">
-										<div className="flex h-48 w-48 items-center justify-center">
-											<ResponsiveIcon className="h-20 w-20 text-gray-300" icon={feather.Lock} />
-										</div>
-										<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
-									</div>
-									{/* RHS */}
-									{/* eslint-disable jsx-a11y/click-events-have-key-events */}
-									{/* eslint-disable jsx-a11y/no-static-element-interactions */}
-									<div className="flex h-48 w-48 cursor-pointer items-center justify-center">
-										<div className="group/eye flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200" onClick={e => setEye(curr => !curr)}>
-											<ResponsiveIcon className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</Container>
-
-					{/* <Container>
-						<div className="flex h-100% items-center justify-center gap-16" style={{ "--base": "16px", "--increment": 1 + 1 / 3 } as any}>
-							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_0)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_0)]" icon={feather.Feather} />
-							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_1)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_1)]" icon={feather.Feather} />
-							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_2)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_2)]" icon={feather.Feather} />
-							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_3)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_3)]" icon={feather.Feather} />
-						</div>
-					</Container> */}
-
-					<Container>
-						<div
-							className="flex h-100% items-center justify-center"
-							style={
-								{
-									"--step-1": "16px",
-									"--step-2": "32px",
-									"--step-3": "48px",
-									"--step-4": "64px",
-								} as any
-							}
-						>
-							<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)}>
-									<ResponsiveIcon className="rounded text-700 h-[var(--step-1)] w-[var(--step-1)]" icon={feather.Feather} />
-								</div>
-							</MouseTooltip>
-							<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)}>
-									<ResponsiveIcon className="rounded text-700 h-[var(--step-2)] w-[var(--step-2)]" icon={feather.Feather} />
-								</div>
-							</MouseTooltip>
-							<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)}>
-									<ResponsiveIcon className="rounded text-700 h-[var(--step-3)] w-[var(--step-3)]" icon={feather.Feather} />
-								</div>
-							</MouseTooltip>
-							<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
-								<div className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)}>
-									<ResponsiveIcon className="rounded text-700 h-[var(--step-4)] w-[var(--step-4)]" icon={feather.Feather} />
-								</div>
-							</MouseTooltip>
-						</div>
-					</Container>
-
-					<Container>
-						<div className="flex h-100% flex-col">
-							<div className="grow"></div>
-							{/* Use z-index to prevent box-shadow from being clipped by sibling */}
-							<div className="relative z-10 flex h-40 bg-gray-200 shadow-[var(--hairline-shadow-t)]">
-								{/* Cap */}
-								<div className="relative w-10">
-									<div className="absolute bottom-0 right-0">
-										<div className="h-10 w-10 bg-white"></div>
-										<div className="absolute inset-0">
-											<div className="h-10 w-10 rounded-br-10 bg-gray-200"></div>
-										</div>
-									</div>
-								</div>
-								<div className="flex flex-[1] items-center rounded-t-10 bg-white">
-									<div className="flex h-40 w-40 items-center justify-center">
-										<ResponsiveIcon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
-									</div>
-									<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
-								</div>
-								{/* Cap */}
-								<div className="relative flex-[1]">
-									<div className="absolute bottom-0 left-0">
-										<div className="h-40 w-40 bg-white"></div>
-										<div className="absolute inset-0">
-											<div className="h-40 w-40 rounded-bl-10 bg-gray-200"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							{/* Use z-index to prevent box-shadow from being clipped by sibling */}
-							<div className="relative z-10 flex h-48 gap-16 bg-white p-8 shadow-[var(--hairline-shadow-b)]">
-								<div className="flex">
-									<div className="group/a flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
-										<ResponsiveIcon className="h-20 w-20 rounded-1e3 text-gray-500" icon={feather.ArrowLeft} />
-									</div>
-									<div className="group/b flex h-32 w-32 items-center justify-center rounded-1e3">
-										<ResponsiveIcon className="h-20 w-20 rounded-1e3 text-gray-300" icon={feather.ArrowRight} />
-									</div>
-									<div className="group/c flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
-										<ResponsiveIcon className="h-20 w-20 rounded-1e3 text-gray-500" icon={feather.RotateCw} />
-									</div>
-								</div>
-								<div className="flex h-32 grow justify-between rounded-1e3 bg-gray-100 p-2">
-									{/* LHS */}
-									<div className="flex items-center gap-2">
-										<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
-											<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Info} />
-										</div>
-										<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
-									</div>
-									{/* RHS */}
-									<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
-										<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Star} />
-									</div>
-								</div>
-							</div>
-							<div className="grow bg-white"></div>
-						</div>
-					</Container>
-
-					<Container>{/* ... */}</Container>
-
-					<Container>
-						<div className="flex h-100% items-center justify-center gap-16">
-							<div className="flex items-center gap-8">
-								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillA(curr => !curr)}>
-									<ResponsiveIcon
-										// prettier-ignore
-										className="h-24 w-24 text-sky-700"
-										icon={feather.ThumbsUp}
-										fill={fillA ? "currentColor" : "none"}
-									/>
-								</div>
-								<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
-							</div>
-							<div className="flex items-center gap-8">
-								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillB(curr => !curr)}>
-									<ResponsiveIcon
-										// prettier-ignore
-										className="h-24 w-24 text-sky-700"
-										icon={feather.ThumbsDown}
-										fill={fillB ? "currentColor" : "none"}
-									/>
-								</div>
-								<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
-							</div>
-							<div className="flex items-center gap-8">
-								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillC(curr => !curr)}>
-									<ResponsiveIcon
-										// prettier-ignore
-										className="h-24 w-24 text-sky-700"
-										icon={feather.Heart}
-										fill={fillC ? "currentColor" : "none"}
-									/>
-								</div>
-								<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
-							</div>
-							<div className="flex items-center gap-8">
-								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillD(curr => !curr)}>
-									<ResponsiveIcon
-										// prettier-ignore
-										className="h-24 w-24 text-sky-700"
-										icon={feather.Bookmark}
-										fill={fillD ? "currentColor" : "none"}
-									/>
-								</div>
-								{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
-							</div>
-						</div>
-					</Container>
-
-					<Container>
-						<div className="flex h-100% items-center justify-center">
-							<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-white pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
-								{/* LHS */}
-								<div className="flex h-48 w-48 items-center justify-center">
-									<ResponsiveIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather.Feather} />
-								</div>
-								{/* RHS */}
-								<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
-							</div>
-						</div>
-					</Container>
+					<Demo1 />
+					<Demo2 />
+					<Demo3 />
+					<Demo4 />
+					<Demo5 />
+					<Demo6 />
 				</figure>
 
 				{/* <Hr /> */}

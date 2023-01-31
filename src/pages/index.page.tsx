@@ -2,12 +2,12 @@ import * as feather from "../data/react-feather"
 
 import Link from "next/link"
 import { memo, useContext, useMemo } from "react"
+import { AdjustableIcon } from "../components/adjustable-icon"
 import { MouseTooltip } from "../components/mouse-tooltip"
 import { PageTransition } from "../components/page-transition"
 import { TypographySmallSans } from "../components/typography"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase } from "../lib/cases"
-import { Icon } from "../lib/react/icon"
 import { SearchContext, SelectedContext } from "../providers/state"
 
 //// function Wbr({ children }: { children: string }) {
@@ -55,7 +55,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 					}}
 					aria-label={`Icon ${name}`}
 				>
-					<Icon id={name} className="h-32 w-32 text-gray-800 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather[name]} />
+					<AdjustableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
 				</button>
 			</MouseTooltip>
 		</div>
@@ -77,7 +77,7 @@ const MemoGridItem = memo(function GridItem({ name, indexes }: { name: keyof typ
 				}}
 				aria-label={`Icon ${name}`}
 			>
-				<Icon id={name} className="h-32 w-32 text-gray-800 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather[name]} />
+				<AdjustableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
 			</button>
 			<Link
 				href={`/${toKebabCase(name)}`}

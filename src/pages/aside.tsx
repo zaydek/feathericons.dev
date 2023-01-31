@@ -7,6 +7,7 @@ import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
+import { AdjustableIcon } from "../components/adjustable-icon"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
 import { PageTransition } from "../components/page-transition"
 import { TypographyCaps } from "../components/typography"
@@ -130,6 +131,7 @@ function Preview() {
 			</code>
 		</pre>
 	) : (
+		// FIXME: Lol what the hell is going on here?
 		<div>
 			<div
 				// prettier-ignore
@@ -137,9 +139,9 @@ function Preview() {
 				data-background-dots
 			>
 				<PageTransition>
-					{/* Use <div> so preserve [transform:_scale(var(--grid-icon-scale))] */}
+					{/* Use <div> to preserve <AdjustableIcon> */}
 					<div>
-						<Icon className="h-64 w-64 text-black [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather[name]} />
+						<AdjustableIcon className="h-64 w-64 text-black" icon={feather[name]} />
 					</div>
 				</PageTransition>
 			</div>
