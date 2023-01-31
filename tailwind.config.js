@@ -3,7 +3,7 @@ const defaultTheme = require("./tailwind.default-theme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["./src/**/*.tsx"],
+	content: ["./src/**/*.tsx", "./og/**/*.tsx"],
 	corePlugins: {
 		boxShadow:       false,
 		boxShadowColor:  false,
