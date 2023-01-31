@@ -35,6 +35,7 @@ export function Layout({ children }: PropsWithChildren) {
 						{children}
 					</main>
 					{/* RHS */}
+					{/* Use box-content here because of border-l */}
 					<aside className="box-content hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] border-l lg:block">
 						<Sticky pos="tr">
 							<Aside />
