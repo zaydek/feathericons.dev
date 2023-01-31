@@ -114,7 +114,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
 					<Container>
 						<div className="flex h-100% items-center justify-center">
-							<div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.25)] bg-white shadow-[var(--shadow-2)]">
+							{/* <div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.3125)] bg-white shadow-[var(--shadow-2)]"> */}
+							<div className="w-[calc(48px_*_5)] rounded-16 bg-white shadow-[var(--shadow-2)]">
 								<div className="flex justify-between">
 									{/* LHS */}
 									<div className="flex items-center">
