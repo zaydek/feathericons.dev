@@ -19,7 +19,7 @@ export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 
 	return (
-		<div className="flex h-64 rounded-1e3 bg-[#fff] shadow-[var(--shadow-2)] [&_>_:nth-child(2)]:grow">
+		<div className="flex h-64 rounded-1e3 bg-white shadow-[var(--shadow-2)] [&_>_:nth-child(2)]:grow">
 			<MouseTooltip pos="start" content={<>SEARCH FEATHER</>}>
 				<SearchBarButton
 					icon={feather.Search}

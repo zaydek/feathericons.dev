@@ -8,7 +8,7 @@ function Sticky({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr" }>) {
 	return (
 		<div className="sticky top-0 z-[var(--app-z)] 2xl:top-[var(--inset-y)]" data-pos={pos}>
 			<div
-				className="bg-[#fff]
+				className="bg-white
 					2xl:[[data-pos=tr]_&]:rounded-tr-[var(--app-rounding)]
 					2xl:[[data-pos=tl]_&]:rounded-tl-[var(--app-rounding)]"
 			>
@@ -24,7 +24,7 @@ export function Layout({ children }: PropsWithChildren) {
 			<Header />
 			<Masks />
 			<div className="flex justify-center 2xl:pb-[calc(var(--inset-y)_*_2)]">
-				<div className="flex w-100% max-w-[var(--app-w)] bg-[#fff] shadow-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">
+				<div className="flex w-100% max-w-[var(--app-w)] bg-white shadow-[var(--shadow-3)] 2xl:rounded-[var(--app-rounding)]">
 					{/* LHS */}
 					<main className="w-100% min-w-0">
 						<Sticky pos="tl">

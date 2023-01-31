@@ -48,7 +48,7 @@ export function MouseTooltip({
 						}[pos]
 					}
 				>
-					<div className="flex h-32 items-center gap-8 rounded-12 bg-[#fff] px-12 shadow-[var(--shadow-6),_var(--base-shadow-6)]">
+					<div className="flex h-32 items-center gap-8 rounded-12 bg-white px-12 shadow-[var(--shadow-6),_var(--base-shadow-6)]">
 						<TypographyCaps className="text-gray-700">{content}</TypographyCaps>
 					</div>
 				</div>

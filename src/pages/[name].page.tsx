@@ -48,13 +48,39 @@ function ResponsiveIcon({ className, ...props }: IconProps) {
 
 function Container({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots {...props}>
+		//// <div className="bg-gray h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--shadow-2)]" data-background-dots {...props}>
+		<div className="bg-gray h-256 overflow-clip rounded-24 border bg-gray-50" data-background-dots {...props}>
 			{children}
 		</div>
 	)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+//// <Container>
+//// 	<div className="flex h-100% flex-col items-center justify-center">
+//// 		<div className="flex flex-col gap-12">
+//// 			<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-white pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
+//// 				{/* LHS */}
+//// 				<div className="flex h-48 w-48 items-center justify-center">
+//// 					<ResponsiveIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather.Feather} />
+//// 				</div>
+//// 				{/* RHS */}
+//// 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
+//// 			</div>
+//// 			<div className="group/button flex h-48 cursor-not-allowed items-center rounded-1e3 bg-gray-200 pr-32">
+//// 				{/* LHS */}
+//// 				<div className="flex h-48 w-48 items-center justify-center">
+//// 					{/* Use gray-400 here because of bg-gray-200 */}
+//// 					<ResponsiveIcon className="h-20 w-20 text-gray-400" icon={feather.LifeBuoy} />
+//// 				</div>
+//// 				{/* RHS */}
+//// 				{/* Use gray-400 here because of bg-gray-200 */}
+//// 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-400"></div>
+//// 			</div>
+//// 		</div>
+//// 	</div>
+//// </Container>
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	const { size } = useContext(SliderContext)!
@@ -88,7 +114,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<Container>
 						<div className="flex h-100% items-center justify-center">
 							<div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.375)] bg-white shadow-[var(--shadow-2)]">
-								<div className="flex items-center justify-between">
+								<div className="flex justify-between">
 									{/* LHS */}
 									<div className="flex items-center">
 										<div className="flex h-48 w-48 items-center justify-center">
@@ -98,7 +124,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									</div>
 								</div>
 								<hr />
-								<div className="flex items-center justify-between">
+								<div className="flex justify-between">
 									{/* LHS */}
 									<div className="flex items-center">
 										<div className="flex h-48 w-48 items-center justify-center">
@@ -109,8 +135,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									{/* RHS */}
 									{/* eslint-disable jsx-a11y/click-events-have-key-events */}
 									{/* eslint-disable jsx-a11y/no-static-element-interactions */}
-									<div className="group/eye flex h-48 w-48 cursor-pointer items-center justify-center" onClick={e => setEye(curr => !curr)}>
-										<div className="flex h-32 w-32 items-center justify-center rounded-1e3 group-hover/eye:group-active/eye:bg-gray-200">
+									<div className="flex h-48 w-48 cursor-pointer items-center justify-center">
+										<div className="group/eye flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200" onClick={e => setEye(curr => !curr)}>
 											<ResponsiveIcon className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
 										</div>
 									</div>
@@ -162,31 +188,78 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 							</MouseTooltip>
 						</div>
 					</Container>
-					<Container>{/* ... */}</Container>
+
+					<Container>
+						<div className="flex h-100% flex-col">
+							<div className="grow"></div>
+							{/* Use z-index to prevent box-shadow from being clipped by sibling */}
+							<div className="relative z-10 flex h-40 bg-gray-200 shadow-[var(--hairline-shadow-t)]">
+								{/* Cap */}
+								<div className="relative w-10">
+									<div className="absolute bottom-0 right-0">
+										<div className="h-10 w-10 bg-white"></div>
+										<div className="absolute inset-0">
+											<div className="h-10 w-10 rounded-br-10 bg-gray-200"></div>
+										</div>
+									</div>
+								</div>
+								<div className="flex flex-[1] items-center rounded-t-10 bg-white">
+									<div className="flex h-40 w-40 items-center justify-center">
+										<ResponsiveIcon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
+									</div>
+									<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
+								</div>
+								{/* Cap */}
+								<div className="relative flex-[1]">
+									<div className="absolute bottom-0 left-0">
+										<div className="h-40 w-40 bg-white"></div>
+										<div className="absolute inset-0">
+											<div className="h-40 w-40 rounded-bl-10 bg-gray-200"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{/* Use z-index to prevent box-shadow from being clipped by sibling */}
+							<div className="relative z-10 flex h-48 gap-16 bg-white p-8 shadow-[var(--hairline-shadow-b)]">
+								<div className="flex">
+									<div className="group/a flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+										<ResponsiveIcon className="h-20 w-20 rounded-1e3 text-gray-500" icon={feather.ArrowLeft} />
+									</div>
+									<div className="group/b flex h-32 w-32 items-center justify-center rounded-1e3">
+										<ResponsiveIcon className="h-20 w-20 rounded-1e3 text-gray-300" icon={feather.ArrowRight} />
+									</div>
+									<div className="group/c flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+										<ResponsiveIcon className="h-20 w-20 rounded-1e3 text-gray-500" icon={feather.RotateCw} />
+									</div>
+								</div>
+								<div className="-my-2 flex h-36 grow justify-between rounded-1e3 bg-gray-100 p-2">
+									<div className="flex items-center gap-2">
+										<div className="flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
+											<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Info} />
+										</div>
+										<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
+									</div>
+									<div className="flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
+										<ResponsiveIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Star} />
+									</div>
+								</div>
+							</div>
+							<div className="grow bg-white"></div>
+						</div>
+					</Container>
+
 					<Container>{/* ... */}</Container>
 					<Container>{/* ... */}</Container>
 
 					<Container>
-						<div className="flex h-100% flex-col items-center justify-center">
-							<div className="flex flex-col gap-12">
-								<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-[#fff] pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
-									{/* LHS */}
-									<div className="flex h-48 w-48 items-center justify-center">
-										<ResponsiveIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-[#fff]" icon={feather.Feather} />
-									</div>
-									{/* RHS */}
-									<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-[#fff]"></div>
+						<div className="flex h-100% items-center justify-center">
+							<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-white pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
+								{/* LHS */}
+								<div className="flex h-48 w-48 items-center justify-center">
+									<ResponsiveIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather.Feather} />
 								</div>
-								<div className="group/button flex h-48 cursor-not-allowed items-center rounded-1e3 bg-gray-200 pr-32">
-									{/* LHS */}
-									<div className="flex h-48 w-48 items-center justify-center">
-										{/* Use gray-400 here because of bg-gray-200 */}
-										<ResponsiveIcon className="h-20 w-20 text-gray-400" icon={feather.LifeBuoy} />
-									</div>
-									{/* RHS */}
-									{/* Use gray-400 here because of bg-gray-200 */}
-									<div className="aspect-[16] h-6 rounded-1e3 bg-gray-400"></div>
-								</div>
+								{/* RHS */}
+								<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
 							</div>
 						</div>
 					</Container>

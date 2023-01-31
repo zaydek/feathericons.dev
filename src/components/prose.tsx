@@ -31,7 +31,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h1 id={id} className="group/header relative text-[#000]" {...props}>
+		<h1 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
@@ -48,7 +48,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h2 id={id} className="group/header relative text-[#000]" {...props}>
+		<h2 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
