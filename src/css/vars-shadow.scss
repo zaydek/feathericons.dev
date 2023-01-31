@@ -5,8 +5,8 @@
 	// Hairline
 
 	--hairline-size:           1px;
-	//// --hairline-color:          hsl(var(--seed-h), var(--seed-s), 15%, 0.1);
-	--hairline-color:          #{gray(200)};
+	--hairline-color:          hsl(var(--seed-h), var(--seed-s), 15%, 0.1);
+	//// --hairline-color:          #{gray(200)};
 
 	--hairline-shadow:         0 0 0 var(--hairline-size) var(--hairline-color);
 	--hairline-shadow-t:       0 calc(-1 * var(--hairline-size)) 0 0 var(--hairline-color);
