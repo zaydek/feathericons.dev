@@ -1,8 +1,11 @@
 feather:
 	npx tsx scripts/feather.ts
+	npx tsx scripts/feather-format.ts
 
-format-feather:
-	npx tsx scripts/format-feather.ts
+dev-og:
+	npx concurrently \
+		'npx tailwind -c tailwind.config.js --content og/src/index.tsx -o og/public/tw.css -w' \
+		'cd og && npx vite dev'
 
 build:
 	npx next build

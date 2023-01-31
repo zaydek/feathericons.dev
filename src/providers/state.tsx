@@ -10,7 +10,7 @@ import {
 	useMemo,
 	useState,
 } from "react"
-import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/format"
+import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/formatting"
 import { stringify } from "../../scripts/stringify"
 import { FormatAs, jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "../constants"
 import { manifest } from "../data/react-feather-manifest"

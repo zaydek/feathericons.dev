@@ -7,7 +7,7 @@ import feather from "./_feather.json"
 import { JSDOM } from "jsdom"
 import { toTitleCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
-import { formatAsSvg, formatAsTsx } from "./format"
+import { formatAsSvg, formatAsTsx } from "./formatting"
 import { stringify } from "./stringify"
 
 const omitAttrs = ["class"]
