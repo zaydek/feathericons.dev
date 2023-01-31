@@ -44,6 +44,11 @@
 		0
 		calc(var(--gutter-x-1) + var(--gutter-x-2));
 }
+.prose > figure {
+	margin:
+		64px
+		var(--gutter-x-1);
+}
 .prose > hr {
 	margin:
 		32px

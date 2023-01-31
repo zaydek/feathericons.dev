@@ -1,3 +1,5 @@
+import * as feather from "../data/react-feather"
+
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
@@ -6,6 +8,7 @@ import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../com
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
+import { Icon } from "../lib/react/icon"
 
 interface IconParams extends ParsedUrlQuery {
 	name: string
@@ -55,7 +58,56 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					</InlineIcon>
 					, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
 				</P>
-				<Hr />
+
+				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
+					<div className="bg-gray h-256 rounded-24 bg-gray-100">
+						<div className="flex h-100% items-center justify-center">
+							<div className="w-256 rounded-16 bg-white shadow-[var(--shadow-2)]">
+								<div className="flex items-center">
+									<div className="flex h-48 w-48 items-center justify-center">
+										<Icon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
+									</div>
+									<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300"></div>
+								</div>
+								<hr />
+								<div className="flex items-center">
+									{/* LHS */}
+									<div className="flex h-48 w-48 items-center justify-center">
+										<Icon className="h-20 w-20 text-gray-300" icon={feather.Lock} />
+									</div>
+									{/* RHS */}
+									{/* <div className="flex grow gap-6">
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
+									</div> */}
+									<div className="grow">
+										<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
+									</div>
+									<div className="group/password flex h-48 w-48 items-center justify-center">
+										<div className="flex h-32 w-32 items-center justify-center rounded-1e3 group-hover/password:bg-gray-100">
+											<Icon className="h-20 w-20 text-gray-300" icon={feather.EyeOff} />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
+					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
+					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
+					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
+					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
+				</figure>
+
+				{/* <Hr /> */}
+
 				<H2>Using {name} With a CDN</H2>
 				<P>To get started with Feather using a CDN (content delivery network), simply:</P>
 				<Ol>
