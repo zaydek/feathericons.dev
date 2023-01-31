@@ -24,10 +24,11 @@ function parseId(str: string) {
 }
 
 export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const [id, href] = useMemo(() => {
-		const id = parseId(getStringFromChildren(children as any))
+	const [str, id, href] = useMemo(() => {
+		const str = getStringFromChildren(children as any)
+		const id = parseId(str)
 		const href = `#${id}`
-		return [id, href] as const
+		return [str, id, href] as const
 	}, [children]) // 🤷‍♀️
 
 	return (
@@ -37,6 +38,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/header:opacity-100"
+				aria-label={`Link to header ${str}`}
 			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
@@ -45,10 +47,11 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 }
 
 export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const [id, href] = useMemo(() => {
-		const id = parseId(getStringFromChildren(children as any))
+	const [str, id, href] = useMemo(() => {
+		const str = getStringFromChildren(children as any)
+		const id = parseId(str)
 		const href = `#${id}`
-		return [id, href] as const
+		return [str, id, href] as const
 	}, [children]) // 🤷‍♀️
 
 	return (
@@ -58,6 +61,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/header:opacity-100"
+				aria-label={`Link to subheader ${str}`}
 			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
