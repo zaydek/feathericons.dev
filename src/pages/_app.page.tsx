@@ -14,13 +14,17 @@ import { Meta } from "./meta"
 import { IconProps } from "./[name].page"
 
 const GoogleFontsInter = Inter({
+	display: "swap",
 	subsets: ["latin"],
 	variable: "--font-inter",
+	weight: ["400", "500", "600", "700", "800", "900"],
 })
 
 const GoogleFontsFiraCode = Fira_Code({
+	display: "swap",
 	subsets: ["latin"],
 	variable: "--font-fira-code",
+	weight: ["400"],
 })
 
 function InlineGoogleFonts() {

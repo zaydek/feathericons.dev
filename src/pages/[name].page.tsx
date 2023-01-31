@@ -103,7 +103,25 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
 					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
 					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
-					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
+
+					<div className="bg-gray h-256 rounded-24 bg-gray-100">
+						<div className="flex h-100% flex-col items-center justify-center gap-12">
+							<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-[#fff] pr-24 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
+								<div className="flex h-48 w-48 items-center justify-center">
+									<Icon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-[#fff]" icon={feather.Feather} />
+								</div>
+								<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-[#fff]"></div>
+							</div>
+							<div className="flex h-48 cursor-not-allowed items-center rounded-1e3 bg-gray-200 pr-24">
+								<div className="flex h-48 w-48 items-center justify-center">
+									{/* Use gray-400 here because of bg-gray-200 */}
+									<Icon className="h-20 w-20 text-gray-400" icon={feather.Feather} />
+								</div>
+								{/* Use gray-400 here because of bg-gray-200 */}
+								<div className="aspect-[16] h-6 rounded-1e3 bg-gray-400"></div>
+							</div>
+						</div>
+					</div>
 				</figure>
 
 				{/* <Hr /> */}
