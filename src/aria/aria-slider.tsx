@@ -1,4 +1,4 @@
-import { CSSProperties, Dispatch, HTMLAttributes, SetStateAction, useEffect, useMemo, useRef } from "react"
+import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useMemo, useRef } from "react"
 import { clamp } from "../lib/precision"
 
 // prettier-ignore
@@ -78,7 +78,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 
 	return (
 		<div
-			style={{ "--progress": progress } as CSSProperties}
+			style={{ "--progress": progress } as any}
 			onKeyDown={e => {
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 					e.preventDefault()

@@ -1,9 +1,11 @@
 .typography-caps {
+	white-space: pre;
 	font: 500 11px / normal var(--sans);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: 0.05em;
 }
 .typography-small-sans {
+	white-space: normal;
 	font: 400 12px / normal var(--sans);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: 0.0125em;
@@ -63,16 +65,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 .prose {
+	white-space: normal;
 	font: 400 16px / 1.6 var(--sans);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
 }
 .prose h1 {
+	white-space: normal;
 	font: 500 1.25em / 1.25 var(--sans);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
 }
 .prose h2 {
+	white-space: normal;
 	font: 500 1.125em / 1.25 var(--sans);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
@@ -80,6 +85,7 @@
 pre code {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
+	white-space: pre;
 	font: 400 #{16px * 0.875} / 1.6 var(--code);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;
@@ -87,6 +93,7 @@ pre code {
 .prose :not(pre) code {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
+	white-space: pre;
 	font: 400 0.875em / normal var(--code);
 	font-feature-settings: "tnum", "zero"; // FIXME: Next.js
 	letter-spacing: null;

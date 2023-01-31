@@ -2,15 +2,18 @@ import * as feather from "../data/react-feather"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
+import { MouseTooltip } from "../components/mouse-tooltip"
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
+import { sizeInitial } from "../constants"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { cx } from "../lib/cx"
 import { detab } from "../lib/format"
 import { Icon, IconProps } from "../lib/react/icon"
+import { SliderContext } from "../providers/state"
 
 interface NameParams extends ParsedUrlQuery {
 	name: string
@@ -37,11 +40,25 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 	return { props: { name } }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 function ResponsiveIcon({ className, ...props }: IconProps) {
 	return <Icon className={cx(className, "[transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]")} {...props} />
 }
 
+function Container({ children, ...props }: JSX.IntrinsicElements["div"]) {
+	return (
+		<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots {...props}>
+			{children}
+		</div>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 export default function Component({ name }: { name: keyof typeof manifest }) {
+	const { size } = useContext(SliderContext)!
+
 	const [eye, setEye] = useState(false)
 
 	return (
@@ -68,7 +85,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</P>
 
 				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
-					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots>
+					<Container>
 						<div className="flex h-100% items-center justify-center">
 							<div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.375)] bg-white shadow-[var(--shadow-2)]">
 								<div className="flex items-center justify-between">
@@ -100,14 +117,56 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 								</div>
 							</div>
 						</div>
-					</div>
+					</Container>
 
-					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
-					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
-					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
-					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
+					{/* <Container>
+						<div className="flex h-100% items-center justify-center gap-16" style={{ "--base": "16px", "--increment": 1 + 1 / 3 } as any}>
+							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_0)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_0)]" icon={feather.Feather} />
+							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_1)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_1)]" icon={feather.Feather} />
+							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_2)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_2)]" icon={feather.Feather} />
+							<ResponsiveIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_3)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_3)]" icon={feather.Feather} />
+						</div>
+					</Container> */}
 
-					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots>
+					<Container>
+						<div
+							className="flex h-100% items-center justify-center"
+							style={
+								{
+									"--step-1": "16px",
+									"--step-2": "32px",
+									"--step-3": "48px",
+									"--step-4": "64px",
+								} as any
+							}
+						>
+							<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)}>
+									<ResponsiveIcon className="rounded text-700 h-[var(--step-1)] w-[var(--step-1)]" icon={feather.Feather} />
+								</div>
+							</MouseTooltip>
+							<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)}>
+									<ResponsiveIcon className="rounded text-700 h-[var(--step-2)] w-[var(--step-2)]" icon={feather.Feather} />
+								</div>
+							</MouseTooltip>
+							<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)}>
+									<ResponsiveIcon className="rounded text-700 h-[var(--step-3)] w-[var(--step-3)]" icon={feather.Feather} />
+								</div>
+							</MouseTooltip>
+							<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
+								<div className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_16px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)}>
+									<ResponsiveIcon className="rounded text-700 h-[var(--step-4)] w-[var(--step-4)]" icon={feather.Feather} />
+								</div>
+							</MouseTooltip>
+						</div>
+					</Container>
+					<Container>{/* ... */}</Container>
+					<Container>{/* ... */}</Container>
+					<Container>{/* ... */}</Container>
+
+					<Container>
 						<div className="flex h-100% flex-col items-center justify-center">
 							<div className="flex flex-col gap-8">
 								<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-[#fff] pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
@@ -116,7 +175,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 										<ResponsiveIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-[#fff]" icon={feather.Feather} />
 									</div>
 									{/* RHS */}
-									<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-[#fff]"></div>
+									<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-[#fff]"></div>
 								</div>
 								<div className="group/button flex h-48 cursor-not-allowed items-center rounded-1e3 bg-gray-200 pr-32">
 									{/* LHS */}
@@ -126,11 +185,11 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 									</div>
 									{/* RHS */}
 									{/* Use gray-400 here because of bg-gray-200 */}
-									<div className="aspect-[12] h-6 rounded-1e3 bg-gray-400"></div>
+									<div className="aspect-[16] h-6 rounded-1e3 bg-gray-400"></div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</Container>
 				</figure>
 
 				{/* <Hr /> */}
