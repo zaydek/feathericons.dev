@@ -88,6 +88,11 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 
 	const [eye, setEye] = useState(false)
 
+	const [fillA, setFillA] = useState(false)
+	const [fillB, setFillB] = useState(false)
+	const [fillC, setFillC] = useState(false)
+	const [fillD, setFillD] = useState(false)
+
 	return (
 		<PageTransition>
 			<Article>
@@ -253,7 +258,55 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					</Container>
 
 					<Container>{/* ... */}</Container>
-					<Container>{/* ... */}</Container>
+
+					<Container>
+						<div className="flex h-100% items-center justify-center gap-16">
+							<div className="flex items-center gap-8">
+								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillA(curr => !curr)}>
+									<ResponsiveIcon
+										// prettier-ignore
+										className="h-24 w-24 text-sky-700"
+										icon={feather.ThumbsUp}
+										fill={fillA ? "currentColor" : "none"}
+									/>
+								</div>
+								<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
+							</div>
+							<div className="flex items-center gap-8">
+								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillB(curr => !curr)}>
+									<ResponsiveIcon
+										// prettier-ignore
+										className="h-24 w-24 text-sky-700"
+										icon={feather.ThumbsDown}
+										fill={fillB ? "currentColor" : "none"}
+									/>
+								</div>
+								<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
+							</div>
+							<div className="flex items-center gap-8">
+								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillC(curr => !curr)}>
+									<ResponsiveIcon
+										// prettier-ignore
+										className="h-24 w-24 text-sky-700"
+										icon={feather.Heart}
+										fill={fillC ? "currentColor" : "none"}
+									/>
+								</div>
+								<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
+							</div>
+							<div className="flex items-center gap-8">
+								<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillD(curr => !curr)}>
+									<ResponsiveIcon
+										// prettier-ignore
+										className="h-24 w-24 text-sky-700"
+										icon={feather.Bookmark}
+										fill={fillD ? "currentColor" : "none"}
+									/>
+								</div>
+								{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
+							</div>
+						</div>
+					</Container>
 
 					<Container>
 						<div className="flex h-100% items-center justify-center">
