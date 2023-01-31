@@ -37,12 +37,12 @@ export const tsxPlaceholder = detab(`
 	}
 `)
 
-export const sizeInitial = 32
-export const sizeMin = sizeInitial - 16
-export const sizeMax = sizeInitial + 16
-export const sizeStep = 1
+export const sizeInitial        = 32               // prettier-ignore
+export const sizeMin            = sizeInitial - 16 // prettier-ignore
+export const sizeMax            = sizeInitial + 16 // prettier-ignore
+export const sizeStep           = 1                // prettier-ignore
 
-export const strokeWidthInitial = 2
-export const strokeWidthMin = strokeWidthInitial - 1.5
-export const strokeWidthMax = strokeWidthInitial + 1.5
-export const strokeWidthStep = 0.125
+export const strokeWidthInitial = 2                        // prettier-ignore
+export const strokeWidthMin     = strokeWidthInitial - 1.5 // prettier-ignore
+export const strokeWidthMax     = strokeWidthInitial + 1.5 // prettier-ignore
+export const strokeWidthStep    = 0.125                    // prettier-ignore
