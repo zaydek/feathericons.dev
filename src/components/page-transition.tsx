@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { cloneElement, ReactElement, TransitionEvent, useEffect, useState } from "react"
-import { queue } from "../aria/utils"
+import { queue } from "../lib/queue"
 import { Arrayable } from "../lib/types"
 
 export function PageTransition({ children }: { children: Arrayable<ReactElement> }) {
