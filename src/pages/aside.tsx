@@ -189,15 +189,16 @@ function FormatButton() {
 			aria-label="Click to format as SVG, JSX, or TSX"
 		>
 			<div className="relative flex flex-col">
+				{/* group/button */}
 				<div
-					className="group flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white px-16 shadow-[var(--shadow-2)]
+					className="group/button flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white shadow-[var(--shadow-2)]
 						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
 				>
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-						<Icon className="h-16 w-16 group-hover:group-active:text-white" style={{ color: hex }} icon={icon} />
+						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" style={{ color: hex }} icon={icon} />
 					</div>
 					<TypographyCaps className="text-gray-700">
-						FORMAT: <span className="inline-flex h-0 w-24">{desc}</span>
+						FILE FORMAT: <span className="inline-flex h-0 w-24">{desc}</span>
 					</TypographyCaps>
 				</div>
 				<div className="absolute top-0 right-0 bottom-0">
@@ -272,8 +273,9 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 	}, [pressed])
 
 	return (
+		// group/button
 		<button
-			className="group flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white px-16 shadow-[var(--shadow-2)]
+			className="group/button flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white shadow-[var(--shadow-2)]
 				hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 			onClick={e => {
 				setPressed(true)
@@ -282,9 +284,9 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 			{...props}
 		>
 			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-				<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover:group-active:text-white" icon={pressed ? feather.Check : icon} />
+				<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white" icon={pressed ? feather.Check : icon} />
 			</div>
-			<TypographyCaps className="text-gray-700 group-hover:group-active:text-white">{children}</TypographyCaps>
+			<TypographyCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</TypographyCaps>
 		</button>
 	)
 }
