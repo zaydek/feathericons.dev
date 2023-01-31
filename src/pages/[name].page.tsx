@@ -2,6 +2,7 @@ import * as feather from "../data/react-feather"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
+import { useState } from "react"
 import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
@@ -36,6 +37,8 @@ export const getStaticProps: GetStaticProps<IconProps, IconParams> = context => 
 }
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
+	const [eye, setEye] = useState(false)
+
 	return (
 		<PageTransition>
 			<Article>
@@ -60,38 +63,33 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</P>
 
 				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
-					<div className="bg-gray h-256 rounded-24 bg-gray-100">
+					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots>
 						<div className="flex h-100% items-center justify-center">
-							<div className="w-256 rounded-16 bg-white shadow-[var(--shadow-2)]">
-								<div className="flex items-center">
-									<div className="flex h-48 w-48 items-center justify-center">
-										<Icon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
+							<div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.375)] bg-white shadow-[var(--shadow-2)]">
+								<div className="flex items-center justify-between">
+									{/* LHS */}
+									<div className="flex items-center">
+										<div className="flex h-48 w-48 items-center justify-center">
+											<Icon className="h-20 w-20 text-gray-700 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather.Feather} />
+										</div>
+										<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
-									<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300"></div>
 								</div>
 								<hr />
-								<div className="flex items-center">
+								<div className="flex items-center justify-between">
 									{/* LHS */}
-									<div className="flex h-48 w-48 items-center justify-center">
-										<Icon className="h-20 w-20 text-gray-300" icon={feather.Lock} />
-									</div>
-									{/* RHS */}
-									{/* <div className="flex grow gap-6">
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-										<div className="h-6 w-6 rounded-1e3 bg-gray-700"></div>
-									</div> */}
-									<div className="grow">
+									<div className="flex items-center">
+										<div className="flex h-48 w-48 items-center justify-center">
+											<Icon className="h-20 w-20 text-gray-300 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather.Lock} />
+										</div>
 										<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
 									</div>
-									<div className="group/password flex h-48 w-48 items-center justify-center">
-										<div className="flex h-32 w-32 items-center justify-center rounded-1e3 group-hover/password:bg-gray-100">
-											<Icon className="h-20 w-20 text-gray-300" icon={feather.EyeOff} />
+									{/* RHS */}
+									{/* eslint-disable jsx-a11y/click-events-have-key-events */}
+									{/* eslint-disable jsx-a11y/no-static-element-interactions */}
+									<div className="group/eye flex h-48 w-48 cursor-pointer items-center justify-center" onClick={e => setEye(curr => !curr)}>
+										<div className="flex h-32 w-32 items-center justify-center rounded-1e3 group-hover/eye:group-active/eye:bg-gray-200">
+											<Icon className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
 										</div>
 									</div>
 								</div>
@@ -99,26 +97,32 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						</div>
 					</div>
 
-					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
-					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
-					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
-					<div className="bg-gray h-256 rounded-24 bg-gray-100"></div>
+					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
+					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
+					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
+					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots></div>
 
-					<div className="bg-gray h-256 rounded-24 bg-gray-100">
-						<div className="flex h-100% flex-col items-center justify-center gap-12">
-							<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-[#fff] pr-24 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
-								<div className="flex h-48 w-48 items-center justify-center">
-									<Icon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-[#fff]" icon={feather.Feather} />
+					<div className="bg-gray h-256 rounded-24 border bg-gray-50" data-background-dots>
+						<div className="flex h-100% flex-col items-center justify-center">
+							<div className="flex flex-col gap-8">
+								<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-[#fff] pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
+									{/* LHS */}
+									<div className="flex h-48 w-48 items-center justify-center">
+										<Icon className="h-20 w-20 text-gray-700 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)] group-hover/button:group-active/button:text-[#fff]" icon={feather.Feather} />
+									</div>
+									{/* RHS */}
+									<div className="aspect-[20] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-[#fff]"></div>
 								</div>
-								<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-[#fff]"></div>
-							</div>
-							<div className="flex h-48 cursor-not-allowed items-center rounded-1e3 bg-gray-200 pr-24">
-								<div className="flex h-48 w-48 items-center justify-center">
+								<div className="group/button flex h-48 cursor-not-allowed items-center rounded-1e3 bg-gray-200 pr-32">
+									{/* LHS */}
+									<div className="flex h-48 w-48 items-center justify-center">
+										{/* Use gray-400 here because of bg-gray-200 */}
+										<Icon className="h-20 w-20 text-gray-400 [transform:_scale(var(--grid-icon-scale))] [stroke-width:_var(--grid-icon-stroke-width)]" icon={feather.LifeBuoy} />
+									</div>
+									{/* RHS */}
 									{/* Use gray-400 here because of bg-gray-200 */}
-									<Icon className="h-20 w-20 text-gray-400" icon={feather.Feather} />
+									<div className="aspect-[12] h-6 rounded-1e3 bg-gray-400"></div>
 								</div>
-								{/* Use gray-400 here because of bg-gray-200 */}
-								<div className="aspect-[16] h-6 rounded-1e3 bg-gray-400"></div>
 							</div>
 						</div>
 					</div>

@@ -1,3 +1,5 @@
+@use "tailwind-colors" as *;
+
 [data-background-hero] {
 	//// background-image: linear-gradient(
 	//// 	var(--hero-gradient-angle),
@@ -11,8 +13,8 @@
 /* https://30secondsofcode.org/css/s/polka-dot-pattern */
 [data-background-dots] {
 	background-image:
-		radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%),
-		radial-gradient(hsl(0, 0%, 75%) 0%, transparent 10%);
+		radial-gradient(gray(300), transparent 10%),
+		radial-gradient(gray(300), transparent 10%);
 	background-position:
 		center;
 	background-size:
