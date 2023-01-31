@@ -1,7 +1,24 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { useContext, useState } from "react"
-import { CodePenHex, CodePenIcon, NextJsHex, NextJsIcon, ReactJsHex, ReactJsIcon, SassHex, SassIcon, SvgHex, SvgIcon, TailwindCssHex, TailwindCssIcon, TwitterHex, TwitterIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
+import {
+	CodePenHex,
+	CodePenIcon,
+	NextJsHex,
+	NextJsIcon,
+	ReactJsHex,
+	ReactJsIcon,
+	SassHex,
+	SassIcon,
+	SvgHex,
+	SvgIcon,
+	TailwindCssHex,
+	TailwindCssIcon,
+	TwitterHex,
+	TwitterIcon,
+	TypeScriptHex,
+	TypeScriptIcon,
+} from "../components/icons"
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
 import { manifest } from "../data/react-feather-manifest"
@@ -52,7 +69,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			<Article>
 				<H1>Get Started With Feather</H1>
 				<P>
-					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
+					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source
+					icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
 				</P>
 				<P>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as{" "}
@@ -85,7 +103,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<P>To get started with Feather using a CDN (content delivery network), simply:</P>
 				<Ol>
 					<Li>
-						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code> tag
+						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code>{" "}
+						tag
 					</Li>
 					<Li>
 						Add <Code>{`<i data-feather="${toKebabCase(name)}"></i>`}</Code>
@@ -130,7 +149,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<P>To get started with Feather using React, simply:</P>
 				<Ol>
 					<Li>
-						Add <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
+						Add <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or{" "}
+						<Code>{`pnpm i react-feather`}</Code>
 					</Li>
 					<Li>
 						Add <Code>{`import { ${name} } from "react-feather"`}</Code>
@@ -182,7 +202,9 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						</A>
 						.
 						<br />
-						Feather is licensed as <A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used for personal and commercial use without attribution.
+						Feather is licensed as{" "}
+						<A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used
+						for personal and commercial use without attribution.
 						<br />
 						Built using{" "}
 						<A href="https://typescriptlang.org">

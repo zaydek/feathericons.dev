@@ -1,7 +1,18 @@
 // https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
 
-import { createContext, Dispatch, MutableRefObject, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { getStringFromReactElements, queue } from "./utils"
+import {
+	createContext,
+	Dispatch,
+	MutableRefObject,
+	SetStateAction,
+	useCallback,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react"
+import { getStringFromChildren, queue } from "./utils"
 
 // prettier-ignore
 type Item<T extends string> = {
@@ -58,7 +69,14 @@ export type AriaSimpleDropDownProps<T extends string> = {
 	setCurrentId: Dispatch<SetStateAction<T>>
 } & JSX.IntrinsicElements["div"]
 
-export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps<T>) {
+export function AriaSimpleDropDown<T extends string>({
+	show,
+	setShow,
+	currentId,
+	setCurrentId,
+	children,
+	...props
+}: AriaSimpleDropDownProps<T>) {
 	const ref = useRef<HTMLDivElement | null>(null)
 	const [items, setItems] = useState<Item<T>[]>([])
 
@@ -190,7 +208,7 @@ export function AriaSimpleDropDownItem<T extends string>({ id, children, ...prop
 	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!
 
 	const ref = useRef<HTMLDivElement | null>(null)
-	const str = useMemo(() => getStringFromReactElements(children as any), [children]) // 🤷‍♀️
+	const str = useMemo(() => getStringFromChildren(children as any), [children]) // 🤷‍♀️
 	const selected = useMemo(() => currentId === id, [currentId, id])
 
 	useEffect(() => {

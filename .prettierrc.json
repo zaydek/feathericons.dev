@@ -1,6 +1,6 @@
 {
 	"//": "https://michelelarson.com/prettier-config",
-	"printWidth": 1e3,
+	"printWidth": 120,
 	"tabWidth": 2,
 	"useTabs": true,
 	"semi": false,

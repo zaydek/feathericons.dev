@@ -72,11 +72,7 @@ function SponsorSlot() {
 
 export function Header() {
 	return (
-		<header
-			// prettier-ignore
-			className="flex justify-center py-64 pt-96 px-16 sm:py-96"
-			data-background-hero
-		>
+		<header className="flex justify-center py-64 px-16 pt-96 sm:py-96" data-background-hero>
 			<NavLink pos="tl" />
 			<NavLink pos="tr" />
 			<div className="flex w-100% max-w-[var(--header-w)] flex-col justify-evenly gap-64 sm:items-center xl:flex-row">

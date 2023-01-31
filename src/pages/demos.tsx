@@ -9,7 +9,11 @@ function DemoShell({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
 		//// <div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots {...props}>
 		//// <div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--shadow-2)]" data-background-dots {...props}>
-		<div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--hairline-shadow)]" data-background-dots {...props}>
+		<div
+			className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--hairline-shadow)]"
+			data-background-dots
+			{...props}
+		>
 			{children}
 		</div>
 	)
@@ -45,8 +49,14 @@ export function Demo1() {
 						{/* eslint-disable jsx-a11y/click-events-have-key-events */}
 						{/* eslint-disable jsx-a11y/no-static-element-interactions */}
 						<div className="flex h-48 w-48 cursor-pointer items-center justify-center">
-							<div className="group/eye flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200" onClick={e => setEye(curr => !curr)}>
-								<AdjustableIcon className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
+							<div
+								className="group/eye flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200"
+								onClick={e => setEye(curr => !curr)}
+							>
+								<AdjustableIcon
+									className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700"
+									icon={eye ? feather.Eye : feather.EyeOff}
+								/>
 							</div>
 						</div>
 					</div>
@@ -82,22 +92,34 @@ export function Demo2() {
 				}
 			>
 				<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)}>
+					<div
+						className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_24px)] cursor-pointer items-center justify-center"
+						onClick={async e => await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)}
+					>
 						<AdjustableIcon className="rounded text-700 h-[var(--step-1)] w-[var(--step-1)]" icon={feather.Feather} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)}>
+					<div
+						className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_24px)] cursor-pointer items-center justify-center"
+						onClick={async e => await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)}
+					>
 						<AdjustableIcon className="rounded text-700 h-[var(--step-2)] w-[var(--step-2)]" icon={feather.Feather} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)}>
+					<div
+						className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_24px)] cursor-pointer items-center justify-center"
+						onClick={async e => await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)}
+					>
 						<AdjustableIcon className="rounded text-700 h-[var(--step-3)] w-[var(--step-3)]" icon={feather.Feather} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_24px)] cursor-pointer items-center justify-center" onClick={async e => await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)}>
+					<div
+						className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_24px)] cursor-pointer items-center justify-center"
+						onClick={async e => await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)}
+					>
 						<AdjustableIcon className="rounded text-700 h-[var(--step-4)] w-[var(--step-4)]" icon={feather.Feather} />
 					</div>
 				</MouseTooltip>
@@ -184,9 +206,12 @@ export function Demo5() {
 		<DemoShell>
 			<div className="flex h-100% items-center justify-center gap-16">
 				<div className="flex items-center gap-8">
-					<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillA(curr => !curr)}>
+					{/* TODO: Extract component here */}
+					<div
+						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
+						onClick={e => setFillA(curr => !curr)}
+					>
 						<AdjustableIcon
-							// prettier-ignore
 							className="h-24 w-24 text-sky-700"
 							icon={feather.ThumbsUp}
 							fill={fillA ? "currentColor" : "none"}
@@ -195,9 +220,12 @@ export function Demo5() {
 					<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
-					<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillB(curr => !curr)}>
+					{/* TODO: Extract component here */}
+					<div
+						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
+						onClick={e => setFillB(curr => !curr)}
+					>
 						<AdjustableIcon
-							// prettier-ignore
 							className="h-24 w-24 text-sky-700"
 							icon={feather.ThumbsDown}
 							fill={fillB ? "currentColor" : "none"}
@@ -206,9 +234,12 @@ export function Demo5() {
 					<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
-					<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillC(curr => !curr)}>
+					{/* TODO: Extract component here */}
+					<div
+						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
+						onClick={e => setFillC(curr => !curr)}
+					>
 						<AdjustableIcon
-							// prettier-ignore
 							className="h-24 w-24 text-sky-700"
 							icon={feather.Heart}
 							fill={fillC ? "currentColor" : "none"}
@@ -217,15 +248,17 @@ export function Demo5() {
 					<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
-					<div className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200" onClick={e => setFillD(curr => !curr)}>
+					{/* TODO: Extract component here */}
+					<div
+						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
+						onClick={e => setFillD(curr => !curr)}
+					>
 						<AdjustableIcon
-							// prettier-ignore
 							className="h-24 w-24 text-sky-700"
 							icon={feather.Bookmark}
 							fill={fillD ? "currentColor" : "none"}
 						/>
 					</div>
-					{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
 				</div>
 			</div>
 		</DemoShell>
@@ -239,7 +272,10 @@ export function Demo6() {
 				<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-white pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
 					{/* LHS */}
 					<div className="flex h-48 w-48 items-center justify-center">
-						<AdjustableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather.Feather} />
+						<AdjustableIcon
+							className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white"
+							icon={feather.Feather}
+						/>
 					</div>
 					{/* RHS */}
 					<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>

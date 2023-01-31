@@ -11,7 +11,17 @@ import { AdjustableIcon } from "../components/adjustable-icon"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
 import { PageTransition } from "../components/page-transition"
 import { TypographyCaps } from "../components/typography"
-import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
+import {
+	FormatAs,
+	sizeInitial,
+	sizeMax,
+	sizeMin,
+	sizeStep,
+	strokeWidthInitial,
+	strokeWidthMax,
+	strokeWidthMin,
+	strokeWidthStep,
+} from "../constants"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { download } from "../lib/download"
@@ -59,32 +69,6 @@ function useRouterName() {
 	return name
 }
 
-//// ? code.split("\n").map((ys, y) => (
-//// 		<div key={y} className="relative px-24 pl-48">
-//// 			<div className="absolute top-0 bottom-0 left-0 select-none">
-//// 				<div className="w-32 text-right text-gray-400">{y + 1}</div>
-//// 			</div>
-//// 			{ys || <br />}
-//// 			{ys.length > 0 ? y === 0 ? <CommentLink formatAs={formatAs}>{ys}</CommentLink> : ys : <br />}
-//// 		</div>
-////   ))
-//// : tokens.map((ys, y) => (
-//// 		<div key={y} className="relative px-24 pl-48">
-//// 			<div className="absolute top-0 bottom-0 left-0 select-none">
-//// 				<div className="w-32 text-right text-gray-400">{y + 1}</div>
-//// 			</div>
-//// 			{ys.length > 0 ? (
-//// 				ys.map(({ color, content }, x) => (
-//// 					<span key={x} style={{ color }}>
-//// 						{y === 0 ? <CommentLink formatAs={formatAs}>{content}</CommentLink> : content}
-//// 					</span>
-//// 				))
-//// 			) : (
-//// 				<br />
-//// 			)}
-//// 		</div>
-////   ))}
-
 function Preview() {
 	const name = useRouterName()
 
@@ -105,18 +89,11 @@ function Preview() {
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-24">
-								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-400">{y + 1}</div>
-								</div> */}
-								{/* {ys || <br />} */}
 								{ys.length > 0 ? y === 0 ? <CommentLink formatAs={formatAs}>{ys}</CommentLink> : ys : <br />}
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
 							<div key={y} className="px-24">
-								{/* <div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-400">{y + 1}</div>
-								</div> */}
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>
@@ -134,7 +111,6 @@ function Preview() {
 		// FIXME: Lol what the hell is going on here?
 		<div>
 			<div
-				// prettier-ignore
 				className="flex aspect-[1.5] items-center justify-center rounded-24 bg-white shadow-[var(--shadow-2)]"
 				data-background-dots
 			>
@@ -182,7 +158,6 @@ function FormatButton() {
 
 	return (
 		<AriaSimpleDropDown<FormatAs>
-			// prettier-ignore
 			className="relative flex flex-col"
 			show={show}
 			setShow={setShow}
@@ -197,7 +172,11 @@ function FormatButton() {
 						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
 				>
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" style={{ color: hex }} icon={icon} />
+						<Icon
+							className="h-16 w-16 group-hover/button:group-active/button:text-white"
+							style={{ color: hex }}
+							icon={icon}
+						/>
 					</div>
 					<TypographyCaps className="text-gray-700">
 						FILE FORMAT: <span className="inline-flex h-0 w-24">{desc}</span>
@@ -230,7 +209,10 @@ function FormatButton() {
 						}}
 						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
 					>
-						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white shadow-[var(--shadow-6),_var(--base-shadow-6)]">
+						<div
+							ref={ref}
+							className="flex flex-col overflow-hidden rounded-12 bg-white shadow-[var(--shadow-6),_var(--base-shadow-6)]"
+						>
 							<DropDownItem
 								// prettier-ignore
 								id="svg"
@@ -286,9 +268,14 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 			{...props}
 		>
 			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-				<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white" icon={pressed ? feather.Check : icon} />
+				<Icon
+					className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white"
+					icon={pressed ? feather.Check : icon}
+				/>
 			</div>
-			<TypographyCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</TypographyCaps>
+			<TypographyCaps className="text-gray-700 group-hover/button:group-active/button:text-white">
+				{children}
+			</TypographyCaps>
 		</button>
 	)
 }
@@ -313,7 +300,6 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 			</div>
 			{/* RHS */}
 			<div className="flex h-16 w-48 items-center rounded-1e3 bg-[var(--hairline-color)] group-aria-checked/checkbox:bg-[var(--theme-color)]">
-				{/* prettier-ignore */}
 				<motion.div
 					animate={{ x: props.checked ? "50%" : 0 }}
 					transition={{
@@ -327,7 +313,8 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 	)
 }
 
-const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
+const linearGradientFromHell =
+	"bg-[linear-gradient(to_right,_var(--theme-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
 
 //// function useMedia(query: string, initialValue: boolean) {
 //// 	const [state, setState] = useState(initialValue)
@@ -344,7 +331,12 @@ const linearGradientFromHell = "bg-[linear-gradient(to_right,_var(--theme-color)
 //// 	return state
 //// }
 
-function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: SVG } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+function CompoundSlider({
+	icon,
+	resetHandler,
+	children,
+	...props
+}: { icon: SVG } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -365,7 +357,6 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: SVG 
 							: `${props.value} PX`}
 					</TypographyCaps>
 					<button
-						// prettier-ignore
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}
 						aria-label={`Reset ${props.value < sizeMin ? "stroke-width" : "size"}`}
@@ -379,12 +370,14 @@ function CompoundSlider({ icon, resetHandler, children, ...props }: { icon: SVG 
 					<div ref={setTrack} className="flex h-24 flex-col justify-center">
 						<div className={`flex h-6 items-center rounded-1e3 ${linearGradientFromHell}`}>
 							<div
-								// prettier-ignore
 								ref={setThumb}
 								className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white shadow-[var(--shadow-6)]"
 								// Statically determine the width and then translateX to center
 								// before <AriaSlider> mounts
-								style={{ transform: "translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))" }}
+								style={{
+									transform:
+										"translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))",
+								}}
 							></div>
 						</div>
 					</div>
@@ -438,7 +431,6 @@ export function Aside() {
 					<FormatButton />
 					<div className="grid grid-cols-2 gap-8">
 						<ActionButton
-							// prettier-ignore
 							icon={feather.Clipboard}
 							onClick={handleClickCopy}
 							aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
@@ -446,7 +438,6 @@ export function Aside() {
 							COPY
 						</ActionButton>
 						<ActionButton
-							// prettier-ignore
 							icon={feather.Download}
 							onClick={handleClickDownload}
 							aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}
@@ -458,10 +449,13 @@ export function Aside() {
 			</Section>
 			<hr />
 			<Section>
-				{/* prettier-ignore */}
 				<CompoundSlider
 					icon={feather.Maximize2}
-					min={sizeMin} max={sizeMax} step={sizeStep} value={size} setValue={setSize}
+					min={sizeMin}
+					max={sizeMax}
+					step={sizeStep}
+					value={size}
+					setValue={setSize}
 					resetHandler={e => setSize(sizeInitial)}
 					aria-label="Preview size"
 				>
@@ -470,10 +464,13 @@ export function Aside() {
 			</Section>
 			<hr />
 			<Section>
-				{/* prettier-ignore */}
 				<CompoundSlider
 					icon={feather.Minimize2}
-					min={strokeWidthMin} max={strokeWidthMax} step={strokeWidthStep} value={strokeWidth} setValue={setStrokeWidth}
+					min={strokeWidthMin}
+					max={strokeWidthMax}
+					step={strokeWidthStep}
+					value={strokeWidth}
+					setValue={setStrokeWidth}
 					resetHandler={e => setStrokeWidth(strokeWidthInitial)}
 					aria-label="Preview stroke-width"
 				>

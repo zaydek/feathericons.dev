@@ -2,7 +2,7 @@ import * as feather from "../data/react-feather"
 
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
-import { getStringFromReactElements } from "../aria/utils"
+import { getStringFromChildren } from "../aria/utils"
 import { cx } from "../lib/cx"
 import { Icon, SVG } from "../lib/react/icon"
 import { ShikiContext } from "../providers/shiki"
@@ -25,7 +25,7 @@ function parseId(str: string) {
 
 export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = useMemo(() => {
-		const id = parseId(getStringFromReactElements(children as any))
+		const id = parseId(getStringFromChildren(children as any))
 		const href = `#${id}`
 		return [id, href] as const
 	}, [children]) // 🤷‍♀️
@@ -33,7 +33,11 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h1 id={id} className="group/header relative text-black" {...props}>
 			{children}
-			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
+			<a
+				href={href}
+				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
+					group-hover/header:opacity-100"
+			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h1>
@@ -42,7 +46,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 
 export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [id, href] = useMemo(() => {
-		const id = parseId(getStringFromReactElements(children as any))
+		const id = parseId(getStringFromChildren(children as any))
 		const href = `#${id}`
 		return [id, href] as const
 	}, [children]) // 🤷‍♀️
@@ -50,7 +54,11 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	return (
 		<h2 id={id} className="group/header relative text-black" {...props}>
 			{children}
-			<a href={href} className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0 group-hover/header:opacity-100">
+			<a
+				href={href}
+				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
+					group-hover/header:opacity-100"
+			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</h2>
@@ -77,7 +85,11 @@ export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-export function Pre({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
+export function Pre({
+	lang,
+	children: code,
+	...props
+}: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -92,31 +104,6 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 		// TODO
 		<pre className="overflow-auto" {...props}>
 			<code>
-				{/* {tokens === null
-					? code.split("\n").map((ys, y) => (
-							<div key={y} className="relative px-48">
-								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{y + 1}</div>
-								</div>
-								{ys || <br />}
-							</div>
-					  ))
-					: tokens.map((ys, y) => (
-							<div key={y} className="relative px-48">
-								<div className="absolute top-0 bottom-0 left-0 select-none">
-									<div className="w-32 text-right text-gray-500">{y + 1}</div>
-								</div>
-								{ys.length > 0 ? (
-									ys.map(({ color, content }, x) => (
-										<span key={x} style={{ color }}>
-											{content}
-										</span>
-									))
-								) : (
-									<br />
-								)}
-							</div>
-					  ))} */}
 				{tokens === null
 					? code.split("\n").map((ys, y) => <div key={y}>{ys || <br />}</div>)
 					: tokens.map((ys, y) => (

@@ -15,7 +15,16 @@ export type TransitionProps = {
 	delay?:   number
 } & { children: Arrayable<ReactElement> }
 
-export function Transition({ when, unmount, s1: start, s2: end, duration, ease = "ease", delay = 0, children }: TransitionProps) {
+export function Transition({
+	when,
+	unmount,
+	s1: start,
+	s2: end,
+	duration,
+	ease  = "ease", // prettier-ignore
+	delay = 0,
+	children,
+}: TransitionProps) {
 	// prettier-ignore
 	const [show, setShow] = useState(!(
 		 (when && unmount === "end") ||

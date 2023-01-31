@@ -8,8 +8,8 @@ export function MouseTooltip({
 	pos,
 	content,
 	children,
-}: PropsWithChildren<{
-	pos:     "start" | "center" | "end" // prettier-ignore
+}: /* prettier-ignore */ PropsWithChildren<{
+	pos:     "start" | "center" | "end"
 	content: ReactNode
 }>) {
 	const [hover, setHover] = useState(false)

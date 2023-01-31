@@ -21,13 +21,11 @@ function ForegroundMask() {
 				{/* LHS */}
 				<div className="relative">
 					<div
-						// prettier-ignore
 						className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
 						data-background-hero
 					/>
 					<div className="absolute top-0 right-0">
 						<div
-							// prettier-ignore
 							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
 							data-background-hero
 						/>
@@ -35,19 +33,16 @@ function ForegroundMask() {
 				</div>
 				{/* RHS */}
 				<div
-					// prettier-ignore
 					className="h-[var(--inset-y)] w-100% max-w-[calc(var(--app-w)_-_var(--app-rounding)_*_2)]"
 					data-background-hero
 				/>
 				<div className="relative">
 					<div
-						// prettier-ignore
 						className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
 						data-background-hero
 					/>
 					<div className="absolute top-0 left-0">
 						<div
-							// prettier-ignore
 							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
 							data-background-hero
 						/>

@@ -64,7 +64,13 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 
 // TODO: It's not clear these need to be memoized, maybe if we add
 // highlighting...
-const MemoGridItem = memo(function GridItem({ name, indexes }: { name: keyof typeof manifest; indexes: readonly [number, number] | null }) {
+const MemoGridItem = memo(function GridItem({
+	name,
+	indexes,
+}: /* prettier-ignore */ {
+	name:    keyof typeof manifest
+	indexes: readonly [number, number] | null
+}) {
 	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
 
 	return (
@@ -112,7 +118,11 @@ export default function Component() {
 		<PageTransition>
 			<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))] px-[var(--gutter-x-1)]">
 				{Object.keys(searchResults).map(name => (
-					<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
+					<GridItem
+						key={name}
+						name={name as keyof typeof manifest}
+						indexes={searchResults[name as keyof typeof manifest]!}
+					/>
 				))}
 			</div>
 		</PageTransition>
