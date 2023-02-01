@@ -15,7 +15,7 @@ feather:
 
 og:
 	npx concurrently \
-		'npx tailwind -c tailwind.config.js --content og/vite/src/index.tsx -o og/vite/src/tw.css -w' \
+		'npx tailwind -c tailwind.config.js --content og/vite/src/index.tsx -o og/vite/src/tw.generated.css -w' \
 		'cd og/vite && npx vite dev'
 
 build:
