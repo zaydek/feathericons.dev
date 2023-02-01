@@ -1,4 +1,13 @@
-.PHONY: feather og build serve
+.PHONY: clean clean-og feather og build serve
+
+clean:
+	-rm -r node_modules package-lock.json
+	npm i
+
+clean-og:
+	cd og/vite
+	-rm -r node_modules package-lock.json
+	npm i
 
 feather:
 	npx tsx scripts/feather.ts
