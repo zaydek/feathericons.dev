@@ -42,6 +42,3 @@ next-env.d.ts
 # Userland
 
 *.generated.*
-
-# E.g. nested directories
-node_modules
