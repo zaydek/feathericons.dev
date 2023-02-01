@@ -11,12 +11,12 @@ async function main() {
 		<?xml version="1.0" encoding="UTF-8"?>
 		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 			<url>
-				<loc>https://feathericons.dev</loc>
+				<loc>https://feathericons.com</loc>
 				<lastmod>${DATE}</lastmod>
 			</url>
 			${Object.keys(manifest).map(name => `
 			<url>
-				<loc>https://feathericons.dev/${toKebabCase(name)}</loc>
+				<loc>https://feathericons.com/${toKebabCase(name)}</loc>
 				<lastmod>${DATE}</lastmod>
 			</url>`.replace("\n\t\t", "\t\t")).join("\n").trimStart()}
 		</urlset>

@@ -5,11 +5,11 @@ import { toKebabCase } from "../lib/cases"
 
 // prettier-ignore
 const URL =
-	"https://feathericons.dev"
+	"https://feathericons.com"
 
 // prettier-ignore
 const OG_URL =
-	"https://feathericons.dev/feather-og.png"
+	"https://feathericons.com/feather-og.png"
 
 // prettier-ignore
 const TITLE =
