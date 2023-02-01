@@ -2,15 +2,16 @@ import "./tw.generated.css"
 
 import * as feather from "../../../src/data/react-feather"
 
+import { useMemo } from "react"
 import { createRoot } from "react-dom/client"
 import { Icon } from "../../../src/lib/react/icon"
 
-function OgImage() {
+function OgImage({ name }: { name: keyof typeof feather }) {
 	return (
 		<div className="relative h-100%">
-			<div id="ig" className="flex h-100% items-center justify-center bg-[rgb(59,_134,_247)]">
+			<div id="og" className="flex h-100% items-center justify-center bg-[rgb(59,_134,_247)]">
 				<div className="aspect-square h-[31.25%]">
-					<Icon className="h-100% w-100% text-white" icon={feather.Feather} />
+					<Icon className="h-100% w-100% text-white" icon={feather[name]} />
 				</div>
 			</div>
 			<div className="contents" style={{ "--inset": "64px", "--size": "96px" } as any}>
@@ -32,11 +33,19 @@ function OgImage() {
 }
 
 function App() {
+	const name = useMemo(() => {
+		const name = window.location.pathname.slice(1)
+		if (!(name in feather)) {
+			throw new Error("Internal error")
+		}
+		return name as keyof typeof feather
+	}, [])
+
 	return (
 		<div className="flex h-screen items-center justify-center">
 			{/* https://support.wix.com/en/article/wix-editor-recommended-ogimage-size */}
 			<div className="h-[630px] w-[1200px]">
-				<OgImage />
+				<OgImage name={name} />
 			</div>
 		</div>
 	)
