@@ -19,7 +19,7 @@ og-dev:
 		'cd og/vite && npx vite dev'
 
 og:
-	npx esbuild .\scripts\og.ts --platform=node --format=cjs | node
+	npx esbuild scripts/og.ts --platform=node --format=cjs | node
 
 build:
 	npx next build
