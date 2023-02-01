@@ -1,17 +1,33 @@
 .PHONY: *
 
-clean:
+esrun:
+	npx esbuild \
+		--bundle \
+		--external:jsdom \
+		--format=cjs \
+		--platform=node \
+		--sourcemap=inline \
+	$(entrypoint) \
+		| node --enable-source-maps
+
+################################################################################
+
+purge:
 	-rm -r node_modules package-lock.json
 	npm i
 
-clean-og:
+purge-og:
 	cd og/vite
 	-rm -r node_modules package-lock.json
 	npm i
 
+################################################################################
+
 feather:
-	npx tsx scripts/feather.ts
-	npx tsx scripts/feather-format.ts
+	make esrun entrypoint=scripts/feather-cache.ts
+	make esrun entrypoint=scripts/feather-export.ts
+
+################################################################################
 
 og-dev:
 	npx concurrently \
@@ -19,12 +35,14 @@ og-dev:
 		'cd og/vite && npx vite dev'
 
 og:
-	npx esbuild scripts/og.ts --platform=node --format=cjs | node
+	make esrun entrypoint=scripts/og.ts
 
-build:
+################################################################################
+
+out:
 	npx next build
 	npx next export
-	npx tsx scripts/sitemap.ts
+	make esrun entrypoint=scripts/sitemap.ts
 
-serve:
+serve-out:
 	npx serve out -l 3000 -n

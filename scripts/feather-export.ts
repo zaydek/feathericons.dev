@@ -1,14 +1,14 @@
 import fs from "node:fs"
 
 import JSZip from "jszip"
-import featherTags from "./_feather-tags.json"
-import feather from "./_feather.json"
+import featherTags from "./_feather-tags.generated.json"
+import feather from "./_feather.generated.json"
 
 import { JSDOM } from "jsdom"
 import { toTitleCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
-import { formatAsSvg, formatAsTsx } from "./formatting"
-import { stringify } from "./stringify"
+import { formatAsSvg, formatAsTsx } from "./utils/format"
+import { stringify } from "./utils/stringify"
 
 const omitAttrs = ["class"]
 
@@ -27,7 +27,7 @@ async function feather_svg() {
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
 		const codeAsSvg = formatAsSvg(name, code, {
 			//// license: `<!-- Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather -->`,
-			comment: `https://feathericons.dev/${name}`,
+			comment: `https://feathericons.com/${name}`,
 		})
 		// Prefer spaces because this can be downloaded
 		await fs.promises.writeFile(`src/data/feather/${name}.svg`, codeAsSvg + "\n")
@@ -66,7 +66,7 @@ async function feather_tsx() {
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: true, omitAttrs })
 		const codeAsTsx = formatAsTsx(toTitleCase(name), code, {
 			//// license: `/*! Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather */`,
-			comment: `https://feathericons.dev/${name}`,
+			comment: `https://feathericons.com/${name}`,
 		})
 		await fs.promises.writeFile(`src/data/react-feather/${toTitleCase(name)}.tsx`, codeAsTsx + "\n")
 	}

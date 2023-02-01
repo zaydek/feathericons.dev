@@ -10,8 +10,8 @@ import {
 	useMemo,
 	useState,
 } from "react"
-import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/formatting"
-import { stringify } from "../../scripts/stringify"
+import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/utils/format"
+import { stringify } from "../../scripts/utils/stringify"
 import { FormatAs, jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "../constants"
 import { manifest } from "../data/react-feather-manifest"
 import { toKebabCase } from "../lib/cases"
@@ -121,7 +121,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsSvg(toKebabCase(selectedName), code, {
-				comment: `https://feathericons.dev/${toKebabCase(selectedName)}`,
+				comment: `https://feathericons.com/${toKebabCase(selectedName)}`,
 			}).replaceAll("\t", "  ")
 		} else if (formatAs === "jsx") {
 			const code = stringify(selectedSvgElement, {
@@ -129,7 +129,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsJsx(selectedName, code, {
-				comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=jsx`,
+				comment: `https://feathericons.com/${toKebabCase(selectedName)}?format=jsx`,
 			}).replaceAll("\t", "  ")
 		} else {
 			const code = stringify(selectedSvgElement, {
@@ -137,7 +137,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsTsx(selectedName, code, {
-				comment: `https://feathericons.dev/${toKebabCase(selectedName)}?format=tsx`,
+				comment: `https://feathericons.com/${toKebabCase(selectedName)}?format=tsx`,
 			}).replaceAll("\t", "  ")
 		}
 	}, [formatAs, selectedName, selectedSvgElement])

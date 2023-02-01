@@ -1,4 +1,4 @@
-import * as fs from "fs"
+import fs from "node:fs"
 
 import { manifest } from "../src/data/react-feather-manifest"
 import { toKebabCase } from "../src/lib/cases"

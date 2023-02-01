@@ -1,4 +1,4 @@
-import { toCamelCase } from "../src/lib/cases"
+import { toCamelCase } from "../../src/lib/cases"
 
 type Configuration = {
 	strictJsx: boolean

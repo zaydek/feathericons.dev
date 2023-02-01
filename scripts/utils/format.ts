@@ -1,4 +1,4 @@
-import { detab, tab } from "../src/lib/format"
+import { detab, tab } from "../../src/lib/format"
 
 export function formatAsSvg(name: string, code: string, { comment }: { comment: string }) {
 	return detab(`
