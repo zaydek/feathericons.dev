@@ -29,7 +29,6 @@ async function feather_svg() {
 			//// license: `<!-- Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather -->`,
 			comment: `https://feathericons.com/${name}`,
 		})
-		// Prefer spaces because this can be downloaded
 		await fs.promises.writeFile(`src/data/feather/${name}.svg`, codeAsSvg + "\n")
 		zip.file(`${name}.svg`, codeAsSvg.replaceAll("\t", "  ") + "\n")
 	}

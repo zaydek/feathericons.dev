@@ -4,6 +4,7 @@ import * as feather from "../../../src/data/react-feather"
 
 import { useMemo } from "react"
 import { createRoot } from "react-dom/client"
+import { toTitleCase } from "../../../src/lib/cases"
 import { Icon } from "../../../src/lib/react/icon"
 
 function OgImage({ name }: { name: keyof typeof feather }) {
@@ -34,7 +35,7 @@ function OgImage({ name }: { name: keyof typeof feather }) {
 
 function App() {
 	const name = useMemo(() => {
-		const name = window.location.pathname.slice(1)
+		const name = toTitleCase(window.location.pathname.slice(1))
 		if (!(name in feather)) {
 			throw new Error("Internal error")
 		}
