@@ -8,13 +8,23 @@ import { cx } from "../lib/cx"
 import { Icon, SVG } from "../lib/react/icon"
 import { ShikiContext } from "../providers/shiki"
 
+////////////////////////////////////////////////////////////////////////////////
+
 export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		<article className="prose text-gray-900" {...props}>
+		<article
+			// Use !my-* because of space-y-*
+			className="prose space-y-16 text-gray-900
+				[&_>_:not(pre)]:mx-64
+				[&_>_pre]:!my-32"
+			{...props}
+		>
 			{children}
 		</article>
 	)
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 function parseId(str: string) {
 	return str
@@ -70,6 +80,8 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	)
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 export function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
 	return <p {...props}>{children}</p>
 }
@@ -90,10 +102,17 @@ export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
+//// function countDigits(num: number) {
+//// 	if (num === 0) return 1
+//// 	return Math.trunc(Math.log10(Math.abs(num))) + 1
+//// }
+
 export function Pre({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
+	const [click1, setClick1] = useState(false)
+	const [click2, setClick2] = useState(false)
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
@@ -101,14 +120,33 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 		setTokens(tokens)
 	}, [code, highlighter, lang])
 
+	useEffect(() => {
+		if (!click1) { return } // prettier-ignore
+		const d = window.setTimeout(() => {
+			setClick1(false)
+		}, 1e3)
+		return () => window.clearTimeout(d)
+	}, [click1])
+
+	useEffect(() => {
+		if (!click2) { return } // prettier-ignore
+		const d = window.setTimeout(() => {
+			setClick2(false)
+		}, 1e3)
+		return () => window.clearTimeout(d)
+	}, [click2])
+
 	return (
-		// TODO
-		<pre className="overflow-auto" {...props}>
+		<pre className="relative overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
 			<code>
 				{tokens === null
-					? code.split("\n").map((ys, y) => <div key={y}>{ys || <br />}</div>)
+					? code.split("\n").map((ys, y) => (
+							<div key={y} className="px-64">
+								{ys || <br />}
+							</div>
+					  ))
 					: tokens.map((ys, y) => (
-							<div key={y}>
+							<div key={y} className="px-64">
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>
@@ -121,7 +159,41 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 							</div>
 					  ))}
 			</code>
+			<div className="absolute top-8 right-64 hidden lg:block">
+				<div className="flex">
+					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick1(true)}>
+						<div className="flex h-32 w-32 items-center justify-center">
+							<Icon
+								className="h-16 w-16 text-[#1570fb]"
+								icon={click1 ? feather.Check : feather.Clipboard}
+								// Use a slightly thicker stroke when checked
+								{...(click1 && { strokeWidth: 2.5 })}
+							/>
+						</div>
+						<TypeCaps>COPY</TypeCaps>
+					</div>
+					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick2(true)}>
+						<div className="flex h-32 w-32 items-center justify-center">
+							<Icon
+								className="h-16 w-16 text-[#1570fb]"
+								icon={click2 ? feather.Check : feather.Download}
+								// Use a slightly thicker stroke when checked
+								{...(click2 && { strokeWidth: 2.5 })}
+							/>
+						</div>
+						<TypeCaps>DOWNLOAD</TypeCaps>
+					</div>
+				</div>
+			</div>
 		</pre>
+	)
+}
+
+function TypeCaps({ className, children, ...props }: JSX.IntrinsicElements["div"]) {
+	return (
+		<div className={cx("font-sans text-[11px] font-[500] slashed-zero tabular-nums leading-[normal] tracking-[0.05em]", className)} {...props}>
+			{children}
+		</div>
 	)
 }
 
@@ -160,6 +232,7 @@ export function Code({ children: code, ...props }: { children: string } & JSX.In
 	)
 }
 
+// TODO: DEPRECATE?
 function HeadingIcon({ className, icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["svg"]) {
 	if (children === undefined || children === null) {
 		return <Icon className={cx("inline-block h-[1.1em] w-[1.1em]", className)} icon={icon} {...props} />

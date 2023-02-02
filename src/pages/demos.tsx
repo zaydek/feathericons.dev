@@ -163,8 +163,9 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 								[&:not([aria-disabled])]:cursor-pointer
 								[&:not([aria-disabled])]:hover:bg-gray-100
 								[&:not([aria-disabled])]:hover:active:bg-gray-200"
-							// onClick={e => window.history.forward()}
-							aria-disabled
+							onClick={e => window.history.forward()}
+							// TODO
+							//// aria-disabled
 						>
 							<ResizableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.ArrowRight} />
 						</button>
@@ -215,28 +216,53 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 			<div className="flex h-100% items-center justify-center gap-16">
 				<div className="flex items-center gap-8">
 					<div
-						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
+							[&[data-fill]]:cursor-pointer
+							[&[data-fill]]:hover:bg-gray-200
+							[&[data-fill]]:hover:active:bg-gray-300"
 						onClick={e => setFill1(curr => !curr)}
+						data-fill
 					>
-						<ResizableIcon className="h-24 w-24 text-gray-700" icon={feather.ThumbsUp} fill={fill1 ? "currentColor" : "none"} />
+						<ResizableIcon
+							className="h-24 w-24 text-gray-700
+								[&[data-fill]]:fill-current"
+							icon={feather.ThumbsUp}
+							data-fill={fill1 || undefined}
+						/>
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
 					<div
-						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
+							[&[data-fill]]:cursor-pointer
+							[&[data-fill]]:hover:bg-gray-200
+							[&[data-fill]]:hover:active:bg-gray-300"
 						onClick={e => setFill2(curr => !curr)}
+						data-fill
 					>
-						<ResizableIcon className="h-24 w-24 text-gray-700" icon={feather.ThumbsDown} fill={fill2 ? "currentColor" : "none"} />
+						<ResizableIcon
+							className="h-24 w-24 text-gray-700
+								[&[data-fill]]:fill-current"
+							icon={feather.ThumbsDown}
+							data-fill={fill2 || undefined}
+						/>
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
 					<div
-						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
+							[&[data-fill]]:cursor-pointer
+							[&[data-fill]]:hover:bg-gray-200
+							[&[data-fill]]:hover:active:bg-gray-300"
 						onClick={e => setFill3(curr => !curr)}
 					>
-						<ResizableIcon className="h-24 w-24 text-gray-700" icon={feather[name]} fill={fill3 ? "currentColor" : "none"} />
+						<ResizableIcon
+							className="h-24 w-24 text-gray-700
+								[&[data-fill]]:fill-current"
+							icon={feather[name]}
+						/>
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>

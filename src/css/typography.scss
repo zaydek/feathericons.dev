@@ -13,54 +13,54 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-:root {
-	--gutter-x-1: 16px;
-	--gutter-x-2: 16px;
-}
-@media (min-width: 640px)  { :root { --gutter-x-1: 24px; --gutter-x-2: 12px; } }
-@media (min-width: 1024px) { :root { --gutter-x-1: 48px; --gutter-x-2: 24px; } }
-
-.prose > * + * {
-	margin:
-		8px
-		var(--gutter-x-1);
-}
-.prose > :first-child { margin-top:    0; }
-.prose > :last-child  { margin-bottom: 0; }
-
-.prose > :is(h1, h2, h3, h4, h5, h6) {
-	margin:
-		32px
-		var(--gutter-x-1);
-}
-.prose > ol {
-	margin:
-		16px
-		calc(var(--gutter-x-1) + var(--gutter-x-2));
-}
-.prose > pre {
-	margin:
-		32px
-		0;
-	padding:
-		0
-		calc(var(--gutter-x-1) + var(--gutter-x-2));
-}
-.prose > figure {
-	margin:
-		64px
-		var(--gutter-x-1);
-}
-.prose > hr {
-	margin:
-		32px
-		0;
-	@media (min-width: 512px) {
-		margin:
-			32px
-			var(--gutter-x-1);
-	}
-}
+//// :root {
+//// 	--gutter-x-1: 16px;
+//// 	--gutter-x-2: 16px;
+//// }
+//// @media (min-width: 640px)  { :root { --gutter-x-1: 24px; --gutter-x-2: 12px; } }
+//// @media (min-width: 1024px) { :root { --gutter-x-1: 48px; --gutter-x-2: 24px; } }
+////
+///// .prose > * + * {
+///// 	margin:
+///// 		8px
+///// 		var(--gutter-x-1);
+///// }
+///// .prose > :first-child { margin-top:    0; }
+///// .prose > :last-child  { margin-bottom: 0; }
+/////
+///// .prose > :is(h1, h2, h3, h4, h5, h6) {
+///// 	margin:
+///// 		32px
+///// 		var(--gutter-x-1);
+///// }
+///// .prose > ol {
+///// 	margin:
+///// 		16px
+///// 		calc(var(--gutter-x-1) + var(--gutter-x-2));
+///// }
+///// .prose > pre {
+///// 	margin:
+///// 		32px
+///// 		0;
+///// 	padding:
+///// 		0
+///// 		calc(var(--gutter-x-1) + var(--gutter-x-2));
+///// }
+///// .prose > figure {
+///// 	margin:
+///// 		64px
+///// 		var(--gutter-x-1);
+///// }
+///// .prose > hr {
+///// 	margin:
+///// 		32px
+///// 		0;
+///// 	@media (min-width: 512px) {
+///// 		margin:
+///// 			32px
+///// 			var(--gutter-x-1);
+///// 	}
+///// }
 
 ////////////////////////////////////////////////////////////////////////////////
 

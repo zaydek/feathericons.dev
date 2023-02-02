@@ -29,11 +29,11 @@ pre, code {
 
 svg { overflow: visible; }
 
-[role] { cursor: pointer; user-select: none; }
-[role=slider] {
-	cursor: grab;
-	user-select: none;
-	&:active {
-		cursor: grabbing;
-	}
-}
+//// [role] { cursor: pointer; user-select: none; }
+//// [role=slider] {
+//// 	cursor: grab;
+//// 	user-select: none;
+//// 	&:active {
+//// 		cursor: grabbing;
+//// 	}
+//// }

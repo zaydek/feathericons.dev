@@ -161,10 +161,10 @@ function FormatButton() {
 						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" style={{ color: hex }} icon={icon} />
 					</div>
 					<TypographyCaps className="text-gray-700">
-						FILE FORMAT: <span className="inline-flex h-0 w-24">{desc}</span>
+						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
 					</TypographyCaps>
 				</div>
-				<div className="absolute top-0 right-0 bottom-0">
+				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
 						<Icon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
 					</div>
@@ -225,28 +225,32 @@ function FormatButton() {
 }
 
 function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
-	const [pressed, setPressed] = useState(false)
+	const [click, setClick] = useState(false)
 
 	useEffect(() => {
-		if (!pressed) { return } // prettier-ignore
+		if (!click) { return } // prettier-ignore
 		const d = window.setTimeout(() => {
-			setPressed(false)
+			setClick(false)
 		}, 1e3)
 		return () => window.clearTimeout(d)
-	}, [pressed])
+	}, [click])
 
 	return (
 		<button
 			className="group/button flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white shadow-[var(--shadow-2)]
 				hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 			onClick={e => {
-				setPressed(true)
+				setClick(true)
 				onClick?.(e)
 			}}
 			{...props}
 		>
 			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-				<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white" icon={pressed ? feather.Check : icon} />
+				<Icon
+					className="h-16 w-16 text-[#1570fb] group-hover/button:group-active/button:text-white"
+					icon={click ? feather.Check : icon}
+					{...(click && { strokeWidth: 2.5 })}
+				/>
 			</div>
 			<TypographyCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</TypographyCaps>
 		</button>
@@ -402,10 +406,20 @@ export function Aside() {
 				<div className="flex flex-col gap-8">
 					<FormatButton />
 					<div className="grid grid-cols-2 gap-8">
-						<ActionButton icon={feather.Clipboard} onClick={handleClickCopy} aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}>
+						<ActionButton
+							// prettier-ignore
+							icon={feather.Clipboard}
+							onClick={handleClickCopy}
+							aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
+						>
 							COPY
 						</ActionButton>
-						<ActionButton icon={feather.Download} onClick={handleClickDownload} aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}>
+						<ActionButton
+							// prettier-ignore
+							icon={feather.Download}
+							onClick={handleClickDownload}
+							aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}
+						>
 							DOWNLOAD
 						</ActionButton>
 					</div>
