@@ -8,7 +8,7 @@ const URL =
 	"https://feathericons.com"
 
 // prettier-ignore
-const OG_URL = (name: keyof typeof manifest) =>
+const OG_URL = (name: keyof typeof manifest | "index") =>
 	`https://feathericons.com/og/${toKebabCase(name).toLowerCase()}.png`
 
 // prettier-ignore
@@ -43,14 +43,14 @@ export function Meta({ name }: { name?: keyof typeof manifest }) {
 			<meta property="twitter:url" content={URL} />
 			<meta property="twitter:title" content={TITLE} />
 			<meta property="twitter:description" content={DESCRIPTION} />
-			<meta property="twitter:image" content={OG_URL(name ?? "Feather")} />
+			<meta property="twitter:image" content={OG_URL(name ?? "index")} />
 
 			{/* META */}
 			<meta property="og:type" content="website" />
 			<meta property="og:url" content={URL} />
 			<meta property="og:title" content={TITLE} />
 			<meta property="og:description" content={DESCRIPTION} />
-			<meta property="og:image" content={OG_URL(name ?? "Feather")} />
+			<meta property="og:image" content={OG_URL(name ?? "index")} />
 		</Head>
 	)
 }
