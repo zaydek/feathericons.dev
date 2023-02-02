@@ -2,7 +2,7 @@ import fs from "node:fs"
 
 import playwright from "playwright"
 
-const ANCHOR_SELECTOR = "css-xt128v"
+const UNPKG_ANCHOR_SELECTOR = "css-xt128v"
 
 async function main() {
 	const browser = await playwright.chromium.launch({ headless: false })
@@ -20,7 +20,7 @@ async function main() {
 	const hrefs = await page1.evaluate(async ([anchorSelector]) => {
 		const anchors = [...document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>].slice(3)
 		return anchors.map(a => a.href)
-	}, [ANCHOR_SELECTOR])
+	}, [UNPKG_ANCHOR_SELECTOR])
 
 	const dataset: { meta: { version: string }, data: Record<string, string> } = {
 		meta: { version },

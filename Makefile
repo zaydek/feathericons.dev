@@ -24,10 +24,10 @@ feather:
 
 ################################################################################
 
-out:
+build:
 	npx next build
 	npx next export
 	make esrun entrypoint=scripts/sitemap.ts
 
-serve-out:
+serve:
 	npx serve out -l 3000 -n

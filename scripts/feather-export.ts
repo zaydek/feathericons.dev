@@ -12,7 +12,7 @@ import { stringify } from "./utils/stringify"
 
 const omitAttrs = ["class"]
 
-async function feather_svg() {
+async function exportAsSvg() {
 	const zip = new JSZip()
 
 	// src/data/feather
@@ -38,7 +38,7 @@ async function feather_svg() {
 	await fs.promises.writeFile(`src/data/feather.zip`, buffer)
 }
 
-async function feather_tsx() {
+async function exportAsTsx() {
 	// src/data/react-feather-manifest.json
 	const data = Object.keys(feather.data).reduce<Record<string, string[]>>((acc, name) => {
 		acc[toTitleCase(name)] = featherTags[name as keyof typeof featherTags] ?? []
@@ -72,8 +72,8 @@ async function feather_tsx() {
 }
 
 async function main() {
-	await feather_svg()
-	await feather_tsx()
+	await exportAsSvg()
+	await exportAsTsx()
 }
 
 main()
