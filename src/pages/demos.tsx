@@ -149,24 +149,34 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 				{/* Use z-index to prevent box-shadow from being clipped by sibling */}
 				<div className="relative z-10 flex h-48 items-center gap-8 bg-white px-8 shadow-[var(--hairline-shadow-b)]">
 					<div className="flex">
-						<div
-							className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200"
+						<button
+							className="group/button flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
+								[&:not([aria-disabled])]:cursor-pointer
+								[&:not([aria-disabled])]:hover:bg-gray-100
+								[&:not([aria-disabled])]:hover:active:bg-gray-200"
 							onClick={e => window.history.back()}
 						>
-							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.ArrowLeft} />
-						</div>
-						<div
-							className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200"
-							onClick={e => window.history.forward()}
+							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.ArrowLeft} />
+						</button>
+						<button
+							className="group/button flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
+								[&:not([aria-disabled])]:cursor-pointer
+								[&:not([aria-disabled])]:hover:bg-gray-100
+								[&:not([aria-disabled])]:hover:active:bg-gray-200"
+							// onClick={e => window.history.forward()}
+							aria-disabled
 						>
-							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.ArrowRight} />
-						</div>
-						<div
-							className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200"
+							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.ArrowRight} />
+						</button>
+						<button
+							className="group/button flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
+								[&:not([aria-disabled])]:cursor-pointer
+								[&:not([aria-disabled])]:hover:bg-gray-100
+								[&:not([aria-disabled])]:hover:active:bg-gray-200"
 							onClick={e => window.location.reload()}
 						>
-							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.RotateCw} />
-						</div>
+							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.RotateCw} />
+						</button>
 					</div>
 					<div className="flex grow justify-between rounded-1e3 bg-gray-100">
 						{/* LHS */}
@@ -241,7 +251,7 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 			<div className="flex h-100% items-center justify-center">
 				<div className="flex flex-col gap-8">
 					<a
-						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-24 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
+						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 						href={`http://twitter.com/intent/tweet?text=${encodeURI(
 							`Check out Feather – Simply beautiful open source designed by @colebemis\n\nThanks @colebemis and @username_ZAYDEK feathericons.com`
 						)}`}
@@ -254,7 +264,7 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
 					</a>
 					<a
-						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-24 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
+						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 						href={`http://twitter.com/intent/tweet?text=${encodeURI(
 							`Check out Feather – Simply beautiful open source designed by @colebemis\n\nThanks @colebemis and @username_ZAYDEK feathericons.com`
 						)}`}
