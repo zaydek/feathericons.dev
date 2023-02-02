@@ -33,7 +33,7 @@ export function Meta({ name }: { name?: keyof typeof manifest }) {
 	return (
 		<Head>
 			{/* GOOG */}
-			<title>{name === undefined ? TITLE : `Icon: ${name}`}</title>
+			<title>{name === undefined ? TITLE : name.replace(/([a-z])([A-Z0-9])/g, "$1 $2")}</title>
 			<meta name="description" content={DESCRIPTION} />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<link rel="icon" href={`/feather/${toKebabCase(name ?? "Feather")}.svg`} />
