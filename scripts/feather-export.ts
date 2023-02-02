@@ -12,37 +12,46 @@ import { stringify } from "./utils/stringify"
 
 const omitAttrs = ["class"]
 
-function getTags(kebab: keyof typeof _featherTags) {
-	return (_featherTags[kebab] ?? []) as string[]
+function getTags(arg: keyof typeof _featherTags) {
+	return _featherTags[arg] ?? []
 }
 
-function getMore(kebab: keyof typeof _featherTags) {
+function getMore(arg: keyof typeof _featherTags) {
 	const more = new Set<string>()
-	const chunks = kebab.split("-")
+	const argTags = _featherTags[arg] ?? []
 	ctx: for (const [name, tags] of Object.entries(_featherTags)) {
-		// Dedupe
+		// Compare argument name vs. name
 		for (const n of name.split("-")) {
-			for (const chunk of chunks) {
-				if (chunk === n) {
+			for (const k of arg.split("-")) {
+				if (k === n) {
 					more.add(name)
 					continue ctx
 				}
 			}
 		}
+		// Compare argument name vs. tags
 		for (const tag of tags) {
 			for (const t of tag.split("-")) {
-				for (const chunk of chunks) {
-					if (chunk === t) {
+				for (const k of arg.split("-")) {
+					if (k === t) {
 						more.add(name)
 						continue ctx
 					}
 				}
 			}
 		}
+		// Compare argument tags vs. tags
+		for (const argTag of argTags) {
+			for (const tag of tags) {
+				if (tag === argTag) {
+					more.add(name)
+					continue ctx
+				}
+			}
+		}
 	}
-	// prettier-ignore
 	return [...more]
-		.filter(m => m !== kebab) // Dedupe
+		.filter(m => m !== arg) // Dedupe
 		.map(m => toTitleCase(m))
 }
 

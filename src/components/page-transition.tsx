@@ -14,8 +14,12 @@ export function PageTransition({ children }: { children: Arrayable<ReactElement>
 	const forwards = path !== "/"
 
 	useEffect(() => {
-		queue(() => setStarted(true))
+		queue(() => {
+			console.log("started")
+			setStarted(true)
+		})
 		return () => {
+			console.log("ended")
 			setStarted(false)
 			setEnded(false)
 		}

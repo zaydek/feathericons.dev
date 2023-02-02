@@ -73,7 +73,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						<Fragment key={m}>
 							{index > 0 && " "}
 							<A href={`/${toKebabCase(m).toLowerCase()}`}>
-								<InlineIcon icon={feather[m]}>{m}</InlineIcon>
+								<InlineIcon icon={feather[m]}>{m.replace(/([a-z])([A-Z0-9])/g, "$1 $2")}</InlineIcon>
 							</A>
 							{index + 1 < manifest[name].more.length && ","}
 						</Fragment>

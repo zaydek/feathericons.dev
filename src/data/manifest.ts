@@ -19,7 +19,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "mirroring"
     ],
     "more": [
-      "Cast"
+      "Cast",
+      "Tv"
     ]
   },
   "AlertCircle": {
@@ -131,14 +132,25 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "camera",
       "photo"
     ],
-    "more": []
+    "more": [
+      "Camera",
+      "Crop",
+      "Instagram",
+      "VideoOff",
+      "Video",
+      "ZapOff",
+      "Zap"
+    ]
   },
   "Archive": {
     "tags": [
       "index",
       "box"
     ],
-    "more": []
+    "more": [
+      "Gift",
+      "Package"
+    ]
   },
   "ArrowDownCircle": {
     "tags": [],
@@ -432,7 +444,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "message"
     ],
     "more": [
-      "DollarSign"
+      "DollarSign",
+      "Inbox",
+      "Mail",
+      "Send"
     ]
   },
   "Award": {
@@ -499,6 +514,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "Bell",
       "Circle",
+      "Clock",
       "EyeOff",
       "MicOff",
       "PhoneOff",
@@ -518,14 +534,24 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "sound"
     ],
     "more": [
-      "BellOff"
+      "BellOff",
+      "Clock",
+      "Headphones",
+      "MicOff",
+      "Mic",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
     ]
   },
   "Bluetooth": {
     "tags": [
       "wireless"
     ],
-    "more": []
+    "more": [
+      "Wifi"
+    ]
   },
   "Bold": {
     "tags": [],
@@ -537,7 +563,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "library"
     ],
     "more": [
-      "Book"
+      "Book",
+      "Bookmark"
     ]
   },
   "Book": {
@@ -549,7 +576,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "library"
     ],
     "more": [
-      "BookOpen"
+      "BookOpen",
+      "Bookmark"
     ]
   },
   "Bookmark": {
@@ -560,6 +588,9 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "tag"
     ],
     "more": [
+      "BookOpen",
+      "Book",
+      "MapPin",
       "Star"
     ]
   },
@@ -616,6 +647,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "Aperture",
+      "Crop",
       "Instagram",
       "VideoOff",
       "Video",
@@ -672,6 +704,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerDownRight",
       "CornerLeftDown",
       "CornerRightDown",
+      "Maximize2",
       "ThumbsDown"
     ]
   },
@@ -772,10 +805,15 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "AlertCircle",
       "HelpCircle",
       "MessageCircle",
+      "MicOff",
+      "Mic",
       "PauseCircle",
       "PlayCircle",
       "PlusCircle",
+      "Power",
       "StopCircle",
+      "ToggleLeft",
+      "ToggleRight",
       "XCircle"
     ]
   },
@@ -792,6 +830,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "alarm"
     ],
     "more": [
+      "Bell",
+      "BellOff",
+      "Eye",
+      "EyeOff",
+      "Sunrise",
+      "Sunset",
       "Watch"
     ]
   },
@@ -804,7 +848,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CloudLightning",
       "CloudRain",
       "CloudSnow",
-      "Cloud"
+      "Cloud",
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Umbrella",
+      "Wind"
     ]
   },
   "CloudLightning": {
@@ -817,6 +867,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CloudRain",
       "CloudSnow",
       "Cloud",
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Umbrella",
+      "Wind",
       "ZapOff",
       "Zap"
     ]
@@ -852,7 +908,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CloudLightning",
       "CloudSnow",
       "Cloud",
-      "Umbrella"
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Umbrella",
+      "Wind"
     ]
   },
   "CloudSnow": {
@@ -864,7 +925,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CloudDrizzle",
       "CloudLightning",
       "CloudRain",
-      "Cloud"
+      "Cloud",
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Umbrella",
+      "Wind"
     ]
   },
   "Cloud": {
@@ -875,7 +942,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CloudDrizzle",
       "CloudLightning",
       "CloudRain",
-      "CloudSnow"
+      "CloudSnow",
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Umbrella",
+      "Wind"
     ]
   },
   "Code": {
@@ -895,13 +968,45 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "tags": [
       "logo"
     ],
-    "more": []
+    "more": [
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Codesandbox": {
     "tags": [
       "logo"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Coffee": {
     "tags": [
@@ -928,7 +1033,9 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "terminal",
       "prompt"
     ],
-    "more": []
+    "more": [
+      "Terminal"
+    ]
   },
   "Compass": {
     "tags": [
@@ -937,7 +1044,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "travel",
       "direction"
     ],
-    "more": []
+    "more": [
+      "MapPin",
+      "Map",
+      "Menu",
+      "Navigation",
+      "Navigation2"
+    ]
   },
   "Copy": {
     "tags": [
@@ -963,6 +1076,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightUp",
       "CornerUpLeft",
       "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsDown",
       "ToggleLeft"
     ]
@@ -981,6 +1099,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightUp",
       "CornerUpLeft",
       "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsDown",
       "ToggleRight"
     ]
@@ -999,6 +1122,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightUp",
       "CornerUpLeft",
       "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsDown",
       "ToggleLeft"
     ]
@@ -1017,6 +1145,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightUp",
       "CornerUpLeft",
       "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsUp",
       "ToggleLeft"
     ]
@@ -1035,6 +1168,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightUp",
       "CornerUpLeft",
       "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsDown",
       "ToggleRight"
     ]
@@ -1053,6 +1191,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightDown",
       "CornerUpLeft",
       "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsUp",
       "ToggleRight"
     ]
@@ -1071,6 +1214,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightDown",
       "CornerRightUp",
       "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsUp",
       "ToggleLeft"
     ]
@@ -1089,6 +1237,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightDown",
       "CornerRightUp",
       "CornerUpLeft",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ThumbsUp",
       "ToggleRight"
     ]
@@ -1106,14 +1259,21 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "payment",
       "cc"
     ],
-    "more": []
+    "more": [
+      "DollarSign",
+      "ShoppingBag",
+      "ShoppingCart"
+    ]
   },
   "Crop": {
     "tags": [
       "photo",
       "image"
     ],
-    "more": []
+    "more": [
+      "Aperture",
+      "Camera"
+    ]
   },
   "Crosshair": {
     "tags": [
@@ -1127,7 +1287,9 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "storage",
       "memory"
     ],
-    "more": []
+    "more": [
+      "HardDrive"
+    ]
   },
   "Delete": {
     "tags": [
@@ -1152,7 +1314,24 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "dvd",
       "music"
     ],
-    "more": []
+    "more": [
+      "FastForward",
+      "Headphones",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
+    ]
   },
   "DivideCircle": {
     "tags": [],
@@ -1187,7 +1366,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "payment"
     ],
     "more": [
-      "AtSign"
+      "AtSign",
+      "CreditCard"
     ]
   },
   "DownloadCloud": {
@@ -1274,6 +1454,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "BellOff",
       "Circle",
+      "Clock",
       "Eye",
       "MicOff",
       "PhoneOff",
@@ -1292,6 +1473,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "watch"
     ],
     "more": [
+      "Clock",
       "EyeOff"
     ]
   },
@@ -1300,14 +1482,45 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "logo",
       "social"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "FastForward": {
     "tags": [
       "music"
     ],
     "more": [
-      "SkipForward"
+      "Disc",
+      "Headphones",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
     ]
   },
   "Feather": {
@@ -1320,7 +1533,23 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "design",
       "tool"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "FileMinus": {
     "tags": [
@@ -1329,11 +1558,19 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "erase"
     ],
     "more": [
+      "Delete",
       "FilePlus",
       "FileText",
       "FolderMinus",
       "Minus",
-      "UserMinus"
+      "Trash",
+      "Trash2",
+      "UserMinus",
+      "UserX",
+      "XCircle",
+      "XOctagon",
+      "XSquare",
+      "X"
     ]
   },
   "FilePlus": {
@@ -1361,6 +1598,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "FileMinus",
       "FilePlus",
+      "HardDrive",
       "Type"
     ]
   },
@@ -1379,7 +1617,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "VideoOff",
-      "Video"
+      "Video",
+      "Youtube"
     ]
   },
   "Filter": {
@@ -1439,7 +1678,23 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "design",
       "tool"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Frown": {
     "tags": [
@@ -1449,7 +1704,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "sad",
       "emotion"
     ],
-    "more": []
+    "more": [
+      "Heart",
+      "Meh",
+      "Smile",
+      "ThumbsDown",
+      "ThumbsUp"
+    ]
   },
   "Gift": {
     "tags": [
@@ -1458,7 +1719,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "birthday",
       "party"
     ],
-    "more": []
+    "more": [
+      "Archive",
+      "Package"
+    ]
   },
   "GitBranch": {
     "tags": [
@@ -1468,7 +1732,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "GitCommit",
       "GitMerge",
-      "GitPullRequest"
+      "GitPullRequest",
+      "Github",
+      "Gitlab",
+      "Terminal"
     ]
   },
   "GitCommit": {
@@ -1479,7 +1746,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "GitBranch",
       "GitMerge",
-      "GitPullRequest"
+      "GitPullRequest",
+      "Github",
+      "Gitlab",
+      "Terminal"
     ]
   },
   "GitMerge": {
@@ -1490,7 +1760,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "GitBranch",
       "GitCommit",
-      "GitPullRequest"
+      "GitPullRequest",
+      "Github",
+      "Gitlab",
+      "Terminal"
     ]
   },
   "GitPullRequest": {
@@ -1501,7 +1774,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "GitBranch",
       "GitCommit",
-      "GitMerge"
+      "GitMerge",
+      "Github",
+      "Gitlab",
+      "Terminal"
     ]
   },
   "Github": {
@@ -1509,14 +1785,54 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "logo",
       "version control"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "GitBranch",
+      "GitCommit",
+      "GitMerge",
+      "GitPullRequest",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Gitlab": {
     "tags": [
       "logo",
       "version control"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "GitBranch",
+      "GitCommit",
+      "GitMerge",
+      "GitPullRequest",
+      "Github",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Globe": {
     "tags": [
@@ -1538,7 +1854,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "memory",
       "data"
     ],
-    "more": []
+    "more": [
+      "Database",
+      "FileText"
+    ]
   },
   "Hash": {
     "tags": [
@@ -1554,7 +1873,27 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "audio",
       "sound"
     ],
-    "more": []
+    "more": [
+      "Bell",
+      "Disc",
+      "FastForward",
+      "MicOff",
+      "Mic",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
+    ]
   },
   "Heart": {
     "tags": [
@@ -1562,7 +1901,14 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "love",
       "emotion"
     ],
-    "more": []
+    "more": [
+      "Frown",
+      "Meh",
+      "Smile",
+      "Star",
+      "ThumbsDown",
+      "ThumbsUp"
+    ]
   },
   "HelpCircle": {
     "tags": [
@@ -1586,7 +1932,23 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "node.js",
       "logo"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Home": {
     "tags": [
@@ -1607,7 +1969,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "tags": [
       "email"
     ],
-    "more": []
+    "more": [
+      "AtSign",
+      "Mail",
+      "Send"
+    ]
   },
   "Info": {
     "tags": [],
@@ -1618,7 +1984,28 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "logo",
       "camera"
     ],
-    "more": []
+    "more": [
+      "Aperture",
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "VideoOff",
+      "Video",
+      "Youtube",
+      "ZapOff",
+      "Zap"
+    ]
   },
   "Italic": {
     "tags": [],
@@ -1631,7 +2018,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "authentication",
       "secure"
     ],
-    "more": []
+    "more": [
+      "Lock",
+      "Shield"
+    ]
   },
   "Layers": {
     "tags": [
@@ -1689,7 +2079,23 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "logo",
       "social media"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "List": {
     "tags": [
@@ -1707,7 +2113,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "password",
       "secure"
     ],
-    "more": []
+    "more": [
+      "Key",
+      "Shield",
+      "ShieldOff",
+      "Unlock"
+    ]
   },
   "LogIn": {
     "tags": [
@@ -1716,7 +2127,18 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "enter"
     ],
     "more": [
+      "CornerDownLeft",
+      "CornerDownRight",
+      "CornerLeftDown",
+      "CornerLeftUp",
+      "CornerRightDown",
+      "CornerRightUp",
+      "CornerUpLeft",
+      "CornerUpRight",
       "LogOut",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ZoomIn"
     ]
   },
@@ -1727,7 +2149,18 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "exit"
     ],
     "more": [
+      "CornerDownLeft",
+      "CornerDownRight",
+      "CornerLeftDown",
+      "CornerLeftUp",
+      "CornerRightDown",
+      "CornerRightUp",
+      "CornerUpLeft",
+      "CornerUpRight",
       "LogIn",
+      "MousePointer",
+      "RotateCcw",
+      "RotateCw",
       "ZoomOut"
     ]
   },
@@ -1737,6 +2170,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "message"
     ],
     "more": [
+      "AtSign",
+      "Inbox",
       "Send"
     ]
   },
@@ -1748,7 +2183,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "marker"
     ],
     "more": [
-      "Map"
+      "Bookmark",
+      "Compass",
+      "Map",
+      "Menu",
+      "Navigation",
+      "Navigation2"
     ]
   },
   "Map": {
@@ -1758,7 +2198,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "travel"
     ],
     "more": [
-      "MapPin"
+      "Compass",
+      "MapPin",
+      "Menu",
+      "Navigation",
+      "Navigation2"
     ]
   },
   "Maximize2": {
@@ -1769,11 +2213,16 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "BarChart2",
+      "ChevronDown",
       "Edit2",
       "Link2",
       "Maximize",
       "Minimize2",
+      "Move",
       "Navigation2",
+      "RefreshCw",
+      "RefreshCcw",
+      "Repeat",
       "Share2",
       "Trash2",
       "Volume2"
@@ -1794,7 +2243,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "neutral",
       "emotion"
     ],
-    "more": []
+    "more": [
+      "Frown",
+      "Heart",
+      "Smile",
+      "ThumbsDown",
+      "ThumbsUp"
+    ]
   },
   "Menu": {
     "tags": [
@@ -1802,7 +2257,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "navigation",
       "hamburger"
     ],
-    "more": []
+    "more": [
+      "Compass",
+      "MapPin",
+      "Map"
+    ]
   },
   "MessageCircle": {
     "tags": [
@@ -1845,9 +2304,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "mute"
     ],
     "more": [
+      "Bell",
       "BellOff",
       "Circle",
       "EyeOff",
+      "Headphones",
       "Mic",
       "PhoneOff",
       "Power",
@@ -1855,6 +2316,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "ToggleLeft",
       "ToggleRight",
       "VideoOff",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX",
       "WifiOff",
       "ZapOff"
     ]
@@ -1866,7 +2331,14 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "listen"
     ],
     "more": [
-      "MicOff"
+      "Bell",
+      "Circle",
+      "Headphones",
+      "MicOff",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
     ]
   },
   "Minimize2": {
@@ -1881,10 +2353,17 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "Link2",
       "Maximize2",
       "Minimize",
+      "Move",
       "Navigation2",
+      "RefreshCw",
+      "RefreshCcw",
+      "Repeat",
       "Share2",
       "Trash2",
-      "Volume2"
+      "Volume2",
+      "XCircle",
+      "XSquare",
+      "X"
     ]
   },
   "Minimize": {
@@ -1893,7 +2372,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "close"
     ],
     "more": [
-      "Minimize2"
+      "Minimize2",
+      "XCircle",
+      "XSquare",
+      "X"
     ]
   },
   "MinusCircle": {
@@ -1949,7 +2431,9 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "dark",
       "night"
     ],
-    "more": []
+    "more": [
+      "Sunset"
+    ]
   },
   "MoreHorizontal": {
     "tags": [
@@ -1972,13 +2456,32 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "arrow",
       "cursor"
     ],
-    "more": []
+    "more": [
+      "CornerDownLeft",
+      "CornerDownRight",
+      "CornerLeftDown",
+      "CornerLeftUp",
+      "CornerRightDown",
+      "CornerRightUp",
+      "CornerUpLeft",
+      "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "RotateCcw",
+      "RotateCw"
+    ]
   },
   "Move": {
     "tags": [
       "arrows"
     ],
-    "more": []
+    "more": [
+      "Maximize2",
+      "Minimize2",
+      "RefreshCw",
+      "RefreshCcw",
+      "Repeat"
+    ]
   },
   "Music": {
     "tags": [
@@ -2044,6 +2547,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "AlertOctagon",
+      "Pause",
+      "PauseCircle",
       "XOctagon"
     ]
   },
@@ -2052,7 +2557,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "box",
       "container"
     ],
-    "more": []
+    "more": [
+      "Archive",
+      "Gift"
+    ]
   },
   "Paperclip": {
     "tags": [
@@ -2069,13 +2577,28 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "AlertCircle",
       "Circle",
+      "Disc",
+      "FastForward",
+      "Headphones",
       "HelpCircle",
       "MessageCircle",
+      "Octagon",
       "Pause",
+      "Play",
       "PlayCircle",
       "PlusCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
       "StopCircle",
-      "XCircle"
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX",
+      "XCircle",
+      "XOctagon"
     ]
   },
   "Pause": {
@@ -2084,7 +2607,24 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "stop"
     ],
     "more": [
-      "PauseCircle"
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "Octagon",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX",
+      "XOctagon"
     ]
   },
   "PenTool": {
@@ -2182,6 +2722,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "ToggleRight",
       "VideoOff",
       "Voicemail",
+      "Volume",
+      "VolumeX",
       "WifiOff",
       "ZapOff"
     ]
@@ -2232,12 +2774,25 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "AlertCircle",
       "Circle",
+      "Disc",
+      "FastForward",
+      "Headphones",
       "HelpCircle",
       "MessageCircle",
+      "Pause",
       "PauseCircle",
       "Play",
       "PlusCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
       "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX",
       "XCircle",
       "Youtube"
     ]
@@ -2248,7 +2803,22 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "start"
     ],
     "more": [
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "Pause",
+      "PauseCircle",
       "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX",
       "Youtube"
     ]
   },
@@ -2306,7 +2876,23 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "logo",
       "save"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Power": {
     "tags": [
@@ -2315,7 +2901,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "Battery",
-      "BatteryCharging"
+      "BatteryCharging",
+      "Circle",
+      "ToggleLeft",
+      "ToggleRight"
     ]
   },
   "Printer": {
@@ -2324,20 +2913,29 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "office",
       "device"
     ],
-    "more": []
+    "more": [
+      "Smartphone",
+      "Tablet"
+    ]
   },
   "Radio": {
     "tags": [
       "signal"
     ],
-    "more": []
+    "more": [
+      "Wifi"
+    ]
   },
   "RefreshCcw": {
     "tags": [
       "arrows"
     ],
     "more": [
+      "Maximize2",
+      "Minimize2",
+      "Move",
       "RefreshCw",
+      "Repeat",
       "RotateCcw"
     ]
   },
@@ -2347,7 +2945,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "arrows"
     ],
     "more": [
+      "Maximize2",
+      "Minimize2",
+      "Move",
       "RefreshCcw",
+      "Repeat",
       "RotateCw"
     ]
   },
@@ -2356,19 +2958,53 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "loop",
       "arrows"
     ],
-    "more": []
+    "more": [
+      "Maximize2",
+      "Minimize2",
+      "Move",
+      "RefreshCw",
+      "RefreshCcw"
+    ]
   },
   "Rewind": {
     "tags": [
       "music"
     ],
-    "more": []
+    "more": [
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
+    ]
   },
   "RotateCcw": {
     "tags": [
       "arrow"
     ],
     "more": [
+      "CornerDownLeft",
+      "CornerDownRight",
+      "CornerLeftDown",
+      "CornerLeftUp",
+      "CornerRightDown",
+      "CornerRightUp",
+      "CornerUpLeft",
+      "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
       "RefreshCcw",
       "RotateCw"
     ]
@@ -2378,6 +3014,17 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "arrow"
     ],
     "more": [
+      "CornerDownLeft",
+      "CornerDownRight",
+      "CornerLeftDown",
+      "CornerLeftUp",
+      "CornerRightDown",
+      "CornerRightUp",
+      "CornerUpLeft",
+      "CornerUpRight",
+      "LogIn",
+      "LogOut",
+      "MousePointer",
       "RefreshCw",
       "RotateCcw"
     ]
@@ -2387,7 +3034,9 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "feed",
       "subscribe"
     ],
-    "more": []
+    "more": [
+      "UserPlus"
+    ]
   },
   "Save": {
     "tags": [
@@ -2409,7 +3058,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "magnifier",
       "magnifying glass"
     ],
-    "more": []
+    "more": [
+      "ZoomIn",
+      "ZoomOut"
+    ]
   },
   "Send": {
     "tags": [
@@ -2419,7 +3071,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "paper airplane",
       "paper aeroplane"
     ],
-    "more": []
+    "more": [
+      "AtSign",
+      "Inbox",
+      "Mail"
+    ]
   },
   "Server": {
     "tags": [],
@@ -2470,12 +3126,14 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "BellOff",
       "Circle",
       "EyeOff",
+      "Lock",
       "MicOff",
       "PhoneOff",
       "Power",
       "Shield",
       "ToggleLeft",
       "ToggleRight",
+      "Unlock",
       "VideoOff",
       "WifiOff",
       "ZapOff"
@@ -2487,7 +3145,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "secure"
     ],
     "more": [
-      "ShieldOff"
+      "Key",
+      "Lock",
+      "ShieldOff",
+      "Unlock"
     ]
   },
   "ShoppingBag": {
@@ -2499,6 +3160,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "Briefcase",
+      "CreditCard",
       "ShoppingCart"
     ]
   },
@@ -2510,6 +3172,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "store"
     ],
     "more": [
+      "CreditCard",
       "ShoppingBag"
     ]
   },
@@ -2517,7 +3180,24 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "tags": [
       "music"
     ],
-    "more": []
+    "more": [
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
+    ]
   },
   "Sidebar": {
     "tags": [],
@@ -2528,7 +3208,22 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "music"
     ],
     "more": [
-      "SkipForward"
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
     ]
   },
   "SkipForward": {
@@ -2536,15 +3231,45 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "music"
     ],
     "more": [
+      "Disc",
       "FastForward",
-      "SkipBack"
+      "Headphones",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "Speaker",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
     ]
   },
   "Slack": {
     "tags": [
       "logo"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Target",
+      "Twitch",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Slash": {
     "tags": [
@@ -2558,14 +3283,19 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "settings",
       "controls"
     ],
-    "more": []
+    "more": [
+      "Tool"
+    ]
   },
   "Smartphone": {
     "tags": [
       "cellphone",
       "device"
     ],
-    "more": []
+    "more": [
+      "Printer",
+      "Tablet"
+    ]
   },
   "Smile": {
     "tags": [
@@ -2575,14 +3305,37 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "good",
       "emotion"
     ],
-    "more": []
+    "more": [
+      "Frown",
+      "Heart",
+      "Meh",
+      "ThumbsDown",
+      "ThumbsUp"
+    ]
   },
   "Speaker": {
     "tags": [
       "audio",
       "music"
     ],
-    "more": []
+    "more": [
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "StopCircle",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX"
+    ]
   },
   "Square": {
     "tags": [],
@@ -2598,7 +3351,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "favorite",
       "like"
     ],
-    "more": []
+    "more": [
+      "Heart",
+      "ThumbsUp"
+    ]
   },
   "StopCircle": {
     "tags": [
@@ -2608,13 +3364,26 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "AlertCircle",
       "Circle",
+      "Disc",
+      "FastForward",
+      "Headphones",
       "HelpCircle",
       "MessageCircle",
       "Octagon",
       "Pause",
       "PauseCircle",
+      "Play",
       "PlayCircle",
       "PlusCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "Volume",
+      "Volume1",
+      "Volume2",
+      "VolumeX",
       "XCircle",
       "XOctagon"
     ]
@@ -2625,7 +3394,18 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "weather",
       "light"
     ],
-    "more": []
+    "more": [
+      "CloudDrizzle",
+      "CloudLightning",
+      "CloudRain",
+      "CloudSnow",
+      "Cloud",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Umbrella",
+      "Wind"
+    ]
   },
   "Sunrise": {
     "tags": [
@@ -2634,7 +3414,20 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "morning",
       "day"
     ],
-    "more": []
+    "more": [
+      "Clock",
+      "CloudDrizzle",
+      "CloudLightning",
+      "CloudRain",
+      "CloudSnow",
+      "Cloud",
+      "Sun",
+      "Sunset",
+      "Thermometer",
+      "Umbrella",
+      "Watch",
+      "Wind"
+    ]
   },
   "Sunset": {
     "tags": [
@@ -2643,7 +3436,21 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "evening",
       "night"
     ],
-    "more": []
+    "more": [
+      "Clock",
+      "CloudDrizzle",
+      "CloudLightning",
+      "CloudRain",
+      "CloudSnow",
+      "Cloud",
+      "Moon",
+      "Sun",
+      "Sunrise",
+      "Thermometer",
+      "Umbrella",
+      "Watch",
+      "Wind"
+    ]
   },
   "Table": {
     "tags": [],
@@ -2653,7 +3460,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "tags": [
       "device"
     ],
-    "more": []
+    "more": [
+      "Printer",
+      "Smartphone"
+    ]
   },
   "Tag": {
     "tags": [
@@ -2669,7 +3479,22 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "bullseye"
     ],
     "more": [
-      "Crosshair"
+      "Codepen",
+      "Codesandbox",
+      "Crosshair",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Twitch",
+      "Twitter",
+      "Youtube"
     ]
   },
   "Terminal": {
@@ -2679,7 +3504,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "prompt"
     ],
     "more": [
-      "Command"
+      "Command",
+      "GitBranch",
+      "GitCommit",
+      "GitMerge",
+      "GitPullRequest"
     ]
   },
   "Thermometer": {
@@ -2689,7 +3518,18 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "fahrenheit",
       "weather"
     ],
-    "more": []
+    "more": [
+      "CloudDrizzle",
+      "CloudLightning",
+      "CloudRain",
+      "CloudSnow",
+      "Cloud",
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Umbrella",
+      "Wind"
+    ]
   },
   "ThumbsDown": {
     "tags": [
@@ -2703,6 +3543,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerDownRight",
       "CornerLeftDown",
       "CornerRightDown",
+      "Frown",
+      "Heart",
+      "Meh",
+      "Smile",
       "ThumbsUp"
     ]
   },
@@ -2718,6 +3562,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "CornerRightUp",
       "CornerUpLeft",
       "CornerUpRight",
+      "Frown",
+      "Heart",
+      "Meh",
+      "Smile",
+      "Star",
       "ThumbsDown"
     ]
   },
@@ -2729,10 +3578,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "AlignLeft",
+      "Circle",
       "CornerDownLeft",
       "CornerLeftDown",
       "CornerLeftUp",
       "CornerUpLeft",
+      "Power",
       "ToggleRight"
     ]
   },
@@ -2744,10 +3595,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "AlignRight",
+      "Circle",
       "CornerDownRight",
       "CornerRightDown",
       "CornerRightUp",
       "CornerUpRight",
+      "Power",
       "ToggleLeft"
     ]
   },
@@ -2759,7 +3612,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "Figma",
       "Framer",
-      "PenTool"
+      "PenTool",
+      "Sliders"
     ]
   },
   "Trash2": {
@@ -2771,14 +3625,22 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "BarChart2",
+      "Delete",
       "Edit2",
+      "FileMinus",
       "Link2",
       "Maximize2",
       "Minimize2",
       "Navigation2",
       "Share2",
       "Trash",
-      "Volume2"
+      "UserMinus",
+      "UserX",
+      "Volume2",
+      "XCircle",
+      "XOctagon",
+      "XSquare",
+      "X"
     ]
   },
   "Trash": {
@@ -2789,7 +3651,15 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "bin"
     ],
     "more": [
-      "Trash2"
+      "Delete",
+      "FileMinus",
+      "Trash2",
+      "UserMinus",
+      "UserX",
+      "XCircle",
+      "XOctagon",
+      "XSquare",
+      "X"
     ]
   },
   "Trello": {
@@ -2842,6 +3712,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "stream"
     ],
     "more": [
+      "Airplay",
       "Monitor"
     ]
   },
@@ -2849,14 +3720,46 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "tags": [
       "logo"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitter",
+      "Youtube"
+    ]
   },
   "Twitter": {
     "tags": [
       "logo",
       "social"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Youtube"
+    ]
   },
   "Type": {
     "tags": [
@@ -2869,7 +3772,18 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "rain",
       "weather"
     ],
-    "more": []
+    "more": [
+      "CloudDrizzle",
+      "CloudLightning",
+      "CloudRain",
+      "CloudSnow",
+      "Cloud",
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Wind"
+    ]
   },
   "Underline": {
     "tags": [],
@@ -2879,7 +3793,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "tags": [
       "security"
     ],
-    "more": []
+    "more": [
+      "Lock",
+      "Shield",
+      "ShieldOff"
+    ]
   },
   "UploadCloud": {
     "tags": [],
@@ -2915,13 +3833,20 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "unsubscribe"
     ],
     "more": [
+      "Delete",
       "FileMinus",
       "FolderMinus",
       "Minus",
+      "Trash",
+      "Trash2",
       "UserCheck",
       "UserPlus",
       "UserX",
-      "User"
+      "User",
+      "XCircle",
+      "XOctagon",
+      "XSquare",
+      "X"
     ]
   },
   "UserPlus": {
@@ -2938,6 +3863,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "Plus",
       "PlusCircle",
       "PlusSquare",
+      "Rss",
       "UserCheck",
       "UserMinus",
       "UserX",
@@ -2953,6 +3879,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "unavailable"
     ],
     "more": [
+      "Delete",
+      "FileMinus",
+      "Trash",
+      "Trash2",
       "UserCheck",
       "UserMinus",
       "UserPlus",
@@ -2989,10 +3919,12 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "film"
     ],
     "more": [
+      "Aperture",
       "BellOff",
       "Circle",
       "EyeOff",
       "Film",
+      "Instagram",
       "MicOff",
       "PhoneOff",
       "Power",
@@ -3002,7 +3934,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "Video",
       "WifiOff",
       "Youtube",
-      "ZapOff"
+      "ZapOff",
+      "Zap"
     ]
   },
   "Video": {
@@ -3012,9 +3945,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "film"
     ],
     "more": [
+      "Aperture",
       "Film",
+      "Instagram",
       "VideoOff",
-      "Youtube"
+      "Youtube",
+      "ZapOff",
+      "Zap"
     ]
   },
   "Voicemail": {
@@ -3029,6 +3966,22 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "sound"
     ],
     "more": [
+      "Bell",
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "MicOff",
+      "Mic",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
       "Volume",
       "Volume2",
       "VolumeX"
@@ -3041,12 +3994,28 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "BarChart2",
+      "Bell",
+      "Disc",
       "Edit2",
+      "FastForward",
+      "Headphones",
       "Link2",
       "Maximize2",
+      "MicOff",
+      "Mic",
       "Minimize2",
       "Navigation2",
+      "Pause",
+      "PauseCircle",
+      "Play",
+      "PlayCircle",
+      "Rewind",
       "Share2",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
       "Trash2",
       "Volume",
       "Volume1",
@@ -3060,6 +4029,23 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "mute"
     ],
     "more": [
+      "Bell",
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "MicOff",
+      "Mic",
+      "Pause",
+      "PauseCircle",
+      "PhoneOff",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
       "UserX",
       "Volume",
       "Volume1",
@@ -3077,6 +4063,23 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "mute"
     ],
     "more": [
+      "Bell",
+      "Disc",
+      "FastForward",
+      "Headphones",
+      "MicOff",
+      "Mic",
+      "Pause",
+      "PauseCircle",
+      "PhoneOff",
+      "Play",
+      "PlayCircle",
+      "Rewind",
+      "Shuffle",
+      "SkipBack",
+      "SkipForward",
+      "Speaker",
+      "StopCircle",
       "Volume1",
       "Volume2",
       "VolumeX"
@@ -3090,7 +4093,9 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "Clock",
       "Eye",
-      "EyeOff"
+      "EyeOff",
+      "Sunrise",
+      "Sunset"
     ]
   },
   "WifiOff": {
@@ -3119,6 +4124,8 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "wireless"
     ],
     "more": [
+      "Bluetooth",
+      "Radio",
       "WifiOff"
     ]
   },
@@ -3127,7 +4134,18 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "weather",
       "air"
     ],
-    "more": []
+    "more": [
+      "CloudDrizzle",
+      "CloudLightning",
+      "CloudRain",
+      "CloudSnow",
+      "Cloud",
+      "Sun",
+      "Sunrise",
+      "Sunset",
+      "Thermometer",
+      "Umbrella"
+    ]
   },
   "XCircle": {
     "tags": [
@@ -3141,12 +4159,19 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     "more": [
       "AlertCircle",
       "Circle",
+      "Delete",
+      "FileMinus",
       "HelpCircle",
       "MessageCircle",
+      "Minimize",
+      "Minimize2",
       "PauseCircle",
       "PlayCircle",
       "PlusCircle",
       "StopCircle",
+      "Trash",
+      "Trash2",
+      "UserMinus",
       "UserX",
       "VolumeX",
       "XOctagon",
@@ -3164,8 +4189,16 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "clear"
     ],
     "more": [
+      "AlertCircle",
       "AlertOctagon",
+      "AlertTriangle",
+      "FileMinus",
       "Octagon",
+      "Pause",
+      "PauseCircle",
+      "Trash",
+      "Trash2",
+      "UserMinus",
       "UserX",
       "VolumeX",
       "XCircle",
@@ -3183,8 +4216,15 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "clear"
     ],
     "more": [
+      "Delete",
+      "FileMinus",
       "MessageSquare",
+      "Minimize",
+      "Minimize2",
       "PlusSquare",
+      "Trash",
+      "Trash2",
+      "UserMinus",
       "UserX",
       "VolumeX",
       "XCircle",
@@ -3202,6 +4242,13 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "clear"
     ],
     "more": [
+      "Delete",
+      "FileMinus",
+      "Minimize",
+      "Minimize2",
+      "Trash",
+      "Trash2",
+      "UserMinus",
       "UserX",
       "VolumeX",
       "XCircle",
@@ -3215,7 +4262,24 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "video",
       "play"
     ],
-    "more": []
+    "more": [
+      "Codepen",
+      "Codesandbox",
+      "Facebook",
+      "Figma",
+      "Film",
+      "Framer",
+      "Github",
+      "Gitlab",
+      "Hexagon",
+      "Instagram",
+      "Linkedin",
+      "Pocket",
+      "Slack",
+      "Target",
+      "Twitch",
+      "Twitter"
+    ]
   },
   "ZapOff": {
     "tags": [
@@ -3224,9 +4288,11 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "lightning"
     ],
     "more": [
+      "Aperture",
       "BellOff",
       "Circle",
       "EyeOff",
+      "Instagram",
       "MicOff",
       "PhoneOff",
       "Power",
@@ -3234,6 +4300,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "ToggleLeft",
       "ToggleRight",
       "VideoOff",
+      "Video",
       "WifiOff",
       "Zap"
     ]
@@ -3245,6 +4312,10 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
       "lightning"
     ],
     "more": [
+      "Aperture",
+      "Instagram",
+      "VideoOff",
+      "Video",
       "ZapOff"
     ]
   },
@@ -3254,6 +4325,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "LogIn",
+      "Search",
       "ZoomOut"
     ]
   },
@@ -3263,6 +4335,7 @@ export const manifest: Record<keyof typeof feather, { tags: string[], more: (key
     ],
     "more": [
       "LogOut",
+      "Search",
       "ZoomIn"
     ]
   }
