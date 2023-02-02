@@ -1,6 +1,6 @@
 import * as feather from "../data/react-feather"
 
-import { SetStateAction, useCallback, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { AdjustableIcon } from "../components/adjustable-icon"
 import { MouseTooltip } from "../components/mouse-tooltip"
 import { sizeInitial } from "../constants"
@@ -51,7 +51,7 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 								onClick={e => setEye(curr => !curr)}
 							>
 								<AdjustableIcon
-									className="h-20 w-20 text-gray-300 group-hover/eye:text-gray-700"
+									className="h-20 w-20 fill-white text-gray-300 group-hover/eye:text-gray-700"
 									icon={eye ? feather.Eye : feather.EyeOff}
 								/>
 							</div>
@@ -131,8 +131,8 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 						</div>
 					</div>
 					{/* Tab */}
-					<div className="flex flex-[1] items-center rounded-t-10 bg-white">
-						<div className="flex h-40 w-[calc(40px_*_1.25)] items-center justify-center">
+					<div className="flex flex-[1] items-center gap-8 rounded-t-10 bg-white px-8">
+						<div className="flex h-40 w-40 items-center justify-center">
 							<AdjustableIcon className="h-24 w-24 text-gray-700" icon={feather[name]} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
@@ -191,33 +191,33 @@ export function Demo4({ name }: { name: keyof typeof manifest }) {
 }
 
 export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
-	const [fill1, _setFill1] = useState(true)
-	const [fill2, _setFill2] = useState(false)
+	const [fill1, setFill1] = useState(true)
+	const [fill2, setFill2] = useState(false)
 	const [fill3, setFill3] = useState(false)
 
-	const setFill1 = useCallback((next: SetStateAction<boolean>) => {
-		_setFill1(curr => {
-			if (typeof next === "boolean") {
-				_setFill2(!next)
-				return curr
-			} else {
-				_setFill2(!next(curr))
-				return next(curr)
-			}
-		})
-	}, [])
-
-	const setFill2 = useCallback((next: SetStateAction<boolean>) => {
-		_setFill1(curr => {
-			if (typeof next === "boolean") {
-				_setFill1(!next)
-				return curr
-			} else {
-				_setFill2(!next(curr))
-				return next(curr)
-			}
-		})
-	}, [])
+	//// const setFill1 = useCallback((next: SetStateAction<boolean>) => {
+	//// 	_setFill1(curr => {
+	//// 		if (typeof next === "boolean") {
+	//// 			_setFill2(!next)
+	//// 			return curr
+	//// 		} else {
+	//// 			_setFill2(!next(curr))
+	//// 			return next(curr)
+	//// 		}
+	//// 	})
+	//// }, [])
+	////
+	//// const setFill2 = useCallback((next: SetStateAction<boolean>) => {
+	//// 	_setFill1(curr => {
+	//// 		if (typeof next === "boolean") {
+	//// 			_setFill1(!next)
+	//// 			return curr
+	//// 		} else {
+	//// 			_setFill2(!next(curr))
+	//// 			return next(curr)
+	//// 		}
+	//// 	})
+	//// }, [])
 
 	return (
 		<DemoSlot>
