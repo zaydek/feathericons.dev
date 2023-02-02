@@ -1,9 +1,9 @@
+// TODO: Rename branch
 export function toKebabCase(str: string) {
 	return str
 		.replace(/([a-z])([A-Z0-9])/g, "$1-$2")
 		.replace(/([A-Z])([A-Z0-9])/g, "$1-$2")
 		.replace(/([0-9])([a-zA-Z])/g, "$1-$2")
-		.toLowerCase()
 }
 
 export function toSnakeCase(str: string) {
@@ -11,9 +11,16 @@ export function toSnakeCase(str: string) {
 		.replace(/([a-z])([A-Z0-9])/g, "$1_$2")
 		.replace(/([A-Z])([A-Z0-9])/g, "$1-$2")
 		.replace(/([0-9])([a-zA-Z])/g, "$1_$2")
-		.toLowerCase()
 }
 
+export function toSpaceCase(str: string) {
+	return str
+		.replace(/([a-z])([A-Z0-9])/g, "$1 $2")
+		.replace(/([A-Z])([A-Z0-9])/g, "$1 $2")
+		.replace(/([0-9])([a-zA-Z])/g, "$1 $2")
+}
+
+// TODO: Rename branch
 export function toCamelCase(str: string) {
 	return str.replace(/-([a-zA-Z0-9])/g, (_, $1) => $1.toUpperCase())
 }

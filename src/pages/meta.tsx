@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { manifest } from "../data/manifest"
-import { toKebabCase } from "../lib/cases"
+import { toKebabCase, toSpaceCase } from "../lib/cases"
 
 // prettier-ignore
 const URL =
@@ -23,7 +23,7 @@ export function Meta({ name }: { name?: keyof typeof manifest }) {
 	return (
 		<Head>
 			{/* GOOG */}
-			<title>{name === undefined ? TITLE : name.replace(/([a-z])([A-Z0-9])/g, "$1 $2")}</title>
+			<title>{name === undefined ? TITLE : toSpaceCase(name)}</title>
 			<meta name="description" content={DESCRIPTION} />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<link rel="icon" href={`/feather/${toKebabCase(name ?? "Feather")}.svg`} />

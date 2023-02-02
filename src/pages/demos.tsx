@@ -2,6 +2,7 @@ import * as feather from "../data/react-feather"
 
 import { useContext, useState } from "react"
 import { AdjustableIcon } from "../components/adjustable-icon"
+import { TwitterIcon } from "../components/icons"
 import { MouseTooltip } from "../components/mouse-tooltip"
 import { sizeInitial } from "../constants"
 import { manifest } from "../data/manifest"
@@ -189,6 +190,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 		</DemoSlot>
 	)
 }
+
 export function Demo4({ name }: { name: keyof typeof manifest }) {
 	return <DemoSlot>{/* ... */}</DemoSlot>
 }
@@ -197,30 +199,6 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 	const [fill1, setFill1] = useState(true)
 	const [fill2, setFill2] = useState(false)
 	const [fill3, setFill3] = useState(false)
-
-	//// const setFill1 = useCallback((next: SetStateAction<boolean>) => {
-	//// 	_setFill1(curr => {
-	//// 		if (typeof next === "boolean") {
-	//// 			_setFill2(!next)
-	//// 			return curr
-	//// 		} else {
-	//// 			_setFill2(!next(curr))
-	//// 			return next(curr)
-	//// 		}
-	//// 	})
-	//// }, [])
-	////
-	//// const setFill2 = useCallback((next: SetStateAction<boolean>) => {
-	//// 	_setFill1(curr => {
-	//// 		if (typeof next === "boolean") {
-	//// 			_setFill1(!next)
-	//// 			return curr
-	//// 		} else {
-	//// 			_setFill2(!next(curr))
-	//// 			return next(curr)
-	//// 		}
-	//// 	})
-	//// }, [])
 
 	return (
 		<DemoSlot>
@@ -261,13 +239,33 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 	return (
 		<DemoSlot>
 			<div className="flex h-100% items-center justify-center">
-				<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-white pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
-					{/* LHS */}
-					<div className="flex h-48 w-48 items-center justify-center">
-						<AdjustableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather[name]} />
-					</div>
-					{/* RHS */}
-					<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
+				<div className="flex flex-col gap-8">
+					<a
+						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-24 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
+						href={`http://twitter.com/intent/tweet?text=${encodeURI(
+							`Check out Feather – Simply beautiful open source designed by @colebemis\n\nThanks @colebemis and @username_ZAYDEK feathericons.com`
+						)}`}
+						rel="noopener noreferrer"
+						target="_blank"
+					>
+						<div className="flex h-48 w-48 items-center justify-center">
+							<AdjustableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather[name]} />
+						</div>
+						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
+					</a>
+					<a
+						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-24 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
+						href={`http://twitter.com/intent/tweet?text=${encodeURI(
+							`Check out Feather – Simply beautiful open source designed by @colebemis\n\nThanks @colebemis and @username_ZAYDEK feathericons.com`
+						)}`}
+						rel="noopener noreferrer"
+						target="_blank"
+					>
+						<div className="flex h-48 w-48 items-center justify-center">
+							<AdjustableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={TwitterIcon} />
+						</div>
+						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
+					</a>
 				</div>
 			</div>
 		</DemoSlot>

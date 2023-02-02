@@ -24,7 +24,7 @@ import {
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
 import { manifest } from "../data/manifest"
-import { toKebabCase, toTitleCase } from "../lib/cases"
+import { toKebabCase, toSpaceCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
 import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia } from "./demos"
 
@@ -40,7 +40,7 @@ export const getStaticPaths: GetStaticPaths<NameParams> = async () => {
 	return {
 		paths: Object.keys(manifest).map(name => ({
 			params: {
-				name: toKebabCase(name),
+				name: toKebabCase(name).toLowerCase(),
 			},
 		})),
 		fallback: false,
@@ -73,7 +73,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						<Fragment key={m}>
 							{index > 0 && " "}
 							<A href={`/${toKebabCase(m).toLowerCase()}`}>
-								<InlineIcon icon={feather[m]}>{m.replace(/([a-z])([A-Z0-9])/g, "$1 $2")}</InlineIcon>
+								<InlineIcon icon={feather[m]}>{toSpaceCase(m)}</InlineIcon>
 							</A>
 							{index + 1 < manifest[name].more.length && ","}
 						</Fragment>
@@ -116,7 +116,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code> tag
 					</Li>
 					<Li>
-						Add <Code>{`<i data-feather="${toKebabCase(name)}"></i>`}</Code>
+						Add <Code>{`<i data-feather="${toKebabCase(name).toLowerCase()}"></i>`}</Code>
 					</Li>
 					<Li>
 						Invoke <Code>{`feather.replace()`}</Code>
@@ -131,7 +131,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 								<script src="https://unpkg.com/feather-icons"></script>
 							</head>
 							<body>
-								<i data-feather="${toKebabCase(name)}"></i>
+								<i data-feather="${toKebabCase(name).toLowerCase()}"></i>
 								<script>
 									feather.replace()
 								</script>
