@@ -1,7 +1,7 @@
 import * as feather from "./data/react-feather"
 
 import { useContext, useRef } from "react"
-import { MouseTooltip } from "./components/mouse-tooltip"
+import { Hoverable } from "./components/hoverable"
 import { Icon, SVG } from "./lib/react/icon"
 import { SearchContext } from "./providers/state"
 
@@ -20,7 +20,7 @@ export function SearchBar() {
 
 	return (
 		<div className="flex h-64 rounded-1e3 bg-white shadow-[var(--shadow-2)] [&_>_:nth-child(2)]:grow">
-			<MouseTooltip pos="start" content={<>SEARCH FEATHER</>}>
+			<Hoverable pos="start" content={<>SEARCH FEATHER</>}>
 				<SearchBarButton
 					icon={feather.Search}
 					onClick={e => {
@@ -28,9 +28,9 @@ export function SearchBar() {
 					}}
 					aria-label="Search Feather"
 				/>
-			</MouseTooltip>
+			</Hoverable>
 			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
-			<MouseTooltip pos="end" content={<>COMPACT MODE</>}>
+			<Hoverable pos="end" content={<>COMPACT MODE</>}>
 				<SearchBarButton
 					icon={feather.MoreHorizontal}
 					onClick={e => {
@@ -38,7 +38,7 @@ export function SearchBar() {
 					}}
 					aria-label="Toggle compact mode"
 				/>
-			</MouseTooltip>
+			</Hoverable>
 		</div>
 	)
 }

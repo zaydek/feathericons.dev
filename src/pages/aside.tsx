@@ -7,9 +7,9 @@ import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
-import { AdjustableIcon } from "../components/adjustable-icon"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
 import { PageTransition } from "../components/page-transition"
+import { ResizableIcon } from "../components/resizable-icon"
 import { TypographyCaps } from "../components/typography"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
@@ -26,7 +26,7 @@ function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: str
 		return (
 			<>
 				{"<!-- "}
-				<a href={href} target="_blank" rel="noreferrer" className="underline">
+				<a className="underline" href={href} target="_blank" rel="noreferrer">
 					{href}
 				</a>{" "}
 				✨ {"--> "}
@@ -37,7 +37,7 @@ function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: str
 		return (
 			<>
 				{"// "}
-				<a href={href} target="_blank" rel="noreferrer" className="underline">
+				<a className="underline" href={href} target="_blank" rel="noreferrer">
 					{href}
 				</a>{" "}
 				✨{" "}
@@ -104,7 +104,7 @@ function Preview() {
 				<PageTransition>
 					{/* Use <div> to preserve <AdjustableIcon> */}
 					<div>
-						<AdjustableIcon className="h-64 w-64 text-black" icon={feather[name]} />
+						<ResizableIcon className="h-64 w-64 text-black" icon={feather[name]} />
 					</div>
 				</PageTransition>
 			</div>

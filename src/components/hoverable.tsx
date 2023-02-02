@@ -4,7 +4,7 @@ import { Transition } from "./transition"
 import { TypographyCaps } from "./typography"
 
 // TODO: Convert to using Framer Motion and deprecate <Transition>?
-export function MouseTooltip({
+export function Hoverable({
 	pos,
 	content,
 	children,

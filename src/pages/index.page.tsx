@@ -2,9 +2,9 @@ import * as feather from "../data/react-feather"
 
 import Link from "next/link"
 import { memo, useContext, useMemo } from "react"
-import { AdjustableIcon } from "../components/adjustable-icon"
-import { MouseTooltip } from "../components/mouse-tooltip"
+import { Hoverable } from "../components/hoverable"
 import { PageTransition } from "../components/page-transition"
+import { ResizableIcon } from "../components/resizable-icon"
 import { TypographySmallSans } from "../components/typography"
 import { manifest } from "../data/manifest"
 import { toKebabCase } from "../lib/cases"
@@ -46,7 +46,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 
 	return (
 		<div className="flex flex-col">
-			<MouseTooltip pos="center" content={<>{toKebabCase(name).toUpperCase()}</>}>
+			<Hoverable pos="center" content={<>{toKebabCase(name).toUpperCase()}</>}>
 				<button
 					className="flex h-[var(--grid-size)] items-center justify-center"
 					onClick={e => {
@@ -55,9 +55,9 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 					}}
 					aria-label={`Icon ${name}`}
 				>
-					<AdjustableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
+					<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
 				</button>
-			</MouseTooltip>
+			</Hoverable>
 		</div>
 	)
 })
@@ -83,7 +83,7 @@ const MemoGridItem = memo(function GridItem({
 				}}
 				aria-label={`Icon ${name}`}
 			>
-				<AdjustableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
+				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
 			</button>
 			<Link
 				href={`/${toKebabCase(name)}`}

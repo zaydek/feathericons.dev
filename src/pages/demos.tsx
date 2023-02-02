@@ -1,9 +1,9 @@
 import * as feather from "../data/react-feather"
 
 import { useContext, useState } from "react"
-import { AdjustableIcon } from "../components/adjustable-icon"
+import { Hoverable } from "../components/hoverable"
 import { TwitterIcon } from "../components/icons"
-import { MouseTooltip } from "../components/mouse-tooltip"
+import { ResizableIcon } from "../components/resizable-icon"
 import { sizeInitial } from "../constants"
 import { manifest } from "../data/manifest"
 import { SliderContext } from "../providers/state"
@@ -29,7 +29,7 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 						{/* LHS */}
 						<div className="flex items-center">
 							<div className="flex h-48 w-48 items-center justify-center">
-								<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
+								<ResizableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
 							</div>
 							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
@@ -39,7 +39,7 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 						{/* LHS */}
 						<div className="flex items-center">
 							<div className="flex h-48 w-48 items-center justify-center">
-								<AdjustableIcon className="h-20 w-20 text-gray-300 [&_>_rect]:fill-current" icon={feather.Lock} />
+								<ResizableIcon className="h-20 w-20 text-gray-300 [&_>_rect]:fill-current" icon={feather.Lock} />
 							</div>
 							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
@@ -51,7 +51,7 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 								className="group/eye flex h-[calc(20px_*_1.5)] w-[calc(20px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200"
 								onClick={e => setEye(curr => !curr)}
 							>
-								<AdjustableIcon className="h-20 w-20 fill-white text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
+								<ResizableIcon className="h-20 w-20 fill-white text-gray-300 group-hover/eye:text-gray-700" icon={eye ? feather.Eye : feather.EyeOff} />
 							</div>
 						</div>
 					</div>
@@ -86,26 +86,26 @@ export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest })
 					} as any
 				}
 			>
-				<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
+				<Hoverable pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--size-4)] w-[calc(var(--size-1)_+_var(--size-1))] cursor-help items-center justify-center">
-						<AdjustableIcon className="rounded text-700 h-[var(--size-1)] w-[var(--size-1)]" icon={feather[name]} />
+						<ResizableIcon className="rounded text-700 h-[var(--size-1)] w-[var(--size-1)]" icon={feather[name]} />
 					</div>
-				</MouseTooltip>
-				<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
+				</Hoverable>
+				<Hoverable pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--size-4)] w-[calc(var(--size-2)_+_var(--size-1))] cursor-help items-center justify-center">
-						<AdjustableIcon className="rounded text-700 h-[var(--size-2)] w-[var(--size-2)]" icon={feather[name]} />
+						<ResizableIcon className="rounded text-700 h-[var(--size-2)] w-[var(--size-2)]" icon={feather[name]} />
 					</div>
-				</MouseTooltip>
-				<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
+				</Hoverable>
+				<Hoverable pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--size-4)] w-[calc(var(--size-3)_+_var(--size-1))] cursor-help items-center justify-center">
-						<AdjustableIcon className="rounded text-700 h-[var(--size-3)] w-[var(--size-3)]" icon={feather[name]} />
+						<ResizableIcon className="rounded text-700 h-[var(--size-3)] w-[var(--size-3)]" icon={feather[name]} />
 					</div>
-				</MouseTooltip>
-				<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
+				</Hoverable>
+				<Hoverable pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--size-4)] w-[calc(var(--size-4)_+_var(--size-1))] cursor-help items-center justify-center">
-						<AdjustableIcon className="rounded text-700 h-[var(--size-4)] w-[var(--size-4)]" icon={feather[name]} />
+						<ResizableIcon className="rounded text-700 h-[var(--size-4)] w-[var(--size-4)]" icon={feather[name]} />
 					</div>
-				</MouseTooltip>
+				</Hoverable>
 			</div>
 		</DemoSlot>
 	)
@@ -132,7 +132,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 					<div className="flex items-center rounded-t-10 bg-white pr-32">
 						{/* Use w-48 here to be consistent */}
 						<div className="flex h-40 w-48 items-center justify-center">
-							<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
+							<ResizableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 					</div>
@@ -156,7 +156,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 								[&:not([aria-disabled])]:hover:active:bg-gray-200"
 							onClick={e => window.history.back()}
 						>
-							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.ArrowLeft} />
+							<ResizableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.ArrowLeft} />
 						</button>
 						<button
 							className="group/button flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
@@ -166,7 +166,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 							// onClick={e => window.history.forward()}
 							aria-disabled
 						>
-							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.ArrowRight} />
+							<ResizableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.ArrowRight} />
 						</button>
 						<button
 							className="group/button flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3
@@ -175,14 +175,14 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 								[&:not([aria-disabled])]:hover:active:bg-gray-200"
 							onClick={e => window.location.reload()}
 						>
-							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.RotateCw} />
+							<ResizableIcon className="h-24 w-24 rounded-1e3 text-gray-500 group-aria-disabled/button:text-gray-300" icon={feather.RotateCw} />
 						</button>
 					</div>
 					<div className="flex grow justify-between rounded-1e3 bg-gray-100">
 						{/* LHS */}
 						<div className="flex items-center">
 							<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
-								<AdjustableIcon className="text-300 h-20 w-20 text-gray-700" icon={feather.Info} />
+								<ResizableIcon className="text-300 h-20 w-20 text-gray-700" icon={feather.Info} />
 							</div>
 							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
@@ -191,7 +191,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 							className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
 							onClick={e => setBookmark(curr => !curr)}
 						>
-							<AdjustableIcon className="text-300 h-20 w-20 text-gray-700 [&[data-fill]]:fill-current" icon={feather.Star} data-fill={bookmark || undefined} />
+							<ResizableIcon className="text-300 h-20 w-20 text-gray-700 [&[data-fill]]:fill-current" icon={feather.Star} data-fill={bookmark || undefined} />
 						</div>
 					</div>
 				</div>
@@ -218,7 +218,7 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
 						onClick={e => setFill1(curr => !curr)}
 					>
-						<AdjustableIcon className="h-24 w-24 text-gray-700" icon={feather.ThumbsUp} fill={fill1 ? "currentColor" : "none"} />
+						<ResizableIcon className="h-24 w-24 text-gray-700" icon={feather.ThumbsUp} fill={fill1 ? "currentColor" : "none"} />
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
@@ -227,7 +227,7 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
 						onClick={e => setFill2(curr => !curr)}
 					>
-						<AdjustableIcon className="h-24 w-24 text-gray-700" icon={feather.ThumbsDown} fill={fill2 ? "currentColor" : "none"} />
+						<ResizableIcon className="h-24 w-24 text-gray-700" icon={feather.ThumbsDown} fill={fill2 ? "currentColor" : "none"} />
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
@@ -236,7 +236,7 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
 						onClick={e => setFill3(curr => !curr)}
 					>
-						<AdjustableIcon className="h-24 w-24 text-gray-700" icon={feather[name]} fill={fill3 ? "currentColor" : "none"} />
+						<ResizableIcon className="h-24 w-24 text-gray-700" icon={feather[name]} fill={fill3 ? "currentColor" : "none"} />
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
@@ -259,7 +259,7 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 						target="_blank"
 					>
 						<div className="flex h-48 w-48 items-center justify-center">
-							<AdjustableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather[name]} />
+							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather[name]} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
 					</a>
@@ -272,7 +272,7 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 						target="_blank"
 					>
 						<div className="flex h-48 w-48 items-center justify-center">
-							<AdjustableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={TwitterIcon} />
+							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={TwitterIcon} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
 					</a>

@@ -2,7 +2,7 @@ import * as feather from "../data/react-feather"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { Fragment } from "react"
+import { Hoverable } from "../components/hoverable"
 import {
 	CodePenHex,
 	CodePenIcon,
@@ -23,6 +23,7 @@ import {
 } from "../components/icons"
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
+import { ResizableIcon } from "../components/resizable-icon"
 import { manifest } from "../data/manifest"
 import { toKebabCase, toSpaceCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
@@ -55,6 +56,19 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 
 ////////////////////////////////////////////////////////////////////////////////
 
+//// <P className="!-mt-48 mb-32">
+//// 	Related Icons:{" "}
+//// 	{manifest[name].more.map((m, index) => (
+//// 		<Fragment key={m}>
+//// 			{index > 0 && " "}
+//// 			<A href={`/${toKebabCase(m).toLowerCase()}`}>
+//// 				<InlineIcon icon={feather[m]}>{m.replace(/([a-z])([A-Z0-9])/g, "$1 $2")}</InlineIcon>
+//// 			</A>
+//// 			{index + 1 < manifest[name].more.length && ","}
+//// 		</Fragment>
+//// 	))}
+//// </P>
+
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
 		<PageTransition>
@@ -67,18 +81,21 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<DemoSocialMedia name={name} />
 					<DemoButton name={name} />
 				</figure>
-				<P className="!-mt-48 mb-32">
-					Related Icons:{" "}
-					{manifest[name].more.map((m, index) => (
-						<Fragment key={m}>
-							{index > 0 && " "}
-							<A href={`/${toKebabCase(m).toLowerCase()}`}>
-								<InlineIcon icon={feather[m]}>{toSpaceCase(m)}</InlineIcon>
+				<H2>Icons Related to {toSpaceCase(name)}</H2>
+				<div className="flex flex-wrap">
+					{manifest[name].more.map(m => (
+						<Hoverable key={m} pos="center" content={toSpaceCase(m).toUpperCase()}>
+							<A className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center" href={`/${toKebabCase(m).toLowerCase()}`}>
+								{/* <div className="flex h-80 w-80 items-center justify-center"> */}
+								<ResizableIcon className="h-32 w-32 text-gray-800" icon={feather[m]} />
+								{/* </div> */}
 							</A>
-							{index + 1 < manifest[name].more.length && ","}
-						</Fragment>
+						</Hoverable>
 					))}
-				</P>
+				</div>
+
+				<Hr />
+
 				<H1>Get Started With Feather</H1>
 				<P>
 					<A href="https://github.com/feathericons/feather">
