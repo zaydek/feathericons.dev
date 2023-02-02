@@ -81,6 +81,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<DemoSocialMedia name={name} />
 					<DemoButton name={name} />
 				</figure>
+
 				<H2>Icons Related to {toSpaceCase(name)}</H2>
 				<div className="flex flex-wrap">
 					{manifest[name].more.map(m => (
@@ -203,7 +204,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</Pre>
 				<P>
 					Click here to get started with a{" "}
-					<A href="https://play.tailwindcss.com/jPEYvRowr3">
+					<A href="https://play.tailwindcss.com/6WByBJYved">
 						<InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
 							Tailwind CSS
 						</InlineIcon>

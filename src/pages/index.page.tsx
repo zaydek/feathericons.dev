@@ -46,7 +46,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 
 	return (
 		<div className="flex flex-col">
-			<Hoverable pos="center" content={<>{toKebabCase(name).toUpperCase()}</>}>
+			<Hoverable pos="center" content={toKebabCase(name).toUpperCase()}>
 				<button
 					className="flex h-[var(--grid-size)] items-center justify-center"
 					onClick={e => {
@@ -86,7 +86,7 @@ const MemoGridItem = memo(function GridItem({
 				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
 			</button>
 			<Link
-				href={`/${toKebabCase(name)}`}
+				href={`/${toKebabCase(name).toLowerCase()}`}
 				onClick={e => {
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
