@@ -37,12 +37,7 @@ import { cx } from "../cx"
 //// }
 
 export function createStyled(argClassName: string) {
-	function Styled({
-		as = "div",
-		className,
-		children,
-		...props
-	}: { as?: keyof JSX.IntrinsicElements | (() => JSX.Element) } & JSX.IntrinsicElements["div"]) {
+	function Styled({ as = "div", className, children, ...props }: { as?: keyof JSX.IntrinsicElements | (() => JSX.Element) } & JSX.IntrinsicElements["div"]) {
 		return createElement(
 			as,
 			{

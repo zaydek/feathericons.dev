@@ -84,8 +84,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<A href="https://github.com/feathericons/feather">
 						<InlineIcon icon={feather.ExternalLink}>Feather</InlineIcon>
 					</A>{" "}
-					is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis
-					on simplicity, consistency, and flexibility.
+					is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and
+					flexibility.
 				</P>
 				<P>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as{" "}
@@ -113,8 +113,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<P>To get started with Feather using a CDN (content delivery network), simply:</P>
 				<Ol>
 					<Li>
-						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code>{" "}
-						tag
+						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code> tag
 					</Li>
 					<Li>
 						Add <Code>{`<i data-feather="${toKebabCase(name)}"></i>`}</Code>
@@ -159,8 +158,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<P>To get started with Feather using React, simply:</P>
 				<Ol>
 					<Li>
-						Add <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or{" "}
-						<Code>{`pnpm i react-feather`}</Code>
+						Add <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
 					</Li>
 					<Li>
 						Add <Code>{`import { ${name} } from "react-feather"`}</Code>
@@ -212,9 +210,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						</A>
 						.
 						<br />
-						Feather is licensed as{" "}
-						<A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used
-						for personal and commercial use without attribution.
+						Feather is licensed as <A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used for personal and
+						commercial use without attribution.
 						<br />
 						Built using{" "}
 						<A href="https://typescriptlang.org">

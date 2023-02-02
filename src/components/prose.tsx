@@ -90,11 +90,7 @@ export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-export function Pre({
-	lang,
-	children: code,
-	...props
-}: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
+export function Pre({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -136,7 +132,7 @@ export function Hr(props: JSX.IntrinsicElements["hr"]) {
 ////////////////////////////////////////////////////////////////////////////////
 
 // Make href required
-export function A({ href, children, ...props }: { href: string } & Omit<JSX.IntrinsicElements["a"], "href">) {
+export function A({ href, children, ...props }: { href: string } & Omit<JSX.IntrinsicElements["a"], "href" | "rel" | "target">) {
 	if (href.startsWith("/")) {
 		return (
 			// @ts-expect-error: Type 'string' is not assignable to type
@@ -147,7 +143,7 @@ export function A({ href, children, ...props }: { href: string } & Omit<JSX.Intr
 		)
 	} else {
 		return (
-			<a className="decoration-gray-400 hover:underline" href={href} {...props}>
+			<a className="decoration-gray-400 hover:underline" href={href} rel="noopener noreferrer" target="_blank" {...props}>
 				{children}
 			</a>
 		)

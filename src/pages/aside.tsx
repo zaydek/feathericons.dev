@@ -11,17 +11,7 @@ import { AdjustableIcon } from "../components/adjustable-icon"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
 import { PageTransition } from "../components/page-transition"
 import { TypographyCaps } from "../components/typography"
-import {
-	FormatAs,
-	sizeInitial,
-	sizeMax,
-	sizeMin,
-	sizeStep,
-	strokeWidthInitial,
-	strokeWidthMax,
-	strokeWidthMin,
-	strokeWidthStep,
-} from "../constants"
+import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { download } from "../lib/download"
@@ -110,10 +100,7 @@ function Preview() {
 	) : (
 		// FIXME: Lol what the hell is going on here?
 		<div>
-			<div
-				className="flex aspect-[1.5] items-center justify-center rounded-24 bg-white shadow-[var(--shadow-2)]"
-				data-background-dots
-			>
+			<div className="flex aspect-[1.5] items-center justify-center rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots>
 				<PageTransition>
 					{/* Use <div> to preserve <AdjustableIcon> */}
 					<div>
@@ -171,11 +158,7 @@ function FormatButton() {
 						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
 				>
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-						<Icon
-							className="h-16 w-16 group-hover/button:group-active/button:text-white"
-							style={{ color: hex }}
-							icon={icon}
-						/>
+						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" style={{ color: hex }} icon={icon} />
 					</div>
 					<TypographyCaps className="text-gray-700">
 						FILE FORMAT: <span className="inline-flex h-0 w-24">{desc}</span>
@@ -208,10 +191,7 @@ function FormatButton() {
 						}}
 						className="absolute top-[calc(100%_+_8px)] right-0 z-10"
 					>
-						<div
-							ref={ref}
-							className="flex flex-col overflow-hidden rounded-12 bg-white shadow-[var(--shadow-6),_var(--base-shadow-6)]"
-						>
+						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white shadow-[var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem
 								// prettier-ignore
 								id="svg"
@@ -266,14 +246,9 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 			{...props}
 		>
 			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-				<Icon
-					className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white"
-					icon={pressed ? feather.Check : icon}
-				/>
+				<Icon className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white" icon={pressed ? feather.Check : icon} />
 			</div>
-			<TypographyCaps className="text-gray-700 group-hover/button:group-active/button:text-white">
-				{children}
-			</TypographyCaps>
+			<TypographyCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</TypographyCaps>
 		</button>
 	)
 }
@@ -373,8 +348,7 @@ function CompoundSlider({
 								// Statically determine the width and then translateX to center
 								// before <AriaSlider> mounts
 								style={{
-									transform:
-										"translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))",
+									transform: "translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))",
 								}}
 							></div>
 						</div>
@@ -428,18 +402,10 @@ export function Aside() {
 				<div className="flex flex-col gap-8">
 					<FormatButton />
 					<div className="grid grid-cols-2 gap-8">
-						<ActionButton
-							icon={feather.Clipboard}
-							onClick={handleClickCopy}
-							aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
-						>
+						<ActionButton icon={feather.Clipboard} onClick={handleClickCopy} aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}>
 							COPY
 						</ActionButton>
-						<ActionButton
-							icon={feather.Download}
-							onClick={handleClickDownload}
-							aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}
-						>
+						<ActionButton icon={feather.Download} onClick={handleClickDownload} aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}>
 							DOWNLOAD
 						</ActionButton>
 					</div>

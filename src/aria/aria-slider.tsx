@@ -40,10 +40,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 			//// e.preventDefault()
 			const trackClient = track!.getBoundingClientRect()
 			const thumbClient = thumb!.getBoundingClientRect()
-			const range = clamp(
-				(e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width),
-				{ min: 0, max: 1 }
-			)
+			const range = clamp((e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width), { min: 0, max: 1 })
 			const value = range * (max - min) + min
 			setValue(value - (value % step))
 		}
@@ -54,10 +51,7 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 			//// e.preventDefault()
 			const trackClient = track!.getBoundingClientRect()
 			const thumbClient = thumb!.getBoundingClientRect()
-			const range = clamp(
-				(e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width),
-				{ min: 0, max: 1 }
-			)
+			const range = clamp((e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width), { min: 0, max: 1 })
 			const value = range * (max - min) + min
 			setValue(value - (value % step))
 		}

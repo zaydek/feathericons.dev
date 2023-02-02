@@ -20,32 +20,17 @@ function ForegroundMask() {
 			<div className="flex h-[var(--inset-y)] justify-center">
 				{/* LHS */}
 				<div className="relative">
-					<div
-						className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
-						data-background-hero
-					/>
+					<div className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]" data-background-hero />
 					<div className="absolute top-0 right-0">
-						<div
-							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
-							data-background-hero
-						/>
+						<div className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]" data-background-hero />
 					</div>
 				</div>
 				{/* RHS */}
-				<div
-					className="h-[var(--inset-y)] w-100% max-w-[calc(var(--app-w)_-_var(--app-rounding)_*_2)]"
-					data-background-hero
-				/>
+				<div className="h-[var(--inset-y)] w-100% max-w-[calc(var(--app-w)_-_var(--app-rounding)_*_2)]" data-background-hero />
 				<div className="relative">
-					<div
-						className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
-						data-background-hero
-					/>
+					<div className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]" data-background-hero />
 					<div className="absolute top-0 left-0">
-						<div
-							className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]"
-							data-background-hero
-						/>
+						<div className="h-[calc(var(--app-rounding)_+_var(--inset-y))] w-[calc(var(--app-rounding)_+_var(--inset-y))]" data-background-hero />
 					</div>
 				</div>
 			</div>

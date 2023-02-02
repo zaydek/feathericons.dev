@@ -118,11 +118,7 @@ export default function Component() {
 		<PageTransition>
 			<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))] px-[var(--gutter-x-1)]">
 				{Object.keys(searchResults).map(name => (
-					<GridItem
-						key={name}
-						name={name as keyof typeof manifest}
-						indexes={searchResults[name as keyof typeof manifest]!}
-					/>
+					<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
 				))}
 			</div>
 		</PageTransition>

@@ -19,9 +19,7 @@ async function main() {
 	const version = /@(\d+\.\d+\.\d+)/.exec(page1.url())![1]
 	const hrefs = await page1.evaluate(
 		async ([anchorSelector]) => {
-			const anchors = [
-				...(document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>),
-			].slice(3)
+			const anchors = [...(document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>)].slice(3)
 			return anchors.map(a => a.href)
 		},
 		[UNPKG_ANCHOR_SELECTOR]

@@ -1,13 +1,4 @@
-import {
-	createContext,
-	Dispatch,
-	PropsWithChildren,
-	SetStateAction,
-	useContext,
-	useEffect,
-	useMemo,
-	useState,
-} from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useMemo, useState } from "react"
 import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/utils/format"
 import { stringify } from "../../scripts/utils/stringify"
 import { FormatAs, jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "../constants"

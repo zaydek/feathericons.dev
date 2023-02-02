@@ -1,16 +1,6 @@
 // https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
 
-import {
-	createContext,
-	Dispatch,
-	SetStateAction,
-	useCallback,
-	useContext,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react"
+import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { queue } from "../lib/queue"
 import { getStringFromChildren, useCancelable } from "./utils"
 
@@ -40,14 +30,7 @@ export type AriaSimpleDropDownProps<T extends string> = {
 	setCurrentId: Dispatch<SetStateAction<T>>
 } & JSX.IntrinsicElements["div"]
 
-export function AriaSimpleDropDown<T extends string>({
-	show,
-	setShow,
-	currentId,
-	setCurrentId,
-	children,
-	...props
-}: AriaSimpleDropDownProps<T>) {
+export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps<T>) {
 	const ref = useRef<HTMLDivElement | null>(null)
 	const [items, setItems] = useState<Item<T>[]>([])
 
