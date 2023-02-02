@@ -1,6 +1,6 @@
 import * as feather from "../data/react-feather"
 
-import { useContext, useState } from "react"
+import { SetStateAction, useCallback, useContext, useState } from "react"
 import { AdjustableIcon } from "../components/adjustable-icon"
 import { MouseTooltip } from "../components/mouse-tooltip"
 import { sizeInitial } from "../constants"
@@ -114,12 +114,13 @@ export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest })
 }
 
 export function DemoChrome({ name }: { name: keyof typeof manifest }) {
+	const [bookmark, setBookmark] = useState(true)
+
 	return (
 		<DemoSlot>
 			<div className="flex h-100% flex-col">
 				<div className="grow"></div>
-				{/* Use z-index to prevent box-shadow from being clipped by sibling */}
-				<div className="relative z-10 flex h-40 bg-gray-200 shadow-[var(--hairline-shadow-t)]">
+				<div className="relative flex h-40 bg-gray-200 shadow-[var(--hairline-shadow-t)]">
 					{/* Cap */}
 					<div className="relative w-10">
 						<div className="absolute bottom-0 right-0">
@@ -149,27 +150,34 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 				{/* Use z-index to prevent box-shadow from being clipped by sibling */}
 				<div className="relative z-10 flex h-48 items-center gap-8 bg-white px-8 shadow-[var(--hairline-shadow-b)]">
 					<div className="flex">
-						<div className="group/a flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+						<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
 							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.ArrowLeft} />
 						</div>
-						<div className="group/c flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+						<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
 							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.ArrowRight} />
 						</div>
-						<div className="group/c flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+						<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
 							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.RotateCw} />
 						</div>
 					</div>
 					<div className="flex grow justify-between rounded-1e3 bg-gray-100">
 						{/* LHS */}
 						<div className="flex items-center">
-							<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
+							<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
 								<AdjustableIcon className="text-300 h-20 w-20 text-gray-700" icon={feather.Info} />
 							</div>
 							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
 						{/* RHS */}
-						<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
-							<AdjustableIcon className="text-300 h-20 w-20 fill-current text-gray-700" icon={feather.Star} />
+						<div
+							className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+							onClick={e => setBookmark(curr => !curr)}
+						>
+							<AdjustableIcon
+								className="text-300 h-20 w-20 text-gray-700 [&[data-fill]]:fill-current"
+								icon={feather.Star}
+								data-fill={bookmark || undefined}
+							/>
 						</div>
 					</div>
 				</div>
@@ -183,18 +191,40 @@ export function Demo4({ name }: { name: keyof typeof manifest }) {
 }
 
 export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
-	const [fill1, setFill1] = useState(false)
-	const [fill2, setFill2] = useState(false)
+	const [fill1, _setFill1] = useState(true)
+	const [fill2, _setFill2] = useState(false)
 	const [fill3, setFill3] = useState(false)
-	const [fill4, setFill4] = useState(false)
+
+	const setFill1 = useCallback((next: SetStateAction<boolean>) => {
+		_setFill1(curr => {
+			if (typeof next === "boolean") {
+				_setFill2(!next)
+				return curr
+			} else {
+				_setFill2(!next(curr))
+				return next(curr)
+			}
+		})
+	}, [])
+
+	const setFill2 = useCallback((next: SetStateAction<boolean>) => {
+		_setFill1(curr => {
+			if (typeof next === "boolean") {
+				_setFill1(!next)
+				return curr
+			} else {
+				_setFill2(!next(curr))
+				return next(curr)
+			}
+		})
+	}, [])
 
 	return (
 		<DemoSlot>
-			<div className="flex h-100% items-center justify-center gap-8">
+			<div className="flex h-100% items-center justify-center gap-16">
 				<div className="flex items-center gap-8">
-					{/* TODO: Extract component here */}
 					<div
-						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
 						onClick={e => setFill1(curr => !curr)}
 					>
 						<AdjustableIcon
@@ -206,9 +236,8 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
-					{/* TODO: Extract component here */}
 					<div
-						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
 						onClick={e => setFill2(curr => !curr)}
 					>
 						<AdjustableIcon
@@ -220,31 +249,17 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
-					{/* TODO: Extract component here */}
 					<div
-						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
 						onClick={e => setFill3(curr => !curr)}
 					>
 						<AdjustableIcon
 							className="h-24 w-24 text-gray-700"
-							icon={feather.Heart}
+							icon={feather[name]}
 							fill={fill3 ? "currentColor" : "none"}
 						/>
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
-				</div>
-				<div className="flex items-center gap-8">
-					{/* TODO: Extract component here */}
-					<div
-						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
-						onClick={e => setFill4(curr => !curr)}
-					>
-						<AdjustableIcon
-							className="h-24 w-24 text-gray-700"
-							icon={feather[name]}
-							fill={fill4 ? "currentColor" : "none"}
-						/>
-					</div>
 				</div>
 			</div>
 		</DemoSlot>
