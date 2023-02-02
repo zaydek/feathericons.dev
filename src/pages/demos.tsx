@@ -89,22 +89,22 @@ export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest })
 				}
 			>
 				<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--size-4)] w-[calc(var(--size-1)_+_var(--size-2))] cursor-pointer items-center justify-center">
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-1)_+_var(--size-1))] cursor-pointer items-center justify-center">
 						<AdjustableIcon className="rounded text-700 h-[var(--size-1)] w-[var(--size-1)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--size-4)] w-[calc(var(--size-2)_+_var(--size-2))] cursor-pointer items-center justify-center">
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-2)_+_var(--size-1))] cursor-pointer items-center justify-center">
 						<AdjustableIcon className="rounded text-700 h-[var(--size-2)] w-[var(--size-2)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--size-4)] w-[calc(var(--size-3)_+_var(--size-2))] cursor-pointer items-center justify-center">
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-3)_+_var(--size-1))] cursor-pointer items-center justify-center">
 						<AdjustableIcon className="rounded text-700 h-[var(--size-3)] w-[var(--size-3)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
-					<div className="flex h-[var(--size-4)] w-[calc(var(--size-4)_+_var(--size-2))] cursor-pointer items-center justify-center">
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-4)_+_var(--size-1))] cursor-pointer items-center justify-center">
 						<AdjustableIcon className="rounded text-700 h-[var(--size-4)] w-[var(--size-4)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
@@ -120,7 +120,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 		<DemoSlot>
 			<div className="flex h-100% flex-col">
 				<div className="grow"></div>
-				<div className="relative flex h-40 bg-gray-200 shadow-[var(--hairline-shadow-t)]">
+				<div className="relative flex bg-gray-200 shadow-[var(--hairline-shadow-t)]">
 					{/* Cap */}
 					<div className="relative w-10">
 						<div className="absolute bottom-0 right-0">
@@ -131,9 +131,10 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 						</div>
 					</div>
 					{/* Tab */}
-					<div className="flex flex-[1] items-center gap-8 rounded-t-10 bg-white px-8">
-						<div className="flex h-40 w-40 items-center justify-center">
-							<AdjustableIcon className="h-24 w-24 text-gray-700" icon={feather[name]} />
+					<div className="flex items-center rounded-t-10 bg-white pr-32">
+						{/* Use w-48 here to be consistent */}
+						<div className="flex h-40 w-48 items-center justify-center">
+							<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 					</div>
