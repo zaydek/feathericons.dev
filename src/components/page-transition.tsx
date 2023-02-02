@@ -3,7 +3,7 @@ import { cloneElement, ReactElement, TransitionEvent, useLayoutEffect, useState 
 import { queue } from "../lib/queue"
 import { Arrayable } from "../lib/types"
 
-const useNoopLayoutEffect = typeof window === "undefined" ? () => {} : useLayoutEffect
+const useClientLayoutEffect = typeof window === "undefined" ? () => {} : useLayoutEffect
 
 export function PageTransition({ children }: { children: Arrayable<ReactElement> }) {
 	const path = useRouter().asPath
@@ -13,7 +13,7 @@ export function PageTransition({ children }: { children: Arrayable<ReactElement>
 
 	const forwards = path !== "/"
 
-	useNoopLayoutEffect(() => {
+	useClientLayoutEffect(() => {
 		queue(() => setStarted(true))
 		return () => {
 			setStarted(false)
