@@ -1,5 +1,3 @@
-import * as feather from "../data/react-feather"
-
 import {
 	createContext,
 	Dispatch,
@@ -23,7 +21,7 @@ export const SearchContext =
 		setCompactMode:        Dispatch<SetStateAction<boolean>>
 		search:                string
 		setSearch:             Dispatch<SetStateAction<string>>
-		searchResults:         Partial<Record<keyof typeof feather, readonly [number, number] | null>>
+		searchResults:         Partial<Record<keyof typeof manifest, readonly [number, number] | null>>
 	} | null>(null)
 
 // prettier-ignore
@@ -71,9 +69,9 @@ export function StateProvider({ children }: PropsWithChildren) {
 	}, [search])
 
 	const searchResultsFallback = useMemo(() => {
-		const ref: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
+		const ref: Partial<Record<keyof typeof manifest, readonly [number, number] | null>> = {}
 		for (const name of Object.keys(manifest)) {
-			ref[name as keyof typeof feather] = null
+			ref[name as keyof typeof manifest] = null
 		}
 		return ref
 	}, [])
@@ -82,16 +80,16 @@ export function StateProvider({ children }: PropsWithChildren) {
 		if ($$search === "") {
 			return searchResultsFallback
 		}
-		const refA: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
-		const refB: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
+		const refA: Partial<Record<keyof typeof manifest, readonly [number, number] | null>> = {}
+		const refB: Partial<Record<keyof typeof manifest, readonly [number, number] | null>> = {}
 		for (const [name, info] of Object.entries(manifest)) {
 			const indexes = getSubstringIndexes(name.toLowerCase(), $$search)
 			if (indexes !== null) {
-				refA[name as keyof typeof feather] = indexes
+				refA[name as keyof typeof manifest] = indexes
 			} else {
 				for (const tag of info.tags) {
 					if (tag.startsWith($$search)) {
-						refB[name as keyof typeof feather] = null
+						refB[name as keyof typeof manifest] = null
 					}
 				}
 			}
