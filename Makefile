@@ -29,5 +29,9 @@ build:
 	npx next export
 	make esrun entrypoint=scripts/sitemap.ts
 
+build-s:
+	make build
+	make serve
+
 serve:
 	npx serve out -l 3000 -n

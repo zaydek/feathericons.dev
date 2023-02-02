@@ -21,11 +21,10 @@ function getMore(kebab: keyof typeof _featherTags) {
 	const chunks = kebab.split("-")
 	ctx: for (const [name, tags] of Object.entries(_featherTags)) {
 		// Dedupe
-		if (kebab === name) { continue } // prettier-ignore
 		for (const n of name.split("-")) {
 			for (const chunk of chunks) {
 				if (chunk === n) {
-					more.add(toTitleCase(name))
+					more.add(name)
 					continue ctx
 				}
 			}
@@ -34,14 +33,17 @@ function getMore(kebab: keyof typeof _featherTags) {
 			for (const t of tag.split("-")) {
 				for (const chunk of chunks) {
 					if (chunk === t) {
-						more.add(toTitleCase(name))
+						more.add(name)
 						continue ctx
 					}
 				}
 			}
 		}
 	}
+	// prettier-ignore
 	return [...more]
+		.filter(m => m !== kebab) // Dedupe
+		.map(m => toTitleCase(m))
 }
 
 async function exportAsSvg() {
@@ -82,12 +84,12 @@ async function exportAsTsx() {
 	}, {})
 	// prettier-ignore
 	const imports = `import * as feather from "./react-feather"\n\nexport const version = ${JSON.stringify(_feather.meta.version)}\n\nexport const manifest: Record<keyof typeof feather, { tags: string[], more: (keyof typeof feather)[] }> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
-	await fs.promises.writeFile(`src/data/react-feather-manifest.ts`, imports + "\n")
+	await fs.promises.writeFile(`src/data/manifest.ts`, imports + "\n")
 
 	// src/data/react-feather
 	try {
 		await fs.promises.rm(`src/data/react-feather`, { recursive: true, force: true })
-	} catch { }
+	} catch {}
 	await fs.promises.mkdir(`src/data/react-feather`, { recursive: true })
 
 	// src/data/react-feather/index.ts

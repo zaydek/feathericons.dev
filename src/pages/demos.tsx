@@ -1,8 +1,10 @@
+import * as feather from "../data/react-feather"
+
 import { useContext, useState } from "react"
 import { AdjustableIcon } from "../components/adjustable-icon"
 import { MouseTooltip } from "../components/mouse-tooltip"
 import { sizeInitial } from "../constants"
-import * as feather from "../data/react-feather"
+import { manifest } from "../data/manifest"
 import { SliderContext } from "../providers/state"
 
 function DemoSlot({ children, ...props }: JSX.IntrinsicElements["div"]) {
@@ -13,7 +15,7 @@ function DemoSlot({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	)
 }
 
-export function DemoLogin() {
+export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 	const [eye, setEye] = useState(false)
 
 	return (
@@ -25,7 +27,7 @@ export function DemoLogin() {
 						{/* LHS */}
 						<div className="flex items-center">
 							<div className="flex h-48 w-48 items-center justify-center">
-								<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
+								<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
 							</div>
 							<div className="aspect-[24] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
@@ -69,7 +71,7 @@ export function DemoLogin() {
 //// 	</div>
 //// </Container> */}
 
-export function DemoGoldenAspectRatio() {
+export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest }) {
 	const { size } = useContext(SliderContext)!
 
 	return (
@@ -88,33 +90,41 @@ export function DemoGoldenAspectRatio() {
 				<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
 					<div
 						className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)}
+						onClick={async e => {
+							await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)
+						}}
 					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-1)] w-[var(--step-1)]" icon={feather.Feather} />
+						<AdjustableIcon className="rounded text-700 h-[var(--step-1)] w-[var(--step-1)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
 					<div
 						className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)}
+						onClick={async e => {
+							await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)
+						}}
 					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-2)] w-[var(--step-2)]" icon={feather.Feather} />
+						<AdjustableIcon className="rounded text-700 h-[var(--step-2)] w-[var(--step-2)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
 					<div
 						className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)}
+						onClick={async e => {
+							await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)
+						}}
 					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-3)] w-[var(--step-3)]" icon={feather.Feather} />
+						<AdjustableIcon className="rounded text-700 h-[var(--step-3)] w-[var(--step-3)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
 					<div
 						className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)}
+						onClick={async e => {
+							await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)
+						}}
 					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-4)] w-[var(--step-4)]" icon={feather.Feather} />
+						<AdjustableIcon className="rounded text-700 h-[var(--step-4)] w-[var(--step-4)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 			</div>
@@ -122,7 +132,7 @@ export function DemoGoldenAspectRatio() {
 	)
 }
 
-export function DemoChrome() {
+export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 	return (
 		<DemoSlot>
 			<div className="flex h-100% flex-col">
@@ -140,7 +150,7 @@ export function DemoChrome() {
 					</div>
 					<div className="flex flex-[1] items-center rounded-t-10 bg-white">
 						<div className="flex h-40 w-40 items-center justify-center">
-							<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather.Feather} />
+							<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
 						</div>
 						<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
 					</div>
@@ -186,11 +196,11 @@ export function DemoChrome() {
 		</DemoSlot>
 	)
 }
-export function Demo4() {
+export function Demo4({ name }: { name: keyof typeof manifest }) {
 	return <DemoSlot>{/* ... */}</DemoSlot>
 }
 
-export function DemoSocialMedia() {
+export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 	const [fillA, setFillA] = useState(false)
 	const [fillB, setFillB] = useState(false)
 	const [fillC, setFillC] = useState(false)
@@ -211,7 +221,7 @@ export function DemoSocialMedia() {
 							fill={fillA ? "currentColor" : "none"}
 						/>
 					</div>
-					<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
+					{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
 				</div>
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
@@ -225,7 +235,7 @@ export function DemoSocialMedia() {
 							fill={fillB ? "currentColor" : "none"}
 						/>
 					</div>
-					<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
+					{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
 				</div>
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
@@ -239,7 +249,7 @@ export function DemoSocialMedia() {
 							fill={fillC ? "currentColor" : "none"}
 						/>
 					</div>
-					<div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div>
+					{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
 				</div>
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
@@ -249,7 +259,7 @@ export function DemoSocialMedia() {
 					>
 						<AdjustableIcon
 							className="h-24 w-24 text-sky-700"
-							icon={feather.Bookmark}
+							icon={feather[name]}
 							fill={fillD ? "currentColor" : "none"}
 						/>
 					</div>
@@ -259,7 +269,7 @@ export function DemoSocialMedia() {
 	)
 }
 
-export function DemoButton() {
+export function DemoButton({ name }: { name: keyof typeof manifest }) {
 	return (
 		<DemoSlot>
 			<div className="flex h-100% items-center justify-center">
@@ -268,7 +278,7 @@ export function DemoButton() {
 					<div className="flex h-48 w-48 items-center justify-center">
 						<AdjustableIcon
 							className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white"
-							icon={feather.Feather}
+							icon={feather[name]}
 						/>
 					</div>
 					{/* RHS */}

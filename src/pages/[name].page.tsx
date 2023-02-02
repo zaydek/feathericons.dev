@@ -60,12 +60,12 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 		<PageTransition>
 			<Article>
 				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
-					<DemoLogin />
-					<DemoGoldenAspectRatio />
-					<DemoChrome />
-					<Demo4 />
-					<DemoSocialMedia />
-					<DemoButton />
+					<DemoLogin name={name} />
+					<DemoGoldenAspectRatio name={name} />
+					<DemoChrome name={name} />
+					<Demo4 name={name} />
+					<DemoSocialMedia name={name} />
+					<DemoButton name={name} />
 				</figure>
 				<P className="!-mt-48 mb-32">
 					Related Icons:{" "}
