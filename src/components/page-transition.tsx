@@ -1,25 +1,19 @@
 import { useRouter } from "next/router"
-import { cloneElement, ReactElement, TransitionEvent, useEffect, useState } from "react"
+import { cloneElement, ReactElement, TransitionEvent, useLayoutEffect, useState } from "react"
 import { queue } from "../lib/queue"
 import { Arrayable } from "../lib/types"
 
 export function PageTransition({ children }: { children: Arrayable<ReactElement> }) {
 	const path = useRouter().asPath
 
-	console.log({ path })
-
 	const [started, setStarted] = useState(false)
 	const [ended, setEnded] = useState(false)
 
 	const forwards = path !== "/"
 
-	useEffect(() => {
-		queue(() => {
-			console.log("started")
-			setStarted(true)
-		})
+	useLayoutEffect(() => {
+		queue(() => setStarted(true))
 		return () => {
-			console.log("ended")
 			setStarted(false)
 			setEnded(false)
 		}
