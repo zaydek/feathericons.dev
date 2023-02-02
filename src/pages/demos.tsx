@@ -22,14 +22,15 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 		<DemoSlot>
 			<div className="flex h-100% items-center justify-center">
 				{/* <div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.3125)] bg-white shadow-[var(--shadow-2)]"> */}
-				<div className="w-[calc(48px_*_5)] rounded-16 bg-white shadow-[var(--shadow-2)]">
+				{/* TODO: Can we use aspect-ratio her? */}
+				<div className="w-[calc(96px_*_2.5)] rounded-[calc(96px_*_0.1875)] bg-white shadow-[var(--shadow-2)]">
 					<div className="flex justify-between">
 						{/* LHS */}
 						<div className="flex items-center">
 							<div className="flex h-48 w-48 items-center justify-center">
 								<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
 							</div>
-							<div className="aspect-[24] h-6 rounded-1e3 bg-gray-300"></div>
+							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
 					</div>
 					<hr />
@@ -37,7 +38,7 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 						{/* LHS */}
 						<div className="flex items-center">
 							<div className="flex h-48 w-48 items-center justify-center">
-								<AdjustableIcon className="h-20 w-20 text-gray-300" icon={feather.Lock} />
+								<AdjustableIcon className="h-20 w-20 text-gray-300 [&_>_rect]:fill-current" icon={feather.Lock} />
 							</div>
 							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
@@ -46,7 +47,7 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 						{/* eslint-disable jsx-a11y/no-static-element-interactions */}
 						<div className="flex h-48 w-48 cursor-pointer items-center justify-center">
 							<div
-								className="group/eye flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200"
+								className="group/eye flex h-[calc(20px_*_1.5)] w-[calc(20px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200"
 								onClick={e => setEye(curr => !curr)}
 							>
 								<AdjustableIcon
@@ -80,51 +81,31 @@ export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest })
 				className="flex h-100% items-center justify-center"
 				style={
 					{
-						"--step-1": "16px",
-						"--step-2": "32px",
-						"--step-3": "48px",
-						"--step-4": "64px",
+						"--size-1": "16px",
+						"--size-2": "32px",
+						"--size-3": "48px",
+						"--size-4": "64px",
 					} as any
 				}
 			>
 				<MouseTooltip pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
-					<div
-						className="flex h-[var(--step-4)] w-[calc(var(--step-1)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => {
-							await navigator.clipboard.writeText(`${(16 * size) / sizeInitial}px`)
-						}}
-					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-1)] w-[var(--step-1)]" icon={feather[name]} />
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-1)_+_var(--size-2))] cursor-pointer items-center justify-center">
+						<AdjustableIcon className="rounded text-700 h-[var(--size-1)] w-[var(--size-1)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
-					<div
-						className="flex h-[var(--step-4)] w-[calc(var(--step-2)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => {
-							await navigator.clipboard.writeText(`${(32 * size) / sizeInitial}px`)
-						}}
-					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-2)] w-[var(--step-2)]" icon={feather[name]} />
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-2)_+_var(--size-2))] cursor-pointer items-center justify-center">
+						<AdjustableIcon className="rounded text-700 h-[var(--size-2)] w-[var(--size-2)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
-					<div
-						className="flex h-[var(--step-4)] w-[calc(var(--step-3)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => {
-							await navigator.clipboard.writeText(`${(48 * size) / sizeInitial}px`)
-						}}
-					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-3)] w-[var(--step-3)]" icon={feather[name]} />
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-3)_+_var(--size-2))] cursor-pointer items-center justify-center">
+						<AdjustableIcon className="rounded text-700 h-[var(--size-3)] w-[var(--size-3)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 				<MouseTooltip pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
-					<div
-						className="flex h-[var(--step-4)] w-[calc(var(--step-4)_+_24px)] cursor-pointer items-center justify-center"
-						onClick={async e => {
-							await navigator.clipboard.writeText(`${(64 * size) / sizeInitial}px`)
-						}}
-					>
-						<AdjustableIcon className="rounded text-700 h-[var(--step-4)] w-[var(--step-4)]" icon={feather[name]} />
+					<div className="flex h-[var(--size-4)] w-[calc(var(--size-4)_+_var(--size-2))] cursor-pointer items-center justify-center">
+						<AdjustableIcon className="rounded text-700 h-[var(--size-4)] w-[var(--size-4)]" icon={feather[name]} />
 					</div>
 				</MouseTooltip>
 			</div>
@@ -148,11 +129,12 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 							</div>
 						</div>
 					</div>
+					{/* Tab */}
 					<div className="flex flex-[1] items-center rounded-t-10 bg-white">
-						<div className="flex h-40 w-40 items-center justify-center">
-							<AdjustableIcon className="h-20 w-20 text-gray-700" icon={feather[name]} />
+						<div className="flex h-40 w-[calc(40px_*_1.25)] items-center justify-center">
+							<AdjustableIcon className="h-24 w-24 text-gray-700" icon={feather[name]} />
 						</div>
-						<div className="aspect-[12] h-6 rounded-1e3 bg-gray-300"></div>
+						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 					</div>
 					{/* Cap */}
 					<div className="relative flex-[1]">
@@ -165,29 +147,29 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 					</div>
 				</div>
 				{/* Use z-index to prevent box-shadow from being clipped by sibling */}
-				<div className="relative z-10 flex h-48 gap-16 bg-white p-8 shadow-[var(--hairline-shadow-b)]">
+				<div className="relative z-10 flex h-48 items-center gap-8 bg-white px-8 shadow-[var(--hairline-shadow-b)]">
 					<div className="flex">
-						<div className="group/a flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
-							<AdjustableIcon className="h-20 w-20 rounded-1e3 text-gray-500" icon={feather.ArrowLeft} />
+						<div className="group/a flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.ArrowLeft} />
 						</div>
-						<div className="group/b flex h-32 w-32 items-center justify-center rounded-1e3">
-							<AdjustableIcon className="h-20 w-20 rounded-1e3 text-gray-300" icon={feather.ArrowRight} />
+						<div className="group/c flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.ArrowRight} />
 						</div>
-						<div className="group/c flex h-32 w-32 items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
-							<AdjustableIcon className="h-20 w-20 rounded-1e3 text-gray-500" icon={feather.RotateCw} />
+						<div className="group/c flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-100 hover:active:bg-gray-200">
+							<AdjustableIcon className="h-24 w-24 rounded-1e3 text-gray-500" icon={feather.RotateCw} />
 						</div>
 					</div>
-					<div className="flex h-32 grow justify-between rounded-1e3 bg-gray-100 p-2">
+					<div className="flex grow justify-between rounded-1e3 bg-gray-100">
 						{/* LHS */}
-						<div className="flex items-center gap-2">
-							<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
-								<AdjustableIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Info} />
+						<div className="flex items-center">
+							<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
+								<AdjustableIcon className="text-300 h-20 w-20 text-gray-700" icon={feather.Info} />
 							</div>
 							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 						</div>
 						{/* RHS */}
-						<div className="flex h-28 w-28 items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
-							<AdjustableIcon className="text-300 h-16 w-16 text-gray-700" icon={feather.Star} />
+						<div className="flex h-[calc(24px_*_1.5)] w-[calc(24px_*_1.5)] items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300">
+							<AdjustableIcon className="text-300 h-20 w-20 fill-current text-gray-700" icon={feather.Star} />
 						</div>
 					</div>
 				</div>
@@ -201,66 +183,66 @@ export function Demo4({ name }: { name: keyof typeof manifest }) {
 }
 
 export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
-	const [fillA, setFillA] = useState(false)
-	const [fillB, setFillB] = useState(false)
-	const [fillC, setFillC] = useState(false)
-	const [fillD, setFillD] = useState(false)
+	const [fill1, setFill1] = useState(false)
+	const [fill2, setFill2] = useState(false)
+	const [fill3, setFill3] = useState(false)
+	const [fill4, setFill4] = useState(false)
 
 	return (
 		<DemoSlot>
-			<div className="flex h-100% items-center justify-center gap-16">
+			<div className="flex h-100% items-center justify-center gap-8">
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
 					<div
-						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
-						onClick={e => setFillA(curr => !curr)}
+						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						onClick={e => setFill1(curr => !curr)}
 					>
 						<AdjustableIcon
-							className="h-24 w-24 text-sky-700"
+							className="h-24 w-24 text-gray-700"
 							icon={feather.ThumbsUp}
-							fill={fillA ? "currentColor" : "none"}
+							fill={fill1 ? "currentColor" : "none"}
 						/>
 					</div>
-					{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
+					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
 					<div
-						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
-						onClick={e => setFillB(curr => !curr)}
+						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						onClick={e => setFill2(curr => !curr)}
 					>
 						<AdjustableIcon
-							className="h-24 w-24 text-sky-700"
+							className="h-24 w-24 text-gray-700"
 							icon={feather.ThumbsDown}
-							fill={fillB ? "currentColor" : "none"}
+							fill={fill2 ? "currentColor" : "none"}
 						/>
 					</div>
-					{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
+					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
 					<div
-						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
-						onClick={e => setFillC(curr => !curr)}
+						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						onClick={e => setFill3(curr => !curr)}
 					>
 						<AdjustableIcon
-							className="h-24 w-24 text-sky-700"
+							className="h-24 w-24 text-gray-700"
 							icon={feather.Heart}
-							fill={fillC ? "currentColor" : "none"}
+							fill={fill3 ? "currentColor" : "none"}
 						/>
 					</div>
-					{/* <div className="aspect-[4] h-6 rounded-1e3 bg-sky-300"></div> */}
+					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
 					<div
-						className="flex h-40 w-40 items-center justify-center rounded-1e3 hover:bg-sky-100 hover:active:bg-sky-200"
-						onClick={e => setFillD(curr => !curr)}
+						className="flex h-40 w-40 cursor-pointer items-center justify-center rounded-1e3 hover:bg-gray-200 hover:active:bg-gray-300"
+						onClick={e => setFill4(curr => !curr)}
 					>
 						<AdjustableIcon
-							className="h-24 w-24 text-sky-700"
+							className="h-24 w-24 text-gray-700"
 							icon={feather[name]}
-							fill={fillD ? "currentColor" : "none"}
+							fill={fill4 ? "currentColor" : "none"}
 						/>
 					</div>
 				</div>
