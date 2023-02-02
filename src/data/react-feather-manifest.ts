@@ -2,1069 +2,1643 @@ import * as feather from "./react-feather"
 
 export const version = "4.29.0"
 
-export const manifest: Record<keyof typeof feather, string[]> = {
-  "Activity": [
-    "pulse",
-    "health",
-    "action",
-    "motion"
-  ],
-  "Airplay": [
-    "stream",
-    "cast",
-    "mirroring"
-  ],
-  "AlertCircle": [
-    "warning",
-    "alert",
-    "danger"
-  ],
-  "AlertOctagon": [
-    "warning",
-    "alert",
-    "danger"
-  ],
-  "AlertTriangle": [
-    "warning",
-    "alert",
-    "danger"
-  ],
-  "AlignCenter": [
-    "text alignment",
-    "center"
-  ],
-  "AlignJustify": [
-    "text alignment",
-    "justified"
-  ],
-  "AlignLeft": [
-    "text alignment",
-    "left"
-  ],
-  "AlignRight": [
-    "text alignment",
-    "right"
-  ],
-  "Anchor": [],
-  "Aperture": [
-    "camera",
-    "photo"
-  ],
-  "Archive": [
-    "index",
-    "box"
-  ],
-  "ArrowDownCircle": [],
-  "ArrowDownLeft": [],
-  "ArrowDownRight": [],
-  "ArrowDown": [],
-  "ArrowLeftCircle": [],
-  "ArrowLeft": [],
-  "ArrowRightCircle": [],
-  "ArrowRight": [],
-  "ArrowUpCircle": [],
-  "ArrowUpLeft": [],
-  "ArrowUpRight": [],
-  "ArrowUp": [],
-  "AtSign": [
-    "mention",
-    "at",
-    "email",
-    "message"
-  ],
-  "Award": [
-    "achievement",
-    "badge"
-  ],
-  "BarChart2": [
-    "statistics",
-    "diagram",
-    "graph"
-  ],
-  "BarChart": [
-    "statistics",
-    "diagram",
-    "graph"
-  ],
-  "BatteryCharging": [
-    "power",
-    "electricity"
-  ],
-  "Battery": [
-    "power",
-    "electricity"
-  ],
-  "BellOff": [
-    "alarm",
-    "notification",
-    "silent"
-  ],
-  "Bell": [
-    "alarm",
-    "notification",
-    "sound"
-  ],
-  "Bluetooth": [
-    "wireless"
-  ],
-  "Bold": [],
-  "BookOpen": [
-    "read",
-    "library"
-  ],
-  "Book": [
-    "read",
-    "dictionary",
-    "booklet",
-    "magazine",
-    "library"
-  ],
-  "Bookmark": [
-    "read",
-    "clip",
-    "marker",
-    "tag"
-  ],
-  "Box": [
-    "cube"
-  ],
-  "Briefcase": [
-    "work",
-    "bag",
-    "baggage",
-    "folder"
-  ],
-  "Calendar": [
-    "date"
-  ],
-  "CameraOff": [],
-  "Camera": [
-    "photo"
-  ],
-  "Cast": [
-    "chromecast",
-    "airplay"
-  ],
-  "CheckCircle": [],
-  "CheckSquare": [],
-  "Check": [],
-  "ChevronDown": [
-    "expand"
-  ],
-  "ChevronLeft": [],
-  "ChevronRight": [],
-  "ChevronUp": [
-    "collapse"
-  ],
-  "ChevronsDown": [],
-  "ChevronsLeft": [],
-  "ChevronsRight": [],
-  "ChevronsUp": [],
-  "Chrome": [],
-  "Circle": [
-    "off",
-    "zero",
-    "record"
-  ],
-  "Clipboard": [
-    "copy"
-  ],
-  "Clock": [
-    "time",
-    "watch",
-    "alarm"
-  ],
-  "CloudDrizzle": [
-    "weather",
-    "shower"
-  ],
-  "CloudLightning": [
-    "weather",
-    "bolt"
-  ],
-  "CloudOff": [],
-  "CloudRain": [
-    "weather"
-  ],
-  "CloudSnow": [
-    "weather",
-    "blizzard"
-  ],
-  "Cloud": [
-    "weather"
-  ],
-  "Code": [
-    "source",
-    "programming"
-  ],
-  "Codepen": [
-    "logo"
-  ],
-  "Codesandbox": [
-    "logo"
-  ],
-  "Coffee": [
-    "drink",
-    "cup",
-    "mug",
-    "tea",
-    "cafe",
-    "hot",
-    "beverage"
-  ],
-  "Columns": [
-    "layout"
-  ],
-  "Command": [
-    "keyboard",
-    "cmd",
-    "terminal",
-    "prompt"
-  ],
-  "Compass": [
-    "navigation",
-    "safari",
-    "travel",
-    "direction"
-  ],
-  "Copy": [
-    "clone",
-    "duplicate"
-  ],
-  "CornerDownLeft": [
-    "arrow",
-    "return"
-  ],
-  "CornerDownRight": [
-    "arrow"
-  ],
-  "CornerLeftDown": [
-    "arrow"
-  ],
-  "CornerLeftUp": [
-    "arrow"
-  ],
-  "CornerRightDown": [
-    "arrow"
-  ],
-  "CornerRightUp": [
-    "arrow"
-  ],
-  "CornerUpLeft": [
-    "arrow"
-  ],
-  "CornerUpRight": [
-    "arrow"
-  ],
-  "Cpu": [
-    "processor",
-    "technology"
-  ],
-  "CreditCard": [
-    "purchase",
-    "payment",
-    "cc"
-  ],
-  "Crop": [
-    "photo",
-    "image"
-  ],
-  "Crosshair": [
-    "aim",
-    "target"
-  ],
-  "Database": [
-    "storage",
-    "memory"
-  ],
-  "Delete": [
-    "remove"
-  ],
-  "Disc": [
-    "album",
-    "cd",
-    "dvd",
-    "music"
-  ],
-  "DivideCircle": [],
-  "DivideSquare": [],
-  "Divide": [],
-  "DollarSign": [
-    "currency",
-    "money",
-    "payment"
-  ],
-  "DownloadCloud": [],
-  "Download": [],
-  "Dribbble": [],
-  "Droplet": [
-    "water"
-  ],
-  "Edit2": [
-    "pencil",
-    "change"
-  ],
-  "Edit3": [
-    "pencil",
-    "change"
-  ],
-  "Edit": [
-    "pencil",
-    "change"
-  ],
-  "ExternalLink": [
-    "outbound"
-  ],
-  "EyeOff": [
-    "view",
-    "watch",
-    "hide",
-    "hidden"
-  ],
-  "Eye": [
-    "view",
-    "watch"
-  ],
-  "Facebook": [
-    "logo",
-    "social"
-  ],
-  "FastForward": [
-    "music"
-  ],
-  "Feather": [],
-  "Figma": [
-    "logo",
-    "design",
-    "tool"
-  ],
-  "FileMinus": [
-    "delete",
-    "remove",
-    "erase"
-  ],
-  "FilePlus": [
-    "add",
-    "create",
-    "new"
-  ],
-  "FileText": [
-    "data",
-    "txt",
-    "pdf"
-  ],
-  "File": [],
-  "Film": [
-    "movie",
-    "video"
-  ],
-  "Filter": [
-    "funnel",
-    "hopper"
-  ],
-  "Flag": [
-    "report"
-  ],
-  "FolderMinus": [
-    "directory"
-  ],
-  "FolderPlus": [
-    "directory"
-  ],
-  "Folder": [
-    "directory"
-  ],
-  "Framer": [
-    "logo",
-    "design",
-    "tool"
-  ],
-  "Frown": [
-    "emoji",
-    "face",
-    "bad",
-    "sad",
-    "emotion"
-  ],
-  "Gift": [
-    "present",
-    "box",
-    "birthday",
-    "party"
-  ],
-  "GitBranch": [
-    "code",
-    "version control"
-  ],
-  "GitCommit": [
-    "code",
-    "version control"
-  ],
-  "GitMerge": [
-    "code",
-    "version control"
-  ],
-  "GitPullRequest": [
-    "code",
-    "version control"
-  ],
-  "Github": [
-    "logo",
-    "version control"
-  ],
-  "Gitlab": [
-    "logo",
-    "version control"
-  ],
-  "Globe": [
-    "world",
-    "browser",
-    "language",
-    "translate"
-  ],
-  "Grid": [],
-  "HardDrive": [
-    "computer",
-    "server",
-    "memory",
-    "data"
-  ],
-  "Hash": [
-    "hashtag",
-    "number",
-    "pound"
-  ],
-  "Headphones": [
-    "music",
-    "audio",
-    "sound"
-  ],
-  "Heart": [
-    "like",
-    "love",
-    "emotion"
-  ],
-  "HelpCircle": [
-    "question mark"
-  ],
-  "Hexagon": [
-    "shape",
-    "node.js",
-    "logo"
-  ],
-  "Home": [
-    "house",
-    "living"
-  ],
-  "Image": [
-    "picture"
-  ],
-  "Inbox": [
-    "email"
-  ],
-  "Info": [],
-  "Instagram": [
-    "logo",
-    "camera"
-  ],
-  "Italic": [],
-  "Key": [
-    "password",
-    "login",
-    "authentication",
-    "secure"
-  ],
-  "Layers": [
-    "stack"
-  ],
-  "Layout": [
-    "window",
-    "webpage"
-  ],
-  "LifeBuoy": [
-    "help",
-    "life ring",
-    "support"
-  ],
-  "Link2": [
-    "chain",
-    "url"
-  ],
-  "Link": [
-    "chain",
-    "url"
-  ],
-  "Linkedin": [
-    "logo",
-    "social media"
-  ],
-  "List": [
-    "options"
-  ],
-  "Loader": [],
-  "Lock": [
-    "security",
-    "password",
-    "secure"
-  ],
-  "LogIn": [
-    "sign in",
-    "arrow",
-    "enter"
-  ],
-  "LogOut": [
-    "sign out",
-    "arrow",
-    "exit"
-  ],
-  "Mail": [
-    "email",
-    "message"
-  ],
-  "MapPin": [
-    "location",
-    "navigation",
-    "travel",
-    "marker"
-  ],
-  "Map": [
-    "location",
-    "navigation",
-    "travel"
-  ],
-  "Maximize2": [
-    "fullscreen",
-    "arrows",
-    "expand"
-  ],
-  "Maximize": [
-    "fullscreen"
-  ],
-  "Meh": [
-    "emoji",
-    "face",
-    "neutral",
-    "emotion"
-  ],
-  "Menu": [
-    "bars",
-    "navigation",
-    "hamburger"
-  ],
-  "MessageCircle": [
-    "comment",
-    "chat"
-  ],
-  "MessageSquare": [
-    "comment",
-    "chat"
-  ],
-  "MicOff": [
-    "record",
-    "sound",
-    "mute"
-  ],
-  "Mic": [
-    "record",
-    "sound",
-    "listen"
-  ],
-  "Minimize2": [
-    "exit fullscreen",
-    "arrows",
-    "close"
-  ],
-  "Minimize": [
-    "exit fullscreen",
-    "close"
-  ],
-  "MinusCircle": [],
-  "MinusSquare": [],
-  "Minus": [
-    "subtract"
-  ],
-  "Monitor": [
-    "tv",
-    "screen",
-    "display"
-  ],
-  "Moon": [
-    "dark",
-    "night"
-  ],
-  "MoreHorizontal": [
-    "ellipsis"
-  ],
-  "MoreVertical": [
-    "ellipsis"
-  ],
-  "MousePointer": [
-    "arrow",
-    "cursor"
-  ],
-  "Move": [
-    "arrows"
-  ],
-  "Music": [
-    "note"
-  ],
-  "Navigation2": [
-    "location",
-    "travel"
-  ],
-  "Navigation": [
-    "location",
-    "travel"
-  ],
-  "Octagon": [
-    "stop"
-  ],
-  "Package": [
-    "box",
-    "container"
-  ],
-  "Paperclip": [
-    "attachment"
-  ],
-  "PauseCircle": [
-    "music",
-    "audio",
-    "stop"
-  ],
-  "Pause": [
-    "music",
-    "stop"
-  ],
-  "PenTool": [
-    "vector",
-    "drawing"
-  ],
-  "Percent": [
-    "discount"
-  ],
-  "PhoneCall": [
-    "ring"
-  ],
-  "PhoneForwarded": [
-    "call"
-  ],
-  "PhoneIncoming": [
-    "call"
-  ],
-  "PhoneMissed": [
-    "call"
-  ],
-  "PhoneOff": [
-    "call",
-    "mute"
-  ],
-  "PhoneOutgoing": [
-    "call"
-  ],
-  "Phone": [
-    "call"
-  ],
-  "PieChart": [
-    "statistics",
-    "diagram"
-  ],
-  "PlayCircle": [
-    "music",
-    "start"
-  ],
-  "Play": [
-    "music",
-    "start"
-  ],
-  "PlusCircle": [
-    "add",
-    "new"
-  ],
-  "PlusSquare": [
-    "add",
-    "new"
-  ],
-  "Plus": [
-    "add",
-    "new"
-  ],
-  "Pocket": [
-    "logo",
-    "save"
-  ],
-  "Power": [
-    "on",
-    "off"
-  ],
-  "Printer": [
-    "fax",
-    "office",
-    "device"
-  ],
-  "Radio": [
-    "signal"
-  ],
-  "RefreshCcw": [
-    "arrows"
-  ],
-  "RefreshCw": [
-    "synchronise",
-    "arrows"
-  ],
-  "Repeat": [
-    "loop",
-    "arrows"
-  ],
-  "Rewind": [
-    "music"
-  ],
-  "RotateCcw": [
-    "arrow"
-  ],
-  "RotateCw": [
-    "arrow"
-  ],
-  "Rss": [
-    "feed",
-    "subscribe"
-  ],
-  "Save": [
-    "floppy disk"
-  ],
-  "Scissors": [
-    "cut"
-  ],
-  "Search": [
-    "find",
-    "magnifier",
-    "magnifying glass"
-  ],
-  "Send": [
-    "message",
-    "mail",
-    "email",
-    "paper airplane",
-    "paper aeroplane"
-  ],
-  "Server": [],
-  "Settings": [
-    "cog",
-    "edit",
-    "gear",
-    "preferences"
-  ],
-  "Share2": [
-    "network",
-    "connections"
-  ],
-  "Share": [],
-  "ShieldOff": [
-    "security",
-    "insecure"
-  ],
-  "Shield": [
-    "security",
-    "secure"
-  ],
-  "ShoppingBag": [
-    "ecommerce",
-    "cart",
-    "purchase",
-    "store"
-  ],
-  "ShoppingCart": [
-    "ecommerce",
-    "cart",
-    "purchase",
-    "store"
-  ],
-  "Shuffle": [
-    "music"
-  ],
-  "Sidebar": [],
-  "SkipBack": [
-    "music"
-  ],
-  "SkipForward": [
-    "music"
-  ],
-  "Slack": [
-    "logo"
-  ],
-  "Slash": [
-    "ban",
-    "no"
-  ],
-  "Sliders": [
-    "settings",
-    "controls"
-  ],
-  "Smartphone": [
-    "cellphone",
-    "device"
-  ],
-  "Smile": [
-    "emoji",
-    "face",
-    "happy",
-    "good",
-    "emotion"
-  ],
-  "Speaker": [
-    "audio",
-    "music"
-  ],
-  "Square": [],
-  "Star": [
-    "bookmark",
-    "favorite",
-    "like"
-  ],
-  "StopCircle": [
-    "media",
-    "music"
-  ],
-  "Sun": [
-    "brightness",
-    "weather",
-    "light"
-  ],
-  "Sunrise": [
-    "weather",
-    "time",
-    "morning",
-    "day"
-  ],
-  "Sunset": [
-    "weather",
-    "time",
-    "evening",
-    "night"
-  ],
-  "Table": [],
-  "Tablet": [
-    "device"
-  ],
-  "Tag": [
-    "label"
-  ],
-  "Target": [
-    "logo",
-    "bullseye"
-  ],
-  "Terminal": [
-    "code",
-    "command line",
-    "prompt"
-  ],
-  "Thermometer": [
-    "temperature",
-    "celsius",
-    "fahrenheit",
-    "weather"
-  ],
-  "ThumbsDown": [
-    "dislike",
-    "bad",
-    "emotion"
-  ],
-  "ThumbsUp": [
-    "like",
-    "good",
-    "emotion"
-  ],
-  "ToggleLeft": [
-    "on",
-    "off",
-    "switch"
-  ],
-  "ToggleRight": [
-    "on",
-    "off",
-    "switch"
-  ],
-  "Tool": [
-    "settings",
-    "spanner"
-  ],
-  "Trash2": [
-    "garbage",
-    "delete",
-    "remove",
-    "bin"
-  ],
-  "Trash": [
-    "garbage",
-    "delete",
-    "remove",
-    "bin"
-  ],
-  "Trello": [],
-  "TrendingDown": [],
-  "TrendingUp": [],
-  "Triangle": [
-    "delta"
-  ],
-  "Truck": [
-    "delivery",
-    "van",
-    "shipping",
-    "transport",
-    "lorry"
-  ],
-  "Tv": [
-    "television",
-    "stream"
-  ],
-  "Twitch": [
-    "logo"
-  ],
-  "Twitter": [
-    "logo",
-    "social"
-  ],
-  "Type": [
-    "text"
-  ],
-  "Umbrella": [
-    "rain",
-    "weather"
-  ],
-  "Underline": [],
-  "Unlock": [
-    "security"
-  ],
-  "UploadCloud": [],
-  "Upload": [],
-  "UserCheck": [
-    "followed",
-    "subscribed"
-  ],
-  "UserMinus": [
-    "delete",
-    "remove",
-    "unfollow",
-    "unsubscribe"
-  ],
-  "UserPlus": [
-    "new",
-    "add",
-    "create",
-    "follow",
-    "subscribe"
-  ],
-  "UserX": [
-    "delete",
-    "remove",
-    "unfollow",
-    "unsubscribe",
-    "unavailable"
-  ],
-  "User": [
-    "person",
-    "account"
-  ],
-  "Users": [
-    "group"
-  ],
-  "VideoOff": [
-    "camera",
-    "movie",
-    "film"
-  ],
-  "Video": [
-    "camera",
-    "movie",
-    "film"
-  ],
-  "Voicemail": [
-    "phone"
-  ],
-  "Volume1": [
-    "music",
-    "sound"
-  ],
-  "Volume2": [
-    "music",
-    "sound"
-  ],
-  "VolumeX": [
-    "music",
-    "sound",
-    "mute"
-  ],
-  "Volume": [
-    "music",
-    "sound",
-    "mute"
-  ],
-  "Watch": [
-    "clock",
-    "time"
-  ],
-  "WifiOff": [
-    "disabled"
-  ],
-  "Wifi": [
-    "connection",
-    "signal",
-    "wireless"
-  ],
-  "Wind": [
-    "weather",
-    "air"
-  ],
-  "XCircle": [
-    "cancel",
-    "close",
-    "delete",
-    "remove",
-    "times",
-    "clear"
-  ],
-  "XOctagon": [
-    "delete",
-    "stop",
-    "alert",
-    "warning",
-    "times",
-    "clear"
-  ],
-  "XSquare": [
-    "cancel",
-    "close",
-    "delete",
-    "remove",
-    "times",
-    "clear"
-  ],
-  "X": [
-    "cancel",
-    "close",
-    "delete",
-    "remove",
-    "times",
-    "clear"
-  ],
-  "Youtube": [
-    "logo",
-    "video",
-    "play"
-  ],
-  "ZapOff": [
-    "flash",
-    "camera",
-    "lightning"
-  ],
-  "Zap": [
-    "flash",
-    "camera",
-    "lightning"
-  ],
-  "ZoomIn": [
-    "magnifying glass"
-  ],
-  "ZoomOut": [
-    "magnifying glass"
-  ],
+export const manifest: Record<keyof typeof feather, { tags: string[] }> = {
+  "Activity": {
+    "tags": [
+      "pulse",
+      "health",
+      "action",
+      "motion"
+    ]
+  },
+  "Airplay": {
+    "tags": [
+      "stream",
+      "cast",
+      "mirroring"
+    ]
+  },
+  "AlertCircle": {
+    "tags": [
+      "warning",
+      "alert",
+      "danger"
+    ]
+  },
+  "AlertOctagon": {
+    "tags": [
+      "warning",
+      "alert",
+      "danger"
+    ]
+  },
+  "AlertTriangle": {
+    "tags": [
+      "warning",
+      "alert",
+      "danger"
+    ]
+  },
+  "AlignCenter": {
+    "tags": [
+      "text alignment",
+      "center"
+    ]
+  },
+  "AlignJustify": {
+    "tags": [
+      "text alignment",
+      "justified"
+    ]
+  },
+  "AlignLeft": {
+    "tags": [
+      "text alignment",
+      "left"
+    ]
+  },
+  "AlignRight": {
+    "tags": [
+      "text alignment",
+      "right"
+    ]
+  },
+  "Anchor": {
+    "tags": []
+  },
+  "Aperture": {
+    "tags": [
+      "camera",
+      "photo"
+    ]
+  },
+  "Archive": {
+    "tags": [
+      "index",
+      "box"
+    ]
+  },
+  "ArrowDownCircle": {
+    "tags": []
+  },
+  "ArrowDownLeft": {
+    "tags": []
+  },
+  "ArrowDownRight": {
+    "tags": []
+  },
+  "ArrowDown": {
+    "tags": []
+  },
+  "ArrowLeftCircle": {
+    "tags": []
+  },
+  "ArrowLeft": {
+    "tags": []
+  },
+  "ArrowRightCircle": {
+    "tags": []
+  },
+  "ArrowRight": {
+    "tags": []
+  },
+  "ArrowUpCircle": {
+    "tags": []
+  },
+  "ArrowUpLeft": {
+    "tags": []
+  },
+  "ArrowUpRight": {
+    "tags": []
+  },
+  "ArrowUp": {
+    "tags": []
+  },
+  "AtSign": {
+    "tags": [
+      "mention",
+      "at",
+      "email",
+      "message"
+    ]
+  },
+  "Award": {
+    "tags": [
+      "achievement",
+      "badge"
+    ]
+  },
+  "BarChart2": {
+    "tags": [
+      "statistics",
+      "diagram",
+      "graph"
+    ]
+  },
+  "BarChart": {
+    "tags": [
+      "statistics",
+      "diagram",
+      "graph"
+    ]
+  },
+  "BatteryCharging": {
+    "tags": [
+      "power",
+      "electricity"
+    ]
+  },
+  "Battery": {
+    "tags": [
+      "power",
+      "electricity"
+    ]
+  },
+  "BellOff": {
+    "tags": [
+      "alarm",
+      "notification",
+      "silent"
+    ]
+  },
+  "Bell": {
+    "tags": [
+      "alarm",
+      "notification",
+      "sound"
+    ]
+  },
+  "Bluetooth": {
+    "tags": [
+      "wireless"
+    ]
+  },
+  "Bold": {
+    "tags": []
+  },
+  "BookOpen": {
+    "tags": [
+      "read",
+      "library"
+    ]
+  },
+  "Book": {
+    "tags": [
+      "read",
+      "dictionary",
+      "booklet",
+      "magazine",
+      "library"
+    ]
+  },
+  "Bookmark": {
+    "tags": [
+      "read",
+      "clip",
+      "marker",
+      "tag"
+    ]
+  },
+  "Box": {
+    "tags": [
+      "cube"
+    ]
+  },
+  "Briefcase": {
+    "tags": [
+      "work",
+      "bag",
+      "baggage",
+      "folder"
+    ]
+  },
+  "Calendar": {
+    "tags": [
+      "date"
+    ]
+  },
+  "CameraOff": {
+    "tags": []
+  },
+  "Camera": {
+    "tags": [
+      "photo"
+    ]
+  },
+  "Cast": {
+    "tags": [
+      "chromecast",
+      "airplay"
+    ]
+  },
+  "CheckCircle": {
+    "tags": []
+  },
+  "CheckSquare": {
+    "tags": []
+  },
+  "Check": {
+    "tags": []
+  },
+  "ChevronDown": {
+    "tags": [
+      "expand"
+    ]
+  },
+  "ChevronLeft": {
+    "tags": []
+  },
+  "ChevronRight": {
+    "tags": []
+  },
+  "ChevronUp": {
+    "tags": [
+      "collapse"
+    ]
+  },
+  "ChevronsDown": {
+    "tags": []
+  },
+  "ChevronsLeft": {
+    "tags": []
+  },
+  "ChevronsRight": {
+    "tags": []
+  },
+  "ChevronsUp": {
+    "tags": []
+  },
+  "Chrome": {
+    "tags": []
+  },
+  "Circle": {
+    "tags": [
+      "off",
+      "zero",
+      "record"
+    ]
+  },
+  "Clipboard": {
+    "tags": [
+      "copy"
+    ]
+  },
+  "Clock": {
+    "tags": [
+      "time",
+      "watch",
+      "alarm"
+    ]
+  },
+  "CloudDrizzle": {
+    "tags": [
+      "weather",
+      "shower"
+    ]
+  },
+  "CloudLightning": {
+    "tags": [
+      "weather",
+      "bolt"
+    ]
+  },
+  "CloudOff": {
+    "tags": []
+  },
+  "CloudRain": {
+    "tags": [
+      "weather"
+    ]
+  },
+  "CloudSnow": {
+    "tags": [
+      "weather",
+      "blizzard"
+    ]
+  },
+  "Cloud": {
+    "tags": [
+      "weather"
+    ]
+  },
+  "Code": {
+    "tags": [
+      "source",
+      "programming"
+    ]
+  },
+  "Codepen": {
+    "tags": [
+      "logo"
+    ]
+  },
+  "Codesandbox": {
+    "tags": [
+      "logo"
+    ]
+  },
+  "Coffee": {
+    "tags": [
+      "drink",
+      "cup",
+      "mug",
+      "tea",
+      "cafe",
+      "hot",
+      "beverage"
+    ]
+  },
+  "Columns": {
+    "tags": [
+      "layout"
+    ]
+  },
+  "Command": {
+    "tags": [
+      "keyboard",
+      "cmd",
+      "terminal",
+      "prompt"
+    ]
+  },
+  "Compass": {
+    "tags": [
+      "navigation",
+      "safari",
+      "travel",
+      "direction"
+    ]
+  },
+  "Copy": {
+    "tags": [
+      "clone",
+      "duplicate"
+    ]
+  },
+  "CornerDownLeft": {
+    "tags": [
+      "arrow",
+      "return"
+    ]
+  },
+  "CornerDownRight": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "CornerLeftDown": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "CornerLeftUp": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "CornerRightDown": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "CornerRightUp": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "CornerUpLeft": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "CornerUpRight": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "Cpu": {
+    "tags": [
+      "processor",
+      "technology"
+    ]
+  },
+  "CreditCard": {
+    "tags": [
+      "purchase",
+      "payment",
+      "cc"
+    ]
+  },
+  "Crop": {
+    "tags": [
+      "photo",
+      "image"
+    ]
+  },
+  "Crosshair": {
+    "tags": [
+      "aim",
+      "target"
+    ]
+  },
+  "Database": {
+    "tags": [
+      "storage",
+      "memory"
+    ]
+  },
+  "Delete": {
+    "tags": [
+      "remove"
+    ]
+  },
+  "Disc": {
+    "tags": [
+      "album",
+      "cd",
+      "dvd",
+      "music"
+    ]
+  },
+  "DivideCircle": {
+    "tags": []
+  },
+  "DivideSquare": {
+    "tags": []
+  },
+  "Divide": {
+    "tags": []
+  },
+  "DollarSign": {
+    "tags": [
+      "currency",
+      "money",
+      "payment"
+    ]
+  },
+  "DownloadCloud": {
+    "tags": []
+  },
+  "Download": {
+    "tags": []
+  },
+  "Dribbble": {
+    "tags": []
+  },
+  "Droplet": {
+    "tags": [
+      "water"
+    ]
+  },
+  "Edit2": {
+    "tags": [
+      "pencil",
+      "change"
+    ]
+  },
+  "Edit3": {
+    "tags": [
+      "pencil",
+      "change"
+    ]
+  },
+  "Edit": {
+    "tags": [
+      "pencil",
+      "change"
+    ]
+  },
+  "ExternalLink": {
+    "tags": [
+      "outbound"
+    ]
+  },
+  "EyeOff": {
+    "tags": [
+      "view",
+      "watch",
+      "hide",
+      "hidden"
+    ]
+  },
+  "Eye": {
+    "tags": [
+      "view",
+      "watch"
+    ]
+  },
+  "Facebook": {
+    "tags": [
+      "logo",
+      "social"
+    ]
+  },
+  "FastForward": {
+    "tags": [
+      "music"
+    ]
+  },
+  "Feather": {
+    "tags": []
+  },
+  "Figma": {
+    "tags": [
+      "logo",
+      "design",
+      "tool"
+    ]
+  },
+  "FileMinus": {
+    "tags": [
+      "delete",
+      "remove",
+      "erase"
+    ]
+  },
+  "FilePlus": {
+    "tags": [
+      "add",
+      "create",
+      "new"
+    ]
+  },
+  "FileText": {
+    "tags": [
+      "data",
+      "txt",
+      "pdf"
+    ]
+  },
+  "File": {
+    "tags": []
+  },
+  "Film": {
+    "tags": [
+      "movie",
+      "video"
+    ]
+  },
+  "Filter": {
+    "tags": [
+      "funnel",
+      "hopper"
+    ]
+  },
+  "Flag": {
+    "tags": [
+      "report"
+    ]
+  },
+  "FolderMinus": {
+    "tags": [
+      "directory"
+    ]
+  },
+  "FolderPlus": {
+    "tags": [
+      "directory"
+    ]
+  },
+  "Folder": {
+    "tags": [
+      "directory"
+    ]
+  },
+  "Framer": {
+    "tags": [
+      "logo",
+      "design",
+      "tool"
+    ]
+  },
+  "Frown": {
+    "tags": [
+      "emoji",
+      "face",
+      "bad",
+      "sad",
+      "emotion"
+    ]
+  },
+  "Gift": {
+    "tags": [
+      "present",
+      "box",
+      "birthday",
+      "party"
+    ]
+  },
+  "GitBranch": {
+    "tags": [
+      "code",
+      "version control"
+    ]
+  },
+  "GitCommit": {
+    "tags": [
+      "code",
+      "version control"
+    ]
+  },
+  "GitMerge": {
+    "tags": [
+      "code",
+      "version control"
+    ]
+  },
+  "GitPullRequest": {
+    "tags": [
+      "code",
+      "version control"
+    ]
+  },
+  "Github": {
+    "tags": [
+      "logo",
+      "version control"
+    ]
+  },
+  "Gitlab": {
+    "tags": [
+      "logo",
+      "version control"
+    ]
+  },
+  "Globe": {
+    "tags": [
+      "world",
+      "browser",
+      "language",
+      "translate"
+    ]
+  },
+  "Grid": {
+    "tags": []
+  },
+  "HardDrive": {
+    "tags": [
+      "computer",
+      "server",
+      "memory",
+      "data"
+    ]
+  },
+  "Hash": {
+    "tags": [
+      "hashtag",
+      "number",
+      "pound"
+    ]
+  },
+  "Headphones": {
+    "tags": [
+      "music",
+      "audio",
+      "sound"
+    ]
+  },
+  "Heart": {
+    "tags": [
+      "like",
+      "love",
+      "emotion"
+    ]
+  },
+  "HelpCircle": {
+    "tags": [
+      "question mark"
+    ]
+  },
+  "Hexagon": {
+    "tags": [
+      "shape",
+      "node.js",
+      "logo"
+    ]
+  },
+  "Home": {
+    "tags": [
+      "house",
+      "living"
+    ]
+  },
+  "Image": {
+    "tags": [
+      "picture"
+    ]
+  },
+  "Inbox": {
+    "tags": [
+      "email"
+    ]
+  },
+  "Info": {
+    "tags": []
+  },
+  "Instagram": {
+    "tags": [
+      "logo",
+      "camera"
+    ]
+  },
+  "Italic": {
+    "tags": []
+  },
+  "Key": {
+    "tags": [
+      "password",
+      "login",
+      "authentication",
+      "secure"
+    ]
+  },
+  "Layers": {
+    "tags": [
+      "stack"
+    ]
+  },
+  "Layout": {
+    "tags": [
+      "window",
+      "webpage"
+    ]
+  },
+  "LifeBuoy": {
+    "tags": [
+      "help",
+      "life ring",
+      "support"
+    ]
+  },
+  "Link2": {
+    "tags": [
+      "chain",
+      "url"
+    ]
+  },
+  "Link": {
+    "tags": [
+      "chain",
+      "url"
+    ]
+  },
+  "Linkedin": {
+    "tags": [
+      "logo",
+      "social media"
+    ]
+  },
+  "List": {
+    "tags": [
+      "options"
+    ]
+  },
+  "Loader": {
+    "tags": []
+  },
+  "Lock": {
+    "tags": [
+      "security",
+      "password",
+      "secure"
+    ]
+  },
+  "LogIn": {
+    "tags": [
+      "sign in",
+      "arrow",
+      "enter"
+    ]
+  },
+  "LogOut": {
+    "tags": [
+      "sign out",
+      "arrow",
+      "exit"
+    ]
+  },
+  "Mail": {
+    "tags": [
+      "email",
+      "message"
+    ]
+  },
+  "MapPin": {
+    "tags": [
+      "location",
+      "navigation",
+      "travel",
+      "marker"
+    ]
+  },
+  "Map": {
+    "tags": [
+      "location",
+      "navigation",
+      "travel"
+    ]
+  },
+  "Maximize2": {
+    "tags": [
+      "fullscreen",
+      "arrows",
+      "expand"
+    ]
+  },
+  "Maximize": {
+    "tags": [
+      "fullscreen"
+    ]
+  },
+  "Meh": {
+    "tags": [
+      "emoji",
+      "face",
+      "neutral",
+      "emotion"
+    ]
+  },
+  "Menu": {
+    "tags": [
+      "bars",
+      "navigation",
+      "hamburger"
+    ]
+  },
+  "MessageCircle": {
+    "tags": [
+      "comment",
+      "chat"
+    ]
+  },
+  "MessageSquare": {
+    "tags": [
+      "comment",
+      "chat"
+    ]
+  },
+  "MicOff": {
+    "tags": [
+      "record",
+      "sound",
+      "mute"
+    ]
+  },
+  "Mic": {
+    "tags": [
+      "record",
+      "sound",
+      "listen"
+    ]
+  },
+  "Minimize2": {
+    "tags": [
+      "exit fullscreen",
+      "arrows",
+      "close"
+    ]
+  },
+  "Minimize": {
+    "tags": [
+      "exit fullscreen",
+      "close"
+    ]
+  },
+  "MinusCircle": {
+    "tags": []
+  },
+  "MinusSquare": {
+    "tags": []
+  },
+  "Minus": {
+    "tags": [
+      "subtract"
+    ]
+  },
+  "Monitor": {
+    "tags": [
+      "tv",
+      "screen",
+      "display"
+    ]
+  },
+  "Moon": {
+    "tags": [
+      "dark",
+      "night"
+    ]
+  },
+  "MoreHorizontal": {
+    "tags": [
+      "ellipsis"
+    ]
+  },
+  "MoreVertical": {
+    "tags": [
+      "ellipsis"
+    ]
+  },
+  "MousePointer": {
+    "tags": [
+      "arrow",
+      "cursor"
+    ]
+  },
+  "Move": {
+    "tags": [
+      "arrows"
+    ]
+  },
+  "Music": {
+    "tags": [
+      "note"
+    ]
+  },
+  "Navigation2": {
+    "tags": [
+      "location",
+      "travel"
+    ]
+  },
+  "Navigation": {
+    "tags": [
+      "location",
+      "travel"
+    ]
+  },
+  "Octagon": {
+    "tags": [
+      "stop"
+    ]
+  },
+  "Package": {
+    "tags": [
+      "box",
+      "container"
+    ]
+  },
+  "Paperclip": {
+    "tags": [
+      "attachment"
+    ]
+  },
+  "PauseCircle": {
+    "tags": [
+      "music",
+      "audio",
+      "stop"
+    ]
+  },
+  "Pause": {
+    "tags": [
+      "music",
+      "stop"
+    ]
+  },
+  "PenTool": {
+    "tags": [
+      "vector",
+      "drawing"
+    ]
+  },
+  "Percent": {
+    "tags": [
+      "discount"
+    ]
+  },
+  "PhoneCall": {
+    "tags": [
+      "ring"
+    ]
+  },
+  "PhoneForwarded": {
+    "tags": [
+      "call"
+    ]
+  },
+  "PhoneIncoming": {
+    "tags": [
+      "call"
+    ]
+  },
+  "PhoneMissed": {
+    "tags": [
+      "call"
+    ]
+  },
+  "PhoneOff": {
+    "tags": [
+      "call",
+      "mute"
+    ]
+  },
+  "PhoneOutgoing": {
+    "tags": [
+      "call"
+    ]
+  },
+  "Phone": {
+    "tags": [
+      "call"
+    ]
+  },
+  "PieChart": {
+    "tags": [
+      "statistics",
+      "diagram"
+    ]
+  },
+  "PlayCircle": {
+    "tags": [
+      "music",
+      "start"
+    ]
+  },
+  "Play": {
+    "tags": [
+      "music",
+      "start"
+    ]
+  },
+  "PlusCircle": {
+    "tags": [
+      "add",
+      "new"
+    ]
+  },
+  "PlusSquare": {
+    "tags": [
+      "add",
+      "new"
+    ]
+  },
+  "Plus": {
+    "tags": [
+      "add",
+      "new"
+    ]
+  },
+  "Pocket": {
+    "tags": [
+      "logo",
+      "save"
+    ]
+  },
+  "Power": {
+    "tags": [
+      "on",
+      "off"
+    ]
+  },
+  "Printer": {
+    "tags": [
+      "fax",
+      "office",
+      "device"
+    ]
+  },
+  "Radio": {
+    "tags": [
+      "signal"
+    ]
+  },
+  "RefreshCcw": {
+    "tags": [
+      "arrows"
+    ]
+  },
+  "RefreshCw": {
+    "tags": [
+      "synchronise",
+      "arrows"
+    ]
+  },
+  "Repeat": {
+    "tags": [
+      "loop",
+      "arrows"
+    ]
+  },
+  "Rewind": {
+    "tags": [
+      "music"
+    ]
+  },
+  "RotateCcw": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "RotateCw": {
+    "tags": [
+      "arrow"
+    ]
+  },
+  "Rss": {
+    "tags": [
+      "feed",
+      "subscribe"
+    ]
+  },
+  "Save": {
+    "tags": [
+      "floppy disk"
+    ]
+  },
+  "Scissors": {
+    "tags": [
+      "cut"
+    ]
+  },
+  "Search": {
+    "tags": [
+      "find",
+      "magnifier",
+      "magnifying glass"
+    ]
+  },
+  "Send": {
+    "tags": [
+      "message",
+      "mail",
+      "email",
+      "paper airplane",
+      "paper aeroplane"
+    ]
+  },
+  "Server": {
+    "tags": []
+  },
+  "Settings": {
+    "tags": [
+      "cog",
+      "edit",
+      "gear",
+      "preferences"
+    ]
+  },
+  "Share2": {
+    "tags": [
+      "network",
+      "connections"
+    ]
+  },
+  "Share": {
+    "tags": []
+  },
+  "ShieldOff": {
+    "tags": [
+      "security",
+      "insecure"
+    ]
+  },
+  "Shield": {
+    "tags": [
+      "security",
+      "secure"
+    ]
+  },
+  "ShoppingBag": {
+    "tags": [
+      "ecommerce",
+      "cart",
+      "purchase",
+      "store"
+    ]
+  },
+  "ShoppingCart": {
+    "tags": [
+      "ecommerce",
+      "cart",
+      "purchase",
+      "store"
+    ]
+  },
+  "Shuffle": {
+    "tags": [
+      "music"
+    ]
+  },
+  "Sidebar": {
+    "tags": []
+  },
+  "SkipBack": {
+    "tags": [
+      "music"
+    ]
+  },
+  "SkipForward": {
+    "tags": [
+      "music"
+    ]
+  },
+  "Slack": {
+    "tags": [
+      "logo"
+    ]
+  },
+  "Slash": {
+    "tags": [
+      "ban",
+      "no"
+    ]
+  },
+  "Sliders": {
+    "tags": [
+      "settings",
+      "controls"
+    ]
+  },
+  "Smartphone": {
+    "tags": [
+      "cellphone",
+      "device"
+    ]
+  },
+  "Smile": {
+    "tags": [
+      "emoji",
+      "face",
+      "happy",
+      "good",
+      "emotion"
+    ]
+  },
+  "Speaker": {
+    "tags": [
+      "audio",
+      "music"
+    ]
+  },
+  "Square": {
+    "tags": []
+  },
+  "Star": {
+    "tags": [
+      "bookmark",
+      "favorite",
+      "like"
+    ]
+  },
+  "StopCircle": {
+    "tags": [
+      "media",
+      "music"
+    ]
+  },
+  "Sun": {
+    "tags": [
+      "brightness",
+      "weather",
+      "light"
+    ]
+  },
+  "Sunrise": {
+    "tags": [
+      "weather",
+      "time",
+      "morning",
+      "day"
+    ]
+  },
+  "Sunset": {
+    "tags": [
+      "weather",
+      "time",
+      "evening",
+      "night"
+    ]
+  },
+  "Table": {
+    "tags": []
+  },
+  "Tablet": {
+    "tags": [
+      "device"
+    ]
+  },
+  "Tag": {
+    "tags": [
+      "label"
+    ]
+  },
+  "Target": {
+    "tags": [
+      "logo",
+      "bullseye"
+    ]
+  },
+  "Terminal": {
+    "tags": [
+      "code",
+      "command line",
+      "prompt"
+    ]
+  },
+  "Thermometer": {
+    "tags": [
+      "temperature",
+      "celsius",
+      "fahrenheit",
+      "weather"
+    ]
+  },
+  "ThumbsDown": {
+    "tags": [
+      "dislike",
+      "bad",
+      "emotion"
+    ]
+  },
+  "ThumbsUp": {
+    "tags": [
+      "like",
+      "good",
+      "emotion"
+    ]
+  },
+  "ToggleLeft": {
+    "tags": [
+      "on",
+      "off",
+      "switch"
+    ]
+  },
+  "ToggleRight": {
+    "tags": [
+      "on",
+      "off",
+      "switch"
+    ]
+  },
+  "Tool": {
+    "tags": [
+      "settings",
+      "spanner"
+    ]
+  },
+  "Trash2": {
+    "tags": [
+      "garbage",
+      "delete",
+      "remove",
+      "bin"
+    ]
+  },
+  "Trash": {
+    "tags": [
+      "garbage",
+      "delete",
+      "remove",
+      "bin"
+    ]
+  },
+  "Trello": {
+    "tags": []
+  },
+  "TrendingDown": {
+    "tags": []
+  },
+  "TrendingUp": {
+    "tags": []
+  },
+  "Triangle": {
+    "tags": [
+      "delta"
+    ]
+  },
+  "Truck": {
+    "tags": [
+      "delivery",
+      "van",
+      "shipping",
+      "transport",
+      "lorry"
+    ]
+  },
+  "Tv": {
+    "tags": [
+      "television",
+      "stream"
+    ]
+  },
+  "Twitch": {
+    "tags": [
+      "logo"
+    ]
+  },
+  "Twitter": {
+    "tags": [
+      "logo",
+      "social"
+    ]
+  },
+  "Type": {
+    "tags": [
+      "text"
+    ]
+  },
+  "Umbrella": {
+    "tags": [
+      "rain",
+      "weather"
+    ]
+  },
+  "Underline": {
+    "tags": []
+  },
+  "Unlock": {
+    "tags": [
+      "security"
+    ]
+  },
+  "UploadCloud": {
+    "tags": []
+  },
+  "Upload": {
+    "tags": []
+  },
+  "UserCheck": {
+    "tags": [
+      "followed",
+      "subscribed"
+    ]
+  },
+  "UserMinus": {
+    "tags": [
+      "delete",
+      "remove",
+      "unfollow",
+      "unsubscribe"
+    ]
+  },
+  "UserPlus": {
+    "tags": [
+      "new",
+      "add",
+      "create",
+      "follow",
+      "subscribe"
+    ]
+  },
+  "UserX": {
+    "tags": [
+      "delete",
+      "remove",
+      "unfollow",
+      "unsubscribe",
+      "unavailable"
+    ]
+  },
+  "User": {
+    "tags": [
+      "person",
+      "account"
+    ]
+  },
+  "Users": {
+    "tags": [
+      "group"
+    ]
+  },
+  "VideoOff": {
+    "tags": [
+      "camera",
+      "movie",
+      "film"
+    ]
+  },
+  "Video": {
+    "tags": [
+      "camera",
+      "movie",
+      "film"
+    ]
+  },
+  "Voicemail": {
+    "tags": [
+      "phone"
+    ]
+  },
+  "Volume1": {
+    "tags": [
+      "music",
+      "sound"
+    ]
+  },
+  "Volume2": {
+    "tags": [
+      "music",
+      "sound"
+    ]
+  },
+  "VolumeX": {
+    "tags": [
+      "music",
+      "sound",
+      "mute"
+    ]
+  },
+  "Volume": {
+    "tags": [
+      "music",
+      "sound",
+      "mute"
+    ]
+  },
+  "Watch": {
+    "tags": [
+      "clock",
+      "time"
+    ]
+  },
+  "WifiOff": {
+    "tags": [
+      "disabled"
+    ]
+  },
+  "Wifi": {
+    "tags": [
+      "connection",
+      "signal",
+      "wireless"
+    ]
+  },
+  "Wind": {
+    "tags": [
+      "weather",
+      "air"
+    ]
+  },
+  "XCircle": {
+    "tags": [
+      "cancel",
+      "close",
+      "delete",
+      "remove",
+      "times",
+      "clear"
+    ]
+  },
+  "XOctagon": {
+    "tags": [
+      "delete",
+      "stop",
+      "alert",
+      "warning",
+      "times",
+      "clear"
+    ]
+  },
+  "XSquare": {
+    "tags": [
+      "cancel",
+      "close",
+      "delete",
+      "remove",
+      "times",
+      "clear"
+    ]
+  },
+  "X": {
+    "tags": [
+      "cancel",
+      "close",
+      "delete",
+      "remove",
+      "times",
+      "clear"
+    ]
+  },
+  "Youtube": {
+    "tags": [
+      "logo",
+      "video",
+      "play"
+    ]
+  },
+  "ZapOff": {
+    "tags": [
+      "flash",
+      "camera",
+      "lightning"
+    ]
+  },
+  "Zap": {
+    "tags": [
+      "flash",
+      "camera",
+      "lightning"
+    ]
+  },
+  "ZoomIn": {
+    "tags": [
+      "magnifying glass"
+    ]
+  },
+  "ZoomOut": {
+    "tags": [
+      "magnifying glass"
+    ]
+  }
 }

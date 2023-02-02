@@ -84,12 +84,12 @@ export function StateProvider({ children }: PropsWithChildren) {
 		}
 		const refA: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
 		const refB: Partial<Record<keyof typeof feather, readonly [number, number] | null>> = {}
-		for (const [name, tags] of Object.entries(manifest)) {
+		for (const [name, info] of Object.entries(manifest)) {
 			const indexes = getSubstringIndexes(name.toLowerCase(), $$search)
 			if (indexes !== null) {
 				refA[name as keyof typeof feather] = indexes
 			} else {
-				for (const tag of tags) {
+				for (const tag of info.tags) {
 					if (tag.startsWith($$search)) {
 						refB[name as keyof typeof feather] = null
 					}

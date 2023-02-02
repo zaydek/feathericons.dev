@@ -40,11 +40,13 @@ async function exportAsSvg() {
 
 async function exportAsTsx() {
 	// src/data/react-feather-manifest.json
-	const data = Object.keys(feather.data).reduce<Record<string, string[]>>((acc, name) => {
-		acc[toTitleCase(name)] = featherTags[name as keyof typeof featherTags] ?? []
+	const data = Object.keys(feather.data).reduce<Record<string, { tags: string[] }>>((acc, name) => {
+		acc[toTitleCase(name)] = {
+			tags: featherTags[name as keyof typeof featherTags] ?? []
+		}
 		return acc
 	}, {})
-	const imports = `import * as feather from "./react-feather"\n\nexport const version = ${JSON.stringify(feather.meta.version)}\n\nexport const manifest: Record<keyof typeof feather, string[]> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
+	const imports = `import * as feather from "./react-feather"\n\nexport const version = ${JSON.stringify(feather.meta.version)}\n\nexport const manifest: Record<keyof typeof feather, { tags: string[] }> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
 	await fs.promises.writeFile(`src/data/react-feather-manifest.ts`, imports + "\n")
 
 	// src/data/react-feather
