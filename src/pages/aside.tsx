@@ -249,6 +249,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 				<Icon
 					className="h-16 w-16 text-[#1570fb] group-hover/button:group-active/button:text-white"
 					icon={click ? feather.Check : icon}
+					// Use a slightly thicker stroke when checked
 					{...(click && { strokeWidth: 2.5 })}
 				/>
 			</div>
