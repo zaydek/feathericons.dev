@@ -1,6 +1,6 @@
 import playwright from "playwright"
 
-import { manifest } from "../src/data/react-feather-manifest"
+import { manifest } from "../src/data/manifest"
 import { toKebabCase } from "../src/lib/cases"
 
 async function main() {

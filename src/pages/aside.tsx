@@ -22,7 +22,7 @@ import {
 	strokeWidthMin,
 	strokeWidthStep,
 } from "../constants"
-import { manifest } from "../data/react-feather-manifest"
+import { manifest } from "../data/manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { download } from "../lib/download"
 import { Icon, SVG } from "../lib/react/icon"

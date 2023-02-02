@@ -35,7 +35,7 @@ ctx:
 }
 
 async function main() {
-	// src/data/react-feather-manifest.json
+	// src/data/manifest.json
 	const data = Object.keys(_feather.data).reduce<Record<string, { tags: string[], more: string[] }>>((acc, key) => {
 		const kebab = key as keyof typeof _featherTags // 🍢
 		acc[toTitleCase(kebab)] = {

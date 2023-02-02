@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useEffect } from "react"
-import { manifest } from "../data/react-feather-manifest"
+import { manifest } from "../data/manifest"
 import { toKebabCase } from "../lib/cases"
 
 // prettier-ignore

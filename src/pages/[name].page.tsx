@@ -21,7 +21,7 @@ import {
 } from "../components/icons"
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
-import { manifest } from "../data/react-feather-manifest"
+import { manifest } from "../data/manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
 import { SliderContext } from "../providers/state"

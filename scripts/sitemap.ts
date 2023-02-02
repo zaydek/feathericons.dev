@@ -1,6 +1,6 @@
 import fs from "node:fs"
 
-import { manifest } from "../src/data/react-feather-manifest"
+import { manifest } from "../src/data/manifest"
 import { toKebabCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
 

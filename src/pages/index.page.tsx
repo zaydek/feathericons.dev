@@ -6,7 +6,7 @@ import { AdjustableIcon } from "../components/adjustable-icon"
 import { MouseTooltip } from "../components/mouse-tooltip"
 import { PageTransition } from "../components/page-transition"
 import { TypographySmallSans } from "../components/typography"
-import { manifest } from "../data/react-feather-manifest"
+import { manifest } from "../data/manifest"
 import { toKebabCase } from "../lib/cases"
 import { SearchContext, SelectedContext } from "../providers/state"
 
