@@ -28,7 +28,7 @@ export function Layout({ children }: PropsWithChildren) {
 					{/* LHS */}
 					<main className="w-100% min-w-0">
 						<Sticky pos="tl">
-							{iota(4).map(index => (
+							{iota(2).map(index => (
 								<div key={index}>Hello, world!</div>
 							))}
 						</Sticky>
@@ -36,6 +36,7 @@ export function Layout({ children }: PropsWithChildren) {
 					</main>
 					{/* RHS */}
 					{/* Use box-content here because of border-l */}
+					{/* TODO: Or use box-shadow here */}
 					<aside className="box-content hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] border-l lg:block">
 						<Sticky pos="tr">
 							<Aside />

@@ -19,8 +19,9 @@ function getTags(kebab: keyof typeof _featherTags) {
 function getMore(kebab: keyof typeof _featherTags) {
 	const more = new Set<string>()
 	const chunks = kebab.split("-")
-ctx:
-	for (const [name, tags] of Object.entries(_featherTags)) {
+	ctx: for (const [name, tags] of Object.entries(_featherTags)) {
+		// Dedupe
+		if (kebab === name) { continue } // prettier-ignore
 		for (const n of name.split("-")) {
 			for (const chunk of chunks) {
 				if (chunk === n) {
@@ -49,7 +50,7 @@ async function exportAsSvg() {
 	// src/data/feather
 	try {
 		await fs.promises.rm(`src/data/feather`, { recursive: true, force: true })
-	} catch { }
+	} catch {}
 	await fs.promises.mkdir(`src/data/feather`, { recursive: true })
 
 	// src/data/feather/<name>.svg
@@ -71,7 +72,7 @@ async function exportAsSvg() {
 
 async function exportAsTsx() {
 	// src/data/manifest.json
-	const data = Object.keys(_feather.data).reduce<Record<string, { tags: string[], more: string[] }>>((acc, key) => {
+	const data = Object.keys(_feather.data).reduce<Record<string, { tags: string[]; more: string[] }>>((acc, key) => {
 		const kebab = key as keyof typeof _featherTags // 🍢
 		acc[toTitleCase(kebab)] = {
 			tags: getTags(kebab),
@@ -79,8 +80,9 @@ async function exportAsTsx() {
 		}
 		return acc
 	}, {})
+	// prettier-ignore
 	const imports = `import * as feather from "./react-feather"\n\nexport const version = ${JSON.stringify(_feather.meta.version)}\n\nexport const manifest: Record<keyof typeof feather, { tags: string[], more: (keyof typeof feather)[] }> = ${JSON.stringify(data, null, 2).replace("]\n}", "],\n}")}`
-	await fs.promises.writeFile(`src/data/manifest.ts`, imports + "\n")
+	await fs.promises.writeFile(`src/data/react-feather-manifest.ts`, imports + "\n")
 
 	// src/data/react-feather
 	try {
@@ -89,6 +91,7 @@ async function exportAsTsx() {
 	await fs.promises.mkdir(`src/data/react-feather`, { recursive: true })
 
 	// src/data/react-feather/index.ts
+	// prettier-ignore
 	const exports = Object.keys(_feather.data).map(name => detab(`
 		export * from "./${toTitleCase(name)}"
 	`).trim()).join("\n")

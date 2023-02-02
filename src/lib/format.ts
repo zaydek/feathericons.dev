@@ -1,16 +1,18 @@
 export function tab(str: string, count: number, { omitStart = false }: { omitStart?: boolean } = {}) {
 	const lines = str.split("\n")
-	return lines.map((line, index) => {
-		if (omitStart && index === 0) {
-			return line
-		} else {
-			if (line.length > 0) {
-				return "\t".repeat(count) + line
-			} else {
+	return lines
+		.map((line, index) => {
+			if (omitStart && index === 0) {
 				return line
+			} else {
+				if (line.length > 0) {
+					return "\t".repeat(count) + line
+				} else {
+					return line
+				}
 			}
-		}
-	}).join("\n")
+		})
+		.join("\n")
 }
 
 export function detab(str: string) {
@@ -26,10 +28,14 @@ export function detab(str: string) {
 		return index
 	})
 	const min = Math.min(...indexes.filter(index => index > 0))
-	return lines.map(line => {
-		if (line === "" || !line.startsWith("\t")) { return line }
-		return line.slice(min)
-	}).join("\n")
+	return lines
+		.map(line => {
+			if (line === "" || !line.startsWith("\t")) {
+				return line
+			}
+			return line.slice(min)
+		})
+		.join("\n")
 }
 
 //// if (import.meta.vitest) {

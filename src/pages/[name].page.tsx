@@ -1,6 +1,8 @@
+import * as feather from "../data/react-feather"
+
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { useContext, useState } from "react"
+import { Fragment } from "react"
 import {
 	CodePenHex,
 	CodePenIcon,
@@ -24,8 +26,7 @@ import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../com
 import { manifest } from "../data/manifest"
 import { toKebabCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
-import { SliderContext } from "../providers/state"
-import { Demo1, Demo2, Demo3, Demo4, Demo5, Demo6 } from "./demos"
+import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia } from "./demos"
 
 interface NameParams extends ParsedUrlQuery {
 	name: string
@@ -55,18 +56,29 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 ////////////////////////////////////////////////////////////////////////////////
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
-	const { size } = useContext(SliderContext)!
-
-	const [eye, setEye] = useState(false)
-
-	const [fillA, setFillA] = useState(false)
-	const [fillB, setFillB] = useState(false)
-	const [fillC, setFillC] = useState(false)
-	const [fillD, setFillD] = useState(false)
-
 	return (
 		<PageTransition>
 			<Article>
+				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
+					<DemoLogin />
+					<DemoGoldenAspectRatio />
+					<DemoChrome />
+					<Demo4 />
+					<DemoSocialMedia />
+					<DemoButton />
+				</figure>
+				<P className="!-mt-48 mb-32">
+					Related Icons:{" "}
+					{manifest[name].more.map((m, index) => (
+						<Fragment key={m}>
+							{index > 0 && " "}
+							<A href={`/${toKebabCase(m).toLowerCase()}`}>
+								<InlineIcon icon={feather[m]}>{m}</InlineIcon>
+							</A>
+							{index + 1 < manifest[name].more.length && ","}
+						</Fragment>
+					))}
+				</P>
 				<H1>Get Started With Feather</H1>
 				<P>
 					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source
@@ -87,15 +99,6 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					</InlineIcon>
 					, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
 				</P>
-
-				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
-					<Demo1 />
-					<Demo2 />
-					<Demo3 />
-					<Demo4 />
-					<Demo5 />
-					<Demo6 />
-				</figure>
 
 				{/* <Hr /> */}
 

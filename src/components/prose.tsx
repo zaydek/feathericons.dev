@@ -1,5 +1,6 @@
 import * as feather from "../data/react-feather"
 
+import Link from "next/link"
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
@@ -134,17 +135,30 @@ export function Hr(props: JSX.IntrinsicElements["hr"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function A({ children, ...props }: JSX.IntrinsicElements["a"]) {
-	return (
-		<a className="text-gray-500 decoration-gray-400 hover:underline" {...props}>
-			{children}
-		</a>
-	)
+// Make href required
+export function A({ href, children, ...props }: { href: string } & Omit<JSX.IntrinsicElements["a"], "href">) {
+	if (href.startsWith("/")) {
+		return (
+			// @ts-expect-error: Type 'string' is not assignable to type
+			// 'Ref<HTMLAnchorElement> | undefined'.ts(2322)
+			<Link className="text-gray-500 decoration-gray-400 hover:underline" href={href} {...props}>
+				{children}
+			</Link>
+		)
+	} else {
+		return (
+			<a className="text-gray-500 decoration-gray-400 hover:underline" href={href} {...props}>
+				{children}
+			</a>
+		)
+	}
 }
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (
-		<code className="rounded-1e3 bg-gray-100 py-2 px-8 shadow-[var(--hairline-shadow)]" {...props}>
+		//// <code className="rounded-1e3 bg-gray-100 py-2 px-8 shadow-[var(--hairline-shadow)]" {...props}>
+		// TODO: Hairline needs to be darker here
+		<code className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
 			{code}
 		</code>
 	)

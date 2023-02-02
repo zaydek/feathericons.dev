@@ -6,6 +6,8 @@ import { Arrayable } from "../lib/types"
 export function PageTransition({ children }: { children: Arrayable<ReactElement> }) {
 	const path = useRouter().asPath
 
+	console.log({ path })
+
 	const [started, setStarted] = useState(false)
 	const [ended, setEnded] = useState(false)
 

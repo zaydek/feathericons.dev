@@ -5,25 +5,19 @@ import { sizeInitial } from "../constants"
 import * as feather from "../data/react-feather"
 import { SliderContext } from "../providers/state"
 
-function DemoShell({ children, ...props }: JSX.IntrinsicElements["div"]) {
+function DemoSlot({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		//// <div className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots {...props}>
-		//// <div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--shadow-2)]" data-background-dots {...props}>
-		<div
-			className="h-256 overflow-clip rounded-24 bg-white shadow-[var(--hairline-shadow)]"
-			data-background-dots
-			{...props}
-		>
+		<div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--hairline-shadow)]" {...props}>
 			{children}
 		</div>
 	)
 }
 
-export function Demo1() {
+export function DemoLogin() {
 	const [eye, setEye] = useState(false)
 
 	return (
-		<DemoShell>
+		<DemoSlot>
 			<div className="flex h-100% items-center justify-center">
 				{/* <div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.3125)] bg-white shadow-[var(--shadow-2)]"> */}
 				<div className="w-[calc(48px_*_5)] rounded-16 bg-white shadow-[var(--shadow-2)]">
@@ -62,7 +56,7 @@ export function Demo1() {
 					</div>
 				</div>
 			</div>
-		</DemoShell>
+		</DemoSlot>
 	)
 }
 
@@ -75,11 +69,11 @@ export function Demo1() {
 //// 	</div>
 //// </Container> */}
 
-export function Demo2() {
+export function DemoGoldenAspectRatio() {
 	const { size } = useContext(SliderContext)!
 
 	return (
-		<DemoShell>
+		<DemoSlot>
 			<div
 				className="flex h-100% items-center justify-center"
 				style={
@@ -124,13 +118,13 @@ export function Demo2() {
 					</div>
 				</MouseTooltip>
 			</div>
-		</DemoShell>
+		</DemoSlot>
 	)
 }
 
-export function Demo3() {
+export function DemoChrome() {
 	return (
-		<DemoShell>
+		<DemoSlot>
 			<div className="flex h-100% flex-col">
 				<div className="grow"></div>
 				{/* Use z-index to prevent box-shadow from being clipped by sibling */}
@@ -189,21 +183,21 @@ export function Demo3() {
 				</div>
 				<div className="grow bg-white"></div>
 			</div>
-		</DemoShell>
+		</DemoSlot>
 	)
 }
 export function Demo4() {
-	return <DemoShell>{/* ... */}</DemoShell>
+	return <DemoSlot>{/* ... */}</DemoSlot>
 }
 
-export function Demo5() {
+export function DemoSocialMedia() {
 	const [fillA, setFillA] = useState(false)
 	const [fillB, setFillB] = useState(false)
 	const [fillC, setFillC] = useState(false)
 	const [fillD, setFillD] = useState(false)
 
 	return (
-		<DemoShell>
+		<DemoSlot>
 			<div className="flex h-100% items-center justify-center gap-16">
 				<div className="flex items-center gap-8">
 					{/* TODO: Extract component here */}
@@ -261,13 +255,13 @@ export function Demo5() {
 					</div>
 				</div>
 			</div>
-		</DemoShell>
+		</DemoSlot>
 	)
 }
 
-export function Demo6() {
+export function DemoButton() {
 	return (
-		<DemoShell>
+		<DemoSlot>
 			<div className="flex h-100% items-center justify-center">
 				<div className="group/button flex h-48 cursor-pointer items-center rounded-1e3 bg-white pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]">
 					{/* LHS */}
@@ -281,6 +275,6 @@ export function Demo6() {
 					<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
 				</div>
 			</div>
-		</DemoShell>
+		</DemoSlot>
 	)
 }

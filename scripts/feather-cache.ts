@@ -17,12 +17,17 @@ async function main() {
 	const page1 = await context.newPage()
 	await page1.goto("https://unpkg.com/browse/feather-icons/dist/icons/")
 	const version = /@(\d+\.\d+\.\d+)/.exec(page1.url())![1]
-	const hrefs = await page1.evaluate(async ([anchorSelector]) => {
-		const anchors = [...document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>].slice(3)
-		return anchors.map(a => a.href)
-	}, [UNPKG_ANCHOR_SELECTOR])
+	const hrefs = await page1.evaluate(
+		async ([anchorSelector]) => {
+			const anchors = [
+				...(document.getElementsByClassName(anchorSelector) as HTMLCollectionOf<HTMLAnchorElement>),
+			].slice(3)
+			return anchors.map(a => a.href)
+		},
+		[UNPKG_ANCHOR_SELECTOR]
+	)
 
-	const dataset: { meta: { version: string }, data: Record<string, string> } = {
+	const dataset: { meta: { version: string }; data: Record<string, string> } = {
 		meta: { version },
 		data: {},
 	}

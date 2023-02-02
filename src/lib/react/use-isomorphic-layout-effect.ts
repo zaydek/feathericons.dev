@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect } from "react"
 
+// prettier-ignore
 export const useIsomorphicLayoutEffect = typeof document !== "undefined"
 	? useLayoutEffect
 	: useEffect
