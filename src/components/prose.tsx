@@ -141,13 +141,13 @@ export function A({ href, children, ...props }: { href: string } & Omit<JSX.Intr
 		return (
 			// @ts-expect-error: Type 'string' is not assignable to type
 			// 'Ref<HTMLAnchorElement> | undefined'.ts(2322)
-			<Link className="text-gray-500 decoration-gray-400 hover:underline" href={href} {...props}>
+			<Link className="decoration-gray-400 hover:underline" href={href} {...props}>
 				{children}
 			</Link>
 		)
 	} else {
 		return (
-			<a className="text-gray-500 decoration-gray-400 hover:underline" href={href} {...props}>
+			<a className="decoration-gray-400 hover:underline" href={href} {...props}>
 				{children}
 			</a>
 		)
@@ -171,8 +171,11 @@ function HeadingIcon({ className, icon, children, ...props }: { icon: SVG } & JS
 		return (
 			// Use inline-flex h-0 items-center to optically center
 			<span className="inline-flex h-0 items-center">
-				{children}&nbsp;
-				<Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
+				{children}
+				<span className="no-underline">
+					&nbsp;
+					<Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
+				</span>
 			</span>
 		)
 	}
@@ -180,13 +183,14 @@ function HeadingIcon({ className, icon, children, ...props }: { icon: SVG } & JS
 
 export function InlineIcon({ className, icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["svg"]) {
 	if (children === undefined || children === null) {
-		return <Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
+		return <Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
 	} else {
 		return (
 			// Use inline-flex h-0 items-center to optically center
 			<span className="inline-flex h-0 items-center">
-				{children}&nbsp;
-				<Icon className={cx("inline-block h-[1.125em] w-[1.125em]", className)} icon={icon} {...props} />
+				{children}
+				&nbsp;
+				<Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
 			</span>
 		)
 	}

@@ -81,8 +81,11 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</P>
 				<H1>Get Started With Feather</H1>
 				<P>
-					<A href="https://github.com/feathericons/feather">Feather</A> is a collection of simply beautiful open source
-					icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
+					<A href="https://github.com/feathericons/feather">
+						<InlineIcon icon={feather.ExternalLink}>Feather</InlineIcon>
+					</A>{" "}
+					is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis
+					on simplicity, consistency, and flexibility.
 				</P>
 				<P>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as{" "}
@@ -97,7 +100,11 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
 						TypeScript React
 					</InlineIcon>
-					, or use one of the <A href="https://github.com/feathericons/feather#related-projects">related projects</A>.
+					, or use one of the{" "}
+					<A href="https://github.com/feathericons/feather#related-projects">
+						<InlineIcon icon={feather.ExternalLink}>related projects</InlineIcon>
+					</A>
+					.
 				</P>
 
 				{/* <Hr /> */}

@@ -21,25 +21,25 @@ function getMore(arg: keyof typeof _featherTags) {
 	const argTags = _featherTags[arg] ?? []
 	ctx: for (const [name, tags] of Object.entries(_featherTags)) {
 		// Compare argument name vs. name
-		for (const n of name.split("-")) {
-			for (const k of arg.split("-")) {
-				if (k === n) {
+		for (const k of arg.split("-")) {
+			for (const n of name.split("-")) {
+				if (n === k) {
 					more.add(name)
 					continue ctx
 				}
 			}
 		}
-		// Compare argument name vs. tags
-		for (const tag of tags) {
-			for (const t of tag.split("-")) {
-				for (const k of arg.split("-")) {
-					if (k === t) {
-						more.add(name)
-						continue ctx
-					}
-				}
-			}
-		}
+		//// // Compare argument name vs. tags
+		//// for (const k of arg.split("-")) {
+		//// 	for (const tag of tags) {
+		//// 		for (const t of tag.split("-")) {
+		//// 			if (t === k) {
+		//// 				more.add(name)
+		//// 				continue ctx
+		//// 			}
+		//// 		}
+		//// 	}
+		//// }
 		// Compare argument tags vs. tags
 		for (const argTag of argTags) {
 			for (const tag of tags) {
