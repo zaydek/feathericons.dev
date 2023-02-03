@@ -118,6 +118,7 @@ export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest })
 	)
 }
 
+// TODO: Add 8px top here
 export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 	const [bookmark, setBookmark] = useState(true)
 

@@ -1,11 +1,11 @@
 import { useRouter } from "next/router"
-import { cloneElement, ReactElement, TransitionEvent, useLayoutEffect, useState } from "react"
+import { cloneElement, PropsWithChildren, TransitionEvent, useLayoutEffect, useState } from "react"
 import { queue } from "../lib/queue"
-import { Arrayable } from "../lib/types"
 
 const useClientLayoutEffect = typeof window === "undefined" ? () => {} : useLayoutEffect
 
-export function PageTransition({ children }: { children: Arrayable<ReactElement> }) {
+//// export function PageTransition({ children }: { children: Arrayable<ReactElement> }) {
+export function PageTransition({ children }: PropsWithChildren) {
 	const path = useRouter().asPath
 
 	const [started, setStarted] = useState(false)
@@ -24,6 +24,7 @@ export function PageTransition({ children }: { children: Arrayable<ReactElement>
 	return (
 		<>
 			{[children].flat().map((child, index) =>
+				// @ts-expect-error
 				cloneElement(child, {
 					key: index,
 					style: ended

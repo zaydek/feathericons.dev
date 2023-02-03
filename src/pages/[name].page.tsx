@@ -69,6 +69,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<DemoSocialMedia name={name} />
 					<DemoButton name={name} />
 				</figure>
+				{/* FIXME: Transition doesn't interpolate here -- why? */}
 				{manifest[name].more.length > 0 && (
 					<>
 						<p.Heading>
