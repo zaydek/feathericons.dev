@@ -58,13 +58,13 @@ function getMore(arg: keyof typeof _featherTags) {
 async function exportAsSvg() {
 	const zip = new JSZip()
 
-	// src/data/feather
+	// public/feather
 	try {
-		await fs.promises.rm(`src/data/feather`, { recursive: true, force: true })
+		await fs.promises.rm(`public/feather`, { recursive: true, force: true })
 	} catch {}
-	await fs.promises.mkdir(`src/data/feather`, { recursive: true })
+	await fs.promises.mkdir(`public/feather`, { recursive: true })
 
-	// src/data/feather/<name>.svg
+	// public/feather/<name>.svg
 	for (const [name, data] of Object.entries(_feather.data)) {
 		const { window } = new JSDOM(data)
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs })
@@ -72,13 +72,13 @@ async function exportAsSvg() {
 			//// license: `<!-- Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather -->`,
 			comment: `https://feathericons.com/${name}`,
 		})
-		await fs.promises.writeFile(`src/data/feather/${name}.svg`, codeAsSvg + "\n")
+		await fs.promises.writeFile(`public/feather/${name}.svg`, codeAsSvg + "\n")
 		zip.file(`${name}.svg`, codeAsSvg.replaceAll("\t", "  ") + "\n")
 	}
 
-	// src/data/feather.zip
+	// public/feather.zip
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
-	await fs.promises.writeFile(`src/data/feather.zip`, buffer)
+	await fs.promises.writeFile(`public/feather.zip`, buffer)
 }
 
 async function exportAsTsx() {

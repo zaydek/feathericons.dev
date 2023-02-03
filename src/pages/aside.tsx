@@ -15,7 +15,7 @@ import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToTitleCase } from "../lib/cases"
-import { download } from "../lib/download"
+import { downloadText } from "../lib/download"
 import { Mutable } from "../lib/types"
 import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
@@ -390,7 +390,7 @@ export function Aside() {
 	const handleClickDownload = useCallback(() => {
 		const filename = `${formatAs === "svg" ? convertToKebabCase(selectedName).toLowerCase() : selectedName}.${formatAs}`
 		const contents = clipboard + "\n"
-		download(filename, contents)
+		downloadText(filename, contents)
 	}, [clipboard, formatAs, selectedName])
 
 	return (

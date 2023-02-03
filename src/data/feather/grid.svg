@@ -1,7 +1,0 @@
-<!-- https://feathericons.com/grid -->
-<svg class="feather feather-grid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-	<rect height="7" width="7" x="3" y="3"></rect>
-	<rect height="7" width="7" x="14" y="3"></rect>
-	<rect height="7" width="7" x="14" y="14"></rect>
-	<rect height="7" width="7" x="3" y="14"></rect>
-</svg>
