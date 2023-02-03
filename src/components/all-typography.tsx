@@ -46,65 +46,63 @@ export function SmallSans<T extends keyof JSX.IntrinsicElements>({ className, ch
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Prose({ className, children, ...props }: JSX.IntrinsicElements["article"]) {
-	return (
-		<Tag
-			tag="article"
-			className="whitespace-normal
-				font-sans text-[16px] font-[400]
-				leading-[1.6]"
-			appendClassName={className}
-			{...props}
-		>
-			{children}
-		</Tag>
-	)
-}
-
-export function ProseH1({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
-	return (
-		<Tag
-			tag="h1"
-			className="
-				text-[1.25em]
-				font-[500]
-				leading-[1.25]"
-			appendClassName={className}
-			{...props}
-		>
-			{children}
-		</Tag>
-	)
-}
-
-export function ProseH2({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
-	return (
-		<Tag
-			tag="h2"
-			className="
-				text-[1.0625em]
-				font-[500]
-				leading-[1.25]"
-			appendClassName={className}
-			{...props}
-		>
-			{children}
-		</Tag>
-	)
-}
-
-export function ProsePreCode({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
-	return (
-		<Tag tag="code" className="text-[0.875em]" appendClassName={className} {...props}>
-			{children}
-		</Tag>
-	)
-}
-
-export function ProseCode({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
-	return (
-		<Tag tag="code" className="text-[0.875em]" appendClassName={className} {...props}>
-			{children}
-		</Tag>
-	)
+export const prose = {
+	Article({ className, children, ...props }: JSX.IntrinsicElements["article"]) {
+		return (
+			<Tag
+				tag="article"
+				className="whitespace-normal
+					font-sans text-[16px] font-[400]
+					leading-[1.6]"
+				appendClassName={className}
+				{...props}
+			>
+				{children}
+			</Tag>
+		)
+	},
+	H1({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
+		return (
+			<Tag
+				tag="h1"
+				className="
+					text-[1.25em]
+					font-[500]
+					leading-[1.25]"
+				appendClassName={className}
+				{...props}
+			>
+				{children}
+			</Tag>
+		)
+	},
+	H2({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
+		return (
+			<Tag
+				tag="h2"
+				className="
+					text-[1.0625em]
+					font-[500]
+					leading-[1.25]"
+				appendClassName={className}
+				{...props}
+			>
+				{children}
+			</Tag>
+		)
+	},
+	PreCode({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
+		return (
+			<Tag tag="code" className="text-[0.875em]" appendClassName={className} {...props}>
+				{children}
+			</Tag>
+		)
+	},
+	Code({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
+		return (
+			<Tag tag="code" className="text-[0.875em]" appendClassName={className} {...props}>
+				{children}
+			</Tag>
+		)
+	},
 }

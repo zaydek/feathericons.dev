@@ -1,4 +1,4 @@
-import * as t from "../components/star-type"
+import * as typography from "../components/all-typography"
 import * as feather from "../data/react-feather"
 
 import { memo, useContext, useMemo } from "react"
@@ -93,9 +93,9 @@ const MemoGridItem = memo(function GridItem({
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 				}}
 			>
-				<t.SmallSans className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
+				<typography.SmallSans className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
 					<Highlight indexes={indexes}>{name}</Highlight>
-				</t.SmallSans>
+				</typography.SmallSans>
 			</A>
 		</div>
 	)

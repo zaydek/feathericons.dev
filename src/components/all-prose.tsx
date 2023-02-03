@@ -1,5 +1,5 @@
 import * as feather from "../data/react-feather"
-import * as t from "./star-type"
+import * as typography from "./all-typography"
 
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
@@ -8,14 +8,30 @@ import { cx } from "../lib/cx"
 import { ShikiContext } from "../providers/shiki"
 import { A } from "./anchor"
 import { Icon, SVG } from "./icon"
+import {
+	CodePenIcon,
+	CodePenUrl,
+	NextjsIcon,
+	NextjsUrl,
+	ReactjsIcon,
+	ReactjsUrl,
+	SassIcon,
+	SvgIcon,
+	TailwindCssIcon,
+	TailwindCssUrl,
+	TwitterIcon,
+	TwitterUrl,
+	TypeScriptIcon,
+	TypeScriptUrl,
+} from "./icon-config"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		<t.Prose className="prose text-gray-900" {...props}>
+		<typography.prose.Article className="prose text-gray-900" {...props}>
 			{children}
-		</t.Prose>
+		</typography.prose.Article>
 	)
 }
 
@@ -38,7 +54,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<t.ProseH1 id={id} className="group/header relative text-black" {...props}>
+		<typography.prose.H1 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -48,7 +64,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</t.ProseH1>
+		</typography.prose.H1>
 	)
 }
 
@@ -61,7 +77,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<t.ProseH2 id={id} className="group/header relative text-black" {...props}>
+		<typography.prose.H2 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -71,7 +87,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</t.ProseH2>
+		</typography.prose.H2>
 	)
 }
 
@@ -107,7 +123,7 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 
 	return (
 		<pre className="overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
-			<t.ProsePreCode>
+			<typography.prose.PreCode>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-64">
@@ -127,7 +143,7 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 								)}
 							</div>
 					  ))}
-			</t.ProsePreCode>
+			</typography.prose.PreCode>
 		</pre>
 	)
 }
@@ -136,9 +152,9 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (
-		<t.ProseCode className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
+		<typography.prose.Code className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
 			{code}
-		</t.ProseCode>
+		</typography.prose.Code>
 	)
 }
 
@@ -174,3 +190,45 @@ export function TextIconAnchor({ icon, children, ...props }: { icon: SVG } & JSX
 		</A>
 	)
 }
+
+// Badges
+export const CodePen = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? CodePenUrl} icon={CodePenIcon} {...props}>
+		{children ?? "CodePen"}
+	</TextIconAnchor>
+)
+export const Nextjs = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? NextjsUrl} icon={NextjsIcon} {...props}>
+		{children ?? "Next.js"}
+	</TextIconAnchor>
+)
+export const Reactjs = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? ReactjsUrl} icon={ReactjsIcon} {...props}>
+		{children ?? "React.js"}
+	</TextIconAnchor>
+)
+export const Sass = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? "TODO"} icon={SassIcon} {...props}>
+		{children ?? "Sass"}
+	</TextIconAnchor>
+)
+export const Svg = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? "TODO"} icon={SvgIcon} {...props}>
+		{children ?? "SVG"}
+	</TextIconAnchor>
+)
+export const TailwindCss = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? TailwindCssUrl} icon={TailwindCssIcon} {...props}>
+		{children ?? "Tailwind CSS"}
+	</TextIconAnchor>
+)
+export const Twitter = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? TwitterUrl} icon={TwitterIcon} {...props}>
+		{children ?? "Twitter"}
+	</TextIconAnchor>
+)
+export const TypeScript = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<TextIconAnchor href={href ?? TypeScriptUrl} icon={TypeScriptIcon} {...props}>
+		{children ?? "TypeScript"}
+	</TextIconAnchor>
+)

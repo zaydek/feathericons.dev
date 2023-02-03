@@ -1,4 +1,4 @@
-import * as t from "../components/star-type"
+import * as typography from "../components/all-typography"
 import * as feather from "../data/react-feather"
 
 import { AnimatePresence, motion } from "framer-motion"
@@ -160,9 +160,9 @@ function FormatButton() {
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" icon={icon} />
 					</div>
-					<t.Caps className="text-gray-700">
+					<typography.Caps className="text-gray-700">
 						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
-					</t.Caps>
+					</typography.Caps>
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
@@ -198,7 +198,7 @@ function FormatButton() {
 								aria-label="Format as SVG"
 							>
 								<Icon className="h-16 w-16" icon={SvgIcon} />
-								<t.Caps className="text-gray-700">SVG</t.Caps>
+								<typography.Caps className="text-gray-700">SVG</typography.Caps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -206,7 +206,7 @@ function FormatButton() {
 								aria-label="Format as React"
 							>
 								<Icon className="h-16 w-16" icon={ReactjsIcon} />
-								<t.Caps className="text-gray-700">REACT</t.Caps>
+								<typography.Caps className="text-gray-700">REACT</typography.Caps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -214,7 +214,7 @@ function FormatButton() {
 								aria-label="Format as TypeScript React"
 							>
 								<Icon className="h-16 w-16" icon={TypeScriptIcon} />
-								<t.Caps className="text-gray-700">TS REACT</t.Caps>
+								<typography.Caps className="text-gray-700">TS REACT</typography.Caps>
 							</DropDownItem>
 						</div>
 					</motion.div>
@@ -253,7 +253,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 					{...(click && { strokeWidth: 2.5 })}
 				/>
 			</div>
-			<t.Caps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</t.Caps>
+			<typography.Caps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</typography.Caps>
 		</button>
 	)
 }
@@ -274,7 +274,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<DecorativeIcon icon={feather.Code} />
-				<t.Caps className="text-gray-700">{children}</t.Caps>
+				<typography.Caps className="text-gray-700">{children}</typography.Caps>
 			</div>
 			{/* RHS */}
 			<div className="flex h-16 w-48 items-center rounded-1e3 bg-[var(--hairline-color)] group-aria-checked/checkbox:bg-[var(--theme-color)]">
@@ -324,16 +324,16 @@ function CompoundSlider({
 				{/* LHS */}
 				<div className="flex items-center gap-8">
 					<DecorativeIcon icon={icon} />
-					<t.Caps className="text-gray-700">{children}</t.Caps>
+					<typography.Caps className="text-gray-700">{children}</typography.Caps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-8">
 					{/* prettier-ignore */}
-					<t.Caps className="text-gray-700">
+					<typography.Caps className="text-gray-700">
 						{props.value < sizeMin
 							? props.value.toFixed(2)
 							: `${props.value} PX`}
-					</t.Caps>
+					</typography.Caps>
 					<button
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}
