@@ -7,7 +7,7 @@ import { getStringFromChildren } from "../aria/utils"
 import { cx } from "../lib/cx"
 import { ShikiContext } from "../providers/shiki"
 import { Icon, SVG } from "./icon"
-import { TypeCaps, TypeProse, TypeProseH1, TypeProseH2 } from "./type"
+import { TypeCaps, TypeProse, TypeProseCode, TypeProseH1, TypeProseH2, TypeProsePreCode } from "./type"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,6 +28,7 @@ export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO: Change to convertToKebabCase?
 function parseId(str: string) {
 	return str
 		.trim()
@@ -140,7 +141,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		<pre className="relative overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
-			<code>
+			<TypeProsePreCode>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-64">
@@ -160,7 +161,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 								)}
 							</div>
 					  ))}
-			</code>
+			</TypeProsePreCode>
 			<div className="absolute top-8 right-64 hidden lg:block">
 				<div className="flex">
 					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick1(true)}>
@@ -218,11 +219,9 @@ export function A({ href, children, ...props }: { href: string } & Omit<JSX.Intr
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (
-		//// <code className="rounded-1e3 bg-gray-100 py-2 px-8 shadow-[var(--hairline-shadow)]" {...props}>
-		// TODO: Hairline needs to be darker here
-		<code className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
+		<TypeProseCode className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
 			{code}
-		</code>
+		</TypeProseCode>
 	)
 }
 

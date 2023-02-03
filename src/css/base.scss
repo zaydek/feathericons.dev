@@ -20,20 +20,15 @@
 	font-family: var(--sans);
 }
 pre, code {
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
 	font-family: var(--code);
 	tab-size: 2;
 }
+pre code { white-space: pre; }
+code     { white-space: pre-wrap; }
 
 :root:not(.dark) { color-scheme: light; }
 :root.dark       { color-scheme: dark;  }
 
 svg { overflow: visible; }
-
-//// [role] { cursor: pointer; user-select: none; }
-//// [role=slider] {
-//// 	cursor: grab;
-//// 	user-select: none;
-//// 	&:active {
-//// 		cursor: grabbing;
-//// 	}
-//// }
