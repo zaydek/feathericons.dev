@@ -6,6 +6,7 @@ import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
 import { cx } from "../lib/cx"
 import { ShikiContext } from "../providers/shiki"
+import { A } from "./anchor"
 import { Icon, SVG } from "./icon"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +29,7 @@ function getSlug(str: string) {
 		.toLowerCase()
 }
 
-export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [str, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
 		const id = getSlug(str)
@@ -51,7 +52,7 @@ export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	)
 }
 
-export function Subheading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [str, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
 		const id = getSlug(str)
@@ -76,7 +77,7 @@ export function Subheading({ children, ...props }: JSX.IntrinsicElements["h1"]) 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
+export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
 		<ol className="flex flex-col gap-8" {...props}>
 			{children}
@@ -84,7 +85,7 @@ export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"])
 	)
 }
 
-export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
+export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li className="list-inside list-decimal" {...props}>
 			{children}
@@ -141,6 +142,7 @@ export function Code({ children: code, ...props }: { children: string } & JSX.In
 	)
 }
 
+// TODO: Deprecate if possible
 export function InlineIcon({ className, icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["svg"]) {
 	if (children === undefined || children === null) {
 		return <Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
@@ -154,4 +156,21 @@ export function InlineIcon({ className, icon, children, ...props }: { icon: SVG 
 			</span>
 		)
 	}
+}
+
+export function TextAnchor({ children, ...props }: JSX.IntrinsicElements["a"] & Required<Pick<JSX.IntrinsicElements["a"], "href">>) {
+	return (
+		<A className="underline decoration-gray-400" {...props}>
+			{children}
+		</A>
+	)
+}
+
+export function TextIconAnchor({ icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["a"] & Required<Pick<JSX.IntrinsicElements["a"], "href">>) {
+	return (
+		<A className="inline-flex items-center" {...props}>
+			<span className="underline decoration-gray-400">{children}</span>&nbsp;
+			<Icon className="h-[1em] w-[1em] text-gray-700" icon={icon} />
+		</A>
+	)
 }
