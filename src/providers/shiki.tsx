@@ -14,7 +14,7 @@ export function ShikiProvider({ children }: PropsWithChildren) {
 		async function fn() {
 			const highlighter = await getHighlighter({
 				themes: ["github-light", "github-dark"],
-				langs: ["sh", "html", "tsx"],
+				langs: ["html", "tsx"],
 			})
 			setHighlighter(highlighter)
 		}

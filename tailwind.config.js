@@ -24,8 +24,7 @@ module.exports = {
 		...defaultTheme,
 		extend: {
 			screens: {
-				//// // TODO: Change to 500 for production?
-				//// "xs":  "512px",
+				// Use 16px for Windows scrollbar
 				"2xl": `${1792 + 16}px`,
 			},
 		},

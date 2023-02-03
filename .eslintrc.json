@@ -1,11 +1,4 @@
 {
-	"extends": [
-		"react-app",
-		"plugin:jsx-a11y/recommended",
-		"next/core-web-vitals"
-	],
-	"plugins": ["jsx-a11y"],
-	"rules": {
-		"react-hooks/exhaustive-deps": 2
-	}
+	"extends": ["react-app", "plugin:jsx-a11y/recommended", "next/core-web-vitals"],
+	"plugins": ["jsx-a11y"]
 }
