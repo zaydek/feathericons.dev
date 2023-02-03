@@ -4,9 +4,25 @@ import { useContext, useState } from "react"
 import { Hoverable } from "../components/hoverable"
 import { TwitterIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
+import { Anchor } from "../components/star-prose"
 import { sizeInitial } from "../constants"
 import { manifest } from "../data/manifest"
+import { convertToKebabCase, convertToSpaceCase } from "../lib/cases"
 import { SliderContext } from "../providers/state"
+
+export function Recommendation({ name }: { name: keyof typeof manifest }) {
+	return (
+		<Hoverable pos="center" content={convertToSpaceCase(name).toUpperCase()}>
+			<Anchor
+				//// className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center rounded-24 bg-gray-50 shadow-[var(--hairline-shadow)]"
+				className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center"
+				href={`/${convertToKebabCase(name).toLowerCase()}`}
+			>
+				<ResizableIcon className="h-32 w-32 text-gray-800" icon={feather[name]} />
+			</Anchor>
+		</Hoverable>
+	)
+}
 
 function DemoSlot({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (

@@ -1,3 +1,4 @@
+import * as t from "../components/star-type"
 import * as feather from "../data/react-feather"
 
 import Link from "next/link"
@@ -5,7 +6,6 @@ import { memo, useContext, useMemo } from "react"
 import { Hoverable } from "../components/hoverable"
 import { PageTransition } from "../components/page-transition"
 import { ResizableIcon } from "../components/resizable-icon"
-import { TypeSansSmall } from "../components/type"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase } from "../lib/cases"
 import { SearchContext, SelectedContext } from "../providers/state"
@@ -94,9 +94,9 @@ const MemoGridItem = memo(function GridItem({
 				scroll={false}
 			>
 				<div className="group/name flex h-32 items-center justify-center truncate px-4">
-					<TypeSansSmall className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
+					<t.TypeSansSmall className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
 						<Highlight indexes={indexes}>{name}</Highlight>
-					</TypeSansSmall>
+					</t.TypeSansSmall>
 				</div>
 			</Link>
 		</div>

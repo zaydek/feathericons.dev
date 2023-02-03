@@ -1,4 +1,5 @@
 import * as feather from "../data/react-feather"
+import * as t from "./star-type"
 
 import Link from "next/link"
 import { useContext, useEffect, useMemo, useState } from "react"
@@ -7,22 +8,14 @@ import { getStringFromChildren } from "../aria/utils"
 import { cx } from "../lib/cx"
 import { ShikiContext } from "../providers/shiki"
 import { Icon, SVG } from "./icon"
-import { TypeCaps, TypeProse, TypeProseCode, TypeProseH1, TypeProseH2, TypeProsePreCode } from "./type"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		<TypeProse
-			// Use !my-* because of space-y-*
-			className="prose space-y-16 text-gray-900
-				[&_>_:not(pre)]:mx-64
-				[&_>_:is(h1,_h2)]:!my-64
-				   [&_>_:is(pre)]:!my-32"
-			{...props}
-		>
+		<t.TypeProse className="prose text-gray-900" {...props}>
 			{children}
-		</TypeProse>
+		</t.TypeProse>
 	)
 }
 
@@ -37,7 +30,7 @@ function parseId(str: string) {
 		.toLowerCase()
 }
 
-export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [str, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
 		const id = parseId(str)
@@ -46,7 +39,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<TypeProseH1 id={id} className="group/header relative text-black" {...props}>
+		<t.TypeProseH1 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -56,11 +49,11 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</TypeProseH1>
+		</t.TypeProseH1>
 	)
 }
 
-export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
+export function Subheading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [str, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
 		const id = parseId(str)
@@ -69,7 +62,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<TypeProseH2 id={id} className="group/header relative text-black" {...props}>
+		<t.TypeProseH2 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -79,17 +72,13 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</TypeProseH2>
+		</t.TypeProseH2>
 	)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function P({ children, ...props }: JSX.IntrinsicElements["p"]) {
-	return <p {...props}>{children}</p>
-}
-
-export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
+export function OrderedList({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	return (
 		<ol className="flex flex-col gap-8" {...props}>
 			{children}
@@ -97,18 +86,13 @@ export function Ol({ children, ...props }: JSX.IntrinsicElements["ol"]) {
 	)
 }
 
-export function Li({ children, ...props }: JSX.IntrinsicElements["li"]) {
+export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	return (
 		<li className="list-inside list-decimal" {...props}>
 			{children}
 		</li>
 	)
 }
-
-//// function countDigits(num: number) {
-//// 	if (num === 0) return 1
-//// 	return Math.trunc(Math.log10(Math.abs(num))) + 1
-//// }
 
 export function Pre({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
@@ -141,7 +125,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 	return (
 		<pre className="relative overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
-			<TypeProsePreCode>
+			<t.TypeProsePreCode>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-64">
@@ -161,7 +145,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 								)}
 							</div>
 					  ))}
-			</TypeProsePreCode>
+			</t.TypeProsePreCode>
 			<div className="absolute top-8 right-64 hidden lg:block">
 				<div className="flex">
 					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick1(true)}>
@@ -173,7 +157,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 								{...(click1 && { strokeWidth: 2.5 })}
 							/>
 						</div>
-						<TypeCaps>COPY</TypeCaps>
+						<t.TypeCaps>COPY</t.TypeCaps>
 					</div>
 					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick2(true)}>
 						<div className="flex h-32 w-32 items-center justify-center">
@@ -184,7 +168,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 								{...(click2 && { strokeWidth: 2.5 })}
 							/>
 						</div>
-						<TypeCaps>DOWNLOAD</TypeCaps>
+						<t.TypeCaps>DOWNLOAD</t.TypeCaps>
 					</div>
 				</div>
 			</div>
@@ -192,14 +176,10 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	)
 }
 
-export function Hr(props: JSX.IntrinsicElements["hr"]) {
-	return <hr {...props} />
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 
 // Make href required
-export function A({ href, children, ...props }: { href: string } & Omit<JSX.IntrinsicElements["a"], "href" | "rel" | "target">) {
+export function Anchor({ href, children, ...props }: { href: string } & Omit<JSX.IntrinsicElements["a"], "href" | "rel" | "target">) {
 	if (href.startsWith("/")) {
 		return (
 			// @ts-expect-error: Type 'string' is not assignable to type
@@ -219,9 +199,9 @@ export function A({ href, children, ...props }: { href: string } & Omit<JSX.Intr
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (
-		<TypeProseCode className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
+		<t.TypeProseCode className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
 			{code}
-		</TypeProseCode>
+		</t.TypeProseCode>
 	)
 }
 

@@ -1,3 +1,4 @@
+import * as t from "../components/star-type"
 import * as feather from "../data/react-feather"
 
 import { AnimatePresence, motion } from "framer-motion"
@@ -11,7 +12,6 @@ import { Icon, SVG } from "../components/icon"
 import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icon-config"
 import { PageTransition } from "../components/page-transition"
 import { ResizableIcon } from "../components/resizable-icon"
-import { TypeCaps } from "../components/type"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToTitleCase } from "../lib/cases"
@@ -160,9 +160,9 @@ function FormatButton() {
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" style={{ color: hex }} icon={icon} />
 					</div>
-					<TypeCaps className="text-gray-700">
+					<t.TypeCaps className="text-gray-700">
 						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
-					</TypeCaps>
+					</t.TypeCaps>
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
@@ -198,7 +198,7 @@ function FormatButton() {
 								aria-label="Format as SVG"
 							>
 								<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
-								<TypeCaps className="text-gray-700">SVG</TypeCaps>
+								<t.TypeCaps className="text-gray-700">SVG</t.TypeCaps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -206,7 +206,7 @@ function FormatButton() {
 								aria-label="Format as React"
 							>
 								<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
-								<TypeCaps className="text-gray-700">REACT</TypeCaps>
+								<t.TypeCaps className="text-gray-700">REACT</t.TypeCaps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -214,7 +214,7 @@ function FormatButton() {
 								aria-label="Format as TypeScript React"
 							>
 								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
-								<TypeCaps className="text-gray-700">TS REACT</TypeCaps>
+								<t.TypeCaps className="text-gray-700">TS REACT</t.TypeCaps>
 							</DropDownItem>
 						</div>
 					</motion.div>
@@ -253,7 +253,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 					{...(click && { strokeWidth: 2.5 })}
 				/>
 			</div>
-			<TypeCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</TypeCaps>
+			<t.TypeCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</t.TypeCaps>
 		</button>
 	)
 }
@@ -274,7 +274,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<DecorativeIcon icon={feather.Code} />
-				<TypeCaps className="text-gray-700">{children}</TypeCaps>
+				<t.TypeCaps className="text-gray-700">{children}</t.TypeCaps>
 			</div>
 			{/* RHS */}
 			<div className="flex h-16 w-48 items-center rounded-1e3 bg-[var(--hairline-color)] group-aria-checked/checkbox:bg-[var(--theme-color)]">
@@ -324,16 +324,16 @@ function CompoundSlider({
 				{/* LHS */}
 				<div className="flex items-center gap-8">
 					<DecorativeIcon icon={icon} />
-					<TypeCaps className="text-gray-700">{children}</TypeCaps>
+					<t.TypeCaps className="text-gray-700">{children}</t.TypeCaps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-8">
 					{/* prettier-ignore */}
-					<TypeCaps className="text-gray-700">
+					<t.TypeCaps className="text-gray-700">
 						{props.value < sizeMin
 							? props.value.toFixed(2)
 							: `${props.value} PX`}
-					</TypeCaps>
+					</t.TypeCaps>
 					<button
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}

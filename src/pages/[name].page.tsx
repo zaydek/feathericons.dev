@@ -1,8 +1,8 @@
+import * as p from "../components/star-prose"
 import * as feather from "../data/react-feather"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { Hoverable } from "../components/hoverable"
 import {
 	CodePenHex,
 	CodePenIcon,
@@ -19,15 +19,13 @@ import {
 	TwitterHex,
 	TwitterIcon,
 	TypeScriptHex,
-	TypeScriptIcon,
+	TypeScriptIcon
 } from "../components/icon-config"
 import { PageTransition } from "../components/page-transition"
-import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
-import { ResizableIcon } from "../components/resizable-icon"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
-import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia } from "./demos"
+import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia, Recommendation } from "./demos"
 
 interface NameParams extends ParsedUrlQuery {
 	name: string
@@ -59,7 +57,10 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
 		<PageTransition>
-			<Article>
+			<p.Article>
+				<p.Heading>
+					Icon: <p.Code>{convertToSpaceCase(name)}</p.Code>
+				</p.Heading>
 				<figure className="grid grid-cols-3 grid-rows-2 gap-24">
 					<DemoLogin name={name} />
 					<DemoGoldenAspectRatio name={name} />
@@ -68,67 +69,57 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<DemoSocialMedia name={name} />
 					<DemoButton name={name} />
 				</figure>
-
-				<H2>Icons Related to {convertToSpaceCase(name)}</H2>
+				<p.Subheading>
+					Recommended Icons for <p.Code>{convertToSpaceCase(name)}</p.Code>
+				</p.Subheading>
 				<div className="flex flex-wrap">
-					{manifest[name].more.map(m => (
-						<Hoverable key={m} pos="center" content={convertToSpaceCase(m).toUpperCase()}>
-							<A className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center" href={`/${convertToKebabCase(m).toLowerCase()}`}>
-								{/* <div className="flex h-80 w-80 items-center justify-center"> */}
-								<ResizableIcon className="h-32 w-32 text-gray-800" icon={feather[m]} />
-								{/* </div> */}
-							</A>
-						</Hoverable>
+					{manifest[name].more.map(name => (
+						<Recommendation key={name} name={name} />
 					))}
 				</div>
-
-				<Hr />
-
-				<H1>Get Started With Feather</H1>
-				<P>
-					<A href="https://github.com/feathericons/feather">
-						<InlineIcon icon={feather.ExternalLink}>Feather</InlineIcon>
-					</A>{" "}
+				<hr />
+				<p.Heading>Get Started With Feather</p.Heading>
+				<p>
+					<p.Anchor href="https://github.com/feathericons/feather">
+						<p.InlineIcon icon={feather.ExternalLink}>Feather</p.InlineIcon>
+					</p.Anchor>{" "}
 					is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and
 					flexibility.
-				</P>
-				<P>
+				</p>
+				<p>
 					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as{" "}
-					<InlineIcon style={{ color: SvgHex }} icon={SvgIcon}>
+					<p.InlineIcon style={{ color: SvgHex }} icon={SvgIcon}>
 						SVG
-					</InlineIcon>
+					</p.InlineIcon>
 					,{" "}
-					<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
+					<p.InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
 						React
-					</InlineIcon>
+					</p.InlineIcon>
 					, or{" "}
-					<InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
+					<p.InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
 						TypeScript React
-					</InlineIcon>
+					</p.InlineIcon>
 					, or use one of the{" "}
-					<A href="https://github.com/feathericons/feather#related-projects">
-						<InlineIcon icon={feather.ExternalLink}>related projects</InlineIcon>
-					</A>
+					<p.Anchor href="https://github.com/feathericons/feather#related-projects">
+						<p.InlineIcon icon={feather.ExternalLink}>related projects</p.InlineIcon>
+					</p.Anchor>
 					.
-				</P>
-
-				{/* <Hr /> */}
-
-				<H2>Using {name} With a CDN</H2>
-				<P>To get started with Feather using a CDN (content delivery network), simply:</P>
-				<Ol>
-					<Li>
-						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code> tag
-					</Li>
-					<Li>
-						Add <Code>{`<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>`}</Code>
-					</Li>
-					<Li>
-						Invoke <Code>{`feather.replace()`}</Code>
-					</Li>
-				</Ol>
-				<P>For example:</P>
-				<Pre lang="html">
+				</p>
+				<p.Subheading>Using {name} With a CDN</p.Subheading>
+				<p>To get started with Feather using a CDN (content delivery network), simply:</p>
+				<p.OrderedList>
+					<p.ListItem>
+						Add <p.Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</p.Code> to the <p.Code>{`<head>`}</p.Code> tag
+					</p.ListItem>
+					<p.ListItem>
+						Add <p.Code>{`<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>`}</p.Code>
+					</p.ListItem>
+					<p.ListItem>
+						Invoke <p.Code>{`feather.replace()`}</p.Code>
+					</p.ListItem>
+				</p.OrderedList>
+				<p>For example:</p>
+				<p.Pre lang="html">
 					{detab(`
 						<!DOCTYPE html>
 						<html lang="en">
@@ -143,37 +134,36 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 							</body>
 						</html>
 					`)}
-				</Pre>
-				<P>
+				</p.Pre>
+				<p>
 					Click here to get started with a{" "}
-					<A href="https://codepen.io/pen?template=WOJZdM">
-						<InlineIcon style={{ color: CodePenHex }} icon={CodePenIcon}>
+					<p.Anchor href="https://codepen.io/pen?template=WOJZdM">
+						<p.InlineIcon style={{ color: CodePenHex }} icon={CodePenIcon}>
 							CodePen
-						</InlineIcon>
-					</A>{" "}
+						</p.InlineIcon>
+					</p.Anchor>{" "}
 					template.
-				</P>
-				<Hr />
-				<H2>
+				</p>
+				<p.Subheading>
 					Using {name} With{" "}
-					<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
+					<p.InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
 						React
-					</InlineIcon>
-				</H2>
-				<P>To get started with Feather using React, simply:</P>
-				<Ol>
-					<Li>
-						Add <Code>{`npm i react-feather`}</Code> or <Code>{`yarn add react-feather`}</Code> or <Code>{`pnpm i react-feather`}</Code>
-					</Li>
-					<Li>
-						Add <Code>{`import { ${name} } from "react-feather"`}</Code>
-					</Li>
-					<Li>
-						Invoke <Code>{`<${name} />`}</Code>
-					</Li>
-				</Ol>
-				<P>For example:</P>
-				<Pre lang="tsx">
+					</p.InlineIcon>
+				</p.Subheading>
+				<p>To get started with Feather using React, simply:</p>
+				<p.OrderedList>
+					<p.ListItem>
+						Add <p.Code>{`npm i react-feather`}</p.Code> or <p.Code>{`yarn add react-feather`}</p.Code> or <p.Code>{`pnpm i react-feather`}</p.Code>
+					</p.ListItem>
+					<p.ListItem>
+						Add <p.Code>{`import { ${name} } from "react-feather"`}</p.Code>
+					</p.ListItem>
+					<p.ListItem>
+						Invoke <p.Code>{`<${name} />`}</p.Code>
+					</p.ListItem>
+				</p.OrderedList>
+				<p>For example:</p>
+				<p.Pre lang="tsx">
 					{detab(`
 						import { ${name} } from "react-feather"
 
@@ -188,73 +178,73 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 							)
 						}
 					`)}
-				</Pre>
-				<P>
+				</p.Pre>
+				<p>
 					Click here to get started with a{" "}
-					<A href="https://play.tailwindcss.com/6WByBJYved">
-						<InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
+					<p.Anchor href="https://play.tailwindcss.com/6WByBJYved">
+						<p.InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
 							Tailwind CSS
-						</InlineIcon>
-					</A>{" "}
+						</p.InlineIcon>
+					</p.Anchor>{" "}
 					template.
-				</P>
-				<Hr />
-				<P>
+				</p>
+				<hr />
+				<p>
 					<small>
 						Icons by{" "}
-						<A href="https://twitter.com/colebemis">
-							<InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
+						<p.Anchor href="https://twitter.com/colebemis">
+							<p.InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
 								@colebemis
-							</InlineIcon>
-						</A>
+							</p.InlineIcon>
+						</p.Anchor>
 						. App by{" "}
-						<A href="https://twitter.com/username_ZAYDEK">
-							<InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
+						<p.Anchor href="https://twitter.com/username_ZAYDEK">
+							<p.InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
 								@username_ZAYDEK
-							</InlineIcon>
-						</A>
+							</p.InlineIcon>
+						</p.Anchor>
 						.
 						<br />
-						Feather is licensed as <A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used for personal and
-						commercial use without attribution.
+						Feather is licensed as <p.Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</p.Anchor>. Icons may be used
+						for personal and commercial use without attribution.
 						<br />
 						Built using{" "}
-						<A href="https://typescriptlang.org">
-							<InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
+						<p.Anchor href="https://typescriptlang.org">
+							<p.InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
 								TypeScript
-							</InlineIcon>
-						</A>
+							</p.InlineIcon>
+						</p.Anchor>
 						,{" "}
-						<A href="https://reactjs.org">
-							<InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
+						<p.Anchor href="https://reactjs.org">
+							<p.InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
 								React.js
-							</InlineIcon>
-						</A>
+							</p.InlineIcon>
+						</p.Anchor>
 						,{" "}
-						<A href="https://nextjs.org">
-							<InlineIcon style={{ color: NextJsHex }} icon={NextJsIcon}>
+						<p.Anchor href="https://nextjs.org">
+							<p.InlineIcon style={{ color: NextJsHex }} icon={NextJsIcon}>
 								Next.js
-							</InlineIcon>
-						</A>
+							</p.InlineIcon>
+						</p.Anchor>
 						,{" "}
-						<A href="https://tailwindcss.com">
-							<InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
+						<p.Anchor href="https://tailwindcss.com">
+							<p.InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
 								Tailwind CSS
-							</InlineIcon>
-						</A>
+							</p.InlineIcon>
+						</p.Anchor>
 						, and{" "}
-						<A href="https://sass-lang.com">
-							<InlineIcon style={{ color: SassHex }} icon={SassIcon}>
+						<p.Anchor href="https://sass-lang.com">
+							<p.InlineIcon style={{ color: SassHex }} icon={SassIcon}>
 								Sass
-							</InlineIcon>
-						</A>
+							</p.InlineIcon>
+						</p.Anchor>
 						.
 						<br />
 						<br />
-						Looking for the original Feather website? <A href="https://feathericons.com">Click here.</A>
+						Looking for the original Feather website? <p.Anchor href="https://feathericons.com">Click here.</p.Anchor>
 					</small>
-				</P>
-			</Article>
+				</p>
+			</p.Article>
 		</PageTransition>
 	)
 }

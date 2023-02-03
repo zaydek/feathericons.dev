@@ -1,0 +1,15 @@
+.prose > * + * {
+	margin-top:    8px; // Y-axis
+}
+.prose > h1 {
+	margin-top:    64px; // Y-axis
+	margin-bottom: 32px;
+}
+.prose > :is(h2, h3, h4, h5, h6, pre, hr) {
+	margin-top:    32px; // Y-axis
+	margin-bottom: 32px;
+}
+.prose > :not(pre) {
+	margin-right:  64px; // X-axis
+	margin-left:   64px;
+}
