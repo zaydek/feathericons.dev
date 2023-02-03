@@ -14,7 +14,7 @@ function Tag<T extends keyof JSX.IntrinsicElements>({
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function TypeCaps<T extends keyof JSX.IntrinsicElements>({ className, children, ...props }: { tag?: T } & JSX.IntrinsicElements[T]) {
+export function Caps<T extends keyof JSX.IntrinsicElements>({ className, children, ...props }: { tag?: T } & JSX.IntrinsicElements[T]) {
 	return (
 		<Tag
 			tag="div"
@@ -29,12 +29,12 @@ export function TypeCaps<T extends keyof JSX.IntrinsicElements>({ className, chi
 	)
 }
 
-export function TypeSansSmall<T extends keyof JSX.IntrinsicElements>({ className, children, ...props }: { tag?: T } & JSX.IntrinsicElements[T]) {
+export function SmallSans<T extends keyof JSX.IntrinsicElements>({ className, children, ...props }: { tag?: T } & JSX.IntrinsicElements[T]) {
 	return (
 		<Tag
 			tag="div"
 			className="whitespace-normal
-				font-sans text-[12px] font-[400] slashed-zero tabular-nums
+				font-sans text-[12px] font-[400]
 				leading-[normal] tracking-[0.0125em]"
 			appendClassName={className}
 			{...props}
@@ -46,12 +46,12 @@ export function TypeSansSmall<T extends keyof JSX.IntrinsicElements>({ className
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function TypeProse({ className, children, ...props }: JSX.IntrinsicElements["article"]) {
+export function Prose({ className, children, ...props }: JSX.IntrinsicElements["article"]) {
 	return (
 		<Tag
 			tag="article"
 			className="whitespace-normal
-				font-sans text-[16px] font-[400] slashed-zero tabular-nums
+				font-sans text-[16px] font-[400]
 				leading-[1.6]"
 			appendClassName={className}
 			{...props}
@@ -61,7 +61,7 @@ export function TypeProse({ className, children, ...props }: JSX.IntrinsicElemen
 	)
 }
 
-export function TypeProseH1({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
+export function ProseH1({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
 	return (
 		<Tag
 			tag="h1"
@@ -77,7 +77,7 @@ export function TypeProseH1({ className, children, ...props }: JSX.IntrinsicElem
 	)
 }
 
-export function TypeProseH2({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
+export function ProseH2({ className, children, ...props }: JSX.IntrinsicElements["h2"]) {
 	return (
 		<Tag
 			tag="h2"
@@ -93,7 +93,7 @@ export function TypeProseH2({ className, children, ...props }: JSX.IntrinsicElem
 	)
 }
 
-export function TypeProsePreCode({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
+export function ProsePreCode({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		<Tag tag="code" className="text-[0.875em]" appendClassName={className} {...props}>
 			{children}
@@ -101,7 +101,7 @@ export function TypeProsePreCode({ className, children, ...props }: JSX.Intrinsi
 	)
 }
 
-export function TypeProseCode({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
+export function ProseCode({ className, children, ...props }: JSX.IntrinsicElements["code"]) {
 	return (
 		<Tag tag="code" className="text-[0.875em]" appendClassName={className} {...props}>
 			{children}

@@ -50,7 +50,7 @@ export function Hoverable({
 					}
 				>
 					<div className="flex h-32 items-center gap-8 rounded-12 bg-white px-12 shadow-[var(--shadow-6),_var(--base-shadow-6)]">
-						<t.TypeCaps className="text-gray-700">{content}</t.TypeCaps>
+						<t.Caps className="text-gray-700">{content}</t.Caps>
 					</div>
 				</div>
 			</Transition>

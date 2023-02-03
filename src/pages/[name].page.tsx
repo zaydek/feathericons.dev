@@ -69,14 +69,18 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<DemoSocialMedia name={name} />
 					<DemoButton name={name} />
 				</figure>
-				<p.Heading>
-					Recommended Icons for <p.Code>{convertToSpaceCase(name)}</p.Code>
-				</p.Heading>
-				<div className="flex flex-wrap">
-					{manifest[name].more.map(name => (
-						<Recommendation key={name} name={name} />
-					))}
-				</div>
+				{manifest[name].more.length > 0 && (
+					<>
+						<p.Heading>
+							Recommended Icons for <p.Code>{convertToSpaceCase(name)}</p.Code>
+						</p.Heading>
+						<div className="flex flex-wrap">
+							{manifest[name].more.map(name => (
+								<Recommendation key={name} name={name} />
+							))}
+						</div>
+					</>
+				)}
 				<hr />
 				<p.Heading>Get Started With Feather</p.Heading>
 				<p>
@@ -181,7 +185,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</p.Pre>
 				<p>
 					Click here to get started with a{" "}
-					<p.Anchor href="https://play.tailwindcss.com/6WByBJYved">
+					<p.Anchor href="https://play.tailwindcss.com/tq0UHdwbAr">
 						<p.InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
 							Tailwind CSS
 						</p.InlineIcon>

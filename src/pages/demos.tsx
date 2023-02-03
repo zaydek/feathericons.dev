@@ -1,3 +1,5 @@
+// TODO: This needs a11y
+
 import * as feather from "../data/react-feather"
 
 import { useContext, useState } from "react"
@@ -38,8 +40,6 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 	return (
 		<DemoSlot>
 			<div className="flex h-100% items-center justify-center">
-				{/* <div className="w-[calc(48px_*_5)] rounded-[calc(48px_*_0.3125)] bg-white shadow-[var(--shadow-2)]"> */}
-				{/* TODO: Can we use aspect-ratio her? */}
 				<div className="w-[calc(96px_*_2.5)] rounded-[calc(96px_*_0.1875)] bg-white shadow-[var(--shadow-2)]">
 					<div className="flex justify-between">
 						{/* LHS */}
@@ -76,15 +76,6 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 		</DemoSlot>
 	)
 }
-
-//// {/* <Container>
-//// 	<div className="flex h-100% items-center justify-center gap-16" style={{ "--base": "16px", "--increment": 1 + 1 / 3 } as any}>
-//// 		<ResizableIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_0)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_0)]" icon={feather.Feather} />
-//// 		<ResizableIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_1)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_1)]" icon={feather.Feather} />
-//// 		<ResizableIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_2)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_2)]" icon={feather.Feather} />
-//// 		<ResizableIcon className="rounded text-700 h-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_3)] w-[calc(var(--base)_+_var(--base)_*_var(--increment)_*_3)]" icon={feather.Feather} />
-//// 	</div>
-//// </Container> */}
 
 export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest }) {
 	const { size } = useContext(SliderContext)!

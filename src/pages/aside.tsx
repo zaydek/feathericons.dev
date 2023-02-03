@@ -20,7 +20,7 @@ import { Mutable } from "../lib/types"
 import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
 
-function CommentLink({ formatAs, children }: { formatAs: FormatAs; children: string }) {
+function CommentAnchor({ formatAs, children }: { formatAs: FormatAs; children: string }) {
 	if (formatAs === "svg") {
 		const href = children.slice("<!-- ".length, -1 * " -->".length)
 		return (
@@ -69,17 +69,17 @@ function Preview() {
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
-		const tokens = highlighter.codeToThemedTokens(code + "\n", formatAs === "svg" ? "html" : "tsx", "github-light")
+		const tokens = highlighter.codeToThemedTokens(code, formatAs === "svg" ? "html" : "tsx", "github-light")
 		setTokens(tokens)
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
 		<pre className="aspect-[1.5] overflow-auto rounded-24 bg-white text-gray-800 shadow-[var(--shadow-2)]">
-			<code className="inline-block py-24 text-[13px] leading-[1.5]">
+			<code className="inline-block py-24 text-[0.8125em] leading-[1.5]">
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-24">
-								{ys.length > 0 ? y === 0 ? <CommentLink formatAs={formatAs}>{ys}</CommentLink> : ys : <br />}
+								{ys.length > 0 ? y === 0 ? <CommentAnchor formatAs={formatAs}>{ys}</CommentAnchor> : ys : <br />}
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
@@ -87,7 +87,7 @@ function Preview() {
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>
-											{y === 0 ? <CommentLink formatAs={formatAs}>{content}</CommentLink> : content}
+											{y === 0 ? <CommentAnchor formatAs={formatAs}>{content}</CommentAnchor> : content}
 										</span>
 									))
 								) : (
@@ -120,8 +120,8 @@ function DropDownItem({ id, children, ...props }: AriaSimpleDropDownItemProps<Fo
 			id={id}
 			className="flex h-[var(--form-size)] items-center gap-8 px-16
 				hover:bg-gray-100
-					hover:active:bg-gray-200
-						aria-selected:bg-gray-100"
+				hover:active:bg-gray-200
+				aria-selected:bg-gray-100"
 			{...props}
 		>
 			{children}
@@ -160,9 +160,9 @@ function FormatButton() {
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" style={{ color: hex }} icon={icon} />
 					</div>
-					<t.TypeCaps className="text-gray-700">
+					<t.Caps className="text-gray-700">
 						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
-					</t.TypeCaps>
+					</t.Caps>
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
@@ -198,7 +198,7 @@ function FormatButton() {
 								aria-label="Format as SVG"
 							>
 								<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
-								<t.TypeCaps className="text-gray-700">SVG</t.TypeCaps>
+								<t.Caps className="text-gray-700">SVG</t.Caps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -206,7 +206,7 @@ function FormatButton() {
 								aria-label="Format as React"
 							>
 								<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
-								<t.TypeCaps className="text-gray-700">REACT</t.TypeCaps>
+								<t.Caps className="text-gray-700">REACT</t.Caps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -214,7 +214,7 @@ function FormatButton() {
 								aria-label="Format as TypeScript React"
 							>
 								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
-								<t.TypeCaps className="text-gray-700">TS REACT</t.TypeCaps>
+								<t.Caps className="text-gray-700">TS REACT</t.Caps>
 							</DropDownItem>
 						</div>
 					</motion.div>
@@ -253,7 +253,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 					{...(click && { strokeWidth: 2.5 })}
 				/>
 			</div>
-			<t.TypeCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</t.TypeCaps>
+			<t.Caps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</t.Caps>
 		</button>
 	)
 }
@@ -274,7 +274,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<DecorativeIcon icon={feather.Code} />
-				<t.TypeCaps className="text-gray-700">{children}</t.TypeCaps>
+				<t.Caps className="text-gray-700">{children}</t.Caps>
 			</div>
 			{/* RHS */}
 			<div className="flex h-16 w-48 items-center rounded-1e3 bg-[var(--hairline-color)] group-aria-checked/checkbox:bg-[var(--theme-color)]">
@@ -324,16 +324,16 @@ function CompoundSlider({
 				{/* LHS */}
 				<div className="flex items-center gap-8">
 					<DecorativeIcon icon={icon} />
-					<t.TypeCaps className="text-gray-700">{children}</t.TypeCaps>
+					<t.Caps className="text-gray-700">{children}</t.Caps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-8">
 					{/* prettier-ignore */}
-					<t.TypeCaps className="text-gray-700">
+					<t.Caps className="text-gray-700">
 						{props.value < sizeMin
 							? props.value.toFixed(2)
 							: `${props.value} PX`}
-					</t.TypeCaps>
+					</t.Caps>
 					<button
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}
@@ -388,7 +388,7 @@ export function Aside() {
 	}, [clipboard])
 
 	const handleClickDownload = useCallback(() => {
-		const filename = `${formatAs === "svg" ? convertToKebabCase(selectedName) : selectedName}.${formatAs}`
+		const filename = `${formatAs === "svg" ? convertToKebabCase(selectedName).toLowerCase() : selectedName}.${formatAs}`
 		const contents = clipboard + "\n"
 		download(filename, contents)
 	}, [clipboard, formatAs, selectedName])

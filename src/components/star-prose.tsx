@@ -13,9 +13,9 @@ import { Icon, SVG } from "./icon"
 
 export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		<t.TypeProse className="prose text-gray-900" {...props}>
+		<t.Prose className="prose text-gray-900" {...props}>
 			{children}
-		</t.TypeProse>
+		</t.Prose>
 	)
 }
 
@@ -38,7 +38,7 @@ export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<t.TypeProseH1 id={id} className="group/header relative text-black" {...props}>
+		<t.ProseH1 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -48,7 +48,7 @@ export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</t.TypeProseH1>
+		</t.ProseH1>
 	)
 }
 
@@ -61,7 +61,7 @@ export function Subheading({ children, ...props }: JSX.IntrinsicElements["h1"]) 
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<t.TypeProseH2 id={id} className="group/header relative text-black" {...props}>
+		<t.ProseH2 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -71,7 +71,7 @@ export function Subheading({ children, ...props }: JSX.IntrinsicElements["h1"]) 
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</t.TypeProseH2>
+		</t.ProseH2>
 	)
 }
 
@@ -125,7 +125,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 	return (
 		///// <pre className="relative overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
 		<pre className="overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
-			<t.TypeProsePreCode>
+			<t.ProsePreCode>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-64">
@@ -145,7 +145,7 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 								)}
 							</div>
 					  ))}
-			</t.TypeProsePreCode>
+			</t.ProsePreCode>
 			{/* <div className="absolute top-8 right-64 hidden lg:block">
 				<div className="flex">
 					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick1(true)}>
@@ -199,9 +199,9 @@ export function Anchor({ href, children, ...props }: { href: string } & Omit<JSX
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (
-		<t.TypeProseCode className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
+		<t.ProseCode className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
 			{code}
-		</t.TypeProseCode>
+		</t.ProseCode>
 	)
 }
 
