@@ -49,13 +49,11 @@ function HeadingSubheading() {
 	)
 }
 
-// Make href required
-function CtaAnchor({ href, primary = undefined, icon, children, ...props }: { icon: SVG; primary?: true } & JSX.IntrinsicElements["a"]) {
+function CtaAnchor({ primary = undefined, icon, children, ...props }: { primary?: true; icon: SVG } & JSX.IntrinsicElements["a"]) {
 	return (
 		<a
 			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff3] sm:aspect-[3] sm:rounded-1e3
 				[&[data-primary]]:bg-white"
-			href={href}
 			rel="noopener noreferrer"
 			target="_blank"
 			data-primary={primary}

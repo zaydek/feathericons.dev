@@ -178,19 +178,18 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Make href required
-export function Anchor({ href, children, ...props }: { href: string } & Omit<JSX.IntrinsicElements["a"], "href" | "rel" | "target">) {
-	if (href.startsWith("/")) {
+export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
+	if (props.href?.startsWith("/")) {
 		return (
 			// @ts-expect-error: Type 'string' is not assignable to type
 			// 'Ref<HTMLAnchorElement> | undefined'.ts(2322)
-			<Link className="decoration-gray-400 hover:underline" href={href} {...props}>
+			<Link className="decoration-gray-400 hover:underline" {...props}>
 				{children}
 			</Link>
 		)
 	} else {
 		return (
-			<a className="decoration-gray-400 hover:underline" href={href} rel="noopener noreferrer" target="_blank" {...props}>
+			<a className="decoration-gray-400 hover:underline" rel="noopener noreferrer" target="_blank" {...props}>
 				{children}
 			</a>
 		)
