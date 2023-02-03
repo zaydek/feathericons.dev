@@ -7,15 +7,15 @@ import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
-import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icons"
+import { Icon, SVG } from "../components/icon"
+import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icon-config"
 import { PageTransition } from "../components/page-transition"
 import { ResizableIcon } from "../components/resizable-icon"
-import { TypographyCaps } from "../components/typography"
+import { TypeCaps } from "../components/type"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToTitleCase } from "../lib/cases"
 import { download } from "../lib/download"
-import { Icon, SVG } from "../lib/react/icon"
 import { Mutable } from "../lib/types"
 import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
@@ -160,9 +160,9 @@ function FormatButton() {
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" style={{ color: hex }} icon={icon} />
 					</div>
-					<TypographyCaps className="text-gray-700">
+					<TypeCaps className="text-gray-700">
 						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
-					</TypographyCaps>
+					</TypeCaps>
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
@@ -198,7 +198,7 @@ function FormatButton() {
 								aria-label="Format as SVG"
 							>
 								<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
-								<TypographyCaps className="text-gray-700">SVG</TypographyCaps>
+								<TypeCaps className="text-gray-700">SVG</TypeCaps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -206,7 +206,7 @@ function FormatButton() {
 								aria-label="Format as React"
 							>
 								<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
-								<TypographyCaps className="text-gray-700">REACT</TypographyCaps>
+								<TypeCaps className="text-gray-700">REACT</TypeCaps>
 							</DropDownItem>
 							<DropDownItem
 								// prettier-ignore
@@ -214,7 +214,7 @@ function FormatButton() {
 								aria-label="Format as TypeScript React"
 							>
 								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
-								<TypographyCaps className="text-gray-700">TS REACT</TypographyCaps>
+								<TypeCaps className="text-gray-700">TS REACT</TypeCaps>
 							</DropDownItem>
 						</div>
 					</motion.div>
@@ -253,7 +253,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 					{...(click && { strokeWidth: 2.5 })}
 				/>
 			</div>
-			<TypographyCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</TypographyCaps>
+			<TypeCaps className="text-gray-700 group-hover/button:group-active/button:text-white">{children}</TypeCaps>
 		</button>
 	)
 }
@@ -274,7 +274,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<DecorativeIcon icon={feather.Code} />
-				<TypographyCaps className="text-gray-700">{children}</TypographyCaps>
+				<TypeCaps className="text-gray-700">{children}</TypeCaps>
 			</div>
 			{/* RHS */}
 			<div className="flex h-16 w-48 items-center rounded-1e3 bg-[var(--hairline-color)] group-aria-checked/checkbox:bg-[var(--theme-color)]">
@@ -324,16 +324,16 @@ function CompoundSlider({
 				{/* LHS */}
 				<div className="flex items-center gap-8">
 					<DecorativeIcon icon={icon} />
-					<TypographyCaps className="text-gray-700">{children}</TypographyCaps>
+					<TypeCaps className="text-gray-700">{children}</TypeCaps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-8">
 					{/* prettier-ignore */}
-					<TypographyCaps className="text-gray-700">
+					<TypeCaps className="text-gray-700">
 						{props.value < sizeMin
 							? props.value.toFixed(2)
 							: `${props.value} PX`}
-					</TypographyCaps>
+					</TypeCaps>
 					<button
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}

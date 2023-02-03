@@ -2,7 +2,7 @@ import * as feather from "../data/react-feather"
 
 import { useContext, useState } from "react"
 import { Hoverable } from "../components/hoverable"
-import { TwitterIcon } from "../components/icons"
+import { TwitterIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
 import { sizeInitial } from "../constants"
 import { manifest } from "../data/manifest"

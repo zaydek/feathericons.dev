@@ -2,7 +2,7 @@ import * as feather from "./data/react-feather"
 
 import { useContext, useRef } from "react"
 import { Hoverable } from "./components/hoverable"
-import { Icon, SVG } from "./lib/react/icon"
+import { Icon, SVG } from "./components/icon"
 import { SearchContext } from "./providers/state"
 
 function SearchBarButton({ icon, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {

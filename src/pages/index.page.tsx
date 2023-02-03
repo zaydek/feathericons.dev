@@ -5,7 +5,7 @@ import { memo, useContext, useMemo } from "react"
 import { Hoverable } from "../components/hoverable"
 import { PageTransition } from "../components/page-transition"
 import { ResizableIcon } from "../components/resizable-icon"
-import { TypographySmallSans } from "../components/typography"
+import { TypeIconName } from "../components/type"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase } from "../lib/cases"
 import { SearchContext, SelectedContext } from "../providers/state"
@@ -94,9 +94,9 @@ const MemoGridItem = memo(function GridItem({
 				scroll={false}
 			>
 				<div className="group/name flex h-32 items-center justify-center truncate px-4">
-					<TypographySmallSans className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
+					<TypeIconName className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
 						<Highlight indexes={indexes}>{name}</Highlight>
-					</TypographySmallSans>
+					</TypeIconName>
 				</div>
 			</Link>
 		</div>

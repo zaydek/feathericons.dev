@@ -20,7 +20,7 @@ import {
 	TwitterIcon,
 	TypeScriptHex,
 	TypeScriptIcon,
-} from "../components/icons"
+} from "../components/icon-config"
 import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
 import { ResizableIcon } from "../components/resizable-icon"

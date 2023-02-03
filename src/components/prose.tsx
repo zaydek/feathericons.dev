@@ -5,8 +5,9 @@ import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
 import { cx } from "../lib/cx"
-import { Icon, SVG } from "../lib/react/icon"
 import { ShikiContext } from "../providers/shiki"
+import { Icon, SVG } from "./icon"
+import { TypeCaps } from "./type"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -186,14 +187,6 @@ export function Pre({ lang, children: code, ...props }: { lang: Lang; children: 
 				</div>
 			</div>
 		</pre>
-	)
-}
-
-function TypeCaps({ className, children, ...props }: JSX.IntrinsicElements["div"]) {
-	return (
-		<div className={cx("font-sans text-[11px] font-[500] slashed-zero tabular-nums leading-[normal] tracking-[0.05em]", className)} {...props}>
-			{children}
-		</div>
 	)
 }
 
