@@ -1,7 +1,6 @@
 import * as feather from "../data/react-feather"
 import * as t from "./star-type"
 
-import Link from "next/link"
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
@@ -178,24 +177,6 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
-export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
-	if (props.href?.startsWith("/")) {
-		return (
-			// @ts-expect-error: Type 'string' is not assignable to type
-			// 'Ref<HTMLAnchorElement> | undefined'.ts(2322)
-			<Link className="underline decoration-gray-400" scroll={false} {...props}>
-				{children}
-			</Link>
-		)
-	} else {
-		return (
-			<a className="underline decoration-gray-400" rel="noopener noreferrer" {...props}>
-				{children}
-			</a>
-		)
-	}
-}
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (

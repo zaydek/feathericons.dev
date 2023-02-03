@@ -3,16 +3,16 @@
 import * as feather from "../data/react-feather"
 
 import { useContext, useState } from "react"
-import { Hoverable } from "../components/hoverable"
-import { TwitterIcon } from "../components/icon-config"
-import { ResizableIcon } from "../components/resizable-icon"
-import { Anchor } from "../components/star-prose"
 import { sizeInitial } from "../constants"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase } from "../lib/cases"
 import { SliderContext } from "../providers/state"
+import { Anchor } from "./anchor"
+import { Hoverable } from "./hoverable"
+import { TwitterIcon } from "./icon-config"
+import { ResizableIcon } from "./resizable-icon"
 
-export function Recommendation({ name }: { name: keyof typeof manifest }) {
+export function Recommended({ name }: { name: keyof typeof manifest }) {
 	return (
 		<Hoverable pos="center" content={convertToSpaceCase(name).toUpperCase()}>
 			<Anchor

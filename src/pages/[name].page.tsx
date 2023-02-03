@@ -3,6 +3,8 @@ import * as feather from "../data/react-feather"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
+import { Anchor } from "../components/anchor"
+import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia, Recommended } from "../components/demos"
 import {
 	CodePenHex,
 	CodePenIcon,
@@ -25,7 +27,6 @@ import { PageTransition } from "../components/page-transition"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
-import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia, Recommendation } from "./demos"
 
 interface NameParams extends ParsedUrlQuery {
 	name: string
@@ -77,7 +78,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						</p.Heading>
 						<div className="flex flex-wrap">
 							{manifest[name].more.map(name => (
-								<Recommendation key={name} name={name} />
+								<Recommended key={name} name={name} />
 							))}
 						</div>
 					</>
@@ -85,9 +86,9 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<hr />
 				<p.Heading>Get Started With Feather</p.Heading>
 				<p>
-					<p.Anchor href="https://github.com/feathericons/feather">
+					<Anchor href="https://github.com/feathericons/feather">
 						<p.InlineIcon icon={feather.ExternalLink}>Feather</p.InlineIcon>
-					</p.Anchor>{" "}
+					</Anchor>{" "}
 					is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and
 					flexibility.
 				</p>
@@ -105,9 +106,9 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						TypeScript React
 					</p.InlineIcon>
 					, or use one of the{" "}
-					<p.Anchor href="https://github.com/feathericons/feather#related-projects">
+					<Anchor href="https://github.com/feathericons/feather#related-projects">
 						<p.InlineIcon icon={feather.ExternalLink}>related projects</p.InlineIcon>
-					</p.Anchor>
+					</Anchor>
 					.
 				</p>
 				<p.Subheading>Using {name} With a CDN</p.Subheading>
@@ -142,11 +143,11 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</p.Pre>
 				<p>
 					Click here to get started with a{" "}
-					<p.Anchor href="https://codepen.io/pen?template=WOJZdM">
+					<Anchor href="https://codepen.io/pen?template=WOJZdM">
 						<p.InlineIcon style={{ color: CodePenHex }} icon={CodePenIcon}>
 							CodePen
 						</p.InlineIcon>
-					</p.Anchor>{" "}
+					</Anchor>{" "}
 					template.
 				</p>
 				<p.Subheading>
@@ -186,67 +187,67 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</p.Pre>
 				<p>
 					Click here to get started with a{" "}
-					<p.Anchor href="https://play.tailwindcss.com/tq0UHdwbAr">
+					<Anchor href="https://play.tailwindcss.com/tq0UHdwbAr">
 						<p.InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
 							Tailwind CSS
 						</p.InlineIcon>
-					</p.Anchor>{" "}
+					</Anchor>{" "}
 					template.
 				</p>
 				<hr />
 				<p>
 					<small>
 						Icons by{" "}
-						<p.Anchor href="https://twitter.com/colebemis">
+						<Anchor href="https://twitter.com/colebemis">
 							<p.InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
 								@colebemis
 							</p.InlineIcon>
-						</p.Anchor>
+						</Anchor>
 						. App by{" "}
-						<p.Anchor href="https://twitter.com/username_ZAYDEK">
+						<Anchor href="https://twitter.com/username_ZAYDEK">
 							<p.InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
 								@username_ZAYDEK
 							</p.InlineIcon>
-						</p.Anchor>
+						</Anchor>
 						.
 						<br />
-						Feather is licensed as <p.Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</p.Anchor>. Icons may be used
-						for personal and commercial use without attribution.
+						Feather is licensed as <Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</Anchor>. Icons may be used for
+						personal and commercial use without attribution.
 						<br />
 						Built using{" "}
-						<p.Anchor href="https://typescriptlang.org">
+						<Anchor href="https://typescriptlang.org">
 							<p.InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
 								TypeScript
 							</p.InlineIcon>
-						</p.Anchor>
+						</Anchor>
 						,{" "}
-						<p.Anchor href="https://reactjs.org">
+						<Anchor href="https://reactjs.org">
 							<p.InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
 								React.js
 							</p.InlineIcon>
-						</p.Anchor>
+						</Anchor>
 						,{" "}
-						<p.Anchor href="https://nextjs.org">
+						<Anchor href="https://nextjs.org">
 							<p.InlineIcon style={{ color: NextJsHex }} icon={NextJsIcon}>
 								Next.js
 							</p.InlineIcon>
-						</p.Anchor>
+						</Anchor>
 						,{" "}
-						<p.Anchor href="https://tailwindcss.com">
+						<Anchor href="https://tailwindcss.com">
 							<p.InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
 								Tailwind CSS
 							</p.InlineIcon>
-						</p.Anchor>
+						</Anchor>
 						, and{" "}
-						<p.Anchor href="https://sass-lang.com">
+						<Anchor href="https://sass-lang.com">
 							<p.InlineIcon style={{ color: SassHex }} icon={SassIcon}>
 								Sass
 							</p.InlineIcon>
-						</p.Anchor>
+						</Anchor>
 						.
 						<br />
 						<br />
-						Looking for the original Feather website? <p.Anchor href="https://feathericons.com">Click here.</p.Anchor>
+						Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
 					</small>
 				</p>
 			</PageTransition>
