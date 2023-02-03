@@ -21,19 +21,18 @@ export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Change to convertToKebabCase?
-function parseId(str: string) {
+function getSlug(str: string) {
 	return str
-		.trim()
-		.replace(/\s+/g, "-")
-		.replace(/[^a-zA-Z0-9-_]/g, "")
+		.replace(/[^\w-]+/g, "-")
+		.replace(/-+/g, "-")
+		.replace(/^-|-$/, "")
 		.toLowerCase()
 }
 
 export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [str, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
-		const id = parseId(str)
+		const id = getSlug(str)
 		const href = `#${id}`
 		return [str, id, href] as const
 	}, [children]) // 🤷‍♀️
@@ -56,7 +55,7 @@ export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 export function Subheading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	const [str, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
-		const id = parseId(str)
+		const id = getSlug(str)
 		const href = `#${id}`
 		return [str, id, href] as const
 	}, [children]) // 🤷‍♀️
