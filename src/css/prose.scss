@@ -2,18 +2,16 @@
 // Y-axis
 
 .prose > * + * {
-	margin-top:    8px;
+	margin-top:    16px;
 }
-.prose > h1 {
+.prose > :is(
+	h1,
+	h2
+) {
 	margin-top:    64px;
 	margin-bottom: 32px;
 }
 .prose > :is(
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
 	hr,
 	pre
 ) {

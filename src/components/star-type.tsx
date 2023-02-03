@@ -82,7 +82,7 @@ export function TypeProseH2({ className, children, ...props }: JSX.IntrinsicElem
 		<Tag
 			tag="h2"
 			className="
-				text-[1.125em]
+				text-[1.0625em]
 				font-[500]
 				leading-[1.25]"
 			appendClassName={className}

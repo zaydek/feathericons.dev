@@ -46,7 +46,7 @@ export function Heading({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 					group-hover/header:opacity-100"
 				aria-label={`Link to header ${str}`}
 			>
-				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
+				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</t.TypeProseH1>
 	)
@@ -69,7 +69,7 @@ export function Subheading({ children, ...props }: JSX.IntrinsicElements["h1"]) 
 					group-hover/header:opacity-100"
 				aria-label={`Link to subheader ${str}`}
 			>
-				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
+				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
 		</t.TypeProseH2>
 	)
@@ -203,24 +203,6 @@ export function Code({ children: code, ...props }: { children: string } & JSX.In
 			{code}
 		</t.TypeProseCode>
 	)
-}
-
-// TODO: DEPRECATE?
-function HeadingIcon({ className, icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["svg"]) {
-	if (children === undefined || children === null) {
-		return <Icon className={cx("inline-block h-[1.1em] w-[1.1em]", className)} icon={icon} {...props} />
-	} else {
-		return (
-			// Use inline-flex h-0 items-center to optically center
-			<span className="inline-flex h-0 items-center">
-				{children}
-				<span className="no-underline">
-					&nbsp;
-					<Icon className={cx("inline-block h-[1em] w-[1em]", className)} icon={icon} {...props} />
-				</span>
-			</span>
-		)
-	}
 }
 
 export function InlineIcon({ className, icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["svg"]) {
