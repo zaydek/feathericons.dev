@@ -3,7 +3,7 @@ import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/utils/forma
 import { stringify } from "../../scripts/utils/stringify"
 import { FormatAs, jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "../constants"
 import { manifest } from "../data/manifest"
-import { toKebabCase } from "../lib/cases"
+import { convertToKebabCase } from "../lib/cases"
 
 // prettier-ignore
 export const SearchContext =
@@ -109,8 +109,8 @@ export function StateProvider({ children }: PropsWithChildren) {
 				strictJsx: false,
 				omitAttrs,
 			})
-			return formatAsSvg(toKebabCase(selectedName), code, {
-				comment: `https://feathericons.com/${toKebabCase(selectedName)}`,
+			return formatAsSvg(convertToKebabCase(selectedName), code, {
+				comment: `https://feathericons.com/${convertToKebabCase(selectedName)}`,
 			}).replaceAll("\t", "  ")
 		} else if (formatAs === "jsx") {
 			const code = stringify(selectedSvgElement, {
@@ -118,7 +118,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsJsx(selectedName, code, {
-				comment: `https://feathericons.com/${toKebabCase(selectedName)}?format=jsx`,
+				comment: `https://feathericons.com/${convertToKebabCase(selectedName)}?format=jsx`,
 			}).replaceAll("\t", "  ")
 		} else {
 			const code = stringify(selectedSvgElement, {
@@ -126,7 +126,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsTsx(selectedName, code, {
-				comment: `https://feathericons.com/${toKebabCase(selectedName)}?format=tsx`,
+				comment: `https://feathericons.com/${convertToKebabCase(selectedName)}?format=tsx`,
 			}).replaceAll("\t", "  ")
 		}
 	}, [formatAs, selectedName, selectedSvgElement])

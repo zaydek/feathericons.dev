@@ -13,7 +13,7 @@ import { ResizableIcon } from "../components/resizable-icon"
 import { TypographyCaps } from "../components/typography"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
-import { toKebabCase, toTitleCase } from "../lib/cases"
+import { convertToKebabCase, convertToTitleCase } from "../lib/cases"
 import { download } from "../lib/download"
 import { Icon, SVG } from "../lib/react/icon"
 import { Mutable } from "../lib/types"
@@ -54,7 +54,7 @@ function useRouterName() {
 		name = "Feather"
 	} else {
 		// Cast string | string[] to string and string to keyof typeof manifest
-		name = toTitleCase(router.query.icon as string) as keyof typeof manifest
+		name = convertToTitleCase(router.query.icon as string) as keyof typeof manifest
 	}
 	return name
 }
@@ -388,7 +388,7 @@ export function Aside() {
 	}, [clipboard])
 
 	const handleClickDownload = useCallback(() => {
-		const filename = `${formatAs === "svg" ? toKebabCase(selectedName) : selectedName}.${formatAs}`
+		const filename = `${formatAs === "svg" ? convertToKebabCase(selectedName) : selectedName}.${formatAs}`
 		const contents = clipboard + "\n"
 		download(filename, contents)
 	}, [clipboard, formatAs, selectedName])

@@ -1,7 +1,7 @@
 import fs from "node:fs"
 
 import { manifest } from "../src/data/manifest"
-import { toKebabCase } from "../src/lib/cases"
+import { convertToKebabCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
 
 const DATE = new Date().toISOString().split("T")[0]
@@ -17,7 +17,7 @@ async function main() {
 			</url>
 			${Object.keys(manifest).map(name => `
 			<url>
-				<loc>https://feathericons.com/${toKebabCase(name)}</loc>
+				<loc>https://feathericons.com/${convertToKebabCase(name)}</loc>
 				<lastmod>${DATE}</lastmod>
 			</url>`.replace("\n\t\t", "\t\t")).join("\n").trimStart()}
 		</urlset>

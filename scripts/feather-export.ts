@@ -5,7 +5,7 @@ import _featherTags from "./_feather-tags.generated.json"
 import _feather from "./_feather.generated.json"
 
 import { JSDOM } from "jsdom"
-import { toTitleCase } from "../src/lib/cases"
+import { convertToTitleCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
 import { formatAsSvg, formatAsTsx } from "./utils/format"
 import { stringify } from "./utils/stringify"
@@ -52,7 +52,7 @@ function getMore(arg: keyof typeof _featherTags) {
 	}
 	return [...more]
 		.filter(m => m !== arg) // Dedupe
-		.map(m => toTitleCase(m))
+		.map(m => convertToTitleCase(m))
 }
 
 async function exportAsSvg() {
@@ -85,7 +85,7 @@ async function exportAsTsx() {
 	// src/data/manifest.json
 	const data = Object.keys(_feather.data).reduce<Record<string, { tags: string[]; more: string[] }>>((acc, key) => {
 		const kebab = key as keyof typeof _featherTags // 🍢
-		acc[toTitleCase(kebab)] = {
+		acc[convertToTitleCase(kebab)] = {
 			tags: getTags(kebab),
 			more: getMore(kebab),
 		}
@@ -104,7 +104,7 @@ async function exportAsTsx() {
 	// src/data/react-feather/index.ts
 	// prettier-ignore
 	const exports = Object.keys(_feather.data).map(name => detab(`
-		export * from "./${toTitleCase(name)}"
+		export * from "./${convertToTitleCase(name)}"
 	`).trim()).join("\n")
 	await fs.promises.writeFile(`src/data/react-feather/index.ts`, exports + "\n")
 
@@ -112,11 +112,11 @@ async function exportAsTsx() {
 	for (const [name, data] of Object.entries(_feather.data)) {
 		const { window } = new JSDOM(data)
 		const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: true, omitAttrs })
-		const codeAsTsx = formatAsTsx(toTitleCase(name), code, {
+		const codeAsTsx = formatAsTsx(convertToTitleCase(name), code, {
 			//// license: `/*! Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather */`,
 			comment: `https://feathericons.com/${name}`,
 		})
-		await fs.promises.writeFile(`src/data/react-feather/${toTitleCase(name)}.tsx`, codeAsTsx + "\n")
+		await fs.promises.writeFile(`src/data/react-feather/${convertToTitleCase(name)}.tsx`, codeAsTsx + "\n")
 	}
 }
 

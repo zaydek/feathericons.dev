@@ -1,5 +1,5 @@
 import { cloneElement, CSSProperties, ReactElement, useEffect, useMemo, useRef, useState } from "react"
-import { toKebabCase } from "../lib/cases"
+import { convertToKebabCase } from "../lib/cases"
 import { Arrayable } from "../lib/types"
 
 const MICRO_TIMEOUT = 10
@@ -36,8 +36,8 @@ export function Transition({
 	const transitionProperty = useMemo(() => {
 		return [
 			...new Set([
-				...Object.keys(start).map(key => toKebabCase(key)),
-				...Object.keys(end).map(key => toKebabCase(key)),
+				...Object.keys(start).map(key => convertToKebabCase(key)),
+				...Object.keys(end).map(key => convertToKebabCase(key)),
 			]),
 		].join(", ")
 	}, [end, start])

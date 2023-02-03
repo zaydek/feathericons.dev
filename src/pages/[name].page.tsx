@@ -25,7 +25,7 @@ import { PageTransition } from "../components/page-transition"
 import { A, Article, Code, H1, H2, Hr, InlineIcon, Li, Ol, P, Pre } from "../components/prose"
 import { ResizableIcon } from "../components/resizable-icon"
 import { manifest } from "../data/manifest"
-import { toKebabCase, toSpaceCase, toTitleCase } from "../lib/cases"
+import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
 import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia } from "./demos"
 
@@ -41,7 +41,7 @@ export const getStaticPaths: GetStaticPaths<NameParams> = async () => {
 	return {
 		paths: Object.keys(manifest).map(name => ({
 			params: {
-				name: toKebabCase(name).toLowerCase(),
+				name: convertToKebabCase(name).toLowerCase(),
 			},
 		})),
 		fallback: false,
@@ -50,7 +50,7 @@ export const getStaticPaths: GetStaticPaths<NameParams> = async () => {
 
 export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => {
 	const params = context.params!
-	const name = toTitleCase(params.name) as keyof typeof manifest
+	const name = convertToTitleCase(params.name) as keyof typeof manifest
 	return { props: { name } }
 }
 
@@ -69,11 +69,11 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					<DemoButton name={name} />
 				</figure>
 
-				<H2>Icons Related to {toSpaceCase(name)}</H2>
+				<H2>Icons Related to {convertToSpaceCase(name)}</H2>
 				<div className="flex flex-wrap">
 					{manifest[name].more.map(m => (
-						<Hoverable key={m} pos="center" content={toSpaceCase(m).toUpperCase()}>
-							<A className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center" href={`/${toKebabCase(m).toLowerCase()}`}>
+						<Hoverable key={m} pos="center" content={convertToSpaceCase(m).toUpperCase()}>
+							<A className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center" href={`/${convertToKebabCase(m).toLowerCase()}`}>
 								{/* <div className="flex h-80 w-80 items-center justify-center"> */}
 								<ResizableIcon className="h-32 w-32 text-gray-800" icon={feather[m]} />
 								{/* </div> */}
@@ -121,7 +121,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						Add <Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</Code> to the <Code>{`<head>`}</Code> tag
 					</Li>
 					<Li>
-						Add <Code>{`<i data-feather="${toKebabCase(name).toLowerCase()}"></i>`}</Code>
+						Add <Code>{`<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>`}</Code>
 					</Li>
 					<Li>
 						Invoke <Code>{`feather.replace()`}</Code>
@@ -136,7 +136,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 								<script src="https://unpkg.com/feather-icons"></script>
 							</head>
 							<body>
-								<i data-feather="${toKebabCase(name).toLowerCase()}"></i>
+								<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>
 								<script>
 									feather.replace()
 								</script>
