@@ -56,19 +56,6 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// <P className="!-mt-48 mb-32">
-//// 	Related Icons:{" "}
-//// 	{manifest[name].more.map((m, index) => (
-//// 		<Fragment key={m}>
-//// 			{index > 0 && " "}
-//// 			<A href={`/${toKebabCase(m).toLowerCase()}`}>
-//// 				<InlineIcon icon={feather[m]}>{m.replace(/([a-z])([A-Z0-9])/g, "$1 $2")}</InlineIcon>
-//// 			</A>
-//// 			{index + 1 < manifest[name].more.length && ","}
-//// 		</Fragment>
-//// 	))}
-//// </P>
-
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
 		<PageTransition>
