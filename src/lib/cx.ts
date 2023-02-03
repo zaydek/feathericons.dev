@@ -4,7 +4,7 @@ export function cx(...args: unknown[]) {
 		.flat()
 		.filter(Boolean)
 		.join(" ")
-		.replaceAll(/\s+/g, " ")
 		.trim()
-	return className === "" ? undefined : className
+		.replace(/\s+/g, " ")
+	return className || undefined
 }
