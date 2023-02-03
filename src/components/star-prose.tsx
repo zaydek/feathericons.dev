@@ -189,7 +189,7 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 		)
 	} else {
 		return (
-			<a className="decoration-gray-400 hover:underline" rel="noopener noreferrer" target="_blank" {...props}>
+			<a className="decoration-gray-400 hover:underline" rel="noopener noreferrer" {...props}>
 				{children}
 			</a>
 		)

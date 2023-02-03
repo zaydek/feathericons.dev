@@ -20,24 +20,24 @@ import { Mutable } from "../lib/types"
 import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
 
-function CommentAnchor({ formatAs, children }: { formatAs: FormatAs; children: string }) {
+function CommentAnchor({ formatAs, children, ...props }: { formatAs: FormatAs } & JSX.IntrinsicElements["a"]) {
 	if (formatAs === "svg") {
-		const href = children.slice("<!-- ".length, -1 * " -->".length)
+		const href = (children as string).slice("<!-- ".length, -1 * " -->".length)
 		return (
 			<>
 				{"<!-- "}
-				<a className="underline" href={href} target="_blank" rel="noreferrer">
+				<a className="underline" rel="noopener noreferrer" {...props}>
 					{href}
 				</a>{" "}
 				✨ {"--> "}
 			</>
 		)
 	} else {
-		const href = children.slice("// ".length)
+		const href = (children as string).slice("// ".length)
 		return (
 			<>
 				{"// "}
-				<a className="underline" href={href} target="_blank" rel="noreferrer">
+				<a className="underline" rel="noopener noreferrer" {...props}>
 					{href}
 				</a>{" "}
 				✨{" "}

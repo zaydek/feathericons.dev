@@ -289,7 +289,6 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
 						)}`}
 						rel="noopener noreferrer"
-						target="_blank"
 					>
 						<div className="flex h-48 w-48 items-center justify-center">
 							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={feather[name]} />
@@ -302,7 +301,6 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
 						)}`}
 						rel="noopener noreferrer"
-						target="_blank"
 					>
 						<div className="flex h-48 w-48 items-center justify-center">
 							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:text-white" icon={TwitterIcon} />

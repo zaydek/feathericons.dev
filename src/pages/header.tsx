@@ -12,7 +12,7 @@ function NavLink({ pos, icon, children, ...props }: { pos: "tl" | "tr"; icon: SV
 				[&[data-pos=tr]]:top-16 [&[data-pos=tr]]:right-16"
 			data-pos={pos}
 		>
-			<a className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" rel="noopener noreferrer" target="_blank" {...props}>
+			<a className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" rel="noopener noreferrer" {...props}>
 				<div className="flex h-32 w-32 items-center justify-center">
 					<Icon className="h-16 w-16 text-white" icon={icon} />
 				</div>
@@ -55,7 +55,6 @@ function CtaAnchor({ primary = undefined, icon, children, ...props }: { primary?
 			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff3] sm:aspect-[3] sm:rounded-1e3
 				[&[data-primary]]:bg-white"
 			rel="noopener noreferrer"
-			target="_blank"
 			data-primary={primary}
 			{...props}
 		>
