@@ -9,7 +9,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Icon, SVG } from "../components/icon"
-import { ReactJsHex, ReactJsIcon, SvgHex, SvgIcon, TypeScriptHex, TypeScriptIcon } from "../components/icon-config"
+import { ReactjsColor, ReactjsIcon, SvgColor, SvgIcon, TypeScriptColor, TypeScriptIcon } from "../components/icon-config"
 import { PageTransition } from "../components/page-transition"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
@@ -137,9 +137,9 @@ function FormatButton() {
 
 	const [hex, icon, desc] = useMemo(() => {
 		return {
-			svg: [SvgHex, SvgIcon, "SVG"] as const,
-			jsx: [ReactJsHex, ReactJsIcon, "JSX"] as const,
-			tsx: [TypeScriptHex, TypeScriptIcon, "TSX"] as const,
+			svg: [SvgColor, SvgIcon, "SVG"] as const,
+			jsx: [ReactjsColor, ReactjsIcon, "JSX"] as const,
+			tsx: [TypeScriptColor, TypeScriptIcon, "TSX"] as const,
 		}[formatAs as Mutable<FormatAs>]
 	}, [formatAs])
 
@@ -197,7 +197,7 @@ function FormatButton() {
 								id="svg"
 								aria-label="Format as SVG"
 							>
-								<Icon className="h-16 w-16" style={{ color: SvgHex }} icon={SvgIcon} />
+								<Icon className="h-16 w-16" style={{ color: SvgColor }} icon={SvgIcon} />
 								<t.Caps className="text-gray-700">SVG</t.Caps>
 							</DropDownItem>
 							<DropDownItem
@@ -205,7 +205,7 @@ function FormatButton() {
 								id="jsx"
 								aria-label="Format as React"
 							>
-								<Icon className="h-16 w-16" style={{ color: ReactJsHex }} icon={ReactJsIcon} />
+								<Icon className="h-16 w-16" style={{ color: ReactjsColor }} icon={ReactjsIcon} />
 								<t.Caps className="text-gray-700">REACT</t.Caps>
 							</DropDownItem>
 							<DropDownItem
@@ -213,7 +213,7 @@ function FormatButton() {
 								id="tsx"
 								aria-label="Format as TypeScript React"
 							>
-								<Icon className="h-16 w-16" style={{ color: TypeScriptHex }} icon={TypeScriptIcon} />
+								<Icon className="h-16 w-16" style={{ color: TypeScriptColor }} icon={TypeScriptIcon} />
 								<t.Caps className="text-gray-700">TS REACT</t.Caps>
 							</DropDownItem>
 						</div>

@@ -2,7 +2,7 @@ import * as t from "../components/star-type"
 import * as feather from "../data/react-feather"
 
 import { memo, useContext, useMemo } from "react"
-import { Anchor } from "../components/anchor"
+import { A } from "../components/anchor"
 import { Hoverable } from "../components/hoverable"
 import { PageTransition } from "../components/page-transition"
 import { ResizableIcon } from "../components/resizable-icon"
@@ -85,7 +85,7 @@ const MemoGridItem = memo(function GridItem({
 			>
 				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
 			</button>
-			<Anchor
+			<A
 				className="group/name flex h-32 items-center justify-center truncate px-4"
 				href={`/${convertToKebabCase(name).toLowerCase()}`}
 				onClick={e => {
@@ -96,7 +96,7 @@ const MemoGridItem = memo(function GridItem({
 				<t.SmallSans className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
 					<Highlight indexes={indexes}>{name}</Highlight>
 				</t.SmallSans>
-			</Anchor>
+			</A>
 		</div>
 	)
 })

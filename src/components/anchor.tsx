@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-export function Anchor({ href, children, ...props }: JSX.IntrinsicElements["a"] & Required<Pick<JSX.IntrinsicElements["a"], "href">>) {
+export function A({ href, children, ...props }: JSX.IntrinsicElements["a"] & Required<Pick<JSX.IntrinsicElements["a"], "href">>) {
 	if (href.startsWith("/")) {
 		return (
 			// @ts-expect-error

@@ -1,30 +1,31 @@
 import * as p from "../components/star-prose"
-import * as feather from "../data/react-feather"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { Anchor } from "../components/anchor"
+import { A } from "../components/anchor"
 import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia, Recommended } from "../components/demos"
+import { Icon, SVG } from "../components/icon"
 import {
-	CodePenHex,
-	CodePenIcon,
-	NextJsHex,
-	NextJsIcon,
-	ReactJsHex,
-	ReactJsIcon,
-	SassHex,
-	SassIcon,
-	SvgHex,
-	SvgIcon,
-	TailwindCssHex,
-	TailwindCssIcon,
-	TwitterHex,
-	TwitterIcon,
-	TypeScriptHex,
-	TypeScriptIcon,
+	CodePenIconWithColor,
+	CodePenUrl,
+	NextjsIconWithColor,
+	NextjsUrl,
+	ReactjsColor,
+	ReactjsIcon,
+	ReactjsIconWithColor,
+	ReactjsUrl,
+	SassIconWithColor,
+	SvgIconWithColor,
+	TailwindCssIconWithColor,
+	TailwindCssUrl,
+	TwitterIconWithColor,
+	TwitterUrl,
+	TypeScriptIconWithColor,
+	TypeScriptUrl,
 } from "../components/icon-config"
 import { PageTransition } from "../components/page-transition"
 import { manifest } from "../data/manifest"
+import { ExternalLink } from "../data/react-feather"
 import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
 
@@ -86,30 +87,13 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<hr />
 				<p.Heading>Get Started With Feather</p.Heading>
 				<p>
-					<Anchor href="https://github.com/feathericons/feather">
-						<p.InlineIcon icon={feather.ExternalLink}>Feather</p.InlineIcon>
-					</Anchor>{" "}
-					is a collection of simply beautiful open source icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and
-					flexibility.
+					<LinkOut href="https://github.com/feathericons/feather">Feather</LinkOut> Feather is a collection of simply beautiful open source icons. Each icon is
+					designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
 				</p>
 				<p>
-					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as{" "}
-					<p.InlineIcon style={{ color: SvgHex }} icon={SvgIcon}>
-						SVG
-					</p.InlineIcon>
-					,{" "}
-					<p.InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
-						React
-					</p.InlineIcon>
-					, or{" "}
-					<p.InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
-						TypeScript React
-					</p.InlineIcon>
-					, or use one of the{" "}
-					<Anchor href="https://github.com/feathericons/feather#related-projects">
-						<p.InlineIcon icon={feather.ExternalLink}>related projects</p.InlineIcon>
-					</Anchor>
-					.
+					Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as <Svg />, <Reactjs />, or{" "}
+					<TypeScript>TypeScript React.js</TypeScript>, or use one of the{" "}
+					<LinkOut href="https://github.com/feathericons/feather#related-projects">related projects</LinkOut>.
 				</p>
 				<p.Subheading>Using {name} With a CDN</p.Subheading>
 				<p>To get started with Feather using a CDN (content delivery network), simply:</p>
@@ -142,17 +126,11 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					`)}
 				</p.Pre>
 				<p>
-					Click here to get started with a{" "}
-					<Anchor href="https://codepen.io/pen?template=WOJZdM">
-						<p.InlineIcon style={{ color: CodePenHex }} icon={CodePenIcon}>
-							CodePen
-						</p.InlineIcon>
-					</Anchor>{" "}
-					template.
+					Click here to get started with a <CodePen href="https://codepen.io/pen?template=WOJZdM" /> template.
 				</p>
 				<p.Subheading>
 					Using {name} With{" "}
-					<p.InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
+					<p.InlineIcon style={{ color: ReactjsColor }} icon={ReactjsIcon}>
 						React
 					</p.InlineIcon>
 				</p.Subheading>
@@ -186,71 +164,81 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					`)}
 				</p.Pre>
 				<p>
-					Click here to get started with a{" "}
-					<Anchor href="https://play.tailwindcss.com/tq0UHdwbAr">
-						<p.InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
-							Tailwind CSS
-						</p.InlineIcon>
-					</Anchor>{" "}
-					template.
+					Click here to get started with a <TailwindCss href="https://play.tailwindcss.com/tq0UHdwbAr" /> template.
 				</p>
 				<hr />
 				<p>
 					<small>
-						Icons by{" "}
-						<Anchor href="https://twitter.com/colebemis">
-							<p.InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
-								@colebemis
-							</p.InlineIcon>
-						</Anchor>
-						. App by{" "}
-						<Anchor href="https://twitter.com/username_ZAYDEK">
-							<p.InlineIcon style={{ color: TwitterHex }} icon={TwitterIcon}>
-								@username_ZAYDEK
-							</p.InlineIcon>
-						</Anchor>
+						Icons by <Twitter href="https://twitter.com/colebemis">@colebemis</Twitter>. App by{" "}
+						<Twitter href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</Twitter>
 						.
 						<br />
-						Feather is licensed as <Anchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</Anchor>. Icons may be used for
-						personal and commercial use without attribution.
+						Feather is licensed as <A href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</A>. Icons may be used for personal and
+						commercial use without attribution.
 						<br />
-						Built using{" "}
-						<Anchor href="https://typescriptlang.org">
-							<p.InlineIcon style={{ color: TypeScriptHex }} icon={TypeScriptIcon}>
-								TypeScript
-							</p.InlineIcon>
-						</Anchor>
-						,{" "}
-						<Anchor href="https://reactjs.org">
-							<p.InlineIcon style={{ color: ReactJsHex }} icon={ReactJsIcon}>
-								React.js
-							</p.InlineIcon>
-						</Anchor>
-						,{" "}
-						<Anchor href="https://nextjs.org">
-							<p.InlineIcon style={{ color: NextJsHex }} icon={NextJsIcon}>
-								Next.js
-							</p.InlineIcon>
-						</Anchor>
-						,{" "}
-						<Anchor href="https://tailwindcss.com">
-							<p.InlineIcon style={{ color: TailwindCssHex }} icon={TailwindCssIcon}>
-								Tailwind CSS
-							</p.InlineIcon>
-						</Anchor>
-						, and{" "}
-						<Anchor href="https://sass-lang.com">
-							<p.InlineIcon style={{ color: SassHex }} icon={SassIcon}>
-								Sass
-							</p.InlineIcon>
-						</Anchor>
-						.
+						Built using <TypeScript />, <Reactjs />, <Nextjs />, <TailwindCss />, and <Sass />.
 						<br />
 						<br />
-						Looking for the original Feather website? <Anchor href="https://feathericons.com">Click here.</Anchor>
+						Looking for the original Feather website? <A href="https://feathericons.com">Click here.</A>
 					</small>
 				</p>
 			</PageTransition>
 		</p.Article>
 	)
 }
+
+function LinkedIconText({ icon, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["a"] & Required<Pick<JSX.IntrinsicElements["a"], "href">>) {
+	return (
+		<A className="inline-flex items-center" {...props}>
+			<span className="underline decoration-gray-400">{children}</span>&nbsp;
+			<Icon className="h-[1em] w-[1em] text-gray-700" icon={icon} />
+		</A>
+	)
+}
+
+const LinkOut = ({ children, ...props }: JSX.IntrinsicElements["a"] & Required<Pick<JSX.IntrinsicElements["a"], "href">>) => (
+	<LinkedIconText icon={ExternalLink} {...props}>
+		{children}
+	</LinkedIconText>
+)
+
+const CodePen = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? CodePenUrl} icon={CodePenIconWithColor} {...props}>
+		{children ?? "CodePen"}
+	</LinkedIconText>
+)
+const Nextjs = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? NextjsUrl} icon={NextjsIconWithColor} {...props}>
+		{children ?? "Next.js"}
+	</LinkedIconText>
+)
+const Reactjs = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? ReactjsUrl} icon={ReactjsIconWithColor} {...props}>
+		{children ?? "React.js"}
+	</LinkedIconText>
+)
+const Sass = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? "TODO"} icon={SassIconWithColor} {...props}>
+		{children ?? "Sass"}
+	</LinkedIconText>
+)
+const Svg = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? "TODO"} icon={SvgIconWithColor} {...props}>
+		{children ?? "SVG"}
+	</LinkedIconText>
+)
+const TailwindCss = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? TailwindCssUrl} icon={TailwindCssIconWithColor} {...props}>
+		{children ?? "Tailwind CSS"}
+	</LinkedIconText>
+)
+const Twitter = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? TwitterUrl} icon={TwitterIconWithColor} {...props}>
+		{children ?? "Twitter"}
+	</LinkedIconText>
+)
+const TypeScript = ({ href, children, ...props }: JSX.IntrinsicElements["a"]) => (
+	<LinkedIconText href={href ?? TypeScriptUrl} icon={TypeScriptIconWithColor} {...props}>
+		{children ?? "TypeScript"}
+	</LinkedIconText>
+)
