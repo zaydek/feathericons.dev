@@ -56,8 +56,8 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
-		<PageTransition>
-			<p.Article>
+		<p.Article>
+			<PageTransition>
 				<p.Heading>
 					Icon: <p.Code>{convertToSpaceCase(name)}</p.Code>
 				</p.Heading>
@@ -248,7 +248,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						Looking for the original Feather website? <p.Anchor href="https://feathericons.com">Click here.</p.Anchor>
 					</small>
 				</p>
-			</p.Article>
-		</PageTransition>
+			</PageTransition>
+		</p.Article>
 	)
 }

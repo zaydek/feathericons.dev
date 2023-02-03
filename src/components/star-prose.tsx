@@ -93,7 +93,8 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-export function Pre({ lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
+// Discard style so <pre> doesn't transition (from <PageTransition>)
+export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
