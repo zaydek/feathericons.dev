@@ -1,5 +1,4 @@
 import { version } from "../data/manifest"
-import { downloadFile } from "../lib/download"
 import { iota } from "../lib/iota"
 
 function NavLink({ pos }: { pos: "tl" | "tr" }) {
@@ -44,16 +43,20 @@ function HeadingSubheading() {
 	)
 }
 
-function CallToActionButton({ primary = undefined, children, ...props }: { primary?: true } & JSX.IntrinsicElements["button"]) {
+// Make href required
+function CtaAnchor({ primary = undefined, href, children, ...props }: { primary?: true } & JSX.IntrinsicElements["a"]) {
 	return (
-		<button
+		<a
 			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff7] sm:aspect-[3] sm:rounded-1e3
 				[&[data-primary]]:bg-white"
+			href={href}
+			rel="noopener noreferrer"
+			target="_blank"
 			data-primary={primary}
 			{...props}
 		>
 			{children}
-		</button>
+		</a>
 	)
 }
 
@@ -96,12 +99,8 @@ export function Header() {
 					<HeadingSubheading />
 					{/* Use items-center ... self-stretch to conditionally center y-axis */}
 					<div className="flex flex-col items-center gap-16 self-stretch sm:flex-row sm:self-start">
-						<CallToActionButton primary />
-						<CallToActionButton
-							onClick={e => {
-								downloadFile(`feather@${version}.zip`, "/feather.zip")
-							}}
-						/>
+						<CtaAnchor href="https://github.com/feathericons/feather" primary />
+						<CtaAnchor download={`feather@${version}.zip`} href="/feather.zip" />
 					</div>
 				</div>
 				{/* RHS */}
