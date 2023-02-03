@@ -295,7 +295,7 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 					<a
 						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 						href={`http://twitter.com/intent/tweet?text=${encodeURI(
-							`Check out Feather – Simply beautiful open source designed by @colebemis\n\nThanks @colebemis and @username_ZAYDEK feathericons.com`
+							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
 						)}`}
 						rel="noopener noreferrer"
 						target="_blank"
@@ -308,7 +308,7 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 					<a
 						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 						href={`http://twitter.com/intent/tweet?text=${encodeURI(
-							`Check out Feather – Simply beautiful open source designed by @colebemis\n\nThanks @colebemis and @username_ZAYDEK feathericons.com`
+							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
 						)}`}
 						rel="noopener noreferrer"
 						target="_blank"
