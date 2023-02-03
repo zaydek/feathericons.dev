@@ -11,8 +11,6 @@ export default function Document() {
 	return (
 		<Html lang="en">
 			<Head>
-				{/* https://stackoverflow.com/a/63071358 */}
-				<base target="_blank" />
 				{/* Plausible Analytics */}
 				<Production>
 					<Script defer data-domain="feathericons.com" src="https://plausible.io/js/script.outbound-links.js" />

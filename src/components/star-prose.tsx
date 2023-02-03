@@ -184,13 +184,13 @@ export function Anchor({ children, ...props }: JSX.IntrinsicElements["a"]) {
 		return (
 			// @ts-expect-error: Type 'string' is not assignable to type
 			// 'Ref<HTMLAnchorElement> | undefined'.ts(2322)
-			<Link className="decoration-gray-400 hover:underline" scroll={false} {...props}>
+			<Link className="underline decoration-gray-400" scroll={false} {...props}>
 				{children}
 			</Link>
 		)
 	} else {
 		return (
-			<a className="decoration-gray-400 hover:underline" rel="noopener noreferrer" {...props}>
+			<a className="underline decoration-gray-400" rel="noopener noreferrer" {...props}>
 				{children}
 			</a>
 		)
