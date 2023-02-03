@@ -92,13 +92,11 @@ export function ListItem({ children, ...props }: JSX.IntrinsicElements["li"]) {
 	)
 }
 
-// Discard style so <pre> doesn't transition (from <PageTransition>)
+// Omit style because of <PageTransition>
 export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
-	//// const [click1, setClick1] = useState(false)
-	//// const [click2, setClick2] = useState(false)
 
 	useEffect(() => {
 		if (highlighter === null) { return } // prettier-ignore
@@ -106,24 +104,7 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 		setTokens(tokens)
 	}, [code, highlighter, lang])
 
-	//// useEffect(() => {
-	//// 	if (!click1) { return } // prettier-ignore
-	//// 	const d = window.setTimeout(() => {
-	//// 		setClick1(false)
-	//// 	}, 1e3)
-	//// 	return () => window.clearTimeout(d)
-	//// }, [click1])
-	////
-	//// useEffect(() => {
-	//// 	if (!click2) { return } // prettier-ignore
-	//// 	const d = window.setTimeout(() => {
-	//// 		setClick2(false)
-	//// 	}, 1e3)
-	//// 	return () => window.clearTimeout(d)
-	//// }, [click2])
-
 	return (
-		///// <pre className="relative overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
 		<pre className="overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
 			<t.ProsePreCode>
 				{tokens === null
@@ -146,32 +127,6 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 							</div>
 					  ))}
 			</t.ProsePreCode>
-			{/* <div className="absolute top-8 right-64 hidden lg:block">
-				<div className="flex">
-					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick1(true)}>
-						<div className="flex h-32 w-32 items-center justify-center">
-							<Icon
-								className="h-16 w-16 text-[#1570fb]"
-								icon={click1 ? feather.Check : feather.Clipboard}
-								// Use a slightly thicker stroke when checked
-								{...(click1 && { strokeWidth: 2.5 })}
-							/>
-						</div>
-						<t.TypeCaps>COPY</t.TypeCaps>
-					</div>
-					<div className="flex cursor-pointer items-center rounded-1e3 px-8 pr-16 hover:active:bg-gray-200" onClick={e => setClick2(true)}>
-						<div className="flex h-32 w-32 items-center justify-center">
-							<Icon
-								className="h-16 w-16 text-[#1570fb]"
-								icon={click2 ? feather.Check : feather.Download}
-								// Use a slightly thicker stroke when checked
-								{...(click2 && { strokeWidth: 2.5 })}
-							/>
-						</div>
-						<t.TypeCaps>DOWNLOAD</t.TypeCaps>
-					</div>
-				</div>
-			</div> */}
 		</pre>
 	)
 }
