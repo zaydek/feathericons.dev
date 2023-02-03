@@ -4,7 +4,7 @@ import { Icon, SVG } from "../components/icon"
 import { version } from "../data/manifest"
 import { iota } from "../lib/iota"
 
-function NavLink({ pos }: { pos: "tl" | "tr" }) {
+function NavLink({ pos, icon, children, ...props }: { pos: "tl" | "tr"; icon: SVG } & JSX.IntrinsicElements["a"]) {
 	return (
 		<div
 			className="absolute
@@ -12,10 +12,13 @@ function NavLink({ pos }: { pos: "tl" | "tr" }) {
 				[&[data-pos=tr]]:top-16 [&[data-pos=tr]]:right-16"
 			data-pos={pos}
 		>
-			<div className="flex h-32 items-center gap-8 rounded-1e3 bg-black/25 px-8 pr-16">
-				<div className="h-16 w-16 rounded-1e3 bg-white"></div>
+			<a className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" rel="noopener noreferrer" target="_blank" {...props}>
+				<div className="flex h-32 w-32 items-center justify-center">
+					<Icon className="h-16 w-16 text-white" icon={icon} />
+				</div>
+				{/* {children} */}
 				<div className="h-6 w-96 rounded-1e3 bg-white"></div>
-			</div>
+			</a>
 		</div>
 	)
 }
@@ -99,8 +102,8 @@ function SponsorSlot() {
 export function Header() {
 	return (
 		<header className="flex justify-center py-64 px-16 pt-96 sm:py-96" data-background-hero>
-			<NavLink pos="tl" />
-			<NavLink pos="tr" />
+			<NavLink pos="tl" icon={feather.Star} />
+			<NavLink pos="tr" icon={feather.Star} />
 			<div className="flex w-100% max-w-[var(--header-w)] flex-col justify-evenly gap-64 sm:items-center xl:flex-row">
 				{/* LHS */}
 				<div className="flex flex-col items-center gap-32">
