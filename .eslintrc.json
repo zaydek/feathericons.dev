@@ -2,7 +2,7 @@
 	"extends": [
 		"react-app",
 		"plugin:jsx-a11y/recommended",
-		"next/core-web-vitals",
+		"next/core-web-vitals"
 	],
 	"plugins": ["jsx-a11y"],
 	"rules": {

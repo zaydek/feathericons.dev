@@ -7,21 +7,22 @@ import { getStringFromChildren } from "../aria/utils"
 import { cx } from "../lib/cx"
 import { ShikiContext } from "../providers/shiki"
 import { Icon, SVG } from "./icon"
-import { TypeCaps } from "./type"
+import { TypeCaps, TypeProse, TypeProseH1, TypeProseH2 } from "./type"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		<article
+		<TypeProse
 			// Use !my-* because of space-y-*
 			className="prose space-y-16 text-gray-900
 				[&_>_:not(pre)]:mx-64
-				[&_>_pre]:!my-32"
+				[&_>_:is(h1,_h2)]:!my-64
+				   [&_>_:is(pre)]:!my-32"
 			{...props}
 		>
 			{children}
-		</article>
+		</TypeProse>
 	)
 }
 
@@ -44,7 +45,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h1 id={id} className="group/header relative text-black" {...props}>
+		<TypeProseH1 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -54,7 +55,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</h1>
+		</TypeProseH1>
 	)
 }
 
@@ -67,7 +68,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<h2 id={id} className="group/header relative text-black" {...props}>
+		<TypeProseH2 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -77,7 +78,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<HeadingIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</h2>
+		</TypeProseH2>
 	)
 }
 
