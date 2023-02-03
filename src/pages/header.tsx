@@ -1,3 +1,6 @@
+import * as feather from "../data/react-feather"
+
+import { Icon, SVG } from "../components/icon"
 import { version } from "../data/manifest"
 import { iota } from "../lib/iota"
 
@@ -44,10 +47,10 @@ function HeadingSubheading() {
 }
 
 // Make href required
-function CtaAnchor({ primary = undefined, href, children, ...props }: { primary?: true } & JSX.IntrinsicElements["a"]) {
+function CtaAnchor({ href, primary = undefined, icon, children, ...props }: { icon: SVG; primary?: true } & JSX.IntrinsicElements["a"]) {
 	return (
 		<a
-			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff7] sm:aspect-[3] sm:rounded-1e3
+			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff3] sm:aspect-[3] sm:rounded-1e3
 				[&[data-primary]]:bg-white"
 			href={href}
 			rel="noopener noreferrer"
@@ -55,7 +58,13 @@ function CtaAnchor({ primary = undefined, href, children, ...props }: { primary?
 			data-primary={primary}
 			{...props}
 		>
-			{children}
+			<div className="flex h-100% items-center justify-center">
+				<div className="-ml-[calc((48px_-_24px)_/_2)] flex h-48 w-48 items-center justify-center">
+					<Icon className="h-24 w-24 text-white [[data-primary]_&]:text-gray-900" icon={icon} />
+				</div>
+				{/* {children} */}
+				<div className="aspect-[8] h-6 rounded-1e3 bg-white [[data-primary]_&]:bg-gray-900"></div>
+			</div>
 		</a>
 	)
 }
@@ -99,8 +108,21 @@ export function Header() {
 					<HeadingSubheading />
 					{/* Use items-center ... self-stretch to conditionally center y-axis */}
 					<div className="flex flex-col items-center gap-16 self-stretch sm:flex-row sm:self-start">
-						<CtaAnchor href="https://github.com/feathericons/feather" primary />
-						<CtaAnchor download={`feather@${version}.zip`} href="/feather.zip" />
+						{/* prettier-ignore */}
+						<CtaAnchor
+							href="https://github.com/feathericons/feather"
+							primary
+							icon={feather.Github}
+						>
+							{/* ... */}
+						</CtaAnchor>
+						{/* prettier-ignore */}
+						<CtaAnchor
+							download={`feather@${version}.zip`} href="/feather.zip"
+							icon={feather.Download}
+						>
+							{/* ... */}
+						</CtaAnchor>
 					</div>
 				</div>
 				{/* RHS */}
