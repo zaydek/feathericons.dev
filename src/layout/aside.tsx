@@ -350,11 +350,11 @@ function CompoundSlider({
 							<div
 								ref={setThumb}
 								className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white shadow-[var(--shadow-6)]"
-								// Statically determine the width and then translateX to center
-								// before <AriaSlider> mounts
-								style={{
-									transform: "translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))",
-								}}
+								//// // Statically determine the width and then translateX to center
+								//// // before <AriaSlider> mounts
+								//// style={{
+								//// 	transform: "translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))",
+								//// }}
 							></div>
 						</div>
 					</div>

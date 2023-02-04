@@ -1,8 +1,10 @@
-function BackgroundMask() {
+function BgMask() {
 	return (
 		// Use -mt-[var(--inset-y)] > h-[var(--inset-y)] to prevent responsive
 		// layout thrashing
-		<div className="sticky top-0 z-[var(--background-mask-z)] -mt-[var(--inset-y)] hidden 2xl:block">
+		//
+		// Use a z-index < 0 here
+		<div className="sticky top-0 -mt-[var(--inset-y)] hidden 2xl:block" style={{ zIndex: -10 }}>
 			{/* Use overflow-x-clip to prevent side-scrolling. Note that
 			overflow-x-hidden doesn't work as expected. */}
 			<div className="h-[var(--inset-y)] overflow-x-clip">
@@ -12,11 +14,13 @@ function BackgroundMask() {
 	)
 }
 
-function ForegroundMask() {
+function FgMask() {
 	return (
 		// Use -mt-[var(--inset-y)] > h-[var(--inset-y)] to prevent responsive
 		// layout thrashing
-		<div className="sticky top-0 z-[var(--foreground-mask-z)] -mt-[var(--inset-y)] hidden 2xl:block">
+		//
+		// Use a z-index > 0 here
+		<div className="sticky top-0 -mt-[var(--inset-y)] hidden 2xl:block" style={{ zIndex: +10 }}>
 			<div className="flex h-[var(--inset-y)] justify-center">
 				{/* LHS */}
 				<div className="relative">
@@ -41,8 +45,8 @@ function ForegroundMask() {
 export function Masks() {
 	return (
 		<>
-			<ForegroundMask />
-			<BackgroundMask />
+			<FgMask />
+			<BgMask />
 		</>
 	)
 }
