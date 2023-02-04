@@ -247,7 +247,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 		>
 			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 				<Icon
-					className="h-16 w-16 text-[#1570fb] group-hover/button:group-active/button:text-white"
+					className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white"
 					icon={click ? feather.Check : icon}
 					// Use a slightly thicker stroke when checked
 					{...(click && { strokeWidth: 2.5 })}
@@ -368,7 +368,7 @@ function CompoundSlider({
 
 function Section({ children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
-		<section className="flex flex-col gap-16 px-24" {...props}>
+		<section className="flex flex-col gap-[var(--aside-gap)] px-[var(--aside-inset)]" {...props}>
 			{children}
 		</section>
 	)
@@ -394,7 +394,7 @@ export function Aside() {
 	}, [clipboard, formatAs, selectedName])
 
 	return (
-		<div className="flex flex-col gap-16 py-24">
+		<div className="flex flex-col gap-[var(--aside-gap)] py-[var(--aside-inset)]">
 			<Section>
 				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
 					VIEW SOURCE

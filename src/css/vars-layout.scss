@@ -11,12 +11,23 @@
 	--icon-scale:        1;
 	--icon-stroke-width: 2;
 
-	--inset-y:           16px;
+	// Header
 	--header-w:          calc(var(--app-w) - 256px);
-	--app-min-h:         calc(100dvh - (var(--app-rounding) + var(--inset-y)));
+
+	// Mask
+	--mask-h:            240px;
+	--mask-inset:        24px;
+
+	// App
 	--app-w:             1792px;
-	--app-rounding:      40px; // Use 40px because <Checkbox> uses rounded-32 and p-24 -> p-40
-	--aside-w:           416px;
+	--app-rounding:      48px;
+
+	// Aside
+	--aside-w:           448px;
+	--aside-inset:       32px;
+	--aside-gap:         16px;
+
+	// Etc.
 	--grid-size:         96px;
 	--reduced-form-size: 32px;
 	--form-size:         36px;

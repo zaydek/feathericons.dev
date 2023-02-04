@@ -41,6 +41,14 @@ const percents = {
 	"100%": "100%",
 }
 
+//// function negative(record) {
+//// 	return Object.entries(record).reduce((acc, [k, v]) => {
+//// 		if (k.startsWith("0")) { return acc }
+//// 		acc[`-${k}`] = `-${v}`
+//// 		return acc
+//// 	}, {})
+//// }
+
 const zIndexes = {
 	    0:   0,
 	   10:  10,
