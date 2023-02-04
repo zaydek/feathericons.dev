@@ -1,8 +1,8 @@
-import * as prose from "../components/all-prose"
+import * as prose from "../components/all-docs"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia, Recommended } from "../components/demos"
+import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia, Recommended } from "../components/docs-demos"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"

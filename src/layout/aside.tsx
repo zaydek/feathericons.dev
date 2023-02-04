@@ -10,7 +10,6 @@ import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Icon, SVG } from "../components/icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
-import { PageTransition } from "../components/page-transition"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
@@ -19,6 +18,7 @@ import { downloadText } from "../lib/download"
 import { Mutable } from "../lib/types"
 import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
+import { PageTransition } from "./page-transition"
 
 function CommentAnchor({ formatAs, children, ...props }: { formatAs: FormatAs } & JSX.IntrinsicElements["a"]) {
 	if (formatAs === "svg") {
