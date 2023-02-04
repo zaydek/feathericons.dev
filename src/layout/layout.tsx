@@ -29,7 +29,7 @@ export function Layout({ children }: PropsWithChildren) {
 								<Nav />
 							</div>
 						</StickyTl>
-						<div className="px-16 sm:px-32 2xl:px-64">{children}</div>
+						<div className="px-16 pb-96 sm:px-32 2xl:px-64">{children}</div>
 					</main>
 					{/* RHS */}
 					{/* Use box-content here because of border-l */}

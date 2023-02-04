@@ -29,9 +29,13 @@ import {
 
 export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	return (
-		<typography.prose.Article className="prose text-gray-900" {...props}>
+		//// <div className="flex justify-center">
+		//// 	<div className="w-100% max-w-1280">
+		<typography.docs.Article className="docs text-gray-900" {...props}>
 			{children}
-		</typography.prose.Article>
+		</typography.docs.Article>
+		//// 	</div>
+		//// </div>
 	)
 }
 
@@ -54,7 +58,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<typography.prose.H1 id={id} className="group/header relative text-black" {...props}>
+		<typography.docs.H1 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -64,7 +68,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</typography.prose.H1>
+		</typography.docs.H1>
 	)
 }
 
@@ -77,7 +81,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 	}, [children]) // 🤷‍♀️
 
 	return (
-		<typography.prose.H2 id={id} className="group/header relative text-black" {...props}>
+		<typography.docs.H2 id={id} className="group/header relative text-black" {...props}>
 			{children}
 			<a
 				href={href}
@@ -87,7 +91,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
-		</typography.prose.H2>
+		</typography.docs.H2>
 	)
 }
 
@@ -123,7 +127,7 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 
 	return (
 		<pre className="overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
-			<typography.prose.PreCode>
+			<typography.docs.PreCode>
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-64">
@@ -143,7 +147,7 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 								)}
 							</div>
 					  ))}
-			</typography.prose.PreCode>
+			</typography.docs.PreCode>
 		</pre>
 	)
 }
@@ -152,9 +156,9 @@ export function Pre({ style: _, lang, children: code, ...props }: { lang: Lang; 
 
 export function Code({ children: code, ...props }: { children: string } & JSX.IntrinsicElements["code"]) {
 	return (
-		<typography.prose.Code className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
+		<typography.docs.Code className="rounded-1e3 bg-white py-2 px-8 text-[#1570fb] shadow-[var(--hairline-shadow)]" {...props}>
 			{code}
-		</typography.prose.Code>
+		</typography.docs.Code>
 	)
 }
 

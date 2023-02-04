@@ -128,11 +128,13 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 				<div className="grow"></div>
 				<div className="relative flex bg-gray-200 shadow-[var(--hairline-shadow-t)]">
 					{/* Cap */}
-					<div className="relative w-10">
-						<div className="absolute bottom-0 right-0">
-							<div className="h-10 w-10 bg-white"></div>
-							<div className="absolute inset-0">
-								<div className="h-10 w-10 rounded-br-10 bg-gray-200"></div>
+					<div className="relative">
+						<div className="w-10">
+							<div className="absolute bottom-0 right-0">
+								<div className="h-10 w-10 bg-white"></div>
+								<div className="absolute inset-0">
+									<div className="h-10 w-10 rounded-br-10 bg-gray-200"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -145,7 +147,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 					</div>
 					{/* Cap */}
-					<div className="relative flex-[1]">
+					<div className="relative">
 						<div className="absolute bottom-0 left-0">
 							<div className="h-40 w-40 bg-white"></div>
 							<div className="absolute inset-0">

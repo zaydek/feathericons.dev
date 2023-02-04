@@ -1,24 +1,24 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Y-axis
 
-.prose > * + * {
+.docs > * + * {
 	margin-top:    16px;
 }
-.prose > :is(
+.docs > :is(
 	h1,
 	h2
 ) {
 	margin-top:    32px;
 	margin-bottom: 16px;
 }
-.prose > :is(
+.docs > :is(
 	hr,
 	pre
 ) {
 	margin-top:    32px;
 	margin-bottom: 32px;
 }
-.prose > :is(
+.docs > :is(
 	ol,
 	ul
 ) {
@@ -29,11 +29,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 // X-axis
 
-.prose > :not(pre) {
+.docs > :not(pre) {
 	margin-right:  64px;
 	margin-left:   64px;
 }
-.prose > :is(
+.docs > :is(
 	ol,
 	ul
 ) {

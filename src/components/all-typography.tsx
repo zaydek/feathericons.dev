@@ -46,7 +46,7 @@ export function SmallSans<T extends keyof JSX.IntrinsicElements>({ className, ch
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export const prose = {
+export const docs = {
 	Article({ className, children, ...props }: JSX.IntrinsicElements["article"]) {
 		return (
 			<Tag

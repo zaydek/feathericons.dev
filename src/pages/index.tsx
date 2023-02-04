@@ -55,7 +55,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 					}}
 					aria-label={`Icon ${name}`}
 				>
-					<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
+					<ResizableIcon id={name} className="h-32 w-32 text-gray-900" icon={feather[name]} />
 				</button>
 			</Hoverable>
 		</div>
@@ -83,7 +83,7 @@ const MemoGridItem = memo(function GridItem({
 				}}
 				aria-label={`Icon ${name}`}
 			>
-				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
+				<ResizableIcon id={name} className="h-32 w-32 text-gray-900" icon={feather[name]} />
 			</button>
 			<A
 				className="group/name flex h-32 items-center justify-center truncate px-4"
@@ -93,7 +93,7 @@ const MemoGridItem = memo(function GridItem({
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 				}}
 			>
-				<typography.SmallSans className="truncate text-gray-600 group-hover/name:underline group-hover/name:decoration-gray-400">
+				<typography.SmallSans className="truncate text-gray-900 group-hover/name:underline group-hover/name:decoration-gray-400">
 					<Highlight indexes={indexes}>{name}</Highlight>
 				</typography.SmallSans>
 			</A>

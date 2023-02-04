@@ -8,7 +8,7 @@ import { SearchContext } from "../providers/state"
 function NavButton({ icon, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
-			<Icon className="h-24 w-24 text-gray-400" icon={icon} />
+			<Icon className="h-24 w-24 text-gray-700" icon={icon} />
 		</button>
 	)
 }
@@ -19,8 +19,8 @@ export function Nav() {
 	const ref = useRef<HTMLInputElement | null>(null)
 
 	return (
-		<div className="flex h-64 rounded-1e3 bg-white shadow-[var(--shadow-2)] [&_>_:nth-child(2)]:grow">
-			<Hoverable pos="start" content={<>SEARCH FEATHER</>}>
+		<div className="flex h-64 rounded-1e3 bg-white shadow-[var(--shadow-2)]">
+			<Hoverable pos="start" content="SEARCH FEATHER">
 				<NavButton
 					icon={feather.Search}
 					onClick={e => {
@@ -30,8 +30,8 @@ export function Nav() {
 				/>
 			</Hoverable>
 			{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
-			<Hoverable pos="end" content={<>COMPACT MODE</>}>
+			<input ref={ref} className="grow focus-visible:outline-none" type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
+			<Hoverable pos="end" content="NO-NAME MODE">
 				<NavButton
 					icon={feather.MoreHorizontal}
 					onClick={e => {

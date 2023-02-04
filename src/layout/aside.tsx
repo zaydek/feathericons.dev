@@ -263,7 +263,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 function DecorativeIcon({ icon }: { icon: SVG }) {
 	return (
 		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
-			<Icon className="h-12 w-12 text-gray-700" icon={icon} />
+			<Icon className="h-12 w-12 text-gray-900" icon={icon} />
 		</div>
 	)
 }
