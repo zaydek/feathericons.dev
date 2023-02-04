@@ -46,7 +46,7 @@ function getSlug(str: string) {
 }
 
 export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const [str, id, href] = useMemo(() => {
+	const [content, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
 		const id = getSlug(str)
 		const href = `#${id}`
@@ -60,7 +60,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/header:opacity-100"
-				aria-label={`Link to header ${str}`}
+				aria-label={`Link to header ${content}`}
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
@@ -69,7 +69,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 }
 
 export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
-	const [str, id, href] = useMemo(() => {
+	const [content, id, href] = useMemo(() => {
 		const str = getStringFromChildren(children as any)
 		const id = getSlug(str)
 		const href = `#${id}`
@@ -83,7 +83,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/header:opacity-100"
-				aria-label={`Link to subheader ${str}`}
+				aria-label={`Link to subheader ${content}`}
 			>
 				<InlineIcon className="text-[#1570fb]" icon={feather.Link2} />
 			</a>
