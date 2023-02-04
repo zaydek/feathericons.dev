@@ -1,3 +1,5 @@
+@use "tailwind-colors" as *;
+
 :root {
 	// TODO: Use Tailwind channels / colors here?
 	--seed-h:   220;
@@ -10,4 +12,6 @@
 	--hero-gradient-angle: 195deg;
 	--hero-gradient-start: #44bbff;
 	--hero-gradient-end:   #0062ff;
+
+	background-color: gray(50);
 }

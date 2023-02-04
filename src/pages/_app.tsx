@@ -3,12 +3,12 @@ import "../css/tailwind.css"
 
 import { Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
+import { Layout } from "../layout/layout"
 import { detab } from "../lib/format"
 import { ShikiProvider } from "../providers/shiki"
 import { StateProvider } from "../providers/state"
-import { Layout } from "./layout"
-import { Meta } from "./meta"
-import { NameProps } from "./[name].page"
+import { NameProps } from "./[name]"
+import { Meta } from "./_meta"
 
 const GoogleFontsInter = Inter({
 	display: "swap",
