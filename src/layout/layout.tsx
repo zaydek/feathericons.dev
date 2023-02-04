@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react"
-import { iota } from "../lib/iota"
 import { Aside } from "./aside"
 import { Header } from "./header"
 import { Masks } from "./masks"
+import { Nav } from "./nav"
 
 function Sticky({ pos, children }: PropsWithChildren<{ pos: "tl" | "tr" }>) {
 	return (
@@ -28,11 +28,9 @@ export function Layout({ children }: PropsWithChildren) {
 					{/* LHS */}
 					<main className="w-100% min-w-0">
 						<Sticky pos="tl">
-							{iota(2).map(index => (
-								<div key={index}>Hello, world!</div>
-							))}
+							<Nav />
 						</Sticky>
-						{children}
+						<div className="px-16 sm:px-32 2xl:px-64">{children}</div>
 					</main>
 					{/* RHS */}
 					{/* Use box-content here because of border-l */}

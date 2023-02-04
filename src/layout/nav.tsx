@@ -1,11 +1,11 @@
-import * as feather from "./data/react-feather"
+import * as feather from "../data/react-feather"
 
 import { useContext, useRef } from "react"
-import { Hoverable } from "./components/hoverable"
-import { Icon, SVG } from "./components/icon"
-import { SearchContext } from "./providers/state"
+import { Hoverable } from "../components/hoverable"
+import { Icon, SVG } from "../components/icon"
+import { SearchContext } from "../providers/state"
 
-function SearchBarButton({ icon, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
+function NavButton({ icon, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
 			<Icon className="h-24 w-24 text-gray-400" icon={icon} />
@@ -13,7 +13,7 @@ function SearchBarButton({ icon, ...props }: { icon: SVG } & JSX.IntrinsicElemen
 	)
 }
 
-export function SearchBar() {
+export function Nav() {
 	const { setCompactMode, search, setSearch } = useContext(SearchContext)!
 
 	const ref = useRef<HTMLInputElement | null>(null)
@@ -21,7 +21,7 @@ export function SearchBar() {
 	return (
 		<div className="flex h-64 rounded-1e3 bg-white shadow-[var(--shadow-2)] [&_>_:nth-child(2)]:grow">
 			<Hoverable pos="start" content={<>SEARCH FEATHER</>}>
-				<SearchBarButton
+				<NavButton
 					icon={feather.Search}
 					onClick={e => {
 						ref.current?.focus()
@@ -29,9 +29,10 @@ export function SearchBar() {
 					aria-label="Search Feather"
 				/>
 			</Hoverable>
+			{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
 			<input ref={ref} type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
 			<Hoverable pos="end" content={<>COMPACT MODE</>}>
-				<SearchBarButton
+				<NavButton
 					icon={feather.MoreHorizontal}
 					onClick={e => {
 						setCompactMode(curr => !curr)
