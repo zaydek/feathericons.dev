@@ -18,9 +18,13 @@ export function Caps<T extends keyof JSX.IntrinsicElements>({ className, childre
 	return (
 		<Tag
 			tag="div"
-			className="whitespace-pre
-				font-sans text-[11px] font-[500] slashed-zero tabular-nums
-				leading-[normal] tracking-[0.075em]"
+			className="
+				whitespace-pre
+				text-[11px]
+				font-[500]
+				slashed-zero tabular-nums
+				leading-[normal]
+				tracking-[0.075em]"
 			appendClassName={className}
 			{...props}
 		>
@@ -33,9 +37,14 @@ export function SmallSans<T extends keyof JSX.IntrinsicElements>({ className, ch
 	return (
 		<Tag
 			tag="div"
-			className="whitespace-normal
-				font-sans text-[12px] font-[400]
-				leading-[normal] tracking-[0.0125em]"
+			className="
+				whitespace-normal
+				text-[12px]
+				font-[400]
+				slashed-zero
+				tabular-nums
+				leading-[normal]
+				tracking-[0.0125em]"
 			appendClassName={className}
 			{...props}
 		>
@@ -51,8 +60,9 @@ export const docs = {
 		return (
 			<Tag
 				tag="article"
-				className="whitespace-normal
-					font-sans text-[16px] font-[400]
+				className="
+					text-[16px]
+					font-[400]
 					leading-[1.6]"
 				appendClassName={className}
 				{...props}

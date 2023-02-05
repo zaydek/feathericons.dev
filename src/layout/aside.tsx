@@ -449,6 +449,7 @@ export function Aside() {
 					PREVIEW STROKE WIDTH
 				</CompoundSlider>
 			</Section>
+			<hr />
 		</div>
 	)
 }

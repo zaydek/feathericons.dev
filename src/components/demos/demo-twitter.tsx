@@ -12,7 +12,6 @@ function ShareButton({ icon }: { icon: Icon }) {
 	return (
 		<Anchor
 			className="group/button flex items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)]
-				hover:bg-gray-100
 				hover:active:bg-[var(--theme-color)]
 				hover:active:shadow-[var(--inset-shadow-2)]"
 			href={twitterShareUrl}
