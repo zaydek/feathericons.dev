@@ -1,6 +1,4 @@
-////////////////////////////////////////////////////////////////////////////////
 // Y-axis
-
 .docs > * + * {
 	margin-top:    16px;
 }
@@ -24,19 +22,4 @@
 ) {
 	margin-top:    16px;
 	margin-bottom: 32px;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// X-axis
-
-.docs > :not(pre) {
-	margin-right:  64px;
-	margin-left:   64px;
-}
-.docs > :is(
-	ol,
-	ul
-) {
-	margin-right:  64px + 16px;
-	margin-left:   64px + 16px;
 }

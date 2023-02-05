@@ -1,4 +1,4 @@
-import * as typography from "./all-typography"
+import * as typography from "./export-star-typography"
 
 import { PropsWithChildren, ReactNode, useState } from "react"
 import { cx } from "../lib/cx"

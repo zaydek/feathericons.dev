@@ -1,4 +1,4 @@
-import * as typography from "../components/all-typography"
+import * as typography from "../components/export-star-typography"
 import * as feather from "../data/react-feather"
 
 import { memo, useContext, useMemo } from "react"

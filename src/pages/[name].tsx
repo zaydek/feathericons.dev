@@ -1,4 +1,4 @@
-import * as prose from "../components/all-docs"
+import * as prose from "../components/export-star-docs"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
@@ -36,8 +36,7 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
-		<prose.Article>
-			{/* <PageTransition> */}
+		<>
 			<prose.H1>
 				Icon: <prose.Code>{convertToSpaceCase(name)}</prose.Code>
 			</prose.H1>
@@ -158,7 +157,6 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					Looking for the original Feather website? <prose.TextAnchor href="https://feathericons.com">Click here</prose.TextAnchor>.
 				</small>
 			</p>
-			{/* </PageTransition> */}
-		</prose.Article>
+		</>
 	)
 }

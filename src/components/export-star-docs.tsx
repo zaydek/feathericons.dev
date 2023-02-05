@@ -1,5 +1,5 @@
 import * as feather from "../data/react-feather"
-import * as typography from "./all-typography"
+import * as typography from "./export-star-typography"
 
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
@@ -28,13 +28,13 @@ import {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
-	return (
-		<typography.docs.Article className="docs text-gray-900" {...props}>
-			{children}
-		</typography.docs.Article>
-	)
-}
+//// export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
+//// 	return (
+//// 		<typography.docs.Article className="docs text-gray-900" {...props}>
+//// 			{children}
+//// 		</typography.docs.Article>
+//// 	)
+//// }
 
 ////////////////////////////////////////////////////////////////////////////////
 

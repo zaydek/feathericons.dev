@@ -25,7 +25,7 @@ module.exports = {
 		extend: {
 			screens: {
 				// Use 16px for Windows scrollbar
-				"2xl": `${1792 + 16}px`,
+				"2xl": `${1536 + 16}px`,
 			},
 		},
 	},

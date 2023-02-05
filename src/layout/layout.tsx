@@ -1,4 +1,4 @@
-import * as typography from "../components/all-typography"
+import * as typography from "../components/export-star-typography"
 import * as feather from "../data/react-feather"
 
 import { PropsWithChildren } from "react"
@@ -52,7 +52,15 @@ export function Layout({ children }: PropsWithChildren) {
 								<Nav />
 							</div>
 						</div>
-						<div className="px-16 pb-96 sm:px-32 2xl:px-64">{children}</div>
+						{/* Hmm... */}
+						<typography.docs.Article
+							className="docs pb-96
+								    [&_>_:not(pre)]:px-16
+								 sm:[&_>_:not(pre)]:px-32
+								2xl:[&_>_:not(pre)]:px-64"
+						>
+							{children}
+						</typography.docs.Article>
 					</main>
 					{/* RHS */}
 					{/* Use box-content here because of border-l */}
