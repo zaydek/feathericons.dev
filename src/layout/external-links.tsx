@@ -2,14 +2,14 @@ import * as typography from "../components/export-star-typography"
 import * as feather from "../data/react-feather"
 
 import { Anchor, AnchorProps } from "../components/anchor"
-import { Icon, SVG } from "../components/icon"
+import { DynamicIcon, IconSvg } from "../components/dynamic-icon"
 import { twitterShareUrl } from "../constants"
 
-function ExternalLink({ icon, children, ...props }: { icon: SVG } & AnchorProps) {
+function ExternalLink({ icon, children, ...props }: { icon: IconSvg } & AnchorProps) {
 	return (
 		<Anchor className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" {...props}>
 			<div className="flex h-32 w-32 items-center justify-center">
-				<Icon className="h-16 w-16 fill-current text-white" icon={icon} />
+				<DynamicIcon className="h-16 w-16 fill-current text-white" icon={icon} />
 			</div>
 			<typography.Caps className="text-white">{children}</typography.Caps>
 		</Anchor>

@@ -1,14 +1,14 @@
 import * as feather from "../data/react-feather"
 
 import { useContext, useRef } from "react"
+import { DynamicIcon, IconSvg } from "../components/dynamic-icon"
 import { Hoverable } from "../components/hoverable"
-import { Icon, SVG } from "../components/icon"
 import { SearchContext } from "../providers/state"
 
-function NavButton({ icon, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
+function NavButton({ icon, ...props }: { icon: IconSvg } & JSX.IntrinsicElements["button"]) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
-			<Icon className="h-24 w-24 text-gray-700" icon={icon} />
+			<DynamicIcon className="h-24 w-24 text-gray-700" icon={icon} />
 		</button>
 	)
 }

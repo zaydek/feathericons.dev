@@ -9,7 +9,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Anchor } from "../components/anchor"
-import { Icon, SVG } from "../components/icon"
+import { DynamicIcon, IconSvg } from "../components/dynamic-icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
@@ -160,7 +160,7 @@ function FormatButton() {
 						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
 				>
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-						<Icon className="h-16 w-16 group-hover/button:group-active/button:text-white" icon={icon} />
+						<DynamicIcon className="h-16 w-16 group-hover/button:group-active/button:text-white" icon={icon} />
 					</div>
 					<typography.Caps className="text-gray-700">
 						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
@@ -168,7 +168,7 @@ function FormatButton() {
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
-						<Icon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
+						<DynamicIcon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
 					</div>
 				</div>
 			</div>
@@ -199,7 +199,7 @@ function FormatButton() {
 								id="svg"
 								aria-label="Format as SVG"
 							>
-								<Icon className="h-16 w-16" icon={SvgIcon} />
+								<DynamicIcon className="h-16 w-16" icon={SvgIcon} />
 								<typography.Caps className="text-gray-700">SVG</typography.Caps>
 							</DropDownItem>
 							<DropDownItem
@@ -207,7 +207,7 @@ function FormatButton() {
 								id="jsx"
 								aria-label="Format as React"
 							>
-								<Icon className="h-16 w-16" icon={ReactjsIcon} />
+								<DynamicIcon className="h-16 w-16" icon={ReactjsIcon} />
 								<typography.Caps className="text-gray-700">REACT</typography.Caps>
 							</DropDownItem>
 							<DropDownItem
@@ -215,7 +215,7 @@ function FormatButton() {
 								id="tsx"
 								aria-label="Format as TypeScript React"
 							>
-								<Icon className="h-16 w-16" icon={TypeScriptIcon} />
+								<DynamicIcon className="h-16 w-16" icon={TypeScriptIcon} />
 								<typography.Caps className="text-gray-700">TS REACT</typography.Caps>
 							</DropDownItem>
 						</div>
@@ -226,7 +226,7 @@ function FormatButton() {
 	)
 }
 
-function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX.IntrinsicElements["button"]) {
+function ActionButton({ icon, onClick, children, ...props }: { icon: IconSvg } & JSX.IntrinsicElements["button"]) {
 	const [click, setClick] = useState(false)
 
 	useEffect(() => {
@@ -248,7 +248,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 			{...props}
 		>
 			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-				<Icon
+				<DynamicIcon
 					className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white"
 					icon={click ? feather.Check : icon}
 					// Use a slightly thicker stroke when checked
@@ -262,10 +262,10 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SVG } & JSX
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function DecorativeIcon({ icon }: { icon: SVG }) {
+function DecorativeIcon({ icon }: { icon: IconSvg }) {
 	return (
 		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
-			<Icon className="h-12 w-12 text-gray-900" icon={icon} />
+			<DynamicIcon className="h-12 w-12 text-gray-900" icon={icon} />
 		</div>
 	)
 }
@@ -317,7 +317,7 @@ function CompoundSlider({
 	resetHandler,
 	children,
 	...props
-}: { icon: SVG } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+}: { icon: IconSvg } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -342,7 +342,7 @@ function CompoundSlider({
 						onClick={resetHandler}
 						aria-label={`Reset ${props.value < sizeMin ? "stroke-width" : "size"}`}
 					>
-						<Icon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
+						<DynamicIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
 					</button>
 				</div>
 			</div>
