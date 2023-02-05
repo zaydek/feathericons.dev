@@ -171,7 +171,7 @@ function FormatButton() {
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
-						<DynamicIcon className="h-16 w-16 text-gray-500" icon={feather.ChevronDown} />
+						<DynamicIcon className="h-16 w-16 text-gray-600" icon={feather.ChevronDown} />
 					</div>
 				</div>
 			</div>

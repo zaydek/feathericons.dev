@@ -65,7 +65,7 @@ function NavBarButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.Intrin
 				hover:active:bg-gray-200"
 			{...props}
 		>
-			<ResizableIcon className="h-[var(--icon-size-2)] rounded-1e3 text-gray-500" icon={icon} />
+			<ResizableIcon className="h-[var(--icon-size-2)] rounded-1e3 text-gray-600" icon={icon} />
 		</button>
 	)
 }
