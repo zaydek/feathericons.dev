@@ -10,8 +10,6 @@ function createStyled(argClassName: string) {
 }
 
 export const TypographyHero = createStyled("typography-hero")
-export const TypographySans = createStyled("typography-sans")
 export const TypographySmallSans = createStyled("typography-small-sans")
-export const TypographyLargeSans = createStyled("typography-large-sans")
 export const TypographyCode = createStyled("typography-code")
 export const TypographyCaps = createStyled("typography-caps")

@@ -11,24 +11,18 @@
 	--icon-scale:        1;
 	--icon-stroke-width: 2;
 
-	// Header
-	--header-w:          1280px;
-
-	// Mask
 	--mask-h:            320px;
 	--mask-inset:        16px; // TODO: Rename to mask-1-h?
 
-	// App
+	--header-w:          calc(var(--app-w) - 256px);
 	--app-w:             #{1536px + 256px};
 	--app-rounding:      48px;
 
-	// Aside
 	--aside-w:           448px;
 	--aside-inset:       32px;
 	--aside-gap:         16px;
 
-	// Etc.
-	--grid-size:         96px;
+	--grid-size:         104px;
 	--reduced-form-size: 32px;
 	--form-size:         36px;
 }

@@ -7,7 +7,8 @@ import { twitterShareUrl } from "../constants"
 
 function ExternalLink({ icon, children, ...props }: { icon: Icon } & AnchorProps) {
 	return (
-		<Anchor className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" {...props}>
+		// TODO
+		<Anchor className="flex h-32 items-center" {...props}>
 			<div className="flex h-32 w-32 items-center justify-center">
 				<DynamicIcon className="h-16 w-16 fill-current text-white" icon={icon} />
 			</div>
