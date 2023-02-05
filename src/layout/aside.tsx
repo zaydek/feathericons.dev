@@ -146,7 +146,8 @@ function FormatButton() {
 
 	return (
 		<AriaSimpleDropDown<FormatAs>
-			className="relative flex flex-col"
+			// Use cursor-pointer select-none because of synthetic aria component
+			className="relative flex cursor-pointer select-none flex-col"
 			show={show}
 			setShow={setShow}
 			currentId={formatAs}
@@ -271,7 +272,8 @@ function DecorativeIcon({ icon }: { icon: SVG }) {
 
 function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 	return (
-		<AriaCheckbox className="group/checkbox flex h-24 items-center justify-between" {...props}>
+		// Use cursor-pointer select-none because of synthetic aria component
+		<AriaCheckbox className="group/checkbox flex h-24 cursor-pointer select-none items-center justify-between" {...props}>
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<DecorativeIcon icon={feather.Code} />
@@ -292,7 +294,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 	)
 }
 
-const linearGradientFromHell =
+const sliderLinearGradientFromHell =
 	"bg-[linear-gradient(to_right,_var(--theme-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
 
 //// function useMedia(query: string, initialValue: boolean) {
@@ -345,18 +347,11 @@ function CompoundSlider({
 				</div>
 			</div>
 			<div className="px-12">
-				<AriaSlider track={track} thumb={thumb} {...props}>
+				{/* Use cursor-pointer select-none because of synthetic aria component */}
+				<AriaSlider className="cursor-grab select-none active:cursor-grabbing" track={track} thumb={thumb} {...props}>
 					<div ref={setTrack} className="flex h-24 flex-col justify-center">
-						<div className={`flex h-6 items-center rounded-1e3 ${linearGradientFromHell}`}>
-							<div
-								ref={setThumb}
-								className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white shadow-[var(--shadow-6)]"
-								//// // Statically determine the width and then translateX to center
-								//// // before <AriaSlider> mounts
-								//// style={{
-								//// 	transform: "translateX(calc((var(--aside-w) - var(--aside-inset-x) * 2 - 12px * 2) / 2 - var(--form-size) / 2))",
-								//// }}
-							></div>
+						<div className={`flex h-6 items-center rounded-1e3 ${sliderLinearGradientFromHell}`}>
+							<div ref={setThumb} className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white shadow-[var(--shadow-6)]"></div>
 						</div>
 					</div>
 				</AriaSlider>

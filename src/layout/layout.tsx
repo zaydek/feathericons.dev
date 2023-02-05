@@ -53,6 +53,7 @@ export function Layout({ children }: PropsWithChildren) {
 							</div>
 						</div>
 						{/* Hmm... */}
+						{/* Defer to docs.scss for y-axis spacing */}
 						<typography.docs.Article
 							className="docs pb-96
 								    [&_>_:not(pre)]:px-16
@@ -64,7 +65,6 @@ export function Layout({ children }: PropsWithChildren) {
 					</main>
 					{/* RHS */}
 					{/* Use box-content here because of border-l */}
-					{/* TODO: Or use box-shadow here */}
 					<aside className="box-content hidden min-w-[var(--aside-w)] max-w-[var(--aside-w)] border-l lg:block">
 						<div className="sticky top-0 z-100 2xl:top-[var(--mask-inset)]">
 							<div className="bg-white 2xl:rounded-tr-[var(--app-rounding)]">
