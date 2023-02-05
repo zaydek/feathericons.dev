@@ -6,12 +6,12 @@ import { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import Script from "next/script"
 import { useEffect } from "react"
+import { Meta } from "../components/meta"
 import { Layout } from "../layout/layout"
 import { detab } from "../lib/format"
 import { ShikiProvider } from "../providers/shiki"
 import { StateProvider } from "../providers/state"
 import { NameProps } from "./[name]"
-import { Meta } from "./_meta"
 
 const GoogleFontsInter = Inter({
 	display: "swap",
