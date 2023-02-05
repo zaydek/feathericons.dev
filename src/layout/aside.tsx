@@ -159,7 +159,8 @@ function FormatButton() {
 			<div className="relative flex flex-col">
 				<div
 					className="group/button flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white shadow-[var(--shadow-2)]
-						hover:active:bg-gray-200 hover:active:shadow-[var(--inset-shadow-2)]"
+						hover:active:bg-gray-200
+						hover:active:shadow-[var(--inset-shadow-2)]"
 				>
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 						<DynamicIcon className="h-16 w-16 group-hover/button:group-active/button:text-white" icon={icon} />
@@ -242,7 +243,8 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & Ac
 	return (
 		<button
 			className="group/button flex h-[var(--form-size)] items-center justify-center rounded-1e3 bg-white shadow-[var(--shadow-2)]
-				hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
+				hover:active:bg-[var(--theme-color)]
+				hover:active:shadow-[var(--inset-shadow-2)]"
 			onClick={e => {
 				setClick(true)
 				onClick?.(e)

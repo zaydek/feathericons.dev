@@ -5,13 +5,8 @@ const defaultTheme = require("./tailwind.default-theme")
 module.exports = {
 	content: ["./src/**/*.tsx", "./og/**/*.tsx"],
 	corePlugins: {
-		boxShadow:       false,
-		boxShadowColor:  false,
-		ringColor:       false,
-		ringOffsetColor: false,
-		ringOffsetWidth: false,
-		ringOpacity:     false,
-		ringWidth:       false,
+		boxShadow:      false,
+		boxShadowColor: false,
 	},
 	experimental: {
 		optimizeUniversalDefaults: true,
@@ -25,7 +20,7 @@ module.exports = {
 		extend: {
 			screens: {
 				// Use 16px for Windows scrollbar
-				"2xl": `${1536 + 16}px`,
+				"2xl": `${1536 + 128 + 16}px`,
 			},
 		},
 	},

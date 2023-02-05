@@ -146,7 +146,7 @@ export function DemoChrome({ name }: { name: keyof typeof manifest }) {
 			}
 		>
 			<div className="flex h-100% flex-col">
-				<div className="grow bg-gray-50"></div>
+				<div className="grow"></div>
 				{/* Use relative because of var(--hairline-shadow-b) */}
 				<div className="relative">
 					<TabBar name={name} />

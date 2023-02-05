@@ -13,8 +13,8 @@ function InteractiveButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.I
 	return (
 		<button
 			className="flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3
-				[&[data-state-active]]:hover:bg-gray-200
-				[&[data-state-active]]:hover:active:bg-gray-300"
+				hover:bg-gray-200
+				hover:active:bg-gray-300"
 			onClick={e => setActive(curr => !curr)}
 			data-state-active={active || undefined}
 			{...props}
@@ -54,7 +54,7 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 						// prettier-ignore: aria-label
 						aria-label="Like"
 					/>
-					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
+					<div className="aspect-[6] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
 					<InteractiveButton
@@ -62,7 +62,7 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 						// prettier-ignore: aria-label
 						aria-label="Dislike"
 					/>
-					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
+					<div className="aspect-[6] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
 					<DecorativeButton icon={feather[name]} />

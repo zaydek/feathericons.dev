@@ -12,14 +12,14 @@
 	--icon-stroke-width: 2;
 
 	// Header
-	--header-w:          calc(var(--app-w) - 128px);
+	--header-w:          calc(var(--app-w) - 256px);
 
 	// Mask
-	--mask-h:            240px;
-	--mask-inset:        24px; // TODO: Rename to mask-1-h?
+	--mask-h:            320px;
+	--mask-inset:        16px; // TODO: Rename to mask-1-h?
 
 	// App
-	--app-w:             1536px;
+	--app-w:             #{1536px + 128px};
 	--app-rounding:      48px;
 
 	// Aside

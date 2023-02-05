@@ -13,7 +13,6 @@ function BackgroundMask() {
 	)
 }
 
-// TODO: This can be simplified, see https://codepen.io/zaydek/pen/YzjgXwR?editors=1100
 function ForegroundMask() {
 	return (
 		// Use -mt-[var(--mask-inset)] > h-[var(--mask-inset)] to prevent responsive
