@@ -4,6 +4,7 @@ import { ExternalLinks } from "./external-links"
 import { Header } from "./header"
 import { Masks } from "./masks"
 import { Nav } from "./nav"
+import { PageTransition } from "./page-transition"
 
 export function Layout({ children }: PropsWithChildren) {
 	return (
@@ -28,7 +29,7 @@ export function Layout({ children }: PropsWithChildren) {
 						>
 							{children}
 						</article> */}
-						{children}
+						<PageTransition>{children}</PageTransition>
 					</main>
 					{/* RHS */}
 					{/* Use box-content here because of border-l */}

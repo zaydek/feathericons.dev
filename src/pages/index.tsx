@@ -6,7 +6,6 @@ import { TypographySmallSans } from "../components/bindings"
 import { Hoverable } from "../components/hoverable"
 import { ResizableIcon } from "../components/resizable-icon"
 import { manifest } from "../data/manifest"
-import { PageTransition } from "../layout/page-transition"
 import { convertToKebabCase } from "../lib/cases"
 import { SearchContext, SelectedContext } from "../providers/state"
 
@@ -100,12 +99,10 @@ export default function Component() {
 	}, [compactMode])
 
 	return (
-		<PageTransition>
-			<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))]">
-				{Object.keys(searchResults).map(name => (
-					<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
-				))}
-			</div>
-		</PageTransition>
+		<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))]">
+			{Object.keys(searchResults).map(name => (
+				<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
+			))}
+		</div>
 	)
 }

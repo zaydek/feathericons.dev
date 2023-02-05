@@ -52,17 +52,16 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<DemoSocialMedia name={name} />
 				<DemoTwitter name={name} />
 			</figure>
-			{/* FIXME: Transition doesn't interpolate here -- why? */}
 			{manifest[name].more.length > 0 && (
 				<>
 					<docs.Subheading>
 						Recommended for Use With <docs.Code>{convertToSpaceCase(name)}</docs.Code>
 					</docs.Subheading>
-					<div className="flex flex-wrap">
+					<figure className="flex flex-wrap">
 						{manifest[name].more.map(name => (
 							<Recommended key={name} name={name} />
 						))}
-					</div>
+					</figure>
 				</>
 			)}
 			<hr />
@@ -149,8 +148,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			<p>
 				<small>
 					Icons by <docs.Twitter href="https://twitter.com/colebemis">@colebemis</docs.Twitter>. App by{" "}
-					<docs.Twitter href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</docs.Twitter>
-					.
+					<docs.Twitter href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</docs.Twitter>.
 					<br />
 					Feather is licensed as <docs.TextAnchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</docs.TextAnchor>. Icons
 					may be used for personal and commercial use without attribution.
