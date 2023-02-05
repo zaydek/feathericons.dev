@@ -4,8 +4,8 @@ import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
 import { ShikiContext } from "../providers/shiki"
-import { Anchor } from "./anchor"
-import { DynamicIcon } from "./dynamic-icon"
+import { Anchor, AnchorProps, SoftAnchorProps } from "./anchor"
+import { DynamicIcon, Icon } from "./dynamic-icon"
 import {
 	CodePenIcon,
 	CodePenUrl,
