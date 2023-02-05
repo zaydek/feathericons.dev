@@ -20,7 +20,6 @@ import { downloadText } from "../lib/download"
 import { Mutable } from "../lib/types"
 import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
-import { PageTransition } from "./page-transition"
 
 function TransformAnchor({ formatAs, children, ...props }: PropsWithChildren<{ formatAs: FormatAs }>) {
 	if (formatAs === "svg") {
@@ -48,21 +47,21 @@ function TransformAnchor({ formatAs, children, ...props }: PropsWithChildren<{ f
 	}
 }
 
-// TODO
-function useRouterName() {
-	const router = useRouter()
-	let name: keyof typeof manifest
-	if (router.query.icon === undefined) {
-		name = "Feather"
-	} else {
-		// Cast string | string[] to string and string to keyof typeof manifest
-		name = convertToTitleCase(router.query.icon as string) as keyof typeof manifest
+// Because <Aside> is a shared component it's easier to access the name from the
+// route instead of props
+function useNameFromRouter() {
+	let name: keyof typeof manifest | undefined = undefined
+	const queryName = useRouter().query.name
+	if (queryName !== undefined) {
+		name = convertToTitleCase(queryName as string) as keyof typeof manifest
 	}
 	return name
 }
 
-function IconPreview() {
-	const name = useRouterName()
+function Preview() {
+	const routeName = useNameFromRouter()
+	const { selectedName } = useContext(SelectedContext)!
+	const name = routeName ?? selectedName
 
 	const { highlighter } = useContext(ShikiContext)!
 	const { viewSource, formatAs, clipboard: code } = useContext(SelectedContext)!
@@ -100,16 +99,9 @@ function IconPreview() {
 			</TypographyCode>
 		</pre>
 	) : (
-		// FIXME: Lol what the hell is going on here?
-		<div>
-			<div className="flex aspect-[1.5] items-center justify-center rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots>
-				<PageTransition>
-					{/* Use <div> to preserve <AdjustableIcon> */}
-					<div>
-						<ResizableIcon className="h-64 w-64 text-gray-800" icon={feather[name]} />
-					</div>
-				</PageTransition>
-			</div>
+		<div className="flex aspect-[1.5] items-center justify-center rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots>
+			{/* <ResizableIcon className="h-64 w-64 text-gray-800" icon={feather[name]} /> */}
+			<ResizableIcon className="h-64 w-64 text-gray-800" icon={feather[name]} />
 		</div>
 	)
 }
@@ -392,7 +384,7 @@ export function Aside() {
 				</CompoundCheckbox>
 			</Section>
 			<Section>
-				<IconPreview />
+				<Preview />
 			</Section>
 			<Section>
 				<div className="flex flex-col gap-8">

@@ -66,28 +66,28 @@ article code {
 article > * + * {
 	margin-top:    16px;
 }
-
-article > :is(
-	h1,
-	h2
-) {
+article > :is(h1, h2, h3, h4, h5, h6):not(:is(:first-child, :last-child)) {
 	margin-top:    64px;
 	margin-bottom: 16px;
 }
-article > :is(
-	hr,
-	pre
-) {
+article > :is(figure, pre, hr):not(:is(:first-child, :last-child)) {
 	margin-top:    32px;
 	margin-bottom: 32px;
 }
-article > :is(
-	ol,
-	ul
-) {
+article > :is(ol, ul):not(:is(:first-child, :last-child)) {
 	margin-top:    16px;
 	margin-bottom: 32px;
 }
+
+//// article > :is(h1, h2):not(:first-child)  { margin-top:    64px; }
+//// article > :is(h1, h2):not(:last-child)   { margin-bottom: 16px; }
+////
+//// article > :is(pre, hr):not(:first-child) { margin-top:    32px; }
+//// article > :is(pre, hr):not(:last-child)  { margin-bottom: 32px; }
+////
+//// article > :is(ol, ul):not(:first-child)  { margin-top:    16px; }
+//// article > :is(ol, ul):not(:last-child)   { margin-top:    32px; }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // X-axis
