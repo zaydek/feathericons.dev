@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
-		<article>
+		<article className="pb-64">
 			<docs.Heading>
 				Icon: <docs.Code>{convertToSpaceCase(name)}</docs.Code>
 			</docs.Heading>
@@ -75,6 +75,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<docs.TypeScript>TypeScript React.js</docs.TypeScript>, or use one of the{" "}
 				<docs.TextAnchor href="https://github.com/feathericons/feather#related-projects">related projects</docs.TextAnchor>.
 			</p>
+			<hr />
 			<docs.Subheading>Using {name} With a CDN</docs.Subheading>
 			<p>To get started with Feather using a CDN (content delivery network), simply:</p>
 			<docs.Ordered>
@@ -108,6 +109,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			<p>
 				Click here to get started with a <docs.CodePen href="https://codepen.io/pen?template=WOJZdM" /> template.
 			</p>
+			<hr />
 			<docs.Subheading>
 				Using {name} With <docs.Reactjs />
 			</docs.Subheading>

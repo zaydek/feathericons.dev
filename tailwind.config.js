@@ -3,14 +3,16 @@ const defaultTheme = require("./tailwind.default-theme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ["./src/**/*.tsx", "./og/**/*.tsx"],
+	content: ["./src/**/*.tsx"],
 	corePlugins: {
 		boxShadow:      false,
 		boxShadowColor: false,
 	},
+	// Optimization
 	experimental: {
 		optimizeUniversalDefaults: true,
 	},
+	// Optimization
 	future: {
 		disableColorOpacityUtilitiesByDefault: true,
 		hoverOnlyWhenSupported: true,
@@ -24,6 +26,7 @@ module.exports = {
 			},
 		},
 	},
+	// See corePlugins
 	plugins: [
 		plugin(function ({ matchUtilities }) {
 			return matchUtilities({

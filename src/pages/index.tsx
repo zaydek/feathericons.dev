@@ -9,6 +9,7 @@ import { manifest } from "../data/manifest"
 import { convertToKebabCase } from "../lib/cases"
 import { SearchContext, SelectedContext } from "../providers/state"
 
+// TODO: Colors are off
 function Highlight({ indexes, children }: { indexes: readonly [number, number] | null; children: string }) {
 	if (indexes === null) {
 		return <>{children}</>
@@ -99,7 +100,7 @@ export default function Component() {
 	}, [compactMode])
 
 	return (
-		<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))] px-16 lg:px-32 2xl:px-64">
+		<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))] px-16 pb-64 lg:px-32 2xl:px-48">
 			{Object.keys(searchResults).map(name => (
 				<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
 			))}

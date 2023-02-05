@@ -4,8 +4,8 @@ import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
 import { ShikiContext } from "../providers/shiki"
-import { Anchor, AnchorProps, SoftAnchorProps } from "./anchor"
-import { DynamicIcon, Icon } from "./dynamic-icon"
+import { Anchor } from "./anchor"
+import { DynamicIcon } from "./dynamic-icon"
 import {
 	CodePenIcon,
 	CodePenUrl,
@@ -118,7 +118,9 @@ export function CodeSnippet({ style: _, lang, children: code, ...props }: { lang
 	}, [code, highlighter, lang])
 
 	return (
-		<pre className="overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
+		//// <pre className="overflow-auto bg-gray-50 py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" {...props}>
+		//// <pre className="overflow-auto py-32 shadow-[var(--hairline-shadow-t),_var(--hairline-shadow-b)]" data-background-dots {...props}>
+		<pre className="overflow-auto" {...props}>
 			<code>
 				{tokens === null
 					? code.split("\n").map((ys, y) => <div key={y}>{ys || <br />}</div>)

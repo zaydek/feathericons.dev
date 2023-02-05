@@ -3,7 +3,6 @@ import { Aside } from "./aside"
 import { ExternalLinks } from "./external-links"
 import { Header } from "./header"
 import { Masks } from "./masks"
-import { Nav } from "./nav"
 import { PageTransition } from "./page-transition"
 
 export function Layout({ children }: PropsWithChildren) {
@@ -18,17 +17,9 @@ export function Layout({ children }: PropsWithChildren) {
 					<main className="w-100% min-w-0">
 						<div className="sticky top-0 z-100 2xl:top-[var(--mask-inset)]">
 							<div className="bg-[linear-gradient(to_bottom,_#fff_calc(32px_+_64px),_transparent)] py-32 px-64 2xl:rounded-tl-[var(--app-rounding)]">
-								<Nav />
+								{/* <Nav /> */}
 							</div>
 						</div>
-						{/* <article
-							className="pb-96
-								    [&_>_:not(pre)]:px-16
-								 sm:[&_>_:not(pre)]:px-32
-								2xl:[&_>_:not(pre)]:px-64"
-						>
-							{children}
-						</article> */}
 						<PageTransition>{children}</PageTransition>
 					</main>
 					{/* RHS */}

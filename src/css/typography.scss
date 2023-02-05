@@ -54,14 +54,19 @@ article code {
 article > * + * {
 	margin-top:    16px;
 }
-article > :is(h1, h2, h3, h4, h5, h6):not(:is(:first-child, :last-child)) {
-	margin-top:    64px;
+article > :is(h1, h2):not(:is(:first-child, :last-child)) {
+	margin-top:    32px;
 	margin-bottom: 16px;
 }
+//// article > :is(figure, pre, hr):not(:is(:first-child, :last-child)) {
 article > :is(figure, pre, hr):not(:is(:first-child, :last-child)) {
 	margin-top:    32px;
 	margin-bottom: 32px;
 }
+//// article > hr:not(:is(:first-child, :last-child)) {
+//// 	margin-top:    48px;
+//// 	margin-bottom: 48px;
+//// }
 article > :is(ol, ul):not(:is(:first-child, :last-child)) {
 	margin-top:    16px;
 	margin-bottom: 32px;
@@ -87,8 +92,8 @@ article > :not(pre, hr) {
 		margin-right: 32px;
 		margin-left:  32px;
 		@media (min-width: 1792px) {
-			margin-right: 64px;
-			margin-left:  64px;
+			margin-right: 48px;
+			margin-left:  48px;
 		}
 	}
 }
@@ -99,22 +104,34 @@ article > :is(ol, ul) {
 		margin-right: 32px + 16px;
 		margin-left:  32px + 16px;
 		@media (min-width: 1792px) {
-			margin-right: 64px + 16px;
-			margin-left:  64px + 16px;
+			margin-right: 48px + 16px;
+			margin-left:  48px + 16px;
 		}
 	}
 }
-// <article><pre><code><div>
-//                     ^^^^^
 article > pre > code > div {
 	margin-right:  16px;
 	margin-left:   16px;
 	@media (min-width: 1024px) {
-		margin-right: 32px;
-		margin-left:  32px;
+		margin-right: 32px + 16px;
+		margin-left:  32px + 16px;
 		@media (min-width: 1792px) {
-			margin-right: 64px;
-			margin-left:  64px;
+			margin-right: 48px + 16px;
+			margin-left:  48px + 16px;
 		}
 	}
 }
+//// // <article><pre><code><div>
+//// //                     ^^^^^
+//// article > pre > code > div {
+//// 	margin-right:  16px;
+//// 	margin-left:   16px;
+//// 	@media (min-width: 1024px) {
+//// 		margin-right: 32px;
+//// 		margin-left:  32px;
+//// 		@media (min-width: 1792px) {
+//// 			margin-right: 48px + 16px;
+//// 			margin-left:  48px + 16px;
+//// 		}
+//// 	}
+//// }
