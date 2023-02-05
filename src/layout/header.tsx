@@ -35,7 +35,7 @@ function HeadingSubheading() {
 function CallToActionAnchor({ primary = undefined, icon, children, ...props }: { primary?: true; icon: Icon } & AnchorProps) {
 	return (
 		<Anchor
-			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff3] sm:aspect-[3] sm:rounded-1e3
+			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff3] sm:aspect-[3.5] sm:rounded-1e3
 				[&[data-primary]]:bg-white"
 			data-primary={primary}
 			{...props}
@@ -88,10 +88,10 @@ export function Header() {
 					{/* Use items-center ... self-stretch to conditionally center y-axis */}
 					<div className="flex flex-col items-center gap-16 self-stretch sm:flex-row sm:self-start">
 						<CallToActionAnchor primary icon={feather.Github} href="https://github.com/feathericons/feather">
-							Read docs
+							Open GitHub
 						</CallToActionAnchor>
 						<CallToActionAnchor icon={feather.Download} download={`feather@${version}.zip`} href="/feather.zip">
-							Download
+							Download all
 						</CallToActionAnchor>
 					</div>
 				</div>
