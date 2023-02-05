@@ -1,29 +1,14 @@
-import * as typography from "../components/export-star-typography"
 import * as feather from "../data/react-feather"
 
 import { memo, useContext, useMemo } from "react"
 import { Anchor } from "../components/anchor"
+import { TypographySmallSans } from "../components/bindings"
 import { Hoverable } from "../components/hoverable"
 import { ResizableIcon } from "../components/resizable-icon"
 import { manifest } from "../data/manifest"
 import { PageTransition } from "../layout/page-transition"
 import { convertToKebabCase } from "../lib/cases"
 import { SearchContext, SelectedContext } from "../providers/state"
-
-//// function Wbr({ children }: { children: string }) {
-//// 	const ws = children.split(/(?=[A-Z])/)
-////
-//// 	return (
-//// 		<>
-//// 			{ws.map((w, index) => (
-//// 				<Fragment key={w}>
-//// 					{index > 0 && <wbr />}
-//// 					{w}
-//// 				</Fragment>
-//// 			))}
-//// 		</>
-//// 	)
-//// }
 
 function Highlight({ indexes, children }: { indexes: readonly [number, number] | null; children: string }) {
 	if (indexes === null) {
@@ -88,16 +73,16 @@ const MemoGridItem = memo(function GridItem({
 				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
 			</button>
 			<Anchor
-				className="group/name flex h-32 items-center justify-center truncate px-4"
+				className="group/name flex h-32 items-center justify-center truncate"
 				href={`/${convertToKebabCase(name).toLowerCase()}`}
 				onClick={e => {
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 				}}
 			>
-				<typography.SmallSans className="truncate text-gray-800 group-hover/name:underline group-hover/name:decoration-gray-400">
+				<TypographySmallSans className="truncate text-gray-800 group-hover/name:underline group-hover/name:decoration-gray-400">
 					<Highlight indexes={indexes}>{name}</Highlight>
-				</typography.SmallSans>
+				</TypographySmallSans>
 			</Anchor>
 		</div>
 	)

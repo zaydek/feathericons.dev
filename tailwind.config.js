@@ -20,16 +20,14 @@ module.exports = {
 		extend: {
 			screens: {
 				// Use 16px for Windows scrollbar
-				"2xl": `${1536 + 128 + 16}px`,
+				"2xl": `${1536 + 256 + 16}px`,
 			},
 		},
 	},
 	plugins: [
 		plugin(function ({ matchUtilities }) {
 			return matchUtilities({
-				"shadow": value => ({
-					boxShadow: value,
-				}),
+				"shadow": value => ({ boxShadow: value }),
 			})
 		}),
 	],

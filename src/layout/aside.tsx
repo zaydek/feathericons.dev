@@ -1,4 +1,3 @@
-import * as typography from "../components/export-star-typography"
 import * as feather from "../data/react-feather"
 
 import { AnimatePresence, motion } from "framer-motion"
@@ -10,6 +9,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Anchor } from "../components/anchor"
+import { TypographyCaps, TypographyCode } from "../components/bindings"
 import { DynamicIcon, Icon } from "../components/dynamic-icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
@@ -61,7 +61,7 @@ function useRouterName() {
 	return name
 }
 
-function Preview() {
+function IconPreview() {
 	const name = useRouterName()
 
 	const { highlighter } = useContext(ShikiContext)!
@@ -76,8 +76,8 @@ function Preview() {
 	}, [code, formatAs, highlighter])
 
 	return viewSource ? (
-		<pre className="aspect-[1.5] overflow-auto rounded-24 bg-white text-gray-800 shadow-[var(--shadow-2)]">
-			<code className="inline-block py-24 text-[0.8125em] leading-[1.5]">
+		<pre className="aspect-[1.5] overflow-auto rounded-24 bg-white shadow-[var(--shadow-2)]">
+			<TypographyCode tag="code" className="inline-block py-24 text-gray-800">
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-24">
@@ -97,7 +97,7 @@ function Preview() {
 								)}
 							</div>
 					  ))}
-			</code>
+			</TypographyCode>
 		</pre>
 	) : (
 		// FIXME: Lol what the hell is going on here?
@@ -165,9 +165,9 @@ function FormatButton() {
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
 						<DynamicIcon className="h-16 w-16 group-hover/button:group-active/button:text-white" icon={icon} />
 					</div>
-					<typography.Caps className="text-gray-800">
+					<TypographyCaps className="text-gray-800">
 						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
-					</typography.Caps>
+					</TypographyCaps>
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
@@ -203,7 +203,7 @@ function FormatButton() {
 								aria-label="Format as SVG"
 							>
 								<DynamicIcon className="h-16 w-16" icon={SvgIcon} />
-								<typography.Caps className="text-gray-800">SVG</typography.Caps>
+								<TypographyCaps className="text-gray-800">SVG</TypographyCaps>
 							</DropDownItem>
 							<DropDownItem
 								id="jsx"
@@ -211,7 +211,7 @@ function FormatButton() {
 								aria-label="Format as React"
 							>
 								<DynamicIcon className="h-16 w-16" icon={ReactjsIcon} />
-								<typography.Caps className="text-gray-800">REACT</typography.Caps>
+								<TypographyCaps className="text-gray-800">REACT</TypographyCaps>
 							</DropDownItem>
 							<DropDownItem
 								id="tsx"
@@ -219,7 +219,7 @@ function FormatButton() {
 								aria-label="Format as TypeScript React"
 							>
 								<DynamicIcon className="h-16 w-16" icon={TypeScriptIcon} />
-								<typography.Caps className="text-gray-800">TS REACT</typography.Caps>
+								<TypographyCaps className="text-gray-800">TS REACT</TypographyCaps>
 							</DropDownItem>
 						</div>
 					</motion.div>
@@ -259,7 +259,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & Ac
 					{...(click && { strokeWidth: 2.5 })}
 				/>
 			</div>
-			<typography.Caps className="text-gray-800 group-hover/button:group-active/button:text-white">{children}</typography.Caps>
+			<TypographyCaps className="text-gray-800 group-hover/button:group-active/button:text-white">{children}</TypographyCaps>
 		</button>
 	)
 }
@@ -281,7 +281,7 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 			{/* LHS */}
 			<div className="flex items-center gap-8">
 				<DecorativeIcon icon={feather.Code} />
-				<typography.Caps className="text-gray-800">{children}</typography.Caps>
+				<TypographyCaps className="text-gray-800">{children}</TypographyCaps>
 			</div>
 			{/* RHS */}
 			<div className="flex h-16 w-48 items-center rounded-1e3 bg-[var(--hairline-color)] group-aria-checked/checkbox:bg-[var(--theme-color)]">
@@ -316,16 +316,16 @@ function CompoundSlider({
 				{/* LHS */}
 				<div className="flex items-center gap-8">
 					<DecorativeIcon icon={icon} />
-					<typography.Caps className="text-gray-800">{children}</typography.Caps>
+					<TypographyCaps className="text-gray-800">{children}</TypographyCaps>
 				</div>
 				{/* RHS */}
 				<div className="flex items-center gap-8">
 					{/* prettier-ignore */}
-					<typography.Caps className="text-gray-800">
+					<TypographyCaps className="text-gray-800">
 						{props.value < sizeMin
 							? props.value.toFixed(2)
 							: `${props.value} PX`}
-					</typography.Caps>
+					</TypographyCaps>
 					<button
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}
@@ -392,7 +392,7 @@ export function Aside() {
 				</CompoundCheckbox>
 			</Section>
 			<Section>
-				<Preview />
+				<IconPreview />
 			</Section>
 			<Section>
 				<div className="flex flex-col gap-8">

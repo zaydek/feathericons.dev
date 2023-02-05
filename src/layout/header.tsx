@@ -1,6 +1,7 @@
 import * as feather from "../data/react-feather"
 
 import { Anchor, AnchorProps } from "../components/anchor"
+import { TypographyHero } from "../components/bindings"
 import { DynamicIcon, Icon } from "../components/dynamic-icon"
 import { version } from "../data/manifest"
 import { iota } from "../lib/iota"
@@ -40,11 +41,10 @@ function CallToActionAnchor({ primary = undefined, icon, children, ...props }: {
 			{...props}
 		>
 			<div className="flex h-100% items-center justify-center">
-				<div className="-ml-[calc((48px_-_24px)_/_2)] flex h-48 w-48 items-center justify-center">
-					<DynamicIcon className="h-24 w-24 text-white [[data-primary]_&]:text-gray-800" icon={icon} />
+				<div className="-ml-[calc((40px_-_20px)_/_2)] flex h-40 w-40 items-center justify-center">
+					<DynamicIcon className="h-20 w-20 text-white [[data-primary]_&]:text-gray-800" icon={icon} />
 				</div>
-				{/* {children} */}
-				<div className="aspect-[8] h-6 rounded-1e3 bg-white [[data-primary]_&]:bg-gray-800"></div>
+				<TypographyHero className="text-white [[data-primary]_&]:text-gray-800">{children}</TypographyHero>
 			</div>
 		</Anchor>
 	)
@@ -87,20 +87,11 @@ export function Header() {
 					<HeadingSubheading />
 					{/* Use items-center ... self-stretch to conditionally center y-axis */}
 					<div className="flex flex-col items-center gap-16 self-stretch sm:flex-row sm:self-start">
-						{/* prettier-ignore */}
-						<CallToActionAnchor
-							href="https://github.com/feathericons/feather"
-							primary
-							icon={feather.Github}
-						>
-							{/* ... */}
+						<CallToActionAnchor primary icon={feather.Github} href="https://github.com/feathericons/feather">
+							Read docs
 						</CallToActionAnchor>
-						{/* prettier-ignore */}
-						<CallToActionAnchor
-							download={`feather@${version}.zip`} href="/feather.zip"
-							icon={feather.Download}
-						>
-							{/* ... */}
+						<CallToActionAnchor icon={feather.Download} download={`feather@${version}.zip`} href="/feather.zip">
+							Download
 						</CallToActionAnchor>
 					</div>
 				</div>

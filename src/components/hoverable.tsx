@@ -1,7 +1,6 @@
-import * as typography from "./export-star-typography"
-
 import { PropsWithChildren, ReactNode, useState } from "react"
 import { cx } from "../lib/cx"
+import { TypographyCaps } from "./bindings"
 import { Transition } from "./transition"
 
 // TODO: Convert to using Framer Motion and deprecate <Transition>?
@@ -43,14 +42,14 @@ export function Hoverable({
 					className={
 						// prettier-ignore
 						{
-							start:  cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-0     z-10"),
-							center: cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-[50%] z-10"),
-							end:    cx("pointer-events-none absolute top-[calc(100%_+_10px)] right-0    z-10"),
+							start:  cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-0     z-10 whitespace-pre"),
+							center: cx("pointer-events-none absolute top-[calc(100%_+_10px)] left-[50%] z-10 whitespace-pre"),
+							end:    cx("pointer-events-none absolute top-[calc(100%_+_10px)] right-0    z-10 whitespace-pre"),
 						}[pos]
 					}
 				>
 					<div className="flex h-32 items-center gap-8 rounded-12 bg-white px-12 shadow-[var(--shadow-6),_var(--base-shadow-6)]">
-						<typography.Caps className="text-gray-800">{content}</typography.Caps>
+						<TypographyCaps className="text-gray-800">{content}</TypographyCaps>
 					</div>
 				</div>
 			</Transition>

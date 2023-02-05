@@ -1,7 +1,9 @@
-import "../css/index.scss"
-import "../css/tailwind.css"
+import "../css/tailwind/tailwind-base.css"
 
-import { Fira_Code, Inter } from "@next/font/google"
+import "../css/index.scss"
+import "../css/tailwind/tailwind.css"
+
+import { DM_Sans, Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import Script from "next/script"
@@ -13,17 +15,21 @@ import { ShikiProvider } from "../providers/shiki"
 import { StateProvider } from "../providers/state"
 import { NameProps } from "./[name]"
 
-const GoogleFontsInter = Inter({
+const fontDmSans = DM_Sans({
 	display: "swap",
 	subsets: ["latin"],
-	variable: "--font-inter",
+	weight: ["400", "500", "700"],
+})
+
+const fontInter = Inter({
+	display: "swap",
+	subsets: ["latin"],
 	weight: ["400", "500", "600", "700", "800", "900"],
 })
 
-const GoogleFontsFiraCode = Fira_Code({
+const fontFiraCode = Fira_Code({
 	display: "swap",
 	subsets: ["latin"],
-	variable: "--font-fira-code",
 	weight: ["400"],
 })
 
@@ -33,8 +39,9 @@ function InlineGoogleFonts() {
 		<style id="google-fonts" dangerouslySetInnerHTML={{
 			__html: "\n" + detab(`
 				:root, ::before, ::after {
-					--sans: ${GoogleFontsInter.style.fontFamily};
-					--code: ${GoogleFontsFiraCode.style.fontFamily};
+					--font-hero: ${fontDmSans.style.fontFamily};
+					--font-sans: ${fontInter.style.fontFamily};
+					--font-code: ${fontFiraCode.style.fontFamily};
 				}
 			`).replaceAll("\t", "  ") + "\n"
 		}} />

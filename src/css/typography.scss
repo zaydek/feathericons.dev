@@ -1,0 +1,132 @@
+.typography-hero {
+	font: 500 18px / normal
+		var(--font-hero);
+	font-feature-settings: 'tnum';
+	letter-spacing: 0;
+}
+.typography-sans {
+	font: 400 16px /
+		1.6 var(--font-sans);
+	font-feature-settings: 'tnum';
+	letter-spacing: 0;
+}
+.typography-large-sans {
+	font: 400 16px / normal
+		var(--font-sans);
+	font-feature-settings: 'tnum';
+	letter-spacing: -0.0625em;
+}
+.typography-small-sans {
+	font: 400 12px / normal
+		var(--font-sans);
+	font-feature-settings: 'tnum';
+	letter-spacing: 0;
+}
+.typography-code {
+	font-size: 0.8125em;
+	font-feature-settings: 'tnum';
+	letter-spacing: null;
+}
+.typography-caps {
+	font: 500 11px / normal
+		var(--font-sans);
+	font-feature-settings: 'tnum';
+	letter-spacing: 0.075em;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+article {
+	font: 400 16px / 1.6
+		var(--font-sans);
+	font-feature-settings: 'tnum';
+	letter-spacing: 0;
+}
+article h1 {
+	font: 500 1.5em / 1.25
+		var(--font-hero); // Try var(--font-hero) here?
+	font-feature-settings: 'tnum';
+	letter-spacing: 0;
+}
+article h2 {
+	font: 500 1.25em / 1.25
+		var(--font-hero); // Try var(--font-hero) here?
+	font-feature-settings: 'tnum';
+	letter-spacing: 0;
+}
+article code {
+	font-size: 0.875em;
+	font-feature-settings: 'tnum';
+	letter-spacing: null;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+// Y-axis
+article > * + * {
+	margin-top:    16px;
+}
+
+article > :is(
+	h1,
+	h2
+) {
+	margin-top:    64px;
+	margin-bottom: 16px;
+}
+article > :is(
+	hr,
+	pre
+) {
+	margin-top:    32px;
+	margin-bottom: 32px;
+}
+article > :is(
+	ol,
+	ul
+) {
+	margin-top:    16px;
+	margin-bottom: 32px;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// X-axis
+
+article > :not(pre, hr) {
+	margin-right:  16px;
+	margin-left:   16px;
+	@media (min-width: 1024px) {
+		margin-right: 32px;
+		margin-left:  32px;
+		@media (min-width: 1792px) {
+			margin-right: 64px;
+			margin-left:  64px;
+		}
+	}
+}
+article > :is(ol, ul) {
+	margin-right:  16px;
+	margin-left:   16px;
+	@media (min-width: 1024px) {
+		margin-right: 32px + 16px;
+		margin-left:  32px + 16px;
+		@media (min-width: 1792px) {
+			margin-right: 64px + 16px;
+			margin-left:  64px + 16px;
+		}
+	}
+}
+// <article><pre><code><div>
+//                     ^^^^^
+article > pre > code > div {
+	margin-right:  16px;
+	margin-left:   16px;
+	@media (min-width: 1024px) {
+		margin-right: 32px;
+		margin-left:  32px;
+		@media (min-width: 1792px) {
+			margin-right: 64px;
+			margin-left:  64px;
+		}
+	}
+}

@@ -1,7 +1,7 @@
-import * as typography from "../components/export-star-typography"
 import * as feather from "../data/react-feather"
 
 import { Anchor, AnchorProps } from "../components/anchor"
+import { TypographyCaps } from "../components/bindings"
 import { DynamicIcon, Icon } from "../components/dynamic-icon"
 import { twitterShareUrl } from "../constants"
 
@@ -11,7 +11,7 @@ function ExternalLink({ icon, children, ...props }: { icon: Icon } & AnchorProps
 			<div className="flex h-32 w-32 items-center justify-center">
 				<DynamicIcon className="h-16 w-16 fill-current text-white" icon={icon} />
 			</div>
-			<typography.Caps className="text-white">{children}</typography.Caps>
+			<TypographyCaps className="text-white">{children}</TypographyCaps>
 		</Anchor>
 	)
 }

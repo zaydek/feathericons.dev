@@ -13,12 +13,12 @@
 }
 
 :root, ::before, ::after {
-	font-family: var(--sans);
+	font-family: var(--font-sans);
 }
 pre, code {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
-	font-family: var(--code);
+	font-family: var(--font-code);
 	tab-size: 2;
 }
 pre code { white-space: pre; }

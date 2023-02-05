@@ -1,5 +1,3 @@
-import * as typography from "../components/export-star-typography"
-
 import { PropsWithChildren } from "react"
 import { Aside } from "./aside"
 import { ExternalLinks } from "./external-links"
@@ -22,16 +20,15 @@ export function Layout({ children }: PropsWithChildren) {
 								<Nav />
 							</div>
 						</div>
-						{/* Hmm... */}
-						{/* Defer to docs.scss for y-axis spacing */}
-						<typography.docs.Article
-							className="docs pb-96
+						{/* <article
+							className="pb-96
 								    [&_>_:not(pre)]:px-16
 								 sm:[&_>_:not(pre)]:px-32
 								2xl:[&_>_:not(pre)]:px-64"
 						>
 							{children}
-						</typography.docs.Article>
+						</article> */}
+						{children}
 					</main>
 					{/* RHS */}
 					{/* Use box-content here because of border-l */}

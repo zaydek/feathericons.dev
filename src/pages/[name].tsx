@@ -1,4 +1,4 @@
-import * as prose from "../components/export-star-docs"
+import * as docs from "../components/docs"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
@@ -41,10 +41,10 @@ export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => 
 
 export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
-		<>
-			<prose.H1>
-				Icon: <prose.Code>{convertToSpaceCase(name)}</prose.Code>
-			</prose.H1>
+		<article>
+			<docs.Heading>
+				Icon: <docs.Code>{convertToSpaceCase(name)}</docs.Code>
+			</docs.Heading>
 			<figure className="grid grid-cols-3 grid-rows-2 gap-24">
 				<DemoLogin name={name} />
 				<DemoGoldenAspectRatio name={name} />
@@ -55,9 +55,9 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			{/* FIXME: Transition doesn't interpolate here -- why? */}
 			{manifest[name].more.length > 0 && (
 				<>
-					<prose.H1>
-						Recommended for Use With <prose.Code>{convertToSpaceCase(name)}</prose.Code>
-					</prose.H1>
+					<docs.Subheading>
+						Recommended for Use With <docs.Code>{convertToSpaceCase(name)}</docs.Code>
+					</docs.Subheading>
 					<div className="flex flex-wrap">
 						{manifest[name].more.map(name => (
 							<Recommended key={name} name={name} />
@@ -66,31 +66,31 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				</>
 			)}
 			<hr />
-			<prose.H1>Get Started With Feather</prose.H1>
+			<docs.Heading>Get Started With Feather</docs.Heading>
 			<p>
-				<prose.TextAnchor href="https://github.com/feathericons/feather">Feather</prose.TextAnchor> Feather is a collection of simply beautiful open source
-				icons. Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
+				<docs.TextAnchor href="https://github.com/feathericons/feather">Feather</docs.TextAnchor> Feather is a collection of simply beautiful open source icons.
+				Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
 			</p>
 			<p>
-				Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as <prose.Svg />, <prose.Reactjs />, or{" "}
-				<prose.TypeScript>TypeScript React.js</prose.TypeScript>, or use one of the{" "}
-				<prose.TextAnchor href="https://github.com/feathericons/feather#related-projects">related projects</prose.TextAnchor>.
+				Feather can easily be used in most environments. Use this website to quickly search and copy icon codes as <docs.Svg />, <docs.Reactjs />, or{" "}
+				<docs.TypeScript>TypeScript React.js</docs.TypeScript>, or use one of the{" "}
+				<docs.TextAnchor href="https://github.com/feathericons/feather#related-projects">related projects</docs.TextAnchor>.
 			</p>
-			<prose.H2>Using {name} With a CDN</prose.H2>
+			<docs.Subheading>Using {name} With a CDN</docs.Subheading>
 			<p>To get started with Feather using a CDN (content delivery network), simply:</p>
-			<prose.Ol>
-				<prose.Li>
-					Add <prose.Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</prose.Code> to the <prose.Code>{`<head>`}</prose.Code> tag
-				</prose.Li>
-				<prose.Li>
-					Add <prose.Code>{`<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>`}</prose.Code>
-				</prose.Li>
-				<prose.Li>
-					Invoke <prose.Code>{`feather.replace()`}</prose.Code>
-				</prose.Li>
-			</prose.Ol>
+			<docs.Ordered>
+				<docs.Item>
+					Add <docs.Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</docs.Code> to the <docs.Code>{`<head>`}</docs.Code> tag
+				</docs.Item>
+				<docs.Item>
+					Add <docs.Code>{`<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>`}</docs.Code>
+				</docs.Item>
+				<docs.Item>
+					Invoke <docs.Code>{`feather.replace()`}</docs.Code>
+				</docs.Item>
+			</docs.Ordered>
 			<p>For example:</p>
-			<prose.Pre lang="html">
+			<docs.CodeSnippet lang="html">
 				{detab(`
 					<!DOCTYPE html>
 					<html lang="en">
@@ -105,28 +105,28 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						</body>
 					</html>
 				`)}
-			</prose.Pre>
+			</docs.CodeSnippet>
 			<p>
-				Click here to get started with a <prose.CodePen href="https://codepen.io/pen?template=WOJZdM" /> template.
+				Click here to get started with a <docs.CodePen href="https://codepen.io/pen?template=WOJZdM" /> template.
 			</p>
-			<prose.H2>
-				Using {name} With <prose.Reactjs />
-			</prose.H2>
+			<docs.Subheading>
+				Using {name} With <docs.Reactjs />
+			</docs.Subheading>
 			<p>To get started with Feather using React, simply:</p>
-			<prose.Ol>
-				<prose.Li>
-					Add <prose.Code>{`npm i react-feather`}</prose.Code> or <prose.Code>{`yarn add react-feather`}</prose.Code> or{" "}
-					<prose.Code>{`pnpm i react-feather`}</prose.Code>
-				</prose.Li>
-				<prose.Li>
-					Add <prose.Code>{`import { ${name} } from "react-feather"`}</prose.Code>
-				</prose.Li>
-				<prose.Li>
-					Invoke <prose.Code>{`<${name} />`}</prose.Code>
-				</prose.Li>
-			</prose.Ol>
+			<docs.Ordered>
+				<docs.Item>
+					Add <docs.Code>{`npm i react-feather`}</docs.Code> or <docs.Code>{`yarn add react-feather`}</docs.Code> or{" "}
+					<docs.Code>{`pnpm i react-feather`}</docs.Code>
+				</docs.Item>
+				<docs.Item>
+					Add <docs.Code>{`import { ${name} } from "react-feather"`}</docs.Code>
+				</docs.Item>
+				<docs.Item>
+					Invoke <docs.Code>{`<${name} />`}</docs.Code>
+				</docs.Item>
+			</docs.Ordered>
 			<p>For example:</p>
-			<prose.Pre lang="tsx">
+			<docs.CodeSnippet lang="tsx">
 				{detab(`
 					import { ${name} } from "react-feather"
 
@@ -141,26 +141,26 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 						)
 					}
 				`)}
-			</prose.Pre>
+			</docs.CodeSnippet>
 			<p>
-				Click here to get started with a <prose.TailwindCss href="https://play.tailwindcss.com/tq0UHdwbAr" /> template.
+				Click here to get started with a <docs.TailwindCss href="https://play.tailwindcss.com/tq0UHdwbAr" /> template.
 			</p>
 			<hr />
 			<p>
 				<small>
-					Icons by <prose.Twitter href="https://twitter.com/colebemis">@colebemis</prose.Twitter>. App by{" "}
-					<prose.Twitter href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</prose.Twitter>
+					Icons by <docs.Twitter href="https://twitter.com/colebemis">@colebemis</docs.Twitter>. App by{" "}
+					<docs.Twitter href="https://twitter.com/username_ZAYDEK">@username_ZAYDEK</docs.Twitter>
 					.
 					<br />
-					Feather is licensed as <prose.TextAnchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</prose.TextAnchor>. Icons
+					Feather is licensed as <docs.TextAnchor href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT open source</docs.TextAnchor>. Icons
 					may be used for personal and commercial use without attribution.
 					<br />
-					Built using <prose.TypeScript />, <prose.Reactjs />, <prose.Nextjs />, <prose.TailwindCss />, and <prose.Sass />.
+					Built using <docs.TypeScript />, <docs.Reactjs />, <docs.Nextjs />, <docs.TailwindCss />, and <docs.Sass />.
 					<br />
 					<br />
-					Looking for the original Feather website? <prose.TextAnchor href="https://feathericons.com">Click here</prose.TextAnchor>.
+					Looking for the original Feather website? <docs.TextAnchor href="https://feathericons.com">Click here</docs.TextAnchor>.
 				</small>
 			</p>
-		</>
+		</article>
 	)
 }

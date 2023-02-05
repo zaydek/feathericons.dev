@@ -72,10 +72,6 @@ const defaultTheme = {
 	minWidth:     { ...sizes, ...percents },
 	spacing:      { ...sizes, ...percents },
 	zIndex:       zIndexes,
-	fontFamily: {
-		sans: "var(--sans)",
-		code: "var(--code)",
-	},
 }
 
 module.exports = defaultTheme
