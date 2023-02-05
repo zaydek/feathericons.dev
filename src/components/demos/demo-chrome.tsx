@@ -93,13 +93,13 @@ function NavBar() {
 					icon={feather.ArrowLeft}
 					onClick={e => window.history.back()}
 					// prettier-ignore: aria-label
-					aria-label="Go back"
+					aria-label="Navigate back"
 				/>
 				<NavBarButton
 					icon={feather.ArrowRight}
 					onClick={e => window.history.forward()}
 					// prettier-ignore: aria-label
-					aria-label="Go next"
+					aria-label="Navigate next"
 				/>
 				<NavBarButton
 					icon={feather.RotateCw}
