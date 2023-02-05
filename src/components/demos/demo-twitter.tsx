@@ -3,12 +3,12 @@ import * as feather from "../../data/react-feather"
 import { twitterShareUrl } from "../../constants"
 import { manifest } from "../../data/manifest"
 import { Anchor } from "../anchor"
-import { IconSvg } from "../dynamic-icon"
+import { Svg } from "../dynamic-icon"
 import { TwitterIcon } from "../icon-config"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
-function ShareButton({ icon }: { icon: IconSvg }) {
+function ShareButton({ icon }: { icon: Svg }) {
 	return (
 		<Anchor
 			className="group/button flex items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)]

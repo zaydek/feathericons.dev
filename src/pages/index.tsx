@@ -53,6 +53,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 						setSelectedName(name)
 						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 					}}
+					// prettier-ignore
 					aria-label={`Icon ${name}`}
 				>
 					<ResizableIcon id={name} className="h-32 w-32 text-gray-900" icon={feather[name]} />
@@ -81,6 +82,7 @@ const MemoGridItem = memo(function GridItem({
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
 				}}
+				// prettier-ignore
 				aria-label={`Icon ${name}`}
 			>
 				<ResizableIcon id={name} className="h-32 w-32 text-gray-900" icon={feather[name]} />

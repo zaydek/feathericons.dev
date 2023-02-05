@@ -3,7 +3,7 @@ import * as feather from "../../data/react-feather"
 import { PropsWithChildren, useState } from "react"
 import { manifest } from "../../data/manifest"
 import { cx } from "../../lib/cx"
-import { IconSvg } from "../dynamic-icon"
+import { Svg } from "../dynamic-icon"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
@@ -11,7 +11,7 @@ function IconContainer({ children }: PropsWithChildren) {
 	return <div className="flex h-[var(--field-h)] w-[var(--field-h)] items-center justify-center">{children}</div>
 }
 
-function UsernameField({ icon }: { icon: IconSvg }) {
+function UsernameField({ icon }: { icon: Svg }) {
 	return (
 		<div className="flex items-center">
 			{/* LHS */}
@@ -25,7 +25,7 @@ function UsernameField({ icon }: { icon: IconSvg }) {
 	)
 }
 
-function PasswordField({ icon }: { icon: IconSvg }) {
+function PasswordField({ icon }: { icon: Svg }) {
 	const [show, setShow] = useState(false)
 
 	return (

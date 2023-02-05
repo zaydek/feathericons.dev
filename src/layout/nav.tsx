@@ -1,11 +1,11 @@
 import * as feather from "../data/react-feather"
 
 import { useContext, useRef } from "react"
-import { DynamicIcon, IconSvg } from "../components/dynamic-icon"
+import { DynamicIcon, Svg } from "../components/dynamic-icon"
 import { Hoverable } from "../components/hoverable"
 import { SearchContext } from "../providers/state"
 
-function NavButton({ icon, ...props }: { icon: IconSvg } & JSX.IntrinsicElements["button"]) {
+function NavButton({ icon, ...props }: { icon: Svg } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
 			<DynamicIcon className="h-24 w-24 text-gray-700" icon={icon} />
@@ -26,6 +26,7 @@ export function Nav() {
 					onClick={e => {
 						ref.current?.focus()
 					}}
+					// prettier-ignore
 					aria-label="Search Feather"
 				/>
 			</Hoverable>
@@ -37,6 +38,7 @@ export function Nav() {
 					onClick={e => {
 						setCompactMode(curr => !curr)
 					}}
+					// prettier-ignore
 					aria-label="Toggle compact mode"
 				/>
 			</Hoverable>

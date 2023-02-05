@@ -9,7 +9,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Anchor } from "../components/anchor"
-import { DynamicIcon, IconSvg } from "../components/dynamic-icon"
+import { DynamicIcon, Svg } from "../components/dynamic-icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
@@ -152,6 +152,7 @@ function FormatButton() {
 			setShow={setShow}
 			currentId={formatAs}
 			setCurrentId={setFormatAs}
+			// prettier-ignore
 			aria-label="Click to format as SVG, JSX, or TSX"
 		>
 			<div className="relative flex flex-col">
@@ -195,24 +196,24 @@ function FormatButton() {
 					>
 						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white shadow-[var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem
-								// prettier-ignore
 								id="svg"
+								// prettier-ignore
 								aria-label="Format as SVG"
 							>
 								<DynamicIcon className="h-16 w-16" icon={SvgIcon} />
 								<typography.Caps className="text-gray-700">SVG</typography.Caps>
 							</DropDownItem>
 							<DropDownItem
-								// prettier-ignore
 								id="jsx"
+								// prettier-ignore
 								aria-label="Format as React"
 							>
 								<DynamicIcon className="h-16 w-16" icon={ReactjsIcon} />
 								<typography.Caps className="text-gray-700">REACT</typography.Caps>
 							</DropDownItem>
 							<DropDownItem
-								// prettier-ignore
 								id="tsx"
+								// prettier-ignore
 								aria-label="Format as TypeScript React"
 							>
 								<DynamicIcon className="h-16 w-16" icon={TypeScriptIcon} />
@@ -226,7 +227,7 @@ function FormatButton() {
 	)
 }
 
-function ActionButton({ icon, onClick, children, ...props }: { icon: IconSvg } & JSX.IntrinsicElements["button"]) {
+function ActionButton({ icon, onClick, children, ...props }: { icon: Svg } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
 	const [click, setClick] = useState(false)
 
 	useEffect(() => {
@@ -262,7 +263,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: IconSvg } &
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function DecorativeIcon({ icon }: { icon: IconSvg }) {
+function DecorativeIcon({ icon }: { icon: Svg }) {
 	return (
 		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
 			<DynamicIcon className="h-12 w-12 text-gray-900" icon={icon} />
@@ -317,7 +318,7 @@ function CompoundSlider({
 	resetHandler,
 	children,
 	...props
-}: { icon: IconSvg } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+}: { icon: Svg } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -340,6 +341,7 @@ function CompoundSlider({
 					<button
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}
+						// prettier-ignore
 						aria-label={`Reset ${props.value < sizeMin ? "stroke-width" : "size"}`}
 					>
 						<DynamicIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
@@ -404,17 +406,17 @@ export function Aside() {
 					<FormatButton />
 					<div className="grid grid-cols-2 gap-8">
 						<ActionButton
-							// prettier-ignore
 							icon={feather.Clipboard}
 							onClick={handleClickCopy}
+							// prettier-ignore
 							aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
 						>
 							COPY
 						</ActionButton>
 						<ActionButton
-							// prettier-ignore
 							icon={feather.Download}
 							onClick={handleClickDownload}
+							// prettier-ignore
 							aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}
 						>
 							DOWNLOAD
@@ -432,6 +434,7 @@ export function Aside() {
 					value={size}
 					setValue={setSize}
 					resetHandler={e => setSize(sizeInitial)}
+					// prettier-ignore
 					aria-label="Preview size"
 				>
 					PREVIEW SIZE
@@ -447,6 +450,7 @@ export function Aside() {
 					value={strokeWidth}
 					setValue={setStrokeWidth}
 					resetHandler={e => setStrokeWidth(strokeWidthInitial)}
+					// prettier-ignore
 					aria-label="Preview stroke-width"
 				>
 					PREVIEW STROKE WIDTH

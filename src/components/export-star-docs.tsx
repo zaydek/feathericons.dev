@@ -6,7 +6,7 @@ import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
 import { ShikiContext } from "../providers/shiki"
 import { Anchor, AnchorProps, SoftAnchorProps } from "./anchor"
-import { DynamicIcon, IconSvg } from "./dynamic-icon"
+import { DynamicIcon, Svg } from "./dynamic-icon"
 import {
 	CodePenIcon,
 	CodePenUrl,
@@ -62,6 +62,7 @@ export function H1({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/header:opacity-100"
+				// prettier-ignore
 				aria-label={`Link to header ${content}`}
 			>
 				<DynamicIcon className="h-[1em] w-[1em] text-[#1570fb]" icon={feather.Link2} />
@@ -86,6 +87,7 @@ export function H2({ children, ...props }: JSX.IntrinsicElements["h1"]) {
 				href={href}
 				className="absolute top-0 right-100% bottom-0 flex items-center px-8 opacity-0
 					group-hover/header:opacity-100"
+				// prettier-ignore
 				aria-label={`Link to subheader ${content}`}
 			>
 				<DynamicIcon className="h-[1em] w-[1em] text-[#1570fb]" icon={feather.Link2} />
@@ -171,7 +173,7 @@ export function TextAnchor({ children, ...props }: AnchorProps) {
 	)
 }
 
-export function TextIconAnchor({ icon, children, ...props }: { icon: IconSvg } & AnchorProps) {
+export function TextIconAnchor({ icon, children, ...props }: { icon: Svg } & AnchorProps) {
 	return (
 		<Anchor className="inline-flex items-center" {...props}>
 			<span className="underline decoration-gray-400">{children}</span>&nbsp;
