@@ -1,11 +1,12 @@
 import * as feather from "../data/react-feather"
 
 import { useContext, useRef } from "react"
+import { Accessible } from "../aria/a11y"
 import { DynamicIcon, Icon } from "../components/dynamic-icon"
 import { Hoverable } from "../components/hoverable"
 import { SearchContext } from "../providers/state"
 
-function NavButton({ icon, ...props }: { icon: Icon } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function NavButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
 			<DynamicIcon className="h-24 w-24 text-gray-700" icon={icon} />
@@ -30,8 +31,17 @@ export function Nav() {
 					aria-label="Search Feather"
 				/>
 			</Hoverable>
-			{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-			<input ref={ref} className="grow focus-visible:outline-none" type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} autoFocus />
+			<input
+				ref={ref}
+				className="grow focus-visible:outline-none"
+				type="text"
+				value={search}
+				onChange={e => setSearch(e.currentTarget.value)}
+				// eslint-disable-next-line jsx-a11y/no-autofocus
+				autoFocus
+				// prettier-ignore: aria-label
+				aria-label="Search Feather"
+			/>
 			<Hoverable pos="end" content="NO-NAME MODE">
 				<NavButton
 					icon={feather.MoreHorizontal}
@@ -39,7 +49,7 @@ export function Nav() {
 						setCompactMode(curr => !curr)
 					}}
 					// prettier-ignore: aria-label
-					aria-label="Toggle compact mode"
+					aria-label="Toggle no-name mode"
 				/>
 			</Hoverable>
 		</div>

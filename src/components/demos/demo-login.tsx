@@ -41,6 +41,8 @@ function PasswordField({ icon }: { icon: Icon }) {
 					className="group/button flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3
 						hover:bg-gray-100 hover:active:bg-gray-200"
 					onClick={e => setShow(curr => !curr)}
+					// prettier-ignore: aria-label
+					aria-label="Toggle show password"
 				>
 					<ResizableIcon
 						className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-300

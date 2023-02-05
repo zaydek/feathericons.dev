@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from "next/router"
 import { MouseEventHandler, PropsWithChildren, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
+import { Accessible } from "../aria/a11y"
 import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
@@ -227,7 +228,7 @@ function FormatButton() {
 	)
 }
 
-function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
 	const [click, setClick] = useState(false)
 
 	useEffect(() => {
@@ -379,7 +380,12 @@ export function Aside() {
 	return (
 		<div className="flex flex-col gap-[var(--aside-gap)] py-[var(--aside-inset)]">
 			<Section>
-				<CompoundCheckbox checked={viewSource} setChecked={setViewSource}>
+				<CompoundCheckbox
+					checked={viewSource}
+					setChecked={setViewSource}
+					// prettier-ignore: aria-label
+					aria-label="View source"
+				>
 					VIEW SOURCE
 				</CompoundCheckbox>
 			</Section>

@@ -1,12 +1,13 @@
 import * as feather from "../../data/react-feather"
 
 import { useState } from "react"
+import { Accessible } from "../../aria/a11y"
 import { manifest } from "../../data/manifest"
 import { Icon } from "../dynamic-icon"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
-function InteractiveButton({ icon, ...props }: { icon: Icon } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function InteractiveButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
 	const [active, setActive] = useState(false)
 
 	return (
@@ -27,11 +28,11 @@ function InteractiveButton({ icon, ...props }: { icon: Icon } & JSX.IntrinsicEle
 	)
 }
 
-function NonInteractiveButton({ icon, ...props }: { icon: Icon } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function DecorativeButton({ icon, ...props }: { icon: Icon }) {
 	return (
-		<button className="flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3" {...props}>
+		<div className="flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3" {...props}>
 			<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-700" icon={icon} />
-		</button>
+		</div>
 	)
 }
 
@@ -51,7 +52,7 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 					<InteractiveButton
 						icon={feather.ThumbsUp}
 						// prettier-ignore: aria-label
-						aria-label="Thumbs up button"
+						aria-label="Like"
 					/>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
@@ -59,16 +60,12 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 					<InteractiveButton
 						icon={feather.ThumbsDown}
 						// prettier-ignore: aria-label
-						aria-label="Thumbs down button"
+						aria-label="Dislike"
 					/>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
 				</div>
 				<div className="flex items-center gap-8">
-					<NonInteractiveButton
-						icon={feather[name]}
-						// prettier-ignore: aria-label
-						aria-label="Abstract button"
-					/>
+					<DecorativeButton icon={feather[name]} />
 				</div>
 			</div>
 		</Container>

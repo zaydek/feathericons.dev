@@ -1,6 +1,7 @@
 import * as feather from "../../data/react-feather"
 
 import { useState } from "react"
+import { Accessible } from "../../aria/a11y"
 import { manifest } from "../../data/manifest"
 import { Icon } from "../dynamic-icon"
 import { ResizableIcon } from "../resizable-icon"
@@ -56,7 +57,7 @@ function TabBar({ name }: { name: keyof typeof manifest }) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function NavBarButton({ icon, ...props }: { icon: Icon } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function NavBarButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
 	return (
 		<button
 			className="flex h-[var(--hover-icon-size-2)] w-[var(--hover-icon-size-2)] items-center justify-center rounded-1e3
@@ -69,7 +70,7 @@ function NavBarButton({ icon, ...props }: { icon: Icon } & JSX.IntrinsicElements
 	)
 }
 
-function UrlBarButton({ icon, ...props }: { icon: Icon } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function UrlBarButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
 	return (
 		<button
 			className="flex h-[var(--hover-icon-size-2)] w-[var(--hover-icon-size-2)] items-center justify-center rounded-1e3
@@ -92,26 +93,26 @@ function NavBar() {
 					icon={feather.ArrowLeft}
 					onClick={e => window.history.back()}
 					// prettier-ignore: aria-label
-					aria-label="Back button"
+					aria-label="Go back"
 				/>
 				<NavBarButton
 					icon={feather.ArrowRight}
 					onClick={e => window.history.forward()}
 					// prettier-ignore: aria-label
-					aria-label="Forward button"
+					aria-label="Go next"
 				/>
 				<NavBarButton
 					icon={feather.RotateCw}
 					onClick={e => window.location.reload()}
 					// prettier-ignore: aria-label
-					aria-label="Reload button"
+					aria-label="Refresh"
 				/>
 			</div>
 			<div className="flex grow items-center justify-between rounded-1e3 bg-gray-100">
 				<UrlBarButton
 					icon={feather.Info}
 					// prettier-ignore: aria-label
-					aria-label="Info button"
+					aria-label="Info"
 				/>
 				<div className="grow">
 					<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
@@ -121,7 +122,7 @@ function NavBar() {
 					style={{ fill: bookmark ? "current" : undefined }}
 					onClick={e => setBookmark(curr => !curr)}
 					// prettier-ignore: aria-label
-					aria-label="Bookmark button"
+					aria-label="Bookmark"
 				/>
 			</div>
 		</div>

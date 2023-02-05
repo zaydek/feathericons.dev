@@ -1,5 +1,6 @@
-import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useMemo, useRef } from "react"
+import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react"
 import { clamp } from "../lib/precision"
+import { Accessible } from "./a11y"
 
 // prettier-ignore
 export type AriaSliderProps = {
@@ -10,7 +11,7 @@ export type AriaSliderProps = {
 	step:     number
 	value:    number
 	setValue: Dispatch<SetStateAction<number>>
-} & HTMLAttributes<HTMLDivElement>
+} & Accessible<JSX.IntrinsicElements["div"]>
 
 // https://stackoverflow.com/a/21696585
 function someHidden(...args: HTMLElement[]) {

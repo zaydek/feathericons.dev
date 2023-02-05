@@ -1,10 +1,11 @@
-import { Dispatch, HTMLAttributes, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from "react"
+import { Accessible } from "./a11y"
 
 // prettier-ignore
 export type AriaCheckboxProps = {
 	checked:    boolean
 	setChecked: Dispatch<SetStateAction<boolean>>
-} & HTMLAttributes<HTMLDivElement>
+} & Accessible<JSX.IntrinsicElements["div"]>
 
 export function AriaCheckbox({ checked, setChecked, children, ...props }: AriaCheckboxProps) {
 	return (

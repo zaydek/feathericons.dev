@@ -2,12 +2,13 @@
 
 import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { queue } from "../lib/queue"
+import { Accessible } from "./a11y"
 import { getStringFromChildren, useCancelable } from "./utils"
 
 type Item<T extends string> = { id: T; str: string }
 
 // prettier-ignore
-type GenericContextData<T extends string = any> = {
+type GenericSimpleDropDownContext<T extends string = any> = {
 	show:         boolean
 	setShow:      Dispatch<SetStateAction<boolean>>
 	currentId:    T
@@ -20,7 +21,7 @@ type GenericContextData<T extends string = any> = {
 	increment:    (by?: number | undefined) => void
 }
 
-const _SimpleDropDownContext = createContext<GenericContextData | null>(null)
+const _SimpleDropDownContext = createContext<GenericSimpleDropDownContext | null>(null)
 
 // prettier-ignore
 export type AriaSimpleDropDownProps<T extends string> = {
@@ -28,7 +29,7 @@ export type AriaSimpleDropDownProps<T extends string> = {
 	setShow:      Dispatch<SetStateAction<boolean>>
 	currentId:    T
 	setCurrentId: Dispatch<SetStateAction<T>>
-} & JSX.IntrinsicElements["div"]
+} & Accessible<JSX.IntrinsicElements["div"]>
 
 export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps<T>) {
 	const ref = useRef<HTMLDivElement | null>(null)
@@ -161,7 +162,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 	)
 }
 
-export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Omit<JSX.IntrinsicElements["div"], "id">
+export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Accessible<Omit<JSX.IntrinsicElements["div"], "id">>
 
 export function AriaSimpleDropDownItem<T extends string>({ id, children, ...props }: AriaSimpleDropDownItemProps<T>) {
 	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!

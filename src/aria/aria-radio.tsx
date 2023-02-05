@@ -1,18 +1,20 @@
-import { createContext, Dispatch, HTMLAttributes, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { Accessible } from "./a11y"
 
 // prettier-ignore
-const InternalRadiogroupContext = createContext<{
-	groupValue:    string
-	setGroupValue: Dispatch<SetStateAction<string>>
-	values:        string[]
-	setValues:     Dispatch<SetStateAction<string[]>>
-} | null>(null)
+const InternalRadiogroupContext =
+	createContext<{
+		groupValue:    string
+		setGroupValue: Dispatch<SetStateAction<string>>
+		values:        string[]
+		setValues:     Dispatch<SetStateAction<string[]>>
+	} | null>(null)
 
 // prettier-ignore
 export type AriaRadiogroupProps = {
 	groupValue:    string
 	setGroupValue: Dispatch<SetStateAction<string>>
-} & HTMLAttributes<HTMLDivElement>
+} & Accessible<JSX.IntrinsicElements["div"]>
 
 export function AriaRadiogroup({ groupValue, setGroupValue, children, ...props }: AriaRadiogroupProps) {
 	const [values, setValues] = useState<string[]>([])
@@ -44,7 +46,7 @@ export function AriaRadiogroup({ groupValue, setGroupValue, children, ...props }
 
 export type AriaRadioProps = {
 	value: string
-} & HTMLAttributes<HTMLDivElement>
+} & Accessible<JSX.IntrinsicElements["div"]>
 
 export function AriaRadio({ value, children, ...props }: AriaRadioProps) {
 	const { groupValue, setGroupValue, values, setValues } = useContext(InternalRadiogroupContext)!
