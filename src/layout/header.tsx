@@ -79,7 +79,7 @@ function SponsorSlot() {
 
 export function Header() {
 	return (
-		<header className="flex justify-center py-64 px-16 pt-128 sm:py-128" data-background-hero>
+		<header className="flex justify-center py-96 px-16" data-background-hero>
 			<div className="flex w-100% max-w-[var(--header-w)] flex-col justify-evenly gap-64 sm:items-center xl:flex-row">
 				{/* LHS */}
 				<div className="flex flex-col items-center gap-32">

@@ -43,7 +43,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
 		<article className="pb-64">
 			<docs.Heading>
-				Icon: <docs.Code>{convertToSpaceCase(name)}</docs.Code>
+				Ideas Using the <docs.Code>{convertToSpaceCase(name)}</docs.Code> Icon
 			</docs.Heading>
 			<figure className="grid grid-cols-3 grid-rows-2 gap-24">
 				<DemoLogin name={name} />
@@ -76,7 +76,9 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<docs.TextAnchor href="https://github.com/feathericons/feather#related-projects">related projects</docs.TextAnchor>.
 			</p>
 			{/* <hr /> */}
-			<docs.Subheading>Using {name} With a CDN</docs.Subheading>
+			<docs.Subheading>
+				Using <docs.Code>{convertToSpaceCase(name)}</docs.Code> With a CDN
+			</docs.Subheading>
 			<p>To get started with Feather using a CDN (content delivery network), simply:</p>
 			<docs.Ordered>
 				<docs.Item>
@@ -111,7 +113,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			</p>
 			{/* <hr /> */}
 			<docs.Subheading>
-				Using {name} With <docs.Reactjs />
+				Using <docs.Code>{convertToSpaceCase(name)}</docs.Code> With <docs.Reactjs />
 			</docs.Subheading>
 			<p>To get started with Feather using React, simply:</p>
 			<docs.Ordered>
@@ -161,6 +163,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					Looking for the original Feather website? <docs.TextAnchor href="https://feathericons.com">Click here</docs.TextAnchor>.
 				</small>
 			</p>
+			{/* <hr /> */}
 		</article>
 	)
 }

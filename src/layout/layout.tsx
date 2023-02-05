@@ -1,6 +1,5 @@
 import { PropsWithChildren } from "react"
 import { Aside } from "./aside"
-import { ExternalLinks } from "./external-links"
 import { Header } from "./header"
 import { Masks } from "./masks"
 import { Nav } from "./nav"
@@ -9,7 +8,7 @@ import { PageTransition } from "./page-transition"
 export function Layout({ children }: PropsWithChildren) {
 	return (
 		<>
-			<ExternalLinks />
+			{/* <ExternalLinks /> */}
 			<Header />
 			<Masks />
 			<div className="flex justify-center 2xl:pb-[calc(var(--mask-inset)_*_2)]">
