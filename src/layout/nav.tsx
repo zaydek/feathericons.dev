@@ -1,11 +1,11 @@
 import * as feather from "../data/react-feather"
 
 import { useContext, useRef } from "react"
-import { DynamicIcon, Svg } from "../components/dynamic-icon"
+import { DynamicIcon, SvgComponent } from "../components/dynamic-icon"
 import { Hoverable } from "../components/hoverable"
 import { SearchContext } from "../providers/state"
 
-function NavButton({ icon, ...props }: { icon: Svg } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function NavButton({ icon, ...props }: { icon: SvgComponent } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
 			<DynamicIcon className="h-24 w-24 text-gray-700" icon={icon} />

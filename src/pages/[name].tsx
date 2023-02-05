@@ -6,7 +6,7 @@ import { DemoChrome } from "../components/demos/demo-chrome"
 import { DemoGoldenAspectRatio } from "../components/demos/demo-golden-aspect-ratio"
 import { DemoLogin } from "../components/demos/demo-login"
 import { DemoTwitter } from "../components/demos/demo-twitter"
-import { Demo4, DemoSocialMedia, Recommended } from "../components/docs-demos"
+import { DemoSocialMedia, Recommended } from "../components/docs-demos"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
@@ -48,7 +48,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<DemoLogin name={name} />
 				<DemoGoldenAspectRatio name={name} />
 				<DemoChrome name={name} />
-				<Demo4 name={name} />
+				{/* <Demo4 name={name} /> */}
 				<DemoSocialMedia name={name} />
 				<DemoTwitter name={name} />
 			</figure>

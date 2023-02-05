@@ -1,7 +1,7 @@
 import * as feather from "../data/react-feather"
 
 import { Anchor, AnchorProps } from "../components/anchor"
-import { DynamicIcon, Svg } from "../components/dynamic-icon"
+import { DynamicIcon, SvgComponent } from "../components/dynamic-icon"
 import { version } from "../data/manifest"
 import { iota } from "../lib/iota"
 
@@ -31,7 +31,7 @@ function HeadingSubheading() {
 	)
 }
 
-function CallToActionAnchor({ primary = undefined, icon, children, ...props }: { primary?: true; icon: Svg } & AnchorProps) {
+function CallToActionAnchor({ primary = undefined, icon, children, ...props }: { primary?: true; icon: SvgComponent } & AnchorProps) {
 	return (
 		<Anchor
 			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff3] sm:aspect-[3] sm:rounded-1e3

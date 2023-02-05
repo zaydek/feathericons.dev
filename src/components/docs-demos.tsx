@@ -27,10 +27,6 @@ function Container({ children, ...props }: JSX.IntrinsicElements["div"]) {
 	)
 }
 
-export function Demo4({ name }: { name: keyof typeof manifest }) {
-	return <Container>{/* ... */}</Container>
-}
-
 export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 	const [fill1, setFill1] = useState(true)
 	const [fill2, setFill2] = useState(false)

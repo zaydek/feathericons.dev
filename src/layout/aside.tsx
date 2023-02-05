@@ -9,7 +9,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Anchor } from "../components/anchor"
-import { DynamicIcon, Svg } from "../components/dynamic-icon"
+import { DynamicIcon, SvgComponent } from "../components/dynamic-icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
@@ -227,7 +227,7 @@ function FormatButton() {
 	)
 }
 
-function ActionButton({ icon, onClick, children, ...props }: { icon: Svg } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function ActionButton({ icon, onClick, children, ...props }: { icon: SvgComponent } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
 	const [click, setClick] = useState(false)
 
 	useEffect(() => {
@@ -263,7 +263,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: Svg } & JSX
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function DecorativeIcon({ icon }: { icon: Svg }) {
+function DecorativeIcon({ icon }: { icon: SvgComponent }) {
 	return (
 		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
 			<DynamicIcon className="h-12 w-12 text-gray-900" icon={icon} />
@@ -318,7 +318,7 @@ function CompoundSlider({
 	resetHandler,
 	children,
 	...props
-}: { icon: Svg } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+}: { icon: SvgComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
