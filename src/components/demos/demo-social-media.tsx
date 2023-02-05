@@ -20,7 +20,7 @@ function InteractiveButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.I
 			{...props}
 		>
 			<ResizableIcon
-				className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-700
+				className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800
 					[[data-state-active]_&]:fill-current"
 				icon={icon}
 			/>
@@ -31,7 +31,7 @@ function InteractiveButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.I
 function DecorativeButton({ icon, ...props }: { icon: Icon }) {
 	return (
 		<div className="flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3" {...props}>
-			<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-700" icon={icon} />
+			<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" icon={icon} />
 		</div>
 	)
 }

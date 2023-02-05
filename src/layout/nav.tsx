@@ -9,7 +9,7 @@ import { SearchContext } from "../providers/state"
 function NavButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
-			<DynamicIcon className="h-24 w-24 text-gray-700" icon={icon} />
+			<DynamicIcon className="h-24 w-24 text-gray-800" icon={icon} />
 		</button>
 	)
 }

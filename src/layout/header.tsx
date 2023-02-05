@@ -41,10 +41,10 @@ function CallToActionAnchor({ primary = undefined, icon, children, ...props }: {
 		>
 			<div className="flex h-100% items-center justify-center">
 				<div className="-ml-[calc((48px_-_24px)_/_2)] flex h-48 w-48 items-center justify-center">
-					<DynamicIcon className="h-24 w-24 text-white [[data-primary]_&]:text-gray-900" icon={icon} />
+					<DynamicIcon className="h-24 w-24 text-white [[data-primary]_&]:text-gray-800" icon={icon} />
 				</div>
 				{/* {children} */}
-				<div className="aspect-[8] h-6 rounded-1e3 bg-white [[data-primary]_&]:bg-gray-900"></div>
+				<div className="aspect-[8] h-6 rounded-1e3 bg-white [[data-primary]_&]:bg-gray-800"></div>
 			</div>
 		</Anchor>
 	)

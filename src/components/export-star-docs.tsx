@@ -30,7 +30,7 @@ import {
 
 //// export function Article({ children, ...props }: JSX.IntrinsicElements["div"]) {
 //// 	return (
-//// 		<typography.docs.Article className="docs text-gray-900" {...props}>
+//// 		<typography.docs.Article className="docs text-gray-800" {...props}>
 //// 			{children}
 //// 		</typography.docs.Article>
 //// 	)
@@ -177,7 +177,7 @@ export function TextIconAnchor({ icon, children, ...props }: { icon: Icon } & An
 	return (
 		<Anchor className="inline-flex items-center" {...props}>
 			<span className="underline decoration-gray-400">{children}</span>&nbsp;
-			<DynamicIcon className="h-[1em] w-[1em] text-gray-700" icon={icon} />
+			<DynamicIcon className="h-[1em] w-[1em] text-gray-800" icon={icon} />
 		</Anchor>
 	)
 }

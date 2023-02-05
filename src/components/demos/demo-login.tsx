@@ -16,7 +16,7 @@ function UsernameField({ icon }: { icon: Icon }) {
 		<div className="flex items-center">
 			{/* LHS */}
 			<IconContainer>
-				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-700" icon={icon} />
+				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" icon={icon} />
 			</IconContainer>
 			<div className="grow">
 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
@@ -31,7 +31,7 @@ function PasswordField({ icon }: { icon: Icon }) {
 	return (
 		<div className="flex items-center">
 			<IconContainer>
-				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-700" icon={icon} />
+				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" icon={icon} />
 			</IconContainer>
 			<div className="grow">
 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
@@ -46,7 +46,7 @@ function PasswordField({ icon }: { icon: Icon }) {
 				>
 					<ResizableIcon
 						className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-300
-							group-hover/button:text-gray-700"
+							group-hover/button:text-gray-800"
 						icon={show ? feather.Eye : feather.EyeOff}
 					/>
 				</button>

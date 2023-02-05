@@ -20,7 +20,7 @@ function ShareButton({ icon }: { icon: Icon }) {
 			{/* Icon */}
 			<div className="flex h-[var(--button-h)] w-[var(--button-h)] items-center justify-center">
 				{/* Use !important here because of TwitterIcon */}
-				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-700 group-hover/button:group-active/button:!text-white" icon={icon} />
+				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800 group-hover/button:group-active/button:!text-white" icon={icon} />
 			</div>
 			{/* Text */}
 			<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
