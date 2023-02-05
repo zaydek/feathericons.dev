@@ -5,8 +5,9 @@ import { ParsedUrlQuery } from "querystring"
 import { DemoChrome } from "../components/demos/demo-chrome"
 import { DemoGoldenAspectRatio } from "../components/demos/demo-golden-aspect-ratio"
 import { DemoLogin } from "../components/demos/demo-login"
+import { DemoSocialMedia } from "../components/demos/demo-social-media"
 import { DemoTwitter } from "../components/demos/demo-twitter"
-import { DemoSocialMedia, Recommended } from "../components/docs-demos"
+import { Recommended } from "../components/demos/recommended"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
@@ -48,7 +49,6 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<DemoLogin name={name} />
 				<DemoGoldenAspectRatio name={name} />
 				<DemoChrome name={name} />
-				{/* <Demo4 name={name} /> */}
 				<DemoSocialMedia name={name} />
 				<DemoTwitter name={name} />
 			</figure>
@@ -56,7 +56,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			{manifest[name].more.length > 0 && (
 				<>
 					<prose.H1>
-						Recommended Icons for <prose.Code>{convertToSpaceCase(name)}</prose.Code>
+						Recommended for Use With <prose.Code>{convertToSpaceCase(name)}</prose.Code>
 					</prose.H1>
 					<div className="flex flex-wrap">
 						{manifest[name].more.map(name => (

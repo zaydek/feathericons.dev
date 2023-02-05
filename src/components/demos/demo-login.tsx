@@ -3,7 +3,7 @@ import * as feather from "../../data/react-feather"
 import { PropsWithChildren, useState } from "react"
 import { manifest } from "../../data/manifest"
 import { cx } from "../../lib/cx"
-import { SvgComponent } from "../dynamic-icon"
+import { Icon } from "../dynamic-icon"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
@@ -11,7 +11,7 @@ function IconContainer({ children }: PropsWithChildren) {
 	return <div className="flex h-[var(--field-h)] w-[var(--field-h)] items-center justify-center">{children}</div>
 }
 
-function UsernameField({ icon }: { icon: SvgComponent }) {
+function UsernameField({ icon }: { icon: Icon }) {
 	return (
 		<div className="flex items-center">
 			{/* LHS */}
@@ -25,19 +25,17 @@ function UsernameField({ icon }: { icon: SvgComponent }) {
 	)
 }
 
-function PasswordField({ icon }: { icon: SvgComponent }) {
+function PasswordField({ icon }: { icon: Icon }) {
 	const [show, setShow] = useState(false)
 
 	return (
 		<div className="flex items-center">
-			{/* LHS */}
 			<IconContainer>
 				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-700" icon={icon} />
 			</IconContainer>
 			<div className="grow">
 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 			</div>
-			{/* RHS */}
 			<IconContainer>
 				<button
 					className="group/button flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3
@@ -62,7 +60,7 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 				// prettier-ignore
 				{
 					"--field-h":         "48px",
-					"--field-w":         "240px",
+					"--field-w":         "calc(var(--field-h) * 5)",
 					"--icon-size":       "20px",
 					"--hover-icon-size": "30px", // E.g. 1.5x
 				} as any

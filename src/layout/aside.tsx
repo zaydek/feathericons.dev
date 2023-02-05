@@ -9,7 +9,7 @@ import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Anchor } from "../components/anchor"
-import { DynamicIcon, SvgComponent } from "../components/dynamic-icon"
+import { DynamicIcon, Icon } from "../components/dynamic-icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
@@ -105,7 +105,7 @@ function Preview() {
 				<PageTransition>
 					{/* Use <div> to preserve <AdjustableIcon> */}
 					<div>
-						<ResizableIcon className="h-64 w-64 text-black" icon={feather[name]} />
+						<ResizableIcon className="h-64 w-64 text-gray-800" icon={feather[name]} />
 					</div>
 				</PageTransition>
 			</div>
@@ -152,7 +152,7 @@ function FormatButton() {
 			setShow={setShow}
 			currentId={formatAs}
 			setCurrentId={setFormatAs}
-			// prettier-ignore
+			// prettier-ignore: aria-label
 			aria-label="Click to format as SVG, JSX, or TSX"
 		>
 			<div className="relative flex flex-col">
@@ -197,7 +197,7 @@ function FormatButton() {
 						<div ref={ref} className="flex flex-col overflow-hidden rounded-12 bg-white shadow-[var(--shadow-6),_var(--base-shadow-6)]">
 							<DropDownItem
 								id="svg"
-								// prettier-ignore
+								// prettier-ignore: aria-label
 								aria-label="Format as SVG"
 							>
 								<DynamicIcon className="h-16 w-16" icon={SvgIcon} />
@@ -205,7 +205,7 @@ function FormatButton() {
 							</DropDownItem>
 							<DropDownItem
 								id="jsx"
-								// prettier-ignore
+								// prettier-ignore: aria-label
 								aria-label="Format as React"
 							>
 								<DynamicIcon className="h-16 w-16" icon={ReactjsIcon} />
@@ -213,7 +213,7 @@ function FormatButton() {
 							</DropDownItem>
 							<DropDownItem
 								id="tsx"
-								// prettier-ignore
+								// prettier-ignore: aria-label
 								aria-label="Format as TypeScript React"
 							>
 								<DynamicIcon className="h-16 w-16" icon={TypeScriptIcon} />
@@ -227,7 +227,7 @@ function FormatButton() {
 	)
 }
 
-function ActionButton({ icon, onClick, children, ...props }: { icon: SvgComponent } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
+function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & JSX.IntrinsicElements["button"] & { "aria-label": string }) {
 	const [click, setClick] = useState(false)
 
 	useEffect(() => {
@@ -263,7 +263,7 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: SvgComponen
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function DecorativeIcon({ icon }: { icon: SvgComponent }) {
+function DecorativeIcon({ icon }: { icon: Icon }) {
 	return (
 		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
 			<DynamicIcon className="h-12 w-12 text-gray-900" icon={icon} />
@@ -298,27 +298,12 @@ function CompoundCheckbox({ children, ...props }: AriaCheckboxProps) {
 const sliderLinearGradientFromHell =
 	"bg-[linear-gradient(to_right,_var(--theme-color)_calc(var(--progress,_0.5)_*_100%),_var(--hairline-color)_calc(var(--progress,_0.5)_*_100%))]"
 
-//// function useMedia(query: string, initialValue: boolean) {
-//// 	const [state, setState] = useState(initialValue)
-////
-//// 	useEffect(() => {
-//// 		const media = window.matchMedia(query)
-//// 		function handleChange(e: MediaQueryListEvent) {
-//// 			setState(e.matches)
-//// 		}
-//// 		media.addEventListener("change", handleChange)
-//// 		return () => media.removeEventListener("change", handleChange)
-//// 	}, [query])
-////
-//// 	return state
-//// }
-
 function CompoundSlider({
 	icon,
 	resetHandler,
 	children,
 	...props
-}: { icon: SvgComponent } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+}: { icon: Icon } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -341,7 +326,7 @@ function CompoundSlider({
 					<button
 						className="flex h-24 w-24 items-center justify-center"
 						onClick={resetHandler}
-						// prettier-ignore
+						// prettier-ignore: aria-label
 						aria-label={`Reset ${props.value < sizeMin ? "stroke-width" : "size"}`}
 					>
 						<DynamicIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-700" icon={feather.RotateCcw} />
@@ -350,7 +335,7 @@ function CompoundSlider({
 			</div>
 			<div className="px-12">
 				{/* Use cursor-pointer select-none because of synthetic aria component */}
-				<AriaSlider className="cursor-grab select-none active:cursor-grabbing" track={track} thumb={thumb} {...props}>
+				<AriaSlider className="cursor-grab select-none hover:active:cursor-grabbing" track={track} thumb={thumb} {...props}>
 					<div ref={setTrack} className="flex h-24 flex-col justify-center">
 						<div className={`flex h-6 items-center rounded-1e3 ${sliderLinearGradientFromHell}`}>
 							<div ref={setThumb} className="h-[var(--form-size)] w-[var(--form-size)] rounded-1e3 bg-white shadow-[var(--shadow-6)]"></div>
@@ -408,7 +393,7 @@ export function Aside() {
 						<ActionButton
 							icon={feather.Clipboard}
 							onClick={handleClickCopy}
-							// prettier-ignore
+							// prettier-ignore: aria-label
 							aria-label={`Copy ${selectedName} as ${formatAs.toUpperCase()} to the clipboard`}
 						>
 							COPY
@@ -416,7 +401,7 @@ export function Aside() {
 						<ActionButton
 							icon={feather.Download}
 							onClick={handleClickDownload}
-							// prettier-ignore
+							// prettier-ignore: aria-label
 							aria-label={`Download ${selectedName} as ${formatAs.toUpperCase()}`}
 						>
 							DOWNLOAD
@@ -434,7 +419,7 @@ export function Aside() {
 					value={size}
 					setValue={setSize}
 					resetHandler={e => setSize(sizeInitial)}
-					// prettier-ignore
+					// prettier-ignore: aria-label
 					aria-label="Preview size"
 				>
 					PREVIEW SIZE
@@ -450,7 +435,7 @@ export function Aside() {
 					value={strokeWidth}
 					setValue={setStrokeWidth}
 					resetHandler={e => setStrokeWidth(strokeWidthInitial)}
-					// prettier-ignore
+					// prettier-ignore: aria-label
 					aria-label="Preview stroke-width"
 				>
 					PREVIEW STROKE WIDTH

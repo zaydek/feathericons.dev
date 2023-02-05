@@ -2,10 +2,10 @@ import * as typography from "../components/export-star-typography"
 import * as feather from "../data/react-feather"
 
 import { Anchor, AnchorProps } from "../components/anchor"
-import { DynamicIcon, SvgComponent } from "../components/dynamic-icon"
+import { DynamicIcon, Icon } from "../components/dynamic-icon"
 import { twitterShareUrl } from "../constants"
 
-function ExternalLink({ icon, children, ...props }: { icon: SvgComponent } & AnchorProps) {
+function ExternalLink({ icon, children, ...props }: { icon: Icon } & AnchorProps) {
 	return (
 		<Anchor className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" {...props}>
 			<div className="flex h-32 w-32 items-center justify-center">
