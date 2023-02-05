@@ -37,12 +37,16 @@ export const tsxPlaceholder = detab(`
 	}
 `)
 
-export const sizeInitial        = 32               // prettier-ignore
+export const sizeInitial        = 32 // prettier-ignore
 export const sizeMin            = sizeInitial - 16 // prettier-ignore
 export const sizeMax            = sizeInitial + 16 // prettier-ignore
-export const sizeStep           = 1                // prettier-ignore
+export const sizeStep           = 1 // prettier-ignore
 
-export const strokeWidthInitial = 2                        // prettier-ignore
+export const strokeWidthInitial = 2 // prettier-ignore
 export const strokeWidthMin     = strokeWidthInitial - 1.5 // prettier-ignore
 export const strokeWidthMax     = strokeWidthInitial + 1.5 // prettier-ignore
-export const strokeWidthStep    = 0.125                    // prettier-ignore
+export const strokeWidthStep    = 0.125 // prettier-ignore
+
+export const twitterShareUrl = `http://twitter.com/intent/tweet?text=${encodeURI(
+	`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
+)}`

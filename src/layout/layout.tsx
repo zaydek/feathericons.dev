@@ -1,47 +1,17 @@
 import * as typography from "../components/export-star-typography"
-import * as feather from "../data/react-feather"
 
 import { PropsWithChildren } from "react"
-import { Anchor, AnchorProps } from "../components/anchor"
-import { Icon, SVG } from "../components/icon"
 import { Aside } from "./aside"
+import { ExternalLinks } from "./external-links"
 import { Header } from "./header"
 import { Masks } from "./masks"
 import { Nav } from "./nav"
 
-function ExtLink({ icon, children, ...props }: { icon: SVG } & AnchorProps) {
-	return (
-		<Anchor className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" {...props}>
-			<div className="flex h-32 w-32 items-center justify-center">
-				<Icon className="h-16 w-16 fill-current text-white" icon={icon} />
-			</div>
-			<typography.Caps className="text-white">{children}</typography.Caps>
-		</Anchor>
-	)
-}
-
-function ExtLinks() {
-	return (
-		<>
-			<div className="absolute top-16 left-16">
-				<ExtLink href="https://github.com/feathericons/feather" icon={feather.Star}>
-					STAR ON GITHUB
-				</ExtLink>
-			</div>
-			<div className="absolute top-16 right-16">
-				<ExtLink href="TODO" icon={feather.Twitter}>
-					SHARE ON TWITTER
-				</ExtLink>
-			</div>
-		</>
-	)
-}
-
 export function Layout({ children }: PropsWithChildren) {
 	return (
 		<>
+			<ExternalLinks />
 			<Header />
-			<ExtLinks />
 			<Masks />
 			<div className="flex justify-center 2xl:pb-[calc(var(--mask-inset)_*_2)]">
 				<div className="flex w-100% max-w-[var(--app-w)] bg-white shadow-[var(--shadow-2)] 2xl:rounded-[var(--app-rounding)]">
