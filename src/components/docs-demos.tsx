@@ -9,7 +9,6 @@ import { convertToKebabCase, convertToSpaceCase } from "../lib/cases"
 import { SliderContext } from "../providers/state"
 import { Anchor } from "./anchor"
 import { Hoverable } from "./hoverable"
-import { TwitterIcon } from "./icon-config"
 import { ResizableIcon } from "./resizable-icon"
 
 export function Recommended({ name }: { name: keyof typeof manifest }) {
@@ -27,67 +26,6 @@ function Container({ children, ...props }: JSX.IntrinsicElements["div"]) {
 		<div className="h-256 overflow-clip rounded-24 bg-gray-50 shadow-[var(--hairline-shadow)]" {...props}>
 			{children}
 		</div>
-	)
-}
-
-export function DemoLogin({ name }: { name: keyof typeof manifest }) {
-	const [eye, setEye] = useState(false)
-
-	return (
-		<Container
-			style={
-				// prettier-ignore
-				{
-					"--size":       "20px",
-					"--hover-size": "30px", // E.g. 1.5x
-				} as any
-			}
-		>
-			<div className="flex h-100% items-center justify-center">
-				{/* Username */}
-				<div className="w-[calc(96px_*_2.5)] rounded-[calc(96px_*_0.1875)] bg-white shadow-[var(--shadow-2)]">
-					<div className="flex justify-between">
-						{/* LHS */}
-						<div className="flex items-center">
-							<div className="flex h-48 w-48 items-center justify-center">
-								<ResizableIcon className="h-[var(--size)] w-[var(--size)] text-gray-700" icon={feather[name]} />
-							</div>
-							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
-						</div>
-						{/* No RHS here */}
-					</div>
-					{/* Password */}
-					<hr />
-					<div className="flex justify-between">
-						{/* LHS */}
-						<div className="flex items-center">
-							<div className="flex h-48 w-48 items-center justify-center">
-								<ResizableIcon
-									className="h-[var(--size)] w-[var(--size)] text-gray-300
-										[&_>_rect]:fill-current"
-									icon={feather.Lock}
-								/>
-							</div>
-							<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
-						</div>
-						{/* RHS */}
-						<div className="flex h-48 w-48 items-center justify-center">
-							<button
-								className="group/button flex h-[var(--hover-size)] w-[var(--hover-size)] items-center justify-center rounded-1e3
-									hover:bg-gray-100 hover:active:bg-gray-200"
-								onClick={e => setEye(curr => !curr)}
-							>
-								<ResizableIcon
-									className="h-[var(--size)] w-[var(--size)] text-gray-300
-										group-hover/button:text-gray-700"
-									icon={eye ? feather.Eye : feather.EyeOff}
-								/>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</Container>
 	)
 }
 
@@ -308,41 +246,6 @@ export function DemoSocialMedia({ name }: { name: keyof typeof manifest }) {
 						/>
 					</div>
 					<div className="aspect-[4] h-6 rounded-1e3 bg-gray-300"></div>
-				</div>
-			</div>
-		</Container>
-	)
-}
-
-export function DemoButton({ name }: { name: keyof typeof manifest }) {
-	return (
-		<Container>
-			<div className="flex h-100% items-center justify-center">
-				<div className="flex flex-col gap-8">
-					<Anchor
-						className="group/button flex items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
-						href={`http://twitter.com/intent/tweet?text=${encodeURI(
-							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
-						)}`}
-					>
-						<div className="flex h-48 w-48 items-center justify-center">
-							{/* Use !text-* here because icons may have colors */}
-							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:!text-white" icon={feather[name]} />
-						</div>
-						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
-					</Anchor>
-					<Anchor
-						className="group/button flex items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
-						href={`http://twitter.com/intent/tweet?text=${encodeURI(
-							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
-						)}`}
-					>
-						<div className="flex h-48 w-48 items-center justify-center">
-							{/* Use !text-* here because icons may have colors */}
-							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:!text-white" icon={TwitterIcon} />
-						</div>
-						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
-					</Anchor>
 				</div>
 			</div>
 		</Container>

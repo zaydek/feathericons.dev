@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 export type AnchorProps = Omit<JSX.IntrinsicElements["a"], "rel" | "target"> & Required<Pick<JSX.IntrinsicElements["a"], "href">>
+
 export type SoftAnchorProps = Omit<JSX.IntrinsicElements["a"], "rel" | "target"> & Pick<JSX.IntrinsicElements["a"], "href">
 
 export function Anchor({ href, children, ...props }: AnchorProps) {

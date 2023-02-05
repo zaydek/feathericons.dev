@@ -2,7 +2,9 @@ import * as prose from "../components/export-star-docs"
 
 import { GetStaticPaths, GetStaticProps } from "next"
 import { ParsedUrlQuery } from "querystring"
-import { Demo4, DemoButton, DemoChrome, DemoGoldenAspectRatio, DemoLogin, DemoSocialMedia, Recommended } from "../components/docs-demos"
+import { DemoLogin } from "../components/demos/demo-login"
+import { DemoTwitter } from "../components/demos/demo-twitter"
+import { Demo4, DemoChrome, DemoGoldenAspectRatio, DemoSocialMedia, Recommended } from "../components/docs-demos"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
@@ -46,7 +48,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<DemoChrome name={name} />
 				<Demo4 name={name} />
 				<DemoSocialMedia name={name} />
-				<DemoButton name={name} />
+				<DemoTwitter name={name} />
 			</figure>
 			{/* FIXME: Transition doesn't interpolate here -- why? */}
 			{manifest[name].more.length > 0 && (
