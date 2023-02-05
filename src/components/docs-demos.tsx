@@ -7,7 +7,7 @@ import { sizeInitial } from "../constants"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase, convertToSpaceCase } from "../lib/cases"
 import { SliderContext } from "../providers/state"
-import { A } from "./anchor"
+import { Anchor } from "./anchor"
 import { Hoverable } from "./hoverable"
 import { TwitterIcon } from "./icon-config"
 import { ResizableIcon } from "./resizable-icon"
@@ -15,13 +15,13 @@ import { ResizableIcon } from "./resizable-icon"
 export function Recommended({ name }: { name: keyof typeof manifest }) {
 	return (
 		<Hoverable pos="center" content={convertToSpaceCase(name).toUpperCase()}>
-			<A
+			<Anchor
 				//// className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center rounded-24 bg-gray-50 shadow-[var(--hairline-shadow)]"
 				className="flex h-[var(--grid-size)] w-[var(--grid-size)] items-center justify-center"
 				href={`/${convertToKebabCase(name).toLowerCase()}`}
 			>
 				<ResizableIcon className="h-32 w-32 text-gray-800" icon={feather[name]} />
-			</A>
+			</Anchor>
 		</Hoverable>
 	)
 }
@@ -286,32 +286,30 @@ export function DemoButton({ name }: { name: keyof typeof manifest }) {
 		<DemoSlot>
 			<div className="flex h-100% items-center justify-center">
 				<div className="flex flex-col gap-8">
-					<a
+					<Anchor
 						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 						href={`http://twitter.com/intent/tweet?text=${encodeURI(
 							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
 						)}`}
-						rel="noopener noreferrer"
 					>
 						<div className="flex h-48 w-48 items-center justify-center">
 							{/* Use !text-* here because icons may have colors */}
 							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:!text-white" icon={feather[name]} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
-					</a>
-					<a
+					</Anchor>
+					<Anchor
 						className="group/button flex cursor-pointer items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)] hover:bg-gray-100 hover:active:bg-[var(--theme-color)] hover:active:shadow-[var(--inset-shadow-2)]"
 						href={`http://twitter.com/intent/tweet?text=${encodeURI(
 							`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`
 						)}`}
-						rel="noopener noreferrer"
 					>
 						<div className="flex h-48 w-48 items-center justify-center">
 							{/* Use !text-* here because icons may have colors */}
 							<ResizableIcon className="h-20 w-20 text-gray-700 group-hover/button:group-active/button:!text-white" icon={TwitterIcon} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>
-					</a>
+					</Anchor>
 				</div>
 			</div>
 		</DemoSlot>

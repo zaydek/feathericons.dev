@@ -1,27 +1,9 @@
 import * as feather from "../data/react-feather"
 
+import { Anchor, AnchorProps } from "../components/anchor"
 import { Icon, SVG } from "../components/icon"
 import { version } from "../data/manifest"
 import { iota } from "../lib/iota"
-
-function NavLink({ pos, icon, children, ...props }: { pos: "tl" | "tr"; icon: SVG } & JSX.IntrinsicElements["a"]) {
-	return (
-		<div
-			className="absolute
-				[&[data-pos=tl]]:top-16 [&[data-pos=tl]]:left-16
-				[&[data-pos=tr]]:top-16 [&[data-pos=tr]]:right-16"
-			data-pos={pos}
-		>
-			<a className="flex h-32 items-center rounded-1e3 bg-black/25 pr-16" rel="noopener noreferrer" {...props}>
-				<div className="flex h-32 w-32 items-center justify-center">
-					<Icon className="h-16 w-16 text-white" icon={icon} />
-				</div>
-				{/* {children} */}
-				<div className="h-6 w-96 rounded-1e3 bg-white"></div>
-			</a>
-		</div>
-	)
-}
 
 function Logo() {
 	return (
@@ -49,12 +31,11 @@ function HeadingSubheading() {
 	)
 }
 
-function CtaAnchor({ primary = undefined, icon, children, ...props }: { primary?: true; icon: SVG } & JSX.IntrinsicElements["a"]) {
+function CallToActionAnchor({ primary = undefined, icon, children, ...props }: { primary?: true; icon: SVG } & AnchorProps) {
 	return (
-		<a
+		<Anchor
 			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-[calc(64px_*_0.375)] bg-[#fff3] sm:aspect-[3] sm:rounded-1e3
 				[&[data-primary]]:bg-white"
-			rel="noopener noreferrer"
 			data-primary={primary}
 			{...props}
 		>
@@ -65,7 +46,7 @@ function CtaAnchor({ primary = undefined, icon, children, ...props }: { primary?
 				{/* {children} */}
 				<div className="aspect-[8] h-6 rounded-1e3 bg-white [[data-primary]_&]:bg-gray-900"></div>
 			</div>
-		</a>
+		</Anchor>
 	)
 }
 
@@ -99,8 +80,6 @@ function SponsorSlot() {
 export function Header() {
 	return (
 		<header className="flex justify-center py-64 px-16 pt-96 sm:py-96" data-background-hero>
-			<NavLink pos="tl" icon={feather.Star} />
-			<NavLink pos="tr" icon={feather.Star} />
 			<div className="flex w-100% max-w-[var(--header-w)] flex-col justify-evenly gap-64 sm:items-center xl:flex-row">
 				{/* LHS */}
 				<div className="flex flex-col items-center gap-32">
@@ -109,20 +88,20 @@ export function Header() {
 					{/* Use items-center ... self-stretch to conditionally center y-axis */}
 					<div className="flex flex-col items-center gap-16 self-stretch sm:flex-row sm:self-start">
 						{/* prettier-ignore */}
-						<CtaAnchor
+						<CallToActionAnchor
 							href="https://github.com/feathericons/feather"
 							primary
 							icon={feather.Github}
 						>
 							{/* ... */}
-						</CtaAnchor>
+						</CallToActionAnchor>
 						{/* prettier-ignore */}
-						<CtaAnchor
+						<CallToActionAnchor
 							download={`feather@${version}.zip`} href="/feather.zip"
 							icon={feather.Download}
 						>
 							{/* ... */}
-						</CtaAnchor>
+						</CallToActionAnchor>
 					</div>
 				</div>
 				{/* RHS */}

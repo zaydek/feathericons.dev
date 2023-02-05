@@ -3,11 +3,12 @@ import * as feather from "../data/react-feather"
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from "next/router"
-import { MouseEventHandler, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { MouseEventHandler, PropsWithChildren, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { IThemedToken } from "shiki-es"
 import { AriaCheckbox, AriaCheckboxProps } from "../aria/aria-checkbox"
 import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps } from "../aria/aria-simple-dropdown"
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
+import { Anchor } from "../components/anchor"
 import { Icon, SVG } from "../components/icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
@@ -20,15 +21,15 @@ import { ShikiContext } from "../providers/shiki"
 import { SelectedContext, SliderContext } from "../providers/state"
 import { PageTransition } from "./page-transition"
 
-function CommentAnchor({ formatAs, children, ...props }: { formatAs: FormatAs } & JSX.IntrinsicElements["a"]) {
+function TransformAnchor({ formatAs, children, ...props }: PropsWithChildren<{ formatAs: FormatAs }>) {
 	if (formatAs === "svg") {
 		const href = (children as string).slice("<!-- ".length, -1 * " -->".length)
 		return (
 			<>
 				{"<!-- "}
-				<a className="underline" rel="noopener noreferrer" {...props}>
+				<Anchor className="underline" href={href} {...props}>
 					{href}
-				</a>{" "}
+				</Anchor>{" "}
 				✨ {"--> "}
 			</>
 		)
@@ -37,9 +38,9 @@ function CommentAnchor({ formatAs, children, ...props }: { formatAs: FormatAs } 
 		return (
 			<>
 				{"// "}
-				<a className="underline" rel="noopener noreferrer" {...props}>
+				<Anchor className="underline" href={href} {...props}>
 					{href}
-				</a>{" "}
+				</Anchor>{" "}
 				✨{" "}
 			</>
 		)
@@ -79,7 +80,7 @@ function Preview() {
 				{tokens === null
 					? code.split("\n").map((ys, y) => (
 							<div key={y} className="px-24">
-								{ys.length > 0 ? y === 0 ? <CommentAnchor formatAs={formatAs}>{ys}</CommentAnchor> : ys : <br />}
+								{ys.length > 0 ? y === 0 ? <TransformAnchor formatAs={formatAs}>{ys}</TransformAnchor> : ys : <br />}
 							</div>
 					  ))
 					: tokens.map((ys, y) => (
@@ -87,7 +88,7 @@ function Preview() {
 								{ys.length > 0 ? (
 									ys.map(({ color, content }, x) => (
 										<span key={x} style={{ color }}>
-											{y === 0 ? <CommentAnchor formatAs={formatAs}>{content}</CommentAnchor> : content}
+											{y === 0 ? <TransformAnchor formatAs={formatAs}>{content}</TransformAnchor> : content}
 										</span>
 									))
 								) : (

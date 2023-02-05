@@ -20,7 +20,7 @@ export function Caps<T extends keyof JSX.IntrinsicElements>({ className, childre
 			tag="div"
 			className="whitespace-pre
 				font-sans text-[11px] font-[500] slashed-zero tabular-nums
-				leading-[normal] tracking-[0.05em]"
+				leading-[normal] tracking-[0.075em]"
 			appendClassName={className}
 			{...props}
 		>
