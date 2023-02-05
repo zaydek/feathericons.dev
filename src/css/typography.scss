@@ -55,7 +55,7 @@ article > * + * {
 	margin-top:    16px;
 }
 article > :is(h1, h2):not(:is(:first-child, :last-child)) {
-	margin-top:    32px;
+	margin-top:    64px;
 	margin-bottom: 16px;
 }
 //// article > :is(figure, pre, hr):not(:is(:first-child, :last-child)) {

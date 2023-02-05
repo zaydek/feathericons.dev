@@ -11,16 +11,16 @@
 	--icon-scale:        1;
 	--icon-stroke-width: 2;
 
-	--mask-h:            240px;
+	--mask-h:            256px;
 	--mask-inset:        16px; // TODO: Rename to mask-1-h?
 
-	--header-w:          #{1536px - 128px};
-	--app-w:             #{1536px + 128px};
+	--header-w:          #{1536px - 256px};
+	--app-w:             #{1536px + 256px};
 	--app-rounding:      48px;
 	--aside-w:           448px;
 	--aside-inset:       32px;
 	--aside-gap:         16px;
-	--grid-size:         104px;
+	--grid-size:         96px;
 	--reduced-form-size: 32px;
 	--form-size:         36px;
 }

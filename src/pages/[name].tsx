@@ -64,8 +64,8 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					</figure>
 				</>
 			)}
-			<hr />
-			<docs.Heading>Get Started With Feather</docs.Heading>
+			{/* <hr /> */}
+			<docs.Subheading>Get Started With Feather</docs.Subheading>
 			<p>
 				<docs.TextAnchor href="https://github.com/feathericons/feather">Feather</docs.TextAnchor> Feather is a collection of simply beautiful open source icons.
 				Each icon is designed on a 24×24 grid with an emphasis on simplicity, consistency, and flexibility.
@@ -75,7 +75,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 				<docs.TypeScript>TypeScript React.js</docs.TypeScript>, or use one of the{" "}
 				<docs.TextAnchor href="https://github.com/feathericons/feather#related-projects">related projects</docs.TextAnchor>.
 			</p>
-			<hr />
+			{/* <hr /> */}
 			<docs.Subheading>Using {name} With a CDN</docs.Subheading>
 			<p>To get started with Feather using a CDN (content delivery network), simply:</p>
 			<docs.Ordered>
@@ -109,7 +109,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			<p>
 				Click here to get started with a <docs.CodePen href="https://codepen.io/pen?template=WOJZdM" /> template.
 			</p>
-			<hr />
+			{/* <hr /> */}
 			<docs.Subheading>
 				Using {name} With <docs.Reactjs />
 			</docs.Subheading>
