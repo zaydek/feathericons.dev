@@ -1,52 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
 
+/* CSS reset */
 @layer base {
-	/* CSS reset */
 	input[type="text"] {
 		width: 100%;
 	}
 }
 
-/* Base */
-:root {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow:
-		hidden  /* X-axis */
-		scroll; /* Y-axis */
-	overscroll-behavior: none;
-}
-:root:not(.dark) { color-scheme: light; }
-:root.dark       { color-scheme: dark;  }
+@layer base {
+	:root {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		overflow:
+			hidden  /* X-axis */
+			scroll; /* Y-axis */
+		overscroll-behavior: none;
+	}
+	:root:not(.dark) { color-scheme: light; }
+	:root.dark       { color-scheme: dark;  }
 
-/* Typography */
-:root, ::before, ::after {
-	font: 400 14px / 1.625
-		var(--font-sans);
-	color: theme('colors.slate.600');
-}
-/* pre code { white-space: pre; } */
-/* code     { white-space: pre-wrap; } */
-pre, code {
-	/* Disable font-smoothing for code */
-	-webkit-font-smoothing:  auto;
-	-moz-osx-font-smoothing: auto;
+	/* Typography */
+	:root, ::before, ::after {
+		font: 400 14px / 1.625
+			var(--font-sans);
+		color: theme('colors.slate.600');
+	}
+	/* pre code { white-space: pre; } */
+	/* code     { white-space: pre-wrap; } */
+	pre, code {
+		/* Disable font-smoothing for code */
+		-webkit-font-smoothing:  auto;
+		-moz-osx-font-smoothing: auto;
 
-	tab-size: 2;
-	font: 400 13px / 1.625
-		var(--font-code);
-	color: theme('colors.slate.600');
-}
+		tab-size: 2;
+		font: 400 13px / 1.625
+			var(--font-code);
+		color: theme('colors.slate.600');
+	}
 
-/* Iconography */
-svg { overflow: visible; }
+	/* Iconography */
+	svg { overflow: visible; }
+}
 
 /******************************************************************************/
+/* css-* */
 
 .css-search-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--search-grid-item-size), 1fr));
-  grid-auto-rows: var(--search-grid-item-size);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--search-grid-item-size), 1fr));
+	grid-auto-rows: var(--search-grid-item-size);
 }

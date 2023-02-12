@@ -13,7 +13,8 @@ function GrayChip({ children }: PropsWithChildren) {
 	return (
 		<div className="h-[var(--gray-chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--gray-chip-height)_/_2)]" style={grayChipVars}>
 			<div className="flex h-100% items-center">
-				<div className="text-[13px]">{children}</div>
+				{/* TODO: Use leading-[normal] here because 13px is an odd number? */}
+				<div className="text-[13px] leading-[normal]">{children}</div>
 			</div>
 		</div>
 	)
@@ -61,17 +62,13 @@ function DropDownIndicator() {
 	)
 }
 
-const genericInputVars = {
-	"--generic-input-height": "36px",
-	"--generic-input-icon-height": "24px",
-} as CSSProperties
+//// const genericInputVars = {
+//// 	"--generic-input-height": "32px",
+//// 	"--generic-input-icon-height": "24px",
+//// } as CSSProperties
 
 function GenericInput({ children }: PropsWithChildren) {
-	return (
-		<div className="flex h-[var(--generic-input-height)] items-center rounded-1e3 shadow-[0_0_0_1px_theme('colors.gray.300')]" style={genericInputVars}>
-			{children}
-		</div>
-	)
+	return <div className="flex h-[var(--generic-input-height)] items-center rounded-1e3 shadow-[0_0_0_1px_theme('colors.gray.300')]">{children}</div>
 }
 
 // State goes here
@@ -305,7 +302,7 @@ function Sidebar({ tag = "div", children }: PropsWithChildren<{ tag?: keyof JSX.
 			{createElement(
 				tag,
 				{
-					className: "flex flex-col gap-[var(--sidebar-spacing)] py-[var(--sidebar-spacing)]",
+					className: "flex flex-col gap-[var(--sidebar-spacing)]",
 					style: sidebarVars,
 				},
 				children
@@ -373,11 +370,33 @@ const searchGridVars = {
 	"--search-grid-item-text-container-height": "48px",
 } as CSSProperties
 
+// E.g. https://play.tailwindcss.com/AlKl7fvFY3
+function SearchGridItem() {
+	return (
+		// Use rounded-32 or rounded-[25%] e.g. 32px
+		<div className="group relative flex flex-col rounded-32 hover:bg-gray-100 hover:active:bg-blue-500">
+			{/* Icon */}
+			<div className="flex grow items-center justify-center">
+				{/* Use -mb-* to optically center */}
+				<div
+					className="-mb-[calc(var(--search-grid-item-text-container-height)_/_2)] h-[var(--search-grid-item-icon-size)] w-[var(--search-grid-item-icon-size)] rounded-1e3 bg-gray-700
+						group-hover:group-active:bg-white"
+				></div>
+			</div>
+			{/* Text */}
+			{/* TODO: Add truncate */}
+			<div className="flex h-[var(--search-grid-item-text-container-height)] items-center justify-center px-16">
+				<div className="truncate group-hover:group-active:text-white">Hello, world!</div>
+			</div>
+		</div>
+	)
+}
+
 function SearchGrid() {
 	return (
 		<div className="css-search-grid" style={searchGridVars}>
 			{iota(300).map(index => (
-				<div key={index}>Hello</div>
+				<SearchGridItem key={index} />
 			))}
 		</div>
 	)
@@ -386,13 +405,17 @@ function SearchGrid() {
 ////////////////////////////////////////////////////////////////////////////////
 
 const globalVars = {
-	// Sidebar
+	"--padding-y": "32px",
+	"--padding-x": "16px",
+
 	"--sidebar-1-width": "250px",
 	"--sidebar-2-width": "400px",
 
-	// Search bar
 	"--search-bar-height": "48px",
 	"--search-bar-icon-size": "16px",
+
+	"--generic-input-height": "32px",
+	"--generic-input-icon-height": "24px",
 } as CSSProperties
 
 export default function Page() {
@@ -418,8 +441,8 @@ export default function Page() {
 			</style>
 			<div className="flex" style={globalVars}>
 				{/* LHS */}
-				<aside className="w-[var(--sidebar-1-width)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
-					<div className="sticky top-0">
+				<aside className="w-[var(--sidebar-1-width)] py-[var(--padding-y)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+					<div className="sticky top-[var(--padding-y)]">
 						<Sidebar>
 							<Section>
 								<CheckboxGroupFeather checked />
@@ -433,30 +456,34 @@ export default function Page() {
 						</Sidebar>
 					</div>
 				</aside>
-				<main className="flex grow justify-center py-32 px-16">
+				<main className="flex grow justify-center py-[var(--padding-y)] px-[var(--padding-x)]">
 					{/* TODO */}
 					<div className="flex w-100% max-w-xl flex-col gap-64">
 						{/* Search bar */}
-						<div className="flex flex-col gap-16">
-							<div className="flex items-center justify-between">
-								<GrayChip>Search</GrayChip>
-								<div>Twitter</div>
+						{/* TODO: Add background-image somewhere here (preferably use css-*) */}
+						<div className="sticky top-32">
+							<div className="flex flex-col gap-16">
+								{/* Use var(--generic-input-height) here to make optically centered (see sidebars) */}
+								<div className="flex h-[var(--generic-input-height)] items-center justify-between">
+									<GrayChip>Search</GrayChip>
+									<div>Twitter TODO</div>
+								</div>
+								<SearchBar />
 							</div>
-							<SearchBar />
 						</div>
 						<SearchGrid />
 					</div>
 				</main>
 				{/* RHS */}
-				<aside className="w-[var(--sidebar-2-width)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
-					<div className="sticky top-0">
+				<aside className="w-[var(--sidebar-2-width)] py-[var(--padding-y)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+					<div className="sticky top-[var(--padding-y)]">
 						<Sidebar>
 							<Section>
 								<div className="flex items-center justify-between">
 									<GrayChip>Code</GrayChip>
 									<DropDown>TypeScript React</DropDown>
 								</div>
-								{/* <div className="mr-[calc(-1_*_var(--sidebar-spacing))]"> */}
+								{/* <div className="-mr-[var(--sidebar-spacing)]"> */}
 								<SyntaxHighlighting language="html">
 									{detab(`
 											<!-- https://feathericons.com/feather -->
