@@ -197,8 +197,9 @@ function SliderInput() {
 	return (
 		<div className="flex h-[var(--slider-thumb-size)] flex-col justify-center" style={sliderInputVars}>
 			{/* Track */}
-			<div className="h-[var(--slider-track-height)] bg-gray-300">
-				<div className="flex h-100% items-center">
+			<div className="css-slider-background-image h-[var(--slider-track-height)] rounded-1e3">
+				{/* <div className="flex h-100% items-center"> */}
+				<div className="flex h-100% items-center justify-center">
 					{/* Thumb */}
 					<div className="h-[var(--slider-thumb-size)] w-[var(--slider-thumb-size)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]"></div>
 				</div>
@@ -292,9 +293,9 @@ function CheckboxGroupPaymentServices({ checked = false }: { checked?: boolean }
 ////////////////////////////////////////////////////////////////////////////////
 // Sidebar
 
-const sidebarVars = {
-	"--sidebar-spacing": "24px",
-} as CSSProperties
+//// const sidebarVars = {
+//// 	"--sidebar-spacing": "24px",
+//// } as CSSProperties
 
 function Sidebar({ tag = "div", children }: PropsWithChildren<{ tag?: keyof JSX.IntrinsicElements }>) {
 	return (
@@ -303,7 +304,7 @@ function Sidebar({ tag = "div", children }: PropsWithChildren<{ tag?: keyof JSX.
 				tag,
 				{
 					className: "flex flex-col gap-[var(--sidebar-spacing)]",
-					style: sidebarVars,
+					/// style: sidebarVars,
 				},
 				children
 			)}
@@ -374,7 +375,7 @@ const searchGridVars = {
 function SearchGridItem() {
 	return (
 		// Use rounded-32 or rounded-[25%] e.g. 32px
-		<div className="group relative flex flex-col rounded-32 hover:bg-gray-100 hover:active:bg-blue-500">
+		<div className="group flex flex-col rounded-32 hover:bg-gray-100 hover:active:bg-blue-500">
 			{/* Icon */}
 			<div className="flex grow items-center justify-center">
 				{/* Use -mb-* to optically center */}
@@ -404,17 +405,18 @@ function SearchGrid() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// prettier-ignore
 const globalVars = {
-	"--padding-y": "32px",
-	"--padding-x": "16px",
+	"--main-spacing":    "32px",
+	"--sidebar-spacing": "24px",
 
 	"--sidebar-1-width": "250px",
 	"--sidebar-2-width": "400px",
 
-	"--search-bar-height": "48px",
+	"--search-bar-height":    "48px",
 	"--search-bar-icon-size": "16px",
 
-	"--generic-input-height": "32px",
+	"--generic-input-height":      "32px",
 	"--generic-input-icon-height": "24px",
 } as CSSProperties
 
@@ -440,9 +442,9 @@ export default function Page() {
 					`)}
 			</style>
 			<div className="flex" style={globalVars}>
-				{/* LHS */}
-				<aside className="w-[var(--sidebar-1-width)] py-[var(--padding-y)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
-					<div className="sticky top-[var(--padding-y)]">
+				{/* <aside> */}
+				<aside className="min-h-[100dvh] w-[var(--sidebar-1-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+					<div className="sticky top-[var(--main-spacing)]">
 						<Sidebar>
 							<Section>
 								<CheckboxGroupFeather checked />
@@ -456,12 +458,13 @@ export default function Page() {
 						</Sidebar>
 					</div>
 				</aside>
-				<main className="flex grow justify-center py-[var(--padding-y)] px-[var(--padding-x)]">
+				{/* <main> */}
+				<main className="flex grow justify-center px-[var(--main-spacing)]">
 					{/* TODO */}
-					<div className="flex w-100% max-w-xl flex-col gap-64">
+					<div className="flex w-100% max-w-xl flex-col gap-[var(--main-spacing)]">
 						{/* Search bar */}
-						{/* TODO: Add background-image somewhere here (preferably use css-*) */}
-						<div className="sticky top-32">
+						{/* <div className="css-search-bar-background-image sticky top-0 py-[var(--main-spacing)]"> */}
+						<div className="css-search-bar-background-image sticky top-0 p-[var(--main-spacing)]">
 							<div className="flex flex-col gap-16">
 								{/* Use var(--generic-input-height) here to make optically centered (see sidebars) */}
 								<div className="flex h-[var(--generic-input-height)] items-center justify-between">
@@ -474,9 +477,9 @@ export default function Page() {
 						<SearchGrid />
 					</div>
 				</main>
-				{/* RHS */}
-				<aside className="w-[var(--sidebar-2-width)] py-[var(--padding-y)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
-					<div className="sticky top-[var(--padding-y)]">
+				{/* <aside> */}
+				<aside className="min-h-[100dvh] w-[var(--sidebar-2-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+					<div className="sticky top-[var(--main-spacing)]">
 						<Sidebar>
 							<Section>
 								<div className="flex items-center justify-between">
@@ -486,13 +489,13 @@ export default function Page() {
 								{/* <div className="-mr-[var(--sidebar-spacing)]"> */}
 								<SyntaxHighlighting language="html">
 									{detab(`
-											<!-- https://feathericons.com/feather -->
-											<svg class="feather feather-feather" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-												<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
-												<line x1="16" x2="2" y1="8" y2="22"></line>
-												<line x1="17.5" x2="9" y1="15" y2="15"></line>
-											</svg>
-										`)}
+										<!-- https://feathericons.com/feather -->
+										<svg class="feather feather-feather" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+											<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+											<line x1="16" x2="2" y1="8" y2="22"></line>
+											<line x1="17.5" x2="9" y1="15" y2="15"></line>
+										</svg>
+									`)}
 								</SyntaxHighlighting>
 								{/* </div> */}
 								<ActionButton />

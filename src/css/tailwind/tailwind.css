@@ -3,14 +3,11 @@
 @tailwind utilities;
 @tailwind variants;
 
-/* CSS reset */
 @layer base {
-	input[type="text"] {
-		width: 100%;
-	}
-}
+	/* CSS reset */
+	input[type="text"] { width: 100%; }
 
-@layer base {
+	/* Base */
 	:root {
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
@@ -22,11 +19,15 @@
 	:root:not(.dark) { color-scheme: light; }
 	:root.dark       { color-scheme: dark;  }
 
+	hr {
+		border-color: theme('colors.gray.300');
+	}
+
 	/* Typography */
 	:root, ::before, ::after {
 		font: 400 14px / 1.625
 			var(--font-sans);
-		color: theme('colors.slate.600');
+		color: theme('colors.gray.600');
 	}
 	/* pre code { white-space: pre; } */
 	/* code     { white-space: pre-wrap; } */
@@ -38,7 +39,7 @@
 		tab-size: 2;
 		font: 400 13px / 1.625
 			var(--font-code);
-		color: theme('colors.slate.600');
+		color: theme('colors.gray.600');
 	}
 
 	/* Iconography */
@@ -48,8 +49,18 @@
 /******************************************************************************/
 /* css-* */
 
+.css-search-bar-background-image {
+	background-image:
+		linear-gradient(to bottom, white calc(var(--main-spacing) + var(--search-bar-height)), transparent),
+		linear-gradient(to bottom, white calc(var(--main-spacing) + var(--search-bar-height)), transparent);
+}
+
 .css-search-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--search-grid-item-size), 1fr));
 	grid-auto-rows: var(--search-grid-item-size);
+}
+
+.css-slider-background-image {
+	background-image: linear-gradient(to right, theme('colors.sky.400') 50%, theme('colors.gray.200') 50%);
 }
