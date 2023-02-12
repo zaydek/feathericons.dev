@@ -2,29 +2,30 @@
 //// 	outline: 1px solid hsl(200, 100%, 50%, 0.5);
 //// 	outline-offset: -0.5px;
 //// }
-
-:root {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow:
-		hidden  //                X-axis
-		scroll; // COMPAT/Window; Y-axis
-	//// scroll-behavior: smooth;
-}
-
-:root, ::before, ::after {
-	font-family: var(--font-sans);
-}
-pre, code {
-	-webkit-font-smoothing: auto;
-	-moz-osx-font-smoothing: auto;
-	font-family: var(--font-code);
-	tab-size: 2;
-}
-pre code { white-space: pre; }
-code     { white-space: pre-wrap; }
-
-:root:not(.dark) { color-scheme: light; }
-:root.dark       { color-scheme: dark;  }
-
-svg { overflow: visible; }
+////
+//// :root {
+//// 	-webkit-font-smoothing: antialiased;
+//// 	-moz-osx-font-smoothing: grayscale;
+//// 	overflow:
+//// 		hidden  //                X-axis
+//// 		scroll; // COMPAT/Window; Y-axis
+//// 	//// scroll-behavior: smooth;
+//// }
+////
+//// :root, ::before, ::after {
+//// 	font-family: var(--font-sans);
+//// }
+//// pre, code {
+//// 	-webkit-font-smoothing: auto;
+//// 	-moz-osx-font-smoothing: auto;
+//// 	font-family: var(--font-code);
+//// 	tab-size: 2;
+//// }
+//// pre code { white-space: pre; }
+//// code     { white-space: pre-wrap; }
+////
+//// :root:not(.dark) { color-scheme: light; }
+//// :root.dark       { color-scheme: dark;  }
+////
+//// svg { overflow: visible; }
+////

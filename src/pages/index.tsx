@@ -1,109 +1,415 @@
-import * as feather from "../data/react-feather"
+import { createElement, CSSProperties, PropsWithChildren, useCallback, useEffect, useState } from "react"
+import { Lang } from "shiki-es"
+import { cx } from "../lib/cx"
+import { detab } from "../lib/format"
+import { iota } from "../lib/iota"
 
-import { memo, useContext, useMemo } from "react"
-import { Anchor } from "../components/anchor"
-import { TypographySmallSans } from "../components/bindings"
-import { Hoverable } from "../components/hoverable"
-import { ResizableIcon } from "../components/resizable-icon"
-import { manifest } from "../data/manifest"
-import { convertToKebabCase } from "../lib/cases"
-import { SearchContext, SelectedContext } from "../providers/state"
+////////////////////////////////////////////////////////////////////////////////
+// Gray chip
 
-// TODO: Colors are off
-function Highlight({ indexes, children }: { indexes: readonly [number, number] | null; children: string }) {
-	if (indexes === null) {
-		return <>{children}</>
-	} else {
-		return (
-			<>
-				{children.slice(0, indexes[0])}
-				<span className="bg-opacity-60 bg-amber-200 text-amber-900">{children.slice(indexes[0], indexes[1])}</span>
-				{children.slice(indexes[1])}
-			</>
-		)
-	}
+const grayChipStyles = {
+	"--gray-chip-height": "24px",
+} as CSSProperties
+
+function GrayChip({ children }: PropsWithChildren) {
+	return (
+		<div className="h-[var(--gray-chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--gray-chip-height)_/_2)]" style={grayChipStyles}>
+			<div className="flex h-100% items-center">
+				<div className="text-[13px]">{children}</div>
+			</div>
+		</div>
+	)
 }
 
-// TODO: It's not clear these need to be memoized, maybe if we add
-// highlighting...
-const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: keyof typeof manifest }) {
-	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
+////////////////////////////////////////////////////////////////////////////////
+// Inputs
 
+const checkboxIndicatorStyles = {
+	"--checkbox-size": "var(--generic-input-icon-height)",
+	"--checkbox-check-size": "8px",
+} as CSSProperties
+
+// Visual representation of a checkbox, stateless
+function CheckboxIndicator({ checked = false }: { checked?: boolean }) {
 	return (
-		<div className="flex flex-col">
-			<Hoverable pos="center" content={convertToKebabCase(name).toUpperCase()}>
-				<button
-					className="flex h-[var(--grid-size)] items-center justify-center"
-					onClick={e => {
-						setSelectedName(name)
-						setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
-					}}
-					// prettier-ignore: aria-label
-					aria-label={`Icon ${name}`}
-				>
-					<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
-				</button>
-			</Hoverable>
+		<div
+			className={`h-[var(--checkbox-size)] w-[var(--checkbox-size)] rounded-1e3 ${
+				checked ? "bg-blue-500" : "bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]"
+			}`}
+			style={checkboxIndicatorStyles}
+		>
+			{checked && (
+				<div className="flex h-100% items-center justify-center">
+					<div className="h-[var(--checkbox-check-size)] w-[var(--checkbox-check-size)] rounded-1e3 bg-white"></div>
+				</div>
+			)}
 		</div>
 	)
-})
+}
 
-// TODO: It's not clear these need to be memoized, maybe if we add
-// highlighting...
-const MemoGridItem = memo(function GridItem({
-	name,
-	indexes,
-}: /* prettier-ignore */ {
-	name:    keyof typeof manifest
-	indexes: readonly [number, number] | null
-}) {
-	const { setSelectedName, setSelectedSvgElement } = useContext(SelectedContext)!
+const dropDownStyles = {
+	"--dropdown-size": "24px",
+	"--dropdown-arrow-size": "8px",
+} as CSSProperties
 
+// Visual representation of a dropdown, stateless
+function DropDownIndicator() {
 	return (
-		<div className="flex flex-col">
-			<button
-				className="flex h-[var(--grid-size)] items-center justify-center"
-				onClick={e => {
-					setSelectedName(name)
-					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
-				}}
-				// prettier-ignore: aria-label
-				aria-label={`Icon ${name}`}
-			>
-				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
-			</button>
-			<Anchor
-				className="group/name flex h-32 items-center justify-center truncate"
-				href={`/${convertToKebabCase(name).toLowerCase()}`}
-				onClick={e => {
-					setSelectedName(name)
-					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)
-				}}
-			>
-				<TypographySmallSans className="truncate text-gray-800 group-hover/name:underline group-hover/name:decoration-gray-400">
-					<Highlight indexes={indexes}>{name}</Highlight>
-				</TypographySmallSans>
-			</Anchor>
+		<div className="h-[var(--dropdown-size)] w-[var(--dropdown-size)]" style={dropDownStyles}>
+			<div className="flex h-100% items-center justify-center">
+				<div className="h-[var(--dropdown-arrow-size)] w-[var(--dropdown-arrow-size)] rounded-1e3 bg-gray-700"></div>
+			</div>
 		</div>
 	)
-})
+}
 
-export default function Component() {
-	const { compactMode, searchResults } = useContext(SearchContext)!
+const genericInputStyles = {
+	"--generic-input-height": "36px",
+	"--generic-input-icon-height": "24px",
+} as CSSProperties
 
-	const GridItem = useMemo(() => {
-		if (compactMode) {
-			return MemoTextlessGridItem
-		} else {
-			return MemoGridItem
+function GenericInput({ children }: PropsWithChildren) {
+	return (
+		<div className="flex h-[var(--generic-input-height)] items-center rounded-1e3 shadow-[0_0_0_1px_theme('colors.gray.300')]" style={genericInputStyles}>
+			{children}
+		</div>
+	)
+}
+
+// State goes here
+function Checkbox({ checked = false, children }: PropsWithChildren<{ checked?: boolean }>) {
+	return (
+		<GenericInput>
+			<div className="flex grow items-center justify-between">
+				{/* LHS */}
+				<div className="flex items-center">
+					<div className="flex h-[var(--generic-input-height)] w-[var(--generic-input-height)] items-center justify-center">
+						<div className="h-[var(--generic-input-icon-height)] w-[var(--generic-input-icon-height)] rounded-1e3 bg-blue-500"></div>
+					</div>
+					<div>{children}</div>
+				</div>
+				{/* RHS */}
+				<div className="flex h-[var(--generic-input-height)] w-[var(--generic-input-height)] items-center justify-center">
+					<CheckboxIndicator checked={checked} />
+				</div>
+			</div>
+		</GenericInput>
+	)
+}
+
+// State goes here
+function DropDown({ children }: PropsWithChildren) {
+	return (
+		<GenericInput>
+			<div className="flex grow items-center justify-between">
+				{/* LHS */}
+				<div className="flex items-center">
+					<div className="flex h-[var(--generic-input-height)] w-[var(--generic-input-height)] items-center justify-center">
+						<div className="h-[var(--generic-input-icon-height)] w-[var(--generic-input-icon-height)] rounded-1e3 bg-blue-500"></div>
+					</div>
+					<div>{children}</div>
+				</div>
+				{/* RHS */}
+				<div className="flex h-[var(--generic-input-height)] w-[var(--generic-input-height)] items-center justify-center">
+					<DropDownIndicator />
+				</div>
+			</div>
+		</GenericInput>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Syntax highlighting
+
+function SyntaxHighlighting({ language: _, children }: PropsWithChildren<{ language: Lang }>) {
+	const lines = (children as string).split("\n")
+	const linesCount = ("" + lines.length).length
+
+	const getLineNumberFromIndex = useCallback(
+		(index: number) => {
+			const lineNumber = index + 1
+			return ("" + lineNumber).padStart(linesCount, " ")
+		},
+		[linesCount]
+	)
+
+	return (
+		<pre className="resize-y overflow-x-scroll">
+			<code className="inline-block pr-[var(--sidebar-spacing)]">
+				{lines.map((line, index) => (
+					<div className="flex" key={index}>
+						{/* It's not worth separating the card layer from the text so merge them here */}
+						<div className="sticky left-0 select-none bg-white" style={{ width: linesCount + 2 + "ch" }}>
+							{getLineNumberFromIndex(index)}
+						</div>
+						{line}
+					</div>
+				))}
+			</code>
+		</pre>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Action button
+
+const actionButtonStyles = {
+	"--action-button-height": "36px",
+	"--action-button-icon-size": "16px",
+} as CSSProperties
+
+function ActionButton() {
+	return (
+		<div className="h-[var(--action-button-height)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]" style={actionButtonStyles}>
+			<div className="flex items-center justify-center">
+				<div>Copy</div>
+				<div className="flex h-[var(--action-button-height)] w-[var(--action-button-height)] items-center justify-center">
+					<div className="h-[var(--action-button-icon-size)] w-[var(--action-button-icon-size)] rounded-1e3 bg-gray-700"></div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Slider
+
+const sliderLabelStyles = {
+	"--slider-label-height": "32px",
+	"--slider-reset-button-size": "16px",
+} as CSSProperties
+
+function SliderLabel({ value, children }: PropsWithChildren<{ value: number }>) {
+	return (
+		<div className="flex items-center justify-between" style={sliderLabelStyles}>
+			<GrayChip>{children}</GrayChip>
+			<div className="flex items-center">
+				<code>{value < 10 ? value.toFixed(2) : `${value} PX`}</code>
+				<div className="flex h-[var(--slider-label-height)] w-[var(--slider-label-height)] items-center justify-center">
+					<div className="h-[var(--slider-reset-button-size)] w-[var(--slider-reset-button-size)] rounded-1e3 bg-gray-700"></div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+const sliderInputStyles = {
+	"--slider-track-height": "6px",
+	"--slider-thumb-size": "32px",
+} as CSSProperties
+
+function SliderInput() {
+	return (
+		<div className="flex h-[var(--slider-thumb-size)] flex-col justify-center" style={sliderInputStyles}>
+			{/* Track */}
+			<div className="h-[var(--slider-track-height)] bg-gray-300">
+				<div className="flex h-100% items-center">
+					{/* Thumb */}
+					<div className="h-[var(--slider-thumb-size)] w-[var(--slider-thumb-size)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]"></div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Checkbox group
+
+function CheckboxGroupFeather({ checked = false }: { checked?: boolean }) {
+	return (
+		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+			<Checkbox checked={checked}>Feather</Checkbox>
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
+				<div>
+					24x24px user interface icons, designed by{" "}
+					<a href="TODO">
+						@<span className="underline">colebemis</span>
+					</a>
+				</div>
+				<div>
+					For example:{" "}
+					<a href="TODO">
+						<span className="underline">arrows</span>
+					</a>
+					,{" "}
+					<a href="TODO">
+						<span className="underline">chevrons</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+function CheckboxGroupSocialMedia({ checked = false }: { checked?: boolean }) {
+	return (
+		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+			<Checkbox checked={checked}>Social media</Checkbox>
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
+				<div>
+					24x24px user interface icons, sourced from{" "}
+					<a href="TODO">
+						@<span className="underline">WolfKit</span>
+					</a>
+				</div>
+				<div>
+					For example:{" "}
+					<a href="TODO">
+						<span className="underline">twitter</span>
+					</a>
+					,{" "}
+					<a href="TODO">
+						<span className="underline">facebook</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+function CheckboxGroupPaymentServices({ checked = false }: { checked?: boolean }) {
+	return (
+		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+			<Checkbox checked={checked}>Payment services</Checkbox>
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
+				<div>
+					56x32px user interface icons, sourced from{" "}
+					<a href="TODO">
+						<span className="underline">WolfKit</span>
+					</a>
+				</div>
+				<div>
+					For example:{" "}
+					<a href="TODO">
+						<span className="underline">stripe</span>
+					</a>
+					,{" "}
+					<a href="TODO">
+						<span className="underline">visa</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Sidebar
+
+const sidebarStyles = {
+	"--sidebar-spacing": "24px",
+} as CSSProperties
+
+function Sidebar({ tag = "div", children }: PropsWithChildren<{ tag?: keyof JSX.IntrinsicElements }>) {
+	return (
+		<>
+			{createElement(
+				tag,
+				{
+					className: "flex flex-col gap-[var(--sidebar-spacing)] py-[var(--sidebar-spacing)]",
+					style: sidebarStyles,
+				},
+				children
+			)}
+		</>
+	)
+}
+
+function Section({ gutter = true, children }: PropsWithChildren<{ gutter?: boolean }>) {
+	// Use cx because of ""
+	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "px-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
+}
+
+const pageStyles = {
+	"--sidebar-1-width": "250px",
+	"--sidebar-2-width": "400px",
+} as CSSProperties
+
+export default function Page() {
+	const [showOutline, setShowOutline] = useState(false)
+
+	useEffect(() => {
+		function handleKeydown(e: KeyboardEvent) {
+			if (e.key === "`") {
+				setShowOutline(curr => !curr)
+			}
 		}
-	}, [compactMode])
+		window.addEventListener("keydown", handleKeydown, false)
+		return () => window.removeEventListener("keydown", handleKeydown, false)
+	}, [])
 
 	return (
-		<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--grid-size),_1fr))] px-16 pb-64 lg:px-32 2xl:px-48">
-			{Object.keys(searchResults).map(name => (
-				<GridItem key={name} name={name as keyof typeof manifest} indexes={searchResults[name as keyof typeof manifest]!} />
-			))}
-		</div>
+		<>
+			<style>
+				{showOutline &&
+					detab(`
+						* { outline: 1px solid hsl(0, 100%, 50%, 0.1); }
+					`)}
+			</style>
+			<div className="flex" style={pageStyles}>
+				{/* LHS */}
+				<aside className="w-[var(--sidebar-1-width)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+					<div className="sticky top-0">
+						<Sidebar>
+							<Section>
+								<CheckboxGroupFeather checked />
+							</Section>
+							<Section>
+								<CheckboxGroupSocialMedia />
+							</Section>
+							<Section>
+								<CheckboxGroupPaymentServices />
+							</Section>
+						</Sidebar>
+					</div>
+				</aside>
+				<main className="grow">
+					{iota(300).map((line, index) => (
+						<div key={index}>{line}</div>
+					))}
+				</main>
+				{/* RHS */}
+				<aside className="w-[var(--sidebar-2-width)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+					<div className="sticky top-0">
+						<Sidebar>
+							<Section>
+								<div className="flex items-center justify-between">
+									<GrayChip>Code</GrayChip>
+									<DropDown>TypeScript React</DropDown>
+								</div>
+								<div className="mr-[calc(-1_*_var(--sidebar-spacing))]">
+									<SyntaxHighlighting language="html">
+										{detab(`
+											<!-- https://feathericons.com/feather -->
+											<svg class="feather feather-feather" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+												<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+												<line x1="16" x2="2" y1="8" y2="22"></line>
+												<line x1="17.5" x2="9" y1="15" y2="15"></line>
+											</svg>
+										`)}
+									</SyntaxHighlighting>
+								</div>
+								<ActionButton />
+							</Section>
+							<hr />
+							<Section>
+								<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+									<SliderLabel value={32}>Size</SliderLabel>
+									<SliderInput />
+								</div>
+							</Section>
+							<hr />
+							<Section>
+								<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+									<SliderLabel value={2}>Stroke width</SliderLabel>
+									<SliderInput />
+								</div>
+							</Section>
+							<hr />
+						</Sidebar>
+					</div>
+				</aside>
+			</div>
+		</>
 	)
 }

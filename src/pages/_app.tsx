@@ -1,6 +1,6 @@
-import "../css/tailwind/tailwind-base.css"
+//// import "../css/tailwind/tailwind-base.css"
+//// import "../css/index.scss"
 
-import "../css/index.scss"
 import "../css/tailwind/tailwind.css"
 
 import { DM_Sans, Fira_Code, Inter } from "@next/font/google"
@@ -8,11 +8,8 @@ import { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import Script from "next/script"
 import { useEffect } from "react"
-import { Meta } from "../components/meta"
-import { Layout } from "../layout/layout"
 import { detab } from "../lib/format"
 import { ShikiProvider } from "../providers/shiki"
-import { StateProvider } from "../providers/state"
 import { NameProps } from "./[name]"
 
 const fontDmSans = DM_Sans({
@@ -69,18 +66,19 @@ function InlineNoopScrollRestoration() {
 	)
 }
 
-export default function App({ Component, pageProps }: AppProps<Partial<NameProps>>) {
+export default function App({ Component: Page, pageProps }: AppProps<Partial<NameProps>>) {
 	return (
 		<>
 			<InlineGoogleFonts />
 			<InlineNoopScrollRestoration />
 			<ShikiProvider>
-				<StateProvider>
+				<Page {...pageProps} />
+				{/* <StateProvider>
 					<Meta {...pageProps} />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
-				</StateProvider>
+				</StateProvider> */}
 			</ShikiProvider>
 		</>
 	)
