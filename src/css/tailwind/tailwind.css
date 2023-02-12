@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	/* CSS reset */
+	input[type="text"] {
+		width: 100%;
+	}
+}
+
 /* Base */
 :root {
 	-webkit-font-smoothing: antialiased;
@@ -18,6 +25,7 @@
 :root, ::before, ::after {
 	font: 400 14px / 1.625
 		var(--font-sans);
+	color: theme('colors.slate.600');
 }
 /* pre code { white-space: pre; } */
 /* code     { white-space: pre-wrap; } */
@@ -26,10 +34,19 @@ pre, code {
 	-webkit-font-smoothing:  auto;
 	-moz-osx-font-smoothing: auto;
 
+	tab-size: 2;
 	font: 400 13px / 1.625
 		var(--font-code);
-	tab-size: 2;
+	color: theme('colors.slate.600');
 }
 
 /* Iconography */
 svg { overflow: visible; }
+
+/******************************************************************************/
+
+.css-search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--search-grid-item-size), 1fr));
+  grid-auto-rows: var(--search-grid-item-size);
+}

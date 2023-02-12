@@ -1,3 +1,13 @@
+// @ts-check
+
+const screens = {
+	sm: "640px",
+	md: "768px",
+	lg: "1024px",
+	xl: "1280px",
+	"2xl": "1536px",
+}
+
 const sizes = {
 	   0:    "0px",    1:    "1px",    2:    "2px",    3:    "3px",    4:    "4px",
 	   5:    "5px",    6:    "6px",    7:    "7px",    8:    "8px",    9:    "9px",
@@ -31,6 +41,8 @@ const sizes = {
 	 1800: "1800px",
 	 1900: "1900px",
 	"2e3": "2000px",
+
+	...screens,
 }
 
 const percents = {
@@ -41,29 +53,22 @@ const percents = {
 	"100%": "100%",
 }
 
-//// function negative(record) {
-//// 	return Object.entries(record).reduce((acc, [k, v]) => {
-//// 		if (k.startsWith("0")) { return acc }
-//// 		acc[`-${k}`] = `-${v}`
-//// 		return acc
-//// 	}, {})
-//// }
-
 const zIndexes = {
-	    0:   0,
-	   10:  10,
-	   20:  20,
-	   30:  30,
-	   40:  40,
-	   50:  50,
-	   60:  60,
-	   70:  70,
-	   80:  80,
-	   90:  90,
-	  100: 100,
-	"1e3": 1e3,
+	    0:   "0",
+	   10:  "10",
+	   20:  "20",
+	   30:  "30",
+	   40:  "40",
+	   50:  "50",
+	   60:  "60",
+	   70:  "70",
+	   80:  "80",
+	   90:  "90",
+	  100: "100",
+	"1e3": "1e3",
 }
 
+/** @type {import('tailwindcss').Config["theme"]} */
 const defaultTheme = {
 	borderRadius: { ...sizes, ...percents },
 	maxHeight:    { ...sizes, ...percents },
@@ -72,6 +77,7 @@ const defaultTheme = {
 	minWidth:     { ...sizes, ...percents },
 	spacing:      { ...sizes, ...percents },
 	zIndex:       zIndexes,
+	screens,
 }
 
 module.exports = defaultTheme

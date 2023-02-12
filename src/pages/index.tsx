@@ -1,19 +1,17 @@
+import { cx, detab, iota } from "@/lib"
 import { createElement, CSSProperties, PropsWithChildren, useCallback, useEffect, useState } from "react"
 import { Lang } from "shiki-es"
-import { cx } from "../lib/cx"
-import { detab } from "../lib/format"
-import { iota } from "../lib/iota"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Gray chip
 
-const grayChipStyles = {
+const grayChipVars = {
 	"--gray-chip-height": "24px",
 } as CSSProperties
 
 function GrayChip({ children }: PropsWithChildren) {
 	return (
-		<div className="h-[var(--gray-chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--gray-chip-height)_/_2)]" style={grayChipStyles}>
+		<div className="h-[var(--gray-chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--gray-chip-height)_/_2)]" style={grayChipVars}>
 			<div className="flex h-100% items-center">
 				<div className="text-[13px]">{children}</div>
 			</div>
@@ -24,7 +22,7 @@ function GrayChip({ children }: PropsWithChildren) {
 ////////////////////////////////////////////////////////////////////////////////
 // Inputs
 
-const checkboxIndicatorStyles = {
+const checkboxIndicatorVars = {
 	"--checkbox-size": "var(--generic-input-icon-height)",
 	"--checkbox-check-size": "8px",
 } as CSSProperties
@@ -36,7 +34,7 @@ function CheckboxIndicator({ checked = false }: { checked?: boolean }) {
 			className={`h-[var(--checkbox-size)] w-[var(--checkbox-size)] rounded-1e3 ${
 				checked ? "bg-blue-500" : "bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]"
 			}`}
-			style={checkboxIndicatorStyles}
+			style={checkboxIndicatorVars}
 		>
 			{checked && (
 				<div className="flex h-100% items-center justify-center">
@@ -47,7 +45,7 @@ function CheckboxIndicator({ checked = false }: { checked?: boolean }) {
 	)
 }
 
-const dropDownStyles = {
+const dropDownVars = {
 	"--dropdown-size": "24px",
 	"--dropdown-arrow-size": "8px",
 } as CSSProperties
@@ -55,7 +53,7 @@ const dropDownStyles = {
 // Visual representation of a dropdown, stateless
 function DropDownIndicator() {
 	return (
-		<div className="h-[var(--dropdown-size)] w-[var(--dropdown-size)]" style={dropDownStyles}>
+		<div className="h-[var(--dropdown-size)] w-[var(--dropdown-size)]" style={dropDownVars}>
 			<div className="flex h-100% items-center justify-center">
 				<div className="h-[var(--dropdown-arrow-size)] w-[var(--dropdown-arrow-size)] rounded-1e3 bg-gray-700"></div>
 			</div>
@@ -63,14 +61,14 @@ function DropDownIndicator() {
 	)
 }
 
-const genericInputStyles = {
+const genericInputVars = {
 	"--generic-input-height": "36px",
 	"--generic-input-icon-height": "24px",
 } as CSSProperties
 
 function GenericInput({ children }: PropsWithChildren) {
 	return (
-		<div className="flex h-[var(--generic-input-height)] items-center rounded-1e3 shadow-[0_0_0_1px_theme('colors.gray.300')]" style={genericInputStyles}>
+		<div className="flex h-[var(--generic-input-height)] items-center rounded-1e3 shadow-[0_0_0_1px_theme('colors.gray.300')]" style={genericInputVars}>
 			{children}
 		</div>
 	)
@@ -122,7 +120,7 @@ function DropDown({ children }: PropsWithChildren) {
 // Syntax highlighting
 
 function SyntaxHighlighting({ language: _, children }: PropsWithChildren<{ language: Lang }>) {
-	const lines = (children as string).split("\n")
+	const lines = ((children + "\n") as string).split("\n")
 	const linesCount = ("" + lines.length).length
 
 	const getLineNumberFromIndex = useCallback(
@@ -153,14 +151,14 @@ function SyntaxHighlighting({ language: _, children }: PropsWithChildren<{ langu
 ////////////////////////////////////////////////////////////////////////////////
 // Action button
 
-const actionButtonStyles = {
+const actionButtonVars = {
 	"--action-button-height": "36px",
 	"--action-button-icon-size": "16px",
 } as CSSProperties
 
 function ActionButton() {
 	return (
-		<div className="h-[var(--action-button-height)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]" style={actionButtonStyles}>
+		<div className="h-[var(--action-button-height)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]" style={actionButtonVars}>
 			<div className="flex items-center justify-center">
 				<div>Copy</div>
 				<div className="flex h-[var(--action-button-height)] w-[var(--action-button-height)] items-center justify-center">
@@ -174,14 +172,14 @@ function ActionButton() {
 ////////////////////////////////////////////////////////////////////////////////
 // Slider
 
-const sliderLabelStyles = {
+const sliderLabelVars = {
 	"--slider-label-height": "32px",
 	"--slider-reset-button-size": "16px",
 } as CSSProperties
 
 function SliderLabel({ value, children }: PropsWithChildren<{ value: number }>) {
 	return (
-		<div className="flex items-center justify-between" style={sliderLabelStyles}>
+		<div className="flex items-center justify-between" style={sliderLabelVars}>
 			<GrayChip>{children}</GrayChip>
 			<div className="flex items-center">
 				<code>{value < 10 ? value.toFixed(2) : `${value} PX`}</code>
@@ -193,14 +191,14 @@ function SliderLabel({ value, children }: PropsWithChildren<{ value: number }>) 
 	)
 }
 
-const sliderInputStyles = {
+const sliderInputVars = {
 	"--slider-track-height": "6px",
 	"--slider-thumb-size": "32px",
 } as CSSProperties
 
 function SliderInput() {
 	return (
-		<div className="flex h-[var(--slider-thumb-size)] flex-col justify-center" style={sliderInputStyles}>
+		<div className="flex h-[var(--slider-thumb-size)] flex-col justify-center" style={sliderInputVars}>
 			{/* Track */}
 			<div className="h-[var(--slider-track-height)] bg-gray-300">
 				<div className="flex h-100% items-center">
@@ -223,17 +221,17 @@ function CheckboxGroupFeather({ checked = false }: { checked?: boolean }) {
 				<div>
 					24x24px user interface icons, designed by{" "}
 					<a href="TODO">
-						@<span className="underline">colebemis</span>
+						@<span className="underline underline-offset-[3px]">colebemis</span>
 					</a>
 				</div>
 				<div>
 					For example:{" "}
 					<a href="TODO">
-						<span className="underline">arrows</span>
+						<span className="underline underline-offset-[3px]">arrow</span>
 					</a>
 					,{" "}
 					<a href="TODO">
-						<span className="underline">chevrons</span>
+						<span className="underline underline-offset-[3px]">chevron</span>
 					</a>
 				</div>
 			</div>
@@ -249,17 +247,18 @@ function CheckboxGroupSocialMedia({ checked = false }: { checked?: boolean }) {
 				<div>
 					24x24px user interface icons, sourced from{" "}
 					<a href="TODO">
-						@<span className="underline">WolfKit</span>
+						@<span className="underline underline-offset-[3px]">Wolf Kit</span>
 					</a>
 				</div>
 				<div>
 					For example:{" "}
 					<a href="TODO">
-						<span className="underline">twitter</span>
+						<span className="underline underline-offset-[3px]">twitter</span>
 					</a>
 					,{" "}
 					<a href="TODO">
-						<span className="underline">facebook</span>
+						{/* Prefer to put facebook here but doesn't fit */}
+						<span className="underline underline-offset-[3px]">github</span>
 					</a>
 				</div>
 			</div>
@@ -275,17 +274,17 @@ function CheckboxGroupPaymentServices({ checked = false }: { checked?: boolean }
 				<div>
 					56x32px user interface icons, sourced from{" "}
 					<a href="TODO">
-						<span className="underline">WolfKit</span>
+						<span className="underline underline-offset-[3px]">Wolf Kit</span>
 					</a>
 				</div>
 				<div>
 					For example:{" "}
 					<a href="TODO">
-						<span className="underline">stripe</span>
+						<span className="underline underline-offset-[3px]">stripe</span>
 					</a>
 					,{" "}
 					<a href="TODO">
-						<span className="underline">visa</span>
+						<span className="underline underline-offset-[3px]">paypal</span>
 					</a>
 				</div>
 			</div>
@@ -296,7 +295,7 @@ function CheckboxGroupPaymentServices({ checked = false }: { checked?: boolean }
 ////////////////////////////////////////////////////////////////////////////////
 // Sidebar
 
-const sidebarStyles = {
+const sidebarVars = {
 	"--sidebar-spacing": "24px",
 } as CSSProperties
 
@@ -307,7 +306,7 @@ function Sidebar({ tag = "div", children }: PropsWithChildren<{ tag?: keyof JSX.
 				tag,
 				{
 					className: "flex flex-col gap-[var(--sidebar-spacing)] py-[var(--sidebar-spacing)]",
-					style: sidebarStyles,
+					style: sidebarVars,
 				},
 				children
 			)}
@@ -320,9 +319,80 @@ function Section({ gutter = true, children }: PropsWithChildren<{ gutter?: boole
 	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "px-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
 }
 
-const pageStyles = {
+////////////////////////////////////////////////////////////////////////////////
+// Search bar
+
+function SearchTextField() {
+	return (
+		// Use h-100% for the ascending bounding box and flex for the descending
+		// bounding box
+		<div className="relative flex h-100%">
+			{/* TODO */}
+			<input type="text" />
+			<div className="absolute inset-0">
+				{/* Placeholder */}
+				<div className="flex h-100% items-center">
+					<div className="opacity-[62.5%]">
+						For example: <span className="underline underline-offset-[3px]">netflix</span>, <span className="underline underline-offset-[3px]">chill</span>
+						{"\u00a0".repeat(4)}
+						(Hint: Use commas to perform many search queries)
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+function SearchBar() {
+	return (
+		<div className="h-[var(--search-bar-height)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]">
+			<div className="flex">
+				{/* LHS */}
+				<div className="flex h-[var(--search-bar-height)] w-[var(--search-bar-height)] items-center justify-center">
+					<div className="h-[var(--search-bar-icon-size)] w-[var(--search-bar-icon-size)] rounded-1e3 bg-gray-700"></div>
+				</div>
+				{/* Text field */}
+				<div className="grow">
+					<SearchTextField />
+				</div>
+				{/* LHS */}
+				<div className="flex h-[var(--search-bar-height)] w-[var(--search-bar-height)] items-center justify-center">
+					<div className="h-[var(--search-bar-icon-size)] w-[var(--search-bar-icon-size)] rounded-1e3 bg-gray-700"></div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Search grid
+
+const searchGridVars = {
+	"--search-grid-item-size": "128px",
+	"--search-grid-item-icon-size": "32px",
+	"--search-grid-item-text-container-height": "48px",
+} as CSSProperties
+
+function SearchGrid() {
+	return (
+		<div className="css-search-grid" style={searchGridVars}>
+			{iota(300).map(index => (
+				<div key={index}>Hello</div>
+			))}
+		</div>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+const globalVars = {
+	// Sidebar
 	"--sidebar-1-width": "250px",
 	"--sidebar-2-width": "400px",
+
+	// Search bar
+	"--search-bar-height": "48px",
+	"--search-bar-icon-size": "16px",
 } as CSSProperties
 
 export default function Page() {
@@ -346,7 +416,7 @@ export default function Page() {
 						* { outline: 1px solid hsl(0, 100%, 50%, 0.1); }
 					`)}
 			</style>
-			<div className="flex" style={pageStyles}>
+			<div className="flex" style={globalVars}>
 				{/* LHS */}
 				<aside className="w-[var(--sidebar-1-width)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
 					<div className="sticky top-0">
@@ -363,10 +433,19 @@ export default function Page() {
 						</Sidebar>
 					</div>
 				</aside>
-				<main className="grow">
-					{iota(300).map((line, index) => (
-						<div key={index}>{line}</div>
-					))}
+				<main className="flex grow justify-center py-32 px-16">
+					{/* TODO */}
+					<div className="flex w-100% max-w-xl flex-col gap-64">
+						{/* Search bar */}
+						<div className="flex flex-col gap-16">
+							<div className="flex items-center justify-between">
+								<GrayChip>Search</GrayChip>
+								<div>Twitter</div>
+							</div>
+							<SearchBar />
+						</div>
+						<SearchGrid />
+					</div>
 				</main>
 				{/* RHS */}
 				<aside className="w-[var(--sidebar-2-width)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
@@ -377,9 +456,9 @@ export default function Page() {
 									<GrayChip>Code</GrayChip>
 									<DropDown>TypeScript React</DropDown>
 								</div>
-								<div className="mr-[calc(-1_*_var(--sidebar-spacing))]">
-									<SyntaxHighlighting language="html">
-										{detab(`
+								{/* <div className="mr-[calc(-1_*_var(--sidebar-spacing))]"> */}
+								<SyntaxHighlighting language="html">
+									{detab(`
 											<!-- https://feathericons.com/feather -->
 											<svg class="feather feather-feather" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
 												<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
@@ -387,8 +466,8 @@ export default function Page() {
 												<line x1="17.5" x2="9" y1="15" y2="15"></line>
 											</svg>
 										`)}
-									</SyntaxHighlighting>
-								</div>
+								</SyntaxHighlighting>
+								{/* </div> */}
 								<ActionButton />
 							</Section>
 							<hr />

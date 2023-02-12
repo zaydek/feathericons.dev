@@ -1,3 +1,5 @@
+// @ts-check
+
 const plugin = require("tailwindcss/plugin")
 const defaultTheme = require("./tailwind.default-theme")
 
@@ -17,15 +19,7 @@ module.exports = {
 		disableColorOpacityUtilitiesByDefault: true,
 		hoverOnlyWhenSupported: true,
 	},
-	theme: {
-		...defaultTheme,
-		extend: {
-			screens: {
-				// Use 16px for Windows scrollbar
-				"2xl": `${1536 + 256 + 16}px`,
-			},
-		},
-	},
+	theme: defaultTheme,
 	// See corePlugins
 	plugins: [
 		plugin(function ({ matchUtilities }) {
