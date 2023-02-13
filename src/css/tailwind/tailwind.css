@@ -9,6 +9,27 @@
 
 	/* Base */
 	:root {
+		/* https://github.com/sindresorhus/modern-normalize/blob/32713e4f46899410c9cb4dacd4302b3096019c9b/modern-normalize.css#L43 */
+		--fallback-font-sans:
+			system-ui,
+			'Segoe UI',
+			Roboto,
+			Helvetica,
+			Arial,
+			sans-serif,
+			'Apple Color Emoji',
+			'Segoe UI Emoji';
+
+		/* https://github.com/sindresorhus/modern-normalize/blob/32713e4f46899410c9cb4dacd4302b3096019c9b/modern-normalize.css#L100 */
+		--fallback-font-code:
+				ui-monospace,
+				SFMono-Regular,
+				Consolas,
+				'Liberation Mono',
+				Menlo,
+				monospace; /* 1 */
+			font-size: 1em; /* 2 */
+
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		overflow:
@@ -35,10 +56,11 @@
 		/* Disable font-smoothing for code */
 		-webkit-font-smoothing:  auto;
 		-moz-osx-font-smoothing: auto;
-
 		tab-size: 2;
-		font: 400 13px / 1.625
-			var(--font-code);
+		/* font: 400 13px / 1.625 */
+		/* 	var(--font-code); */
+		font: 400 14px / 1.625
+			var(--fallback-font-code);
 		color: theme('colors.gray.600');
 	}
 
@@ -58,7 +80,7 @@
 .css-search-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--search-grid-item-size), 1fr));
-	grid-auto-rows: var(--search-grid-item-size);
+	/* grid-auto-rows: var(--search-grid-item-size); */
 }
 
 .css-slider-background-image {
