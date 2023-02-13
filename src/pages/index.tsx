@@ -200,7 +200,9 @@ export default function Page() {
 					</div>
 				</aside>
 				<main className="flex grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
-					<div className="max-w-xl w-100%">
+					{/* <div className="max-w-lg w-100%"> */}
+					{/* <div className="w-100% max-w-[896px]"> */}
+					<div className="w-100% max-w-[960px]">
 						<SearchApp />
 					</div>
 				</main>
