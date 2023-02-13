@@ -6,7 +6,8 @@ import { Lang } from "shiki-es"
 
 export function Chip({ children }: PropsWithChildren) {
 	return (
-		<div className="h-[var(--chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--chip-height)_/_2)]">
+		// Use mx-* to optically center
+		<div className="mx-8 h-[var(--chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--chip-height)_/_2)]">
 			<div className="flex h-100% items-center">
 				<div>{children}</div>
 			</div>
@@ -150,7 +151,8 @@ export function SliderLabel({ value, children }: PropsWithChildren<{ value: numb
 
 export function SliderInput() {
 	return (
-		<div className="flex h-[var(--slider-thumb-size)] flex-col justify-center">
+		// Use mx-* to optically center
+		<div className="mx-20 flex h-[var(--slider-thumb-size)] flex-col justify-center">
 			{/* Track */}
 			<div className="slider-bg-image h-[var(--slider-track-height)] rounded-1e3">
 				{/* <div className="flex h-100% items-center"> */}
@@ -170,7 +172,7 @@ export function Sidebar({ tag = "div", children }: PropsWithChildren<{ tag?: key
 }
 
 export function Section({ gutter = true, children }: PropsWithChildren<{ gutter?: boolean }>) {
-	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "px-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
+	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "mx-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -227,19 +229,19 @@ function SearchGridItem() {
 				{/* Icon */}
 				<div className="flex grow items-center justify-center">
 					<div
-						// Use -mb-* to optically center
+						// Use mb-* to optically center
 						className="-mb-[calc(var(--search-grid-item-text-container-height))] h-[var(--search-grid-item-icon-size)] w-[var(--search-grid-item-icon-size)] rounded-1e3 bg-gray-700
 							group-hover/button:group-active/button:bg-sky-400"
 					></div>
 				</div>
 				{/* Text */}
 				{/* TODO: Add a checkmark on click */}
-				<div className="flex h-[var(--search-grid-item-text-container-height)] items-center justify-center px-16">
+				<div className="mx-16 flex h-[var(--search-grid-item-text-container-height)] items-center justify-center">
 					<div
 						className="truncate
 							group-hover/button:group-active/button:text-sky-400"
 					>
-						Hello
+						Hello asdasd asd asdasd
 					</div>
 				</div>
 			</div>

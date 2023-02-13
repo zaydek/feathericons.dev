@@ -20,7 +20,7 @@ function IconsGroupFeather({ checked = false }: { checked?: boolean }) {
 	return (
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Feather</Checkbox>
-			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 				<div className="leading-[1.5]">
 					24x24px user interface icons, designed by{" "}
 					<a href="TODO">
@@ -46,7 +46,7 @@ function IconsGroupSocialMedia({ checked = false }: { checked?: boolean }) {
 	return (
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Social media</Checkbox>
-			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 				<div className="leading-[1.5]">
 					24x24px user interface icons, sourced from{" "}
 					<a href="TODO">
@@ -73,7 +73,7 @@ function IconsGroupPaymentServices({ checked = false }: { checked?: boolean }) {
 	return (
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Payment services</Checkbox>
-			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 				<div className="leading-[1.5]">
 					56x32px user interface icons, sourced from{" "}
 					<a href="TODO">
@@ -137,8 +137,7 @@ function Sidebar2() {
 	return (
 		<Sidebar>
 			<Section>
-				{/* Use h-[var(--chip-height)] here to optically align chips */}
-				<div className="flex h-[var(--chip-height)] items-center justify-between">
+				<div className="flex items-center justify-between">
 					<Chip>Code</Chip>
 					<DropDown>TypeScript React</DropDown>
 				</div>
@@ -202,10 +201,10 @@ export default function Page() {
 						<Sidebar1 />
 					</div>
 				</aside>
-				<main className="flex grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
-					{/* <div className="max-w-lg w-100%"> */}
+				<main className="mx-[var(--main-spacing)] flex grow justify-center pb-[calc(var(--main-spacing)_*_2)]">
+					{/* <div className="w-100% max-w-[960px]"> */}
 					{/* <div className="w-100% max-w-[896px]"> */}
-					<div className="w-100% max-w-[960px]">
+					<div className="max-w-lg w-100%">
 						<SearchApp />
 					</div>
 				</main>
