@@ -105,7 +105,7 @@ function Sidebar1() {
 function SearchApp() {
 	return (
 		<>
-			<div className="search-bar-bg-image sticky top-0 p-[var(--main-spacing)]">
+			<div className="search-bar-bg-image sticky top-0 py-[var(--main-spacing)]">
 				<div className="flex flex-col gap-16">
 					<div className="flex items-center justify-between">
 						<Chip>Search</Chip>
@@ -189,8 +189,8 @@ export default function Page() {
 				</aside>
 				<main className="flex min-h-[100dvh] grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
 					{/* <div className="max-w-lg w-100%"> */}
-					{/* <div className="w-100% max-w-[896px]"> */}
-					<div className="w-100% max-w-[960px]">
+					{/* <div className="w-100% max-w-[960px]"> */}
+					<div className="w-100% max-w-[896px]">
 						<SearchApp />
 					</div>
 				</main>

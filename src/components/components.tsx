@@ -204,7 +204,6 @@ export function SearchBar() {
 				<div className="flex h-[var(--search-bar-height)] w-[var(--search-bar-height)] items-center justify-center">
 					<div className="h-[var(--search-bar-icon-size)] w-[var(--search-bar-icon-size)] rounded-1e3 bg-gray-700"></div>
 				</div>
-				{/* Text field */}
 				<div className="grow">
 					<SearchTextField />
 				</div>
@@ -226,9 +225,12 @@ function SearchGridItem() {
 			<div className="flex h-[var(--search-grid-item-size)] w-[var(--search-grid-item-size)] flex-col">
 				{/* Icon */}
 				<div className="flex grow items-center justify-center">
+					{/* <div
+						className="-mb-[var(--search-grid-item-text-container-height)] h-[var(--search-grid-item-icon-size)] w-[var(--search-grid-item-icon-size)] rounded-1e3 bg-gray-700
+							group-hover/button:group-active/button:bg-sky-400"
+					></div> */}
 					<div
-						// Use mb-* to optically center
-						className="-mb-[calc(var(--search-grid-item-text-container-height))] h-[var(--search-grid-item-icon-size)] w-[var(--search-grid-item-icon-size)] rounded-1e3 bg-gray-700
+						className="h-[var(--search-grid-item-icon-size)] w-[var(--search-grid-item-icon-size)] rounded-1e3 bg-gray-700
 							group-hover/button:group-active/button:bg-sky-400"
 					></div>
 				</div>
