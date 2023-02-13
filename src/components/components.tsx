@@ -1,5 +1,5 @@
 import { cx, iota } from "@/lib"
-import { createElement, PropsWithChildren, useCallback } from "react"
+import { PropsWithChildren, useCallback } from "react"
 import { Lang } from "shiki-es"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -167,8 +167,8 @@ export function SliderInput() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Sidebar({ tag = "div", children }: PropsWithChildren<{ tag?: keyof JSX.IntrinsicElements }>) {
-	return <>{createElement(tag, { className: "flex flex-col gap-[var(--sidebar-spacing)]" }, children)}</>
+export function Sidebar({ children }: PropsWithChildren) {
+	return <div className="flex flex-col gap-[var(--sidebar-spacing)]">{children}</div>
 }
 
 export function Section({ gutter = true, children }: PropsWithChildren<{ gutter?: boolean }>) {

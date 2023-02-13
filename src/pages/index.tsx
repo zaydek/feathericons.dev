@@ -1,16 +1,4 @@
-import {
-	ActionButton,
-	Checkbox,
-	Chip,
-	DropDown,
-	SearchBar,
-	SearchGrid,
-	Section,
-	Sidebar,
-	SliderInput,
-	SliderLabel,
-	SyntaxHighlighting,
-} from "@/components/components"
+import { ActionButton, Checkbox, Chip, DropDown, SearchBar, SearchGrid, Section, SliderInput, SliderLabel, SyntaxHighlighting } from "@/components/components"
 import { detab } from "@/lib"
 import { useEffect, useState } from "react"
 
@@ -99,20 +87,18 @@ function IconsGroupPaymentServices({ checked = false }: { checked?: boolean }) {
 
 function Sidebar1() {
 	return (
-		<Sidebar>
-			<Section>
-				<div className="flex flex-col gap-16">
-					<div className="flex">
-						<Chip>Icons</Chip>
-					</div>
-					<div className="flex flex-col gap-[var(--sidebar-spacing)]">
-						<IconsGroupFeather checked />
-						<IconsGroupSocialMedia />
-						<IconsGroupPaymentServices />
-					</div>
+		<Section>
+			<div className="flex flex-col gap-16">
+				<div className="flex">
+					<Chip>Icons</Chip>
 				</div>
-			</Section>
-		</Sidebar>
+				<div className="flex flex-col gap-[var(--sidebar-spacing)]">
+					<IconsGroupFeather checked />
+					<IconsGroupSocialMedia />
+					<IconsGroupPaymentServices />
+				</div>
+			</div>
+		</Section>
 	)
 }
 
@@ -135,7 +121,7 @@ function SearchApp() {
 
 function Sidebar2() {
 	return (
-		<Sidebar>
+		<div className="flex flex-col gap-[var(--sidebar-spacing)]">
 			<Section>
 				<div className="flex items-center justify-between">
 					<Chip>Code</Chip>
@@ -168,7 +154,7 @@ function Sidebar2() {
 				</div>
 			</Section>
 			<hr />
-		</Sidebar>
+		</div>
 	)
 }
 
