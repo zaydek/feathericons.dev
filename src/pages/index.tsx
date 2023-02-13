@@ -182,19 +182,19 @@ export default function Page() {
 					`)}
 			</style>
 			<div className="flex">
-				<aside className="min-h-[100dvh] w-[var(--sidebar-1-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+				<aside className="w-[var(--sidebar-1-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
 					<div className="sticky top-[var(--main-spacing)]">
 						<Sidebar1 />
 					</div>
 				</aside>
-				<main className="mx-[var(--main-spacing)] flex grow justify-center pb-[calc(var(--main-spacing)_*_2)]">
-					{/* <div className="w-100% max-w-[960px]"> */}
+				<main className="flex min-h-[100dvh] grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
+					{/* <div className="max-w-lg w-100%"> */}
 					{/* <div className="w-100% max-w-[896px]"> */}
-					<div className="max-w-lg w-100%">
+					<div className="w-100% max-w-[960px]">
 						<SearchApp />
 					</div>
 				</main>
-				<aside className="min-h-[100dvh] w-[var(--sidebar-2-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+				<aside className="w-[var(--sidebar-2-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
 					<div className="sticky top-[var(--main-spacing)]">
 						<Sidebar2 />
 					</div>

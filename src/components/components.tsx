@@ -6,10 +6,11 @@ import { Lang } from "shiki-es"
 
 export function Chip({ children }: PropsWithChildren) {
 	return (
-		// Use mx-* to optically center
-		<div className="mx-8 h-[var(--chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--chip-height)_/_2)]">
-			<div className="flex h-100% items-center">
-				<div>{children}</div>
+		<div className="px-8">
+			<div className="h-[var(--chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--chip-height)_/_2)]">
+				<div className="flex h-100% items-center">
+					<div>{children}</div>
+				</div>
 			</div>
 		</div>
 	)
@@ -151,14 +152,15 @@ export function SliderLabel({ value, children }: PropsWithChildren<{ value: numb
 
 export function SliderInput() {
 	return (
-		// Use mx-* to optically center
-		<div className="mx-20 flex h-[var(--slider-thumb-size)] flex-col justify-center">
-			{/* Track */}
-			<div className="slider-bg-image h-[var(--slider-track-height)] rounded-1e3">
-				{/* <div className="flex h-100% items-center"> */}
-				<div className="flex h-100% items-center justify-center">
-					{/* Thumb */}
-					<div className="h-[var(--slider-thumb-size)] w-[var(--slider-thumb-size)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.gray.300')]"></div>
+		<div className="px-20">
+			<div className="flex h-[var(--slider-thumb-size)] flex-col justify-center">
+				{/* Track */}
+				<div className="slider-bg-image h-[var(--slider-track-height)] rounded-1e3">
+					{/* <div className="flex h-100% items-center"> */}
+					<div className="flex h-100% items-center justify-center">
+						{/* Thumb */}
+						<div className="h-[var(--slider-thumb-size)] w-[var(--slider-thumb-size)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.gray.300')]"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -168,7 +170,7 @@ export function SliderInput() {
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Section({ gutter = true, children }: PropsWithChildren<{ gutter?: boolean }>) {
-	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "mx-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
+	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "px-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -232,7 +234,7 @@ function SearchGridItem() {
 				</div>
 				{/* Text */}
 				{/* TODO: Add a checkmark on click */}
-				<div className="mx-16 flex h-[var(--search-grid-item-text-container-height)] items-center justify-center">
+				<div className="flex h-[var(--search-grid-item-text-container-height)] items-center justify-center px-16">
 					<div
 						className="truncate
 							group-hover/button:group-active/button:text-sky-400"
