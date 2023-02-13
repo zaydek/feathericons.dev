@@ -167,10 +167,6 @@ export function SliderInput() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Sidebar({ children }: PropsWithChildren) {
-	return <div className="flex flex-col gap-[var(--sidebar-spacing)]">{children}</div>
-}
-
 export function Section({ gutter = true, children }: PropsWithChildren<{ gutter?: boolean }>) {
 	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "mx-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
 }
