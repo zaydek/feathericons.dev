@@ -1,4 +1,4 @@
-import { cx, iota } from "@/lib"
+import { iota } from "@/lib"
 import { PropsWithChildren, useCallback } from "react"
 import { Lang } from "shiki-es"
 
@@ -6,7 +6,8 @@ import { Lang } from "shiki-es"
 
 export function Chip({ children }: PropsWithChildren) {
 	return (
-		<div className="px-8">
+		// Use flex to ensure <Chip> never stretches
+		<div className="flex px-8">
 			<div className="flex h-[var(--chip-height)] items-center rounded-1e3 bg-gray-200 px-[calc(var(--chip-height)_/_2)]">
 				<div>{children}</div>
 			</div>
@@ -168,12 +169,6 @@ export function Slider({ value, children }: PropsWithChildren<{ value: number }>
 			<SliderInput />
 		</div>
 	)
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-export function Section({ gutter = true, children }: PropsWithChildren<{ gutter?: boolean }>) {
-	return <section className={cx(`flex flex-col gap-[var(--sidebar-spacing)] ${gutter ? "px-[var(--sidebar-spacing)]" : ""}`)}>{children}</section>
 }
 
 ////////////////////////////////////////////////////////////////////////////////

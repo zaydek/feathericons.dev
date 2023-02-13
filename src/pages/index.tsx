@@ -1,4 +1,4 @@
-import { ActionButton, Checkbox, Chip, DropDown, SearchBar, SearchGrid, Section, Slider, SyntaxHighlighting } from "@/components/components"
+import { ActionButton, Checkbox, Chip, DropDown, SearchBar, SearchGrid, Slider, SyntaxHighlighting } from "@/components/components"
 import { detab } from "@/lib"
 import { useEffect, useState } from "react"
 
@@ -85,13 +85,19 @@ function LiPaymentServices({ checked = false }: { checked?: boolean }) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+function Section({ children, ...props }: JSX.IntrinsicElements["section"]) {
+	return (
+		<section className="flex flex-col gap-[var(--sidebar-spacing)] px-[var(--sidebar-spacing)]" {...props}>
+			{children}
+		</section>
+	)
+}
+
 function Aside1Contents() {
 	return (
 		<Section>
 			<div className="flex flex-col gap-16">
-				<div className="flex">
-					<Chip>Icons</Chip>
-				</div>
+				<Chip>Icons</Chip>
 				<ul className="flex flex-col gap-[var(--sidebar-spacing)]">
 					<LiFeather checked />
 					<LiSocialMedia />
@@ -106,9 +112,7 @@ function MainContents() {
 	return (
 		<>
 			<div className="css-search-bar-bg-image sticky top-0 flex flex-col gap-16 py-[var(--main-spacing)]">
-				<div className="flex">
-					<Chip>Search</Chip>
-				</div>
+				<Chip>Search</Chip>
 				<SearchBar />
 			</div>
 			<SearchGrid />
