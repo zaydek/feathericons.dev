@@ -8,7 +8,7 @@ function IconsGroupFeather({ checked = false }: { checked?: boolean }) {
 	return (
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Feather</Checkbox>
-			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-8">
 				<div className="leading-[1.5]">
 					24x24px user interface icons, designed by{" "}
 					<a href="TODO">
@@ -34,7 +34,7 @@ function IconsGroupSocialMedia({ checked = false }: { checked?: boolean }) {
 	return (
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Social media</Checkbox>
-			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-8">
 				<div className="leading-[1.5]">
 					24x24px user interface icons, sourced from{" "}
 					<a href="TODO">
@@ -61,7 +61,7 @@ function IconsGroupPaymentServices({ checked = false }: { checked?: boolean }) {
 	return (
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Payment services</Checkbox>
-			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-8">
 				<div className="leading-[1.5]">
 					56x32px user interface icons, sourced from{" "}
 					<a href="TODO">
