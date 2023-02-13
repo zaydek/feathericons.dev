@@ -12,7 +12,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components/components"
 import { detab } from "@/lib"
-import { CSSProperties, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -21,13 +21,13 @@ function IconsGroupFeather({ checked = false }: { checked?: boolean }) {
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Feather</Checkbox>
 			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
-				<div>
+				<div className="leading-[1.5]">
 					24x24px user interface icons, designed by{" "}
 					<a href="TODO">
 						@<span className="underline underline-offset-[3px]">colebemis</span>
 					</a>
 				</div>
-				<div>
+				<div className="leading-[1.5]">
 					For example:{" "}
 					<a href="TODO">
 						<span className="underline underline-offset-[3px]">arrow</span>
@@ -47,13 +47,13 @@ function IconsGroupSocialMedia({ checked = false }: { checked?: boolean }) {
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Social media</Checkbox>
 			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
-				<div>
+				<div className="leading-[1.5]">
 					24x24px user interface icons, sourced from{" "}
 					<a href="TODO">
 						@<span className="underline underline-offset-[3px]">Wolf Kit</span>
 					</a>
 				</div>
-				<div>
+				<div className="leading-[1.5]">
 					For example:{" "}
 					<a href="TODO">
 						<span className="underline underline-offset-[3px]">twitter</span>
@@ -74,13 +74,13 @@ function IconsGroupPaymentServices({ checked = false }: { checked?: boolean }) {
 		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Payment services</Checkbox>
 			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-[calc(var(--sidebar-spacing)_/_4)]">
-				<div>
+				<div className="leading-[1.5]">
 					56x32px user interface icons, sourced from{" "}
 					<a href="TODO">
 						<span className="underline underline-offset-[3px]">Wolf Kit</span>
 					</a>
 				</div>
-				<div>
+				<div className="leading-[1.5]">
 					For example:{" "}
 					<a href="TODO">
 						<span className="underline underline-offset-[3px]">stripe</span>
@@ -172,21 +172,6 @@ function Sidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// prettier-ignore
-const globalVars = {
-	"--main-spacing":              "32px",
-	"--sidebar-spacing":           "24px",
-
-	"--sidebar-1-width":           "250px",
-	"--sidebar-2-width":           "400px",
-
-	"--search-bar-height":         "48px",
-	"--search-bar-icon-size":      "16px",
-
-	"--generic-input-height":      "32px",
-	"--generic-input-icon-height": "16px",
-} as CSSProperties
-
 export default function Page() {
 	const [showOutline, setShowOutline] = useState(false)
 
@@ -208,7 +193,7 @@ export default function Page() {
 						* { outline: 1px solid hsl(0, 100%, 50%, 0.1); }
 					`)}
 			</style>
-			<div className="flex" style={globalVars}>
+			<div className="flex">
 				<aside className="min-h-[100dvh] w-[var(--sidebar-1-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
 					<div className="sticky top-[var(--main-spacing)]">
 						<Sidebar1 />
