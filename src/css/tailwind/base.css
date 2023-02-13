@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-	/* CSS reset */
-	input[type="text"] {
-		width: 100%;
-		background-color: transparent;
-	}
 	/* Base */
 	:root {
 		/* https://github.com/sindresorhus/modern-normalize/blob/32713e4f46899410c9cb4dacd4302b3096019c9b/modern-normalize.css#L43 */
@@ -62,3 +57,5 @@
 	/* Iconography */
 	svg { overflow: visible; }
 }
+
+#__next { display: flex; }

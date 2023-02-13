@@ -1,12 +1,12 @@
-import { ActionButton, Checkbox, Chip, DropDown, SearchBar, SearchGrid, Section, SliderInput, SliderLabel, SyntaxHighlighting } from "@/components/components"
+import { ActionButton, Checkbox, Chip, DropDown, SearchBar, SearchGrid, Section, Slider, SyntaxHighlighting } from "@/components/components"
 import { detab } from "@/lib"
 import { useEffect, useState } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function IconsGroupFeather({ checked = false }: { checked?: boolean }) {
+function LiFeather({ checked = false }: { checked?: boolean }) {
 	return (
-		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+		<li className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Feather</Checkbox>
 			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-8">
 				<div className="leading-[1.5]">
@@ -26,13 +26,13 @@ function IconsGroupFeather({ checked = false }: { checked?: boolean }) {
 					</a>
 				</div>
 			</div>
-		</div>
+		</li>
 	)
 }
 
-function IconsGroupSocialMedia({ checked = false }: { checked?: boolean }) {
+function LiSocialMedia({ checked = false }: { checked?: boolean }) {
 	return (
-		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+		<li className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Social media</Checkbox>
 			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-8">
 				<div className="leading-[1.5]">
@@ -53,13 +53,13 @@ function IconsGroupSocialMedia({ checked = false }: { checked?: boolean }) {
 					</a>
 				</div>
 			</div>
-		</div>
+		</li>
 	)
 }
 
-function IconsGroupPaymentServices({ checked = false }: { checked?: boolean }) {
+function LiPaymentServices({ checked = false }: { checked?: boolean }) {
 	return (
-		<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
+		<li className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
 			<Checkbox checked={checked}>Payment services</Checkbox>
 			<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)] px-8">
 				<div className="leading-[1.5]">
@@ -79,51 +79,49 @@ function IconsGroupPaymentServices({ checked = false }: { checked?: boolean }) {
 					</a>
 				</div>
 			</div>
-		</div>
+		</li>
 	)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function Sidebar1() {
+function Aside1Contents() {
 	return (
 		<Section>
 			<div className="flex flex-col gap-16">
 				<div className="flex">
 					<Chip>Icons</Chip>
 				</div>
-				<div className="flex flex-col gap-[var(--sidebar-spacing)]">
-					<IconsGroupFeather checked />
-					<IconsGroupSocialMedia />
-					<IconsGroupPaymentServices />
-				</div>
+				<ul className="flex flex-col gap-[var(--sidebar-spacing)]">
+					<LiFeather checked />
+					<LiSocialMedia />
+					<LiPaymentServices />
+				</ul>
 			</div>
 		</Section>
 	)
 }
 
-function SearchApp() {
+function MainContents() {
 	return (
 		<>
-			<div className="search-bar-bg-image sticky top-0 py-[var(--main-spacing)]">
-				<div className="flex flex-col gap-16">
-					<div className="flex items-center justify-between">
-						<Chip>Search</Chip>
-						<div>Twitter TODO</div>
-					</div>
-					<SearchBar />
+			<div className="css-search-bar-bg-image sticky top-0 flex flex-col gap-16 py-[var(--main-spacing)]">
+				<div className="flex">
+					<Chip>Search</Chip>
 				</div>
+				<SearchBar />
 			</div>
 			<SearchGrid />
 		</>
 	)
 }
 
-function Sidebar2() {
+function Aside2Contents() {
 	return (
 		<div className="flex flex-col gap-[var(--sidebar-spacing)]">
 			<Section>
-				<div className="flex items-center justify-between">
+				{/* Use h-[var(--chip-height)] to optically align */}
+				<div className="flex h-[var(--chip-height)] items-center justify-between">
 					<Chip>Code</Chip>
 					<DropDown>TypeScript React</DropDown>
 				</div>
@@ -141,17 +139,11 @@ function Sidebar2() {
 			</Section>
 			<hr />
 			<Section>
-				<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
-					<SliderLabel value={32}>Size</SliderLabel>
-					<SliderInput />
-				</div>
+				<Slider value={32}>Size</Slider>
 			</Section>
 			<hr />
 			<Section>
-				<div className="flex flex-col gap-[calc(var(--sidebar-spacing)_/_2)]">
-					<SliderLabel value={2}>Stroke width</SliderLabel>
-					<SliderInput />
-				</div>
+				<Slider value={2}>Stroke width</Slider>
 			</Section>
 			<hr />
 		</div>
@@ -175,31 +167,30 @@ export default function Page() {
 
 	return (
 		<>
+			{/* DEBUG */}
 			<style>
 				{showOutline &&
 					detab(`
 						* { outline: 1px solid hsl(0, 100%, 50%, 0.1); }
 					`)}
 			</style>
-			<div className="flex">
-				<aside className="w-[var(--sidebar-1-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
-					<div className="sticky top-[var(--main-spacing)]">
-						<Sidebar1 />
-					</div>
-				</aside>
-				<main className="flex min-h-[100dvh] grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
-					{/* <div className="max-w-lg w-100%"> */}
-					{/* <div className="w-100% max-w-[960px]"> */}
-					<div className="w-100% max-w-[896px]">
-						<SearchApp />
-					</div>
-				</main>
-				<aside className="w-[var(--sidebar-2-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
-					<div className="sticky top-[var(--main-spacing)]">
-						<Sidebar2 />
-					</div>
-				</aside>
-			</div>
+			<aside className="min-h-[100dvh] w-[var(--sidebar-1-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+				<div className="sticky top-[var(--main-spacing)]">
+					<Aside1Contents />
+				</div>
+			</aside>
+			{/* Use grow because #__next uses flex */}
+			{/* Omit pt-* because of <SearchBar> */}
+			<main className="flex grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
+				<div className="w-100% max-w-[896px]">
+					<MainContents />
+				</div>
+			</main>
+			<aside className="min-h-[100dvh] w-[var(--sidebar-2-width)] py-[var(--main-spacing)] shadow-[0_0_0_1px_theme('colors.gray.300')]">
+				<div className="sticky top-[var(--main-spacing)]">
+					<Aside2Contents />
+				</div>
+			</aside>
 		</>
 	)
 }
