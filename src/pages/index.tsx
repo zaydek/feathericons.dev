@@ -459,7 +459,7 @@ export default function Page() {
 					</div>
 				</aside>
 				{/* <main> */}
-				<main className="flex grow justify-center px-[var(--main-spacing)]">
+				<main className="flex grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
 					{/* TODO */}
 					<div className="flex w-100% max-w-xl flex-col gap-[var(--main-spacing)]">
 						{/* Search bar */}
