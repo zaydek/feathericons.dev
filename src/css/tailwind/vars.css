@@ -1,0 +1,29 @@
+:root {
+	--main-spacing:                           32px;
+	--sidebar-spacing:                        24px;
+
+	--sidebar-1-width:                        250px;
+	--sidebar-2-width:                        400px;
+
+	--chip-height:                            24px;
+
+	--search-bar-height:                      48px;
+	--search-bar-icon-size:                   16px;
+
+	--search-grid-item-size:                  128px;
+	--search-grid-item-icon-size:             32px;
+	--search-grid-item-text-container-height: 32px;
+
+	--form-height:                            32px;
+	--form-icon-size:                         16px;
+	--form-symbol-size:                       20px;
+	--form-tick-symbol-size:                  8px;
+
+	--action-button-height:                   36px;
+	--action-button-icon-size:                16px;
+
+	--slider-label-height:                    32px;
+	--slider-reset-button-size:               16px;
+	--slider-track-height:                    6px;
+	--slider-thumb-size:                      32px;
+}

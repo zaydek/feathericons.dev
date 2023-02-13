@@ -1,7 +1,10 @@
 //// import "../css/tailwind/tailwind-base.css"
 //// import "../css/index.scss"
 
-import "../css/tailwind/tailwind.css"
+import "../css/tailwind/base.css"
+import "../css/tailwind/vars.css"
+
+import "../css/tailwind/classes.css"
 
 import { DM_Sans, Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"

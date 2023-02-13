@@ -4,9 +4,9 @@ import { Lang } from "shiki-es"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function GrayChip({ children }: PropsWithChildren) {
+export function Chip({ children }: PropsWithChildren) {
 	return (
-		<div className="h-[var(--gray-chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--gray-chip-height)_/_2)]">
+		<div className="h-[var(--chip-height)] rounded-1e3 bg-gray-200 px-[calc(var(--chip-height)_/_2)]">
 			<div className="flex h-100% items-center">
 				<div>{children}</div>
 			</div>
@@ -22,8 +22,8 @@ function CheckboxSymbol({ checked = false }: { checked?: boolean }) {
 		<div
 			// prettier-ignore
 			className={`h-[var(--form-symbol-size)] w-[var(--form-symbol-size)] rounded-1e3 ${checked
-				? "bg-blue-500"
-				: "bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]"
+				? "bg-sky-400"
+				: "bg-white shadow-[inset_0_0_0_1px_theme('colors.gray.300')]"
 			}`}
 		>
 			{checked && (
@@ -48,12 +48,12 @@ function DropDownSymbol() {
 
 export function Checkbox({ checked = false, children }: PropsWithChildren<{ checked?: boolean }>) {
 	return (
-		<div className="flex h-[var(--form-height)] items-center rounded-1e3 shadow-[0_0_0_1px_theme('colors.gray.300')]">
+		<div className="flex h-[var(--form-height)] items-center rounded-1e3 shadow-[inset_0_0_0_1px_theme('colors.gray.300')]">
 			<div className="flex grow items-center justify-between">
 				{/* LHS */}
 				<div className="flex items-center">
 					<div className="flex h-[var(--form-height)] w-[var(--form-height)] items-center justify-center">
-						<div className="h-[var(--form-icon-size)] w-[var(--form-icon-size)] rounded-1e3 bg-blue-500"></div>
+						<div className="h-[var(--form-icon-size)] w-[var(--form-icon-size)] rounded-1e3 bg-sky-400"></div>
 					</div>
 					<div>{children}</div>
 				</div>
@@ -68,12 +68,12 @@ export function Checkbox({ checked = false, children }: PropsWithChildren<{ chec
 
 export function DropDown({ children }: PropsWithChildren) {
 	return (
-		<div className="flex h-[var(--form-height)] items-center rounded-1e3 shadow-[0_0_0_1px_theme('colors.gray.300')]">
+		<div className="flex h-[var(--form-height)] items-center rounded-1e3 shadow-[inset_0_0_0_1px_theme('colors.gray.300')]">
 			<div className="flex grow items-center justify-between">
 				{/* LHS */}
 				<div className="flex items-center">
 					<div className="flex h-[var(--form-height)] w-[var(--form-height)] items-center justify-center">
-						<div className="h-[var(--form-icon-size)] w-[var(--form-icon-size)] rounded-1e3 bg-blue-500"></div>
+						<div className="h-[var(--form-icon-size)] w-[var(--form-icon-size)] rounded-1e3 bg-sky-400"></div>
 					</div>
 					<div>{children}</div>
 				</div>
@@ -121,7 +121,7 @@ export function SyntaxHighlighting({ language: _, children }: PropsWithChildren<
 
 export function ActionButton() {
 	return (
-		<div className="h-[var(--action-button-height)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]">
+		<div className="h-[var(--action-button-height)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.gray.300')]">
 			<div className="flex items-center justify-center">
 				<div>Copy</div>
 				<div className="flex h-[var(--action-button-height)] w-[var(--action-button-height)] items-center justify-center">
@@ -137,7 +137,7 @@ export function ActionButton() {
 export function SliderLabel({ value, children }: PropsWithChildren<{ value: number }>) {
 	return (
 		<div className="flex items-center justify-between">
-			<GrayChip>{children}</GrayChip>
+			<Chip>{children}</Chip>
 			<div className="flex items-center">
 				<code>{value < 10 ? value.toFixed(2) : `${value} PX`}</code>
 				<div className="flex h-[var(--slider-label-height)] w-[var(--slider-label-height)] items-center justify-center">
@@ -152,11 +152,11 @@ export function SliderInput() {
 	return (
 		<div className="flex h-[var(--slider-thumb-size)] flex-col justify-center">
 			{/* Track */}
-			<div className="css-slider-background-image h-[var(--slider-track-height)] rounded-1e3">
+			<div className="slider-bg-image h-[var(--slider-track-height)] rounded-1e3">
 				{/* <div className="flex h-100% items-center"> */}
 				<div className="flex h-100% items-center justify-center">
 					{/* Thumb */}
-					<div className="h-[var(--slider-thumb-size)] w-[var(--slider-thumb-size)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]"></div>
+					<div className="h-[var(--slider-thumb-size)] w-[var(--slider-thumb-size)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.gray.300')]"></div>
 				</div>
 			</div>
 		</div>
@@ -198,7 +198,7 @@ function SearchTextField() {
 
 export function SearchBar() {
 	return (
-		<div className="h-[var(--search-bar-height)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]">
+		<div className="h-[var(--search-bar-height)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.gray.300')]">
 			<div className="flex">
 				{/* LHS */}
 				<div className="flex h-[var(--search-bar-height)] w-[var(--search-bar-height)] items-center justify-center">
@@ -249,7 +249,7 @@ function SearchGridItem() {
 
 export function SearchGrid() {
 	return (
-		<div className="css-search-grid">
+		<div className="search-grid">
 			{iota(300).map(index => (
 				<SearchGridItem key={index} />
 			))}

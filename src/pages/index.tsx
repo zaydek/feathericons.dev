@@ -1,8 +1,8 @@
 import {
 	ActionButton,
 	Checkbox,
+	Chip,
 	DropDown,
-	GrayChip,
 	SearchBar,
 	SearchGrid,
 	Section,
@@ -101,13 +101,16 @@ function Sidebar1() {
 	return (
 		<Sidebar>
 			<Section>
-				<IconsGroupFeather checked />
-			</Section>
-			<Section>
-				<IconsGroupSocialMedia />
-			</Section>
-			<Section>
-				<IconsGroupPaymentServices />
+				<div className="flex flex-col gap-16">
+					<div className="flex">
+						<Chip>Icons</Chip>
+					</div>
+					<div className="flex flex-col gap-[var(--sidebar-spacing)]">
+						<IconsGroupFeather checked />
+						<IconsGroupSocialMedia />
+						<IconsGroupPaymentServices />
+					</div>
+				</div>
 			</Section>
 		</Sidebar>
 	)
@@ -116,11 +119,10 @@ function Sidebar1() {
 function SearchApp() {
 	return (
 		<>
-			<div className="css-search-bar-background-image sticky top-0 p-[var(--main-spacing)]">
+			<div className="search-bar-bg-image sticky top-0 p-[var(--main-spacing)]">
 				<div className="flex flex-col gap-16">
-					{/* Use var(--generic-input-height) here to make optically centered (see sidebars) */}
-					<div className="flex h-[var(--generic-input-height)] items-center justify-between">
-						<GrayChip>Search</GrayChip>
+					<div className="flex items-center justify-between">
+						<Chip>Search</Chip>
 						<div>Twitter TODO</div>
 					</div>
 					<SearchBar />
@@ -135,8 +137,9 @@ function Sidebar2() {
 	return (
 		<Sidebar>
 			<Section>
-				<div className="flex items-center justify-between">
-					<GrayChip>Code</GrayChip>
+				{/* Use h-[var(--chip-height)] here to optically align chips */}
+				<div className="flex h-[var(--chip-height)] items-center justify-between">
+					<Chip>Code</Chip>
 					<DropDown>TypeScript React</DropDown>
 				</div>
 				<SyntaxHighlighting language="html">
