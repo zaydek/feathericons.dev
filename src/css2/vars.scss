@@ -34,6 +34,12 @@
 	--search-bar-icon-negative-margin:     calc((var(--search-bar-height) - var(--search-bar-icon-height)) / 2);
 
 	/****************************************************************************/
+	/* Search grid */
+
+	--search-grid-item-height:             128px;
+	--search-grid-item-icon-height:        32px;
+
+	/****************************************************************************/
 	/* Sidebar */
 
 	--sidebar-1-width:                     250px;

@@ -1,5 +1,5 @@
-import { ActionDropdownButton, Checkbox, FormatDropdownButton, SearchBar, Slider, SyntaxHighlighting } from "@/components/components2"
-import { Heading } from "@/components/docs"
+import { ActionDropdownButton, Checkbox, FormatDropdownButton, Heading, SearchBar, SearchGrid, Slider, SyntaxHighlighting } from "@/components/components2"
+import { feather, paymentServices, socialMedia } from "@/constants"
 import { detab } from "@/lib"
 import { PropsWithChildren, useEffect, useState } from "react"
 
@@ -30,11 +30,8 @@ function Sidebar2({ children }: PropsWithChildren) {
 
 function Main({ children }: PropsWithChildren) {
 	return (
-		// Container
-		//
-		// Use absolute because relative doesn't work as expected
 		<div className="absolute right-[var(--sidebar-2-width)] left-[var(--sidebar-1-width)] flex justify-center p-[var(--spacing-2)] pt-0">
-			<div className="w-100% max-w-lg">
+			<div className="w-100% max-w-[896px]">
 				{/* Search bar */}
 				<div className="sticky top-0 flex flex-col gap-[var(--spacing-2)] bg-white py-[var(--spacing-2)]">
 					<Heading>Search</Heading>
@@ -73,15 +70,9 @@ export default function Page() {
 			</style>
 			<Sidebar1>
 				<Heading>Icons</Heading>
-				<Checkbox p1={<>Hello, world! Hello, world! Hello, world!</>} p2={<>Hello, world!</>}>
-					Feather
-				</Checkbox>
-				<Checkbox p1={<>Hello, world! Hello, world! Hello, world!</>} p2={<>Hello, world!</>}>
-					Feather
-				</Checkbox>
-				<Checkbox p1={<>Hello, world! Hello, world! Hello, world!</>} p2={<>Hello, world!</>}>
-					Feather
-				</Checkbox>
+				<Checkbox desc={feather.desc}>{feather.name}</Checkbox>
+				<Checkbox desc={socialMedia.desc}>{socialMedia.name}</Checkbox>
+				<Checkbox desc={paymentServices.desc}>{paymentServices.name}</Checkbox>
 			</Sidebar1>
 			<Sidebar2>
 				<div className="flex h-[var(--heading-height)] items-center justify-between">
@@ -106,59 +97,7 @@ export default function Page() {
 				<hr className="-mx-[var(--spacing-2)]" />
 			</Sidebar2>
 			<Main>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
+				<SearchGrid />
 			</Main>
 		</>
 	)

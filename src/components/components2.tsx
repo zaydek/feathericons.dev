@@ -1,10 +1,11 @@
+import { iota } from "@/lib"
 import { PropsWithChildren, ReactNode, useCallback, useState } from "react"
 import { Lang } from "shiki-es"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Heading
 
-// Exported
+// EXPORTED
 export function Heading({ children }: PropsWithChildren) {
 	// Use w-fit because of flex flex-col
 	return <div className="ml-8 flex h-[var(--heading-height)] w-fit items-center rounded-1e3 bg-gray-200 px-[calc(var(--heading-height)_/_2)]">{children}</div>
@@ -17,7 +18,7 @@ function SearchBarButton() {
 	return <div className="m-[var(--search-bar-icon-negative-margin)] aspect-square h-[var(--search-bar-icon-height)] rounded-1e3 bg-gray-700"></div>
 }
 
-// Exported
+// EXPORTED
 export function SearchBar() {
 	return (
 		<div className="flex h-[var(--search-bar-height)] rounded-1e3 bg-white shadow-[var(--inset-shadow)]">
@@ -40,10 +41,52 @@ export function SearchBar() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Search grid
+
+//// {/* NOTE: Using <button> here breaks truncate 🫠 */}
+//// <div className="flex h-[var(--search-grid-item-height)] w-[var(--search-grid-item-height)] flex-col">
+//// 	{/* Icon */}
+//// 	<div className="flex grow items-center justify-center">
+//// 		<div className="-mb-[calc(var(--search-grid-item-text-container-height)_/_2)] h-[var(--search-grid-item-icon-height)] w-[var(--search-grid-item-icon-height)] rounded-1e3 bg-gray-700 group-hover:group-active:bg-sky-400"></div>
+//// 	</div>
+//// 	{/* Text */}
+//// 	<div className="flex h-[var(--search-grid-item-text-container-height)] items-center justify-center px-16">
+//// 		<div className="truncate group-hover:group-active:text-sky-400">Hello, world! Hello, world!</div>
+//// 	</div>
+//// </div>
+
+// E.g. https://play.tailwindcss.com/AlKl7fvFY3
+function SearchGridItem() {
+	return (
+		// NOTE: Using <button> here breaks truncate 🫠
+		<button className="group flex justify-center">
+			{/* Use pt-0 to make icons appear more optically aligned */}
+			<div className="flex aspect-square h-[var(--search-grid-item-height)] flex-col p-16 pt-0">
+				<div className="flex grow items-center justify-center">
+					<div className="aspect-square h-[var(--search-grid-item-icon-height)] rounded-1e3 bg-gray-700"></div>
+				</div>
+				<div className="truncate">Hello, world! Hello, world!</div>
+			</div>
+		</button>
+	)
+}
+
+// EXPORTED
+export function SearchGrid() {
+	return (
+		<div className="grid grid-cols-[repeat(auto-fill,_minmax(var(--search-grid-item-height),_1fr))]">
+			{iota(300).map(index => (
+				<SearchGridItem key={index} />
+			))}
+		</div>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // Form
 
-// Exported
-export function Checkbox({ p1, p2, children }: PropsWithChildren<{ p1: ReactNode; p2: ReactNode }>) {
+// EXPORTED
+export function Checkbox({ desc, children }: PropsWithChildren<{ desc: ReactNode[] }>) {
 	return (
 		<div className="flex flex-col gap-[var(--spacing-1)]">
 			{/* Button */}
@@ -59,8 +102,8 @@ export function Checkbox({ p1, p2, children }: PropsWithChildren<{ p1: ReactNode
 				</div>
 			</div>
 			{/* Description */}
-			<p className="ml-8 leading-[1.5]">{p1}</p>
-			<p className="ml-8 leading-[1.5]">{p2}</p>
+			<p className="ml-8 leading-[1.5]">{desc[0]}</p>
+			<p className="ml-8 leading-[1.5]">{desc[1]}</p>
 		</div>
 	)
 }
@@ -77,7 +120,7 @@ function DropdownItem({ children }: PropsWithChildren) {
 	)
 }
 
-// Exported
+// EXPORTED
 export function FormatDropdownButton() {
 	const [show, setShow] = useState(false)
 
@@ -113,7 +156,7 @@ export function FormatDropdownButton() {
 	)
 }
 
-// Exported
+// EXPORTED
 export function ActionDropdownButton() {
 	const [show, setShow] = useState(false)
 
@@ -154,7 +197,7 @@ export function ActionDropdownButton() {
 ////////////////////////////////////////////////////////////////////////////////
 // Syntax highlighting
 
-// Exported
+// EXPORTED
 export function SyntaxHighlighting({ lang: _, children }: PropsWithChildren<{ lang: Lang }>) {
 	const lines = ((children + "\n") as string).split("\n")
 	const lineCount = ("" + lines.length).length
@@ -212,7 +255,7 @@ function SliderInput() {
 	)
 }
 
-// Exported
+// EXPORTED
 export function Slider({ value, children }: PropsWithChildren<{ value: number }>) {
 	return (
 		<div className="flex flex-col gap-[var(--spacing-1)]">
