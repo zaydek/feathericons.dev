@@ -186,7 +186,8 @@ export default function Page() {
 			{/* Use grow because #__next uses flex */}
 			{/* Omit pt-* because of <SearchBar> */}
 			<main className="flex grow justify-center px-[var(--main-spacing)] pb-[calc(var(--main-spacing)_*_2)]">
-				<div className="w-100% max-w-[896px]">
+				{/* <div className="w-100% max-w-[896px]"> */}
+				<div className="w-100% max-w-xl">
 					<MainContents />
 				</div>
 			</main>
