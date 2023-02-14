@@ -3,7 +3,7 @@ import * as feather from "../data/react-feather"
 import { useContext, useEffect, useMemo, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 import { getStringFromChildren } from "../aria/utils"
-import { ShikiContext } from "../providers/shiki"
+import { ShikiContext } from "../state/shiki"
 import { Anchor, AnchorProps, SoftAnchorProps } from "./anchor"
 import { DynamicIcon, Icon } from "./dynamic-icon"
 import {

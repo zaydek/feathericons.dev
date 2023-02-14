@@ -1,34 +1,35 @@
-import "../css2/base.css"
+import "@/css/base.css"
+import "@/css/data-bg-image.scss"
+import "@/css/vars.scss"
 
-import "../css2/vars.scss"
-
-import "../css2/data-bg-image.scss"
-
+import { detab } from "@/lib/format"
+import { ShikiProvider } from "@/state/shiki"
 import { DM_Sans, Fira_Code, Inter } from "@next/font/google"
 import { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import Script from "next/script"
 import { useEffect } from "react"
-import { detab } from "../lib/format"
-import { ShikiProvider } from "../providers/shiki"
 import { NameProps } from "./[name]"
 
+// prettier-ignore
 const fontDmSans = DM_Sans({
 	display: "swap",
 	subsets: ["latin"],
-	weight: ["400", "500", "700"],
+	weight:  ["400", "500", "700"],
 })
 
+// prettier-ignore
 const fontInter = Inter({
 	display: "swap",
 	subsets: ["latin"],
-	weight: ["400", "500", "600", "700", "800", "900"],
+	weight:  ["400", "500", "600", "700", "800", "900"],
 })
 
+// prettier-ignore
 const fontFiraCode = Fira_Code({
 	display: "swap",
 	subsets: ["latin"],
-	weight: ["400"],
+	weight:  ["400"],
 })
 
 function InlineGoogleFonts() {
