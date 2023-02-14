@@ -1,29 +1,61 @@
 :root {
-	--main-spacing:                           32px;
-	--sidebar-spacing:                        24px;
+	/****************************************************************************/
+	/* Spacing */
 
-	--sidebar-1-width:                        250px;
-	--sidebar-2-width:                        400px;
+	--spacing-1:                           12px;
+	--spacing-2:                           24px;
 
-	--chip-height:                            24px;
+	/****************************************************************************/
+	/* Shadows */
 
-	--search-bar-height:                      48px;
-	--search-bar-icon-size:                   16px;
+	--shadow:                              0 0 0 1px gray;
+	--inset-shadow:                        inset 0 0 0 1px red;
 
-	--search-grid-item-size:                  128px;
-	--search-grid-item-icon-size:             32px;
-	--search-grid-item-text-container-height: 32px;
+	/****************************************************************************/
+	/* Layout */
 
-	--form-height:                            32px;
-	--form-icon-size:                         16px;
-	--form-symbol-size:                       20px;
-	--form-tick-symbol-size:                  8px;
+	--sidebar-1-width:                     250px;
+	--sidebar-2-width:                     400px;
 
-	--action-button-height:                   36px;
-	--action-button-icon-size:                16px;
+	--sidebar-1-inset:                     0 auto 0 0;
+	--sidebar-2-inset:                     0 0 0 auto;
+	--main-inset:                          0 var(--sidebar-2-width) auto var(--sidebar-1-width);
 
-	--slider-label-height:                    32px;
-	--slider-reset-button-size:               16px;
-	--slider-track-height:                    6px;
-	--slider-thumb-size:                      32px;
+	/****************************************************************************/
+	/* Heading */
+
+	--heading-height:                      24px;
+
+	/****************************************************************************/
+	/* Search bar */
+
+	--search-bar-height:                   48px;
+	--search-bar-icon-height:              24px;
+	--search-bar-icon-negative-margin:     calc((var(--search-bar-height) - var(--search-bar-icon-height)) / 2);
+
+	/****************************************************************************/
+	/* Sidebar */
+
+	--sidebar-1-width:                     250px;
+	--sidebar-2-width:                     400px;
+
+	/****************************************************************************/
+	/* Form */
+
+	--form-height:                         32px;
+	--form-icon-height:                    20px;
+	--form-sm-icon-height:                 6px;
+	--form-icon-negative-margin:           calc((var(--form-height) - var(--form-icon-height)) / 2);
+	--form-sm-icon-negative-margin:        calc((var(--form-height) - var(--form-sm-icon-height)) / 2);
+
+	--lg-form-height:                      36px;
+	--lg-form-icon-height:                 20px;
+	--lg-form-sm-icon-height:              6px;
+	--lg-form-icon-negative-margin:        calc((var(--lg-form-height) - var(--lg-form-icon-height)) / 2);
+	--lg-form-sm-icon-negative-margin:     calc((var(--lg-form-height) - var(--lg-form-sm-icon-height)) / 2);
+
+	--slider-reset-button-height:          16px;
+	--slider-track-height:                 6px;
+	--slider-thumb-height:                 36px;
+	--slider-reset-button-negative-margin: calc((var(--form-height) - var(--slider-reset-button-height)) / 2);
 }

@@ -7,7 +7,8 @@ const defaultTheme = require("./tailwind.default-theme")
 module.exports = {
 	content: ["./src/**/*.tsx"],
 	corePlugins: {
-		boxShadow:      false,
+		//// inset:          false,
+		//// boxShadow:      false,
 		boxShadowColor: false,
 	},
 	// Optimization
@@ -22,6 +23,11 @@ module.exports = {
 	theme: defaultTheme,
 	// See corePlugins
 	plugins: [
+		//// plugin(function ({ matchUtilities }) {
+		//// 	return matchUtilities({
+		//// 		"inset": value => ({ inset: value }),
+		//// 	})
+		//// }),
 		plugin(function ({ matchUtilities }) {
 			return matchUtilities({
 				"shadow": value => ({ boxShadow: value }),
