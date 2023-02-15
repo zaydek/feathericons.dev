@@ -15,27 +15,27 @@ import { stringifySvgElement } from "./stringify"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-async function exportOptimizedSvg(dirname: string, outdir: string) {
+async function exportOptimizedSvg(src: string, dst: string) {
 	const zip = new JSZip()
-	const names = await fs.readdir(dirname)
+	const names = await fs.readdir(src)
 	for (const name of names) {
-		console.log("✅", name)
-		const filename = path.join(dirname, name)
+		const filename = path.join(src, name)
 		const buffer = await fs.readFile(filename)
 		// prettier-ignore
 		const svg = buffer.toString()
-			.replaceAll(/ fill="none"/g, "")                    // Remove fill="none"
+			//// .replaceAll(/ fill="none"/g, "")                    // Remove fill="none"
 			.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1")        // Remove <g>; preserve $1
 			.replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
 		const svg_optimized = optimizeSvg(svg).data
 		const { window } = new JSDOM(svg_optimized)
 		const svg_optimizedPretty = stringifySvgElement(window.document.body.firstElementChild as SVGSVGElement)
 		//// const svg_optimizedPrettyColor = svg_optimizedPretty.replace('fill="none"', 'fill="currentColor"')
+		console.log("✅", name)
 		console.log(svg_optimizedPretty)
-		zip.file(`${name}.svg`, svg_optimizedPretty)
+		zip.file(name, svg_optimizedPretty)
 	}
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
-	await fs.writeFile(`idea.zip`, buffer)
+	await fs.writeFile(dst, buffer)
 }
 
 async function exportOptimizedTypeScriptReactSvg(dirname: string, outdir: string) {
@@ -51,12 +51,18 @@ async function exportZip(dirname: string, outdir: string) {
 }
 
 async function run() {
-	//// // Read files from a directory
-	//// const filenames = await fs.readdir("public/wolf-kit/social-media/figma/svg")
-	//// console.log(filenames)
-	const dirnames = ["public/wolf-kit/social-media/figma/svg"]
-	for (const dirname of dirnames) {
-		await exportOptimizedSvg(dirname, "")
+	const config = [
+		{
+			src: "public/wolf-kit/social-media-icons/figma/svg",
+			dst: "social-media-icons.zip",
+		},
+		{
+			src: "public/wolf-kit/payment-icons/figma/svg",
+			dst: "payment-icons.zip",
+		},
+	]
+	for (const { src, dst } of config) {
+		await exportOptimizedSvg(src, dst)
 		//// await exportOptimizedTypeScriptReactSvg(dirname, "")
 		//// await exportZip(dirname, "")
 	}
