@@ -8,77 +8,98 @@ import { formatSvg } from "./format-svg"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-type Icons = Record<string, string>
+//// .replaceAll(/ fill="none"/g, "")               // Remove fill="none"
+//// const svg_optimizedPrettyColor = svg_optimizedPretty.replace('fill="none"', 'fill="currentColor"')
 
-async function getIcons(srcdir: string) {
-	const icons: Icons = {}
+// s1: Raw
+// s2: Remove dead code
+// s3: SVGO
+// s4: formatSvg
+//
+async function parseSvgs(srcdir: string) {
+	const svgs: Record<string, string> = {}
 	const names = await fs.readdir(srcdir)
 	for (const name of names) {
-		const filename = path.join(srcdir, name)
-		const buffer = await fs.readFile(filename)
+		const s1 = await fs.readFile(path.join(srcdir, name), "utf-8")
 		// prettier-ignore
-		const contents = buffer.toString()
-			//// .replaceAll(/ fill="none"/g, "")               // Remove fill="none"
+		const s2 = s1
 			.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1")        // Remove <g>; preserve $1
 			.replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
-		const formatted = optimizeSvg(contents).data
-		const { window } = new JSDOM(formatted)
-		const optimized = formatSvg(window.document.body.firstElementChild as SVGSVGElement)
-		//// const svg_optimizedPrettyColor = svg_optimizedPretty.replace('fill="none"', 'fill="currentColor"')
-		console.log("✅", filename)
-		console.log(optimized)
-		icons[name] = optimized + "\n" // EOF
+		const s3 = optimizeSvg(s2).data
+		const { window } = new JSDOM(s3)
+		const s4 = formatSvg(window.document.body.firstElementChild as SVGSVGElement)
+		console.log("✅", name)
+		console.log(s4)
+		svgs[name] = s4 + "\n" // EOF
 	}
-	return icons
+	return svgs
 }
 
-async function exportSvg(icons: Icons, dstdir: string) {
-	await fs.mkdir(path.join(dstdir, "svg"), { recursive: true })
-	for (const [name, icon] of Object.entries(icons)) {
-		await fs.writeFile(path.join(dstdir, "svg", name), icon)
-	}
-}
+///// async function exportVector(icons: Record<string, string>, outdir: string) {
+///// 	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
+///// 	for (const [name, icon] of Object.entries(icons)) {
+///// 		await fs.writeFile(path.join(outdir, name), icon)
+///// 	}
+///// }
 
-async function exportSvgZip(icons: Icons, dstdir: string) {
-	await fs.mkdir(dstdir, { recursive: true })
+async function exportVectorZip(icons: Record<string, string>, outdir: string) {
+	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
 	const zip = new JSZip()
-	for (const [name, icon] of Object.entries(icons)) {
-		zip.file(name, icon)
+	for (const [name, code] of Object.entries(icons)) {
+		zip.file(name, code)
 	}
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
-	await fs.writeFile(path.join(dstdir, "svg.zip"), buffer)
+	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
 }
 
-//// async function exportOptimizedTypeScriptReactSvg(dirname: string, outdir: string) {
-//// 	// run through svgo
-//// 	// run through stringify
-//// 	// create exports
-//// }
-////
-//// // Zips svg, png@1x, png@2x, jpg@1x, jpg@2x
-//// async function exportZip(dirname: string, outdir: string) {
-//// 	// run through svgo
-//// 	// run through jszip
-//// }
+///// async function exportBinary(srcdir: string, outdir: string) {
+///// 	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
+///// 	await fs.cp(srcdir, outdir, { recursive: true })
+///// }
+
+async function exportBinaryZip(srcdir: string, outdir: string) {
+	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
+	const zip = new JSZip()
+	const names = await fs.readdir(srcdir)
+	for (const name of names) {
+		const contents = await fs.readFile(path.join(srcdir, name), "utf-8")
+		zip.file(name, contents)
+	}
+	const buffer = await zip.generateAsync({ type: "nodebuffer" })
+	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
+}
+
+async function exportSocialMediaIcons() {
+	const svgs = await parseSvgs("icons/wolf-kit/figma/social-media-icons/svg")
+	//// await exportVector(svgs, "icons/wolf-kit/production/social-media-icons/svg")
+	await exportVectorZip(svgs, "icons/wolf-kit/production/social-media-icons/svg")
+	//// await exportBinary("icons/wolf-kit/figma/social-media-icons/jpg@1x", "icons/wolf-kit/production/social-media-icons/jpg@1x")
+	//// await exportBinary("icons/wolf-kit/figma/social-media-icons/jpg@2x", "icons/wolf-kit/production/social-media-icons/jpg@2x")
+	//// await exportBinary("icons/wolf-kit/figma/social-media-icons/png@1x", "icons/wolf-kit/production/social-media-icons/png@1x")
+	//// await exportBinary("icons/wolf-kit/figma/social-media-icons/png@2x", "icons/wolf-kit/production/social-media-icons/png@2x")
+	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/jpg@1x", "icons/wolf-kit/production/social-media-icons/jpg@1x")
+	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/jpg@2x", "icons/wolf-kit/production/social-media-icons/jpg@2x")
+	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/png@1x", "icons/wolf-kit/production/social-media-icons/png@1x")
+	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/png@2x", "icons/wolf-kit/production/social-media-icons/png@2x")
+}
+
+async function exportPaymentIcons() {
+	const svgs = await parseSvgs("icons/wolf-kit/figma/payment-icons/svg")
+	//// await exportVector(svgs, "icons/wolf-kit/production/payment-icons/svg")
+	await exportVectorZip(svgs, "icons/wolf-kit/production/payment-icons/svg")
+	//// await exportBinary("icons/wolf-kit/figma/payment-icons/jpg@1x", "icons/wolf-kit/production/payment-icons/jpg@1x")
+	//// await exportBinary("icons/wolf-kit/figma/payment-icons/jpg@2x", "icons/wolf-kit/production/payment-icons/jpg@2x")
+	//// await exportBinary("icons/wolf-kit/figma/payment-icons/png@1x", "icons/wolf-kit/production/payment-icons/png@1x")
+	//// await exportBinary("icons/wolf-kit/figma/payment-icons/png@2x", "icons/wolf-kit/production/payment-icons/png@2x")
+	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/jpg@1x", "icons/wolf-kit/production/payment-icons/jpg@1x")
+	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/jpg@2x", "icons/wolf-kit/production/payment-icons/jpg@2x")
+	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/png@1x", "icons/wolf-kit/production/payment-icons/png@1x")
+	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/png@2x", "icons/wolf-kit/production/payment-icons/png@2x")
+}
 
 async function run() {
-	const config = [
-		{
-			src: "icons/wolf-kit/figma/social-media-icons/svg",
-			dst: "icons/wolf-kit/production/social-media-icons",
-		},
-		{
-			src: "icons/wolf-kit/figma/payment-icons/svg",
-			dst: "icons/wolf-kit/production/payment-icons",
-		},
-	]
-	for (const { src, dst } of config) {
-		const icons = await getIcons(src)
-		await exportSvg(icons, dst)
-		await exportSvgZip(icons, dst)
-		//// await exportOptimizedTypeScriptReactSvg(dirname, "")
-		//// await exportZip(dirname, "")
-	}
+	await exportSocialMediaIcons()
+	await exportPaymentIcons()
 }
 
 run()
