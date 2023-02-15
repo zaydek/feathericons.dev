@@ -61,6 +61,11 @@ function formatIcons(icons: Record<string, string>, { strictJsx }: { strictJsx: 
 		const { window } = new JSDOM(icon)
 		const icon2 = formatSvg(window.document.body.firstElementChild as SVGSVGElement, { strictJsx })
 		copy[name] = icon2
+
+		// LOG
+		console.log(`✅ ${name}.svg`)
+		console.log(icon2)
+		console.log()
 	}
 	return copy
 }

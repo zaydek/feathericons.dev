@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import * as WolfKitSocialMedia from "@/wolf-kit/social-media"
 //// import * as WolfKitPayment from "@/wolf-kit/payment"
 
-const WolfKitSocialMediaEntries = Object.entries(WolfKitSocialMedia).slice(-14, -13)
+const WolfKitSocialMediaEntries = Object.entries(WolfKitSocialMedia) //// .slice(-14, -13)
 
 //// import { DynamicIcon } from "@/components/dynamic-icon"
 ////
