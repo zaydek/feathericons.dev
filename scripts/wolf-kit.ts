@@ -1,7 +1,7 @@
 import fs from "node:fs/promises"
 import path from "node:path"
 
-import { convertToTitleCase } from "@/lib"
+import { convertToTitleCase, detab } from "@/lib"
 import { JSDOM } from "jsdom"
 import JSZip from "jszip"
 import { optimize as optimizeSvg } from "svgo"
@@ -46,13 +46,17 @@ async function exportVector(icons: Record<string, string>, outdir: string) {
 	}
 }
 
-// TODO: Generate an index?
 async function exportTypeScriptReactComponents(icons: Record<string, string>, outdir: string) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, code] of Object.entries(icons)) {
 		const transformed = transformTsx(convertToTitleCase(name), code, { comment: `https://feathericons.dev/${name}` })
 		await fs.writeFile(path.join(outdir, `${convertToTitleCase(name)}.tsx`), transformed)
 	}
+	// prettier-ignore
+	const exports = Object.keys(icons).map(name => detab(`
+		export * from "./${convertToTitleCase(name)}"
+	`).trim()).join("\n")
+	await fs.writeFile(path.join(outdir, "index.ts"), exports + "\n") // EOF
 }
 
 async function exportVectorZip(icons: Record<string, string>, outdir: string) {
