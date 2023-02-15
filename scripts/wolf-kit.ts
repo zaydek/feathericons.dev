@@ -41,9 +41,14 @@ async function parseSvgs(srcdir: string) {
 ///// 		await fs.writeFile(path.join(outdir, name), icon)
 ///// 	}
 ///// }
+/////
+///// async function exportBinary(srcdir: string, outdir: string) {
+///// 	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
+///// 	await fs.cp(srcdir, outdir, { recursive: true })
+///// }
 
 async function exportVectorZip(icons: Record<string, string>, outdir: string) {
-	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
+	await fs.mkdir(path.dirname(outdir), { recursive: true }) // Ensure directory exists
 	const zip = new JSZip()
 	for (const [name, code] of Object.entries(icons)) {
 		zip.file(name, code)
@@ -52,13 +57,8 @@ async function exportVectorZip(icons: Record<string, string>, outdir: string) {
 	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
 }
 
-///// async function exportBinary(srcdir: string, outdir: string) {
-///// 	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
-///// 	await fs.cp(srcdir, outdir, { recursive: true })
-///// }
-
 async function exportBinaryZip(srcdir: string, outdir: string) {
-	await fs.mkdir(outdir, { recursive: true }) // Ensure directory exists
+	await fs.mkdir(path.dirname(outdir), { recursive: true }) // Ensure directory exists
 	const zip = new JSZip()
 	const names = await fs.readdir(srcdir)
 	for (const name of names) {
