@@ -1,10 +1,13 @@
 import { detab } from "@/lib"
 import { useEffect, useState } from "react"
 
-import * as WolfKitSocialMedia from "@/wolf-kit/social-media"
-//// import * as WolfKitPayment from "@/wolf-kit/payment"
+import { Icon } from "@/components/dynamic-icon"
+import * as WolfKitPaymentIcons from "@/wolf-kit/payment"
+import * as WolfKitSocialMediaIcons from "@/wolf-kit/social-media"
 
-const WolfKitSocialMediaEntries = Object.entries(WolfKitSocialMedia) //// .slice(-14, -13)
+const WolfKitSocialMediaIconsEntries: [string, Icon][] = Object.entries(WolfKitSocialMediaIcons) //// .filter(([name]) => !["Circle", "Mono", "Square"].some(f => name.includes(f)))
+const WolfKitPaymentIconsEntries: [string, Icon][] = Object.entries(WolfKitPaymentIcons) //// .filter(([name]) => !["1", "2", "3", "4"].some(f => name.includes(f)))
+const aggregate: [string, Icon][] = [...WolfKitSocialMediaIconsEntries, ...WolfKitPaymentIconsEntries]
 
 //// import { DynamicIcon } from "@/components/dynamic-icon"
 ////
@@ -67,14 +70,14 @@ export default function Page() {
 					`)}
 			</style>
 			<div className="flex justify-center py-96 px-16">
-				<div className="flex w-100% max-w-lg flex-col gap-64">
+				<div className="flex w-100% max-w-xl flex-col gap-64">
 					{/* Search bar */}
 					<div className="flex h-48 items-center rounded-1e3 bg-white px-[calc(48px_/_2)] shadow-[var(--inset-shadow)]">
 						<div>Hello</div>
 					</div>
 					{/* Search grid */}
 					<div className="grid grid-cols-[repeat(auto-fill,_minmax(128px,_1fr))]">
-						{WolfKitSocialMediaEntries.map(([name, Icon]) => (
+						{aggregate.map(([name, Icon]) => (
 							<div key={name} className="flex h-128 flex-col pb-16">
 								<div className="flex grow items-center justify-center">
 									{/* <div className="h-32 w-32 rounded-1e3 bg-gray-700"></div> */}
