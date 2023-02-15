@@ -1,6 +1,6 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useMemo, useState } from "react"
-import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/utils/format"
-import { stringify } from "../../scripts/utils/stringify"
+import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/utils/-format"
+import { stringify } from "../../scripts/utils/-stringify"
 import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "../constants"
 import { manifest } from "../data/manifest"
 import { convertToKebabCase } from "../lib/cases"

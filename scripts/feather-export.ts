@@ -7,8 +7,8 @@ import _feather from "./_feather.generated.json"
 import { JSDOM } from "jsdom"
 import { convertToTitleCase } from "../src/lib/cases"
 import { detab } from "../src/lib/format"
-import { formatAsSvg, formatAsTsx } from "./utils/format"
-import { stringify } from "./utils/stringify"
+import { formatAsSvg, formatAsTsx } from "./utils/-format"
+import { stringify } from "./utils/-stringify"
 
 const omitAttrs = ["class"]
 
