@@ -5,32 +5,37 @@
 import fs from "node:fs/promises"
 import path from "node:path"
 
+import { JSDOM } from "jsdom"
+import JSZip from "jszip"
 import { optimize as optimizeSvg } from "svgo"
+import { stringifySvgElement } from "./stringify"
 
 //// // Maps names to an optimized <svg>
 //// const svgoCache = {}
 
+////////////////////////////////////////////////////////////////////////////////
+
 async function exportOptimizedSvg(dirname: string, outdir: string) {
+	const zip = new JSZip()
 	const names = await fs.readdir(dirname)
-	for (const name of names.slice(0, 1)) {
+	for (const name of names) {
 		console.log("✅", name)
 		const filename = path.join(dirname, name)
 		const buffer = await fs.readFile(filename)
-		const contents = buffer.toString()
-		const optimized = optimizeSvg(contents)
-
-		//// const { window } = new JSDOM(optimized.data)
-		//// const code = stringify(window.document.body.firstElementChild as SVGSVGElement, { strictJsx: false, omitAttrs: [] })
-		//// const svgCode = formatAsSvg(convertToTitleCase(name), code, {
-		//// 	//// license: `/*! Feather v${feather.meta.version} | MIT License | https://github.com/feathericons/feather */`,
-		//// 	comment: `https://feathericons.com/${name}`,
-		//// })
-
-		console.log(optimized.data)
+		// prettier-ignore
+		const svg = buffer.toString()
+			.replaceAll(/ fill="none"/g, "")                    // Remove fill="none"
+			.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1")        // Remove <g>; preserve $1
+			.replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
+		const svg_optimized = optimizeSvg(svg).data
+		const { window } = new JSDOM(svg_optimized)
+		const svg_optimizedPretty = stringifySvgElement(window.document.body.firstElementChild as SVGSVGElement)
+		//// const svg_optimizedPrettyColor = svg_optimizedPretty.replace('fill="none"', 'fill="currentColor"')
+		console.log(svg_optimizedPretty)
+		zip.file(`${name}.svg`, svg_optimizedPretty)
 	}
-
-	// run through svgo
-	// run through stringify
+	const buffer = await zip.generateAsync({ type: "nodebuffer" })
+	await fs.writeFile(`idea.zip`, buffer)
 }
 
 async function exportOptimizedTypeScriptReactSvg(dirname: string, outdir: string) {
