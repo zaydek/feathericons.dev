@@ -1,50 +1,48 @@
-import { ActionDropdownButton, Checkbox, FormatDropdownButton, Heading, SearchBar, SearchGrid, Slider, SyntaxHighlighting } from "@/components/components2"
-import { feather, paymentServices, socialMedia } from "@/constants"
 import { detab } from "@/lib"
-import { PropsWithChildren, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
-////////////////////////////////////////////////////////////////////////////////
-// Layout
+import * as WolfKitSocialMedia from "@/wolf-kit/social-media"
+//// import * as WolfKitPayment from "@/wolf-kit/payment"
 
-function Sidebar1({ children }: PropsWithChildren) {
-	return (
-		<div
-			className="fixed z-10 flex min-h-[100dvh] w-[var(--sidebar-1-width)] flex-col gap-[var(--spacing-2)] bg-white p-[var(--spacing-2)] shadow-[var(--shadow)]"
-			style={{ inset: "var(--sidebar-1-inset)" }}
-		>
-			{children}
-		</div>
-	)
-}
+const WolfKitSocialMediaEntries = Object.entries(WolfKitSocialMedia)
 
-function Sidebar2({ children }: PropsWithChildren) {
-	return (
-		<div
-			className="fixed z-10 flex min-h-[100dvh] w-[var(--sidebar-2-width)] flex-col gap-[var(--spacing-2)] bg-white p-[var(--spacing-2)] shadow-[var(--shadow)]"
-			style={{ inset: "var(--sidebar-2-inset)" }}
-		>
-			{children}
-		</div>
-	)
-}
+//// import { DynamicIcon } from "@/components/dynamic-icon"
+////
+//// const WolfKitSocialMediaNames = Object.keys(WolfKitSocialMedia)
+//// //// const staticWolfKitPaymentKeys = Object.keys(WolfKitPayment)
+////
+//// function WolfKitSocialMediaIcon({ name }: { name: string }) {
+//// 	return <DynamicIcon icon={WolfKitSocialMedia} />
+//// }
 
-function Main({ children }: PropsWithChildren) {
-	return (
-		<div className="absolute right-[var(--sidebar-2-width)] left-[var(--sidebar-1-width)] flex justify-center p-[var(--spacing-2)] pt-0">
-			<div className="w-100% max-w-[896px]">
-				{/* Search bar */}
-				<div className="sticky top-0 flex flex-col gap-[var(--spacing-2)] bg-white py-[var(--spacing-2)]">
-					<Heading>Search</Heading>
-					<SearchBar />
-				</div>
-				{/* Search results */}
-				{children}
-			</div>
-		</div>
-	)
-}
-
-////////////////////////////////////////////////////////////////////////////////
+//// function SearchBar() {
+//// 	return (
+//// 		<div className="h-48 rounded-1e3 bg-white px-[calc(48px_/_4)]">
+//// 			<div>Hello</div>
+//// 		</div>
+//// 	)
+//// }
+////
+//// function SearchGridItem() {
+//// 	return (
+//// 		<div className="flex h-128 flex-col p-16 pt-0">
+//// 			<div className="flex grow items-center justify-center">
+//// 				<div className="h-32 w-32 rounded-1e3 bg-gray-700"></div>
+//// 			</div>
+//// 			<div className="truncate text-center">Hello hello hello hello hello hello</div>
+//// 		</div>
+//// 	)
+//// }
+////
+//// function SearchGrid() {
+//// 	return (
+//// 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(128px,_1fr))]">
+//// 			{iota(60).map(index => (
+//// 				<SearchGridItem key={index} />
+//// 			))}
+//// 		</div>
+//// 	)
+//// }
 
 export default function Page() {
 	const [showOutline, setShowOutline] = useState(false)
@@ -68,37 +66,26 @@ export default function Page() {
 						* { outline: 1px solid hsl(0, 100%, 50%, 0.1); }
 					`)}
 			</style>
-			<Sidebar1>
-				<Heading>Icons</Heading>
-				<Checkbox desc={feather.desc}>{feather.name}</Checkbox>
-				<Checkbox desc={socialMedia.desc}>{socialMedia.name}</Checkbox>
-				<Checkbox desc={paymentServices.desc}>{paymentServices.name}</Checkbox>
-			</Sidebar1>
-			<Sidebar2>
-				<div className="flex h-[var(--heading-height)] items-center justify-between">
-					<Heading>Code</Heading>
-					<FormatDropdownButton />
+			<div className="flex justify-center py-96 px-16">
+				<div className="flex w-100% max-w-lg flex-col gap-64">
+					{/* Search bar */}
+					<div className="flex h-48 items-center rounded-1e3 bg-white px-[calc(48px_/_2)] shadow-[var(--inset-shadow)]">
+						<div>Hello</div>
+					</div>
+					{/* Search grid */}
+					<div className="grid grid-cols-[repeat(auto-fill,_minmax(128px,_1fr))]">
+						{WolfKitSocialMediaEntries.map(([name, Icon]) => (
+							<div key={name} className="flex h-128 flex-col p-16 pt-0">
+								<div className="flex grow items-center justify-center">
+									{/* <div className="h-32 w-32 rounded-1e3 bg-gray-700"></div> */}
+									<Icon className="aspect-square h-32 text-gray-600" />
+								</div>
+								<div className="truncate text-center">{name}</div>
+							</div>
+						))}
+					</div>
 				</div>
-				<SyntaxHighlighting lang="html">
-					{detab(`
-						<!-- https://feathericons.com/feather -->
-						<svg class="feather feather-feather" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-							<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
-							<line x1="16" x2="2" y1="8" y2="22"></line>
-							<line x1="17.5" x2="9" y1="15" y2="15"></line>
-						</svg>
-					`)}
-				</SyntaxHighlighting>
-				<ActionDropdownButton />
-				<hr className="-mx-[var(--spacing-2)]" />
-				<Slider value={32}>Size</Slider>
-				<hr className="-mx-[var(--spacing-2)]" />
-				<Slider value={2}>Stroke width</Slider>
-				<hr className="-mx-[var(--spacing-2)]" />
-			</Sidebar2>
-			<Main>
-				<SearchGrid />
-			</Main>
+			</div>
 		</>
 	)
 }

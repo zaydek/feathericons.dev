@@ -16,7 +16,9 @@
 		"incremental": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@/wolf-kit/payment": ["./icons/wolf-kit/production/payment/tsx/index.ts"],
+			"@/wolf-kit/social-media": ["./icons/wolf-kit/production/social-media/tsx/index.ts"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

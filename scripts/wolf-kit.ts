@@ -1,52 +1,64 @@
 import fs from "node:fs/promises"
 import path from "node:path"
 
-import { convertToTitleCase, detab } from "@/lib"
 import { JSDOM } from "jsdom"
 import JSZip from "jszip"
-import { optimize as optimizeSvg } from "svgo"
+import SVGO from "svgo"
+
+import { convertToTitleCase, detab } from "@/lib"
 import { formatSvg } from "./utils/format-svg"
 import { transformTsx } from "./utils/transform-svg"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// .replaceAll(/ fill="none"/g, "")               // Remove fill="none"
-//// const svg_optimizedPrettyColor = svg_optimizedPretty.replace('fill="none"', 'fill="currentColor"')
-
-// s1: Raw
-// s2: Remove dead code
-// s3: SVGO
-// s4: formatSvg
-//
-async function parseIcons(srcdir: string) {
+async function readIcons(srcdir: string) {
 	const icons: Record<string, string> = {}
 	const basenames = await fs.readdir(srcdir)
 	for (const basename of basenames) {
-		const s1 = await fs.readFile(path.join(srcdir, basename), "utf-8")
+		const { name } = path.parse(basename)
+		const icon = await fs.readFile(path.join(srcdir, basename), "utf-8")
 		// prettier-ignore
-		const s2 = s1
+		const icon2 = icon
 			.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1")        // Remove <g>; preserve $1
 			.replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
-		const s3 = optimizeSvg(s2).data
-		const { window } = new JSDOM(s3)
-		const s4 = formatSvg(window.document.body.firstElementChild as SVGSVGElement)
-		console.log("✅", basename)
-		console.log(s4)
-		icons[path.parse(basename).name] = s4 + "\n" // EOF
+		icons[name] = icon2 + "\n" // Add an EOF (once)
 	}
 	return icons
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-async function exportVector(icons: Record<string, string>, outdir: string) {
-	await fs.mkdir(outdir, { recursive: true })
-	for (const [name, code] of Object.entries(icons)) {
-		await fs.writeFile(path.join(outdir, `${name}.svg`), code)
+function optimizeIcons(icons: Record<string, string>) {
+	const copy: Record<string, string> = {}
+	for (const [name, icon] of Object.entries(icons)) {
+		const icon2 = SVGO.optimize(icon).data
+		copy[name] = icon2
 	}
+	return copy
 }
 
-async function exportTypeScriptReactComponents(icons: Record<string, string>, outdir: string) {
+function formatIcons(icons: Record<string, string>, { strictJsx }: { strictJsx: boolean }) {
+	const copy: Record<string, string> = {}
+	for (const [name, icon] of Object.entries(icons)) {
+		const { window } = new JSDOM(icon)
+		const icon2 = formatSvg(window.document.body.firstElementChild as SVGSVGElement, { strictJsx })
+		copy[name] = icon2
+	}
+	return copy
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+async function exportSvgAndZip(icons: Record<string, string>, outdir: string) {
+	await fs.mkdir(outdir, { recursive: true })
+	const zip = new JSZip()
+	for (const [name, code] of Object.entries(icons)) {
+		await fs.writeFile(path.join(outdir, `${name}.svg`), code)
+		zip.file(name, code)
+	}
+	const buffer = await zip.generateAsync({ type: "nodebuffer" })
+	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
+}
+
+async function exportTsx(icons: Record<string, string>, outdir: string) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, code] of Object.entries(icons)) {
 		const transformed = transformTsx(convertToTitleCase(name), code, { comment: `https://feathericons.dev/${name}` })
@@ -59,17 +71,7 @@ async function exportTypeScriptReactComponents(icons: Record<string, string>, ou
 	await fs.writeFile(path.join(outdir, "index.ts"), exports + "\n") // EOF
 }
 
-async function exportVectorZip(icons: Record<string, string>, outdir: string) {
-	await fs.mkdir(outdir, { recursive: true })
-	const zip = new JSZip()
-	for (const [name, code] of Object.entries(icons)) {
-		zip.file(name, code)
-	}
-	const buffer = await zip.generateAsync({ type: "nodebuffer" })
-	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
-}
-
-async function exportBinaryZip(srcdir: string, outdir: string) {
+async function exportZip(srcdir: string, outdir: string) {
 	await fs.mkdir(outdir, { recursive: true })
 	const zip = new JSZip()
 	const names = await fs.readdir(srcdir)
@@ -83,37 +85,38 @@ async function exportBinaryZip(srcdir: string, outdir: string) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-async function exportSocialMediaIcons() {
-	await fs.rmdir("icons/wolf-kit/production", { recursive: true })
-
-	const icons = await parseIcons("icons/wolf-kit/figma/social-media-icons/svg")
-	await exportVector(icons, "icons/wolf-kit/production/social-media-icons/svg")
-	await exportTypeScriptReactComponents(icons, "icons/wolf-kit/production/social-media-icons/tsx")
-	await exportVectorZip(icons, "icons/wolf-kit/production/social-media-icons/svg")
-	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/jpg@1x", "icons/wolf-kit/production/social-media-icons/jpg@1x")
-	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/jpg@2x", "icons/wolf-kit/production/social-media-icons/jpg@2x")
-	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/png@1x", "icons/wolf-kit/production/social-media-icons/png@1x")
-	await exportBinaryZip("icons/wolf-kit/figma/social-media-icons/png@2x", "icons/wolf-kit/production/social-media-icons/png@2x")
+async function exportWolfKitSocialMedia() {
+	const icons = await readIcons("icons/wolf-kit/figma/social-media/svg")
+	const optimized = optimizeIcons(icons)
+	const svg = formatIcons(optimized, { strictJsx: false })
+	const tsx = formatIcons(optimized, { strictJsx: true })
+	await exportSvgAndZip(svg, "icons/wolf-kit/production/social-media/svg")
+	await exportTsx(tsx, "icons/wolf-kit/production/social-media/tsx")
+	await exportZip("icons/wolf-kit/figma/social-media/jpg@1x", "icons/wolf-kit/production/social-media/jpg@1x")
+	await exportZip("icons/wolf-kit/figma/social-media/jpg@2x", "icons/wolf-kit/production/social-media/jpg@2x")
+	await exportZip("icons/wolf-kit/figma/social-media/png@1x", "icons/wolf-kit/production/social-media/png@1x")
+	await exportZip("icons/wolf-kit/figma/social-media/png@2x", "icons/wolf-kit/production/social-media/png@2x")
 }
 
-async function exportPaymentIcons() {
-	await fs.rmdir("icons/wolf-kit/production", { recursive: true })
-
-	const icons = await parseIcons("icons/wolf-kit/figma/payment-icons/svg")
-	await exportVector(icons, "icons/wolf-kit/production/payment-icons/svg")
-	await exportTypeScriptReactComponents(icons, "icons/wolf-kit/production/payment-icons/tsx")
-	await exportVectorZip(icons, "icons/wolf-kit/production/payment-icons/svg")
-	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/jpg@1x", "icons/wolf-kit/production/payment-icons/jpg@1x")
-	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/jpg@2x", "icons/wolf-kit/production/payment-icons/jpg@2x")
-	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/png@1x", "icons/wolf-kit/production/payment-icons/png@1x")
-	await exportBinaryZip("icons/wolf-kit/figma/payment-icons/png@2x", "icons/wolf-kit/production/payment-icons/png@2x")
+async function exportWolfKitPayment() {
+	const icons = await readIcons("icons/wolf-kit/figma/payment/svg")
+	const optimized = optimizeIcons(icons)
+	const svg = formatIcons(optimized, { strictJsx: false })
+	const tsx = formatIcons(optimized, { strictJsx: true })
+	await exportSvgAndZip(svg, "icons/wolf-kit/production/payment/svg")
+	await exportTsx(tsx, "icons/wolf-kit/production/payment/tsx")
+	await exportZip("icons/wolf-kit/figma/payment/jpg@1x", "icons/wolf-kit/production/payment/jpg@1x")
+	await exportZip("icons/wolf-kit/figma/payment/jpg@2x", "icons/wolf-kit/production/payment/jpg@2x")
+	await exportZip("icons/wolf-kit/figma/payment/png@1x", "icons/wolf-kit/production/payment/png@1x")
+	await exportZip("icons/wolf-kit/figma/payment/png@2x", "icons/wolf-kit/production/payment/png@2x")
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 async function run() {
-	await exportSocialMediaIcons()
-	await exportPaymentIcons()
+	//// await fs.rm("icons/wolf-kit/production", { recursive: true })
+	await exportWolfKitSocialMedia()
+	await exportWolfKitPayment()
 }
 
 run()
