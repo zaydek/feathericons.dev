@@ -6,32 +6,46 @@ import JSZip from "jszip"
 import { optimize as optimizeSvg } from "svgo"
 import { formatSvg } from "./format-svg"
 
-//// // Maps names to an optimized <svg>
-//// const svgoCache = {}
-
 ////////////////////////////////////////////////////////////////////////////////
 
-async function exportOptimizedSvg(srcdir: string, dstdir: string) {
-	const zip = new JSZip()
+type Icons = Record<string, string>
+
+async function getIcons(srcdir: string) {
+	const icons: Icons = {}
 	const names = await fs.readdir(srcdir)
 	for (const name of names) {
 		const filename = path.join(srcdir, name)
 		const buffer = await fs.readFile(filename)
 		// prettier-ignore
-		const svg = buffer.toString()
+		const contents = buffer.toString()
 			//// .replaceAll(/ fill="none"/g, "")               // Remove fill="none"
 			.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1")        // Remove <g>; preserve $1
 			.replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
-		const svg2 = optimizeSvg(svg).data
-		const { window } = new JSDOM(svg2)
-		const svg3 = formatSvg(window.document.body.firstElementChild as SVGSVGElement)
+		const formatted = optimizeSvg(contents).data
+		const { window } = new JSDOM(formatted)
+		const optimized = formatSvg(window.document.body.firstElementChild as SVGSVGElement)
 		//// const svg_optimizedPrettyColor = svg_optimizedPretty.replace('fill="none"', 'fill="currentColor"')
-		console.log("✅", name)
-		console.log(svg3)
-		zip.file(name, svg3 + "\n") // EOF
+		console.log("✅", filename)
+		console.log(optimized)
+		icons[name] = optimized + "\n" // EOF
+	}
+	return icons
+}
+
+async function exportSvg(icons: Icons, dstdir: string) {
+	await fs.mkdir(path.join(dstdir, "svg"), { recursive: true })
+	for (const [name, icon] of Object.entries(icons)) {
+		await fs.writeFile(path.join(dstdir, "svg", name), icon)
+	}
+}
+
+async function exportSvgZip(icons: Icons, dstdir: string) {
+	await fs.mkdir(dstdir, { recursive: true })
+	const zip = new JSZip()
+	for (const [name, icon] of Object.entries(icons)) {
+		zip.file(name, icon)
 	}
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
-	await fs.mkdir(dstdir, { recursive: true })
 	await fs.writeFile(path.join(dstdir, "svg.zip"), buffer)
 }
 
@@ -59,7 +73,9 @@ async function run() {
 		},
 	]
 	for (const { src, dst } of config) {
-		await exportOptimizedSvg(src, dst)
+		const icons = await getIcons(src)
+		await exportSvg(icons, dst)
+		await exportSvgZip(icons, dst)
 		//// await exportOptimizedTypeScriptReactSvg(dirname, "")
 		//// await exportZip(dirname, "")
 	}
