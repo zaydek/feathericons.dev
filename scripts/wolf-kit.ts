@@ -53,12 +53,12 @@ async function exportZip(dirname: string, outdir: string) {
 async function run() {
 	const config = [
 		{
-			src: "public/wolf-kit/social-media-icons/figma/svg",
-			dst: "social-media-icons.zip",
+			src: "icons/wolf-kit/social-media-icons/svg",
+			dst: "icons/wolf-kit/social-media-icons/svg-optimized.zip",
 		},
 		{
-			src: "public/wolf-kit/payment-icons/figma/svg",
-			dst: "payment-icons.zip",
+			src: "icons/wolf-kit/payment-icons/svg",
+			dst: "icons/wolf-kit/payment-icons/svg-optimized.zip",
 		},
 	]
 	for (const { src, dst } of config) {
