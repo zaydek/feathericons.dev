@@ -42,7 +42,7 @@ async function parseIcons(srcdir: string) {
 async function exportVector(icons: Record<string, string>, outdir: string) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, code] of Object.entries(icons)) {
-		await fs.writeFile(path.join(outdir, name), code)
+		await fs.writeFile(path.join(outdir, `${name}.svg`), code)
 	}
 }
 
