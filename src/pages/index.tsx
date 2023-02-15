@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import * as WolfKitSocialMedia from "@/wolf-kit/social-media"
 //// import * as WolfKitPayment from "@/wolf-kit/payment"
 
-const WolfKitSocialMediaEntries = Object.entries(WolfKitSocialMedia)
+const WolfKitSocialMediaEntries = Object.entries(WolfKitSocialMedia).slice(-14, -13)
 
 //// import { DynamicIcon } from "@/components/dynamic-icon"
 ////
@@ -75,10 +75,11 @@ export default function Page() {
 					{/* Search grid */}
 					<div className="grid grid-cols-[repeat(auto-fill,_minmax(128px,_1fr))]">
 						{WolfKitSocialMediaEntries.map(([name, Icon]) => (
-							<div key={name} className="flex h-128 flex-col p-16 pt-0">
+							<div key={name} className="flex h-128 flex-col pb-16">
 								<div className="flex grow items-center justify-center">
 									{/* <div className="h-32 w-32 rounded-1e3 bg-gray-700"></div> */}
-									<Icon className="aspect-square h-32 text-gray-600" />
+									{/* NOTE: aspect-square doesn't work here */}
+									<Icon className="h-48 w-48" />
 								</div>
 								<div className="truncate text-center">{name}</div>
 							</div>
