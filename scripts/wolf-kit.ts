@@ -37,10 +37,8 @@ async function readIcons(srcdir: string) {
 	for (const basename of basenames) {
 		const { name } = path.parse(basename)
 		const icon = await fs.readFile(path.join(srcdir, basename), "utf-8")
-		// prettier-ignore
-		const icon2 = icon
-			.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1")        // Remove <g>; preserve $1
-			.replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
+		const icon2 = icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1") // Remove <g>; preserve $1
+		//// .replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
 		icons[name] = icon2 + "\n" // Add an EOF (once)
 	}
 	return icons
@@ -49,7 +47,18 @@ async function readIcons(srcdir: string) {
 function optimizeIcons(icons: Record<string, string>) {
 	const copy: Record<string, string> = {}
 	for (const [name, icon] of Object.entries(icons)) {
-		const icon2 = SVGO.optimize(icon).data
+		const icon2 = SVGO.optimize(icon, {
+			plugins: [
+				"preset-default",
+				{
+					name: "prefixIds",
+					params: {
+						prefix: name,
+						//// delim: "-",
+					},
+				},
+			],
+		}).data
 		copy[name] = icon2
 	}
 	return copy

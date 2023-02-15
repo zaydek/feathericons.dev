@@ -46,10 +46,11 @@ function formatSvgElement(ref: Element, nesting: number, { strictJsx }: { strict
 	const keys = Object.values(ref.attributes).map(node => node.name)
 	const sortedKeys = sortKeys(tag, keys)
 
+	const attrs = stringifyAttrs(sortedKeys, ref.attributes, { strictJsx })
 	if (ref.children.length === 0) {
-		str = "  ".repeat(nesting) + `<${tag} ${stringifyAttrs(sortedKeys, ref.attributes, { strictJsx })} />`
+		str = "  ".repeat(nesting) + `<${tag}${attrs === "" ? "" : ` ${attrs}`} />`
 	} else {
-		str = "  ".repeat(nesting) + `<${tag} ${stringifyAttrs(sortedKeys, ref.attributes, { strictJsx })}>`
+		str = "  ".repeat(nesting) + `<${tag}${attrs === "" ? "" : ` ${attrs}`}>`
 		for (const child of ref.children) {
 			//// if (child.tagName === "defs") { continue } // prettier-ignore
 			//// if (child.tagName === "g") {
