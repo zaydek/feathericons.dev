@@ -1,36 +1,30 @@
 import { detab, tab } from "@/lib"
 
-// prettier-ignore
-export function transformSvg(name: string, code: string, { banner: __banner__ }: { banner: string }) {
-	code = code.trim()
+export function transformSvg(_: string, code: string, { banner }: { banner: string }) {
 	return detab(`
-		${__banner__}
-		${tab(code.replace(/<svg ([^>]+)>/, `<svg class="feather feather-${name}" $1>`), 2, { omitStart: true })}
-	`) + "\n" // EOF
+		${banner}
+		${tab(code.trim().replace(/<svg ([^>]+)>/, `<svg $1>`), 2, { omitStart: true })}
+	`)
 }
 
-// prettier-ignore
-export function transformJsx(name: string, code: string, { banner: __banner__ }: { banner: string }) {
-	code = code.trim()
+export function transformJsx(name: string, code: string, { banner }: { banner: string }) {
 	return detab(`
-		${__banner__}
+		${banner}
 		export function ${name}(props) {
 			return (
-				${tab(code.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>"), 4, { omitStart: true })}
+				${tab(code.trim().replace(/<svg ([^>]+)>/, "<svg $1 {...props}>"), 4, { omitStart: true })}
 			);
 		}
-	`) + "\n" // EOF
+	`)
 }
 
-// prettier-ignore
-export function transformTsx(name: string, code: string, { banner: __banner__ }: { banner: string }) {
-	code = code.trim()
+export function transformTsx(name: string, code: string, { banner }: { banner: string }) {
 	return detab(`
-		${__banner__}
+		${banner}
 		export function ${name}(props: JSX.IntrinsicElements["svg"]) {
 			return (
-				${tab(code.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>"), 4, { omitStart: true })}
+				${tab(code.trim().replace(/<svg ([^>]+)>/, "<svg $1 {...props}>"), 4, { omitStart: true })}
 			);
 		}
-	`) + "\n" // EOF
+	`)
 }

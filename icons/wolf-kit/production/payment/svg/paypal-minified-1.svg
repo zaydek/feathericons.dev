@@ -6,7 +6,7 @@ Licensed as CC BY 4.0
 https://feathericons.dev/paypal-minified-1
 
 -->
-<svg class="feather feather-PaypalMinified1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#003087" height="32" rx="6" width="56" />
   <path clip-rule="evenodd" d="M34.78 11.081c-.019.119-.04.24-.062.365-.794 4.209-3.507 5.663-6.973 5.663H25.98a.866.866 0 0 0-.847.75l-1.16 7.601a.462.462 0 0 0 .446.54h3.13c.37 0 .686-.278.744-.656l.03-.164.59-3.866.038-.212a.76.76 0 0 1 .744-.657h.468c3.032 0 5.406-1.273 6.1-4.955.29-1.538.14-2.823-.627-3.726a3.004 3.004 0 0 0-.857-.683Z" fill="#fff" fill-rule="evenodd" />
   <path clip-rule="evenodd" d="M33.949 10.74a5.963 5.963 0 0 0-.771-.178 9.493 9.493 0 0 0-1.556-.117h-4.714a.728.728 0 0 0-.325.076.775.775 0 0 0-.418.582l-1.003 6.565-.03.191a.866.866 0 0 1 .848-.75h1.764c3.466 0 6.18-1.455 6.973-5.663.024-.125.044-.246.062-.365a4.148 4.148 0 0 0-.83-.341Z" fill="#009CDE" fill-rule="evenodd" />

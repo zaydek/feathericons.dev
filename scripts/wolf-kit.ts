@@ -9,6 +9,8 @@ import { convertToTitleCase, detab, sleep } from "@/lib"
 import { formatSvg } from "./utils/format-svg"
 import { transformSvg, transformTsx } from "./utils/transform-svg"
 
+const EOF = "\n"
+
 // prettier-ignore
 const svgBanner = (name: string) => detab(`
 	<!--
@@ -39,7 +41,7 @@ async function readIcons(srcdir: string) {
 		const icon = await fs.readFile(path.join(srcdir, basename), "utf-8")
 		const icon2 = icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1") // Remove <g>; preserve $1
 		//// .replaceAll(/<clip-path>[\s\S]*<\/clip-path>/g, "") // Remove <clip-path>
-		icons[name] = icon2 + "\n" // Add an EOF (once)
+		icons[name] = icon2
 	}
 	return icons
 }
@@ -85,8 +87,8 @@ async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { 
 	await fs.mkdir(outdir, { recursive: true })
 	const zip = new JSZip()
 	for (const [name, code] of Object.entries(icons)) {
-		const transformed = transformSvg(convertToTitleCase(name), code, { banner: banner(name) })
-		await fs.writeFile(path.join(outdir, `${name}.svg`), transformed)
+		const code2 = transformSvg(convertToTitleCase(name), code, { banner: banner(name) })
+		await fs.writeFile(path.join(outdir, `${name}.svg`), code2 + EOF)
 		zip.file(name, code)
 	}
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
@@ -96,14 +98,14 @@ async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { 
 async function exportTsx(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, code] of Object.entries(icons)) {
-		const transformed = transformTsx(convertToTitleCase(name), code, { banner: banner(name) })
-		await fs.writeFile(path.join(outdir, `${convertToTitleCase(name)}.tsx`), transformed)
+		const code2 = transformTsx(convertToTitleCase(name), code, { banner: banner(name) })
+		await fs.writeFile(path.join(outdir, `${convertToTitleCase(name)}.tsx`), code2 + EOF)
 	}
 	// prettier-ignore
 	const exports = Object.keys(icons).map(name => detab(`
 		export * from "./${convertToTitleCase(name)}"
 	`).trim()).join("\n")
-	await fs.writeFile(path.join(outdir, "index.ts"), exports + "\n") // EOF
+	await fs.writeFile(path.join(outdir, "index.ts"), exports + EOF)
 }
 
 async function exportZip(srcdir: string, outdir: string) {
