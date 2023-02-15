@@ -38,7 +38,7 @@ function sortKeys(tag: string, attrKeys: string[]) {
 	}
 }
 
-function stringifyElement(ref: Element, nesting: number): string {
+function formatSvgElement(ref: Element, nesting: number): string {
 	let str = ""
 
 	const tag = ref.tagName
@@ -58,7 +58,7 @@ function stringifyElement(ref: Element, nesting: number): string {
 			//// 		str += "\n" + stringifyElement(c, nesting + 1)
 			//// 	}
 			//// } else {
-			str += "\n" + stringifyElement(child, nesting + 1)
+			str += "\n" + formatSvgElement(child, nesting + 1)
 			//// }
 		}
 		str += "\n" + "  ".repeat(nesting) + `</${tag}>`
@@ -66,6 +66,6 @@ function stringifyElement(ref: Element, nesting: number): string {
 	return str
 }
 
-export function stringifySvgElement(ref: SVGSVGElement) {
-	return stringifyElement(ref, 0)
+export function formatSvg(ref: SVGSVGElement) {
+	return formatSvgElement(ref, 0)
 }
