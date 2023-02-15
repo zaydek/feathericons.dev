@@ -114,7 +114,7 @@ async function exportWolfKitPayment() {
 ////////////////////////////////////////////////////////////////////////////////
 
 async function run() {
-	//// await fs.rm("icons/wolf-kit/production", { recursive: true })
+	await fs.rm("icons/wolf-kit/production", { recursive: true })
 	await exportWolfKitSocialMedia()
 	await exportWolfKitPayment()
 }
