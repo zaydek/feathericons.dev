@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+<!--
+
+Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
+Licensed as CC BY 4.0
+
+https://feathericons.dev/google-play-circle
+
+-->
+<svg class="feather feather-GooglePlayCircle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
   <rect fill="#000" height="24" rx="12" width="24" />
   <path clip-rule="evenodd" d="M6.748 5.212c-.157.17-.248.429-.248.768v12.037c0 .34.091.599.254.761l.042.037 6.744-6.744v-.15L6.79 5.175l-.042.037Z" fill="url(#a)" fill-rule="evenodd" />
   <path clip-rule="evenodd" d="m15.784 14.326-2.25-2.25v-.157l2.25-2.25.049.03 2.66 1.513c.762.429.762 1.138 0 1.572l-2.66 1.512-.05.03Z" fill="url(#b)" fill-rule="evenodd" />

@@ -1,3 +1,6 @@
+// Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
+// Licensed as CC BY 4.0
+//
 // https://feathericons.dev/slack-circle
 export function SlackCircle(props: JSX.IntrinsicElements["svg"]) {
 	return (

@@ -1,3 +1,6 @@
+// Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
+// Licensed as CC BY 4.0
+//
 // https://feathericons.dev/citadele-2
 export function Citadele2(props: JSX.IntrinsicElements["svg"]) {
 	return (

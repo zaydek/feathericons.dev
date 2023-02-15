@@ -1,3 +1,6 @@
+// Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
+// Licensed as CC BY 4.0
+//
 // https://feathericons.dev/sofort-minified-1
 export function SofortMinified1(props: JSX.IntrinsicElements["svg"]) {
 	return (
