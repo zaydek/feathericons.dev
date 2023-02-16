@@ -112,7 +112,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsSvg(convertToKebabCase(selectedName).toLowerCase(), code, {
-				comment: `https://feathericons.com/${convertToKebabCase(selectedName).toLowerCase()}`,
+				comment: `https://feathericons.dev/${convertToKebabCase(selectedName).toLowerCase()}`,
 			}).replaceAll("\t", "  ")
 		} else if (formatAs === "jsx") {
 			const code = stringify(selectedSvgElement, {
@@ -120,7 +120,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsJsx(selectedName, code, {
-				comment: `https://feathericons.com/${convertToKebabCase(selectedName).toLowerCase()}?format=jsx`,
+				comment: `https://feathericons.dev/${convertToKebabCase(selectedName).toLowerCase()}?format=jsx`,
 			}).replaceAll("\t", "  ")
 		} else {
 			const code = stringify(selectedSvgElement, {
@@ -128,7 +128,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsTsx(selectedName, code, {
-				comment: `https://feathericons.com/${convertToKebabCase(selectedName).toLowerCase()}?format=tsx`,
+				comment: `https://feathericons.dev/${convertToKebabCase(selectedName).toLowerCase()}?format=tsx`,
 			}).replaceAll("\t", "  ")
 		}
 	}, [formatAs, selectedName, selectedSvgElement])

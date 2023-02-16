@@ -63,7 +63,7 @@ function optimizeIcons(icons: Record<string, string>) {
 		const icon3 = SVGO.optimize(icon2, {
 			plugins: [
 				"preset-default",
-				//// // This doesn't work so use icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1"); see readIcons
+				//// // This doesn't work so use icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1")
 				//// {
 				//// 	name: "collapseGroups",
 				//// },

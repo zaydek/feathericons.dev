@@ -4,11 +4,11 @@ import { convertToKebabCase, convertToSpaceCase } from "../lib/cases"
 
 // prettier-ignore
 const URL =
-	"https://feathericons.com"
+	"https://feathericons.dev"
 
 // prettier-ignore
 const OG_URL = (name: keyof typeof manifest | "index") =>
-	`https://feathericons.com/og/${convertToKebabCase(name).toLowerCase()}.png`
+	`https://feathericons.dev/og/${convertToKebabCase(name).toLowerCase()}.png`
 
 // prettier-ignore
 const TITLE =

@@ -51,7 +51,7 @@ export const paymentServices = {
 }
 
 export const svgPlaceholder = detab(`
-	<!-- https://feathericons.com/feather -->
+	<!-- https://feathericons.dev/feather -->
 	<svg class="feather feather-feather" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
 		<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
 		<line x1="16" x2="2" y1="8" y2="22"></line>
@@ -60,7 +60,7 @@ export const svgPlaceholder = detab(`
 `)
 
 export const jsxPlaceholder = detab(`
-	// https://feathericons.com/feather
+	// https://feathericons.dev/feather
 	export function Feather(props) {
 		return (
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
@@ -73,7 +73,7 @@ export const jsxPlaceholder = detab(`
 `)
 
 export const tsxPlaceholder = detab(`
-	// https://feathericons.com/feather
+	// https://feathericons.dev/feather
 	export function Feather(props: JSX.IntrinsicElements["svg"]) {
 		return (
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
@@ -96,5 +96,5 @@ export const strokeWidthMax     = strokeWidthInitial + 1.5 // prettier-ignore
 export const strokeWidthStep    = 0.125 // prettier-ignore
 
 export const twitterShareUrl = `http://twitter.com/intent/tweet?text=${encodeURI(
-	`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.com 😍`,
+	`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.dev 😍`,
 )}`

@@ -160,7 +160,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					Built using <docs.TypeScript />, <docs.Reactjs />, <docs.Nextjs />, <docs.TailwindCss />, and <docs.Sass />.
 					<br />
 					<br />
-					Looking for the original Feather website? <docs.TextAnchor href="https://feathericons.com">Click here</docs.TextAnchor>.
+					Looking for the original Feather website? <docs.TextAnchor href="https://feathericons.dev">Click here</docs.TextAnchor>.
 				</small>
 			</p>
 			{/* <hr /> */}

@@ -13,7 +13,7 @@ export default function Document() {
 			<Head>
 				{/* Plausible Analytics */}
 				<Production>
-					<Script defer data-domain="feathericons.com" src="https://plausible.io/js/script.outbound-links.js" />
+					<Script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js" />
 				</Production>
 				{/* Theming */}
 				{/* prettier-ignore */}
