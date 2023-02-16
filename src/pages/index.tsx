@@ -2,14 +2,20 @@ import { detab } from "@/lib"
 import { useEffect, useState } from "react"
 
 import { Icon } from "@/components/dynamic-icon"
-import * as WolfKitPaymentIcons from "@/wolf-kit/payment"
-import * as WolfKitSocialMediaIcons from "@/wolf-kit/social-media"
+import * as feather from "@/feather"
+import * as wolfKitPayment from "@/wolf-kit/payment"
+import * as wolfKitSocialMedia from "@/wolf-kit/social-media"
 
-const WolfKitSocialMediaIconsEntries: [string, Icon][] = Object.entries(WolfKitSocialMediaIcons).filter(
-	([name]) => !["Circle", "Mono", "Square"].some(f => name.includes(f)),
-)
-const WolfKitPaymentIconsEntries: [string, Icon][] = Object.entries(WolfKitPaymentIcons).filter(([name]) => !["1", "2", "3", "4"].some(f => name.includes(f)))
-const aggregate: [string, Icon][] = [...WolfKitSocialMediaIconsEntries, ...WolfKitPaymentIconsEntries]
+const featherEntries = Object.entries(feather)
+const wolfKitSocialEntries: [string, Icon][] = Object.entries(wolfKitSocialMedia) //// .filter(([name]) => !["Circle", "Mono", "Square"].some(f => name.includes(f)))
+const wolfKitPaymentEntries: [string, Icon][] = Object.entries(wolfKitPayment) //// .filter(([name]) => !["1", "2", "3", "4"].some(f => name.includes(f)))
+
+// prettier-ignore
+const aggregate: [string, Icon][] = [
+	...featherEntries,
+	...wolfKitSocialEntries,
+	...wolfKitPaymentEntries,
+]
 
 //// const aggregate: [string, Icon][] = [
 //// 	...WolfKitSocialMediaIconsEntries,
@@ -93,7 +99,7 @@ export default function Page() {
 									<div className="flex grow items-center justify-center">
 										{/* <div className="h-32 w-32 rounded-1e3 bg-gray-700"></div> */}
 										{/* NOTE: aspect-square doesn't work here */}
-										<Icon className="min-h-48 min-w-48" />
+										<Icon className="min-h-32 min-w-32" />
 									</div>
 									<div className="truncate text-center">{name}</div>
 								</div>
