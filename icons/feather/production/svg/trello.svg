@@ -1,0 +1,6 @@
+<!-- https://feathericons.dev/trello -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-trello" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+  <rect height="18" rx="2" ry="2" width="18" x="3" y="3" />
+  <rect height="9" width="3" x="7" y="7" />
+  <rect height="5" width="3" x="14" y="7" />
+</svg>

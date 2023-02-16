@@ -124,7 +124,7 @@ async function exportZip(srcdir: string, outdir: string) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-async function exportWolfKitSocialMedia() {
+async function exportAllWolfKitSocialMedia() {
 	const icons = await getIcons("icons/wolf-kit/figma/social-media/svg")
 	const optimized = optimizeIcons(icons)
 	const svg = formatIcons(optimized, { strictJsx: false })
@@ -137,7 +137,7 @@ async function exportWolfKitSocialMedia() {
 	await exportZip("icons/wolf-kit/figma/social-media/png@2x", "icons/wolf-kit/production/social-media/png@2x")
 }
 
-async function exportWolfKitPayment() {
+async function exportAllWolfKitPayment() {
 	const icons = await getIcons("icons/wolf-kit/figma/payment/svg")
 	const optimized = optimizeIcons(icons)
 	const svg = formatIcons(optimized, { strictJsx: false })
@@ -156,8 +156,8 @@ async function run() {
 	await fs.rm("icons/wolf-kit/production", { recursive: true, force: true })
 	await sleep(100)
 
-	await exportWolfKitSocialMedia()
-	await exportWolfKitPayment()
+	await exportAllWolfKitSocialMedia()
+	await exportAllWolfKitPayment()
 }
 
 run()

@@ -1,30 +1,43 @@
 import { detab, tab } from "@/lib"
 
-export function transformSvg(_: string, code: string, { banner }: { banner: string }) {
+export function transformSvg(_: string, icon: string, { banner }: { banner: string }) {
+	// prettier-ignore
+	icon = icon
+		.trim()
+		.replace(/<svg ([^>]+)>/, `<svg $1>`)
 	return detab(`
 		${banner}
-		${tab(code.trim().replace(/<svg ([^>]+)>/, `<svg $1>`), 2, { omitStart: true })}
-	`)
+		${tab(icon, 2)}
+	`).replaceAll("\t", "  ")
 }
 
-export function transformJsx(name: string, code: string, { banner }: { banner: string }) {
+export function transformJsx(name: string, icon: string, { banner }: { banner: string }) {
+	// prettier-ignore
+	icon = icon
+		.trim()
+		.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>")
 	return detab(`
 		${banner}
 		export function ${name}(props) {
 			return (
-				${tab(code.trim().replace(/<svg ([^>]+)>/, "<svg $1 {...props}>"), 4, { omitStart: true })}
+				${tab(icon, 4)}
 			);
 		}
-	`)
+	`).replaceAll("\t", "  ")
 }
 
-export function transformTsx(name: string, code: string, { banner }: { banner: string }) {
+export function transformTsx(name: string, icon: string, { banner }: { banner: string }) {
+	// prettier-ignore
+	icon = icon
+		.trim()
+		.replace(/ class="[^"]+"/, "") // Remove class="feather feather-*"
+		.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>")
 	return detab(`
 		${banner}
 		export function ${name}(props: JSX.IntrinsicElements["svg"]) {
 			return (
-				${tab(code.trim().replace(/<svg ([^>]+)>/, "<svg $1 {...props}>"), 4, { omitStart: true })}
+				${tab(icon, 4)}
 			);
 		}
-	`)
+	`).replaceAll("\t", "  ")
 }
