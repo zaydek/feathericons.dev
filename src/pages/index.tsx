@@ -79,7 +79,7 @@ export default function Page() {
 			<div className="flex">
 				{/* LHS */}
 				<div className="flex grow justify-center">
-					<div className="flex w-100% max-w-xl flex-col gap-32">
+					<div className="flex w-100% max-w-2xl flex-col gap-32">
 						{/* Search bar */}
 						<div className="sticky top-0 p-32">
 							<div className="flex h-48 items-center rounded-1e3 bg-white px-[calc(48px_/_2)] shadow-[var(--shadow)]">
@@ -102,7 +102,7 @@ export default function Page() {
 					</div>
 				</div>
 				{/* RHS */}
-				<div className="w-400 shadow-[var(--shadow)]">
+				<div className="min-h-[100dvh] w-400 shadow-[var(--shadow)]">
 					<div className="sticky top-0 p-32">
 						<div>Hello</div>
 					</div>

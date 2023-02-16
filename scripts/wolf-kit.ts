@@ -1,6 +1,8 @@
+// Node
 import fs from "node:fs/promises"
 import path from "node:path"
 
+// NPM
 import { JSDOM } from "jsdom"
 import JSZip from "jszip"
 import SVGO from "svgo"
@@ -33,7 +35,7 @@ const jsBanner = (name: string) => detab(`
 
 ////////////////////////////////////////////////////////////////////////////////
 
-async function readIcons(srcdir: string) {
+async function getIcons(srcdir: string) {
 	const icons: Record<string, string> = {}
 	const basenames = await fs.readdir(srcdir)
 	for (const basename of basenames) {
@@ -86,10 +88,10 @@ function formatIcons(icons: Record<string, string>, { strictJsx }: { strictJsx: 
 async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
 	await fs.mkdir(outdir, { recursive: true })
 	const zip = new JSZip()
-	for (const [name, code] of Object.entries(icons)) {
-		const code2 = transformSvg(convertToTitleCase(name), code, { banner: banner(name) })
-		await fs.writeFile(path.join(outdir, `${name}.svg`), code2 + EOF)
-		zip.file(name, code)
+	for (const [name, icon] of Object.entries(icons)) {
+		const icon2 = transformSvg(convertToTitleCase(name), icon, { banner: banner(name) })
+		await fs.writeFile(path.join(outdir, `${name}.svg`), icon2 + EOF)
+		zip.file(name, icon)
 	}
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
 	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
@@ -97,9 +99,9 @@ async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { 
 
 async function exportTsx(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
 	await fs.mkdir(outdir, { recursive: true })
-	for (const [name, code] of Object.entries(icons)) {
-		const code2 = transformTsx(convertToTitleCase(name), code, { banner: banner(name) })
-		await fs.writeFile(path.join(outdir, `${convertToTitleCase(name)}.tsx`), code2 + EOF)
+	for (const [name, icon] of Object.entries(icons)) {
+		const icon2 = transformTsx(convertToTitleCase(name), icon, { banner: banner(name) })
+		await fs.writeFile(path.join(outdir, `${convertToTitleCase(name)}.tsx`), icon2 + EOF)
 	}
 	// prettier-ignore
 	const exports = Object.keys(icons).map(name => detab(`
@@ -123,7 +125,7 @@ async function exportZip(srcdir: string, outdir: string) {
 ////////////////////////////////////////////////////////////////////////////////
 
 async function exportWolfKitSocialMedia() {
-	const icons = await readIcons("icons/wolf-kit/figma/social-media/svg")
+	const icons = await getIcons("icons/wolf-kit/figma/social-media/svg")
 	const optimized = optimizeIcons(icons)
 	const svg = formatIcons(optimized, { strictJsx: false })
 	const tsx = formatIcons(optimized, { strictJsx: true })
@@ -136,7 +138,7 @@ async function exportWolfKitSocialMedia() {
 }
 
 async function exportWolfKitPayment() {
-	const icons = await readIcons("icons/wolf-kit/figma/payment/svg")
+	const icons = await getIcons("icons/wolf-kit/figma/payment/svg")
 	const optimized = optimizeIcons(icons)
 	const svg = formatIcons(optimized, { strictJsx: false })
 	const tsx = formatIcons(optimized, { strictJsx: true })
@@ -151,7 +153,7 @@ async function exportWolfKitPayment() {
 ////////////////////////////////////////////////////////////////////////////////
 
 async function run() {
-	await fs.rm("icons/wolf-kit/production", { recursive: true })
+	await fs.rm("icons/wolf-kit/production", { recursive: true, force: true })
 	await sleep(100)
 
 	await exportWolfKitSocialMedia()
