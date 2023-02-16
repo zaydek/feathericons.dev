@@ -23,9 +23,29 @@ const featherTsxBanner = (name: string) => detab(`
 	// https://feathericons.dev/${name}
 `)
 
+// prettier-ignore
+const wolfKitSvgBanner = (name: string) => detab(`
+	<!--
+
+	Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
+	Licensed as CC BY 4.0
+
+	https://feathericons.dev/${name}
+
+	-->
+`)
+
+// prettier-ignore
+const wolfKitTsxBanner = (name: string) => detab(`
+	// Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
+	// Licensed as CC BY 4.0
+	//
+	// https://feathericons.dev/${name}
+`)
+
 ////////////////////////////////////////////////////////////////////////////////
 
-async function getIcons(srcdir: string) {
+async function readIcons(srcdir: string) {
 	const icons: Record<string, string> = {}
 	const basenames = await fs.readdir(srcdir)
 	for (const basename of basenames) {
@@ -39,19 +59,21 @@ async function getIcons(srcdir: string) {
 function optimizeIcons(icons: Record<string, string>) {
 	const icons2: Record<string, string> = {}
 	for (const [name, icon] of Object.entries(icons)) {
-		const icon2 = SVGO.optimize(icon, {
+		const icon2 = icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1") // Remove <g>
+		const icon3 = SVGO.optimize(icon2, {
 			plugins: [
 				"preset-default",
-				{
-					name: "collapseGroups",
-				},
+				//// // This doesn't work so use icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1"); see readIcons
+				//// {
+				//// 	name: "collapseGroups",
+				//// },
 				{
 					name: "prefixIds",
 					params: { prefix: name },
 				},
 			],
 		}).data
-		icons2[name] = icon2
+		icons2[name] = icon3
 	}
 	return icons2
 }
@@ -93,22 +115,23 @@ async function exportTsx(icons: Record<string, string>, outdir: string, { banner
 	await fs.writeFile(path.join(outdir, "index.ts"), exports + EOF)
 }
 
-//// async function exportZip(srcdir: string, outdir: string) {
-//// 	await fs.mkdir(outdir, { recursive: true })
-//// 	const zip = new JSZip()
-//// 	const names = await fs.readdir(srcdir)
-//// 	for (const name of names) {
-//// 		const contents = await fs.readFile(path.join(srcdir, name), "utf-8")
-//// 		zip.file(name, contents)
-//// 	}
-//// 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
-//// 	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
-//// }
+async function exportZip(srcdir: string, outdir: string) {
+	await fs.mkdir(outdir, { recursive: true })
+	const zip = new JSZip()
+	const names = await fs.readdir(srcdir)
+	for (const name of names) {
+		const contents = await fs.readFile(path.join(srcdir, name), "utf-8")
+		zip.file(name, contents)
+	}
+	const buffer = await zip.generateAsync({ type: "nodebuffer" })
+	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 async function exportAllFeather() {
-	const icons = await getIcons("icons/feather/unpkg")
+	const icons = await readIcons("icons/feather/unpkg")
+	// No optimization step
 	const svgIcons = formatIcons(icons, { strictJsx: false })
 	const tsxIcons = formatIcons(icons, { strictJsx: true })
 	for (const [name, icon] of Object.entries(svgIcons)) {
@@ -118,10 +141,46 @@ async function exportAllFeather() {
 	}
 	await exportSvgAndZip(svgIcons, "icons/feather/production/svg", { banner: featherSvgBanner })
 	await exportTsx(tsxIcons, "icons/feather/production/tsx", { banner: featherTsxBanner })
-	//// await exportZip("icons/wolf-kit/figma/payment/jpg@1x", "icons/wolf-kit/production/payment/jpg@1x")
-	//// await exportZip("icons/wolf-kit/figma/payment/jpg@2x", "icons/wolf-kit/production/payment/jpg@2x")
-	//// await exportZip("icons/wolf-kit/figma/payment/png@1x", "icons/wolf-kit/production/payment/png@1x")
-	//// await exportZip("icons/wolf-kit/figma/payment/png@2x", "icons/wolf-kit/production/payment/png@2x")
+	//// await exportZip("icons/feather/figma/jpg@1x", "icons/feather/production/payment/jpg@1x")
+	//// await exportZip("icons/feather/figma/jpg@2x", "icons/feather/production/payment/jpg@2x")
+	//// await exportZip("icons/feather/figma/png@1x", "icons/feather/production/payment/png@1x")
+	//// await exportZip("icons/feather/figma/png@2x", "icons/feather/production/payment/png@2x")
+}
+
+async function exportAllWolfKitSocialMedia() {
+	const icons = await readIcons("icons/wolf-kit/figma/social-media/svg")
+	const optimizedIcons = optimizeIcons(icons)
+	const svgIcons = formatIcons(optimizedIcons, { strictJsx: false })
+	const tsxIcons = formatIcons(optimizedIcons, { strictJsx: true })
+	for (const [name, icon] of Object.entries(svgIcons)) {
+		console.log(`✅ ${name}.svg`)
+		console.log(icon)
+		console.log()
+	}
+	await exportSvgAndZip(svgIcons, "icons/wolf-kit/production/social-media/svg", { banner: wolfKitSvgBanner })
+	await exportTsx(tsxIcons, "icons/wolf-kit/production/social-media/tsx", { banner: wolfKitTsxBanner })
+	await exportZip("icons/wolf-kit/figma/social-media/jpg@1x", "icons/wolf-kit/production/social-media/jpg@1x")
+	await exportZip("icons/wolf-kit/figma/social-media/jpg@2x", "icons/wolf-kit/production/social-media/jpg@2x")
+	await exportZip("icons/wolf-kit/figma/social-media/png@1x", "icons/wolf-kit/production/social-media/png@1x")
+	await exportZip("icons/wolf-kit/figma/social-media/png@2x", "icons/wolf-kit/production/social-media/png@2x")
+}
+
+async function exportAllWolfKitPayment() {
+	const icons = await readIcons("icons/wolf-kit/figma/payment/svg")
+	const optimizedIcons = optimizeIcons(icons)
+	const svgIcons = formatIcons(optimizedIcons, { strictJsx: false })
+	const tsxIcons = formatIcons(optimizedIcons, { strictJsx: true })
+	for (const [name, icon] of Object.entries(svgIcons)) {
+		console.log(`✅ ${name}.svg`)
+		console.log(icon)
+		console.log()
+	}
+	await exportSvgAndZip(svgIcons, "icons/wolf-kit/production/payment/svg", { banner: wolfKitSvgBanner })
+	await exportTsx(tsxIcons, "icons/wolf-kit/production/payment/tsx", { banner: wolfKitTsxBanner })
+	await exportZip("icons/wolf-kit/figma/payment/jpg@1x", "icons/wolf-kit/production/payment/jpg@1x")
+	await exportZip("icons/wolf-kit/figma/payment/jpg@2x", "icons/wolf-kit/production/payment/jpg@2x")
+	await exportZip("icons/wolf-kit/figma/payment/png@1x", "icons/wolf-kit/production/payment/png@1x")
+	await exportZip("icons/wolf-kit/figma/payment/png@2x", "icons/wolf-kit/production/payment/png@2x")
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -131,6 +190,8 @@ async function run() {
 	await sleep(100)
 
 	await exportAllFeather()
+	await exportAllWolfKitSocialMedia()
+	await exportAllWolfKitPayment()
 }
 
 run()
