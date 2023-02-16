@@ -69,7 +69,9 @@ function optimizeIcons(icons: Record<string, string>) {
 				//// },
 				{
 					name: "prefixIds",
-					params: { prefix: name },
+					params: {
+						prefix: name,
+					},
 				},
 			],
 		}).data
@@ -124,12 +126,15 @@ async function exportZip(srcdir: string, outdir: string) {
 		zip.file(name, contents)
 	}
 	const buffer = await zip.generateAsync({ type: "nodebuffer" })
-	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
+	await fs.writeFile(`${outdir}.zip`, buffer)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 async function exportAllFeather() {
+	await fs.rm("icons/feather/production", { recursive: true, force: true })
+	await sleep(100)
+
 	const icons = await readIcons("icons/feather/unpkg")
 	// No optimization step
 	const svgIcons = formatIcons(icons, { strictJsx: false })
@@ -141,13 +146,16 @@ async function exportAllFeather() {
 	}
 	await exportSvgAndZip(svgIcons, "icons/feather/production/svg", { banner: featherSvgBanner })
 	await exportTsx(tsxIcons, "icons/feather/production/tsx", { banner: featherTsxBanner })
-	//// await exportZip("icons/feather/figma/jpg@1x", "icons/feather/production/payment/jpg@1x")
-	//// await exportZip("icons/feather/figma/jpg@2x", "icons/feather/production/payment/jpg@2x")
-	//// await exportZip("icons/feather/figma/png@1x", "icons/feather/production/payment/png@1x")
-	//// await exportZip("icons/feather/figma/png@2x", "icons/feather/production/payment/png@2x")
+	await exportZip("icons/feather/figma/jpg@1x", "icons/feather/production/jpg@1x")
+	await exportZip("icons/feather/figma/jpg@2x", "icons/feather/production/jpg@2x")
+	await exportZip("icons/feather/figma/png@1x", "icons/feather/production/png@1x")
+	await exportZip("icons/feather/figma/png@2x", "icons/feather/production/png@2x")
 }
 
 async function exportAllWolfKitSocialMedia() {
+	await fs.rm("icons/wolf-kit/production/social-media", { recursive: true, force: true })
+	await sleep(100)
+
 	const icons = await readIcons("icons/wolf-kit/figma/social-media/svg")
 	const optimizedIcons = optimizeIcons(icons)
 	const svgIcons = formatIcons(optimizedIcons, { strictJsx: false })
@@ -166,6 +174,9 @@ async function exportAllWolfKitSocialMedia() {
 }
 
 async function exportAllWolfKitPayment() {
+	await fs.rm("icons/wolf-kit/production/payment", { recursive: true, force: true })
+	await sleep(100)
+
 	const icons = await readIcons("icons/wolf-kit/figma/payment/svg")
 	const optimizedIcons = optimizeIcons(icons)
 	const svgIcons = formatIcons(optimizedIcons, { strictJsx: false })
@@ -186,9 +197,6 @@ async function exportAllWolfKitPayment() {
 ////////////////////////////////////////////////////////////////////////////////
 
 async function run() {
-	await fs.rm("icons/feather/production", { recursive: true, force: true })
-	await sleep(100)
-
 	await exportAllFeather()
 	await exportAllWolfKitSocialMedia()
 	await exportAllWolfKitPayment()
