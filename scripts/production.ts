@@ -57,7 +57,7 @@ async function readIcons(srcdir: string) {
 }
 
 function optimizeIcons(icons: Record<string, string>) {
-	const icons2: Record<string, string> = {}
+	const copy: Record<string, string> = {}
 	for (const [name, icon] of Object.entries(icons)) {
 		const icon2 = icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1") // Remove <g>
 		const icon3 = SVGO.optimize(icon2, {
@@ -73,19 +73,19 @@ function optimizeIcons(icons: Record<string, string>) {
 				},
 			],
 		}).data
-		icons2[name] = icon3
+		copy[name] = icon3
 	}
-	return icons2
+	return copy
 }
 
 function formatIcons(icons: Record<string, string>, { strictJsx }: { strictJsx: boolean }) {
-	const icons2: Record<string, string> = {}
+	const copy: Record<string, string> = {}
 	for (const [name, icon] of Object.entries(icons)) {
 		const { window } = new JSDOM(icon)
 		const icon2 = formatSvg(window.document.body.firstElementChild as SVGSVGElement, { strictJsx })
-		icons2[name] = icon2
+		copy[name] = icon2
 	}
-	return icons2
+	return copy
 }
 
 ////////////////////////////////////////////////////////////////////////////////
