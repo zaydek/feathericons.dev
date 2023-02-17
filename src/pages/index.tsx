@@ -1,4 +1,4 @@
-import { detab, toKebabCase } from "@/lib"
+import { detab, round, toKebabCase } from "@/lib"
 import { createContext, CSSProperties, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect, useMemo, useState } from "react"
 
 import { DynamicIcon, Icon } from "@/components/dynamic-icon"
@@ -30,12 +30,12 @@ function nameCase(str: string) {
 }
 
 function Hairline() {
-	return <div className="-mx-[var(--padding-x)] h-1 shrink-0 bg-slate-300"></div>
+	return <hr className="-mx-[var(--padding-x)] border-slate-300" />
 }
 
 function Section({ className, children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
-		<section className="flex flex-col gap-[var(--section-spacing)]" {...props}>
+		<section className="flex flex-col gap-16" {...props}>
 			{children}
 		</section>
 	)
@@ -103,7 +103,7 @@ function Group({ name, icon, children }: PropsWithChildren<{ name: string; icon:
 					{/* RHS */}
 					{checked ? (
 						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-							<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-sky-400">
+							<div className="flex h-[var(--checkbox-h)] w-[var(--checkbox-h)] items-center justify-center rounded-[43.75%] bg-sky-400">
 								<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} />
 							</div>
 						</div>
@@ -170,7 +170,7 @@ function GroupItem({ name, icon }: { name: string; icon: Icon }) {
 			{/* RHS */}
 			{checked ? (
 				<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-sky-400">
+					<div className="flex h-[var(--checkbox-h)] w-[var(--checkbox-h)] items-center justify-center rounded-[43.75%] bg-sky-400">
 						<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} />
 					</div>
 				</div>
@@ -189,9 +189,8 @@ function SearchBar() {
 	const [search, setSearch] = useState("")
 
 	return (
-		// Use focus-within:!* because of hover:*
-		<div className="mx-[var(--keyline)] flex h-[var(--container-h)] rounded-1e3 bg-slate-100 focus-within:bg-white focus-within:shadow-[inset_0_0_0_1px_theme('colors.slate.300')] hover:bg-white hover:shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
-			<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center rounded-1e3">
+		<div className="ml-[var(--keyline)] flex h-40 rounded-1e3 bg-slate-200/75 focus-within:bg-white focus-within:shadow-[inset_0_0_0_1px_theme('colors.slate.300')] hover:bg-white hover:shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
+			<div className="flex h-40 w-40 items-center justify-center rounded-1e3">
 				{/* <feather.Search className="h-12 w-12 text-slate-400" strokeWidth={5} /> */}
 				<feather.Search className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-400" strokeWidth={2} />
 			</div>
@@ -212,13 +211,8 @@ function Slider({ name }: { name: string }) {
 	return (
 		<>
 			<div className="flex flex-col gap-16">
-				<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
-					<Chip>{name}</Chip>
-					{/* <div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-						<feather.X className="h-12 w-12 text-slate-400" strokeWidth={5} />
-					</div> */}
-				</div>
-				<div className="mx-[var(--keyline)] flex h-[calc(var(--slider-thumb-h))] flex-col justify-center">
+				<Heading name={name} />
+				<div className="ml-[var(--keyline)] flex h-[calc(var(--slider-thumb-h))] flex-col justify-center">
 					<div className="flex h-[var(--slider-track-h)] flex-row items-center justify-center rounded-1e3 bg-[linear-gradient(to_right,_theme('colors.sky.400')_50%,_theme('colors.slate.200')_50%)]">
 						<div className="h-[var(--slider-thumb-h)] w-[var(--slider-thumb-h)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]"></div>
 					</div>
@@ -270,9 +264,7 @@ export default function Page() {
 			<div className="flex" style={{ "--grid-column-size": "128px", "--grid-row-size": "128px" } as CSSProperties}>
 				<Aside>
 					<Section>
-						<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
-							<Chip>ICONS</Chip>
-						</div>
+						<Heading name="Icons" />
 						<div className="flex flex-col gap-8">
 							<Group name="Feather" icon={feather.Smile} />
 							<Group
@@ -313,11 +305,9 @@ export default function Page() {
 					</Section>
 					<Hairline />
 					<Section>
-						<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
-							<Chip>Icon licenses</Chip>
-						</div>
+						<Heading name="Licenses" />
 						<div className="flex flex-col gap-4">
-							<div className="mx-[var(--keyline)] flex gap-8">
+							<div className="ml-[var(--keyline)] flex gap-8">
 								<div className="-m-[calc((var(--icon-h)_-_var(--small-icon-h))_/_4)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
 									<Scale className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={2} />
 								</div>
@@ -331,7 +321,7 @@ export default function Page() {
 								</div>
 							</div>
 							<div className="grow"></div>
-							<div className="mx-[var(--keyline)] flex gap-8">
+							<div className="ml-[var(--keyline)] flex gap-8">
 								<div className="-m-[calc((var(--icon-h)_-_var(--small-icon-h))_/_4)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
 									<CreativeCommons className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" />
 								</div>
@@ -344,7 +334,7 @@ export default function Page() {
 									Personal & commercial use allowed <em>with</em> attribution
 								</div>
 							</div>
-							<div className="mx-[var(--keyline)] flex gap-8">
+							<div className="ml-[var(--keyline)] flex gap-8">
 								<div className="-m-[calc((var(--icon-h)_-_var(--small-icon-h))_/_4)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
 									<CreativeCommons className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" />
 								</div>
@@ -389,70 +379,67 @@ export default function Page() {
 
 //// function Chip({ children }: PropsWithChildren) {
 //// 	// Use mx-[var(--keyline)] to optically align to search bar
-//// 	return <div className="mx-[var(--keyline)] flex h-24 items-center rounded-1e3 bg-slate-200 px-10 text-[13px] tracking-[0.0125em] text-slate-700">{children}</div>
+//// 	return (
+//// 		<div className="ml-[var(--keyline)] flex h-24 items-center rounded-1e3 bg-slate-100 px-10 text-[13px] tracking-[0.0125em] text-slate-700">{children}</div>
+//// 	)
 //// }
 
 function Chip({ children }: PropsWithChildren) {
 	return (
-		<div className="flex h-24 items-center rounded-1e3 bg-slate-100 px-12 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</div>
+		<div className="flex h-24 items-center rounded-1e3 bg-slate-200/75 px-12 text-[9.5px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</div>
+	)
+}
+
+function Heading({ name }: { name: string }) {
+	return (
+		<div className="ml-[var(--keyline)] flex items-center justify-between">
+			<Chip>{name}</Chip>
+			<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+				<feather.RotateCcw className="h-12 w-12 text-slate-300" strokeWidth={round((7 * 2) / 3, { precision: 2 })} />
+			</div>
+		</div>
 	)
 }
 
 //// function Chip({ children }: PropsWithChildren) {
-//// 	return <div className="mx-[var(--keyline)] text-[9px] font-[600] uppercase tracking-[0.1em] text-slate-800">{children}</div>
-//// }
-
-//// function SecondaryChip({ children }: PropsWithChildren) {
-//// 	return <div className="mx-[var(--keyline)] flex h-24 items-center text-[9px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</div>
-//// }
-
-//// function SecondaryChip({ children }: PropsWithChildren) {
-//// 	return <div className="mx-[var(--keyline)] flex h-24 items-center text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-800">{children}</div>
-//// }
-
-//// function SecondaryChip({ children }: PropsWithChildren) {
-//// 	return <div className="mx-[var(--keyline)] text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-600">{children}</div>
+//// 	return (
+//// 		<div className="flex h-24 items-center rounded-1e3 bg-white px-12 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-700 shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
+//// 			{children}
+//// 		</div>
+//// 	)
 //// }
 
 function Main({ children }: PropsWithChildren) {
-	return <div className="flex grow flex-col justify-center gap-32 p-64">{children}</div>
+	return <main className="flex grow flex-col justify-center gap-32 p-64">{children}</main>
 }
 
 // prettier-ignore
 const cssVars = {
-	"--padding-y":       "32px",
-	"--padding-x":       "16px",
-	"--padding":         "var(--padding-y) var(--padding-x)",
-	"--spacing":         "24px",
-	"--section-spacing": "24px",
+	"--padding-y":      "32px",
+	"--padding-x":      "16px",
+	"--padding":        "var(--padding-y) var(--padding-x)",
+	"--spacing":        "24px",
 
-	"--keyline":         "calc((var(--container-h) - var(--icon-h)) / 2)",
-	"--container-h":     "36px",
-	"--icon-h":          "18px",
-	"--small-icon-h":    "12px",
+	"--keyline":        "calc((var(--container-h) - var(--icon-h)) / 2)",
+	"--container-h":    "36px",
+	"--icon-h":         "18px",
+	"--small-icon-h":   "12px",
 
-	"--slider-track-h":  "6px",
-	"--slider-thumb-h":  "32px",
+	"--checkbox-h":     "24px",
+	"--slider-track-h": "6px",
+	"--slider-thumb-h": "32px",
 } as CSSProperties
 
 function Aside({ children }: PropsWithChildren) {
 	return (
-		<div className="w-384 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]" style={cssVars}>
-			{/* <div className="sticky top-0 flex h-[100dvh] flex-col">{children}</div> */}
+		<aside className="w-384 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]" style={cssVars}>
 			<div className="sticky top-0 flex h-[100dvh] flex-col">
-				<div className="sticky top-0 flex flex-col gap-[var(--spacing)] bg-white p-[var(--padding)] pb-[var(--spacing)] shadow-[0_0_0_1px_theme('colors.slate.300')]">
-					<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
-						<Chip>Search</Chip>
-					</div>
+				<header className="sticky top-0 flex flex-col gap-16 bg-white p-[var(--padding)] pb-[var(--spacing)] shadow-[0_0_0_1px_theme('colors.slate.300')]">
+					<Heading name="Search" />
 					<SearchBar />
-				</div>
-				<div className="flex flex-col gap-[var(--spacing)] overflow-y-auto p-[var(--padding)] pt-[var(--spacing)]">
-					{/* {iota(400).map(index => (
-						<div key={index}>Hello</div>
-					))} */}
-					{children}
-				</div>
+				</header>
+				<div className="flex flex-col gap-[var(--spacing)] overflow-y-auto p-[var(--padding)] pt-[var(--spacing)]">{children}</div>
 			</div>
-		</div>
+		</aside>
 	)
 }

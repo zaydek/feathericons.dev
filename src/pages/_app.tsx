@@ -1,6 +1,6 @@
 import "@/css/base.css"
 import "@/css/data-bg-image.scss"
-import "@/css/vars.scss"
+//// import "@/css/vars.scss"
 
 import { detab } from "@/lib/format"
 import { ShikiProvider } from "@/state/shiki"
