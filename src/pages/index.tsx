@@ -32,7 +32,7 @@ function nameCase(str: string) {
 function Section({ className, children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
 		<>
-			<hr className="-mx-[var(--spacing)] border-slate-200 first:hidden" />
+			<hr className="-mx-[var(--spacing)] border-slate-300 first:hidden" />
 			<section className="flex flex-col gap-[var(--section-spacing)]" {...props}>
 				{children}
 			</section>
@@ -108,7 +108,7 @@ function Group({ name, icon, children }: PropsWithChildren<{ name: string; icon:
 						</div>
 					) : (
 						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-							<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.200')]">
+							<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
 								{/* <feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} /> */}
 							</div>
 						</div>
@@ -175,7 +175,7 @@ function GroupItem({ name, icon }: { name: string; icon: Icon }) {
 				</div>
 			) : (
 				<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.200')]">
+					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
 						{/* <feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} /> */}
 					</div>
 				</div>
@@ -189,10 +189,10 @@ function SearchBar() {
 
 	return (
 		// Use focus-within:!* because of hover:*
-		<div className="mx-[var(--keyline)] flex h-[var(--container-h)] rounded-1e3 bg-slate-100 focus-within:bg-white focus-within:shadow-[inset_0_0_0_1px_theme('colors.slate.200')] hover:bg-white hover:shadow-[inset_0_0_0_1px_theme('colors.slate.200')]">
+		<div className="mx-[var(--keyline)] flex h-[var(--container-h)] rounded-1e3 bg-slate-100 focus-within:bg-white focus-within:shadow-[inset_0_0_0_1px_theme('colors.slate.300')] hover:bg-white hover:shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
 			<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center rounded-1e3">
 				{/* <feather.Search className="h-12 w-12 text-slate-400" strokeWidth={5} /> */}
-				<feather.Search className="h-18 w-18 text-slate-400" strokeWidth={2} />
+				<feather.Search className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-400" strokeWidth={2} />
 			</div>
 			<div className="relative grow">
 				{/* CSS reset: 100% w-100% bg-transparent */}
@@ -219,7 +219,7 @@ function Slider({ name }: { name: string }) {
 				</div>
 				<div className="mx-[var(--keyline)] flex h-[calc(var(--slider-thumb-h))] flex-col justify-center">
 					<div className="flex h-[var(--slider-track-h)] flex-row items-center justify-center rounded-1e3 bg-[linear-gradient(to_right,_theme('colors.sky.400')_50%,_theme('colors.slate.200')_50%)]">
-						<div className="h-[var(--slider-thumb-h)] w-[var(--slider-thumb-h)] rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]"></div>
+						<div className="h-[var(--slider-thumb-h)] w-[var(--slider-thumb-h)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]"></div>
 					</div>
 				</div>
 			</div>
@@ -322,53 +322,47 @@ export default function Page() {
 					</Section>
 					<Section>
 						<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
-							<Chip>Licensing</Chip>
+							<Chip>Icon licenses</Chip>
 						</div>
-						<div className="flex flex-col gap-8">
+						<div className="flex flex-col gap-4">
 							<div className="mx-[var(--keyline)] flex gap-8">
-								<div className="flex h-24 w-24 items-center justify-center">
-									<Scale className="h-18 w-18 text-slate-700" strokeWidth={2} />
+								<div className="-m-[calc((var(--icon-h)_-_var(--small-icon-h))_/_4)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
+									<Scale className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={2} />
 								</div>
-								<div className="min-w-0 flex-1 text-[12px] leading-[1.375] text-slate-600">
-									<span className="underline decoration-slate-400 underline-offset-2">Feather icons</span> by{" "}
+								<div className="min-w-0 flex-1 text-[12px] leading-[1.5] text-slate-600">
+									<span className="underline decoration-slate-400 underline-offset-2">Feather icons</span> designed by{" "}
 									<span className="underline decoration-slate-400 underline-offset-2">@colebemis</span>
 									<br />
 									Licensed as <span className="underline decoration-slate-400 underline-offset-2">MIT</span>
 									<br />
-									<span className="mt-4 inline-block">
-										Personal and commercial use allowed <em>without</em> attribution
-									</span>
+									Personal & commercial use allowed <em>without</em> attribution
 								</div>
 							</div>
 							<div className="grow"></div>
 							<div className="mx-[var(--keyline)] flex gap-8">
-								<div className="flex h-24 w-24 items-center justify-center">
-									<CreativeCommons className="h-18 w-18 text-slate-700" />
+								<div className="-m-[calc((var(--icon-h)_-_var(--small-icon-h))_/_4)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
+									<CreativeCommons className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" />
 								</div>
-								<div className="min-w-0 flex-1 text-[12px] leading-[1.375] text-slate-600">
-									<span className="underline decoration-slate-400 underline-offset-2">Apps</span> by{" "}
+								<div className="min-w-0 flex-1 text-[12px] leading-[1.5] text-slate-600">
+									<span className="underline decoration-slate-400 underline-offset-2">App icons</span> designed by{" "}
 									<span className="underline decoration-slate-400 underline-offset-2">The Wolf Kit</span>
 									<br />
 									Licensed as <span className="underline decoration-slate-400 underline-offset-2">CC BY 4.0</span>
 									<br />
-									<span className="mt-4 inline-block">
-										Personal and commercial use allowed <em>with</em> attribution
-									</span>
+									Personal & commercial use allowed <em>with</em> attribution
 								</div>
 							</div>
 							<div className="mx-[var(--keyline)] flex gap-8">
-								<div className="flex h-24 w-24 items-center justify-center">
-									<CreativeCommons className="h-18 w-18 text-slate-700" />
+								<div className="-m-[calc((var(--icon-h)_-_var(--small-icon-h))_/_4)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
+									<CreativeCommons className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" />
 								</div>
-								<div className="min-w-0 flex-1 text-[12px] leading-[1.375] text-slate-600">
-									<span className="underline decoration-slate-400 underline-offset-2">Vendors</span> by{" "}
+								<div className="min-w-0 flex-1 text-[12px] leading-[1.5] text-slate-600">
+									<span className="underline decoration-slate-400 underline-offset-2">Vendor icons</span> designed by{" "}
 									<span className="underline decoration-slate-400 underline-offset-2">The Wolf Kit</span>
 									<br />
 									Licensed as <span className="underline decoration-slate-400 underline-offset-2">CC BY 4.0</span>
 									<br />
-									<span className="mt-4 inline-block">
-										Personal and commercial use allowed <em>with</em> attribution
-									</span>
+									Personal & commercial use allowed <em>with</em> attribution
 								</div>
 							</div>
 						</div>
@@ -408,7 +402,7 @@ export default function Page() {
 
 function Chip({ children }: PropsWithChildren) {
 	return (
-		<div className="flex h-24 items-center rounded-1e3 bg-slate-100 px-12 text-[9.5px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</div>
+		<div className="flex h-24 items-center rounded-1e3 bg-slate-100 px-12 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</div>
 	)
 }
 
@@ -449,7 +443,7 @@ const cssVars = {
 
 function AsideContainer({ children }: PropsWithChildren) {
 	return (
-		<div className="w-320 bg-white shadow-[0_0_0_1px_theme('colors.slate.200')]" style={cssVars}>
+		<div className="w-384 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]" style={cssVars}>
 			<div className="sticky top-0 flex h-[100dvh] h-[100vh] flex-col gap-[var(--spacing)] overflow-y-auto p-[var(--padding)]">{children}</div>
 		</div>
 	)
