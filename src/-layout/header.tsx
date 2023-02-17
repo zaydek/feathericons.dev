@@ -32,7 +32,7 @@ function HeadingSubheading() {
 	)
 }
 
-function CallToActionAnchor({ primary = undefined, icon, children, ...props }: { primary?: true; icon: Icon } & AnchorProps) {
+function CallToActionAnchor({ primary, icon, children, ...props }: { primary?: true; icon: Icon } & AnchorProps) {
 	return (
 		<Anchor
 			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-1e3 bg-white/25 sm:aspect-[3.25]
