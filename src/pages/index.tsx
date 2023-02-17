@@ -29,14 +29,15 @@ function nameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
 
+function Hairline() {
+	return <div className="-mx-[var(--padding-x)] h-1 shrink-0 bg-slate-300"></div>
+}
+
 function Section({ className, children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
-		<>
-			<hr className="-mx-[var(--spacing)] border-slate-300 first:hidden" />
-			<section className="flex flex-col gap-[var(--section-spacing)]" {...props}>
-				{children}
-			</section>
-		</>
+		<section className="flex flex-col gap-[var(--section-spacing)]" {...props}>
+			{children}
+		</section>
 	)
 }
 
@@ -48,7 +49,7 @@ const GroupContext =
 	} | null>(null)
 
 function Group({ name, icon, children }: PropsWithChildren<{ name: string; icon: Icon }>) {
-	const [dropdown, setDropdown] = useState(false)
+	const [dropdown, setDropdown] = useState(true)
 	const [checkboxes, setCheckboxes] = useState<Map<string, boolean>>(() => new Map())
 
 	useEffect(() => {
@@ -267,16 +268,7 @@ export default function Page() {
 					`)}
 			</style>
 			<div className="flex" style={{ "--grid-column-size": "128px", "--grid-row-size": "128px" } as CSSProperties}>
-				<AsideContainer>
-					<Section>
-						<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
-							<Chip>Search</Chip>
-							{/* <div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-								<feather.X className="h-12 w-12 text-slate-400" strokeWidth={5} />
-							</div> */}
-						</div>
-						<SearchBar />
-					</Section>
+				<Aside>
 					<Section>
 						<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
 							<Chip>ICONS</Chip>
@@ -285,7 +277,6 @@ export default function Page() {
 							<Group name="Feather" icon={feather.Smile} />
 							<Group
 								name="Apps"
-								//// icon={({ className, ...props }) => <feather.ChevronDown className={cx("text-slate-400", className)} {...props} />}
 								icon={() => (
 									<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
 										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={(7 * 2) / 3} />
@@ -300,7 +291,6 @@ export default function Page() {
 							</Group>
 							<Group
 								name="Vendors"
-								//// icon={({ className, ...props }) => <feather.ChevronDown className={cx("text-slate-400", className)} {...props} />}
 								icon={() => (
 									<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
 										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={(7 * 2) / 3} />
@@ -315,11 +305,13 @@ export default function Page() {
 							</Group>
 						</div>
 					</Section>
+					<Hairline />
 					<Section>
 						<Slider name="Size" />
 						<div></div>
 						<Slider name="Stroke width" />
 					</Section>
+					<Hairline />
 					<Section>
 						<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
 							<Chip>Icon licenses</Chip>
@@ -367,8 +359,8 @@ export default function Page() {
 							</div>
 						</div>
 					</Section>
-				</AsideContainer>
-				<MainContainer>
+				</Aside>
+				<Main>
 					{/* Search grid */}
 					{[["Feather", featherEntries] as const, ["Wolf Kit", wolfKitSocialMediaEntries] as const, ["Wolf Kit", wolfKitPaymentEntries] as const].map(
 						([name, entries], index) => (
@@ -388,7 +380,7 @@ export default function Page() {
 							</div>
 						),
 					)}
-				</MainContainer>
+				</Main>
 				{/* <AsideContainer></AsideContainer> */}
 			</div>
 		</>
@@ -422,13 +414,15 @@ function Chip({ children }: PropsWithChildren) {
 //// 	return <div className="mx-[var(--keyline)] text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-600">{children}</div>
 //// }
 
-function MainContainer({ children }: PropsWithChildren) {
+function Main({ children }: PropsWithChildren) {
 	return <div className="flex grow flex-col justify-center gap-32 p-64">{children}</div>
 }
 
 // prettier-ignore
 const cssVars = {
-	"--padding":         "32px 16px",
+	"--padding-y":       "32px",
+	"--padding-x":       "16px",
+	"--padding":         "var(--padding-y) var(--padding-x)",
 	"--spacing":         "24px",
 	"--section-spacing": "24px",
 
@@ -441,10 +435,24 @@ const cssVars = {
 	"--slider-thumb-h":  "32px",
 } as CSSProperties
 
-function AsideContainer({ children }: PropsWithChildren) {
+function Aside({ children }: PropsWithChildren) {
 	return (
 		<div className="w-384 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]" style={cssVars}>
-			<div className="sticky top-0 flex h-[100dvh] h-[100vh] flex-col gap-[var(--spacing)] overflow-y-auto p-[var(--padding)]">{children}</div>
+			{/* <div className="sticky top-0 flex h-[100dvh] flex-col">{children}</div> */}
+			<div className="sticky top-0 flex h-[100dvh] flex-col">
+				<div className="sticky top-0 flex flex-col gap-[var(--spacing)] bg-white p-[var(--padding)] pb-[var(--spacing)] shadow-[0_0_0_1px_theme('colors.slate.300')]">
+					<div className="mx-[var(--keyline)] flex h-24 items-center justify-between">
+						<Chip>Search</Chip>
+					</div>
+					<SearchBar />
+				</div>
+				<div className="flex flex-col gap-[var(--spacing)] overflow-y-auto p-[var(--padding)] pt-[var(--spacing)]">
+					{/* {iota(400).map(index => (
+						<div key={index}>Hello</div>
+					))} */}
+					{children}
+				</div>
+			</div>
 		</div>
 	)
 }
