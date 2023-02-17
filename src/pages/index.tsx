@@ -23,10 +23,6 @@ const wolfKitPaymentEntries: [string, Icon][] = Object.entries(wolfKitPayment) /
 //// 	...WolfKitSocialMediaIconsEntries,
 //// 	...WolfKitPaymentIconsEntries,
 //// ]
-////
-//// function DoubleInset({ className, children }: PropsWithChildren<{ className?: string }>) {
-//// 	return <div className={cx(`px-[calc(var(--padding)_*_1.5)]`, className)}>{children}</div>
-//// }
 
 function nameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -40,51 +36,69 @@ const GroupContext =
 	} | null>(null)
 
 function Group({ name, icon, children }: PropsWithChildren<{ name: string; icon: Icon }>) {
-	const [open, setOpen] = useState(true)
+	const [dropdown, setDropdown] = useState(false)
 	const [checkboxes, setCheckboxes] = useState<Map<string, boolean>>(() => new Map())
+
+	useEffect(() => {
+		if (children !== undefined) { return } // prettier-ignore
+		setCheckboxes(curr => {
+			const next = new Map(curr)
+			next.set(name, true)
+			return next
+		})
+	}, [children, name])
 
 	const [some, every] = useMemo(() => {
 		const arr = [...checkboxes.values()]
 		return [arr.some(checked => checked), arr.every(checked => checked)] as const
 	}, [checkboxes])
 
+	const setChecked = useCallback(
+		(checked: SetStateAction<boolean>) => {
+			setCheckboxes(curr => {
+				const next = new Map(curr)
+				for (const key of next.keys()) {
+					next.set(key, typeof checked === "function" ? checked(every) : checked)
+				}
+				return next
+			})
+		},
+		[every],
+	)
+
 	return (
 		<GroupContext.Provider value={{ checkboxes, setCheckboxes }}>
 			<div
 				className="rounded-[calc(var(--container-h)_/_2)] hover:bg-slate-100"
-				style={{ "--container-h": "36px", "--icon-h": "16px", "--small-icon-h": "10px" } as CSSProperties}
-				onClick={e => {
-					//// setChecked(curr => !curr)
-					setOpen(curr => !curr)
-				}}
+				style={{ "--container-h": "36px", "--icon-h": "16px", "--small-icon-h": "12px" } as CSSProperties}
 			>
-				{/* Button */}
 				<div
 					className="flex h-[var(--container-h)] cursor-pointer select-none items-center justify-between rounded-1e3
 						hover:bg-slate-200 hover:active:bg-slate-300"
+					onClick={e => {
+						if (children === undefined) {
+							setChecked(curr => !curr)
+						} else {
+							setDropdown(curr => !curr)
+						}
+					}}
 					tabIndex={0}
 				>
 					{/* LHS */}
 					<div className="flex items-center">
 						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-							<DynamicIcon icon={icon} className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-700" />
+							<DynamicIcon icon={icon} className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-700" strokeWidth={2.5} />
 						</div>
 						{name}
 					</div>
 					{/* RHS */}
-					{/* Use !every to guard zero values */}
-					{!every && some && (
-						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-							<feather.Minus className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={5} />
-						</div>
-					)}
-					{every && (
-						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-							<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={5} />
-						</div>
-					)}
+					<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+						{/* {!some && !every && <feather.Minus className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-300" strokeWidth={5} />} */}
+						{some && <feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={5} />}
+					</div>
 				</div>
-				{open && <div className="pl-12">{children}</div>}
+				{dropdown && <div className="pl-12">{children}</div>}
+				{/* {dropdown && children} */}
 			</div>
 		</GroupContext.Provider>
 	)
@@ -97,7 +111,7 @@ function GroupItem({ name, icon }: { name: string; icon: Icon }) {
 		if (checkboxes.has(name)) { return } // prettier-ignore
 		setCheckboxes(curr => {
 			const next = new Map(curr)
-			next.set(name, false)
+			next.set(name, true)
 			return next
 		})
 	}, [checkboxes, name, setCheckboxes])
@@ -121,7 +135,6 @@ function GroupItem({ name, icon }: { name: string; icon: Icon }) {
 	)
 
 	return (
-		// Button
 		<div
 			className="flex h-[var(--container-h)] cursor-pointer select-none items-center justify-between rounded-1e3
 				hover:bg-slate-200 hover:active:bg-slate-300"
@@ -153,7 +166,7 @@ function SearchBar() {
 
 	return (
 		<div className="flex h-36 rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]">
-			<feather.Search className="m-[calc((36px_-_16px)_/_2)] h-16 w-16 text-slate-400" />
+			<feather.Search className="m-[calc((36px_-_16px)_/_2)] h-16 w-16 text-slate-400" strokeWidth={2.5} />
 			<div className="relative grow">
 				{/* CSS reset: 100% w-100% bg-transparent */}
 				<input className="h-100% w-100% bg-transparent focus:outline-none" type="text" value={search} onChange={e => setSearch(e.currentTarget.value)} />
@@ -208,46 +221,100 @@ export default function Page() {
 			</style>
 			<div className="flex" style={{ "--grid-column-size": "128px", "--grid-row-size": "128px" } as CSSProperties}>
 				<AsideContainer>
-					<div className="flex flex-col gap-16 px-[var(--padding)]">
-						<div className="flex items-center justify-between">
+					<div className="flex flex-col gap-16 p-[var(--padding)]">
+						<div className="flex h-24 items-center justify-between">
 							<Chip>Search</Chip>
-							{/* <Chip>Search&nbsp;&nbsp;&middot;&nbsp;&nbsp;⌘P to Focus</Chip> */}
-							{/* <SecondaryChip>⌘P to Focus</SecondaryChip> */}
+							<div className="flex h-36 w-36 items-center justify-center">
+								<feather.RotateCcw className="h-12 w-12 text-slate-700" strokeWidth={4} />
+							</div>
 						</div>
-						{/* <div className="px-10"> */}
 						<SearchBar />
-						{/* </div> */}
 					</div>
-					<div className="flex flex-col gap-16 px-[var(--padding)]">
-						<div className="flex">
-							<Chip>Icons</Chip>
+					<hr className="relative first-of-type:top-1 last-of-type:bottom-1" />
+					<div className="flex flex-col gap-[var(--spacing)] overflow-y-auto px-[var(--padding)]">
+						<hr className="-mx-[var(--padding)]" />
+						<div className="flex flex-col gap-16">
+							<div className="flex h-24 items-center justify-between">
+								<Chip>Icons</Chip>
+								<div className="flex h-36 w-36 items-center justify-center">
+									<feather.RotateCcw className="h-12 w-12 text-slate-700" strokeWidth={4} />
+								</div>
+							</div>
+							<div className="flex flex-col gap-8">
+								<Group name="Feather" icon={feather.Smile} />
+								<Group
+									name="Platforms"
+									icon={() => (
+										<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+											<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={5} />
+										</div>
+									)}
+								>
+									{socialItems.map(props => (
+										<Group key={props.name} {...props}>
+											<GroupItem {...props} />
+										</Group>
+									))}
+								</Group>
+								<Group
+									name="Payment platforms"
+									icon={() => (
+										<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+											<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={5} />
+										</div>
+									)}
+								>
+									{paymentItems.map(props => (
+										<Group key={props.name} {...props}>
+											<GroupItem {...props} />
+										</Group>
+									))}
+								</Group>
+							</div>
 						</div>
-						<div className="flex flex-col gap-[calc(var(--spacing)_/_4)]">
-							<Group name="Feather icons" icon={feather.Feather} />
-							<Group
-								name="Platform icons"
-								icon={() => (
-									<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={7 / 2} />
-									</div>
-								)}
-							>
-								{socialItems.map(props => (
-									<GroupItem key={props.name} {...props} />
-								))}
-							</Group>
-							<Group
-								name="Payment platform icons"
-								icon={() => (
-									<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={7 / 2} />
-									</div>
-								)}
-							>
-								{paymentItems.map(props => (
-									<GroupItem key={props.name} {...props} />
-								))}
-							</Group>
+						{/* Slider */}
+						<hr className="-mx-[var(--padding)]" />
+						<div className="flex flex-col gap-16">
+							<div className="flex h-24 items-center justify-between">
+								<Chip>Size</Chip>
+								<div className="flex h-36 w-36 items-center justify-center">
+									<feather.RotateCcw className="h-12 w-12 text-slate-700" strokeWidth={4} />
+								</div>
+							</div>
+							<div className="mx-10 flex h-36 flex-col justify-center">
+								<div className="flex h-6 flex-row items-center justify-center rounded-1e3 bg-slate-300">
+									<div className="h-36 w-36 rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]"></div>
+								</div>
+							</div>
+						</div>
+						{/* Slider */}
+						<hr className="-mx-[var(--padding)]" />
+						<div className="flex flex-col gap-16">
+							<div className="flex h-24 items-center justify-between">
+								<Chip>Stroke width</Chip>
+								<div className="flex h-36 w-36 items-center justify-center">
+									<feather.RotateCcw className="h-12 w-12 text-slate-700" strokeWidth={4} />
+								</div>
+							</div>
+							<div className="mx-10 flex h-36 flex-col justify-center">
+								<div className="flex h-6 flex-row items-center justify-center rounded-1e3 bg-slate-300">
+									<div className="h-36 w-36 rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]"></div>
+								</div>
+							</div>
+						</div>
+						<hr className="-mx-[var(--padding)]" />
+					</div>
+					<div className="grow"></div>
+					<hr className="relative first-of-type:top-1 last-of-type:bottom-1" />
+					<div className="flex flex-col gap-8 p-[var(--padding)]">
+						<div className="text-[12px] leading-[1.375] text-slate-600">
+							‘Feather’ icons are designed by @colebemis and are licensed as MIT open source. Personal and commercial use allowed without attribution.
+						</div>
+						<div className="text-[12px] leading-[1.375] text-slate-600">
+							‘Platforms’ icons are sourced from The Wolf Kit and are licensed as CC BY 4.0. Personal and commercial use allowed with attribution.
+						</div>
+						<div className="text-[12px] leading-[1.375] text-slate-600">
+							‘Payment icons’ are sourced from from The Wolf Kit and are licensed as CC BY 4.0. Personal and commercial use allowed with attribution.
 						</div>
 					</div>
 				</AsideContainer>
@@ -280,16 +347,28 @@ export default function Page() {
 
 //// function Chip({ children }: PropsWithChildren) {
 //// 	// Use mx-10 to optically align to search bar
-//// 	return <div className="mx-10 flex h-24 items-center rounded-1e3 bg-slate-200 px-12">{children}</div>
+//// 	return <div className="mx-10 flex h-24 items-center rounded-1e3 bg-slate-200 px-10 text-[13px]">{children}</div>
 //// }
 
 function Chip({ children }: PropsWithChildren) {
-	return <div className="mx-10 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-800">{children}</div>
+	return (
+		<div className="mx-10 flex h-24 items-center rounded-1e3 bg-slate-200 px-10 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-800">
+			{children}
+		</div>
+	)
 }
 
-function SecondaryChip({ children }: PropsWithChildren) {
-	return <div className="mx-10 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-600">{children}</div>
-}
+//// function SecondaryChip({ children }: PropsWithChildren) {
+//// 	return <div className="mx-10 flex h-24 items-center text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-800">{children}</div>
+//// }
+
+//// function Chip({ children }: PropsWithChildren) {
+//// 	return <div className="mx-10 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-800">{children}</div>
+//// }
+
+//// function SecondaryChip({ children }: PropsWithChildren) {
+//// 	return <div className="mx-10 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-600">{children}</div>
+//// }
 
 function MainContainer({ children }: PropsWithChildren) {
 	return <div className="flex grow flex-col justify-center gap-32 p-64">{children}</div>
@@ -298,10 +377,11 @@ function MainContainer({ children }: PropsWithChildren) {
 function AsideContainer({ children }: PropsWithChildren) {
 	return (
 		<div
-			className="min-h-[100dvh] w-320 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]"
-			style={{ "--padding": "16px", "--spacing": "32px" } as CSSProperties}
+			className="min-h-[100dvh] w-384 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]"
+			style={{ "--padding": "16px", "--spacing": "16px" } as CSSProperties}
 		>
-			<div className="sticky top-0 flex flex-col gap-[var(--spacing)] py-[calc(var(--padding)_*_2)]">{children}</div>
+			{/* Use h-[100dvh] because of grow */}
+			<div className="sticky top-0 flex h-[100dvh] flex-col">{children}</div>
 		</div>
 	)
 }

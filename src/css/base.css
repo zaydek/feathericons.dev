@@ -37,13 +37,13 @@
 	:root:not(.dark) { color-scheme: light; }
 	:root.dark       { color-scheme: dark;  }
 	hr {
-		border-color: theme('colors.gray.300');
+		border-color: theme('colors.slate.300');
 	}
 	/* Typography */
 	:root, ::before, ::after {
 		font: 400 14px / normal
 			var(--font-sans);
-		color: theme('colors.gray.900');
+		color: theme('colors.slate.900');
 	}
 	/* :root { */
 	/* 	font-family: var(--font-sans); */
@@ -55,7 +55,7 @@
 		tab-size: 2;
 		font: 400 14px / normal
 			var(--fallback-font-code);
-		color: theme('colors.gray.900');
+		color: theme('colors.slate.900');
 		/* font-family: var(--font-code); */
 	}
 	/* Iconography */
