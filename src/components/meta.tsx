@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { manifest } from "../data/manifest"
-import { convertToKebabCase, convertToSpaceCase } from "../lib/cases"
+import { toKebabCase, toSpaceCase } from "../lib/cases"
 
 // prettier-ignore
 const URL =
@@ -8,7 +8,7 @@ const URL =
 
 // prettier-ignore
 const OG_URL = (name: keyof typeof manifest | "index") =>
-	`https://feathericons.dev/og/${convertToKebabCase(name).toLowerCase()}.png`
+	`https://feathericons.dev/og/${toKebabCase(name).toLowerCase()}.png`
 
 // prettier-ignore
 const TITLE =
@@ -23,10 +23,10 @@ export function Meta({ name }: { name?: keyof typeof manifest }) {
 	return (
 		<Head>
 			{/* GOOG */}
-			<title>{name === undefined ? TITLE : convertToSpaceCase(name)}</title>
+			<title>{name === undefined ? TITLE : toSpaceCase(name)}</title>
 			<meta name="description" content={DESCRIPTION} />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<link rel="icon" href={`/feather/${convertToKebabCase(name ?? "Feather")}.svg`} />
+			<link rel="icon" href={`/feather/${toKebabCase(name ?? "Feather")}.svg`} />
 
 			{/* TWTR */}
 			<meta property="twitter:card" content="summary_large_image" />

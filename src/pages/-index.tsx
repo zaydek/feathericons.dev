@@ -6,7 +6,7 @@ import { TypographySmallSans } from "../components/bindings"
 import { Hoverable } from "../components/hoverable"
 import { ResizableIcon } from "../components/resizable-icon"
 import { manifest } from "../data/manifest"
-import { convertToKebabCase } from "../lib/cases"
+import { toKebabCase } from "../lib/cases"
 import { SearchContext, SelectedContext } from "../state/state"
 
 // TODO: Colors are off
@@ -31,7 +31,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 
 	return (
 		<div className="flex flex-col">
-			<Hoverable pos="center" content={convertToKebabCase(name).toUpperCase()}>
+			<Hoverable pos="center" content={toKebabCase(name).toUpperCase()}>
 				<button
 					className="flex h-[var(--grid-size)] items-center justify-center"
 					onClick={e => {
@@ -74,7 +74,7 @@ const MemoGridItem = memo(function GridItem({
 			</button>
 			<Anchor
 				className="group/name flex h-32 items-center justify-center truncate"
-				href={`/${convertToKebabCase(name).toLowerCase()}`}
+				href={`/${toKebabCase(name).toLowerCase()}`}
 				onClick={e => {
 					setSelectedName(name)
 					setSelectedSvgElement(document.getElementById(name)! as Element as SVGSVGElement)

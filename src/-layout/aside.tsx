@@ -15,7 +15,7 @@ import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
 import { manifest } from "../data/manifest"
-import { convertToKebabCase, convertToTitleCase } from "../lib/cases"
+import { toKebabCase, toTitleCase } from "../lib/cases"
 import { downloadText } from "../lib/download"
 import { Mutable } from "../lib/types"
 import { ShikiContext } from "../state/shiki"
@@ -53,7 +53,7 @@ function useNameFromRouter() {
 	let name: keyof typeof manifest | undefined = undefined
 	const queryName = useRouter().query.name
 	if (queryName !== undefined) {
-		name = convertToTitleCase(queryName as string) as keyof typeof manifest
+		name = toTitleCase(queryName as string) as keyof typeof manifest
 	}
 	return name
 }
@@ -366,7 +366,7 @@ export function Aside() {
 	}, [clipboard])
 
 	const handleClickDownload = useCallback(() => {
-		const filename = `${formatAs === "svg" ? convertToKebabCase(selectedName).toLowerCase() : selectedName}.${formatAs}`
+		const filename = `${formatAs === "svg" ? toKebabCase(selectedName).toLowerCase() : selectedName}.${formatAs}`
 		const contents = clipboard + "\n"
 		downloadText(filename, contents)
 	}, [clipboard, formatAs, selectedName])

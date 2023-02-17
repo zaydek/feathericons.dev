@@ -3,7 +3,7 @@ import { formatAsJsx, formatAsSvg, formatAsTsx } from "../../scripts/utils/-form
 import { stringify } from "../../scripts/utils/-stringify"
 import { jsxPlaceholder, sizeInitial, strokeWidthInitial, svgPlaceholder, tsxPlaceholder } from "../constants"
 import { manifest } from "../data/manifest"
-import { convertToKebabCase } from "../lib/cases"
+import { toKebabCase } from "../lib/cases"
 
 export type FormatAs = "svg" | "jsx" | "tsx"
 
@@ -111,8 +111,8 @@ export function StateProvider({ children }: PropsWithChildren) {
 				strictJsx: false,
 				omitAttrs,
 			})
-			return formatAsSvg(convertToKebabCase(selectedName).toLowerCase(), code, {
-				comment: `https://feathericons.dev/${convertToKebabCase(selectedName).toLowerCase()}`,
+			return formatAsSvg(toKebabCase(selectedName).toLowerCase(), code, {
+				comment: `https://feathericons.dev/${toKebabCase(selectedName).toLowerCase()}`,
 			}).replaceAll("\t", "  ")
 		} else if (formatAs === "jsx") {
 			const code = stringify(selectedSvgElement, {
@@ -120,7 +120,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsJsx(selectedName, code, {
-				comment: `https://feathericons.dev/${convertToKebabCase(selectedName).toLowerCase()}?format=jsx`,
+				comment: `https://feathericons.dev/${toKebabCase(selectedName).toLowerCase()}?format=jsx`,
 			}).replaceAll("\t", "  ")
 		} else {
 			const code = stringify(selectedSvgElement, {
@@ -128,7 +128,7 @@ export function StateProvider({ children }: PropsWithChildren) {
 				omitAttrs,
 			})
 			return formatAsTsx(selectedName, code, {
-				comment: `https://feathericons.dev/${convertToKebabCase(selectedName).toLowerCase()}?format=tsx`,
+				comment: `https://feathericons.dev/${toKebabCase(selectedName).toLowerCase()}?format=tsx`,
 			}).replaceAll("\t", "  ")
 		}
 	}, [formatAs, selectedName, selectedSvgElement])

@@ -7,7 +7,7 @@ import { JSDOM } from "jsdom"
 import JSZip from "jszip"
 import SVGO from "svgo"
 
-import { convertToTitleCase, detab, sleep } from "@/lib"
+import { detab, sleep, toTitleCase } from "@/lib"
 import { formatSvg } from "./utils/format-svg"
 import { transformSvg, transformTsx } from "./utils/transform-svg"
 
@@ -96,7 +96,7 @@ async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { 
 	await fs.mkdir(outdir, { recursive: true })
 	const zip = new JSZip()
 	for (const [name, icon] of Object.entries(icons)) {
-		const icon2 = transformSvg(convertToTitleCase(name), icon, { banner: banner(name) })
+		const icon2 = transformSvg(toTitleCase(name), icon, { banner: banner(name) })
 		await fs.writeFile(path.join(outdir, `${name}.svg`), icon2 + EOF)
 		zip.file(name, icon)
 	}
@@ -107,12 +107,12 @@ async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { 
 async function exportTsx(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, icon] of Object.entries(icons)) {
-		const icon2 = transformTsx(convertToTitleCase(name), icon, { banner: banner(name) })
-		await fs.writeFile(path.join(outdir, `${convertToTitleCase(name)}.tsx`), icon2 + EOF)
+		const icon2 = transformTsx(toTitleCase(name), icon, { banner: banner(name) })
+		await fs.writeFile(path.join(outdir, `${toTitleCase(name)}.tsx`), icon2 + EOF)
 	}
 	// prettier-ignore
 	const exports = Object.keys(icons).map(name => detab(`
-		export * from "./${convertToTitleCase(name)}"
+		export * from "./${toTitleCase(name)}"
 	`).trim()).join("\n")
 	await fs.writeFile(path.join(outdir, "index.ts"), exports + EOF)
 }

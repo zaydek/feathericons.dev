@@ -1,4 +1,4 @@
-import { convertToCamelCase } from "@/lib"
+import { toCamelCase } from "@/lib"
 
 const svgStartAttrs = ["xmlns", "viewBox", "width", "height"] // prettier-ignore
 const svgEndAttrs   = ["aria-hidden"] // prettier-ignore
@@ -17,7 +17,7 @@ function stringifyAttrs(sortedKeys: string[], attrs: NamedNodeMap, { strictJsx }
 		} else {
 			if (str !== "") { str += " " } // prettier-ignore
 			if (strictJsx) {
-				str += `${convertToCamelCase(attr.name)}=${JSON.stringify(attr.value)}`
+				str += `${toCamelCase(attr.name)}=${JSON.stringify(attr.value)}`
 			} else {
 				str += `${attr.name}=${JSON.stringify(attr.value)}`
 			}

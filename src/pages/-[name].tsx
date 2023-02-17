@@ -9,7 +9,7 @@ import { DemoSocialMedia } from "../components/demos/demo-social-media"
 import { DemoTwitter } from "../components/demos/demo-twitter"
 import { Recommended } from "../components/demos/recommended"
 import { manifest } from "../data/manifest"
-import { convertToKebabCase, convertToSpaceCase, convertToTitleCase } from "../lib/cases"
+import { toKebabCase, toSpaceCase, toTitleCase } from "../lib/cases"
 import { detab } from "../lib/format"
 
 interface NameParams extends ParsedUrlQuery {
@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths<NameParams> = async () => {
 	return {
 		paths: Object.keys(manifest).map(name => ({
 			params: {
-				name: convertToKebabCase(name).toLowerCase(),
+				name: toKebabCase(name).toLowerCase(),
 			},
 		})),
 		fallback: false,
@@ -33,7 +33,7 @@ export const getStaticPaths: GetStaticPaths<NameParams> = async () => {
 
 export const getStaticProps: GetStaticProps<NameProps, NameParams> = context => {
 	const params = context.params!
-	const name = convertToTitleCase(params.name) as keyof typeof manifest
+	const name = toTitleCase(params.name) as keyof typeof manifest
 	return { props: { name } }
 }
 
@@ -43,7 +43,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 	return (
 		<article className="pb-64">
 			<docs.Heading>
-				Ideas Using the <docs.Code>{convertToSpaceCase(name)}</docs.Code> Icon
+				Ideas Using the <docs.Code>{toSpaceCase(name)}</docs.Code> Icon
 			</docs.Heading>
 			<figure className="grid grid-cols-3 grid-rows-2 gap-24">
 				<DemoLogin name={name} />
@@ -55,7 +55,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			{manifest[name].more.length > 0 && (
 				<>
 					<docs.Subheading>
-						Recommended for Use With <docs.Code>{convertToSpaceCase(name)}</docs.Code>
+						Recommended for Use With <docs.Code>{toSpaceCase(name)}</docs.Code>
 					</docs.Subheading>
 					<figure className="flex flex-wrap">
 						{manifest[name].more.map(name => (
@@ -77,7 +77,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			</p>
 			{/* <hr /> */}
 			<docs.Subheading>
-				Using <docs.Code>{convertToSpaceCase(name)}</docs.Code> With a CDN
+				Using <docs.Code>{toSpaceCase(name)}</docs.Code> With a CDN
 			</docs.Subheading>
 			<p>To get started with Feather using a CDN (content delivery network), simply:</p>
 			<docs.Ordered>
@@ -85,7 +85,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 					Add <docs.Code>{`<script src="https://unpkg.com/feather-icons"></script>`}</docs.Code> to the <docs.Code>{`<head>`}</docs.Code> tag
 				</docs.Item>
 				<docs.Item>
-					Add <docs.Code>{`<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>`}</docs.Code>
+					Add <docs.Code>{`<i data-feather="${toKebabCase(name).toLowerCase()}"></i>`}</docs.Code>
 				</docs.Item>
 				<docs.Item>
 					Invoke <docs.Code>{`feather.replace()`}</docs.Code>
@@ -100,7 +100,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 							<script src="https://unpkg.com/feather-icons"></script>
 						</head>
 						<body>
-							<i data-feather="${convertToKebabCase(name).toLowerCase()}"></i>
+							<i data-feather="${toKebabCase(name).toLowerCase()}"></i>
 							<script>
 								feather.replace()
 							</script>
@@ -113,7 +113,7 @@ export default function Component({ name }: { name: keyof typeof manifest }) {
 			</p>
 			{/* <hr /> */}
 			<docs.Subheading>
-				Using <docs.Code>{convertToSpaceCase(name)}</docs.Code> With <docs.Reactjs />
+				Using <docs.Code>{toSpaceCase(name)}</docs.Code> With <docs.Reactjs />
 			</docs.Subheading>
 			<p>To get started with Feather using React, simply:</p>
 			<docs.Ordered>
