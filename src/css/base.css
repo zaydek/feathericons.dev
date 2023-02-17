@@ -41,9 +41,9 @@
 	}
 	/* Typography */
 	:root, ::before, ::after {
-		font: 400 13px / normal
+		font: 400 14px / normal
 			var(--font-sans);
-		color: theme('colors.gray.700');
+		color: theme('colors.gray.900');
 	}
 	/* :root { */
 	/* 	font-family: var(--font-sans); */
@@ -53,9 +53,9 @@
 		-webkit-font-smoothing:  auto;
 		-moz-osx-font-smoothing: auto;
 		tab-size: 2;
-		font: 400 13px / normal
+		font: 400 14px / normal
 			var(--fallback-font-code);
-		color: theme('colors.gray.700');
+		color: theme('colors.gray.900');
 		/* font-family: var(--font-code); */
 	}
 	/* Iconography */

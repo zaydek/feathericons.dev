@@ -24,82 +24,97 @@ const wolfKitPaymentEntries: [string, Icon][] = Object.entries(wolfKitPayment) /
 //// 	...WolfKitPaymentIconsEntries,
 //// ]
 
-//// import { DynamicIcon } from "@/components/dynamic-icon"
-////
-//// const WolfKitSocialMediaNames = Object.keys(WolfKitSocialMedia)
-//// //// const staticWolfKitPaymentKeys = Object.keys(WolfKitPayment)
-////
-//// function WolfKitSocialMediaIcon({ name }: { name: string }) {
-//// 	return <DynamicIcon icon={WolfKitSocialMedia} />
-//// }
-
-//// function SearchBar() {
-//// 	return (
-//// 		<div className="h-48 rounded-1e3 bg-white px-[calc(48px_/_4)]">
-//// 			<div>Hello</div>
-//// 		</div>
-//// 	)
-//// }
-////
-//// function SearchGridItem() {
-//// 	return (
-//// 		<div className="flex h-128 flex-col p-16 pt-0">
-//// 			<div className="flex grow items-center justify-center">
-//// 				<div className="h-32 w-32 rounded-1e3 bg-gray-700"></div>
-//// 			</div>
-//// 			<div className="truncate text-center">Hello hello hello hello hello hello</div>
-//// 		</div>
-//// 	)
-//// }
-////
-//// function SearchGrid() {
-//// 	return (
-//// 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(128px,_1fr))]">
-//// 			{iota(60).map(index => (
-//// 				<SearchGridItem key={index} />
-//// 			))}
-//// 		</div>
-//// 	)
-//// }
-
-function Inset({ className, children }: PropsWithChildren<{ className?: string }>) {
-	return <div className={cx(`px-[var(--padding)]`, className)}>{children}</div>
+function DoubleInset({ className, children }: PropsWithChildren<{ className?: string }>) {
+	return <div className={cx(`px-[calc(var(--padding)_*_1.5)]`, className)}>{children}</div>
 }
 
 function nameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
 
-function UnorderedList({ name, icon, children }: PropsWithChildren<{ name: string; icon: Icon }>) {
-	return (
-		<ul>
-			<div className="group flex h-32 items-center px-[var(--padding)]">
-				<div className="-mx-16 -ml-8 flex h-32 items-center rounded-12 px-16 pl-8 group-hover:bg-gray-100">
-					<DynamicIcon icon={icon} className="mr-[calc((36px_-_16px)_/_2)] h-16 w-16 text-gray-600" />
-					{name}
-				</div>
-			</div>
-			{children}
-		</ul>
-	)
-}
+function Ul({ name, icon, children }: PropsWithChildren<{ name: string; icon: Icon }>) {
+	const [checked, setChecked] = useState(false)
 
-function ListItem({ name, icon }: { name: string; icon: Icon }) {
-	//// return (
-	//// 	<li className="flex h-32 items-center bg-white px-[var(--padding)] pl-[calc(var(--padding)_+_16px_+_10px)]">
-	//// 		<DynamicIcon icon={icon} className="mr-[calc((36px_-_16px)_/_2)] h-16 w-16 text-gray-600" />
-	//// 		{name}
-	//// 	</li>
-	//// )
 	return (
-		<div className="group flex h-32 items-center px-[var(--padding)] pl-[calc(var(--padding)_+_16px_+_10px)]">
-			<div className="-mx-16 -ml-8 flex h-32 items-center rounded-12 px-16 pl-8 group-hover:bg-gray-100">
-				<DynamicIcon icon={icon} className="mr-[calc((36px_-_16px)_/_2)] h-16 w-16 text-gray-600" />
-				{name}
+		<div className="px-[var(--padding)]" style={{ "--container-h": "36px", "--icon-h": "16px", "--small-icon-h": "10px" } as CSSProperties}>
+			<div className="rounded-16 hover:bg-slate-100" onClick={e => setChecked(curr => !curr)}>
+				{/* Button */}
+				<div className="flex h-[var(--container-h)] cursor-pointer items-center justify-between rounded-1e3 hover:bg-slate-200 hover:active:bg-slate-300">
+					{/* LHS */}
+					<div className="flex items-center">
+						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+							<DynamicIcon icon={icon} className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-700" />
+						</div>
+						{name}
+					</div>
+					{/* RHS */}
+					{checked && (
+						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+							<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={6} />
+						</div>
+					)}
+				</div>
+				{/* <div className="pl-24">{children}</div> */}
+				<div className="pl-12">{children}</div>
 			</div>
 		</div>
 	)
 }
+
+function Li({ name, icon }: { name: string; icon: Icon }) {
+	const [checked, setChecked] = useState(false)
+
+	return (
+		// Button
+		<div
+			className="flex h-[var(--container-h)] cursor-pointer items-center justify-between rounded-1e3 hover:bg-slate-200 hover:active:bg-slate-300"
+			onClick={e => {
+				e.stopPropagation()
+				setChecked(curr => !curr)
+			}}
+		>
+			{/* LHS */}
+			<div className="flex items-center">
+				<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+					<DynamicIcon icon={icon} className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-700" />
+				</div>
+				{name}
+			</div>
+			{/* RHS */}
+			{checked && (
+				<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+					<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={6} />
+				</div>
+			)}
+		</div>
+	)
+}
+
+//// <div className="m-[calc((var(--container-h)_-_var(--icon-h))_/_2)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
+//// 	{/* prettier-ignore */}
+//// 	<feather.Check
+//// 		className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-blue-500"
+//// 		//// strokeLinecap="square"
+//// 		strokeWidth={4}
+//// 	/>
+//// </div>
+
+// prettier-ignore
+const socialItems = [
+	{ name: "Original",    icon: wolfKitSocialMedia.Twitter           },
+	{ name: "Circle",      icon: wolfKitSocialMedia.TwitterCircle     },
+	{ name: "Square",      icon: wolfKitSocialMedia.TwitterSquare     },
+	{ name: "Circle mono", icon: wolfKitSocialMedia.TwitterCircleMono },
+	{ name: "Square mono", icon: wolfKitSocialMedia.TwitterSquareMono },
+]
+
+// prettier-ignore
+const paymentItems = [
+  { name: "Original",      icon: wolfKitPayment.Stripe  },
+  { name: "Inverted",      icon: wolfKitPayment.Stripe1 },
+  { name: "Mono",          icon: wolfKitPayment.Stripe2 },
+  { name: "Inverted mono", icon: wolfKitPayment.Stripe3 },
+];
 
 export default function Page() {
 	const [showOutline, setShowOutline] = useState(false)
@@ -125,36 +140,47 @@ export default function Page() {
 			</style>
 			<div className="flex" style={{ "--grid-column-size": "112px", "--grid-row-size": "128px" } as CSSProperties}>
 				<AsideContainer>
-					<Inset className="flex flex-col gap-16">
+					<DoubleInset className="flex flex-col gap-16">
 						<div className="flex">
 							<Chip>Search</Chip>
 						</div>
-						<div className="flex h-36 rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]">
+						<div className="flex h-36 rounded-1e3 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]">
 							<feather.Search className="m-[calc((36px_-_16px)_/_2)] h-16 w-16 text-blue-500" />
 							<div className="relative grow">
 								{/* CSS reset: 100% w-100% bg-transparent */}
 								<input className="h-100% w-100% bg-transparent focus:outline-none" type="text" />
-								<div className="absolute inset-0 flex items-center">
+								<div className="pointer-events-none absolute inset-0 flex items-center">
 									<span className="opacity-50">⌘+P to Focus</span>
 								</div>
 							</div>
 						</div>
-					</Inset>
-					<div className="flex flex-col gap-8">
-						<UnorderedList name="Feather" icon={feather.Feather} />
-						<UnorderedList name="Social media" icon={feather.ChevronDown}>
-							{/* <ListItem name="Original" icon={wolfKitSocialMedia.Amazon} />
-							<ListItem name="Circle" icon={wolfKitSocialMedia.AmazonCircle} />
-							<ListItem name="Square" icon={wolfKitSocialMedia.AmazonSquare} />
-							<ListItem name="Circle monochrome" icon={wolfKitSocialMedia.AmazonCircleMono} />
-							<ListItem name="Square monochrome" icon={wolfKitSocialMedia.AmazonSquareMono} /> */}
-						</UnorderedList>
-						<UnorderedList name="Payment services" icon={feather.ChevronDown}>
-							{/* <ListItem name="Original" icon={wolfKitPayment.Stripe} />
-							<ListItem name="Inverted" icon={wolfKitPayment.Stripe1} />
-							<ListItem name="Monochrome" icon={wolfKitPayment.Stripe2} />
-							<ListItem name="Inverted monochrome" icon={wolfKitPayment.Stripe3} /> */}
-						</UnorderedList>
+					</DoubleInset>
+					<div className="flex flex-col gap-[calc(var(--spacing)_/_2)]">
+						<Ul name="Feather icons" icon={feather.Feather} />
+						<Ul
+							name="Platform icons"
+							icon={() => (
+								<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+									<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={7 / 2} />
+								</div>
+							)}
+						>
+							{socialItems.map(props => (
+								<Li key={props.name} {...props} />
+							))}
+						</Ul>
+						<Ul
+							name="Payment platform icons"
+							icon={() => (
+								<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
+									<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-700" strokeWidth={7 / 2} />
+								</div>
+							)}
+						>
+							{paymentItems.map(props => (
+								<Li key={props.name} {...props} />
+							))}
+						</Ul>
 					</div>
 				</AsideContainer>
 				<MainContainer>
@@ -166,7 +192,8 @@ export default function Page() {
 									{entries.map(([name, Icon]) => (
 										<div key={name} className="flex flex-col gap-16 p-16">
 											<div className="flex grow items-center justify-center">
-												<Icon className="min-h-36 min-w-36 text-gray-800" strokeWidth={2.5} />
+												{/* Use -800 instead of -700 here */}
+												<Icon className="min-h-28 min-w-28 text-slate-800" strokeWidth={2.5} />
 											</div>
 											{/* Don't truncate names... */}
 											<div className="flex h-16 justify-center self-center text-center">{nameCase(name)}</div>
@@ -177,6 +204,7 @@ export default function Page() {
 						),
 					)}
 				</MainContainer>
+				{/* <AsideContainer></AsideContainer> */}
 			</div>
 		</>
 	)
@@ -184,7 +212,7 @@ export default function Page() {
 
 function Chip({ children }: PropsWithChildren) {
 	// Use mx-10 to optically align to search bar
-	return <div className="mx-10 flex h-24 items-center rounded-1e3 bg-gray-200 px-12">{children}</div>
+	return <div className="mx-10 flex h-24 items-center rounded-1e3 bg-slate-200 px-12">{children}</div>
 }
 
 function MainContainer({ children }: PropsWithChildren) {
@@ -194,10 +222,10 @@ function MainContainer({ children }: PropsWithChildren) {
 function AsideContainer({ children }: PropsWithChildren) {
 	return (
 		<div
-			className="min-h-[100dvh] w-320 bg-white shadow-[0_0_0_1px_theme('colors.gray.300')]"
-			style={{ "--padding": "32px", "--spacing": "24px" } as CSSProperties}
+			className="min-h-[100dvh] w-320 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]"
+			style={{ "--padding": "16px", "--spacing": "24px" } as CSSProperties}
 		>
-			<div className="sticky top-0 flex flex-col gap-[var(--spacing)] py-[var(--padding)]">{children}</div>
+			<div className="sticky top-0 flex flex-col gap-[var(--spacing)] py-[calc(var(--padding)_*_2)]">{children}</div>
 		</div>
 	)
 }
