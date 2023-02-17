@@ -339,7 +339,7 @@ export default function Page() {
 					<hr className="relative bottom-1" />
 					<div className="flex flex-col gap-[var(--spacing)] p-[var(--padding)] py-[var(--padding)]">
 						<div className="flex h-24 items-center justify-between">
-							<Chip>License</Chip>
+							<Chip>Licensing</Chip>
 							{/* <div className="flex h-36 w-36 items-center justify-center">
 								<feather.RotateCcw className="h-12 w-12 text-slate-700" strokeWidth={4} />
 							</div> */}
@@ -427,7 +427,7 @@ export default function Page() {
 //// }
 
 function Chip({ children }: PropsWithChildren) {
-	return <div className="mx-10 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-800">{children}</div>
+	return <div className="mx-10 text-[10px] font-[600] uppercase tracking-[0.1em] text-slate-700">{children}</div>
 }
 
 //// function SecondaryChip({ children }: PropsWithChildren) {
