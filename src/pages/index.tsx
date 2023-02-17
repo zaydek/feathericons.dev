@@ -1,4 +1,4 @@
-import { detab, round, toKebabCase } from "@/lib"
+import { detab, toKebabCase } from "@/lib"
 import { createContext, CSSProperties, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect, useMemo, useState } from "react"
 
 import { DynamicIcon, Icon } from "@/components/dynamic-icon"
@@ -8,22 +8,8 @@ import * as wolfKitPayment from "@/wolf-kit/payment"
 import * as wolfKitSocialMedia from "@/wolf-kit/social-media"
 
 const featherEntries = Object.entries(feather)
-const wolfKitSocialMediaEntries: [string, Icon][] = Object.entries(wolfKitSocialMedia) //// .filter(
-//// 	([name]) => !["Circle", "Mono", "Square"].some(f => name.includes(f)),
-//// )
-const wolfKitPaymentEntries: [string, Icon][] = Object.entries(wolfKitPayment) //// .filter(([name]) => !["1", "2", "3", "4"].some(f => name.includes(f)))
-
-//// // prettier-ignore
-//// const aggregate: [string, Icon][] = [
-//// 	...featherEntries,
-//// 	...wolfKitSocialEntries,
-//// 	...wolfKitPaymentEntries,
-//// ]
-
-//// const aggregate: [string, Icon][] = [
-//// 	...WolfKitSocialMediaIconsEntries,
-//// 	...WolfKitPaymentIconsEntries,
-//// ]
+const wolfKitSocialMediaEntries: [string, Icon][] = Object.entries(wolfKitSocialMedia)
+const wolfKitPaymentEntries: [string, Icon][] = Object.entries(wolfKitPayment)
 
 function nameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -104,13 +90,13 @@ function Group({ name, icon, children }: PropsWithChildren<{ name: string; icon:
 					{checked ? (
 						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
 							<div className="flex h-[var(--checkbox-h)] w-[var(--checkbox-h)] items-center justify-center rounded-[43.75%] bg-sky-400">
-								<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} />
+								<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={8} />
 							</div>
 						</div>
 					) : (
 						<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
 							<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
-								{/* <feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} /> */}
+								{/* ... */}
 							</div>
 						</div>
 					)}
@@ -171,13 +157,13 @@ function GroupItem({ name, icon }: { name: string; icon: Icon }) {
 			{checked ? (
 				<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
 					<div className="flex h-[var(--checkbox-h)] w-[var(--checkbox-h)] items-center justify-center rounded-[43.75%] bg-sky-400">
-						<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} />
+						<feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={8} />
 					</div>
 				</div>
 			) : (
 				<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
 					<div className="flex h-24 w-24 items-center justify-center rounded-[43.75%] bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
-						{/* <feather.Check className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-white" strokeWidth={7} /> */}
+						{/* ... */}
 					</div>
 				</div>
 			)}
@@ -191,8 +177,7 @@ function SearchBar() {
 	return (
 		<div className="ml-[var(--keyline)] flex h-40 rounded-1e3 bg-slate-200/75 focus-within:bg-white focus-within:shadow-[inset_0_0_0_1px_theme('colors.slate.300')] hover:bg-white hover:shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
 			<div className="flex h-40 w-40 items-center justify-center rounded-1e3">
-				{/* <feather.Search className="h-12 w-12 text-slate-400" strokeWidth={5} /> */}
-				<feather.Search className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-400" strokeWidth={2} />
+				<feather.Search className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-400" strokeWidth={4} />
 			</div>
 			<div className="relative grow">
 				{/* CSS reset: 100% w-100% bg-transparent */}
@@ -271,7 +256,7 @@ export default function Page() {
 								name="Apps"
 								icon={() => (
 									<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={(7 * 2) / 3} />
+										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={4} />
 									</div>
 								)}
 							>
@@ -285,7 +270,7 @@ export default function Page() {
 								name="Vendors"
 								icon={() => (
 									<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={(7 * 2) / 3} />
+										<feather.ChevronDown className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={4} />
 									</div>
 								)}
 							>
@@ -300,12 +285,15 @@ export default function Page() {
 					<Hairline />
 					<Section>
 						<Slider name="Size" />
+						{/* </Section> */}
+						{/* <Hairline /> */}
+						{/* <Section> */}
 						<div></div>
 						<Slider name="Stroke width" />
 					</Section>
 					<Hairline />
 					<Section>
-						<Heading name="Licenses" />
+						<StandaloneHeading name="Licenses" />
 						<div className="flex flex-col gap-4">
 							<div className="ml-[var(--keyline)] flex gap-8">
 								<div className="-m-[calc((var(--icon-h)_-_var(--small-icon-h))_/_4)] flex h-[var(--icon-h)] w-[var(--icon-h)] items-center justify-center">
@@ -351,7 +339,6 @@ export default function Page() {
 					</Section>
 				</Aside>
 				<Main>
-					{/* Search grid */}
 					{[["Feather", featherEntries] as const, ["Wolf Kit", wolfKitSocialMediaEntries] as const, ["Wolf Kit", wolfKitPaymentEntries] as const].map(
 						([name, entries], index) => (
 							<div key={index} className="flex flex-col gap-[var(--spacing)]">
@@ -371,43 +358,35 @@ export default function Page() {
 						),
 					)}
 				</Main>
-				{/* <AsideContainer></AsideContainer> */}
 			</div>
 		</>
 	)
 }
 
-//// function Chip({ children }: PropsWithChildren) {
-//// 	// Use mx-[var(--keyline)] to optically align to search bar
-//// 	return (
-//// 		<div className="ml-[var(--keyline)] flex h-24 items-center rounded-1e3 bg-slate-100 px-10 text-[13px] tracking-[0.0125em] text-slate-700">{children}</div>
-//// 	)
-//// }
-
-function Chip({ children }: PropsWithChildren) {
+function HeadingChip({ children }: PropsWithChildren) {
 	return (
-		<div className="flex h-24 items-center rounded-1e3 bg-slate-200/75 px-12 text-[9.5px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</div>
+		<h2 className="flex h-24 items-center rounded-1e3 bg-slate-200/75 px-12 text-[9.5px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</h2>
 	)
 }
 
 function Heading({ name }: { name: string }) {
 	return (
 		<div className="ml-[var(--keyline)] flex items-center justify-between">
-			<Chip>{name}</Chip>
+			<HeadingChip>{name}</HeadingChip>
 			<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
-				<feather.RotateCcw className="h-12 w-12 text-slate-300" strokeWidth={round((7 * 2) / 3, { precision: 2 })} />
+				<feather.RotateCcw className="h-12 w-12 text-slate-300" strokeWidth={4} />
 			</div>
 		</div>
 	)
 }
 
-//// function Chip({ children }: PropsWithChildren) {
-//// 	return (
-//// 		<div className="flex h-24 items-center rounded-1e3 bg-white px-12 text-[10px] font-[500] uppercase tracking-[0.1em] text-slate-700 shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
-//// 			{children}
-//// 		</div>
-//// 	)
-//// }
+function StandaloneHeading({ name }: { name: string }) {
+	return (
+		<div className="ml-[var(--keyline)] flex items-center justify-between">
+			<HeadingChip>{name}</HeadingChip>
+		</div>
+	)
+}
 
 function Main({ children }: PropsWithChildren) {
 	return <main className="flex grow flex-col justify-center gap-32 p-64">{children}</main>
@@ -427,7 +406,7 @@ const cssVars = {
 
 	"--checkbox-h":     "24px",
 	"--slider-track-h": "6px",
-	"--slider-thumb-h": "32px",
+	"--slider-thumb-h": "36px",
 } as CSSProperties
 
 function Aside({ children }: PropsWithChildren) {
