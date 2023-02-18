@@ -16,14 +16,17 @@ function nameCase(str: string) {
 }
 
 function Hairline() {
-	return <hr className="-mx-[var(--padding-x)] border-slate-300" />
+	return <hr className="-mx-[var(--padding-x)] border-slate-300 first:hidden" />
 }
 
 function Section({ className, children, ...props }: JSX.IntrinsicElements["section"]) {
 	return (
-		<section className="flex flex-col gap-16" {...props}>
-			{children}
-		</section>
+		<>
+			<Hairline />
+			<section className="flex flex-col gap-16" {...props}>
+				{children}
+			</section>
+		</>
 	)
 }
 
@@ -175,9 +178,10 @@ function SearchBar() {
 	const [search, setSearch] = useState("")
 
 	return (
-		<div className="ml-[var(--keyline)] flex h-40 rounded-1e3 bg-slate-200/75 focus-within:bg-white focus-within:shadow-[inset_0_0_0_1px_theme('colors.slate.300')] hover:bg-white hover:shadow-[inset_0_0_0_1px_theme('colors.slate.300')]">
+		<div className="ml-[var(--keyline)] flex h-40 rounded-1e3 bg-slate-100 shadow-[inset_0_0_0_1px_theme('colors.slate.300')] focus-within:bg-white hover:bg-white">
 			<div className="flex h-40 w-40 items-center justify-center rounded-1e3">
-				<feather.Search className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-400" strokeWidth={4} />
+				{/* <feather.Search className="h-[var(--icon-h)] w-[var(--icon-h)] text-slate-400" strokeWidth={4} /> */}
+				<feather.Search className="h-[var(--small-icon-h)] w-[var(--small-icon-h)] text-slate-400" strokeWidth={4} />
 			</div>
 			<div className="relative grow">
 				{/* CSS reset: 100% w-100% bg-transparent */}
@@ -195,14 +199,14 @@ function SearchBar() {
 function Slider({ name }: { name: string }) {
 	return (
 		<>
-			<div className="flex flex-col gap-16">
-				<Heading name={name} />
-				<div className="ml-[var(--keyline)] flex h-[calc(var(--slider-thumb-h))] flex-col justify-center">
-					<div className="flex h-[var(--slider-track-h)] flex-row items-center justify-center rounded-1e3 bg-[linear-gradient(to_right,_theme('colors.sky.400')_50%,_theme('colors.slate.200')_50%)]">
-						<div className="h-[var(--slider-thumb-h)] w-[var(--slider-thumb-h)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]"></div>
-					</div>
+			{/* <div className="flex flex-col gap-16"> */}
+			<Heading name={name} />
+			<div className="ml-[var(--keyline)] flex h-[calc(var(--slider-thumb-h))] flex-col justify-center">
+				<div className="flex h-[var(--slider-track-h)] flex-row items-center justify-center rounded-1e3 bg-[linear-gradient(to_right,_theme('colors.sky.400')_50%,_theme('colors.slate.200')_50%)]">
+					<div className="h-[var(--slider-thumb-h)] w-[var(--slider-thumb-h)] rounded-1e3 bg-white shadow-[inset_0_0_0_1px_theme('colors.slate.300')]"></div>
 				</div>
 			</div>
+			{/* </div> */}
 		</>
 	)
 }
@@ -282,16 +286,12 @@ export default function Page() {
 							</Group>
 						</div>
 					</Section>
-					<Hairline />
 					<Section>
 						<Slider name="Size" />
-						{/* </Section> */}
-						{/* <Hairline /> */}
-						{/* <Section> */}
-						<div></div>
+					</Section>
+					<Section>
 						<Slider name="Stroke width" />
 					</Section>
-					<Hairline />
 					<Section>
 						<StandaloneHeading name="Licenses" />
 						<div className="flex flex-col gap-4">
@@ -364,14 +364,12 @@ export default function Page() {
 }
 
 function HeadingChip({ children }: PropsWithChildren) {
-	return (
-		<h2 className="flex h-24 items-center rounded-1e3 bg-slate-200/75 px-12 text-[9.5px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</h2>
-	)
+	return <h2 className="flex h-24 items-center rounded-1e3 bg-slate-200 px-12 text-[9.5px] font-[500] uppercase tracking-[0.1em] text-slate-700">{children}</h2>
 }
 
 function Heading({ name }: { name: string }) {
 	return (
-		<div className="ml-[var(--keyline)] flex items-center justify-between">
+		<div className="ml-[var(--keyline)] flex h-24 items-center justify-between">
 			<HeadingChip>{name}</HeadingChip>
 			<div className="flex h-[var(--container-h)] w-[var(--container-h)] items-center justify-center">
 				<feather.RotateCcw className="h-12 w-12 text-slate-300" strokeWidth={4} />
@@ -397,7 +395,7 @@ const cssVars = {
 	"--padding-y":      "32px",
 	"--padding-x":      "16px",
 	"--padding":        "var(--padding-y) var(--padding-x)",
-	"--spacing":        "24px",
+	"--spacing":        "32px",
 
 	"--keyline":        "calc((var(--container-h) - var(--icon-h)) / 2)",
 	"--container-h":    "36px",
@@ -410,14 +408,29 @@ const cssVars = {
 } as CSSProperties
 
 function Aside({ children }: PropsWithChildren) {
+	const [didScroll, setDidScroll] = useState(false)
+
 	return (
-		<aside className="w-384 bg-white shadow-[0_0_0_1px_theme('colors.slate.300')]" style={cssVars}>
+		<aside className="w-384 bg-white shadow-[1px_0_0_0_theme('colors.slate.300')]" style={cssVars}>
 			<div className="sticky top-0 flex h-[100dvh] flex-col">
-				<header className="sticky top-0 flex flex-col gap-16 bg-white p-[var(--padding)] pb-[var(--spacing)] shadow-[0_0_0_1px_theme('colors.slate.300')]">
+				<header
+					//// className={cx(
+					//// 	"sticky top-0 flex flex-col gap-16 bg-white p-[var(--padding)] pb-[var(--spacing)]",
+					//// 	didScroll && "shadow-[0_1px_0_0_theme('colors.slate.300')]",
+					//// )}
+					className="sticky top-0 flex flex-col gap-16 bg-white p-[var(--padding)] pb-[var(--spacing)] shadow-[0_1px_0_0_theme('colors.slate.300')]"
+				>
 					<Heading name="Search" />
 					<SearchBar />
 				</header>
-				<div className="flex flex-col gap-[var(--spacing)] overflow-y-auto p-[var(--padding)] pt-[var(--spacing)]">{children}</div>
+				<div
+					className="flex flex-col gap-[var(--spacing)] overflow-y-auto p-[var(--padding)] pt-[var(--spacing)]"
+					onScroll={e => {
+						setDidScroll(e.currentTarget.scrollTop > 0)
+					}}
+				>
+					{children}
+				</div>
 			</div>
 		</aside>
 	)
