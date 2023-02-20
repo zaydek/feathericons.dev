@@ -1,0 +1,35 @@
+// https://codepen.io/zaydek/pen/bGxVJqx
+
+@use "idea2" as *;
+@use "reset" as *;
+
+input[type=range] {
+	margin:           ($slider-thumb-height - $slider-track-height) / 2 0;
+	height:           $slider-track-height;
+	background-image: linear-gradient(to right, var(--sky-400) var(--progress), $hairline-color var(--progress));
+	border-radius:    $circular;
+	cursor:           grab;
+}
+input[type=range]:hover:active { cursor: grabbing; }
+input[type=range]::-webkit-slider-thumb {
+	@include reset {
+		-webkit-appearance:
+			none;               // COMPAT/macOS
+		box-shadow:     none; // COMPAT/iOS
+	}
+	height:           $slider-thumb-height;
+	width:            $slider-thumb-height;
+	background-color: white;
+	border-radius:    $circular;
+	box-shadow:       $hairline-shadow, $realistic-shadow;
+}
+input[type=range]::-moz-range-thumb {
+	@include reset {
+		border:         none; // COMPAT/Firefox
+	}
+	height:           $slider-thumb-height;
+	width:            $slider-thumb-height;
+	background-color: white;
+	border-radius:    $circular;
+	box-shadow:       $hairline-shadow, $realistic-shadow;
+}

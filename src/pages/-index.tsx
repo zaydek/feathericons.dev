@@ -41,7 +41,7 @@ const MemoTextlessGridItem = memo(function TextlessGridItem({ name }: { name: ke
 					// prettier-ignore: aria-label
 					aria-label={`Icon ${name}`}
 				>
-					<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
+					<ResizableIcon id={name} className="h-32 w-32 text-gray-800" component={feather[name]} />
 				</button>
 			</Hoverable>
 		</div>
@@ -70,7 +70,7 @@ const MemoGridItem = memo(function GridItem({
 				// prettier-ignore: aria-label
 				aria-label={`Icon ${name}`}
 			>
-				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" icon={feather[name]} />
+				<ResizableIcon id={name} className="h-32 w-32 text-gray-800" component={feather[name]} />
 			</button>
 			<Anchor
 				className="group/name flex h-32 items-center justify-center truncate"

@@ -1,6 +1,6 @@
 {
 	//// "extends": ["react-app", "plugin:jsx-a11y/recommended", "next/core-web-vitals"]
-	"extends": ["react-app", "next/core-web-vitals"]
+	"extends": ["react-app", "next/core-web-vitals", "@unocss"]
 	//// "plugins": ["jsx-a11y"],
 	//// "rules": {
 	//// 	"react/jsx-pascal-case": 0

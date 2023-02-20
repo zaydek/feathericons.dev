@@ -10,7 +10,7 @@ import { AriaSimpleDropDown, AriaSimpleDropDownItem, AriaSimpleDropDownItemProps
 import { AriaSlider, AriaSliderProps } from "../aria/aria-slider"
 import { Anchor } from "../components/anchor"
 import { TypographyCaps, TypographyCode } from "../components/bindings"
-import { DynamicIcon, Icon } from "../components/dynamic-icon"
+import { Component, Dynamic } from "../components/dynamic-icon"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "../components/icon-config"
 import { ResizableIcon } from "../components/resizable-icon"
 import { FormatAs, sizeInitial, sizeMax, sizeMin, sizeStep, strokeWidthInitial, strokeWidthMax, strokeWidthMin, strokeWidthStep } from "../constants"
@@ -101,7 +101,7 @@ function Preview() {
 	) : (
 		<div className="flex aspect-[1.5] items-center justify-center rounded-24 bg-white shadow-[var(--shadow-2)]" data-background-dots>
 			{/* <ResizableIcon className="h-64 w-64 text-gray-800" icon={feather[name]} /> */}
-			<ResizableIcon className="h-64 w-64 text-gray-800" icon={feather[name]} />
+			<ResizableIcon className="h-64 w-64 text-gray-800" component={feather[name]} />
 		</div>
 	)
 }
@@ -155,7 +155,7 @@ function FormatButton() {
 						hover:active:shadow-[var(--inset-shadow-2)]"
 				>
 					<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-						<DynamicIcon className="h-16 w-16 group-hover/button:group-active/button:text-white" icon={icon} />
+						<Dynamic className="h-16 w-16 group-hover/button:group-active/button:text-white" component={icon} />
 					</div>
 					<TypographyCaps className="text-gray-900">
 						FORMAT AS <span className="inline-flex h-0 w-24">{desc}</span>
@@ -163,7 +163,7 @@ function FormatButton() {
 				</div>
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0">
 					<div className="flex h-[var(--form-size)] w-[calc(var(--form-size)_+_var(--form-size)_/_4)] items-center justify-center">
-						<DynamicIcon className="h-16 w-16 text-gray-600" icon={feather.ChevronDown} />
+						<Dynamic className="h-16 w-16 text-gray-600" component={feather.ChevronDown} />
 					</div>
 				</div>
 			</div>
@@ -194,7 +194,7 @@ function FormatButton() {
 								// prettier-ignore: aria-label
 								aria-label="Format as SVG"
 							>
-								<DynamicIcon className="h-16 w-16" icon={SvgIcon} />
+								<Dynamic className="h-16 w-16" component={SvgIcon} />
 								<TypographyCaps className="text-gray-900">SVG</TypographyCaps>
 							</DropDownItem>
 							<DropDownItem
@@ -202,7 +202,7 @@ function FormatButton() {
 								// prettier-ignore: aria-label
 								aria-label="Format as React"
 							>
-								<DynamicIcon className="h-16 w-16" icon={ReactjsIcon} />
+								<Dynamic className="h-16 w-16" component={ReactjsIcon} />
 								<TypographyCaps className="text-gray-900">REACT</TypographyCaps>
 							</DropDownItem>
 							<DropDownItem
@@ -210,7 +210,7 @@ function FormatButton() {
 								// prettier-ignore: aria-label
 								aria-label="Format as TypeScript React"
 							>
-								<DynamicIcon className="h-16 w-16" icon={TypeScriptIcon} />
+								<Dynamic className="h-16 w-16" component={TypeScriptIcon} />
 								<TypographyCaps className="text-gray-900">TS REACT</TypographyCaps>
 							</DropDownItem>
 						</div>
@@ -221,7 +221,7 @@ function FormatButton() {
 	)
 }
 
-function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
+function ActionButton({ icon, onClick, children, ...props }: { icon: Component } & Accessible<JSX.IntrinsicElements["button"]>) {
 	const [click, setClick] = useState(false)
 
 	useEffect(() => {
@@ -244,9 +244,9 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & Ac
 			{...props}
 		>
 			<div className="-ml-[calc((var(--form-size)_-_16px)_/_2)] flex h-[var(--form-size)] w-[var(--form-size)] items-center justify-center">
-				<DynamicIcon
+				<Dynamic
 					className="h-16 w-16 text-[var(--theme-color)] group-hover/button:group-active/button:text-white"
-					icon={click ? feather.Check : icon}
+					component={click ? feather.Check : icon}
 					// Use a slightly thicker stroke when checked
 					{...(click && { strokeWidth: 2.5 })}
 				/>
@@ -258,10 +258,10 @@ function ActionButton({ icon, onClick, children, ...props }: { icon: Icon } & Ac
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function DecorativeIcon({ icon }: { icon: Icon }) {
+function DecorativeIcon({ icon }: { icon: Component }) {
 	return (
 		<div className="flex h-24 w-24 items-center justify-center rounded-1e3 bg-gray-200">
-			<DynamicIcon className="h-12 w-12 text-gray-800" icon={icon} />
+			<Dynamic className="h-12 w-12 text-gray-800" component={icon} />
 		</div>
 	)
 }
@@ -298,7 +298,7 @@ function CompoundSlider({
 	resetHandler,
 	children,
 	...props
-}: { icon: Icon } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
+}: { icon: Component } & { resetHandler: MouseEventHandler } & Omit<AriaSliderProps, "track" | "thumb">) {
 	const [track, setTrack] = useState<HTMLDivElement | null>(null)
 	const [thumb, setThumb] = useState<HTMLDivElement | null>(null)
 
@@ -324,7 +324,7 @@ function CompoundSlider({
 						// prettier-ignore: aria-label
 						aria-label={`Reset ${props.value < sizeMin ? "stroke-width" : "size"}`}
 					>
-						<DynamicIcon className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-800" icon={feather.RotateCcw} />
+						<Dynamic className="h-16 w-16 text-gray-300 [button:hover_&]:text-gray-800" component={feather.RotateCcw} />
 					</button>
 				</div>
 			</div>

@@ -3,7 +3,7 @@ import * as feather from "../../data/react-feather"
 import { PropsWithChildren, useState } from "react"
 import { manifest } from "../../data/manifest"
 import { cx } from "../../lib/cx"
-import { Icon } from "../dynamic-icon"
+import { Component } from "../dynamic-icon"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
@@ -11,12 +11,12 @@ function IconContainer({ children }: PropsWithChildren) {
 	return <div className="flex h-[var(--field-h)] w-[var(--field-h)] items-center justify-center">{children}</div>
 }
 
-function UsernameField({ icon }: { icon: Icon }) {
+function UsernameField({ icon }: { icon: Component }) {
 	return (
 		<div className="flex items-center">
 			{/* LHS */}
 			<IconContainer>
-				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" icon={icon} />
+				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" component={icon} />
 			</IconContainer>
 			<div className="grow">
 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
@@ -25,13 +25,13 @@ function UsernameField({ icon }: { icon: Icon }) {
 	)
 }
 
-function PasswordField({ icon }: { icon: Icon }) {
+function PasswordField({ icon }: { icon: Component }) {
 	const [show, setShow] = useState(false)
 
 	return (
 		<div className="flex items-center">
 			<IconContainer>
-				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" icon={icon} />
+				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" component={icon} />
 			</IconContainer>
 			<div className="grow">
 				<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
@@ -47,7 +47,7 @@ function PasswordField({ icon }: { icon: Icon }) {
 					<ResizableIcon
 						className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-300
 							group-hover/button:text-gray-800"
-						icon={show ? feather.Eye : feather.EyeOff}
+						component={show ? feather.Eye : feather.EyeOff}
 					/>
 				</button>
 			</IconContainer>

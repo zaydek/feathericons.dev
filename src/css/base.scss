@@ -1,0 +1,65 @@
+$fallback-font-sans:
+	system-ui,
+	'Segoe UI',
+	Roboto,
+	Helvetica,
+	Arial,
+	sans-serif,
+	'Apple Color Emoji',
+	'Segoe UI Emoji';
+
+$fallback-font-code:
+	ui-monospace,
+	SFMono-Regular,
+	Consolas,
+	'Liberation Mono',
+	Menlo,
+	monospace;
+
+:root {
+	-webkit-font-smoothing:  antialiased; // Enable
+	-moz-osx-font-smoothing: grayscale;   // Enable
+
+	overflow:
+		hidden  // X-axis
+		scroll; // Y-axis COMPAT/Windows
+	overscroll-behavior: none; // COMPAT/macOS
+}
+:root:not(.dark) { color-scheme: light; }
+:root.dark       { color-scheme: dark;  }
+
+//// // Undo the-new-css-reset
+//// :focus-visible { outline: revert; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Iconography
+
+svg { overflow: visible; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Typography
+
+:root, ::before, ::after {
+	--fallback-font-sans: #{$fallback-font-sans};
+	--fallback-font-code: #{$fallback-font-code};
+	font-family: var(--fallback-font-sans);
+}
+code {
+	-webkit-font-smoothing:  auto; // Disable
+	-moz-osx-font-smoothing: auto; // Disable
+
+	// Prefer 2-space tabs
+	tab-size: 2;
+
+	font-family: var(--fallback-font-code);
+}
+
+em { font-style: italic; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Interaction
+
+// Undo the-new-css-reset
+:focus-visible:not(input[type=text]) { outline: revert; }
+
+label { user-select: none; }

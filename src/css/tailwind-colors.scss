@@ -1,0 +1,23 @@
+@use "sass:color";
+@use "sass:meta";
+
+@use "tailwind-colors-vars";
+
+$tailwind-colors: meta.module-variables(tailwind-colors-vars);
+
+@function r($value) { @return color.red($value);   }
+@function g($value) { @return color.green($value); }
+@function b($value) { @return color.blue($value);  }
+
+:root {
+	@each $key, $value in $tailwind-colors {
+		--#{$key}-rgb: #{
+			r($value)
+			g($value)
+			b($value)
+		};
+	}
+	@each $key, $value in $tailwind-colors {
+		--#{$key}: #{$value};
+	}
+}

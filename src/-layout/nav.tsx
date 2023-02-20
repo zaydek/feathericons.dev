@@ -2,14 +2,14 @@ import * as feather from "../data/react-feather"
 
 import { useContext, useRef } from "react"
 import { Accessible } from "../aria/a11y"
-import { DynamicIcon, Icon } from "../components/dynamic-icon"
+import { Component, Dynamic } from "../components/dynamic-icon"
 import { Hoverable } from "../components/hoverable"
 import { SearchContext } from "../state/state"
 
-function NavButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
+function NavButton({ icon, ...props }: { icon: Component } & Accessible<JSX.IntrinsicElements["button"]>) {
 	return (
 		<button className="flex h-64 w-64 items-center justify-center" {...props}>
-			<DynamicIcon className="h-24 w-24 text-gray-800" icon={icon} />
+			<Dynamic className="h-24 w-24 text-gray-800" component={icon} />
 		</button>
 	)
 }

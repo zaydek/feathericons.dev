@@ -3,11 +3,11 @@ import * as feather from "../../data/react-feather"
 import { useState } from "react"
 import { Accessible } from "../../aria/a11y"
 import { manifest } from "../../data/manifest"
-import { Icon } from "../dynamic-icon"
+import { Component } from "../dynamic-icon"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
-function InteractiveButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
+function InteractiveButton({ icon, ...props }: { icon: Component } & Accessible<JSX.IntrinsicElements["button"]>) {
 	const [active, setActive] = useState(false)
 
 	return (
@@ -22,16 +22,16 @@ function InteractiveButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.I
 			<ResizableIcon
 				className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800
 					[[data-state-active]_&]:fill-current"
-				icon={icon}
+				component={icon}
 			/>
 		</button>
 	)
 }
 
-function DecorativeButton({ icon, ...props }: { icon: Icon }) {
+function DecorativeButton({ icon, ...props }: { icon: Component }) {
 	return (
 		<div className="flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3" {...props}>
-			<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" icon={icon} />
+			<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" component={icon} />
 		</div>
 	)
 }

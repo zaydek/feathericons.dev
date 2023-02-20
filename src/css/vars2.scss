@@ -1,0 +1,97 @@
+:root {
+	// Spacing
+	--padding-y:           32px;
+	--padding-x:           24px;
+	--padding:             var(--padding-y) var(--padding-x);
+	--spacing:             16px;
+
+	// Layout
+	--sidebar-width:       384px;
+
+	// Sidebar
+	--heading-height:      24px;
+	--search-bar-height:   48px;
+	--container-height:    32px;
+	--icon-height:         18px;
+	--tiny-icon-height:    12px;
+	--optical-keyline:     calc((var(--container-height) - var(--icon-height)) / 2);
+
+	// Form
+	--checkbox-height:     24px;
+	--slider-track-height: 6px;
+	--slider-thumb-height: 32px;
+
+	// Hairlines
+	--hairline-color: rgb(var(--slate-500-rgb) / 0.25);
+	//// --hairline-color-rgb: var(--slate-300-rgb);
+
+	// Shadows
+	--inset-hairline-shadow:   inset  0    0   0 1px var(--hairline-color);
+	--inset-hairline-t-shadow: inset  0   -1px 0 0   var(--hairline-color);
+	--inset-hairline-r-shadow: inset  1px  0   0 0   var(--hairline-color);
+	--inset-hairline-b-shadow: inset  0    1px 0 0   var(--hairline-color);
+	--inset-hairline-l-shadow: inset -1px  0   0 0   var(--hairline-color);
+	--hairline-shadow:                0    0   0 1px var(--hairline-color);
+	--hairline-t-shadow:              0   -1px 0 0   var(--hairline-color);
+	--hairline-r-shadow:              1px  0   0 0   var(--hairline-color);
+	--hairline-b-shadow:              0    1px 0 0   var(--hairline-color);
+	--hairline-l-shadow:             -1px  0   0 0   var(--hairline-color);
+
+	--realistic-shadow:
+		0  1px  2px  -1px var(--hairline-color),
+		0  2px  4px  -2px var(--hairline-color),
+		0  4px  8px  -4px var(--hairline-color),
+		0  8px 16px  -8px var(--hairline-color),
+		0 16px 32px -16px var(--hairline-color),
+		0 32px 64px -32px var(--hairline-color);
+}
+
+.search-bar {
+	height: var(--search-bar-height);
+	background-color: rgb(var(--slate-500-rgb) / 0.125);
+	border-radius: 1e3px;
+}
+.search-bar:is(:hover, :focus-within) {
+	background-color: white;
+	box-shadow: var(--hairline-shadow);
+}
+
+// NOTE: Don't use var(--inset-hairline-shadow) here
+.checkbox {
+	height: var(--checkbox-height);
+	width: var(--checkbox-height);
+	background-color: white;
+	border-radius: 43.75%;
+	box-shadow: var(--hairline-shadow), var(--realistic-shadow);
+}
+.checkbox[aria-checked=true] {
+	//// background-color: hsl(200, 100%, 50%);
+	background-color: var(--sky-400);
+	box-shadow: var(--realistic-shadow);
+}
+
+[data-checkbox-group]:hover {
+	background-color: rgb(var(--slate-100));
+	[data-checkbox-group]:hover {
+		background-color: vara(--slate-200);
+	}
+}
+
+button {
+	cursor: pointer;   // Show OS pointer
+	user-select: none; // Disable selection
+}
+
+[data-checkbox-group]:is(:hover, :has(:focus-visible)) {
+	background-color: var(--slate-100);
+	[data-checkbox-group]:is(:hover, :has(:focus-visible)) {
+		background-color: var(--slate-200);
+	}
+}
+
+//// [data-checkbox-group]:is(:hover, :focus-within) {
+//// 	background-color: rgb(var(--sky-500-rgb) / 0.1);
+//// 	//// [data-checkbox-group]:is(:hover, :focus-within) {
+//// 	//// 	background-color: rgb(var(--slate-300-rgb) / 0.5);
+//// 	//// }
+//// }

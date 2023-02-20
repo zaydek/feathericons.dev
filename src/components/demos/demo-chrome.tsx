@@ -3,7 +3,7 @@ import * as feather from "../../data/react-feather"
 import { useState } from "react"
 import { Accessible } from "../../aria/a11y"
 import { manifest } from "../../data/manifest"
-import { Icon } from "../dynamic-icon"
+import { Component } from "../dynamic-icon"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
@@ -44,7 +44,7 @@ function TabBar({ name }: { name: keyof typeof manifest }) {
 					<TabBarCapL />
 					<div className="flex items-center gap-4 rounded-t-[var(--tab-bar-rounding)] bg-white pr-32">
 						<div className="flex h-[var(--tab-h)] w-[calc(var(--tab-h)_+_8px)] items-center justify-center">
-							<ResizableIcon className="h-[var(--icon-size-1)] w-[var(--icon-size-1)] text-gray-800" icon={feather[name]} />
+							<ResizableIcon className="h-[var(--icon-size-1)] w-[var(--icon-size-1)] text-gray-800" component={feather[name]} />
 						</div>
 						<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300"></div>
 					</div>
@@ -57,7 +57,7 @@ function TabBar({ name }: { name: keyof typeof manifest }) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function NavBarButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
+function NavBarButton({ icon, ...props }: { icon: Component } & Accessible<JSX.IntrinsicElements["button"]>) {
 	return (
 		<button
 			className="flex h-[var(--hover-icon-size-2)] w-[var(--hover-icon-size-2)] items-center justify-center rounded-1e3
@@ -65,12 +65,12 @@ function NavBarButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.Intrin
 				hover:active:bg-gray-300"
 			{...props}
 		>
-			<ResizableIcon className="h-[var(--icon-size-2)] rounded-1e3 text-gray-600" icon={icon} />
+			<ResizableIcon className="h-[var(--icon-size-2)] rounded-1e3 text-gray-600" component={icon} />
 		</button>
 	)
 }
 
-function UrlBarButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.IntrinsicElements["button"]>) {
+function UrlBarButton({ icon, ...props }: { icon: Component } & Accessible<JSX.IntrinsicElements["button"]>) {
 	return (
 		<button
 			className="flex h-[var(--hover-icon-size-2)] w-[var(--hover-icon-size-2)] items-center justify-center rounded-1e3
@@ -78,7 +78,7 @@ function UrlBarButton({ icon, ...props }: { icon: Icon } & Accessible<JSX.Intrin
 				hover:active:bg-gray-300"
 			{...props}
 		>
-			<ResizableIcon className="text-300 h-[var(--icon-size-1)] w-[var(--icon-size-1)] text-gray-800" icon={icon} />
+			<ResizableIcon className="text-300 h-[var(--icon-size-1)] w-[var(--icon-size-1)] text-gray-800" component={icon} />
 		</button>
 	)
 }

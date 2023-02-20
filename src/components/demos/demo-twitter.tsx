@@ -3,12 +3,12 @@ import * as feather from "../../data/react-feather"
 import { twitterShareUrl } from "../../constants"
 import { manifest } from "../../data/manifest"
 import { Anchor } from "../anchor"
-import { Icon } from "../dynamic-icon"
+import { Component } from "../dynamic-icon"
 import { TwitterIcon } from "../icon-config"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
-function ShareButton({ icon }: { icon: Icon }) {
+function ShareButton({ icon }: { icon: Component }) {
 	return (
 		<Anchor
 			className="group/button flex items-center rounded-1e3 bg-white px-8 pr-32 shadow-[var(--shadow-2)]
@@ -19,7 +19,10 @@ function ShareButton({ icon }: { icon: Icon }) {
 			{/* Icon */}
 			<div className="flex h-[var(--button-h)] w-[var(--button-h)] items-center justify-center">
 				{/* Use !important here because of TwitterIcon */}
-				<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800 group-hover/button:group-active/button:!text-white" icon={icon} />
+				<ResizableIcon
+					className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800 group-hover/button:group-active/button:!text-white"
+					component={icon}
+				/>
 			</div>
 			{/* Text */}
 			<div className="aspect-[16] h-6 rounded-1e3 bg-gray-300 group-hover/button:group-active/button:bg-white"></div>

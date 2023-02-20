@@ -2,15 +2,15 @@ import * as feather from "../data/react-feather"
 
 import { Anchor, AnchorProps } from "../components/anchor"
 import { TypographyCaps } from "../components/bindings"
-import { DynamicIcon, Icon } from "../components/dynamic-icon"
+import { Component, Dynamic } from "../components/dynamic-icon"
 import { twitterShareUrl } from "../constants"
 
-function ExternalLink({ icon, children, ...props }: { icon: Icon } & AnchorProps) {
+function ExternalLink({ icon, children, ...props }: { icon: Component } & AnchorProps) {
 	return (
 		// TODO
 		<Anchor className="flex h-32 items-center" {...props}>
 			<div className="flex h-32 w-32 items-center justify-center">
-				<DynamicIcon className="h-16 w-16 fill-current text-white" icon={icon} />
+				<Dynamic className="h-16 w-16 fill-current text-white" component={icon} />
 			</div>
 			<TypographyCaps className="text-white">{children}</TypographyCaps>
 		</Anchor>

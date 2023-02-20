@@ -1,19 +1,14 @@
 :root {
-	/****************************************************************************/
-	/* Spacing */
-
+	// Spacing
+	// TODO
 	--spacing-1:                           12px;
 	--spacing-2:                           24px;
 
-	/****************************************************************************/
-	/* Shadows */
-
+	// Shadows
 	--shadow:                              0 0 0 1px gray;
 	--inset-shadow:                        inset 0 0 0 1px red;
 
-	/****************************************************************************/
-	/* Layout */
-
+	// Layout
 	--sidebar-1-width:                     250px;
 	--sidebar-2-width:                     400px;
 
@@ -21,33 +16,23 @@
 	--sidebar-2-inset:                     0 0 0 auto;
 	--main-inset:                          0 var(--sidebar-2-width) auto var(--sidebar-1-width);
 
-	/****************************************************************************/
-	/* Heading */
-
+	// Heading
 	--heading-height:                      24px;
 
-	/****************************************************************************/
-	/* Search bar */
-
+	// Search bar
 	--search-bar-height:                   48px;
 	--search-bar-icon-height:              24px;
 	--search-bar-icon-negative-margin:     calc((var(--search-bar-height) - var(--search-bar-icon-height)) / 2);
 
-	/****************************************************************************/
-	/* Search grid */
-
+	// Search grid
 	--search-grid-item-height:             128px;
 	--search-grid-item-icon-height:        32px;
 
-	/****************************************************************************/
-	/* Sidebar */
-
+	// Sidebar
 	--sidebar-1-width:                     250px;
 	--sidebar-2-width:                     400px;
 
-	/****************************************************************************/
-	/* Form */
-
+	// Form
 	--form-height:                         32px;
 	--form-icon-height:                    20px;
 	--form-sm-icon-height:                 6px;

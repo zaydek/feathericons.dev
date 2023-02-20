@@ -2,7 +2,7 @@ import * as feather from "../data/react-feather"
 
 import { Anchor, AnchorProps } from "../components/anchor"
 import { TypographyHero } from "../components/bindings"
-import { DynamicIcon, Icon } from "../components/dynamic-icon"
+import { Component, Dynamic } from "../components/dynamic-icon"
 import { version } from "../data/manifest"
 import { iota } from "../lib/iota"
 
@@ -32,7 +32,7 @@ function HeadingSubheading() {
 	)
 }
 
-function CallToActionAnchor({ primary, icon, children, ...props }: { primary?: true; icon: Icon } & AnchorProps) {
+function CallToActionAnchor({ primary, icon, children, ...props }: { primary?: true; icon: Component } & AnchorProps) {
 	return (
 		<Anchor
 			className="h-64 w-100% max-w-[calc(64px_*_6)] rounded-1e3 bg-white/25 sm:aspect-[3.25]
@@ -42,7 +42,7 @@ function CallToActionAnchor({ primary, icon, children, ...props }: { primary?: t
 		>
 			<div className="flex h-100% items-center justify-center">
 				<div className="-ml-[calc((40px_-_20px)_/_2)] flex h-40 w-40 items-center justify-center">
-					<DynamicIcon className="h-20 w-20 text-white [[data-primary]_&]:text-gray-800" icon={icon} />
+					<Dynamic className="h-20 w-20 text-white [[data-primary]_&]:text-gray-800" component={icon} />
 				</div>
 				<TypographyHero className="text-white [[data-primary]_&]:text-gray-800">{children}</TypographyHero>
 			</div>

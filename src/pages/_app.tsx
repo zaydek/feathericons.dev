@@ -1,5 +1,26 @@
-import "@/css/base.css"
-import "@/css/data-bg-image.scss"
+//// import "@/css/base.css"
+//// import "@/css/data-bg-image.scss"
+
+//// import "the-new-css-reset"
+////
+//// import "@/css/base.css"
+//// import "@/css/idea.scss"
+
+import "the-new-css-reset"
+
+//// import "@/css/uno.generated.css"
+
+import "@/css/tailwind-colors.scss"
+
+import "@/css/base.scss"
+
+import "@/css/idea2.scss"
+
+import "@/css/form-checkbox.scss"
+import "@/css/form-slider.scss"
+
+//// import "@/css/vars2.scss"
+
 //// import "@/css/vars.scss"
 
 import { detab } from "@/lib/format"
