@@ -1,6 +1,8 @@
 // https://codepen.io/zaydek/pen/poOjBxz?editors=1100
 
-@use "idea2" as *;
+@use "sass:math";
+
+@use "vars" as *;
 
 // feather feather-check
 @function check-svg($stroke-width: 2, $color: currentColor) {
@@ -11,7 +13,7 @@ label:has(input[type=checkbox]) { cursor: pointer; }
 
 input[type=checkbox] {
 	position:         relative;
-	margin:           ($container-height - $checkbox-height) / 2;
+	margin:           math.div($container-height - $checkbox-height, 2);
 	height:           $checkbox-height;
 	width:            $checkbox-height;
 	background-color: white;

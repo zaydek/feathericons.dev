@@ -1,52 +1,61 @@
-:root {
-	// Spacing
-	// TODO
-	--spacing-1:                           12px;
-	--spacing-2:                           24px;
+////////////////////////////////////////////////////////////////////////////////
 
-	// Shadows
-	--shadow:                              0 0 0 1px gray;
-	--inset-shadow:                        inset 0 0 0 1px red;
+$circular:              1e3px;
+$squarish:              43.75%;
 
-	// Layout
-	--sidebar-1-width:                     250px;
-	--sidebar-2-width:                     400px;
+////////////////////////////////////////////////////////////////////////////////
 
-	--sidebar-1-inset:                     0 auto 0 0;
-	--sidebar-2-inset:                     0 0 0 auto;
-	--main-inset:                          0 var(--sidebar-2-width) auto var(--sidebar-1-width);
+$padding-y:             32px;
+$padding-x:             32px;
+$padding:
+	$padding-y
+	$padding-x;
+$spacing:               24px;
 
-	// Heading
-	--heading-height:                      24px;
+////////////////////////////////////////////////////////////////////////////////
 
-	// Search bar
-	--search-bar-height:                   48px;
-	--search-bar-icon-height:              24px;
-	--search-bar-icon-negative-margin:     calc((var(--search-bar-height) - var(--search-bar-icon-height)) / 2);
+$sidebar-width:         384px;
+$search-bar-height:     48px;
+$container-height:      36px;
+$icon-height:           20px;
+$tiny-icon-height:      14px;
 
-	// Search grid
-	--search-grid-item-height:             128px;
-	--search-grid-item-icon-height:        32px;
+////////////////////////////////////////////////////////////////////////////////
 
-	// Sidebar
-	--sidebar-1-width:                     250px;
-	--sidebar-2-width:                     400px;
+$checkbox-height:       26px;
+$checkbox-check-height: $squarish;
+$checkbox-transition-duration:
+	0ms;
+////////////////////////////////////////////////////////////////////////////////
 
-	// Form
-	--form-height:                         32px;
-	--form-icon-height:                    20px;
-	--form-sm-icon-height:                 6px;
-	--form-icon-negative-margin:           calc((var(--form-height) - var(--form-icon-height)) / 2);
-	--form-sm-icon-negative-margin:        calc((var(--form-height) - var(--form-sm-icon-height)) / 2);
 
-	--lg-form-height:                      36px;
-	--lg-form-icon-height:                 20px;
-	--lg-form-sm-icon-height:              6px;
-	--lg-form-icon-negative-margin:        calc((var(--lg-form-height) - var(--lg-form-icon-height)) / 2);
-	--lg-form-sm-icon-negative-margin:     calc((var(--lg-form-height) - var(--lg-form-sm-icon-height)) / 2);
+$slider-track-height:   6px;
+$slider-thumb-height:   36px;
 
-	--slider-reset-button-height:          16px;
-	--slider-track-height:                 6px;
-	--slider-thumb-height:                 36px;
-	--slider-reset-button-negative-margin: calc((var(--form-height) - var(--slider-reset-button-height)) / 2);
-}
+////////////////////////////////////////////////////////////////////////////////
+
+$font-size:             16px;
+$small-font-size:       13px;
+$upper-font-size:       10px;
+
+////////////////////////////////////////////////////////////////////////////////
+
+$hairline-color:          var(--hairline-color);
+$inset-hairline-shadow:   inset  0    0   0 1px var(--hairline-color);
+$inset-hairline-t-shadow: inset  0   -1px 0 0   var(--hairline-color);
+$inset-hairline-r-shadow: inset  1px  0   0 0   var(--hairline-color);
+$inset-hairline-b-shadow: inset  0    1px 0 0   var(--hairline-color);
+$inset-hairline-l-shadow: inset -1px  0   0 0   var(--hairline-color);
+$hairline-shadow:                0    0   0 1px var(--hairline-color);
+$hairline-t-shadow:              0   -1px 0 0   var(--hairline-color);
+$hairline-r-shadow:              1px  0   0 0   var(--hairline-color);
+$hairline-b-shadow:              0    1px 0 0   var(--hairline-color);
+$hairline-l-shadow:             -1px  0   0 0   var(--hairline-color);
+
+$realistic-shadow:
+	0  1px  2px  -1px var(--hairline-color),
+	0  2px  4px  -2px var(--hairline-color),
+	0  4px  8px  -4px var(--hairline-color),
+	0  8px 16px  -8px var(--hairline-color),
+	0 16px 32px -16px var(--hairline-color),
+	0 32px 64px -32px var(--hairline-color);

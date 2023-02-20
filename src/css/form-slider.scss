@@ -1,10 +1,13 @@
 // https://codepen.io/zaydek/pen/bGxVJqx
 
-@use "idea2" as *;
-@use "reset" as *;
+@use "sass:math";
+
+@use "vars" as *;
+
+@use "utils/reset" as *;
 
 input[type=range] {
-	margin:           ($slider-thumb-height - $slider-track-height) / 2 0;
+	margin:           math.div($slider-thumb-height - $slider-track-height, 2) 0;
 	height:           $slider-track-height;
 	background-image: linear-gradient(to right, var(--sky-400) var(--progress), $hairline-color var(--progress));
 	border-radius:    $circular;

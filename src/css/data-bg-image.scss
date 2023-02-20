@@ -1,8 +1,0 @@
-[data-bg-image=search-bar] {
-	background-image:
-		linear-gradient(to bottom, white calc(var(--main-spacing) + var(--search-bar-height)), transparent),
-		linear-gradient(to bottom, white calc(var(--main-spacing) + var(--search-bar-height)), transparent);
-}
-[data-bg-image=slider] {
-	background-image: linear-gradient(to right, theme('colors.sky.400') 50%, theme('colors.gray.200') 50%);
-}

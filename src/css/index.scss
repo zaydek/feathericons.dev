@@ -1,0 +1,153 @@
+@use "sass:math";
+
+@use "vars" as *;
+
+:root {
+	--hairline-color: rgb(var(--slate-500-rgb) / 0.3125);
+}
+
+body { display: flex; }
+
+hr {
+	height:           1px;
+	background-color: var(--slate-300);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Sidebar
+
+.sidebar {
+	display:          flex;
+	flex-direction:   column;
+	height:           100vh; // Fallback
+	height:           100dvh;
+	width:            $sidebar-width;
+	background-color: white;
+	box-shadow:       $hairline-r-shadow;
+}
+.sticky-search-bar-container {
+	position:         sticky;
+	top:              0;
+	padding:          $padding;
+	background-color: white;
+}
+.sticky-search-bar-container[data-state-did-scroll=true] { box-shadow: $hairline-b-shadow; }
+.sidebar section {
+	display:          flex;
+	flex-direction:   column;
+	gap:              16px;
+	padding:          $spacing $padding-x; // Use $spacing for y-axis
+}
+.sidebar section:first-child { padding-top: 0; }
+.sidebar section:last-child { padding-bottom: $padding-y; }
+
+.scrolling-container { overflow-y: scroll; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Section
+
+.section-name {
+	display:          flex;
+	flex-direction:   row;
+	justify-content:  space-between;
+	align-items:      center;
+	height:           $container-height;
+}
+.section-name-type {
+	font:             500 $font-size / normal BlinkMacSystemFont;
+	color:            var(--slate-600);
+}
+.section-name-undo-button {
+	margin:           math.div($container-height - $tiny-icon-height, 2);
+	height:           $tiny-icon-height;
+	width:            $tiny-icon-height;
+	color:            var(--slate-400);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Search bar
+
+.search-bar {
+	display:          flex;
+	flex-direction:   row;
+	height:           $search-bar-height;
+	background-color: rgb(var(--slate-200-rgb) / 0.75);
+	border-radius:    $circular;
+}
+.search-bar:is(:hover, :has(:focus-visible)) {
+	background-color: white;
+	box-shadow:       $hairline-shadow;
+}
+.search-bar-icon {
+	margin:           math.div($search-bar-height - $icon-height, 2);
+	height:           $icon-height;
+	width:            $icon-height;
+	color:            var(--slate-400);
+}
+.search-bar input[type=text] {
+	flex-grow:        1; // Stretch x-axis
+	font:             400 $font-size / normal BlinkMacSystemFont;
+	color:            var(--slate-700);
+}
+.search-bar input[type=text]::placeholder { color: var(--slate-500); }
+.search-bar:has(:focus-visible) input[type=text]::placeholder { opacity: 0; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Checkbox
+
+.checkbox-list { border-radius: math.div($container-height, 2); }
+.checkbox-item {
+	display:          grid;
+	grid-template-columns:
+		auto
+		1fr
+		auto;
+	align-items:      center;
+	height:           $container-height;
+	border-radius:    $circular;
+}
+.checkbox-icon {
+	margin:           math.div($container-height - $icon-height, 2);
+	height:           $icon-height;
+	width:            $icon-height;
+	color:            var(--slate-700);
+}
+.checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-100); }
+.checkbox-list .checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-200); }
+//// .checkbox-item:is(:hover:active, :focus-visible) { background-color: rgb(var(--slate-500-rgb) / 0.25); }
+.checkbox-type {
+	font:             400 $font-size / normal BlinkMacSystemFont;
+	color:            var(--slate-700);
+}
+
+section > .checkbox-list:not(:first-of-type) { margin-top: -8px; }
+.checkbox-list .checkbox-list { margin-left: math.div($container-height, 2); }
+
+////////////////////////////////////////////////////////////////////////////////
+// Licenses
+
+.license-item {
+	display:          flex;
+	flex-direction:   row;
+	gap:              8px;
+}
+.license-item:not(:first-child) { margin-top: 8px; }
+.license-icon {
+	margin:           math.div($tiny-icon-height * 1.375 - $tiny-icon-height, 2);
+	margin-left:      0;
+	height:           $tiny-icon-height;
+	width:            $tiny-icon-height;
+	background-color: var(--slate-700-rgb);
+	border-radius:    $circular;
+}
+.license-type {
+	font:             400 $small-font-size / normal BlinkMacSystemFont;
+	line-height:      1.375;
+	color:            var(--slate-700);
+}
+
+.license-type a {
+	text-decoration:  underline $hairline-color;
+	text-underline-offset:
+		2px;
+}

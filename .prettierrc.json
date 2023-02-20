@@ -1,12 +1,11 @@
 {
-	"//": "https://michelelarson.com/prettier-config",
-	"printWidth": 160,
-	"tabWidth": 2,
-	"useTabs": true,
-	"semi": false,
-	"singleQuote": false,
-	"trailingComma": "all",
-	"bracketSpacing": true,
-	"jsxBracketSameLine": false,
-	"arrowParens": "avoid"
+  "printWidth": 160,
+  "tabWidth": 2,
+  "useTabs": true,
+  "semi": false,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid"
 }

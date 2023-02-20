@@ -78,13 +78,6 @@ module.exports = {
 		"stylelint-order",
 	],
 	rules: {
-		//// "order/order": [
-		//// 	"dollar-variables",
-		//// 	"custom-properties",
-		//// 	"declarations",
-		//// 	"rules",
-		//// 	"at-rules",
-		//// ],
 		"order/properties-order": order,
 	},
 }
