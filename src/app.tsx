@@ -2,13 +2,13 @@ import * as feather from "@icons/feather"
 import * as wkPaymentProcessors from "@icons/wolf-kit/payment"
 import * as wkSocialMedia from "@icons/wolf-kit/social-media"
 
-import { PropsWithChildren, ReactNode, useEffect, useRef, useState } from "react"
+import { CSSProperties, PropsWithChildren, ReactNode, useEffect, useRef, useState } from "react"
 import { IconComponent } from "./components/dynamic-icon"
 import { Checkbox, FormSlider } from "./controls"
 import { Clone } from "./hoc"
 import { cx, toKebabCase } from "./lib"
 import { TheWolfKit } from "./the-wolf-kit"
-import { TypographyHeavySans, TypographySans, TypographySmallSans } from "./typography"
+import { TypographySans, TypographySmallCaps, TypographySmallSans } from "./typography"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -39,8 +39,9 @@ function SearchBar() {
 
 	return (
 		<div
+			//// flex h-[var(--search-bar-height)] rounded-1e3 bg-[rgb(var(--slate-200-rgb)_/_0.625)]
 			className={cx(`
-				flex h-[var(--search-bar-height)] rounded-1e3 bg-[rgb(var(--slate-200-rgb)_/_0.75)]
+				flex h-[var(--search-bar-height)] rounded-1e3 bg-[var(--slate-100)] shadow-[inset_0_0_0_1px_var(--slate-200)]
 				[&:is(:hover,_:focus-within)]:bg-[white]
 				[&:is(:hover,_:focus-within)]:shadow-[var(--inset-hairline-shadow)]
 			`)}
@@ -65,7 +66,12 @@ function SearchBar() {
 }
 
 function Hairline() {
-	return <hr className="border-[var(--slate-300)]" />
+	return (
+		// Use h-0 so <hr> can stack
+		<div className="h-0">
+			<hr className="border-[var(--slate-300)]" />
+		</div>
+	)
 }
 
 function Fieldset({ children }: PropsWithChildren) {
@@ -80,7 +86,7 @@ function Fieldset({ children }: PropsWithChildren) {
 function Legend({ name, canUndo = true }: { name: string; canUndo?: boolean }) {
 	return (
 		<div className="flex items-center justify-between">
-			<TypographyHeavySans className="text-[var(--slate-700)]">{name}</TypographyHeavySans>
+			<TypographySmallCaps className="text-[var(--slate-700)]">{name}</TypographySmallCaps>
 			{canUndo && (
 				<feather.RotateCcw
 					className="m-[calc((var(--container-height)_-_var(--small-icon-height))_/_2)] h-[var(--small-icon-height)] w-[var(--small-icon-height)] cursor-pointer select-none text-[var(--slate-300)] hover:text-[var(--slate-600)]"
@@ -140,9 +146,9 @@ function CheckboxItem({ name, icon: Icon }: { name: string; icon: IconComponent 
 function LicenseItem({ icon: Icon, children }: PropsWithChildren<{ icon: IconComponent }>) {
 	return (
 		<div className="flex gap-8">
-			<Icon className="m-[calc((13px_*_1.5_-_var(--small-icon-height))_/_2)] ml-0 h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[var(--slate-700)]" />
+			<Icon className="m-[calc((13px_*_1.75_-_var(--small-icon-height))_/_2)] ml-0 h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[var(--slate-800)]" />
 			{/* Must use !important here */}
-			<TypographySmallSans tag="p" className="!leading-[1.5] text-[var(--slate-600)]">
+			<TypographySmallSans tag="p" className="!leading-[1.75] text-[var(--slate-700)]">
 				{children}
 			</TypographySmallSans>
 		</div>
@@ -155,16 +161,17 @@ function AsideSlots({ slotHead, slotBody }: { slotHead: ReactNode; slotBody: Rea
 	const [didScroll, setDidScroll] = useState(false)
 
 	return (
-		<aside className="w-400">
-			{/* Must use flex h-screen flex-col here */}
+		<aside className="w-320">
+			{/* Use flex h-screen flex-col here */}
 			<div className="sticky top-0 flex h-screen flex-col bg-[white] shadow-[var(--hairline-r-shadow)]">
 				<nav
-					className="sticky top-0 z-10 p-[var(--padding)] pb-[var(--spacing)] [&[data-state-did-scroll=true]]:shadow-[var(--hairline-b-shadow)]"
+					className="sticky top-0 z-10 p-[var(--padding)] [&[data-state-did-scroll=true]]:shadow-[var(--hairline-b-shadow)]"
 					data-state-did-scroll={didScroll}
 				>
 					{slotHead}
 				</nav>
-				<div className="overflow-y-scroll" onScroll={e => setDidScroll(e.currentTarget.scrollTop > 0)}>
+				{/* Use flex h-screen flex-col here */}
+				<div className="flex h-screen flex-col overflow-y-scroll" onScroll={e => setDidScroll(e.currentTarget.scrollTop > 0)}>
 					{slotBody}
 				</div>
 			</div>
@@ -192,7 +199,7 @@ function Aside() {
 										<feather.ChevronDown
 											style={{
 												color: "var(--slate-400)",
-												transform: "scale(0.875)",
+												transform: "scale(0.75)",
 											}}
 											strokeWidth={4}
 											{...p}
@@ -222,7 +229,7 @@ function Aside() {
 										<feather.ChevronDown
 											style={{
 												color: "var(--slate-400)",
-												transform: "scale(0.875)",
+												transform: "scale(0.75)",
 											}}
 											strokeWidth={4}
 											{...p}
@@ -246,80 +253,23 @@ function Aside() {
 					</Fieldset>
 					<Hairline />
 					<Fieldset>
-						<Legend name="Preview size" />
+						<Legend name="Color" />
+						{/* <FormSlider /> */}
+					</Fieldset>
+					<Hairline />
+					<Fieldset>
+						<Legend name="Size" />
 						<FormSlider />
 					</Fieldset>
 					<Hairline />
 					<Fieldset>
-						<Legend name="Preview stroke width" />
+						<Legend name="Stroke width" />
 						<FormSlider />
 					</Fieldset>
 					<Hairline />
-					<Fieldset>
-						<Legend name="Licenses" canUndo={false} />
-						<div className="flex flex-col gap-8">
-							<LicenseItem icon={feather.Feather}>
-								<span className="inline-flex items-center">
-									<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-										Feather icons
-									</a>
-									&nbsp;designed by&nbsp;
-									<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-										@colebemis
-									</a>
-									&ensp;
-									<wkSocialMedia.Twitter className="inline-block h-[1em] w-[1em]" />
-								</span>
-								<br />
-								Licensed as{" "}
-								<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-									MIT
-								</a>
-								<br />
-								Personal & commercial use OK <em>without</em> attribution
-							</LicenseItem>
-							<LicenseItem icon={p => <TheWolfKit style={{ transform: "scale(1.25)" }} {...p} />}>
-								<span className="inline-flex items-center">
-									<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-										Social icons
-									</a>
-									&nbsp;from&nbsp;
-									<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-										The Wolf Kit
-									</a>
-									&ensp;
-									<wkSocialMedia.Figma className="inline-block h-[1em] w-[1em]" />
-								</span>
-								<br />
-								Licensed as{" "}
-								<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-									CC BY 4.0
-								</a>
-								<br />
-								Personal & commercial use OK <em>with</em> attribution
-							</LicenseItem>
-							<LicenseItem icon={p => <TheWolfKit style={{ transform: "scale(1.25)" }} {...p} />}>
-								<span className="inline-flex items-center">
-									<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-										Payment processor icons
-									</a>
-									&nbsp;from&nbsp;
-									<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-										The Wolf Kit
-									</a>
-									&ensp;
-									<wkSocialMedia.Figma className="inline-block h-[1em] w-[1em]" />
-								</span>
-								<br />
-								Licensed as{" "}
-								<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
-									CC BY 4.0
-								</a>
-								<br />
-								Personal & commercial use OK <em>with</em> attribution
-							</LicenseItem>
-						</div>
-					</Fieldset>
+					{/* TODO */}
+					{/* <div className="flex-1"></div> */}
+					{/* <Hairline /> */}
 				</>
 			}
 		/>
@@ -330,35 +280,90 @@ function Aside() {
 
 function Main() {
 	return (
-		//// <main className="grid flex-1 grid-cols-[repeat(auto-fill,_minmax(128px,_1fr))] gap-y-32 gap-x-16 p-64">
-		<main className="grid flex-1 auto-rows-[128px] grid-cols-[repeat(auto-fill,_minmax(128px,_1fr))] gap-y-32 gap-x-16 py-[var(--padding-y)] px-64">
-			{entries.map(([name, Icon]) => (
-				<div key={name} className="flex flex-col items-center gap-8">
-					{/* <div className="relative flex w-128 flex-1 cursor-pointer select-none items-center justify-center rounded-4 shadow-[var(--inset-hairline-shadow)] hover:bg-[var(--slate-100)] hover:active:bg-[var(--slate-200)]"> */}
-					<div className="group/button flex w-128 flex-1 cursor-pointer select-none items-center justify-center rounded-4 shadow-[var(--inset-hairline-shadow)] hover:bg-[var(--slate-100)] hover:active:bg-[var(--sky-400)] hover:active:shadow-[none]">
-						<Icon className="min-h-36 min-w-36 text-[var(--slate-800)] group-hover/button:group-active/button:text-[white]" />
-						{/* <div className="absolute top-12 left-12">
-							<Icon className="max-h-16 min-h-8 min-w-8 max-w-16 text-[var(--slate-800)]" />
-						</div> */}
+		<main className="flex flex-1 flex-col gap-32 py-[var(--padding-y)] px-64">
+			<div
+				className="grid auto-rows-[var(--grid-row-size)] grid-cols-[repeat(auto-fill,_minmax(var(--grid-col-size),_1fr))]"
+				style={{ "--grid-col-size": "128px", "--grid-row-size": "128px" } as CSSProperties}
+			>
+				{entries.map(([name, Icon]) => (
+					<div key={name} className="group/a flex flex-col gap-8 rounded-24 p-16 pb-24 hover:shadow-[var(--inset-hairline-shadow),_var(--realistic-shadow-2)]">
+						<div className="group/button flex flex-1 cursor-pointer select-none items-center justify-center rounded-4 bg-[var(--slate-100)] group-hover:active:shadow-[none]">
+							<Icon className="min-h-32 min-w-32 text-[var(--slate-800)] group-hover/button:group-active/button:text-[white]" />
+						</div>
+						{/* Optically align leading lines */}
+						<div className="flex h-16 self-center">
+							<TypographySmallSans className="break-words text-center text-[var(--slate-800)]">
+								{/* <Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" /> */}
+								&ensp;
+								{/* <a className="decoration-[var(--slate-400)] underline-offset-2 hover:underline" href="TODO"> */}
+								{name}
+								{/* </a> */}
+							</TypographySmallSans>
+						</div>
 					</div>
-					{/* <div className="flex aspect-square h-128 items-center justify-center rounded-8 shadow-[var(--inset-hairline-shadow)]">
-						<Icon className="min-h-36 min-w-36 text-[var(--slate-800)]" />
-					</div> */}
-					{/* Optically align leading lines */}
-					<div className="flex h-16">
-						{/* <TypographySmallCode tag="code" className="break-words text-center !leading-[1.375] text-[var(--slate-800)]">
-							{name}
-						</TypographySmallCode> */}
-						<TypographySmallSans className="break-words text-center !leading-[1.375] text-[var(--slate-800)]">
-							{/* <Icon className="color-[var(--slate-800)] inline-block max-h-16 min-h-8 min-w-8 max-w-16" />
-							&ensp; */}
-							{/* <a className="decoration-[var(--slate-400)] underline-offset-2 hover:underline" href="TODO"> */}
-							{name}
-							{/* </a> */}
-						</TypographySmallSans>
-					</div>
-				</div>
-			))}
+				))}
+			</div>
+			<Hairline />
+			<div className="flex flex-col gap-8">
+				<LicenseItem icon={feather.Feather}>
+					<span className="inline-flex items-center">
+						<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+							Feather icons
+						</a>
+						&nbsp;designed by&nbsp;
+						<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+							@colebemis
+						</a>
+						&ensp;
+						<wkSocialMedia.Twitter className="inline-block h-[1em] w-[1em]" />
+					</span>
+					<br />
+					Licensed as{" "}
+					<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+						MIT
+					</a>
+					. Personal & commercial use OK <em>without</em> attribution
+				</LicenseItem>
+				<LicenseItem icon={p => <TheWolfKit style={{ transform: "scale(1.25)" }} {...p} />}>
+					<span className="inline-flex items-center">
+						<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+							Social and payment processsor icons
+						</a>
+						&nbsp;from&nbsp;
+						<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+							The Wolf Kit
+						</a>
+						&ensp;
+						<wkSocialMedia.Figma className="inline-block h-[1em] w-[1em]" />
+					</span>
+					<br />
+					Licensed as{" "}
+					<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+						CC BY 4.0
+					</a>
+					. Personal & commercial use OK <em>with</em> attribution
+				</LicenseItem>
+				{/* <LicenseItem icon={p => <TheWolfKit style={{ transform: "scale(1.25)" }} {...p} />}>
+						<span className="inline-flex items-center">
+							<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+								Payment processor icons
+							</a>
+							&nbsp;from&nbsp;
+							<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+								The Wolf Kit
+							</a>
+							&ensp;
+							<wkSocialMedia.Figma className="inline-block h-[1em] w-[1em]" />
+						</span>
+						<br />
+						Licensed as{" "}
+						<a className="underline decoration-[var(--slate-400)] underline-offset-2" href="TODO">
+							CC BY 4.0
+						</a>
+						. Personal & commercial use OK <em>with</em> attribution
+					</LicenseItem> */}
+			</div>
+			{/* </Fieldset> */}
 		</main>
 	)
 }
@@ -387,6 +392,7 @@ export function App() {
 			<DebugCss />
 			<Aside />
 			<Main />
+			{/* <div className="w-400 shadow-[var(--hairline-l-shadow)]"></div> */}
 		</>
 	)
 }
