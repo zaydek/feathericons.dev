@@ -1,8 +1,4 @@
 {
-  "name": "vite",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -19,7 +15,6 @@
     "@types/node": "^18.14.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "@types/svgo": "^3.0.0",
     "@vitejs/plugin-react": "^3.1.0",
     "concurrently": "^7.6.0",
     "esbuild": "^0.17.10",

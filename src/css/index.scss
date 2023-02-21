@@ -6,16 +6,28 @@
 	--hairline-color: rgb(var(--slate-500-rgb) / 0.3125);
 }
 
-body { display: flex; }
+#root { display: flex; }
 
 hr {
 	height:           1px;
 	background-color: var(--slate-300);
 }
 
+// Hacky CSS reset for <legend>
+//
+// https://codepen.io/absolutholz/pen/jWgBMo
+legend { float: left; }
+
+a {
+	text-decoration:  underline $hairline-color;
+	text-underline-offset:
+		2px;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Sidebar
 
+// Sidebar
 .sidebar {
 	display:          flex;
 	flex-direction:   column;
@@ -25,39 +37,45 @@ hr {
 	background-color: white;
 	box-shadow:       $hairline-r-shadow;
 }
+// Sticky search bar
 .sticky-search-bar-container {
 	position:         sticky;
 	top:              0;
 	padding:          $padding;
 	background-color: white;
 }
-.sticky-search-bar-container[data-state-did-scroll=true] { box-shadow: $hairline-b-shadow; }
-.sidebar section {
+// Fieldset
+.sidebar fieldset {
 	display:          flex;
 	flex-direction:   column;
 	gap:              16px;
 	padding:          $spacing $padding-x; // Use $spacing for y-axis
 }
-.sidebar section:first-child { padding-top: 0; }
-.sidebar section:last-child { padding-bottom: $padding-y; }
-
+// Scrolling container
 .scrolling-container { overflow-y: scroll; }
 
-////////////////////////////////////////////////////////////////////////////////
-// Section
+// Spacing
+.sidebar fieldset:first-child { padding-top: 0; }
+.sidebar fieldset:last-child { padding-bottom: $padding-y; }
 
-.section-name {
+// States
+.sticky-search-bar-container[data-state-did-scroll=true] { box-shadow: $hairline-b-shadow; }
+
+////////////////////////////////////////////////////////////////////////////////
+// Legend
+
+.sidebar legend {
 	display:          flex;
 	flex-direction:   row;
 	justify-content:  space-between;
 	align-items:      center;
 	height:           $container-height;
 }
-.section-name-type {
+.sidebar legend .legend-type {
 	font:             500 $font-size / normal BlinkMacSystemFont;
 	color:            var(--slate-600);
 }
-.section-name-undo-button {
+.sidebar legend .undo-button {
 	margin:           math.div($container-height - $tiny-icon-height, 2);
 	height:           $tiny-icon-height;
 	width:            $tiny-icon-height;
@@ -89,6 +107,8 @@ hr {
 	font:             400 $font-size / normal BlinkMacSystemFont;
 	color:            var(--slate-700);
 }
+
+// States
 .search-bar input[type=text]::placeholder { color: var(--slate-500); }
 .search-bar:has(:focus-visible) input[type=text]::placeholder { opacity: 0; }
 
@@ -99,9 +119,7 @@ hr {
 .checkbox-item {
 	display:          grid;
 	grid-template-columns:
-		auto
-		1fr
-		auto;
+		auto 1fr auto;
 	align-items:      center;
 	height:           $container-height;
 	border-radius:    $circular;
@@ -112,16 +130,19 @@ hr {
 	width:            $icon-height;
 	color:            var(--slate-700);
 }
-.checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-100); }
-.checkbox-list .checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-200); }
-//// .checkbox-item:is(:hover:active, :focus-visible) { background-color: rgb(var(--slate-500-rgb) / 0.25); }
 .checkbox-type {
 	font:             400 $font-size / normal BlinkMacSystemFont;
 	color:            var(--slate-700);
 }
 
-section > .checkbox-list:not(:first-of-type) { margin-top: -8px; }
+// Spacing
+fieldset > .checkbox-list:not(:first-of-type) { margin-top: -8px; }
 .checkbox-list .checkbox-list { margin-left: math.div($container-height, 2); }
+
+// States
+.checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-100); }
+.checkbox-list .checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-200); }
+.checkbox-item:is(:hover:active, :has(:focus-visible)) { background-color: rgb(var(--slate-500-rgb) / 0.25); }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Licenses
@@ -144,10 +165,4 @@ section > .checkbox-list:not(:first-of-type) { margin-top: -8px; }
 	font:             400 $small-font-size / normal BlinkMacSystemFont;
 	line-height:      1.375;
 	color:            var(--slate-700);
-}
-
-.license-type a {
-	text-decoration:  underline $hairline-color;
-	text-underline-offset:
-		2px;
 }

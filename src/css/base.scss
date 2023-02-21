@@ -62,4 +62,4 @@ em { font-style: italic; }
 // Undo the-new-css-reset
 :focus-visible:not(input[type=text]) { outline: revert; }
 
-label { user-select: none; }
+label { cursor: pointer; user-select: none; }

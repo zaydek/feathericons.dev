@@ -13,7 +13,6 @@ input[type=range] {
 	border-radius:    $circular;
 	cursor:           grab;
 }
-input[type=range]:hover:active { cursor: grabbing; }
 input[type=range]::-webkit-slider-thumb {
 	@include reset {
 		-webkit-appearance:
@@ -36,3 +35,6 @@ input[type=range]::-moz-range-thumb {
 	border-radius:    $circular;
 	box-shadow:       $hairline-shadow, $realistic-shadow;
 }
+
+// States
+input[type=range]:hover:active { cursor: grabbing; }
