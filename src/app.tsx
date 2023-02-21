@@ -39,7 +39,6 @@ function SearchBar() {
 
 	return (
 		<div
-			//// flex h-[var(--search-bar-height)] rounded-1e3 bg-[rgb(var(--slate-200-rgb)_/_0.625)]
 			className={cx(`
 				flex h-[var(--search-bar-height)] rounded-1e3 bg-[var(--slate-100)] shadow-[inset_0_0_0_1px_var(--slate-200)]
 				[&:is(:hover,_:focus-within)]:bg-[white]
@@ -157,22 +156,22 @@ function LicenseItem({ icon: Icon, children }: PropsWithChildren<{ icon: IconCom
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function AsideSlots({ slotHead, slotBody }: { slotHead: ReactNode; slotBody: ReactNode }) {
+function AsideLayout({ head, body }: { head: ReactNode; body: ReactNode }) {
 	const [didScroll, setDidScroll] = useState(false)
 
 	return (
-		<aside className="w-320">
+		<aside className="w-[var(--sidebar-width)]">
 			{/* Use flex h-screen flex-col here */}
 			<div className="sticky top-0 flex h-screen flex-col bg-[white] shadow-[var(--hairline-r-shadow)]">
 				<nav
 					className="sticky top-0 z-10 p-[var(--padding)] [&[data-state-did-scroll=true]]:shadow-[var(--hairline-b-shadow)]"
 					data-state-did-scroll={didScroll}
 				>
-					{slotHead}
+					{head}
 				</nav>
 				{/* Use flex h-screen flex-col here */}
 				<div className="flex h-screen flex-col overflow-y-scroll" onScroll={e => setDidScroll(e.currentTarget.scrollTop > 0)}>
-					{slotBody}
+					{body}
 				</div>
 			</div>
 		</aside>
@@ -181,9 +180,9 @@ function AsideSlots({ slotHead, slotBody }: { slotHead: ReactNode; slotBody: Rea
 
 function Aside() {
 	return (
-		<AsideSlots
-			slotHead={<SearchBar />}
-			slotBody={
+		<AsideLayout
+			head={<SearchBar />}
+			body={
 				<>
 					<Fieldset>
 						{/* <Legend name="Icons" /> */}
@@ -251,11 +250,10 @@ function Aside() {
 							</CheckboxList>
 						</div>
 					</Fieldset>
-					<Hairline />
+					{/* <Hairline />
 					<Fieldset>
 						<Legend name="Color" />
-						{/* <FormSlider /> */}
-					</Fieldset>
+					</Fieldset> */}
 					<Hairline />
 					<Fieldset>
 						<Legend name="Size" />
@@ -278,29 +276,90 @@ function Aside() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function Main() {
+//// <div
+//// 	className="grid auto-rows-[var(--grid-row-size)] grid-cols-[repeat(auto-fill,_minmax(var(--grid-col-size),_1fr))] gap-32"
+//// 	style={{ "--grid-col-size": "128px", "--grid-row-size": "128px" } as CSSProperties}
+//// >
+//// 	{entries.map(([name, Icon]) => (
+//// 		<div key={name} className="group/a flex flex-col gap-8">
+//// 			<div className="group/button flex flex-1 cursor-pointer select-none items-center justify-center rounded-4 bg-[var(--slate-100)] group-hover:active:shadow-[none]">
+//// 				<Icon className="min-h-32 min-w-32 text-[var(--slate-800)] group-hover/button:group-active/button:text-[white]" />
+//// 			</div>
+//// 			{/* Optically align leading lines */}
+//// 			<div className="flex h-16 self-center">
+//// 				<TypographySmallSans className="break-words text-center text-[var(--slate-800)]">
+//// 					{/* <Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" /> */}
+//// 					&ensp;
+//// 					{/* <a className="decoration-[var(--slate-400)] underline-offset-2 hover:underline" href="TODO"> */}
+//// 					{name}
+//// 					{/* </a> */}
+//// 				</TypographySmallSans>
+//// 			</div>
+//// 		</div>
+//// 	))}
+//// </div>
+
+//// <div className="flex h-16 self-center">
+//// 	<TypographySmallSans className="break-words text-center text-[var(--slate-800)]">
+//// 		{/* <Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" /> */}
+//// 		&ensp;
+//// 		{/* <a className="decoration-[var(--slate-400)] underline-offset-2 hover:underline" href="TODO"> */}
+//// 		{name}
+//// 		{/* </a> */}
+//// 	</TypographySmallSans>
+//// </div>
+
+function GridItem({ name, icon: Icon }: { name: string; icon: IconComponent }) {
+	const [hover, setHover] = useState(false)
+
 	return (
-		<main className="flex flex-1 flex-col gap-32 py-[var(--padding-y)] px-64">
+		//// <div className="group/a flex flex-col gap-16 p-16 shadow-[0_0_0_0.5px_lightgray]" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
+		<div className="flex justify-center">
 			<div
-				className="grid auto-rows-[var(--grid-row-size)] grid-cols-[repeat(auto-fill,_minmax(var(--grid-col-size),_1fr))]"
-				style={{ "--grid-col-size": "128px", "--grid-row-size": "128px" } as CSSProperties}
+				//// className="group/a flex w-[var(--grid-col-size)] flex-col gap-16 rounded-24 p-16 hover:bg-[var(--slate-100)]"
+				className="group/a flex w-[var(--grid-col-size)] flex-col gap-16 rounded-24 p-16 hover:shadow-[var(--inset-hairline-shadow)]"
+				onMouseEnter={e => setHover(true)}
+				onMouseLeave={e => setHover(false)}
 			>
-				{entries.map(([name, Icon]) => (
-					<div key={name} className="group/a flex flex-col gap-8 rounded-24 p-16 pb-24 hover:shadow-[var(--inset-hairline-shadow),_var(--realistic-shadow-2)]">
-						<div className="group/button flex flex-1 cursor-pointer select-none items-center justify-center rounded-4 bg-[var(--slate-100)] group-hover:active:shadow-[none]">
-							<Icon className="min-h-32 min-w-32 text-[var(--slate-800)] group-hover/button:group-active/button:text-[white]" />
+				<div className="flex flex-1 items-center justify-center rounded-4 shadow-[var(--inset-hairline-shadow)] group-hover/a:shadow-[none]">
+					<Icon className="min-h-32 min-w-32 text-[var(--slate-800)]" />
+				</div>
+				{hover ? (
+					<div className="flex gap-6">
+						<div className="flex h-32 flex-1 items-center justify-center rounded-1e3 bg-[dodgerblue] px-12 shadow-[var(--realistic-shadow-6)]">
+							<TypographySmallCaps className="!font-[700] text-[white]">COPY</TypographySmallCaps>
+							<feather.ChevronDown
+								className="m-[calc((var(--container-height)_-_var(--small-icon-height))_/_2)] mr-0 h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[white]"
+								strokeWidth={4}
+							/>
 						</div>
-						{/* Optically align leading lines */}
-						<div className="flex h-16 self-center">
-							<TypographySmallSans className="break-words text-center text-[var(--slate-800)]">
-								{/* <Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" /> */}
-								&ensp;
-								{/* <a className="decoration-[var(--slate-400)] underline-offset-2 hover:underline" href="TODO"> */}
-								{name}
-								{/* </a> */}
-							</TypographySmallSans>
+						<div className="flex h-[var(--container-height)] w-[var(--container-height)] items-center justify-center rounded-1e3 bg-[white] shadow-[var(--inset-hairline-shadow),_var(--realistic-shadow-6)]">
+							<feather.ArrowDown className="h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[var(--slate-800)]" strokeWidth={2.75} />
 						</div>
 					</div>
+				) : (
+					<div className="flex h-[var(--container-height)] self-center">
+						<TypographySmallSans className="break-words text-center text-[var(--slate-800)]">
+							<Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" />
+							&ensp;
+							{name}
+						</TypographySmallSans>
+					</div>
+				)}
+			</div>
+		</div>
+	)
+}
+
+function Main() {
+	return (
+		<main className="flex flex-1 flex-col gap-32 py-[var(--padding-y)] px-24">
+			<div
+				className="grid auto-rows-[var(--grid-row-size)] grid-cols-[repeat(auto-fill,_minmax(var(--grid-col-size),_1fr))]"
+				style={{ "--grid-col-size": "160px", "--grid-row-size": "160px" } as CSSProperties}
+			>
+				{entries.map(([name, icon]) => (
+					<GridItem key={name} name={name} icon={icon} />
 				))}
 			</div>
 			<Hairline />
@@ -392,7 +451,10 @@ export function App() {
 			<DebugCss />
 			<Aside />
 			<Main />
-			{/* <div className="w-400 shadow-[var(--hairline-l-shadow)]"></div> */}
+			{/* <div className="w-[352px] bg-[var(--slate-50)] shadow-[var(--hairline-l-shadow)]"></div> */}
+			<div className="bg-white fixed right-32 bottom-32 h-288 w-448 rounded-32 bg-[white] shadow-[var(--hairline-shadow),_var(--realistic-shadow-6)]">
+				<div>Hello</div>
+			</div>
 		</>
 	)
 }
