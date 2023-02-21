@@ -1,57 +1,57 @@
-// https://codepen.io/zaydek/pen/poOjBxz?editors=1100
-
-@use "sass:math";
-
-@use "vars" as *;
-
-// feather feather-check
 @function check-svg($stroke-width: 2, $color: currentColor) {
 	@return url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-check' fill='none' stroke='#{$color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='#{$stroke-width}'%3E%3Cpolyline points='20 6 9 17 4 12' /%3E%3C/svg%3E%0A");
 }
 
-input[type=checkbox] {
-	position:         relative;
-	margin:           math.div($container-height - $checkbox-height, 2);
-	height:           $checkbox-height;
-	width:            $checkbox-height;
+.form-checkbox {
+	position: relative;
+	height: var(--checkbox-height);
+	width: var(--checkbox-height);
 	background-color: white;
-	border-radius:    $squarish;
-	box-shadow:       $hairline-shadow, $realistic-shadow;
+	border-radius: 43.75%;
+	// NOTE: Don't use var(--inset-hairline-shadow) for form elements
+	box-shadow: var(--hairline-shadow), var(--realistic-shadow-6);
 }
-input[type=checkbox]:checked { box-shadow: $realistic-shadow; }
-input[type=checkbox]::before {
-	content:          "";
-	position:         absolute;
-	inset:            0;
-	background-color: var(--sky-400);
-	border-radius:    inherit;
-	transform:        scale(0);
-	opacity:          0;
-	transition:
-		transform $checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125),
-		opacity   $checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125);
-}
-input[type=checkbox]::after {
-	content:          "";
-	position:         absolute;
-	inset:            0;
-	margin:           auto;
-	height:           $checkbox-check-height;
-	width:            $checkbox-check-height;
-	background:       check-svg($stroke-width: 8, $color: white) 0% 0% / 100% 100%;
-	transform:        scale(0);
-	opacity:          0;
-	transition:
-		transform $checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125),
-		opacity   $checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125);
+// Checked
+[aria-checked=true] .form-checkbox {
+	box-shadow: var(--realistic-shadow-6);
 }
 
-// States
-input[type=checkbox]:checked::before {
-	transform:        scale(1);
-	opacity:          1;
+// ::before
+.form-checkbox::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-color: var(--sky-400);
+	border-radius: inherit;
+	transform: scale(0);
+	opacity: 0;
+	transition:
+		transform var(--checkbox-transition-duration) cubic-bezier(0, 1, 0, 1.125),
+		opacity var(--checkbox-transition-duration) cubic-bezier(0, 1, 0, 1.125);
 }
-input[type=checkbox]:checked::after {
-	transform:        scale(1);
-	opacity:          1;
+// Checked
+[aria-checked=true] .form-checkbox::before {
+	transform: scale(1);
+	opacity: 1;
+}
+
+// ::after
+.form-checkbox::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	height: var(--checkbox-check-height);
+	width: var(--checkbox-check-height);
+	background: check-svg($stroke-width: 8, $color: white) 0% 0% / 100% 100%;
+	transform: scale(0);
+	opacity: 0;
+	transition:
+		transform var(--checkbox-transition-duration) cubic-bezier(0, 1, 0, 1.125),
+		opacity var(--checkbox-transition-duration) cubic-bezier(0, 1, 0, 1.125);
+}
+// Checked
+[aria-checked=true] .form-checkbox::after {
+	transform: scale(1);
+	opacity: 1;
 }

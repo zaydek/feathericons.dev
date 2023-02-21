@@ -2,32 +2,21 @@
 
 @use "vars" as *;
 
+// TODO
 :root {
 	--hairline-color: rgb(var(--slate-500-rgb) / 0.3125);
 }
 
 #root { display: flex; }
+fieldset:not(:first-of-type) { border-top: 1px solid $hairline-color; }
+a { text-decoration: underline $hairline-color; text-underline-offset: 2px; }
 
-hr {
-	height:           1px;
-	background-color: var(--slate-300);
-}
-
-// Hacky CSS reset for <legend>
-//
-// https://codepen.io/absolutholz/pen/jWgBMo
-legend { float: left; }
-
-a {
-	text-decoration:  underline $hairline-color;
-	text-underline-offset:
-		2px;
-}
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // Sidebar
 
-// Sidebar
 .sidebar {
 	display:          flex;
 	flex-direction:   column;
@@ -37,21 +26,18 @@ a {
 	background-color: white;
 	box-shadow:       $hairline-r-shadow;
 }
-// Sticky search bar
 .sticky-search-bar-container {
 	position:         sticky;
 	top:              0;
 	padding:          $padding;
 	background-color: white;
 }
-// Fieldset
 .sidebar fieldset {
 	display:          flex;
 	flex-direction:   column;
 	gap:              16px;
 	padding:          $spacing $padding-x; // Use $spacing for y-axis
 }
-// Scrolling container
 .scrolling-container { overflow-y: scroll; }
 
 // Spacing
@@ -59,42 +45,42 @@ a {
 .sidebar fieldset:last-child { padding-bottom: $padding-y; }
 
 // States
-.sticky-search-bar-container[data-state-did-scroll=true] { box-shadow: $hairline-b-shadow; }
+.search-bar-container[data-state-did-scroll=true] { box-shadow: $hairline-b-shadow; }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Legend
 
-.sidebar legend {
+.legend {
 	display:          flex;
 	flex-direction:   row;
 	justify-content:  space-between;
 	align-items:      center;
 	height:           $container-height;
 }
-.sidebar legend .legend-type {
+.legend-type {
 	font:             500 $font-size / normal BlinkMacSystemFont;
 	color:            var(--slate-600);
 }
-.sidebar legend .undo-button {
-	margin:           math.div($container-height - $tiny-icon-height, 2);
-	height:           $tiny-icon-height;
-	width:            $tiny-icon-height;
+.legend-undo-button {
+	margin:           math.div($container-height - $small-icon-height, 2);
+	height:           $small-icon-height;
+	width:            $small-icon-height;
 	color:            var(--slate-400);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Search bar
 
 .search-bar {
-	display:          flex;
-	flex-direction:   row;
+	display:          grid;
+	grid-template-columns:
+		auto 1fr;
 	height:           $search-bar-height;
 	background-color: rgb(var(--slate-200-rgb) / 0.75);
 	border-radius:    $circular;
-}
-.search-bar:is(:hover, :has(:focus-visible)) {
-	background-color: white;
-	box-shadow:       $hairline-shadow;
 }
 .search-bar-icon {
 	margin:           math.div($search-bar-height - $icon-height, 2);
@@ -103,23 +89,28 @@ a {
 	color:            var(--slate-400);
 }
 .search-bar input[type=text] {
-	flex-grow:        1; // Stretch x-axis
 	font:             400 $font-size / normal BlinkMacSystemFont;
 	color:            var(--slate-700);
 }
 
 // States
+.search-bar:is(:hover, :has(:focus-visible)) { background-color: white; box-shadow: $hairline-shadow; }
 .search-bar input[type=text]::placeholder { color: var(--slate-500); }
 .search-bar:has(:focus-visible) input[type=text]::placeholder { opacity: 0; }
 
 ////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Checkbox
 
 .checkbox-list { border-radius: math.div($container-height, 2); }
-.checkbox-item {
+.checkbox-list-item {
 	display:          grid;
 	grid-template-columns:
-		auto 1fr auto;
+		auto
+		1fr
+		auto;
 	align-items:      center;
 	height:           $container-height;
 	border-radius:    $circular;
@@ -130,34 +121,38 @@ a {
 	width:            $icon-height;
 	color:            var(--slate-700);
 }
-.checkbox-type {
+.checkbox-list-item p {
 	font:             400 $font-size / normal BlinkMacSystemFont;
 	color:            var(--slate-700);
 }
 
 // Spacing
-fieldset > .checkbox-list:not(:first-of-type) { margin-top: -8px; }
-.checkbox-list .checkbox-list { margin-left: math.div($container-height, 2); }
+.checkbox-list:not(:first-of-type) { margin-top: -8px; }
+.checkbox-list ul { margin-left: math.div($container-height, 2); }
 
 // States
-.checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-100); }
-.checkbox-list .checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-200); }
-.checkbox-item:is(:hover:active, :has(:focus-visible)) { background-color: rgb(var(--slate-500-rgb) / 0.25); }
+.checkbox-list-item { cursor: pointer; }
 
+.checkbox-list:is(:hover, :has(:focus-visible)) { background-color: var(--slate-100); }
+.checkbox-list ul:is(:hover, :has(:focus-visible)) { background-color: var(--slate-200); }
+.checkbox-list-item:is(:hover:active, :has(:focus-visible)) { background-color: rgb(var(--slate-500-rgb) / 0.25); }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // Licenses
 
-.license-item {
+.license-list-item {
 	display:          flex;
 	flex-direction:   row;
 	gap:              8px;
 }
-.license-item:not(:first-child) { margin-top: 8px; }
 .license-icon {
-	margin:           math.div($tiny-icon-height * 1.375 - $tiny-icon-height, 2);
+	margin:           math.div($small-icon-height * 1.375 - $small-icon-height, 2);
 	margin-left:      0;
-	height:           $tiny-icon-height;
-	width:            $tiny-icon-height;
+	height:           $small-icon-height;
+	width:            $small-icon-height;
 	background-color: var(--slate-700-rgb);
 	border-radius:    $circular;
 }
@@ -166,3 +161,6 @@ fieldset > .checkbox-list:not(:first-of-type) { margin-top: -8px; }
 	line-height:      1.375;
 	color:            var(--slate-700);
 }
+
+// Spacing
+.license-list-item:not(:first-child) { margin-top: 8px; }

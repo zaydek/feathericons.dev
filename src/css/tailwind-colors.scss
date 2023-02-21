@@ -11,11 +11,13 @@ $tailwind-colors-vars: meta.module-variables(tailwind-colors-vars);
 
 :root {
 	@each $key, $value in $tailwind-colors-vars {
-		--#{$key}-rgb: #{
-			r($value)
-			g($value)
-			b($value)
-		};
+		@if $key != white and $key != black and $key != current {
+			--#{$key}-rgb: #{
+				r($value)
+				g($value)
+				b($value)
+			};
+		}
 	}
 	@each $key, $value in $tailwind-colors-vars {
 		--#{$key}: #{$value};

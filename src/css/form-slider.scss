@@ -1,40 +1,19 @@
-// https://codepen.io/zaydek/pen/bGxVJqx
-
-@use "sass:math";
-
-@use "vars" as *;
-
 @use "utils/reset" as *;
 
-input[type=range] {
-	margin:           math.div($slider-thumb-height - $slider-track-height, 2) 0;
-	height:           $slider-track-height;
-	background-image: linear-gradient(to right, var(--sky-400) var(--progress), $hairline-color var(--progress));
-	border-radius:    $circular;
-	cursor:           grab;
-}
-input[type=range]::-webkit-slider-thumb {
-	@include reset {
-		-webkit-appearance:
-			none;               // COMPAT/macOS
-		box-shadow:     none; // COMPAT/iOS
-	}
-	height:           $slider-thumb-height;
-	width:            $slider-thumb-height;
-	background-color: white;
-	border-radius:    $circular;
-	box-shadow:       $hairline-shadow, $realistic-shadow;
-}
-input[type=range]::-moz-range-thumb {
-	@include reset {
-		border:         none; // COMPAT/Firefox
-	}
-	height:           $slider-thumb-height;
-	width:            $slider-thumb-height;
-	background-color: white;
-	border-radius:    $circular;
-	box-shadow:       $hairline-shadow, $realistic-shadow;
+.form-slider-track {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: var(--slider-track-height);
+	background-image: linear-gradient(to right, var(--sky-400) var(--progress), var(--hairline-color) var(--progress));
+	border-radius: 1e3px;
 }
 
-// States
-input[type=range]:hover:active { cursor: grabbing; }
+.form-slider-thumb {
+	height: var(--slider-thumb-height);
+	width: var(--slider-thumb-height);
+	background-color: white;
+	border-radius: 1e3px;
+	// NOTE: Don't use var(--inset-hairline-shadow) for form elements
+	box-shadow: var(--hairline-shadow), var(--realistic-shadow-6);
+}
