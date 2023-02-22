@@ -312,40 +312,105 @@ function Aside() {
 function GridItem({ name, icon: Icon }: { name: string; icon: IconComponent }) {
 	const [hover, setHover] = useState(false)
 
+	//// return (
+	//// 	<div
+	//// 		//// className="group flex w-[var(--grid-col-size)] flex-col gap-16 rounded-24 p-16 hover:bg-[var(--slate-100)]"
+	//// 		className="group flex w-[var(--grid-col-size)] flex-col gap-16 rounded-24 p-16 hover:shadow-[var(--inset-hairline-shadow)]"
+	//// 		onMouseEnter={e => setHover(true)}
+	//// 		onMouseLeave={e => setHover(false)}
+	//// 	>
+	//// 		<div className="flex flex-1 items-center justify-center rounded-4 shadow-[var(--inset-hairline-shadow)] group-hover:shadow-[none]">
+	//// 			<Icon className="min-h-32 min-w-32 text-[var(--slate-800)]" />
+	//// 		</div>
+	//// 		{hover ? (
+	//// 			<div className="flex gap-6">
+	//// 				<div className="flex h-32 flex-1 items-center justify-center rounded-1e3 bg-[dodgerblue] px-12 shadow-[var(--realistic-shadow-6)]">
+	//// 					<TypographySmallCaps className="!font-[700] text-[white]">COPY</TypographySmallCaps>
+	//// 					{/* <feather.ChevronDown
+	//// 						className="m-[calc((var(--container-height)_-_var(--small-icon-height))_/_2)] mr-0 h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[white]"
+	//// 						strokeWidth={4}
+	//// 					/> */}
+	//// 				</div>
+	//// 				<div className="flex h-[var(--container-height)] w-[var(--container-height)] items-center justify-center rounded-1e3 bg-[white] shadow-[var(--inset-hairline-shadow),_var(--realistic-shadow-6)]">
+	//// 					<feather.ArrowDown className="h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[var(--slate-800)]" strokeWidth={2.75} />
+	//// 				</div>
+	//// 			</div>
+	//// 		) : (
+	//// 			<div className="flex h-[var(--container-height)] self-center">
+	//// 				<TypographySmallSans className="break-words text-center text-[var(--slate-800)]">
+	//// 					<Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" />
+	//// 					&ensp;
+	//// 					{name}
+	//// 				</TypographySmallSans>
+	//// 			</div>
+	//// 		)}
+	//// 	</div>
+	//// )
+
 	return (
-		//// <div className="group/a flex flex-col gap-16 p-16 shadow-[0_0_0_0.5px_lightgray]" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
-		<div className="flex justify-center">
-			<div
-				//// className="group/a flex w-[var(--grid-col-size)] flex-col gap-16 rounded-24 p-16 hover:bg-[var(--slate-100)]"
-				className="group/a flex w-[var(--grid-col-size)] flex-col gap-16 rounded-24 p-16 hover:shadow-[var(--inset-hairline-shadow)]"
-				onMouseEnter={e => setHover(true)}
-				onMouseLeave={e => setHover(false)}
-			>
-				<div className="flex flex-1 items-center justify-center rounded-4 shadow-[var(--inset-hairline-shadow)] group-hover/a:shadow-[none]">
-					<Icon className="min-h-32 min-w-32 text-[var(--slate-800)]" />
-				</div>
-				{hover ? (
-					<div className="flex gap-6">
-						<div className="flex h-32 flex-1 items-center justify-center rounded-1e3 bg-[dodgerblue] px-12 shadow-[var(--realistic-shadow-6)]">
-							<TypographySmallCaps className="!font-[700] text-[white]">COPY</TypographySmallCaps>
-							<feather.ChevronDown
-								className="m-[calc((var(--container-height)_-_var(--small-icon-height))_/_2)] mr-0 h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[white]"
-								strokeWidth={4}
-							/>
-						</div>
-						<div className="flex h-[var(--container-height)] w-[var(--container-height)] items-center justify-center rounded-1e3 bg-[white] shadow-[var(--inset-hairline-shadow),_var(--realistic-shadow-6)]">
-							<feather.ArrowDown className="h-[var(--small-icon-height)] w-[var(--small-icon-height)] text-[var(--slate-800)]" strokeWidth={2.75} />
-						</div>
-					</div>
-				) : (
-					<div className="flex h-[var(--container-height)] self-center">
-						<TypographySmallSans className="break-words text-center text-[var(--slate-800)]">
-							<Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" />
-							&ensp;
-							{name}
-						</TypographySmallSans>
-					</div>
-				)}
+		//// <div className="group/card flex w-[var(--grid-col-size)] flex-col rounded-24 p-10 hover:shadow-[var(--inset-hairline-shadow)]">
+		<div className="group/card flex w-[var(--grid-col-size)] flex-col rounded-28 p-12 hover:shadow-[inset_0_0_0_1px_var(--slate-200)]">
+			<div className="flex flex-1 items-center justify-center rounded-4 shadow-[inset_0_0_0_1px_var(--slate-200)] group-hover/card:shadow-[none]">
+				<Icon className="min-h-32 min-w-32 text-[var(--slate-800)]" />
+			</div>
+			{/* Must use pt-* not mt-* here */}
+			<div className="flex h-40 items-end justify-center group-hover/card:hidden">
+				<TypographySmallSans className="h-32 text-center !leading-[16px] text-[var(--slate-700)]">
+					{/* <Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" /> */}
+					{/* &ensp; */}
+					{name}
+				</TypographySmallSans>
+			</div>
+			<div className="hidden h-40 items-end gap-8 group-hover/card:flex">
+				{/* <TypographySmallSans className="text-center text-[var(--slate-700)]">
+					<Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" />
+					&ensp;
+					{name}
+				</TypographySmallSans> */}
+				<TypographySmallCaps className="relative flex h-32 flex-1 items-center justify-center rounded-1e3 bg-[dodgerblue] shadow-[var(--realistic-shadow-6)]">
+					<div className="ml-[calc(32px_-_1.25em)] flex flex-1 justify-center !font-[700] text-[white]">COPY</div>
+					{/* <div className="shadow-[-1px_0_0_0_rgb(var(--black-rgb)_/_0.25)]"> */}
+					{/* <feather.ChevronDown className="m-[calc((32px_-_1.25em)_/_2)] h-[1.25em] w-[1.25em] text-[var(--white)]" strokeWidth={4} /> */}
+					<feather.ChevronDown className="m-[calc((32px_-_1.25em)_/_2)] h-[1.25em] w-[1.25em] text-[rgb(var(--white-rgb)_/_0.875)]" strokeWidth={4} />
+					{/* </div> */}
+				</TypographySmallCaps>
+				{/* <div className="flex h-32 w-32 items-center justify-center rounded-1e3 bg-[dodgerblue] shadow-[var(--realistic-shadow-6)]">
+					<feather.ArrowDown className="h-12 w-12 text-[white]" strokeWidth={4} />
+				</div> */}
+			</div>
+		</div>
+	)
+
+	return (
+		//// <div className="group/card flex w-[var(--grid-col-size)] flex-col rounded-24 p-10 hover:shadow-[var(--inset-hairline-shadow)]">
+		<div className="group/card flex w-[var(--grid-col-size)] flex-col rounded-28 p-12 hover:bg-[var(--slate-50)] hover:shadow-[inset_0_0_0_1px_var(--slate-200)]">
+			<div className="flex flex-1 items-center justify-center rounded-4 bg-[var(--slate-50)] shadow-[inset_0_0_0_1px_var(--slate-200)] group-hover/card:shadow-[none]">
+				<Icon className="min-h-32 min-w-32 text-[var(--slate-800)]" />
+			</div>
+			{/* Must use pt-* not mt-* here */}
+			<div className="flex h-40 items-end justify-center group-hover/card:hidden">
+				<TypographySmallSans className="h-32 text-center !leading-[16px] text-[var(--slate-700)]">
+					{/* <Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" /> */}
+					{/* &ensp; */}
+					{name}
+				</TypographySmallSans>
+			</div>
+			<div className="hidden h-40 items-end gap-8 group-hover/card:flex">
+				{/* <TypographySmallSans className="text-center text-[var(--slate-700)]">
+					<Icon className="mb-2 inline-block max-h-[1em] min-h-[0.5em] min-w-[0.5em] max-w-[1em] text-[var(--slate-800)]" />
+					&ensp;
+					{name}
+				</TypographySmallSans> */}
+				<TypographySmallCaps className="relative flex h-32 flex-1 items-center justify-center rounded-1e3 bg-[dodgerblue] shadow-[var(--realistic-shadow-6)]">
+					<div className="ml-[calc(32px_-_1.25em)] flex flex-1 justify-center !font-[700] text-[white]">COPY</div>
+					{/* <div className="shadow-[-1px_0_0_0_rgb(var(--black-rgb)_/_0.25)]"> */}
+					{/* <feather.ChevronDown className="m-[calc((32px_-_1.25em)_/_2)] h-[1.25em] w-[1.25em] text-[var(--white)]" strokeWidth={4} /> */}
+					<feather.ChevronDown className="m-[calc((32px_-_1.25em)_/_2)] h-[1.25em] w-[1.25em] text-[rgb(var(--white-rgb)_/_0.875)]" strokeWidth={4} />
+					{/* </div> */}
+				</TypographySmallCaps>
+				{/* <div className="flex h-32 w-32 items-center justify-center rounded-1e3 bg-[dodgerblue] shadow-[var(--realistic-shadow-6)]">
+					<feather.ArrowDown className="h-12 w-12 text-[white]" strokeWidth={4} />
+				</div> */}
 			</div>
 		</div>
 	)
@@ -355,11 +420,14 @@ function Main() {
 	return (
 		<main className="flex flex-1 flex-col gap-32 py-[var(--padding-y)] px-24">
 			<div
-				className="grid auto-rows-[var(--grid-row-size)] grid-cols-[repeat(auto-fill,_minmax(var(--grid-col-size),_1fr))]"
-				style={{ "--grid-col-size": "160px", "--grid-row-size": "160px" } as CSSProperties}
+				className="grid auto-rows-[var(--grid-row-size)] grid-cols-[repeat(auto-fill,_minmax(var(--grid-col-size),_1fr))] justify-items-center"
+				style={{ "--grid-col-size": "144px", "--grid-row-size": "144px" } as CSSProperties}
 			>
 				{entries.map(([name, icon]) => (
+					//// <GridItem key={name} name={name} icon={icon} />
+					///// <div key={name} className="flex justify-center">
 					<GridItem key={name} name={name} icon={icon} />
+					///// </div>
 				))}
 			</div>
 			<Hairline />
