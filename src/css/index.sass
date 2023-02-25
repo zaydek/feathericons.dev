@@ -7,6 +7,7 @@
 
 // CSS
 @use "base" as *
+@use "banner" as *
 @use "layout" as *
 @use "interactive-checkbox" as *
 @use "interactive-slider" as *
@@ -27,25 +28,25 @@ $undo-height: 16px
 .section
   display: flex
   flex-direction: column
-  gap: $aside-gap
-  padding: $aside-gap $aside-padding-x
+  gap: $sidebar-gap
+  padding: $sidebar-gap $sidebar-padding-x
   &:first-child
-    padding-top: $aside-padding-y
+    padding-top: $sidebar-padding-y
   &:last-child
     position: relative
     z-index: 10
-    padding-bottom: $aside-padding-y
+    padding-bottom: $sidebar-padding-y
     box-shadow: $hairline-shadow-top
   .section-header
     display: flex
     align-items: center
     height: math.div($generic-button-height, 2)
     .type
-      margin: keyline()
+      margin: sidebar-keyline()
       +typography-caps
       color: $slate-800
     .undo
-      margin: keyline($undo-height)
+      margin: sidebar-keyline($undo-height)
       height: $undo-height
       width: $undo-height
       color: $slate-300
@@ -64,7 +65,7 @@ $search-bar-icon-height: 16px
 
 .search-bar
   display: flex
-  margin: 0 math.div(keyline(), 2)
+  margin: 0 math.div(sidebar-keyline(), 2)
   height: $search-bar-height
   background-color: $slate-100
   border-radius: 1e3px
@@ -127,16 +128,14 @@ $checkbox-icon-height: $generic-button-icon-height
   display: flex
   align-items: center
   .interactive-slider
-    margin: 0 keyline()
+    margin: 0 sidebar-keyline()
   input[type=text]
-    margin: 0 keyline()
+    margin: 0 sidebar-keyline()
     height: 28px
     width: 56px
     border-radius: 1e3px
     box-shadow: $inset-hairline-shadow
     +typography-code
-    // Use text-align instead of Flexbox
-    // because of input[type=text]
     text-align: center
     color: $slate-800
 
@@ -159,7 +158,7 @@ $resource-icon-2-height: 16px
   &:hover:active
     background-color: $slate-200
   .icon:nth-child(1)
-    margin: keyline($resource-icon-1-height)
+    margin: sidebar-keyline($resource-icon-1-height)
     height: $resource-icon-1-height
     width: $resource-icon-1-height
     color: $slate-800
@@ -167,7 +166,7 @@ $resource-icon-2-height: 16px
     +typography-sans
     color: $slate-800
   .icon:nth-child(3)
-    margin: keyline($resource-icon-2-height)
+    margin: sidebar-keyline($resource-icon-2-height)
     height: $resource-icon-2-height
     width: $resource-icon-2-height
     color: $slate-400

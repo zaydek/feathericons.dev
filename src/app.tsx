@@ -2,13 +2,14 @@ import * as feather from "@icons/feather"
 import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
+import { Banner } from "@/components/banner"
+import { CheckboxItem, CheckboxList } from "@/components/checkbox"
+import { DebugCssEffect } from "@/components/debug-css"
+import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
+import { Resource } from "@/components/resource"
+import { Section } from "@/components/section"
 import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
-import { CheckboxItem, CheckboxList } from "./checkbox"
-import { DebugCssEffect } from "./debug-css"
-import { Main, Sidebar1, Sidebar2 } from "./layout"
-import { Resource } from "./resource"
-import { Section } from "./section"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -38,6 +39,7 @@ export function App() {
 	return (
 		<>
 			<DebugCssEffect />
+			<Banner />
 			<Sidebar1>
 				<div className="u-overflow-y-scroll">
 					<Section name="Icons">
@@ -113,7 +115,7 @@ export function App() {
 					</Section>
 					<hr className="section-hairline" />
 				</div>
-				<Section tag="footer" name="Resources">
+				<Section tag="footer" name="Resources" canUndo={false}>
 					<Resource name="GitHub" icon={wkSocial.Github} />
 					<Resource name="GitHub" icon={wkSocial.Github} />
 					<Resource name="GitHub" icon={wkSocial.Github} />
@@ -124,7 +126,7 @@ export function App() {
 				<div className="u-overflow-y-scroll">
 					<Section name="TODO">{/* TODO */}</Section>
 				</div>
-				<Section tag="footer" name="TODO">
+				<Section tag="footer" name="TODO" canUndo={false}>
 					{/* TODO */}
 				</Section>
 			</Sidebar2>

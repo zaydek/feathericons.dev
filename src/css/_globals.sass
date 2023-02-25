@@ -7,17 +7,17 @@ $WINDOWS_SCROLLBAR_WIDTH: 16px
 $sans: Inter, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
 $code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
 
-$aside-1-width:   320px + $WINDOWS_SCROLLBAR_WIDTH
-$aside-2-width:   400px
+$sidebar-1-width:   320px + $WINDOWS_SCROLLBAR_WIDTH
+$sidebar-2-width:   400px
 
-$aside-padding-y: 24px
-$aside-padding-x: 16px
-$aside-gap:       16px
+$sidebar-padding-y: 24px
+$sidebar-padding-x: 16px
+$sidebar-gap:       16px
 
 $generic-button-height: 40px
 $generic-button-icon-height: 20px
 
-@function keyline($override: $generic-button-icon-height)
+@function sidebar-keyline($override: $generic-button-icon-height)
   @return math.div($generic-button-height - $override, 2)
 
 $hairline-color:               $slate-300

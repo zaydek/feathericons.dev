@@ -2,10 +2,10 @@ import "the-new-css-reset"
 
 import "@/css/index.sass"
 
+import { SidebarProvider } from "@/components/layout"
 import { PropsWithChildren } from "react"
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
-import { SidebarProvider } from "./layout"
 
 function ProvidedApp({ children }: PropsWithChildren) {
 	return (
