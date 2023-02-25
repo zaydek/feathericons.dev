@@ -2,11 +2,13 @@ import * as feather from "@icons/feather"
 import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
-import { isMac, toKebabCase } from "@/lib"
-import { Clone } from "@/lib/clone"
+import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
-import { useEffect, useRef, useState } from "react"
+import { CheckboxItem, CheckboxList } from "./checkbox"
+import { DebugCssEffect } from "./debug-css"
 import { Main, Sidebar1, Sidebar2 } from "./layout"
+import { Resource } from "./resource"
+import { Section } from "./section"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -18,153 +20,77 @@ const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).m
 
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
 
-function DebugCss() {
-	const [showOutline, setShowOutline] = useState(false)
-
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "`") {
-				setShowOutline(curr => !curr)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [])
-
-	return <>{showOutline && <style>{`*:not(svg *) { outline: 1px solid hsl(0, 100%, 50%, 0.125); }`}</style>}</>
-}
-
-//// function Checkbox2() {
-//// 	const [checked, setChecked] = useState(Math.random() >= 0.5)
+//// const ref = useRef<HTMLInputElement | null>(null)
+//// const [value, setValue] = useState("")
 ////
-//// 	return <input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} />
-//// }
-
-function CheckboxItem({ name, icon: Icon, showCheckbox = true }: { name: string; icon: Icon; showCheckbox?: boolean }) {
-	const ref = useRef<HTMLDivElement | null>(null)
-
-	const [checked, setChecked] = useState(false)
-
-	return (
-		<Clone<"li">
-			onClick={e => {
-				setChecked(curr => !curr)
-			}}
-			onKeyDown={e => {
-				if (e.key === "Enter" || e.key === " ") {
-					e.preventDefault()
-					setChecked(curr => !curr)
-				}
-			}}
-			aria-checked={checked}
-		>
-			<li className="checkbox-item">
-				<Icon className="icon" />
-				<div className="name u-flex-1">{name}</div>
-				{showCheckbox && <div ref={ref} className="interactive-checkbox" tabIndex={0} aria-checked={checked}></div>}
-			</li>
-		</Clone>
-	)
-}
-
-function ExtAnchor({ name, icon: Icon }: { name: string; icon: Icon }) {
-	return (
-		<a className="ext-anchor" href="TODO" target="_blank">
-			<Icon className="icon-1" />
-			<div className="name u-flex-1">{name}</div>
-			<feather.ArrowUpRight className="icon-2" strokeWidth={4} />
-		</a>
-	)
-}
+//// useEffect(() => {
+//// 	function handleKeyDown(e: KeyboardEvent) {
+//// 		if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
+//// 			e.preventDefault() // Sorry printers
+//// 			ref.current!.focus()
+//// 		}
+//// 	}
+//// 	window.addEventListener("keydown", handleKeyDown, false)
+//// 	return () => window.removeEventListener("keydown", handleKeyDown, false)
+//// }, [])
 
 export function App() {
-	const ref = useRef<HTMLInputElement | null>(null)
-	const [value, setValue] = useState("")
-
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
-				e.preventDefault() // Sorry printers
-				ref.current!.focus()
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [])
-
 	return (
 		<>
-			<DebugCss />
+			<DebugCssEffect />
 			<Sidebar1>
-				<div
-					className="u-overflow-y-scroll"
-					onScroll={e => {
-						if (e.currentTarget.scrollTop > 0) {
-							e.currentTarget.classList.add("has-scrolled")
-						} else {
-							e.currentTarget.classList.remove("has-scrolled")
-						}
-					}}
-				>
-					<section className="section">
-						<header className="header">
-							<h2 className="name u-flex-1">ICONS</h2>
-							<feather.RotateCcw className="undo" strokeWidth={4} />
-						</header>
-						<ul className="checkbox-list">
+				<div className="u-overflow-y-scroll">
+					<Section name="Icons">
+						<CheckboxList>
 							<CheckboxItem name="Feather" icon={feather.Feather} />
-						</ul>
-						<ul className="checkbox-list">
+						</CheckboxList>
+						<CheckboxList>
 							<CheckboxItem
 								name="Social"
 								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
 								showCheckbox={false}
 							/>
-							<ul className="checkbox-list">
+							<CheckboxList>
 								<CheckboxItem name="Original" icon={wkSocial.Twitter} />
-								<ul className="checkbox-list">
+								<CheckboxList>
 									<CheckboxItem name="Circle" icon={wkSocial.TwitterCircle} />
-								</ul>
-								<ul className="checkbox-list">
+								</CheckboxList>
+								<CheckboxList>
 									<CheckboxItem name="Square" icon={wkSocial.TwitterSquare} />
-								</ul>
-							</ul>
-							<ul className="checkbox-list">
+								</CheckboxList>
+							</CheckboxList>
+							<CheckboxList>
 								<CheckboxItem name="Mono" icon={wkSocial.TwitterMono} />
-								<ul className="checkbox-list">
+								<CheckboxList>
 									<CheckboxItem name="Circle" icon={wkSocial.TwitterCircleMono} />
-								</ul>
-								<ul className="checkbox-list">
+								</CheckboxList>
+								<CheckboxList>
 									<CheckboxItem name="Square" icon={wkSocial.TwitterSquareMono} />
-								</ul>
-							</ul>
-						</ul>
-						<ul className="checkbox-list">
+								</CheckboxList>
+							</CheckboxList>
+						</CheckboxList>
+						<CheckboxList>
 							<CheckboxItem
 								name="Payment"
 								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
 								showCheckbox={false}
 							/>
-							<ul className="checkbox-list">
+							<CheckboxList>
 								<CheckboxItem name="Original" icon={wkPayment.Stripe} />
-								<ul className="checkbox-list">
+								<CheckboxList>
 									<CheckboxItem name="Filled" icon={wkPayment.Stripe1} />
-								</ul>
-							</ul>
-							<ul className="checkbox-list">
+								</CheckboxList>
+							</CheckboxList>
+							<CheckboxList>
 								<CheckboxItem name="Mono" icon={wkPayment.Stripe2} />
-								<ul className="checkbox-list">
+								<CheckboxList>
 									<CheckboxItem name="Filled" icon={wkPayment.Stripe3} />
-								</ul>
-							</ul>
-						</ul>
-					</section>
-					<hr className="hairline" />
-					<section className="section">
-						<header className="header">
-							<h2 className="name u-flex-1">Size</h2>
-							<feather.RotateCcw className="undo" strokeWidth={4} />
-						</header>
+								</CheckboxList>
+							</CheckboxList>
+						</CheckboxList>
+					</Section>
+					<hr className="section-hairline" />
+					<Section name="Size">
 						<div className="slider">
 							<div className="interactive-slider u-flex-1">
 								<div className="track">
@@ -173,13 +99,9 @@ export function App() {
 							</div>
 							<input type="text" value="32 PX" />
 						</div>
-					</section>
-					<hr className="hairline" />
-					<section className="section">
-						<header className="header">
-							<h2 className="name u-flex-1">Stroke width</h2>
-							<feather.RotateCcw className="undo" strokeWidth={4} />
-						</header>
+					</Section>
+					<hr className="section-hairline" />
+					<Section name="Stroke width">
 						<div className="slider">
 							<div className="interactive-slider u-flex-1">
 								<div className="track">
@@ -188,299 +110,32 @@ export function App() {
 							</div>
 							<input type="text" value="2.00" />
 						</div>
-					</section>
-					<hr className="hairline" />
+					</Section>
+					<hr className="section-hairline" />
 				</div>
-				<footer className="section">
-					<header className="header">
-						<h2 className="name u-flex-1">Resources</h2>
-					</header>
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-				</footer>
+				<Section tag="footer" name="Resources">
+					<Resource name="GitHub" icon={wkSocial.Github} />
+					<Resource name="GitHub" icon={wkSocial.Github} />
+					<Resource name="GitHub" icon={wkSocial.Github} />
+					<Resource name="GitHub" icon={wkSocial.Github} />
+				</Section>
 			</Sidebar1>
 			<Sidebar2>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				<div className="u-overflow-y-scroll">
+					<Section name="TODO">{/* TODO */}</Section>
 				</div>
+				<Section tag="footer" name="TODO">
+					{/* TODO */}
+				</Section>
 			</Sidebar2>
 			<Main>
 				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
-				</div>
-				<div>
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
-					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+					Aliquip voluptate irure esse nisi sunt consectetur ut eu sit ipsum sunt amet laboris deserunt. Et nulla pariatur laborum qui do sint ea deserunt
+					veniam consectetur sunt ullamco dolore cupidatat. Labore sit do nostrud excepteur proident. Commodo labore cupidatat consequat aliquip cillum eiusmod
+					occaecat enim sunt est ad. Non veniam qui nisi velit consequat et dolor ullamco esse nisi pariatur cillum. Proident nulla voluptate eiusmod non
+					proident labore et anim labore deserunt deserunt pariatur magna.
 				</div>
 			</Main>
-		</>
-	)
-
-	return (
-		<>
-			<DebugCss />
-			<aside className="column-1">
-				{/* <header className="section is-start">
-					<div className="search-bar">
-						<feather.Search className="icon" strokeWidth={4} />
-						<input
-							className="u-flex-1"
-							ref={ref}
-							type="text"
-							placeholder={isMac() ? "Press ⌘P to focus" : "Press Ctrl+P to focus"}
-							value={value}
-							onChange={e => setValue(e.currentTarget.value)}
-						/>
-					</div>
-				</header> */}
-				<div
-					className="scroll-container"
-					onScroll={e => {
-						if (e.currentTarget.scrollTop > 0) {
-							e.currentTarget.classList.add("has-scrolled")
-						} else {
-							e.currentTarget.classList.remove("has-scrolled")
-						}
-					}}
-				>
-					<section className="section">
-						<header className="header">
-							<h2 className="name u-flex-1">ICONS</h2>
-							<feather.RotateCcw className="undo" strokeWidth={4} />
-						</header>
-						<ul className="checkbox-list">
-							<CheckboxItem name="Feather" icon={feather.Feather} />
-						</ul>
-						<ul className="checkbox-list">
-							<CheckboxItem
-								name="Social"
-								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
-								showCheckbox={false}
-							/>
-							<ul className="checkbox-list">
-								<CheckboxItem name="Original" icon={wkSocial.Twitter} />
-								<ul className="checkbox-list">
-									<CheckboxItem name="Circle" icon={wkSocial.TwitterCircle} />
-								</ul>
-								<ul className="checkbox-list">
-									<CheckboxItem name="Square" icon={wkSocial.TwitterSquare} />
-								</ul>
-							</ul>
-							<ul className="checkbox-list">
-								<CheckboxItem name="Mono" icon={wkSocial.TwitterMono} />
-								<ul className="checkbox-list">
-									<CheckboxItem name="Circle" icon={wkSocial.TwitterCircleMono} />
-								</ul>
-								<ul className="checkbox-list">
-									<CheckboxItem name="Square" icon={wkSocial.TwitterSquareMono} />
-								</ul>
-							</ul>
-						</ul>
-						<ul className="checkbox-list">
-							<CheckboxItem
-								name="Payment"
-								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
-								showCheckbox={false}
-							/>
-							<ul className="checkbox-list">
-								<CheckboxItem name="Original" icon={wkPayment.Stripe} />
-								<ul className="checkbox-list">
-									<CheckboxItem name="Filled" icon={wkPayment.Stripe1} />
-								</ul>
-							</ul>
-							<ul className="checkbox-list">
-								<CheckboxItem name="Mono" icon={wkPayment.Stripe2} />
-								<ul className="checkbox-list">
-									<CheckboxItem name="Filled" icon={wkPayment.Stripe3} />
-								</ul>
-							</ul>
-						</ul>
-					</section>
-					<hr className="hairline" />
-					<section className="section">
-						<header className="header">
-							<h2 className="name u-flex-1">Size</h2>
-							<feather.RotateCcw className="undo" strokeWidth={4} />
-						</header>
-						<div className="slider">
-							<div className="interactive-slider u-flex-1">
-								<div className="track">
-									<div className="thumb"></div>
-								</div>
-							</div>
-							<input type="text" value="32 PX" />
-						</div>
-					</section>
-					<hr className="hairline" />
-					<section className="section">
-						<header className="header">
-							<h2 className="name u-flex-1">Stroke width</h2>
-							<feather.RotateCcw className="undo" strokeWidth={4} />
-						</header>
-						<div className="slider">
-							<div className="interactive-slider u-flex-1">
-								<div className="track">
-									<div className="thumb"></div>
-								</div>
-							</div>
-							<input type="text" value="2.00" />
-						</div>
-					</section>
-					<hr className="hairline" />
-				</div>
-				<footer className="section">
-					<header className="header">
-						<h2 className="name u-flex-1">Resources</h2>
-					</header>
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
-				</footer>
-			</aside>
-			<main className="column-2">
-				<div className="">Hello</div>
-			</main>
-			<aside className="column-3">
-				<header className="sticky-container">
-					<div className="">Hello</div>
-				</header>
-			</aside>
 		</>
 	)
 }

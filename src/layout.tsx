@@ -63,10 +63,10 @@ export function Sidebar1({ children }: PropsWithChildren) {
 
 	return (
 		<aside className={cx("sidebar", state && `is-${state}`)}>
-			<div className="sidebar-drag-area" onClick={cycleState}>
-				<div className="sidebar-handle"></div>
+			<div className="drag-area" onClick={cycleState}>
+				<div className="handle"></div>
 			</div>
-			<div className="sidebar-contents">{children}</div>
+			<div className="contents">{children}</div>
 		</aside>
 	)
 }
@@ -97,10 +97,10 @@ export function Sidebar2({ children }: PropsWithChildren) {
 
 	return (
 		<aside className={cx("sidebar", state && `is-${state}`)}>
-			<div className="sidebar-drag-area" onClick={cycleState}>
-				<div className="sidebar-handle"></div>
+			<div className="drag-area" onClick={cycleState}>
+				<div className="handle"></div>
 			</div>
-			<div className="sidebar-contents">{children}</div>
+			<div className="contents">{children}</div>
 		</aside>
 	)
 }
