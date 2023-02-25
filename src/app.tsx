@@ -3,9 +3,9 @@ import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
 import { useEffect, useRef, useState } from "react"
-import { IconComponent } from "./components/dynamic-icon"
 import { Clone } from "./hoc"
 import { isMac, toKebabCase } from "./lib"
+import { IconComponent } from "./utils/icon"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()

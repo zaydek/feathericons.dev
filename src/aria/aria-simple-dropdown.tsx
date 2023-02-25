@@ -1,7 +1,7 @@
 // https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
 
+import { queue } from "@/lib/queue"
 import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { queue } from "../lib/queue"
 import { Accessible } from "./a11y"
 import { getStringFromChildren, useCancelable } from "./utils"
 
@@ -55,7 +55,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 				setCurrentId(items[Math.max(0, index - by)].id)
 			}
 		},
-		[currentId, items, setCurrentId]
+		[currentId, items, setCurrentId],
 	)
 
 	const increment = useCallback(
@@ -67,7 +67,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 				setCurrentId(items[Math.min(items.length - 1, index + by)].id)
 			}
 		},
-		[currentId, items, setCurrentId]
+		[currentId, items, setCurrentId],
 	)
 
 	const decrementRef = useRef(decrement)
@@ -114,7 +114,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 					increment,
 					decrement,
 				}),
-				[add, currentId, decrement, increment, items, remove, setCurrentId, setShow, show]
+				[add, currentId, decrement, increment, items, remove, setCurrentId, setShow, show],
 			)}
 		>
 			<div

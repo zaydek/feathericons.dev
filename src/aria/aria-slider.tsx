@@ -1,5 +1,5 @@
+import { clamp } from "@/lib/precision"
 import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react"
-import { clamp } from "../lib/precision"
 import { Accessible } from "./a11y"
 
 // prettier-ignore

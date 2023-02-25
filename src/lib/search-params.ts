@@ -1,4 +1,4 @@
-import { Mutable } from "./types"
+import { Mutable } from "./types";
 
 function createSearchParams(url: string) {
 	const urlSearchParams = new URLSearchParams(url)
@@ -37,10 +37,5 @@ function createSearchParams(url: string) {
 		},
 	}
 }
-
-//// export let searchParams: ReturnType<typeof createSearchParams> | null
-//// if (typeof window !== "undefined") {
-//// 	searchParams = createSearchParams(window.location.search)
-//// }
 
 export const searchParams = createSearchParams(typeof window === "undefined" ? "" : window.location.search)

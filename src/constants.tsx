@@ -1,54 +1,4 @@
-import { PropsWithChildren } from "react"
 import { detab } from "./lib/format"
-
-function Underline({ children }: PropsWithChildren) {
-	return <span className="underline-offset-3 underline">{children}</span>
-}
-
-export const feather = {
-	name: "Feather",
-	desc: [
-		<>
-			24x24px user interface icons, designed by{" "}
-			<a href="TODO">
-				@<Underline>colebemis</Underline>
-			</a>
-		</>,
-		<>
-			For example: <Underline>arrow</Underline>, <Underline>chevron</Underline>
-		</>,
-	],
-}
-
-export const socialMedia = {
-	name: "Social media",
-	desc: [
-		<>
-			24x24px user interface icons, designed by{" "}
-			<a href="TODO">
-				@<Underline>colebemis</Underline>
-			</a>
-		</>,
-		<>
-			For example: <Underline>twitter</Underline>, <Underline>facebook</Underline>
-		</>,
-	],
-}
-
-export const paymentServices = {
-	name: "Payment servies",
-	desc: [
-		<>
-			56x32px payment services icons, sourced from{" "}
-			<a href="TODO">
-				<Underline>Wolf Kit</Underline>
-			</a>
-		</>,
-		<>
-			For example: <Underline>stripe</Underline>, <Underline>paypal</Underline>
-		</>,
-	],
-}
 
 export const svgPlaceholder = detab(`
 	<!-- https://feathericons.dev/feather -->
@@ -96,5 +46,5 @@ export const strokeWidthMax     = strokeWidthInitial + 1.5 // prettier-ignore
 export const strokeWidthStep    = 0.125 // prettier-ignore
 
 export const twitterShareUrl = `http://twitter.com/intent/tweet?text=${encodeURI(
-	`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK feathericons.dev 😍`,
+	`Check out Feather – Simply beautiful open source icons\n\nIcons by @colebemis, website by @username_ZAYDEK https://feathericons.dev 😍`,
 )}`
