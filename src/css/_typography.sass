@@ -1,4 +1,4 @@
-@use "globals" as g
+@use "globals" as *
 
 =font-smoothing
   -webkit-font-smoothing:  antialiased
@@ -9,26 +9,26 @@
   -moz-osx-font-smoothing: auto
 
 =typography-sans
-  font:           400 15px / normal g.$sans
+  font:           400 14px / normal $sans
   letter-spacing: normal
   text-transform: none
   &.is-multiline
     line-height: 1.625
 =typography-small-sans
-  font:           400 12px / normal g.$sans
+  font:           400 12px / normal $sans
   letter-spacing: normal
   text-transform: none
   &.is-multiline
     line-height: 1.625
 =typography-caps
-  font:           500 11px / normal g.$sans
-  letter-spacing: 0.05em
+  font:           500 10px / normal $sans
+  letter-spacing: 0.1em
   text-transform: uppercase
   &.is-multiline
     line-height: 1.625
 =typography-code
   +no-font-smoothing
-  font:           400 11px / normal g.$code
+  font:           400 11px / normal $code
   text-transform: none
   &.is-multiline
     line-height: 1.625

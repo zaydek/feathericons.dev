@@ -119,6 +119,10 @@ export function App() {
 					}}
 				>
 					<section className="section">
+						<header className="header">
+							<h2 className="name u-flex-1">ICONS</h2>
+							<feather.RotateCcw className="undo" strokeWidth={4} />
+						</header>
 						<ul className="checkbox-list">
 							<CheckboxItem name="Feather" icon={feather.Feather} />
 						</ul>
