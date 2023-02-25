@@ -133,7 +133,7 @@ export function App() {
 			<Main>
 				<Grid>
 					{entries.map(([name, Icon]) => (
-						<GridItem key={name} name={name} icon={Icon} />
+						<GridItem key={name} name={name} icon={Icon} bookmark={Math.random() < 0.1 ? true : undefined} />
 					))}
 				</Grid>
 			</Main>

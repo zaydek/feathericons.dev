@@ -1,3 +1,5 @@
+import * as feather from "@icons/feather"
+
 import { Icon } from "@/lib/icon"
 import { PropsWithChildren } from "react"
 
@@ -14,14 +16,14 @@ export function GridItem({
 }) {
 	return (
 		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
-			<div className="icon-container u-flex-1">
+			<div className="icon-frame u-flex-1">
 				<Icon className="icon" />
 			</div>
-			<div className="name">{name}</div>
+			<div className="icon-name">{name}</div>
 			<div className="copy-button">
-				<div className="type">COPY TSX</div>
+				<div className="copy-button-text">COPY TSX</div>
 			</div>
-			{/* <feather.Star className="bookmark" /> */}
+			<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
 		</article>
 	)
 }

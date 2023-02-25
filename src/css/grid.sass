@@ -9,11 +9,6 @@ $grid-button-height:        32px
 $grid-button-icon-1-height: 10px
 $grid-button-icon-2-height: 14px
 
-//// .main
-////   display: flex
-////   justify-content: center
-////   padding: 32px
-
 .grid
   display: grid
   grid-template-columns: repeat(auto-fill, $grid-col-size)
@@ -28,39 +23,34 @@ $grid-button-icon-2-height: 14px
     // Note: Omit gap here because of bookmark
     padding: $grid-item-padding
     border-radius: $grid-item-padding + $grid-button-height / 2
-    box-shadow: inset 0 0 0 1px hsl(0, 0%, 90%)
+    box-shadow: inset 0 0 0 1px $slate-200
     cursor: pointer   // Interaction styles
     user-select: none // Interaction styles
 
-    &[data-bookmark] .bookmark
+    .bookmark
       position: absolute
       inset: $grid-item-padding + 8px $grid-item-padding + 8px auto auto
       height: 14px
       width: 14px
-      //// background: feather-star($color: darkslategray, $stroke-width: 4) 0 0 / 100% 100%
-      //// @at-root .grid .grid-item[data-selected] .bookmark
-      ////   background: feather-star($color: dodgerblue, $stroke-width: 4) 0 0 / 100% 100%
+      color: $amber-400
 
-    &[data-selected]
-      background-color: hsl(205, 100%, 98.75%)
-      box-shadow: inset 0 0 0 1px hsl(205, 100%, 75%)
+    //// &[data-selected]
+    ////   background-color: hsl(205, 100%, 98.75%)
+    ////   box-shadow: inset 0 0 0 1px hsl(205, 100%, 75%)
 
-    .icon-container
+    .icon-frame
       display: flex
       justify-content: center
       align-items: center
-      //// @at-root
-      ////   .grid-item:is(:hover, [data-selected]) .icon-container
-      ////     box-shadow: none
       .icon
         height: 36px
         width: 36px
         color: $slate-800
-        //// background: feather-feather($color: darkslategray, $stroke-width: 2) 0 0 / 100% 100%
 
-    .name
+    .icon-name
       display: flex
       justify-content: center
+      align-items: center
       //// align-items: flex-end
       height: $grid-button-height
       font: 400 13px / normal 'Inter'
@@ -75,21 +65,22 @@ $grid-button-icon-2-height: 14px
       ////   max-width: 1.75em   // W
       ////   background: feather-feather($color: darkslategray, $stroke-width: 2) 0 0 / 100% 100%
 
-
     .copy-button
-      display: none // See :hover
+      display: flex
       justify-content: center
       align-items: center
       height: $grid-button-height
       background-color: dodgerblue
       border-radius: 1e3px
-      .type
-        font: 600 11px / normal 'Inter'
-        letter-spacing: 0.1em
+      .copy-button-text
+        font: 700 11px / normal 'Inter'
+        letter-spacing: 0.075em
         text-transform: uppercase
         color: white
 
-    &:hover .name
+    &:hover .icon-name
       display: none
-    &:hover .copy-button
-      display: flex
+    &:not(:hover) .copy-button
+      display: none
+    &:not([data-bookmark]) .bookmark
+      display: none
