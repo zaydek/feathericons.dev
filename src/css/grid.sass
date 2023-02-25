@@ -1,0 +1,95 @@
+@use "tw-colors" as *
+
+$grid-col-size: 128px
+$grid-row-size: 128px
+
+$grid-item-padding: 12px
+
+$grid-button-height:        32px
+$grid-button-icon-1-height: 10px
+$grid-button-icon-2-height: 14px
+
+//// .main
+////   display: flex
+////   justify-content: center
+////   padding: 32px
+
+.grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, $grid-col-size)
+  grid-auto-rows: $grid-row-size
+  justify-content: center
+  gap: $grid-item-padding
+  padding: 64px 0
+  .grid-item
+    position: relative
+    display: flex
+    flex-direction: column
+    // Note: Omit gap here because of bookmark
+    padding: $grid-item-padding
+    border-radius: $grid-item-padding + $grid-button-height / 2
+    box-shadow: inset 0 0 0 1px hsl(0, 0%, 90%)
+    cursor: pointer   // Interaction styles
+    user-select: none // Interaction styles
+
+    &[data-bookmark] .bookmark
+      position: absolute
+      inset: $grid-item-padding + 8px $grid-item-padding + 8px auto auto
+      height: 14px
+      width: 14px
+      //// background: feather-star($color: darkslategray, $stroke-width: 4) 0 0 / 100% 100%
+      //// @at-root .grid .grid-item[data-selected] .bookmark
+      ////   background: feather-star($color: dodgerblue, $stroke-width: 4) 0 0 / 100% 100%
+
+    &[data-selected]
+      background-color: hsl(205, 100%, 98.75%)
+      box-shadow: inset 0 0 0 1px hsl(205, 100%, 75%)
+
+    .icon-container
+      display: flex
+      justify-content: center
+      align-items: center
+      //// @at-root
+      ////   .grid-item:is(:hover, [data-selected]) .icon-container
+      ////     box-shadow: none
+      .icon
+        height: 36px
+        width: 36px
+        color: $slate-800
+        //// background: feather-feather($color: darkslategray, $stroke-width: 2) 0 0 / 100% 100%
+
+    .name
+      display: flex
+      justify-content: center
+      //// align-items: flex-end
+      height: $grid-button-height
+      font: 400 13px / normal 'Inter'
+      text-align: center
+      color: $slate-800
+      //// .icon
+      ////   display: inline-block
+      ////   margin-bottom: -1px
+      ////   min-height: 0.875em // H
+      ////   max-height: 1.75em  // H
+      ////   min-width: 0.875em  // W
+      ////   max-width: 1.75em   // W
+      ////   background: feather-feather($color: darkslategray, $stroke-width: 2) 0 0 / 100% 100%
+
+
+    .copy-button
+      display: none // See :hover
+      justify-content: center
+      align-items: center
+      height: $grid-button-height
+      background-color: dodgerblue
+      border-radius: 1e3px
+      .type
+        font: 600 11px / normal 'Inter'
+        letter-spacing: 0.1em
+        text-transform: uppercase
+        color: white
+
+    &:hover .name
+      display: none
+    &:hover .copy-button
+      display: flex

@@ -2,7 +2,6 @@ import * as feather from "@icons/feather"
 import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
-import { Banner } from "@/components/banner"
 import { CheckboxItem, CheckboxList } from "@/components/checkbox"
 import { DebugCssEffect } from "@/components/debug-css"
 import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
@@ -10,6 +9,7 @@ import { Resource } from "@/components/resource"
 import { Section } from "@/components/section"
 import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
+import { Grid, GridItem } from "./components/grid"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -39,7 +39,7 @@ export function App() {
 	return (
 		<>
 			<DebugCssEffect />
-			<Banner />
+			{/* <Banner /> */}
 			<Sidebar1>
 				<div className="u-overflow-y-scroll">
 					<Section name="Icons">
@@ -131,12 +131,11 @@ export function App() {
 				</Section>
 			</Sidebar2>
 			<Main>
-				<div>
-					Aliquip voluptate irure esse nisi sunt consectetur ut eu sit ipsum sunt amet laboris deserunt. Et nulla pariatur laborum qui do sint ea deserunt
-					veniam consectetur sunt ullamco dolore cupidatat. Labore sit do nostrud excepteur proident. Commodo labore cupidatat consequat aliquip cillum eiusmod
-					occaecat enim sunt est ad. Non veniam qui nisi velit consequat et dolor ullamco esse nisi pariatur cillum. Proident nulla voluptate eiusmod non
-					proident labore et anim labore deserunt deserunt pariatur magna.
-				</div>
+				<Grid>
+					{entries.map(([name, Icon]) => (
+						<GridItem key={name} name={name} icon={Icon} />
+					))}
+				</Grid>
 			</Main>
 		</>
 	)
