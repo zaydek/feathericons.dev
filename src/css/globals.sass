@@ -1,0 +1,35 @@
+@use "sass:math"
+
+@use "tw-v2-colors" as *
+
+$WINDOWS_SCROLLBAR_WIDTH: 16px
+
+$sans: Inter, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
+$code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
+
+$aside-1-width:   320px + $WINDOWS_SCROLLBAR_WIDTH
+$aside-2-width:   400px
+
+$aside-padding-y: 32px
+$aside-padding-x: 16px
+$aside-gap:       16px
+
+$generic-button-height: 40px
+$generic-button-icon-height: 20px
+
+@function keyline($override: $generic-button-icon-height)
+  @return math.div($generic-button-height - $override, 2)
+
+$hairline-color:               $slate-300
+$inset-hairline-shadow:        inset  0    0   0 1px $hairline-color
+$inset-hairline-shadow-top:    inset  0   -1px 0 0   $hairline-color
+$inset-hairline-shadow-right:  inset  1px  0   0 0   $hairline-color
+$inset-hairline-shadow-bottom: inset  0    1px 0 0   $hairline-color
+$inset-hairline-shadow-left:   inset -1px  0   0 0   $hairline-color
+$hairline-shadow:                     0    0   0 1px $hairline-color
+$hairline-shadow-top:                 0   -1px 0 0   $hairline-color
+$hairline-shadow-right:               1px  0   0 0   $hairline-color
+$hairline-shadow-bottom:              0    1px 0 0   $hairline-color
+$hairline-shadow-left:               -1px  0   0 0   $hairline-color
+
+$realistic-shadow: 0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color, 0 32px 64px -32px $hairline-color

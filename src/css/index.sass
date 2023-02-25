@@ -1,81 +1,10 @@
 @use "sass:math"
 
-@use "tailwind-colors" as *
+@use "globals" as g
+@use "tw-v2-colors" as *
 
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
-$sans: Inter, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
-$code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
-
-$WINDOWS_SCROLLBAR_WIDTH: 16px
-
-$aside-1-width:   320px + $WINDOWS_SCROLLBAR_WIDTH
-$aside-2-width:   400px
-
-$aside-padding-y: 32px
-$aside-padding-x: 16px
-$aside-gap:       16px
-
-$generic-button-height: 40px
-$generic-button-icon-height: 20px
-
-@function keyline($override: $generic-button-icon-height)
-  @return math.div($generic-button-height - $override, 2)
-
-$hairline-color:               $slate-300
-$inset-hairline-shadow:        inset  0    0   0 1px $hairline-color
-$inset-hairline-shadow-top:    inset  0   -1px 0 0   $hairline-color
-$inset-hairline-shadow-right:  inset  1px  0   0 0   $hairline-color
-$inset-hairline-shadow-bottom: inset  0    1px 0 0   $hairline-color
-$inset-hairline-shadow-left:   inset -1px  0   0 0   $hairline-color
-$hairline-shadow:                     0    0   0 1px $hairline-color
-$hairline-shadow-top:                 0   -1px 0 0   $hairline-color
-$hairline-shadow-right:               1px  0   0 0   $hairline-color
-$hairline-shadow-bottom:              0    1px 0 0   $hairline-color
-$hairline-shadow-left:               -1px  0   0 0   $hairline-color
-
-$realistic-shadow: 0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color, 0 32px 64px -32px $hairline-color
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
-=font-smoothing
-  -webkit-font-smoothing:  antialiased
-  -moz-osx-font-smoothing: grayscale
-
-=no-font-smoothing
-  -webkit-font-smoothing:  auto
-  -moz-osx-font-smoothing: auto
-
-=typography-sans
-  font:           400 15px / normal $sans
-  letter-spacing: normal
-  text-transform: none
-  &.is-multiline
-    line-height: 1.625
-=typography-small-sans
-  font:           400 12px / normal $sans
-  letter-spacing: normal
-  text-transform: none
-  &.is-multiline
-    line-height: 1.625
-=typography-caps
-  font:           500 11px / normal $sans
-  letter-spacing: 0.05em
-  text-transform: uppercase
-  &.is-multiline
-    line-height: 1.625
-=typography-code
-  +no-font-smoothing
-  font:           400 11px / normal $code
-  text-transform: none
-  &.is-multiline
-    line-height: 1.625
+@use "mixins"
+@use "utils"
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -83,7 +12,7 @@ $realistic-shadow: 0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-colo
 ////////////////////////////////////////
 
 :root
-  +font-smoothing
+  +mixins.font-smoothing
 
 // Color schemes
 :root:not(.dark)
@@ -98,27 +27,14 @@ $realistic-shadow: 0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-colo
 svg
   overflow: visible
 
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
-.u-flex-1
-  flex: 1
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
 .column-1
   position: fixed
   inset: 0 auto 0 0
   display: flex
   flex-direction: column
-  width: $aside-1-width
+  width: g.$aside-1-width
   background-color: white
-  box-shadow: $hairline-shadow-right
+  box-shadow: g.$hairline-shadow-right
 
 .column-2
   display: flex
@@ -132,9 +48,9 @@ svg
   inset: 0 0 0 auto
   display: flex
   flex-direction: column
-  width: $aside-2-width
+  width: g.$aside-2-width
   background-color: white
-  box-shadow: $hairline-shadow-left
+  box-shadow: g.$hairline-shadow-left
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -157,22 +73,22 @@ $undo-height: 16px
 .section
   display: flex
   flex-direction: column
-  gap: $aside-gap
-  padding: $aside-gap $aside-padding-x
+  gap: g.$aside-gap
+  padding: g.$aside-gap g.$aside-padding-x
   &.is-start
-    padding-top: $aside-padding-y
+    padding-top: g.$aside-padding-y
     &:has(+ .scroll-container.has-scrolled)
-      box-shadow: $hairline-shadow-bottom
+      box-shadow: g.$hairline-shadow-bottom
   &.is-end
-    padding-bottom: $aside-padding-y
-    box-shadow: $hairline-shadow-top
+    padding-bottom: g.$aside-padding-y
+    box-shadow: g.$hairline-shadow-top
   .header
     display: flex
     align-items: center
-    height: math.div($generic-button-height, 2)
+    height: math.div(g.$generic-button-height, 2)
     .name
       margin: keyline()
-      +typography-caps
+      +mixins.typography-caps
       color: $slate-900
     .undo
       margin: keyline($undo-height)
@@ -197,14 +113,14 @@ $search-bar-icon-height: 16px
   box-shadow: inset 0 0 0 1px $slate-200
   &:is(:hover, :has(:focus-visible))
     background-color: white
-    box-shadow: $inset-hairline-shadow
+    box-shadow: g.$inset-hairline-shadow
   .icon
     margin: math.div($search-bar-height - $search-bar-icon-height, 2)
     height: $search-bar-icon-height
     width: $search-bar-icon-height
     color: $slate-400
   input[type=text]
-    +typography-sans
+    +mixins.typography-sans
     color: $slate-900
     &::placeholder
       color: $slate-500
@@ -216,7 +132,7 @@ $search-bar-icon-height: 16px
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-$checkbox-icon-height: $generic-button-icon-height
+$checkbox-icon-height: g.$generic-button-icon-height
 
 $x-checkbox-height: 24px
 $x-checkbox-check-height: 12px
@@ -227,13 +143,12 @@ $x-checkbox-transition-duration: 100ms
 
 .checkbox-list
   & .checkbox-list
-    // Indent nested
-    margin-left: math.div($generic-button-height, 2)
+    margin-left: math.div(g.$generic-button-height, 2)
   .checkbox-item
     display: flex
     align-items: center
     margin: -8px 0
-    height: $generic-button-height
+    height: g.$generic-button-height
     border-radius: 1e3px
     cursor: pointer   // Interaction styles
     user-select: none // Interaction styles
@@ -242,15 +157,15 @@ $x-checkbox-transition-duration: 100ms
     &:hover:active
       background-color: $slate-200
     .icon
-      margin: math.div($generic-button-height - $checkbox-icon-height, 2)
+      margin: math.div(g.$generic-button-height - $checkbox-icon-height, 2)
       height: $checkbox-icon-height
       width: $checkbox-icon-height
       color: $slate-900
     .name
-      +typography-sans
+      +mixins.typography-sans
       color: $slate-900
     .interactive-checkbox
-      margin: math.div($generic-button-height - $x-checkbox-height, 2)
+      margin: math.div(g.$generic-button-height - $x-checkbox-height, 2)
 
 .interactive-checkbox
   position: relative
@@ -258,9 +173,9 @@ $x-checkbox-transition-duration: 100ms
   width: $x-checkbox-height
   background-color: white
   border-radius: 1e3px
-  box-shadow: $hairline-shadow, $realistic-shadow
+  box-shadow: g.$hairline-shadow, g.$realistic-shadow
   &[aria-checked=true]
-    box-shadow: $realistic-shadow
+    box-shadow: g.$realistic-shadow
   &::before
     content: ""        // Pseudo reset
     position: absolute // Pseudo reset
@@ -310,8 +225,8 @@ $x-slider-thumb-height: 32px
     height: 28px
     width: 56px
     border-radius: 1e3px
-    box-shadow: $inset-hairline-shadow
-    +typography-code
+    box-shadow: g.$inset-hairline-shadow
+    +mixins.typography-code
     // Use text-align instead of Flexbox
     // because of input[type=text]
     text-align: center
@@ -338,21 +253,21 @@ $x-slider-thumb-height: 32px
       width: $x-slider-thumb-height
       background-color: white
       border-radius: 1e3px
-      box-shadow: $hairline-shadow, $realistic-shadow
+      box-shadow: g.$hairline-shadow, g.$realistic-shadow
 
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-$ext-anchor-icon-1-height: $generic-button-icon-height
+$ext-anchor-icon-1-height: g.$generic-button-icon-height
 $ext-anchor-icon-2-height: 16px
 
 .ext-anchor
   display: flex
   align-items: center
   margin: -8px 0
-  height: $generic-button-height
+  height: g.$generic-button-height
   border-radius: 1e3px
   &:is(:hover, :focus-visible)
     background-color: $slate-100
@@ -369,7 +284,7 @@ $ext-anchor-icon-2-height: 16px
     width: $ext-anchor-icon-2-height
     color: $slate-400
   .name
-    +typography-sans
+    +mixins.typography-sans
     color: $slate-900
 
 ////////////////////////////////////////
