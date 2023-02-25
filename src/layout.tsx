@@ -1,5 +1,5 @@
 import { cx } from "@/lib"
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useMemo, useState } from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect, useMemo, useState } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -50,6 +50,17 @@ export function Sidebar1({ children }: PropsWithChildren) {
 		}
 	}, [setState, state])
 
+	useEffect(() => {
+		if (state) {
+			document.body.style.overflowY = "clip"
+		} else {
+			document.body.style.overflowY = ""
+			if (document.body.style.length === 0) {
+				document.body.removeAttribute("style")
+			}
+		}
+	}, [state])
+
 	return (
 		<aside className={cx("sidebar", state && `is-${state}`)}>
 			<div className="sidebar-drag-area" onClick={cycleState}>
@@ -73,6 +84,17 @@ export function Sidebar2({ children }: PropsWithChildren) {
 		}
 	}, [setState, state])
 
+	useEffect(() => {
+		if (state) {
+			document.body.style.overflowY = "clip"
+		} else {
+			document.body.style.overflowY = ""
+			if (document.body.style.length === 0) {
+				document.body.removeAttribute("style")
+			}
+		}
+	}, [state])
+
 	return (
 		<aside className={cx("sidebar", state && `is-${state}`)}>
 			<div className="sidebar-drag-area" onClick={cycleState}>
@@ -83,7 +105,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	)
 }
 
-function SidebarOverlay() {
+function _SidebarOverlay() {
 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = useContext(SidebarContext)!
 
 	const closeAll = useCallback(() => {
@@ -97,11 +119,29 @@ function SidebarOverlay() {
 	return <div className="sidebar-overlay" onClick={closeAll}></div>
 }
 
+function _Main({ children }: PropsWithChildren) {
+	const { sidebar1: s1, sidebar2: s2 } = useContext(SidebarContext)!
+
+	// prettier-ignore
+	const inert =
+		s1 === "maximized" ||
+		s2 === "maximized"
+			? "true"
+			: null
+
+	return (
+		// @ts-expect-error
+		<main className="main" inert={inert}>
+			{children}
+		</main>
+	)
+}
+
 export function Main({ children }: PropsWithChildren) {
 	return (
 		<>
-			<SidebarOverlay />
-			<main className="main">{children}</main>
+			<_SidebarOverlay />
+			<_Main>{children}</_Main>
 		</>
 	)
 }
