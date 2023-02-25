@@ -6,6 +6,7 @@ import { isMac, toKebabCase } from "@/lib"
 import { Clone } from "@/lib/clone"
 import { Icon } from "@/lib/icon"
 import { useEffect, useRef, useState } from "react"
+import { Main, Sidebar1, Sidebar2 } from "./layout"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -90,6 +91,221 @@ export function App() {
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [])
+
+	return (
+		<>
+			<DebugCss />
+			<Sidebar1>
+				<div
+					className="u-overflow-y-scroll"
+					onScroll={e => {
+						if (e.currentTarget.scrollTop > 0) {
+							e.currentTarget.classList.add("has-scrolled")
+						} else {
+							e.currentTarget.classList.remove("has-scrolled")
+						}
+					}}
+				>
+					<section className="section">
+						<header className="header">
+							<h2 className="name u-flex-1">ICONS</h2>
+							<feather.RotateCcw className="undo" strokeWidth={4} />
+						</header>
+						<ul className="checkbox-list">
+							<CheckboxItem name="Feather" icon={feather.Feather} />
+						</ul>
+						<ul className="checkbox-list">
+							<CheckboxItem
+								name="Social"
+								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
+								showCheckbox={false}
+							/>
+							<ul className="checkbox-list">
+								<CheckboxItem name="Original" icon={wkSocial.Twitter} />
+								<ul className="checkbox-list">
+									<CheckboxItem name="Circle" icon={wkSocial.TwitterCircle} />
+								</ul>
+								<ul className="checkbox-list">
+									<CheckboxItem name="Square" icon={wkSocial.TwitterSquare} />
+								</ul>
+							</ul>
+							<ul className="checkbox-list">
+								<CheckboxItem name="Mono" icon={wkSocial.TwitterMono} />
+								<ul className="checkbox-list">
+									<CheckboxItem name="Circle" icon={wkSocial.TwitterCircleMono} />
+								</ul>
+								<ul className="checkbox-list">
+									<CheckboxItem name="Square" icon={wkSocial.TwitterSquareMono} />
+								</ul>
+							</ul>
+						</ul>
+						<ul className="checkbox-list">
+							<CheckboxItem
+								name="Payment"
+								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
+								showCheckbox={false}
+							/>
+							<ul className="checkbox-list">
+								<CheckboxItem name="Original" icon={wkPayment.Stripe} />
+								<ul className="checkbox-list">
+									<CheckboxItem name="Filled" icon={wkPayment.Stripe1} />
+								</ul>
+							</ul>
+							<ul className="checkbox-list">
+								<CheckboxItem name="Mono" icon={wkPayment.Stripe2} />
+								<ul className="checkbox-list">
+									<CheckboxItem name="Filled" icon={wkPayment.Stripe3} />
+								</ul>
+							</ul>
+						</ul>
+					</section>
+					<hr className="hairline" />
+					<section className="section">
+						<header className="header">
+							<h2 className="name u-flex-1">Size</h2>
+							<feather.RotateCcw className="undo" strokeWidth={4} />
+						</header>
+						<div className="slider">
+							<div className="interactive-slider u-flex-1">
+								<div className="track">
+									<div className="thumb"></div>
+								</div>
+							</div>
+							<input type="text" value="32 PX" />
+						</div>
+					</section>
+					<hr className="hairline" />
+					<section className="section">
+						<header className="header">
+							<h2 className="name u-flex-1">Stroke width</h2>
+							<feather.RotateCcw className="undo" strokeWidth={4} />
+						</header>
+						<div className="slider">
+							<div className="interactive-slider u-flex-1">
+								<div className="track">
+									<div className="thumb"></div>
+								</div>
+							</div>
+							<input type="text" value="2.00" />
+						</div>
+					</section>
+					<hr className="hairline" />
+				</div>
+				<footer className="section">
+					<header className="header">
+						<h2 className="name u-flex-1">Resources</h2>
+					</header>
+					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
+					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
+					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
+					<ExtAnchor name="GitHub" icon={wkSocial.Github} />
+				</footer>
+			</Sidebar1>
+			<Sidebar2>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+			</Sidebar2>
+			<Main>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+				<div>
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+					Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello{" "}
+				</div>
+			</Main>
+		</>
+	)
 
 	return (
 		<>

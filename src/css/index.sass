@@ -1,13 +1,14 @@
 @use "sass:math"
 
 @use "globals" as *
-@use "tw-v2-colors" as *
+@use "tw-colors" as *
 
 @use "typography" as *
 
 // CSS
 @use "base" as *
 @use "utils" as *
+@use "sidebars" as *
 @use "interactive-checkbox" as *
 @use "interactive-slider" as *
 
@@ -15,45 +16,6 @@
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
-
-.column-1
-  position: fixed
-  inset: 0 auto 0 0
-  display: flex
-  flex-direction: column
-  width: $aside-1-width
-  background-color: white
-  box-shadow: $hairline-shadow-right
-
-.column-2
-  display: flex
-  flex-direction: column
-  gap: 64px
-  margin: 0 400px 0 400px
-  padding: 32px
-
-.column-3
-  position: fixed
-  inset: 0 0 0 auto
-  display: flex
-  flex-direction: column
-  width: $aside-2-width
-  background-color: white
-  box-shadow: $hairline-shadow-left
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
-.scroll-container
-  //// display: flex
-  //// flex-direction: column
-  //// gap: $aside-gap
-  //// padding: $aside-padding-y 0
-  height: 100dvh // Ensure .scroll-container expands
-  height: 100dv  // Ensure .scroll-container expands
-  overflow-y: scroll
 
 .hairline
   margin-top: -1px
@@ -69,6 +31,8 @@ $undo-height: 16px
   &:first-child
     padding-top: $aside-padding-y
   &:last-child
+    position: relative
+    z-index: 10
     padding-bottom: $aside-padding-y
     box-shadow: $hairline-shadow-top
   .header
