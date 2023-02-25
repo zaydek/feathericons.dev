@@ -1,10 +1,10 @@
 :root {
 	--padding-y:               32px;
-	--padding-x:               32px;
+	--padding-x:               24px;
 	--padding:                 var(--padding-y) var(--padding-x);
 	--spacing:                 16px;
 
-	--sidebar-width:           clamp(288px, 352px, 20%);
+	--sidebar-width:           300px;
 	--search-bar-height:       48px;
 	--container-height:        32px;
 	--icon-height:             20px;
@@ -16,7 +16,7 @@
 		0ms;
 
 	--slider-track-height:     6px;
-	--slider-thumb-height:     36px;
+	--slider-thumb-height:     32px;
 
 	--font-size:               16px;
 	--small-font-size:         13px;

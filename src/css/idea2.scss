@@ -1,0 +1,107 @@
+$checkbox-height: 40px;
+
+body {
+	display: flex;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Columns
+
+.column-1 {
+	position: fixed;
+	inset: 0 auto 0 0;
+	width: 400px;
+	background-color: white;
+	box-shadow: 0 0 0 1px gray;
+}
+.column-2 {
+	margin: 0 400px 0 400px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 32px;
+}
+.column-3 {
+	position: fixed;
+	inset: 0 0 0 auto;
+	width: 400px;
+	background-color: white;
+	box-shadow: 0 0 0 1px gray;
+}
+.sticky-header {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 32px;
+	padding-top: 32px;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Hairline, fieldset
+
+.hairline {
+	margin-top: -1px; // The margin absorbs the border
+	border-top: 1px solid gray;
+}
+.fieldset {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 32px;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Search bar
+
+.search-bar {
+	display: flex;
+	height: 48px;
+	background-color: lightgray;
+	border-radius: 1e3px;
+}
+.search-bar-icon {
+	margin: (48px - 16px) / 2;
+	height: 16px;
+	width: 16px;
+	background-color: gray;
+	border-radius: 1e3px;
+}
+.search-bar input[type="text"] {
+	flex-grow: 1;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Checkboxes
+
+// Indent nested checkbox lists
+.checkbox-list .checkbox-list {
+	margin-left: 16px;
+}
+.checkbox-item {
+	margin: -8px 0;
+	display: flex;
+	align-items: center;
+	height: $checkbox-height;
+	border-radius: 1e3px;
+	cursor: pointer;   // Button styles
+	user-select: none; // Button styles
+	&:hover { background-color: white; }
+}
+.checkbox-icon {
+	margin: ($checkbox-height - 16px) / 2;
+	height: 16px;
+	width: 16px;
+	background-color: gray;
+	border-radius: 1e3px;
+}
+.checkbox-icon-2 {
+	margin: ($checkbox-height - 16px) / 2;
+	height: 16px;
+	width: 16px;
+	background-color: gray;
+	border-radius: 1e3px;
+}
+.checkbox-name {
+	flex: 1;
+}

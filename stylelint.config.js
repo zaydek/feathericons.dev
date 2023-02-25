@@ -11,11 +11,6 @@ const order = [
 	"flex-grow",
 	"flex-shrink",
 	"flex-basis",
-	"margin",
-	"margin-top",
-	"margin-right",
-	"margin-bottom",
-	"margin-left",
 	"display",
 	"flex-direction",
 	"grid-template-columns",
@@ -34,6 +29,11 @@ const order = [
 	"gap",
 	"column-gap",
 	"row-gap",
+	"margin",
+	"margin-top",
+	"margin-right",
+	"margin-bottom",
+	"margin-left",
 	"padding",
 	"padding-top",
 	"padding-right",
@@ -63,6 +63,8 @@ const order = [
 	"font-feature-settings",
 	"letter-spacing",
 	"text-transform",
+	"vertical-align",
+	"text-align",
 	"color",
 	"transform",
 	"opacity",
@@ -73,7 +75,7 @@ const order = [
 ]
 
 module.exports = {
-	customSyntax: "postcss-scss",
+	customSyntax: "postcss-sass",
 	plugins: [
 		"stylelint-order",
 	],

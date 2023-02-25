@@ -1,0 +1,378 @@
+@use "sass:math"
+
+@use "tailwind-colors-vars" as *
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+$sans: Inter, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
+$code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
+
+$WINDOWS_SCROLLBAR_WIDTH: 16px
+
+$aside-1-width:   320px + $WINDOWS_SCROLLBAR_WIDTH
+$aside-2-width:   400px
+
+$aside-padding-y: 32px
+$aside-padding-x: 16px
+$aside-gap:       16px
+
+$generic-button-height: 40px
+$generic-button-icon-height: 20px
+
+@function keyline($override: $generic-button-icon-height)
+  @return math.div($generic-button-height - $override, 2)
+
+$hairline-color:               $slate-300
+$inset-hairline-shadow:        inset  0    0   0 1px $hairline-color
+$inset-hairline-shadow-top:    inset  0   -1px 0 0   $hairline-color
+$inset-hairline-shadow-right:  inset  1px  0   0 0   $hairline-color
+$inset-hairline-shadow-bottom: inset  0    1px 0 0   $hairline-color
+$inset-hairline-shadow-left:   inset -1px  0   0 0   $hairline-color
+$hairline-shadow:                     0    0   0 1px $hairline-color
+$hairline-shadow-top:                 0   -1px 0 0   $hairline-color
+$hairline-shadow-right:               1px  0   0 0   $hairline-color
+$hairline-shadow-bottom:              0    1px 0 0   $hairline-color
+$hairline-shadow-left:               -1px  0   0 0   $hairline-color
+
+$realistic-shadow: 0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color, 0 32px 64px -32px $hairline-color
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+=font-smoothing
+  -webkit-font-smoothing:  antialiased
+  -moz-osx-font-smoothing: grayscale
+
+=no-font-smoothing
+  -webkit-font-smoothing:  auto
+  -moz-osx-font-smoothing: auto
+
+=typography-sans
+  font:           400 15px / normal $sans
+  letter-spacing: normal
+  text-transform: none
+  &.is-multiline
+    line-height: 1.625
+=typography-small-sans
+  font:           400 12px / normal $sans
+  letter-spacing: normal
+  text-transform: none
+  &.is-multiline
+    line-height: 1.625
+=typography-caps
+  font:           500 11px / normal $sans
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  &.is-multiline
+    line-height: 1.625
+=typography-code
+  +no-font-smoothing
+  font:           400 11px / normal $code
+  text-transform: none
+  &.is-multiline
+    line-height: 1.625
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+:root
+  +font-smoothing
+
+// Color schemes
+:root:not(.dark)
+  color-scheme: light
+:root.dark
+  color-scheme: dark
+
+// Highlight unstyled text
+:root, ::before, ::after
+  color: RED
+
+svg
+  overflow: visible
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+.u-flex-1
+  flex: 1
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+.column-1
+  position: fixed
+  inset: 0 auto 0 0
+  display: flex
+  flex-direction: column
+  width: $aside-1-width
+  background-color: white
+  box-shadow: $hairline-shadow-right
+
+.column-2
+  display: flex
+  flex-direction: column
+  gap: 64px
+  margin: 0 400px 0 400px
+  padding: 32px
+
+.column-3
+  position: fixed
+  inset: 0 0 0 auto
+  display: flex
+  flex-direction: column
+  width: $aside-2-width
+  background-color: white
+  box-shadow: $hairline-shadow-left
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+.scroll-container
+  display: flex
+  flex-direction: column
+  height: 100dvh // Ensure .scroll-container expands
+  height: 100dv  // Ensure .scroll-container expands
+  overflow-y: scroll
+
+.hairline
+  margin-top: -1px
+  border-top: 1px solid $slate-300
+
+$undo-height: 16px
+
+.section
+  display: flex
+  flex-direction: column
+  gap: $aside-gap
+  padding: $aside-gap $aside-padding-x
+  &.is-start
+    padding-top: $aside-padding-y
+    &:has(+ .scroll-container.has-scrolled)
+      box-shadow: $hairline-shadow-bottom
+  &.is-end
+    padding-bottom: $aside-padding-y
+    box-shadow: $hairline-shadow-top
+  .header
+    display: flex
+    align-items: center
+    height: math.div($generic-button-height, 2)
+    .name
+      margin: keyline()
+      +typography-caps
+      color: $slate-900
+    .undo
+      margin: keyline($undo-height)
+      height: $undo-height
+      width: $undo-height
+      color: $slate-300
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+$search-bar-height: 48px
+$search-bar-icon-height: 16px
+
+.search-bar
+  display: flex
+  margin: 0 math.div(keyline(), 2)
+  height: $search-bar-height
+  background-color: $slate-100
+  border-radius: 1e3px
+  box-shadow: inset 0 0 0 1px $slate-200
+  &:is(:hover, :has(:focus-visible))
+    background-color: white
+    box-shadow: $inset-hairline-shadow
+  .icon
+    margin: math.div($search-bar-height - $search-bar-icon-height, 2)
+    height: $search-bar-icon-height
+    width: $search-bar-icon-height
+    color: $slate-400
+  input[type=text]
+    +typography-sans
+    color: $slate-900
+    &::placeholder
+      color: $slate-500
+    &:focus-visible::placeholder
+      opacity: 0
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+$checkbox-icon-height: $generic-button-icon-height
+
+$x-checkbox-height: 24px
+$x-checkbox-check-height: 12px
+$x-checkbox-transition-duration: 100ms
+
+@function feather-check-base64($stroke-width: 2, $color: currentColor)
+  @return url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-check' fill='none' stroke='#{$color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='#{$stroke-width}'%3E%3Cpolyline points='20 6 9 17 4 12' /%3E%3C/svg%3E%0A")
+
+.checkbox-list
+  & .checkbox-list
+    // Indent nested
+    margin-left: math.div($generic-button-height, 2)
+  .checkbox-item
+    display: flex
+    align-items: center
+    margin: -8px 0
+    height: $generic-button-height
+    border-radius: 1e3px
+    cursor: pointer   // Interaction styles
+    user-select: none // Interaction styles
+    &:is(:hover, :has(:focus-visible))
+      background-color: $slate-100
+    &:hover:active
+      background-color: $slate-200
+    .icon
+      margin: math.div($generic-button-height - $checkbox-icon-height, 2)
+      height: $checkbox-icon-height
+      width: $checkbox-icon-height
+      color: $slate-900
+    .name
+      +typography-sans
+      color: $slate-900
+    .interactive-checkbox
+      margin: math.div($generic-button-height - $x-checkbox-height, 2)
+
+.interactive-checkbox
+  position: relative
+  height: $x-checkbox-height
+  width: $x-checkbox-height
+  background-color: white
+  border-radius: 1e3px
+  box-shadow: $hairline-shadow, $realistic-shadow
+  &[aria-checked=true]
+    box-shadow: $realistic-shadow
+  &::before
+    content: ""        // Pseudo reset
+    position: absolute // Pseudo reset
+    inset: 0           // Pseudo reset
+    background-color: dodgerblue
+    border-radius: inherit
+    transform: scale(0)
+    opacity: 0
+    transition: transform $x-checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125), opacity $x-checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125)
+  // Note: Can't use nesting here because
+  // of pseudo
+  &[aria-checked=true]::before
+    transform: scale(1)
+    opacity: 1
+  &::after
+    content: ""        // Pseudo reset
+    position: absolute // Pseudo reset
+    inset: 0           // Pseudo reset
+    margin: auto       // Pseudo reset
+    height: $x-checkbox-check-height
+    width: $x-checkbox-check-height
+    background: feather-check-base64($stroke-width: 8, $color: white) 0% 0% / 100% 100%
+    transform: scale(0)
+    opacity: 0
+    transition: transform $x-checkbox-transition-duration * 2 cubic-bezier(0, 1, 0, 1.125), opacity $x-checkbox-transition-duration * 2 cubic-bezier(0, 1, 0, 1.125)
+  // Note: Can't use nesting here because
+  // of pseudo
+  &[aria-checked=true]::after
+    transform: scale(1)
+    opacity: 1
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+$x-slider-track-height: 6px
+$x-slider-thumb-height: 32px
+
+.slider
+  display: flex
+  align-items: center
+  .interactive-slider
+    margin: 0 keyline()
+  input[type=text]
+    margin: 0 keyline()
+    height: 28px
+    width: 56px
+    border-radius: 1e3px
+    box-shadow: $inset-hairline-shadow
+    +typography-code
+    // Use text-align instead of Flexbox
+    // because of input[type=text]
+    text-align: center
+    color: $slate-900
+
+.interactive-slider
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: $x-slider-thumb-height
+  cursor: grab       // Interaction styles
+  user-select: none  // Interaction styles
+  &:hover:active     // Interaction styles
+    cursor: grabbing // Interaction styles
+  .track
+    display: flex
+    justify-content: center
+    align-items: center
+    height: $x-slider-track-height
+    background-color: dodgerblue
+    border-radius: 1e3px
+    .thumb
+      height: $x-slider-thumb-height
+      width: $x-slider-thumb-height
+      background-color: white
+      border-radius: 1e3px
+      box-shadow: $hairline-shadow, $realistic-shadow
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+$ext-anchor-icon-1-height: $generic-button-icon-height
+$ext-anchor-icon-2-height: 16px
+
+.ext-anchor
+  display: flex
+  align-items: center
+  margin: -8px 0
+  height: $generic-button-height
+  border-radius: 1e3px
+  &:is(:hover, :focus-visible)
+    background-color: $slate-100
+  &:hover:active
+    background-color: $slate-200
+  .icon-1
+    margin: keyline($ext-anchor-icon-1-height)
+    height: $ext-anchor-icon-1-height
+    width: $ext-anchor-icon-1-height
+    color: $slate-900
+  .icon-2
+    margin: keyline($ext-anchor-icon-2-height)
+    height: $ext-anchor-icon-2-height
+    width: $ext-anchor-icon-2-height
+    color: $slate-400
+  .name
+    +typography-sans
+    color: $slate-900
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////

@@ -1,54 +1,61 @@
-@use "sass:color";
 @use "sass:math";
 
-@use "colors" as *;
+@use "tailwind-colors-vars" as *;
+
+*:where(:not(html,iframe,canvas,img,svg,video,audio):not(svg *,symbol *)){all:unset;display:revert}*,*:before,*:after{box-sizing:border-box}a,button{cursor:revert}ol,ul,menu{list-style:none}img{max-inline-size:100%;max-block-size:100%}table{border-collapse:collapse}input,textarea{-webkit-user-select:auto}textarea{white-space:revert}meter{-webkit-appearance:revert;appearance:revert}:where(pre){all:revert}::placeholder{color:unset}::marker{content:initial}:where([hidden]){display:none}:where([contenteditable]:not([contenteditable="false"])){-moz-user-modify:read-write;-webkit-user-modify:read-write;overflow-wrap:break-word;-webkit-line-break:after-white-space;-webkit-user-select:auto}:where([draggable="true"]){-webkit-user-drag:element}:where(dialog:modal){all:revert}
+#root { display: flex; }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Macros
-
-$squarish: 43.75%;
-$circular: 1e3px;
-
 ////////////////////////////////////////////////////////////////////////////////
-// Sidebar
-
-$sidebar-padding-y:    32px;
-$sidebar-padding-x:    16px;
-$sidebar-padding:
-	$sidebar-padding-y
-	$sidebar-padding-x;
-$sidebar-spacing:      24px;
-$sidebar-width:        400px;
-
-$search-bar-height:    40px;
-$optical-margin:       10px;
-$heading-height:       24px;
-$container-height:     36px;
-$icon-height:          math.div($container-height, 2);
-$small-icon-height:    13px;
-
 ////////////////////////////////////////////////////////////////////////////////
-// Controls
-
-$checkbox-height:      24px;
-$slider-track-height:  6px;
-$slider-thumb-height:  36px;
-
 ////////////////////////////////////////////////////////////////////////////////
-// Colors
+// Vars
 
-$base-color:           white;
-$theme-color:          dodgerblue;
+$sans:
+	Inter,
+	system-ui,
+	'Segoe UI',
+	Roboto,
+	Helvetica,
+	Arial,
+	sans-serif,
+	'Apple Color Emoji',
+	'Segoe UI Emoji';
 
-$hairline-color:       $slate-300;
+$code:
+	'Recursive Monospace',
+	ui-monospace,
+	SFMono-Regular,
+	Consolas,
+	'Liberation Mono',
+	Menlo,
+	monospace;
 
-$text-color:           $slate-700;
-$gray-text-color:      $slate-500;
-$lightgray-text-color: $slate-300;
+$WINDOWS_SCROLLBAR_WIDTH: 16px;
 
-////////////////////////////////////////////////////////////////////////////////
-// Shadows
+$main-margin-y:     32px;
+$main-margin-x:     64px;
+$main-spacing:      32px;
+$main-margin:       $main-margin-y $main-margin-x;
 
+$aside-margin-y:    32px;
+$aside-margin-x:    16px;
+$aside-spacing:     16px;
+$aside-margin:      $aside-margin-y $aside-margin-x;
+
+$aside-1-width:     320px + $WINDOWS_SCROLLBAR_WIDTH;
+$aside-2-width:     400px;
+
+$form-height:       40px;
+$form-icon-height:  18px;
+
+$form-keyline:      ($form-height - $form-icon-height) / 2;
+
+@function dynamic-keyline($size) {
+	@return ($form-height - $size) / 2;
+}
+
+$hairline-color:          $slate-300;
 $inset-hairline-shadow:   inset  0    0   0 1px $hairline-color;
 $inset-hairline-t-shadow: inset  0   -1px 0 0   $hairline-color;
 $inset-hairline-r-shadow: inset  1px  0   0 0   $hairline-color;
@@ -61,377 +68,378 @@ $hairline-b-shadow:              0    1px 0 0   $hairline-color;
 $hairline-l-shadow:             -1px  0   0 0   $hairline-color;
 
 $realistic-shadow:
-	0  1px  2px  -1px hsl(0, 0%, 50%, 0.25),
-	0  2px  4px  -2px hsl(0, 0%, 50%, 0.25),
-	0  4px  8px  -4px hsl(0, 0%, 50%, 0.25),
-	0  8px 16px  -8px hsl(0, 0%, 50%, 0.25),
-	0 16px 32px -16px hsl(0, 0%, 50%, 0.25),
-	0 32px 64px -32px hsl(0, 0%, 50%, 0.25);
+	0  1px  2px  -1px $hairline-color,
+	0  2px  4px  -2px $hairline-color,
+	0  4px  8px  -4px $hairline-color,
+	0  8px 16px  -8px $hairline-color,
+	0 16px 32px -16px $hairline-color,
+	0 32px 64px -32px $hairline-color;
 
 ////////////////////////////////////////////////////////////////////////////////
-// Base
-
-:root {
-	// https://github.com/sindresorhus/modern-normalize/blob/32713e4f46899410c9cb4dacd4302b3096019c9b/modern-normalize.css#L43
-	--fallback-font-sans:
-		system-ui,
-		'Segoe UI',
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji';
-
-	// https://github.com/sindresorhus/modern-normalize/blob/32713e4f46899410c9cb4dacd4302b3096019c9b/modern-normalize.css#L100
-	--fallback-font-code:
-			ui-monospace,
-			SFMono-Regular,
-			Consolas,
-			'Liberation Mono',
-			Menlo,
-			monospace; // 1
-		font-size: 1em; // 2
-
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow:
-		hidden  // X-axis
-		scroll; // Y-axis
-	overscroll-behavior: none;
-}
-
-// Color schemes
-:root:not(.dark) { color-scheme: light; }
-:root.dark       { color-scheme: dark;  }
-
-hr {
-	height: 1px;
-	background-color: $hairline-color;
-}
-
-// Iconography
-svg { overflow: visible; }
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Typography
-:root, ::before, ::after {
-	//// font: 400 14px / normal
-	//// 	var(--font-sans);
-	//// color: theme('colors.slate.900');
-	font-family: var(--font-sans);
+
+:root { -webkit-font-smoothing:  antialiased; -moz-osx-font-smoothing: grayscale; }
+
+@mixin typography-sans($color: null) {
+  font-weight:      400;
+  font-size:        15px;
+  font-family:      $sans;
+  text-transform:   none;
+  letter-spacing:   normal;
+  color:            if($color != null, $color, $slate-800);
+	&.is-multiline { line-height: 1.625; }
+}
+@mixin typography-small-sans($color: null) {
+  font-weight:      400;
+  font-size:        12px;
+  font-family:      $sans;
+  text-transform:   none;
+  letter-spacing:   normal;
+  color:            if($color != null, $color, $slate-600);
+	&.is-multiline { line-height: 1.625; }
+}
+@mixin typography-caps($color: null) {
+  font-weight:      500;
+  font-size:        10px;
+  font-family:      $sans;
+  text-transform:   uppercase;
+  letter-spacing:   0.1em;
+  color:            if($color != null, $color, $slate-800);
+	&.is-multiline { line-height: 1.625; }
+}
+@mixin typography-code($color: null) {
+  font-weight:      400;
+  font-size:        11px;
+  font-family:      $code;
+  text-transform:   none;
+  letter-spacing:   normal;
+  color:            if($color != null, $color, $slate-600);
+	&.is-multiline { line-height: 1.625; }
 }
 
-// :root {
-// 	font-family: var(--font-sans);
-// }
-pre, code {
-	// Disable font-soothing for <code>
-	-webkit-font-smoothing:  auto;
-	-moz-osx-font-smoothing: auto;
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// HTML5 checkbox
 
-	// Prefer 2-character tabs
-	tab-size: 2;
+$checkbox-height:   24px;
+$checkbox-check-height: 12px;
+$checkbox-transition-duration: 50ms;
 
-	font-family: var(--font-code);
-	//// font: 400 14px / normal
-	//// 	var(--fallback-font-code);
-	//// color: theme('colors.slate.900');
-	//// // font-family: var(--font-code);
+@function checkmark-svg($stroke-width: 2, $color: currentColor) {
+	@return url("data:image/svg+xml," +
+		"%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-check' fill='none' stroke='#{$color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='#{$stroke-width}'%3E" +
+			"%3Cpolyline points='20 6 9 17 4 12' /%3E" +
+		"%3C/svg%3E" +
+	"%0A");
 }
 
+input[type=checkbox] {
+	position:         relative;
+	height:           $checkbox-height;
+	width:            $checkbox-height;
+	background-color: white;
+	border-radius:    43.75%;
+	box-shadow:       $hairline-shadow, $realistic-shadow;
+	cursor:           pointer;
+	user-select:      none;
+}
+input[type=checkbox]:checked { box-shadow: $realistic-shadow; }
+input[type=checkbox]::before {
+	content:          "";
+	position:         absolute;
+	inset:            0;
+	background-color: dodgerblue;
+	border-radius:    inherit;
+	transform:        scale(0);
+	opacity:          0;
+	transition:
+		transform $checkbox-transition-duration cubic-bezier(0, 1, 0.5, 1.25),
+		opacity   $checkbox-transition-duration cubic-bezier(0, 1, 0.5, 1.25);
+}
+// Note: input[type=checkbox]:checked:is(::before, ::after) doesn't work
+input[type=checkbox]:checked::before {
+	transform:        scale(1);
+	opacity:          1;
+}
+input[type=checkbox]::after {
+	content:          "";
+	position:         absolute;
+	inset:            0;
+	margin:           auto;
+	height:           $checkbox-check-height;
+	width:            $checkbox-check-height;
+	background:       checkmark-svg($stroke-width: 8, $color: white) 0% 0% / 100% 100%;
+	transform:        scale(0);
+	opacity:          0;
+	transition:
+		transform $checkbox-transition-duration * 2 cubic-bezier(0, 1, 0.5, 1.25),
+		opacity   $checkbox-transition-duration * 2 cubic-bezier(0, 1, 0.5, 1.25);
+}
+// Note: input[type=checkbox]:checked:is(::before, ::after) doesn't work
+input[type=checkbox]:checked::after {
+	transform:        scale(1);
+	opacity:          1;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// HTML5 range
+
+$slider-track-height: 6px;
+$slider-thumb-height: 32px;
+
+$slider-intrinsic-margin-y: ($slider-thumb-height - $slider-track-height) / 2;
+
+// CSS resets
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; box-shadow: none; /* iOS */ }
+input[type=range]::-moz-range-thumb { border: none; }
+
+input[type=range] {
+	margin:           $slider-intrinsic-margin-y 0;
+  height:           $slider-track-height;
+  background-color: dodgerblue;
+	border-radius:    1e3px;
+	cursor:           grab;
+	user-select:      none;
+	&:hover:active { cursor: grabbing; }
+}
+// Must be styled separately
+input[type=range]::-webkit-slider-thumb {
+  height:           $slider-thumb-height;
+  width:            $slider-thumb-height;
+  background-color: white;
+  border-radius:    1e3px;
+	box-shadow:       $hairline-shadow, $realistic-shadow;
+}
+// Must be styled separately
+input[type=range]::-moz-range-thumb {
+  height:           $slider-thumb-height;
+  width:            $slider-thumb-height;
+  background-color: white;
+  border-radius:    1e3px;
+	box-shadow:       $hairline-shadow, $realistic-shadow;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // Layout
 
-#__next {
-	display: flex;
-}
-.aside {
-	display: flex;          // Use Flexbox to forward height
-	flex-direction: column; // Use Flexbox to forward height
-	height: 100dvh; // Fallback
-	height: 100vh;
-	width: $sidebar-width;
-	background-color: $base-color;
-	box-shadow: $hairline-r-shadow;
+.aside-1 {
+	display:          flex;
+	flex-direction:   column;
+	height:           100vh; // Fallback
+	height:           100dvh;
+	width:            $aside-1-width;
+	background-color: white;
+	box-shadow:       $hairline-r-shadow;
 }
 .main {
-	flex-grow: 1;
-	padding: $sidebar-padding;
+	flex:             1;
+	margin:           $main-margin;
+}
+.aside-2 {
+	display:          flex;
+	flex-direction:   column;
+	height:           100vh; // Fallback
+	height:           100dvh;
+	width:            $aside-2-width;
+	background-color: white;
+	box-shadow:       $hairline-l-shadow;
+}
+.sticky-container {
+	position:         sticky;
+	top:              0;
+	z-index:          10;
+	background-color: white;
+	&:has(+ .scroll-container[data-state-did-scroll=true]) { box-shadow: $hairline-b-shadow; }
+}
+.scroll-container {
+	flex:             1;
+	display:          flex;
+	flex-direction:   column;
+	overflow-y:       scroll;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Sticky header, section
-
-.sticky-header {
-	position: sticky;
-	top: 0;
-	display: flex;
-	flex-direction: column;
-	gap: $sidebar-spacing;
-	padding: $sidebar-padding;
-	padding-bottom: $sidebar-spacing; // Fake spacing
-	background-color: $base-color;
-}
-.sticky-header[data-state-did-scroll=true] {
-	box-shadow: $hairline-b-shadow;
-}
-.section {
-	display: flex;
-	flex-direction: column;
-	gap: $sidebar-spacing;
-	padding: $sidebar-padding;
-}
-// Omit padding-top on the first section because of .sticky-header
-.section:first-of-type {
-	padding-top: 0;
-}
-
 ////////////////////////////////////////////////////////////////////////////////
-// Heading
-
-.heading-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: $heading-height;
-}
-.heading {
-	margin:
-		0
-		$optical-margin;
-	display: flex;
-	align-items: center;
-	padding:
-		0
-		math.div($heading-height, 2);
-	height: $heading-height;
-	background-color: $base-color;
-	border-radius: $circular;
-	box-shadow: $inset-hairline-shadow;
-	// Typography
-	font: 400 10px / normal var(--font-sans);
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-}
-.heading-revert-icon {
-	margin: math.div($container-height - $icon-height, 2);
-	height: $small-icon-height;
-	width: $small-icon-height;
-	// Iconography
-	color: $lightgray-text-color;
-}
-
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // Search bar
 
 .search-bar {
-	display: flex;
-	height: $search-bar-height;
-	background-color: $slate-100;
-	border-radius: $circular;
-}
-.search-bar:is(:hover, :focus-within) {
-	background-color: transparent; // Use the foreground color
-	box-shadow: $inset-hairline-shadow;
-}
-.search-bar-icon {
-	margin: math.div($search-bar-height - $small-icon-height, 2);
-	height: $small-icon-height;
-	width: $small-icon-height;
-	// Iconography
-	color: $gray-text-color;
-}
-input[type="text"].search-bar-text-field {
-	height: 100%;                  // CSS reset
-	width: 100%;                   // CSS reset
-	background-color: transparent; // CSS reset
-	// Typography
-	font: 400 14px / normal var(--font-sans);
-	color: $text-color;
-}
-input[type="text"].search-bar-text-field::placeholder {
-	// Typography
-	color: $gray-text-color;
-}
-// Omit the placeholder when focused
-input[type="text"].search-bar-text-field:focus::placeholder {
-	visibility: hidden;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Scrolling container
-
-.scrolling-container {
-	overflow-y: auto;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Icons
-
-.icons-list-container {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-.icons-list {
-	border-radius: math.div($container-height, 2);
-}
-
-.icons-list:hover {
-	background-color: $slate-100;
-}
-.icons-list .icons-list:hover {
+	margin:
+		$aside-margin-y                      // Y-axis
+		$aside-margin-x + $form-keyline / 2; // X-axis
+	margin-bottom:    $aside-spacing;
+	display:          flex;
+	height:           $form-height;
 	background-color: $slate-200;
+	border-radius:    1e3px;
+	&:is(:hover, :has(:focus-within)) { background-color: white; box-shadow: $inset-hairline-shadow }
 }
-//// .icons-list .icons-list .icons-list:hover {
-//// 	background-color: $slate-300;
-//// }
-
-.icons-list  .icons-list {
-	margin-left: $optical-margin;
+// LHS
+.search-bar-icon {
+	margin:           dynamic-keyline(16px);
+	height:           16px;
+	width:            16px;
+	color:            $slate-400;
 }
-
-//// // TODO
-//// .icons-list:hover { background-color: $slate-100; }
-//// .icons-list:hover .icons-list { background-color: $slate-200; }
-//// .icons-list:hover .icons-list .icons-list { background-color: $slate-300; }
-
-.icons-list-item {
-	display: flex;
-	align-items: center;
-	height: $container-height;
-	border-radius: $circular;
+// RHS
+.search-bar input[type=text] {
+	@include          typography-sans;
+	flex:             1;
+	&::placeholder { color: $slate-500; }
+	&:focus-visible::placeholder { opacity: 0; }
 }
 
-//// .icons-list-item:hover {
-//// 	background-color: $slate-100;
-//// }
-//// .icons-list .icons-list-item:hover {
-//// 	background-color: $slate-200;
-//// }
-//// .icons-list .icons-list-item:hover {
-//// 	background-color: $slate-300;
-//// }
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Fieldset, hairline
 
-//// .icons-list-item:hover { background-color: $slate-200; }
-//// .icons-list-item:hover:active { background-color: $slate-300; }
-.icons-list-item-icon {
-	margin: math.div($container-height - $icon-height, 2);
-	height: $icon-height;
-	width: $icon-height;
-	color: $lightgray-text-color; // Fallback color
+.fieldset {
+	margin:           $aside-spacing $aside-margin-x;
+	display:          flex;
+	flex-direction:   column;
+	gap:              16px;
+	&:last-child { margin-bottom: $aside-margin-y; }
 }
-.icons-list-item-name {
-	flex-grow: 1; // Push .icons-list-item-checkbox
-	// Typography
-	font: 400 14px / 1.625 var(--font-sans);
-	color: $text-color;
-}
-.icons-list-item-checkbox {
-	margin: math.div($container-height - $checkbox-height, 2);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: $checkbox-height;
-	width: $checkbox-height;
-	background-color: $base-color;
-	border-radius: $squarish;
-	box-shadow: $inset-hairline-shadow, $realistic-shadow;
-}
-.icons-list-item-checkbox[aria-checked=true] {
-	background-color: $theme-color;
-	box-shadow: $realistic-shadow
-}
-.icons-list-item-checkbox-icon {
-	height: $small-icon-height;
-	width: $small-icon-height;
-	// Iconography
-	color: white;
+.hairline {
+	margin-top:       -1px;                      // 😎
+	border-top:       1px solid $hairline-color; // 😎
 }
 
-//// ////////////////////////////////////////////////////////////////////////////////
-//// // Checkbox
-////
-//// .checkbox {
-//// 	display: flex;
-//// 	justify-content: center;
-//// 	align-items: center;
-//// 	height: $checkbox-height;
-//// 	width: $checkbox-height;
-//// 	border-radius: $squarish;
-//// 	background-color: $base-color;
-//// 	box-shadow: $inset-hairline-shadow, $realistic-shadow;
-//// }
-//// .checkbox[aria-checked=true] {
-//// 	background-color: $theme-color;
-//// 	box-shadow: $realistic-shadow
-//// }
-//// .checkbox-icon {
-//// 	height: $small-icon-height;
-//// 	width: $small-icon-height;
-//// 	// Iconography
-//// 	color: white;
-//// }
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Checkboxes
 
+.checkboxes {
+	display:          flex;
+	flex-direction:   column;
+	gap:              16px;
+}
+
+// Space children (x-axis)
+.checkbox-list .checkbox-list { margin-left: $form-height / 2; }
+
+.checkbox-item {
+	margin:           -8px 0;
+	display:          flex;
+	align-items:      center;
+	height:           $form-height;
+	border-radius:    1e3px;
+	&:hover { background-color: $gray-100; }
+	&:hover:active { background-color: $gray-200; }
+
+	// Interaction styles
+	cursor:           pointer;
+	user-select:      none;
+}
+
+// LHS
+.checkbox-icon {
+	margin:           $form-keyline;
+	height:           $form-icon-height;
+	width:            $form-icon-height;
+	color:            $slate-800;
+}
+// RHS
+.checkbox-name {
+	@include          typography-sans;
+	flex:             1;
+}
+.checkbox-item input[type=checkbox] { margin: dynamic-keyline($checkbox-height); }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Legend
+
+$legend-undo-height: 16px;
+
+.legend {
+	float:            left; // Because of <legend> :(
+	display:          flex;
+	justify-content:  space-between;
+	align-items:      center;
+	height:           16px;
+}
+// LHS
+.legend-name {
+	@include          typography-caps;
+	flex:             1;
+	margin:           0 $form-keyline;
+}
+// RHS
+.legend-undo {
+	margin:           dynamic-keyline($legend-undo-height);
+	height:           $legend-undo-height;
+	width:            $legend-undo-height;
+	color:            $slate-300;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // Slider
 
 .slider {
-	margin:
-		0
-		$optical-margin;
-	display: flex;           // Center y-axis
-	flex-direction: column;  // Center y-axis
-	justify-content: center; // Center y-axis
-	height: $slider-thumb-height;
+	display:          flex;
+	align-items:      center;
 }
-.slider-track {
-	display: flex;           // Center x- and y-axis
-	justify-content: center; // Center x- and y-axis
-	align-items: center;     // Center x- and y-axis
-	height: $slider-track-height;
-	background-image: linear-gradient(to right, $theme-color 50%, lightgray 50%);
-	border-radius: $circular;
+// LHS
+.slider input[type=range] {
+	flex:             1;
+	margin-left:      $form-keyline;
 }
-.slider-thumb {
-	height: $slider-thumb-height;
-	width: $slider-thumb-height;
-	background-color: $base-color;
-	border-radius: $circular;
-	box-shadow: $inset-hairline-shadow, $realistic-shadow;
+// RHS
+.slider input[type=text] {
+	@include          typography-code;
+	margin:           0 $form-keyline;
+	height:           24px;
+	width:            56px;
+	border-radius:    1e3px;
+	box-shadow:       $inset-hairline-shadow;
+	text-align:       center;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// License
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Licenses
 
-.license-list {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+.licenses {
+	display:          flex;
+	flex-direction:   column;
+	gap:              8px;
 }
-.license-list-item {
-	display: flex;
-	gap: 8px;
-}
+.license { display: flex; }
 .license-icon {
-	margin: math.div(12px * 1.625 - $small-icon-height, 2);
-	height: $small-icon-height;
-	width: $small-icon-height;
-	// Iconography
-	color: $text-color;
+	margin:           dynamic-keyline(14px);
+	margin-top:       0;
+	height:           14px;
+	width:            14px;
+	color:            $slate-800;
 }
-.license-legalese {
-	// Typography
-	font: 400 12px / 1.625 var(--font-sans);
-	color: $text-color;
-}
+.license-text { @include typography-small-sans; }
 
-////////////////////////////////////////////////////////////////////////////////
-// Misc.
-
-em { font-style: italic; }
-
-.anchor {
-	text-decoration: underline lightgray;
+.license-text a {
+	text-decoration:  underline $slate-300;
 	text-underline-offset: 2px;
 }
+.license-text em { font-style: italic; }

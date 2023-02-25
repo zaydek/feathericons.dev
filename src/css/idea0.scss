@@ -1,0 +1,437 @@
+@use "sass:color";
+@use "sass:math";
+
+@use "colors" as *;
+
+////////////////////////////////////////////////////////////////////////////////
+// Macros
+
+$squarish: 43.75%;
+$circular: 1e3px;
+
+////////////////////////////////////////////////////////////////////////////////
+// Sidebar
+
+$sidebar-padding-y:    32px;
+$sidebar-padding-x:    16px;
+$sidebar-padding:
+	$sidebar-padding-y
+	$sidebar-padding-x;
+$sidebar-spacing:      24px;
+$sidebar-width:        400px;
+
+$search-bar-height:    40px;
+$optical-margin:       10px;
+$heading-height:       24px;
+$container-height:     36px;
+$icon-height:          math.div($container-height, 2);
+$small-icon-height:    13px;
+
+////////////////////////////////////////////////////////////////////////////////
+// Controls
+
+$checkbox-height:      24px;
+$slider-track-height:  6px;
+$slider-thumb-height:  36px;
+
+////////////////////////////////////////////////////////////////////////////////
+// Colors
+
+$base-color:           white;
+$theme-color:          dodgerblue;
+
+$hairline-color:       $slate-300;
+
+$text-color:           $slate-700;
+$gray-text-color:      $slate-500;
+$lightgray-text-color: $slate-300;
+
+////////////////////////////////////////////////////////////////////////////////
+// Shadows
+
+$inset-hairline-shadow:   inset  0    0   0 1px $hairline-color;
+$inset-hairline-t-shadow: inset  0   -1px 0 0   $hairline-color;
+$inset-hairline-r-shadow: inset  1px  0   0 0   $hairline-color;
+$inset-hairline-b-shadow: inset  0    1px 0 0   $hairline-color;
+$inset-hairline-l-shadow: inset -1px  0   0 0   $hairline-color;
+$hairline-shadow:                0    0   0 1px $hairline-color;
+$hairline-t-shadow:              0   -1px 0 0   $hairline-color;
+$hairline-r-shadow:              1px  0   0 0   $hairline-color;
+$hairline-b-shadow:              0    1px 0 0   $hairline-color;
+$hairline-l-shadow:             -1px  0   0 0   $hairline-color;
+
+$realistic-shadow:
+	0  1px  2px  -1px hsl(0, 0%, 50%, 0.25),
+	0  2px  4px  -2px hsl(0, 0%, 50%, 0.25),
+	0  4px  8px  -4px hsl(0, 0%, 50%, 0.25),
+	0  8px 16px  -8px hsl(0, 0%, 50%, 0.25),
+	0 16px 32px -16px hsl(0, 0%, 50%, 0.25),
+	0 32px 64px -32px hsl(0, 0%, 50%, 0.25);
+
+////////////////////////////////////////////////////////////////////////////////
+// Base
+
+:root {
+	// https://github.com/sindresorhus/modern-normalize/blob/32713e4f46899410c9cb4dacd4302b3096019c9b/modern-normalize.css#L43
+	--fallback-font-sans:
+		system-ui,
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
+
+	// https://github.com/sindresorhus/modern-normalize/blob/32713e4f46899410c9cb4dacd4302b3096019c9b/modern-normalize.css#L100
+	--fallback-font-code:
+			ui-monospace,
+			SFMono-Regular,
+			Consolas,
+			'Liberation Mono',
+			Menlo,
+			monospace; // 1
+		font-size: 1em; // 2
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow:
+		hidden  // X-axis
+		scroll; // Y-axis
+	overscroll-behavior: none;
+}
+
+// Color schemes
+:root:not(.dark) { color-scheme: light; }
+:root.dark       { color-scheme: dark;  }
+
+hr {
+	height: 1px;
+	background-color: $hairline-color;
+}
+
+// Iconography
+svg { overflow: visible; }
+
+// Typography
+:root, ::before, ::after {
+	//// font: 400 14px / normal
+	//// 	var(--font-sans);
+	//// color: theme('colors.slate.900');
+	font-family: var(--font-sans);
+}
+
+// :root {
+// 	font-family: var(--font-sans);
+// }
+pre, code {
+	// Disable font-soothing for <code>
+	-webkit-font-smoothing:  auto;
+	-moz-osx-font-smoothing: auto;
+
+	// Prefer 2-character tabs
+	tab-size: 2;
+
+	font-family: var(--font-code);
+	//// font: 400 14px / normal
+	//// 	var(--fallback-font-code);
+	//// color: theme('colors.slate.900');
+	//// // font-family: var(--font-code);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Layout
+
+#__next {
+	display: flex;
+}
+.aside {
+	display: flex;          // Use Flexbox to forward height
+	flex-direction: column; // Use Flexbox to forward height
+	height: 100dvh; // Fallback
+	height: 100vh;
+	width: $sidebar-width;
+	background-color: $base-color;
+	box-shadow: $hairline-r-shadow;
+}
+.main {
+	flex-grow: 1;
+	padding: $sidebar-padding;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Sticky header, section
+
+.sticky-header {
+	position: sticky;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	gap: $sidebar-spacing;
+	padding: $sidebar-padding;
+	padding-bottom: $sidebar-spacing; // Fake spacing
+	background-color: $base-color;
+}
+.sticky-header[data-state-did-scroll=true] {
+	box-shadow: $hairline-b-shadow;
+}
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: $sidebar-spacing;
+	padding: $sidebar-padding;
+}
+// Omit padding-top on the first section because of .sticky-header
+.section:first-of-type {
+	padding-top: 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Heading
+
+.heading-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: $heading-height;
+}
+.heading {
+	margin:
+		0
+		$optical-margin;
+	display: flex;
+	align-items: center;
+	padding:
+		0
+		math.div($heading-height, 2);
+	height: $heading-height;
+	background-color: $base-color;
+	border-radius: $circular;
+	box-shadow: $inset-hairline-shadow;
+	// Typography
+	font: 400 10px / normal var(--font-sans);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+.heading-revert-icon {
+	margin: math.div($container-height - $icon-height, 2);
+	height: $small-icon-height;
+	width: $small-icon-height;
+	// Iconography
+	color: $lightgray-text-color;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Search bar
+
+.search-bar {
+	display: flex;
+	height: $search-bar-height;
+	background-color: $slate-100;
+	border-radius: $circular;
+}
+.search-bar:is(:hover, :focus-within) {
+	background-color: transparent; // Use the foreground color
+	box-shadow: $inset-hairline-shadow;
+}
+.search-bar-icon {
+	margin: math.div($search-bar-height - $small-icon-height, 2);
+	height: $small-icon-height;
+	width: $small-icon-height;
+	// Iconography
+	color: $gray-text-color;
+}
+input[type="text"].search-bar-text-field {
+	height: 100%;                  // CSS reset
+	width: 100%;                   // CSS reset
+	background-color: transparent; // CSS reset
+	// Typography
+	font: 400 14px / normal var(--font-sans);
+	color: $text-color;
+}
+input[type="text"].search-bar-text-field::placeholder {
+	// Typography
+	color: $gray-text-color;
+}
+// Omit the placeholder when focused
+input[type="text"].search-bar-text-field:focus::placeholder {
+	visibility: hidden;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Scrolling container
+
+.scrolling-container {
+	overflow-y: auto;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Icons
+
+.icons-list-container {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.icons-list {
+	border-radius: math.div($container-height, 2);
+}
+
+.icons-list:hover {
+	background-color: $slate-100;
+}
+.icons-list .icons-list:hover {
+	background-color: $slate-200;
+}
+//// .icons-list .icons-list .icons-list:hover {
+//// 	background-color: $slate-300;
+//// }
+
+.icons-list  .icons-list {
+	margin-left: $optical-margin;
+}
+
+//// // TODO
+//// .icons-list:hover { background-color: $slate-100; }
+//// .icons-list:hover .icons-list { background-color: $slate-200; }
+//// .icons-list:hover .icons-list .icons-list { background-color: $slate-300; }
+
+.icons-list-item {
+	display: flex;
+	align-items: center;
+	height: $container-height;
+	border-radius: $circular;
+}
+
+//// .icons-list-item:hover {
+//// 	background-color: $slate-100;
+//// }
+//// .icons-list .icons-list-item:hover {
+//// 	background-color: $slate-200;
+//// }
+//// .icons-list .icons-list-item:hover {
+//// 	background-color: $slate-300;
+//// }
+
+//// .icons-list-item:hover { background-color: $slate-200; }
+//// .icons-list-item:hover:active { background-color: $slate-300; }
+.icons-list-item-icon {
+	margin: math.div($container-height - $icon-height, 2);
+	height: $icon-height;
+	width: $icon-height;
+	color: $lightgray-text-color; // Fallback color
+}
+.icons-list-item-name {
+	flex-grow: 1; // Push .icons-list-item-checkbox
+	// Typography
+	font: 400 14px / 1.625 var(--font-sans);
+	color: $text-color;
+}
+.icons-list-item-checkbox {
+	margin: math.div($container-height - $checkbox-height, 2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: $checkbox-height;
+	width: $checkbox-height;
+	background-color: $base-color;
+	border-radius: $squarish;
+	box-shadow: $inset-hairline-shadow, $realistic-shadow;
+}
+.icons-list-item-checkbox[aria-checked=true] {
+	background-color: $theme-color;
+	box-shadow: $realistic-shadow
+}
+.icons-list-item-checkbox-icon {
+	height: $small-icon-height;
+	width: $small-icon-height;
+	// Iconography
+	color: white;
+}
+
+//// ////////////////////////////////////////////////////////////////////////////////
+//// // Checkbox
+////
+//// .checkbox {
+//// 	display: flex;
+//// 	justify-content: center;
+//// 	align-items: center;
+//// 	height: $checkbox-height;
+//// 	width: $checkbox-height;
+//// 	border-radius: $squarish;
+//// 	background-color: $base-color;
+//// 	box-shadow: $inset-hairline-shadow, $realistic-shadow;
+//// }
+//// .checkbox[aria-checked=true] {
+//// 	background-color: $theme-color;
+//// 	box-shadow: $realistic-shadow
+//// }
+//// .checkbox-icon {
+//// 	height: $small-icon-height;
+//// 	width: $small-icon-height;
+//// 	// Iconography
+//// 	color: white;
+//// }
+
+////////////////////////////////////////////////////////////////////////////////
+// Slider
+
+.slider {
+	margin:
+		0
+		$optical-margin;
+	display: flex;           // Center y-axis
+	flex-direction: column;  // Center y-axis
+	justify-content: center; // Center y-axis
+	height: $slider-thumb-height;
+}
+.slider-track {
+	display: flex;           // Center x- and y-axis
+	justify-content: center; // Center x- and y-axis
+	align-items: center;     // Center x- and y-axis
+	height: $slider-track-height;
+	background-image: linear-gradient(to right, $theme-color 50%, lightgray 50%);
+	border-radius: $circular;
+}
+.slider-thumb {
+	height: $slider-thumb-height;
+	width: $slider-thumb-height;
+	background-color: $base-color;
+	border-radius: $circular;
+	box-shadow: $inset-hairline-shadow, $realistic-shadow;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// License
+
+.license-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.license-list-item {
+	display: flex;
+	gap: 8px;
+}
+.license-icon {
+	margin: math.div(12px * 1.625 - $small-icon-height, 2);
+	height: $small-icon-height;
+	width: $small-icon-height;
+	// Iconography
+	color: $text-color;
+}
+.license-legalese {
+	// Typography
+	font: 400 12px / 1.625 var(--font-sans);
+	color: $text-color;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Misc.
+
+em { font-style: italic; }
+
+.anchor {
+	text-decoration: underline lightgray;
+	text-underline-offset: 2px;
+}

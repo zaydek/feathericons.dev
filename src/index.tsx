@@ -1,15 +1,21 @@
 //// // CSS reset
 //// import "the-new-css-reset"
 
-import "@/css/tailwind-colors.scss"
+//// import "@/css/idea.scss"
 
-import "@/css/base.scss"
-import "@/css/vars.scss"
+import "the-new-css-reset"
 
-import "@/css/form-checkbox.scss"
-import "@/css/form-slider.scss"
+import "@/css/idea3.sass"
 
-import "@/css/tailwind.generated.css"
+//// import "@/css/tailwind-colors.scss"
+////
+//// import "@/css/base.scss"
+//// import "@/css/vars.scss"
+////
+//// import "@/css/form-checkbox.scss"
+//// import "@/css/form-slider.scss"
+////
+//// import "@/css/tailwind.generated.css"
 
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
