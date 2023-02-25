@@ -1,9 +1,13 @@
 @use "sass:math"
 
-@use "globals" as g
+@use "globals" as *
 @use "tw-v2-colors" as *
 
-@use "mixins"
+@use "mixins" as *
+
+// CSS
+@use "interactive-checkbox" as *
+@use "interactive-slider" as *
 @use "utils"
 
 ////////////////////////////////////////
@@ -12,7 +16,7 @@
 ////////////////////////////////////////
 
 :root
-  +mixins.font-smoothing
+  +font-smoothing
 
 // Color schemes
 :root:not(.dark)
@@ -32,9 +36,9 @@ svg
   inset: 0 auto 0 0
   display: flex
   flex-direction: column
-  width: g.$aside-1-width
+  width: $aside-1-width
   background-color: white
-  box-shadow: g.$hairline-shadow-right
+  box-shadow: $hairline-shadow-right
 
 .column-2
   display: flex
@@ -48,9 +52,9 @@ svg
   inset: 0 0 0 auto
   display: flex
   flex-direction: column
-  width: g.$aside-2-width
+  width: $aside-2-width
   background-color: white
-  box-shadow: g.$hairline-shadow-left
+  box-shadow: $hairline-shadow-left
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -58,8 +62,10 @@ svg
 ////////////////////////////////////////
 
 .scroll-container
-  display: flex
-  flex-direction: column
+  //// display: flex
+  //// flex-direction: column
+  //// gap: $aside-gap
+  //// padding: $aside-padding-y 0
   height: 100dvh // Ensure .scroll-container expands
   height: 100dv  // Ensure .scroll-container expands
   overflow-y: scroll
@@ -73,22 +79,20 @@ $undo-height: 16px
 .section
   display: flex
   flex-direction: column
-  gap: g.$aside-gap
-  padding: g.$aside-gap g.$aside-padding-x
-  &.is-start
-    padding-top: g.$aside-padding-y
-    &:has(+ .scroll-container.has-scrolled)
-      box-shadow: g.$hairline-shadow-bottom
-  &.is-end
-    padding-bottom: g.$aside-padding-y
-    box-shadow: g.$hairline-shadow-top
+  gap: $aside-gap
+  padding: $aside-gap $aside-padding-x
+  &:first-child
+    padding-top: $aside-padding-y
+  &:last-child
+    padding-bottom: $aside-padding-y
+    box-shadow: $hairline-shadow-top
   .header
     display: flex
     align-items: center
-    height: math.div(g.$generic-button-height, 2)
+    height: math.div($generic-button-height, 2)
     .name
       margin: keyline()
-      +mixins.typography-caps
+      +typography-caps
       color: $slate-900
     .undo
       margin: keyline($undo-height)
@@ -113,14 +117,14 @@ $search-bar-icon-height: 16px
   box-shadow: inset 0 0 0 1px $slate-200
   &:is(:hover, :has(:focus-visible))
     background-color: white
-    box-shadow: g.$inset-hairline-shadow
+    box-shadow: $inset-hairline-shadow
   .icon
     margin: math.div($search-bar-height - $search-bar-icon-height, 2)
     height: $search-bar-icon-height
     width: $search-bar-icon-height
     color: $slate-400
   input[type=text]
-    +mixins.typography-sans
+    +typography-sans
     color: $slate-900
     &::placeholder
       color: $slate-500
@@ -132,23 +136,16 @@ $search-bar-icon-height: 16px
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-$checkbox-icon-height: g.$generic-button-icon-height
-
-$x-checkbox-height: 24px
-$x-checkbox-check-height: 12px
-$x-checkbox-transition-duration: 100ms
-
-@function feather-check-base64($stroke-width: 2, $color: currentColor)
-  @return url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-check' fill='none' stroke='#{$color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='#{$stroke-width}'%3E%3Cpolyline points='20 6 9 17 4 12' /%3E%3C/svg%3E%0A")
+$checkbox-icon-height: $generic-button-icon-height
 
 .checkbox-list
   & .checkbox-list
-    margin-left: math.div(g.$generic-button-height, 2)
+    margin-left: math.div($generic-button-height, 2)
   .checkbox-item
     display: flex
     align-items: center
     margin: -8px 0
-    height: g.$generic-button-height
+    height: $generic-button-height
     border-radius: 1e3px
     cursor: pointer   // Interaction styles
     user-select: none // Interaction styles
@@ -157,63 +154,20 @@ $x-checkbox-transition-duration: 100ms
     &:hover:active
       background-color: $slate-200
     .icon
-      margin: math.div(g.$generic-button-height - $checkbox-icon-height, 2)
+      margin: math.div($generic-button-height - $checkbox-icon-height, 2)
       height: $checkbox-icon-height
       width: $checkbox-icon-height
       color: $slate-900
     .name
-      +mixins.typography-sans
+      +typography-sans
       color: $slate-900
     .interactive-checkbox
-      margin: math.div(g.$generic-button-height - $x-checkbox-height, 2)
-
-.interactive-checkbox
-  position: relative
-  height: $x-checkbox-height
-  width: $x-checkbox-height
-  background-color: white
-  border-radius: 1e3px
-  box-shadow: g.$hairline-shadow, g.$realistic-shadow
-  &[aria-checked=true]
-    box-shadow: g.$realistic-shadow
-  &::before
-    content: ""        // Pseudo reset
-    position: absolute // Pseudo reset
-    inset: 0           // Pseudo reset
-    background-color: dodgerblue
-    border-radius: inherit
-    transform: scale(0)
-    opacity: 0
-    transition: transform $x-checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125), opacity $x-checkbox-transition-duration cubic-bezier(0, 1, 0, 1.125)
-  // Note: Can't use nesting here because
-  // of pseudo
-  &[aria-checked=true]::before
-    transform: scale(1)
-    opacity: 1
-  &::after
-    content: ""        // Pseudo reset
-    position: absolute // Pseudo reset
-    inset: 0           // Pseudo reset
-    margin: auto       // Pseudo reset
-    height: $x-checkbox-check-height
-    width: $x-checkbox-check-height
-    background: feather-check-base64($stroke-width: 8, $color: white) 0% 0% / 100% 100%
-    transform: scale(0)
-    opacity: 0
-    transition: transform $x-checkbox-transition-duration * 2 cubic-bezier(0, 1, 0, 1.125), opacity $x-checkbox-transition-duration * 2 cubic-bezier(0, 1, 0, 1.125)
-  // Note: Can't use nesting here because
-  // of pseudo
-  &[aria-checked=true]::after
-    transform: scale(1)
-    opacity: 1
+      margin: math.div($generic-button-height - $x-checkbox-height, 2)
 
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
-
-$x-slider-track-height: 6px
-$x-slider-thumb-height: 32px
 
 .slider
   display: flex
@@ -225,49 +179,26 @@ $x-slider-thumb-height: 32px
     height: 28px
     width: 56px
     border-radius: 1e3px
-    box-shadow: g.$inset-hairline-shadow
-    +mixins.typography-code
+    box-shadow: $inset-hairline-shadow
+    +typography-code
     // Use text-align instead of Flexbox
     // because of input[type=text]
     text-align: center
     color: $slate-900
 
-.interactive-slider
-  display: flex
-  flex-direction: column
-  justify-content: center
-  height: $x-slider-thumb-height
-  cursor: grab       // Interaction styles
-  user-select: none  // Interaction styles
-  &:hover:active     // Interaction styles
-    cursor: grabbing // Interaction styles
-  .track
-    display: flex
-    justify-content: center
-    align-items: center
-    height: $x-slider-track-height
-    background-color: dodgerblue
-    border-radius: 1e3px
-    .thumb
-      height: $x-slider-thumb-height
-      width: $x-slider-thumb-height
-      background-color: white
-      border-radius: 1e3px
-      box-shadow: g.$hairline-shadow, g.$realistic-shadow
-
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-$ext-anchor-icon-1-height: g.$generic-button-icon-height
+$ext-anchor-icon-1-height: $generic-button-icon-height
 $ext-anchor-icon-2-height: 16px
 
 .ext-anchor
   display: flex
   align-items: center
   margin: -8px 0
-  height: g.$generic-button-height
+  height: $generic-button-height
   border-radius: 1e3px
   &:is(:hover, :focus-visible)
     background-color: $slate-100
@@ -284,10 +215,5 @@ $ext-anchor-icon-2-height: 16px
     width: $ext-anchor-icon-2-height
     color: $slate-400
   .name
-    +mixins.typography-sans
+    +typography-sans
     color: $slate-900
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////

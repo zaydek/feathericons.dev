@@ -95,7 +95,7 @@ export function App() {
 		<>
 			<DebugCss />
 			<aside className="column-1">
-				<header className="section is-start">
+				{/* <header className="section is-start">
 					<div className="search-bar">
 						<feather.Search className="icon" strokeWidth={4} />
 						<input
@@ -107,7 +107,7 @@ export function App() {
 							onChange={e => setValue(e.currentTarget.value)}
 						/>
 					</div>
-				</header>
+				</header> */}
 				<div
 					className="scroll-container"
 					onScroll={e => {
@@ -198,10 +198,8 @@ export function App() {
 						</div>
 					</section>
 					<hr className="hairline" />
-					<div className="u-flex-1" style={{ backgroundColor: "#f8fafc" }}></div>
-					<hr className="hairline" />
 				</div>
-				<footer className="section is-end">
+				<footer className="section">
 					<header className="header">
 						<h2 className="name u-flex-1">Resources</h2>
 					</header>
