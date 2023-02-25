@@ -1,0 +1,15 @@
+@use "mixins" as *
+
+:root
+  +font-smoothing
+
+:root:not([data-theme=dark])
+  color-scheme: light
+:root.dark
+  color-scheme: dark
+
+:root, ::before, ::after
+  color: RED
+
+svg
+  overflow: visible

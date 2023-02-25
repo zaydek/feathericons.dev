@@ -6,30 +6,15 @@
 @use "mixins" as *
 
 // CSS
+@use "base" as *
+@use "utils" as *
 @use "interactive-checkbox" as *
 @use "interactive-slider" as *
-@use "utils"
 
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
-
-:root
-  +font-smoothing
-
-// Color schemes
-:root:not(.dark)
-  color-scheme: light
-:root.dark
-  color-scheme: dark
-
-// Highlight unstyled text
-:root, ::before, ::after
-  color: RED
-
-svg
-  overflow: visible
 
 .column-1
   position: fixed

@@ -29,16 +29,15 @@
     <script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js"></script>
     <!-- Dark mode -->
     <script>
-      // TODO: Change to data-theme=dark-mode
       const media = window.matchMedia("(prefers-color-scheme: dark)")
       if (media.matches) {
-        document.documentElement.classList.add("dark")
+        document.documentElement.setAttribute("data-theme", "dark")
       }
       media.addEventListener("change", e => {
         if (e.matches) {
-          document.documentElement.classList.add("dark")
+          document.documentElement.setAttribute("data-theme", "dark")
         } else {
-          document.documentElement.classList.remove("dark")
+          document.documentElement.setAttribute("data-theme", "dark")
         }
       })
     </script>
