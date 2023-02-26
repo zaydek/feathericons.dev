@@ -8,10 +8,8 @@
 // CSS
 @use "base" as *
 @use "banner" as *
-@use "layout" as *
 @use "interactive-checkbox" as *
 @use "interactive-slider" as *
-@use "grid" as *
 
 @use "utils" as *
 
@@ -65,37 +63,6 @@ $undo-height: 16px
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-$search-bar-height: 48px
-$search-bar-icon-height: 16px
-
-.search-bar
-  display: flex
-  margin: 0 math.div(sidebar-keyline(), 2)
-  height: $search-bar-height
-  background-color: $slate-200
-  border-radius: 1e3px
-  //// box-shadow: inset 0 0 0 1px $slate-200
-  &:is(:hover, :has(:focus-visible))
-    background-color: white
-    box-shadow: $inset-hairline-shadow
-  .search-bar-icon
-    margin: math.div($search-bar-height - $search-bar-icon-height, 2)
-    height: $search-bar-icon-height
-    width: $search-bar-icon-height
-    color: $slate-400
-  input[type=text]
-    +typography-sans
-    color: $slate-800
-    &::placeholder
-      color: $slate-500
-    &:focus-visible::placeholder
-      opacity: 0
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
 $checkbox-icon-height: $generic-button-icon-height
 
 .checkbox-list
@@ -129,49 +96,17 @@ $checkbox-icon-height: $generic-button-icon-height
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-.slider
-  display: flex
-  align-items: center
-  .interactive-slider
-    margin: 0 sidebar-keyline()
-  //// input[type=text]
-  ////   margin: 0 sidebar-keyline()
-  ////   height: 28px
-  ////   width: 56px
-  ////   border-radius: 1e3px
-  ////   box-shadow: $inset-hairline-shadow
-  ////   +typography-code
-  ////   text-align: center
-  ////   color: $slate-800
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
-$resource-icon-1-height: $generic-button-icon-height
-$resource-icon-2-height: 16px
-
-.resource
-  display: flex
-  align-items: center
-  margin: -8px 0
-  height: $generic-button-height
-  border-radius: 1e3px
-  &:is(:hover, :focus-visible)
-    background-color: $slate-100
-  &:hover:active
-    background-color: $slate-200
-  .icon:nth-child(1)
-    margin: sidebar-keyline($resource-icon-1-height)
-    height: $resource-icon-1-height
-    width: $resource-icon-1-height
-    color: $slate-800
-  .type
-    +typography-sans
-    color: $slate-800
-  .icon:nth-child(3)
-    margin: sidebar-keyline($resource-icon-2-height)
-    height: $resource-icon-2-height
-    width: $resource-icon-2-height
-    color: $slate-400
+//// .slider
+////   display: flex
+////   align-items: center
+////   .interactive-slider
+////     margin: 0 sidebar-keyline()
+////   //// input[type=text]
+////   ////   margin: 0 sidebar-keyline()
+////   ////   height: 28px
+////   ////   width: 56px
+////   ////   border-radius: 1e3px
+////   ////   box-shadow: $inset-hairline-shadow
+////   ////   +typography-code
+////   ////   text-align: center
+////   ////   color: $slate-800

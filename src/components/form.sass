@@ -1,0 +1,23 @@
+@use "../css/globals" as *
+
+$track-height: 6px
+$thumb-height: 32px
+
+.form-slider
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: $thumb-height
+  .track
+    display: flex
+    justify-content: center
+    align-items: center
+    height: $track-height
+    background-color: dodgerblue
+    border-radius: 1e3px
+    .thumb
+      height: $thumb-height
+      width: $thumb-height
+      background-color: white
+      border-radius: 1e3px
+      box-shadow: $hairline-shadow, $realistic-shadow

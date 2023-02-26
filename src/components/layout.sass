@@ -1,0 +1,103 @@
+@use "../css/globals" as *
+
+$sidebar-1-width:          288px
+$sidebar-1-expanded-width: 288px + 128px
+$sidebar-1-z-index:        100
+
+$sidebar-2-width:          352px
+$sidebar-2-expanded-width: 352px + 128px
+$sidebar-2-z-index:        $sidebar-1-z-index - 10
+
+$sidebar-overlay-z-index: 50
+
+$drag-area-width: 4px * 4
+$handle-height:   4px * 12
+$handle-width:    4px
+
+.sidebar
+  position: fixed
+  &:nth-of-type(1)
+    --translate-x: #{-1 * ($sidebar-1-expanded-width - $sidebar-1-width)}
+    inset: 0 auto 0 0
+    z-index: $sidebar-1-z-index
+    display: flex
+    justify-content: flex-end
+    width: $sidebar-1-expanded-width
+    background-color: white
+    box-shadow: $inset-hairline-shadow-left
+    transform: translateX(var(--translate-x))
+    &.is-minimized
+      --translate-x: #{-1 * $sidebar-1-expanded-width}
+    &.is-maximized
+      --translate-x: 0px
+  &:nth-of-type(2)
+    --translate-x: #{$sidebar-2-expanded-width - $sidebar-2-width}
+    inset: 0 0 0 auto
+    z-index: $sidebar-2-z-index
+    display: flex
+    justify-content: flex-start
+    width: $sidebar-2-expanded-width
+    background-color: white
+    box-shadow: $inset-hairline-shadow-right
+    transform: translateX(var(--translate-x))
+    &.is-minimized
+      --translate-x: #{$sidebar-2-expanded-width}
+    &.is-maximized
+      --translate-x: 0px
+  .drag-area
+    position: absolute
+    @at-root
+      .sidebar:nth-of-type(1) .drag-area
+        inset: 0 auto 0 100%
+    @at-root
+      .sidebar:nth-of-type(2) .drag-area
+        inset: 0 100% 0 auto
+    display: flex
+    justify-content: center
+    align-items: center
+    width: $drag-area-width
+    .handle
+      height: $handle-height
+      width: $handle-width
+      background-color: hsl(0, 0%, 0%, 0.25)
+      border-radius: 1e3px
+      @at-root
+        .drag-area:hover .handle
+          background-color: hsl(0, 0%, 0%, 0.5)
+        .drag-area:hover:active .handle
+          background-color: hsl(0, 0%, 0%, 0.75)
+
+  &:nth-child(1) .contents
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: $sidebar-1-width
+    @at-root
+      .sidebar:nth-child(1).is-maximized .contents
+        width: $sidebar-1-expanded-width
+
+  &:nth-child(2) .contents
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: $sidebar-2-width
+    @at-root
+      .sidebar:nth-child(2).is-maximized .contents
+        width: $sidebar-2-expanded-width
+
+.sidebar.is-maximized ~ .sidebar-overlay
+  position: fixed
+  inset: 0
+  z-index: $sidebar-overlay-z-index
+  background-color: hsl(0, 0%, 0%, 0.1)
+  backdrop-filter: blur(2px)
+
+.main
+  --left:  #{$sidebar-1-width + $drag-area-width}
+  --right: #{$sidebar-2-width + $drag-area-width}
+  position: absolute
+  inset: 0 var(--right) auto var(--left)
+  .sidebar:nth-of-type(1).is-minimized ~ &
+    --left:  #{$drag-area-width}
+  .sidebar:nth-of-type(2).is-minimized ~ &
+    --right: #{$drag-area-width}

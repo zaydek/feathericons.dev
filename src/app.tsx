@@ -11,6 +11,7 @@ import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
 import { Grid, GridItem } from "./components/grid"
 import { Hairline } from "./components/hairline"
+import { SearchBar } from "./components/search-bar"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -22,28 +23,17 @@ const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).m
 
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
 
-//// const ref = useRef<HTMLInputElement | null>(null)
-//// const [value, setValue] = useState("")
-////
-//// useEffect(() => {
-//// 	function handleKeyDown(e: KeyboardEvent) {
-//// 		if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
-//// 			e.preventDefault() // Sorry printers
-//// 			ref.current!.focus()
-//// 		}
-//// 	}
-//// 	window.addEventListener("keydown", handleKeyDown, false)
-//// 	return () => window.removeEventListener("keydown", handleKeyDown, false)
-//// }, [])
-
 export function App() {
 	return (
 		<>
 			<DebugCssEffect />
 			{/* <Banner /> */}
 			<Sidebar1>
-				<div className="u-overflow-y-scroll">
-					<Section name="Icons">
+				<div style={{ overflowY: "scroll" }}>
+					<Section>
+						<SearchBar />
+					</Section>
+					<Section>
 						<CheckboxList>
 							<CheckboxItem name="Feather" icon={feather.Feather} />
 						</CheckboxList>
@@ -93,6 +83,22 @@ export function App() {
 						</CheckboxList>
 					</Section>
 					<Hairline />
+					<Section name="Size">
+						<div className="form-slider u-keyline u-pointer-grab">
+							<div className="track">
+								<div className="thumb"></div>
+							</div>
+						</div>
+					</Section>
+					<Hairline />
+					<Section name="Stroke">
+						<div className="form-slider u-keyline u-pointer-grab">
+							<div className="track">
+								<div className="thumb"></div>
+							</div>
+						</div>
+					</Section>
+					<Hairline />
 				</div>
 				<Section tag="footer" name="Resources">
 					<Resource name="GitHub" icon={wkSocial.Github} />
@@ -101,35 +107,7 @@ export function App() {
 					<Resource name="GitHub" icon={wkSocial.Github} />
 				</Section>
 			</Sidebar1>
-			<Sidebar2>
-				<div className="u-overflow-y-scroll">
-					<Section name="Size">
-						<div className="slider">
-							<div className="interactive-slider u-flex-1">
-								<div className="track">
-									<div className="thumb"></div>
-								</div>
-							</div>
-							{/* <input type="text" value="32 PX" /> */}
-						</div>
-					</Section>
-					<Hairline />
-					<Section name="Stroke">
-						<div className="slider">
-							<div className="interactive-slider u-flex-1">
-								<div className="track">
-									<div className="thumb"></div>
-								</div>
-							</div>
-							{/* <input type="text" value="2.00" /> */}
-						</div>
-					</Section>
-					<Hairline />
-				</div>
-				<Section tag="footer" name="Sponsor" canUndo={false}>
-					{/* TODO */}
-				</Section>
-			</Sidebar2>
+			<Sidebar2>{/* TODO */}</Sidebar2>
 			<Main>
 				{/* <div className="search-bar">
 					<feather.Search className="search-bar-icon" strokeWidth={4} />

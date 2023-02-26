@@ -1,17 +1,16 @@
+@use "globals" as *
+
+// TODO: DEPRECATE
 .u-flex-1
   flex: 1
 
-.u-overflow-y-scroll
-  overflow-y: scroll
+.u-keyline
+  margin: 0 sidebar-keyline()
 
-.u-button
+.u-pointer
   cursor: pointer
   user-select: none
-
-.u-slider
-  cursor: grab
-  user-select: none
-.u-grabbing
+.u-pointer-drag
   cursor: grab
   user-select: none
   &:hover:active

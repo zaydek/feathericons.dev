@@ -1,3 +1,5 @@
+import "./grid.sass"
+
 import * as feather from "@icons/feather"
 
 import { Icon } from "@/lib/icon"
@@ -20,13 +22,7 @@ export function GridItem({
 				<figure className="u-flex-1">
 					<Icon className="icon" strokeWidth={2.5} />
 				</figure>
-				<figcaption>
-					{/* <Icon className="icon" strokeWidth={2.5} />
-					&ensp; */}
-					{/* {name} */}
-					{/* Hello hello hello hello hello hello hello */}
-					{name}
-				</figcaption>
+				<figcaption>{name}</figcaption>
 				<feather.Star className="bookmark" fill="currentColor" strokeWidth={6} />
 			</article>
 		</li>

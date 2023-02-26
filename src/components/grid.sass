@@ -1,20 +1,16 @@
-@use "sass:math"
+@use "../css/globals" as *
 
-@use "tw-colors" as *
-
-@use "globals" as *
-@use "typography" as *
-
-$grid-item-height: 112px
+$grid-item-height:       112px
 $grid-item-aspect-ratio: 4 / 3
 
 $bookmark-icon-height: 12px
 
+// TODO: Move to layout
 .main
   display: flex
   flex-direction: column
   gap: 32px
-  padding: 64px 16px
+  padding: 24px
 
 ul.grid
   display: grid
