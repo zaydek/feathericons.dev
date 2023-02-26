@@ -1,16 +1,14 @@
+@use "sass:math"
+
 @use "tw-colors" as *
 
 @use "globals" as *
 @use "typography" as *
 
-$grid-col-size: 128px
-$grid-row-size: 128px
+$grid-item-height: 112px
+$grid-item-aspect-ratio: 4 / 3
 
-$grid-item-padding: 8px
-
-$grid-button-height:        28px
-$grid-button-icon-1-height: 10px
-$grid-button-icon-2-height: 14px
+$bookmark-icon-height: 12px
 
 .main
   display: flex
@@ -18,115 +16,49 @@ $grid-button-icon-2-height: 14px
   gap: 32px
   padding: 64px 16px
 
-//// .sidebar
-////   background-color: $gray-50 !important
-
-.grid
+ul.grid
   display: grid
-  //// grid-template-columns: repeat(auto-fill, minmax($grid-col-size - 8px, 1fr))
-  grid-template-columns: repeat(auto-fill, $grid-col-size)
-  grid-auto-rows: $grid-row-size
+  grid-template-columns: repeat(auto-fill, minmax($grid-item-height, 1fr))
   justify-content: center
   gap: 16px
-
-  .grid-item
-    position: relative
+  li
     display: flex
-    flex-direction: column
-    //// align-items: center
-    //// padding: $grid-item-padding
-    //// padding: 16px
-    //// padding-top: 0
-    //// background-color: $gray-50
-    //// background-color: white
-    //// border-radius: $grid-item-padding + $grid-button-height / 2
-    //// border-radius: 4px
-    //// &:hover
-    ////   box-shadow: inset 0 0 0 1px $gray-200
-    //// box-shadow: 0 0 0 0.5px $gray-200
-    cursor: pointer   // Interaction styles
-    user-select: none // Interaction styles
-
-    //// &[data-selected]
-    ////   background-color: $sky-50
-    ////   box-shadow: inset 0 0 0 1px $sky-300
-
-    .icon-frame
-      //// align-self: stretch
+    justify-content: center
+    article
+      position: relative
       display: flex
-      justify-content: center
-      align-items: center
-      //// background-color: lighten($gray-50, 0.5)
-      //// border-radius: 16px
-      border-radius: 2px
-      box-shadow: inset 0 0 0 1px mix($gray-200, $gray-300)
-      .icon
+      flex-direction: column
+      gap: 6px
+      width: $grid-item-height
+      // Defer aspect-ratio
+      figure
+        display: flex
+        justify-content: center
+        align-items: center
+        aspect-ratio: $grid-item-aspect-ratio
+        background-color: white
+        border-radius: 2px
+        box-shadow: inset 0 0 0 1px mix($gray-200, $gray-300)
+        svg
+          min-height: 32px
+          min-width: 32px
+          color: $gray-800
+      figcaption
+        // Clamp
+        display: -webkit-box
+        -webkit-line-clamp: 2
+        -webkit-box-orient: vertical
+        overflow: hidden
         height: 32px
-        width: 32px
+        font: 450 13px / 1.25 'Inter var experimental'
+        text-align: center
         color: $gray-800
-
-    .name
-      margin-top: 8px
-      //// display: flex
-      //// justify-content: center
-      //// align-items: center
-      height: $grid-button-height
-      +typography-small-sans
-      text-align: center
-      color: $gray-600
-      .icon
-        display: inline-block
-        margin-bottom: -2px
-        height: 1em
-        width: 1em
-
-    .buttons
-      display: flex
-      //// justify-content: center
-      //// gap: 8px
-      margin-top: 8px
-      .button:nth-child(1)
-        display: flex
-        justify-content: center
-        align-items: center
-        //// margin-top: 8px
-        //// padding: 0 $grid-button-height / 2
-        height: $grid-button-height
-        background-color: dodgerblue
-        border-radius: 1e3px
-        box-shadow: $realistic-shadow
-        .type
-          //// +typography-caps
-          +typography-caps($font-weight: 700)
-          color: white
-      .button:nth-child(2)
-        display: flex
-        justify-content: center
-        align-items: center
-        margin-left: ($grid-button-height - 12px) / 2
-        /// /margin-top: 8px
-        height: $grid-button-height
-        width: $grid-button-height
-        background-color: $gray-100
-        //// background-color: white
-        border-radius: 1e3px
-        //// box-shadow: 0 0 0 1px $gray-300, $realistic-shadow
-        //// box-shadow: 0 0 0 1px $gray-200
-        .icon
-          height: 12px
-          width: 12px
-          color: $gray-400
-
-    .bookmark
-      position: absolute
-      inset: 12px 12px auto auto
-      height: 12px
-      width: 12px
-      color: $amber-400
-
-    &:hover .name
-      display: none
-    &:not(:hover) .buttons
-      display: none
-    &:not([data-bookmark]) .bookmark
-      display: none
+      .bookmark
+        position: absolute
+        inset: 8px 8px + 0.5px auto auto
+        height: $bookmark-icon-height
+        width: $bookmark-icon-height
+        color: $amber-400
+        @at-root
+          ul.grid li article:not([data-bookmark]) .bookmark
+            display: none
