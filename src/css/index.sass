@@ -1,7 +1,6 @@
 @use "sass:math"
 
 @use "globals" as *
-@use "tw-colors" as *
 
 @use "typography" as *
 
@@ -9,7 +8,6 @@
 @use "base" as *
 @use "banner" as *
 @use "interactive-checkbox" as *
-@use "interactive-slider" as *
 
 @use "utils" as *
 
@@ -90,23 +88,3 @@ $checkbox-icon-height: $generic-button-icon-height
       color: $slate-800
     .interactive-checkbox
       margin: math.div($generic-button-height - $x-checkbox-height, 2)
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
-//// .slider
-////   display: flex
-////   align-items: center
-////   .interactive-slider
-////     margin: 0 sidebar-keyline()
-////   //// input[type=text]
-////   ////   margin: 0 sidebar-keyline()
-////   ////   height: 28px
-////   ////   width: 56px
-////   ////   border-radius: 1e3px
-////   ////   box-shadow: $inset-hairline-shadow
-////   ////   +typography-code
-////   ////   text-align: center
-////   ////   color: $slate-800

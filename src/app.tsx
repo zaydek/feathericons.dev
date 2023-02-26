@@ -9,6 +9,7 @@ import { Resource } from "@/components/resource"
 import { Section } from "@/components/section"
 import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
+import { FormSlider } from "./components/form"
 import { Grid, GridItem } from "./components/grid"
 import { Hairline } from "./components/hairline"
 import { SearchBar } from "./components/search-bar"
@@ -84,19 +85,11 @@ export function App() {
 					</Section>
 					<Hairline />
 					<Section name="Size">
-						<div className="form-slider u-keyline u-pointer-grab">
-							<div className="track">
-								<div className="thumb"></div>
-							</div>
-						</div>
+						<FormSlider />
 					</Section>
 					<Hairline />
 					<Section name="Stroke">
-						<div className="form-slider u-keyline u-pointer-grab">
-							<div className="track">
-								<div className="thumb"></div>
-							</div>
-						</div>
+						<FormSlider />
 					</Section>
 					<Hairline />
 				</div>

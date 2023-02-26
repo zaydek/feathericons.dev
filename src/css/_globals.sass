@@ -1,8 +1,28 @@
-@forward "tw-colors"
+@forward "tailwind-v2-colors"
 
 @use "sass:math"
+@use "sass:selector"
 
-@use "tw-colors" as *
+@use "tailwind-v2-colors" as *
+
+////////////////////////////////////////
+
+=font-smoothing
+  -webkit-font-smoothing:  antialiased
+  -moz-osx-font-smoothing: grayscale
+
+=no-font-smoothing
+  -webkit-font-smoothing:  auto
+  -moz-osx-font-smoothing: auto
+
+@function end($selector)
+  @return nth(nth(selector.parse(&), -1), -1)
+
+// TODO: DEPRECATE -- use .u-keyline instead
+@function sidebar-keyline($override: $generic-button-icon-height)
+  @return math.div($generic-button-height - $override, 2)
+
+////////////////////////////////////////
 
 $WINDOWS_SCROLLBAR_WIDTH: 16px
 
@@ -16,11 +36,8 @@ $sidebar-padding-y: 24px
 $sidebar-padding-x: 16px
 $sidebar-gap:       16px
 
-$generic-button-height: 40px
+$generic-button-height:      40px
 $generic-button-icon-height: 20px
-
-@function sidebar-keyline($override: $generic-button-icon-height)
-  @return math.div($generic-button-height - $override, 2)
 
 $hairline-color:               $slate-300
 $inset-hairline-shadow:        inset  0    0   0 1px $hairline-color

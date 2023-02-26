@@ -2,9 +2,9 @@ import "./form.sass"
 
 import { Dispatch, forwardRef, SetStateAction } from "react"
 
-export const FormRange = forwardRef<HTMLDivElement>((props, ref) => {
+export const FormSlider = forwardRef<HTMLDivElement>((props, ref) => {
 	return (
-		<div ref={ref} className="form-slider u-pointer-grab">
+		<div ref={ref} className="form-slider u-keyline u-pointer-grab">
 			<div className="track">
 				<div className="thumb"></div>
 			</div>
