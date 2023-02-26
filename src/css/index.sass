@@ -2,16 +2,11 @@
 
 @use "globals" as *
 
-@use "typography" as *
-
 // CSS
 @use "base" as *
 @use "utils" as *
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
+@use "form-checkbox" as *
+@use "form-slider" as *
 
 $undo-height: 16px
 
@@ -38,7 +33,8 @@ $undo-height: 16px
     height: math.div($generic-button-height, 2)
     .type
       margin: sidebar-keyline()
-      +typography-caps
+      // TODO
+      //// +typography-caps
       color: $slate-400
     .undo
       margin: sidebar-keyline($undo-height)

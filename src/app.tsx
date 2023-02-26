@@ -4,15 +4,15 @@ import * as wkSocial from "@icons/wolf-kit/social-media"
 
 import { CheckboxItem, CheckboxList } from "@/components/checkboxes"
 import { DebugCssEffect } from "@/components/debug-css"
+import { Grid, GridItem } from "@/components/grid"
+import { Hairline } from "@/components/hairline"
 import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
 import { Resource } from "@/components/resource"
+import { SearchBar } from "@/components/search-bar"
 import { Section } from "@/components/section"
+import { Slider } from "@/components/slider"
 import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
-import { FormSlider } from "./components/form"
-import { Grid, GridItem } from "./components/grid"
-import { Hairline } from "./components/hairline"
-import { SearchBar } from "./components/search-bar"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -84,11 +84,11 @@ export function App() {
 					</Section>
 					<Hairline />
 					<Section name="Size">
-						<FormSlider />
+						<Slider />
 					</Section>
 					<Hairline />
 					<Section name="Stroke">
-						<FormSlider />
+						<Slider />
 					</Section>
 					<Hairline />
 				</div>

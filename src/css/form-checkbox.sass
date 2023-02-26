@@ -1,4 +1,4 @@
-@use "../css/globals" as *
+@use "globals" as *
 
 $height:              24px
 $check-height:        12px
@@ -14,6 +14,8 @@ input[type=checkbox]
   background-color: white
   border-radius: 1e3px
   box-shadow: $hairline-shadow, $realistic-shadow
+  cursor: pointer   // Interaction styles
+  user-select: none // Interaction styles
   &:checked
     box-shadow: $realistic-shadow
 
