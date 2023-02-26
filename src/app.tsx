@@ -5,7 +5,6 @@ import * as wkSocial from "@icons/wolf-kit/social-media"
 import { CheckboxItem, CheckboxList } from "@/components/checkboxes"
 import { DebugCssEffect } from "@/components/debug-css"
 import { Grid, GridItem } from "@/components/grid"
-import { Hairline } from "@/components/hairline"
 import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
 import { Resource } from "@/components/resource"
 import { SearchBar } from "@/components/search-bar"
@@ -39,7 +38,9 @@ export function App() {
 						<CheckboxList>
 							<CheckboxItem
 								name="Social"
-								icon={p => <feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />}
+								icon={p => (
+									<feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />
+								)}
 								showCheckbox={false}
 							/>
 							<CheckboxList>
@@ -64,7 +65,9 @@ export function App() {
 						<CheckboxList>
 							<CheckboxItem
 								name="Payment"
-								icon={p => <feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />}
+								icon={p => (
+									<feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />
+								)}
 								showCheckbox={false}
 							/>
 							<CheckboxList>
@@ -81,7 +84,7 @@ export function App() {
 							</CheckboxList>
 						</CheckboxList>
 					</Section>
-					<Hairline />
+					<hr />
 				</div>
 				<Section tag="footer" name="Resources">
 					<Resource name="Icons" icon={wkSocial.Github} />
@@ -94,15 +97,15 @@ export function App() {
 				<Section name="Size" canUndo>
 					<input type="range" />
 				</Section>
-				<Hairline />
+				<hr />
 				<Section name="Size" canUndo>
 					<input type="range" />
 				</Section>
-				<Hairline />
+				<hr />
 				<Section name="Stroke" canUndo>
 					<input type="range" />
 				</Section>
-				<Hairline />
+				<hr />
 				<div style={{ flexGrow: 1 }}></div>
 			</Sidebar2>
 			<Main>

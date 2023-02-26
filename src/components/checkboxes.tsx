@@ -7,7 +7,15 @@ export function CheckboxList({ children }: PropsWithChildren) {
 	return <ul className="checkbox-list">{children}</ul>
 }
 
-export function CheckboxItem({ name, icon: Icon, showCheckbox = true }: { name: string; icon: Icon; showCheckbox?: boolean }) {
+export function CheckboxItem({
+	name,
+	icon: Icon,
+	showCheckbox = true,
+}: {
+	name: string
+	icon: Icon
+	showCheckbox?: boolean
+}) {
 	const [checked, setChecked] = useState(false)
 
 	return (

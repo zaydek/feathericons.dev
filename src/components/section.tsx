@@ -7,7 +7,11 @@ export function Section({
 	name,
 	canUndo = undefined,
 	children,
-}: PropsWithChildren<{ tag?: keyof JSX.IntrinsicElements; name?: string; canUndo?: boolean }>) {
+}: PropsWithChildren<{
+	tag?: keyof JSX.IntrinsicElements
+	name?: string
+	canUndo?: boolean
+}>) {
 	return (
 		<Tag className="section">
 			{name !== undefined && (
