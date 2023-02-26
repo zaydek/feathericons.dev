@@ -17,10 +17,10 @@ export function GridItem({
 	selected?: boolean
 }) {
 	return (
-		<li data-bookmark={bookmark} data-selected={selected}>
+		<li className="grid-item" data-bookmark={bookmark} data-selected={selected}>
 			<article>
-				<figure className="u-flex-1">
-					<Icon className="icon" strokeWidth={2.5} />
+				<figure>
+					<Icon strokeWidth={2.5} />
 				</figure>
 				<figcaption>{name}</figcaption>
 				<feather.Star className="bookmark" fill="currentColor" strokeWidth={6} />

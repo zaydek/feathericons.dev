@@ -101,10 +101,6 @@ export function App() {
 			</Sidebar1>
 			<Sidebar2>{/* TODO */}</Sidebar2>
 			<Main>
-				{/* <div className="search-bar">
-					<feather.Search className="search-bar-icon" strokeWidth={4} />
-					<input className="u-flex-1" type="text" />
-				</div> */}
 				<Grid>
 					{entries.map(([name, Icon]) => (
 						<GridItem
