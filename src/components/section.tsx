@@ -12,7 +12,7 @@ export function Section({
 		<Tag className="section">
 			{name !== undefined && (
 				<header className="section-header">
-					<h2 className="type u-flex-1">{name}</h2>
+					<h2 className="type">{name}</h2>
 					{canUndo && <feather.RotateCcw className="undo" strokeWidth={4} />}
 				</header>
 			)}

@@ -99,7 +99,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 
 	return (
 		<aside className={cx("sidebar", state && `is-${state}`)}>
-			<div className="drag-area u-pointer-drag" onClick={cycleState}>
+			<div className="drag-area" onClick={cycleState}>
 				<div className="handle"></div>
 			</div>
 			<div className="contents">{children}</div>

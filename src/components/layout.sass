@@ -56,6 +56,10 @@ $handle-width:    4px
     justify-content: center
     align-items: center
     width: $drag-area-width
+    cursor: grab       // Interaction styles
+    user-select: none  // Interaction styles
+    &:hover:active     // Interaction styles
+      cursor: grabbing // Interaction styles
     .handle
       height: $handle-height
       width: $handle-width
@@ -64,8 +68,8 @@ $handle-width:    4px
       @at-root
         .drag-area:hover .handle
           background-color: hsl(0, 0%, 0%, 0.5)
-        .drag-area:hover:active .handle
-          background-color: hsl(0, 0%, 0%, 0.75)
+        //// .drag-area:hover:active .handle
+        ////   background-color: hsl(0, 0%, 0%, 0.75)
 
   &:nth-child(1) .contents
     display: flex
