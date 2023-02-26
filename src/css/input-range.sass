@@ -1,0 +1,50 @@
+@use "sass:math"
+
+@use "globals" as *
+
+$track-height: 6px
+$thumb-height: 32px
+
+input[type=range]
+  height: 32px
+  cursor: grab       // Interaction
+  user-select: none  // Interaction
+  &:hover:active     // Interaction
+    cursor: grabbing // Interaction
+
+  // COMPAT/WebKit
+  &::-webkit-slider-runnable-track
+    appearance: none // CSS reset
+    height: 6px
+    background-color: dodgerblue
+    border-radius: 1e3px
+  &::-webkit-slider-thumb
+    appearance: none // CSS reset
+    margin-top: -1 * math.div(32px - 6px, 2)
+    height: 32px
+    width: 32px
+    background-color: white
+    border-radius: 1e3px
+    box-shadow: $hairline-shadow, $realistic-shadow
+    @at-root
+      input[type=range]:focus-visible::-webkit-slider-thumb
+        background-color: $slate-100
+
+  // COMPAT/Gecko
+  &::-moz-range-track
+    appearance: none // CSS reset
+    height: 6px
+    background-color: dodgerblue
+    border-radius: 1e3px
+  &::-moz-range-thumb
+    appearance: none // CSS reset
+    border: none     // CSS reset
+    margin-top: -1 * math.div(32px - 6px, 2)
+    height: 32px
+    width: 32px
+    background-color: white
+    border-radius: 50%
+    box-shadow: $hairline-shadow, $realistic-shadow
+    @at-root
+      input[type=range]:focus-visible::-moz-range-thumb
+        background-color: $slate-100

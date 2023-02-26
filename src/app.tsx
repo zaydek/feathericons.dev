@@ -10,7 +10,6 @@ import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
 import { Resource } from "@/components/resource"
 import { SearchBar } from "@/components/search-bar"
 import { Section } from "@/components/section"
-import { Slider } from "@/components/slider"
 import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
 
@@ -84,11 +83,11 @@ export function App() {
 					</Section>
 					<Hairline />
 					<Section name="Size">
-						<Slider />
+						<input type="range" />
 					</Section>
 					<Hairline />
 					<Section name="Stroke">
-						<Slider />
+						<input type="range" />
 					</Section>
 					<Hairline />
 				</div>
