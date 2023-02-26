@@ -92,11 +92,11 @@ export function App() {
 					</Section>
 					<Hairline />
 				</div>
-				<Section tag="footer" name="Resources">
-					<Resource name="GitHub" icon={wkSocial.Github} />
-					<Resource name="GitHub" icon={wkSocial.Github} />
-					<Resource name="GitHub" icon={wkSocial.Github} />
-					<Resource name="GitHub" icon={wkSocial.Github} />
+				<Section tag="footer" name="Resources" canUndo={false}>
+					<Resource name="Icons" icon={wkSocial.Github} />
+					<Resource name="Website" icon={wkSocial.Github} />
+					<Resource name="Figma Plugin" icon={wkSocial.Figma} />
+					<Resource name="Share on Twitter" icon={wkSocial.Twitter} />
 				</Section>
 			</Sidebar1>
 			<Sidebar2>{/* TODO */}</Sidebar2>

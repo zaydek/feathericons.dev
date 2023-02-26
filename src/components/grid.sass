@@ -5,7 +5,7 @@ $grid-item-aspect-ratio: 4 / 3
 
 $bookmark-icon-height: 12px
 
-ul.grid
+.grid
   display: grid
   grid-template-columns: repeat(auto-fill, minmax($grid-item-height, 1fr))
   justify-content: center
@@ -29,8 +29,8 @@ ul.grid
         border-radius: 2px
         box-shadow: inset 0 0 0 1px mix($gray-200, $gray-300)
         svg
-          min-height: 32px
-          min-width: 32px
+          min-height: 24px
+          min-width: 24px
           color: $gray-800
       figcaption
         // Clamp
@@ -49,5 +49,5 @@ ul.grid
         width: $bookmark-icon-height
         color: $amber-400
         @at-root
-          ul.grid li article:not([data-bookmark]) .bookmark
+          .grid li article:not([data-bookmark]) .bookmark
             display: none
