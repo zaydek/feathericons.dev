@@ -9,7 +9,7 @@ $search-bar-icon-height: 16px
   display: flex
   margin: 0 math.div(generate-keyline(), 2)
   height: $search-bar-height
-  background-color: $slate-200
+  background-color: $gray-200
   border-radius: 1e3px
   &:is(:hover, :has(:focus-visible))
     background-color: white
@@ -18,12 +18,12 @@ $search-bar-icon-height: 16px
     margin: math.div($search-bar-height - $search-bar-icon-height, 2)
     height: $search-bar-icon-height
     width: $search-bar-icon-height
-    color: $slate-400
+    color: $gray-400
   input[type=text]
     flex: 1 // Stretch x-axis
     font: 450 14px / normal 'Inter var experimental'
-    color: $slate-800
+    color: $gray-800
     &::placeholder
-      color: $slate-500
+      color: $gray-500
     &:focus-visible::placeholder
       opacity: 0
