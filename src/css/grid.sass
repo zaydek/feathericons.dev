@@ -1,86 +1,132 @@
 @use "tw-colors" as *
 
+@use "globals" as *
+@use "typography" as *
+
 $grid-col-size: 128px
 $grid-row-size: 128px
 
-$grid-item-padding: 12px
+$grid-item-padding: 8px
 
-$grid-button-height:        32px
+$grid-button-height:        28px
 $grid-button-icon-1-height: 10px
 $grid-button-icon-2-height: 14px
 
+.main
+  display: flex
+  flex-direction: column
+  gap: 32px
+  padding: 64px 16px
+
+//// .sidebar
+////   background-color: $gray-50 !important
+
 .grid
   display: grid
+  //// grid-template-columns: repeat(auto-fill, minmax($grid-col-size - 8px, 1fr))
   grid-template-columns: repeat(auto-fill, $grid-col-size)
   grid-auto-rows: $grid-row-size
   justify-content: center
-  gap: $grid-item-padding
-  padding: 64px 0
+  gap: 16px
+
   .grid-item
     position: relative
     display: flex
     flex-direction: column
-    // Note: Omit gap here because of bookmark
-    padding: $grid-item-padding
-    border-radius: $grid-item-padding + $grid-button-height / 2
-    box-shadow: inset 0 0 0 1px $slate-200
+    //// align-items: center
+    //// padding: $grid-item-padding
+    //// padding: 16px
+    //// padding-top: 0
+    //// background-color: $gray-50
+    //// background-color: white
+    //// border-radius: $grid-item-padding + $grid-button-height / 2
+    //// border-radius: 4px
+    //// &:hover
+    ////   box-shadow: inset 0 0 0 1px $gray-200
+    //// box-shadow: 0 0 0 0.5px $gray-200
     cursor: pointer   // Interaction styles
     user-select: none // Interaction styles
 
-    .bookmark
-      position: absolute
-      inset: $grid-item-padding + 8px $grid-item-padding + 8px auto auto
-      height: 14px
-      width: 14px
-      color: $amber-400
-
     //// &[data-selected]
-    ////   background-color: hsl(205, 100%, 98.75%)
-    ////   box-shadow: inset 0 0 0 1px hsl(205, 100%, 75%)
+    ////   background-color: $sky-50
+    ////   box-shadow: inset 0 0 0 1px $sky-300
 
     .icon-frame
+      //// align-self: stretch
       display: flex
       justify-content: center
       align-items: center
+      //// background-color: lighten($gray-50, 0.5)
+      //// border-radius: 16px
+      border-radius: 2px
+      box-shadow: inset 0 0 0 1px mix($gray-200, $gray-300)
       .icon
-        height: 36px
-        width: 36px
-        color: $slate-800
+        height: 32px
+        width: 32px
+        color: $gray-800
 
-    .icon-name
-      display: flex
-      justify-content: center
-      align-items: center
-      //// align-items: flex-end
+    .name
+      margin-top: 8px
+      //// display: flex
+      //// justify-content: center
+      //// align-items: center
       height: $grid-button-height
-      font: 400 13px / normal 'Inter'
+      +typography-small-sans
       text-align: center
-      color: $slate-800
-      //// .icon
-      ////   display: inline-block
-      ////   margin-bottom: -1px
-      ////   min-height: 0.875em // H
-      ////   max-height: 1.75em  // H
-      ////   min-width: 0.875em  // W
-      ////   max-width: 1.75em   // W
-      ////   background: feather-feather($color: darkslategray, $stroke-width: 2) 0 0 / 100% 100%
+      color: $gray-600
+      .icon
+        display: inline-block
+        margin-bottom: -2px
+        height: 1em
+        width: 1em
 
-    .copy-button
+    .buttons
       display: flex
-      justify-content: center
-      align-items: center
-      height: $grid-button-height
-      background-color: dodgerblue
-      border-radius: 1e3px
-      .copy-button-text
-        font: 700 11px / normal 'Inter'
-        letter-spacing: 0.075em
-        text-transform: uppercase
-        color: white
+      //// justify-content: center
+      //// gap: 8px
+      margin-top: 8px
+      .button:nth-child(1)
+        display: flex
+        justify-content: center
+        align-items: center
+        //// margin-top: 8px
+        //// padding: 0 $grid-button-height / 2
+        height: $grid-button-height
+        background-color: dodgerblue
+        border-radius: 1e3px
+        box-shadow: $realistic-shadow
+        .type
+          //// +typography-caps
+          +typography-caps($font-weight: 700)
+          color: white
+      .button:nth-child(2)
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-left: ($grid-button-height - 12px) / 2
+        /// /margin-top: 8px
+        height: $grid-button-height
+        width: $grid-button-height
+        background-color: $gray-100
+        //// background-color: white
+        border-radius: 1e3px
+        //// box-shadow: 0 0 0 1px $gray-300, $realistic-shadow
+        //// box-shadow: 0 0 0 1px $gray-200
+        .icon
+          height: 12px
+          width: 12px
+          color: $gray-400
 
-    &:hover .icon-name
+    .bookmark
+      position: absolute
+      inset: 12px 12px auto auto
+      height: 12px
+      width: 12px
+      color: $amber-400
+
+    &:hover .name
       display: none
-    &:not(:hover) .copy-button
+    &:not(:hover) .buttons
       display: none
     &:not([data-bookmark]) .bookmark
       display: none

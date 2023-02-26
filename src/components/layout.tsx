@@ -51,7 +51,7 @@ export function Sidebar1({ children }: PropsWithChildren) {
 	}, [setState, state])
 
 	useEffect(() => {
-		if (state) {
+		if (state === "maximized") {
 			document.body.style.overflowY = "clip"
 		} else {
 			document.body.style.overflowY = ""
@@ -85,7 +85,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	}, [setState, state])
 
 	useEffect(() => {
-		if (state) {
+		if (state === "maximized") {
 			document.body.style.overflowY = "clip"
 		} else {
 			document.body.style.overflowY = ""

@@ -13,5 +13,13 @@ export function DebugCssEffect() {
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [])
 
-	return <>{showOutline && <style>{`*:not(svg *) { outline: 1px solid hsl(0, 100%, 50%, 0.125); }`}</style>}</>
+	useEffect(() => {
+		if (showOutline) {
+			document.body.setAttribute("data-debug-css", "true")
+		} else {
+			document.body.removeAttribute("data-debug-css")
+		}
+	}, [showOutline])
+
+	return <></>
 }

@@ -15,6 +15,9 @@
 
 @use "utils" as *
 
+[data-debug-css] :not(svg *)
+  outline: 1px solid hsl(0, 100%, 50%, 0.125)
+
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -22,7 +25,7 @@
 
 $undo-height: 16px
 
-.section-hairline
+.hairline
   margin-top: -1px
   border-top: 1px solid $slate-300
 
@@ -36,7 +39,8 @@ $undo-height: 16px
   &:last-child
     position: relative
     z-index: 10
-    padding-bottom: $sidebar-padding-y
+    padding: $sidebar-padding-y $sidebar-padding-x
+    //// padding-bottom: $sidebar-padding-y
     box-shadow: $hairline-shadow-top
   .section-header
     display: flex
@@ -45,7 +49,7 @@ $undo-height: 16px
     .type
       margin: sidebar-keyline()
       +typography-caps
-      color: $slate-800
+      color: $slate-400
     .undo
       margin: sidebar-keyline($undo-height)
       height: $undo-height
@@ -68,13 +72,13 @@ $search-bar-icon-height: 16px
   display: flex
   margin: 0 math.div(sidebar-keyline(), 2)
   height: $search-bar-height
-  background-color: $slate-100
+  background-color: $slate-200
   border-radius: 1e3px
-  box-shadow: inset 0 0 0 1px $slate-200
+  //// box-shadow: inset 0 0 0 1px $slate-200
   &:is(:hover, :has(:focus-visible))
     background-color: white
     box-shadow: $inset-hairline-shadow
-  .icon
+  .search-bar-icon
     margin: math.div($search-bar-height - $search-bar-icon-height, 2)
     height: $search-bar-icon-height
     width: $search-bar-icon-height
@@ -130,15 +134,15 @@ $checkbox-icon-height: $generic-button-icon-height
   align-items: center
   .interactive-slider
     margin: 0 sidebar-keyline()
-  input[type=text]
-    margin: 0 sidebar-keyline()
-    height: 28px
-    width: 56px
-    border-radius: 1e3px
-    box-shadow: $inset-hairline-shadow
-    +typography-code
-    text-align: center
-    color: $slate-800
+  //// input[type=text]
+  ////   margin: 0 sidebar-keyline()
+  ////   height: 28px
+  ////   width: 56px
+  ////   border-radius: 1e3px
+  ////   box-shadow: $inset-hairline-shadow
+  ////   +typography-code
+  ////   text-align: center
+  ////   color: $slate-800
 
 ////////////////////////////////////////
 ////////////////////////////////////////

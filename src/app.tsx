@@ -10,6 +10,7 @@ import { Section } from "@/components/section"
 import { toKebabCase } from "@/lib"
 import { Icon } from "@/lib/icon"
 import { Grid, GridItem } from "./components/grid"
+import { Hairline } from "./components/hairline"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -91,31 +92,9 @@ export function App() {
 							</CheckboxList>
 						</CheckboxList>
 					</Section>
-					<hr className="section-hairline" />
-					<Section name="Size">
-						<div className="slider">
-							<div className="interactive-slider u-flex-1">
-								<div className="track">
-									<div className="thumb"></div>
-								</div>
-							</div>
-							<input type="text" value="32 PX" />
-						</div>
-					</Section>
-					<hr className="section-hairline" />
-					<Section name="Stroke width">
-						<div className="slider">
-							<div className="interactive-slider u-flex-1">
-								<div className="track">
-									<div className="thumb"></div>
-								</div>
-							</div>
-							<input type="text" value="2.00" />
-						</div>
-					</Section>
-					<hr className="section-hairline" />
+					<Hairline />
 				</div>
-				<Section tag="footer" name="Resources" canUndo={false}>
+				<Section tag="footer" name="Resources">
 					<Resource name="GitHub" icon={wkSocial.Github} />
 					<Resource name="GitHub" icon={wkSocial.Github} />
 					<Resource name="GitHub" icon={wkSocial.Github} />
@@ -124,16 +103,47 @@ export function App() {
 			</Sidebar1>
 			<Sidebar2>
 				<div className="u-overflow-y-scroll">
-					<Section name="TODO">{/* TODO */}</Section>
+					<Section name="Size">
+						<div className="slider">
+							<div className="interactive-slider u-flex-1">
+								<div className="track">
+									<div className="thumb"></div>
+								</div>
+							</div>
+							{/* <input type="text" value="32 PX" /> */}
+						</div>
+					</Section>
+					<Hairline />
+					<Section name="Stroke">
+						<div className="slider">
+							<div className="interactive-slider u-flex-1">
+								<div className="track">
+									<div className="thumb"></div>
+								</div>
+							</div>
+							{/* <input type="text" value="2.00" /> */}
+						</div>
+					</Section>
+					<Hairline />
 				</div>
-				<Section tag="footer" name="TODO" canUndo={false}>
+				<Section tag="footer" name="Sponsor" canUndo={false}>
 					{/* TODO */}
 				</Section>
 			</Sidebar2>
 			<Main>
+				{/* <div className="search-bar">
+					<feather.Search className="search-bar-icon" strokeWidth={4} />
+					<input className="u-flex-1" type="text" />
+				</div> */}
 				<Grid>
 					{entries.map(([name, Icon]) => (
-						<GridItem key={name} name={name} icon={Icon} bookmark={Math.random() < 0.1 ? true : undefined} />
+						<GridItem
+							key={name}
+							name={name}
+							icon={Icon}
+							bookmark={Math.random() < 0.1 ? true : undefined}
+							//// selected={Math.random() < 0.1 ? true : undefined}
+						/>
 					))}
 				</Grid>
 			</Main>
