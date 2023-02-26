@@ -1,3 +1,5 @@
+import "./section.sass"
+
 import * as feather from "@icons/feather"
 
 import { PropsWithChildren } from "react"
@@ -15,9 +17,9 @@ export function Section({
 	return (
 		<Tag className="section">
 			{name !== undefined && (
-				<header className="section-header">
-					<h2 className="type">{name}</h2>
-					{canUndo !== undefined && canUndo && <feather.RotateCcw className="undo" strokeWidth={4} />}
+				<header>
+					<span className="type">{name}</span>
+					{canUndo !== undefined && canUndo && <feather.RotateCcw strokeWidth={4} />}
 				</header>
 			)}
 			{children}

@@ -18,7 +18,7 @@
 //// @function end($selector)
 ////   @return nth(nth(selector.parse(&), -1), -1)
 
-@function sidebar-keyline($override: $generic-button-icon-height)
+@function generate-keyline($override: $generic-button-icon-height)
   @return math.div($generic-button-height - $override, 2)
 
 ////////////////////////////////////////

@@ -6,7 +6,7 @@ import { CheckboxItem, CheckboxList } from "@/components/checkboxes"
 import { DebugCssEffect } from "@/components/debug-css"
 import { Grid, GridItem } from "@/components/grid"
 import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
-import { Resource } from "@/components/resource"
+import { ResourceItem, ResourceList } from "@/components/resource"
 import { SearchBar } from "@/components/search-bar"
 import { Section } from "@/components/section"
 import { toKebabCase } from "@/lib"
@@ -87,10 +87,12 @@ export function App() {
 					<hr />
 				</div>
 				<Section tag="footer" name="Resources">
-					<Resource name="Icons" icon={wkSocial.Github} />
-					<Resource name="Website" icon={wkSocial.Github} />
-					<Resource name="Figma Plugin" icon={wkSocial.Figma} />
-					<Resource name="Share on Twitter" icon={wkSocial.Twitter} />
+					<ResourceList>
+						<ResourceItem name="Icons" icon={wkSocial.Github} />
+						<ResourceItem name="Website" icon={wkSocial.Github} />
+						<ResourceItem name="Figma Plugin" icon={wkSocial.Figma} />
+						<ResourceItem name="Share on Twitter" icon={wkSocial.Twitter} />
+					</ResourceList>
 				</Section>
 			</Sidebar1>
 			<Sidebar2>
@@ -110,9 +112,9 @@ export function App() {
 			</Sidebar2>
 			<Main>
 				<Grid>
-					{entries.map(([name, Icon]) => (
+					{entries.map(([name, Icon], index) => (
 						<GridItem
-							key={name}
+							key={index}
 							name={name}
 							icon={Icon}
 							bookmark={Math.random() < 0.1 ? true : undefined}

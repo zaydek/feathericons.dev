@@ -1,6 +1,8 @@
 import "the-new-css-reset"
 
-import "@/css/index.sass"
+import "@/css/base.sass"
+import "@/css/input-checkbox.sass"
+import "@/css/input-range.sass"
 
 import { SidebarProvider } from "@/components/layout"
 import { createRoot } from "react-dom/client"

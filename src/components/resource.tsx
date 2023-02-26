@@ -3,13 +3,20 @@ import "./resource.sass"
 import * as feather from "@icons/feather"
 
 import { Icon } from "@/lib/icon"
+import { PropsWithChildren } from "react"
 
-export function Resource({ name, icon: Icon }: { name: string; icon: Icon }) {
+export function ResourceList({ children }: PropsWithChildren) {
+	return <ul className="resource-list">{children}</ul>
+}
+
+export function ResourceItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 	return (
-		<a className="resource" href="TODO" target="_blank">
-			<Icon />
-			<span>{name}</span>
-			<feather.ArrowUpRight strokeWidth={4} />
-		</a>
+		<li>
+			<a className="resource-item" href="TODO" target="_blank">
+				<Icon />
+				<span>{name}</span>
+				<feather.ArrowUpRight strokeWidth={4} />
+			</a>
+		</li>
 	)
 }

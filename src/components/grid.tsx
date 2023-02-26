@@ -23,7 +23,7 @@ export function GridItem({
 					<Icon strokeWidth={2.5} />
 				</figure>
 				<figcaption>{name}</figcaption>
-				<feather.Star className="bookmark" fill="currentColor" strokeWidth={6} />
+				<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
 			</article>
 		</li>
 	)
