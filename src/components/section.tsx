@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react"
 export function Section({
 	tag: Tag = "section",
 	name,
-	canUndo = true,
+	canUndo = undefined,
 	children,
 }: PropsWithChildren<{ tag?: keyof JSX.IntrinsicElements; name?: string; canUndo?: boolean }>) {
 	return (
@@ -13,7 +13,7 @@ export function Section({
 			{name !== undefined && (
 				<header className="section-header">
 					<h2 className="type">{name}</h2>
-					{canUndo && <feather.RotateCcw className="undo" strokeWidth={4} />}
+					{canUndo !== undefined && canUndo && <feather.RotateCcw className="undo" strokeWidth={4} />}
 				</header>
 			)}
 			{children}

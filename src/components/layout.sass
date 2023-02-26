@@ -4,15 +4,15 @@ $sidebar-1-width:          288px
 $sidebar-1-expanded-width: 288px + 128px
 $sidebar-1-z-index:        100
 
-$sidebar-2-width:          352px
-$sidebar-2-expanded-width: 352px + 128px
+$sidebar-2-width:          288px
+$sidebar-2-expanded-width: 288px + 128px
 $sidebar-2-z-index:        $sidebar-1-z-index - 10
 
 $sidebar-overlay-z-index: 50
 
-$drag-area-width: 4px * 4
-$handle-height:   4px * 12
-$handle-width:    4px
+$drag-area-width: 6px * 4
+$handle-height:   6px * 8
+$handle-width:    6px
 
 .sidebar
   position: fixed
@@ -97,12 +97,12 @@ $handle-width:    4px
   backdrop-filter: blur(2px)
 
 .main
-  --left:  #{$sidebar-1-width + $drag-area-width}
-  --right: #{$sidebar-2-width + $drag-area-width}
+  --left:  #{$sidebar-1-width}
+  --right: #{$sidebar-2-width}
   position: absolute
   inset: 0 var(--right) auto var(--left)
-  padding: $sidebar-padding-y $sidebar-padding-x
+  padding: $sidebar-padding-y $sidebar-padding-x * 4
   .sidebar:nth-of-type(1).is-minimized ~ &
-    --left:  #{$drag-area-width}
+    --left:  0
   .sidebar:nth-of-type(2).is-minimized ~ &
-    --right: #{$drag-area-width}
+    --right: 0

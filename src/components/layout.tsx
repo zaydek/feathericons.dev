@@ -40,34 +40,34 @@ export function SidebarProvider({ children }: PropsWithChildren) {
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Sidebar1({ children }: PropsWithChildren) {
-	const { sidebar1: state, setSidebar1: setState } = useContext(SidebarContext)!
-
-	const cycleState = useCallback(() => {
-		if (state === null) {
-			setState("maximized")
-		} else if (state === "maximized") {
-			setState("minimized")
-		} else {
-			setState(null)
-		}
-	}, [setState, state])
-
-	useEffect(() => {
-		if (state === "maximized") {
-			document.body.style.overflowY = "clip"
-		} else {
-			document.body.style.overflowY = ""
-			if (document.body.style.length === 0) {
-				document.body.removeAttribute("style")
-			}
-		}
-	}, [state])
+	//// const { sidebar1: state, setSidebar1: setState } = useContext(SidebarContext)!
+	////
+	//// const cycleState = useCallback(() => {
+	//// 	if (state === null) {
+	//// 		setState("maximized")
+	//// 	} else if (state === "maximized") {
+	//// 		setState("minimized")
+	//// 	} else {
+	//// 		setState(null)
+	//// 	}
+	//// }, [setState, state])
+	////
+	//// useEffect(() => {
+	//// 	if (state === "maximized") {
+	//// 		document.body.style.overflowY = "clip"
+	//// 	} else {
+	//// 		document.body.style.overflowY = ""
+	//// 		if (document.body.style.length === 0) {
+	//// 			document.body.removeAttribute("style")
+	//// 		}
+	//// 	}
+	//// }, [state])
 
 	return (
-		<aside className={cx("sidebar", state && `is-${state}`)}>
-			<div className="drag-area" onClick={cycleState}>
+		<aside className="sidebar">
+			{/* <div className="drag-area" onClick={cycleState}>
 				<div className="handle"></div>
-			</div>
+			</div> */}
 			<div className="contents">{children}</div>
 		</aside>
 	)
@@ -96,6 +96,15 @@ export function Sidebar2({ children }: PropsWithChildren) {
 			}
 		}
 	}, [state])
+
+	useEffect(() => {
+		if (state !== "maximized") { return } // prettier-ignore
+		function handleKeyDown(e: KeyboardEvent) {
+			setState(null)
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [setState, state])
 
 	return (
 		<aside className={cx("sidebar", state && `is-${state}`)}>

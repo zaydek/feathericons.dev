@@ -32,14 +32,14 @@ export function App() {
 					<Section>
 						<SearchBar />
 					</Section>
-					<Section>
+					<Section name="Icons" canUndo>
 						<CheckboxList>
 							<CheckboxItem name="Feather" icon={feather.Feather} />
 						</CheckboxList>
 						<CheckboxList>
 							<CheckboxItem
 								name="Social"
-								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
+								icon={p => <feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />}
 								showCheckbox={false}
 							/>
 							<CheckboxList>
@@ -64,7 +64,7 @@ export function App() {
 						<CheckboxList>
 							<CheckboxItem
 								name="Payment"
-								icon={p => <feather.ChevronDown style={{ transform: "scale(0.75)", opacity: 0.375 }} strokeWidth={6} {...p} />}
+								icon={p => <feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />}
 								showCheckbox={false}
 							/>
 							<CheckboxList>
@@ -82,23 +82,29 @@ export function App() {
 						</CheckboxList>
 					</Section>
 					<Hairline />
-					<Section name="Size">
-						<input type="range" />
-					</Section>
-					<Hairline />
-					<Section name="Stroke">
-						<input type="range" />
-					</Section>
-					<Hairline />
 				</div>
-				<Section tag="footer" name="Resources" canUndo={false}>
+				<Section tag="footer" name="Resources">
 					<Resource name="Icons" icon={wkSocial.Github} />
 					<Resource name="Website" icon={wkSocial.Github} />
 					<Resource name="Figma Plugin" icon={wkSocial.Figma} />
 					<Resource name="Share on Twitter" icon={wkSocial.Twitter} />
 				</Section>
 			</Sidebar1>
-			<Sidebar2>{/* TODO */}</Sidebar2>
+			<Sidebar2>
+				<Section name="Size" canUndo>
+					<input type="range" />
+				</Section>
+				<Hairline />
+				<Section name="Size" canUndo>
+					<input type="range" />
+				</Section>
+				<Hairline />
+				<Section name="Stroke" canUndo>
+					<input type="range" />
+				</Section>
+				<Hairline />
+				<div style={{ flexGrow: 1 }}></div>
+			</Sidebar2>
 			<Main>
 				<Grid>
 					{entries.map(([name, Icon]) => (

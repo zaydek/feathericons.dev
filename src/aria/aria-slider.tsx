@@ -17,7 +17,7 @@ function someHidden(...args: HTMLElement[]) {
 	return args.some(arg => arg.offsetParent === null)
 }
 
-export function AriaSlider({ track, thumb, min, max, step, value, setValue, children, ...props }: AriaSliderProps) {
+export function AriaSlider({ track, thumb, min, max, step, value, setValue, onKeyDown, children, ...props }: AriaSliderProps) {
 	const pointerDownRef = useRef(false)
 
 	const progress = useMemo(() => {
@@ -82,17 +82,19 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 			onKeyDown={e => {
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 					e.preventDefault()
+					e.stopPropagation()
 					const nextValue = value - step
 					const clampedNextValue = clamp(nextValue, { min, max })
 					setValue(clampedNextValue)
 				} else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
 					e.preventDefault()
+					e.stopPropagation()
 					const nextValue = value + step
 					const clampedNextValue = clamp(nextValue, { min, max })
 					setValue(clampedNextValue)
 				}
-				// Preserve props events
-				props.onKeyDown?.(e)
+				// Preserve original handler
+				onKeyDown?.(e)
 			}}
 			// A11y
 			role="slider"
