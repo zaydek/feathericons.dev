@@ -28,7 +28,6 @@ export function App() {
 	return (
 		<>
 			<DebugCssEffect />
-			{/* <Banner /> */}
 			<Sidebar1>
 				<div style={{ overflowY: "scroll" }}>
 					<Section>

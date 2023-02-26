@@ -15,8 +15,8 @@
   -webkit-font-smoothing:  auto
   -moz-osx-font-smoothing: auto
 
-@function end($selector)
-  @return nth(nth(selector.parse(&), -1), -1)
+//// @function end($selector)
+////   @return nth(nth(selector.parse(&), -1), -1)
 
 // TODO: DEPRECATE -- use .u-keyline instead
 @function sidebar-keyline($override: $generic-button-icon-height)
@@ -26,13 +26,11 @@
 
 $WINDOWS_SCROLLBAR_WIDTH: 16px
 
+// TODO
 $sans: Inter, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
 $code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
 
-$sidebar-1-width:   320px + $WINDOWS_SCROLLBAR_WIDTH
-$sidebar-2-width:   400px
-
-$sidebar-padding-y: 24px
+$sidebar-padding-y: 32px
 $sidebar-padding-x: 16px
 $sidebar-gap:       16px
 

@@ -1,6 +1,7 @@
 import { Clone } from "@/lib/clone"
 import { Icon } from "@/lib/icon"
 import { PropsWithChildren, useRef, useState } from "react"
+import { FormCheckbox } from "./form"
 
 export function CheckboxList({ children }: PropsWithChildren) {
 	return <ul className="checkbox-list">{children}</ul>
@@ -27,7 +28,7 @@ export function CheckboxItem({ name, icon: Icon, showCheckbox = true }: { name: 
 			<li className="checkbox-item">
 				<Icon className="icon" />
 				<div className="type u-flex-1">{name}</div>
-				{showCheckbox && <div ref={ref} className="interactive-checkbox" tabIndex={0} aria-checked={checked}></div>}
+				{showCheckbox && <FormCheckbox ref={ref} checked={checked} setChecked={setChecked} />}
 			</li>
 		</Clone>
 	)

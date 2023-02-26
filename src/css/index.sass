@@ -6,13 +6,7 @@
 
 // CSS
 @use "base" as *
-@use "banner" as *
-@use "interactive-checkbox" as *
-
 @use "utils" as *
-
-[data-debug-css] :not(svg *)
-  outline: 1px solid hsl(0, 100%, 50%, 0.125)
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -84,7 +78,8 @@ $checkbox-icon-height: $generic-button-icon-height
       width: $checkbox-icon-height
       color: $slate-800
     .type
+      // TODO
       +typography-sans
       color: $slate-800
-    .interactive-checkbox
-      margin: math.div($generic-button-height - $x-checkbox-height, 2)
+    //// .interactive-checkbox
+    ////   margin: math.div($generic-button-height - $x-checkbox-height, 2)
