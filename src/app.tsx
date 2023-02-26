@@ -2,7 +2,7 @@ import * as feather from "@icons/feather"
 import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
-import { CheckboxItem, CheckboxList } from "@/components/checkbox"
+import { CheckboxItem, CheckboxList } from "@/components/checkboxes"
 import { DebugCssEffect } from "@/components/debug-css"
 import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
 import { Resource } from "@/components/resource"

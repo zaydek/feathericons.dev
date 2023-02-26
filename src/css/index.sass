@@ -49,37 +49,3 @@ $undo-height: 16px
       user-select: none // Interaction styles
       &:hover
         color: $slate-800
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
-$checkbox-icon-height: $generic-button-icon-height
-
-.checkbox-list
-  & .checkbox-list
-    margin-left: math.div($generic-button-height, 2)
-  .checkbox-item
-    display: flex
-    align-items: center
-    margin: -8px 0
-    height: $generic-button-height
-    border-radius: 1e3px
-    cursor: pointer   // Interaction styles
-    user-select: none // Interaction styles
-    &:is(:hover, :has(:focus-visible))
-      background-color: $slate-100
-    &:hover:active
-      background-color: $slate-200
-    .icon
-      margin: math.div($generic-button-height - $checkbox-icon-height, 2)
-      height: $checkbox-icon-height
-      width: $checkbox-icon-height
-      color: $slate-800
-    .type
-      // TODO
-      +typography-sans
-      color: $slate-800
-    //// .interactive-checkbox
-    ////   margin: math.div($generic-button-height - $x-checkbox-height, 2)

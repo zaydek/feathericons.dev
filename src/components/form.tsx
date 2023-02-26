@@ -14,11 +14,11 @@ export const FormSlider = forwardRef<HTMLDivElement>((props, ref) => {
 })
 
 export const FormCheckbox = forwardRef<
-	HTMLDivElement,
+	HTMLInputElement,
 	{
 		checked: boolean
 		setChecked: Dispatch<SetStateAction<boolean>>
-	}
->(({ checked, setChecked }, ref) => {
-	return <div ref={ref} className="form-checkbox u-keyline-checkbox u-pointer" tabIndex={0} onClick={e => setChecked(curr => !curr)}></div>
+	} & JSX.IntrinsicElements["input"]
+>(({ checked, setChecked, ...props }, ref) => {
+	return <input ref={ref} type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} {...props} />
 })

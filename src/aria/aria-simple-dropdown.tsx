@@ -2,7 +2,6 @@
 
 import { queue } from "@/lib/queue"
 import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { Accessible } from "./a11y"
 import { getStringFromChildren, useCancelable } from "./utils"
 
 type Item<T extends string> = { id: T; str: string }
@@ -29,7 +28,7 @@ export type AriaSimpleDropDownProps<T extends string> = {
 	setShow:      Dispatch<SetStateAction<boolean>>
 	currentId:    T
 	setCurrentId: Dispatch<SetStateAction<T>>
-} & Accessible<JSX.IntrinsicElements["div"]>
+} & JSX.IntrinsicElements["div"]
 
 export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps<T>) {
 	const ref = useRef<HTMLDivElement | null>(null)
@@ -125,7 +124,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 					// Preserve props events
 					props.onClick?.(e)
 				}}
-				onKeyDown={e => {
+				onKeyUp={e => {
 					if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 						e.preventDefault()
 						setShow(true)
@@ -146,7 +145,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 						queue(() => incrementRef.current(-1))
 					}
 					// Preserve props events
-					props.onKeyDown?.(e)
+					props.onKeyUp?.(e)
 				}}
 				// A11y
 				role="combobox"
@@ -162,9 +161,9 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 	)
 }
 
-export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Accessible<Omit<JSX.IntrinsicElements["div"], "id">>
+export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Omit<JSX.IntrinsicElements["div"], "id">
 
-export function AriaSimpleDropDownItem<T extends string>({ id, children, ...props }: AriaSimpleDropDownItemProps<T>) {
+export function AriaSimpleDropDownItem<T extends string>({ id, onClick, onKeyUp, children, ...props }: AriaSimpleDropDownItemProps<T>) {
 	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!
 
 	const ref = useRef<HTMLDivElement | null>(null)
@@ -181,16 +180,14 @@ export function AriaSimpleDropDownItem<T extends string>({ id, children, ...prop
 			ref={ref}
 			id={id}
 			onClick={e => {
-				// Must stop propagation because of <AriaSimpleDropDown>
 				e.preventDefault()
 				e.stopPropagation()
 				setCurrentId(id)
 				setShow(false)
-				// Preserve props events
-				props.onClick?.(e)
+				// Preserve original handler
+				onClick?.(e)
 			}}
-			onKeyDown={e => {
-				// Must stop propagation because of <AriaSimpleDropDown>
+			onKeyUp={e => {
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 					e.preventDefault()
 					e.stopPropagation()
@@ -213,8 +210,8 @@ export function AriaSimpleDropDownItem<T extends string>({ id, children, ...prop
 					e.stopPropagation()
 					increment(-1)
 				}
-				// Preserve props events
-				props.onKeyDown?.(e)
+				// Preserve original handler
+				onKeyUp?.(e)
 			}}
 			// A11y
 			role="option"
