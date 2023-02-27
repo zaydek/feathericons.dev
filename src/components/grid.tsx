@@ -30,7 +30,12 @@ export function GridItem({
 				}}
 				tabIndex={0}
 			>
-				<Icon />
+				<Icon
+				/// style={{
+				/// 	transform: "scale(calc(var(--icon-size) / 24px))",
+				/// 	strokeWidth: "var(--icon-stroke-width)",
+				/// }}
+				/>
 			</figure>
 			<figcaption>{name}</figcaption>
 			<feather.Star className="bookmark" fill="currentColor" strokeWidth={6} />

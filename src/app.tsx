@@ -21,7 +21,7 @@ import {
 	Sidebar2,
 } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -33,9 +33,24 @@ const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).m
 
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
 
-function RangeInstance() {
-	const [value, setValue] = useState(50)
-	return <Range value={value} setValue={setValue} min={0} max={100} step={1} />
+function SizeRange() {
+	const [size, setSize] = useState(24)
+
+	useEffect(() => {
+		document.body.style.setProperty("--icon-size", "" + size)
+	}, [size])
+
+	return <Range value={size} setValue={setSize} min={16} max={48} step={1} />
+}
+
+function StrokeWidthRange() {
+	const [strokeWidth, setStrokeWidth] = useState(2)
+
+	useEffect(() => {
+		document.body.style.setProperty("--icon-stroke-width", "" + strokeWidth)
+	}, [strokeWidth])
+
+	return <Range value={strokeWidth} setValue={setStrokeWidth} min={0.5} max={3.5} step={0.125} />
 }
 
 export function App() {
@@ -128,13 +143,13 @@ export function App() {
 			<Sidebar2>
 				<Header>
 					<Section name="Size">
-						<RangeInstance />
+						<SizeRange />
 					</Section>
 				</Header>
 				<OverflowYContainer>
 					<hr />
 					<Section name="Stroke width">
-						<RangeInstance />
+						<StrokeWidthRange />
 					</Section>
 					<hr />
 					{/* <Section name="Size">
