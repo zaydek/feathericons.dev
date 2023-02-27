@@ -2,15 +2,21 @@ import * as feather from "@icons/feather"
 import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
-import { CheckboxItem, CheckboxList } from "@/components/checkboxes"
-import { DebugCssEffect } from "@/components/debug-css"
-import { Grid, GridItem } from "@/components/grid"
-import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
-import { ResourceItem, ResourceList } from "@/components/resource"
-import { SearchBar } from "@/components/search-bar"
-import { Section } from "@/components/section"
-import { toKebabCase } from "@/lib/cases"
-import { Icon } from "@/lib/icon"
+import {
+	CheckboxItem,
+	CheckboxList,
+	DebugCssEffect,
+	Grid,
+	GridItem,
+	Main,
+	ResourceItem,
+	ResourceList,
+	SearchBar,
+	Section,
+	Sidebar1,
+	Sidebar2,
+} from "@/components"
+import { Icon, toKebabCase } from "@/lib"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()

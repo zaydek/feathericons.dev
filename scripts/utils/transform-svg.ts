@@ -1,4 +1,4 @@
-import { detab, tab } from "@/lib"
+import { detab } from "@/lib"
 
 export function transformSvg(_: string, icon: string, { banner }: { banner: string }) {
 	// prettier-ignore

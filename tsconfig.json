@@ -23,6 +23,6 @@
       "@icons/wolf-kit/social-media": ["./icons/wolf-kit/production/social-media/tsx/index.ts"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "scripts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

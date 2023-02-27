@@ -1,7 +1,9 @@
-import { Arrayable } from "@/lib/types"
+import { Arrayable } from "@/lib"
 import { Dispatch, MutableRefObject, ReactElement, SetStateAction, useEffect } from "react"
 
-export function getStringFromChildren(children: Arrayable<string> | Arrayable<ReactElement<{ children?: string }>> | undefined) {
+export function getStringFromChildren(
+	children: Arrayable<string> | Arrayable<ReactElement<{ children?: string }>> | undefined,
+) {
 	if (children === undefined) { return "" } // prettier-ignore
 	let str = ""
 	const flatChildren = [children].flat()
@@ -18,7 +20,7 @@ export function getStringFromChildren(children: Arrayable<string> | Arrayable<Re
 
 export function useCancelable(
 	ref:     MutableRefObject<HTMLDivElement | null>, // prettier-ignore
-	setShow: Dispatch<SetStateAction<boolean>>
+	setShow: Dispatch<SetStateAction<boolean>>,
 ) {
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {

@@ -2,7 +2,7 @@ import "./grid.sass"
 
 import * as feather from "@icons/feather"
 
-import { Icon } from "@/lib/icon"
+import { Icon } from "@/lib"
 import { PropsWithChildren } from "react"
 
 export function GridItem({

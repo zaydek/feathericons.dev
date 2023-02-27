@@ -4,7 +4,7 @@ import "@/css/base.sass"
 import "@/css/input-checkbox.sass"
 import "@/css/input-range.sass"
 
-import { SidebarProvider } from "@/components/layout"
+import { SidebarProvider } from "@/components"
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
 

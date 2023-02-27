@@ -1,8 +1,7 @@
 import fs from "node:fs"
 
 import { manifest } from "@/data/manifest"
-import { toKebabCase } from "@/lib/cases"
-import { detab } from "@/lib/format"
+import { detab, toKebabCase } from "@/lib"
 
 const DATE = new Date().toISOString().split("T")[0]
 

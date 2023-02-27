@@ -1,6 +1,6 @@
 import "./checkboxes.sass"
 
-import { Icon } from "@/lib/icon"
+import { Icon } from "@/lib"
 import { PropsWithChildren, useState } from "react"
 
 export function CheckboxList({ children }: PropsWithChildren) {
