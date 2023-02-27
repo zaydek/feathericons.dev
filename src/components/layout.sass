@@ -103,8 +103,8 @@ $handle-width:    6px
   --right: #{$sidebar-2-width}
   position: absolute
   inset: 0 var(--right) auto var(--left)
-  padding: $sidebar-padding-y $sidebar-padding-x * 4
+  padding: $sidebar-padding-y $sidebar-padding-x * 2
   .sidebar:nth-of-type(1).is-minimized ~ &
     --left:  0
   .sidebar:nth-of-type(2).is-minimized ~ &
-    --right: 0
+    --right: #{$drag-area-width}

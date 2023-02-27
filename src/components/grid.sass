@@ -6,13 +6,15 @@ $grid-item-height:       128px
 $grid-item-aspect-ratio: math.div(4, 3)
 $grid-item-gap:          16px
 
+$bookmark-icon-frame:  32px
 $bookmark-icon-height: 12px
 
 .grid
   display: grid
-  grid-template-columns: repeat(auto-fill, minmax($grid-item-height, 1fr))
+  //// grid-template-columns: repeat(auto-fill, minmax($grid-item-height, 1fr))
+  grid-template-columns: repeat(auto-fill, $grid-item-height)
   justify-content: center
-  gap: 16px
+  gap: $grid-item-gap
 
 .grid-item
   display: flex
@@ -21,7 +23,7 @@ $bookmark-icon-height: 12px
     position: relative
     display: flex
     flex-direction: column
-    gap: $grid-item-gap
+    gap: 8px
     width: $grid-item-height
     // Defer aspect-ratio
     figure
@@ -54,7 +56,7 @@ $bookmark-icon-height: 12px
     .bookmark
       position: absolute
       inset: 0 0 auto auto
-      margin: math.div(32px - $bookmark-icon-height, 2)
+      margin: math.div($bookmark-icon-frame - $bookmark-icon-height, 2)
       height: $bookmark-icon-height
       width: $bookmark-icon-height
       color: $amber-400
