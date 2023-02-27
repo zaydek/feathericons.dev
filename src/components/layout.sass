@@ -4,13 +4,13 @@
 
 $sidebar-1-width:          288px
 $sidebar-1-expanded-width: 288px + 128px
-$sidebar-1-z-index:        100
+$sidebar-1-z-index:        50
 
 $sidebar-2-width:          352px
 $sidebar-2-expanded-width: 352px + 128px
-$sidebar-2-z-index:        $sidebar-1-z-index - 10
+$sidebar-2-z-index:        100
 
-$sidebar-overlay-z-index: 50
+$sidebar-overlay-z-index: 75
 
 $drag-area-width: 6px * 4
 $handle-height:   6px * 8
@@ -46,6 +46,7 @@ $handle-width:    6px
       --translate-x: #{$sidebar-2-expanded-width}
     &.is-maximized
       --translate-x: 0px
+      box-shadow: none
   .drag-area
     position: absolute
     @at-root
@@ -93,8 +94,8 @@ $handle-width:    6px
   position: fixed
   inset: 0
   z-index: $sidebar-overlay-z-index
-  background-color: hsl(0, 0%, 0%, 0.1)
-  backdrop-filter: blur(2px)
+  background-color: hsl(0, 0%, 0%, 0.25)
+  //// backdrop-filter: blur(2px)
 
 .main
   --left:  #{$sidebar-1-width}

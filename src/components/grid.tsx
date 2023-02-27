@@ -22,8 +22,15 @@ export function GridItem({
 }) {
 	return (
 		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
-			<figure tabIndex={0}>
-				<Icon strokeWidth={2.5} />
+			<figure
+				onFocus={e => {
+					// Remove selection e.g. user-select: all
+					const selection = window.getSelection()
+					selection?.removeAllRanges()
+				}}
+				tabIndex={0}
+			>
+				<Icon />
 			</figure>
 			<figcaption>{name}</figcaption>
 			<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
