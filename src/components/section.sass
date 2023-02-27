@@ -4,17 +4,17 @@
 
 //// $undo-icon-height: 16px
 
-header
+.header
   position: sticky
   top: 0
   z-index: 10 // Because of input[type=checkbox]
   background-color: white
   &:has(+ [data-scroll=true])
     box-shadow: $hairline-shadow-bottom
-  section:first-child
+  .section:first-child
     padding-top: $sidebar-padding-y
 
-footer
+.footer
   position: sticky
   bottom: 0
   z-index: 10 // Because of input[type=checkbox]
@@ -23,13 +23,13 @@ footer
   box-shadow: $hairline-shadow-top
   //// section:first-child
   ////   padding-top: $sidebar-padding-y
-  section:last-child
+  .section:last-child
     padding: $sidebar-padding-y $sidebar-padding-x
 
 .overflow-y-container
   overflow-y: auto // COMPAT/Windows
 
-section
+.section
   display: flex
   flex-direction: column
   gap: $sidebar-gap
@@ -38,10 +38,10 @@ section
   > :not(div:not([class]), .resources)
     margin: 0 generate-keyline()
   h6
-    font: 600 10.5px / normal $sans
-    letter-spacing: 0.05em
+    font: 500 10.5px / normal $sans
+    letter-spacing: 0.075em
     text-transform: uppercase
-    color: $slate-400
+    color: $slate-500
 
 //// .section
 ////   display: flex

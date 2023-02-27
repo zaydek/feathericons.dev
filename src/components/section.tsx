@@ -3,16 +3,16 @@ import "./section.sass"
 import { PropsWithChildren, useState } from "react"
 
 export function Header({ children }: PropsWithChildren) {
-	return <header>{children}</header>
+	return <header className="header">{children}</header>
 }
 
 export function Footer({ children }: PropsWithChildren) {
-	return <footer>{children}</footer>
+	return <footer className="footer">{children}</footer>
 }
 
 export function Section({ name, children }: PropsWithChildren<{ name?: string }>) {
 	return (
-		<section>
+		<section className="section">
 			{name !== undefined && <h6>{name}</h6>}
 			{children}
 		</section>

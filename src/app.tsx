@@ -64,7 +64,7 @@ export function App() {
 					</Section>
 				</Header>
 				<OverflowYContainer>
-					<Section name="Iconsets">
+					<Section name="Icons">
 						<div>
 							<Checkboxes>
 								<Checkbox name="Feather" icon={feather.Feather} checked />
