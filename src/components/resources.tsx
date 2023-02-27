@@ -11,7 +11,7 @@ export function Resources({ children }: PropsWithChildren) {
 
 export function Resource({ name, icon: Icon }: { name: string; icon: Icon }) {
 	return (
-		<a href="TODO" target="_blank">
+		<a className="resource" href="TODO" target="_blank">
 			<Icon />
 			<span>{name}</span>
 			<feather.ArrowUpRight strokeWidth={4} />

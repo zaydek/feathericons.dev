@@ -23,7 +23,13 @@ export function SearchBar() {
 	return (
 		<div className="search-bar">
 			<feather.Search strokeWidth={4} />
-			<input type="text" value={value} onChange={e => setValue(e.currentTarget.value)} />
+			<input
+				ref={ref}
+				type="text"
+				placeholder={isMac() ? "Press ⌘P to Focus" : "Press Ctrl-P to Focus"}
+				value={value}
+				onChange={e => setValue(e.currentTarget.value)}
+			/>
 		</div>
 	)
 }
