@@ -20,10 +20,22 @@ export function Checkbox({
 
 	return (
 		<li className="checkbox">
-			<label>
+			<label
+				onKeyDown={e => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault()
+						e.stopPropagation()
+						// @ts-expect-error
+						e.currentTarget.querySelector("input[type=checkbox]")?.click()
+					}
+				}}
+				tabIndex={0}
+			>
 				<Icon />
 				<span>{name}</span>
-				{showCheckbox && <input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} />}
+				{showCheckbox && (
+					<input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} tabIndex={-1} />
+				)}
 			</label>
 		</li>
 	)
