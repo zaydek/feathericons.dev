@@ -12,6 +12,7 @@ import {
 	Header,
 	Main,
 	OverflowYContainer,
+	Range,
 	Resource,
 	Resources,
 	SearchBar,
@@ -20,6 +21,7 @@ import {
 	Sidebar2,
 } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
+import { useState } from "react"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -30,6 +32,11 @@ const wkSocialMediaEntries: [string, Icon][] = Object.entries(wkSocial).map(([k,
 const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).map(([k, v]) => [toNameCase(k), v])
 
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
+
+function RangeInstance() {
+	const [value, setValue] = useState(50)
+	return <Range value={value} setValue={setValue} min={0} max={100} step={1} />
+}
 
 export function App() {
 	return (
@@ -50,8 +57,12 @@ export function App() {
 							<Checkboxes>
 								<Checkbox
 									name="Social"
-									icon={p => (
-										<feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />
+									icon={$props => (
+										<feather.ChevronDown
+											style={{ transform: "scale(0.8)", opacity: 0.375 }}
+											strokeWidth={4}
+											{...$props}
+										/>
 									)}
 									showCheckbox={false}
 								/>
@@ -77,8 +88,12 @@ export function App() {
 							<Checkboxes>
 								<Checkbox
 									name="Payment"
-									icon={p => (
-										<feather.ChevronDown style={{ transform: "scale(0.8)", opacity: 0.375 }} strokeWidth={4} {...p} />
+									icon={$props => (
+										<feather.ChevronDown
+											style={{ transform: "scale(0.8)", opacity: 0.375 }}
+											strokeWidth={4}
+											{...$props}
+										/>
 									)}
 									showCheckbox={false}
 								/>
@@ -113,33 +128,20 @@ export function App() {
 			<Sidebar2>
 				<Header>
 					<Section name="Size">
-						<input type="range" />
+						<RangeInstance />
 					</Section>
 				</Header>
 				<OverflowYContainer>
 					<hr />
-					<Section name="Size">
-						<input type="range" />
+					<Section name="Stroke width">
+						<RangeInstance />
 					</Section>
 					<hr />
-					<Section name="Stroke">
+					{/* <Section name="Size">
 						<input type="range" />
-					</Section>
-					<hr />
-					<Section name="Size">
-						<input type="range" />
-					</Section>
-					<hr />
-					<Section name="Size">
-						<input type="range" />
-					</Section>
-					<hr />
+					</Section> */}
 				</OverflowYContainer>
-				<Footer>
-					<Section name="Stroke">
-						<input type="range" />
-					</Section>
-				</Footer>
+				{/* <Footer></Footer> */}
 			</Sidebar2>
 			<Main>
 				<Grid>

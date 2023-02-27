@@ -6,7 +6,7 @@ $track-height: 6px
 $thumb-height: 32px
 
 input[type=range]
-  height: 32px
+  height: $thumb-height
   cursor: grab       // Interaction
   user-select: none  // Interaction
   &:hover:active     // Interaction
@@ -15,14 +15,15 @@ input[type=range]
   // COMPAT/WebKit
   &::-webkit-slider-runnable-track
     appearance: none // CSS reset
-    height: 6px
-    background-color: dodgerblue
+    height: $track-height
+    //// background-color: dodgerblue
+    background-image: linear-gradient(to right, dodgerblue var(--progress, 50%), $slate-200 var(--progress, 50%))
     border-radius: 1e3px
   &::-webkit-slider-thumb
     appearance: none // CSS reset
-    margin-top: -1 * math.div(32px - 6px, 2)
-    height: 32px
-    width: 32px
+    margin-top: -1 * math.div($thumb-height - $track-height, 2)
+    height: $thumb-height
+    width: $thumb-height
     background-color: white
     border-radius: 1e3px
     box-shadow: $hairline-shadow, $realistic-shadow
@@ -33,17 +34,18 @@ input[type=range]
   // COMPAT/Gecko
   &::-moz-range-track
     appearance: none // CSS reset
-    height: 6px
-    background-color: dodgerblue
+    height: $track-height
+    //// background-color: dodgerblue
+    background-image: linear-gradient(to right, dodgerblue var(--progress, 50%), $slate-200 var(--progress, 50%))
     border-radius: 1e3px
   &::-moz-range-thumb
     appearance: none // CSS reset
     border: none     // CSS reset
-    margin-top: -1 * math.div(32px - 6px, 2)
-    height: 32px
-    width: 32px
+    margin-top: -1 * math.div($thumb-height - $track-height, 2)
+    height: $thumb-height
+    width: $thumb-height
     background-color: white
-    border-radius: 50%
+    border-radius: var(--progress, 50%)
     box-shadow: $hairline-shadow, $realistic-shadow
     @at-root
       input[type=range]:focus-visible::-moz-range-thumb
