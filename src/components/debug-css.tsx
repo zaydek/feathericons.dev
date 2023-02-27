@@ -1,3 +1,5 @@
+import "./debug-css.sass"
+
 import { useEffect, useState } from "react"
 
 export function DebugCssEffect() {
