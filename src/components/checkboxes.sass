@@ -17,17 +17,17 @@ $icon-height: $generic-button-icon-height
   cursor: pointer   // Interaction
   user-select: none // Interaction
   &:is(:hover, :has(:focus-visible))
-    background-color: $gray-100
+    background-color: $slate-100
   &:hover:active
-    background-color: $gray-200
+    background-color: $slate-200
   svg:nth-child(1)
     margin: math.div($generic-button-height - $icon-height, 2)
     height: $icon-height
     width: $icon-height
-    color: $gray-800
+    color: $slate-800
   span
     flex: 1 // Stretch x-axis
     font: 450 15px / normal 'Inter var experimental'
-    color: $gray-800
+    color: $slate-800
   input[type=checkbox]
     margin: 0 generate-keyline(24px)
