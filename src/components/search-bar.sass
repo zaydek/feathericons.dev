@@ -11,7 +11,7 @@ $search-bar-icon-height: 16px
   height: $search-bar-height
   background-color: $slate-200
   border-radius: 1e3px
-  &:is(:hover, [data-focus-visible=true])
+  &:is(:hover, :focus-within)
     background-color: white
     box-shadow: $inset-hairline-shadow
   svg

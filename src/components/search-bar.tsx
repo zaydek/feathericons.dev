@@ -7,9 +7,7 @@ import { useEffect, useRef, useState } from "react"
 
 export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
-
 	const [value, setValue] = useState("")
-	const [focusVisible, setFocusVisible] = useState(false)
 
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
@@ -23,19 +21,13 @@ export function SearchBar() {
 	}, [])
 
 	return (
-		<div className="search-bar" data-focus-visible={focusVisible}>
+		<div className="search-bar">
 			<feather.Search strokeWidth={4} />
 			<input
 				ref={ref}
 				type="text"
 				placeholder={isMac() ? "Press ⌘P to Focus" : "Press Ctrl-P to Focus"}
 				value={value}
-				onFocus={e => {
-					setFocusVisible(true)
-				}}
-				onBlur={e => {
-					setFocusVisible(false)
-				}}
 				onChange={e => setValue(e.currentTarget.value)}
 			/>
 		</div>

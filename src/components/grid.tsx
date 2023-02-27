@@ -22,7 +22,7 @@ export function GridItem({
 }) {
 	return (
 		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
-			<figure>
+			<figure tabIndex={0}>
 				<Icon strokeWidth={2.5} />
 			</figure>
 			<figcaption>{name}</figcaption>
