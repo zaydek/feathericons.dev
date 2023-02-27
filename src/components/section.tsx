@@ -1,28 +1,30 @@
 import "./section.sass"
 
-import * as feather from "@icons/feather"
+import { PropsWithChildren, useState } from "react"
 
-import { PropsWithChildren } from "react"
+export function Header({ children }: PropsWithChildren) {
+	return <header>{children}</header>
+}
 
-export function Section({
-	tag: Tag = "section",
-	name,
-	canUndo = undefined,
-	children,
-}: PropsWithChildren<{
-	tag?: keyof JSX.IntrinsicElements
-	name?: string
-	canUndo?: boolean
-}>) {
+export function Footer({ children }: PropsWithChildren) {
+	return <footer>{children}</footer>
+}
+
+export function Section({ name, children }: PropsWithChildren<{ name?: string }>) {
 	return (
-		<Tag className="section">
-			{name !== undefined && (
-				<header>
-					<span className="type">{name}</span>
-					{canUndo !== undefined && canUndo && <feather.RotateCcw strokeWidth={4} />}
-				</header>
-			)}
+		<section>
+			{name !== undefined && <h6>{name}</h6>}
 			{children}
-		</Tag>
+		</section>
+	)
+}
+
+export function OverflowYContainer({ children }: PropsWithChildren) {
+	const [scroll, setScroll] = useState(false)
+
+	return (
+		<div className="overflow-y-container" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
+			{children}
+		</div>
 	)
 }

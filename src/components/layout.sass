@@ -6,8 +6,8 @@ $sidebar-1-width:          288px
 $sidebar-1-expanded-width: 288px + 128px
 $sidebar-1-z-index:        100
 
-$sidebar-2-width:          288px
-$sidebar-2-expanded-width: 288px + 128px
+$sidebar-2-width:          352px
+$sidebar-2-expanded-width: 352px + 128px
 $sidebar-2-z-index:        $sidebar-1-z-index - 10
 
 $sidebar-overlay-z-index: 50
@@ -26,7 +26,7 @@ $handle-width:    6px
     justify-content: flex-end
     width: $sidebar-1-expanded-width
     background-color: white
-    box-shadow: $inset-hairline-shadow-left
+    box-shadow: $hairline-shadow-right
     transform: translateX(var(--translate-x))
     &.is-minimized
       --translate-x: #{-1 * $sidebar-1-expanded-width}
@@ -40,7 +40,7 @@ $handle-width:    6px
     justify-content: flex-start
     width: $sidebar-2-expanded-width
     background-color: white
-    box-shadow: $inset-hairline-shadow-right
+    box-shadow: $hairline-shadow-left
     transform: translateX(var(--translate-x))
     &.is-minimized
       --translate-x: #{$sidebar-2-expanded-width}
@@ -76,7 +76,6 @@ $handle-width:    6px
   &:nth-child(1) .contents
     display: flex
     flex-direction: column
-    justify-content: space-between
     width: $sidebar-1-width
     @at-root
       .sidebar:nth-child(1).is-maximized .contents
@@ -85,7 +84,6 @@ $handle-width:    6px
   &:nth-child(2) .contents
     display: flex
     flex-direction: column
-    justify-content: space-between
     width: $sidebar-2-width
     @at-root
       .sidebar:nth-child(2).is-maximized .contents

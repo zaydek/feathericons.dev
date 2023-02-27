@@ -2,40 +2,82 @@
 
 @use "../css/globals" as *
 
-$undo-icon-height: 16px
+//// $undo-icon-height: 16px
 
-// TODO: Add .scrolling-container here
+header
+  position: sticky
+  top: 0
+  z-index: 10 // Because of input[type=checkbox]
+  background-color: white
+  &:has(+ [data-scroll=true])
+    box-shadow: $hairline-shadow-bottom
+  section:first-child
+    padding-top: $sidebar-padding-y
 
-.section
+footer
+  position: sticky
+  bottom: 0
+  z-index: 10 // Because of input[type=checkbox]
+  margin-top: auto // 😎
+  background-color: white
+  box-shadow: $hairline-shadow-top
+  //// section:first-child
+  ////   padding-top: $sidebar-padding-y
+  section:last-child
+    padding: $sidebar-padding-y $sidebar-padding-x
+
+.overflow-y-container
+  overflow-y: auto // COMPAT/Windows
+
+section
   display: flex
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
-  &:first-child
-    padding-top: $sidebar-padding-y
-  &:last-child
-    position: relative // Because of input[type=checkbox]
-    z-index: 10        // Because of input[type=checkbox]
-    padding-bottom: $sidebar-padding-y
-    box-shadow: $hairline-shadow-top
-  header
-    display: flex
-    align-items: center
-    height: math.div($generic-button-height, 2)
-    span
-      flex: 1 // Stretch x-axis
-      font: 600 10.5px / normal 'Inter var experimental'
-      letter-spacing: 0.075em
-      text-transform: uppercase
-      color: $slate-400
-    svg
-      height: $undo-icon-height
-      width: $undo-icon-height
-      color: $slate-300
-      cursor: pointer   // Interaction
-      user-select: none // Interaction
-      &:hover
-        color: $slate-800
+  > :not(.checkbox-stack, .resources)
+    margin: 0 generate-keyline()
+  h6
+    font: 600 10.5px / normal $sans
+    letter-spacing: 0.075em
+    text-transform: uppercase
+    color: $slate-400
 
-.section > :not(ul)
-  margin: 0 generate-keyline()
+//// .section
+////   display: flex
+////   flex-direction: column
+////   gap: $sidebar-gap
+////   padding: $sidebar-gap $sidebar-padding-x
+////   &:first-child
+////     position: sticky
+////     top: 0
+////     z-index: 10 // Because of input[type=checkbox]
+////     padding-bottom: $sidebar-gap
+////     background-color: white
+////     & + [data-scroll=true]
+////       box-shadow: $hairline-shadow-bottom
+////   &:last-child
+////     position: sticky
+////     bottom: 0
+////     z-index: 10 // Because of input[type=checkbox]
+////     margin-top: auto // 😎
+////     padding-top: $sidebar-gap
+////     background-color: white
+////     box-shadow: $hairline-shadow-top
+////   header
+////     display: flex
+////     align-items: center
+////     height: math.div($generic-button-height, 2)
+////     span
+////       flex: 1 // Stretch x-axis
+////       font: 600 10.5px / normal $sans
+////       letter-spacing: 0.075em
+////       text-transform: uppercase
+////       color: $slate-400
+////     svg
+////       height: $undo-icon-height
+////       width: $undo-icon-height
+////       color: $slate-300
+////       cursor: pointer   // Interaction
+////       user-select: none // Interaction
+////       &:hover
+////         color: $slate-800

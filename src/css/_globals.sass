@@ -15,9 +15,6 @@
   -webkit-font-smoothing:  auto
   -moz-osx-font-smoothing: auto
 
-//// @function end($selector)
-////   @return nth(nth(selector.parse(&), -1), -1)
-
 @function generate-keyline($override: $generic-button-icon-height)
   @return math.div($generic-button-height - $override, 2)
 
@@ -25,8 +22,7 @@
 
 $WINDOWS_SCROLLBAR_WIDTH: 16px
 
-// TODO
-$sans: Inter, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
+$sans: 'Inter var experimental', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
 $code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
 
 $sidebar-padding-y: 32px
@@ -34,7 +30,7 @@ $sidebar-padding-x: 16px
 $sidebar-gap:       16px
 
 $generic-button-height:      40px
-$generic-button-icon-height: 20px
+$generic-button-icon-height: 18px
 
 $hairline-color:               $slate-300
 $inset-hairline-shadow:        inset  0    0   0 1px $hairline-color

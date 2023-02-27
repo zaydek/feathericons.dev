@@ -12,7 +12,7 @@ explicitly, e.g.
 
 */
 @font-face {
-  font-family: 'Inter var experimental';
+  font-family: $sans;
   font-weight: 100 900;
   font-display: swap;
   font-style: oblique 0deg 10deg;

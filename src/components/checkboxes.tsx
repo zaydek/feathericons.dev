@@ -3,11 +3,15 @@ import "./checkboxes.sass"
 import { Icon } from "@/lib"
 import { PropsWithChildren, useState } from "react"
 
-export function CheckboxList({ children }: PropsWithChildren) {
-	return <ul className="checkbox-list">{children}</ul>
+export function CheckboxStack({ children }: PropsWithChildren) {
+	return <div>{children}</div>
 }
 
-export function CheckboxItem({
+export function Checkboxes({ children }: PropsWithChildren) {
+	return <ul className="checkboxes">{children}</ul>
+}
+
+export function Checkbox({
 	name,
 	icon: Icon,
 	showCheckbox = true,
@@ -19,8 +23,8 @@ export function CheckboxItem({
 	const [checked, setChecked] = useState(false)
 
 	return (
-		<li>
-			<label className="checkbox-item">
+		<li className="checkbox">
+			<label>
 				<Icon />
 				<span>{name}</span>
 				{showCheckbox && <input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} />}
