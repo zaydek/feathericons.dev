@@ -3,10 +3,6 @@ import "./checkboxes.sass"
 import { Icon } from "@/lib"
 import { PropsWithChildren, useState } from "react"
 
-export function CheckboxStack({ children }: PropsWithChildren) {
-	return <div>{children}</div>
-}
-
 export function Checkboxes({ children }: PropsWithChildren) {
 	return <ul className="checkboxes">{children}</ul>
 }

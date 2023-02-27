@@ -5,7 +5,6 @@ import * as wkSocial from "@icons/wolf-kit/social-media"
 import {
 	Checkbox,
 	Checkboxes,
-	CheckboxStack,
 	DebugCssEffect,
 	Footer,
 	Grid,
@@ -44,7 +43,7 @@ export function App() {
 				</Header>
 				<OverflowYContainer>
 					<Section name="Icons">
-						<CheckboxStack>
+						<div>
 							<Checkboxes>
 								<Checkbox name="Feather" icon={feather.Feather} />
 							</Checkboxes>
@@ -96,7 +95,7 @@ export function App() {
 									</Checkboxes>
 								</Checkboxes>
 							</Checkboxes>
-						</CheckboxStack>
+						</div>
 					</Section>
 					<hr />
 				</OverflowYContainer>
