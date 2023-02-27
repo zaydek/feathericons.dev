@@ -31,10 +31,6 @@ $bookmark-icon-height: 12px
     box-shadow: inset 0 0 0 1px mix($slate-200, $slate-300)
     cursor: pointer   // Interaction
     user-select: none // Interaction
-    //// // FIXME: Use :focus here?
-    //// &:focus
-    ////   //// background-color: hsl(200, 100%, 97.5%)
-    ////   box-shadow: inset 0 0 0 4px dodgerblue
     // FIXME: Use :focus here?
     &:focus
       //// background-color: hsl(200, 100%, 97.5%)
@@ -65,3 +61,5 @@ $bookmark-icon-height: 12px
     @at-root
       .grid-item:not([data-bookmark=true]) .bookmark
         display: none
+      .grid-item[data-bookmark=true] figure:focus ~ .bookmark
+        color: dodgerblue

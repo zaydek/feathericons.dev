@@ -60,7 +60,7 @@ export function App() {
 									icon={$props => (
 										<feather.ChevronDown
 											style={{ transform: "scale(0.8)", opacity: 0.375 }}
-											strokeWidth={4}
+											strokeWidth={6}
 											{...$props}
 										/>
 									)}
@@ -91,7 +91,7 @@ export function App() {
 									icon={$props => (
 										<feather.ChevronDown
 											style={{ transform: "scale(0.8)", opacity: 0.375 }}
-											strokeWidth={4}
+											strokeWidth={6}
 											{...$props}
 										/>
 									)}
