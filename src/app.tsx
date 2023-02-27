@@ -9,7 +9,7 @@ import { Main, Sidebar1, Sidebar2 } from "@/components/layout"
 import { ResourceItem, ResourceList } from "@/components/resource"
 import { SearchBar } from "@/components/search-bar"
 import { Section } from "@/components/section"
-import { toKebabCase } from "@/lib"
+import { toKebabCase } from "@/lib/cases"
 import { Icon } from "@/lib/icon"
 
 function toNameCase(str: string) {

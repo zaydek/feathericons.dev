@@ -17,10 +17,10 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+			"@/*": ["./src/*"],
+      "@icons/feather": ["./icons/feather/production/tsx/index.ts"],
       "@icons/wolf-kit/payment": ["./icons/wolf-kit/production/payment/tsx/index.ts"],
-      "@icons/wolf-kit/social-media": ["./icons/wolf-kit/production/social-media/tsx/index.ts"],
-      "@icons/feather": ["./icons/feather/production/tsx/index.ts"]
+      "@icons/wolf-kit/social-media": ["./icons/wolf-kit/production/social-media/tsx/index.ts"]
     }
   },
   "include": ["src"],

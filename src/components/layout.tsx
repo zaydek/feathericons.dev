@@ -1,6 +1,6 @@
 import "./layout.sass"
 
-import { cx } from "@/lib"
+import { cx } from "@/lib/cx"
 import {
 	createContext,
 	Dispatch,

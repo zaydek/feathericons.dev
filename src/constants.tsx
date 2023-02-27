@@ -1,4 +1,4 @@
-import { detab } from "./lib/format"
+import { detab } from "@/lib/format"
 
 export const svgPlaceholder = detab(`
 	<!-- https://feathericons.dev/feather -->

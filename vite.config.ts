@@ -1,10 +1,10 @@
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
-// prettier-ignore
 export default defineConfig({
 	plugins: [react()],
 	resolve: {
+		// Must use /dir syntax for Vite 🤷‍♂️
 		alias: {
 			"@": "/src",
 			"@icons/wolf-kit/payment": "/icons/wolf-kit/production/payment/tsx/index.ts",
@@ -13,5 +13,5 @@ export default defineConfig({
 		},
 	},
 	preview: { host: true, port: 3000 },
-	server:  { host: true, port: 3000 },
+	server:  { host: true, port: 3000 }, // prettier-ignore
 })

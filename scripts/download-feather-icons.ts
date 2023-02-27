@@ -37,6 +37,7 @@ async function run(outdir: string) {
 	// prettier-ignore
 	const tags = (await page.evaluate(async () => document.getElementsByTagName("pre")[0].innerHTML))
 		.trim()
+		// @ts-expect-error
 		.replaceAll("life-bouy", "life-buoy")
 
 	//////////////////////////////////////////////////////////////////////////////

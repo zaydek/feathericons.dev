@@ -7,7 +7,6 @@ import { JSDOM } from "jsdom"
 import JSZip from "jszip"
 import SVGO from "svgo"
 
-import { detab, sleep, toTitleCase } from "@/lib"
 import { formatSvg } from "./utils/format-svg"
 import { transformSvg, transformTsx } from "./utils/transform-svg"
 
@@ -59,6 +58,7 @@ async function readIcons(srcdir: string) {
 function optimizeIcons(icons: Record<string, string>) {
 	const copy: Record<string, string> = {}
 	for (const [name, icon] of Object.entries(icons)) {
+		// @ts-expect-error
 		const icon2 = icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1") // Remove <g>
 		const icon3 = SVGO.optimize(icon2, {
 			plugins: [
@@ -92,7 +92,11 @@ function formatIcons(icons: Record<string, string>, { strictJsx }: { strictJsx: 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
+async function exportSvgAndZip(
+	icons: Record<string, string>,
+	outdir: string,
+	{ banner }: { banner: (name: string) => string },
+) {
 	await fs.mkdir(outdir, { recursive: true })
 	const zip = new JSZip()
 	for (const [name, icon] of Object.entries(icons)) {
@@ -104,7 +108,11 @@ async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { 
 	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
 }
 
-async function exportTsx(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
+async function exportTsx(
+	icons: Record<string, string>,
+	outdir: string,
+	{ banner }: { banner: (name: string) => string },
+) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, icon] of Object.entries(icons)) {
 		const icon2 = transformTsx(toTitleCase(name), icon, { banner: banner(name) })
