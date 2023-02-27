@@ -52,7 +52,7 @@ export function App() {
 					<Section name="Iconsets">
 						<div>
 							<Checkboxes>
-								<Checkbox name="Feather" icon={feather.Feather} />
+								<Checkbox name="Feather" icon={feather.Feather} checked />
 							</Checkboxes>
 							<Checkboxes>
 								<Checkbox
@@ -67,7 +67,7 @@ export function App() {
 									showCheckbox={false}
 								/>
 								<Checkboxes>
-									<Checkbox name="Original" icon={wkSocial.Twitter} />
+									<Checkbox name="Original" icon={wkSocial.Twitter} checked />
 									<Checkboxes>
 										<Checkbox name="Circle" icon={wkSocial.TwitterCircle} />
 									</Checkboxes>
@@ -76,7 +76,7 @@ export function App() {
 									</Checkboxes>
 								</Checkboxes>
 								<Checkboxes>
-									<Checkbox name="Mono" icon={wkSocial.TwitterMono} />
+									<Checkbox name="Mono" icon={wkSocial.TwitterMono} checked />
 									<Checkboxes>
 										<Checkbox name="Circle" icon={wkSocial.TwitterCircleMono} />
 									</Checkboxes>
@@ -100,13 +100,13 @@ export function App() {
 								<Checkboxes>
 									<Checkbox name="Original" icon={wkPayment.Stripe} />
 									<Checkboxes>
-										<Checkbox name="Filled" icon={wkPayment.Stripe1} />
+										<Checkbox name="Filled" icon={wkPayment.Stripe1} checked />
 									</Checkboxes>
 								</Checkboxes>
 								<Checkboxes>
 									<Checkbox name="Mono" icon={wkPayment.Stripe2} />
 									<Checkboxes>
-										<Checkbox name="Filled" icon={wkPayment.Stripe3} />
+										<Checkbox name="Filled" icon={wkPayment.Stripe3} checked />
 									</Checkboxes>
 								</Checkboxes>
 							</Checkboxes>

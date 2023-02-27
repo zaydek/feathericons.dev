@@ -11,12 +11,14 @@ export function Checkbox({
 	name,
 	icon: Icon,
 	showCheckbox = true,
+	checked: initialValue = false,
 }: {
 	name: string
 	icon: Icon
 	showCheckbox?: boolean
+	checked?: boolean
 }) {
-	const [checked, setChecked] = useState(false)
+	const [checked, setChecked] = useState(initialValue)
 
 	return (
 		<li className="checkbox">
