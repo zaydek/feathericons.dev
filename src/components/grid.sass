@@ -6,60 +6,58 @@ $grid-item-height:       128px
 $grid-item-aspect-ratio: math.div(4, 3)
 $grid-item-gap:          16px
 
-$bookmark-icon-frame:  32px
+$bookmark-icon-frame:  32px + 4px
 $bookmark-icon-height: 14px
 
 .grid
   display: grid
-  //// grid-template-columns: repeat(auto-fill, minmax($grid-item-height, 1fr))
   grid-template-columns: repeat(auto-fill, $grid-item-height)
   justify-content: center
   gap: $grid-item-gap
 
 .grid-item
+  position: relative
   display: flex
-  justify-content: center
-  article
-    position: relative
+  flex-direction: column
+  gap: 8px
+  width: $grid-item-height
+  figure
     display: flex
-    flex-direction: column
-    gap: 8px
-    width: $grid-item-height
-    // Defer aspect-ratio
-    figure
-      display: flex
-      justify-content: center
-      align-items: center
-      aspect-ratio: $grid-item-aspect-ratio
-      background-color: white
-      border-radius: 2px
-      box-shadow: inset 0 0 0 1px mix($slate-200, $slate-300)
-      cursor: pointer   // Interaction
-      user-select: none // Interaction
-      svg
-        min-height: 28px
-        max-height: 28px * math.div(56, 32)
-        min-width:  28px
-        max-width:  28px * math.div(56, 32)
-        color: $slate-800
-    figcaption
-      // Clamp
-      display: -webkit-box
-      -webkit-line-clamp: 2
-      -webkit-box-orient: vertical
-      overflow: hidden
-      height: 32px
-      font: 425 13px / 1.25 $sans
-      text-align: center
+    justify-content: center
+    align-items: center
+    aspect-ratio: $grid-item-aspect-ratio
+    background-color: white
+    border-radius: 8px
+    box-shadow: inset 0 0 0 1px mix($slate-200, $slate-300)
+    cursor: pointer   // Interaction
+    user-select: none // Interaction
+    @at-root
+      .grid-item[data-selected=true] figure
+        background-color: hsl(200, 100%, 97.5%)
+        box-shadow: inset 0 0 0 3px dodgerblue
+    svg
+      min-height: 28px
+      max-height: 28px * math.div(56, 32)
+      min-width:  28px
+      max-width:  28px * math.div(56, 32)
       color: $slate-800
-      user-select: all // Select all on click
-    .bookmark
-      position: absolute
-      inset: 0 0 auto auto
-      margin: math.div($bookmark-icon-frame - $bookmark-icon-height, 2)
-      height: $bookmark-icon-height
-      width: $bookmark-icon-height
-      color: $amber-400
-      @at-root
-        .grid-item:not([data-bookmark]) .bookmark
-          display: none
+  figcaption
+    display: -webkit-box         // Clamp
+    -webkit-line-clamp: 2        // Clamp
+    -webkit-box-orient: vertical // Clamp
+    overflow: hidden             // Clamp
+    height: 32px
+    font: 425 13px / 1.25 $sans
+    text-align: center
+    color: $slate-800
+    user-select: all // Select all on click
+  .bookmark
+    position: absolute
+    inset: 0 0 auto auto
+    margin: math.div($bookmark-icon-frame - $bookmark-icon-height, 2)
+    height: $bookmark-icon-height
+    width: $bookmark-icon-height
+    color: $amber-400
+    @at-root
+      .grid-item:not([data-bookmark=true]) .bookmark
+        display: none

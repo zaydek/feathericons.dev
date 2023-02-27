@@ -42,7 +42,7 @@ export function App() {
 					</Section>
 				</Header>
 				<OverflowYContainer>
-					<Section name="Icons">
+					<Section name="Iconsets">
 						<div>
 							<Checkboxes>
 								<Checkbox name="Feather" icon={feather.Feather} />
@@ -144,13 +144,7 @@ export function App() {
 			<Main>
 				<Grid>
 					{entries.map(([name, Icon], index) => (
-						<GridItem
-							key={index}
-							name={name}
-							icon={Icon}
-							bookmark={Math.random() < 0.1 ? true : undefined}
-							//// selected={Math.random() < 0.1 ? true : undefined}
-						/>
+						<GridItem key={index} name={name} icon={Icon} bookmark={Math.random() < 0.1} selected={index === 0} />
 					))}
 				</Grid>
 			</Main>

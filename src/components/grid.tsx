@@ -5,6 +5,10 @@ import * as feather from "@icons/feather"
 import { Icon } from "@/lib"
 import { PropsWithChildren } from "react"
 
+export function Grid({ children }: PropsWithChildren) {
+	return <div className="grid">{children}</div>
+}
+
 export function GridItem({
 	name,
 	icon: Icon,
@@ -17,18 +21,12 @@ export function GridItem({
 	selected?: boolean
 }) {
 	return (
-		<li className="grid-item" data-bookmark={bookmark} data-selected={selected}>
-			<article>
-				<figure>
-					<Icon strokeWidth={2.5} />
-				</figure>
-				<figcaption>{name}</figcaption>
-				<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
-			</article>
-		</li>
+		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
+			<figure>
+				<Icon strokeWidth={2.5} />
+			</figure>
+			<figcaption>{name}</figcaption>
+			<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
+		</article>
 	)
-}
-
-export function Grid({ children }: PropsWithChildren) {
-	return <ul className="grid">{children}</ul>
 }
