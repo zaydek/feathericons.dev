@@ -1,3 +1,4 @@
+@use "sass:color"
 @use "sass:math"
 
 @use "../css/globals" as *
@@ -48,11 +49,33 @@ $undo-icon-height: 14px
     &-name
       flex: 1 // Stretch x-axis
       font: 500 11px / normal $sans
+      font-feature-settings: 'tnum'
       letter-spacing: 0.075em
       text-transform: uppercase
       color: $slate-500
-    svg:nth-child(3)
-      margin-left: math.div(generate-keyline($icon-height), 2)
+    span
+      display: inline-flex
+      justify-content: center
+      align-items: center
+      height: 24px
+      width: 56px
+      background-color: color.mix($slate-100, $slate-200)
+      border-radius: 1e3px
+      //// font: 500 11px / normal $code
+      //// letter-spacing: 0.075em
+      //// text-align: center
+      //// text-transform: uppercase
+      font: 500 11px / normal $sans
+      font-feature-settings: 'tnum'
+      letter-spacing: 0.075em
+      //// text-align: center
+      text-transform: uppercase
+      color: $slate-500
+      //// &:is(:hover, :focus-visible)
+      ////   background-color: white
+      ////   box-shadow: $inset-hairline-shadow
+    svg:last-child
+      margin-left: generate-keyline($icon-height)
       height: $undo-icon-height
       width: $undo-icon-height
       color: $slate-300

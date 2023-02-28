@@ -51,3 +51,19 @@ export function UndoSection({ name, icon: Icon, children }: PropsWithChildren<{ 
 		</section>
 	)
 }
+
+export function SliderUndoSection({ name, icon: Icon, value, formatValue, children }: PropsWithChildren<{ name?: string; icon?: Icon; value: number; formatValue: (value: number) => string }>) {
+	return (
+		<section className="section">
+			{name !== undefined && (
+				<header className="section-header">
+					{Icon !== undefined && <Icon />}
+					<h6 className="section-header-name">{name}</h6>
+					<span>{formatValue(value)}</span>
+					<feather.RotateCcw strokeWidth={4} />
+				</header>
+			)}
+			{children}
+		</section>
+	)
+}

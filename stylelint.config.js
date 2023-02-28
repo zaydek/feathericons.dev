@@ -62,9 +62,9 @@ const order = [
 	"font-family",
 	"font-feature-settings",
 	"letter-spacing",
-	"text-transform",
 	"vertical-align",
 	"text-align",
+	"text-transform",
 	"color",
 	"transform",
 	"opacity",
@@ -76,9 +76,7 @@ const order = [
 
 module.exports = {
 	customSyntax: "postcss-sass",
-	plugins: [
-		"stylelint-order",
-	],
+	plugins: ["stylelint-order"],
 	rules: {
 		"order/properties-order": order,
 	},

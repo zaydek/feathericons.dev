@@ -2,26 +2,7 @@ import * as feather from "@icons/feather"
 import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
-import {
-	Checkbox,
-	CheckboxButton,
-	Checkboxes,
-	DebugCssEffect,
-	Footer,
-	Grid,
-	GridItem,
-	Header,
-	Main,
-	Range,
-	Resource,
-	Resources,
-	ScrollContainer,
-	SearchBar,
-	Section,
-	Sidebar1,
-	Sidebar2,
-	UndoSection,
-} from "@/components"
+import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Main, Range, Resource, Resources, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
 import { RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
 import { useContext } from "react"
@@ -48,22 +29,7 @@ export function App() {
 }
 
 function LayoutSidebar1() {
-	const {
-		showFeather,
-		setShowFeather,
-		showBrandsOriginal,
-		setShowBrandsOriginal,
-		showBrandsCircle,
-		setShowBrandsCircle,
-		showBrandsSquare,
-		setShowBrandsSquare,
-		showPaymentsOriginal,
-		setShowPaymentsOriginal,
-		showPaymentsFilled,
-		setShowPaymentsFilled,
-		toggleAllBrands,
-		toggleAllPayments,
-	} = useContext(SearchContext)!
+	const { showFeather, setShowFeather, showBrandsOriginal, setShowBrandsOriginal, showBrandsCircle, setShowBrandsCircle, showBrandsSquare, setShowBrandsSquare, showPaymentsOriginal, setShowPaymentsOriginal, showPaymentsFilled, setShowPaymentsFilled, toggleAllBrands, toggleAllPayments } = useContext(SearchContext)!
 
 	return (
 		<Sidebar1>
@@ -80,11 +46,7 @@ function LayoutSidebar1() {
 							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={setShowFeather} />
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton
-								name="Brands"
-								icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />}
-								onClick={toggleAllBrands}
-							/>
+							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={toggleAllBrands} />
 							<Checkboxes>
 								<Checkbox name="Original" icon={wkSocial.Twitter} checked={showBrandsOriginal} setChecked={setShowBrandsOriginal} />
 								<Checkbox name="Circle" icon={wkSocial.TwitterCircle} checked={showBrandsCircle} setChecked={setShowBrandsCircle} />
@@ -92,11 +54,7 @@ function LayoutSidebar1() {
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton
-								name="Payment services"
-								icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />}
-								onClick={toggleAllPayments}
-							/>
+							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={toggleAllPayments} />
 							<Checkboxes>
 								<Checkbox name="Original" icon={wkPayment.Stripe} checked={showPaymentsOriginal} setChecked={setShowPaymentsOriginal} />
 								<Checkbox name="Filled" icon={wkPayment.Stripe1} checked={showPaymentsFilled} setChecked={setShowPaymentsFilled} />
@@ -126,15 +84,15 @@ function LayoutSidebar2() {
 	return (
 		<Sidebar2>
 			<Header>
-				<UndoSection name="Size" icon={feather.PenTool}>
+				<SliderUndoSection name="Size" icon={feather.PenTool} value={size} formatValue={value => `${value.toFixed(0)} PX`}>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-				</UndoSection>
+				</SliderUndoSection>
 			</Header>
 			<ScrollContainer>
 				<hr />
-				<UndoSection name="Stroke width" icon={feather.PenTool}>
+				<SliderUndoSection name="Stroke width" icon={feather.PenTool} value={strokeWidth} formatValue={value => value.toFixed(2)}>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
-				</UndoSection>
+				</SliderUndoSection>
 				<hr />
 			</ScrollContainer>
 		</Sidebar2>
