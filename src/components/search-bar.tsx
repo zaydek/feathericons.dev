@@ -3,7 +3,7 @@ import "./search-bar.sass"
 import * as feather from "@icons/feather"
 
 import { isMac } from "@/lib"
-import { SearchContext } from "@/state"
+import { SearchContext } from "@/providers"
 import { useContext, useEffect, useRef, useState } from "react"
 
 export function SearchBar() {
@@ -16,11 +16,6 @@ export function SearchBar() {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
 				e.preventDefault() // Printers 💀
-				//// if (document.activeElement === ref.current) {
-				//// 	ref.current!.blur()
-				//// } else {
-				//// 	ref.current!.focus()
-				//// }
 				ref.current!.focus()
 			} else if (e.key === "Escape") {
 				setSearch("")

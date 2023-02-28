@@ -1,7 +1,7 @@
 import "./checkboxes.sass"
 
 import { Icon } from "@/lib"
-import { PropsWithChildren, useState } from "react"
+import { Dispatch, PropsWithChildren, SetStateAction } from "react"
 
 export function Checkboxes({ children }: PropsWithChildren) {
 	return <ul className="checkboxes">{children}</ul>
@@ -10,16 +10,16 @@ export function Checkboxes({ children }: PropsWithChildren) {
 export function Checkbox({
 	name,
 	icon: Icon,
-	showCheckbox = true,
-	checked: initialValue = false,
+	showCheckbox = true, // TODO
+	checked,
+	setChecked,
 }: {
 	name: string
 	icon: Icon
-	showCheckbox?: boolean
-	checked?: boolean
+	showCheckbox?: boolean // TODO
+	checked: boolean
+	setChecked: Dispatch<SetStateAction<boolean>>
 }) {
-	const [checked, setChecked] = useState(initialValue)
-
 	return (
 		<li className="checkbox">
 			<label
@@ -35,9 +35,7 @@ export function Checkbox({
 			>
 				<Icon />
 				<span>{name}</span>
-				{showCheckbox && (
-					<input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} tabIndex={-1} />
-				)}
+				{showCheckbox && <input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} tabIndex={-1} />}
 			</label>
 		</li>
 	)

@@ -2,10 +2,7 @@ import { detab, tab } from "@/lib"
 
 export function transformSvg(_: string, icon: string, { banner }: { banner: string }) {
 	// Remove empty lines
-	icon = icon
-		.trim()
-		// Remove the viewBox attribute
-		.replace(/<svg ([^>]+)>/, `<svg $1>`) // No-op
+	icon = icon.trim().replace(/<svg ([^>]+)>/, `<svg $1>`) // No-op
 	// prettier-ignore
 	return detab(`
 		${banner}
@@ -15,10 +12,7 @@ export function transformSvg(_: string, icon: string, { banner }: { banner: stri
 
 export function transformJsx(name: string, icon: string, { banner }: { banner: string }) {
 	// Remove empty lines
-	icon = icon
-		.trim()
-		// Remove the viewBox attribute
-		.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>")
+	icon = icon.trim().replace(/<svg ([^>]+)>/, "<svg $1 {...props}>")
 	// prettier-ignore
 	return detab(`
 		${banner}
@@ -36,7 +30,6 @@ export function transformTsx(name: string, icon: string, { banner }: { banner: s
 		.trim()
 		// Remove the class attribute
 		.replace(/ class="[^"]+"/, "")
-		// Remove the viewBox attribute
 		.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>")
 	// prettier-ignore
 	return detab(`
