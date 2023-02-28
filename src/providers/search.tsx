@@ -21,14 +21,44 @@ export const SearchContext =
 	} | null>(null)
 
 export function SearchProvider({ children }: PropsWithChildren) {
-	const [search, setSearch] = useParamState({ key: "search", initialValue: "" })
+	const [search, setSearch] = useParamState({ key: "search", initialValue: "", parser: value => value })
 
-	const [showFeather, setShowFeather] = useParamState({ key: "feather", initialValue: true })
-	const [showBrandsOriginal, setShowBrandsOriginal] = useParamState({ key: "brands-original", initialValue: true })
-	const [showBrandsCircle, setShowBrandsCircle] = useParamState({ key: "brands-circle", initialValue: false })
-	const [showBrandsSquare, setShowBrandsSquare] = useParamState({ key: "brands-square", initialValue: false })
-	const [showPaymentsOriginal, setShowPaymentsOriginal] = useParamState({ key: "payments-original", initialValue: true })
-	const [showPaymentsFilled, setShowPaymentsFilled] = useParamState({ key: "payments-filled", initialValue: false })
+	const [showFeather, setShowFeather] = useParamState({
+		key: "feather",
+		initialValue: true,
+		parser: value => value === "1",
+		serializer: value => (value ? "1" : "0"),
+	})
+	const [showBrandsOriginal, setShowBrandsOriginal] = useParamState({
+		key: "brands-original",
+		initialValue: true,
+		parser: value => value === "1",
+		serializer: value => (value ? "1" : "0"),
+	})
+	const [showBrandsCircle, setShowBrandsCircle] = useParamState({
+		key: "brands-circle",
+		initialValue: false,
+		parser: value => value === "1",
+		serializer: value => (value ? "1" : "0"),
+	})
+	const [showBrandsSquare, setShowBrandsSquare] = useParamState({
+		key: "brands-square",
+		initialValue: false,
+		parser: value => value === "1",
+		serializer: value => (value ? "1" : "0"),
+	})
+	const [showPaymentsOriginal, setShowPaymentsOriginal] = useParamState({
+		key: "payments-original",
+		initialValue: true,
+		parser: value => value === "1",
+		serializer: value => (value ? "1" : "0"),
+	})
+	const [showPaymentsFilled, setShowPaymentsFilled] = useParamState({
+		key: "payments-filled",
+		initialValue: false,
+		parser: value => value === "1",
+		serializer: value => (value ? "1" : "0"),
+	})
 
 	// TODO
 	useEffect(() => {

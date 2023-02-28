@@ -23,15 +23,15 @@ export const RangeContext =
 export function RangeProvider({ children }: PropsWithChildren) {
 	const [size, setSize] = useParamState({
 		key: "size",
-		initialValue: 24,
+		initialValue: SIZE_DEFAULT,
 		parser: value => {
 			const parsed = +value
 			return parsed >= SIZE_MIN && parsed <= SIZE_MAX ? parsed : SIZE_DEFAULT
 		},
 	})
 	const [strokeWidth, setStrokeWidth] = useParamState({
-		key: "strokeWidth",
-		initialValue: 2,
+		key: "stroke-width",
+		initialValue: STROKE_DEFAULT,
 		parser: value => {
 			const parsed = +value
 			return parsed >= STROKE_MIN && parsed <= STROKE_MAX ? parsed : STROKE_DEFAULT

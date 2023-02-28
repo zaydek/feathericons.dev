@@ -8,13 +8,15 @@ type Serializer<T> = (value: T) => string
 export function useParamState<T>({
 	key,
 	initialValue,
-	parser = value => value as unknown as T,
+	//// // TODO: Should parser be required?
+	//// parser = value => value as unknown as T,
+	parser,
 	// @ts-expect-error
 	serializer = value => value.toString(),
 }: {
 	key: string
 	initialValue: T
-	parser?: Parser<T>
+	parser: Parser<T>
 	serializer?: Serializer<T>
 }) {
 	const [value, setValue] = useState(() => {
