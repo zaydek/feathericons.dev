@@ -58,15 +58,16 @@ export function App() {
 					<Section>
 						<div>
 							<Checkboxes>
-								<Checkbox name="Feather" icon={feather.Feather} checked />
+								<Checkbox name="Feather icons" icon={feather.Feather} checked />
 							</Checkboxes>
 							<Checkboxes>
 								<Checkbox
-									name="Social"
+									name="Brands"
 									icon={$props => (
-										<feather.ChevronDown
+										<feather.Folder
 											style={{ transform: "scale(0.8)", opacity: 0.375 }}
-											strokeWidth={6}
+											fill="currentColor"
+											strokeWidth={4}
 											{...$props}
 										/>
 									)}
@@ -74,14 +75,13 @@ export function App() {
 								/>
 								<Checkboxes>
 									<Checkbox name="Original" icon={wkSocial.Twitter} checked />
-									<Checkboxes>
-										<Checkbox name="Circle" icon={wkSocial.TwitterCircle} />
-									</Checkboxes>
-									<Checkboxes>
-										<Checkbox name="Square" icon={wkSocial.TwitterSquare} />
-									</Checkboxes>
+									<Checkbox name="Circle" icon={wkSocial.TwitterCircle} />
+									<Checkbox name="Square" icon={wkSocial.TwitterSquare} />
+									{/* <Checkbox name="Mono" icon={wkSocial.TwitterMono} checked />
+									<Checkbox name="Circle" icon={wkSocial.TwitterCircleMono} />
+									<Checkbox name="Square" icon={wkSocial.TwitterSquareMono} /> */}
 								</Checkboxes>
-								<Checkboxes>
+								{/* <Checkboxes>
 									<Checkbox name="Mono" icon={wkSocial.TwitterMono} checked />
 									<Checkboxes>
 										<Checkbox name="Circle" icon={wkSocial.TwitterCircleMono} />
@@ -89,15 +89,16 @@ export function App() {
 									<Checkboxes>
 										<Checkbox name="Square" icon={wkSocial.TwitterSquareMono} />
 									</Checkboxes>
-								</Checkboxes>
+								</Checkboxes> */}
 							</Checkboxes>
 							<Checkboxes>
 								<Checkbox
-									name="Payment"
+									name="Payment services"
 									icon={$props => (
-										<feather.ChevronDown
+										<feather.Folder
 											style={{ transform: "scale(0.8)", opacity: 0.375 }}
-											strokeWidth={6}
+											fill="currentColor"
+											strokeWidth={4}
 											{...$props}
 										/>
 									)}
@@ -105,15 +106,9 @@ export function App() {
 								/>
 								<Checkboxes>
 									<Checkbox name="Original" icon={wkPayment.Stripe} />
-									<Checkboxes>
-										<Checkbox name="Filled" icon={wkPayment.Stripe1} checked />
-									</Checkboxes>
-								</Checkboxes>
-								<Checkboxes>
-									<Checkbox name="Mono" icon={wkPayment.Stripe2} />
-									<Checkboxes>
-										<Checkbox name="Filled" icon={wkPayment.Stripe3} checked />
-									</Checkboxes>
+									<Checkbox name="Filled" icon={wkPayment.Stripe1} checked />
+									{/* <Checkbox name="Mono" icon={wkPayment.Stripe2} /> */}
+									{/* <Checkbox name="Filled" icon={wkPayment.Stripe3} checked /> */}
 								</Checkboxes>
 							</Checkboxes>
 						</div>
