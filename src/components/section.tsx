@@ -13,6 +13,16 @@ export function Footer({ children }: PropsWithChildren) {
 	return <footer className="footer">{children}</footer>
 }
 
+export function ScrollContainer({ children }: PropsWithChildren) {
+	const [scroll, setScroll] = useState(false)
+
+	return (
+		<div className="scroll-container" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
+			{children}
+		</div>
+	)
+}
+
 export function Section({ name, icon: Icon, children }: PropsWithChildren<{ name?: string; icon?: Icon }>) {
 	return (
 		<section className="section">
@@ -39,15 +49,5 @@ export function UndoSection({ name, icon: Icon, children }: PropsWithChildren<{ 
 			)}
 			{children}
 		</section>
-	)
-}
-
-export function ScrollContainer({ children }: PropsWithChildren) {
-	const [scroll, setScroll] = useState(false)
-
-	return (
-		<div className="scroll-container" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
-			{children}
-		</div>
 	)
 }

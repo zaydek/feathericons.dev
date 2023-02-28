@@ -2,8 +2,6 @@
 
 @use "../css/globals" as *
 
-//// $undo-icon-height: 16px
-
 $icon-height:      14px
 $undo-icon-height: 14px
 
@@ -17,6 +15,9 @@ $undo-icon-height: 14px
   .section:first-child
     padding-top: $sidebar-padding-y
 
+.scroll-container
+  overflow-y: auto // COMPAT/Windows
+
 .footer
   position: sticky
   bottom: 0
@@ -24,13 +25,9 @@ $undo-icon-height: 14px
   margin-top: auto // 😎
   background-color: white
   box-shadow: $hairline-shadow-top
-  //// section:first-child
-  ////   padding-top: $sidebar-padding-y
   .section:last-child
+    //// padding-bottom: $sidebar-padding-y
     padding: $sidebar-padding-y $sidebar-padding-x
-
-.scroll-container
-  overflow-y: auto // COMPAT/Windows
 
 .section
   display: flex
@@ -40,72 +37,26 @@ $undo-icon-height: 14px
   // Use <div> because of <div><ul className="checkboxes">...</ul></div>
   > :not(div:not([class]), .resources)
     margin: 0 generate-keyline()
-  h6
-    font: 500 11px / normal $sans
-    letter-spacing: 0.075em
-    text-transform: uppercase
-    color: $slate-500
-
-.section-header
-  display: flex
-  align-items: center
-  svg:nth-child(1)
-    margin-right: math.div(generate-keyline($icon-height), 2)
-    height: $icon-height
-    width: $icon-height
-    color: $slate-500
-  &-name
-    flex: 1 // Stretch x-axis
-    font: 500 11px / normal $sans
-    letter-spacing: 0.075em
-    text-transform: uppercase
-    color: $slate-500
-  svg:nth-child(3)
-    margin-left: math.div(generate-keyline($icon-height), 2)
-    height: $undo-icon-height
-    width: $undo-icon-height
-    color: $slate-300
-    cursor: pointer   // Interaction
-    user-select: none // Interaction
-    &:is(:hover, :focus-visible)
-      color: $slate-800
-
-//// .section
-////   display: flex
-////   flex-direction: column
-////   gap: $sidebar-gap
-////   padding: $sidebar-gap $sidebar-padding-x
-////   &:first-child
-////     position: sticky
-////     top: 0
-////     z-index: 10 // Because of input[type=checkbox]
-////     padding-bottom: $sidebar-gap
-////     background-color: white
-////     & + [data-scroll=true]
-////       box-shadow: $hairline-shadow-bottom
-////   &:last-child
-////     position: sticky
-////     bottom: 0
-////     z-index: 10 // Because of input[type=checkbox]
-////     margin-top: auto // 😎
-////     padding-top: $sidebar-gap
-////     background-color: white
-////     box-shadow: $hairline-shadow-top
-////   header
-////     display: flex
-////     align-items: center
-////     height: math.div($generic-button-height, 2)
-////     span
-////       flex: 1 // Stretch x-axis
-////       font: 600 10.5px / normal $sans
-////       letter-spacing: 0.05em
-////       text-transform: uppercase
-////       color: $slate-400
-////     svg
-////       height: $undo-icon-height
-////       width: $undo-icon-height
-////       color: $slate-300
-////       cursor: pointer   // Interaction
-////       user-select: none // Interaction
-////       &:hover
-////         color: $slate-800
+  &-header
+    display: flex
+    align-items: center
+    svg:nth-child(1)
+      margin-right: math.div(generate-keyline($icon-height), 2)
+      height: $icon-height
+      width: $icon-height
+      color: $slate-500
+    &-name
+      flex: 1 // Stretch x-axis
+      font: 500 11px / normal $sans
+      letter-spacing: 0.075em
+      text-transform: uppercase
+      color: $slate-500
+    svg:nth-child(3)
+      margin-left: math.div(generate-keyline($icon-height), 2)
+      height: $undo-icon-height
+      width: $undo-icon-height
+      color: $slate-300
+      cursor: pointer   // Interaction
+      user-select: none // Interaction
+      &:is(:hover, :focus-visible)
+        color: $slate-800

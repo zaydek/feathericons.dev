@@ -23,7 +23,7 @@ import {
 	UndoSection,
 } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
-import { RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/providers"
+import { RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
 import { useContext } from "react"
 
 // TODO: Move to search.tsx

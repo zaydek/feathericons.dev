@@ -1,7 +1,7 @@
 import "./layout.sass"
 
 import { cx, isMac } from "@/lib"
-import { LayoutContext, SidebarState } from "@/providers"
+import { LayoutContext, SidebarState } from "@/state"
 import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////

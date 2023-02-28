@@ -3,7 +3,7 @@ import "./search-bar.sass"
 import * as feather from "@icons/feather"
 
 import { isMac } from "@/lib"
-import { SearchContext } from "@/providers"
+import { SearchContext } from "@/state"
 import { useContext, useEffect, useRef, useState } from "react"
 
 export function SearchBar() {
