@@ -45,22 +45,23 @@ $undo-icon-height: 14px
       margin-right: math.div(generate-keyline($icon-height), 2)
       height: $icon-height
       width: $icon-height
-      color: $slate-500
+      color: $slate-600
     &-name
       flex: 1 // Stretch x-axis
       font: 500 11px / normal $sans
       font-feature-settings: 'tnum'
       letter-spacing: 0.075em
       text-transform: uppercase
-      color: $slate-500
+      color: $slate-600
     span
       display: inline-flex
       justify-content: center
       align-items: center
       height: 24px
       width: 56px
-      background-color: color.mix($slate-100, $slate-200)
+      //// background-color: color.mix($slate-100, $slate-200)
       border-radius: 1e3px
+      box-shadow: $inset-hairline-shadow
       //// font: 500 11px / normal $code
       //// letter-spacing: 0.075em
       //// text-align: center

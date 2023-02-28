@@ -64,15 +64,15 @@ export function SearchProvider({ children }: PropsWithChildren) {
 
 	const toggleAllBrands = useCallback(() => {
 		const every = showBrandsOriginal && showBrandsCircle && showBrandsSquare
-		for (const set of [setShowBrandsOriginal, setShowBrandsCircle, setShowBrandsSquare]) {
-			set(!every)
+		for (const setState of [setShowBrandsOriginal, setShowBrandsCircle, setShowBrandsSquare]) {
+			setState(!every)
 		}
 	}, [setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, showBrandsCircle, showBrandsOriginal, showBrandsSquare])
 
 	const toggleAllPayments = useCallback(() => {
 		const every = showPaymentsOriginal && showPaymentsFilled
-		for (const set of [setShowPaymentsOriginal, setShowPaymentsFilled]) {
-			set(!every)
+		for (const setState of [setShowPaymentsOriginal, setShowPaymentsFilled]) {
+			setState(!every)
 		}
 	}, [setShowPaymentsFilled, setShowPaymentsOriginal, showPaymentsFilled, showPaymentsOriginal])
 
