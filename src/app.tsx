@@ -12,7 +12,6 @@ import {
 	Header,
 	Main,
 	OverflowYContainer,
-	Range,
 	Resource,
 	Resources,
 	SearchBar,
@@ -21,8 +20,7 @@ import {
 	Sidebar2,
 } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
-import { useEffect } from "react"
-import { useParamState } from "./useParamState"
+import { SizeRange, StrokeWidthRange } from "./controllers"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -33,26 +31,6 @@ const wkSocialMediaEntries: [string, Icon][] = Object.entries(wkSocial).map(([k,
 const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).map(([k, v]) => [toNameCase(k), v])
 
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
-
-function SizeRange() {
-	const [size, setSize] = useParamState({ key: "size", initialValue: 24 })
-
-	useEffect(() => {
-		document.body.style.setProperty("--icon-size", "" + size)
-	}, [size])
-
-	return <Range value={size} setValue={setSize} min={16} max={48} step={1} />
-}
-
-function StrokeWidthRange() {
-	const [strokeWidth, setStrokeWidth] = useParamState({ key: "stroke-width", initialValue: 2 })
-
-	useEffect(() => {
-		document.body.style.setProperty("--icon-stroke-width", "" + strokeWidth)
-	}, [strokeWidth])
-
-	return <Range value={strokeWidth} setValue={setStrokeWidth} min={0.5} max={3.5} step={0.125} />
-}
 
 export function App() {
 	return (
