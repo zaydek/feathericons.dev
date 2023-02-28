@@ -1,21 +1,25 @@
-import { detab } from "@/lib"
+import { detab, tab } from "@/lib"
 
 export function transformSvg(_: string, icon: string, { banner }: { banner: string }) {
-	// prettier-ignore
+	// Remove empty lines
 	icon = icon
 		.trim()
-		.replace(/<svg ([^>]+)>/, `<svg $1>`)
+		// Remove the viewBox attribute
+		.replace(/<svg ([^>]+)>/, `<svg $1>`) // No-op
+	// prettier-ignore
 	return detab(`
 		${banner}
 		${tab(icon, 2)}
-	`).replaceAll("\t", "  ")
+	`, { spaces: true })
 }
 
 export function transformJsx(name: string, icon: string, { banner }: { banner: string }) {
-	// prettier-ignore
+	// Remove empty lines
 	icon = icon
 		.trim()
+		// Remove the viewBox attribute
 		.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>")
+	// prettier-ignore
 	return detab(`
 		${banner}
 		export function ${name}(props) {
@@ -23,15 +27,18 @@ export function transformJsx(name: string, icon: string, { banner }: { banner: s
 				${tab(icon, 4)}
 			);
 		}
-	`).replaceAll("\t", "  ")
+	`, { spaces: true })
 }
 
 export function transformTsx(name: string, icon: string, { banner }: { banner: string }) {
-	// prettier-ignore
+	// Remove empty lines
 	icon = icon
 		.trim()
-		.replace(/ class="[^"]+"/, "") // Remove class="feather feather-*"
+		// Remove the class attribute
+		.replace(/ class="[^"]+"/, "")
+		// Remove the viewBox attribute
 		.replace(/<svg ([^>]+)>/, "<svg $1 {...props}>")
+	// prettier-ignore
 	return detab(`
 		${banner}
 		export function ${name}(props: JSX.IntrinsicElements["svg"]) {
@@ -39,5 +46,5 @@ export function transformTsx(name: string, icon: string, { banner }: { banner: s
 				${tab(icon, 4)}
 			);
 		}
-	`).replaceAll("\t", "  ")
+	`, { spaces: true })
 }
