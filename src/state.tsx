@@ -14,6 +14,13 @@ export const STROKE_DEFAULT = 2
 ////////////////////////////////////////////////////////////////////////////////
 
 // prettier-ignore
+export const SearchContext =
+	createContext<{
+		search:         string
+		setSearch:      Dispatch<SetStateAction<string>>
+	} | null>(null)
+
+// prettier-ignore
 export const SliderContext =
 	createContext<{
 		size:           number
@@ -25,6 +32,8 @@ export const SliderContext =
 ////////////////////////////////////////////////////////////////////////////////
 
 export function StateProvider({ children }: PropsWithChildren) {
+	const [search, setSearch] = useParamState({ key: "search", initialValue: "" })
+
 	const [size, setSize] = useParamState({
 		key: "size",
 		initialValue: 24,
@@ -51,18 +60,28 @@ export function StateProvider({ children }: PropsWithChildren) {
 	}, [strokeWidth])
 
 	return (
-		<SliderContext.Provider
+		<SearchContext.Provider
 			value={useMemo(
 				() => ({
-					size,
-					setSize,
-					strokeWidth,
-					setStrokeWidth,
+					search,
+					setSearch,
 				}),
-				[setSize, setStrokeWidth, size, strokeWidth],
+				[search, setSearch],
 			)}
 		>
-			{children}
-		</SliderContext.Provider>
+			<SliderContext.Provider
+				value={useMemo(
+					() => ({
+						size,
+						setSize,
+						strokeWidth,
+						setStrokeWidth,
+					}),
+					[setSize, setStrokeWidth, size, strokeWidth],
+				)}
+			>
+				{children}
+			</SliderContext.Provider>
+		</SearchContext.Provider>
 	)
 }

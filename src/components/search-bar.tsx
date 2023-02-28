@@ -3,11 +3,12 @@ import "./search-bar.sass"
 import * as feather from "@icons/feather"
 
 import { isMac } from "@/lib"
-import { useEffect, useRef, useState } from "react"
+import { SearchContext } from "@/state"
+import { useContext, useEffect, useRef } from "react"
 
 export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
-	const [value, setValue] = useState("")
+	const { search, setSearch } = useContext(SearchContext)!
 
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
@@ -27,8 +28,8 @@ export function SearchBar() {
 				ref={ref}
 				type="text"
 				placeholder={isMac() ? "Press ⌘P to Focus" : "Press Ctrl-P to Focus"}
-				value={value}
-				onChange={e => setValue(e.currentTarget.value)}
+				value={search}
+				onChange={e => setSearch(e.currentTarget.value)}
 			/>
 		</div>
 	)
