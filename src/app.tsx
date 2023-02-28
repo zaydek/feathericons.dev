@@ -12,6 +12,7 @@ import {
 	Header,
 	Main,
 	OverflowYContainer,
+	Range,
 	Resource,
 	Resources,
 	SearchBar,
@@ -20,7 +21,8 @@ import {
 	Sidebar2,
 } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
-import { SizeRange, StrokeWidthRange } from "./controllers"
+import { useContext } from "react"
+import { SIZE_MAX, SIZE_MIN, SIZE_STEP, SliderContext, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "./state"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -31,6 +33,16 @@ const wkSocialMediaEntries: [string, Icon][] = Object.entries(wkSocial).map(([k,
 const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).map(([k, v]) => [toNameCase(k), v])
 
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
+
+function SizeRange() {
+	const { size, setSize } = useContext(SliderContext)!
+	return <Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+}
+
+function StrokeWidthRange() {
+	const { strokeWidth, setStrokeWidth } = useContext(SliderContext)!
+	return <Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
+}
 
 export function App() {
 	return (
