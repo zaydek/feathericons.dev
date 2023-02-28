@@ -24,18 +24,18 @@ export function GridItem({
 		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
 			<figure
 				onFocus={e => {
-					// Remove selection e.g. user-select: all
+					// Remove previous selection e.g. user-select: all
 					const selection = window.getSelection()
 					selection?.removeAllRanges()
 				}}
+				onDragStart={e => {
+					e.dataTransfer.setData("text/plain", "Hello, world!")
+					// TODO
+				}}
+				draggable
 				tabIndex={0}
 			>
-				<Icon
-				/// style={{
-				/// 	transform: "scale(calc(var(--icon-size) / 24px))",
-				/// 	strokeWidth: "var(--icon-stroke-width)",
-				/// }}
-				/>
+				<Icon />
 			</figure>
 			<figcaption>{name}</figcaption>
 			<feather.Star className="bookmark" fill="currentColor" strokeWidth={6} />
