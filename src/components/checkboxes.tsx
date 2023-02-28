@@ -10,19 +10,18 @@ export function Checkboxes({ children }: PropsWithChildren) {
 export function Checkbox({
 	name,
 	icon: Icon,
-	showCheckbox = true, // TODO
 	checked,
 	setChecked,
 }: {
 	name: string
 	icon: Icon
-	showCheckbox?: boolean // TODO
 	checked: boolean
 	setChecked: Dispatch<SetStateAction<boolean>>
 }) {
 	return (
-		<li className="checkbox">
+		<li>
 			<label
+				className="checkbox"
 				onKeyDown={e => {
 					if (e.key === "Enter" || e.key === " ") {
 						e.preventDefault()
@@ -35,8 +34,27 @@ export function Checkbox({
 			>
 				<Icon />
 				<span>{name}</span>
-				{showCheckbox && <input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} tabIndex={-1} />}
+				{/* Defer focus to <label> */}
+				<input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} tabIndex={-1} />
 			</label>
+		</li>
+	)
+}
+
+export function CheckboxButton({
+	name,
+	icon: Icon,
+	...props
+}: {
+	name: string
+	icon: Icon
+} & JSX.IntrinsicElements["button"]) {
+	return (
+		<li>
+			<button className="checkbox" {...props}>
+				<Icon />
+				<span>{name}</span>
+			</button>
 		</li>
 	)
 }

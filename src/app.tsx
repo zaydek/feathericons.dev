@@ -4,6 +4,7 @@ import * as wkSocial from "@icons/wolf-kit/social-media"
 
 import {
 	Checkbox,
+	CheckboxButton,
 	Checkboxes,
 	DebugCssEffect,
 	Footer,
@@ -85,12 +86,10 @@ function LayoutSidebar1() {
 							/>
 						</Checkboxes>
 						<Checkboxes>
-							<Checkbox
+							<CheckboxButton
 								name="Brands"
 								icon={$props => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...$props} />}
-								showCheckbox={false}
-								checked={someBrandsChecked}
-								setChecked={() => {
+								onClick={e => {
 									for (const setChecked of [setShowBrandsOriginal, setShowBrandsCircle, setShowBrandsSquare]) {
 										setChecked(!someBrandsChecked)
 									}
@@ -121,12 +120,10 @@ function LayoutSidebar1() {
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							<Checkbox
+							<CheckboxButton
 								name="Payment services"
 								icon={$props => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...$props} />}
-								showCheckbox={false}
-								checked={somePaymentsChecked}
-								setChecked={() => {
+								onClick={e => {
 									for (const setChecked of [setShowPaymentsOriginal, setShowPaymentsFilled]) {
 										setChecked(!somePaymentsChecked)
 									}

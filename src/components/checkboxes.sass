@@ -12,8 +12,10 @@ $icon-height: $generic-button-icon-height
 .checkboxes .checkboxes
   margin-left: math.div($generic-button-height, 2)
 
-// Target <label> because of input[type=checkbox]
-.checkbox label
+.checkbox
+  width: 100% // CSS reset for <button>
+
+  // stylelint-disable-next-line order/properties-order
   display: flex
   align-items: center
   height: $generic-button-height
@@ -35,11 +37,3 @@ $icon-height: $generic-button-icon-height
     color: $slate-800
   input[type=checkbox]
     margin: 0 generate-keyline(24px)
-
-//// // No-op the start checkbox's top margin
-//// div > .checkboxes:first-child li
-////   margin-top: 0
-////
-//// // No-op the end checkbox's bottom margin
-//// div > .checkboxes:last-child li
-////   margin-bottom: 0
