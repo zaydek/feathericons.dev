@@ -4,6 +4,9 @@
 
 //// $undo-icon-height: 16px
 
+$icon-height:      14px
+$undo-icon-height: 14px
+
 .header
   position: sticky
   top: 0
@@ -42,6 +45,30 @@
     letter-spacing: 0.075em
     text-transform: uppercase
     color: $slate-500
+
+.section-header
+  display: flex
+  align-items: center
+  svg:nth-child(1)
+    margin-right: math.div(generate-keyline($icon-height), 2)
+    height: $icon-height
+    width: $icon-height
+    color: $slate-500
+  &-name
+    flex: 1 // Stretch x-axis
+    font: 500 11px / normal $sans
+    letter-spacing: 0.075em
+    text-transform: uppercase
+    color: $slate-500
+  svg:nth-child(3)
+    margin-left: math.div(generate-keyline($icon-height), 2)
+    height: $undo-icon-height
+    width: $undo-icon-height
+    color: $slate-300
+    cursor: pointer   // Interaction
+    user-select: none // Interaction
+    &:is(:hover, :focus-visible)
+      color: $slate-800
 
 //// .section
 ////   display: flex

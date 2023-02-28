@@ -1,5 +1,8 @@
 import "./section.sass"
 
+import * as feather from "@icons/feather"
+
+import { Icon } from "@/lib"
 import { PropsWithChildren, useState } from "react"
 
 export function Header({ children }: PropsWithChildren) {
@@ -10,10 +13,30 @@ export function Footer({ children }: PropsWithChildren) {
 	return <footer className="footer">{children}</footer>
 }
 
-export function Section({ name, children }: PropsWithChildren<{ name?: string }>) {
+export function Section({ name, icon: Icon, children }: PropsWithChildren<{ name?: string; icon?: Icon }>) {
 	return (
 		<section className="section">
-			{name !== undefined && <h6>{name}</h6>}
+			{name !== undefined && (
+				<header className="section-header">
+					{Icon !== undefined && <Icon />}
+					<h6 className="section-header-name">{name}</h6>
+				</header>
+			)}
+			{children}
+		</section>
+	)
+}
+
+export function UndoSection({ name, icon: Icon, children }: PropsWithChildren<{ name?: string; icon?: Icon }>) {
+	return (
+		<section className="section">
+			{name !== undefined && (
+				<header className="section-header">
+					{Icon !== undefined && <Icon />}
+					<h6 className="section-header-name">{name}</h6>
+					<feather.RotateCcw strokeWidth={4} />
+				</header>
+			)}
 			{children}
 		</section>
 	)

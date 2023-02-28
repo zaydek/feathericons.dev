@@ -20,6 +20,7 @@ import {
 	Section,
 	Sidebar1,
 	Sidebar2,
+	UndoSection,
 } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
 import { RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/providers"
@@ -73,7 +74,7 @@ function LayoutSidebar1() {
 				</Section>
 			</Header>
 			<ScrollContainer>
-				<Section>
+				<UndoSection name="Icon packs" icon={feather.Package}>
 					{/* Use <div> to no-op Flexbox gap */}
 					<div>
 						<Checkboxes>
@@ -147,11 +148,11 @@ function LayoutSidebar1() {
 							</Checkboxes>
 						</Checkboxes>
 					</div>
-				</Section>
+				</UndoSection>
 				<hr />
 			</ScrollContainer>
 			<Footer>
-				<Section name="Resources">
+				<Section name="Interwebs" icon={feather.Globe}>
 					<Resources>
 						<Resource name="Icons" icon={wkSocial.Github} />
 						<Resource name="Website" icon={wkSocial.Github} />
@@ -170,15 +171,15 @@ function LayoutSidebar2() {
 	return (
 		<Sidebar2>
 			<Header>
-				<Section name="Size">
+				<UndoSection name="Size" icon={feather.PenTool}>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-				</Section>
+				</UndoSection>
 			</Header>
 			<ScrollContainer>
 				<hr />
-				<Section name="Stroke width">
+				<UndoSection name="Stroke width" icon={feather.PenTool}>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
-				</Section>
+				</UndoSection>
 				<hr />
 			</ScrollContainer>
 		</Sidebar2>

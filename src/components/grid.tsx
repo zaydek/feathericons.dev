@@ -10,17 +10,7 @@ export function Grid({ children }: PropsWithChildren) {
 }
 
 // TODO: May want to ensure <article> is visible when toggling the sidebar
-export function GridItem({
-	name,
-	icon: Icon,
-	selected = undefined,
-	bookmark = undefined,
-}: {
-	name: string
-	icon: Icon
-	bookmark?: boolean
-	selected?: boolean
-}) {
+export function GridItem({ name, icon: Icon, selected, bookmark }: { name: string; icon: Icon; bookmark?: boolean; selected?: boolean }) {
 	return (
 		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
 			<figure
