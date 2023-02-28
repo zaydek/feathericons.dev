@@ -1,17 +1,7 @@
 import "./layout.sass"
 
-import { cx } from "@/lib"
-import {
-	createContext,
-	Dispatch,
-	PropsWithChildren,
-	SetStateAction,
-	useCallback,
-	useContext,
-	useEffect,
-	useMemo,
-	useState,
-} from "react"
+import { cx, isMac } from "@/lib"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect, useMemo, useState } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -48,6 +38,51 @@ export function SidebarProvider({ children }: PropsWithChildren) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+function useScrollLocking({ state }: { state: SidebarState }) {
+	useEffect(() => {
+		if (state === "maximized") {
+			document.body.style.overflowY = "clip"
+		} else {
+			document.body.style.overflowY = ""
+			if (document.body.style.length === 0) {
+				document.body.removeAttribute("style")
+			}
+		}
+	}, [state])
+	return void 0
+}
+
+function useEscapeKeyShortcut({ state, setState }: { state: SidebarState; setState: Dispatch<SetStateAction<SidebarState>> }) {
+	useEffect(() => {
+		if (state !== "maximized") { return } // prettier-ignore
+		function handleKeyDown(e: KeyboardEvent) {
+			setState(null)
+		}
+		document.addEventListener("keydown", handleKeyDown, false)
+		return () => document.removeEventListener("keydown", handleKeyDown, false)
+	}, [setState, state])
+	return void 0
+}
+
+function useToggleSidebarShortcut({ setState }: { setState: Dispatch<SetStateAction<SidebarState>> }) {
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if ((isMac() && e.metaKey && e.key === "\\") || (!isMac() && e.ctrlKey && e.key === "/")) {
+				setState(curr => {
+					if (curr === null || curr === "maximized") {
+						return "minimized"
+					} else {
+						return null
+					}
+				})
+			}
+		}
+		document.addEventListener("keydown", handleKeyDown)
+		return () => document.removeEventListener("keydown", handleKeyDown)
+	}, [setState])
+	return void 0
+}
 
 export function Sidebar1({ children }: PropsWithChildren) {
 	//// const { sidebar1: state, setSidebar1: setState } = useContext(SidebarContext)!
@@ -96,25 +131,9 @@ export function Sidebar2({ children }: PropsWithChildren) {
 		}
 	}, [setState, state])
 
-	useEffect(() => {
-		if (state === "maximized") {
-			document.body.style.overflowY = "clip"
-		} else {
-			document.body.style.overflowY = ""
-			if (document.body.style.length === 0) {
-				document.body.removeAttribute("style")
-			}
-		}
-	}, [state])
-
-	useEffect(() => {
-		if (state !== "maximized") { return } // prettier-ignore
-		function handleKeyDown(e: KeyboardEvent) {
-			setState(null)
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setState, state])
+	useScrollLocking({ state })
+	useEscapeKeyShortcut({ state, setState })
+	useToggleSidebarShortcut({ setState })
 
 	return (
 		<aside className={cx("sidebar", state && `is-${state}`)}>
