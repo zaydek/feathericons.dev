@@ -1,5 +1,6 @@
 @forward "tailwind-v3-colors"
 
+@use "sass:color"
 @use "sass:math"
 @use "sass:selector"
 
@@ -32,17 +33,30 @@ $sidebar-gap:       16px
 $generic-button-height:      40px
 $generic-button-icon-height: 18px
 
-$hairline-color:               $slate-300
-$inset-hairline-shadow:        inset  0    0   0 1px $hairline-color
-$inset-hairline-shadow-top:    inset  0   -1px 0 0   $hairline-color
-$inset-hairline-shadow-right:  inset  1px  0   0 0   $hairline-color
-$inset-hairline-shadow-bottom: inset  0    1px 0 0   $hairline-color
-$inset-hairline-shadow-left:   inset -1px  0   0 0   $hairline-color
-$hairline-shadow:                     0    0   0 1px $hairline-color
-$hairline-shadow-top:                 0   -1px 0 0   $hairline-color
-$hairline-shadow-right:               1px  0   0 0   $hairline-color
-$hairline-shadow-bottom:              0    1px 0 0   $hairline-color
-$hairline-shadow-left:               -1px  0   0 0   $hairline-color
+$hairline-height: 1px
+$hairline-color:  color.mix($slate-200, $slate-300)
+
+//// $inset-hairline-shadow:        inset  0    0   0 1px $hairline-color
+//// $inset-hairline-shadow-top:    inset  0   -1px 0 0   $hairline-color
+//// $inset-hairline-shadow-right:  inset  1px  0   0 0   $hairline-color
+//// $inset-hairline-shadow-bottom: inset  0    1px 0 0   $hairline-color
+//// $inset-hairline-shadow-left:   inset -1px  0   0 0   $hairline-color
+//// $hairline-shadow:                     0    0   0 1px $hairline-color
+//// $hairline-shadow-top:                 0   -1px 0 0   $hairline-color
+//// $hairline-shadow-right:               1px  0   0 0   $hairline-color
+//// $hairline-shadow-bottom:              0    1px 0 0   $hairline-color
+//// $hairline-shadow-left:               -1px  0   0 0   $hairline-color
+
+$inset-hairline-shadow:        inset  0                     0                    0 $hairline-height $hairline-color
+$inset-hairline-shadow-top:    inset  0                    -1 * $hairline-height 0 0                $hairline-color
+$inset-hairline-shadow-right:  inset  $hairline-height      0                    0 0                $hairline-color
+$inset-hairline-shadow-bottom: inset  0                     $hairline-height     0 0                $hairline-color
+$inset-hairline-shadow-left:   inset -1 * $hairline-height  0                    0 0                $hairline-color
+$hairline-shadow:                     0                     0                    0 $hairline-height $hairline-color
+$hairline-shadow-top:                 0                    -1 * $hairline-height 0 0                $hairline-color
+$hairline-shadow-right:               $hairline-height      0                    0 0                $hairline-color
+$hairline-shadow-bottom:              0                     $hairline-height     0 0                $hairline-color
+$hairline-shadow-left:               -1 * $hairline-height  0                    0 0                $hairline-color
 
 $realistic-shadow:   0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color, 0 32px 64px -32px $hairline-color
 $realistic-shadow-1: 0 1px 2px -1px $hairline-color

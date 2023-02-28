@@ -38,7 +38,7 @@ export function GridItem({
 				<Icon />
 			</figure>
 			<figcaption>{name}</figcaption>
-			<feather.Star className="bookmark" fill="currentColor" strokeWidth={6} />
+			<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
 		</article>
 	)
 }

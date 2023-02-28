@@ -21,7 +21,8 @@ import {
 	Sidebar2,
 } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useParamState } from "./useParamState"
 
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
@@ -34,7 +35,7 @@ const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).m
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
 
 function SizeRange() {
-	const [size, setSize] = useState(24)
+	const [size, setSize] = useParamState({ key: "size", initialValue: 24 })
 
 	useEffect(() => {
 		document.body.style.setProperty("--icon-size", "" + size)
@@ -44,7 +45,7 @@ function SizeRange() {
 }
 
 function StrokeWidthRange() {
-	const [strokeWidth, setStrokeWidth] = useState(2)
+	const [strokeWidth, setStrokeWidth] = useParamState({ key: "stroke-width", initialValue: 2 })
 
 	useEffect(() => {
 		document.body.style.setProperty("--icon-stroke-width", "" + strokeWidth)
@@ -64,7 +65,7 @@ export function App() {
 					</Section>
 				</Header>
 				<OverflowYContainer>
-					<Section name="Icons">
+					<Section>
 						<div>
 							<Checkboxes>
 								<Checkbox name="Feather" icon={feather.Feather} checked />
