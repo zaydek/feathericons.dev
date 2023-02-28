@@ -5,11 +5,9 @@ const searchParams = new URLSearchParams(typeof window === "undefined" ? "" : wi
 type Parser<T> = (value: string) => T
 type Serializer<T> = (value: T) => string
 
-export function useParamState<T>({
+export function useParameterState<T>({
 	key,
 	initialValue,
-	//// // TODO: Should parser be required?
-	//// parser = value => value as unknown as T,
 	parser,
 	// @ts-expect-error
 	serializer = value => value.toString(),

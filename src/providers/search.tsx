@@ -1,5 +1,5 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useEffect, useMemo } from "react"
-import { useParamState } from "./use-param-state"
+import { useParameterState } from "./use-parameter-state"
 
 // prettier-ignore
 export const SearchContext =
@@ -21,39 +21,39 @@ export const SearchContext =
 	} | null>(null)
 
 export function SearchProvider({ children }: PropsWithChildren) {
-	const [search, setSearch] = useParamState({ key: "search", initialValue: "", parser: value => value })
+	const [search, setSearch] = useParameterState({ key: "search", initialValue: "", parser: value => value })
 
-	const [showFeather, setShowFeather] = useParamState({
+	const [showFeather, setShowFeather] = useParameterState({
 		key: "feather",
 		initialValue: true,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showBrandsOriginal, setShowBrandsOriginal] = useParamState({
+	const [showBrandsOriginal, setShowBrandsOriginal] = useParameterState({
 		key: "brands-original",
 		initialValue: true,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showBrandsCircle, setShowBrandsCircle] = useParamState({
+	const [showBrandsCircle, setShowBrandsCircle] = useParameterState({
 		key: "brands-circle",
 		initialValue: false,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showBrandsSquare, setShowBrandsSquare] = useParamState({
+	const [showBrandsSquare, setShowBrandsSquare] = useParameterState({
 		key: "brands-square",
 		initialValue: false,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showPaymentsOriginal, setShowPaymentsOriginal] = useParamState({
+	const [showPaymentsOriginal, setShowPaymentsOriginal] = useParameterState({
 		key: "payments-original",
 		initialValue: true,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showPaymentsFilled, setShowPaymentsFilled] = useParamState({
+	const [showPaymentsFilled, setShowPaymentsFilled] = useParameterState({
 		key: "payments-filled",
 		initialValue: false,
 		parser: value => value === "1",

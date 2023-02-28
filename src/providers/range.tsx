@@ -1,5 +1,5 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useEffect, useMemo } from "react"
-import { useParamState } from "./use-param-state"
+import { useParameterState } from "./use-parameter-state"
 
 export const SIZE_MIN       = 16 // prettier-ignore
 export const SIZE_MAX       = 48 // prettier-ignore
@@ -21,7 +21,7 @@ export const RangeContext =
 	} | null>(null)
 
 export function RangeProvider({ children }: PropsWithChildren) {
-	const [size, setSize] = useParamState({
+	const [size, setSize] = useParameterState({
 		key: "size",
 		initialValue: SIZE_DEFAULT,
 		parser: value => {
@@ -29,7 +29,7 @@ export function RangeProvider({ children }: PropsWithChildren) {
 			return parsed >= SIZE_MIN && parsed <= SIZE_MAX ? parsed : SIZE_DEFAULT
 		},
 	})
-	const [strokeWidth, setStrokeWidth] = useParamState({
+	const [strokeWidth, setStrokeWidth] = useParameterState({
 		key: "stroke-width",
 		initialValue: STROKE_DEFAULT,
 		parser: value => {

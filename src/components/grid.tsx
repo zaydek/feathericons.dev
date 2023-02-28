@@ -9,6 +9,7 @@ export function Grid({ children }: PropsWithChildren) {
 	return <div className="grid">{children}</div>
 }
 
+// TODO: May want to ensure <article> is visible when toggling the sidebar
 export function GridItem({
 	name,
 	icon: Icon,

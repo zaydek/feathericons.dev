@@ -1,30 +1,36 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useMemo, useState } from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useMemo } from "react"
+import { useParameterState } from "./use-parameter-state"
 
-export type SidebarState = null | "minimized" | "maximized"
+export type SidebarState = "normal" | "maximized" | "minimized"
 
 // prettier-ignore
 export const LayoutContext =
 	createContext<{
-		sidebar1:    SidebarState                           // TODO: DEPRECATE?
-		setSidebar1: Dispatch<SetStateAction<SidebarState>> // TODO: DEPRECATE?
-		sidebar2:    SidebarState
-		setSidebar2: Dispatch<SetStateAction<SidebarState>>
+		sidebar:    SidebarState
+		setSidebar: Dispatch<SetStateAction<SidebarState>>
 	} | null>(null)
 
 export function LayoutProvider({ children }: PropsWithChildren) {
-	const [sidebar1, setSidebar1] = useState<SidebarState>(null)
-	const [sidebar2, setSidebar2] = useState<SidebarState>("minimized")
+	const [sidebar, setSidebar] = useParameterState<SidebarState>({
+		key: "sidebar",
+		initialValue: "minimized",
+		parser: value => {
+			if (value === "normal" || value === "maximized" || value === "minimized") {
+				return value
+			} else {
+				return "normal"
+			}
+		},
+	})
 
 	return (
 		<LayoutContext.Provider
 			value={useMemo(
 				() => ({
-					sidebar1,
-					setSidebar1,
-					sidebar2,
-					setSidebar2,
+					sidebar,
+					setSidebar,
 				}),
-				[sidebar1, sidebar2],
+				[sidebar, setSidebar],
 			)}
 		>
 			{children}

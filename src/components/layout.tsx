@@ -4,9 +4,11 @@ import { cx, isMac } from "@/lib"
 import { LayoutContext, SidebarState } from "@/providers"
 import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
 
-function useScrollLocking({ state }: { state: SidebarState }) {
+////////////////////////////////////////////////////////////////////////////////
+
+function useBodyScrollLocking({ sidebar }: { sidebar: SidebarState }) {
 	useEffect(() => {
-		if (state === "maximized") {
+		if (sidebar === "maximized") {
 			document.body.style.overflowY = "clip"
 		} else {
 			document.body.style.overflowY = ""
@@ -14,95 +16,72 @@ function useScrollLocking({ state }: { state: SidebarState }) {
 				document.body.removeAttribute("style")
 			}
 		}
-	}, [state])
+	}, [sidebar])
 	return void 0
 }
 
-function useEscapeKeyShortcut({ state, setState }: { state: SidebarState; setState: Dispatch<SetStateAction<SidebarState>> }) {
+function useCancelableShortcut({ sidebar, setSidebar }: { sidebar: SidebarState; setSidebar: Dispatch<SetStateAction<SidebarState>> }) {
 	useEffect(() => {
-		if (state !== "maximized") { return } // prettier-ignore
+		if (sidebar !== "maximized") { return } // prettier-ignore
 		function handleKeyDown(e: KeyboardEvent) {
-			setState(null)
+			setSidebar("normal")
 		}
 		document.addEventListener("keydown", handleKeyDown, false)
 		return () => document.removeEventListener("keydown", handleKeyDown, false)
-	}, [setState, state])
+	}, [setSidebar, sidebar])
 	return void 0
 }
 
-function useToggleSidebarShortcut({ setState }: { setState: Dispatch<SetStateAction<SidebarState>> }) {
+function useToggleShortcut({ setSidebar }: { setSidebar: Dispatch<SetStateAction<SidebarState>> }) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() && e.metaKey && e.key === "\\") || (!isMac() && e.ctrlKey && e.key === "/")) {
-				setState(curr => {
-					if (curr === null || curr === "maximized") {
+				setSidebar(curr => {
+					if (curr === "normal" || curr === "maximized") {
 						return "minimized"
 					} else {
-						return null
+						return "normal"
 					}
 				})
 			}
 		}
 		document.addEventListener("keydown", handleKeyDown)
 		return () => document.removeEventListener("keydown", handleKeyDown)
-	}, [setState])
+	}, [setSidebar])
 	return void 0
 }
 
-export function Sidebar1({ children }: PropsWithChildren) {
-	//// const { sidebar1: state, setSidebar1: setState } = useContext(SidebarContext)!
-	////
-	//// const cycleState = useCallback(() => {
-	//// 	if (state === null) {
-	//// 		setState("maximized")
-	//// 	} else if (state === "maximized") {
-	//// 		setState("minimized")
-	//// 	} else {
-	//// 		setState(null)
-	//// 	}
-	//// }, [setState, state])
-	////
-	//// useEffect(() => {
-	//// 	if (state === "maximized") {
-	//// 		document.body.style.overflowY = "clip"
-	//// 	} else {
-	//// 		document.body.style.overflowY = ""
-	//// 		if (document.body.style.length === 0) {
-	//// 			document.body.removeAttribute("style")
-	//// 		}
-	//// 	}
-	//// }, [state])
+////////////////////////////////////////////////////////////////////////////////
 
+export function Sidebar1({ children }: PropsWithChildren) {
 	return (
 		<aside className="sidebar">
-			{/* <div className="drag-area" onClick={cycleState}>
-				<div className="handle"></div>
-			</div> */}
 			<div className="contents">{children}</div>
 		</aside>
 	)
 }
 
 export function Sidebar2({ children }: PropsWithChildren) {
-	const { sidebar2: state, setSidebar2: setState } = useContext(LayoutContext)!
+	const { sidebar, setSidebar } = useContext(LayoutContext)!
 
-	const cycleState = useCallback(() => {
-		if (state === null) {
-			setState("maximized")
-		} else if (state === "maximized") {
-			setState("minimized")
+	// DEBUG
+	const DEBUG_cycleState = useCallback(() => {
+		if (sidebar === "normal") {
+			setSidebar("maximized")
+		} else if (sidebar === "maximized") {
+			setSidebar("minimized")
 		} else {
-			setState(null)
+			setSidebar("normal")
 		}
-	}, [setState, state])
+	}, [setSidebar, sidebar])
 
-	useScrollLocking({ state })
-	useEscapeKeyShortcut({ state, setState })
-	useToggleSidebarShortcut({ setState })
+	useBodyScrollLocking({ sidebar })
+	useCancelableShortcut({ sidebar, setSidebar })
+	useToggleShortcut({ setSidebar })
 
 	return (
-		<aside className={cx("sidebar", state && `is-${state}`)}>
-			<div className="drag-area" onClick={cycleState}>
+		<aside className={cx("sidebar", sidebar && `is-${sidebar}`)}>
+			<div className="drag-area" onClick={DEBUG_cycleState}>
 				<div className="handle"></div>
 			</div>
 			<div className="contents">{children}</div>
@@ -110,33 +89,24 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	)
 }
 
-function _SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = useContext(LayoutContext)!
+function InternalSidebarOverlay() {
+	const { sidebar, setSidebar } = useContext(LayoutContext)!
 
-	const closeAll = useCallback(() => {
-		if (sidebar1 === "maximized") {
-			setSidebar1(null)
-		} else if (sidebar2 === "maximized") {
-			setSidebar2(null)
+	const handleClickClose = useCallback(() => {
+		if (sidebar === "maximized") {
+			setSidebar("normal")
 		}
-	}, [setSidebar1, setSidebar2, sidebar1, sidebar2])
+	}, [setSidebar, sidebar])
 
-	return <div className="sidebar-overlay" onClick={closeAll}></div>
+	return <div className="sidebar-overlay" onClick={handleClickClose}></div>
 }
 
-function _Main({ children }: PropsWithChildren) {
-	const { sidebar1: s1, sidebar2: s2 } = useContext(LayoutContext)!
-
-	// prettier-ignore
-	const inert =
-		s1 === "maximized" ||
-		s2 === "maximized"
-			? "true"
-			: null
+function InternalMain({ children }: PropsWithChildren) {
+	const { sidebar } = useContext(LayoutContext)!
 
 	return (
 		// @ts-expect-error
-		<main className="main" inert={inert}>
+		<main className="main" inert={sidebar === "maximized" ? "true" : null}>
 			{children}
 		</main>
 	)
@@ -145,8 +115,8 @@ function _Main({ children }: PropsWithChildren) {
 export function Main({ children }: PropsWithChildren) {
 	return (
 		<>
-			<_SidebarOverlay />
-			<_Main>{children}</_Main>
+			<InternalSidebarOverlay />
+			<InternalMain>{children}</InternalMain>
 		</>
 	)
 }
