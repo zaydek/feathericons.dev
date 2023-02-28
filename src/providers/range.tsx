@@ -39,12 +39,10 @@ export function RangeProvider({ children }: PropsWithChildren) {
 	})
 
 	useEffect(() => {
-		// Update the icon size variable in the body styles
 		document.body.style.setProperty("--icon-size", "" + size)
 	}, [size])
 
 	useEffect(() => {
-		// Update the icon stroke-width variable in the body styles
 		document.body.style.setProperty("--icon-stroke-width", "" + strokeWidth)
 	}, [strokeWidth])
 

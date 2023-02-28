@@ -1,43 +1,8 @@
 import "./layout.sass"
 
 import { cx, isMac } from "@/lib"
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect, useMemo, useState } from "react"
-
-////////////////////////////////////////////////////////////////////////////////
-
-export type SidebarState = null | "minimized" | "maximized"
-
-// prettier-ignore
-const SidebarContext =
-	createContext<{
-		sidebar1:    SidebarState
-		setSidebar1: Dispatch<SetStateAction<SidebarState>>
-		sidebar2:    SidebarState
-		setSidebar2: Dispatch<SetStateAction<SidebarState>>
-	} | null>(null)
-
-export function SidebarProvider({ children }: PropsWithChildren) {
-	const [sidebar1, setSidebar1] = useState<SidebarState>(null)
-	const [sidebar2, setSidebar2] = useState<SidebarState>(null)
-
-	return (
-		<SidebarContext.Provider
-			value={useMemo(
-				() => ({
-					sidebar1,
-					setSidebar1,
-					sidebar2,
-					setSidebar2,
-				}),
-				[sidebar1, sidebar2],
-			)}
-		>
-			{children}
-		</SidebarContext.Provider>
-	)
-}
-
-////////////////////////////////////////////////////////////////////////////////
+import { LayoutContext, SidebarState } from "@/providers"
+import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
 
 function useScrollLocking({ state }: { state: SidebarState }) {
 	useEffect(() => {
@@ -119,7 +84,7 @@ export function Sidebar1({ children }: PropsWithChildren) {
 }
 
 export function Sidebar2({ children }: PropsWithChildren) {
-	const { sidebar2: state, setSidebar2: setState } = useContext(SidebarContext)!
+	const { sidebar2: state, setSidebar2: setState } = useContext(LayoutContext)!
 
 	const cycleState = useCallback(() => {
 		if (state === null) {
@@ -146,7 +111,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 }
 
 function _SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = useContext(SidebarContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = useContext(LayoutContext)!
 
 	const closeAll = useCallback(() => {
 		if (sidebar1 === "maximized") {
@@ -160,7 +125,7 @@ function _SidebarOverlay() {
 }
 
 function _Main({ children }: PropsWithChildren) {
-	const { sidebar1: s1, sidebar2: s2 } = useContext(SidebarContext)!
+	const { sidebar1: s1, sidebar2: s2 } = useContext(LayoutContext)!
 
 	// prettier-ignore
 	const inert =

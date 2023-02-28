@@ -84,22 +84,8 @@ export function SearchProvider({ children }: PropsWithChildren) {
 					showPaymentsFilled,
 					setShowPaymentsFilled,
 				}),
-				[
-					search,
-					setSearch,
-					setShowBrandsCircle,
-					setShowBrandsOriginal,
-					setShowBrandsSquare,
-					setShowFeather,
-					setShowPaymentsFilled,
-					setShowPaymentsOriginal,
-					showBrandsCircle,
-					showBrandsOriginal,
-					showBrandsSquare,
-					showFeather,
-					showPaymentsFilled,
-					showPaymentsOriginal,
-				],
+				// prettier-ignore
+				[search, setSearch, setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, setShowFeather, setShowPaymentsFilled, setShowPaymentsOriginal, showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal],
 			)}
 		>
 			{children}
