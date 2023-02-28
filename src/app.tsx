@@ -61,10 +61,9 @@ function LayoutSidebar1() {
 		setShowPaymentsOriginal,
 		showPaymentsFilled,
 		setShowPaymentsFilled,
+		toggleAllBrands,
+		toggleAllPayments,
 	} = useContext(SearchContext)!
-
-	const someBrandsChecked = showBrandsOriginal || showBrandsCircle || showBrandsSquare
-	const somePaymentsChecked = showPaymentsOriginal || showPaymentsFilled
 
 	return (
 		<Sidebar1>
@@ -78,73 +77,29 @@ function LayoutSidebar1() {
 					{/* Use <div> to no-op Flexbox gap */}
 					<div>
 						<Checkboxes>
-							<Checkbox
-								// prettier-ignore
-								name="Feather icons"
-								icon={feather.Feather}
-								checked={showFeather}
-								setChecked={setShowFeather}
-							/>
+							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={setShowFeather} />
 						</Checkboxes>
 						<Checkboxes>
 							<CheckboxButton
 								name="Brands"
-								icon={$props => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...$props} />}
-								onClick={e => {
-									for (const setChecked of [setShowBrandsOriginal, setShowBrandsCircle, setShowBrandsSquare]) {
-										setChecked(!someBrandsChecked)
-									}
-								}}
+								icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />}
+								onClick={toggleAllBrands}
 							/>
 							<Checkboxes>
-								<Checkbox
-									// prettier-ignore
-									name="Original"
-									icon={wkSocial.Twitter}
-									checked={showBrandsOriginal}
-									setChecked={setShowBrandsOriginal}
-								/>
-								<Checkbox
-									// prettier-ignore
-									name="Circle"
-									icon={wkSocial.TwitterCircle}
-									checked={showBrandsCircle}
-									setChecked={setShowBrandsCircle}
-								/>
-								<Checkbox
-									// prettier-ignore
-									name="Square"
-									icon={wkSocial.TwitterSquare}
-									checked={showBrandsSquare}
-									setChecked={setShowBrandsSquare}
-								/>
+								<Checkbox name="Original" icon={wkSocial.Twitter} checked={showBrandsOriginal} setChecked={setShowBrandsOriginal} />
+								<Checkbox name="Circle" icon={wkSocial.TwitterCircle} checked={showBrandsCircle} setChecked={setShowBrandsCircle} />
+								<Checkbox name="Square" icon={wkSocial.TwitterSquare} checked={showBrandsSquare} setChecked={setShowBrandsSquare} />
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
 							<CheckboxButton
 								name="Payment services"
-								icon={$props => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...$props} />}
-								onClick={e => {
-									for (const setChecked of [setShowPaymentsOriginal, setShowPaymentsFilled]) {
-										setChecked(!somePaymentsChecked)
-									}
-								}}
+								icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />}
+								onClick={toggleAllPayments}
 							/>
 							<Checkboxes>
-								<Checkbox
-									// prettier-ignore
-									name="Original"
-									icon={wkPayment.Stripe}
-									checked={showPaymentsOriginal}
-									setChecked={setShowPaymentsOriginal}
-								/>
-								<Checkbox
-									// prettier-ignore
-									name="Filled"
-									icon={wkPayment.Stripe1}
-									checked={showPaymentsFilled}
-									setChecked={setShowPaymentsFilled}
-								/>
+								<Checkbox name="Original" icon={wkPayment.Stripe} checked={showPaymentsOriginal} setChecked={setShowPaymentsOriginal} />
+								<Checkbox name="Filled" icon={wkPayment.Stripe1} checked={showPaymentsFilled} setChecked={setShowPaymentsFilled} />
 							</Checkboxes>
 						</Checkboxes>
 					</div>

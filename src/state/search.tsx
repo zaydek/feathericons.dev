@@ -1,4 +1,4 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useEffect, useMemo } from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
 import { useParameterState } from "./use-parameter-state"
 
 // prettier-ignore
@@ -18,6 +18,8 @@ export const SearchContext =
 		setShowPaymentsOriginal: Dispatch<SetStateAction<boolean>>
 		showPaymentsFilled:      boolean
 		setShowPaymentsFilled:   Dispatch<SetStateAction<boolean>>
+		toggleAllBrands:         () => void
+		toggleAllPayments:       () => void
 	} | null>(null)
 
 export function SearchProvider({ children }: PropsWithChildren) {
@@ -60,7 +62,21 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		serializer: value => (value ? "1" : "0"),
 	})
 
-	// TODO
+	const toggleAllBrands = useCallback(() => {
+		const every = showBrandsOriginal && showBrandsCircle && showBrandsSquare
+		for (const set of [setShowBrandsOriginal, setShowBrandsCircle, setShowBrandsSquare]) {
+			set(!every)
+		}
+	}, [setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, showBrandsCircle, showBrandsOriginal, showBrandsSquare])
+
+	const toggleAllPayments = useCallback(() => {
+		const every = showPaymentsOriginal && showPaymentsFilled
+		for (const set of [setShowPaymentsOriginal, setShowPaymentsFilled]) {
+			set(!every)
+		}
+	}, [setShowPaymentsFilled, setShowPaymentsOriginal, showPaymentsFilled, showPaymentsOriginal])
+
+	// Shorten title on mount
 	useEffect(() => {
 		document.title = "Feather"
 	}, [])
@@ -83,9 +99,11 @@ export function SearchProvider({ children }: PropsWithChildren) {
 					setShowPaymentsOriginal,
 					showPaymentsFilled,
 					setShowPaymentsFilled,
+					toggleAllBrands,
+					toggleAllPayments,
 				}),
 				// prettier-ignore
-				[search, setSearch, setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, setShowFeather, setShowPaymentsFilled, setShowPaymentsOriginal, showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal],
+				[search, setSearch, setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, setShowFeather, setShowPaymentsFilled, setShowPaymentsOriginal, showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal, toggleAllBrands, toggleAllPayments],
 			)}
 		>
 			{children}
