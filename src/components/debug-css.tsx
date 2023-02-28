@@ -1,8 +1,8 @@
 import "./debug-css.sass"
 
-import { useEffect, useState } from "react"
+import { PropsWithChildren, useEffect, useState } from "react"
 
-export function DebugCssEffect() {
+export function DebugCssEffect({ children }: PropsWithChildren) {
 	const [showOutline, setShowOutline] = useState(false)
 
 	useEffect(() => {
@@ -23,5 +23,5 @@ export function DebugCssEffect() {
 		}
 	}, [showOutline])
 
-	return <></>
+	return <>{children}</>
 }

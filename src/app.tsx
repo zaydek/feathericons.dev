@@ -11,10 +11,10 @@ import {
 	GridItem,
 	Header,
 	Main,
-	OverflowYContainer,
 	Range,
 	Resource,
 	Resources,
+	ScrollContainer,
 	SearchBar,
 	Section,
 	Sidebar1,
@@ -24,6 +24,7 @@ import { Icon, toKebabCase } from "@/lib"
 import { RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/providers"
 import { useContext } from "react"
 
+// TODO: Move to search.tsx
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
@@ -36,12 +37,11 @@ const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcess
 
 export function App() {
 	return (
-		<>
-			<DebugCssEffect />
+		<DebugCssEffect>
 			<LayoutSidebar1 />
 			<LayoutSidebar2 />
 			<LayoutMain />
-		</>
+		</DebugCssEffect>
 	)
 }
 
@@ -71,7 +71,7 @@ function LayoutSidebar1() {
 					<SearchBar />
 				</Section>
 			</Header>
-			<OverflowYContainer>
+			<ScrollContainer>
 				<Section>
 					<div>
 						<Checkboxes>
@@ -151,7 +151,7 @@ function LayoutSidebar1() {
 					</div>
 				</Section>
 				<hr />
-			</OverflowYContainer>
+			</ScrollContainer>
 			<Footer>
 				<Section name="Resources">
 					<Resources>
@@ -166,33 +166,23 @@ function LayoutSidebar1() {
 	)
 }
 
-// Extract ranges because of rerender frequency
-function SizeRange() {
-	const { size, setSize } = useContext(RangeContext)!
-	return <Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-}
-
-// Extract ranges because of rerender frequency
-function StrokeWidthRange() {
-	const { strokeWidth, setStrokeWidth } = useContext(RangeContext)!
-	return <Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
-}
-
 function LayoutSidebar2() {
+	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(RangeContext)!
+
 	return (
 		<Sidebar2>
 			<Header>
 				<Section name="Size">
-					<SizeRange />
+					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</Section>
 			</Header>
-			<OverflowYContainer>
+			<ScrollContainer>
 				<hr />
 				<Section name="Stroke width">
-					<StrokeWidthRange />
+					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</Section>
 				<hr />
-			</OverflowYContainer>
+			</ScrollContainer>
 		</Sidebar2>
 	)
 }

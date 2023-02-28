@@ -19,11 +19,11 @@ export function Section({ name, children }: PropsWithChildren<{ name?: string }>
 	)
 }
 
-export function OverflowYContainer({ children }: PropsWithChildren) {
+export function ScrollContainer({ children }: PropsWithChildren) {
 	const [scroll, setScroll] = useState(false)
 
 	return (
-		<div className="overflow-y-container" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
+		<div className="scroll-container" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
 			{children}
 		</div>
 	)
