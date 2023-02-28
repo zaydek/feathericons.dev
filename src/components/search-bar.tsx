@@ -10,7 +10,12 @@ export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 	const { search, setSearch } = useContext(SearchContext)!
 
-	const [hasFocus, setHasFocus] = useState(false)
+	const [focus, setFocus] = useState(false)
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+		ref.current!.focus()
+	}, [])
 
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
@@ -32,13 +37,13 @@ export function SearchBar() {
 				ref={ref}
 				type="text"
 				// prettier-ignore
-				placeholder={hasFocus
+				placeholder={focus
 					? "Press esc to clear"
 					: (isMac() ? "Press ⌘P to focus" : "Press Ctrl-P to focus")
 				}
 				value={search}
-				onFocus={e => setHasFocus(true)}
-				onBlur={e => setHasFocus(false)}
+				onFocus={e => setFocus(true)}
+				onBlur={e => setFocus(false)}
 				onChange={e => setSearch(e.currentTarget.value)}
 			/>
 		</div>

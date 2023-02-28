@@ -73,6 +73,7 @@ function LayoutSidebar1() {
 			</Header>
 			<ScrollContainer>
 				<Section>
+					{/* Use <div> to no-op Flexbox gap */}
 					<div>
 						<Checkboxes>
 							<Checkbox
@@ -188,6 +189,8 @@ function LayoutSidebar2() {
 }
 
 function LayoutMain() {
+	// TODO
+
 	return (
 		<Main>
 			<Grid>
