@@ -1,9 +1,17 @@
 // TODO: Does this interfere with <Suspense>?
 import * as feather from "@icons/feather/tsx"
 
+// TODO: Does this interfere with <Suspense>?
+import * as wolfKitBrandsMonoCircle from "@icons/wolfkit/brands/mono-circle/tsx"
+import * as wolfKitBrandsMonoSquare from "@icons/wolfkit/brands/mono-square/tsx"
+import * as wolfKitBrandsMono from "@icons/wolfkit/brands/mono/tsx"
 import * as wolfKitBrandsOriginalCircle from "@icons/wolfkit/brands/original-circle/tsx"
 import * as wolfKitBrandsOriginalSquare from "@icons/wolfkit/brands/original-square/tsx"
 import * as wolfKitBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
+
+// TODO: Does this interfere with <Suspense>?
+import * as wolfKitPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
+import * as wolfKitPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wolfKitPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
 import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
@@ -91,10 +99,20 @@ function AppSidebar1() {
 				<UndoSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
 					<div>
 						<Checkboxes>
-							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={transition(setShowFeather)} />
+							<Checkbox name="Feather" icon={feather.Feather} checked={showFeather} setChecked={transition(setShowFeather)} />
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={transition(toggleAllBrandsOriginal)} />
+							<CheckboxButton
+								name="Brands"
+								icon={p =>
+									// prettier-ignore
+									<feather.Folder
+									style={{ transform: "scale(0.8)", opacity: 0.375 }}
+									fill="currentColor"
+									strokeWidth={4} {...p} />
+								}
+								onClick={transition(toggleAllBrandsOriginal)}
+							/>
 							<Checkboxes>
 								<Checkbox name="Original" icon={wolfKitBrandsOriginal.Twitter} checked={showBrandsOriginal} setChecked={transition(setShowBrandsOriginal)} />
 								<Checkbox name="Circle" icon={wolfKitBrandsOriginalCircle.TwitterCircle} checked={showBrandsOriginalCircle} setChecked={transition(setShowBrandsOriginalCircle)} />
@@ -102,10 +120,55 @@ function AppSidebar1() {
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={voidTransition(toggleAllPaymentsOriginal)} />
+							<CheckboxButton
+								name="Brands (mono)"
+								icon={p =>
+									// prettier-ignore
+									<feather.Folder
+									style={{ transform: "scale(0.8)", opacity: 0.375 }}
+									fill="currentColor"
+									strokeWidth={4} {...p} />
+								}
+								onClick={transition(toggleAllBrandsMono)}
+							/>
+							<Checkboxes>
+								<Checkbox name="Original" icon={wolfKitBrandsMono.TwitterMono} checked={showBrandsMono} setChecked={transition(setShowBrandsMono)} />
+								<Checkbox name="Circle" icon={wolfKitBrandsMonoCircle.TwitterCircleMono} checked={showBrandsMonoCircle} setChecked={transition(setShowBrandsMonoCircle)} />
+								<Checkbox name="Square" icon={wolfKitBrandsMonoSquare.TwitterSquareMono} checked={showBrandsMonoSquare} setChecked={transition(setShowBrandsMonoSquare)} />
+							</Checkboxes>
+						</Checkboxes>
+						<Checkboxes>
+							<CheckboxButton
+								name="Payments"
+								icon={p =>
+									// prettier-ignore
+									<feather.Folder
+									style={{ transform: "scale(0.8)", opacity: 0.375 }}
+									fill="currentColor"
+									strokeWidth={4} {...p} />
+								}
+								onClick={voidTransition(toggleAllPaymentsOriginal)}
+							/>
 							<Checkboxes>
 								<Checkbox name="Original" icon={wolfKitPaymentsOriginal.Stripe} checked={showPaymentsOriginal} setChecked={transition(setShowPaymentsOriginal)} />
 								<Checkbox name="Filled" icon={wolfKitPaymentsOriginalFilled.Stripe} checked={showPaymentsOriginalFilled} setChecked={transition(setShowPaymentsOriginalFilled)} />
+							</Checkboxes>
+						</Checkboxes>
+						<Checkboxes>
+							<CheckboxButton
+								name="Payments (mono)"
+								icon={p =>
+									// prettier-ignore
+									<feather.Folder
+									style={{ transform: "scale(0.8)", opacity: 0.375 }}
+									fill="currentColor"
+									strokeWidth={4} {...p} />
+								}
+								onClick={voidTransition(toggleAllPaymentsMono)}
+							/>
+							<Checkboxes>
+								<Checkbox name="Original" icon={wolfKitPaymentsMono.Stripe} checked={showPaymentsMono} setChecked={transition(setShowPaymentsMono)} />
+								<Checkbox name="Filled" icon={wolfKitPaymentsMonoFilled.Stripe} checked={showPaymentsMonoFilled} setChecked={transition(setShowPaymentsMonoFilled)} />
 							</Checkboxes>
 						</Checkboxes>
 					</div>
