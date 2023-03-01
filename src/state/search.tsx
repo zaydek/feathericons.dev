@@ -1,4 +1,5 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
+import { createCache } from "./search-cache"
 import { useParam } from "./use-param"
 
 const FEATHER_DEFAULT           = true // prettier-ignore
@@ -29,6 +30,8 @@ export const SearchContext =
 		toggleAllBrands:         () => void
 		toggleAllPayments:       () => void
 	} | null>(null)
+
+const cache = createCache()
 
 export function SearchProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useParam({ key: "search", initialValue: "", parser: value => value })
@@ -93,10 +96,16 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		}
 	}, [setShowPaymentsFilled, setShowPaymentsOriginal, showPaymentsFilled, showPaymentsOriginal])
 
-	// Shorten title on mount
-	useEffect(() => {
-		document.title = "Feather"
+	// TODO
+	const foo = useMemo(() => {
+		const foo = cache.get("@icons/feather")
+		console.log(foo)
 	}, [])
+
+	//// // Shorten title on mount
+	//// useEffect(() => {
+	//// 	document.title = "Feather"
+	//// }, [])
 
 	return (
 		<SearchContext.Provider

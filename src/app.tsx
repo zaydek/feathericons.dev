@@ -1,6 +1,6 @@
 import * as feather from "@icons/feather"
-import * as wkPayment from "@icons/wolf-kit/payment"
-import * as wkSocial from "@icons/wolf-kit/social-media"
+import * as wolfKitBrands from "@icons/wolf-kit/brands"
+import * as wolfKitPayments from "@icons/wolf-kit/payments"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Interweb, Interwebs, Main, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
@@ -13,10 +13,10 @@ function toNameCase(str: string) {
 }
 
 const featherEntries: [string, Icon][] = Object.entries(feather).map(([k, v]) => [toNameCase(k), v])
-const wkSocialMediaEntries: [string, Icon][] = Object.entries(wkSocial).map(([k, v]) => [toNameCase(k), v])
-const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).map(([k, v]) => [toNameCase(k), v])
+const wolfKitBrandsEntries: [string, Icon][] = Object.entries(wolfKitBrands).map(([k, v]) => [toNameCase(k), v])
+const wolfKitPaymentsEntries: [string, Icon][] = Object.entries(wolfKitPayments).map(([k, v]) => [toNameCase(k), v])
 
-const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
+const entries = [...featherEntries, ...wolfKitBrandsEntries, ...wolfKitPaymentsEntries]
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -57,16 +57,16 @@ function LayoutSidebar1() {
 						<Checkboxes>
 							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={toggleAllBrands} />
 							<Checkboxes>
-								<Checkbox name="Original" icon={wkSocial.Twitter} checked={showBrandsOriginal} setChecked={setShowBrandsOriginal} />
-								<Checkbox name="Circle" icon={wkSocial.TwitterCircle} checked={showBrandsCircle} setChecked={setShowBrandsCircle} />
-								<Checkbox name="Square" icon={wkSocial.TwitterSquare} checked={showBrandsSquare} setChecked={setShowBrandsSquare} />
+								<Checkbox name="Original" icon={wolfKitBrands.Twitter} checked={showBrandsOriginal} setChecked={setShowBrandsOriginal} />
+								<Checkbox name="Circle" icon={wolfKitBrands.TwitterCircle} checked={showBrandsCircle} setChecked={setShowBrandsCircle} />
+								<Checkbox name="Square" icon={wolfKitBrands.TwitterSquare} checked={showBrandsSquare} setChecked={setShowBrandsSquare} />
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
 							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={toggleAllPayments} />
 							<Checkboxes>
-								<Checkbox name="Original" icon={wkPayment.Stripe} checked={showPaymentsOriginal} setChecked={setShowPaymentsOriginal} />
-								<Checkbox name="Filled" icon={wkPayment.Stripe1} checked={showPaymentsFilled} setChecked={setShowPaymentsFilled} />
+								<Checkbox name="Original" icon={wolfKitPayments.Stripe} checked={showPaymentsOriginal} setChecked={setShowPaymentsOriginal} />
+								<Checkbox name="Filled" icon={wolfKitPayments.Stripe1} checked={showPaymentsFilled} setChecked={setShowPaymentsFilled} />
 							</Checkboxes>
 						</Checkboxes>
 					</div>
@@ -76,10 +76,10 @@ function LayoutSidebar1() {
 			<Footer>
 				<Section name="Interwebs" icon={feather.Globe}>
 					<Interwebs>
-						<Interweb name="Icons" icon={wkSocial.Github} />
-						<Interweb name="Website" icon={wkSocial.Github} />
-						<Interweb name="Figma Plugin" icon={wkSocial.Figma} />
-						<Interweb name="Share on Twitter" icon={wkSocial.Twitter} />
+						<Interweb name="Icons" icon={wolfKitBrands.Github} />
+						<Interweb name="Website" icon={wolfKitBrands.Github} />
+						<Interweb name="Figma Plugin" icon={wolfKitBrands.Figma} />
+						<Interweb name="Share on Twitter" icon={wolfKitBrands.Twitter} />
 					</Interwebs>
 				</Section>
 			</Footer>
