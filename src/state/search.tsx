@@ -97,13 +97,19 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		}
 	}, [setShowPaymentsFilled, setShowPaymentsOriginal, showPaymentsFilled, showPaymentsOriginal])
 
-	// TODO
 	const results = useMemo(() => {
-		const feather = cache.get("@icons/feather")
-		const wolfKitBrands = cache.get("@icons/wolf-kit/brands")
-		const wolfKitPayments = cache.get("@icons/wolf-kit/payments")
-		return [feather, wolfKitBrands, wolfKitPayments]
-	}, [])
+		const results: (readonly [string[], LazyExoticComponent<any>])[] = []
+		if (showFeather) {
+			results.push(cache.get("@icons/feather"))
+		}
+		if (showBrandsOriginal || showBrandsCircle || showBrandsSquare) {
+			results.push(cache.get("@icons/wolf-kit/brands"))
+		}
+		if (showPaymentsOriginal || showPaymentsFilled) {
+			results.push(cache.get("@icons/wolf-kit/payments"))
+		}
+		return results
+	}, [showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal])
 
 	return (
 		<SearchContext.Provider
