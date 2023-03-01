@@ -45,11 +45,11 @@ export function RangeProvider({ children }: PropsWithChildren) {
 	const resetStrokeWidth = useCallback(() => setStrokeWidth(STROKE_DEFAULT), [setStrokeWidth])
 
 	useEffect(() => {
-		document.body.style.setProperty("--icon-size", "" + size)
+		document.body.style.setProperty("--size", "" + size)
 	}, [size])
 
 	useEffect(() => {
-		document.body.style.setProperty("--icon-stroke-width", "" + strokeWidth)
+		document.body.style.setProperty("--stroke-width", "" + strokeWidth)
 	}, [strokeWidth])
 
 	return (
