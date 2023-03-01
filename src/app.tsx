@@ -115,6 +115,14 @@ function AppSidebar2() {
 const AppMain = memo(function LayoutMain() {
 	const { results } = useContext(SearchContext)!
 
+	useEffect(() => {
+		let count = 0
+		for (const result of results) {
+			count += result[0].length
+		}
+		document.title = `${count} ${count === 1 ? "icon" : "icons"}`
+	}, [results])
+
 	return (
 		<Main>
 			<MemoGrid results={results} />

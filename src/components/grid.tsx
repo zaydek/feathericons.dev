@@ -2,7 +2,7 @@ import "./grid.sass"
 
 import * as feather from "@icons/feather"
 
-import { Icon, toKebabCase } from "@/lib"
+import { Icon } from "@/lib"
 import { memo, Suspense } from "react"
 
 // Memoize <Grid> to suppress useless rerenders
@@ -26,10 +26,10 @@ export const MemoGrid = memo(function Grid({ results }: { results: (readonly [st
 	)
 })
 
-// TODO: Add caching? Or use text-transform?
-function toNameCase(str: string) {
-	return toKebabCase(str).toLowerCase()
-}
+//// // TODO: Add caching? Or use text-transform?
+//// function toNameCase(str: string) {
+//// 	return toKebabCase(str).toLowerCase()
+//// }
 
 export function GridItem({ name, icon: Icon, selected, bookmark }: { name: string; icon: Icon; bookmark?: boolean; selected?: boolean }) {
 	return (
@@ -50,7 +50,7 @@ export function GridItem({ name, icon: Icon, selected, bookmark }: { name: strin
 			>
 				<Icon />
 			</figure>
-			<figcaption>{toNameCase(name)}</figcaption>
+			<figcaption>{name}</figcaption>
 			<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
 		</article>
 	)
