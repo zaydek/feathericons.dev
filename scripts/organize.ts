@@ -16,43 +16,83 @@ async function copyFilesWithRegex({ srcDir, dstDir, pattern }: { srcDir: string;
 }
 
 async function main() {
-	for (const target of ["original", "original-circle", "original-square", "mono", "mono-circle", "mono-square"]) {
+	//// for (const target of ["original", "original-circle", "original-square", "mono", "mono-circle", "mono-square"]) {
+	//// 	console.log(`📋 Copying *.svg files to ${target}...`)
+	//// 	await copyFilesWithRegex({
+	//// 		srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
+	//// 		dstDir: `./icons/wolf-kit/figma/brands/${target}/svg`,
+	//// 		pattern: /\.svg$/,
+	//// 	})
+	//// 	console.log(`📋 Copying *.png files to ${target}...`)
+	//// 	await copyFilesWithRegex({
+	//// 		srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
+	//// 		dstDir: `./icons/wolf-kit/figma/brands/${target}/png@1x`,
+	//// 		pattern: /@1x\.png$/,
+	//// 	})
+	//// 	await copyFilesWithRegex({
+	//// 		srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
+	//// 		dstDir: `./icons/wolf-kit/figma/brands/${target}/png@2x`,
+	//// 		pattern: /@2x\.png$/,
+	//// 	})
+	//// 	await copyFilesWithRegex({
+	//// 		srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
+	//// 		dstDir: `./icons/wolf-kit/figma/brands/${target}/png@4x`,
+	//// 		pattern: /@4x\.png$/,
+	//// 	})
+	//// 	console.log(`📋 Copying *.jpg files to ${target}...`)
+	//// 	await copyFilesWithRegex({
+	//// 		srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
+	//// 		dstDir: `./icons/wolf-kit/figma/brands/${target}/jpg@1x`,
+	//// 		pattern: /@1x\.jpg$/,
+	//// 	})
+	//// 	await copyFilesWithRegex({
+	//// 		srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
+	//// 		dstDir: `./icons/wolf-kit/figma/brands/${target}/jpg@2x`,
+	//// 		pattern: /@2x\.jpg$/,
+	//// 	})
+	//// 	await copyFilesWithRegex({
+	//// 		srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
+	//// 		dstDir: `./icons/wolf-kit/figma/brands/${target}/jpg@4x`,
+	//// 		pattern: /@4x\.jpg$/,
+	//// 	})
+	//// }
+	for (const target of ["original", "original-filled", "mono", "mono-filled"]) {
 		console.log(`📋 Copying *.svg files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolf-kit/figma/brands/${target}/svg`,
+			srcDir: `./icons/wolf-kit/figma/payments/${target}/all`,
+			dstDir: `./icons/wolf-kit/figma/payments/${target}/svg`,
 			pattern: /\.svg$/,
 		})
 		console.log(`📋 Copying *.png files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolf-kit/figma/brands/${target}/png@1x`,
+			srcDir: `./icons/wolf-kit/figma/payments/${target}/all`,
+			dstDir: `./icons/wolf-kit/figma/payments/${target}/png@1x`,
 			pattern: /@1x\.png$/,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolf-kit/figma/brands/${target}/png@2x`,
+			srcDir: `./icons/wolf-kit/figma/payments/${target}/all`,
+			dstDir: `./icons/wolf-kit/figma/payments/${target}/png@2x`,
 			pattern: /@2x\.png$/,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolf-kit/figma/brands/${target}/png@4x`,
+			srcDir: `./icons/wolf-kit/figma/payments/${target}/all`,
+			dstDir: `./icons/wolf-kit/figma/payments/${target}/png@4x`,
 			pattern: /@4x\.png$/,
 		})
 		console.log(`📋 Copying *.jpg files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolf-kit/figma/brands/${target}/jpg@1x`,
+			srcDir: `./icons/wolf-kit/figma/payments/${target}/all`,
+			dstDir: `./icons/wolf-kit/figma/payments/${target}/jpg@1x`,
 			pattern: /@1x\.jpg$/,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolf-kit/figma/brands/${target}/jpg@2x`,
+			srcDir: `./icons/wolf-kit/figma/payments/${target}/all`,
+			dstDir: `./icons/wolf-kit/figma/payments/${target}/jpg@2x`,
 			pattern: /@2x\.jpg$/,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolf-kit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolf-kit/figma/brands/${target}/jpg@4x`,
+			srcDir: `./icons/wolf-kit/figma/payments/${target}/all`,
+			dstDir: `./icons/wolf-kit/figma/payments/${target}/jpg@4x`,
 			pattern: /@4x\.jpg$/,
 		})
 	}
