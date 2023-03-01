@@ -37,14 +37,25 @@ export function Section({ name, icon: Icon, children }: PropsWithChildren<{ name
 	)
 }
 
-export function UndoSection({ name, icon: Icon, children }: PropsWithChildren<{ name?: string; icon?: Icon }>) {
+export function UndoSection({
+	name,
+	icon: Icon,
+	children,
+	handleUndo,
+}: PropsWithChildren<{
+	name?: string
+	icon?: Icon
+	handleUndo: () => void
+}>) {
 	return (
 		<section className="section">
 			{name !== undefined && (
 				<header className="section-header">
 					{Icon !== undefined && <Icon />}
 					<h6 className="section-header-name">{name}</h6>
-					<feather.RotateCcw strokeWidth={4} />
+					{/* <button className="undo" onClick={handleUndo}> */}
+					<feather.RotateCcw strokeWidth={4} onClick={handleUndo} />
+					{/* </button> */}
 				</header>
 			)}
 			{children}
@@ -52,7 +63,20 @@ export function UndoSection({ name, icon: Icon, children }: PropsWithChildren<{ 
 	)
 }
 
-export function SliderUndoSection({ name, icon: Icon, value, formatValue, children }: PropsWithChildren<{ name?: string; icon?: Icon; value: number; formatValue: (value: number) => string }>) {
+export function SliderUndoSection({
+	name,
+	icon: Icon,
+	value,
+	formatValue,
+	handleUndo,
+	children,
+}: PropsWithChildren<{
+	name?: string
+	icon?: Icon
+	value: number
+	formatValue: (value: number) => string
+	handleUndo: () => void
+}>) {
 	return (
 		<section className="section">
 			{name !== undefined && (
@@ -60,7 +84,9 @@ export function SliderUndoSection({ name, icon: Icon, value, formatValue, childr
 					{Icon !== undefined && <Icon />}
 					<h6 className="section-header-name">{name}</h6>
 					<span>{formatValue(value)}</span>
-					<feather.RotateCcw strokeWidth={4} />
+					{/* <button className="undo" onClick={handleUndo}> */}
+					<feather.RotateCcw strokeWidth={4} onClick={handleUndo} />
+					{/* </button> */}
 				</header>
 			)}
 			{children}

@@ -2,7 +2,7 @@ import * as feather from "@icons/feather"
 import * as wkPayment from "@icons/wolf-kit/payment"
 import * as wkSocial from "@icons/wolf-kit/social-media"
 
-import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Main, Range, Resource, Resources, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
+import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Interweb, Interwebs, Main, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
 import { RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
 import { useContext } from "react"
@@ -29,7 +29,7 @@ export function App() {
 }
 
 function LayoutSidebar1() {
-	const { showFeather, setShowFeather, showBrandsOriginal, setShowBrandsOriginal, showBrandsCircle, setShowBrandsCircle, showBrandsSquare, setShowBrandsSquare, showPaymentsOriginal, setShowPaymentsOriginal, showPaymentsFilled, setShowPaymentsFilled, toggleAllBrands, toggleAllPayments } = useContext(SearchContext)!
+	const { showFeather, setShowFeather, showBrandsOriginal, setShowBrandsOriginal, showBrandsCircle, setShowBrandsCircle, showBrandsSquare, setShowBrandsSquare, showPaymentsOriginal, setShowPaymentsOriginal, showPaymentsFilled, setShowPaymentsFilled, resetAll, toggleAllBrands, toggleAllPayments } = useContext(SearchContext)!
 
 	return (
 		<Sidebar1>
@@ -39,8 +39,7 @@ function LayoutSidebar1() {
 				</Section>
 			</Header>
 			<ScrollContainer>
-				<UndoSection name="Icon packs" icon={feather.Package}>
-					{/* Use <div> to no-op Flexbox gap */}
+				<UndoSection name="Icon packs" icon={feather.Package} handleUndo={resetAll}>
 					<div>
 						<Checkboxes>
 							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={setShowFeather} />
@@ -66,12 +65,12 @@ function LayoutSidebar1() {
 			</ScrollContainer>
 			<Footer>
 				<Section name="Interwebs" icon={feather.Globe}>
-					<Resources>
-						<Resource name="Icons" icon={wkSocial.Github} />
-						<Resource name="Website" icon={wkSocial.Github} />
-						<Resource name="Figma Plugin" icon={wkSocial.Figma} />
-						<Resource name="Share on Twitter" icon={wkSocial.Twitter} />
-					</Resources>
+					<Interwebs>
+						<Interweb name="Icons" icon={wkSocial.Github} />
+						<Interweb name="Website" icon={wkSocial.Github} />
+						<Interweb name="Figma Plugin" icon={wkSocial.Figma} />
+						<Interweb name="Share on Twitter" icon={wkSocial.Twitter} />
+					</Interwebs>
 				</Section>
 			</Footer>
 		</Sidebar1>
@@ -79,18 +78,18 @@ function LayoutSidebar1() {
 }
 
 function LayoutSidebar2() {
-	const { size, setSize, strokeWidth, setStrokeWidth } = useContext(RangeContext)!
+	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
 
 	return (
 		<Sidebar2>
 			<Header>
-				<SliderUndoSection name="Size" icon={feather.PenTool} value={size} formatValue={value => `${value.toFixed(0)} PX`}>
+				<SliderUndoSection name="Size" icon={feather.PenTool} value={size} formatValue={value => `${value.toFixed(0)} PX`} handleUndo={resetSize}>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</SliderUndoSection>
 			</Header>
 			<ScrollContainer>
 				<hr />
-				<SliderUndoSection name="Stroke width" icon={feather.PenTool} value={strokeWidth} formatValue={value => value.toFixed(2)}>
+				<SliderUndoSection name="Stroke width" icon={feather.PenTool} value={strokeWidth} formatValue={value => value.toFixed(2)} handleUndo={resetStrokeWidth}>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</SliderUndoSection>
 				<hr />

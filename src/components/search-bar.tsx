@@ -71,7 +71,7 @@ export function SearchBar() {
 				// prettier-ignore
 				placeholder={focus
 					// TODO
-					? "Search 228 icons"
+					? "Press esc to clear"
 					: (isMac() ? "Press ⌘P to focus" : "Press Ctrl-P to focus")
 				}
 				value={search}

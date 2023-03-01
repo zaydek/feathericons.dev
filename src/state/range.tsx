@@ -1,5 +1,5 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useEffect, useMemo } from "react"
-import { useParameterState } from "./use-parameter-state"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
+import { useParam } from "./use-param"
 
 export const SIZE_MIN       = 16 // prettier-ignore
 export const SIZE_MAX       = 48 // prettier-ignore
@@ -14,14 +14,16 @@ export const STROKE_DEFAULT = 2 // prettier-ignore
 // prettier-ignore
 export const RangeContext =
 	createContext<{
-		size:           number
-		setSize:        Dispatch<SetStateAction<number>>
-		strokeWidth:    number
-		setStrokeWidth: Dispatch<SetStateAction<number>>
+		size:             number
+		setSize:          Dispatch<SetStateAction<number>>
+		strokeWidth:      number
+		setStrokeWidth:   Dispatch<SetStateAction<number>>
+		resetSize:        () => void
+		resetStrokeWidth: () => void
 	} | null>(null)
 
 export function RangeProvider({ children }: PropsWithChildren) {
-	const [size, setSize] = useParameterState({
+	const [size, setSize] = useParam({
 		key: "size",
 		initialValue: SIZE_DEFAULT,
 		parser: value => {
@@ -29,7 +31,8 @@ export function RangeProvider({ children }: PropsWithChildren) {
 			return parsed >= SIZE_MIN && parsed <= SIZE_MAX ? parsed : SIZE_DEFAULT
 		},
 	})
-	const [strokeWidth, setStrokeWidth] = useParameterState({
+
+	const [strokeWidth, setStrokeWidth] = useParam({
 		key: "stroke-width",
 		initialValue: STROKE_DEFAULT,
 		parser: value => {
@@ -37,6 +40,9 @@ export function RangeProvider({ children }: PropsWithChildren) {
 			return parsed >= STROKE_MIN && parsed <= STROKE_MAX ? parsed : STROKE_DEFAULT
 		},
 	})
+
+	const resetSize = useCallback(() => setSize(SIZE_DEFAULT), [setSize])
+	const resetStrokeWidth = useCallback(() => setStrokeWidth(STROKE_DEFAULT), [setStrokeWidth])
 
 	useEffect(() => {
 		document.body.style.setProperty("--icon-size", "" + size)
@@ -54,8 +60,10 @@ export function RangeProvider({ children }: PropsWithChildren) {
 					setSize,
 					strokeWidth,
 					setStrokeWidth,
+					resetSize,
+					resetStrokeWidth,
 				}),
-				[setSize, setStrokeWidth, size, strokeWidth],
+				[resetSize, resetStrokeWidth, setSize, setStrokeWidth, size, strokeWidth],
 			)}
 		>
 			{children}

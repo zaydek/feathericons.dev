@@ -5,7 +5,7 @@ const searchParams = new URLSearchParams(typeof window === "undefined" ? "" : wi
 type Parser<T> = (value: string) => T
 type Serializer<T> = (value: T) => string
 
-export function useParameterState<T>({
+export function useParam<T>({
 	key,
 	initialValue,
 	parser,

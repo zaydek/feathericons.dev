@@ -36,12 +36,12 @@ $undo-icon-height: 14px
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
   // Use <div> because of <div><ul className="checkboxes">...</ul></div>
-  > :not(div:not([class]), .resources)
+  > :not(div:not([class]), .interwebs)
     margin: 0 generate-keyline()
   &-header
     display: flex
     align-items: center
-    svg:nth-child(1)
+    svg:first-child
       margin-right: math.div(generate-keyline($icon-height), 2)
       height: $icon-height
       width: $icon-height
@@ -50,7 +50,7 @@ $undo-icon-height: 14px
       flex: 1 // Stretch x-axis
       font: 500 11px / normal $sans
       font-feature-settings: 'tnum'
-      letter-spacing: 0.075em
+      letter-spacing: 0.05em
       text-transform: uppercase
       color: $slate-600
     span
@@ -63,18 +63,25 @@ $undo-icon-height: 14px
       border-radius: 1e3px
       box-shadow: $inset-hairline-shadow
       //// font: 500 11px / normal $code
-      //// letter-spacing: 0.075em
+      //// letter-spacing: 0.05em
       //// text-align: center
       //// text-transform: uppercase
       font: 500 11px / normal $sans
       font-feature-settings: 'tnum'
-      letter-spacing: 0.075em
+      letter-spacing: 0.05em
       //// text-align: center
       text-transform: uppercase
       color: $slate-500
       //// &:is(:hover, :focus-visible)
       ////   background-color: white
       ////   box-shadow: $inset-hairline-shadow
+    //// button
+    ////   display: inline-flex
+    ////   justify-content: center
+    ////   align-items: center
+    ////   margin-left: generate-keyline($icon-height)
+
+    // TODO: Can't seem to wrap <button class="undo"> here
     svg:last-child
       margin-left: generate-keyline($icon-height)
       height: $undo-icon-height
@@ -83,4 +90,4 @@ $undo-icon-height: 14px
       cursor: pointer   // Interaction
       user-select: none // Interaction
       &:is(:hover, :focus-visible)
-        color: $slate-800
+          color: $slate-800

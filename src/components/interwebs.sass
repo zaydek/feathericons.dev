@@ -6,10 +6,10 @@ $icon-1-height: $generic-button-icon-height
 $icon-2-height: 16px
 
 // Y-axis
-.resource
+.interweb
   margin: -4px 0
 
-.resource
+.interweb
   display: flex
   align-items: center
   height: $generic-button-height
@@ -18,19 +18,17 @@ $icon-2-height: 16px
     background-color: $slate-100
   &:hover:active
     background-color: $slate-200
-  // LHS
-  svg:nth-child(1)
-    margin: generate-keyline($icon-1-height)
+  svg:first-child
+    margin: 0 generate-keyline($icon-1-height)
     height: $icon-1-height
     width: $icon-1-height
     color: $slate-800
-  // RHS
-  svg:nth-child(3)
-    margin: generate-keyline($icon-2-height)
-    height: $icon-2-height
-    width: $icon-2-height
-    color: $slate-400
   span
     flex: 1 // Stretch x-axis
     font: 425 16px / normal $sans
     color: $slate-800
+  svg:last-child
+    margin: 0 generate-keyline($icon-2-height)
+    height: $icon-2-height
+    width: $icon-2-height
+    color: $slate-400

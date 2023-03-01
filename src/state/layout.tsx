@@ -1,5 +1,5 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useMemo } from "react"
-import { useParameterState } from "./use-parameter-state"
+import { useParam } from "./use-param"
 
 export type SidebarState = "normal" | "maximized" | "minimized"
 
@@ -11,7 +11,7 @@ export const LayoutContext =
 	} | null>(null)
 
 export function LayoutProvider({ children }: PropsWithChildren) {
-	const [sidebar, setSidebar] = useParameterState<SidebarState>({
+	const [sidebar, setSidebar] = useParam<SidebarState>({
 		key: "sidebar",
 		initialValue: "minimized",
 		parser: value => {

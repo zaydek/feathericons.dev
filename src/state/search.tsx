@@ -1,5 +1,12 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
-import { useParameterState } from "./use-parameter-state"
+import { useParam } from "./use-param"
+
+const FEATHER_DEFAULT           = true // prettier-ignore
+const BRANDS_ORIGINAL_DEFAULT   = true // prettier-ignore
+const BRANDS_CIRCLE_DEFAULT     = false // prettier-ignore
+const BRANDS_SQUARE_DEFAULT     = false // prettier-ignore
+const PAYMENTS_ORIGINAL_DEFAULT = true // prettier-ignore
+const PAYMENTS_FILLED_DEFAULT   = false // prettier-ignore
 
 // prettier-ignore
 export const SearchContext =
@@ -18,49 +25,65 @@ export const SearchContext =
 		setShowPaymentsOriginal: Dispatch<SetStateAction<boolean>>
 		showPaymentsFilled:      boolean
 		setShowPaymentsFilled:   Dispatch<SetStateAction<boolean>>
+		resetAll:                () => void
 		toggleAllBrands:         () => void
 		toggleAllPayments:       () => void
 	} | null>(null)
 
 export function SearchProvider({ children }: PropsWithChildren) {
-	const [search, setSearch] = useParameterState({ key: "search", initialValue: "", parser: value => value })
+	const [search, setSearch] = useParam({ key: "search", initialValue: "", parser: value => value })
+	const FEATHER_DEFAULT = true
+	const BRANDS_ORIGINAL_DEFAULT = true
+	const BRANDS_CIRCLE_DEFAULT = false
+	const BRANDS_SQUARE_DEFAULT = false
+	const PAYMENTS_ORIGINAL_DEFAULT = true
+	const PAYMENTS_FILLED_DEFAULT = false
 
-	const [showFeather, setShowFeather] = useParameterState({
+	const [showFeather, setShowFeather] = useParam({
 		key: "feather",
-		initialValue: true,
+		initialValue: FEATHER_DEFAULT,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showBrandsOriginal, setShowBrandsOriginal] = useParameterState({
+	const [showBrandsOriginal, setShowBrandsOriginal] = useParam({
 		key: "brands-original",
-		initialValue: true,
+		initialValue: BRANDS_ORIGINAL_DEFAULT,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showBrandsCircle, setShowBrandsCircle] = useParameterState({
+	const [showBrandsCircle, setShowBrandsCircle] = useParam({
 		key: "brands-circle",
-		initialValue: false,
+		initialValue: BRANDS_CIRCLE_DEFAULT,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showBrandsSquare, setShowBrandsSquare] = useParameterState({
+	const [showBrandsSquare, setShowBrandsSquare] = useParam({
 		key: "brands-square",
-		initialValue: false,
+		initialValue: BRANDS_SQUARE_DEFAULT,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showPaymentsOriginal, setShowPaymentsOriginal] = useParameterState({
+	const [showPaymentsOriginal, setShowPaymentsOriginal] = useParam({
 		key: "payments-original",
-		initialValue: true,
+		initialValue: PAYMENTS_ORIGINAL_DEFAULT,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
-	const [showPaymentsFilled, setShowPaymentsFilled] = useParameterState({
+	const [showPaymentsFilled, setShowPaymentsFilled] = useParam({
 		key: "payments-filled",
-		initialValue: false,
+		initialValue: PAYMENTS_FILLED_DEFAULT,
 		parser: value => value === "1",
 		serializer: value => (value ? "1" : "0"),
 	})
+
+	const resetAll = useCallback(() => {
+		setShowFeather(FEATHER_DEFAULT)
+		setShowBrandsOriginal(BRANDS_ORIGINAL_DEFAULT)
+		setShowBrandsCircle(BRANDS_CIRCLE_DEFAULT)
+		setShowBrandsSquare(BRANDS_SQUARE_DEFAULT)
+		setShowPaymentsOriginal(PAYMENTS_ORIGINAL_DEFAULT)
+		setShowPaymentsFilled(PAYMENTS_FILLED_DEFAULT)
+	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 	const toggleAllBrands = useCallback(() => {
 		const every = showBrandsOriginal && showBrandsCircle && showBrandsSquare
@@ -99,11 +122,12 @@ export function SearchProvider({ children }: PropsWithChildren) {
 					setShowPaymentsOriginal,
 					showPaymentsFilled,
 					setShowPaymentsFilled,
+					resetAll,
 					toggleAllBrands,
 					toggleAllPayments,
 				}),
 				// prettier-ignore
-				[search, setSearch, setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, setShowFeather, setShowPaymentsFilled, setShowPaymentsOriginal, showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal, toggleAllBrands, toggleAllPayments],
+				[resetAll, search, setSearch, setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, setShowFeather, setShowPaymentsFilled, setShowPaymentsOriginal, showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal, toggleAllBrands, toggleAllPayments],
 			)}
 		>
 			{children}
