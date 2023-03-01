@@ -4,8 +4,9 @@ import * as wolfKitBrands from "@icons/wolf-kit/brands"
 import * as wolfKitPayments from "@icons/wolf-kit/payments"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Header, Interweb, Interwebs, Main, MemoGrid, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
+import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import { ProgressBarContext, RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
-import { memo, useCallback, useContext, useEffect, useTransition } from "react"
+import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -112,20 +113,22 @@ function AppSidebar2() {
 	)
 }
 
-const AppMain = memo(function LayoutMain() {
+function AppMain() {
 	const { results } = useContext(SearchContext)!
 
-	useEffect(() => {
-		let count = 0
-		for (const result of results) {
-			count += result[0].length
-		}
-		document.title = `${count} ${count === 1 ? "icon" : "icons"}`
+	const count = useMemo(() => {
+		return results.reduce((sum, [names]) => sum + names.length, 0)
 	}, [results])
+
+	// prettier-ignore
+	useVisibleDocumentTitle({
+		active:   `Feather · ${count} icons`,
+		inactive: "Feather", // Truncate SEO <title>
+	})
 
 	return (
 		<Main>
 			<MemoGrid results={results} />
 		</Main>
 	)
-})
+}
