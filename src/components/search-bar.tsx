@@ -63,7 +63,7 @@ export function SearchBar() {
 	useClearShortcut({ setSearch })
 
 	return (
-		<div className="search-bar">
+		<div className="search-bar" onClick={e => ref.current!.focus()}>
 			<feather.Search strokeWidth={4} />
 			<input
 				ref={ref}
