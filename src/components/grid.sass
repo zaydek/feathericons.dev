@@ -6,7 +6,8 @@ $grid-item-height:       128px
 $grid-item-aspect-ratio: 1.375
 $grid-item-gap:          16px
 
-$bookmark-icon-height: 12px
+$bookmark-icon-frame-height: 32px + 4px
+$bookmark-icon-height:       12px
 
 .grid
   display: grid
@@ -57,7 +58,7 @@ $bookmark-icon-height: 12px
     user-select: all // Select all on click
   .bookmark
     position: absolute
-    inset: $bookmark-icon-height $bookmark-icon-height auto auto
+    inset: math.div($bookmark-icon-frame-height - $bookmark-icon-height, 2) math.div($bookmark-icon-frame-height - $bookmark-icon-height, 2) auto auto
     height: $bookmark-icon-height
     width: $bookmark-icon-height
     color: $amber-400
