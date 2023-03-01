@@ -23,6 +23,10 @@ export function App() {
 
 	useEffect(() => {
 		setStarted(true)
+		const d = window.setTimeout(() => {
+			setStarted(false)
+		}, 100)
+		return () => window.clearTimeout(d)
 	}, [setStarted])
 
 	return (
