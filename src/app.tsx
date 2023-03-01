@@ -5,7 +5,7 @@ import * as wolfKitPayments from "@icons/wolf-kit/payments"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Header, Interweb, Interwebs, Main, MemoGrid, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { ProgressBarContext, RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
-import { memo, useContext, useEffect, useRef, useTransition } from "react"
+import { memo, useCallback, useContext, useEffect, useTransition } from "react"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -31,26 +31,19 @@ function AppSidebar1() {
 
 	const [pending, startTransition] = useTransition()
 
-	// Wraps startTransition
-	function voidTransition(fn: () => void) {
+	const voidTransition = useCallback(function (fn: () => void) {
 		return () => startTransition(fn)
-	}
+	}, [])
 
-	// Wraps startTransition
-	function transition<T>(fn: (_: T) => void) {
-		return (next: T) => startTransition(() => fn(next))
-	}
+	const transition = useCallback(function <T>(fn: (_: T) => void) {
+		return (arg: T) => startTransition(() => fn(arg))
+	}, [])
 
-	const onceRef = useRef(false)
 	useEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
 		return () => window.clearTimeout(d)
-	}, [pending]) // eslint-disable-line react-hooks/exhaustive-deps
+	}, [pending, setStarted])
 
 	return (
 		<Sidebar1>

@@ -5,11 +5,6 @@ import * as feather from "@icons/feather"
 import { Icon, toKebabCase } from "@/lib"
 import { memo, Suspense } from "react"
 
-// TODO: Add caching?
-function toNameCase(str: string) {
-	return toKebabCase(str).toLowerCase()
-}
-
 // Memoize <Grid> to suppress useless rerenders
 export const MemoGrid = memo(function Grid({ results }: { results: (readonly [string[], React.LazyExoticComponent<any>])[] }) {
 	return (
@@ -31,7 +26,11 @@ export const MemoGrid = memo(function Grid({ results }: { results: (readonly [st
 	)
 })
 
-// TODO: May want to ensure <article> is visible when toggling the sidebar
+// TODO: Add caching? Or use text-transform?
+function toNameCase(str: string) {
+	return toKebabCase(str).toLowerCase()
+}
+
 export function GridItem({ name, icon: Icon, selected, bookmark }: { name: string; icon: Icon; bookmark?: boolean; selected?: boolean }) {
 	return (
 		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
@@ -41,6 +40,7 @@ export function GridItem({ name, icon: Icon, selected, bookmark }: { name: strin
 					const selection = window.getSelection()
 					selection?.removeAllRanges()
 				}}
+				// Enabling drag-paste
 				onDragStart={e => {
 					e.dataTransfer.setData("text/plain", "Hello, world!")
 					// TODO

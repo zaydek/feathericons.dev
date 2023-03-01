@@ -1,8 +1,8 @@
 import { lazy, LazyExoticComponent } from "react"
 
 import featherManifest from "@icons/feather/manifest.json"
-import wkBrandsManifest from "@icons/wolf-kit/brands/manifest.json"
-import wkPaymentsManifest from "@icons/wolf-kit/payments/manifest.json"
+import wolfKitBrandsManifest from "@icons/wolf-kit/brands/manifest.json"
+import wolfKitPaymentsManifest from "@icons/wolf-kit/payments/manifest.json"
 
 type Iconset = "@icons/feather" | "@icons/wolf-kit/brands" | "@icons/wolf-kit/payments"
 
@@ -13,10 +13,13 @@ export function createCache() {
 		return cache.has(key)
 	}
 
-	// TODO: This can be more granular
 	function get(key: Iconset) {
-		if (cache.has(key)) return cache.get(key)!
-
+		if (cache.has(key)) {
+			return [
+				true, // Cached
+				cache.get(key)!,
+			] as const
+		}
 		let names: string[]
 		let Icon: LazyExoticComponent<any>
 		switch (key) {
@@ -25,16 +28,19 @@ export function createCache() {
 				Icon = lazy(() => import("./stub-feather"))
 				break
 			case "@icons/wolf-kit/brands":
-				names = wkBrandsManifest
+				names = wolfKitBrandsManifest
 				Icon = lazy(() => import("./stub-wolf-kit-brands"))
 				break
 			case "@icons/wolf-kit/payments":
-				names = wkPaymentsManifest
+				names = wolfKitPaymentsManifest
 				Icon = lazy(() => import("./stub-wolf-kit-payments"))
 				break
 		}
 		cache.set(key, [names, Icon] as const)
-		return [names, Icon] as const
+		return [
+			false, // Uncached
+			[names, Icon],
+		] as const
 	}
 
 	return { has, get }

@@ -103,53 +103,18 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	const results = useMemo(() => {
 		const results: (readonly [string[], LazyExoticComponent<any>])[] = []
 		if (showFeather) {
-			results.push(cache.get("@icons/feather"))
+			results.push(cache.get("@icons/feather")[1])
 		}
-		// TODO: Make more granular
 		const someBrands = showBrandsOriginal || showBrandsCircle || showBrandsSquare
 		if (someBrands) {
-			results.push(cache.get("@icons/wolf-kit/brands"))
+			results.push(cache.get("@icons/wolf-kit/brands")[1])
 		}
-		// TODO: Make more granular
 		const somePayments = showPaymentsOriginal || showPaymentsFilled
 		if (somePayments) {
-			results.push(cache.get("@icons/wolf-kit/payments"))
+			results.push(cache.get("@icons/wolf-kit/payments")[1])
 		}
 		return results
 	}, [showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal])
-
-	//// const [pending, startTransition] = useTransition()
-	////
-	//// useEffect(() => {
-	//// 	startTransition(() => {
-	//// 		setStarted(pending)
-	//// 		window.setTimeout(() => {
-	//// 			setStarted(false)
-	//// 		}, 1e3)
-	//// 	})
-	//// }, [results])
-
-	//// useEffect(() => {
-	//// 	window.addEventListener("keydown", e => {
-	//// 		if (e.key === "d") {
-	//// 			setStarted(true)
-	//// 			const d = window.setTimeout(() => {
-	//// 				setStarted(false)
-	//// 			}, 1e3)
-	//// 			return () => window.clearTimeout(d)
-	//// 		}
-	//// 	})
-	//// }, [setStarted])
-
-	////
-	//// const setIconset = useCallback((iconset: IconsetValue) => {
-	//// 	const transition = cache.has(iconset)
-	//// 		? (fn: () => void) => fn()
-	//// 		: startTransition
-	//// 	transition(() => {
-	//// 		_setIconset(iconset)
-	//// 	})
-	//// }, [_setIconset])
 
 	return (
 		<SearchContext.Provider

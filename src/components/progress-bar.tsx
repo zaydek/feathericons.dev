@@ -3,8 +3,8 @@ import "./progress-bar.sass"
 import { ProgressBarContext } from "@/state"
 import { useContext, useEffect, useRef, useState } from "react"
 
-const TICK_MS = 200
-const TICK_END_MS = 400
+const TICK_MS = 100
+const TICK_END_MS = 200
 
 export function ProgresssBar() {
 	const { started } = useContext(ProgressBarContext)!
