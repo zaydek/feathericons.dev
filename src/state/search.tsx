@@ -98,8 +98,8 @@ export function SearchProvider({ children }: PropsWithChildren) {
 
 	// TODO
 	const foo = useMemo(() => {
-		const foo = cache.get("@icons/feather")
-		console.log(foo)
+		const [names, Icon] = cache.get("@icons/feather")
+		console.log(names, Icon)
 	}, [])
 
 	//// // Shorten title on mount
