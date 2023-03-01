@@ -1,5 +1,4 @@
-import { createContext, Dispatch, LazyExoticComponent, PropsWithChildren, SetStateAction, useCallback, useContext, useMemo } from "react"
-import { ProgressBarContext } from "./progress-bar"
+import { createContext, Dispatch, LazyExoticComponent, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
 import { createCache } from "./search-cache"
 import { useParam } from "./use-param"
 
@@ -36,8 +35,6 @@ export const SearchContext =
 const cache = createCache()
 
 export function SearchProvider({ children }: PropsWithChildren) {
-	const { setStarted } = useContext(ProgressBarContext)!
-
 	const [search, setSearch] = useParam({ key: "search", initialValue: "", parser: value => value })
 
 	const [showFeather, setShowFeather] = useParam({
