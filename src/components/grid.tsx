@@ -3,16 +3,33 @@ import "./grid.sass"
 import * as feather from "@icons/feather"
 
 import { Icon, toKebabCase } from "@/lib"
-import { PropsWithChildren } from "react"
+import { memo, Suspense } from "react"
 
 // TODO: Add caching?
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
 
-export function Grid({ children }: PropsWithChildren) {
-	return <div className="grid">{children}</div>
-}
+// Memoize <Grid> to suppress useless rerenders
+export const MemoGrid = memo(function Grid({ results }: { results: (readonly [string[], React.LazyExoticComponent<any>])[] }) {
+	return (
+		<div className="grid">
+			<Suspense fallback={<div>Loading…</div>}>
+				{results.map(([names, Icon]) =>
+					names.map((name, index) => (
+						<GridItem
+							key={name}
+							name={name}
+							icon={p => <Icon name={name} {...p} />}
+							bookmark={index % 15 === 0}
+							//// selected={index === 0}
+						/>
+					)),
+				)}
+			</Suspense>
+		</div>
+	)
+})
 
 // TODO: May want to ensure <article> is visible when toggling the sidebar
 export function GridItem({ name, icon: Icon, selected, bookmark }: { name: string; icon: Icon; bookmark?: boolean; selected?: boolean }) {

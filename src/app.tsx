@@ -1,21 +1,11 @@
+// TODO: Does this interfere with <Suspense>?
 import * as feather from "@icons/feather"
 import * as wolfKitBrands from "@icons/wolf-kit/brands"
 import * as wolfKitPayments from "@icons/wolf-kit/payments"
 
-import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Interweb, Interwebs, Main, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
+import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Header, Interweb, Interwebs, Main, MemoGrid, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { ProgressBarContext, RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
-import { Suspense, useContext, useEffect, useRef, useTransition } from "react"
-
-//// // TODO: Move to search.tsx
-//// function toNameCase(str: string) {
-//// 	return toKebabCase(str).toLowerCase()
-//// }
-////
-//// const featherEntries: [string, Icon][] = Object.entries(feather).map(([k, v]) => [toNameCase(k), v])
-//// const wolfKitBrandsEntries: [string, Icon][] = Object.entries(wolfKitBrands).map(([k, v]) => [toNameCase(k), v])
-//// const wolfKitPaymentsEntries: [string, Icon][] = Object.entries(wolfKitPayments).map(([k, v]) => [toNameCase(k), v])
-////
-//// const entries = [...featherEntries, ...wolfKitBrandsEntries, ...wolfKitPaymentsEntries]
+import { memo, useContext, useEffect, useRef, useTransition } from "react"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -28,14 +18,14 @@ export function App() {
 
 	return (
 		<DebugCssEffect>
-			<LayoutSidebar1 />
-			<LayoutSidebar2 />
-			<LayoutMain />
+			<AppSidebar1 />
+			<AppSidebar2 />
+			<AppMain />
 		</DebugCssEffect>
 	)
 }
 
-function LayoutSidebar1() {
+function AppSidebar1() {
 	const { setStarted } = useContext(ProgressBarContext)!
 	const { showFeather, setShowFeather, showBrandsOriginal, setShowBrandsOriginal, showBrandsCircle, setShowBrandsCircle, showBrandsSquare, setShowBrandsSquare, showPaymentsOriginal, setShowPaymentsOriginal, showPaymentsFilled, setShowPaymentsFilled, resetAll, toggleAllBrands, toggleAllPayments } = useContext(SearchContext)!
 
@@ -70,7 +60,7 @@ function LayoutSidebar1() {
 				</Section>
 			</Header>
 			<ScrollContainer>
-				<UndoSection name="Icon packs" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
+				<UndoSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
 					<div>
 						<Checkboxes>
 							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={transition(setShowFeather)} />
@@ -95,7 +85,7 @@ function LayoutSidebar1() {
 				<hr />
 			</ScrollContainer>
 			<Footer>
-				<Section name="Interwebs" icon={feather.Globe}>
+				<Section name="Explore" icon={feather.Globe}>
 					<Interwebs>
 						<Interweb name="Icons" icon={wolfKitBrands.Github} />
 						<Interweb name="Website" icon={wolfKitBrands.Github} />
@@ -108,19 +98,19 @@ function LayoutSidebar1() {
 	)
 }
 
-function LayoutSidebar2() {
+function AppSidebar2() {
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
 
 	return (
 		<Sidebar2>
 			<Header>
-				<SliderUndoSection name="Size" icon={feather.PenTool} value={size} formatValue={value => `${value.toFixed(0)} PX`} handleUndo={resetSize}>
+				<SliderUndoSection name="Icon size" icon={feather.PenTool} value={size} formatValue={value => `${value.toFixed(0)} PX`} handleUndo={resetSize}>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</SliderUndoSection>
 			</Header>
 			<ScrollContainer>
 				<hr />
-				<SliderUndoSection name="Stroke width" icon={feather.PenTool} value={strokeWidth} formatValue={value => value.toFixed(2)} handleUndo={resetStrokeWidth}>
+				<SliderUndoSection name="Icon stroke width" icon={feather.PenTool} value={strokeWidth} formatValue={value => value.toFixed(2)} handleUndo={resetStrokeWidth}>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</SliderUndoSection>
 				<hr />
@@ -129,27 +119,12 @@ function LayoutSidebar2() {
 	)
 }
 
-function LayoutMain() {
+const AppMain = memo(function LayoutMain() {
 	const { results } = useContext(SearchContext)!
 
 	return (
 		<Main>
-			<Grid>
-				<Suspense fallback={<div>Loading…</div>}>
-					{results.map(([names, Icon]) =>
-						names.map((name, index) =>
-							// prettier-ignore
-							<GridItem
-								key={name}
-								name={name}
-								icon={p => <Icon name={name} {...p} />}
-								bookmark={index % 15 === 0}
-								//// selected={index === 0}
-							/>,
-						),
-					)}
-				</Suspense>
-			</Grid>
+			<MemoGrid results={results} />
 		</Main>
 	)
-}
+})

@@ -59,7 +59,6 @@ async function readIcons(srcdir: string) {
 function optimizeIcons(icons: Record<string, string>) {
 	const copy: Record<string, string> = {}
 	for (const [name, icon] of Object.entries(icons)) {
-		// @ts-expect-error
 		const icon2 = icon.replaceAll(/<g[^>]*>([\s\S]+)<\/g>/g, "$1") // Remove <g>
 		const icon3 = SVGO.optimize(icon2, {
 			plugins: [
