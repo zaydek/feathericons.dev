@@ -120,6 +120,28 @@ export function SearchProvider({ children }: PropsWithChildren) {
 
 	//// const [pending, startTransition] = useTransition()
 	////
+	//// useEffect(() => {
+	//// 	startTransition(() => {
+	//// 		setStarted(pending)
+	//// 		window.setTimeout(() => {
+	//// 			setStarted(false)
+	//// 		}, 1e3)
+	//// 	})
+	//// }, [results])
+
+	//// useEffect(() => {
+	//// 	window.addEventListener("keydown", e => {
+	//// 		if (e.key === "d") {
+	//// 			setStarted(true)
+	//// 			const d = window.setTimeout(() => {
+	//// 				setStarted(false)
+	//// 			}, 1e3)
+	//// 			return () => window.clearTimeout(d)
+	//// 		}
+	//// 	})
+	//// }, [setStarted])
+
+	////
 	//// const setIconset = useCallback((iconset: IconsetValue) => {
 	//// 	const transition = cache.has(iconset)
 	//// 		? (fn: () => void) => fn()

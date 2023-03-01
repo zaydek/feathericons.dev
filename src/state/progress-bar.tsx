@@ -10,6 +10,19 @@ export const ProgressBarContext =
 export function ProgressBarProvider({ children }: PropsWithChildren) {
 	const [started, setStarted] = useState(false)
 
+	// DEBUG
+	//// useEffect(() => {
+	//// 	window.addEventListener("keydown", e => {
+	//// 		if (e.key === "d") {
+	//// 			setStarted(true)
+	//// 			const d = window.setTimeout(() => {
+	//// 				setStarted(false)
+	//// 			}, 1e3)
+	//// 			return () => window.clearTimeout(d)
+	//// 		}
+	//// 	})
+	//// }, [])
+
 	return (
 		<ProgressBarContext.Provider
 			value={useMemo(

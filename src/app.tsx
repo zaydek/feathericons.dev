@@ -4,7 +4,7 @@ import * as wolfKitPayments from "@icons/wolf-kit/payments"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Interweb, Interwebs, Main, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { ProgressBarContext, RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
-import { useContext, useEffect } from "react"
+import { Suspense, useContext, useEffect, useRef, useTransition } from "react"
 
 //// // TODO: Move to search.tsx
 //// function toNameCase(str: string) {
@@ -22,9 +22,7 @@ export function App() {
 
 	useEffect(() => {
 		setStarted(true)
-		const d = window.setTimeout(() => {
-			setStarted(false)
-		}, 100)
+		const d = window.setTimeout(() => setStarted(false), 100)
 		return () => window.clearTimeout(d)
 	}, [setStarted])
 
@@ -38,7 +36,31 @@ export function App() {
 }
 
 function LayoutSidebar1() {
+	const { setStarted } = useContext(ProgressBarContext)!
 	const { showFeather, setShowFeather, showBrandsOriginal, setShowBrandsOriginal, showBrandsCircle, setShowBrandsCircle, showBrandsSquare, setShowBrandsSquare, showPaymentsOriginal, setShowPaymentsOriginal, showPaymentsFilled, setShowPaymentsFilled, resetAll, toggleAllBrands, toggleAllPayments } = useContext(SearchContext)!
+
+	const [pending, startTransition] = useTransition()
+
+	// Wraps startTransition
+	function voidTransition(fn: () => void) {
+		return () => startTransition(fn)
+	}
+
+	// Wraps startTransition
+	function transition<T>(fn: (_: T) => void) {
+		return (next: T) => startTransition(() => fn(next))
+	}
+
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		setStarted(true)
+		const d = window.setTimeout(() => setStarted(false), 100)
+		return () => window.clearTimeout(d)
+	}, [pending]) // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<Sidebar1>
@@ -48,24 +70,24 @@ function LayoutSidebar1() {
 				</Section>
 			</Header>
 			<ScrollContainer>
-				<UndoSection name="Icon packs" icon={feather.Package} handleUndo={resetAll}>
+				<UndoSection name="Icon packs" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
 					<div>
 						<Checkboxes>
-							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={setShowFeather} />
+							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={transition(setShowFeather)} />
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={toggleAllBrands} />
+							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={transition(toggleAllBrands)} />
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitBrands.Twitter} checked={showBrandsOriginal} setChecked={setShowBrandsOriginal} />
-								<Checkbox name="Circle" icon={wolfKitBrands.TwitterCircle} checked={showBrandsCircle} setChecked={setShowBrandsCircle} />
-								<Checkbox name="Square" icon={wolfKitBrands.TwitterSquare} checked={showBrandsSquare} setChecked={setShowBrandsSquare} />
+								<Checkbox name="Original" icon={wolfKitBrands.Twitter} checked={showBrandsOriginal} setChecked={transition(setShowBrandsOriginal)} />
+								<Checkbox name="Circle" icon={wolfKitBrands.TwitterCircle} checked={showBrandsCircle} setChecked={transition(setShowBrandsCircle)} />
+								<Checkbox name="Square" icon={wolfKitBrands.TwitterSquare} checked={showBrandsSquare} setChecked={transition(setShowBrandsSquare)} />
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={toggleAllPayments} />
+							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={voidTransition(toggleAllPayments)} />
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitPayments.Stripe} checked={showPaymentsOriginal} setChecked={setShowPaymentsOriginal} />
-								<Checkbox name="Filled" icon={wolfKitPayments.Stripe1} checked={showPaymentsFilled} setChecked={setShowPaymentsFilled} />
+								<Checkbox name="Original" icon={wolfKitPayments.Stripe} checked={showPaymentsOriginal} setChecked={transition(setShowPaymentsOriginal)} />
+								<Checkbox name="Filled" icon={wolfKitPayments.Stripe1} checked={showPaymentsFilled} setChecked={transition(setShowPaymentsFilled)} />
 							</Checkboxes>
 						</Checkboxes>
 					</div>
@@ -113,18 +135,20 @@ function LayoutMain() {
 	return (
 		<Main>
 			<Grid>
-				{results.map(([names, Icon]) =>
-					names.map((name, index) =>
-						// prettier-ignore
-						<GridItem
-							key={name}
-							name={name}
-							icon={p => <Icon name={name} {...p} />}
-							bookmark={index % 15 === 0}
-							//// selected={index === 0}
-						/>,
-					),
-				)}
+				<Suspense fallback={<div>Loading…</div>}>
+					{results.map(([names, Icon]) =>
+						names.map((name, index) =>
+							// prettier-ignore
+							<GridItem
+								key={name}
+								name={name}
+								icon={p => <Icon name={name} {...p} />}
+								bookmark={index % 15 === 0}
+								//// selected={index === 0}
+							/>,
+						),
+					)}
+				</Suspense>
 			</Grid>
 		</Main>
 	)
