@@ -1,4 +1,5 @@
-import { createContext, Dispatch, LazyExoticComponent, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
+import { createContext, Dispatch, LazyExoticComponent, PropsWithChildren, SetStateAction, useCallback, useContext, useMemo } from "react"
+import { ProgressBarContext } from "./progress-bar"
 import { createCache } from "./search-cache"
 import { useParam } from "./use-param"
 
@@ -35,6 +36,8 @@ export const SearchContext =
 const cache = createCache()
 
 export function SearchProvider({ children }: PropsWithChildren) {
+	const { setStarted } = useContext(ProgressBarContext)!
+
 	const [search, setSearch] = useParam({ key: "search", initialValue: "", parser: value => value })
 
 	const [showFeather, setShowFeather] = useParam({
@@ -102,14 +105,29 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		if (showFeather) {
 			results.push(cache.get("@icons/feather"))
 		}
-		if (showBrandsOriginal || showBrandsCircle || showBrandsSquare) {
+		// TODO: Make more granular
+		const someBrands = showBrandsOriginal || showBrandsCircle || showBrandsSquare
+		if (someBrands) {
 			results.push(cache.get("@icons/wolf-kit/brands"))
 		}
-		if (showPaymentsOriginal || showPaymentsFilled) {
+		// TODO: Make more granular
+		const somePayments = showPaymentsOriginal || showPaymentsFilled
+		if (somePayments) {
 			results.push(cache.get("@icons/wolf-kit/payments"))
 		}
 		return results
 	}, [showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal])
+
+	//// const [pending, startTransition] = useTransition()
+	////
+	//// const setIconset = useCallback((iconset: IconsetValue) => {
+	//// 	const transition = cache.has(iconset)
+	//// 		? (fn: () => void) => fn()
+	//// 		: startTransition
+	//// 	transition(() => {
+	//// 		_setIconset(iconset)
+	//// 	})
+	//// }, [_setIconset])
 
 	return (
 		<SearchContext.Provider

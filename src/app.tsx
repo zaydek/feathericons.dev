@@ -113,15 +113,15 @@ function LayoutMain() {
 	return (
 		<Main>
 			<Grid>
-				{results.map(([names, Icon], index) =>
-					names.map(name =>
+				{results.map(([names, Icon]) =>
+					names.map((name, index) =>
 						// prettier-ignore
 						<GridItem
 							key={name}
 							name={name}
 							icon={p => <Icon name={name} {...p} />}
-							bookmark={Math.random() < 0.1}
-							selected={index === 0}
+							bookmark={index % 15 === 0}
+							//// selected={index === 0}
 						/>,
 					),
 				)}
