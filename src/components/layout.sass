@@ -59,10 +59,11 @@ $handle-width:    6px
     justify-content: center
     align-items: center
     width: $drag-area-width
-    cursor: grab       // Interaction styles
-    user-select: none  // Interaction styles
-    &:hover:active     // Interaction styles
-      cursor: grabbing // Interaction styles
+    cursor: grab              // Interaction
+    -webkit-user-select: none // Interaction
+    user-select: none         // Interaction
+    &:hover:active            // Interaction
+      cursor: grabbing        // Interaction
     .handle
       height: $handle-height
       width: $handle-width

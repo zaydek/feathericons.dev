@@ -29,8 +29,9 @@ $bookmark-icon-height:       12px
     background-color: white
     border-radius: 4px
     box-shadow: $inset-hairline-shadow
-    cursor: pointer   // Interaction styles
-    user-select: none // Interaction styles
+    cursor: pointer           // Interaction
+    -webkit-user-select: none // Interaction
+    user-select: none         // Interaction
     // FIXME: Use :focus here?
     &:focus
       //// background-color: hsl(200, 100%, 97.5%)
@@ -55,7 +56,8 @@ $bookmark-icon-height:       12px
     font: 425 13px / 1.25 $sans
     text-align: center
     color: $slate-800
-    user-select: all // Select all on click
+    -webkit-user-select: all // Interaction
+    user-select: all         // Interaction
   .bookmark
     position: absolute
     inset: math.div($bookmark-icon-frame-height - $bookmark-icon-height, 2) math.div($bookmark-icon-frame-height - $bookmark-icon-height, 2) auto auto
