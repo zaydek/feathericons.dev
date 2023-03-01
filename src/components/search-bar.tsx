@@ -1,6 +1,6 @@
 import "./search-bar.sass"
 
-import * as feather from "@icons/feather"
+import * as feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
 import { SearchContext } from "@/state"

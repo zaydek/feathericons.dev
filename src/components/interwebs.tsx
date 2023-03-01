@@ -1,6 +1,6 @@
 import "./interwebs.sass"
 
-import * as feather from "@icons/feather"
+import * as feather from "@icons/feather/tsx"
 
 import { Icon } from "@/lib"
 import { PropsWithChildren } from "react"

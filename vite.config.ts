@@ -6,12 +6,8 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			"@": "/src",
-			"@icons/feather/manifest.json": "/icons/feather/production/manifest.json",
-			"@icons/feather": "/icons/feather/production/tsx/index.ts",
-			"@icons/wolf-kit/brands/manifest.json": "/icons/wolf-kit/production/brands/manifest.json",
-			"@icons/wolf-kit/brands": "/icons/wolf-kit/production/brands/tsx/index.ts",
-			"@icons/wolf-kit/payments/manifest.json": "/icons/wolf-kit/production/payments/manifest.json",
-			"@icons/wolf-kit/payments": "/icons/wolf-kit/production/payments/tsx/index.ts",
+			"@icons/feather": "/icons/feather/production",
+			"@icons/wolf-kit": "/icons/wolf-kit/production",
 		},
 	},
 	preview: { host: true, port: 3000 },

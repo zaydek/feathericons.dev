@@ -1,8 +1,8 @@
 import { lazy, LazyExoticComponent } from "react"
 
 import featherManifest from "@icons/feather/manifest.json"
-import wolfKitBrandsManifest from "@icons/wolf-kit/brands/manifest.json"
-import wolfKitPaymentsManifest from "@icons/wolf-kit/payments/manifest.json"
+import wolfKitBrandsManifest from "@icons/wolf-kit/brands/original/manifest.json"
+import wolfKitPaymentsManifest from "@icons/wolf-kit/payments/original/manifest.json"
 
 type Iconset = "@icons/feather" | "@icons/wolf-kit/brands" | "@icons/wolf-kit/payments"
 

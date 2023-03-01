@@ -1,7 +1,11 @@
 // TODO: Does this interfere with <Suspense>?
-import * as feather from "@icons/feather"
-import * as wolfKitBrands from "@icons/wolf-kit/brands"
-import * as wolfKitPayments from "@icons/wolf-kit/payments"
+import * as feather from "@icons/feather/tsx"
+
+import * as wolfKitBrandsOriginalCircle from "@icons/wolf-kit/brands/original-circle/tsx"
+import * as wolfKitBrandsOriginalSquare from "@icons/wolf-kit/brands/original-square/tsx"
+import * as wolfKitBrandsOriginal from "@icons/wolf-kit/brands/original/tsx"
+import * as wolfKitPaymentsOriginalFilled from "@icons/wolf-kit/payments/original-filled/tsx"
+import * as wolfKitPaymentsOriginal from "@icons/wolf-kit/payments/original/tsx"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Header, Interweb, Interwebs, Main, MemoGrid, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
@@ -62,16 +66,16 @@ function AppSidebar1() {
 						<Checkboxes>
 							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={transition(toggleAllBrands)} />
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitBrands.Twitter} checked={showBrandsOriginal} setChecked={transition(setShowBrandsOriginal)} />
-								<Checkbox name="Circle" icon={wolfKitBrands.TwitterCircle} checked={showBrandsCircle} setChecked={transition(setShowBrandsCircle)} />
-								<Checkbox name="Square" icon={wolfKitBrands.TwitterSquare} checked={showBrandsSquare} setChecked={transition(setShowBrandsSquare)} />
+								<Checkbox name="Original" icon={wolfKitBrandsOriginal.Twitter} checked={showBrandsOriginal} setChecked={transition(setShowBrandsOriginal)} />
+								<Checkbox name="Circle" icon={wolfKitBrandsOriginalCircle.TwitterCircle} checked={showBrandsCircle} setChecked={transition(setShowBrandsCircle)} />
+								<Checkbox name="Square" icon={wolfKitBrandsOriginalSquare.TwitterSquare} checked={showBrandsSquare} setChecked={transition(setShowBrandsSquare)} />
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
 							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={voidTransition(toggleAllPayments)} />
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitPayments.Stripe} checked={showPaymentsOriginal} setChecked={transition(setShowPaymentsOriginal)} />
-								<Checkbox name="Filled" icon={wolfKitPayments.Stripe1} checked={showPaymentsFilled} setChecked={transition(setShowPaymentsFilled)} />
+								<Checkbox name="Original" icon={wolfKitPaymentsOriginal.Stripe} checked={showPaymentsOriginal} setChecked={transition(setShowPaymentsOriginal)} />
+								<Checkbox name="Filled" icon={wolfKitPaymentsOriginalFilled.Stripe} checked={showPaymentsFilled} setChecked={transition(setShowPaymentsFilled)} />
 							</Checkboxes>
 						</Checkboxes>
 					</div>
@@ -81,10 +85,10 @@ function AppSidebar1() {
 			<Footer>
 				<Section name="Explore" icon={feather.Globe}>
 					<Interwebs>
-						<Interweb name="Icons" icon={wolfKitBrands.Github} />
-						<Interweb name="Website" icon={wolfKitBrands.Github} />
-						<Interweb name="Figma Plugin" icon={wolfKitBrands.Figma} />
-						<Interweb name="Share on Twitter" icon={wolfKitBrands.Twitter} />
+						<Interweb name="Icons" icon={wolfKitBrandsOriginal.Github} />
+						<Interweb name="Website" icon={wolfKitBrandsOriginal.Github} />
+						<Interweb name="Figma Plugin" icon={wolfKitBrandsOriginal.Figma} />
+						<Interweb name="Share on Twitter" icon={wolfKitBrandsOriginal.Twitter} />
 					</Interwebs>
 				</Section>
 			</Footer>

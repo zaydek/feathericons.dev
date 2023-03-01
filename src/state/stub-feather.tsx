@@ -1,4 +1,4 @@
-import * as icons from "@icons/feather"
+import * as icons from "@icons/feather/tsx"
 
 import { createElement } from "react"
 
