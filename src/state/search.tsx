@@ -1,4 +1,4 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
+import { createContext, Dispatch, LazyExoticComponent, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
 import { createCache } from "./search-cache"
 import { useParam } from "./use-param"
 
@@ -29,6 +29,7 @@ export const SearchContext =
 		resetAll:                () => void
 		toggleAllBrands:         () => void
 		toggleAllPayments:       () => void
+		results:                 (readonly [string[], LazyExoticComponent<any>])[]
 	} | null>(null)
 
 const cache = createCache()
@@ -97,15 +98,12 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	}, [setShowPaymentsFilled, setShowPaymentsOriginal, showPaymentsFilled, showPaymentsOriginal])
 
 	// TODO
-	const foo = useMemo(() => {
-		const [names, Icon] = cache.get("@icons/feather")
-		console.log(names, Icon)
+	const results = useMemo(() => {
+		const feather = cache.get("@icons/feather")
+		const wolfKitBrands = cache.get("@icons/wolf-kit/brands")
+		const wolfKitPayments = cache.get("@icons/wolf-kit/payments")
+		return [feather, wolfKitBrands, wolfKitPayments]
 	}, [])
-
-	//// // Shorten title on mount
-	//// useEffect(() => {
-	//// 	document.title = "Feather"
-	//// }, [])
 
 	return (
 		<SearchContext.Provider
@@ -128,9 +126,10 @@ export function SearchProvider({ children }: PropsWithChildren) {
 					resetAll,
 					toggleAllBrands,
 					toggleAllPayments,
+					results,
 				}),
 				// prettier-ignore
-				[resetAll, search, setSearch, setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, setShowFeather, setShowPaymentsFilled, setShowPaymentsOriginal, showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal, toggleAllBrands, toggleAllPayments],
+				[resetAll, results, search, setSearch, setShowBrandsCircle, setShowBrandsOriginal, setShowBrandsSquare, setShowFeather, setShowPaymentsFilled, setShowPaymentsOriginal, showBrandsCircle, showBrandsOriginal, showBrandsSquare, showFeather, showPaymentsFilled, showPaymentsOriginal, toggleAllBrands, toggleAllPayments],
 			)}
 		>
 			{children}

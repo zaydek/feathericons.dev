@@ -148,7 +148,8 @@ async function exportAllFeather() {
 	// Source assets
 	await exportSvgAndZip(svgs, "icons/feather/production/svg", { banner: featherSvgBanner })
 	await exportTsx(tsxs, "icons/feather/production/tsx", { banner: featherTsxBanner })
-	await fs.writeFile("icons/feather/production/manifest.json", JSON.stringify(Object.keys(svgs), null, "  ") + EOF)
+	const names = Object.keys(svgs).map(name => toTitleCase(name))
+	await fs.writeFile("icons/feather/production/manifest.json", JSON.stringify(names, null, "  ") + EOF)
 
 	// Binary assets
 	await exportZip("icons/feather/figma/jpg@1x", "icons/feather/production/jpg@1x")
@@ -174,7 +175,8 @@ async function exportAllWolfKitBrands() {
 	// Source assets
 	await exportSvgAndZip(svgs, "icons/wolf-kit/production/brands/svg", { banner: wolfKitSvgBanner })
 	await exportTsx(tsxs, "icons/wolf-kit/production/brands/tsx", { banner: wolfKitTsxBanner })
-	await fs.writeFile("icons/wolf-kit/production/brands/manifest.json", JSON.stringify(Object.keys(svgs), null, "  ") + EOF)
+	const names = Object.keys(svgs).map(name => toTitleCase(name))
+	await fs.writeFile("icons/wolf-kit/production/brands/manifest.json", JSON.stringify(names, null, "  ") + EOF)
 
 	// Binary assets
 	await exportZip("icons/wolf-kit/figma/brands/jpg@1x", "icons/wolf-kit/production/brands/jpg@1x")
@@ -200,7 +202,8 @@ async function exportAllWolfKitPayments() {
 	// Source assets
 	await exportSvgAndZip(svgs, "icons/wolf-kit/production/payments/svg", { banner: wolfKitSvgBanner })
 	await exportTsx(tsxs, "icons/wolf-kit/production/payments/tsx", { banner: wolfKitTsxBanner })
-	await fs.writeFile("icons/wolf-kit/production/payments/manifest.json", JSON.stringify(Object.keys(svgs), null, "  ") + EOF)
+	const names = Object.keys(svgs).map(name => toTitleCase(name))
+	await fs.writeFile("icons/wolf-kit/production/payments/manifest.json", JSON.stringify(names, null, "  ") + EOF)
 
 	// Binary assets
 	await exportZip("icons/wolf-kit/figma/payments/jpg@1x", "icons/wolf-kit/production/payments/jpg@1x")

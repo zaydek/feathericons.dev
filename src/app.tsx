@@ -109,14 +109,23 @@ function LayoutSidebar2() {
 }
 
 function LayoutMain() {
-	// TODO
+	const { results } = useContext(SearchContext)!
 
 	return (
 		<Main>
 			<Grid>
-				{entries.map(([name, Icon], index) => (
-					<GridItem key={index} name={name} icon={Icon} bookmark={Math.random() < 0.1} selected={index === 0} />
-				))}
+				{results.map(([names, Icon], index) =>
+					names.map(name =>
+						// prettier-ignore
+						<GridItem
+							key={name}
+							name={name}
+							icon={p => <Icon name={name} {...p} />}
+							bookmark={Math.random() < 0.1}
+							selected={index === 0}
+						/>,
+					),
+				)}
 			</Grid>
 		</Main>
 	)
