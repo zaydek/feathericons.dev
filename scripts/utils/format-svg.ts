@@ -9,13 +9,13 @@ function stringifyAttrs(sortedKeys: string[], attrs: NamedNodeMap, { strictJsx }
 		const attr = attrs.getNamedItem(sortedKey)!
 		if (attr === null) {
 			if (sortedKey === "viewBox") {
-				if (str !== "") { str += " " } // prettier-ignore
+				if (str !== "") str += " "
 				const width = attrs.getNamedItem("width")!.value
 				const height = attrs.getNamedItem("height")!.value
 				str += `viewBox="0 0 ${width} ${height}"`
 			}
 		} else {
-			if (str !== "") { str += " " } // prettier-ignore
+			if (str !== "") str += " "
 			if (strictJsx) {
 				str += `${toCamelCase(attr.name)}=${JSON.stringify(attr.value)}`
 			} else {
@@ -52,7 +52,7 @@ function formatSvgElement(ref: Element, nesting: number, { strictJsx }: { strict
 	} else {
 		str = "  ".repeat(nesting) + `<${tag}${attrs === "" ? "" : ` ${attrs}`}>`
 		for (const child of ref.children) {
-			//// if (child.tagName === "defs") { continue } // prettier-ignore
+			//// if (child.tagName === "defs") continue
 			//// if (child.tagName === "g") {
 			//// 	// <g><path /><path /></g>
 			//// 	// -> <path /><path />

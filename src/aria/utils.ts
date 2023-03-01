@@ -1,10 +1,8 @@
 import { Arrayable } from "@/lib"
-import { Dispatch, MutableRefObject, ReactElement, SetStateAction, useEffect } from "react"
+import { Dispatch, ReactElement, RefObject, SetStateAction, useEffect } from "react"
 
-export function getStringFromChildren(
-	children: Arrayable<string> | Arrayable<ReactElement<{ children?: string }>> | undefined,
-) {
-	if (children === undefined) { return "" } // prettier-ignore
+export function getStringFromChildren(children: Arrayable<string> | Arrayable<ReactElement<{ children?: string }>> | undefined) {
+	if (children === undefined) return ""
 	let str = ""
 	const flatChildren = [children].flat()
 	for (const child of flatChildren) {
@@ -18,13 +16,10 @@ export function getStringFromChildren(
 	return str
 }
 
-export function useCancelable(
-	ref:     MutableRefObject<HTMLDivElement | null>, // prettier-ignore
-	setShow: Dispatch<SetStateAction<boolean>>,
-) {
+export function useCancelable(ref: RefObject<HTMLDivElement | null>, setShow: Dispatch<SetStateAction<boolean>>) {
 	useEffect(() => {
 		function handleClick(e: MouseEvent) {
-			if (ref.current === null) { return } // prettier-ignore
+			if (ref.current === null) return
 			if (!(e.target instanceof HTMLElement && ref.current.contains(e.target))) {
 				setShow(false)
 			}

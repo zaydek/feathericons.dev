@@ -1,4 +1,5 @@
 export * from "./layout"
+export * from "./progress-bar"
 export * from "./range"
 export * from "./search"
 export * from "./use-param"

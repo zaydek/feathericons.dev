@@ -1,17 +1,7 @@
 // https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
 
 import { queue } from "@/lib"
-import {
-	createContext,
-	Dispatch,
-	SetStateAction,
-	useCallback,
-	useContext,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react"
+import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { getStringFromChildren, useCancelable } from "./utils"
 
 type Item<T extends string> = { id: T; str: string }
@@ -40,16 +30,7 @@ export type AriaSimpleDropDownProps<T extends string> = {
 	setCurrentId: Dispatch<SetStateAction<T>>
 } & JSX.IntrinsicElements["div"]
 
-export function AriaSimpleDropDown<T extends string>({
-	show,
-	setShow,
-	currentId,
-	setCurrentId,
-	onClick,
-	onKeyDown,
-	children,
-	...props
-}: AriaSimpleDropDownProps<T>) {
+export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId, setCurrentId, onClick, onKeyDown, children, ...props }: AriaSimpleDropDownProps<T>) {
 	const ref = useRef<HTMLDivElement | null>(null)
 	const [items, setItems] = useState<Item<T>[]>([])
 
@@ -103,7 +84,7 @@ export function AriaSimpleDropDown<T extends string>({
 			return
 		}
 		if (show) {
-			if (items.length === 0) { return } // prettier-ignore
+			if (items.length === 0) return
 			const element = document.getElementById(currentId) ?? document.getElementById(items[0].id)
 			element?.focus()
 		} else {
@@ -188,13 +169,7 @@ export function AriaSimpleDropDown<T extends string>({
 
 export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Omit<JSX.IntrinsicElements["div"], "id">
 
-export function AriaSimpleDropDownItem<T extends string>({
-	id,
-	onClick,
-	onKeyDown,
-	children,
-	...props
-}: AriaSimpleDropDownItemProps<T>) {
+export function AriaSimpleDropDownItem<T extends string>({ id, onClick, onKeyDown, children, ...props }: AriaSimpleDropDownItemProps<T>) {
 	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!
 
 	const ref = useRef<HTMLDivElement | null>(null)

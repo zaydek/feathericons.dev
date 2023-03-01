@@ -32,12 +32,6 @@ export const SearchContext =
 
 export function SearchProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useParam({ key: "search", initialValue: "", parser: value => value })
-	const FEATHER_DEFAULT = true
-	const BRANDS_ORIGINAL_DEFAULT = true
-	const BRANDS_CIRCLE_DEFAULT = false
-	const BRANDS_SQUARE_DEFAULT = false
-	const PAYMENTS_ORIGINAL_DEFAULT = true
-	const PAYMENTS_FILLED_DEFAULT = false
 
 	const [showFeather, setShowFeather] = useParam({
 		key: "feather",

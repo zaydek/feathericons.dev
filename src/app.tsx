@@ -4,8 +4,8 @@ import * as wkSocial from "@icons/wolf-kit/social-media"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Interweb, Interwebs, Main, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { Icon, toKebabCase } from "@/lib"
-import { RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
-import { useContext } from "react"
+import { ProgressBarContext, RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
+import { useContext, useEffect } from "react"
 
 // TODO: Move to search.tsx
 function toNameCase(str: string) {
@@ -19,6 +19,12 @@ const wkPaymentProcessorsEntries: [string, Icon][] = Object.entries(wkPayment).m
 const entries = [...featherEntries, ...wkSocialMediaEntries, ...wkPaymentProcessorsEntries]
 
 export function App() {
+	const { setStarted } = useContext(ProgressBarContext)!
+
+	useEffect(() => {
+		setStarted(true)
+	}, [setStarted])
+
 	return (
 		<DebugCssEffect>
 			<LayoutSidebar1 />

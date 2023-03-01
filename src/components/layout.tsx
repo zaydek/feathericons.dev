@@ -22,7 +22,7 @@ function useBodyScrollLocking({ sidebar }: { sidebar: SidebarState }) {
 
 function useCancelableShortcut({ sidebar, setSidebar }: { sidebar: SidebarState; setSidebar: Dispatch<SetStateAction<SidebarState>> }) {
 	useEffect(() => {
-		if (sidebar !== "maximized") { return } // prettier-ignore
+		if (sidebar !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
 			setSidebar("normal")
 		}
