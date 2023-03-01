@@ -2,8 +2,13 @@ import "./grid.sass"
 
 import * as feather from "@icons/feather"
 
-import { Icon } from "@/lib"
+import { Icon, toKebabCase } from "@/lib"
 import { PropsWithChildren } from "react"
+
+// TODO: Add caching?
+function toNameCase(str: string) {
+	return toKebabCase(str).toLowerCase()
+}
 
 export function Grid({ children }: PropsWithChildren) {
 	return <div className="grid">{children}</div>
@@ -28,7 +33,7 @@ export function GridItem({ name, icon: Icon, selected, bookmark }: { name: strin
 			>
 				<Icon />
 			</figure>
-			<figcaption>{name}</figcaption>
+			<figcaption>{toNameCase(name)}</figcaption>
 			<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
 		</article>
 	)

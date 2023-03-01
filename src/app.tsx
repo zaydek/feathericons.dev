@@ -3,20 +3,19 @@ import * as wolfKitBrands from "@icons/wolf-kit/brands"
 import * as wolfKitPayments from "@icons/wolf-kit/payments"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Grid, GridItem, Header, Interweb, Interwebs, Main, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
-import { Icon, toKebabCase } from "@/lib"
 import { ProgressBarContext, RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
 import { useContext, useEffect } from "react"
 
-// TODO: Move to search.tsx
-function toNameCase(str: string) {
-	return toKebabCase(str).toLowerCase()
-}
-
-const featherEntries: [string, Icon][] = Object.entries(feather).map(([k, v]) => [toNameCase(k), v])
-const wolfKitBrandsEntries: [string, Icon][] = Object.entries(wolfKitBrands).map(([k, v]) => [toNameCase(k), v])
-const wolfKitPaymentsEntries: [string, Icon][] = Object.entries(wolfKitPayments).map(([k, v]) => [toNameCase(k), v])
-
-const entries = [...featherEntries, ...wolfKitBrandsEntries, ...wolfKitPaymentsEntries]
+//// // TODO: Move to search.tsx
+//// function toNameCase(str: string) {
+//// 	return toKebabCase(str).toLowerCase()
+//// }
+////
+//// const featherEntries: [string, Icon][] = Object.entries(feather).map(([k, v]) => [toNameCase(k), v])
+//// const wolfKitBrandsEntries: [string, Icon][] = Object.entries(wolfKitBrands).map(([k, v]) => [toNameCase(k), v])
+//// const wolfKitPaymentsEntries: [string, Icon][] = Object.entries(wolfKitPayments).map(([k, v]) => [toNameCase(k), v])
+////
+//// const entries = [...featherEntries, ...wolfKitBrandsEntries, ...wolfKitPaymentsEntries]
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
