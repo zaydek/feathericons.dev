@@ -19,7 +19,7 @@
     "paths": {
 			"@/*": ["./src/*"],
       "@icons/feather/*": ["./icons/feather/production/*"],
-      "@icons/wolf-kit/*": ["./icons/wolf-kit/production/*"],
+      "@icons/wolfkit/*": ["./icons/wolfkit/production/*"],
     }
   },
   "include": ["src", "scripts"],

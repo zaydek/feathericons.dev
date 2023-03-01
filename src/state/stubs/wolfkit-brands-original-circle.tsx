@@ -1,4 +1,4 @@
-import * as icons from "@icons/wolf-kit/payments/original/tsx"
+import * as icons from "@icons/wolfkit/brands/original-circle/tsx"
 
 import { createElement } from "react"
 

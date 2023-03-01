@@ -7,7 +7,7 @@ export default defineConfig({
 		alias: {
 			"@": "/src",
 			"@icons/feather": "/icons/feather/production",
-			"@icons/wolf-kit": "/icons/wolf-kit/production",
+			"@icons/wolfkit": "/icons/wolfkit/production",
 		},
 	},
 	preview: { host: true, port: 3000 },

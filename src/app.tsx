@@ -1,11 +1,11 @@
 // TODO: Does this interfere with <Suspense>?
 import * as feather from "@icons/feather/tsx"
 
-import * as wolfKitBrandsOriginalCircle from "@icons/wolf-kit/brands/original-circle/tsx"
-import * as wolfKitBrandsOriginalSquare from "@icons/wolf-kit/brands/original-square/tsx"
-import * as wolfKitBrandsOriginal from "@icons/wolf-kit/brands/original/tsx"
-import * as wolfKitPaymentsOriginalFilled from "@icons/wolf-kit/payments/original-filled/tsx"
-import * as wolfKitPaymentsOriginal from "@icons/wolf-kit/payments/original/tsx"
+import * as wolfKitBrandsOriginalCircle from "@icons/wolfkit/brands/original-circle/tsx"
+import * as wolfKitBrandsOriginalSquare from "@icons/wolfkit/brands/original-square/tsx"
+import * as wolfKitBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
+import * as wolfKitPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
+import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Header, Interweb, Interwebs, Main, MemoGrid, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
@@ -32,7 +32,37 @@ export function App() {
 
 function AppSidebar1() {
 	const { setStarted } = useContext(ProgressBarContext)!
-	const { showFeather, setShowFeather, showBrandsOriginal, setShowBrandsOriginal, showBrandsCircle, setShowBrandsCircle, showBrandsSquare, setShowBrandsSquare, showPaymentsOriginal, setShowPaymentsOriginal, showPaymentsFilled, setShowPaymentsFilled, resetAll, toggleAllBrands, toggleAllPayments } = useContext(SearchContext)!
+
+	// prettier-ignore
+	const {
+		showFeather,
+		setShowFeather,
+		showBrandsOriginal,
+		setShowBrandsOriginal,
+		showBrandsOriginalCircle,
+		setShowBrandsOriginalCircle,
+		showBrandsOriginalSquare,
+		setShowBrandsOriginalSquare,
+		showBrandsMono,
+		setShowBrandsMono,
+		showBrandsMonoCircle,
+		setShowBrandsMonoCircle,
+		showBrandsMonoSquare,
+		setShowBrandsMonoSquare,
+		showPaymentsOriginal,
+		setShowPaymentsOriginal,
+		showPaymentsOriginalFilled,
+		setShowPaymentsOriginalFilled,
+		showPaymentsMono,
+		setShowPaymentsMono,
+		showPaymentsMonoFilled,
+		setShowPaymentsMonoFilled,
+		resetAll,
+		toggleAllBrandsOriginal,
+		toggleAllBrandsMono,
+		toggleAllPaymentsOriginal,
+		toggleAllPaymentsMono,
+	} = useContext(SearchContext)!
 
 	const [pending, startTransition] = useTransition()
 
@@ -64,18 +94,18 @@ function AppSidebar1() {
 							<Checkbox name="Feather icons" icon={feather.Feather} checked={showFeather} setChecked={transition(setShowFeather)} />
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={transition(toggleAllBrands)} />
+							<CheckboxButton name="Brands" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={transition(toggleAllBrandsOriginal)} />
 							<Checkboxes>
 								<Checkbox name="Original" icon={wolfKitBrandsOriginal.Twitter} checked={showBrandsOriginal} setChecked={transition(setShowBrandsOriginal)} />
-								<Checkbox name="Circle" icon={wolfKitBrandsOriginalCircle.TwitterCircle} checked={showBrandsCircle} setChecked={transition(setShowBrandsCircle)} />
-								<Checkbox name="Square" icon={wolfKitBrandsOriginalSquare.TwitterSquare} checked={showBrandsSquare} setChecked={transition(setShowBrandsSquare)} />
+								<Checkbox name="Circle" icon={wolfKitBrandsOriginalCircle.TwitterCircle} checked={showBrandsOriginalCircle} setChecked={transition(setShowBrandsOriginalCircle)} />
+								<Checkbox name="Square" icon={wolfKitBrandsOriginalSquare.TwitterSquare} checked={showBrandsOriginalSquare} setChecked={transition(setShowBrandsOriginalSquare)} />
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={voidTransition(toggleAllPayments)} />
+							<CheckboxButton name="Payment services" icon={p => <feather.Folder style={{ transform: "scale(0.8)", opacity: 0.375 }} fill="currentColor" strokeWidth={4} {...p} />} onClick={voidTransition(toggleAllPaymentsOriginal)} />
 							<Checkboxes>
 								<Checkbox name="Original" icon={wolfKitPaymentsOriginal.Stripe} checked={showPaymentsOriginal} setChecked={transition(setShowPaymentsOriginal)} />
-								<Checkbox name="Filled" icon={wolfKitPaymentsOriginalFilled.Stripe} checked={showPaymentsFilled} setChecked={transition(setShowPaymentsFilled)} />
+								<Checkbox name="Filled" icon={wolfKitPaymentsOriginalFilled.Stripe} checked={showPaymentsOriginalFilled} setChecked={transition(setShowPaymentsOriginalFilled)} />
 							</Checkboxes>
 						</Checkboxes>
 					</div>
