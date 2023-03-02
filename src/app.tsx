@@ -2,16 +2,16 @@
 import * as feather from "@icons/feather/tsx"
 
 // TODO: Does this interfere with <Suspense>?
-import * as wolfKitBrandsMonoCircle from "@icons/wolfkit/brands/mono-circle/tsx"
-import * as wolfKitBrandsMonoSquare from "@icons/wolfkit/brands/mono-square/tsx"
-import * as wolfKitBrandsMono from "@icons/wolfkit/brands/mono/tsx"
+//// import * as wolfKitBrandsMonoCircle from "@icons/wolfkit/brands/mono-circle/tsx"
+//// import * as wolfKitBrandsMonoSquare from "@icons/wolfkit/brands/mono-square/tsx"
+//// import * as wolfKitBrandsMono from "@icons/wolfkit/brands/mono/tsx"
 import * as wolfKitBrandsOriginalCircle from "@icons/wolfkit/brands/original-circle/tsx"
 import * as wolfKitBrandsOriginalSquare from "@icons/wolfkit/brands/original-square/tsx"
 import * as wolfKitBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
 
 // TODO: Does this interfere with <Suspense>?
-import * as wolfKitPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
-import * as wolfKitPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
+//// import * as wolfKitPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
+//// import * as wolfKitPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wolfKitPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
 import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
@@ -79,25 +79,25 @@ function AppSidebar1() {
 		setShowBrandsOriginalCircle,
 		showBrandsOriginalSquare,
 		setShowBrandsOriginalSquare,
-		showBrandsMono,
-		setShowBrandsMono,
-		showBrandsMonoCircle,
-		setShowBrandsMonoCircle,
-		showBrandsMonoSquare,
-		setShowBrandsMonoSquare,
+		//// showBrandsMono,
+		//// setShowBrandsMono,
+		//// showBrandsMonoCircle,
+		//// setShowBrandsMonoCircle,
+		//// showBrandsMonoSquare,
+		//// setShowBrandsMonoSquare,
 		showPaymentsOriginal,
 		setShowPaymentsOriginal,
 		showPaymentsOriginalFilled,
 		setShowPaymentsOriginalFilled,
-		showPaymentsMono,
-		setShowPaymentsMono,
-		showPaymentsMonoFilled,
-		setShowPaymentsMonoFilled,
+		//// showPaymentsMono,
+		//// setShowPaymentsMono,
+		//// showPaymentsMonoFilled,
+		//// setShowPaymentsMonoFilled,
 		resetAll,
 		toggleAllBrandsOriginal,
-		toggleAllBrandsMono,
+		//// toggleAllBrandsMono,
 		toggleAllPaymentsOriginal,
-		toggleAllPaymentsMono,
+		//// toggleAllPaymentsMono,
 	} = useContext(SearchContext)!
 
 	const [pending, startTransition] = useTransition()
@@ -167,7 +167,7 @@ function AppSidebar1() {
 								/>
 							</Checkboxes>
 						</Checkboxes>
-						<Checkboxes>
+						{/* <Checkboxes>
 							<CheckboxButton
 								name="Brands (mono)"
 								icon={p =>
@@ -199,7 +199,7 @@ function AppSidebar1() {
 									setChecked={transition(setShowBrandsMonoSquare)}
 								/>
 							</Checkboxes>
-						</Checkboxes>
+						</Checkboxes> */}
 						<Checkboxes>
 							<CheckboxButton
 								name="Payments"
@@ -227,7 +227,7 @@ function AppSidebar1() {
 								/>
 							</Checkboxes>
 						</Checkboxes>
-						<Checkboxes>
+						{/* <Checkboxes>
 							<CheckboxButton
 								name="Payments (mono)"
 								icon={p =>
@@ -253,7 +253,7 @@ function AppSidebar1() {
 									setChecked={transition(setShowPaymentsMonoFilled)}
 								/>
 							</Checkboxes>
-						</Checkboxes>
+						</Checkboxes> */}
 					</div>
 				</UndoSection>
 				<hr />
