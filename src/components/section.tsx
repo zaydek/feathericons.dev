@@ -5,6 +5,8 @@ import * as feather from "@icons/feather/tsx"
 import { Icon } from "@/lib"
 import { PropsWithChildren, useState } from "react"
 
+////////////////////////////////////////////////////////////////////////////////
+
 export function Header({ children }: PropsWithChildren) {
 	return <header className="header">{children}</header>
 }
@@ -23,39 +25,38 @@ export function ScrollContainer({ children }: PropsWithChildren) {
 	)
 }
 
-export function Section({ name, icon: Icon, children }: PropsWithChildren<{ name?: string; icon?: Icon }>) {
+////////////////////////////////////////////////////////////////////////////////
+
+export function EmptySection({ children }: PropsWithChildren) {
+	return <section className="section">{children}</section>
+}
+
+// Expose padding={false} and gap={false} for <Checkboxes> and <SyntaxHighlighting>
+export function Section({ name, icon: Icon, children }: PropsWithChildren<{ name: string; icon: Icon }>) {
 	return (
 		<section className="section">
-			{name !== undefined && (
-				<header className="section-header">
-					{Icon !== undefined && <Icon />}
-					<h6 className="section-header-name">{name}</h6>
-				</header>
-			)}
+			<header className="section-header">
+				{Icon !== undefined && <Icon />}
+				<h6 className="section-header-name">{name}</h6>
+			</header>
 			{children}
 		</section>
 	)
 }
 
-export function UndoSection({
+export function ResetSection({
 	name,
 	icon: Icon,
 	children,
 	handleUndo,
-}: PropsWithChildren<{
-	name?: string
-	icon?: Icon
-	handleUndo: () => void
-}>) {
+}: PropsWithChildren<{ name: string; icon: Icon; handleUndo: () => void }>) {
 	return (
 		<section className="section">
 			{name !== undefined && (
 				<header className="section-header">
 					{Icon !== undefined && <Icon />}
 					<h6 className="section-header-name">{name}</h6>
-					{/* <button className="undo" onClick={handleUndo}> */}
 					<feather.RotateCcw strokeWidth={4} onClick={handleUndo} />
-					{/* </button> */}
 				</header>
 			)}
 			{children}
@@ -63,7 +64,7 @@ export function UndoSection({
 	)
 }
 
-export function SliderUndoSection({
+export function SliderResetSection({
 	name,
 	icon: Icon,
 	value,
@@ -84,9 +85,7 @@ export function SliderUndoSection({
 					{Icon !== undefined && <Icon />}
 					<h6 className="section-header-name">{name}</h6>
 					<span>{formatValue(value)}</span>
-					{/* <button className="undo" onClick={handleUndo}> */}
 					<feather.RotateCcw strokeWidth={4} onClick={handleUndo} />
-					{/* </button> */}
 				</header>
 			)}
 			{children}

@@ -1,3 +1,5 @@
+import "./syntax-highlighting.sass"
+
 import { ShikiContext } from "@/state"
 import { useContext, useEffect, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"

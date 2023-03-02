@@ -3,10 +3,17 @@
 
 @use "../css/globals" as *
 
+$padding-y: 24px
+$padding-x: 24px
+
 .pre
-  padding: 24px
-  background-color: gray
+  margin: 0 -1 * $sidebar-padding-x
+  //// padding: $padding-y 0
+  //// background-color: whitesmoke
+  overflow-x: scroll // COMPAT/Windows
   .pre-code
-    .line
-      a
-        text-decoration: underline
+    display: inline-block
+    padding: 0 $padding-x
+    font: 500 13px / 1.4375 $code
+    font-feature-settings: 'tnum'
+    color: $slate-600

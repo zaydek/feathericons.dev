@@ -20,6 +20,7 @@ import {
 	CheckboxButton,
 	Checkboxes,
 	DebugCssEffect,
+	EmptySection,
 	Footer,
 	Header,
 	Interweb,
@@ -27,14 +28,14 @@ import {
 	Main,
 	MemoGrid,
 	Range,
+	ResetSection,
 	ScrollContainer,
 	SearchBar,
 	Section,
 	Sidebar1,
 	Sidebar2,
-	SliderUndoSection,
+	SliderResetSection,
 	SyntaxHighlighting,
-	UndoSection,
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
@@ -49,6 +50,7 @@ import {
 	STROKE_STEP,
 } from "@/state"
 import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
+import { detab } from "./lib"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -120,12 +122,12 @@ function AppSidebar1() {
 	return (
 		<Sidebar1>
 			<Header>
-				<Section>
+				<EmptySection>
 					<SearchBar />
-				</Section>
+				</EmptySection>
 			</Header>
 			<ScrollContainer>
-				<UndoSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
+				<ResetSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
 					<div>
 						<Checkboxes>
 							<Checkbox
@@ -138,13 +140,14 @@ function AppSidebar1() {
 						<Checkboxes>
 							<CheckboxButton
 								name="Brands"
-								icon={p =>
-									// prettier-ignore
+								icon={p => (
 									<feather.Folder
-									style={{ transform: "scale(0.8)", opacity: 0.375 }}
-									fill="currentColor"
-									strokeWidth={4} {...p} />
-								}
+										style={{ transform: "scale(0.8)", opacity: 0.375 }}
+										fill="currentColor"
+										strokeWidth={4}
+										{...p}
+									/>
+								)}
 								onClick={transition(toggleAllBrandsOriginal)}
 							/>
 							<Checkboxes>
@@ -168,49 +171,17 @@ function AppSidebar1() {
 								/>
 							</Checkboxes>
 						</Checkboxes>
-						{/* <Checkboxes>
-							<CheckboxButton
-								name="Brands (mono)"
-								icon={p =>
-									// prettier-ignore
-									<feather.Folder
-									style={{ transform: "scale(0.8)", opacity: 0.375 }}
-									fill="currentColor"
-									strokeWidth={4} {...p} />
-								}
-								onClick={transition(toggleAllBrandsMono)}
-							/>
-							<Checkboxes>
-								<Checkbox
-									name="Original"
-									icon={wolfKitBrandsMono.Twitter}
-									checked={showBrandsMono}
-									setChecked={transition(setShowBrandsMono)}
-								/>
-								<Checkbox
-									name="Circle"
-									icon={wolfKitBrandsMonoCircle.Twitter}
-									checked={showBrandsMonoCircle}
-									setChecked={transition(setShowBrandsMonoCircle)}
-								/>
-								<Checkbox
-									name="Square"
-									icon={wolfKitBrandsMonoSquare.Twitter}
-									checked={showBrandsMonoSquare}
-									setChecked={transition(setShowBrandsMonoSquare)}
-								/>
-							</Checkboxes>
-						</Checkboxes> */}
 						<Checkboxes>
 							<CheckboxButton
 								name="Payments"
-								icon={p =>
-									// prettier-ignore
+								icon={p => (
 									<feather.Folder
-									style={{ transform: "scale(0.8)", opacity: 0.375 }}
-									fill="currentColor"
-									strokeWidth={4} {...p} />
-								}
+										style={{ transform: "scale(0.8)", opacity: 0.375 }}
+										fill="currentColor"
+										strokeWidth={4}
+										{...p}
+									/>
+								)}
 								onClick={voidTransition(toggleAllPaymentsOriginal)}
 							/>
 							<Checkboxes>
@@ -228,35 +199,8 @@ function AppSidebar1() {
 								/>
 							</Checkboxes>
 						</Checkboxes>
-						{/* <Checkboxes>
-							<CheckboxButton
-								name="Payments (mono)"
-								icon={p =>
-									// prettier-ignore
-									<feather.Folder
-									style={{ transform: "scale(0.8)", opacity: 0.375 }}
-									fill="currentColor"
-									strokeWidth={4} {...p} />
-								}
-								onClick={voidTransition(toggleAllPaymentsMono)}
-							/>
-							<Checkboxes>
-								<Checkbox
-									name="Original"
-									icon={wolfKitPaymentsMono.Stripe}
-									checked={showPaymentsMono}
-									setChecked={transition(setShowPaymentsMono)}
-								/>
-								<Checkbox
-									name="Filled"
-									icon={wolfKitPaymentsMonoFilled.Stripe}
-									checked={showPaymentsMonoFilled}
-									setChecked={transition(setShowPaymentsMonoFilled)}
-								/>
-							</Checkboxes>
-						</Checkboxes> */}
 					</div>
-				</UndoSection>
+				</ResetSection>
 				<hr />
 			</ScrollContainer>
 			<Footer>
@@ -279,11 +223,24 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<Header>
-				<SyntaxHighlighting lang="html" code={`<div>Hello, world!</div>`} />
+				<Section name="Code" icon={feather.Clipboard} gap={false} padding={false}>
+					<SyntaxHighlighting
+						lang="html"
+						// prettier-ignore
+						code={detab(`
+							<!-- https://feathericons.dev/feather -->
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-feather" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+								<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
+								<line x1="16" x2="2" y1="8" y2="22" />
+								<line x1="17.5" x2="9" y1="15" y2="15" />
+							</svg>
+					`, { spaces: true })}
+					/>
+				</Section>
 			</Header>
 			<ScrollContainer>
 				<hr />
-				<SliderUndoSection
+				<SliderResetSection
 					name="Icon size"
 					icon={feather.PenTool}
 					value={size}
@@ -291,9 +248,9 @@ function AppSidebar2() {
 					handleUndo={resetSize}
 				>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-				</SliderUndoSection>
+				</SliderResetSection>
 				<hr />
-				<SliderUndoSection
+				<SliderResetSection
 					name="Icon stroke width"
 					icon={feather.PenTool}
 					value={strokeWidth}
@@ -301,7 +258,7 @@ function AppSidebar2() {
 					handleUndo={resetStrokeWidth}
 				>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
-				</SliderUndoSection>
+				</SliderResetSection>
 				<hr />
 			</ScrollContainer>
 		</Sidebar2>
