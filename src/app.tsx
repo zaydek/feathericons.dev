@@ -20,22 +20,22 @@ import {
 	CheckboxAsButton,
 	Checkboxes,
 	DebugCssEffect,
-	EmptySection,
-	Footer,
-	Header,
 	Main,
 	MemoMainGrid,
+	NoNameSection,
 	Range,
-	ResetSection,
 	Resource,
 	Resources,
-	ScrollContainer,
 	SearchBar,
 	Section,
 	Sidebar1,
 	Sidebar2,
-	SliderResetSection,
+	SidebarContents,
+	SidebarFooter,
+	SidebarHeader,
+	SliderUndoSection,
 	SyntaxHighlighting,
+	UndoSection,
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
@@ -121,13 +121,13 @@ function AppSidebar1() {
 
 	return (
 		<Sidebar1>
-			<Header>
-				<EmptySection>
+			<SidebarHeader>
+				<NoNameSection>
 					<SearchBar />
-				</EmptySection>
-			</Header>
-			<ScrollContainer>
-				<ResetSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
+				</NoNameSection>
+			</SidebarHeader>
+			<SidebarContents>
+				<UndoSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
 					<div>
 						<Checkboxes>
 							<Checkbox
@@ -200,10 +200,10 @@ function AppSidebar1() {
 							</Checkboxes>
 						</Checkboxes>
 					</div>
-				</ResetSection>
+				</UndoSection>
 				<hr />
-			</ScrollContainer>
-			<Footer>
+			</SidebarContents>
+			<SidebarFooter>
 				<Section name="Resources" icon={feather.Globe}>
 					<Resources>
 						<Resource name="Icons" icon={wolfKitBrandsOriginal.Github} />
@@ -212,7 +212,7 @@ function AppSidebar1() {
 						<Resource name="Share on Twitter" icon={wolfKitBrandsOriginal.Twitter} />
 					</Resources>
 				</Section>
-			</Footer>
+			</SidebarFooter>
 		</Sidebar1>
 	)
 }
@@ -222,7 +222,7 @@ function AppSidebar2() {
 
 	return (
 		<Sidebar2>
-			<Header>
+			<SidebarHeader>
 				<Section name="Code" icon={feather.Clipboard}>
 					<SyntaxHighlighting
 						lang="html"
@@ -237,10 +237,10 @@ function AppSidebar2() {
 					`, { spaces: true })}
 					/>
 				</Section>
-			</Header>
-			<ScrollContainer>
+			</SidebarHeader>
+			<SidebarContents>
 				<hr />
-				<SliderResetSection
+				<SliderUndoSection
 					name="Icon size"
 					icon={feather.PenTool}
 					value={size}
@@ -248,9 +248,9 @@ function AppSidebar2() {
 					handleUndo={resetSize}
 				>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-				</SliderResetSection>
+				</SliderUndoSection>
 				<hr />
-				<SliderResetSection
+				<SliderUndoSection
 					name="Icon stroke width"
 					icon={feather.PenTool}
 					value={strokeWidth}
@@ -258,9 +258,9 @@ function AppSidebar2() {
 					handleUndo={resetStrokeWidth}
 				>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
-				</SliderResetSection>
+				</SliderUndoSection>
 				<hr />
-			</ScrollContainer>
+			</SidebarContents>
 		</Sidebar2>
 	)
 }

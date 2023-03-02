@@ -7,27 +7,27 @@ import { PropsWithChildren, useState } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Header({ children }: PropsWithChildren) {
-	return <header className="header">{children}</header>
+export function SidebarHeader({ children }: PropsWithChildren) {
+	return <header className="sidebar-header">{children}</header>
 }
 
-export function Footer({ children }: PropsWithChildren) {
-	return <footer className="footer">{children}</footer>
-}
-
-export function ScrollContainer({ children }: PropsWithChildren) {
+export function SidebarContents({ children }: PropsWithChildren) {
 	const [scroll, setScroll] = useState(false)
 
 	return (
-		<div className="scroll-container" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
+		<div className="sidebar-contents" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
 			{children}
 		</div>
 	)
 }
 
+export function SidebarFooter({ children }: PropsWithChildren) {
+	return <footer className="sidebar-footer">{children}</footer>
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
-export function EmptySection({ children }: PropsWithChildren) {
+export function NoNameSection({ children }: PropsWithChildren) {
 	return <section className="section">{children}</section>
 }
 
@@ -35,15 +35,15 @@ export function Section({ name, icon: Icon, children }: PropsWithChildren<{ name
 	return (
 		<section className="section">
 			<header className="section-header">
-				{Icon !== undefined && <Icon />}
-				<h6 className="section-header-name">{name}</h6>
+				<Icon className="section-header-icon" />
+				<h6 className="section-header-name u-flex-1">{name}</h6>
 			</header>
 			{children}
 		</section>
 	)
 }
 
-export function ResetSection({
+export function UndoSection({
 	name,
 	icon: Icon,
 	children,
@@ -51,19 +51,17 @@ export function ResetSection({
 }: PropsWithChildren<{ name: string; icon: Icon; handleUndo: () => void }>) {
 	return (
 		<section className="section">
-			{name !== undefined && (
-				<header className="section-header">
-					{Icon !== undefined && <Icon />}
-					<h6 className="section-header-name">{name}</h6>
-					<feather.RotateCcw strokeWidth={4} onClick={handleUndo} />
-				</header>
-			)}
+			<header className="section-header">
+				<Icon className="section-header-icon" />
+				<h6 className="section-header-name u-flex-1">{name}</h6>
+				<feather.RotateCcw className="section-header-icon" strokeWidth={4} onClick={handleUndo} />
+			</header>
 			{children}
 		</section>
 	)
 }
 
-export function SliderResetSection({
+export function SliderUndoSection({
 	name,
 	icon: Icon,
 	value,
@@ -72,21 +70,19 @@ export function SliderResetSection({
 	children,
 }: PropsWithChildren<{
 	name?: string
-	icon?: Icon
+	icon: Icon
 	value: number
 	formatValue: (value: number) => string
 	handleUndo: () => void
 }>) {
 	return (
 		<section className="section">
-			{name !== undefined && (
-				<header className="section-header">
-					{Icon !== undefined && <Icon />}
-					<h6 className="section-header-name">{name}</h6>
-					<span>{formatValue(value)}</span>
-					<feather.RotateCcw strokeWidth={4} onClick={handleUndo} />
-				</header>
-			)}
+			<header className="section-header">
+				<Icon className="section-header-icon" />
+				<h6 className="section-header-name u-flex-1">{name}</h6>
+				<span className="section-header-slider-desc">{formatValue(value)}</span>
+				<feather.RotateCcw className="section-header-icon" strokeWidth={4} onClick={handleUndo} />
+			</header>
 			{children}
 		</section>
 	)

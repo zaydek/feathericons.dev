@@ -32,7 +32,7 @@ export function Checkbox({
 			tabIndex={0}
 		>
 			<Icon className="checkbox-icon" />
-			<span className="checkbox-name">{name}</span>
+			<span className="checkbox-name u-flex-1">{name}</span>
 			{/* NOTE: Use tabindex={-1} because of <label tabIndex={1}> */}
 			<input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} tabIndex={-1} />
 		</label>
@@ -50,7 +50,7 @@ export function CheckboxAsButton({
 	return (
 		<button className="checkbox" {...props}>
 			<Icon className="checkbox-icon" />
-			<span className="checkbox-name">{name}</span>
+			<span className="checkbox-name u-flex-1">{name}</span>
 		</button>
 	)
 }
