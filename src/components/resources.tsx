@@ -6,7 +6,7 @@ import { Icon } from "@/lib"
 import { PropsWithChildren } from "react"
 
 export function Resources({ children }: PropsWithChildren) {
-	return <nav className="interwebs">{children}</nav>
+	return <nav className="resources">{children}</nav>
 }
 
 export function Resource({ name, icon: Icon }: { name: string; icon: Icon }) {
