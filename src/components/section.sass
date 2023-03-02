@@ -42,13 +42,13 @@
   //   </div>
   //
   > :not(:is(div:not([class]), .interwebs, .pre))
-    margin: 0 math.div($button-height - $icon-height, 2)
+    margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
   &-header
     display: flex
     align-items: center
     svg:first-child
-      margin-right: math.div($button-height - $tiny-icon-height, 3) // Use 3 here
+      margin-right: math.div($button-height - $tiny-icon-height, 2)
       height: $tiny-icon-height
       width: $tiny-icon-height
       color: $slate-600
@@ -75,7 +75,7 @@
       -webkit-user-select: all // Select all on click
       user-select: all         // Select all on click
     svg:last-child
-      margin-left: math.div($button-height - $tiny-icon-height, 3) // Use 3 here
+      margin-left: math.div($button-height - $tiny-icon-height, 2)
       height: $tiny-icon-height
       width: $tiny-icon-height
       color: $slate-300
