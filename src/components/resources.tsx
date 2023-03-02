@@ -1,4 +1,4 @@
-import "./interwebs.sass"
+import "./resources.sass"
 
 import * as feather from "@icons/feather/tsx"
 

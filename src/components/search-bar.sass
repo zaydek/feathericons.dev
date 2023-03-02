@@ -2,29 +2,32 @@
 
 @use "../css/globals" as *
 
-$search-bar-height:      $button-height
-$search-bar-icon-height: 16px
+////////////////////////////////////////
 
 .search-bar
   display: flex
   align-items: center
-  height: $search-bar-height
+  height: $button-height
   background-color: $slate-200
   border-radius: 1e3px
   cursor: text // Interaction
   &:is(:hover, :focus-within)
     background-color: white
     box-shadow: $inset-hairline-shadow
-  svg
-    margin: 0 math.div($search-bar-height - $search-bar-icon-height, 2)
-    height: $search-bar-icon-height
-    width: $search-bar-icon-height
-    color: $slate-400
-  input[type=text]
-    flex: 1 // Stretch x-axis
-    font: 425 16px / normal $sans
-    color: $slate-800
-    &::placeholder
-      color: $slate-500
-    //// &:focus-visible::placeholder
-    ////   opacity: 0
+
+////////////////////////////////////////
+
+.search-bar-icon
+  margin: 0 math.div($button-height - 16px, 2)
+  height: 16px
+  width: 16px
+  color: $slate-400
+
+.search-bar input[type=text]
+  flex: 1 // Stretch x-axis
+  font: 425 16px / normal $sans
+  color: $slate-800
+  &::placeholder
+    color: $slate-500
+  &:focus-visible::placeholder
+    opacity: 0

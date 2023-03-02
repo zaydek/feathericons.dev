@@ -5,7 +5,6 @@ import * as feather from "@icons/feather/tsx"
 import { Icon, toKebabCase } from "@/lib"
 import { memo, Suspense } from "react"
 
-// Memoize <Grid> to suppress useless rerenders
 export const MemoMainGrid = memo(function MainGrid({
 	results,
 }: {

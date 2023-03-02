@@ -3,7 +3,6 @@ import "./checkboxes.sass"
 import { Icon } from "@/lib"
 import { Dispatch, PropsWithChildren, SetStateAction } from "react"
 
-// Don't bother using <ul> because of <label> and <button>
 export function Checkboxes({ children }: PropsWithChildren) {
 	return <div className="checkboxes">{children}</div>
 }
