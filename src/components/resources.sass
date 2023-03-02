@@ -17,21 +17,18 @@
 
 ////////////////////////////////////////
 
-// LHS
 .resource-icon:first-child
   margin: 0 math.div($button-height - $icon-height, 2)
   height: $icon-height
   width: $icon-height
   color: $slate-800
 
-// RHS
+.resource-name
+  font: 425 16px / normal $sans
+  color: $slate-800
+
 .resource-icon:last-child
   margin: 0 math.div($button-height - 16px, 2)
   height: 16px
   width: 16px
   color: $slate-400
-
-.resource-name
-  //// flex: 1 // Stretch x-axis
-  font: 425 16px / normal $sans
-  color: $slate-800
