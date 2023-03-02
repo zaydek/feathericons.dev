@@ -48,7 +48,7 @@ export function MainGridItem({
 	return (
 		<li className="main-grid-item" data-bookmark={bookmark} data-selected={selected}>
 			<figure
-				className="main-grid-item-figure"
+				className="main-grid-item-frame"
 				onFocus={e => {
 					// Remove previous selection e.g. user-select: all
 					const selection = window.getSelection()
@@ -62,9 +62,9 @@ export function MainGridItem({
 				draggable
 				tabIndex={0}
 			>
-				<Icon className="main-grid-item-figure-svg" />
+				<Icon className="main-grid-item-frame-icon" />
 			</figure>
-			<figcaption className="main-grid-item-figcaption">{toNameCase(name)}</figcaption>
+			<figcaption className="main-grid-item-name">{toNameCase(name)}</figcaption>
 			<feather.Star className="main-grid-item-bookmark" fill="currentColor" strokeWidth={4} />
 		</li>
 	)

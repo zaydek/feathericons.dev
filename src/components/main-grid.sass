@@ -24,7 +24,7 @@ $main-grid-item-aspect-ratio: 1.25
 
 ////////////////////////////////////////
 
-.main-grid-item-figure
+.main-grid-item-frame
   display: flex
   justify-content: center
   align-items: center
@@ -38,7 +38,7 @@ $main-grid-item-aspect-ratio: 1.25
   &:focus
     box-shadow: inset 0 0 0 4px $brand-color
 
-.main-grid-item-figure-svg
+.main-grid-item-frame-icon
   min-height: 24px
   max-height: 24px * math.div(56, 32)
   min-width:  24px
@@ -49,7 +49,7 @@ $main-grid-item-aspect-ratio: 1.25
 
 ////////////////////////////////////////
 
-.main-grid-item-figcaption
+.main-grid-item-name
   display: -webkit-box         // Clamp
   -webkit-line-clamp: 2        // Clamp
   -webkit-box-orient: vertical // Clamp
