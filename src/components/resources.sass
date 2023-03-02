@@ -1,0 +1,37 @@
+@use "sass:math"
+
+@use "../css/globals" as *
+
+////////////////////////////////////////
+
+.resource
+  display: flex
+  align-items: center
+  margin: -4px 0
+  height: $button-height
+  border-radius: 1e3px
+  &:is(:hover, :focus-visible)
+    background-color: $slate-100
+  &:hover:active
+    background-color: $slate-200
+
+////////////////////////////////////////
+
+// LHS
+.resource-icon:first-child
+  margin: 0 math.div($button-height - $icon-height, 2)
+  height: $icon-height
+  width: $icon-height
+  color: $slate-800
+
+// RHS
+.resource-icon:last-child
+  margin: 0 math.div($button-height - 16px, 2)
+  height: 16px
+  width: 16px
+  color: $slate-400
+
+.resource-name
+  flex: 1 // Stretch x-axis
+  font: 425 16px / normal $sans
+  color: $slate-800

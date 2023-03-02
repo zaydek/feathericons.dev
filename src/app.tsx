@@ -23,12 +23,12 @@ import {
 	EmptySection,
 	Footer,
 	Header,
-	Interweb,
-	Interwebs,
 	Main,
 	MemoMainGrid,
 	Range,
 	ResetSection,
+	Resource,
+	Resources,
 	ScrollContainer,
 	SearchBar,
 	Section,
@@ -205,12 +205,12 @@ function AppSidebar1() {
 			</ScrollContainer>
 			<Footer>
 				<Section name="Resources" icon={feather.Globe}>
-					<Interwebs>
-						<Interweb name="Icons" icon={wolfKitBrandsOriginal.Github} />
-						<Interweb name="Website" icon={wolfKitBrandsOriginal.Github} />
-						<Interweb name="Figma Plugin" icon={wolfKitBrandsOriginal.Figma} />
-						<Interweb name="Share on Twitter" icon={wolfKitBrandsOriginal.Twitter} />
-					</Interwebs>
+					<Resources>
+						<Resource name="Icons" icon={wolfKitBrandsOriginal.Github} />
+						<Resource name="Website" icon={wolfKitBrandsOriginal.Github} />
+						<Resource name="Figma Plugin" icon={wolfKitBrandsOriginal.Figma} />
+						<Resource name="Share on Twitter" icon={wolfKitBrandsOriginal.Twitter} />
+					</Resources>
 				</Section>
 			</Footer>
 		</Sidebar1>
