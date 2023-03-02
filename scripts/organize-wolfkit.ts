@@ -1,13 +1,31 @@
 import * as fs from "node:fs/promises"
 import * as path from "path"
 
-async function copyFilesWithRegex({ srcDir, dstDir, pattern }: { srcDir: string; dstDir: string; pattern: RegExp }) {
+import { sleep } from "@/lib"
+
+async function copyFilesWithRegex({
+	srcDir,
+	dstDir,
+	patternRegex,
+	replaceRegex,
+}: {
+	srcDir: string
+	dstDir: string
+	patternRegex: RegExp
+	replaceRegex?: readonly [RegExp, string]
+}) {
+	await fs.rm(dstDir, { recursive: true, force: true })
+	await sleep(100) // 😪
+
 	await fs.mkdir(dstDir, { recursive: true })
 	const files = await fs.readdir(srcDir)
 	for (const file of files) {
 		const src = path.join(srcDir, file)
-		const dst = path.join(dstDir, file)
-		if (pattern.test(file) && (await fs.stat(src)).isFile()) {
+		let dst = path.join(dstDir, file)
+		if (patternRegex.test(file) && (await fs.stat(src)).isFile()) {
+			if (replaceRegex !== undefined) {
+				dst = dst.replace(...replaceRegex)
+			}
 			await fs.copyFile(src, dst)
 			console.log(`✅ Copied ${src} to ${dst}`)
 		}
@@ -15,44 +33,90 @@ async function copyFilesWithRegex({ srcDir, dstDir, pattern }: { srcDir: string;
 }
 
 async function organizeBrands() {
-	for (const target of ["original", "original-circle", "original-square", "mono", "mono-circle", "mono-square"]) {
+	// prettier-ignore
+	const args = [
+		{ target: "original" },
+		{
+			target: "original-circle",
+			replaceRegex: [
+				/(-circle)(\.)/,
+				"$2",
+			] as const,
+		},
+		{
+			target: "original-square",
+			replaceRegex: [
+				/(-square)(\.)/,
+				"$2",
+			] as const,
+		},
+		{
+			target: "mono",
+			replaceRegex: [
+				/(-mono)(\.)/,
+				"$2",
+			] as const,
+		},
+		{
+			target: "mono-circle",
+			replaceRegex: [
+				/(-circle-mono)(\.)/,
+				"$2",
+			] as const,
+		},
+		{
+			target: "mono-square",
+			replaceRegex: [
+				/(-square-mono)(\.)/,
+				"$2",
+			] as const,
+		},
+	]
+	for (const { target, replaceRegex } of args) {
 		console.log(`📋 Copying *.svg files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/brands/${target}/svg`,
-			pattern: /\.svg$/,
+			patternRegex: /\.svg$/,
+			replaceRegex,
 		})
 		console.log(`📋 Copying *.png files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/brands/${target}/png@1x`,
-			pattern: /@1x\.png$/,
+			patternRegex: /@1x\.png$/,
+			replaceRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/brands/${target}/png@2x`,
-			pattern: /@2x\.png$/,
+			patternRegex: /@2x\.png$/,
+			replaceRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/brands/${target}/png@4x`,
-			pattern: /@4x\.png$/,
+			patternRegex: /@4x\.png$/,
+			replaceRegex,
 		})
 		console.log(`📋 Copying *.jpg files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/brands/${target}/jpg@1x`,
-			pattern: /@1x\.jpg$/,
+			patternRegex: /@1x\.jpg$/,
+			replaceRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/brands/${target}/jpg@2x`,
-			pattern: /@2x\.jpg$/,
+			patternRegex: /@2x\.jpg$/,
+			replaceRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/brands/${target}/jpg@4x`,
-			pattern: /@4x\.jpg$/,
+			patternRegex: /@4x\.jpg$/,
+			replaceRegex,
 		})
 	}
 }
@@ -63,39 +127,39 @@ async function organizePayments() {
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/payments/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/payments/${target}/svg`,
-			pattern: /\.svg$/,
+			patternRegex: /\.svg$/,
 		})
 		console.log(`📋 Copying *.png files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/payments/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/payments/${target}/png@1x`,
-			pattern: /@1x\.png$/,
+			patternRegex: /@1x\.png$/,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/payments/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/payments/${target}/png@2x`,
-			pattern: /@2x\.png$/,
+			patternRegex: /@2x\.png$/,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/payments/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/payments/${target}/png@4x`,
-			pattern: /@4x\.png$/,
+			patternRegex: /@4x\.png$/,
 		})
 		console.log(`📋 Copying *.jpg files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/payments/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/payments/${target}/jpg@1x`,
-			pattern: /@1x\.jpg$/,
+			patternRegex: /@1x\.jpg$/,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/payments/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/payments/${target}/jpg@2x`,
-			pattern: /@2x\.jpg$/,
+			patternRegex: /@2x\.jpg$/,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wolfkit/figma/payments/${target}/all`,
 			dstDir: `./icons/wolfkit/figma/payments/${target}/jpg@4x`,
-			pattern: /@4x\.jpg$/,
+			patternRegex: /@4x\.jpg$/,
 		})
 	}
 }

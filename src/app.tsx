@@ -15,9 +15,38 @@ import * as wolfKitPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wolfKitPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
 import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
-import { Checkbox, CheckboxButton, Checkboxes, DebugCssEffect, Footer, Header, Interweb, Interwebs, Main, MemoGrid, Range, ScrollContainer, SearchBar, Section, Sidebar1, Sidebar2, SliderUndoSection, UndoSection } from "@/components"
+import {
+	Checkbox,
+	CheckboxButton,
+	Checkboxes,
+	DebugCssEffect,
+	Footer,
+	Header,
+	Interweb,
+	Interwebs,
+	Main,
+	MemoGrid,
+	Range,
+	ScrollContainer,
+	SearchBar,
+	Section,
+	Sidebar1,
+	Sidebar2,
+	SliderUndoSection,
+	UndoSection,
+} from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
-import { ProgressBarContext, RangeContext, SearchContext, SIZE_MAX, SIZE_MIN, SIZE_STEP, STROKE_MAX, STROKE_MIN, STROKE_STEP } from "@/state"
+import {
+	ProgressBarContext,
+	RangeContext,
+	SearchContext,
+	SIZE_MAX,
+	SIZE_MIN,
+	SIZE_STEP,
+	STROKE_MAX,
+	STROKE_MIN,
+	STROKE_STEP,
+} from "@/state"
 import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
 
 export function App() {
@@ -41,7 +70,6 @@ export function App() {
 function AppSidebar1() {
 	const { setStarted } = useContext(ProgressBarContext)!
 
-	// prettier-ignore
 	const {
 		showFeather,
 		setShowFeather,
@@ -99,7 +127,12 @@ function AppSidebar1() {
 				<UndoSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
 					<div>
 						<Checkboxes>
-							<Checkbox name="Feather" icon={feather.Feather} checked={showFeather} setChecked={transition(setShowFeather)} />
+							<Checkbox
+								name="Feather"
+								icon={feather.Feather}
+								checked={showFeather}
+								setChecked={transition(setShowFeather)}
+							/>
 						</Checkboxes>
 						<Checkboxes>
 							<CheckboxButton
@@ -114,9 +147,24 @@ function AppSidebar1() {
 								onClick={transition(toggleAllBrandsOriginal)}
 							/>
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitBrandsOriginal.Twitter} checked={showBrandsOriginal} setChecked={transition(setShowBrandsOriginal)} />
-								<Checkbox name="Circle" icon={wolfKitBrandsOriginalCircle.TwitterCircle} checked={showBrandsOriginalCircle} setChecked={transition(setShowBrandsOriginalCircle)} />
-								<Checkbox name="Square" icon={wolfKitBrandsOriginalSquare.TwitterSquare} checked={showBrandsOriginalSquare} setChecked={transition(setShowBrandsOriginalSquare)} />
+								<Checkbox
+									name="Original"
+									icon={wolfKitBrandsOriginal.Twitter}
+									checked={showBrandsOriginal}
+									setChecked={transition(setShowBrandsOriginal)}
+								/>
+								<Checkbox
+									name="Circle"
+									icon={wolfKitBrandsOriginalCircle.Twitter}
+									checked={showBrandsOriginalCircle}
+									setChecked={transition(setShowBrandsOriginalCircle)}
+								/>
+								<Checkbox
+									name="Square"
+									icon={wolfKitBrandsOriginalSquare.Twitter}
+									checked={showBrandsOriginalSquare}
+									setChecked={transition(setShowBrandsOriginalSquare)}
+								/>
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
@@ -132,9 +180,24 @@ function AppSidebar1() {
 								onClick={transition(toggleAllBrandsMono)}
 							/>
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitBrandsMono.TwitterMono} checked={showBrandsMono} setChecked={transition(setShowBrandsMono)} />
-								<Checkbox name="Circle" icon={wolfKitBrandsMonoCircle.TwitterCircleMono} checked={showBrandsMonoCircle} setChecked={transition(setShowBrandsMonoCircle)} />
-								<Checkbox name="Square" icon={wolfKitBrandsMonoSquare.TwitterSquareMono} checked={showBrandsMonoSquare} setChecked={transition(setShowBrandsMonoSquare)} />
+								<Checkbox
+									name="Original"
+									icon={wolfKitBrandsMono.Twitter}
+									checked={showBrandsMono}
+									setChecked={transition(setShowBrandsMono)}
+								/>
+								<Checkbox
+									name="Circle"
+									icon={wolfKitBrandsMonoCircle.Twitter}
+									checked={showBrandsMonoCircle}
+									setChecked={transition(setShowBrandsMonoCircle)}
+								/>
+								<Checkbox
+									name="Square"
+									icon={wolfKitBrandsMonoSquare.Twitter}
+									checked={showBrandsMonoSquare}
+									setChecked={transition(setShowBrandsMonoSquare)}
+								/>
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
@@ -150,8 +213,18 @@ function AppSidebar1() {
 								onClick={voidTransition(toggleAllPaymentsOriginal)}
 							/>
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitPaymentsOriginal.Stripe} checked={showPaymentsOriginal} setChecked={transition(setShowPaymentsOriginal)} />
-								<Checkbox name="Filled" icon={wolfKitPaymentsOriginalFilled.Stripe} checked={showPaymentsOriginalFilled} setChecked={transition(setShowPaymentsOriginalFilled)} />
+								<Checkbox
+									name="Original"
+									icon={wolfKitPaymentsOriginal.Stripe}
+									checked={showPaymentsOriginal}
+									setChecked={transition(setShowPaymentsOriginal)}
+								/>
+								<Checkbox
+									name="Filled"
+									icon={wolfKitPaymentsOriginalFilled.Stripe}
+									checked={showPaymentsOriginalFilled}
+									setChecked={transition(setShowPaymentsOriginalFilled)}
+								/>
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
@@ -167,8 +240,18 @@ function AppSidebar1() {
 								onClick={voidTransition(toggleAllPaymentsMono)}
 							/>
 							<Checkboxes>
-								<Checkbox name="Original" icon={wolfKitPaymentsMono.Stripe} checked={showPaymentsMono} setChecked={transition(setShowPaymentsMono)} />
-								<Checkbox name="Filled" icon={wolfKitPaymentsMonoFilled.Stripe} checked={showPaymentsMonoFilled} setChecked={transition(setShowPaymentsMonoFilled)} />
+								<Checkbox
+									name="Original"
+									icon={wolfKitPaymentsMono.Stripe}
+									checked={showPaymentsMono}
+									setChecked={transition(setShowPaymentsMono)}
+								/>
+								<Checkbox
+									name="Filled"
+									icon={wolfKitPaymentsMonoFilled.Stripe}
+									checked={showPaymentsMonoFilled}
+									setChecked={transition(setShowPaymentsMonoFilled)}
+								/>
 							</Checkboxes>
 						</Checkboxes>
 					</div>
@@ -176,7 +259,7 @@ function AppSidebar1() {
 				<hr />
 			</ScrollContainer>
 			<Footer>
-				<Section name="Explore" icon={feather.Globe}>
+				<Section name="Resources" icon={feather.Globe}>
 					<Interwebs>
 						<Interweb name="Icons" icon={wolfKitBrandsOriginal.Github} />
 						<Interweb name="Website" icon={wolfKitBrandsOriginal.Github} />
@@ -195,13 +278,25 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<Header>
-				<SliderUndoSection name="Icon size" icon={feather.PenTool} value={size} formatValue={value => `${value.toFixed(0)} PX`} handleUndo={resetSize}>
+				<SliderUndoSection
+					name="Icon size"
+					icon={feather.PenTool}
+					value={size}
+					formatValue={value => `${value.toFixed(0)} PX`}
+					handleUndo={resetSize}
+				>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</SliderUndoSection>
 			</Header>
 			<ScrollContainer>
 				<hr />
-				<SliderUndoSection name="Icon stroke width" icon={feather.PenTool} value={strokeWidth} formatValue={value => value.toFixed(2)} handleUndo={resetStrokeWidth}>
+				<SliderUndoSection
+					name="Icon stroke width"
+					icon={feather.PenTool}
+					value={strokeWidth}
+					formatValue={value => value.toFixed(2)}
+					handleUndo={resetStrokeWidth}
+				>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</SliderUndoSection>
 				<hr />
@@ -219,7 +314,7 @@ function AppMain() {
 
 	// prettier-ignore
 	useVisibleDocumentTitle({
-		active:   `Feather · ${count} icons`,
+		active:   `Feather\u2002·\u2002${count} icons`,
 		inactive: "Feather", // Truncate SEO <title>
 	})
 

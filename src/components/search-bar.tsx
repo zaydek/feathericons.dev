@@ -22,7 +22,13 @@ function useResetScrollOnSearch({ search }: { search: string }) {
 	return void 0
 }
 
-function useFocusShortcut({ ref, setSearch }: { ref: RefObject<HTMLInputElement | null>; setSearch: Dispatch<SetStateAction<string>> }) {
+function useFocusShortcut({
+	ref,
+	setSearch,
+}: {
+	ref: RefObject<HTMLInputElement | null>
+	setSearch: Dispatch<SetStateAction<string>>
+}) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
@@ -60,7 +66,7 @@ export function SearchBar() {
 	useFocusOnMount({ ref })
 	useResetScrollOnSearch({ search })
 	useFocusShortcut({ ref, setSearch })
-	useClearShortcut({ setSearch })
+	//// useClearShortcut({ setSearch })
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
@@ -70,8 +76,7 @@ export function SearchBar() {
 				type="text"
 				// prettier-ignore
 				placeholder={focus
-					// TODO
-					? "Press esc to clear"
+					? undefined //// "Press esc to clear"
 					: (isMac() ? "Press ⌘P to focus" : "Press Ctrl-P to focus")
 				}
 				value={search}
