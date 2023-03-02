@@ -2,15 +2,13 @@
 
 @use "../css/globals" as *
 
-$icon-height: $generic-button-icon-height
-
 // Y-axis
 .checkbox
   margin: -4px 0
 
 // X-axis
 .checkboxes .checkboxes
-  margin-left: math.div($generic-button-height, 2)
+  margin-left: math.div($button-height, 2)
 
 .checkbox
   width: 100% // CSS reset for <button>
@@ -18,7 +16,7 @@ $icon-height: $generic-button-icon-height
   // stylelint-disable-next-line order/properties-order
   display: flex
   align-items: center
-  height: $generic-button-height
+  height: $button-height
   border-radius: 1e3px
   cursor: pointer           // Interaction
   -webkit-user-select: none // Interaction
@@ -28,7 +26,7 @@ $icon-height: $generic-button-icon-height
   &:hover:active
     background-color: $slate-200
   svg:first-child
-    margin: 0 math.div($generic-button-height - $icon-height, 2)
+    margin: 0 math.div($button-height - $icon-height, 2)
     height: $icon-height
     width: $icon-height
     color: $slate-800
@@ -37,4 +35,4 @@ $icon-height: $generic-button-icon-height
     font: 425 16px / normal $sans
     color: $slate-800
   input[type=checkbox]
-    margin: 0 generate-keyline(24px)
+    margin: 0 math.div($button-height - 24px, 2)

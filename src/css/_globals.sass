@@ -6,7 +6,7 @@
 
 @use "tailwind-v3-colors" as *
 
-////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 =font-smoothing
   -webkit-font-smoothing:  antialiased
@@ -16,10 +16,7 @@
   -webkit-font-smoothing:  auto
   -moz-osx-font-smoothing: auto
 
-@function generate-keyline($override: $generic-button-icon-height)
-  @return math.div($generic-button-height - $override, 2)
-
-////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 $WINDOWS_SCROLLBAR_WIDTH: 16px
 
@@ -30,8 +27,9 @@ $sidebar-padding-y: 32px
 $sidebar-padding-x: 16px
 $sidebar-gap:       16px
 
-$generic-button-height:      40px
-$generic-button-icon-height: 18px
+$button-height:    40px
+$icon-height:      18px
+$tiny-icon-height: 14px
 
 $hairline-height: 1px
 $hairline-color:  color.mix($slate-200, $slate-300)

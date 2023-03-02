@@ -6,9 +6,6 @@ $grid-item-height:       144px
 $grid-item-aspect-ratio: 1.375
 $grid-item-gap:          16px
 
-$bookmark-icon-frame-height: $generic-button-height
-$bookmark-icon-height:       14px
-
 .grid
   display: grid
   grid-template-columns: repeat(auto-fill, $grid-item-height)
@@ -60,9 +57,9 @@ $bookmark-icon-height:       14px
     user-select: all         // Interaction
   .bookmark
     position: absolute
-    inset: math.div($bookmark-icon-frame-height - $bookmark-icon-height, 2) math.div($bookmark-icon-frame-height - $bookmark-icon-height, 2) auto auto
-    height: $bookmark-icon-height
-    width: $bookmark-icon-height
+    inset: math.div($button-height - $tiny-icon-height, 2) math.div($button-height - $tiny-icon-height, 2) auto auto
+    height: $tiny-icon-height
+    width: $tiny-icon-height
     color: $amber-400
     @at-root
       .grid-item:not([data-bookmark=true]) .bookmark

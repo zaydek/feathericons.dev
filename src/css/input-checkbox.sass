@@ -1,7 +1,6 @@
 @use "globals" as *
 
 $height:              24px
-$check-icon-height:   14px
 $transition-duration: 75ms
 
 //// @function feather-check-base64($stroke-width: 2, $color: currentColor)
@@ -42,8 +41,8 @@ input[type=checkbox]
     position: absolute // Pseudo reset
     inset: 0           // Pseudo reset
     margin: auto       // Pseudo reset
-    height: $check-icon-height
-    width: $check-icon-height
+    height: $tiny-icon-height
+    width: $tiny-icon-height
     background: feather-chubby-check-base64($stroke-width: 10, $color: white) 0% 0% / 100% 100%
     transform: scale(0)
     opacity: 0
