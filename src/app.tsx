@@ -17,7 +17,7 @@ import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Checkbox,
-	CheckboxButton,
+	CheckboxAsButton,
 	Checkboxes,
 	DebugCssEffect,
 	EmptySection,
@@ -138,7 +138,7 @@ function AppSidebar1() {
 							/>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton
+							<CheckboxAsButton
 								name="Brands"
 								icon={p => (
 									<feather.Folder
@@ -172,7 +172,7 @@ function AppSidebar1() {
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxButton
+							<CheckboxAsButton
 								name="Payments"
 								icon={p => (
 									<feather.Folder

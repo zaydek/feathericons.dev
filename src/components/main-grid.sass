@@ -5,11 +5,15 @@
 $main-grid-item-height:       128px
 $main-grid-item-aspect-ratio: 1.25
 
+////////////////////////////////////////
+
 .main-grid
   display: grid
   grid-template-columns: repeat(auto-fill, $main-grid-item-height)
   justify-content: center
   gap: 16px
+
+////////////////////////////////////////
 
 .main-grid-item
   position: relative
@@ -17,6 +21,8 @@ $main-grid-item-aspect-ratio: 1.25
   flex-direction: column
   gap: 8px
   width: $main-grid-item-height
+
+////////////////////////////////////////
 
 .main-grid-item-figure
   display: flex
@@ -40,6 +46,8 @@ $main-grid-item-aspect-ratio: 1.25
   color: $slate-800
   transform: scale(calc(var(--size) / 24))
   stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
+
+////////////////////////////////////////
 
 .main-grid-item-figcaption
   display: -webkit-box         // Clamp
