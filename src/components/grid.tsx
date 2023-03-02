@@ -6,10 +6,14 @@ import { Icon } from "@/lib"
 import { memo, Suspense } from "react"
 
 // Memoize <Grid> to suppress useless rerenders
-export const MemoGrid = memo(function Grid({ results }: { results: (readonly [string[], React.LazyExoticComponent<any>])[] }) {
+export const MemoGrid = memo(function Grid({
+	results,
+}: {
+	results: (readonly [string[], React.LazyExoticComponent<any>])[]
+}) {
 	return (
 		<div className="grid">
-			<Suspense fallback={<div>Loading…</div>}>
+			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map((name, index) => (
 						<GridItem
@@ -31,7 +35,17 @@ export const MemoGrid = memo(function Grid({ results }: { results: (readonly [st
 //// 	return toKebabCase(str).toLowerCase()
 //// }
 
-export function GridItem({ name, icon: Icon, selected, bookmark }: { name: string; icon: Icon; bookmark?: boolean; selected?: boolean }) {
+export function GridItem({
+	name,
+	icon: Icon,
+	selected,
+	bookmark,
+}: {
+	name: string
+	icon: Icon
+	bookmark?: boolean
+	selected?: boolean
+}) {
 	return (
 		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
 			<figure

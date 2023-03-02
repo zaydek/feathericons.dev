@@ -33,6 +33,7 @@ import {
 	Sidebar1,
 	Sidebar2,
 	SliderUndoSection,
+	SyntaxHighlighting,
 	UndoSection,
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
@@ -278,6 +279,10 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<Header>
+				<SyntaxHighlighting lang="html" code={`<div>Hello, world!</div>`} />
+			</Header>
+			<ScrollContainer>
+				<hr />
 				<SliderUndoSection
 					name="Icon size"
 					icon={feather.PenTool}
@@ -287,8 +292,6 @@ function AppSidebar2() {
 				>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</SliderUndoSection>
-			</Header>
-			<ScrollContainer>
 				<hr />
 				<SliderUndoSection
 					name="Icon stroke width"
