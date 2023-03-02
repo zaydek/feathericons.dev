@@ -1,0 +1,7 @@
+{
+  "exportall.config.folderListener": [
+    "/src/components",
+    "/src/lib",
+    "/src/state"
+  ]
+}
