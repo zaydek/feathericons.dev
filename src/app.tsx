@@ -26,7 +26,7 @@ import {
 	Interweb,
 	Interwebs,
 	Main,
-	MemoGrid,
+	MemoMainGrid,
 	Range,
 	ResetSection,
 	ScrollContainer,
@@ -280,7 +280,7 @@ function AppMain() {
 
 	return (
 		<Main>
-			<MemoGrid results={results} />
+			<MemoMainGrid results={results} />
 		</Main>
 	)
 }

@@ -1,0 +1,65 @@
+@use "sass:math"
+
+@use "../css/globals" as *
+
+$main-grid-item-height:       128px
+$main-grid-item-aspect-ratio: 1.25
+
+.main-grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, $main-grid-item-height)
+  justify-content: center
+  gap: 16px
+
+.main-grid-item
+  position: relative
+  display: flex
+  flex-direction: column
+  gap: 8px
+  width: $main-grid-item-height
+
+.main-grid-item-figure
+  display: flex
+  justify-content: center
+  align-items: center
+  aspect-ratio: $main-grid-item-aspect-ratio
+  background-color: white
+  border-radius: 4px
+  box-shadow: $inset-hairline-shadow
+  cursor: pointer              // Interaction
+  -webkit-user-select: none    // Interaction
+  user-select: none            // Interaction
+  &:focus
+    box-shadow: inset 0 0 0 4px $brand-color
+
+.main-grid-item-figure-svg
+  min-height: 24px
+  max-height: 24px * math.div(56, 32)
+  min-width:  24px
+  max-width:  24px * math.div(56, 32)
+  color: $slate-800
+  transform: scale(calc(var(--size) / 24))
+  stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
+
+.main-grid-item-figcaption
+  display: -webkit-box         // Clamp
+  -webkit-line-clamp: 2        // Clamp
+  -webkit-box-orient: vertical // Clamp
+  overflow: hidden             // Clamp
+  height: 32px
+  font: 425 13px / 1.25 $sans
+  text-align: center
+  color: $slate-800
+  -webkit-user-select: all     // Interaction
+  user-select: all             // Interaction
+
+.main-grid-item-bookmark
+  position: absolute
+  inset: math.div($button-height - $tiny-icon-height, 2) math.div($button-height - $tiny-icon-height, 2) auto auto
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $amber-400
+  .main-grid-item:not([data-bookmark=true]) &
+    display: none
+  .main-grid-item[data-bookmark=true] .main-grid-item-figure ~ &
+    color: $brand-color

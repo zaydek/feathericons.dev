@@ -1,22 +1,22 @@
-import "./grid.sass"
+import "./main-grid.sass"
 
 import * as feather from "@icons/feather/tsx"
 
-import { Icon } from "@/lib"
+import { Icon, toKebabCase } from "@/lib"
 import { memo, Suspense } from "react"
 
 // Memoize <Grid> to suppress useless rerenders
-export const MemoGrid = memo(function Grid({
+export const MemoMainGrid = memo(function MainGrid({
 	results,
 }: {
 	results: (readonly [string[], React.LazyExoticComponent<any>])[]
 }) {
 	return (
-		<div className="grid">
+		<ul className="main-grid">
 			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map((name, index) => (
-						<GridItem
+						<MainGridItem
 							key={name}
 							name={name}
 							icon={p => <Icon name={name} {...p} />}
@@ -26,16 +26,16 @@ export const MemoGrid = memo(function Grid({
 					)),
 				)}
 			</Suspense>
-		</div>
+		</ul>
 	)
 })
 
-//// // TODO: Add caching? Or use text-transform?
-//// function toNameCase(str: string) {
-//// 	return toKebabCase(str).toLowerCase()
-//// }
+// TODO: Add caching? Or use text-transform?
+function toNameCase(str: string) {
+	return toKebabCase(str).toLowerCase()
+}
 
-export function GridItem({
+export function MainGridItem({
 	name,
 	icon: Icon,
 	selected,
@@ -47,8 +47,9 @@ export function GridItem({
 	selected?: boolean
 }) {
 	return (
-		<article className="grid-item" data-bookmark={bookmark} data-selected={selected}>
+		<li className="main-grid-item" data-bookmark={bookmark} data-selected={selected}>
 			<figure
+				className="main-grid-item-figure"
 				onFocus={e => {
 					// Remove previous selection e.g. user-select: all
 					const selection = window.getSelection()
@@ -62,10 +63,10 @@ export function GridItem({
 				draggable
 				tabIndex={0}
 			>
-				<Icon />
+				<Icon className="main-grid-item-figure-svg" />
 			</figure>
-			<figcaption>{name}</figcaption>
-			<feather.Star className="bookmark" fill="currentColor" strokeWidth={4} />
-		</article>
+			<figcaption className="main-grid-item-figcaption">{toNameCase(name)}</figcaption>
+			<feather.Star className="main-grid-item-bookmark" fill="currentColor" strokeWidth={4} />
+		</li>
 	)
 }
