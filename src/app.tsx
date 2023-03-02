@@ -223,7 +223,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<Header>
-				<Section name="Code" icon={feather.Clipboard} gap={false} padding={false}>
+				<Section name="Code" icon={feather.Clipboard}>
 					<SyntaxHighlighting
 						lang="html"
 						// prettier-ignore

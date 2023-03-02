@@ -2,15 +2,14 @@
 
 @use "../css/globals" as *
 
-$grid-item-height:       144px
-$grid-item-aspect-ratio: 1.375
-$grid-item-gap:          16px
+$grid-item-height:       128px
+$grid-item-aspect-ratio: 1.25
 
 .grid
   display: grid
   grid-template-columns: repeat(auto-fill, $grid-item-height)
   justify-content: center
-  gap: $grid-item-gap
+  gap: 16px
 
 .grid-item
   position: relative

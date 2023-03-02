@@ -31,7 +31,6 @@ export function EmptySection({ children }: PropsWithChildren) {
 	return <section className="section">{children}</section>
 }
 
-// Expose padding={false} and gap={false} for <Checkboxes> and <SyntaxHighlighting>
 export function Section({ name, icon: Icon, children }: PropsWithChildren<{ name: string; icon: Icon }>) {
 	return (
 		<section className="section">
