@@ -36,6 +36,7 @@ import {
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
 	ClipboardContext,
+	ExportAs,
 	ProgressBarContext,
 	RangeContext,
 	SearchContext,
@@ -47,6 +48,7 @@ import {
 	STROKE_STEP,
 } from "@/state"
 import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
+import { Lang } from "shiki-es"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -220,20 +222,24 @@ function AppSidebar1() {
 }
 
 function AppSidebar2() {
-	const { clipboard } = useContext(ClipboardContext)!
+	const { exportAs, setExportAs, clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
+
+	//// const $size = selected.size
+	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
 
 	return (
 		<Sidebar2>
 			<SidebarHeader>
-				{/* TODO: Add grammar here (s) */}
-				{/* <SelectSection name="Selected&ensp;&middot;&ensp;3 icons" icon={feather.MousePointer}> */}
-				<SelectSection name="Selection" icon={feather.MousePointer}>
-					<SyntaxHighlighting
-						// TODO
-						lang="html"
-						code={clipboard}
-					/>
+				<SelectSection<ExportAs>
+					/// name={$size < 2 ? "Selected" : `Selected\u2002\u00B7\u2002${$size} icons`}
+					//// name={$size > 1 ? `Selected ${$size} icons` : "Selected"}
+					name="Selected"
+					icon={feather.MousePointer}
+					value={exportAs}
+					setValue={setExportAs}
+				>
+					<SyntaxHighlighting lang={lang} code={clipboard} />
 				</SelectSection>
 			</SidebarHeader>
 			<SidebarContents>

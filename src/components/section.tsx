@@ -3,7 +3,8 @@ import "./section.sass"
 import * as feather from "@icons/feather/tsx"
 
 import { Icon } from "@/lib"
-import { PropsWithChildren, useState } from "react"
+import { ExportAs } from "@/state"
+import { Dispatch, PropsWithChildren, SetStateAction, useState } from "react"
 import { SelectFormat } from "./select-format"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,20 +63,30 @@ export function UndoSection({
 	)
 }
 
-export function SelectSection({
+export function SelectSection<T>({
 	name,
 	icon: Icon,
+	value,
+	setValue,
 	children,
 }: PropsWithChildren<{
 	name: string
 	icon: Icon
+	value: T
+	setValue: Dispatch<SetStateAction<T>>
 }>) {
 	return (
 		<section className="section">
 			<header className="section-header">
 				<Icon className="section-header-icon" />
 				<h6 className="section-header-name u-flex-1">{name}</h6>
-				<SelectFormat />
+				<SelectFormat
+					// Type 'T' is not assignable to type 'ExportAs'.
+					//   Type 'string' is not assignable to type 'ExportAs'. ts(2322)
+					//
+					value={value as ExportAs}
+					setValue={setValue as Dispatch<SetStateAction<ExportAs>>}
+				/>
 			</header>
 			{children}
 		</section>

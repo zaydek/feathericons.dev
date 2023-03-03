@@ -1,20 +1,11 @@
 import "./select-format.sass"
 
 import { Icon } from "@/lib"
-import { useState } from "react"
+import { ExportAs } from "@/state"
+import { Dispatch, SetStateAction } from "react"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "./icon-config"
 
-// prettier-ignore
-type Format =
-	| "svg"
-	| "react"
-	| "ts-react"
-	| "react-native"
-	| "ts-react-native"
-//// | "jpg"
-//// | "png"
-
-const icons: Record<Format, Icon> = {
+const icons: Record<ExportAs, Icon> = {
 	svg: SvgIcon,
 	react: ReactjsIcon,
 	"ts-react": TypeScriptIcon,
@@ -24,7 +15,7 @@ const icons: Record<Format, Icon> = {
 	//// png: feather.Image,
 }
 
-const names: Record<Format, string> = {
+const names: Record<ExportAs, string> = {
 	svg: "SVG",
 	react: "React",
 	"ts-react": "React (TypeScript)",
@@ -34,15 +25,13 @@ const names: Record<Format, string> = {
 	//// png: "PNG",
 }
 
-export function SelectFormat() {
-	const [value, setValue] = useState<Format>("svg")
-
+export function SelectFormat({ value, setValue }: { value: ExportAs; setValue: Dispatch<SetStateAction<ExportAs>> }) {
 	const name = names[value]
 	const Icon = icons[value]
 
 	return (
 		<label className="select-format">
-			<select value={value} onChange={e => setValue(e.currentTarget.value as Format)}>
+			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAs)}>
 				<optgroup label="Web">
 					<option value="svg">SVG</option>
 					<option value="react">React</option>
