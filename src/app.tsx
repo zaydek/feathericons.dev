@@ -85,16 +85,17 @@ function AppSidebar1() {
 		setShowPaymentsOriginal,
 		showPaymentsOriginalFilled,
 		setShowPaymentsOriginalFilled,
-		resetAll,
+		resetFeather,
+		resetWolfKit,
 	} = useContext(SearchContext)!
 
 	const [pending, startTransition] = useTransition()
 
-	const voidTransition = useCallback(function (fn: () => void) {
+	const createVoidTransition = useCallback(function (fn: () => void) {
 		return () => startTransition(fn)
 	}, [])
 
-	const transition = useCallback(function <T>(fn: (_: T) => void) {
+	const createTransition = useCallback(function <T>(fn: (_: T) => void) {
 		return (arg: T) => startTransition(() => fn(arg))
 	}, [])
 
@@ -113,92 +114,86 @@ function AppSidebar1() {
 			</SidebarHeader>
 			<SidebarContents>
 				<hr />
-				<UndoSection name="Feather" icon={feather.Image} handleUndo={voidTransition(resetAll)}>
-					<div>
-						<Checkboxes>
-							<Checkbox
-								name="Feather"
-								icon={feather.Feather}
-								checked={showFeather}
-								setChecked={transition(setShowFeather)}
-							/>
-						</Checkboxes>
-					</div>
+				<UndoSection name="Feather" icon={feather.Image} handleUndo={createVoidTransition(resetFeather)}>
+					<Checkboxes>
+						<Checkbox
+							name="Feather"
+							icon={feather.Feather}
+							checked={showFeather}
+							setChecked={createTransition(setShowFeather)}
+						/>
+					</Checkboxes>
 				</UndoSection>
 				<hr />
-				<UndoSection name="The Wolf Kit" icon={feather.Image} handleUndo={voidTransition(resetAll)}>
-					<div>
+				<UndoSection name="The Wolf Kit" icon={feather.Image} handleUndo={createVoidTransition(resetWolfKit)}>
+					<Checkboxes>
+						<MonochromeCheckboxFolder
+							//// name="Brands"
+							name={brandsMonochrome ? "Brands (mono)" : "Brands"}
+							icon={p => (
+								<feather.ChevronDown
+									style={{ transform: "scale(0.8)", opacity: 0.375 }}
+									//// style={{ opacity: 0.375 }}
+									//// fill="currentColor"
+									strokeWidth={6}
+									{...p}
+								/>
+							)}
+							checked={brandsMonochrome}
+							setChecked={createTransition(setBrandsMonochrome)}
+						/>
 						<Checkboxes>
-							<MonochromeCheckboxFolder
-								//// name="Brands"
-								name={brandsMonochrome ? "Brands (mono)" : "Brands"}
-								icon={p => (
-									<feather.ChevronDown
-										style={{ transform: "scale(0.8)", opacity: 0.375 }}
-										//// style={{ opacity: 0.375 }}
-										//// fill="currentColor"
-										strokeWidth={6}
-										{...p}
-									/>
-								)}
-								checked={brandsMonochrome}
-								setChecked={transition(setBrandsMonochrome)}
+							<Checkbox
+								name="Original"
+								icon={brandsMonochrome ? wolfKitBrandsMono.Twitter : wolfKitBrandsOriginal.Twitter}
+								checked={showBrandsOriginal}
+								setChecked={createTransition(setShowBrandsOriginal)}
 							/>
-							<Checkboxes>
-								<Checkbox
-									name="Original"
-									icon={brandsMonochrome ? wolfKitBrandsMono.Twitter : wolfKitBrandsOriginal.Twitter}
-									checked={showBrandsOriginal}
-									setChecked={transition(setShowBrandsOriginal)}
-								/>
-								<Checkbox
-									name="Circle"
-									icon={brandsMonochrome ? wolfKitBrandsMonoCircle.Twitter : wolfKitBrandsOriginalCircle.Twitter}
-									checked={showBrandsOriginalCircle}
-									setChecked={transition(setShowBrandsOriginalCircle)}
-								/>
-								<Checkbox
-									name="Square"
-									icon={brandsMonochrome ? wolfKitBrandsMonoSquare.Twitter : wolfKitBrandsOriginalSquare.Twitter}
-									checked={showBrandsOriginalSquare}
-									setChecked={transition(setShowBrandsOriginalSquare)}
-								/>
-							</Checkboxes>
+							<Checkbox
+								name="Circle"
+								icon={brandsMonochrome ? wolfKitBrandsMonoCircle.Twitter : wolfKitBrandsOriginalCircle.Twitter}
+								checked={showBrandsOriginalCircle}
+								setChecked={createTransition(setShowBrandsOriginalCircle)}
+							/>
+							<Checkbox
+								name="Square"
+								icon={brandsMonochrome ? wolfKitBrandsMonoSquare.Twitter : wolfKitBrandsOriginalSquare.Twitter}
+								checked={showBrandsOriginalSquare}
+								setChecked={createTransition(setShowBrandsOriginalSquare)}
+							/>
 						</Checkboxes>
-					</div>
-					<div>
+					</Checkboxes>
+					<Checkboxes>
+						<MonochromeCheckboxFolder
+							//// name="Payments"
+							name={paymentsMonochrome ? "Payments (mono)" : "Payments"}
+							icon={p => (
+								<feather.ChevronDown
+									style={{ transform: "scale(0.8)", opacity: 0.375 }}
+									//// style={{ opacity: 0.375 }}
+									//// fill="currentColor"
+									strokeWidth={6}
+									{...p}
+								/>
+							)}
+							checked={paymentsMonochrome}
+							setChecked={createTransition(setPaymentsMonochrome)}
+						/>
 						<Checkboxes>
-							<MonochromeCheckboxFolder
-								//// name="Payments"
-								name={paymentsMonochrome ? "Payments (mono)" : "Payments"}
-								icon={p => (
-									<feather.ChevronDown
-										style={{ transform: "scale(0.8)", opacity: 0.375 }}
-										//// style={{ opacity: 0.375 }}
-										//// fill="currentColor"
-										strokeWidth={6}
-										{...p}
-									/>
-								)}
-								checked={paymentsMonochrome}
-								setChecked={transition(setPaymentsMonochrome)}
+							<Checkbox
+								name="Original"
+								icon={paymentsMonochrome ? wolfKitPaymentsMono.Stripe : wolfKitPaymentsOriginal.Stripe}
+								checked={showPaymentsOriginal}
+								setChecked={createTransition(setShowPaymentsOriginal)}
 							/>
-							<Checkboxes>
-								<Checkbox
-									name="Original"
-									icon={paymentsMonochrome ? wolfKitPaymentsMono.Stripe : wolfKitPaymentsOriginal.Stripe}
-									checked={showPaymentsOriginal}
-									setChecked={transition(setShowPaymentsOriginal)}
-								/>
-								<Checkbox
-									name="Filled"
-									icon={paymentsMonochrome ? wolfKitPaymentsMonoFilled.Stripe : wolfKitPaymentsOriginalFilled.Stripe}
-									checked={showPaymentsOriginalFilled}
-									setChecked={transition(setShowPaymentsOriginalFilled)}
-								/>
-							</Checkboxes>
+							<Checkbox
+								name="Filled"
+								icon={paymentsMonochrome ? wolfKitPaymentsMonoFilled.Stripe : wolfKitPaymentsOriginalFilled.Stripe}
+								checked={showPaymentsOriginalFilled}
+								setChecked={createTransition(setShowPaymentsOriginalFilled)}
+							/>
 						</Checkboxes>
-					</div>
+					</Checkboxes>
 				</UndoSection>
 				<hr />
 			</SidebarContents>
@@ -240,7 +235,7 @@ function AppSidebar2() {
 			<SidebarContents>
 				<hr />
 				<SliderUndoSection
-					name="Preview color"
+					name="Color"
 					icon={feather.Image}
 					value={size}
 					formatValue={value => `${value.toFixed(0)} PX`}
@@ -250,7 +245,7 @@ function AppSidebar2() {
 				</SliderUndoSection>
 				<hr />
 				<SliderUndoSection
-					name="Preview size"
+					name="Size"
 					icon={feather.PenTool}
 					value={size}
 					formatValue={value => `${value.toFixed(0)} PX`}
@@ -260,7 +255,7 @@ function AppSidebar2() {
 				</SliderUndoSection>
 				<hr />
 				<SliderUndoSection
-					name="Preview stroke width"
+					name="Stroke width"
 					icon={feather.PenTool}
 					value={strokeWidth}
 					formatValue={value => value.toFixed(2)}

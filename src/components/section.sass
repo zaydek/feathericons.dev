@@ -36,19 +36,6 @@
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
 
-  // Use div:not([class]) for checkboxes
-  //
-  //   <div>
-  //   ^^^^^
-  //     <Checkboxes>
-  //       <Checkbox />
-  //       ...
-  //     </Checkboxes>
-  //   </div>
-  //
-  > :not(:is(div:not([class]), .resources, .syntax-highlighting))
-    margin: 0 math.div($button-height - $tiny-icon-height, 2)
-
   //// // Use div:not([class]) for checkboxes
   //// //
   //// //   <div>
@@ -59,8 +46,21 @@
   //// //     </Checkboxes>
   //// //   </div>
   //// //
-  //// > :not(.checkboxes, .resources, .syntax-highlighting)
+  //// > :not(:is(div:not([class]), .resources, .syntax-highlighting))
   ////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
+
+  // Use div:not([class]) for checkboxes
+  //
+  //   <div>
+  //   ^^^^^
+  //     <Checkboxes>
+  //       <Checkbox />
+  //       ...
+  //     </Checkboxes>
+  //   </div>
+  //
+  > :not(.checkboxes, .resources, .syntax-highlighting)
+    margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 ////////////////////////////////////////
 
