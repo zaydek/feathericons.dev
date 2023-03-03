@@ -18,35 +18,25 @@ import {
 	MemoGrid,
 	MonochromeCheckboxFolder,
 	NoNameSection,
-	Range,
 	Resource,
 	Resources,
 	SearchBar,
 	Section,
-	SelectSection,
+	Section2Body,
+	Section2Footer,
+	Section2Header,
+	Section2HeaderBody,
+	Section2HeaderHeader,
+	Section2Spacer,
 	Sidebar1,
 	Sidebar2,
 	SidebarBody,
 	SidebarFooter,
 	SidebarHeader,
-	SliderUndoSection,
-	SyntaxHighlighting,
 	UndoSection,
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
-import {
-	ClipboardContext,
-	ExportAs,
-	ProgressBarContext,
-	RangeContext,
-	SearchContext,
-	SIZE_MAX,
-	SIZE_MIN,
-	SIZE_STEP,
-	STROKE_MAX,
-	STROKE_MIN,
-	STROKE_STEP,
-} from "@/state"
+import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } from "@/state"
 import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
 import { Lang } from "shiki-es"
 
@@ -230,53 +220,115 @@ function AppSidebar2() {
 
 	return (
 		<Sidebar2>
-			<SidebarHeader>
-				<SelectSection<ExportAs>
-					/// name={$size < 2 ? "Selected" : `Selected\u2002\u00B7\u2002${$size} icons`}
-					//// name={$size > 1 ? `Selected ${$size} icons` : "Selected"}
-					name="Selected"
-					icon={feather.MousePointer}
-					value={exportAs}
-					setValue={setExportAs}
-				>
-					<SyntaxHighlighting lang={lang} code={clipboard} />
-				</SelectSection>
-			</SidebarHeader>
-			<SidebarBody>
-				{/* <hr />
-				<SliderUndoSection
-					name="Color"
-					icon={feather.Image}
-					value={size}
-					formatValue={value => `${value.toFixed(0)} PX`}
-					handleUndo={resetSize}
-				>
-					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-				</SliderUndoSection> */}
-				<hr />
-				<SliderUndoSection
-					name="Preview size"
-					icon={feather.PenTool}
-					value={size}
-					formatValue={value => `${value.toFixed(0)} PX`}
-					handleUndo={resetSize}
-				>
-					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-				</SliderUndoSection>
-				<hr />
-				<SliderUndoSection
-					name="Preview stroke width"
-					icon={feather.PenTool}
-					value={strokeWidth}
-					formatValue={value => value.toFixed(2)}
-					handleUndo={resetStrokeWidth}
-				>
-					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
-				</SliderUndoSection>
-				<hr />
-			</SidebarBody>
+			<Section2Header>
+				<Section2HeaderHeader>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+				</Section2HeaderHeader>
+				<Section2HeaderBody>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+				</Section2HeaderBody>
+			</Section2Header>
+			<Section2Body>
+				<div>Hello</div>
+				<div>Hello</div>
+				<div>Hello</div>
+				<div>Hello</div>
+			</Section2Body>
+			<Section2Spacer />
+			<Section2Footer>
+				<Section name="Foo" icon={feather.Umbrella}>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+					<div>Hello</div>
+				</Section>
+			</Section2Footer>
 		</Sidebar2>
 	)
+
+	//// return (
+	//// 	<Sidebar2>
+	//// 		<SidebarHeader>
+	//// 			<SelectSection<ExportAs>
+	//// 				/// name={$size < 2 ? "Selected" : `Selected\u2002\u00B7\u2002${$size} icons`}
+	//// 				//// name={$size > 1 ? `Selected ${$size} icons` : "Selected"}
+	//// 				name="Selected"
+	//// 				icon={feather.MousePointer}
+	//// 				value={exportAs}
+	//// 				setValue={setExportAs}
+	//// 			>
+	//// 				<SyntaxHighlighting lang={lang} code={clipboard} />
+	//// 			</SelectSection>
+	//// 		</SidebarHeader>
+	//// 		<SidebarBody>
+	//// 			{/* <hr />
+	//// 			<SliderUndoSection
+	//// 				name="Color"
+	//// 				icon={feather.Image}
+	//// 				value={size}
+	//// 				formatValue={value => `${value.toFixed(0)} PX`}
+	//// 				handleUndo={resetSize}
+	//// 			>
+	//// 				<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+	//// 			</SliderUndoSection> */}
+	//// 			<hr />
+	//// 			<SliderUndoSection
+	//// 				name="Preview size"
+	//// 				icon={feather.PenTool}
+	//// 				value={size}
+	//// 				formatValue={value => `${value.toFixed(0)} PX`}
+	//// 				handleUndo={resetSize}
+	//// 			>
+	//// 				<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+	//// 			</SliderUndoSection>
+	//// 			<hr />
+	//// 			<SliderUndoSection
+	//// 				name="Preview stroke width"
+	//// 				icon={feather.PenTool}
+	//// 				value={strokeWidth}
+	//// 				formatValue={value => value.toFixed(2)}
+	//// 				handleUndo={resetStrokeWidth}
+	//// 			>
+	//// 				<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
+	//// 			</SliderUndoSection>
+	//// 			<hr />
+	//// 		</SidebarBody>
+	//// 	</Sidebar2>
+	//// )
 }
 
 function AppMain() {
