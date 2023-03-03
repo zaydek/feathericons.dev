@@ -5,7 +5,14 @@ import "@/css/input-checkbox.sass"
 import "@/css/input-range.sass"
 
 import { ProgresssBar } from "@/components"
-import { LayoutProvider, ProgressBarProvider, RangeProvider, SearchProvider, ShikiProvider } from "@/state"
+import {
+	ClipboardProvider,
+	LayoutProvider,
+	ProgressBarProvider,
+	RangeProvider,
+	SearchProvider,
+	ShikiProvider,
+} from "@/state"
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
 
@@ -17,7 +24,9 @@ function ProvidedApp() {
 				<LayoutProvider>
 					<SearchProvider>
 						<RangeProvider>
-							<App />
+							<ClipboardProvider>
+								<App />
+							</ClipboardProvider>
 						</RangeProvider>
 					</SearchProvider>
 				</LayoutProvider>

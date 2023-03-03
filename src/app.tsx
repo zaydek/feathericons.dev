@@ -30,6 +30,7 @@ import {
 	SidebarHeader,
 	SliderUndoSection,
 	SyntaxHighlighting,
+	UndoSection,
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
@@ -112,7 +113,14 @@ function AppSidebar1() {
 				</NoNameSection>
 			</SidebarHeader>
 			<SidebarContents>
-				<NoNameSection>
+				<UndoSection
+					name="Icons"
+					icon={feather.Package}
+					handleUndo={createVoidTransition(() => {
+						resetFeather()
+						resetWolfKit()
+					})}
+				>
 					<Checkboxes>
 						<Checkbox
 							name="Feather"
@@ -133,7 +141,10 @@ function AppSidebar1() {
 								/>
 							)}
 							checked={brandsMonochrome}
-							setChecked={createTransition(setBrandsMonochrome)}
+							setChecked={createVoidTransition(() => {
+								setBrandsMonochrome(curr => !curr)
+								setPaymentsMonochrome(curr => !curr)
+							})}
 						/>
 						<Checkboxes>
 							<Checkbox
@@ -168,7 +179,10 @@ function AppSidebar1() {
 								/>
 							)}
 							checked={paymentsMonochrome}
-							setChecked={createTransition(setPaymentsMonochrome)}
+							setChecked={createVoidTransition(() => {
+								setPaymentsMonochrome(curr => !curr)
+								setBrandsMonochrome(curr => !curr)
+							})}
 						/>
 						<Checkboxes>
 							<Checkbox
@@ -185,7 +199,7 @@ function AppSidebar1() {
 							/>
 						</Checkboxes>
 					</Checkboxes>
-				</NoNameSection>
+				</UndoSection>
 				<hr />
 			</SidebarContents>
 			<SidebarFooter>
