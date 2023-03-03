@@ -3,6 +3,7 @@
     "/src/components",
     "/src/lib",
     "/src/state",
-    "/src/hooks"
+    "/src/hooks",
+    "/scripts/utils"
   ]
 }

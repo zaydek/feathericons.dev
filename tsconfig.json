@@ -20,7 +20,7 @@
 			"@/*": ["./src/*"],
       "@icons/feather/*": ["./icons/feather/production/*"],
       "@icons/wolfkit/*": ["./icons/wolfkit/production/*"],
-      "@scripts/utils/*": ["./scripts/utils/*"]
+      "@scripts/utils": ["./scripts/utils/index.ts"]
     }
   },
   "include": ["src", "scripts"],

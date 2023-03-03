@@ -9,8 +9,17 @@ export const MemoGrid = memo(function Grid({
 }: {
 	results: (readonly [string[], React.LazyExoticComponent<any>])[]
 }) {
+	const { clearSelected } = useContext(ClipboardContext)!
+
 	return (
-		<ul className="grid">
+		<ul
+			className="grid"
+			onClick={e => {
+				e.stopPropagation()
+				e.preventDefault()
+				clearSelected()
+			}}
+		>
 			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map((name, index) => (
@@ -54,24 +63,27 @@ export function GridItem({
 			<figure
 				className="grid-item-frame"
 				onFocus={e => {
-					// Remove previous selection e.g. user-select: all
 					const selection = window.getSelection()
 					selection?.removeAllRanges()
 				}}
-				// Enabling drag-paste
-				onDragStart={e => {
-					e.dataTransfer.setData("text/plain", "Hello, world!")
-					// TODO
-				}}
+				//// // Enabling drag-paste
+				//// onDragStart={e => {
+				//// 	e.dataTransfer.setData("text/plain", "Hello, world!")
+				//// 	// TODO
+				//// }}
 				onClick={e => {
 					if (e.metaKey) {
+						e.stopPropagation()
+						e.preventDefault()
 						addToSelected(id)
 					} else {
+						e.stopPropagation()
+						e.preventDefault()
 						clearSelected()
 						addToSelected(id)
 					}
 				}}
-				draggable
+				//// draggable
 				tabIndex={0}
 			>
 				<Icon className="grid-item-frame-icon" />

@@ -68,6 +68,6 @@ function formatSvgElement(ref: Element, nesting: number, { strictJsx }: { strict
 	return str
 }
 
-export function formatSvg(ref: SVGSVGElement, { strictJsx = false }: { strictJsx?: boolean }) {
+export function formatSvg(ref: SVGSVGElement, { strictJsx = false }: { strictJsx?: boolean } = {}) {
 	return formatSvgElement(ref, 0, { strictJsx })
 }

@@ -35,6 +35,7 @@ import {
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
+	ClipboardContext,
 	ProgressBarContext,
 	RangeContext,
 	SearchContext,
@@ -46,7 +47,6 @@ import {
 	STROKE_STEP,
 } from "@/state"
 import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
-import { detab } from "./lib"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -220,6 +220,7 @@ function AppSidebar1() {
 }
 
 function AppSidebar2() {
+	const { clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
 
 	return (
@@ -229,30 +230,9 @@ function AppSidebar2() {
 				{/* <SelectSection name="Selected&ensp;&middot;&ensp;3 icons" icon={feather.MousePointer}> */}
 				<SelectSection name="Selection" icon={feather.MousePointer}>
 					<SyntaxHighlighting
+						// TODO
 						lang="html"
-						// prettier-ignore
-						code={detab(`
-							<!-- https://feathericons.dev/feather -->
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-feather" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-								<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-								<line x1="16" x2="2" y1="8" y2="22" />
-								<line x1="17.5" x2="9" y1="15" y2="15" />
-							</svg>
-
-							<!-- https://feathericons.dev/feather -->
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-feather" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-								<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-								<line x1="16" x2="2" y1="8" y2="22" />
-								<line x1="17.5" x2="9" y1="15" y2="15" />
-							</svg>
-
-							<!-- https://feathericons.dev/feather -->
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-feather" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-								<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-								<line x1="16" x2="2" y1="8" y2="22" />
-								<line x1="17.5" x2="9" y1="15" y2="15" />
-							</svg>
-					`, { spaces: true })}
+						code={clipboard}
 					/>
 				</SelectSection>
 			</SidebarHeader>

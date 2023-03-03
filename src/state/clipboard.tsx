@@ -1,4 +1,5 @@
 import { detab } from "@/lib"
+import { formatSvg, transformSvg } from "@scripts/utils"
 import { createContext, ReactNode, useCallback, useEffect, useState } from "react"
 
 // prettier-ignore
@@ -133,24 +134,18 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	useEffect(() => {
 		if (selected.size === 0) {
 			setClipboard(getClipboardPlaceholder(exportAs))
+			return
 		}
-
+		let clipboard = ""
 		const ids = [...selected.keys()]
-
-		const svgs: SVGSVGElement[] = []
 		for (const id of ids) {
-			svgs.push(document.getElementById(id)! as unknown as SVGSVGElement)
+			if (clipboard !== "") {
+				clipboard += "\n\n"
+			}
+			const svg = document.getElementById(id)!.querySelector("svg")!
+			clipboard += transformSvg(id, formatSvg(svg), { banner: `<!-- https://feathericons.dev/${id} -->` })
 		}
-
-		//// if (exportAs === "svg") {
-		//// 	//// const code = transformSvg(
-		//// 	//// 	formatSvg(selectedSvgElement, {
-		//// 	//// 		strictJsx: false,
-		//// 	//// 	}),
-		//// 	//// )
-		//// }
-
-		console.log(ids)
+		setClipboard(clipboard)
 	}, [exportAs, selected])
 
 	return (
