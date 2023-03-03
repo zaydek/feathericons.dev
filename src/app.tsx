@@ -30,7 +30,6 @@ import {
 	SidebarHeader,
 	SliderUndoSection,
 	SyntaxHighlighting,
-	UndoSection,
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
@@ -113,8 +112,7 @@ function AppSidebar1() {
 				</NoNameSection>
 			</SidebarHeader>
 			<SidebarContents>
-				<hr />
-				<UndoSection name="Feather" icon={feather.Image} handleUndo={createVoidTransition(resetFeather)}>
+				<NoNameSection>
 					<Checkboxes>
 						<Checkbox
 							name="Feather"
@@ -123,18 +121,13 @@ function AppSidebar1() {
 							setChecked={createTransition(setShowFeather)}
 						/>
 					</Checkboxes>
-				</UndoSection>
-				<hr />
-				<UndoSection name="The Wolf Kit" icon={feather.Image} handleUndo={createVoidTransition(resetWolfKit)}>
 					<Checkboxes>
 						<MonochromeCheckboxFolder
-							//// name="Brands"
 							name={brandsMonochrome ? "Brands (mono)" : "Brands"}
 							icon={p => (
-								<feather.ChevronDown
+								<feather.Folder
 									style={{ transform: "scale(0.8)", opacity: 0.375 }}
-									//// style={{ opacity: 0.375 }}
-									//// fill="currentColor"
+									fill="currentColor"
 									strokeWidth={6}
 									{...p}
 								/>
@@ -165,13 +158,11 @@ function AppSidebar1() {
 					</Checkboxes>
 					<Checkboxes>
 						<MonochromeCheckboxFolder
-							//// name="Payments"
 							name={paymentsMonochrome ? "Payments (mono)" : "Payments"}
 							icon={p => (
-								<feather.ChevronDown
+								<feather.Folder
 									style={{ transform: "scale(0.8)", opacity: 0.375 }}
-									//// style={{ opacity: 0.375 }}
-									//// fill="currentColor"
+									fill="currentColor"
 									strokeWidth={6}
 									{...p}
 								/>
@@ -194,7 +185,7 @@ function AppSidebar1() {
 							/>
 						</Checkboxes>
 					</Checkboxes>
-				</UndoSection>
+				</NoNameSection>
 				<hr />
 			</SidebarContents>
 			<SidebarFooter>
