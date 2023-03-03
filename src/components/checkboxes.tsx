@@ -35,6 +35,7 @@ export function MonochromeCheckboxFolder({
 				}
 			}}
 			tabIndex={0}
+			//// title="Toggle monochrome"
 		>
 			<Icon className="checkbox-icon" />
 			<span className="checkbox-name u-flex-1">{name}</span>

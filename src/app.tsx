@@ -1,7 +1,12 @@
 import * as feather from "@icons/feather/tsx"
+import * as wolfKitBrandsMonoCircle from "@icons/wolfkit/brands/mono-circle/tsx"
+import * as wolfKitBrandsMonoSquare from "@icons/wolfkit/brands/mono-square/tsx"
+import * as wolfKitBrandsMono from "@icons/wolfkit/brands/mono/tsx"
 import * as wolfKitBrandsOriginalCircle from "@icons/wolfkit/brands/original-circle/tsx"
 import * as wolfKitBrandsOriginalSquare from "@icons/wolfkit/brands/original-square/tsx"
 import * as wolfKitBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
+import * as wolfKitPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
+import * as wolfKitPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wolfKitPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
 import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
@@ -107,7 +112,8 @@ function AppSidebar1() {
 				</NoNameSection>
 			</SidebarHeader>
 			<SidebarContents>
-				<UndoSection name="Icons" icon={feather.Package} handleUndo={voidTransition(resetAll)}>
+				<hr />
+				<UndoSection name="Feather" icon={feather.Image} handleUndo={voidTransition(resetAll)}>
 					<div>
 						<Checkboxes>
 							<Checkbox
@@ -117,14 +123,21 @@ function AppSidebar1() {
 								setChecked={transition(setShowFeather)}
 							/>
 						</Checkboxes>
+					</div>
+				</UndoSection>
+				<hr />
+				<UndoSection name="The Wolf Kit" icon={feather.Image} handleUndo={voidTransition(resetAll)}>
+					<div>
 						<Checkboxes>
 							<MonochromeCheckboxFolder
-								name="Brands"
+								//// name="Brands"
+								name={brandsMonochrome ? "Brands (mono)" : "Brands"}
 								icon={p => (
-									<feather.Folder
+									<feather.ChevronDown
 										style={{ transform: "scale(0.8)", opacity: 0.375 }}
-										fill="currentColor"
-										strokeWidth={4}
+										//// style={{ opacity: 0.375 }}
+										//// fill="currentColor"
+										strokeWidth={6}
 										{...p}
 									/>
 								)}
@@ -134,32 +147,36 @@ function AppSidebar1() {
 							<Checkboxes>
 								<Checkbox
 									name="Original"
-									icon={wolfKitBrandsOriginal.Twitter}
+									icon={brandsMonochrome ? wolfKitBrandsMono.Twitter : wolfKitBrandsOriginal.Twitter}
 									checked={showBrandsOriginal}
 									setChecked={transition(setShowBrandsOriginal)}
 								/>
 								<Checkbox
 									name="Circle"
-									icon={wolfKitBrandsOriginalCircle.Twitter}
+									icon={brandsMonochrome ? wolfKitBrandsMonoCircle.Twitter : wolfKitBrandsOriginalCircle.Twitter}
 									checked={showBrandsOriginalCircle}
 									setChecked={transition(setShowBrandsOriginalCircle)}
 								/>
 								<Checkbox
 									name="Square"
-									icon={wolfKitBrandsOriginalSquare.Twitter}
+									icon={brandsMonochrome ? wolfKitBrandsMonoSquare.Twitter : wolfKitBrandsOriginalSquare.Twitter}
 									checked={showBrandsOriginalSquare}
 									setChecked={transition(setShowBrandsOriginalSquare)}
 								/>
 							</Checkboxes>
 						</Checkboxes>
+					</div>
+					<div>
 						<Checkboxes>
 							<MonochromeCheckboxFolder
-								name="Brands"
+								//// name="Payments"
+								name={paymentsMonochrome ? "Payments (mono)" : "Payments"}
 								icon={p => (
-									<feather.Folder
+									<feather.ChevronDown
 										style={{ transform: "scale(0.8)", opacity: 0.375 }}
-										fill="currentColor"
-										strokeWidth={4}
+										//// style={{ opacity: 0.375 }}
+										//// fill="currentColor"
+										strokeWidth={6}
 										{...p}
 									/>
 								)}
@@ -169,13 +186,13 @@ function AppSidebar1() {
 							<Checkboxes>
 								<Checkbox
 									name="Original"
-									icon={wolfKitPaymentsOriginal.Stripe}
+									icon={paymentsMonochrome ? wolfKitPaymentsMono.Stripe : wolfKitPaymentsOriginal.Stripe}
 									checked={showPaymentsOriginal}
 									setChecked={transition(setShowPaymentsOriginal)}
 								/>
 								<Checkbox
 									name="Filled"
-									icon={wolfKitPaymentsOriginalFilled.Stripe}
+									icon={paymentsMonochrome ? wolfKitPaymentsMonoFilled.Stripe : wolfKitPaymentsOriginalFilled.Stripe}
 									checked={showPaymentsOriginalFilled}
 									setChecked={transition(setShowPaymentsOriginalFilled)}
 								/>

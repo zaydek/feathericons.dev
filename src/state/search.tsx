@@ -157,32 +157,32 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		if (showFeather) results.push(cache.get("feather")[1])
 		if (brandsMonochrome) {
 			if (showBrandsOriginal) {
-				results.push(cache.get("wolfkit-brands-original")[1])
-			} else if (showBrandsOriginalCircle) {
-				results.push(cache.get("wolfkit-brands-original-circle")[1])
-			} else if (showBrandsOriginalSquare) {
-				results.push(cache.get("wolfkit-brands-original-square")[1])
-			}
-		} else {
-			if (showBrandsOriginal) {
 				results.push(cache.get("wolfkit-brands-mono")[1])
 			} else if (showBrandsOriginalCircle) {
 				results.push(cache.get("wolfkit-brands-mono-circle")[1])
 			} else if (showBrandsOriginalSquare) {
 				results.push(cache.get("wolfkit-brands-mono-square")[1])
 			}
+		} else {
+			if (showBrandsOriginal) {
+				results.push(cache.get("wolfkit-brands-original")[1])
+			} else if (showBrandsOriginalCircle) {
+				results.push(cache.get("wolfkit-brands-original-circle")[1])
+			} else if (showBrandsOriginalSquare) {
+				results.push(cache.get("wolfkit-brands-original-square")[1])
+			}
 		}
 		if (paymentsMonochrome) {
-			if (showPaymentsOriginal) {
-				results.push(cache.get("wolfkit-payments-original")[1])
-			} else if (showPaymentsOriginalFilled) {
-				results.push(cache.get("wolfkit-payments-original-filled")[1])
-			}
-		} else {
 			if (showPaymentsOriginal) {
 				results.push(cache.get("wolfkit-payments-mono")[1])
 			} else if (showPaymentsOriginalFilled) {
 				results.push(cache.get("wolfkit-payments-mono-filled")[1])
+			}
+		} else {
+			if (showPaymentsOriginal) {
+				results.push(cache.get("wolfkit-payments-original")[1])
+			} else if (showPaymentsOriginalFilled) {
+				results.push(cache.get("wolfkit-payments-original-filled")[1])
 			}
 		}
 		return results

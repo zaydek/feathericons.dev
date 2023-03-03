@@ -49,6 +49,19 @@
   > :not(:is(div:not([class]), .resources, .syntax-highlighting))
     margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
+  //// // Use div:not([class]) for checkboxes
+  //// //
+  //// //   <div>
+  //// //   ^^^^^
+  //// //     <Checkboxes>
+  //// //       <Checkbox />
+  //// //       ...
+  //// //     </Checkboxes>
+  //// //   </div>
+  //// //
+  //// > :not(.checkboxes, .resources, .syntax-highlighting)
+  ////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
+
 ////////////////////////////////////////
 
 .section-header
