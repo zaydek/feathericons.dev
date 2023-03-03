@@ -208,7 +208,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<SidebarHeader>
-				<Section name="Selected" icon={feather.MousePointer}>
+				<Section name="Selection" icon={feather.MousePointer}>
 					<SyntaxHighlighting
 						lang="html"
 						// prettier-ignore
@@ -224,7 +224,7 @@ function AppSidebar2() {
 				</Section>
 			</SidebarHeader>
 			<SidebarContents>
-				<hr />
+				{/* <hr />
 				<SliderUndoSection
 					name="Color"
 					icon={feather.Image}
@@ -233,7 +233,7 @@ function AppSidebar2() {
 					handleUndo={resetSize}
 				>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
-				</SliderUndoSection>
+				</SliderUndoSection> */}
 				<hr />
 				<SliderUndoSection
 					name="Size"

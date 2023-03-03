@@ -1,7 +1,5 @@
 import "./main-grid.sass"
 
-import * as feather from "@icons/feather/tsx"
-
 import { Icon, toKebabCase } from "@/lib"
 import { memo, Suspense } from "react"
 
@@ -65,7 +63,7 @@ export function MainGridItem({
 				<Icon className="main-grid-item-frame-icon" />
 			</figure>
 			<figcaption className="main-grid-item-name">{toNameCase(name)}</figcaption>
-			<feather.Star className="main-grid-item-bookmark" fill="currentColor" strokeWidth={4} />
+			{/* <feather.Star className="main-grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
 		</li>
 	)
 }
