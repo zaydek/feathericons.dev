@@ -14,8 +14,9 @@
   background-color: white
   overflow-y: auto
 
-.section-2-body
-  // No-op
+// TODO
+//// .section-2-body
+////   // No-op
 
 .section-2-spacer
   flex: 1
@@ -38,14 +39,22 @@
 .section-2-header-body
   flex: 1
   overflow-y: auto
+  padding-bottom: $sidebar-gap
 
 ////////////////////////////////////////
 
-.section-2-pane
+.section-2
   display: flex
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
+  &.is-start
+    padding-top: $sidebar-padding-y
+  &.is-end
+    padding-bottom: $sidebar-padding-y
+
+.section-2 > *
+  margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 ////////////////////////////////////////
 

@@ -229,7 +229,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<header className="section-2-header">
-				<section className="section-2-pane">
+				<section className="section-2 is-start">
 					<header className="section-2-header-header">
 						<div className="section-2-icon"></div>
 						<h6 className="section-2-name u-flex-1">HELLO</h6>
@@ -242,7 +242,7 @@ function AppSidebar2() {
 			</header>
 			<div className="section-2-body">
 				<hr />
-				<section className="section-2-pane">
+				<section className="section-2">
 					<header className="section-2-header-header">
 						<div className="section-2-icon"></div>
 						<h6 className="section-header-name u-flex-1">Idea</h6>
@@ -252,7 +252,7 @@ function AppSidebar2() {
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
 				<hr />
-				<section className="section-2-pane">
+				<section className="section-2">
 					<header className="section-2-header-header">
 						<div className="section-2-icon"></div>
 						<h6 className="section-header-name u-flex-1">Idea</h6>
@@ -266,10 +266,16 @@ function AppSidebar2() {
 			<div className="section-2-spacer"></div>
 			<footer className="section-2-footer">
 				<hr />
-				<section className="section-2-pane">
-					<Section name="Foo" icon={feather.Umbrella}>
+				<section className="section-2 is-end">
+					{/* <Section name="Foo" icon={feather.Umbrella}>
 						<div>Hello</div>
-					</Section>
+					</Section> */}
+					<header className="section-2-header-header">
+						<div className="section-2-icon"></div>
+						<h6 className="section-header-name u-flex-1">Sponsor</h6>
+						{/* <span className="section-2-header-slider-desc">{size} PX</span>
+						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} /> */}
+					</header>
 				</section>
 			</footer>
 		</Sidebar2>
