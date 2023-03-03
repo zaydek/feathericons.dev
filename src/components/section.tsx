@@ -4,6 +4,7 @@ import * as feather from "@icons/feather/tsx"
 
 import { Icon } from "@/lib"
 import { PropsWithChildren, useState } from "react"
+import { SelectFormat } from "./select-format"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -61,6 +62,26 @@ export function UndoSection({
 	)
 }
 
+export function SelectSection({
+	name,
+	icon: Icon,
+	children,
+}: PropsWithChildren<{
+	name: string
+	icon: Icon
+}>) {
+	return (
+		<section className="section">
+			<header className="section-header">
+				<Icon className="section-header-icon" />
+				<h6 className="section-header-name u-flex-1">{name}</h6>
+				<SelectFormat />
+			</header>
+			{children}
+		</section>
+	)
+}
+
 export function SliderUndoSection({
 	name,
 	icon: Icon,
@@ -69,7 +90,7 @@ export function SliderUndoSection({
 	handleUndo,
 	children,
 }: PropsWithChildren<{
-	name?: string
+	name: string
 	icon: Icon
 	value: number
 	formatValue: (value: number) => string

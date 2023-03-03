@@ -23,7 +23,7 @@ import {
 	Resources,
 	SearchBar,
 	Section,
-	SelectFormat,
+	SelectSection,
 	Sidebar1,
 	Sidebar2,
 	SidebarContents,
@@ -59,10 +59,9 @@ export function App() {
 
 	return (
 		<DebugCssEffect>
-			<SelectFormat />
-			{/* <AppSidebar1 />
+			<AppSidebar1 />
 			<AppSidebar2 />
-			<AppMain /> */}
+			<AppMain />
 		</DebugCssEffect>
 	)
 }
@@ -227,7 +226,7 @@ function AppSidebar2() {
 		<Sidebar2>
 			<SidebarHeader>
 				{/* TODO: Add grammar here (s) */}
-				<Section name="Selected&ensp;&middot;&ensp;3 icons" icon={feather.MousePointer}>
+				<SelectSection name="Selected&ensp;&middot;&ensp;3 icons" icon={feather.MousePointer}>
 					<SyntaxHighlighting
 						lang="html"
 						// prettier-ignore
@@ -254,7 +253,7 @@ function AppSidebar2() {
 							</svg>
 					`, { spaces: true })}
 					/>
-				</Section>
+				</SelectSection>
 			</SidebarHeader>
 			<SidebarContents>
 				{/* <hr />
