@@ -1,24 +1,45 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react"
+import { createContext, ReactNode, useCallback, useState } from "react"
 
 // prettier-ignore
 const SelectedContext = createContext<{
-	selected:    string[]
-	setSelected: Dispatch<SetStateAction<string[]>>
+  selected: Map<string, true>;
+  add:      (...ids: string[]) => void;
+  remove:   (...ids: string[]) => void;
 } | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
-	const [selected, setSelected] = useState<string[]>([])
+	const [selected, setSelected] = useState<Map<string, true>>(() => new Map())
 
-	//// // TODO: Can we safely use useEffect for clipboard events?
+	const add = useCallback((...ids: string[]) => {
+		setSelected(prev => {
+			const next = new Map(prev)
+			for (const id of ids) {
+				next.set(id, true)
+			}
+			return next
+		})
+	}, [])
+
+	const remove = useCallback((...ids: string[]) => {
+		setSelected(prev => {
+			const next = new Map(prev)
+			for (const id of ids) {
+				next.delete(id)
+			}
+			return next
+		})
+	}, [])
+
 	//// useEffect(() => {
-	//// 	// ...
+	//// 	// TODO
 	//// }, [])
 
 	return (
 		<SelectedContext.Provider
 			value={{
 				selected,
-				setSelected,
+				add,
+				remove,
 			}}
 		>
 			{children}

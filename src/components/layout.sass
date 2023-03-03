@@ -6,8 +6,8 @@ $sidebar-1-width:          288px         // TODO: DEPRECATE?
 $sidebar-1-expanded-width: 288px + 128px // TODO: DEPRECATE?
 $sidebar-1-z-index:        50            // TODO: DEPRECATE?
 
-$sidebar-2-width:          352px
-$sidebar-2-expanded-width: 352px + 128px
+$sidebar-2-width:          384px
+$sidebar-2-expanded-width: 384px + 128px
 $sidebar-2-z-index:        100
 
 $sidebar-overlay-z-index: 75
@@ -101,11 +101,13 @@ $handle-width:    6px
 
 .main
   --left:  #{$sidebar-1-width}
-  --right: #{$sidebar-2-width}
+  //// --right: #{$sidebar-2-width}
+  --right: 0
   position: absolute
   inset: 0 var(--right) auto var(--left)
-  padding: $sidebar-padding-y $sidebar-padding-x * 2
+  padding: $sidebar-padding-y $drag-area-width
   .sidebar:nth-of-type(1).is-minimized ~ &
     --left:  0
   .sidebar:nth-of-type(2).is-minimized ~ &
-    --right: #{$drag-area-width}
+    //// --right: #{$drag-area-width}
+    --right: 0
