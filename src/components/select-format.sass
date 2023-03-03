@@ -2,7 +2,7 @@
 
 @use "../css/globals" as *
 
-$height: 32px
+$height: 28px
 
 ////////////////////////////////////////
 
@@ -14,14 +14,11 @@ label.select-format
 ////////////////////////////////////////
 
 .select-format-button
-  //// position: absolute
   display: inline-flex
   justify-content: center
   align-items: center
   padding: 0 math.div($height, 2)
   height: $height
-  //// width: 100%  // Inherit
-  //// background-color: gainsboro
   border-radius: 1e3px
   box-shadow: $inset-hairline-shadow
   pointer-events: none // Passthrough to <select>
@@ -29,10 +26,8 @@ label.select-format
 ////////////////////////////////////////
 
 .select-format-button-name
-  font: 500 11px / normal $sans
-  font-feature-settings: 'tnum'
-  letter-spacing: 0.05em
-  text-transform: uppercase
+  font: 425 13px / 1.25 $sans
+  text-align: center
   color: $slate-800
 
 .select-format-button-icon

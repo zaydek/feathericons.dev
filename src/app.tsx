@@ -226,7 +226,8 @@ function AppSidebar2() {
 		<Sidebar2>
 			<SidebarHeader>
 				{/* TODO: Add grammar here (s) */}
-				<SelectSection name="Selected&ensp;&middot;&ensp;3 icons" icon={feather.MousePointer}>
+				{/* <SelectSection name="Selected&ensp;&middot;&ensp;3 icons" icon={feather.MousePointer}> */}
+				<SelectSection name="Selection" icon={feather.MousePointer}>
 					<SyntaxHighlighting
 						lang="html"
 						// prettier-ignore

@@ -1,7 +1,5 @@
 import "./select-format.sass"
 
-import * as feather from "@icons/feather/tsx"
-
 import { Icon } from "@/lib"
 import { useState } from "react"
 import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "./icon-config"
@@ -13,8 +11,8 @@ type Format =
 	| "ts-react"
 	| "react-native"
 	| "ts-react-native"
-	| "jpg"
-	| "png"
+//// | "jpg"
+//// | "png"
 
 const icons: Record<Format, Icon> = {
 	svg: SvgIcon,
@@ -22,18 +20,18 @@ const icons: Record<Format, Icon> = {
 	"ts-react": TypeScriptIcon,
 	"react-native": ReactjsIcon,
 	"ts-react-native": TypeScriptIcon,
-	jpg: feather.Image,
-	png: feather.Image,
+	//// jpg: feather.Image,
+	//// png: feather.Image,
 }
 
 const names: Record<Format, string> = {
 	svg: "SVG",
 	react: "React",
-	"ts-react": "TS React",
+	"ts-react": "React (TypeScript)",
 	"react-native": "React Native",
-	"ts-react-native": "TS React Native",
-	jpg: "JPG",
-	png: "PNG",
+	"ts-react-native": "React Native (TypeScript)",
+	//// jpg: "JPG",
+	//// png: "PNG",
 }
 
 export function SelectFormat() {
@@ -48,16 +46,16 @@ export function SelectFormat() {
 				<optgroup label="Web">
 					<option value="svg">SVG</option>
 					<option value="react">React</option>
-					<option value="ts-react">TS React</option>
+					<option value="ts-react">React (TypeScript)</option>
 				</optgroup>
 				<optgroup label="React Native">
 					<option value="react-native">React Native</option>
-					<option value="ts-react-native">TS React Native</option>
+					<option value="ts-react-native">React Native (TypeScript)</option>
 				</optgroup>
-				<optgroup label="Image">
+				{/* <optgroup label="Image">
 					<option value="jpg">JPG</option>
 					<option value="png">PNG</option>
-				</optgroup>
+				</optgroup> */}
 			</select>
 			<span className="select-format-button">
 				<span className="select-format-button-name">{name}</span>
