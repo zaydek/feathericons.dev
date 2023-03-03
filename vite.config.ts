@@ -8,6 +8,7 @@ export default defineConfig({
 			"@": "/src",
 			"@icons/feather": "/icons/feather/production",
 			"@icons/wolfkit": "/icons/wolfkit/production",
+			"@scripts/utils": "scripts/utils/*",
 		},
 	},
 	preview: { host: true, port: 3000 },

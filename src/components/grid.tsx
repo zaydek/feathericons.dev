@@ -1,7 +1,8 @@
 import "./grid.sass"
 
 import { Icon, toKebabCase } from "@/lib"
-import { memo, Suspense } from "react"
+import { ClipboardContext } from "@/state"
+import { memo, Suspense, useContext } from "react"
 
 export const MemoGrid = memo(function Grid({
 	results,
@@ -17,7 +18,7 @@ export const MemoGrid = memo(function Grid({
 							key={name}
 							name={name}
 							icon={p => <Icon name={name} {...p} />}
-							bookmark={index % 15 === 0}
+							//// bookmark={index % 15 === 0}
 							//// selected={index === 0}
 						/>
 					)),
@@ -35,7 +36,7 @@ function toNameCase(str: string) {
 export function GridItem({
 	name,
 	icon: Icon,
-	selected,
+	//// selected,
 	bookmark,
 }: {
 	name: string
@@ -43,8 +44,13 @@ export function GridItem({
 	bookmark?: boolean
 	selected?: boolean
 }) {
+	const { selected, addToSelected, clearSelected } = useContext(ClipboardContext)!
+
+	const id = toNameCase(name)
+
 	return (
-		<li className="grid-item" data-bookmark={bookmark} data-selected={selected}>
+		//// <li id={id} className="grid-item" data-bookmark={bookmark} data-selected={selected.has(id)}>
+		<li id={id} className="grid-item" data-selected={selected.has(id)}>
 			<figure
 				className="grid-item-frame"
 				onFocus={e => {
@@ -57,12 +63,20 @@ export function GridItem({
 					e.dataTransfer.setData("text/plain", "Hello, world!")
 					// TODO
 				}}
+				onClick={e => {
+					if (e.metaKey) {
+						addToSelected(id)
+					} else {
+						clearSelected()
+						addToSelected(id)
+					}
+				}}
 				draggable
 				tabIndex={0}
 			>
 				<Icon className="grid-item-frame-icon" />
 			</figure>
-			<figcaption className="grid-item-name">{toNameCase(name)}</figcaption>
+			<figcaption className="grid-item-name">{id}</figcaption>
 			{/* <feather.Star className="grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
 		</li>
 	)
