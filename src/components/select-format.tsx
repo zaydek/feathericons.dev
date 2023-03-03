@@ -17,8 +17,8 @@ const icons: Record<ExportAs, Icon> = {
 
 const names: Record<ExportAs, string> = {
 	svg: "SVG",
-	react: "React",
-	"ts-react": "React (TypeScript)",
+	react: "React.js",
+	"ts-react": "React.js (TypeScript)",
 	"react-native": "React Native",
 	"ts-react-native": "React Native (TypeScript)",
 	//// jpg: "JPG",

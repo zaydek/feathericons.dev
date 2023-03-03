@@ -1,7 +1,7 @@
 import "./grid.sass"
 
 import { Icon, toKebabCase } from "@/lib"
-import { ClipboardContext } from "@/state"
+import { ClipboardContext, LayoutContext } from "@/state"
 import { memo, Suspense, useContext } from "react"
 
 export const MemoGrid = memo(function Grid({
@@ -22,7 +22,7 @@ export const MemoGrid = memo(function Grid({
 		>
 			<Suspense>
 				{results.map(([names, Icon]) =>
-					names.map((name, index) => (
+					names.map(name => (
 						<GridItem
 							key={name}
 							name={name}
@@ -53,6 +53,7 @@ export function GridItem({
 	bookmark?: boolean
 	selected?: boolean
 }) {
+	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const { selected, addToSelected, clearSelected } = useContext(ClipboardContext)!
 
 	const id = toNameCase(name)
@@ -73,10 +74,16 @@ export function GridItem({
 				//// }}
 				onClick={e => {
 					if (e.metaKey) {
+						if (sidebar === "minimized") {
+							setSidebar("normal")
+						}
 						e.stopPropagation()
 						e.preventDefault()
 						addToSelected(id)
 					} else {
+						if (sidebar === "minimized") {
+							setSidebar("normal")
+						}
 						e.stopPropagation()
 						e.preventDefault()
 						clearSelected()
