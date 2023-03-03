@@ -2,6 +2,7 @@
   "exportall.config.folderListener": [
     "/src/components",
     "/src/lib",
-    "/src/state"
+    "/src/state",
+    "/src/hooks"
   ]
 }

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 
 const searchParams = new URLSearchParams(typeof window === "undefined" ? "" : window.location.search)
 
-type Parser<T> = (value: string) => T
-type Serializer<T> = (value: T) => string
+export type Parser<T> = (value: string) => T
+export type Serializer<T> = (value: T) => string
 
 export function useParam<T>({
 	key,

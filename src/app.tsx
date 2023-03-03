@@ -17,11 +17,11 @@ import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Checkbox,
-	CheckboxAsButton,
 	Checkboxes,
 	DebugCssEffect,
 	Main,
 	MemoMainGrid,
+	MonochromeCheckboxFolder,
 	NoNameSection,
 	Range,
 	Resource,
@@ -70,37 +70,38 @@ export function App() {
 	)
 }
 
+function FolderIcon(props: JSX.IntrinsicElements["svg"]) {
+	return (
+		<feather.Folder
+			style={{ transform: "scale(0.8)", opacity: 0.375 }}
+			fill="currentColor"
+			strokeWidth={4}
+			{...props}
+		/>
+	)
+}
+
 function AppSidebar1() {
 	const { setStarted } = useContext(ProgressBarContext)!
 
 	const {
 		showFeather,
 		setShowFeather,
+		brandsMonochrome,
+		setBrandsMonochrome,
 		showBrandsOriginal,
 		setShowBrandsOriginal,
 		showBrandsOriginalCircle,
 		setShowBrandsOriginalCircle,
 		showBrandsOriginalSquare,
 		setShowBrandsOriginalSquare,
-		//// showBrandsMono,
-		//// setShowBrandsMono,
-		//// showBrandsMonoCircle,
-		//// setShowBrandsMonoCircle,
-		//// showBrandsMonoSquare,
-		//// setShowBrandsMonoSquare,
+		paymentsMonochrome,
+		setPaymentsMonochrome,
 		showPaymentsOriginal,
 		setShowPaymentsOriginal,
 		showPaymentsOriginalFilled,
 		setShowPaymentsOriginalFilled,
-		//// showPaymentsMono,
-		//// setShowPaymentsMono,
-		//// showPaymentsMonoFilled,
-		//// setShowPaymentsMonoFilled,
 		resetAll,
-		toggleAllBrandsOriginal,
-		//// toggleAllBrandsMono,
-		toggleAllPaymentsOriginal,
-		//// toggleAllPaymentsMono,
 	} = useContext(SearchContext)!
 
 	const [pending, startTransition] = useTransition()
@@ -138,17 +139,11 @@ function AppSidebar1() {
 							/>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxAsButton
+							<MonochromeCheckboxFolder
 								name="Brands"
-								icon={p => (
-									<feather.Folder
-										style={{ transform: "scale(0.8)", opacity: 0.375 }}
-										fill="currentColor"
-										strokeWidth={4}
-										{...p}
-									/>
-								)}
-								onClick={transition(toggleAllBrandsOriginal)}
+								icon={FolderIcon}
+								checked={brandsMonochrome}
+								setChecked={transition(setBrandsMonochrome)}
 							/>
 							<Checkboxes>
 								<Checkbox
@@ -172,17 +167,11 @@ function AppSidebar1() {
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							<CheckboxAsButton
-								name="Payments"
-								icon={p => (
-									<feather.Folder
-										style={{ transform: "scale(0.8)", opacity: 0.375 }}
-										fill="currentColor"
-										strokeWidth={4}
-										{...p}
-									/>
-								)}
-								onClick={voidTransition(toggleAllPaymentsOriginal)}
+							<MonochromeCheckboxFolder
+								name="Brands"
+								icon={FolderIcon}
+								checked={paymentsMonochrome}
+								setChecked={transition(setPaymentsMonochrome)}
 							/>
 							<Checkboxes>
 								<Checkbox
