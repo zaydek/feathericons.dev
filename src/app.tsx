@@ -23,6 +23,7 @@ import {
 	Resources,
 	SearchBar,
 	Section,
+	SelectFormat,
 	Sidebar1,
 	Sidebar2,
 	SidebarContents,
@@ -58,9 +59,10 @@ export function App() {
 
 	return (
 		<DebugCssEffect>
-			<AppSidebar1 />
+			<SelectFormat />
+			{/* <AppSidebar1 />
 			<AppSidebar2 />
-			<AppMain />
+			<AppMain /> */}
 		</DebugCssEffect>
 	)
 }
