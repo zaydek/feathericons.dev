@@ -208,7 +208,8 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<SidebarHeader>
-				<Section name="Selection" icon={feather.MousePointer}>
+				{/* TODO: Add grammar here (s) */}
+				<Section name="Selected&ensp;&middot;&ensp;3 icons" icon={feather.MousePointer}>
 					<SyntaxHighlighting
 						lang="html"
 						// prettier-ignore
@@ -236,7 +237,7 @@ function AppSidebar2() {
 				</SliderUndoSection> */}
 				<hr />
 				<SliderUndoSection
-					name="Size"
+					name="Preview size"
 					icon={feather.PenTool}
 					value={size}
 					formatValue={value => `${value.toFixed(0)} PX`}
@@ -246,7 +247,7 @@ function AppSidebar2() {
 				</SliderUndoSection>
 				<hr />
 				<SliderUndoSection
-					name="Stroke width"
+					name="Preview stroke width"
 					icon={feather.PenTool}
 					value={strokeWidth}
 					formatValue={value => value.toFixed(2)}
