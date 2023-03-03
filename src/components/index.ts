@@ -1,6 +1,7 @@
 export * from "./checkboxes"
 export * from "./debug-css"
 export * from "./grid"
+export * from "./icon-config"
 export * from "./layout"
 export * from "./progress-bar"
 export * from "./range"

@@ -1,6 +1,10 @@
 import "./select-format.sass"
 
+import * as feather from "@icons/feather/tsx"
+
+import { Icon } from "@/lib"
 import { useState } from "react"
+import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "./icon-config"
 
 // prettier-ignore
 type Format =
@@ -12,8 +16,31 @@ type Format =
 	| "jpg"
 	| "png"
 
+const icons: Record<Format, Icon> = {
+	svg: SvgIcon,
+	react: ReactjsIcon,
+	"ts-react": TypeScriptIcon,
+	"react-native": ReactjsIcon,
+	"ts-react-native": TypeScriptIcon,
+	jpg: feather.Image,
+	png: feather.Image,
+}
+
+const names: Record<Format, string> = {
+	svg: "SVG",
+	react: "React",
+	"ts-react": "TS React",
+	"react-native": "React Native",
+	"ts-react-native": "TS React Native",
+	jpg: "JPG",
+	png: "PNG",
+}
+
 export function SelectFormat() {
 	const [value, setValue] = useState<Format>("svg")
+
+	const name = names[value]
+	const Icon = icons[value]
 
 	return (
 		<label className="select-format">
@@ -32,7 +59,10 @@ export function SelectFormat() {
 					<option value="png">PNG</option>
 				</optgroup>
 			</select>
-			<div className="select-format-button">SVG</div>
+			<span className="select-format-button">
+				<span className="select-format-button-name">{name}</span>
+				<Icon className="select-format-button-icon" />
+			</span>
 		</label>
 	)
 }

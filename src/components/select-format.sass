@@ -3,28 +3,45 @@
 @use "../css/globals" as *
 
 $height: 32px
-$width:  96px
+
+////////////////////////////////////////
 
 label.select-format
   display: inline-block // CSS reset
 .select-format
   position: relative
-  height: $height
-  width: $width
+
+////////////////////////////////////////
 
 .select-format-button
-  position: absolute
+  //// position: absolute
   display: inline-flex
   justify-content: center
   align-items: center
-  height: 100% // Inherit
-  width: 100%  // Inherit
-  background-color: gainsboro
+  padding: 0 math.div($height, 2)
+  height: $height
+  //// width: 100%  // Inherit
+  //// background-color: gainsboro
   border-radius: 1e3px
+  box-shadow: $inset-hairline-shadow
   pointer-events: none // Passthrough to <select>
 
-.select-format select:is(:hover, :focus-visible) + .select-format-button
-  background-color: blue
+////////////////////////////////////////
+
+.select-format-button-name
+  font: 500 11px / normal $sans
+  font-feature-settings: 'tnum'
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-800
+
+.select-format-button-icon
+  margin-left: math.div($height - 12px, 2)
+  height: 12px
+  width: 12px
+  color: $slate-800
+
+////////////////////////////////////////
 
 .select-format select
   position: absolute
@@ -32,3 +49,7 @@ label.select-format
   width: 100%  // Inherit
   opacity: 0.01
   cursor: pointer
+  &:is(:hover, :focus-visible) + .select-format-button
+    background-color: $slate-100
+  &:hover:active + .select-format-button
+    background-color: $slate-200
