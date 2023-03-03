@@ -38,16 +38,26 @@ button.checkbox
   margin: 0 math.div($button-height - 24px, 2)
   height: 24px
   width: 24px
-  background-color: $slate-300
+  background-color: $hairline-color
   background-image: revert
   border-radius: 1e3px
   box-shadow: revert
 
+//// // Off
+//// .checkbox-icon[data-type=checkbox][data-checked=false]
+////   margin: 0 math.div($button-height - 16px, 2)
+////   height: 16px
+////   width: 16px
+////   background-color: $slate-300
+////   background-image: revert
+////   border-radius: 1e3px
+////   box-shadow: 0 0 0 2px white, 0 0 0 4px $slate-300
+
 // On
 .checkbox-icon[data-type=checkbox][data-checked=true]
-  margin: 0 math.div($button-height - 18px, 2)
-  height: 18px
-  width: 18px
+  margin: 0 math.div($button-height - 16px, 2)
+  height: 16px
+  width: 16px
   background-color: revert
   background-image: linear-gradient(to right, #f00, #fc0, #ff0, #0f0, #0cf, #00f, #80f)
   border-radius: 1e3px
