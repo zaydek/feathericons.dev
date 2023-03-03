@@ -86,7 +86,18 @@ const parser = (value: string) => value === "1"
 const serializer = (value: boolean) => (value ? "1" : "0")
 
 export function SearchProvider({ children }: PropsWithChildren) {
-	const [search, setSearch] = useParam({ key: "search", initialValue: "", parser: value => value })
+	const [search, setSearch] = useParam({
+		key: "search",
+		initialValue: "",
+		parser: value => value,
+		// prettier-ignore
+		serializer: value => {
+			return value
+				.replace(/[^\w\s-]/g, "") // Remove bad characters
+				.replace(/\s+/g, " ")     // Remove excess spaces
+				.trim()                   // Trim start and end spaces
+		},
+	})
 
 	const [showFeather, setShowFeather] = useParam({
 		key: "feather",
