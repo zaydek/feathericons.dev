@@ -1,19 +1,19 @@
-import "./main-grid.sass"
+import "./grid.sass"
 
 import { Icon, toKebabCase } from "@/lib"
 import { memo, Suspense } from "react"
 
-export const MemoMainGrid = memo(function MainGrid({
+export const MemoGrid = memo(function Grid({
 	results,
 }: {
 	results: (readonly [string[], React.LazyExoticComponent<any>])[]
 }) {
 	return (
-		<ul className="main-grid">
+		<ul className="grid">
 			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map((name, index) => (
-						<MainGridItem
+						<GridItem
 							key={name}
 							name={name}
 							icon={p => <Icon name={name} {...p} />}
@@ -32,7 +32,7 @@ function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
 
-export function MainGridItem({
+export function GridItem({
 	name,
 	icon: Icon,
 	selected,
@@ -44,9 +44,9 @@ export function MainGridItem({
 	selected?: boolean
 }) {
 	return (
-		<li className="main-grid-item" data-bookmark={bookmark} data-selected={selected}>
+		<li className="grid-item" data-bookmark={bookmark} data-selected={selected}>
 			<figure
-				className="main-grid-item-frame"
+				className="grid-item-frame"
 				onFocus={e => {
 					// Remove previous selection e.g. user-select: all
 					const selection = window.getSelection()
@@ -60,10 +60,10 @@ export function MainGridItem({
 				draggable
 				tabIndex={0}
 			>
-				<Icon className="main-grid-item-frame-icon" />
+				<Icon className="grid-item-frame-icon" />
 			</figure>
-			<figcaption className="main-grid-item-name">{toNameCase(name)}</figcaption>
-			{/* <feather.Star className="main-grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
+			<figcaption className="grid-item-name">{toNameCase(name)}</figcaption>
+			{/* <feather.Star className="grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
 		</li>
 	)
 }

@@ -1,4 +1,4 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useMemo } from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction } from "react"
 import { useParam } from "../hooks/use-param"
 
 export type SidebarState = "normal" | "maximized" | "minimized"
@@ -25,13 +25,10 @@ export function LayoutProvider({ children }: PropsWithChildren) {
 
 	return (
 		<LayoutContext.Provider
-			value={useMemo(
-				() => ({
-					sidebar,
-					setSidebar,
-				}),
-				[sidebar, setSidebar],
-			)}
+			value={{
+				sidebar,
+				setSidebar,
+			}}
 		>
 			{children}
 		</LayoutContext.Provider>

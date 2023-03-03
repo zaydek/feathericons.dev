@@ -15,7 +15,7 @@ import {
 	Checkboxes,
 	DebugCssEffect,
 	Main,
-	MemoMainGrid,
+	MemoGrid,
 	MonochromeCheckboxFolder,
 	NoNameSection,
 	Range,
@@ -121,6 +121,7 @@ function AppSidebar1() {
 						resetWolfKit()
 					})}
 				>
+					{/* <div> */}
 					<Checkboxes>
 						<Checkbox
 							name="Feather"
@@ -199,6 +200,7 @@ function AppSidebar1() {
 							/>
 						</Checkboxes>
 					</Checkboxes>
+					{/* </div> */}
 				</UndoSection>
 				<hr />
 			</SidebarContents>
@@ -290,7 +292,7 @@ function AppMain() {
 
 	return (
 		<Main>
-			<MemoMainGrid results={results} />
+			<MemoGrid results={results} />
 		</Main>
 	)
 }

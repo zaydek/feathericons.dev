@@ -9,8 +9,17 @@ import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, u
 function useBodyScrollLocking({ sidebar }: { sidebar: SidebarState }) {
 	useEffect(() => {
 		if (sidebar === "maximized") {
+			// <html>
+			document.documentElement.style.overflowY = "clip"
+			// <body>
 			document.body.style.overflowY = "clip"
 		} else {
+			// <html>
+			document.documentElement.style.overflowY = ""
+			if (document.documentElement.style.length === 0) {
+				document.documentElement.removeAttribute("style")
+			}
+			// <body>
 			document.body.style.overflowY = ""
 			if (document.body.style.length === 0) {
 				document.body.removeAttribute("style")
@@ -20,7 +29,13 @@ function useBodyScrollLocking({ sidebar }: { sidebar: SidebarState }) {
 	return void 0
 }
 
-function useCancelableShortcut({ sidebar, setSidebar }: { sidebar: SidebarState; setSidebar: Dispatch<SetStateAction<SidebarState>> }) {
+function useCancelableShortcut({
+	sidebar,
+	setSidebar,
+}: {
+	sidebar: SidebarState
+	setSidebar: Dispatch<SetStateAction<SidebarState>>
+}) {
 	useEffect(() => {
 		if (sidebar !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
@@ -35,7 +50,7 @@ function useCancelableShortcut({ sidebar, setSidebar }: { sidebar: SidebarState;
 function useToggleShortcut({ setSidebar }: { setSidebar: Dispatch<SetStateAction<SidebarState>> }) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if ((isMac() && e.metaKey && e.key === "\\") || (!isMac() && e.ctrlKey && e.key === "/")) {
+			if ((isMac() && e.metaKey && e.key === "\\") || (!isMac() && e.ctrlKey && e.key === "\\")) {
 				setSidebar(curr => {
 					if (curr === "normal" || curr === "maximized") {
 						return "minimized"
@@ -75,6 +90,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 		}
 	}, [setSidebar, sidebar])
 
+	// TODO: Move to provider?
 	useBodyScrollLocking({ sidebar })
 	useCancelableShortcut({ sidebar, setSidebar })
 	useToggleShortcut({ setSidebar })
