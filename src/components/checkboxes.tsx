@@ -1,7 +1,5 @@
 import "./checkboxes.sass"
 
-import * as feather from "@icons/feather/tsx"
-
 import { Icon } from "@/lib"
 import { Dispatch, PropsWithChildren, SetStateAction } from "react"
 
@@ -41,11 +39,15 @@ export function MonochromeCheckboxFolder({
 			<Icon className="checkbox-icon" />
 			<span className="checkbox-name u-flex-1">{name}</span>
 			{/* This is supposed to be checkbox... */}
-			<feather.Circle
+			<span
 				className="checkbox-icon"
-				style={{ opacity: 0.1875 }}
-				fill={checked ? "currentColor" : "none"}
-				strokeWidth={4}
+				//// style={{ opacity: 0.1875 }}
+				//// fill={checked ? "none" : "currentColor"}
+				//// stroke="dodgerblue"
+				//// fill="currentColor"
+				//// strokeWidth={4}
+				data-type="checkbox"
+				data-checked={checked}
 			/>
 		</label>
 	)

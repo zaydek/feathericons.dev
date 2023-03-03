@@ -1,17 +1,7 @@
-// TODO: Does this interfere with <Suspense>?
 import * as feather from "@icons/feather/tsx"
-
-// TODO: Does this interfere with <Suspense>?
-//// import * as wolfKitBrandsMonoCircle from "@icons/wolfkit/brands/mono-circle/tsx"
-//// import * as wolfKitBrandsMonoSquare from "@icons/wolfkit/brands/mono-square/tsx"
-//// import * as wolfKitBrandsMono from "@icons/wolfkit/brands/mono/tsx"
 import * as wolfKitBrandsOriginalCircle from "@icons/wolfkit/brands/original-circle/tsx"
 import * as wolfKitBrandsOriginalSquare from "@icons/wolfkit/brands/original-square/tsx"
 import * as wolfKitBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
-
-// TODO: Does this interfere with <Suspense>?
-//// import * as wolfKitPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
-//// import * as wolfKitPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wolfKitPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
 import * as wolfKitPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
@@ -67,17 +57,6 @@ export function App() {
 			<AppSidebar2 />
 			<AppMain />
 		</DebugCssEffect>
-	)
-}
-
-function FolderIcon(props: JSX.IntrinsicElements["svg"]) {
-	return (
-		<feather.Folder
-			style={{ transform: "scale(0.8)", opacity: 0.375 }}
-			fill="currentColor"
-			strokeWidth={4}
-			{...props}
-		/>
 	)
 }
 
@@ -141,7 +120,14 @@ function AppSidebar1() {
 						<Checkboxes>
 							<MonochromeCheckboxFolder
 								name="Brands"
-								icon={FolderIcon}
+								icon={p => (
+									<feather.Folder
+										style={{ transform: "scale(0.8)", opacity: 0.375 }}
+										fill="currentColor"
+										strokeWidth={4}
+										{...p}
+									/>
+								)}
 								checked={brandsMonochrome}
 								setChecked={transition(setBrandsMonochrome)}
 							/>
@@ -169,7 +155,14 @@ function AppSidebar1() {
 						<Checkboxes>
 							<MonochromeCheckboxFolder
 								name="Brands"
-								icon={FolderIcon}
+								icon={p => (
+									<feather.Folder
+										style={{ transform: "scale(0.8)", opacity: 0.375 }}
+										fill="currentColor"
+										strokeWidth={4}
+										{...p}
+									/>
+								)}
 								checked={paymentsMonochrome}
 								setChecked={transition(setPaymentsMonochrome)}
 							/>
@@ -212,7 +205,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar2>
 			<SidebarHeader>
-				<Section name="Selection" icon={feather.Clipboard}>
+				<Section name="Selected" icon={feather.MousePointer}>
 					<SyntaxHighlighting
 						lang="html"
 						// prettier-ignore
@@ -230,7 +223,17 @@ function AppSidebar2() {
 			<SidebarContents>
 				<hr />
 				<SliderUndoSection
-					name="Icon size"
+					name="Preview color"
+					icon={feather.Image}
+					value={size}
+					formatValue={value => `${value.toFixed(0)} PX`}
+					handleUndo={resetSize}
+				>
+					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+				</SliderUndoSection>
+				<hr />
+				<SliderUndoSection
+					name="Preview size"
 					icon={feather.PenTool}
 					value={size}
 					formatValue={value => `${value.toFixed(0)} PX`}
@@ -240,7 +243,7 @@ function AppSidebar2() {
 				</SliderUndoSection>
 				<hr />
 				<SliderUndoSection
-					name="Icon stroke width"
+					name="Preview stroke width"
 					icon={feather.PenTool}
 					value={strokeWidth}
 					formatValue={value => value.toFixed(2)}

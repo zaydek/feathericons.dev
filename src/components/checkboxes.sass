@@ -27,11 +27,31 @@ button.checkbox
 
 ////////////////////////////////////////
 
-.checkbox-icon
+.checkbox-icon:not([data-type=checkbox])
   margin: 0 math.div($button-height - $icon-height, 2)
   height: $icon-height
   width: $icon-height
   color: $slate-800
+
+// Off
+.checkbox-icon[data-type=checkbox][data-checked=false]
+  margin: 0 math.div($button-height - 24px, 2)
+  height: 24px
+  width: 24px
+  background-color: $slate-300
+  background-image: revert
+  border-radius: 1e3px
+  box-shadow: revert
+
+// On
+.checkbox-icon[data-type=checkbox][data-checked=true]
+  margin: 0 math.div($button-height - 18px, 2)
+  height: 18px
+  width: 18px
+  background-color: revert
+  background-image: linear-gradient(to right, #f00, #fc0, #ff0, #0f0, #0cf, #00f, #80f)
+  border-radius: 1e3px
+  box-shadow: 0 0 0 2px white, 0 0 0 4px $brand-color
 
 .checkbox-name
   font: 425 16px / normal $sans
