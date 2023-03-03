@@ -11,20 +11,21 @@ export type Format =
 	| "png"
 
 // prettier-ignore
-const SelectedContext = createContext<{
-	format:         Format
-	setFormat:      (format: Format) => void
-  selected:       Map<string, true>
-  addSelected:    (...ids: string[]) => void
-  removeSelected: (...ids: string[]) => void
-} | null>(null)
+const SelectedContext =
+	createContext<{
+		format:         Format
+		setFormat:      (format: Format) => void
+		selection:      Map<string, true>
+		addToSelection: (...ids: string[]) => void
+		clearSelection: () => void
+	} | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
 	const [format, setFormat] = useState<Format>("svg")
-	const [selected, setSelected] = useState<Map<string, true>>(() => new Map())
+	const [selection, setSelection] = useState<Map<string, true>>(() => new Map())
 
-	const addSelected = useCallback((...ids: string[]) => {
-		setSelected(prev => {
+	const addToSelection = useCallback((...ids: string[]) => {
+		setSelection(prev => {
 			const next = new Map(prev)
 			for (const id of ids) {
 				next.set(id, true)
@@ -33,28 +34,18 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const removeSelected = useCallback((...ids: string[]) => {
-		setSelected(prev => {
-			const next = new Map(prev)
-			for (const id of ids) {
-				next.delete(id)
-			}
-			return next
-		})
+	const clearSelection = useCallback(() => {
+		setSelection(new Map())
 	}, [])
-
-	//// useEffect(() => {
-	//// 	// TODO
-	//// }, [])
 
 	return (
 		<SelectedContext.Provider
 			value={{
 				format,
 				setFormat,
-				selected,
-				addSelected,
-				removeSelected,
+				selection,
+				addToSelection,
+				clearSelection,
 			}}
 		>
 			{children}
