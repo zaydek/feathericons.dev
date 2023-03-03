@@ -18,25 +18,33 @@ import {
 	MemoGrid,
 	MonochromeCheckboxFolder,
 	NoNameSection,
+	Range,
 	Resource,
 	Resources,
 	SearchBar,
 	Section,
-	Section2Body,
-	Section2Footer,
-	Section2Header,
-	Section2HeaderBody,
-	Section2HeaderHeader,
-	Section2Spacer,
+	SelectFormat,
 	Sidebar1,
 	Sidebar2,
 	SidebarBody,
 	SidebarFooter,
 	SidebarHeader,
+	SyntaxHighlighting,
 	UndoSection,
 } from "@/components"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
-import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } from "@/state"
+import {
+	ClipboardContext,
+	ProgressBarContext,
+	RangeContext,
+	SearchContext,
+	SIZE_MAX,
+	SIZE_MIN,
+	SIZE_STEP,
+	STROKE_MAX,
+	STROKE_MIN,
+	STROKE_STEP,
+} from "@/state"
 import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
 import { Lang } from "shiki-es"
 
@@ -220,63 +228,50 @@ function AppSidebar2() {
 
 	return (
 		<Sidebar2>
-			<Section2Header>
-				<Section2HeaderHeader>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-				</Section2HeaderHeader>
-				<Section2HeaderBody>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-				</Section2HeaderBody>
-			</Section2Header>
-			<Section2Body>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-				<div>Hello</div>
-			</Section2Body>
-			<Section2Spacer />
-			<Section2Footer>
-				<Section name="Foo" icon={feather.Umbrella}>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-					<div>Hello</div>
-				</Section>
-			</Section2Footer>
+			<header className="section-2-header">
+				<section className="section-2-pane">
+					<header className="section-2-header-header">
+						<div className="section-2-icon"></div>
+						<h6 className="section-2-name u-flex-1">HELLO</h6>
+						<SelectFormat value={exportAs} setValue={setExportAs} />
+					</header>
+				</section>
+				<div className="section-2-header-body">
+					<SyntaxHighlighting lang={lang} code={clipboard} />
+				</div>
+			</header>
+			<div className="section-2-body">
+				<hr />
+				<section className="section-2-pane">
+					<header className="section-2-header-header">
+						<div className="section-2-icon"></div>
+						<h6 className="section-header-name u-flex-1">Idea</h6>
+						<span className="section-2-header-slider-desc">{size} PX</span>
+						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
+					</header>
+					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+				</section>
+				<hr />
+				<section className="section-2-pane">
+					<header className="section-2-header-header">
+						<div className="section-2-icon"></div>
+						<h6 className="section-header-name u-flex-1">Idea</h6>
+						<span className="section-2-header-slider-desc">{size} PX</span>
+						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
+					</header>
+					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
+				</section>
+				<hr />
+			</div>
+			<div className="section-2-spacer"></div>
+			<footer className="section-2-footer">
+				<hr />
+				<section className="section-2-pane">
+					<Section name="Foo" icon={feather.Umbrella}>
+						<div>Hello</div>
+					</Section>
+				</section>
+			</footer>
 		</Sidebar2>
 	)
 

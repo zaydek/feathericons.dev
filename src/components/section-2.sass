@@ -11,7 +11,7 @@
   z-index: 10
   display: flex
   flex-direction: column
-  background-color: whitesmoke
+  background-color: white
   overflow-y: auto
 
 .section-2-body
@@ -24,13 +24,69 @@
   position: sticky
   bottom: 0
   z-index: 20
-  background-color: whitesmoke
+  background-color: white
 
 ////////////////////////////////////////
 
 .section-2-header-header
-  background-color: gainsboro
+  display: flex
+  align-items: center
+  //// padding: $sidebar-padding-y $sidebar-padding-x
+  height: $tiny-icon-height
+  background-color: white
 
 .section-2-header-body
   flex: 1
   overflow-y: auto
+
+////////////////////////////////////////
+
+.section-2-pane
+  display: flex
+  flex-direction: column
+  gap: $sidebar-gap
+  padding: $sidebar-gap $sidebar-padding-x
+
+////////////////////////////////////////
+
+.section-2-icon
+  margin-right: math.div($button-height - $tiny-icon-height, 2)
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  //// color: $slate-600
+  background-color: gray
+  border-radius: 1e3px
+
+.section-2-name
+  font: 500 11px / normal $sans
+  font-feature-settings: 'tnum'
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-600
+
+.section-2-header-slider-desc
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  height: 24px
+  width: 56px
+  border-radius: 1e3px
+  box-shadow: $inset-hairline-shadow
+  font: 500 11px / normal $sans
+  font-feature-settings: 'tnum'
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-800
+  -webkit-user-select: all // Select all on click
+  user-select: all         // Select all on click
+
+.section-2-header-undo
+  margin-left: math.div($button-height - $tiny-icon-height, 2)
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $slate-300
+  cursor: pointer           // Interaction
+  -webkit-user-select: none // Interaction
+  user-select: none         // Interaction
+  &:is(:hover, :focus-visible)
+      color: $slate-800
