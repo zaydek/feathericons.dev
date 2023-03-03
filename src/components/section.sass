@@ -10,13 +10,13 @@
   top: 0
   z-index: 10 // Because of input[type=checkbox]
   background-color: white
-  &:has(+ .sidebar-contents[data-scroll=true])
+  &:has(+ .u-overflow-y-auto[data-scroll=true])
     box-shadow: $hairline-shadow-bottom
   .section:first-child
     padding-top: $sidebar-padding-y
 
-.sidebar-contents
-  overflow-y: auto // COMPAT/Windows
+//// .u-overflow-y-auto
+////   overflow-y: auto // COMPAT/Windows
 
 .sidebar-footer
   position: sticky

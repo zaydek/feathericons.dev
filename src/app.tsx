@@ -26,7 +26,7 @@ import {
 	SelectSection,
 	Sidebar1,
 	Sidebar2,
-	SidebarContents,
+	SidebarBody,
 	SidebarFooter,
 	SidebarHeader,
 	SliderUndoSection,
@@ -115,7 +115,7 @@ function AppSidebar1() {
 					<SearchBar />
 				</NoNameSection>
 			</SidebarHeader>
-			<SidebarContents>
+			<SidebarBody>
 				<UndoSection
 					name="Icons"
 					icon={feather.Package}
@@ -206,7 +206,7 @@ function AppSidebar1() {
 					{/* </div> */}
 				</UndoSection>
 				<hr />
-			</SidebarContents>
+			</SidebarBody>
 			<SidebarFooter>
 				<Section name="Resources" icon={feather.Globe}>
 					<Resources>
@@ -242,7 +242,7 @@ function AppSidebar2() {
 					<SyntaxHighlighting lang={lang} code={clipboard} />
 				</SelectSection>
 			</SidebarHeader>
-			<SidebarContents>
+			<SidebarBody>
 				{/* <hr />
 				<SliderUndoSection
 					name="Color"
@@ -274,7 +274,7 @@ function AppSidebar2() {
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</SliderUndoSection>
 				<hr />
-			</SidebarContents>
+			</SidebarBody>
 		</Sidebar2>
 	)
 }

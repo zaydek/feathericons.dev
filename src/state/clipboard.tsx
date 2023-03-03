@@ -5,10 +5,12 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEff
 // prettier-ignore
 export type ExportAs =
 	| "svg"
-	| "react"
-	| "ts-react"
-	| "react-native"
-	| "ts-react-native"
+	| "strict-jsx"
+	| "strict-tsx"
+	| "jsx"
+	| "tsx"
+	| "strict-jsx-rn"
+	| "strict-tsx-rn"
 //// | "jpg"
 //// | "png"
 
@@ -36,12 +38,12 @@ function getClipboardPlaceholder(exportAs: ExportAs) {
 					<line x1="17.5" x2="9" y1="15" y2="15"></line>
 				</svg>
 			`, { spaces: true })
-		case "react":
+		case "jsx":
 			return detab(`
 				// https://feathericons.dev/#!/feather?export-as=jsx
 				export function Feather(props) {
 					return (
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" {...props}>
 							<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
 							<line x1="16" x2="2" y1="8" y2="22"></line>
 							<line x1="17.5" x2="9" y1="15" y2="15"></line>
@@ -49,7 +51,7 @@ function getClipboardPlaceholder(exportAs: ExportAs) {
 					)
 				}
 			`, { spaces: true })
-		case "ts-react":
+		case "tsx":
 			return detab(`
 				// https://feathericons.dev/#!/feather?export-as=tsx
 				export function Feather(props: JSX.IntrinsicElements["svg"]) {
@@ -160,14 +162,14 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 					formatSvg(svg),
 					{ banner: `<!-- https://feathericons.dev/#!/${id} -->` },
 				)
-			} else if (exportAs === "react") {
+			} else if (exportAs === "jsx") {
 				// prettier-ignore
 				clipboard += transformJsx(
 					toTitleCase(id),
 					formatSvg(svg, { strictJsx: true }),
 					{ banner: `// https://feathericons.dev/#!/${id}?export-as=jsx` },
 				)
-			} else if (exportAs === "ts-react") {
+			} else if (exportAs === "tsx") {
 				// prettier-ignore
 				clipboard += transformTsx(
 					toTitleCase(id),

@@ -13,11 +13,11 @@ export function SidebarHeader({ children }: PropsWithChildren) {
 	return <header className="sidebar-header">{children}</header>
 }
 
-export function SidebarContents({ children }: PropsWithChildren) {
+export function SidebarBody({ children }: PropsWithChildren) {
 	const [scroll, setScroll] = useState(false)
 
 	return (
-		<div className="sidebar-contents" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
+		<div className="u-overflow-y-auto" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
 			{children}
 		</div>
 	)

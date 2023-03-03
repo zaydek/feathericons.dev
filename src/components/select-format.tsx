@@ -7,20 +7,24 @@ import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "./icon-config"
 
 const icons: Record<ExportAs, Icon> = {
 	svg: SvgIcon,
-	react: ReactjsIcon,
-	"ts-react": TypeScriptIcon,
-	"react-native": ReactjsIcon,
-	"ts-react-native": TypeScriptIcon,
+	"strict-jsx": ReactjsIcon,
+	"strict-tsx": TypeScriptIcon,
+	jsx: ReactjsIcon,
+	tsx: TypeScriptIcon,
+	"strict-jsx-rn": SvgIcon, // TODO
+	"strict-tsx-rn": SvgIcon, // TODO
 	//// jpg: feather.Image,
 	//// png: feather.Image,
 }
 
 const names: Record<ExportAs, string> = {
 	svg: "SVG",
-	react: "React.js",
-	"ts-react": "React.js (TypeScript)",
-	"react-native": "React Native",
-	"ts-react-native": "React Native (TypeScript)",
+	"strict-jsx": "JSX",
+	"strict-tsx": "TypeScript JSX",
+	jsx: "JSX",
+	tsx: "TypeScript JSX",
+	"strict-jsx-rn": "React Native",
+	"strict-tsx-rn": "React Native (TypeScript)",
 	//// jpg: "JPG",
 	//// png: "PNG",
 }
@@ -32,14 +36,25 @@ export function SelectFormat({ value, setValue }: { value: ExportAs; setValue: D
 	return (
 		<label className="select-format">
 			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAs)}>
-				<optgroup label="Web">
+				<optgroup label="HTML, Vue, Svelte">
 					<option value="svg">SVG</option>
-					<option value="react">React</option>
-					<option value="ts-react">React (TypeScript)</option>
+				</optgroup>
+				<optgroup label="CSS">
+					<option value="css">CSS</option>
+					<option value="scss">Sass (SCSS)</option>
+					{/* <option value="sass">Sass</option> */}
+				</optgroup>
+				<optgroup label="Solid.js">
+					<option value="jsx">JSX</option>
+					<option value="tsx">JSX (TypeScript)</option>
+				</optgroup>
+				<optgroup label="React.js, Qwik">
+					<option value="strict-jsx">React.js</option>
+					<option value="strict-tsx">React.js (TypeScript)</option>
 				</optgroup>
 				<optgroup label="React Native">
-					<option value="react-native">React Native</option>
-					<option value="ts-react-native">React Native (TypeScript)</option>
+					<option value="strict-jsx-rn">React Native</option>
+					<option value="strict-tsx-rn">React Native (TypeScript)</option>
 				</optgroup>
 				{/* <optgroup label="Image">
 					<option value="jpg">JPG</option>
