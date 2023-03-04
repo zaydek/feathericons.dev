@@ -1,3 +1,4 @@
+import { useParam } from "@/hooks"
 import { detab, toTitleCase } from "@/lib"
 import {
 	formatSvg,
@@ -132,9 +133,31 @@ function getClipboardPlaceholder(exportAs: ExportAs) {
 }
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
-	// TODO: Change to useParam
-	const [exportAs, setExportAs] = useState<ExportAs>("svg")
+	//// // TODO: Change to useParam
+	//// const [exportAs, setExportAs] = useState<ExportAs>("svg")
+	//// const [selected, setSelected] = useState<Map<string, true>>(() => new Map())
+
+	const [exportAs, setExportAs] = useParam<ExportAs>({
+		key: "export-as",
+		initialValue: "svg",
+		parser: value => {
+			switch (value) {
+				case "svg":
+				case "jsx":
+				case "tsx":
+				case "strict-jsx":
+				case "strict-tsx":
+					return value
+			}
+			return "svg"
+		},
+	})
 	const [selected, setSelected] = useState<Map<string, true>>(() => new Map())
+
+	//// const [selected, setSelected] = useParam({
+	////   key: "selected",
+	////   initialValue: new Map<string, true>()
+	//// })
 
 	const [clipboard, setClipboard] = useState(() => getClipboardPlaceholder(exportAs))
 

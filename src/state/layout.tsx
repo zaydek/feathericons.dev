@@ -21,6 +21,8 @@ export function LayoutProvider({ children }: PropsWithChildren) {
 				return "normal"
 			}
 		},
+		//// // TODO: Don't persist state when sidebar=maximized
+		//// serializer,
 	})
 
 	return (

@@ -39,7 +39,9 @@ function useCancelableShortcut({
 	useEffect(() => {
 		if (sidebar !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
-			setSidebar("normal")
+			if (e.key === "Escape") {
+				setSidebar("normal")
+			}
 		}
 		document.addEventListener("keydown", handleKeyDown, false)
 		return () => document.removeEventListener("keydown", handleKeyDown, false)

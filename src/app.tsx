@@ -256,7 +256,7 @@ function AppSidebar2() {
 					<header className="section-2-header-header">
 						<feather.PenTool className="section-2-icon" />
 						<h6 className="section-header-name u-flex-1">Size</h6>
-						<span className="section-2-header-slider-desc">{size} PX</span>
+						<span className="section-2-header-slider-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
 					</header>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
@@ -266,7 +266,7 @@ function AppSidebar2() {
 					<header className="section-2-header-header">
 						<feather.PenTool className="section-2-icon" />
 						<h6 className="section-header-name u-flex-1">Stroke width</h6>
-						<span className="section-2-header-slider-desc">{size} PX</span>
+						<span className="section-2-header-slider-desc">{strokeWidth.toFixed(3)}</span>
 						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
 					</header>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
