@@ -1,13 +1,6 @@
 import { useParam } from "@/hooks"
 import { detab, toTitleCase } from "@/lib"
-import {
-	formatSvg,
-	transformReactjsJsx,
-	transformReactjsTsx,
-	transformSolidjsJsx,
-	transformSolidjsTsx,
-	transformSvg,
-} from "@scripts/utils"
+import { formatSvg, transformReactjsJsx, transformReactjsTsx, transformSvg } from "@scripts/utils"
 import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useState } from "react"
 
 // prettier-ignore
@@ -124,14 +117,15 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				)
 			} else if (exportAs === "jsx") {
 				// prettier-ignore
-				clipboard += transformSolidjsJsx(
+				clipboard += transformReactjsJsx(
 					toTitleCase(id),
 					formatSvg(svg, { strictJsx: !!0 }),
 					{ banner: `// https://feathericons.dev/#!/${id}?export-as=jsx` },
 				)
 			} else if (exportAs === "tsx") {
+				if (clipboard === "") clipboard += 'import { JSX } from "solid-js";\n\n'
 				// prettier-ignore
-				clipboard += transformSolidjsTsx(
+				clipboard += transformReactjsTsx(
 					toTitleCase(id),
 					formatSvg(svg, { strictJsx: !!0 }),
 					{ banner: `// https://feathericons.dev/#!/${id}?export-as=tsx` },
