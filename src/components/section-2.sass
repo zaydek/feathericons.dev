@@ -39,7 +39,10 @@
 .section-2-header-body
   flex: 1
   overflow-y: auto
-  padding-bottom: $sidebar-gap
+  // Add .padding-bottom for .syntax-highlighter
+  // FUTURE: Change to &:has(> .syntax-highlighter)
+  &.is-padding-bottom
+    padding-bottom: $sidebar-gap
 
 ////////////////////////////////////////
 
@@ -53,9 +56,9 @@
     &:has(+ [data-scroll=true])
       box-shadow: $hairline-shadow-bottom
   &.is-end
-    padding-bottom: $sidebar-padding-y
+    padding: $sidebar-padding-y $sidebar-padding-x
 
-.section-2 > *
+.section-2 > :not(.checkboxes, .resources)
   margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 ////////////////////////////////////////
