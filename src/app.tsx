@@ -12,11 +12,11 @@ import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Checkbox,
+	CheckboxAsButton,
 	Checkboxes,
 	DebugCssEffect,
 	Grid,
 	Main,
-	MonochromeCheckboxFolder,
 	Radio,
 	Range,
 	Resource,
@@ -71,10 +71,10 @@ function AppSidebar1() {
 		setBrandsRadioValue,
 		paymentsRadioValue,
 		setPaymentsRadioValue,
-		displayNames,
-		setDisplayNames,
-		displayMonochrome,
-		setDisplayMonochrome,
+		monochromeMode,
+		setMonochromeMode,
+		compactMode,
+		setCompactMode,
 		resetIcons,
 		resetDisplay,
 	} = useContext(SearchContext)!
@@ -118,7 +118,7 @@ function AppSidebar1() {
 								/>
 							</Checkboxes>
 							<Checkboxes>
-								<MonochromeCheckboxFolder
+								<CheckboxAsButton
 									name="Social"
 									icon={p => (
 										<feather.Folder
@@ -128,13 +128,13 @@ function AppSidebar1() {
 											{...p}
 										/>
 									)}
-									checked={displayMonochrome}
-									setChecked={createTransition(setDisplayMonochrome)}
+									//// checked={monochromeMode}
+									//// setChecked={createTransition(setDisplayMonochrome)}
 								/>
 								<Checkboxes>
 									<Radio<BrandsRadioValue>
 										name="Original"
-										icon={displayMonochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
+										icon={monochromeMode ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
 										radioName="brands"
 										value="normal"
 										setValue={createTransition(setBrandsRadioValue)}
@@ -142,7 +142,7 @@ function AppSidebar1() {
 									/>
 									<Radio<BrandsRadioValue>
 										name="Circle"
-										icon={displayMonochrome ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
+										icon={monochromeMode ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
 										radioName="brands"
 										value="circle"
 										setValue={createTransition(setBrandsRadioValue)}
@@ -150,7 +150,7 @@ function AppSidebar1() {
 									/>
 									<Radio<BrandsRadioValue>
 										name="Square"
-										icon={displayMonochrome ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
+										icon={monochromeMode ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
 										radioName="brands"
 										value="square"
 										setValue={createTransition(setBrandsRadioValue)}
@@ -159,7 +159,7 @@ function AppSidebar1() {
 								</Checkboxes>
 							</Checkboxes>
 							<Checkboxes>
-								<MonochromeCheckboxFolder
+								<CheckboxAsButton
 									name="Payments"
 									icon={p => (
 										<feather.Folder
@@ -169,13 +169,13 @@ function AppSidebar1() {
 											{...p}
 										/>
 									)}
-									checked={displayMonochrome}
-									setChecked={createTransition(setDisplayMonochrome)}
+									//// checked={displayMonochrome}
+									//// setChecked={createTransition(setDisplayMonochrome)}
 								/>
 								<Checkboxes>
 									<Radio<PaymentsRadioValue>
 										name="Original"
-										icon={displayMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+										icon={monochromeMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
 										radioName="payments"
 										value="normal"
 										setValue={createTransition(setPaymentsRadioValue)}
@@ -183,7 +183,7 @@ function AppSidebar1() {
 									/>
 									<Radio<PaymentsRadioValue>
 										name="Filled"
-										icon={displayMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+										icon={monochromeMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
 										radioName="payments"
 										value="filled"
 										setValue={createTransition(setPaymentsRadioValue)}
@@ -205,16 +205,7 @@ function AppSidebar1() {
 					</header>
 					<Checkboxes>
 						<Checkbox
-							name="Display names"
-							//// icon={displayNames ? feather.ToggleRight : feather.ToggleLeft}
-							//// icon={displayNames ? feather.Eye : feather.EyeOff}
-							icon={feather.Edit3}
-							checked={displayNames}
-							setChecked={setDisplayNames}
-						/>
-						{/* <Checkbox
-							name="Display monochrome"
-							//// icon={feather.Droplet}
+							name="Monochrome mode"
 							icon={p => (
 								<feather.Droplet
 									style={{ transform: "scale(0.875)", opacity: 0.75 }}
@@ -223,9 +214,22 @@ function AppSidebar1() {
 									{...p}
 								/>
 							)}
-							checked={displayMonochrome}
-							setChecked={setDisplayMonochrome}
-						/> */}
+							checked={monochromeMode}
+							setChecked={setMonochromeMode}
+						/>
+						<Checkbox
+							name="Compact mode"
+							icon={p => (
+								<feather.Minimize2
+									style={{ transform: "scale(0.875)", opacity: 0.75 }}
+									fill="currentColor"
+									strokeWidth={4}
+									{...p}
+								/>
+							)}
+							checked={compactMode}
+							setChecked={setCompactMode}
+						/>
 					</Checkboxes>
 				</section>
 				<hr className="hr" />

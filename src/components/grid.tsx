@@ -43,7 +43,7 @@ export function GridItem({
 	//// bookmark?: boolean
 }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
-	const { displayNames } = useContext(SearchContext)!
+	const { compactMode: displayNames } = useContext(SearchContext)!
 	const { selected, addToSelected, clearSelected } = useContext(ClipboardContext)!
 
 	const id = toNameCase(name)

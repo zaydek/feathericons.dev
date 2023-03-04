@@ -7,30 +7,31 @@ export function Checkboxes({ children }: PropsWithChildren) {
 	return <div className="checkboxes">{children}</div>
 }
 
-export function MonochromeCheckboxFolder({
+export function CheckboxAsButton({
 	name,
 	icon: Icon,
-	checked,
-	setChecked,
-}: {
+}: //// handleClick,
+{
 	name: string
 	icon?: Icon
-	checked: boolean
-	setChecked: Dispatch<SetStateAction<boolean>>
+	//// handleClick: React.MouseEventHandler<HTMLLabelElement>
 }) {
 	return (
+		// TODO: Change to button?
 		<label
 			className="checkbox"
 			onClick={e => {
 				e.preventDefault()
 				e.stopPropagation()
-				setChecked(curr => !curr)
+				//// setChecked(curr => !curr)
+				//// handleClick(e)
 			}}
 			onKeyDown={e => {
 				if (e.key === "Enter" || e.key === " ") {
 					e.preventDefault()
 					e.stopPropagation()
-					setChecked(curr => !curr)
+					//// setChecked(curr => !curr)
+					//// e.currentTarget.click()
 				}
 			}}
 			tabIndex={0}
@@ -41,10 +42,11 @@ export function MonochromeCheckboxFolder({
 			<span
 				// prettier-ignore
 				className="checkbox-icon"
-				data-type="checkbox"
-				data-checked={checked}
-				tabIndex={-1}
+				//// data-type="checkbox"
+				//// data-checked={checked}
+				//// tabIndex={-1}
 			/>
+			{/* <input type="checkbox" /> */}
 		</label>
 	)
 }

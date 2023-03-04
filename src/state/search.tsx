@@ -26,8 +26,8 @@ export type PaymentsRadioValue =
 const FEATHER_DEFAULT              = !!1 // prettier-ignore
 const BRANDS_RADIO_VALUE_DEFAULT   = "normal" // prettier-ignore
 const PAYMENTS_RADIO_VALUE_DEFAULT = "filled" // prettier-ignore
-const DISPLAY_NAMES_DEFAULT        = !!1 // prettier-ignore
-const DISPLAY_MONOCHROME_DEFAULT   = !!0 // prettier-ignore
+const MONOCHROME_MODE_DEFAULT      = !!0 // prettier-ignore
+const COMPACT_MODE_DEFAULT         = !!0 // prettier-ignore
 
 // prettier-ignore
 export const SearchContext =
@@ -40,10 +40,10 @@ export const SearchContext =
 		setBrandsRadioValue:   Dispatch<SetStateAction<BrandsRadioValue>>
 		paymentsRadioValue:    PaymentsRadioValue
 		setPaymentsRadioValue: Dispatch<SetStateAction<PaymentsRadioValue>>
-		displayNames:          boolean
-		setDisplayNames:       Dispatch<SetStateAction<boolean>>
-		displayMonochrome:     boolean
-		setDisplayMonochrome:  Dispatch<SetStateAction<boolean>>
+		monochromeMode:        boolean
+		setMonochromeMode:     Dispatch<SetStateAction<boolean>>
+		compactMode:           boolean
+		setCompactMode:        Dispatch<SetStateAction<boolean>>
 		resetIcons:            () => void
 		resetDisplay:          () => void
 		results:               (readonly [string[], LazyExoticComponent<any>])[]
@@ -93,13 +93,13 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			return PAYMENTS_RADIO_VALUE_DEFAULT
 		},
 	})
-	const [displayNames, setDisplayNames] = useParamBoolean({
-		key: "display-names",
-		initialValue: DISPLAY_NAMES_DEFAULT,
+	const [monochromeMode, setMonochromeMode] = useParamBoolean({
+		key: "monochrome-mode",
+		initialValue: MONOCHROME_MODE_DEFAULT,
 	})
-	const [displayMonochrome, setDisplayMonochrome] = useParamBoolean({
-		key: "display-monochrome",
-		initialValue: DISPLAY_MONOCHROME_DEFAULT,
+	const [compactMode, setCompactMode] = useParamBoolean({
+		key: "compact-mode",
+		initialValue: COMPACT_MODE_DEFAULT,
 	})
 
 	const resetIcons = useCallback(() => {
@@ -109,14 +109,14 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	}, [setBrandsRadioValue, setPaymentsRadioValue, setShowFeather])
 
 	const resetDisplay = useCallback(() => {
-		setDisplayNames(DISPLAY_NAMES_DEFAULT)
-		setDisplayMonochrome(DISPLAY_MONOCHROME_DEFAULT)
-	}, [setDisplayMonochrome, setDisplayNames])
+		setMonochromeMode(MONOCHROME_MODE_DEFAULT)
+		setCompactMode(COMPACT_MODE_DEFAULT)
+	}, [setCompactMode, setMonochromeMode])
 
 	const results = useMemo(() => {
 		const results: (readonly [string[], LazyExoticComponent<any>])[] = []
 		if (showFeather) results.push(cache.get("feather"))
-		if (displayMonochrome) {
+		if (monochromeMode) {
 			const rv = brandsRadioValue
 			if (rv === "normal") results.push(cache.get("wolfkit-brands-mono"))
 			if (rv === "circle") results.push(cache.get("wolfkit-brands-mono-circle"))
@@ -125,7 +125,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			if (rv === "circle") results.push(cache.get("wolfkit-brands-original-circle"))
 			if (rv === "square") results.push(cache.get("wolfkit-brands-original-square"))
 		}
-		if (displayMonochrome) {
+		if (monochromeMode) {
 			const rv = paymentsRadioValue
 			if (rv === "normal") results.push(cache.get("wolfkit-payments-mono"))
 			if (rv === "filled") results.push(cache.get("wolfkit-payments-mono-filled"))
@@ -133,7 +133,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			if (rv === "filled") results.push(cache.get("wolfkit-payments-original-filled"))
 		}
 		return results
-	}, [displayMonochrome, brandsRadioValue, paymentsRadioValue, showFeather])
+	}, [monochromeMode, brandsRadioValue, paymentsRadioValue, showFeather])
 
 	return (
 		<SearchContext.Provider
@@ -146,10 +146,10 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setBrandsRadioValue,
 				paymentsRadioValue,
 				setPaymentsRadioValue,
-				displayNames,
-				setDisplayNames,
-				displayMonochrome,
-				setDisplayMonochrome,
+				monochromeMode,
+				setMonochromeMode,
+				compactMode,
+				setCompactMode,
 				resetIcons,
 				resetDisplay,
 				results,
