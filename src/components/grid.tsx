@@ -29,6 +29,7 @@ export const MemoGrid = memo(function Grid({
 })
 
 // TODO: Add caching? Or use text-transform?
+// TODO
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
@@ -65,16 +66,12 @@ export function GridItem({
 			//// }}
 			onClick={e => {
 				if (e.metaKey) {
-					if (sidebar === "minimized") {
-						setSidebar("normal")
-					}
+					if (sidebar === "minimized") setSidebar("open")
 					e.stopPropagation()
 					e.preventDefault()
 					addToSelected(id)
 				} else {
-					if (sidebar === "minimized") {
-						setSidebar("normal")
-					}
+					if (sidebar === "minimized") setSidebar("open")
 					e.stopPropagation()
 					e.preventDefault()
 					clearSelected()

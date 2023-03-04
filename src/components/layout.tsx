@@ -40,7 +40,7 @@ function useCancelableShortcut({
 		if (sidebar !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
-				setSidebar("normal")
+				setSidebar("open")
 			}
 		}
 		document.addEventListener("keydown", handleKeyDown, false)
@@ -54,10 +54,13 @@ function useToggleShortcut({ setSidebar }: { setSidebar: Dispatch<SetStateAction
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() && e.metaKey && e.key === "\\") || (!isMac() && e.ctrlKey && e.key === "\\")) {
 				setSidebar(curr => {
-					if (curr === "normal" || curr === "maximized") {
-						return "minimized"
-					} else {
-						return "normal"
+					switch (curr) {
+						case "minimized":
+							return "open"
+						case "open":
+							return "maximized"
+						case "maximized":
+							return "minimized"
 					}
 				})
 			}
@@ -82,15 +85,18 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 
 	// DEBUG
-	const DEBUG_cycleState = useCallback(() => {
-		if (sidebar === "normal") {
-			setSidebar("maximized")
-		} else if (sidebar === "maximized") {
-			setSidebar("minimized")
-		} else {
-			setSidebar("normal")
-		}
-	}, [setSidebar, sidebar])
+	const DEBUG_cycleSidebar = useCallback(() => {
+		setSidebar(curr => {
+			switch (curr) {
+				case "minimized":
+					return "open"
+				case "open":
+					return "maximized"
+				case "maximized":
+					return "minimized"
+			}
+		})
+	}, [setSidebar])
 
 	// TODO: Move to provider?
 	useBodyScrollLocking({ sidebar })
@@ -99,7 +105,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 
 	return (
 		<aside className={cx("sidebar", sidebar && `is-${sidebar}`)}>
-			<div className="drag-area" onClick={DEBUG_cycleState}>
+			<div className="drag-area" onClick={DEBUG_cycleSidebar}>
 				<div className="handle"></div>
 			</div>
 			<div className="contents">{children}</div>
@@ -112,7 +118,7 @@ function SidebarOverlayImpl() {
 
 	const handleClickClose = useCallback(() => {
 		if (sidebar === "maximized") {
-			setSidebar("normal")
+			setSidebar("open")
 		}
 	}, [setSidebar, sidebar])
 
