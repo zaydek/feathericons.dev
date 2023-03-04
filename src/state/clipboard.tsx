@@ -55,7 +55,7 @@ function getClipboardPlaceholder(exportAs: ExportAs) {
 							<line x1="16" x2="2" y1="8" y2="22" />
 							<line x1="17.5" x2="9" y1="15" y2="15" />
 						</svg>
-					)
+					);
 				}
 			`, { spaces: true })
 		case "tsx":
@@ -70,7 +70,7 @@ function getClipboardPlaceholder(exportAs: ExportAs) {
 							<line x1="16" x2="2" y1="8" y2="22" />
 							<line x1="17.5" x2="9" y1="15" y2="15" />
 						</svg>
-					)
+					);
 				}
 			`, { spaces: true })
 		case "strict-jsx":
@@ -83,7 +83,7 @@ function getClipboardPlaceholder(exportAs: ExportAs) {
 							<line x1="16" x2="2" y1="8" y2="22" />
 							<line x1="17.5" x2="9" y1="15" y2="15" />
 						</svg>
-					)
+					);
 				}
 			`, { spaces: true })
 		case "strict-tsx":
@@ -96,7 +96,7 @@ function getClipboardPlaceholder(exportAs: ExportAs) {
 							<line x1="16" x2="2" y1="8" y2="22" />
 							<line x1="17.5" x2="9" y1="15" y2="15" />
 						</svg>
-					)
+					);
 				}
 			`, { spaces: true })
 		//// case "strict-jsx-rn":
