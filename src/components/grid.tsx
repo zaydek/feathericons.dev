@@ -9,17 +9,8 @@ export const MemoGrid = memo(function Grid({
 }: {
 	results: (readonly [string[], React.LazyExoticComponent<any>])[]
 }) {
-	const { clearSelected } = useContext(ClipboardContext)!
-
 	return (
-		<ul
-			className="grid"
-			onClick={e => {
-				e.stopPropagation()
-				e.preventDefault()
-				clearSelected()
-			}}
-		>
+		<ul className="grid">
 			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map(name => (

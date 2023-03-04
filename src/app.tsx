@@ -23,7 +23,7 @@ import {
 	Resources,
 	SearchBar,
 	Section,
-	SelectFormat,
+	SelectExportAs,
 	Sidebar1,
 	Sidebar2,
 	SidebarBody,
@@ -236,7 +236,7 @@ function AppSidebar2() {
 					<header className="section-2-header-header">
 						<feather.MousePointer className="section-2-icon" />
 						<h6 className="section-2-name u-flex-1">Selected</h6>
-						<SelectFormat value={exportAs} setValue={setExportAs} />
+						<SelectExportAs value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
 				<div className="section-2-header-body" {...scrollProps}>

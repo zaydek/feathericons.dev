@@ -9,7 +9,7 @@ import SVGO from "svgo"
 
 import { detab, sleep, toTitleCase } from "@/lib"
 import { formatSvg } from "./utils/format-svg"
-import { transformSvg, transformTsx } from "./utils/transform-svg"
+import { transformReactjsTsx, transformSvg } from "./utils/transform-svg"
 
 const EOF = "\n"
 
@@ -92,7 +92,11 @@ function formatIcons(icons: Record<string, string>, { strictJsx }: { strictJsx: 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
+async function exportSvgAndZip(
+	icons: Record<string, string>,
+	outdir: string,
+	{ banner }: { banner: (name: string) => string },
+) {
 	await fs.mkdir(outdir, { recursive: true })
 	const zip = new JSZip()
 	for (const [name, icon] of Object.entries(icons)) {
@@ -104,10 +108,14 @@ async function exportSvgAndZip(icons: Record<string, string>, outdir: string, { 
 	await fs.writeFile(path.join(`${outdir}.zip`), buffer)
 }
 
-async function exportTsx(icons: Record<string, string>, outdir: string, { banner }: { banner: (name: string) => string }) {
+async function exportTsx(
+	icons: Record<string, string>,
+	outdir: string,
+	{ banner }: { banner: (name: string) => string },
+) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, icon] of Object.entries(icons)) {
-		const icon2 = transformTsx(toTitleCase(name), icon, { banner: banner(name) })
+		const icon2 = transformReactjsTsx(toTitleCase(name), icon, { banner: banner(name) })
 		await fs.writeFile(path.join(outdir, `${toTitleCase(name)}.tsx`), icon2 + EOF)
 	}
 	// prettier-ignore
@@ -176,7 +184,10 @@ async function exportAllWolfKitBrands() {
 		await exportSvgAndZip(svgIcons, `icons/wolfkit/production/brands/${target}/svg`, { banner: wolfKitSvgBanner })
 		await exportTsx(tsxIcons, `icons/wolfkit/production/brands/${target}/tsx`, { banner: wolfKitTsxBanner })
 		const names = Object.keys(svgIcons).map(name => toTitleCase(name))
-		await fs.writeFile(`icons/wolfkit/production/brands/${target}/manifest.json`, JSON.stringify(names, null, "  ") + EOF)
+		await fs.writeFile(
+			`icons/wolfkit/production/brands/${target}/manifest.json`,
+			JSON.stringify(names, null, "  ") + EOF,
+		)
 		// Binary assets
 		await exportZip(`icons/wolfkit/figma/brands/${target}/jpg@1x`, `icons/wolfkit/production/brands/${target}/jpg@1x`)
 		await exportZip(`icons/wolfkit/figma/brands/${target}/jpg@2x`, `icons/wolfkit/production/brands/${target}/jpg@2x`)
@@ -204,12 +215,27 @@ async function exportAllWolfKitPayments() {
 		await exportSvgAndZip(svgIcons, `icons/wolfkit/production/payments/${target}/svg`, { banner: wolfKitSvgBanner })
 		await exportTsx(tsxIcons, `icons/wolfkit/production/payments/${target}/tsx`, { banner: wolfKitTsxBanner })
 		const names = Object.keys(svgIcons).map(name => toTitleCase(name))
-		await fs.writeFile(`icons/wolfkit/production/payments/${target}/manifest.json`, JSON.stringify(names, null, "  ") + EOF)
+		await fs.writeFile(
+			`icons/wolfkit/production/payments/${target}/manifest.json`,
+			JSON.stringify(names, null, "  ") + EOF,
+		)
 		// Binary assets
-		await exportZip(`icons/wolfkit/figma/payments/${target}/jpg@1x`, `icons/wolfkit/production/payments/${target}/jpg@1x`)
-		await exportZip(`icons/wolfkit/figma/payments/${target}/jpg@2x`, `icons/wolfkit/production/payments/${target}/jpg@2x`)
-		await exportZip(`icons/wolfkit/figma/payments/${target}/png@1x`, `icons/wolfkit/production/payments/${target}/png@1x`)
-		await exportZip(`icons/wolfkit/figma/payments/${target}/png@2x`, `icons/wolfkit/production/payments/${target}/png@2x`)
+		await exportZip(
+			`icons/wolfkit/figma/payments/${target}/jpg@1x`,
+			`icons/wolfkit/production/payments/${target}/jpg@1x`,
+		)
+		await exportZip(
+			`icons/wolfkit/figma/payments/${target}/jpg@2x`,
+			`icons/wolfkit/production/payments/${target}/jpg@2x`,
+		)
+		await exportZip(
+			`icons/wolfkit/figma/payments/${target}/png@1x`,
+			`icons/wolfkit/production/payments/${target}/png@1x`,
+		)
+		await exportZip(
+			`icons/wolfkit/figma/payments/${target}/png@2x`,
+			`icons/wolfkit/production/payments/${target}/png@2x`,
+		)
 	}
 }
 

@@ -6,7 +6,7 @@ import { useScrollProps } from "@/hooks"
 import { Icon } from "@/lib"
 import { ExportAs } from "@/state"
 import { Dispatch, PropsWithChildren, SetStateAction } from "react"
-import { SelectFormat } from "./select-format"
+import { SelectExportAs } from "./select-export-as"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -81,7 +81,7 @@ export function SelectSection<T>({
 			<header className="section-header">
 				<Icon className="section-header-icon" />
 				<h6 className="section-header-name u-flex-1">{name}</h6>
-				<SelectFormat
+				<SelectExportAs
 					// Type 'T' is not assignable to type 'ExportAs'.
 					//   Type 'string' is not assignable to type 'ExportAs'. ts(2322)
 					//

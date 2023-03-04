@@ -1,7 +1,7 @@
 import "./layout.sass"
 
 import { cx, isMac } from "@/lib"
-import { LayoutContext, SidebarState } from "@/state"
+import { ClipboardContext, LayoutContext, SidebarState } from "@/state"
 import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	)
 }
 
-function InternalSidebarOverlay() {
+function SidebarOverlayImpl() {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 
 	const handleClickClose = useCallback(() => {
@@ -117,12 +117,21 @@ function InternalSidebarOverlay() {
 	return <div className="sidebar-overlay" onClick={handleClickClose}></div>
 }
 
-function InternalMain({ children }: PropsWithChildren) {
+function MainImpl({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
+	const { clearSelected } = useContext(ClipboardContext)!
 
 	return (
-		// @ts-expect-error
-		<main className="main" inert={sidebar === "maximized" ? "true" : null}>
+		<main
+			className="main"
+			onClick={e => {
+				e.stopPropagation()
+				e.preventDefault()
+				clearSelected()
+			}}
+			// @ts-expect-error
+			inert={sidebar === "maximized" ? "true" : null}
+		>
 			{children}
 		</main>
 	)
@@ -131,8 +140,8 @@ function InternalMain({ children }: PropsWithChildren) {
 export function Main({ children }: PropsWithChildren) {
 	return (
 		<>
-			<InternalSidebarOverlay />
-			<InternalMain>{children}</InternalMain>
+			<SidebarOverlayImpl />
+			<MainImpl>{children}</MainImpl>
 		</>
 	)
 }
