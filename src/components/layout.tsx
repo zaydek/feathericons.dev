@@ -1,7 +1,7 @@
 import "./layout.sass"
 
 import { cx, isMac } from "@/lib"
-import { LayoutContext, SidebarState } from "@/state"
+import { ClipboardContext, LayoutContext, SidebarState } from "@/state"
 import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,6 @@ export function Sidebar1({ children }: PropsWithChildren) {
 	)
 }
 
-// TODO: Add e.preventDefault() and e.stopPropagation() to click handler?
 export function Sidebar2({ children }: PropsWithChildren) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 
@@ -109,7 +108,6 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	)
 }
 
-// TODO: Add e.preventDefault() and e.stopPropagation() to click handler?
 function _SidebarOverlay() {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const handleClickClose = useCallback(() => {
@@ -120,11 +118,31 @@ function _SidebarOverlay() {
 	return <div className="sidebar-overlay" onClick={handleClickClose}></div>
 }
 
+//// function _Main({ children }: PropsWithChildren) {
+//// 	const { sidebar } = useContext(LayoutContext)!
+//// 	return (
+//// 		// @ts-expect-error
+//// 		<main className="main" inert={sidebar === "maximized" ? "true" : null}>
+//// 			{children}
+//// 		</main>
+//// 	)
+//// }
+
 function _Main({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
+	const { clearSelected } = useContext(ClipboardContext)!
+
 	return (
-		// @ts-expect-error
-		<main className="main" inert={sidebar === "maximized" ? "true" : null}>
+		<main
+			className="main"
+			onClick={e => {
+				e.stopPropagation()
+				e.preventDefault()
+				clearSelected()
+			}}
+			// @ts-expect-error
+			inert={sidebar === "maximized" ? "true" : null}
+		>
 			{children}
 		</main>
 	)

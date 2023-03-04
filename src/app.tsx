@@ -279,6 +279,19 @@ function AppSidebar2() {
 	)
 }
 
+function useClearSelectedShortcut({ clearSelected }: { clearSelected: () => void }) {
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				clearSelected()
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [clearSelected])
+	return void 0
+}
+
 function AppMain() {
 	const { results } = useContext(SearchContext)!
 	const { clearSelected } = useContext(ClipboardContext)!
@@ -291,13 +304,16 @@ function AppMain() {
 		inactive: "Feather",
 	})
 
-	useEffect(() => {
-		function handleClick() {
-			clearSelected()
-		}
-		window.addEventListener("click", handleClick, false)
-		return () => window.removeEventListener("click", handleClick, false)
-	}, [clearSelected])
+	useClearSelectedShortcut({ clearSelected })
+
+	//// useEffect(() => {
+	//// 	function handleClick(e: MouseEvent) {
+	//// 		//// clearSelected()
+	//// 		console.log(e.target)
+	//// 	}
+	//// 	window.addEventListener("click", handleClick, false)
+	//// 	return () => window.removeEventListener("click", handleClick, false)
+	//// }, [clearSelected])
 
 	return (
 		<Main>

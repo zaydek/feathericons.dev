@@ -38,7 +38,7 @@ export function MonochromeCheckboxFolder({
 			<Icon className="checkbox-icon" />
 			<span className="checkbox-name">{name}</span>
 			{/* This is supposed to be checkbox... */}
-			<span className="checkbox-icon" data-type="checkbox" data-checked={checked} />
+			<span className="checkbox-icon" data-type="checkbox" data-checked={checked} tabIndex={-1} />
 		</label>
 	)
 }
@@ -57,11 +57,11 @@ export function Checkbox({
 	return (
 		<label
 			className="checkbox"
-			onClick={e => {
-				e.preventDefault()
-				e.stopPropagation()
-				setChecked(curr => !curr)
-			}}
+			//// onClick={e => {
+			//// 	e.preventDefault()
+			//// 	e.stopPropagation()
+			//// 	setChecked(curr => !curr)
+			//// }}
 			onKeyDown={e => {
 				if (e.key === "Enter" || e.key === " ") {
 					e.preventDefault()

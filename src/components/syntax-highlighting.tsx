@@ -52,13 +52,7 @@ export function SyntaxHighlighting({ lang, code }: { lang: string; code: string 
 	}, [code, highlighter, lang])
 
 	return (
-		<pre
-			className="syntax-highlighting"
-			onClick={e => {
-				e.preventDefault()
-				e.stopPropagation()
-			}}
-		>
+		<pre className="syntax-highlighting">
 			<code className="syntax-highlighting-code">
 				{tokens === null ? (
 					"TODO"
