@@ -40,8 +40,7 @@ export const SearchContext =
 		setShowPaymentsOriginal:       Dispatch<SetStateAction<boolean>>
 		showPaymentsOriginalFilled:    boolean
 		setShowPaymentsOriginalFilled: Dispatch<SetStateAction<boolean>>
-		resetFeather:                  () => void
-		resetWolfKit:                  () => void
+		resetAll:                      () => void
 		results:                       (readonly [string[], LazyExoticComponent<any>])[]
 	} | null>(null)
 
@@ -113,11 +112,8 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		serializer,
 	})
 
-	const resetFeather = useCallback(() => {
+	const resetAll = useCallback(() => {
 		setShowFeather(FEATHER_DEFAULT)
-	}, [setShowFeather])
-
-	const resetWolfKit = useCallback(() => {
 		setBrandsMonochrome(BRANDS_MONOCHROME_DEFAULT)
 		setShowBrandsOriginal(BRANDS_ORIGINAL_DEFAULT)
 		setShowBrandsOriginalCircle(BRANDS_ORIGINAL_CIRCLE_DEFAULT)
@@ -131,6 +127,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		setShowBrandsOriginal,
 		setShowBrandsOriginalCircle,
 		setShowBrandsOriginalSquare,
+		setShowFeather,
 		setShowPaymentsOriginal,
 		setShowPaymentsOriginalFilled,
 	])
@@ -188,8 +185,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setShowPaymentsOriginal,
 				showPaymentsOriginalFilled,
 				setShowPaymentsOriginalFilled,
-				resetFeather,
-				resetWolfKit,
+				resetAll,
 				results,
 			}}
 		>

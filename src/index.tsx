@@ -21,8 +21,8 @@ import { App } from "./app"
 function ProvidedApp() {
 	return (
 		<ProgressBarProvider>
+			<ProgresssBar />
 			<ShikiProvider>
-				<ProgresssBar />
 				<LayoutProvider>
 					<SearchProvider>
 						<RangeProvider>

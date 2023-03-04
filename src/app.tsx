@@ -78,8 +78,7 @@ function AppSidebar1() {
 		setShowPaymentsOriginal,
 		showPaymentsOriginalFilled,
 		setShowPaymentsOriginalFilled,
-		resetFeather,
-		resetWolfKit,
+		resetAll,
 	} = useContext(SearchContext)!
 
 	const { scrollProps } = useScrollProps()
@@ -88,9 +87,10 @@ function AppSidebar1() {
 	const [pending, startTransition] = useTransition()
 
 	const setAllMonochrome = useCallback(() => {
-		setBrandsMonochrome(true)
-		setPaymentsMonochrome(true)
-	}, [setBrandsMonochrome, setPaymentsMonochrome])
+		const every = brandsMonochrome || paymentsMonochrome
+		setBrandsMonochrome(!every)
+		setPaymentsMonochrome(!every)
+	}, [brandsMonochrome, paymentsMonochrome, setBrandsMonochrome, setPaymentsMonochrome])
 
 	const createVoidTransition = useCallback(function (fn: () => void) {
 		return () => startTransition(fn)
@@ -117,7 +117,7 @@ function AppSidebar1() {
 						<header className="section-header-header">
 							<feather.Package className="section-icon" />
 							<h6 className="section-name u-flex-1">Icons</h6>
-							<feather.RotateCcw className="section-undo" strokeWidth={4} />
+							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetAll} />
 						</header>
 						<Checkboxes>
 							<Checkbox
@@ -237,7 +237,7 @@ function AppSidebar2() {
 						<feather.PenTool className="section-icon" />
 						<h6 className="section-name u-flex-1">Size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
-						<feather.RotateCcw className="section-undo" strokeWidth={4} />
+						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
 					</header>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
@@ -247,7 +247,7 @@ function AppSidebar2() {
 						<feather.PenTool className="section-icon" />
 						<h6 className="section-name u-flex-1">Stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(3)}</span>
-						<feather.RotateCcw className="section-undo" strokeWidth={4} />
+						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
 					</header>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</section>
