@@ -53,8 +53,18 @@
   &.is-end
     padding: $sidebar-padding-y $sidebar-padding-x
 
-.section > :not(.checkboxes, .resources)
+//// .section > :not(.section-header-header, .checkboxes, .resources)
+.section > :not(div:not([class]), .checkboxes, .resources)
   margin: 0 math.div($button-height - $tiny-icon-height, 2)
+//// .section > .section-header-header
+////   margin-left: math.div($button-height - $tiny-icon-height, 2)
+
+//// .is-inset
+////   margin: 0     math.div($button-height - $tiny-icon-height, 2)
+//// .is-inset-left
+////   margin-left:  math.div($button-height - $tiny-icon-height, 2)
+//// .is-inset-righ
+////   margin-right: math.div($button-height - $tiny-icon-height, 2)
 
 ////////////////////////////////////////
 

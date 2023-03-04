@@ -1,14 +1,13 @@
 import "./grid.sass"
 
 import { Icon, toKebabCase } from "@/lib"
-import { ClipboardContext, LayoutContext } from "@/state"
-import { memo, Suspense, useContext } from "react"
+import { ClipboardContext, LayoutContext, SearchContext } from "@/state"
+import { Suspense, useContext } from "react"
 
-export const MemoGrid = memo(function Grid({
-	results,
-}: {
-	results: (readonly [string[], React.LazyExoticComponent<any>])[]
-}) {
+// TODO: Add memo?
+export function Grid() {
+	const { results } = useContext(SearchContext)!
+
 	return (
 		<ul className="grid">
 			<Suspense>
@@ -26,7 +25,7 @@ export const MemoGrid = memo(function Grid({
 			</Suspense>
 		</ul>
 	)
-})
+}
 
 // TODO: Add caching? Or use text-transform?
 // TODO
@@ -37,15 +36,14 @@ function toNameCase(str: string) {
 export function GridItem({
 	name,
 	icon: Icon,
-	//// selected,
-	bookmark,
-}: {
+}: //// bookmark,
+{
 	name: string
 	icon: Icon
-	bookmark?: boolean
-	selected?: boolean
+	//// bookmark?: boolean
 }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
+	const { displayNames } = useContext(SearchContext)!
 	const { selected, addToSelected, clearSelected } = useContext(ClipboardContext)!
 
 	const id = toNameCase(name)
@@ -85,7 +83,7 @@ export function GridItem({
 			<figure className="grid-item-frame">
 				<Icon className="grid-item-frame-icon" />
 			</figure>
-			<figcaption className="grid-item-name">{id}</figcaption>
+			{displayNames && <figcaption className="grid-item-name">{id}</figcaption>}
 			{/* <feather.Star className="grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
 		</li>
 	)

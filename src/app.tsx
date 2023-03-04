@@ -14,8 +14,8 @@ import {
 	Checkbox,
 	Checkboxes,
 	DebugCssEffect,
+	Grid,
 	Main,
-	MemoGrid,
 	MonochromeCheckboxFolder,
 	Radio,
 	Range,
@@ -25,7 +25,6 @@ import {
 	Sidebar1,
 	Sidebar2,
 	SyntaxHighlighting,
-	TheWolfKit,
 } from "@/components"
 import { useScrollProps } from "@/hooks"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
@@ -68,15 +67,16 @@ function AppSidebar1() {
 	const {
 		showFeather,
 		setShowFeather,
-		brandsMonochrome,
-		setBrandsMonochrome,
 		brandsRadioValue,
 		setBrandsRadioValue,
-		paymentsMonochrome,
-		setPaymentsMonochrome,
 		paymentsRadioValue,
 		setPaymentsRadioValue,
-		resetAll,
+		displayNames,
+		setDisplayNames,
+		displayMonochrome,
+		setDisplayMonochrome,
+		resetIcons,
+		resetDisplay,
 	} = useContext(SearchContext)!
 
 	const { scrollProps } = useScrollProps()
@@ -84,16 +84,7 @@ function AppSidebar1() {
 	const { setStarted } = useContext(ProgressBarContext)!
 	const [pending, startTransition] = useTransition()
 
-	const setAllMonochrome = useCallback(() => {
-		const every = brandsMonochrome || paymentsMonochrome
-		setBrandsMonochrome(!every)
-		setPaymentsMonochrome(!every)
-	}, [brandsMonochrome, paymentsMonochrome, setBrandsMonochrome, setPaymentsMonochrome])
-
-	const createVoidTransition = useCallback(function (fn: () => void) {
-		return () => startTransition(fn)
-	}, [])
-
+	// Use function syntax because of <T>
 	const createTransition = useCallback(function <T>(fn: (_: T) => void) {
 		return (arg: T) => startTransition(() => fn(arg))
 	}, [])
@@ -113,82 +104,132 @@ function AppSidebar1() {
 				<div className="section-header-body" {...scrollProps}>
 					<section className="section">
 						<header className="section-header-header">
-							<feather.Package className="section-icon" />
+							{/* <feather.Package className="section-icon" /> */}
 							<h6 className="section-name">Icons</h6>
-							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetAll} />
+							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetIcons} />
 						</header>
-						<Checkboxes>
-							<Checkbox
-								name="Feather"
-								icon={feather.Feather}
-								checked={showFeather}
-								setChecked={createTransition(setShowFeather)}
-							/>
-						</Checkboxes>
-						<Checkboxes>
-							<MonochromeCheckboxFolder
-								name={brandsMonochrome ? "Brands (mono)" : "Brands"}
-								icon={feather.Shield}
-								checked={brandsMonochrome}
-								setChecked={createVoidTransition(setAllMonochrome)}
-							/>
+						<div>
 							<Checkboxes>
-								<Radio<BrandsRadioValue>
-									name="Original"
-									icon={brandsMonochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
-									radioName="brands"
-									value="normal"
-									setValue={createTransition(setBrandsRadioValue)}
-									checked={brandsRadioValue === "normal"}
-								/>
-								<Radio<BrandsRadioValue>
-									name="Circle"
-									icon={brandsMonochrome ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
-									radioName="brands"
-									value="circle"
-									setValue={createTransition(setBrandsRadioValue)}
-									checked={brandsRadioValue === "circle"}
-								/>
-								<Radio<BrandsRadioValue>
-									name="Square"
-									icon={brandsMonochrome ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
-									radioName="brands"
-									value="square"
-									setValue={createTransition(setBrandsRadioValue)}
-									checked={brandsRadioValue === "square"}
+								<Checkbox
+									name="Feather"
+									icon={feather.Feather}
+									checked={showFeather}
+									setChecked={createTransition(setShowFeather)}
 								/>
 							</Checkboxes>
-						</Checkboxes>
-						<Checkboxes>
-							<MonochromeCheckboxFolder
-								name={paymentsMonochrome ? "Payments (mono)" : "Payments"}
-								icon={feather.CreditCard}
-								checked={paymentsMonochrome}
-								setChecked={createVoidTransition(setAllMonochrome)}
-							/>
 							<Checkboxes>
-								<Radio<PaymentsRadioValue>
-									name="Original"
-									icon={paymentsMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-									radioName="payments"
-									value="normal"
-									setValue={createTransition(setPaymentsRadioValue)}
-									checked={paymentsRadioValue === "normal"}
+								<MonochromeCheckboxFolder
+									name="Social"
+									icon={p => (
+										<feather.Folder
+											style={{ transform: "scale(0.875)", opacity: 0.75 }}
+											fill="currentColor"
+											strokeWidth={4}
+											{...p}
+										/>
+									)}
+									checked={displayMonochrome}
+									setChecked={createTransition(setDisplayMonochrome)}
 								/>
-								<Radio<PaymentsRadioValue>
-									name="Filled"
-									icon={paymentsMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-									radioName="payments"
-									value="filled"
-									setValue={createTransition(setPaymentsRadioValue)}
-									checked={paymentsRadioValue === "filled"}
-								/>
+								<Checkboxes>
+									<Radio<BrandsRadioValue>
+										name="Original"
+										icon={displayMonochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
+										radioName="brands"
+										value="normal"
+										setValue={createTransition(setBrandsRadioValue)}
+										checked={brandsRadioValue === "normal"}
+									/>
+									<Radio<BrandsRadioValue>
+										name="Circle"
+										icon={displayMonochrome ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
+										radioName="brands"
+										value="circle"
+										setValue={createTransition(setBrandsRadioValue)}
+										checked={brandsRadioValue === "circle"}
+									/>
+									<Radio<BrandsRadioValue>
+										name="Square"
+										icon={displayMonochrome ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
+										radioName="brands"
+										value="square"
+										setValue={createTransition(setBrandsRadioValue)}
+										checked={brandsRadioValue === "square"}
+									/>
+								</Checkboxes>
 							</Checkboxes>
-						</Checkboxes>
+							<Checkboxes>
+								<MonochromeCheckboxFolder
+									name="Payments"
+									icon={p => (
+										<feather.Folder
+											style={{ transform: "scale(0.875)", opacity: 0.75 }}
+											fill="currentColor"
+											strokeWidth={4}
+											{...p}
+										/>
+									)}
+									checked={displayMonochrome}
+									setChecked={createTransition(setDisplayMonochrome)}
+								/>
+								<Checkboxes>
+									<Radio<PaymentsRadioValue>
+										name="Original"
+										icon={displayMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+										radioName="payments"
+										value="normal"
+										setValue={createTransition(setPaymentsRadioValue)}
+										checked={paymentsRadioValue === "normal"}
+									/>
+									<Radio<PaymentsRadioValue>
+										name="Filled"
+										icon={displayMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+										radioName="payments"
+										value="filled"
+										setValue={createTransition(setPaymentsRadioValue)}
+										checked={paymentsRadioValue === "filled"}
+									/>
+								</Checkboxes>
+							</Checkboxes>
+						</div>
 					</section>
-					<hr className="hr" />
 				</div>
 			</header>
+			<div className="section-body">
+				<hr className="hr" />
+				<section className="section">
+					<header className="section-header-header">
+						{/* <feather.Monitor className="section-icon" /> */}
+						<h6 className="section-name">Display</h6>
+						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
+					</header>
+					<Checkboxes>
+						<Checkbox
+							name="Display names"
+							//// icon={displayNames ? feather.ToggleRight : feather.ToggleLeft}
+							//// icon={displayNames ? feather.Eye : feather.EyeOff}
+							icon={feather.Edit3}
+							checked={displayNames}
+							setChecked={setDisplayNames}
+						/>
+						{/* <Checkbox
+							name="Display monochrome"
+							//// icon={feather.Droplet}
+							icon={p => (
+								<feather.Droplet
+									style={{ transform: "scale(0.875)", opacity: 0.75 }}
+									fill="currentColor"
+									strokeWidth={4}
+									{...p}
+								/>
+							)}
+							checked={displayMonochrome}
+							setChecked={setDisplayMonochrome}
+						/> */}
+					</Checkboxes>
+				</section>
+				<hr className="hr" />
+			</div>
 			<div className="section-spacer"></div>
 			<footer className="section-footer">
 				<hr className="hr is-collapsible" />
@@ -198,18 +239,21 @@ function AppSidebar1() {
 						<h6 className="section-name">Resources</h6>
 					</header>
 					<nav className="resources">
-						{/* <Resource name="Star icons on GitHub" icon={wkBrandsOriginal.Github} />
-						<Resource name="Star site on GitHub" icon={wkBrandsOriginal.Github} /> */}
-						<Resource
+						<Resource name="Icons" icon={wkBrandsOriginal.Github} />
+						<Resource name="Website" icon={wkBrandsOriginal.Github} />
+						{/* <Resource
 							name="Star icons on GitHub"
-							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" strokeWidth={4} {...p} />}
-						/>
-						<Resource
+							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" {...p} />}
+						/> */}
+						{/* <Resource
 							name="Star app on GitHub"
-							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" strokeWidth={4} {...p} />}
-						/>
-						{/* <Resource name="Feather Figma Plugin" icon={wkBrandsOriginal.Figma} /> */}
-						<Resource name="The Wolf Kit" icon={TheWolfKit} />
+							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" {...p} />}
+						/> */}
+						{/* <Resource name="Plugin" icon={wkBrandsOriginal.Figma} /> */}
+						<Resource name="Social & payments file" icon={wkBrandsOriginal.Figma} />
+						{/* <Resource name="The Wolf Kit" icon={wkBrandsOriginal.Figma} /> */}
+						{/* <Resource name="The Wolf Kit Figma" icon={wkBrandsOriginal.Figma} /> */}
+						{/* <Resource name="The Wolf Kit" icon={TheWolfKit} /> */}
 						<Resource name="Share on Twitter" icon={wkBrandsOriginal.Twitter} />
 					</nav>
 				</section>
@@ -231,7 +275,7 @@ function AppSidebar2() {
 			<header className="section-header">
 				<section className="section is-start">
 					<header className="section-header-header">
-						<feather.MousePointer className="section-icon" />
+						{/* <feather.MousePointer className="section-icon" /> */}
 						<h6 className="section-name">Selected</h6>
 						<SelectExportAs value={exportAs} setValue={setExportAs} />
 					</header>
@@ -244,14 +288,14 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.Circle className="section-icon" />
+						{/* <feather.Circle className="section-icon" /> */}
 						<h6 className="section-name">Color</h6>
 					</header>
 				</section>
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.PenTool className="section-icon" />
+						{/* <feather.PenTool className="section-icon" /> */}
 						<h6 className="section-name">Size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
@@ -261,7 +305,7 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.PenTool className="section-icon" />
+						{/* <feather.PenTool className="section-icon" /> */}
 						<h6 className="section-name">Stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(3)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
@@ -275,7 +319,7 @@ function AppSidebar2() {
 				<hr className="hr is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header-header">
-						<feather.Shield className="section-icon" />
+						{/* <feather.Shield className="section-icon" /> */}
 						<h6 className="section-name">Sponsor</h6>
 					</header>
 				</section>
@@ -322,7 +366,7 @@ function AppMain() {
 
 	return (
 		<Main>
-			<MemoGrid results={results} />
+			<Grid />
 		</Main>
 	)
 }

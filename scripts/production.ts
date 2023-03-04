@@ -9,7 +9,7 @@ import SVGO from "svgo"
 
 import { detab, sleep, toTitleCase } from "@/lib"
 import { formatSvg } from "./utils/format-svg"
-import { transformReactjsTsx, transformSvg } from "./utils/transform-svg"
+import { transformSvg, transformTsx } from "./utils/transform-svg"
 
 const EOF = "\n"
 
@@ -115,7 +115,7 @@ async function exportTsx(
 ) {
 	await fs.mkdir(outdir, { recursive: true })
 	for (const [name, icon] of Object.entries(icons)) {
-		const icon2 = transformReactjsTsx(toTitleCase(name), icon, { banner: banner(name) })
+		const icon2 = transformTsx(toTitleCase(name), icon, { banner: banner(name) })
 		await fs.writeFile(path.join(outdir, `${toTitleCase(name)}.tsx`), icon2 + EOF)
 	}
 	// prettier-ignore

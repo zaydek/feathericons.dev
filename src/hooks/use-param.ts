@@ -43,3 +43,15 @@ export function useParam<T>({
 
 	return [value, setValue] as const
 }
+
+const parser_boolean = (value: string) => value === "1"
+const serializer_boolean = (value: boolean) => (value ? "1" : "0")
+
+export function useParamBoolean({ key, initialValue }: { key: string; initialValue: boolean }) {
+	return useParam({
+		key,
+		initialValue,
+		parser: parser_boolean,
+		serializer: serializer_boolean,
+	})
+}

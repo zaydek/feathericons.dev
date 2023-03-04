@@ -14,7 +14,7 @@ export function MonochromeCheckboxFolder({
 	setChecked,
 }: {
 	name: string
-	icon: Icon
+	icon?: Icon
 	checked: boolean
 	setChecked: Dispatch<SetStateAction<boolean>>
 }) {
@@ -35,7 +35,7 @@ export function MonochromeCheckboxFolder({
 			}}
 			tabIndex={0}
 		>
-			<Icon className="checkbox-icon" />
+			{Icon !== undefined && <Icon className="checkbox-icon" />}
 			<span className="checkbox-name">{name}</span>
 			{/* This is supposed to be checkbox... */}
 			<span
@@ -56,7 +56,7 @@ export function Checkbox({
 	setChecked,
 }: {
 	name: string
-	icon: Icon
+	icon?: Icon
 	checked: boolean
 	setChecked: Dispatch<SetStateAction<boolean>>
 }) {
@@ -72,7 +72,7 @@ export function Checkbox({
 			}}
 			tabIndex={0}
 		>
-			<Icon className="checkbox-icon" />
+			{Icon !== undefined && <Icon className="checkbox-icon" />}
 			<span className="checkbox-name">{name}</span>
 			<input
 				// prettier-ignore
@@ -94,7 +94,7 @@ export function Radio<RadioValue extends string>({
 	checked,
 }: {
 	name: string
-	icon: Icon
+	icon?: Icon
 	radioName: string
 	value: RadioValue
 	setValue: Dispatch<SetStateAction<RadioValue>>
@@ -133,7 +133,7 @@ export function Radio<RadioValue extends string>({
 			}}
 			tabIndex={0}
 		>
-			<Icon className="checkbox-icon" />
+			{Icon !== undefined && <Icon className="checkbox-icon" />}
 			<span className="checkbox-name">{name}</span>
 			<input
 				// prettier-ignore

@@ -1,6 +1,6 @@
 import { useParam } from "@/hooks"
 import { detab, toTitleCase } from "@/lib"
-import { formatSvg, transformReactjsJsx, transformReactjsTsx, transformSvg } from "@scripts/utils"
+import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
 import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useState } from "react"
 
 // prettier-ignore
@@ -102,48 +102,40 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return
 		}
 		let clipboard = ""
+		//// if (exportAs === "svg") {
+		//// 	clipboard = "<!-- https://feathericons.dev -->\n\n"
+		//// } else {
+		//// 	clipboard = "// https://feathericons.dev\n\n"
+		//// }
 		const ids = [...selected.keys()]
-		for (const id of ids) {
-			if (clipboard !== "") {
-				clipboard += "\n\n"
-			}
+		for (const [index, id] of ids.entries()) {
+			if (index > 0) clipboard += "\n\n"
 			const svg = document.getElementById(id)!.querySelector("svg")!
 			if (exportAs === "svg") {
-				// prettier-ignore
 				clipboard += transformSvg(
 					toTitleCase(id),
-					formatSvg(svg, { strictJsx: !!0 }),
-					{ banner: `<!-- https://feathericons.dev/#!/${id} -->` },
+					formatSvg(svg, {
+						strictJsx: !!0,
+					}),
+					{ banner: `<!-- https://feathericons.dev/?search=${id} -->` },
 				)
 			} else if (exportAs === "jsx") {
-				// prettier-ignore
-				clipboard += transformReactjsJsx(
-					toTitleCase(id),
-					formatSvg(svg, { strictJsx: !!0 }),
-					{ banner: `// https://feathericons.dev/#!/${id}?export-as=jsx` },
-				)
+				clipboard += transformJsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!0 }), {
+					banner: `// https://feathericons.dev/?search=${id}`,
+				})
 			} else if (exportAs === "tsx") {
-				if (clipboard === "") clipboard += 'import { JSX } from "solid-js";\n\n'
-				// prettier-ignore
-				clipboard += transformReactjsTsx(
-					toTitleCase(id),
-					formatSvg(svg, { strictJsx: !!0 }),
-					{ banner: `// https://feathericons.dev/#!/${id}?export-as=tsx` },
-				)
+				if (index === 0) clipboard += '\n\nimport { JSX } from "solid-js";\n\n'
+				clipboard += transformTsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!0 }), {
+					banner: `// https://feathericons.dev/?search=${id}`,
+				})
 			} else if (exportAs === "strict-jsx") {
-				// prettier-ignore
-				clipboard += transformReactjsJsx(
-					toTitleCase(id),
-					formatSvg(svg, { strictJsx: !!1 }),
-					{ banner: `// https://feathericons.dev/#!/${id}?export-as=strict-jsx` },
-				)
+				clipboard += transformJsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!1 }), {
+					banner: `// https://feathericons.dev/?search=${id}`,
+				})
 			} else if (exportAs === "strict-tsx") {
-				// prettier-ignore
-				clipboard += transformReactjsTsx(
-					toTitleCase(id),
-					formatSvg(svg, { strictJsx: !!1 }),
-					{ banner: `// https://feathericons.dev/#!/${id}?export-as=strict-tsx` },
-				)
+				clipboard += transformTsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!1 }), {
+					banner: `// https://feathericons.dev/?search=${id}`,
+				})
 			}
 		}
 		setClipboard(clipboard)

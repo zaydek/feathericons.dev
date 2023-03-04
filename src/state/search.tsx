@@ -1,4 +1,4 @@
-import { useParam } from "@/hooks"
+import { useParam, useParamBoolean } from "@/hooks"
 import {
 	createContext,
 	Dispatch,
@@ -24,10 +24,10 @@ export type PaymentsRadioValue =
 	| "filled"
 
 const FEATHER_DEFAULT              = !!1 // prettier-ignore
-const BRANDS_MONOCHROME_DEFAULT    = !!0 // prettier-ignore
 const BRANDS_RADIO_VALUE_DEFAULT   = "normal" // prettier-ignore
-const PAYMENTS_MONOCHROME_DEFAULT  = !!0 // prettier-ignore
 const PAYMENTS_RADIO_VALUE_DEFAULT = "filled" // prettier-ignore
+const DISPLAY_NAMES_DEFAULT        = !!1 // prettier-ignore
+const DISPLAY_MONOCHROME_DEFAULT   = !!0 // prettier-ignore
 
 // prettier-ignore
 export const SearchContext =
@@ -36,48 +36,37 @@ export const SearchContext =
 		setSearch:             Dispatch<SetStateAction<string>>
 		showFeather:           boolean
 		setShowFeather:        Dispatch<SetStateAction<boolean>>
-		brandsMonochrome:      boolean
-		setBrandsMonochrome:   Dispatch<SetStateAction<boolean>>
 		brandsRadioValue:      BrandsRadioValue
 		setBrandsRadioValue:   Dispatch<SetStateAction<BrandsRadioValue>>
-		paymentsMonochrome:    boolean
-		setPaymentsMonochrome: Dispatch<SetStateAction<boolean>>
 		paymentsRadioValue:    PaymentsRadioValue
 		setPaymentsRadioValue: Dispatch<SetStateAction<PaymentsRadioValue>>
-		resetAll:              () => void
+		displayNames:          boolean
+		setDisplayNames:       Dispatch<SetStateAction<boolean>>
+		displayMonochrome:     boolean
+		setDisplayMonochrome:  Dispatch<SetStateAction<boolean>>
+		resetIcons:            () => void
+		resetDisplay:          () => void
 		results:               (readonly [string[], LazyExoticComponent<any>])[]
 	} | null>(null)
 
 const cache = createCache()
 
-const parser_boolean = (value: string) => value === "1"
-const serializer_boolean = (value: boolean) => (value ? "1" : "0")
+// prettier-ignore
+const serializeSearch = (value: string) => value
+	.replace(/[^\w\s-]/g, "") // Remove bad characters
+	.replace(/\s+/g, " ")     // Remove excess spaces
+	.trim() // Trim start and end spaces
 
 export function SearchProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useParam({
 		key: "search",
 		initialValue: "",
 		parser: value => value,
-		// prettier-ignore
-		serializer: value => {
-			return value
-				.replace(/[^\w\s-]/g, "") // Remove bad characters
-				.replace(/\s+/g, " ")     // Remove excess spaces
-				.trim()                   // Trim start and end spaces
-		},
+		serializer: serializeSearch,
 	})
-
-	const [showFeather, setShowFeather] = useParam({
+	const [showFeather, setShowFeather] = useParamBoolean({
 		key: "feather",
 		initialValue: FEATHER_DEFAULT,
-		parser: parser_boolean,
-		serializer: serializer_boolean,
-	})
-	const [brandsMonochrome, setBrandsMonochrome] = useParam({
-		key: "brands-monochrome",
-		initialValue: BRANDS_MONOCHROME_DEFAULT,
-		parser: parser_boolean,
-		serializer: serializer_boolean,
 	})
 	const [brandsRadioValue, setBrandsRadioValue] = useParam<BrandsRadioValue>({
 		key: "brands-radio",
@@ -92,12 +81,6 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			return BRANDS_RADIO_VALUE_DEFAULT
 		},
 	})
-	const [paymentsMonochrome, setPaymentsMonochrome] = useParam({
-		key: "payments-monochrome",
-		initialValue: PAYMENTS_MONOCHROME_DEFAULT,
-		parser: parser_boolean,
-		serializer: serializer_boolean,
-	})
 	const [paymentsRadioValue, setPaymentsRadioValue] = useParam<PaymentsRadioValue>({
 		key: "payments-monochrome",
 		initialValue: PAYMENTS_RADIO_VALUE_DEFAULT,
@@ -110,40 +93,47 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			return PAYMENTS_RADIO_VALUE_DEFAULT
 		},
 	})
+	const [displayNames, setDisplayNames] = useParamBoolean({
+		key: "display-names",
+		initialValue: DISPLAY_NAMES_DEFAULT,
+	})
+	const [displayMonochrome, setDisplayMonochrome] = useParamBoolean({
+		key: "display-monochrome",
+		initialValue: DISPLAY_MONOCHROME_DEFAULT,
+	})
 
-	const resetAll = useCallback(() => {
+	const resetIcons = useCallback(() => {
 		setShowFeather(FEATHER_DEFAULT)
-		setBrandsMonochrome(BRANDS_MONOCHROME_DEFAULT)
 		setBrandsRadioValue(BRANDS_RADIO_VALUE_DEFAULT)
-		setPaymentsMonochrome(PAYMENTS_MONOCHROME_DEFAULT)
 		setPaymentsRadioValue(PAYMENTS_RADIO_VALUE_DEFAULT)
-	}, [setBrandsMonochrome, setBrandsRadioValue, setPaymentsMonochrome, setPaymentsRadioValue, setShowFeather])
+	}, [setBrandsRadioValue, setPaymentsRadioValue, setShowFeather])
+
+	const resetDisplay = useCallback(() => {
+		setDisplayNames(DISPLAY_NAMES_DEFAULT)
+		setDisplayMonochrome(DISPLAY_MONOCHROME_DEFAULT)
+	}, [setDisplayMonochrome, setDisplayNames])
 
 	const results = useMemo(() => {
 		const results: (readonly [string[], LazyExoticComponent<any>])[] = []
 		if (showFeather) results.push(cache.get("feather"))
-		if (brandsMonochrome) {
+		if (displayMonochrome) {
 			const rv = brandsRadioValue
 			if (rv === "normal") results.push(cache.get("wolfkit-brands-mono"))
 			if (rv === "circle") results.push(cache.get("wolfkit-brands-mono-circle"))
 			if (rv === "square") results.push(cache.get("wolfkit-brands-mono-square"))
-		} else {
-			const rv = brandsRadioValue
 			if (rv === "normal") results.push(cache.get("wolfkit-brands-original"))
 			if (rv === "circle") results.push(cache.get("wolfkit-brands-original-circle"))
 			if (rv === "square") results.push(cache.get("wolfkit-brands-original-square"))
 		}
-		if (paymentsMonochrome) {
+		if (displayMonochrome) {
 			const rv = paymentsRadioValue
 			if (rv === "normal") results.push(cache.get("wolfkit-payments-mono"))
 			if (rv === "filled") results.push(cache.get("wolfkit-payments-mono-filled"))
-		} else {
-			const rv = paymentsRadioValue
 			if (rv === "normal") results.push(cache.get("wolfkit-payments-original"))
 			if (rv === "filled") results.push(cache.get("wolfkit-payments-original-filled"))
 		}
 		return results
-	}, [brandsMonochrome, brandsRadioValue, paymentsMonochrome, paymentsRadioValue, showFeather])
+	}, [displayMonochrome, brandsRadioValue, paymentsRadioValue, showFeather])
 
 	return (
 		<SearchContext.Provider
@@ -152,15 +142,16 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setSearch,
 				showFeather,
 				setShowFeather,
-				brandsMonochrome,
-				setBrandsMonochrome,
 				brandsRadioValue,
 				setBrandsRadioValue,
-				paymentsMonochrome,
-				setPaymentsMonochrome,
 				paymentsRadioValue,
 				setPaymentsRadioValue,
-				resetAll,
+				displayNames,
+				setDisplayNames,
+				displayMonochrome,
+				setDisplayMonochrome,
+				resetIcons,
+				resetDisplay,
 				results,
 			}}
 		>
