@@ -2,9 +2,10 @@ import "./section.sass"
 
 import * as feather from "@icons/feather/tsx"
 
+import { useScrollProps } from "@/hooks"
 import { Icon } from "@/lib"
 import { ExportAs } from "@/state"
-import { Dispatch, PropsWithChildren, SetStateAction, useState } from "react"
+import { Dispatch, PropsWithChildren, SetStateAction } from "react"
 import { SelectFormat } from "./select-format"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -14,10 +15,10 @@ export function SidebarHeader({ children }: PropsWithChildren) {
 }
 
 export function SidebarBody({ children }: PropsWithChildren) {
-	const [scroll, setScroll] = useState(false)
+	const { scrollProps } = useScrollProps()
 
 	return (
-		<div className="u-overflow-y-auto" onScroll={e => setScroll(e.currentTarget.scrollTop > 0)} data-scroll={scroll}>
+		<div className="u-overflow-y-auto" {...scrollProps}>
 			{children}
 		</div>
 	)

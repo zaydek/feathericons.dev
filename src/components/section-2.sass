@@ -50,6 +50,8 @@
   padding: $sidebar-gap $sidebar-padding-x
   &.is-start
     padding-top: $sidebar-padding-y
+    &:has(+ [data-scroll=true])
+      box-shadow: $hairline-shadow-bottom
   &.is-end
     padding-bottom: $sidebar-padding-y
 
@@ -62,9 +64,9 @@
   margin-right: math.div($button-height - $tiny-icon-height, 2)
   height: $tiny-icon-height
   width: $tiny-icon-height
-  //// color: $slate-600
-  background-color: gray
-  border-radius: 1e3px
+  color: $slate-600
+  //// background-color: gray
+  //// border-radius: 1e3px
 
 .section-2-name
   font: 500 11px / normal $sans

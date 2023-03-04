@@ -47,6 +47,7 @@ import {
 } from "@/state"
 import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
 import { Lang } from "shiki-es"
+import { useScrollProps } from "./hooks"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -223,6 +224,8 @@ function AppSidebar2() {
 	const { exportAs, setExportAs, clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
 
+	const { scrollProps } = useScrollProps()
+
 	//// const $size = selected.size
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
 
@@ -231,12 +234,12 @@ function AppSidebar2() {
 			<header className="section-2-header">
 				<section className="section-2 is-start">
 					<header className="section-2-header-header">
-						<div className="section-2-icon"></div>
+						<feather.MousePointer className="section-2-icon" />
 						<h6 className="section-2-name u-flex-1">HELLO</h6>
 						<SelectFormat value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
-				<div className="section-2-header-body">
+				<div className="section-2-header-body" {...scrollProps}>
 					<SyntaxHighlighting lang={lang} code={clipboard} />
 				</div>
 			</header>
@@ -244,7 +247,7 @@ function AppSidebar2() {
 				<hr />
 				<section className="section-2">
 					<header className="section-2-header-header">
-						<div className="section-2-icon"></div>
+						<feather.PenTool className="section-2-icon" />
 						<h6 className="section-header-name u-flex-1">Idea</h6>
 						<span className="section-2-header-slider-desc">{size} PX</span>
 						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
@@ -254,7 +257,7 @@ function AppSidebar2() {
 				<hr />
 				<section className="section-2">
 					<header className="section-2-header-header">
-						<div className="section-2-icon"></div>
+						<feather.PenTool className="section-2-icon" />
 						<h6 className="section-header-name u-flex-1">Idea</h6>
 						<span className="section-2-header-slider-desc">{size} PX</span>
 						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
@@ -267,14 +270,9 @@ function AppSidebar2() {
 			<footer className="section-2-footer">
 				<hr />
 				<section className="section-2 is-end">
-					{/* <Section name="Foo" icon={feather.Umbrella}>
-						<div>Hello</div>
-					</Section> */}
 					<header className="section-2-header-header">
-						<div className="section-2-icon"></div>
+						<feather.Shield className="section-2-icon" />
 						<h6 className="section-header-name u-flex-1">Sponsor</h6>
-						{/* <span className="section-2-header-slider-desc">{size} PX</span>
-						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} /> */}
 					</header>
 				</section>
 			</footer>
