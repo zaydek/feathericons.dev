@@ -43,7 +43,7 @@ export function GridItem({
 	//// bookmark?: boolean
 }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
-	const { compactMode: displayNames } = useContext(SearchContext)!
+	const { compactMode } = useContext(SearchContext)!
 	const { selected, addToSelected, clearSelected } = useContext(ClipboardContext)!
 
 	const id = toNameCase(name)
@@ -83,7 +83,7 @@ export function GridItem({
 			<figure className="grid-item-frame">
 				<Icon className="grid-item-frame-icon" />
 			</figure>
-			{displayNames && <figcaption className="grid-item-name">{id}</figcaption>}
+			{!compactMode && <figcaption className="grid-item-name">{id}</figcaption>}
 			{/* <feather.Star className="grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
 		</li>
 	)
