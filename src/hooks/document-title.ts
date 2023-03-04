@@ -4,9 +4,7 @@ export function useDocumentTitle(title: string) {
 	useEffect(() => {
 		const originalTitle = document.title
 		document.title = title
-		return () => {
-			document.title = originalTitle
-		}
+		return () => void (document.title = originalTitle)
 	}, [title])
 	return void 0
 }
@@ -18,9 +16,9 @@ export function useVisibleDocumentTitle({ active, inactive }: { active: string; 
 			document.title = document.visibilityState === "visible" ? active : inactive
 		}
 		handleVisibilityChange()
-		document.addEventListener("visibilitychange", handleVisibilityChange)
+		window.addEventListener("visibilitychange", handleVisibilityChange, false)
 		return () => {
-			document.removeEventListener("visibilitychange", handleVisibilityChange)
+			window.removeEventListener("visibilitychange", handleVisibilityChange, false)
 			document.title = originalTitle
 		}
 	}, [active, inactive])

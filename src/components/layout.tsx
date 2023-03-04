@@ -1,28 +1,20 @@
 import "./layout.sass"
 
 import { cx, isMac } from "@/lib"
-import { ClipboardContext, LayoutContext, SidebarState } from "@/state"
+import { LayoutContext, SidebarState } from "@/state"
 import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useBodyScrollLocking({ sidebar }: { sidebar: SidebarState }) {
+function useDocumentAndBodyScrollLocking({ sidebar }: { sidebar: SidebarState }) {
 	useEffect(() => {
-		if (sidebar === "maximized") {
-			// <html>
-			document.documentElement.style.overflowY = "clip"
-			// <body>
-			document.body.style.overflowY = "clip"
-		} else {
-			// <html>
-			document.documentElement.style.overflowY = ""
-			if (document.documentElement.style.length === 0) {
-				document.documentElement.removeAttribute("style")
-			}
-			// <body>
-			document.body.style.overflowY = ""
-			if (document.body.style.length === 0) {
-				document.body.removeAttribute("style")
+		const targets = [document.documentElement, document.body]
+		for (const target of targets) {
+			target.style.overflow = sidebar === "maximized" ? "hidden" : ""
+		}
+		return () => {
+			for (const target of targets) {
+				target.style.overflow = ""
 			}
 		}
 	}, [sidebar])
@@ -43,8 +35,8 @@ function useCancelableShortcut({
 				setSidebar("open")
 			}
 		}
-		document.addEventListener("keydown", handleKeyDown, false)
-		return () => document.removeEventListener("keydown", handleKeyDown, false)
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [setSidebar, sidebar])
 	return void 0
 }
@@ -52,21 +44,24 @@ function useCancelableShortcut({
 function useToggleShortcut({ setSidebar }: { setSidebar: Dispatch<SetStateAction<SidebarState>> }) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if ((isMac() && e.metaKey && e.key === "\\") || (!isMac() && e.ctrlKey && e.key === "\\")) {
-				setSidebar(curr => {
-					switch (curr) {
-						case "minimized":
-							return "open"
-						case "open":
-							return "maximized"
-						case "maximized":
-							return "minimized"
-					}
-				})
-			}
+			// prettier-ignore
+			if (!(
+				(isMac() ? e.metaKey : e.ctrlKey) &&
+				e.key === "\\"
+			)) return
+			setSidebar(curr => {
+				switch (curr) {
+					case "minimized":
+						return "open"
+					case "open":
+						return "maximized"
+					case "maximized":
+						return "minimized"
+				}
+			})
 		}
-		document.addEventListener("keydown", handleKeyDown)
-		return () => document.removeEventListener("keydown", handleKeyDown)
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [setSidebar])
 	return void 0
 }
@@ -99,7 +94,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	}, [setSidebar])
 
 	// TODO: Move to provider?
-	useBodyScrollLocking({ sidebar })
+	useDocumentAndBodyScrollLocking({ sidebar })
 	useCancelableShortcut({ sidebar, setSidebar })
 	useToggleShortcut({ setSidebar })
 
@@ -113,33 +108,21 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	)
 }
 
-function SidebarOverlayImpl() {
+function _SidebarOverlay() {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
-
 	const handleClickClose = useCallback(() => {
 		if (sidebar === "maximized") {
 			setSidebar("open")
 		}
 	}, [setSidebar, sidebar])
-
 	return <div className="sidebar-overlay" onClick={handleClickClose}></div>
 }
 
-function MainImpl({ children }: PropsWithChildren) {
+function _Main({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
-	const { clearSelected } = useContext(ClipboardContext)!
-
 	return (
-		<main
-			className="main"
-			onClick={e => {
-				e.stopPropagation()
-				e.preventDefault()
-				clearSelected()
-			}}
-			// @ts-expect-error
-			inert={sidebar === "maximized" ? "true" : null}
-		>
+		// @ts-expect-error
+		<main className="main" inert={sidebar === "maximized" ? "true" : null}>
 			{children}
 		</main>
 	)
@@ -148,8 +131,8 @@ function MainImpl({ children }: PropsWithChildren) {
 export function Main({ children }: PropsWithChildren) {
 	return (
 		<>
-			<SidebarOverlayImpl />
-			<MainImpl>{children}</MainImpl>
+			<_SidebarOverlay />
+			<_Main>{children}</_Main>
 		</>
 	)
 }

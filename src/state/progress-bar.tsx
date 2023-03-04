@@ -20,7 +20,7 @@ export function ProgressBarProvider({ children }: PropsWithChildren) {
 	//// 			}, 1e3)
 	//// 			return () => window.clearTimeout(d)
 	//// 		}
-	//// 	})
+	//// 	}, false)
 	//// }, [])
 
 	return (

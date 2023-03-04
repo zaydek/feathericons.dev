@@ -40,7 +40,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useCallback, useContext, useEffect, useMemo, useTransition } from "react"
+import { useCallback, useContext, useEffect, useTransition } from "react"
 import { Lang } from "shiki-es"
 
 export function App() {
@@ -281,10 +281,31 @@ function AppSidebar2() {
 
 function AppMain() {
 	const { results } = useContext(SearchContext)!
+	const { clearSelected } = useContext(ClipboardContext)!
 
-	const count = useMemo(() => {
-		return results.reduce((sum, [names]) => sum + names.length, 0)
-	}, [results])
+	useEffect(() => {
+		function handleClick() {
+			clearSelected()
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [clearSelected])
+
+	//// return (
+	//// 	<main
+	//// 		className="main"
+	//// 		onClick={e => {
+	//// 			e.stopPropagation()
+	//// 			e.preventDefault()
+	//// 			clearSelected()
+	//// 		}}
+	//// 		// @ts-expect-error
+	//// 		inert={sidebar === "maximized" ? "true" : null}
+	//// 	>
+	//// 		{children}
+	//// 	</main>
+
+	const count = results.reduce((sum, [names]) => sum + names.length, 0)
 
 	// prettier-ignore
 	useVisibleDocumentTitle({
