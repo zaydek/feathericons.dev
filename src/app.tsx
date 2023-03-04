@@ -121,7 +121,6 @@ function AppSidebar1() {
 							/>
 						</Checkboxes>
 						<Checkboxes>
-							{/* TODO: Deprecate? */}
 							<Checkbox
 								name="Social"
 								icon={p => (
@@ -142,7 +141,10 @@ function AppSidebar1() {
 									icon={monochromeMode ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
 									radioName="brands"
 									value="normal"
-									setValue={createTransition(setSocialRadio)}
+									setValue={createTransition(next => {
+										setShowSocial(true)
+										setSocialRadio(next)
+									})}
 									checked={socialRadio === "normal"}
 								/>
 								<Radio<SocialRadio>
@@ -150,7 +152,10 @@ function AppSidebar1() {
 									icon={monochromeMode ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
 									radioName="brands"
 									value="circle"
-									setValue={createTransition(setSocialRadio)}
+									setValue={createTransition(next => {
+										setShowSocial(true)
+										setSocialRadio(next)
+									})}
 									checked={socialRadio === "circle"}
 								/>
 								<Radio<SocialRadio>
@@ -158,13 +163,15 @@ function AppSidebar1() {
 									icon={monochromeMode ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
 									radioName="brands"
 									value="square"
-									setValue={createTransition(setSocialRadio)}
+									setValue={createTransition(next => {
+										setShowSocial(true)
+										setSocialRadio(next)
+									})}
 									checked={socialRadio === "square"}
 								/>
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
-							{/* TODO: Deprecate? */}
 							<Checkbox
 								name="Payments"
 								icon={p => (
@@ -177,7 +184,10 @@ function AppSidebar1() {
 									/>
 								)}
 								checked={showPayments}
-								setChecked={createTransition(setShowPayments)}
+								setChecked={createTransition(next => {
+									setShowPayments(true)
+									setShowPayments(next)
+								})}
 							/>
 							<Checkboxes>
 								<Radio<PaymentsRadio>
@@ -185,7 +195,10 @@ function AppSidebar1() {
 									icon={monochromeMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
 									radioName="payments"
 									value="normal"
-									setValue={createTransition(setPaymentsRadio)}
+									setValue={createTransition(next => {
+										setShowPayments(true)
+										setPaymentsRadio(next)
+									})}
 									checked={paymentsRadio === "normal"}
 								/>
 								<Radio<PaymentsRadio>
@@ -193,7 +206,10 @@ function AppSidebar1() {
 									icon={monochromeMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
 									radioName="payments"
 									value="filled"
-									setValue={createTransition(setPaymentsRadio)}
+									setValue={createTransition(next => {
+										setShowPayments(true)
+										setPaymentsRadio(next)
+									})}
 									checked={paymentsRadio === "filled"}
 								/>
 							</Checkboxes>
@@ -223,7 +239,7 @@ function AppSidebar1() {
 								/>
 							)}
 							checked={monochromeMode}
-							setChecked={setMonochromeMode}
+							setChecked={createTransition(setMonochromeMode)}
 						/>
 						<Checkbox
 							name="Compact mode"
