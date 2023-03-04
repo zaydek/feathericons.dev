@@ -100,6 +100,27 @@ export function Radio<RadioValue extends string>({
 	setValue: Dispatch<SetStateAction<RadioValue>>
 	checked?: boolean
 }) {
+	//// const handleKeyDown = useCallback(
+	//// 	(e: KeyboardEvent<HTMLLabelElement>) => {
+	//// 		const radios = [...document.querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${radioName}"]`)]
+	//// 		const curr = radios.findIndex(radio => radio.checked)
+	//// 		if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+	//// 			e.preventDefault()
+	//// 			e.stopPropagation()
+	//// 			const next = curr === 0 ? radios.length - 1 : curr - 1
+	//// 			radios[next].click()
+	//// 			//// radios[next].focus()
+	//// 		} else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+	//// 			e.preventDefault()
+	//// 			e.stopPropagation()
+	//// 			const next = curr === radios.length - 1 ? 0 : curr + 1
+	//// 			radios[next].click()
+	//// 			//// radios[next].focus()
+	//// 		}
+	//// 	},
+	//// 	[radioName],
+	//// )
+
 	return (
 		<label
 			className="checkbox"
