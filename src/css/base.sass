@@ -15,8 +15,11 @@
 svg
   overflow: visible
 
-hr
+.hr
+  //// margin-top: -1px
   border-top: $hairline-height solid $hairline-color
+  &.is-collapsible
+    margin-top: -1px
 
 //// input[type=number]::-webkit-inner-spin-button,
 //// input[type=number]::-webkit-outer-spin-button
@@ -28,11 +31,14 @@ hr
 ////   -webkit-appearance: none
 ////   margin: 0
 
+// TODO: DEPRECATE?
 .u-flex-1
   flex: 1
 
+// TODO: DEPRECATE
 .u-overflow-y-auto
   overflow-y: auto
 
+// TODO: DEPRECATE
 .u-overflow-y-scroll
   overflow-y: scroll

@@ -204,7 +204,7 @@ function AppSidebar1() {
 					</Checkboxes>
 					{/* </div> */}
 				</UndoSection>
-				<hr />
+				<hr className="hr" />
 			</SidebarBody>
 			<SidebarFooter>
 				<Section name="Resources" icon={feather.Globe}>
@@ -244,17 +244,14 @@ function AppSidebar2() {
 				</div>
 			</header>
 			<div className="section-2-body">
-				<hr />
+				{/* <hr className="hr" />
 				<section className="section-2">
 					<header className="section-2-header-header">
 						<feather.Circle className="section-2-icon" />
 						<h6 className="section-header-name u-flex-1">Color</h6>
-						{/* <span className="section-2-header-slider-desc">{size} PX</span>
-						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} /> */}
 					</header>
-					{/* <Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} /> */}
-				</section>
-				<hr />
+				</section> */}
+				<hr className="hr" />
 				<section className="section-2">
 					<header className="section-2-header-header">
 						<feather.PenTool className="section-2-icon" />
@@ -264,7 +261,7 @@ function AppSidebar2() {
 					</header>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
-				<hr />
+				<hr className="hr" />
 				<section className="section-2">
 					<header className="section-2-header-header">
 						<feather.PenTool className="section-2-icon" />
@@ -274,11 +271,11 @@ function AppSidebar2() {
 					</header>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</section>
-				<hr />
+				<hr className="hr" />
 			</div>
 			<div className="section-2-spacer"></div>
 			<footer className="section-2-footer">
-				<hr />
+				<hr className="hr is-collapsible" />
 				<section className="section-2 is-end">
 					<header className="section-2-header-header">
 						<feather.Shield className="section-2-icon" />
@@ -304,7 +301,7 @@ function AppSidebar2() {
 	//// 			</SelectSection>
 	//// 		</SidebarHeader>
 	//// 		<SidebarBody>
-	//// 			{/* <hr />
+	//// 			{/* <hr className="hr" />
 	//// 			<SliderUndoSection
 	//// 				name="Color"
 	//// 				icon={feather.Image}
@@ -314,7 +311,7 @@ function AppSidebar2() {
 	//// 			>
 	//// 				<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 	//// 			</SliderUndoSection> */}
-	//// 			<hr />
+	//// 			<hr className="hr" />
 	//// 			<SliderUndoSection
 	//// 				name="Preview size"
 	//// 				icon={feather.PenTool}
@@ -324,7 +321,7 @@ function AppSidebar2() {
 	//// 			>
 	//// 				<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 	//// 			</SliderUndoSection>
-	//// 			<hr />
+	//// 			<hr className="hr" />
 	//// 			<SliderUndoSection
 	//// 				name="Preview stroke width"
 	//// 				icon={feather.PenTool}
@@ -334,7 +331,7 @@ function AppSidebar2() {
 	//// 			>
 	//// 				<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 	//// 			</SliderUndoSection>
-	//// 			<hr />
+	//// 			<hr className="hr" />
 	//// 		</SidebarBody>
 	//// 	</Sidebar2>
 	//// )
