@@ -11,42 +11,48 @@ import {
 import { createCache } from "./search-cache"
 
 // prettier-ignore
-export type BrandsRadioValue =
+export type SocialRadio =
 	| "off"
 	| "normal"
 	| "circle"
 	| "square"
 
 // prettier-ignore
-export type PaymentsRadioValue =
+export type PaymentsRadio =
 	| "off"
 	| "normal"
 	| "filled"
 
-const FEATHER_DEFAULT              = !!1 // prettier-ignore
-const BRANDS_RADIO_VALUE_DEFAULT   = "normal" // prettier-ignore
-const PAYMENTS_RADIO_VALUE_DEFAULT = "filled" // prettier-ignore
-const MONOCHROME_MODE_DEFAULT      = !!0 // prettier-ignore
-const COMPACT_MODE_DEFAULT         = !!0 // prettier-ignore
+const SHOW_FEATHER_DEFAULT    = !!1 // prettier-ignore
+const SHOW_SOCIAL_DEFAULT     = !!1 // prettier-ignore
+const SOCIAL_RADIO_DEFAULT    = "normal" // prettier-ignore
+const SHOW_PAYMENTS_DEFAULT   = !!1 // prettier-ignore
+const PAYMENTS_RADIO_DEFAULT  = "filled" // prettier-ignore
+const MONOCHROME_MODE_DEFAULT = !!0 // prettier-ignore
+const COMPACT_MODE_DEFAULT    = !!0 // prettier-ignore
 
 // prettier-ignore
 export const SearchContext =
 	createContext<{
-		search:                string
-		setSearch:             Dispatch<SetStateAction<string>>
-		showFeather:           boolean
-		setShowFeather:        Dispatch<SetStateAction<boolean>>
-		brandsRadioValue:      BrandsRadioValue
-		setBrandsRadioValue:   Dispatch<SetStateAction<BrandsRadioValue>>
-		paymentsRadioValue:    PaymentsRadioValue
-		setPaymentsRadioValue: Dispatch<SetStateAction<PaymentsRadioValue>>
-		monochromeMode:        boolean
-		setMonochromeMode:     Dispatch<SetStateAction<boolean>>
-		compactMode:           boolean
-		setCompactMode:        Dispatch<SetStateAction<boolean>>
-		resetIcons:            () => void
-		resetDisplay:          () => void
-		results:               (readonly [string[], LazyExoticComponent<any>])[]
+		search:            string
+		setSearch:         Dispatch<SetStateAction<string>>
+		showFeather:       boolean
+		setShowFeather:    Dispatch<SetStateAction<boolean>>
+		showSocial:        boolean
+		setShowSocial:     Dispatch<SetStateAction<boolean>>
+		socialRadio:       SocialRadio
+		setSocialRadio:    Dispatch<SetStateAction<SocialRadio>>
+		showPayments:      boolean
+		setShowPayments:   Dispatch<SetStateAction<boolean>>
+		paymentsRadio:     PaymentsRadio
+		setPaymentsRadio:  Dispatch<SetStateAction<PaymentsRadio>>
+		monochromeMode:    boolean
+		setMonochromeMode: Dispatch<SetStateAction<boolean>>
+		compactMode:       boolean
+		setCompactMode:    Dispatch<SetStateAction<boolean>>
+		resetIcons:        () => void
+		resetDisplay:      () => void
+		results:           (readonly [string[], LazyExoticComponent<any>])[]
 	} | null>(null)
 
 const cache = createCache()
@@ -64,13 +70,23 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		parser: value => value,
 		serializer: serializeSearch,
 	})
+
+	//////////////////////////////////////////////////////////////////////////////
+
 	const [showFeather, setShowFeather] = useParamBoolean({
-		key: "feather",
-		initialValue: FEATHER_DEFAULT,
+		key: "show-feather",
+		initialValue: SHOW_FEATHER_DEFAULT,
 	})
-	const [brandsRadioValue, setBrandsRadioValue] = useParam<BrandsRadioValue>({
-		key: "brands-radio",
-		initialValue: BRANDS_RADIO_VALUE_DEFAULT,
+
+	//////////////////////////////////////////////////////////////////////////////
+
+	const [showSocial, setShowSocial] = useParamBoolean({
+		key: "show-social",
+		initialValue: SHOW_SOCIAL_DEFAULT,
+	})
+	const [socialRadio, setSocialRadio] = useParam<SocialRadio>({
+		key: "social-radio",
+		initialValue: SOCIAL_RADIO_DEFAULT,
 		parser: value => {
 			switch (value) {
 				case "normal":
@@ -78,21 +94,31 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				case "square":
 					return value
 			}
-			return BRANDS_RADIO_VALUE_DEFAULT
+			return SOCIAL_RADIO_DEFAULT
 		},
 	})
-	const [paymentsRadioValue, setPaymentsRadioValue] = useParam<PaymentsRadioValue>({
-		key: "payments-monochrome",
-		initialValue: PAYMENTS_RADIO_VALUE_DEFAULT,
+
+	//////////////////////////////////////////////////////////////////////////////
+
+	const [showPayments, setShowPayments] = useParamBoolean({
+		key: "show-payments",
+		initialValue: SHOW_PAYMENTS_DEFAULT,
+	})
+	const [paymentsRadio, setPaymentsRadio] = useParam<PaymentsRadio>({
+		key: "payments-radio",
+		initialValue: PAYMENTS_RADIO_DEFAULT,
 		parser: value => {
 			switch (value) {
 				case "normal":
 				case "filled":
 					return value
 			}
-			return PAYMENTS_RADIO_VALUE_DEFAULT
+			return PAYMENTS_RADIO_DEFAULT
 		},
 	})
+
+	//////////////////////////////////////////////////////////////////////////////
+
 	const [monochromeMode, setMonochromeMode] = useParamBoolean({
 		key: "monochrome-mode",
 		initialValue: MONOCHROME_MODE_DEFAULT,
@@ -102,11 +128,15 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		initialValue: COMPACT_MODE_DEFAULT,
 	})
 
+	//////////////////////////////////////////////////////////////////////////////
+
 	const resetIcons = useCallback(() => {
-		setShowFeather(FEATHER_DEFAULT)
-		setBrandsRadioValue(BRANDS_RADIO_VALUE_DEFAULT)
-		setPaymentsRadioValue(PAYMENTS_RADIO_VALUE_DEFAULT)
-	}, [setBrandsRadioValue, setPaymentsRadioValue, setShowFeather])
+		setShowFeather(SHOW_FEATHER_DEFAULT)
+		setShowSocial(SHOW_SOCIAL_DEFAULT)
+		setSocialRadio(SOCIAL_RADIO_DEFAULT)
+		setShowPayments(SHOW_PAYMENTS_DEFAULT)
+		setPaymentsRadio(PAYMENTS_RADIO_DEFAULT)
+	}, [setPaymentsRadio, setShowFeather, setShowPayments, setShowSocial, setSocialRadio])
 
 	const resetDisplay = useCallback(() => {
 		setMonochromeMode(MONOCHROME_MODE_DEFAULT)
@@ -116,24 +146,30 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	const results = useMemo(() => {
 		const results: (readonly [string[], LazyExoticComponent<any>])[] = []
 		if (showFeather) results.push(cache.get("feather"))
-		if (monochromeMode) {
-			const rv = brandsRadioValue
-			if (rv === "normal") results.push(cache.get("wolfkit-brands-mono"))
-			if (rv === "circle") results.push(cache.get("wolfkit-brands-mono-circle"))
-			if (rv === "square") results.push(cache.get("wolfkit-brands-mono-square"))
-			if (rv === "normal") results.push(cache.get("wolfkit-brands-original"))
-			if (rv === "circle") results.push(cache.get("wolfkit-brands-original-circle"))
-			if (rv === "square") results.push(cache.get("wolfkit-brands-original-square"))
+		if (showSocial) {
+			const rv = socialRadio
+			if (monochromeMode) {
+				if (rv === "normal") results.push(cache.get("wolfkit-brands-mono"))
+				if (rv === "circle") results.push(cache.get("wolfkit-brands-mono-circle"))
+				if (rv === "square") results.push(cache.get("wolfkit-brands-mono-square"))
+			} else {
+				if (rv === "normal") results.push(cache.get("wolfkit-brands-original"))
+				if (rv === "circle") results.push(cache.get("wolfkit-brands-original-circle"))
+				if (rv === "square") results.push(cache.get("wolfkit-brands-original-square"))
+			}
 		}
-		if (monochromeMode) {
-			const rv = paymentsRadioValue
-			if (rv === "normal") results.push(cache.get("wolfkit-payments-mono"))
-			if (rv === "filled") results.push(cache.get("wolfkit-payments-mono-filled"))
-			if (rv === "normal") results.push(cache.get("wolfkit-payments-original"))
-			if (rv === "filled") results.push(cache.get("wolfkit-payments-original-filled"))
+		if (showPayments) {
+			const rv = paymentsRadio
+			if (monochromeMode) {
+				if (rv === "normal") results.push(cache.get("wolfkit-payments-mono"))
+				if (rv === "filled") results.push(cache.get("wolfkit-payments-mono-filled"))
+			} else {
+				if (rv === "normal") results.push(cache.get("wolfkit-payments-original"))
+				if (rv === "filled") results.push(cache.get("wolfkit-payments-original-filled"))
+			}
 		}
 		return results
-	}, [monochromeMode, brandsRadioValue, paymentsRadioValue, showFeather])
+	}, [showFeather, showSocial, showPayments, socialRadio, monochromeMode, paymentsRadio])
 
 	return (
 		<SearchContext.Provider
@@ -142,10 +178,14 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setSearch,
 				showFeather,
 				setShowFeather,
-				brandsRadioValue,
-				setBrandsRadioValue,
-				paymentsRadioValue,
-				setPaymentsRadioValue,
+				showSocial,
+				setShowSocial,
+				socialRadio,
+				setSocialRadio,
+				showPayments,
+				setShowPayments,
+				paymentsRadio,
+				setPaymentsRadio,
 				monochromeMode,
 				setMonochromeMode,
 				compactMode,

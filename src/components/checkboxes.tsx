@@ -46,7 +46,7 @@ export function CheckboxAsButton({
 				//// data-checked={checked}
 				//// tabIndex={-1}
 			/>
-			{/* <input type="checkbox" /> */}
+			<input type="checkbox" checked />
 		</label>
 	)
 }

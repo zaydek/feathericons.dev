@@ -12,7 +12,6 @@ import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Checkbox,
-	CheckboxAsButton,
 	Checkboxes,
 	DebugCssEffect,
 	Grid,
@@ -29,15 +28,15 @@ import {
 import { useScrollProps } from "@/hooks"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
-	BrandsRadioValue,
 	ClipboardContext,
-	PaymentsRadioValue,
+	PaymentsRadio,
 	ProgressBarContext,
 	RangeContext,
 	SearchContext,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
+	SocialRadio,
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
@@ -67,10 +66,14 @@ function AppSidebar1() {
 	const {
 		showFeather,
 		setShowFeather,
-		brandsRadioValue,
-		setBrandsRadioValue,
-		paymentsRadioValue,
-		setPaymentsRadioValue,
+		showSocial,
+		setShowSocial,
+		socialRadio,
+		setSocialRadio,
+		showPayments,
+		setShowPayments,
+		paymentsRadio,
+		setPaymentsRadio,
 		monochromeMode,
 		setMonochromeMode,
 		compactMode,
@@ -104,94 +107,98 @@ function AppSidebar1() {
 				<div className="section-header-body" {...scrollProps}>
 					<section className="section">
 						<header className="section-header-header">
-							{/* <feather.Package className="section-icon" /> */}
+							<feather.Package className="section-icon" />
 							<h6 className="section-name">Icons</h6>
 							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetIcons} />
 						</header>
-						<div>
+						{/* <div> */}
+						<Checkboxes>
+							<Checkbox
+								name="Feather"
+								icon={feather.Feather}
+								checked={showFeather}
+								setChecked={createTransition(setShowFeather)}
+							/>
+						</Checkboxes>
+						<Checkboxes>
+							{/* TODO: Deprecate? */}
+							<Checkbox
+								name="Social"
+								icon={p => (
+									<feather.Folder
+										// TODO
+										style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
+										fill="currentColor"
+										strokeWidth={4}
+										{...p}
+									/>
+								)}
+								checked={showSocial}
+								setChecked={createTransition(setShowSocial)}
+							/>
 							<Checkboxes>
-								<Checkbox
-									name="Feather"
-									icon={feather.Feather}
-									checked={showFeather}
-									setChecked={createTransition(setShowFeather)}
+								<Radio<SocialRadio>
+									name="Original"
+									icon={monochromeMode ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
+									radioName="brands"
+									value="normal"
+									setValue={createTransition(setSocialRadio)}
+									checked={socialRadio === "normal"}
+								/>
+								<Radio<SocialRadio>
+									name="Circle"
+									icon={monochromeMode ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
+									radioName="brands"
+									value="circle"
+									setValue={createTransition(setSocialRadio)}
+									checked={socialRadio === "circle"}
+								/>
+								<Radio<SocialRadio>
+									name="Square"
+									icon={monochromeMode ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
+									radioName="brands"
+									value="square"
+									setValue={createTransition(setSocialRadio)}
+									checked={socialRadio === "square"}
 								/>
 							</Checkboxes>
+						</Checkboxes>
+						<Checkboxes>
+							{/* TODO: Deprecate? */}
+							<Checkbox
+								name="Payments"
+								icon={p => (
+									<feather.Folder
+										// TODO
+										style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
+										fill="currentColor"
+										strokeWidth={4}
+										{...p}
+									/>
+								)}
+								checked={showPayments}
+								setChecked={createTransition(setShowPayments)}
+							/>
 							<Checkboxes>
-								<CheckboxAsButton
-									name="Social"
-									icon={p => (
-										<feather.Folder
-											style={{ transform: "scale(0.875)", opacity: 0.75 }}
-											fill="currentColor"
-											strokeWidth={4}
-											{...p}
-										/>
-									)}
-									//// checked={monochromeMode}
-									//// setChecked={createTransition(setDisplayMonochrome)}
+								<Radio<PaymentsRadio>
+									name="Original"
+									icon={monochromeMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+									radioName="payments"
+									value="normal"
+									setValue={createTransition(setPaymentsRadio)}
+									checked={paymentsRadio === "normal"}
 								/>
-								<Checkboxes>
-									<Radio<BrandsRadioValue>
-										name="Original"
-										icon={monochromeMode ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
-										radioName="brands"
-										value="normal"
-										setValue={createTransition(setBrandsRadioValue)}
-										checked={brandsRadioValue === "normal"}
-									/>
-									<Radio<BrandsRadioValue>
-										name="Circle"
-										icon={monochromeMode ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
-										radioName="brands"
-										value="circle"
-										setValue={createTransition(setBrandsRadioValue)}
-										checked={brandsRadioValue === "circle"}
-									/>
-									<Radio<BrandsRadioValue>
-										name="Square"
-										icon={monochromeMode ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
-										radioName="brands"
-										value="square"
-										setValue={createTransition(setBrandsRadioValue)}
-										checked={brandsRadioValue === "square"}
-									/>
-								</Checkboxes>
-							</Checkboxes>
-							<Checkboxes>
-								<CheckboxAsButton
-									name="Payments"
-									icon={p => (
-										<feather.Folder
-											style={{ transform: "scale(0.875)", opacity: 0.75 }}
-											fill="currentColor"
-											strokeWidth={4}
-											{...p}
-										/>
-									)}
-									//// checked={displayMonochrome}
-									//// setChecked={createTransition(setDisplayMonochrome)}
+								<Radio<PaymentsRadio>
+									name="Filled"
+									icon={monochromeMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+									radioName="payments"
+									value="filled"
+									setValue={createTransition(setPaymentsRadio)}
+									checked={paymentsRadio === "filled"}
 								/>
-								<Checkboxes>
-									<Radio<PaymentsRadioValue>
-										name="Original"
-										icon={monochromeMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-										radioName="payments"
-										value="normal"
-										setValue={createTransition(setPaymentsRadioValue)}
-										checked={paymentsRadioValue === "normal"}
-									/>
-									<Radio<PaymentsRadioValue>
-										name="Filled"
-										icon={monochromeMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-										radioName="payments"
-										value="filled"
-										setValue={createTransition(setPaymentsRadioValue)}
-										checked={paymentsRadioValue === "filled"}
-									/>
-								</Checkboxes>
 							</Checkboxes>
-						</div>
+						</Checkboxes>
+						{/* </div> */}
 					</section>
 				</div>
 			</header>
@@ -199,7 +206,7 @@ function AppSidebar1() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						{/* <feather.Monitor className="section-icon" /> */}
+						<feather.Monitor className="section-icon" />
 						<h6 className="section-name">Display</h6>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
 					</header>
@@ -208,7 +215,8 @@ function AppSidebar1() {
 							name="Monochrome mode"
 							icon={p => (
 								<feather.Droplet
-									style={{ transform: "scale(0.875)", opacity: 0.75 }}
+									// TODO
+									style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
 									fill="currentColor"
 									strokeWidth={4}
 									{...p}
@@ -221,7 +229,8 @@ function AppSidebar1() {
 							name="Compact mode"
 							icon={p => (
 								<feather.Minimize2
-									style={{ transform: "scale(0.875)", opacity: 0.75 }}
+									// TODO
+									style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
 									fill="currentColor"
 									strokeWidth={4}
 									{...p}
@@ -279,7 +288,7 @@ function AppSidebar2() {
 			<header className="section-header">
 				<section className="section is-start">
 					<header className="section-header-header">
-						{/* <feather.MousePointer className="section-icon" /> */}
+						<feather.MousePointer className="section-icon" />
 						<h6 className="section-name">Selected</h6>
 						<SelectExportAs value={exportAs} setValue={setExportAs} />
 					</header>
@@ -292,14 +301,14 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						{/* <feather.Circle className="section-icon" /> */}
+						<feather.Circle className="section-icon" />
 						<h6 className="section-name">Color</h6>
 					</header>
 				</section>
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						{/* <feather.PenTool className="section-icon" /> */}
+						<feather.PenTool className="section-icon" />
 						<h6 className="section-name">Size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
@@ -309,7 +318,7 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						{/* <feather.PenTool className="section-icon" /> */}
+						<feather.PenTool className="section-icon" />
 						<h6 className="section-name">Stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(3)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
@@ -323,7 +332,7 @@ function AppSidebar2() {
 				<hr className="hr is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header-header">
-						{/* <feather.Shield className="section-icon" /> */}
+						<feather.Shield className="section-icon" />
 						<h6 className="section-name">Sponsor</h6>
 					</header>
 				</section>
