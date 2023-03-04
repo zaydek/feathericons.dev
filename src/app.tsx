@@ -235,7 +235,7 @@ function AppSidebar2() {
 				<section className="section-2 is-start">
 					<header className="section-2-header-header">
 						<feather.MousePointer className="section-2-icon" />
-						<h6 className="section-2-name u-flex-1">HELLO</h6>
+						<h6 className="section-2-name u-flex-1">Selected</h6>
 						<SelectFormat value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
@@ -247,8 +247,18 @@ function AppSidebar2() {
 				<hr />
 				<section className="section-2">
 					<header className="section-2-header-header">
+						<feather.Circle className="section-2-icon" />
+						<h6 className="section-header-name u-flex-1">Color</h6>
+						{/* <span className="section-2-header-slider-desc">{size} PX</span>
+						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} /> */}
+					</header>
+					{/* <Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} /> */}
+				</section>
+				<hr />
+				<section className="section-2">
+					<header className="section-2-header-header">
 						<feather.PenTool className="section-2-icon" />
-						<h6 className="section-header-name u-flex-1">Idea</h6>
+						<h6 className="section-header-name u-flex-1">Size</h6>
 						<span className="section-2-header-slider-desc">{size} PX</span>
 						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
 					</header>
@@ -258,7 +268,7 @@ function AppSidebar2() {
 				<section className="section-2">
 					<header className="section-2-header-header">
 						<feather.PenTool className="section-2-icon" />
-						<h6 className="section-header-name u-flex-1">Idea</h6>
+						<h6 className="section-header-name u-flex-1">Stroke width</h6>
 						<span className="section-2-header-slider-desc">{size} PX</span>
 						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
 					</header>

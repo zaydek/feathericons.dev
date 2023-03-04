@@ -60,39 +60,41 @@ export function GridItem({
 
 	return (
 		//// <li id={id} className="grid-item" data-bookmark={bookmark} data-selected={selected.has(id)}>
-		<li id={id} className="grid-item" data-selected={selected.has(id)}>
-			<figure
-				className="grid-item-frame"
-				onFocus={e => {
-					const selection = window.getSelection()
-					selection?.removeAllRanges()
-				}}
-				//// // Enabling drag-paste
-				//// onDragStart={e => {
-				//// 	e.dataTransfer.setData("text/plain", "Hello, world!")
-				//// 	// TODO
-				//// }}
-				onClick={e => {
-					if (e.metaKey) {
-						if (sidebar === "minimized") {
-							setSidebar("normal")
-						}
-						e.stopPropagation()
-						e.preventDefault()
-						addToSelected(id)
-					} else {
-						if (sidebar === "minimized") {
-							setSidebar("normal")
-						}
-						e.stopPropagation()
-						e.preventDefault()
-						clearSelected()
-						addToSelected(id)
+		<li
+			id={id}
+			className="grid-item"
+			//// onFocus={e => {
+			//// 	const selection = window.getSelection()
+			//// 	selection?.removeAllRanges()
+			//// }}
+			//// // Enabling drag-paste
+			//// onDragStart={e => {
+			//// 	e.dataTransfer.setData("text/plain", "Hello, world!")
+			//// 	// TODO
+			//// }}
+			onClick={e => {
+				if (e.metaKey) {
+					if (sidebar === "minimized") {
+						setSidebar("normal")
 					}
-				}}
-				//// draggable
-				tabIndex={0}
-			>
+					e.stopPropagation()
+					e.preventDefault()
+					addToSelected(id)
+				} else {
+					if (sidebar === "minimized") {
+						setSidebar("normal")
+					}
+					e.stopPropagation()
+					e.preventDefault()
+					clearSelected()
+					addToSelected(id)
+				}
+			}}
+			//// draggable
+			tabIndex={0}
+			data-selected={selected.has(id)}
+		>
+			<figure className="grid-item-frame">
 				<Icon className="grid-item-frame-icon" />
 			</figure>
 			<figcaption className="grid-item-name">{id}</figcaption>

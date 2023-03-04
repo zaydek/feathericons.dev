@@ -7,26 +7,22 @@ import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "./icon-config"
 
 const icons: Record<ExportAs, Icon> = {
 	svg: SvgIcon,
-	"strict-jsx": ReactjsIcon,
-	"strict-tsx": TypeScriptIcon,
 	jsx: ReactjsIcon,
 	tsx: TypeScriptIcon,
-	"strict-jsx-rn": SvgIcon, // TODO
-	"strict-tsx-rn": SvgIcon, // TODO
-	//// jpg: feather.Image,
-	//// png: feather.Image,
+	"strict-jsx": ReactjsIcon,
+	"strict-tsx": TypeScriptIcon,
+	"strict-jsx-rn": ReactjsIcon,
+	"strict-tsx-rn": TypeScriptIcon,
 }
 
 const names: Record<ExportAs, string> = {
 	svg: "SVG",
-	"strict-jsx": "JSX",
-	"strict-tsx": "TypeScript JSX",
-	jsx: "JSX",
+	jsx: "JavaScript JSX",
 	tsx: "TypeScript JSX",
+	"strict-jsx": "Strict JavaScript JSX",
+	"strict-tsx": "Strict TypeScript JSX",
 	"strict-jsx-rn": "React Native",
-	"strict-tsx-rn": "React Native (TypeScript)",
-	//// jpg: "JPG",
-	//// png: "PNG",
+	"strict-tsx-rn": "TypeScript React Native",
 }
 
 export function SelectFormat({ value, setValue }: { value: ExportAs; setValue: Dispatch<SetStateAction<ExportAs>> }) {
@@ -45,21 +41,17 @@ export function SelectFormat({ value, setValue }: { value: ExportAs; setValue: D
 					{/* <option value="sass">Sass</option> */}
 				</optgroup>
 				<optgroup label="Solid.js">
-					<option value="jsx">JSX</option>
-					<option value="tsx">JSX (TypeScript)</option>
+					<option value="jsx">JavaScript JSX</option>
+					<option value="tsx">TypeScript JSX</option>
 				</optgroup>
 				<optgroup label="React.js, Qwik">
-					<option value="strict-jsx">React.js</option>
-					<option value="strict-tsx">React.js (TypeScript)</option>
+					<option value="strict-jsx">Strict JavaScript JSX</option>
+					<option value="strict-tsx">Strict TypeScript JSX</option>
 				</optgroup>
 				<optgroup label="React Native">
 					<option value="strict-jsx-rn">React Native</option>
-					<option value="strict-tsx-rn">React Native (TypeScript)</option>
+					<option value="strict-tsx-rn">TypeScript React Native</option>
 				</optgroup>
-				{/* <optgroup label="Image">
-					<option value="jpg">JPG</option>
-					<option value="png">PNG</option>
-				</optgroup> */}
 			</select>
 			<span className="select-format-button">
 				<span className="select-format-button-name">{name}</span>
