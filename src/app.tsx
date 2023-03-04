@@ -129,6 +129,7 @@ function AppSidebar1() {
 						</Checkboxes>
 						<Checkboxes>
 							<MonochromeCheckboxFolder
+								//// name="Brands"
 								name={brandsMonochrome ? "Brands (mono)" : "Brands"}
 								icon={feather.Shield}
 								checked={brandsMonochrome}
@@ -157,6 +158,7 @@ function AppSidebar1() {
 						</Checkboxes>
 						<Checkboxes>
 							<MonochromeCheckboxFolder
+								//// name="Payments"
 								name={paymentsMonochrome ? "Payments (mono)" : "Payments"}
 								icon={feather.CreditCard}
 								checked={paymentsMonochrome}

@@ -1,7 +1,7 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction } from "react"
 import { useParam } from "../hooks/use-param"
 
-export type SidebarState = "normal" | "maximized" | "minimized"
+export type SidebarState = "minimized" | "open" | "maximized"
 
 // prettier-ignore
 export const LayoutContext =
@@ -13,16 +13,14 @@ export const LayoutContext =
 export function LayoutProvider({ children }: PropsWithChildren) {
 	const [sidebar, setSidebar] = useParam<SidebarState>({
 		key: "sidebar",
-		initialValue: "minimized",
+		initialValue: "open",
 		parser: value => {
-			if (value === "normal" || value === "maximized" || value === "minimized") {
+			if (value === "minimized" || value === "open" || value === "maximized") {
 				return value
 			} else {
-				return "normal"
+				return "open"
 			}
 		},
-		//// // TODO: Don't persist state when sidebar=maximized
-		//// serializer,
 	})
 
 	return (
