@@ -33,110 +33,7 @@ export const ClipboardContext =
 		clipboard: 		 string
 	} | null>(null)
 
-//// function getClipboardPlaceholder(exportAs: ExportAs) {
-//// 	// prettier-ignore
-//// 	switch (exportAs) {
-//// 		case "svg":
-//// 			return detab(`
-//// 				<!-- https://feathericons.dev/#!/feather -->
-//// 				<svg class="feather feather-feather" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-//// 					<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-//// 					<line x1="16" x2="2" y1="8" y2="22" />
-//// 					<line x1="17.5" x2="9" y1="15" y2="15" />
-//// 				</svg>
-//// 			`, { spaces: true })
-//// 		case "jsx":
-//// 			return detab(`
-//// 				// https://feathericons.dev/#!/feather?export-as=jsx
-//// 				export function Feather(props) {
-//// 					return (
-//// 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" {...props}>
-//// 							<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-//// 							<line x1="16" x2="2" y1="8" y2="22" />
-//// 							<line x1="17.5" x2="9" y1="15" y2="15" />
-//// 						</svg>
-//// 					);
-//// 				}
-//// 			`, { spaces: true })
-//// 		case "tsx":
-//// 			return detab(`
-//// 				import { JSX } from "solid-js";
-////
-//// 				// https://feathericons.dev/#!/feather?export-as=tsx
-//// 				export function Feather(props: JSX.IntrinsicElements["svg"]) {
-//// 					return (
-//// 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" {...props}>
-//// 							<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-//// 							<line x1="16" x2="2" y1="8" y2="22" />
-//// 							<line x1="17.5" x2="9" y1="15" y2="15" />
-//// 						</svg>
-//// 					);
-//// 				}
-//// 			`, { spaces: true })
-//// 		case "strict-jsx":
-//// 			return detab(`
-//// 				// https://feathericons.dev/#!/feather?export-as=strict-jsx
-//// 				export function Feather(props) {
-//// 					return (
-//// 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" {...props}>
-//// 							<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-//// 							<line x1="16" x2="2" y1="8" y2="22" />
-//// 							<line x1="17.5" x2="9" y1="15" y2="15" />
-//// 						</svg>
-//// 					);
-//// 				}
-//// 			`, { spaces: true })
-//// 		case "strict-tsx":
-//// 			return detab(`
-//// 				// https://feathericons.dev/#!/feather?export-as=strict-tsx
-//// 				export function Feather(props: JSX.IntrinsicElements["svg"]) {
-//// 					return (
-//// 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
-//// 							<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-//// 							<line x1="16" x2="2" y1="8" y2="22" />
-//// 							<line x1="17.5" x2="9" y1="15" y2="15" />
-//// 						</svg>
-//// 					);
-//// 				}
-//// 			`, { spaces: true })
-//// 		//// case "strict-jsx-rn":
-//// 		//// 	return detab(`
-//// 		//// 		// https://feathericons.dev/#!/feather?export-as=strict-jsx-rn
-//// 		//// 		export function Feather(props) {
-//// 		//// 			return (
-//// 		//// 				<Svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
-//// 		//// 					<Path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-//// 		//// 					<Line x1="16" x2="2" y1="8" y2="22" />
-//// 		//// 					<Line x1="17.5" x2="9" y1="15" y2="15" />
-//// 		//// 				</Svg>
-//// 		//// 			);
-//// 		//// 		}
-//// 		//// 	`, { spaces: true })
-//// 		//// case "strict-tsx-rn":
-//// 		//// 	return detab(`
-//// 		//// 		import { Line, Path, Svg, SvgProps } from 'react-native-svg';
-//// ////
-//// 		//// 		// https://feathericons.dev/#!/feather?export-as=strict-tsx-rn
-//// 		//// 		export function Feather(props: SvgProps) {
-//// 		//// 			return (
-//// 		//// 				<Svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>
-//// 		//// 					<Path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-//// 		//// 					<Line x1="16" x2="2" y1="8" y2="22" />
-//// 		//// 					<Line x1="17.5" x2="9" y1="15" y2="15" />
-//// 		//// 				</Svg>
-//// 		//// 			);
-//// 		//// 		}
-//// 		//// 	`, { spaces: true })
-//// 	}
-//// 	// TODO: Never
-//// 	return ""
-//// }
-
 export function ClipboardProvider({ children }: { children: ReactNode }) {
-	//// // TODO: Change to useParam
-	//// const [exportAs, setExportAs] = useState<ExportAs>("svg")
-	//// const [selected, setSelected] = useState<Map<string, true>>(() => new Map())
-
 	const [exportAs, setExportAs] = useParam<ExportAs>({
 		key: "export-as",
 		initialValue: "svg",
@@ -179,7 +76,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 						<!--
 
 						Feather icons designed by @colebemis
-						Licensed as MIT open source
+						Licensed as MIT
 						Personal & commercial use allowed *without* attribution
 						https://github.com/feathericons/feather
 
@@ -198,7 +95,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 					// prettier-ignore
 					setClipboard(detab(`
 						// Feather icons designed by @colebemis
-						// Licensed as MIT open source
+						// Licensed as MIT
 						// Personal & commercial use allowed *without* attribution
 						// https://github.com/feathericons/feather
 						//
