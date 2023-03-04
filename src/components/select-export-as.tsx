@@ -17,10 +17,10 @@ const icons: Record<ExportAs, Icon> = {
 
 const names: Record<ExportAs, string> = {
 	svg: "SVG",
-	jsx: "Solid",
-	tsx: "Typescript Solid",
-	"strict-jsx": "React",
-	"strict-tsx": "Typescript React",
+	jsx: "Solid.js",
+	tsx: "Typescript Solid.js",
+	"strict-jsx": "React.js",
+	"strict-tsx": "Typescript React.js",
 	//// "strict-jsx-rn": "React Native",
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
@@ -40,12 +40,12 @@ export function SelectExportAs({ value, setValue }: { value: ExportAs; setValue:
 					<option value="scss">Sass (SCSS)</option>
 				</optgroup> */}
 				<optgroup label="Solid.js">
-					<option value="jsx">Solid</option>
-					<option value="tsx">TypeScript Solid</option>
+					<option value="jsx">Solid.js</option>
+					<option value="tsx">TypeScript Solid.js</option>
 				</optgroup>
 				<optgroup label="React.js, Qwik">
-					<option value="strict-jsx">React</option>
-					<option value="strict-tsx">TypeScript React</option>
+					<option value="strict-jsx">React.js</option>
+					<option value="strict-tsx">TypeScript React.js</option>
 				</optgroup>
 				{/* <optgroup label="React Native">
 					<option value="strict-jsx-rn">React Native</option>
