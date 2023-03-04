@@ -283,28 +283,6 @@ function AppMain() {
 	const { results } = useContext(SearchContext)!
 	const { clearSelected } = useContext(ClipboardContext)!
 
-	useEffect(() => {
-		function handleClick() {
-			clearSelected()
-		}
-		window.addEventListener("click", handleClick, false)
-		return () => window.removeEventListener("click", handleClick, false)
-	}, [clearSelected])
-
-	//// return (
-	//// 	<main
-	//// 		className="main"
-	//// 		onClick={e => {
-	//// 			e.stopPropagation()
-	//// 			e.preventDefault()
-	//// 			clearSelected()
-	//// 		}}
-	//// 		// @ts-expect-error
-	//// 		inert={sidebar === "maximized" ? "true" : null}
-	//// 	>
-	//// 		{children}
-	//// 	</main>
-
 	const count = results.reduce((sum, [names]) => sum + names.length, 0)
 
 	// prettier-ignore
@@ -312,6 +290,14 @@ function AppMain() {
 		active:   `Feather\u2002·\u2002${count} icons`,
 		inactive: "Feather",
 	})
+
+	useEffect(() => {
+		function handleClick() {
+			clearSelected()
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [clearSelected])
 
 	return (
 		<Main>

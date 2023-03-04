@@ -42,18 +42,18 @@ function useFocusShortcut({
 	return void 0
 }
 
-//// function useClearShortcut({ setSearch }: { setSearch: Dispatch<SetStateAction<string>> }) {
-//// 	useEffect(() => {
-//// 		function handleKeyDown(e: KeyboardEvent) {
-//// 			if (e.key === "Escape") {
-//// 				setSearch("")
-//// 			}
-//// 		}
-//// 		window.addEventListener("keydown", handleKeyDown, false)
-//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-//// 	}, [setSearch])
-//// 	return void 0
-//// }
+function useClearShortcut({ setSearch }: { setSearch: Dispatch<SetStateAction<string>> }) {
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				setSearch("")
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [setSearch])
+	return void 0
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -64,19 +64,21 @@ export function SearchBar() {
 	useFocusOnMount({ ref })
 	useResetScrollOnSearch({ search })
 	useFocusShortcut({ ref, setSearch })
-	//// useClearShortcut({ setSearch })
+	useClearShortcut({ setSearch })
 
 	return (
-		<div className="search-bar" onClick={e => ref.current!.focus()}>
+		<div
+			className="search-bar"
+			onClick={e => {
+				e.preventDefault()
+				e.stopPropagation()
+				ref.current!.focus()
+			}}
+		>
 			<feather.Search className="search-bar-icon" strokeWidth={4} />
 			<input
 				ref={ref}
 				type="text"
-				//// // prettier-ignore
-				//// placeholder={focus
-				//// 	? undefined //// "Press esc to clear"
-				//// 	: (isMac() ? "Press ⌘P to focus" : "Press Ctrl-P to focus")
-				//// }
 				placeholder={isMac() ? "Press ⌘P to focus" : "Press Ctrl-P to focus"}
 				value={search}
 				onChange={e => setSearch(e.currentTarget.value)}

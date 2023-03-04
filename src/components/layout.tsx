@@ -76,6 +76,7 @@ export function Sidebar1({ children }: PropsWithChildren) {
 	)
 }
 
+// TODO: Add e.preventDefault() and e.stopPropagation() to click handler?
 export function Sidebar2({ children }: PropsWithChildren) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 
@@ -108,6 +109,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 	)
 }
 
+// TODO: Add e.preventDefault() and e.stopPropagation() to click handler?
 function _SidebarOverlay() {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const handleClickClose = useCallback(() => {
