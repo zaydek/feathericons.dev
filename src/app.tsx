@@ -108,16 +108,16 @@ function AppSidebar1() {
 
 	return (
 		<Sidebar1>
-			<header className="section-2-header">
-				<section className="section-2 is-start">
+			<header className="section-header">
+				<section className="section is-start">
 					<SearchBar />
 				</section>
-				<div className="section-2-header-body" {...scrollProps}>
-					<section className="section-2">
-						<header className="section-2-header-header">
-							<feather.Package className="section-2-icon" />
-							<h6 className="section-header-name u-flex-1">Icons</h6>
-							<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
+				<div className="section-header-body" {...scrollProps}>
+					<section className="section">
+						<header className="section-header-header">
+							<feather.Package className="section-icon" />
+							<h6 className="section-name u-flex-1">Icons</h6>
+							<feather.RotateCcw className="section-undo" strokeWidth={4} />
 						</header>
 						<Checkboxes>
 							<Checkbox
@@ -181,13 +181,13 @@ function AppSidebar1() {
 					<hr className="hr" />
 				</div>
 			</header>
-			<div className="section-2-spacer"></div>
-			<footer className="section-2-footer">
+			<div className="section-spacer"></div>
+			<footer className="section-footer">
 				<hr className="hr is-collapsible" />
-				<section className="section-2 is-end">
-					<header className="section-2-header-header">
-						<feather.Globe className="section-2-icon" />
-						<h6 className="section-header-name u-flex-1">Resources</h6>
+				<section className="section is-end">
+					<header className="section-header-header">
+						<feather.Globe className="section-icon" />
+						<h6 className="section-name u-flex-1">Resources</h6>
 					</header>
 					<nav className="resources">
 						<Resource name="Icons" icon={wkBrandsOriginal.Github} />
@@ -211,55 +211,55 @@ function AppSidebar2() {
 
 	return (
 		<Sidebar2>
-			<header className="section-2-header">
-				<section className="section-2 is-start">
-					<header className="section-2-header-header">
-						<feather.MousePointer className="section-2-icon" />
-						<h6 className="section-2-name u-flex-1">Selected</h6>
+			<header className="section-header">
+				<section className="section is-start">
+					<header className="section-header-header">
+						<feather.MousePointer className="section-icon" />
+						<h6 className="section-name u-flex-1">Selected</h6>
 						<SelectExportAs value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
-				<div className="section-2-header-body is-padding-bottom" {...scrollProps}>
+				<div className="section-header-body is-padding-bottom" {...scrollProps}>
 					<SyntaxHighlighting lang={lang} code={clipboard} />
 				</div>
 			</header>
-			<div className="section-2-body">
+			<div className="section-body">
 				<hr className="hr" />
-				<section className="section-2">
-					<header className="section-2-header-header">
-						<feather.Circle className="section-2-icon" />
-						<h6 className="section-header-name u-flex-1">Color</h6>
+				<section className="section">
+					<header className="section-header-header">
+						<feather.Circle className="section-icon" />
+						<h6 className="section-name u-flex-1">Color</h6>
 					</header>
 				</section>
 				<hr className="hr" />
-				<section className="section-2">
-					<header className="section-2-header-header">
-						<feather.PenTool className="section-2-icon" />
-						<h6 className="section-header-name u-flex-1">Size</h6>
-						<span className="section-2-header-slider-desc">{size.toFixed(0)} PX</span>
-						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
+				<section className="section">
+					<header className="section-header-header">
+						<feather.PenTool className="section-icon" />
+						<h6 className="section-name u-flex-1">Size</h6>
+						<span className="section-range-desc">{size.toFixed(0)} PX</span>
+						<feather.RotateCcw className="section-undo" strokeWidth={4} />
 					</header>
 					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
 				<hr className="hr" />
-				<section className="section-2">
-					<header className="section-2-header-header">
-						<feather.PenTool className="section-2-icon" />
-						<h6 className="section-header-name u-flex-1">Stroke width</h6>
-						<span className="section-2-header-slider-desc">{strokeWidth.toFixed(3)}</span>
-						<feather.RotateCcw className="section-2-header-undo" strokeWidth={4} />
+				<section className="section">
+					<header className="section-header-header">
+						<feather.PenTool className="section-icon" />
+						<h6 className="section-name u-flex-1">Stroke width</h6>
+						<span className="section-range-desc">{strokeWidth.toFixed(3)}</span>
+						<feather.RotateCcw className="section-undo" strokeWidth={4} />
 					</header>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 				</section>
 				<hr className="hr" />
 			</div>
-			<div className="section-2-spacer"></div>
-			<footer className="section-2-footer">
+			<div className="section-spacer"></div>
+			<footer className="section-footer">
 				<hr className="hr is-collapsible" />
-				<section className="section-2 is-end">
-					<header className="section-2-header-header">
-						<feather.Shield className="section-2-icon" />
-						<h6 className="section-header-name u-flex-1">Sponsor</h6>
+				<section className="section is-end">
+					<header className="section-header-header">
+						<feather.Shield className="section-icon" />
+						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
 				</section>
 			</footer>

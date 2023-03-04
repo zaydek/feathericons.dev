@@ -1,6 +1,8 @@
 import "the-new-css-reset"
 
 import "@/css/base.sass"
+import "@/css/section.sass"
+
 import "@/css/input-checkbox.sass"
 import "@/css/input-range.sass"
 

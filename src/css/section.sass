@@ -5,7 +5,7 @@
 
 ////////////////////////////////////////
 
-.section-2-header
+.section-header
   position: sticky
   top: 0
   z-index: 10
@@ -14,14 +14,10 @@
   background-color: white
   overflow-y: auto
 
-// TODO
-//// .section-2-body
-////   // No-op
-
-.section-2-spacer
+.section-spacer
   flex: 1
 
-.section-2-footer
+.section-footer
   position: sticky
   bottom: 0
   z-index: 20
@@ -29,14 +25,13 @@
 
 ////////////////////////////////////////
 
-.section-2-header-header
+.section-header-header
   display: flex
   align-items: center
-  //// padding: $sidebar-padding-y $sidebar-padding-x
   height: math.div($button-height, 2)
   background-color: white
 
-.section-2-header-body
+.section-header-body
   flex: 1
   overflow-y: auto
   // Add .padding-bottom for .syntax-highlighter
@@ -46,7 +41,7 @@
 
 ////////////////////////////////////////
 
-.section-2
+.section
   display: flex
   flex-direction: column
   gap: $sidebar-gap
@@ -58,27 +53,25 @@
   &.is-end
     padding: $sidebar-padding-y $sidebar-padding-x
 
-.section-2 > :not(.checkboxes, .resources)
+.section > :not(.checkboxes, .resources)
   margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 ////////////////////////////////////////
 
-.section-2-icon
+.section-icon
   margin-right: math.div($button-height - $tiny-icon-height, 2)
   height: $tiny-icon-height
   width: $tiny-icon-height
   color: $slate-600
-  //// background-color: gray
-  //// border-radius: 1e3px
 
-.section-2-name
+.section-name
   font: 500 11px / normal $sans
   font-feature-settings: 'tnum'
   letter-spacing: 0.05em
   text-transform: uppercase
   color: $slate-600
 
-.section-2-header-slider-desc
+.section-range-desc
   display: inline-flex
   justify-content: center
   align-items: center
@@ -90,11 +83,11 @@
   font-feature-settings: 'tnum'
   letter-spacing: 0.05em
   text-transform: uppercase
-  color: $slate-800
+  color: $slate-600
   -webkit-user-select: all // Select all on click
   user-select: all         // Select all on click
 
-.section-2-header-undo
+.section-undo
   margin-left: math.div($button-height - $tiny-icon-height, 2)
   height: $tiny-icon-height
   width: $tiny-icon-height
