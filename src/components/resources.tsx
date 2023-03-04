@@ -12,7 +12,7 @@ export function Resource({ name, icon: Icon }: { name: string; icon: Icon }) {
 	return (
 		<a className="resource" href="TODO" target="_blank">
 			<Icon className="resource-icon" />
-			<span className="resource-name u-flex-1">{name}</span>
+			<span className="resource-name">{name}</span>
 			<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 		</a>
 	)

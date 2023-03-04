@@ -24,6 +24,7 @@ import {
 	Sidebar1,
 	Sidebar2,
 	SyntaxHighlighting,
+	TheWolfKit,
 } from "@/components"
 import { useScrollProps } from "@/hooks"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
@@ -116,7 +117,7 @@ function AppSidebar1() {
 					<section className="section">
 						<header className="section-header-header">
 							<feather.Package className="section-icon" />
-							<h6 className="section-name u-flex-1">Icons</h6>
+							<h6 className="section-name">Icons</h6>
 							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetAll} />
 						</header>
 						<Checkboxes>
@@ -189,12 +190,21 @@ function AppSidebar1() {
 				<section className="section is-end">
 					<header className="section-header-header">
 						<feather.Globe className="section-icon" />
-						<h6 className="section-name u-flex-1">Resources</h6>
+						<h6 className="section-name">Resources</h6>
 					</header>
 					<nav className="resources">
-						<Resource name="Icons" icon={wkBrandsOriginal.Github} />
-						<Resource name="Website" icon={wkBrandsOriginal.Github} />
-						<Resource name="Figma Plugin" icon={wkBrandsOriginal.Figma} />
+						{/* <Resource name="Star icons on GitHub" icon={wkBrandsOriginal.Github} />
+						<Resource name="Star site on GitHub" icon={wkBrandsOriginal.Github} /> */}
+						<Resource
+							name="Star icons on GitHub"
+							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" strokeWidth={4} {...p} />}
+						/>
+						<Resource
+							name="Star app on GitHub"
+							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" strokeWidth={4} {...p} />}
+						/>
+						{/* <Resource name="Feather Figma Plugin" icon={wkBrandsOriginal.Figma} /> */}
+						<Resource name="The Wolf Kit" icon={TheWolfKit} />
 						<Resource name="Share on Twitter" icon={wkBrandsOriginal.Twitter} />
 					</nav>
 				</section>
@@ -217,7 +227,7 @@ function AppSidebar2() {
 				<section className="section is-start">
 					<header className="section-header-header">
 						<feather.MousePointer className="section-icon" />
-						<h6 className="section-name u-flex-1">Selected</h6>
+						<h6 className="section-name">Selected</h6>
 						<SelectExportAs value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
@@ -230,14 +240,14 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header-header">
 						<feather.Circle className="section-icon" />
-						<h6 className="section-name u-flex-1">Color</h6>
+						<h6 className="section-name">Color</h6>
 					</header>
 				</section>
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
 						<feather.PenTool className="section-icon" />
-						<h6 className="section-name u-flex-1">Size</h6>
+						<h6 className="section-name">Size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
 					</header>
@@ -247,7 +257,7 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header-header">
 						<feather.PenTool className="section-icon" />
-						<h6 className="section-name u-flex-1">Stroke width</h6>
+						<h6 className="section-name">Stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(3)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
 					</header>
@@ -261,7 +271,7 @@ function AppSidebar2() {
 				<section className="section is-end">
 					<header className="section-header-header">
 						<feather.Shield className="section-icon" />
-						<h6 className="section-name u-flex-1">Sponsor</h6>
+						<h6 className="section-name">Sponsor</h6>
 					</header>
 				</section>
 			</footer>

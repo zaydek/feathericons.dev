@@ -4,6 +4,7 @@ import { ShikiContext } from "@/state"
 import { useContext, useEffect, useState } from "react"
 import { IThemedToken, Lang } from "shiki-es"
 
+// TODO: Parse URLs and @mentions
 export function SyntaxHighlighting({ lang, code }: { lang: Lang; code: string }) {
 	const { highlighter } = useContext(ShikiContext)!
 

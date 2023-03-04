@@ -71,7 +71,6 @@ export function SearchBar() {
 			<feather.Search className="search-bar-icon" strokeWidth={4} />
 			<input
 				ref={ref}
-				className="u-flex-1"
 				type="text"
 				//// // prettier-ignore
 				//// placeholder={focus

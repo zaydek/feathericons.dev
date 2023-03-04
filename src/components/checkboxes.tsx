@@ -38,7 +38,7 @@ export function MonochromeCheckboxFolder({
 			//// title="Toggle monochrome"
 		>
 			<Icon className="checkbox-icon" />
-			<span className="checkbox-name u-flex-1">{name}</span>
+			<span className="checkbox-name">{name}</span>
 			{/* This is supposed to be checkbox... */}
 			<span
 				className="checkbox-icon"
@@ -79,7 +79,7 @@ export function Checkbox({
 			tabIndex={0}
 		>
 			<Icon className="checkbox-icon" />
-			<span className="checkbox-name u-flex-1">{name}</span>
+			<span className="checkbox-name">{name}</span>
 			{/* NOTE: Use tabindex={-1} because of <label tabIndex={1}> */}
 			<input
 				// prettier-ignore

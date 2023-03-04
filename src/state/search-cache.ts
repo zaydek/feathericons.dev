@@ -1,8 +1,8 @@
 import { lazy, LazyExoticComponent } from "react"
 
 import featherManifest from "@icons/feather/manifest.json"
-import wolfKitBrandsManifest from "@icons/wolfkit/brands/original/manifest.json"
-import wolfKitPaymentsManifest from "@icons/wolfkit/payments/original/manifest.json"
+import wkBrandsManifest from "@icons/wolfkit/brands/original/manifest.json"
+import wkPaymentsManifest from "@icons/wolfkit/payments/original/manifest.json"
 
 type Iconset =
 	| "feather"
@@ -39,43 +39,43 @@ export function createCache() {
 				Icon = lazy(() => import("./stubs/feather"))
 				break
 			case "wolfkit-brands-original":
-				names = wolfKitBrandsManifest
+				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-original"))
 				break
 			case "wolfkit-brands-original-circle":
-				names = wolfKitBrandsManifest
+				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-original-circle"))
 				break
 			case "wolfkit-brands-original-square":
-				names = wolfKitBrandsManifest
+				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-original-square"))
 				break
 			case "wolfkit-brands-mono":
-				names = wolfKitBrandsManifest
+				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-mono"))
 				break
 			case "wolfkit-brands-mono-circle":
-				names = wolfKitBrandsManifest
+				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-mono-circle"))
 				break
 			case "wolfkit-brands-mono-square":
-				names = wolfKitBrandsManifest
+				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-mono-square"))
 				break
 			case "wolfkit-payments-original":
-				names = wolfKitPaymentsManifest
+				names = wkPaymentsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-payments-original"))
 				break
 			case "wolfkit-payments-original-filled":
-				names = wolfKitPaymentsManifest
+				names = wkPaymentsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-payments-original-filled"))
 				break
 			case "wolfkit-payments-mono":
-				names = wolfKitPaymentsManifest
+				names = wkPaymentsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-payments-mono"))
 				break
 			case "wolfkit-payments-mono-filled":
-				names = wolfKitPaymentsManifest
+				names = wkPaymentsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-payments-mono-filled"))
 				break
 		}
