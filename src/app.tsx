@@ -17,6 +17,7 @@ import {
 	Main,
 	MemoGrid,
 	MonochromeCheckboxFolder,
+	Radio,
 	Range,
 	Resource,
 	SearchBar,
@@ -29,7 +30,9 @@ import {
 import { useScrollProps } from "@/hooks"
 import { useVisibleDocumentTitle } from "@/hooks/document-title"
 import {
+	BrandsRadioValue,
 	ClipboardContext,
+	PaymentsRadioValue,
 	ProgressBarContext,
 	RangeContext,
 	SearchContext,
@@ -67,18 +70,12 @@ function AppSidebar1() {
 		setShowFeather,
 		brandsMonochrome,
 		setBrandsMonochrome,
-		showBrandsOriginal,
-		setShowBrandsOriginal,
-		showBrandsOriginalCircle,
-		setShowBrandsOriginalCircle,
-		showBrandsOriginalSquare,
-		setShowBrandsOriginalSquare,
+		brandsRadioValue,
+		setBrandsRadioValue,
 		paymentsMonochrome,
 		setPaymentsMonochrome,
-		showPaymentsOriginal,
-		setShowPaymentsOriginal,
-		showPaymentsOriginalFilled,
-		setShowPaymentsOriginalFilled,
+		paymentsRadioValue,
+		setPaymentsRadioValue,
 		resetAll,
 	} = useContext(SearchContext)!
 
@@ -130,53 +127,61 @@ function AppSidebar1() {
 						</Checkboxes>
 						<Checkboxes>
 							<MonochromeCheckboxFolder
-								//// name="Brands"
 								name={brandsMonochrome ? "Brands (mono)" : "Brands"}
 								icon={feather.Shield}
 								checked={brandsMonochrome}
 								setChecked={createVoidTransition(setAllMonochrome)}
 							/>
 							<Checkboxes>
-								<Checkbox
+								<Radio<BrandsRadioValue>
 									name="Original"
 									icon={brandsMonochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
-									checked={showBrandsOriginal}
-									setChecked={createTransition(setShowBrandsOriginal)}
+									radioName="brands"
+									value="normal"
+									setValue={createTransition(setBrandsRadioValue)}
+									checked={brandsRadioValue === "normal"}
 								/>
-								<Checkbox
+								<Radio<BrandsRadioValue>
 									name="Circle"
 									icon={brandsMonochrome ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
-									checked={showBrandsOriginalCircle}
-									setChecked={createTransition(setShowBrandsOriginalCircle)}
+									radioName="brands"
+									value="circle"
+									setValue={createTransition(setBrandsRadioValue)}
+									checked={brandsRadioValue === "circle"}
 								/>
-								<Checkbox
+								<Radio<BrandsRadioValue>
 									name="Square"
 									icon={brandsMonochrome ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
-									checked={showBrandsOriginalSquare}
-									setChecked={createTransition(setShowBrandsOriginalSquare)}
+									radioName="brands"
+									value="square"
+									setValue={createTransition(setBrandsRadioValue)}
+									checked={brandsRadioValue === "square"}
 								/>
 							</Checkboxes>
 						</Checkboxes>
 						<Checkboxes>
 							<MonochromeCheckboxFolder
-								//// name="Payments"
 								name={paymentsMonochrome ? "Payments (mono)" : "Payments"}
 								icon={feather.CreditCard}
 								checked={paymentsMonochrome}
 								setChecked={createVoidTransition(setAllMonochrome)}
 							/>
 							<Checkboxes>
-								<Checkbox
+								<Radio<PaymentsRadioValue>
 									name="Original"
 									icon={paymentsMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-									checked={showPaymentsOriginal}
-									setChecked={createTransition(setShowPaymentsOriginal)}
+									radioName="payments"
+									value="normal"
+									setValue={createTransition(setPaymentsRadioValue)}
+									checked={paymentsRadioValue === "normal"}
 								/>
-								<Checkbox
+								<Radio<PaymentsRadioValue>
 									name="Filled"
 									icon={paymentsMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-									checked={showPaymentsOriginalFilled}
-									setChecked={createTransition(setShowPaymentsOriginalFilled)}
+									radioName="payments"
+									value="filled"
+									setValue={createTransition(setPaymentsRadioValue)}
+									checked={paymentsRadioValue === "filled"}
 								/>
 							</Checkboxes>
 						</Checkboxes>

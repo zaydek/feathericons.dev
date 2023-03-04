@@ -25,12 +25,13 @@ export function createCache() {
 	}
 
 	function get(key: Iconset) {
-		if (cache.has(key)) {
-			return [
-				true, // Cached
-				cache.get(key)!,
-			] as const
-		}
+		//// if (cache.has(key)) {
+		//// 	return [
+		//// 		true, // Cached
+		//// 		cache.get(key)!,
+		//// 	] as const
+		//// }
+		if (cache.has(key)) return cache.get(key)!
 		let names: string[]
 		let Icon: LazyExoticComponent<any>
 		switch (key) {
@@ -80,10 +81,11 @@ export function createCache() {
 				break
 		}
 		cache.set(key, [names, Icon] as const)
-		return [
-			false, // No cache
-			[names, Icon],
-		] as const
+		//// return [
+		//// 	false, // No cache
+		//// 	[names, Icon],
+		//// ] as const
+		return [names, Icon] as const
 	}
 
 	return { has, get }

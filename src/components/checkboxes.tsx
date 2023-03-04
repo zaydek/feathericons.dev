@@ -38,7 +38,13 @@ export function MonochromeCheckboxFolder({
 			<Icon className="checkbox-icon" />
 			<span className="checkbox-name">{name}</span>
 			{/* This is supposed to be checkbox... */}
-			<span className="checkbox-icon" data-type="checkbox" data-checked={checked} tabIndex={-1} />
+			<span
+				// prettier-ignore
+				className="checkbox-icon"
+				data-type="checkbox"
+				data-checked={checked}
+				tabIndex={-1}
+			/>
 		</label>
 	)
 }
@@ -57,11 +63,6 @@ export function Checkbox({
 	return (
 		<label
 			className="checkbox"
-			//// onClick={e => {
-			//// 	e.preventDefault()
-			//// 	e.stopPropagation()
-			//// 	setChecked(curr => !curr)
-			//// }}
 			onKeyDown={e => {
 				if (e.key === "Enter" || e.key === " ") {
 					e.preventDefault()
@@ -73,7 +74,55 @@ export function Checkbox({
 		>
 			<Icon className="checkbox-icon" />
 			<span className="checkbox-name">{name}</span>
-			<input type="checkbox" checked={checked} onChange={e => setChecked(curr => !curr)} tabIndex={-1} />
+			<input
+				// prettier-ignore
+				type="checkbox"
+				checked={checked}
+				onChange={e => setChecked(curr => !curr)}
+				tabIndex={-1}
+			/>
+		</label>
+	)
+}
+
+export function Radio<RadioValue extends string>({
+	name,
+	icon: Icon,
+	radioName,
+	value,
+	setValue,
+	checked,
+}: {
+	name: string
+	icon: Icon
+	radioName: string
+	value: RadioValue
+	setValue: Dispatch<SetStateAction<RadioValue>>
+	checked?: boolean
+}) {
+	return (
+		<label
+			className="checkbox"
+			onKeyDown={e => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault()
+					e.stopPropagation()
+					setValue(value)
+				}
+			}}
+			tabIndex={0}
+		>
+			<Icon className="checkbox-icon" />
+			<span className="checkbox-name">{name}</span>
+			<input
+				// prettier-ignore
+				type="radio"
+				name={radioName}
+				value={value}
+				onChange={e => setValue(value)}
+				checked={checked}
+				tabIndex={-1}
+			/>
 		</label>
 	)
 }

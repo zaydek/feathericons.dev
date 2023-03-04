@@ -10,44 +10,48 @@ import {
 } from "react"
 import { createCache } from "./search-cache"
 
-const FEATHER_DEFAULT                  = !!1 // prettier-ignore
-const BRANDS_MONOCHROME_DEFAULT        = !!0 // prettier-ignore
-const BRANDS_ORIGINAL_DEFAULT          = !!1 // prettier-ignore
-const BRANDS_ORIGINAL_CIRCLE_DEFAULT   = !!0 // prettier-ignore
-const BRANDS_ORIGINAL_SQUARE_DEFAULT   = !!0 // prettier-ignore
-const PAYMENTS_MONOCHROME_DEFAULT      = !!0 // prettier-ignore
-const PAYMENTS_ORIGINAL_DEFAULT        = !!0 // prettier-ignore
-const PAYMENTS_ORIGINAL_FILLED_DEFAULT = !!1 // prettier-ignore
+// prettier-ignore
+export type BrandsRadioValue =
+	| "off"
+	| "normal"
+	| "circle"
+	| "square"
+
+// prettier-ignore
+export type PaymentsRadioValue =
+	| "off"
+	| "normal"
+	| "filled"
+
+const FEATHER_DEFAULT              = !!1 // prettier-ignore
+const BRANDS_MONOCHROME_DEFAULT    = !!0 // prettier-ignore
+const BRANDS_RADIO_VALUE_DEFAULT   = "normal" // prettier-ignore
+const PAYMENTS_MONOCHROME_DEFAULT  = !!0 // prettier-ignore
+const PAYMENTS_RADIO_VALUE_DEFAULT = "filled" // prettier-ignore
 
 // prettier-ignore
 export const SearchContext =
 	createContext<{
-		search:                        string
-		setSearch:                     Dispatch<SetStateAction<string>>
-		showFeather:                   boolean
-		setShowFeather:                Dispatch<SetStateAction<boolean>>
-		brandsMonochrome:              boolean
-		setBrandsMonochrome:           Dispatch<SetStateAction<boolean>>
-		showBrandsOriginal:            boolean
-		setShowBrandsOriginal:         Dispatch<SetStateAction<boolean>>
-		showBrandsOriginalCircle:      boolean
-		setShowBrandsOriginalCircle:   Dispatch<SetStateAction<boolean>>
-		showBrandsOriginalSquare:      boolean
-		setShowBrandsOriginalSquare:   Dispatch<SetStateAction<boolean>>
-		paymentsMonochrome:            boolean
-		setPaymentsMonochrome:         Dispatch<SetStateAction<boolean>>
-		showPaymentsOriginal:          boolean
-		setShowPaymentsOriginal:       Dispatch<SetStateAction<boolean>>
-		showPaymentsOriginalFilled:    boolean
-		setShowPaymentsOriginalFilled: Dispatch<SetStateAction<boolean>>
-		resetAll:                      () => void
-		results:                       (readonly [string[], LazyExoticComponent<any>])[]
+		search:                string
+		setSearch:             Dispatch<SetStateAction<string>>
+		showFeather:           boolean
+		setShowFeather:        Dispatch<SetStateAction<boolean>>
+		brandsMonochrome:      boolean
+		setBrandsMonochrome:   Dispatch<SetStateAction<boolean>>
+		brandsRadioValue:      BrandsRadioValue
+		setBrandsRadioValue:   Dispatch<SetStateAction<BrandsRadioValue>>
+		paymentsMonochrome:    boolean
+		setPaymentsMonochrome: Dispatch<SetStateAction<boolean>>
+		paymentsRadioValue:    PaymentsRadioValue
+		setPaymentsRadioValue: Dispatch<SetStateAction<PaymentsRadioValue>>
+		resetAll:              () => void
+		results:               (readonly [string[], LazyExoticComponent<any>])[]
 	} | null>(null)
 
 const cache = createCache()
 
-const parser = (value: string) => value === "1"
-const serializer = (value: boolean) => (value ? "1" : "0")
+const parser_boolean = (value: string) => value === "1"
+const serializer_boolean = (value: boolean) => (value ? "1" : "0")
 
 export function SearchProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useParam({
@@ -66,103 +70,80 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	const [showFeather, setShowFeather] = useParam({
 		key: "feather",
 		initialValue: FEATHER_DEFAULT,
-		parser,
-		serializer,
+		parser: parser_boolean,
+		serializer: serializer_boolean,
 	})
 	const [brandsMonochrome, setBrandsMonochrome] = useParam({
 		key: "brands-monochrome",
 		initialValue: BRANDS_MONOCHROME_DEFAULT,
-		parser,
-		serializer,
+		parser: parser_boolean,
+		serializer: serializer_boolean,
 	})
-	const [showBrandsOriginal, setShowBrandsOriginal] = useParam({
-		key: "brands-original",
-		initialValue: BRANDS_ORIGINAL_DEFAULT,
-		parser,
-		serializer,
-	})
-	const [showBrandsOriginalCircle, setShowBrandsOriginalCircle] = useParam({
-		key: "brands-original-circle",
-		initialValue: BRANDS_ORIGINAL_CIRCLE_DEFAULT,
-		parser,
-		serializer,
-	})
-	const [showBrandsOriginalSquare, setShowBrandsOriginalSquare] = useParam({
-		key: "brands-original-square",
-		initialValue: BRANDS_ORIGINAL_SQUARE_DEFAULT,
-		parser,
-		serializer,
+	const [brandsRadioValue, setBrandsRadioValue] = useParam<BrandsRadioValue>({
+		key: "brands-radio",
+		initialValue: BRANDS_RADIO_VALUE_DEFAULT,
+		parser: value => {
+			switch (value) {
+				case "normal":
+				case "circle":
+				case "square":
+					return value
+			}
+			return BRANDS_RADIO_VALUE_DEFAULT
+		},
 	})
 	const [paymentsMonochrome, setPaymentsMonochrome] = useParam({
 		key: "payments-monochrome",
 		initialValue: PAYMENTS_MONOCHROME_DEFAULT,
-		parser,
-		serializer,
+		parser: parser_boolean,
+		serializer: serializer_boolean,
 	})
-	const [showPaymentsOriginal, setShowPaymentsOriginal] = useParam({
-		key: "payments-original",
-		initialValue: PAYMENTS_ORIGINAL_DEFAULT,
-		parser,
-		serializer,
-	})
-	const [showPaymentsOriginalFilled, setShowPaymentsOriginalFilled] = useParam({
-		key: "payments-original-filled",
-		initialValue: PAYMENTS_ORIGINAL_FILLED_DEFAULT,
-		parser,
-		serializer,
+	const [paymentsRadioValue, setPaymentsRadioValue] = useParam<PaymentsRadioValue>({
+		key: "payments-monochrome",
+		initialValue: PAYMENTS_RADIO_VALUE_DEFAULT,
+		parser: value => {
+			switch (value) {
+				case "normal":
+				case "filled":
+					return value
+			}
+			return PAYMENTS_RADIO_VALUE_DEFAULT
+		},
 	})
 
 	const resetAll = useCallback(() => {
 		setShowFeather(FEATHER_DEFAULT)
 		setBrandsMonochrome(BRANDS_MONOCHROME_DEFAULT)
-		setShowBrandsOriginal(BRANDS_ORIGINAL_DEFAULT)
-		setShowBrandsOriginalCircle(BRANDS_ORIGINAL_CIRCLE_DEFAULT)
-		setShowBrandsOriginalSquare(BRANDS_ORIGINAL_SQUARE_DEFAULT)
+		setBrandsRadioValue(BRANDS_RADIO_VALUE_DEFAULT)
 		setPaymentsMonochrome(PAYMENTS_MONOCHROME_DEFAULT)
-		setShowPaymentsOriginal(PAYMENTS_ORIGINAL_DEFAULT)
-		setShowPaymentsOriginalFilled(PAYMENTS_ORIGINAL_FILLED_DEFAULT)
-	}, [
-		setBrandsMonochrome,
-		setPaymentsMonochrome,
-		setShowBrandsOriginal,
-		setShowBrandsOriginalCircle,
-		setShowBrandsOriginalSquare,
-		setShowFeather,
-		setShowPaymentsOriginal,
-		setShowPaymentsOriginalFilled,
-	])
+		setPaymentsRadioValue(PAYMENTS_RADIO_VALUE_DEFAULT)
+	}, [setBrandsMonochrome, setBrandsRadioValue, setPaymentsMonochrome, setPaymentsRadioValue, setShowFeather])
 
-	// prettier-ignore
 	const results = useMemo(() => {
 		const results: (readonly [string[], LazyExoticComponent<any>])[] = []
-		if (showFeather) results.push(cache.get("feather")[1])
+		if (showFeather) results.push(cache.get("feather"))
 		if (brandsMonochrome) {
-			if (showBrandsOriginal)         results.push(cache.get("wolfkit-brands-mono")[1])
-			if (showBrandsOriginalCircle)   results.push(cache.get("wolfkit-brands-mono-circle")[1])
-			if (showBrandsOriginalSquare)   results.push(cache.get("wolfkit-brands-mono-square")[1])
+			const rv = brandsRadioValue
+			if (rv === "normal") results.push(cache.get("wolfkit-brands-mono"))
+			if (rv === "circle") results.push(cache.get("wolfkit-brands-mono-circle"))
+			if (rv === "square") results.push(cache.get("wolfkit-brands-mono-square"))
 		} else {
-			if (showBrandsOriginal)         results.push(cache.get("wolfkit-brands-original")[1])
-			if (showBrandsOriginalCircle)   results.push(cache.get("wolfkit-brands-original-circle")[1])
-			if (showBrandsOriginalSquare)   results.push(cache.get("wolfkit-brands-original-square")[1])
+			const rv = brandsRadioValue
+			if (rv === "normal") results.push(cache.get("wolfkit-brands-original"))
+			if (rv === "circle") results.push(cache.get("wolfkit-brands-original-circle"))
+			if (rv === "square") results.push(cache.get("wolfkit-brands-original-square"))
 		}
 		if (paymentsMonochrome) {
-			if (showPaymentsOriginal)       results.push(cache.get("wolfkit-payments-mono")[1])
-			if (showPaymentsOriginalFilled) results.push(cache.get("wolfkit-payments-mono-filled")[1])
+			const rv = paymentsRadioValue
+			if (rv === "normal") results.push(cache.get("wolfkit-payments-mono"))
+			if (rv === "filled") results.push(cache.get("wolfkit-payments-mono-filled"))
 		} else {
-			if (showPaymentsOriginal)       results.push(cache.get("wolfkit-payments-original")[1])
-			if (showPaymentsOriginalFilled) results.push(cache.get("wolfkit-payments-original-filled")[1])
+			const rv = paymentsRadioValue
+			if (rv === "normal") results.push(cache.get("wolfkit-payments-original"))
+			if (rv === "filled") results.push(cache.get("wolfkit-payments-original-filled"))
 		}
 		return results
-	}, [
-		brandsMonochrome,
-		paymentsMonochrome,
-		showBrandsOriginal,
-		showBrandsOriginalCircle,
-		showBrandsOriginalSquare,
-		showFeather,
-		showPaymentsOriginal,
-		showPaymentsOriginalFilled,
-	])
+	}, [brandsMonochrome, brandsRadioValue, paymentsMonochrome, paymentsRadioValue, showFeather])
 
 	return (
 		<SearchContext.Provider
@@ -173,18 +154,12 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setShowFeather,
 				brandsMonochrome,
 				setBrandsMonochrome,
-				showBrandsOriginal,
-				setShowBrandsOriginal,
-				showBrandsOriginalCircle,
-				setShowBrandsOriginalCircle,
-				showBrandsOriginalSquare,
-				setShowBrandsOriginalSquare,
+				brandsRadioValue,
+				setBrandsRadioValue,
 				paymentsMonochrome,
 				setPaymentsMonochrome,
-				showPaymentsOriginal,
-				setShowPaymentsOriginal,
-				showPaymentsOriginalFilled,
-				setShowPaymentsOriginalFilled,
+				paymentsRadioValue,
+				setPaymentsRadioValue,
 				resetAll,
 				results,
 			}}
