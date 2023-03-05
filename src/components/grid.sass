@@ -11,6 +11,7 @@ $grid-item-aspect-ratio: 1.25
   display: grid
   grid-template-columns: repeat(auto-fill, $grid-item-height)
   justify-content: center
+  //// gap: 24px
   gap: 16px
 
 ////////////////////////////////////////
@@ -36,7 +37,8 @@ $grid-item-aspect-ratio: 1.25
   -webkit-user-select: none    // Interaction
   user-select: none            // Interaction
   .grid-item[data-selected=true] &
-    box-shadow: inset 0 0 0 4px $app-color
+    //// box-shadow: inset 0 0 0 4px $brand-color
+    box-shadow: inset 0 0 0 4px $brand-color
 
 .grid-item-name
   display: -webkit-box         // Clamp
@@ -68,6 +70,6 @@ $grid-item-aspect-ratio: 1.25
   max-height: 24px * math.div(56, 32)
   min-width:  24px
   max-width:  24px * math.div(56, 32)
-  color: var(--app-color, $slate-800) // TODO
+  color: var(--app-color, $slate-800)
   transform: scale(calc(var(--size) / 24))
   stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
