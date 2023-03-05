@@ -48,7 +48,8 @@ export function SyntaxHighlighting({ lang, code }: { lang: string; code: string 
 
 	useEffect(() => {
 		if (highlighter === null) return
-		const tokens = highlighter.codeToThemedTokens(code, lang, "github-light")
+		// Defer to JavaScript because of // comments
+		const tokens = highlighter.codeToThemedTokens(code, code.startsWith("//") ? "js" : lang, "github-light")
 		setTokens(tokens)
 	}, [code, highlighter, lang])
 

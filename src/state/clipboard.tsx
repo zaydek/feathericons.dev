@@ -63,23 +63,23 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		if (selected.size === 0) {
 			switch (exportAs) {
 				case "svg":
-					// prettier-ignore
-					setClipboard(detab(`
-						<!--
-
-						Feather icons designed by @colebemis
-						Licensed as MIT
-						Personal & commercial use allowed *without* attribution
-						https://github.com/feathericons/feather
-
-						Logos sourced from The Wolf Kit
-						Licensed as CC BY 4.0
-						Personal & commercial use allowed *with* attribution
-						https://thewolfkit.com
-
-						-->
-					`, { spaces: true }))
-					break
+				//// // prettier-ignore
+				//// setClipboard(detab(`
+				//// 	<!--
+				////
+				//// 	Feather icons designed by @colebemis
+				//// 	Licensed as MIT
+				//// 	Personal & commercial use allowed *without* attribution
+				//// 	https://github.com/feathericons/feather
+				////
+				//// 	Logos sourced from The Wolf Kit
+				//// 	Licensed as CC BY 4.0
+				//// 	Personal & commercial use allowed *with* attribution
+				//// 	https://thewolfkit.com
+				////
+				//// 	-->
+				//// `, { spaces: true }))
+				//// break
 				case "jsx":
 				case "tsx":
 				case "strict-jsx":
