@@ -173,7 +173,7 @@ function AppSidebar1() {
 				</div>
 			</header>
 			<div className="sidebar-body">
-				<hr className="hr" />
+				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
 						{/* <feather.Monitor className="section-icon" /> */}
@@ -188,12 +188,12 @@ function AppSidebar1() {
 						</label>
 					</ul>
 				</section>
-				<hr className="hr" />
+				<hr className="hairline" />
 			</div>
 			<div className="sidebar-spacer"></div>
 			<footer className="sidebar-footer">
-				<hr className="hr is-collapsible" />
-				<section className="section">
+				<hr className="hairline is-collapsible" />
+				<section className="section is-end">
 					<header className="section-header">
 						<feather.Globe className="section-icon" />
 						<h6 className="section-name u-flex-1">Resources</h6>
@@ -221,13 +221,13 @@ function AppSidebar1() {
 						</Anchor>
 					</nav>
 				</section>
-				<hr className="hr" />
+				{/* <hr className="hairline" />
 				<section className="section is-end">
 					<header className="section-header">
 						<feather.Smile className="section-icon" />
 						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
-				</section>
+				</section> */}
 			</footer>
 		</Sidebar1>
 	)
@@ -270,7 +270,7 @@ function AppSidebar2() {
 				</div>
 			</header>
 			<div className="sidebar-body">
-				<hr className="hr" />
+				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
 						<h6 className="section-name u-flex-1">Variants</h6>
@@ -291,7 +291,7 @@ function AppSidebar2() {
 						</label>
 					</ul>
 				</section>
-				<hr className="hr" />
+				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
 						<h6 className="section-name u-flex-1">Size</h6>
@@ -300,7 +300,7 @@ function AppSidebar2() {
 					</header>
 					<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
-				<hr className="hr" />
+				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
 						<h6 className="section-name u-flex-1">Stroke width</h6>
@@ -315,11 +315,11 @@ function AppSidebar2() {
 						step={STROKE_STEP}
 					/>
 				</section>
-				<hr className="hr" />
+				<hr className="hairline" />
 			</div>
 			{/* <div className="sidebar-spacer"></div> */}
 			{/* <footer className="sidebar-footer">
-				<hr className="hr is-collapsible" />
+				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
 						<feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} />
