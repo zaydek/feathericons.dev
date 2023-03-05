@@ -3,7 +3,7 @@ import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/ut
 import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useState } from "react"
 
 // prettier-ignore
-export type ExportAs =
+export type ExportAsValue =
 	| "svg"
 	| "jsx" // TODO
 	| "tsx" // TODO
@@ -17,8 +17,8 @@ export type ExportAs =
 // prettier-ignore
 export const ClipboardContext =
 	createContext<{
-		exportAs:      ExportAs
-		setExportAs:   Dispatch<SetStateAction<ExportAs>>
+		exportAs:      ExportAsValue
+		setExportAs:   Dispatch<SetStateAction<ExportAsValue>>
 		selected:      Map<string, true>
 		addToSelected: (...ids: string[]) => void
 		clearSelected: () => void
@@ -26,7 +26,7 @@ export const ClipboardContext =
 	} | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
-	const [exportAs, setExportAs] = useParam<ExportAs>({
+	const [exportAs, setExportAs] = useParam<ExportAsValue>({
 		key: "export-as",
 		initialValue: "svg",
 		parser: value => {

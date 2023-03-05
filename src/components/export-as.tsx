@@ -1,11 +1,9 @@
-import "./index.sass"
-
 import { Icon } from "@/lib"
-import { ExportAs } from "@/state"
+import { ExportAsValue } from "@/state"
 import { Dispatch, SetStateAction } from "react"
 import { Reactjs, Svg, TypeScript } from "./icons"
 
-const icons: Record<ExportAs, Icon> = {
+const icons: Record<ExportAsValue, Icon> = {
 	svg: Svg,
 	jsx: Reactjs, // TODO
 	tsx: TypeScript,
@@ -15,7 +13,7 @@ const icons: Record<ExportAs, Icon> = {
 	//// "strict-tsx-rn": TypeScriptIcon,
 }
 
-const names: Record<ExportAs, string> = {
+const names: Record<ExportAsValue, string> = {
 	svg: "SVG",
 	jsx: "Solid.js",
 	tsx: "Typescript Solid.js",
@@ -25,13 +23,19 @@ const names: Record<ExportAs, string> = {
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
 
-export function ExportSelect({ value, setValue }: { value: ExportAs; setValue: Dispatch<SetStateAction<ExportAs>> }) {
+export function ExportAs({
+	value,
+	setValue,
+}: {
+	value: ExportAsValue
+	setValue: Dispatch<SetStateAction<ExportAsValue>>
+}) {
 	const name = names[value]
 	const Icon = icons[value]
 
 	return (
 		<label className="export-select">
-			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAs)}>
+			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAsValue)}>
 				<optgroup label="HTML, Vue, Svelte">
 					<option value="svg">SVG</option>
 				</optgroup>

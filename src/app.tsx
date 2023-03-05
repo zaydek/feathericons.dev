@@ -12,7 +12,7 @@ import {
 	ColorPicker,
 	CssVarRange,
 	DEV_DebugCss,
-	ExportSelect,
+	ExportAs,
 	Grid,
 	Main,
 	Radio,
@@ -24,7 +24,7 @@ import {
 import { useScrollProps, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
-	PaymentsRadio,
+	PaymentsRadioValue,
 	ProgressBarContext,
 	RangeContext,
 	SearchContext,
@@ -183,7 +183,7 @@ function AppSidebar1() {
 								setChecked={createTransition(setShowPayments)}
 							/>
 							<Checkboxes>
-								<Radio<PaymentsRadio>
+								<Radio<PaymentsRadioValue>
 									name="Original"
 									icon={preferMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
 									radioName="payments"
@@ -194,7 +194,7 @@ function AppSidebar1() {
 									})}
 									checked={paymentsRadio === "normal"}
 								/>
-								<Radio<PaymentsRadio>
+								<Radio<PaymentsRadioValue>
 									name="Filled"
 									icon={preferMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
 									radioName="payments"
@@ -354,7 +354,7 @@ function AppSidebar2() {
 					<header className="section-header-header">
 						{/* <feather.MousePointer className="section-icon" /> */}
 						<h6 className="section-name">Selected</h6>
-						<ExportSelect value={exportAs} setValue={setExportAs} />
+						<ExportAs value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
 				<div className="section-header-body is-padding-bottom" {...scrollProps}>

@@ -11,14 +11,14 @@ import {
 import { createCache } from "./search-cache"
 
 // prettier-ignore
-export type SocialRadio =
+export type SocialRadioValue =
 	| "off"
 	| "normal"
 //// | "circle"
 //// | "square"
 
 // prettier-ignore
-export type PaymentsRadio =
+export type PaymentsRadioValue =
 	| "off"
 	| "normal"
 	| "filled"
@@ -44,8 +44,8 @@ export const SearchContext =
 		//// setSocialRadio:      Dispatch<SetStateAction<SocialRadio>>
 		showPayments:        boolean
 		setShowPayments:     Dispatch<SetStateAction<boolean>>
-		paymentsRadio:       PaymentsRadio
-		setPaymentsRadio:    Dispatch<SetStateAction<PaymentsRadio>>
+		paymentsRadio:       PaymentsRadioValue
+		setPaymentsRadio:    Dispatch<SetStateAction<PaymentsRadioValue>>
 		preferMonochrome:    boolean
 		setPreferMonochrome: Dispatch<SetStateAction<boolean>>
 		showNames:           boolean
@@ -104,7 +104,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		key: "show-payments",
 		initialValue: SHOW_PAYMENTS_DEFAULT,
 	})
-	const [paymentsRadio, setPaymentsRadio] = useParam<PaymentsRadio>({
+	const [paymentsRadio, setPaymentsRadio] = useParam<PaymentsRadioValue>({
 		key: "payments-radio",
 		initialValue: PAYMENTS_RADIO_DEFAULT,
 		parser: value => {
