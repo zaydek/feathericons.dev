@@ -7,7 +7,7 @@ export function Grid() {
 	const { results } = useContext(SearchContext)!
 
 	return (
-		<ul className="grid">
+		<div className="grid">
 			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map(name => (
@@ -21,7 +21,7 @@ export function Grid() {
 					)),
 				)}
 			</Suspense>
-		</ul>
+		</div>
 	)
 }
 
@@ -48,7 +48,7 @@ export function GridItem({
 
 	return (
 		//// <li id={id} className="grid-item" data-bookmark={bookmark} data-selected={selected.has(id)}>
-		<li
+		<article
 			id={id}
 			className="grid-item"
 			//// onFocus={e => {
@@ -82,7 +82,6 @@ export function GridItem({
 				<Icon className="grid-item-frame-icon" />
 			</figure>
 			{showNames && <figcaption className="grid-item-name">{id}</figcaption>}
-			{/* <feather.Star className="grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
-		</li>
+		</article>
 	)
 }

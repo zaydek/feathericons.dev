@@ -1,7 +1,7 @@
 import { CSSProperties, Dispatch, SetStateAction } from "react"
 
 // prettier-ignore
-export type RangeProps = {
+export type ProgressRangeProps = {
 	value:    number
 	setValue: Dispatch<SetStateAction<number>>
 	min:      number
@@ -9,7 +9,7 @@ export type RangeProps = {
 	step:     number
 }
 
-export function CssVarRange({ value, setValue, min, max, step }: RangeProps) {
+export function ProgressRange({ value, setValue, min, max, step }: ProgressRangeProps) {
 	return (
 		<input
 			style={{ "--progress": ((value - min) / (max - min)) * 100 + "%" } as CSSProperties}

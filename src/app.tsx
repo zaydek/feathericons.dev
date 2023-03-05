@@ -1,21 +1,16 @@
 import * as feather from "@icons/feather/tsx"
 import * as wkBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
-import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
-import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
-import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
-import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Anchor,
 	Checkbox,
 	Checkboxes,
 	ColorPicker,
-	CssVarRange,
 	DEV_DebugCss,
 	ExportAs,
 	Grid,
 	Main,
-	Radio,
+	ProgressRange,
 	SearchBar,
 	Sidebar1,
 	Sidebar2,
@@ -24,7 +19,6 @@ import {
 import { useScrollProps, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
-	PaymentsRadioValue,
 	ProgressBarContext,
 	RangeContext,
 	SearchContext,
@@ -106,67 +100,54 @@ function AppSidebar1() {
 							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetIcons} />
 						</header>
 						{/* <div> */}
-						<Checkboxes>
+						{/* <Checkboxes>
 							<Checkbox
 								name="Feather"
 								icon={feather.Feather}
 								checked={showFeather}
 								setChecked={createTransition(setShowFeather)}
 							/>
-						</Checkboxes>
-						<Checkboxes>
-							<Checkbox
-								name="Social"
-								icon={feather.Twitter}
-								//// icon={p => (
-								//// 	<feather.Folder
-								//// 		// TODO
-								//// 		style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
-								//// 		fill="currentColor"
-								//// 		strokeWidth={4}
-								//// 		{...p}
-								//// 	/>
-								//// )}
-								checked={showSocial}
-								setChecked={createTransition(setShowSocial)}
-							/>
-							{/* <Checkboxes>
-								<Radio<SocialRadio>
-									name="Original"
-									icon={preferMonochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
-									radioName="brands"
-									value="normal"
-									setValue={createTransition(next => {
-										setShowSocial(true)
-										setSocialRadio(next)
-									})}
-									checked={socialRadio === "normal"}
-								/>
-								<Radio<SocialRadio>
-									name="Circle"
-									icon={preferMonochrome ? wkBrandsMonoCircle.Twitter : wkBrandsOriginalCircle.Twitter}
-									radioName="brands"
-									value="circle"
-									setValue={createTransition(next => {
-										setShowSocial(true)
-										setSocialRadio(next)
-									})}
-									checked={socialRadio === "circle"}
-								/>
-								<Radio<SocialRadio>
-									name="Square"
-									icon={preferMonochrome ? wkBrandsMonoSquare.Twitter : wkBrandsOriginalSquare.Twitter}
-									radioName="brands"
-									value="square"
-									setValue={createTransition(next => {
-										setShowSocial(true)
-										setSocialRadio(next)
-									})}
-									checked={socialRadio === "square"}
-								/>
-							</Checkboxes> */}
-						</Checkboxes>
-						<Checkboxes>
+						</Checkboxes> */}
+						<ul className="checkboxes">
+							<li>
+								<label className="checkbox">
+									<feather.Feather className="checkbox-icon" />
+									<div className="checkbox-name">Feather</div>
+									<input
+										type="checkbox"
+										checked={showFeather}
+										onChange={createTransition(() => setShowFeather(curr => !curr))}
+									/>
+								</label>
+							</li>
+						</ul>
+						<ul className="checkboxes">
+							<li>
+								<label className="checkbox">
+									<feather.Feather className="checkbox-icon" />
+									<div className="checkbox-name">Sociak</div>
+									<input
+										type="checkbox"
+										checked={showFeather}
+										onChange={createTransition(() => setShowFeather(curr => !curr))}
+									/>
+								</label>
+							</li>
+						</ul>
+						<ul className="checkboxes">
+							<li>
+								<label className="checkbox">
+									<feather.Feather className="checkbox-icon" />
+									<div className="checkbox-name">Payments</div>
+									<input
+										type="checkbox"
+										checked={showFeather}
+										onChange={createTransition(() => setShowFeather(curr => !curr))}
+									/>
+								</label>
+							</li>
+						</ul>
+						{/* <Checkboxes>
 							<Checkbox
 								name="Payments"
 								icon={feather.CreditCard}
@@ -225,7 +206,7 @@ function AppSidebar1() {
 									setChecked={setShowNames}
 								/>
 							</Checkboxes>
-						)}
+						)} */}
 						{/* </div> */}
 					</section>
 				</div>
@@ -395,7 +376,7 @@ function AppSidebar2() {
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
 					</header>
-					<CssVarRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+					<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
 				<hr className="hr" />
 				<section className="section">
@@ -405,7 +386,7 @@ function AppSidebar2() {
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
 					</header>
-					<CssVarRange
+					<ProgressRange
 						value={strokeWidth}
 						setValue={setStrokeWidth}
 						min={STROKE_MIN}
