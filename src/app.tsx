@@ -1,10 +1,12 @@
 import * as feather from "@icons/feather/tsx"
 import * as wkBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
+import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
+import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
+import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
+import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Anchor,
-	Checkbox,
-	Checkboxes,
 	ColorPicker,
 	DEV_DebugCss,
 	ExportAs,
@@ -16,7 +18,7 @@ import {
 	Sidebar2,
 	SyntaxHighlighting,
 } from "@/components"
-import { useScrollProps, useVisibleDocumentTitle } from "@/lib"
+import { DynamicIcon, useScrollProps, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -29,7 +31,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useCallback, useContext, useEffect, useState, useTransition } from "react"
+import { useContext, useEffect, useState, useTransition } from "react"
 import { Lang } from "shiki-es"
 
 export function App() {
@@ -51,6 +53,9 @@ export function App() {
 }
 
 function AppSidebar1() {
+	const { scrollProps } = useScrollProps()
+
+	const { setStarted } = useContext(ProgressBarContext)!
 	const {
 		showFeather,
 		setShowFeather,
@@ -63,23 +68,21 @@ function AppSidebar1() {
 		paymentsRadio,
 		setPaymentsRadio,
 		preferMonochrome,
-		setPreferMonochrome,
+		//// setPreferMonochrome,
 		showNames,
 		setShowNames,
 		resetIcons,
 		resetDisplay,
 	} = useContext(SearchContext)!
 
-	const { scrollProps } = useScrollProps()
-
-	const { setStarted } = useContext(ProgressBarContext)!
 	const [pending, startTransition] = useTransition()
 
-	// Use function syntax because of <T>
-	const createTransition = useCallback(function <T>(fn: (_: T) => void) {
-		return (arg: T) => startTransition(() => fn(arg))
-	}, [])
+	//// // Use function syntax because of <T>
+	//// const createTransition = useCallback(function <T>(fn: (_: T) => void) {
+	//// 	return (arg: T) => startTransition(() => fn(arg))
+	//// }, [])
 
+	// TODO: Extract to pattern
 	useEffect(() => {
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
@@ -99,115 +102,79 @@ function AppSidebar1() {
 							<h6 className="section-name">Icons</h6>
 							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetIcons} />
 						</header>
-						{/* <div> */}
-						{/* <Checkboxes>
-							<Checkbox
-								name="Feather"
-								icon={feather.Feather}
-								checked={showFeather}
-								setChecked={createTransition(setShowFeather)}
-							/>
-						</Checkboxes> */}
 						<ul className="checkboxes">
-							<li>
-								<label className="checkbox">
-									<feather.Feather className="checkbox-icon" />
-									<div className="checkbox-name">Feather</div>
-									<input
-										type="checkbox"
-										checked={showFeather}
-										onChange={createTransition(() => setShowFeather(curr => !curr))}
-									/>
-								</label>
-							</li>
+							<label className="checkbox">
+								<feather.Feather className="checkbox-icon" />
+								<span className="checkbox-name">Feather</span>
+								<input
+									type="checkbox"
+									checked={showFeather}
+									onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
+								/>
+							</label>
 						</ul>
 						<ul className="checkboxes">
-							<li>
-								<label className="checkbox">
-									<feather.Feather className="checkbox-icon" />
-									<div className="checkbox-name">Sociak</div>
-									<input
-										type="checkbox"
-										checked={showFeather}
-										onChange={createTransition(() => setShowFeather(curr => !curr))}
-									/>
-								</label>
-							</li>
+							<label className="checkbox">
+								<feather.Twitter className="checkbox-icon" />
+								<span className="checkbox-name">Social</span>
+								<input
+									type="checkbox"
+									checked={showSocial}
+									onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
+								/>
+							</label>
 						</ul>
 						<ul className="checkboxes">
-							<li>
+							<label className="checkbox">
+								<feather.CreditCard className="checkbox-icon" />
+								<span className="checkbox-name">Payments</span>
+								<input
+									type="checkbox"
+									checked={showPayments}
+									onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
+								/>
+							</label>
+							<ul className="checkboxes">
 								<label className="checkbox">
-									<feather.Feather className="checkbox-icon" />
-									<div className="checkbox-name">Payments</div>
+									<DynamicIcon
+										className="checkbox-icon"
+										icon={preferMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+									/>
+									<span className="checkbox-name">Original</span>
 									<input
-										type="checkbox"
-										checked={showFeather}
-										onChange={createTransition(() => setShowFeather(curr => !curr))}
+										name="payments"
+										type="radio"
+										checked={paymentsRadio === "normal"}
+										onChange={e =>
+											startTransition(() => {
+												setShowPayments(true)
+												setPaymentsRadio("normal")
+											})
+										}
 									/>
 								</label>
-							</li>
+							</ul>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<DynamicIcon
+										className="checkbox-icon"
+										icon={preferMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+									/>
+									<span className="checkbox-name">Filled</span>
+									<input
+										name="payments"
+										type="radio"
+										checked={paymentsRadio === "filled"}
+										onChange={e =>
+											startTransition(() => {
+												setShowPayments(true)
+												setPaymentsRadio("filled")
+											})
+										}
+									/>
+								</label>
+							</ul>
 						</ul>
-						{/* <Checkboxes>
-							<Checkbox
-								name="Payments"
-								icon={feather.CreditCard}
-								//// icon={p => (
-								//// 	<feather.Folder
-								//// 		// TODO
-								//// 		style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
-								//// 		fill="currentColor"
-								//// 		strokeWidth={4}
-								//// 		{...p}
-								//// 	/>
-								//// )}
-								checked={showPayments}
-								setChecked={createTransition(setShowPayments)}
-							/>
-							<Checkboxes>
-								<Radio<PaymentsRadioValue>
-									name="Original"
-									icon={preferMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-									radioName="payments"
-									value="normal"
-									setValue={createTransition(next => {
-										setShowPayments(true)
-										setPaymentsRadio(next)
-									})}
-									checked={paymentsRadio === "normal"}
-								/>
-								<Radio<PaymentsRadioValue>
-									name="Filled"
-									icon={preferMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-									radioName="payments"
-									value="filled"
-									setValue={createTransition(next => {
-										setShowPayments(true)
-										setPaymentsRadio(next)
-									})}
-									checked={paymentsRadio === "filled"}
-								/>
-							</Checkboxes>
-						</Checkboxes>
-						{false && (
-							<Checkboxes>
-								<Checkbox
-									name="Show icon names"
-									icon={feather.Eye}
-									//// icon={p => (
-									//// 	<feather.Search
-									//// 		// TODO
-									//// 		style={{ transform: "scale(0.875)", opacity: 0.75 }}
-									//// 		//// fill="currentColor"
-									//// 		strokeWidth={4}
-									//// 		{...p}
-									//// 	/>
-									//// )}
-									checked={showNames}
-									setChecked={setShowNames}
-								/>
-							</Checkboxes>
-						)} */}
-						{/* </div> */}
 					</section>
 				</div>
 			</header>
@@ -219,67 +186,15 @@ function AppSidebar1() {
 						<h6 className="section-name">Display</h6>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
 					</header>
-					<Checkboxes>
-						{/* <Checkbox
-							name="Prefer monochrome"
-							icon={p => (
-								<feather.Droplet
-									// TODO
-									style={{ transform: "scale(0.875)", opacity: 0.75 }}
-									fill="currentColor"
-									strokeWidth={4}
-									{...p}
-								/>
-							)}
-							checked={preferMonochrome}
-							setChecked={createTransition(setPreferMonochrome)}
-						/> */}
-						<Checkbox
-							name="Show names"
-							icon={showNames ? feather.ToggleRight : feather.ToggleLeft}
-							//// icon={p => (
-							//// 	<feather.Search
-							//// 		// TODO
-							//// 		style={{ transform: "scale(0.875)", opacity: 0.75 }}
-							//// 		//// fill="currentColor"
-							//// 		strokeWidth={4}
-							//// 		{...p}
-							//// 	/>
-							//// )}
-							checked={showNames}
-							setChecked={setShowNames}
-						/>
-					</Checkboxes>
+					<ul className="checkboxes">
+						<label className="checkbox">
+							<DynamicIcon className="checkbox-icon" icon={showNames ? feather.ToggleRight : feather.ToggleLeft} />
+							<span className="checkbox-name">Show names</span>
+							<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
+						</label>
+					</ul>
 				</section>
 				<hr className="hr" />
-				{false && (
-					<>
-						<section className="section">
-							<header className="section-header-header">
-								{/* <feather.Monitor className="section-icon" /> */}
-								<h6 className="section-name">Display</h6>
-								<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
-							</header>
-							<Checkboxes>
-								<Checkbox
-									name="Show names"
-									icon={p => (
-										<feather.Search
-											// TODO
-											style={{ transform: "scale(0.875)", opacity: 0.75 }}
-											//// fill="currentColor"
-											strokeWidth={4}
-											{...p}
-										/>
-									)}
-									checked={showNames}
-									setChecked={setShowNames}
-								/>
-							</Checkboxes>
-						</section>
-						<hr className="hr" />
-					</>
-				)}
 			</div>
 			<div className="section-spacer"></div>
 			<footer className="section-footer">
@@ -318,15 +233,26 @@ function AppSidebar1() {
 }
 
 function AppSidebar2() {
+	const { scrollProps } = useScrollProps()
+
+	const { setStarted } = useContext(ProgressBarContext)!
+	const { preferMonochrome, setPreferMonochrome } = useContext(SearchContext)!
 	const { exportAs, setExportAs, clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
 
-	const { scrollProps } = useScrollProps()
+	const [pending, startTransition] = useTransition()
 
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
 
 	// TODO: Extract to some provider
 	const [color, setColor] = useState<string | null>(null)
+
+	// TODO: Extract to pattern
+	useEffect(() => {
+		setStarted(true)
+		const d = window.setTimeout(() => setStarted(false), 100)
+		return () => window.clearTimeout(d)
+	}, [pending, setStarted])
 
 	return (
 		<Sidebar2>
@@ -345,28 +271,30 @@ function AppSidebar2() {
 			<div className="section-body">
 				<hr className="hr" />
 				<section className="section">
-					<header className="section-header-header">
-						{/* <feather.Circle
-							className="section-icon"
-							fill="var(--app-color)"
-							stroke="var(--app-color)"
-							strokeWidth={4}
-						/> */}
+					{/* <header className="section-header-header">
 						<h6 className="section-name">Color</h6>
 						<ColorPicker color={color} setColor={setColor} />
-						{/* <ColorPicker /> */}
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={e => setColor(null)} />
-						{/* <div> */}
+					</header> */}
+					<header className="section-header-header">
+						{/* <feather.PenTool className="section-icon" /> */}
+						<h6 className="section-name">Color</h6>
+						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
 					</header>
-					<Checkboxes>
-						{/* TODO */}
-						<Checkbox
-							name="Toggle monochrome"
-							//// icon={feather.Feather}
-							//// checked={showFeather}
-							//// setChecked={createTransition(setShowFeather)}
-						/>
-					</Checkboxes>
+					<ul className="checkboxes">
+						<label className="checkbox">
+							<span className="checkbox-name">Color</span>
+							<ColorPicker color={color} setColor={setColor} />
+						</label>
+						<label className="checkbox">
+							<span className="checkbox-name">Monochrome (social & payments)</span>
+							<input
+								type="checkbox"
+								checked={preferMonochrome}
+								onChange={e => startTransition(() => setPreferMonochrome(e.currentTarget.checked))}
+							/>
+						</label>
+					</ul>
 				</section>
 				<hr className="hr" />
 				<section className="section">

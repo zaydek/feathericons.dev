@@ -1,0 +1,55 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+// <ul class="checkboxes">
+//   <label class="checkbox">
+//   ^^^^^^^^^^^^^^^^^^^^^^^^
+//     <span class="checkbox-icon">
+//     <span class="checkbox-name">…</span>
+//   </label>
+//   ^^^^^^^^
+// </ul>
+//
+// Use <label> because of <input type="…">
+
+// Nesting
+.checkboxes .checkboxes
+  margin-left: math.div($button-height, 2)
+
+.checkbox
+  display: flex
+  align-items: center
+  margin: -4px 0
+  height: $button-height
+  border-radius: 1e3px
+  cursor: pointer           // Interaction
+  -webkit-user-select: none // Interaction
+  user-select: none         // Interaction
+  &:hover
+    background-color: $slate-100
+  &:hover:active
+    background-color: $slate-200
+
+.checkbox-icon
+  height: $icon-height
+  object-fit: contain // TODO
+  color: $slate-800
+  &:first-child
+    margin: 0 math.div($button-height - $icon-height, 2)
+
+.checkbox-name
+  flex: 1 // Stretch x-axis
+  font: 425 16px / normal $sans
+  color: $slate-800
+  &:first-child
+    margin: 0 math.div($button-height - $tiny-icon-height, 2)
+
+// E.g.
+//
+// - <input type="checkbox">
+// - <input type="radio">
+// - <ColorPicker>
+//
+.checkbox :last-child
+    margin: 0 math.div($button-height - 24px, 2)

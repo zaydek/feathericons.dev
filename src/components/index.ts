@@ -1,5 +1,4 @@
 export * from "./anchor"
-export * from "./checkboxes"
 export * from "./color-picker"
 export * from "./debug-css"
 export * from "./export-as"
