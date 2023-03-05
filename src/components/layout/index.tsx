@@ -1,4 +1,4 @@
-import "./layout.sass"
+import "./index.sass"
 
 import { cx, isMac } from "@/lib"
 import { ClipboardContext, LayoutContext, SidebarState } from "@/state"

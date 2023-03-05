@@ -1,5 +1,5 @@
+import { useParam } from "@/lib"
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
-import { useParam } from "../hooks/use-param"
 
 export const SIZE_MIN       = 16 // prettier-ignore
 export const SIZE_MAX       = 48 // prettier-ignore

@@ -1,4 +1,4 @@
-import { useParam, useParamBoolean } from "@/hooks"
+import { useParam, useParamBoolean } from "@/lib"
 import {
 	createContext,
 	Dispatch,

@@ -1,5 +1,4 @@
-import { useParam } from "@/hooks"
-import { detab, toTitleCase } from "@/lib"
+import { detab, toTitleCase, useParam } from "@/lib"
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
 import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useState } from "react"
 

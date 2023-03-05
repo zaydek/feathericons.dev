@@ -1,5 +1,5 @@
+import { useParam } from "@/lib"
 import { createContext, Dispatch, PropsWithChildren, SetStateAction } from "react"
-import { useParam } from "../hooks/use-param"
 
 export type SidebarState = "minimized" | "open" | "maximized"
 
