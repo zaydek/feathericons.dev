@@ -184,10 +184,7 @@ function AppSidebar1() {
 									/>
 								)}
 								checked={showPayments}
-								setChecked={createTransition(next => {
-									setShowPayments(true)
-									setShowPayments(next)
-								})}
+								setChecked={createTransition(setShowPayments)}
 							/>
 							<Checkboxes>
 								<Radio<PaymentsRadio>
