@@ -100,13 +100,13 @@ function AppSidebar1() {
 
 	return (
 		<Sidebar1>
-			<header className="sidebar-header">
+			<header className="section-header">
 				<section className="section is-start">
 					<SearchBar />
 				</section>
-				<div className="section-body" {...scrollProps}>
+				<div className="section-header-body" {...scrollProps}>
 					<section className="section">
-						<header className="section-header">
+						<header className="section-header-header">
 							<feather.Package className="section-icon" />
 							<h6 className="section-name">Icons</h6>
 							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetIcons} />
@@ -218,7 +218,7 @@ function AppSidebar1() {
 			<div className="section-body">
 				<hr className="hr" />
 				<section className="section">
-					<header className="section-header">
+					<header className="section-header-header">
 						<feather.Monitor className="section-icon" />
 						<h6 className="section-name">Display</h6>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
@@ -256,11 +256,11 @@ function AppSidebar1() {
 				</section>
 				<hr className="hr" />
 			</div>
-			<div className="sidebar-spacer"></div>
-			<footer className="sidebar-footer">
+			<div className="section-spacer"></div>
+			<footer className="section-footer">
 				<hr className="hr is-collapsible" />
 				<section className="section is-end">
-					<header className="section-header">
+					<header className="section-header-header">
 						<feather.Globe className="section-icon" />
 						<h6 className="section-name">Resources</h6>
 					</header>
@@ -269,6 +269,9 @@ function AppSidebar1() {
 						<Resource name="Website" icon={wkBrandsOriginal.Github} />
 						<Resource name="Plugin" icon={wkBrandsOriginal.Figma} />
 						<Resource name="Social & payments file" icon={wkBrandsOriginal.Figma} />
+						{/* <Resource name="The Wolf Kit" icon={wkBrandsOriginal.Figma} /> */}
+						{/* <Resource name="The Wolf Kit Figma" icon={wkBrandsOriginal.Figma} /> */}
+						{/* <Resource name="The Wolf Kit" icon={TheWolfKit} /> */}
 						<Resource name="Share on Twitter" icon={wkBrandsOriginal.Twitter} />
 					</nav>
 				</section>
@@ -287,29 +290,29 @@ function AppSidebar2() {
 
 	return (
 		<Sidebar2>
-			<header className="sidebar-header">
+			<header className="section-header">
 				<section className="section is-start">
-					<header className="section-header">
+					<header className="section-header-header">
 						<feather.MousePointer className="section-icon" />
 						<h6 className="section-name">Selected</h6>
 						<SelectExportAs value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
-				<div className="section-body is-padding-bottom" {...scrollProps}>
+				<div className="section-header-body is-padding-bottom" {...scrollProps}>
 					<SyntaxHighlighting lang={lang} code={clipboard} />
 				</div>
 			</header>
 			<div className="section-body">
 				<hr className="hr" />
 				<section className="section">
-					<header className="section-header">
+					<header className="section-header-header">
 						<feather.Circle className="section-icon" />
 						<h6 className="section-name">Color</h6>
 					</header>
 				</section>
 				<hr className="hr" />
 				<section className="section">
-					<header className="section-header">
+					<header className="section-header-header">
 						<feather.PenTool className="section-icon" />
 						<h6 className="section-name">Size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
@@ -319,7 +322,7 @@ function AppSidebar2() {
 				</section>
 				<hr className="hr" />
 				<section className="section">
-					<header className="section-header">
+					<header className="section-header-header">
 						<feather.PenTool className="section-icon" />
 						<h6 className="section-name">Stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(3)}</span>
@@ -329,11 +332,11 @@ function AppSidebar2() {
 				</section>
 				<hr className="hr" />
 			</div>
-			<div className="sidebar-spacer"></div>
-			<footer className="sidebar-footer">
+			<div className="section-spacer"></div>
+			<footer className="section-footer">
 				<hr className="hr is-collapsible" />
 				<section className="section is-end">
-					<header className="section-header">
+					<header className="section-header-header">
 						<feather.Shield className="section-icon" />
 						<h6 className="section-name">Sponsor</h6>
 					</header>

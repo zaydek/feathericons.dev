@@ -124,7 +124,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 					banner: `// https://feathericons.dev/?search=${id}`,
 				})
 			} else if (exportAs === "tsx") {
-				if (index === 0) clipboard += '\n\nimport { JSX } from "solid-js";\n\n'
+				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
 				clipboard += transformTsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!0 }), {
 					banner: `// https://feathericons.dev/?search=${id}`,
 				})
