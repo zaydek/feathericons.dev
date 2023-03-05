@@ -2,15 +2,12 @@
 
 @use "globals" as *
 
-////////////////////////////////////////
-
 :focus-visible:not(input[type=text])
   outline: revert
 
 :root
   +font-smoothing
   font-feature-settings: 'tnum'
-
   overflow-y: scroll // COMPAT/Windows
 
 :root, ::before, ::after
@@ -20,14 +17,7 @@ svg
   overflow: visible
 
 .hr
-  //// margin-top: -1px
   border-top: $hairline-height solid $hairline-color
   &.is-collapsible
     position: relative
     top: -1px
-
-
-////////////////////////////////////////
-
-//// :root
-////   --app-color: dodgerblue

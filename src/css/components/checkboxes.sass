@@ -30,20 +30,37 @@
     background-color: $slate-100
   &:hover:active
     background-color: $slate-200
+  > :is(:first-child, :last-child)
+    margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 .checkbox-icon
   height: $icon-height
   object-fit: contain // TODO
   color: $slate-800
   &:first-child
+    // Override
     margin: 0 math.div($button-height - $icon-height, 2)
 
 .checkbox-name
   flex: 1 // Stretch x-axis
   font: 425 16px / normal $sans
   color: $slate-800
-  &:first-child
-    margin: 0 math.div($button-height - $tiny-icon-height, 2)
+  //// &:first-child
+  ////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
+
+.checkbox-color-desc
+  flex: 1 // Stretch x-axis
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  padding: 0 math.div(28px, 4)
+  height: 24px
+  width: min-content
+  background-color: $app-color
+  border-radius: 4px
+  font: 500 11px / normal $code
+  text-transform: uppercase
+  color: white
 
 // E.g.
 //
@@ -52,25 +69,5 @@
 // - <ColorPicker>
 //
 .checkbox > *:last-child
+    // Override
     margin: 0 math.div($button-height - 24px, 2)
-
-.caps
-  //// margin: 0 4px
-  display: inline-flex
-  justify-content: center
-  //// width: 64px
-  align-items: center
-  height: 24px
-  padding: 0 math.div(28px, 4)
-  width: min-content
-  //// width: 64px
-  border-radius: 4px
-  //// box-shadow: $inset-hairline-shadow
-  background-color: $app-color
-  color: white
-  font: 500 11px / normal $code
-  //// letter-spacing: 0.05em
-  text-transform: uppercase
-  //// color: $slate-600
-  -webkit-user-select: all // Select all on click
-  user-select: all         // Select all on click

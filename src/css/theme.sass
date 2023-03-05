@@ -14,6 +14,8 @@ $decorative-icon-color: var(--decorative-icon-color)
   color-scheme: dark
 
 :root:not([data-theme="dark"])
+  --app-color:             red
+
   --base-color:            $white
   --hairline-color:        color.mix($gray-200, $gray-300)
   --primary-text-color:    $gray-800
@@ -23,6 +25,8 @@ $decorative-icon-color: var(--decorative-icon-color)
   --decorative-icon-color: $gray-500
 
 :root[data-theme="dark"]
+  --app-color:             blue
+
   --base-color:            $gray-900
   --hairline-color:        color.mix($gray-400, $gray-500)
   --primary-text-color:    $gray-100
