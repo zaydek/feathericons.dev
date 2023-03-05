@@ -306,7 +306,7 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.Circle className="section-icon" />
+						<feather.Circle className="section-icon" fill="currentColor" strokeWidth={4} />
 						<h6 className="section-name">Color</h6>
 					</header>
 				</section>
