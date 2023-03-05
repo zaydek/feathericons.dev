@@ -7,8 +7,6 @@ import "@/css/form-checkbox.sass"
 import "@/css/form-radio.sass"
 import "@/css/form-range.sass"
 
-import "@/css/react-colorful.sass"
-
 import { ProgresssBar } from "@/components"
 import {
 	ClipboardProvider,
