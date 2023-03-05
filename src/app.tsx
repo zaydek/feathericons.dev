@@ -325,40 +325,65 @@ function AppSidebar1() {
 	)
 }
 
-// TODO: Inline
-function ColorPicker() {
-	const [color, setColor] = useState("#000000")
-
-	return (
-		<div className="react-colorful-container">
-			<HexAlphaColorPicker color={color} onChange={setColor} />
-		</div>
-	)
-}
-
-function useClickAway({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }) {
+function useClickAway({ show, setShow }: { show: boolean; setShow: Dispatch<SetStateAction<boolean>> }) {
 	useEffect(() => {
-		if (!open) return
+		if (!show) return
 		function handleClick(e: MouseEvent) {
-			setOpen(false)
+			setShow(false)
 		}
 		window.addEventListener("click", handleClick, false)
 		return () => window.removeEventListener("click", handleClick, false)
-	}, [open, setOpen])
+	}, [show, setShow])
 	return void 0
 }
 
-function useEscapeShortcut({ setOpen }: { setOpen: Dispatch<SetStateAction<boolean>> }) {
+function useEscapeShortcut({ setShow }: { setShow: Dispatch<SetStateAction<boolean>> }) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
-				setOpen(false)
+				setShow(false)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setOpen])
+	}, [setShow])
 	return void 0
+}
+
+function ColorPicker({ color, setColor }: { color: string | null; setColor: Dispatch<SetStateAction<string | null>> }) {
+	const [show, setShow] = useState(false)
+
+	useEffect(() => {
+		if (color === null) {
+			document.documentElement.style.removeProperty("--app-color")
+			if (document.documentElement.style.length === 0) {
+				document.documentElement.removeAttribute("style")
+			}
+		} else {
+			document.documentElement.style.setProperty("--app-color", color)
+		}
+	}, [color])
+
+	useClickAway({ show: show, setShow: setShow })
+	useEscapeShortcut({ setShow: setShow })
+
+	return (
+		<div
+			className="color-picker"
+			onClick={e => {
+				// TODO
+				e.preventDefault()
+				e.stopPropagation()
+				setShow(true)
+			}}
+		>
+			{show && (
+				<div className="react-colorful-container">
+					<HexAlphaColorPicker color={color ?? "#000"} onChange={setColor} />
+				</div>
+			)}
+		</div>
+	)
 }
 
 function AppSidebar2() {
@@ -369,17 +394,15 @@ function AppSidebar2() {
 
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
 
-	// TODO
-	const [openColorPicker, setOpenColorPicker] = useState(false)
-	useClickAway({ open: openColorPicker, setOpen: setOpenColorPicker })
-	useEscapeShortcut({ setOpen: setOpenColorPicker })
+	// TODO: Extract to some provider
+	const [color, setColor] = useState<string | null>(null)
 
 	return (
 		<Sidebar2>
 			<header className="section-header">
 				<section className="section is-start">
 					<header className="section-header-header">
-						<feather.MousePointer className="section-icon" />
+						{/* <feather.MousePointer className="section-icon" /> */}
 						<h6 className="section-name">Selected</h6>
 						<SelectExportAs value={exportAs} setValue={setExportAs} />
 					</header>
@@ -392,27 +415,20 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.Circle className="section-icon" fill="currentColor" strokeWidth={4} />
+						{/* <feather.Circle
+							className="section-icon"
+							fill="var(--app-color)"
+							stroke="var(--app-color)"
+							strokeWidth={4}
+						/> */}
 						<h6 className="section-name">Color</h6>
-						<div
-							className="thing"
-							onClick={e => {
-								e.preventDefault()
-								e.stopPropagation()
-								setOpenColorPicker(true)
-							}}
-						>
-							{openColorPicker && (
-								<div className="thing-thing">
-									<HexAlphaColorPicker color="#000" />
-								</div>
-							)}
-						</div>
+						<ColorPicker color={color} setColor={setColor} />
 						{/* <ColorPicker /> */}
-						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
+						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={e => setColor(null)} />
 						{/* <div> */}
 					</header>
 					<Checkboxes>
+						{/* TODO */}
 						<Checkbox
 							name="Toggle monochrome"
 							//// icon={feather.Feather}
@@ -424,7 +440,7 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.PenTool className="section-icon" />
+						{/* <feather.PenTool className="section-icon" /> */}
 						<h6 className="section-name">Size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
@@ -434,7 +450,7 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.PenTool className="section-icon" />
+						{/* <feather.PenTool className="section-icon" /> */}
 						<h6 className="section-name">Stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />

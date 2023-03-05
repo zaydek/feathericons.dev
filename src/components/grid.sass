@@ -36,7 +36,7 @@ $grid-item-aspect-ratio: 1.25
   -webkit-user-select: none    // Interaction
   user-select: none            // Interaction
   .grid-item[data-selected=true] &
-    box-shadow: inset 0 0 0 4px $brand-color
+    box-shadow: inset 0 0 0 4px $app-color
 
 .grid-item-name
   display: -webkit-box         // Clamp
@@ -59,7 +59,7 @@ $grid-item-aspect-ratio: 1.25
 ////   .grid-item:not([data-bookmark=true]) &
 ////     display: none
 ////   .grid-item[data-bookmark=true] .grid-item-figure ~ &
-////     color: $brand-color
+////     color: $app-color
 
 ////////////////////////////////////////
 
@@ -68,6 +68,6 @@ $grid-item-aspect-ratio: 1.25
   max-height: 24px * math.div(56, 32)
   min-width:  24px
   max-width:  24px * math.div(56, 32)
-  color: $slate-800
+  color: var(--app-color, $slate-800) // TODO
   transform: scale(calc(var(--size) / 24))
   stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
