@@ -71,7 +71,7 @@ function useToggleShortcut({ setSidebar }: { setSidebar: Dispatch<SetStateAction
 export function Sidebar1({ children }: PropsWithChildren) {
 	return (
 		<aside className="sidebar">
-			<div className="contents">{children}</div>
+			<div className="sidebar-contents">{children}</div>
 		</aside>
 	)
 }
@@ -93,7 +93,6 @@ export function Sidebar2({ children }: PropsWithChildren) {
 		})
 	}, [setSidebar])
 
-	// TODO: Move to provider?
 	useDocumentAndBodyScrollLocking({ sidebar })
 	useCancelableShortcut({ sidebar, setSidebar })
 	useToggleShortcut({ setSidebar })
@@ -103,7 +102,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 			<div className="drag-area" onClick={DEBUG_cycleSidebar}>
 				<div className="handle"></div>
 			</div>
-			<div className="contents">{children}</div>
+			<div className="sidebar-contents">{children}</div>
 		</aside>
 	)
 }

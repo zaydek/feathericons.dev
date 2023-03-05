@@ -76,20 +76,20 @@ $handle-width:    6px
         //// .drag-area:hover:active .handle
         ////   background-color: hsl(0, 0%, 0%, 0.75)
 
-  &:nth-of-type(1) .contents
+  &:nth-of-type(1) .sidebar-contents
     display: flex
     flex-direction: column
     width: $sidebar-1-width
     @at-root
-      .sidebar:nth-of-type(1).is-maximized .contents
+      .sidebar:nth-of-type(1).is-maximized .sidebar-contents
         width: $sidebar-1-expanded-width
 
-  &:nth-of-type(2) .contents
+  &:nth-of-type(2) .sidebar-contents
     display: flex
     flex-direction: column
     width: $sidebar-2-width
     @at-root
-      .sidebar:nth-of-type(2).is-maximized .contents
+      .sidebar:nth-of-type(2).is-maximized .sidebar-contents
         width: $sidebar-2-expanded-width
 
 .sidebar.is-maximized ~ .sidebar-overlay
