@@ -94,12 +94,12 @@ function AppSidebar1() {
 				<section className="section is-start">
 					<SearchBar />
 				</section>
-				<div className="section-header-body" {...scrollProps}>
+				<div className="sidebar-header-scroll-area" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
 							{/* <feather.Package className="section-icon" /> */}
-							<h6 className="section-name">Icons</h6>
-							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetIcons} />
+							<h6 className="section-name u-flex-1">Icons</h6>
+							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetIcons} />
 						</header>
 						<ul className="checkboxes">
 							<label className="checkbox">
@@ -182,8 +182,8 @@ function AppSidebar1() {
 				<section className="section">
 					<header className="section-header">
 						{/* <feather.Monitor className="section-icon" /> */}
-						<h6 className="section-name">Display</h6>
-						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
+						<h6 className="section-name u-flex-1">Display</h6>
+						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetDisplay} />
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
@@ -201,7 +201,7 @@ function AppSidebar1() {
 				<section className="section">
 					<header className="section-header">
 						<feather.Globe className="section-icon" />
-						<h6 className="section-name">Resources</h6>
+						<h6 className="section-name u-flex-1">Resources</h6>
 					</header>
 					<nav className="resources">
 						<Anchor className="resource" href="TODO">
@@ -230,7 +230,7 @@ function AppSidebar1() {
 				<section className="section is-end">
 					<header className="section-header">
 						<feather.Smile className="section-icon" />
-						<h6 className="section-name">Sponsor</h6>
+						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
 				</section>
 			</footer>
@@ -266,11 +266,11 @@ function AppSidebar2() {
 				<section className="section is-start">
 					<header className="section-header">
 						{/* <feather.MousePointer className="section-icon" /> */}
-						<h6 className="section-name">Selected</h6>
+						<h6 className="section-name u-flex-1">Selected</h6>
 						<ExportAs value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
-				<div className="section-header-body is-padding-bottom" {...scrollProps}>
+				<div className="sidebar-header-scroll-area is-padding-bottom" {...scrollProps}>
 					<SyntaxHighlighting lang={lang} code={clipboard} />
 				</div>
 			</header>
@@ -278,8 +278,8 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header">
-						<h6 className="section-name">Variants</h6>
-						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
+						<h6 className="section-name u-flex-1">Variants</h6>
+						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
@@ -299,18 +299,18 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header">
-						<h6 className="section-name">Size</h6>
-						<span className="section-range-desc">{size.toFixed(0)} PX</span>
-						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
+						<h6 className="section-name u-flex-1">Size</h6>
+						<span className="section-name">{size.toFixed(0)} PX</span>
+						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 					</header>
 					<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header">
-						<h6 className="section-name">Stroke width</h6>
-						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
-						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
+						<h6 className="section-name u-flex-1">Stroke width</h6>
+						<span className="section-name">{strokeWidth.toFixed(2)}</span>
+						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 					</header>
 					<ProgressRange
 						value={strokeWidth}
@@ -328,7 +328,7 @@ function AppSidebar2() {
 				<section className="section is-end">
 					<header className="section-header">
 						<feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} />
-						<h6 className="section-name">Sponsor</h6>
+						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
 				</section>
 			</footer> */}

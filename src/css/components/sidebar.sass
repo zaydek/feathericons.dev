@@ -1,0 +1,41 @@
+@use "sass:math"
+
+@use "../../css/globals" as *
+
+// <header class="sidebar-header"
+//   …
+//   <div class="sidebar-header-scroll-area">
+//     …
+//   </div>
+// </header>
+// <div class="sidebar-spacer"></div>
+// <footer class="sidebar-header">
+//   …
+// </footer>
+
+.sidebar-header
+  position: sticky
+  top: 0
+  z-index: 50
+  display: flex
+  flex-direction: column
+  background-color: white
+  overflow-y: auto
+
+.sidebar-header-scroll-area
+  flex: 1
+  overflow-y: auto
+  // Add .padding-bottom for .syntax-highlighting
+  //// &:has(.syntax-highlighting)
+  ////   padding-bottom: $sidebar-gap
+  &.is-padding-bottom
+    padding-bottom: $sidebar-gap
+
+.sidebar-spacer
+  flex: 1
+
+.sidebar-footer
+  position: sticky
+  bottom: 0
+  z-index: 50
+  background-color: white

@@ -1,0 +1,66 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+// <section class="section">
+//   <header class="section-header">
+//     <span class="section-icon"></span>
+//     <span class="section-name">
+//       …
+//     </span>
+//     <span class="section-range-desc">
+//       …
+//     </span>
+//     <span class="section-reset-icon"></span>
+//   </header>
+//   …
+// </section>
+
+.section
+  display: flex
+  flex-direction: column
+  gap: $sidebar-gap
+  padding: $sidebar-gap $sidebar-padding-x
+  &.is-start
+    padding-top: $sidebar-padding-y
+    &:has(+ [data-scroll=true])
+      box-shadow: $hairline-shadow-bottom
+  &.is-end
+    // Change from [$sidebar-gap $sidebar-padding-x]
+    // to [$sidebar-padding-y $sidebar-padding-x]
+    padding: $sidebar-padding-y $sidebar-padding-x
+  // Optical alignment
+  > :not(.checkboxes, .resources)
+    margin: 0 math.div($button-height - $tiny-icon-height, 2)
+
+.section-header
+  display: flex
+  align-items: center
+  height: math.div($button-height, 2)
+  background-color: white
+  // Optical alignment
+  > :first-child
+    margin-right: math.div($button-height - $tiny-icon-height, 2)
+  > :last-child
+    margin-left:  math.div($button-height - $tiny-icon-height, 2)
+
+.section-icon
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $slate-600
+
+.section-name
+  font: 500 11px / normal $sans
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-600
+
+.section-reset-icon
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $slate-300
+  cursor: pointer           // Interaction
+  -webkit-user-select: none // Interaction
+  user-select: none         // Interaction
+  &:hover
+    color: $slate-800
