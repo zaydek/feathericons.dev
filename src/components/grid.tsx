@@ -83,7 +83,7 @@ export function GridItem({
 			<figure className="grid-item-frame">
 				<Icon className="grid-item-frame-icon" />
 			</figure>
-			{!showNames && <figcaption className="grid-item-name">{id}</figcaption>}
+			{showNames && <figcaption className="grid-item-name">{id}</figcaption>}
 			{/* <feather.Star className="grid-item-bookmark" fill="currentColor" strokeWidth={4} /> */}
 		</li>
 	)
