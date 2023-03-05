@@ -76,11 +76,6 @@ function AppSidebar1() {
 
 	const [pending, startTransition] = useTransition()
 
-	//// // Use function syntax because of <T>
-	//// const createTransition = useCallback(function <T>(fn: (_: T) => void) {
-	//// 	return (arg: T) => startTransition(() => fn(arg))
-	//// }, [])
-
 	// TODO: Extract to pattern
 	useEffect(() => {
 		setStarted(true)
