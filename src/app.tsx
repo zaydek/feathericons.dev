@@ -107,7 +107,7 @@ function AppSidebar1() {
 				<div className="section-header-body" {...scrollProps}>
 					<section className="section">
 						<header className="section-header-header">
-							<feather.Package className="section-icon" />
+							{/* <feather.Package className="section-icon" /> */}
 							<h6 className="section-name">Icons</h6>
 							<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetIcons} />
 						</header>
@@ -219,17 +219,17 @@ function AppSidebar1() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						<feather.Monitor className="section-icon" />
+						{/* <feather.Monitor className="section-icon" /> */}
 						<h6 className="section-name">Display</h6>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
 					</header>
 					<Checkboxes>
 						<Checkbox
-							name="Monochrome mode"
+							name="Prefer monochrome"
 							icon={p => (
 								<feather.Droplet
 									// TODO
-									style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
+									style={{ transform: "scale(0.875)", opacity: 0.75 }}
 									fill="currentColor"
 									strokeWidth={4}
 									{...p}
@@ -239,12 +239,12 @@ function AppSidebar1() {
 							setChecked={createTransition(setMonochromeMode)}
 						/>
 						<Checkbox
-							name="Compact mode"
+							name="Show names"
 							icon={p => (
-								<feather.Minimize2
+								<feather.Search
 									// TODO
-									style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
-									fill="currentColor"
+									style={{ transform: "scale(0.875)", opacity: 0.75 }}
+									//// fill="currentColor"
 									strokeWidth={4}
 									{...p}
 								/>
@@ -325,7 +325,7 @@ function AppSidebar2() {
 					<header className="section-header-header">
 						<feather.PenTool className="section-icon" />
 						<h6 className="section-name">Stroke width</h6>
-						<span className="section-range-desc">{strokeWidth.toFixed(3)}</span>
+						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
 					</header>
 					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
@@ -337,7 +337,7 @@ function AppSidebar2() {
 				<hr className="hr is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header-header">
-						<feather.Shield className="section-icon" />
+						{/* <feather.Shield className="section-icon" /> */}
 						<h6 className="section-name">Sponsor</h6>
 					</header>
 				</section>
