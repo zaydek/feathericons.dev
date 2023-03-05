@@ -49,7 +49,12 @@ label.export-select
   width: 100%  // Inherit
   opacity: 0.01
   cursor: pointer
-  &:is(:hover, :focus-visible) + .export-select-button
+  //// &:is(:hover, :focus-visible) + .export-select-button
+
+  // Forward styles
+  &:hover + .export-select-button
     background-color: $slate-100
+
+  // Forward styles
   &:hover:active + .export-select-button
     background-color: $slate-200

@@ -8,7 +8,12 @@ $inactive-icon-color:   var(--inactive-icon-color)
 $active-icon-color:     var(--active-icon-color)
 $decorative-icon-color: var(--decorative-icon-color)
 
-:not([data-theme="dark"])
+:root:not([data-theme=dark])
+  color-scheme: light
+:root[data-theme=dark]
+  color-scheme: dark
+
+:root:not([data-theme="dark"])
   --base-color:            $white
   --hairline-color:        color.mix($gray-200, $gray-300)
   --primary-text-color:    $gray-800
@@ -17,7 +22,7 @@ $decorative-icon-color: var(--decorative-icon-color)
   --active-icon-color:     $gray-800
   --decorative-icon-color: $gray-500
 
-[data-theme="dark"]
+:root[data-theme="dark"]
   --base-color:            $gray-900
   --hairline-color:        color.mix($gray-400, $gray-500)
   --primary-text-color:    $gray-100

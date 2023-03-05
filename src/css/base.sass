@@ -4,14 +4,12 @@
 
 ////////////////////////////////////////
 
+:focus-visible:not(input[type=text])
+  outline: revert
+
 :root
   +font-smoothing
   overflow-y: scroll // COMPAT/Windows
-
-//// :root:not([data-theme=dark])
-////   color-scheme: light
-//// :root[data-theme=dark]
-////   color-scheme: dark
 
 :root, ::before, ::after
   color: RED

@@ -1,11 +1,11 @@
 import "./index.sass"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { HexAlphaColorPicker } from "react-colorful"
+import { HexColorPicker } from "react-colorful"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useClickAway({ show, setShow }: { show: boolean; setShow: Dispatch<SetStateAction<boolean>> }) {
+function useClickAwayToClose({ show, setShow }: { show: boolean; setShow: Dispatch<SetStateAction<boolean>> }) {
 	useEffect(() => {
 		if (!show) return
 		function handleClick(e: MouseEvent) {
@@ -17,7 +17,7 @@ function useClickAway({ show, setShow }: { show: boolean; setShow: Dispatch<SetS
 	return void 0
 }
 
-function useEscapeShortcut({ setShow }: { setShow: Dispatch<SetStateAction<boolean>> }) {
+function useEscapeShortcutToClose({ setShow }: { setShow: Dispatch<SetStateAction<boolean>> }) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
@@ -52,8 +52,8 @@ export function ColorPicker({
 		}
 	}, [color])
 
-	useClickAway({ show: show, setShow: setShow })
-	useEscapeShortcut({ setShow: setShow })
+	useClickAwayToClose({ show: show, setShow: setShow })
+	useEscapeShortcutToClose({ setShow: setShow })
 
 	return (
 		<div
@@ -67,7 +67,7 @@ export function ColorPicker({
 		>
 			{show && (
 				<div className="react-colorful-container">
-					<HexAlphaColorPicker color={color ?? "#000"} onChange={setColor} />
+					<HexColorPicker color={color ?? "#000"} onChange={setColor} />
 				</div>
 			)}
 		</div>
