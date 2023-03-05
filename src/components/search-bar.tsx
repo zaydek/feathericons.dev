@@ -3,7 +3,7 @@ import "./search-bar.sass"
 import * as feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
-import { SearchContext } from "@/state"
+import { ClipboardContext, SearchContext } from "@/state"
 import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useRef } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,11 +60,22 @@ function useFocusShortcut({
 export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 	const { search, setSearch } = useContext(SearchContext)!
+	const { clearSelected } = useContext(ClipboardContext)!
 
 	useFocusOnMount({ ref })
 	useResetScrollOnSearch({ search })
 	useFocusShortcut({ ref, setSearch })
 	//// useClearShortcut({ setSearch })
+
+	// Clear on search
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		clearSelected()
+	}, [clearSelected, search])
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
@@ -72,7 +83,7 @@ export function SearchBar() {
 			<input
 				ref={ref}
 				type="text"
-				placeholder={isMac() ? "Press ⌘P to focus" : "Press Ctrl-P to focus"}
+				placeholder={isMac() ? "⌘P to focus" : "Ctrl-P to focus"}
 				value={search}
 				onChange={e => setSearch(e.currentTarget.value)}
 			/>

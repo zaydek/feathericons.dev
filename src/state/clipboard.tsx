@@ -121,20 +121,20 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				)
 			} else if (exportAs === "jsx") {
 				clipboard += transformJsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${id}`,
+					banner: `// https://feathericons.dev/?search=${id}&export-as=jsx`,
 				})
 			} else if (exportAs === "tsx") {
 				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
 				clipboard += transformTsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${id}`,
+					banner: `// https://feathericons.dev/?search=${id}&export-as=tsx`,
 				})
 			} else if (exportAs === "strict-jsx") {
 				clipboard += transformJsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${id}`,
+					banner: `// https://feathericons.dev/?search=${id}&export-as=strict-jsx`,
 				})
 			} else if (exportAs === "strict-tsx") {
 				clipboard += transformTsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${id}`,
+					banner: `// https://feathericons.dev/?search=${id}&export-as=strict-tsx`,
 				})
 			}
 		}

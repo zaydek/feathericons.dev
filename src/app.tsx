@@ -207,6 +207,25 @@ function AppSidebar1() {
 								/>
 							</Checkboxes>
 						</Checkboxes>
+						{false && (
+							<Checkboxes>
+								<Checkbox
+									name="Show icon names"
+									icon={feather.Eye}
+									//// icon={p => (
+									//// 	<feather.Search
+									//// 		// TODO
+									//// 		style={{ transform: "scale(0.875)", opacity: 0.75 }}
+									//// 		//// fill="currentColor"
+									//// 		strokeWidth={4}
+									//// 		{...p}
+									//// 	/>
+									//// )}
+									checked={showNames}
+									setChecked={setShowNames}
+								/>
+							</Checkboxes>
+						)}
 						{/* </div> */}
 					</section>
 				</div>
@@ -220,7 +239,7 @@ function AppSidebar1() {
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
 					</header>
 					<Checkboxes>
-						<Checkbox
+						{/* <Checkbox
 							name="Prefer monochrome"
 							icon={p => (
 								<feather.Droplet
@@ -233,48 +252,53 @@ function AppSidebar1() {
 							)}
 							checked={preferMonochrome}
 							setChecked={createTransition(setPreferMonochrome)}
-						/>
-						{/* <Checkbox
-							name="Show names"
-							icon={p => (
-								<feather.Search
-									// TODO
-									style={{ transform: "scale(0.875)", opacity: 0.75 }}
-									//// fill="currentColor"
-									strokeWidth={4}
-									{...p}
-								/>
-							)}
-							checked={showNames}
-							setChecked={setShowNames}
 						/> */}
-					</Checkboxes>
-				</section>
-				<hr className="hr" />
-				<section className="section">
-					<header className="section-header-header">
-						{/* <feather.Monitor className="section-icon" /> */}
-						<h6 className="section-name">Display</h6>
-						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
-					</header>
-					<Checkboxes>
 						<Checkbox
 							name="Show names"
-							icon={p => (
-								<feather.Search
-									// TODO
-									style={{ transform: "scale(0.875)", opacity: 0.75 }}
-									//// fill="currentColor"
-									strokeWidth={4}
-									{...p}
-								/>
-							)}
+							icon={showNames ? feather.ToggleRight : feather.ToggleLeft}
+							//// icon={p => (
+							//// 	<feather.Search
+							//// 		// TODO
+							//// 		style={{ transform: "scale(0.875)", opacity: 0.75 }}
+							//// 		//// fill="currentColor"
+							//// 		strokeWidth={4}
+							//// 		{...p}
+							//// 	/>
+							//// )}
 							checked={showNames}
 							setChecked={setShowNames}
 						/>
 					</Checkboxes>
 				</section>
 				<hr className="hr" />
+				{false && (
+					<>
+						<section className="section">
+							<header className="section-header-header">
+								{/* <feather.Monitor className="section-icon" /> */}
+								<h6 className="section-name">Display</h6>
+								<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
+							</header>
+							<Checkboxes>
+								<Checkbox
+									name="Show names"
+									icon={p => (
+										<feather.Search
+											// TODO
+											style={{ transform: "scale(0.875)", opacity: 0.75 }}
+											//// fill="currentColor"
+											strokeWidth={4}
+											{...p}
+										/>
+									)}
+									checked={showNames}
+									setChecked={setShowNames}
+								/>
+							</Checkboxes>
+						</section>
+						<hr className="hr" />
+					</>
+				)}
 			</div>
 			<div className="section-spacer"></div>
 			<footer className="section-footer">
@@ -287,7 +311,7 @@ function AppSidebar1() {
 					<nav className="resources">
 						<Resource name="Icons" icon={wkBrandsOriginal.Github} />
 						<Resource name="Website" icon={wkBrandsOriginal.Github} />
-						<Resource name="Plugin" icon={wkBrandsOriginal.Figma} />
+						{/* <Resource name="Figma" icon={wkBrandsOriginal.Figma} /> */}
 						<Resource name="Social & payments files" icon={wkBrandsOriginal.Figma} />
 						{/* <Resource name="The Wolf Kit" icon={wkBrandsOriginal.Figma} /> */}
 						{/* <Resource name="The Wolf Kit Figma" icon={wkBrandsOriginal.Figma} /> */}
