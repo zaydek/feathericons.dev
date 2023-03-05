@@ -1,4 +1,4 @@
-import "./progress-bar.sass"
+import "./index.sass"
 
 import { ProgressBarContext } from "@/state"
 import { useContext, useEffect, useRef, useState } from "react"
@@ -48,7 +48,9 @@ export function ProgresssBar() {
 			style={{
 				width: `${progress * 100}%`,
 				opacity: working ? 1 : 0,
-				transition: [`width ${TICK_MS}ms ease`, !working && `opacity ${TICK_END_MS}ms ease ${TICK_MS}ms`].filter(Boolean).join(", "),
+				transition: [`width ${TICK_MS}ms ease`, !working && `opacity ${TICK_END_MS}ms ease ${TICK_MS}ms`]
+					.filter(Boolean)
+					.join(", "),
 			}}
 			onTransitionEnd={e => {
 				if (e.propertyName === "opacity") {

@@ -1,7 +1,8 @@
 import "the-new-css-reset"
 
 import "@/css/base.sass"
-import "@/css/section.sass"
+import "@/css/resources.sass"
+//// import "@/css/section.sass"
 
 import "@/css/form-checkbox.sass"
 import "@/css/form-radio.sass"

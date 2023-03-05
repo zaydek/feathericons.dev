@@ -1,5 +1,6 @@
-import "./syntax-highlighting.sass"
+import "./index.sass"
 
+import { Anchor } from "@/components"
 import { ShikiContext } from "@/state"
 import { Fragment, useContext, useEffect, useState } from "react"
 import { IThemedToken } from "shiki-es"
@@ -7,12 +8,12 @@ import { IThemedToken } from "shiki-es"
 // prettier-ignore
 function TwitterLink({ username, children }: { username: string; children: string }) {
 	const href = `https://twitter.com/${username}`
-	return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
+	return <Anchor href={href}>{children}</Anchor>
 }
 
 // prettier-ignore
 function Link({ href, children }: { href: string; children: string }) {
-	return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
+	return <Anchor href={href}>{children}</Anchor>
 }
 
 // prettier-ignore
@@ -22,10 +23,10 @@ function RenderLink({ children }: { children: string }) {
 		: <Link href={children}>{children}</Link>
 }
 
-const re = /(.*)(?!http:\/\/www\.w3\.org\/2000\/svg)(@[^\s]+|https?:\/\/[^\s]+)(.*)/g
+const regex = /(.*)(?!http:\/\/www\.w3\.org\/2000\/svg)(@[^\s]+|https?:\/\/[^\s]+)(.*)/g
 
 function Token({ color, children }: { color?: string; children: string }) {
-	const matches = [...children.matchAll(re)]
+	const matches = [...children.matchAll(regex)]
 	return (
 		<span style={{ color }}>
 			{matches.length > 0

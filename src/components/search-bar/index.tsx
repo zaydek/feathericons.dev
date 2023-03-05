@@ -1,4 +1,4 @@
-import "./search-bar.sass"
+import "./index.sass"
 
 import * as feather from "@icons/feather/tsx"
 

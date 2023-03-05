@@ -1,14 +1,14 @@
 @use "sass:color"
 @use "sass:math"
 
-@use "../css/globals" as *
+@use "../../css/globals" as *
 
 ////////////////////////////////////////
 
-pre.syntax-highlighting
-  margin: 0 // CSS reset
 .syntax-highlighting
-  overflow-x: scroll
+  pre#{&}
+    margin: 0        // CSS reset
+  overflow-x: scroll // COMPAT/Windows
 
 ////////////////////////////////////////
 
@@ -19,5 +19,4 @@ pre.syntax-highlighting
   font-feature-settings: 'tnum'
   color: $slate-600
   a
-    //// color: $brand-color
     text-decoration: underline

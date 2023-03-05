@@ -6,6 +6,7 @@ import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-fill
 import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
+	Anchor,
 	Checkbox,
 	Checkboxes,
 	ColorPicker,
@@ -14,7 +15,6 @@ import {
 	Main,
 	Radio,
 	Range,
-	Resource,
 	SearchBar,
 	SelectExportAs,
 	Sidebar1,
@@ -310,14 +310,26 @@ function AppSidebar1() {
 						<h6 className="section-name">Resources</h6>
 					</header>
 					<nav className="resources">
-						<Resource name="Icons" icon={wkBrandsOriginal.Github} />
-						<Resource name="Website" icon={wkBrandsOriginal.Github} />
-						{/* <Resource name="Figma" icon={wkBrandsOriginal.Figma} /> */}
-						<Resource name="Social & payments files" icon={wkBrandsOriginal.Figma} />
-						{/* <Resource name="The Wolf Kit" icon={wkBrandsOriginal.Figma} /> */}
-						{/* <Resource name="The Wolf Kit Figma" icon={wkBrandsOriginal.Figma} /> */}
-						{/* <Resource name="The Wolf Kit" icon={TheWolfKit} /> */}
-						<Resource name="Share on Twitter" icon={wkBrandsOriginal.Twitter} />
+						<Anchor className="resource" href="TODO">
+							<wkBrandsOriginal.Github className="resource-icon" />
+							<span className="resource-name">Icons</span>
+							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+						</Anchor>
+						<Anchor className="resource" href="TODO">
+							<wkBrandsOriginal.Github className="resource-icon" />
+							<span className="resource-name">Website</span>
+							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+						</Anchor>
+						<Anchor className="resource" href="TODO">
+							<wkBrandsOriginal.Figma className="resource-icon" />
+							<span className="resource-name">Social & payments files</span>
+							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+						</Anchor>
+						<Anchor className="resource" href="TODO">
+							<wkBrandsOriginal.Twitter className="resource-icon" />
+							<span className="resource-name">Share on Twitter</span>
+							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+						</Anchor>
 					</nav>
 				</section>
 			</footer>
