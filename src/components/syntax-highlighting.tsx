@@ -1,5 +1,3 @@
-import "./index.sass"
-
 import { Anchor } from "@/components"
 import { ShikiContext } from "@/state"
 import { Fragment, useContext, useEffect, useState } from "react"

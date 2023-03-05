@@ -1,5 +1,3 @@
-import "./index.sass"
-
 import { PropsWithChildren, useEffect, useState } from "react"
 
 export function DEV_DebugCss({ children }: PropsWithChildren) {

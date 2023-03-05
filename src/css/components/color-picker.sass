@@ -1,8 +1,12 @@
 @use "sass:math"
 
-@use "../../css/globals" as *
+@use "../globals" as *
 
-////////////////////////////////////////
+// <div class="color-picker">
+//   <div class="react-colorful-container">
+//     <div class="react-colorful">…</div>
+//   </div>
+// </div>
 
 .color-picker
   position: relative
@@ -15,15 +19,10 @@
   cursor: pointer   // Interaction
   user-select: none // Interaction
 
-////////////////////////////////////////
-
 .react-colorful-container
   position: absolute
-  //// inset: auto 0 32px auto
   inset: -4px -4px auto auto
   z-index: 100
-
-////////////////////////////////////////
 
 .react-colorful
   border-radius: 12px

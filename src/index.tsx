@@ -1,12 +1,11 @@
 import "the-new-css-reset"
 
 import "@/css/base.sass"
-import "@/css/resources.sass"
+
 //// import "@/css/section.sass"
 
-import "@/css/form-checkbox.sass"
-import "@/css/form-radio.sass"
-import "@/css/form-range.sass"
+import "@/css/components/index.sass"
+import "@/css/form/index.sass"
 
 import { ProgresssBar } from "@/components"
 import {

@@ -1,0 +1,24 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+// <pre class="syntax-highlighting">
+//   <code>
+//     …
+//     <a>…</a>
+//     …
+//   </code>
+// </pre>
+
+pre.syntax-highlighting
+  margin: 0 // CSS reset
+.syntax-highlighting
+  overflow-x: scroll // COMPAT/Windows
+  code
+    display: inline-block
+    padding: 0 24px + 5px // 🧐
+    font: 500 13px / 1.375 $code
+    font-feature-settings: 'tnum'
+    color: $slate-600
+    a
+      text-decoration: underline

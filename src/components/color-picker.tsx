@@ -1,5 +1,3 @@
-import "./index.sass"
-
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { HexColorPicker } from "react-colorful"
 

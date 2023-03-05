@@ -1,5 +1,3 @@
-import "./index.sass"
-
 import { ProgressBarContext } from "@/state"
 import { useContext, useEffect, useRef, useState } from "react"
 

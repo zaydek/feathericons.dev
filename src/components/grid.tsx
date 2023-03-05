@@ -1,5 +1,3 @@
-import "./index.sass"
-
 import { Icon, toKebabCase } from "@/lib"
 import { ClipboardContext, LayoutContext, SearchContext } from "@/state"
 import { Suspense, useContext } from "react"

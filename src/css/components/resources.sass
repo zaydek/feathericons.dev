@@ -10,21 +10,16 @@
 //   </div>
 // </div>
 
-////////////////////////////////////////
-
 .resource
   display: flex
   align-items: center
   margin: -4px 0
   height: $button-height
   border-radius: 1e3px
-  //// &:is(:hover, :focus-visible)
   &:hover
     background-color: $slate-100
   &:hover:active
     background-color: $slate-200
-
-////////////////////////////////////////
 
 .resource-icon:first-child
   margin: 0 math.div($button-height - $icon-height, 2)
@@ -38,7 +33,7 @@
   color: $slate-800
 
 .resource-icon:last-child
-  margin: 0 math.div($button-height - 16px, 2)
-  height: 16px
-  width: 16px
+  margin: 0 math.div($button-height - $icon-height, 2)
+  height: $icon-height
+  width: $icon-height
   color: $slate-400
