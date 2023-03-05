@@ -7,8 +7,8 @@ import wkPaymentsManifest from "@icons/wolfkit/payments/original/manifest.json"
 type Iconset =
 	| "feather"
 	| "wolfkit-brands-original"
-	| "wolfkit-brands-original-circle"
-	| "wolfkit-brands-original-square"
+	//// | "wolfkit-brands-original-circle"
+	//// | "wolfkit-brands-original-square"
 	| "wolfkit-brands-mono"
 	| "wolfkit-brands-mono-circle"
 	| "wolfkit-brands-mono-square"
@@ -43,14 +43,14 @@ export function createCache() {
 				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-original"))
 				break
-			case "wolfkit-brands-original-circle":
-				names = wkBrandsManifest
-				Icon = lazy(() => import("./stubs/wolfkit-brands-original-circle"))
-				break
-			case "wolfkit-brands-original-square":
-				names = wkBrandsManifest
-				Icon = lazy(() => import("./stubs/wolfkit-brands-original-square"))
-				break
+			//// case "wolfkit-brands-original-circle":
+			//// 	names = wkBrandsManifest
+			//// 	Icon = lazy(() => import("./stubs/wolfkit-brands-original-circle"))
+			//// 	break
+			//// case "wolfkit-brands-original-square":
+			//// 	names = wkBrandsManifest
+			//// 	Icon = lazy(() => import("./stubs/wolfkit-brands-original-square"))
+			//// 	break
 			case "wolfkit-brands-mono":
 				names = wkBrandsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-brands-mono"))

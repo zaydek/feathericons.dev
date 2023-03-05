@@ -14,8 +14,8 @@ import { createCache } from "./search-cache"
 export type SocialRadio =
 	| "off"
 	| "normal"
-	| "circle"
-	| "square"
+//// | "circle"
+//// | "square"
 
 // prettier-ignore
 export type PaymentsRadio =
@@ -25,7 +25,7 @@ export type PaymentsRadio =
 
 const SHOW_FEATHER_DEFAULT      = !!1 // prettier-ignore
 const SHOW_SOCIAL_DEFAULT       = !!1 // prettier-ignore
-const SOCIAL_RADIO_DEFAULT      = "normal" // prettier-ignore
+//// const SOCIAL_RADIO_DEFAULT      = "normal" // prettier-ignore
 const SHOW_PAYMENTS_DEFAULT     = !!1 // prettier-ignore
 const PAYMENTS_RADIO_DEFAULT    = "filled" // prettier-ignore
 const PREFER_MONOCHROME_DEFAULT = !!0 // prettier-ignore
@@ -40,8 +40,8 @@ export const SearchContext =
 		setShowFeather:      Dispatch<SetStateAction<boolean>>
 		showSocial:          boolean
 		setShowSocial:       Dispatch<SetStateAction<boolean>>
-		socialRadio:         SocialRadio
-		setSocialRadio:      Dispatch<SetStateAction<SocialRadio>>
+		//// socialRadio:         SocialRadio
+		//// setSocialRadio:      Dispatch<SetStateAction<SocialRadio>>
 		showPayments:        boolean
 		setShowPayments:     Dispatch<SetStateAction<boolean>>
 		paymentsRadio:       PaymentsRadio
@@ -84,19 +84,19 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		key: "show-social",
 		initialValue: SHOW_SOCIAL_DEFAULT,
 	})
-	const [socialRadio, setSocialRadio] = useParam<SocialRadio>({
-		key: "social-radio",
-		initialValue: SOCIAL_RADIO_DEFAULT,
-		parser: value => {
-			switch (value) {
-				case "normal":
-				case "circle":
-				case "square":
-					return value
-			}
-			return SOCIAL_RADIO_DEFAULT
-		},
-	})
+	//// const [socialRadio, setSocialRadio] = useParam<SocialRadio>({
+	//// 	key: "social-radio",
+	//// 	initialValue: SOCIAL_RADIO_DEFAULT,
+	//// 	parser: value => {
+	//// 		switch (value) {
+	//// 			case "normal":
+	//// 			case "circle":
+	//// 			case "square":
+	//// 				return value
+	//// 		}
+	//// 		return SOCIAL_RADIO_DEFAULT
+	//// 	},
+	//// })
 
 	//////////////////////////////////////////////////////////////////////////////
 
@@ -133,10 +133,10 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	const resetIcons = useCallback(() => {
 		setShowFeather(SHOW_FEATHER_DEFAULT)
 		setShowSocial(SHOW_SOCIAL_DEFAULT)
-		setSocialRadio(SOCIAL_RADIO_DEFAULT)
+		//// setSocialRadio(SOCIAL_RADIO_DEFAULT)
 		setShowPayments(SHOW_PAYMENTS_DEFAULT)
 		setPaymentsRadio(PAYMENTS_RADIO_DEFAULT)
-	}, [setPaymentsRadio, setShowFeather, setShowPayments, setShowSocial, setSocialRadio])
+	}, [setPaymentsRadio, setShowFeather, setShowPayments, setShowSocial])
 
 	const resetDisplay = useCallback(() => {
 		setPreferMonochrome(PREFER_MONOCHROME_DEFAULT)
@@ -147,15 +147,16 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		const results: (readonly [string[], LazyExoticComponent<any>])[] = []
 		if (showFeather) results.push(cache.get("feather"))
 		if (showSocial) {
-			const rv = socialRadio
+			//// const rv = socialRadio
+			const rv = "normal"
 			if (preferMonochrome) {
 				if (rv === "normal") results.push(cache.get("wolfkit-brands-mono"))
-				if (rv === "circle") results.push(cache.get("wolfkit-brands-mono-circle"))
-				if (rv === "square") results.push(cache.get("wolfkit-brands-mono-square"))
+				//// if (rv === "circle") results.push(cache.get("wolfkit-brands-mono-circle"))
+				//// if (rv === "square") results.push(cache.get("wolfkit-brands-mono-square"))
 			} else {
 				if (rv === "normal") results.push(cache.get("wolfkit-brands-original"))
-				if (rv === "circle") results.push(cache.get("wolfkit-brands-original-circle"))
-				if (rv === "square") results.push(cache.get("wolfkit-brands-original-square"))
+				//// if (rv === "circle") results.push(cache.get("wolfkit-brands-original-circle"))
+				//// if (rv === "square") results.push(cache.get("wolfkit-brands-original-square"))
 			}
 		}
 		if (showPayments) {
@@ -169,7 +170,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			}
 		}
 		return results
-	}, [showFeather, showSocial, showPayments, socialRadio, preferMonochrome, paymentsRadio])
+	}, [showFeather, showSocial, showPayments, preferMonochrome, paymentsRadio])
 
 	return (
 		<SearchContext.Provider
@@ -180,8 +181,8 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setShowFeather,
 				showSocial,
 				setShowSocial,
-				socialRadio,
-				setSocialRadio,
+				//// socialRadio,
+				//// setSocialRadio,
 				showPayments,
 				setShowPayments,
 				paymentsRadio,

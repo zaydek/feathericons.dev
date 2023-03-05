@@ -1,9 +1,4 @@
 import * as feather from "@icons/feather/tsx"
-import * as wkBrandsMonoCircle from "@icons/wolfkit/brands/mono-circle/tsx"
-import * as wkBrandsMonoSquare from "@icons/wolfkit/brands/mono-square/tsx"
-import * as wkBrandsMono from "@icons/wolfkit/brands/mono/tsx"
-import * as wkBrandsOriginalCircle from "@icons/wolfkit/brands/original-circle/tsx"
-import * as wkBrandsOriginalSquare from "@icons/wolfkit/brands/original-square/tsx"
 import * as wkBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
 import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
 import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
@@ -36,7 +31,6 @@ import {
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
-	SocialRadio,
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
@@ -68,8 +62,8 @@ function AppSidebar1() {
 		setShowFeather,
 		showSocial,
 		setShowSocial,
-		socialRadio,
-		setSocialRadio,
+		//// socialRadio,
+		//// setSocialRadio,
 		showPayments,
 		setShowPayments,
 		paymentsRadio,
@@ -123,19 +117,20 @@ function AppSidebar1() {
 						<Checkboxes>
 							<Checkbox
 								name="Social"
-								icon={p => (
-									<feather.Folder
-										// TODO
-										style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
-										fill="currentColor"
-										strokeWidth={4}
-										{...p}
-									/>
-								)}
+								icon={feather.Twitter}
+								//// icon={p => (
+								//// 	<feather.Folder
+								//// 		// TODO
+								//// 		style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
+								//// 		fill="currentColor"
+								//// 		strokeWidth={4}
+								//// 		{...p}
+								//// 	/>
+								//// )}
 								checked={showSocial}
 								setChecked={createTransition(setShowSocial)}
 							/>
-							<Checkboxes>
+							{/* <Checkboxes>
 								<Radio<SocialRadio>
 									name="Original"
 									icon={preferMonochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
@@ -169,20 +164,21 @@ function AppSidebar1() {
 									})}
 									checked={socialRadio === "square"}
 								/>
-							</Checkboxes>
+							</Checkboxes> */}
 						</Checkboxes>
 						<Checkboxes>
 							<Checkbox
 								name="Payments"
-								icon={p => (
-									<feather.Folder
-										// TODO
-										style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
-										fill="currentColor"
-										strokeWidth={4}
-										{...p}
-									/>
-								)}
+								icon={feather.CreditCard}
+								//// icon={p => (
+								//// 	<feather.Folder
+								//// 		// TODO
+								//// 		style={{ color: "dodgerblue", transform: "scale(0.875)", opacity: 0.75 }}
+								//// 		fill="currentColor"
+								//// 		strokeWidth={4}
+								//// 		{...p}
+								//// 	/>
+								//// )}
 								checked={showPayments}
 								setChecked={createTransition(setShowPayments)}
 							/>
@@ -238,6 +234,30 @@ function AppSidebar1() {
 							checked={preferMonochrome}
 							setChecked={createTransition(setPreferMonochrome)}
 						/>
+						{/* <Checkbox
+							name="Show names"
+							icon={p => (
+								<feather.Search
+									// TODO
+									style={{ transform: "scale(0.875)", opacity: 0.75 }}
+									//// fill="currentColor"
+									strokeWidth={4}
+									{...p}
+								/>
+							)}
+							checked={showNames}
+							setChecked={setShowNames}
+						/> */}
+					</Checkboxes>
+				</section>
+				<hr className="hr" />
+				<section className="section">
+					<header className="section-header-header">
+						{/* <feather.Monitor className="section-icon" /> */}
+						<h6 className="section-name">Display</h6>
+						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetDisplay} />
+					</header>
+					<Checkboxes>
 						<Checkbox
 							name="Show names"
 							icon={p => (
@@ -268,7 +288,7 @@ function AppSidebar1() {
 						<Resource name="Icons" icon={wkBrandsOriginal.Github} />
 						<Resource name="Website" icon={wkBrandsOriginal.Github} />
 						<Resource name="Plugin" icon={wkBrandsOriginal.Figma} />
-						<Resource name="Social & payments file" icon={wkBrandsOriginal.Figma} />
+						<Resource name="Social & payments files" icon={wkBrandsOriginal.Figma} />
 						{/* <Resource name="The Wolf Kit" icon={wkBrandsOriginal.Figma} /> */}
 						{/* <Resource name="The Wolf Kit Figma" icon={wkBrandsOriginal.Figma} /> */}
 						{/* <Resource name="The Wolf Kit" icon={TheWolfKit} /> */}
