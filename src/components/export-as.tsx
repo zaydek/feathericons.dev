@@ -34,7 +34,7 @@ export function ExportAs({
 	const Icon = icons[value]
 
 	return (
-		<label className="export-select">
+		<label className="export-as">
 			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAsValue)}>
 				<optgroup label="HTML, Vue, Svelte">
 					<option value="svg">SVG</option>
@@ -56,9 +56,9 @@ export function ExportAs({
 					<option value="strict-tsx-rn">TypeScript React Native</option>
 				</optgroup> */}
 			</select>
-			<span className="export-select-button">
-				<span className="export-select-button-name">{name}</span>
-				<Icon className="export-select-button-icon" />
+			<span className="export-as-button">
+				<span className="export-as-button-name">{name}</span>
+				<Icon className="export-as-button-icon" />
 			</span>
 		</label>
 	)
