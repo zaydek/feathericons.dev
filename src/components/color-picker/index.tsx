@@ -1,4 +1,4 @@
-import "./color-picker.sass"
+import "./index.sass"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { HexAlphaColorPicker } from "react-colorful"

@@ -9,7 +9,7 @@ export type RangeProps = {
 	step:     number
 }
 
-export function Range({ value, setValue, min, max, step }: RangeProps) {
+export function CssVarRange({ value, setValue, min, max, step }: RangeProps) {
 	return (
 		<input
 			style={{ "--progress": ((value - min) / (max - min)) * 100 + "%" } as CSSProperties}

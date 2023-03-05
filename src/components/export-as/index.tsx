@@ -1,16 +1,16 @@
-import "./select-export-as.sass"
+import "./index.sass"
 
 import { Icon } from "@/lib"
 import { ExportAs } from "@/state"
 import { Dispatch, SetStateAction } from "react"
-import { ReactjsIcon, SvgIcon, TypeScriptIcon } from "./icon-config"
+import { Reactjs, Svg, TypeScript } from "./icons"
 
 const icons: Record<ExportAs, Icon> = {
-	svg: SvgIcon,
-	jsx: ReactjsIcon, // TODO
-	tsx: TypeScriptIcon,
-	"strict-jsx": ReactjsIcon,
-	"strict-tsx": TypeScriptIcon,
+	svg: Svg,
+	jsx: Reactjs, // TODO
+	tsx: TypeScript,
+	"strict-jsx": Reactjs,
+	"strict-tsx": TypeScript,
 	//// "strict-jsx-rn": ReactjsIcon,
 	//// "strict-tsx-rn": TypeScriptIcon,
 }
@@ -25,7 +25,7 @@ const names: Record<ExportAs, string> = {
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
 
-export function SelectExportAs({ value, setValue }: { value: ExportAs; setValue: Dispatch<SetStateAction<ExportAs>> }) {
+export function ExportAsSelect({ value, setValue }: { value: ExportAs; setValue: Dispatch<SetStateAction<ExportAs>> }) {
 	const name = names[value]
 	const Icon = icons[value]
 

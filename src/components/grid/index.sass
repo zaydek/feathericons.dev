@@ -1,15 +1,15 @@
 @use "sass:math"
 
-@use "../css/globals" as *
+@use "../../css/globals" as *
 
-$grid-item-height:       128px
-$grid-item-aspect-ratio: 1.25
+$height:       128px
+$aspect-ratio: 1.25
 
 ////////////////////////////////////////
 
 .grid
   display: grid
-  grid-template-columns: repeat(auto-fill, $grid-item-height)
+  grid-template-columns: repeat(auto-fill, $height)
   justify-content: center
   //// gap: 24px
   gap: 16px
@@ -21,7 +21,7 @@ $grid-item-aspect-ratio: 1.25
   display: flex
   flex-direction: column
   gap: 8px
-  width: $grid-item-height
+  width: $height
 
 ////////////////////////////////////////
 
@@ -29,7 +29,7 @@ $grid-item-aspect-ratio: 1.25
   display: flex
   justify-content: center
   align-items: center
-  aspect-ratio: $grid-item-aspect-ratio
+  aspect-ratio: $aspect-ratio
   background-color: white
   border-radius: 4px
   box-shadow: $inset-hairline-shadow

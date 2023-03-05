@@ -46,6 +46,7 @@ const order = [
 	"min-width",
 	"max-width",
 	"aspect-ratio",
+	"object-fit",
 	"background",
 	"background-color",
 	"background-image",

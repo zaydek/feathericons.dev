@@ -1,24 +1,28 @@
 @use "sass:math"
 
-@use "../css/globals" as *
+@use "../../css/globals" as *
+
+////////////////////////////////////////
 
 .color-picker
   position: relative
   margin: 0 4px // Compensate for box-shadow
   height: 16px
   width: 16px
-  //// background-color: revert
   background-image: linear-gradient(to right, #f00, #fc0, #ff0, #0f0, #0cf, #00f, #80f)
   border-radius: 1e3px
   box-shadow: 0 0 0 2px white, 0 0 0 4px var(--app-color, $brand-color)
   cursor: pointer   // Interaction
   user-select: none // Interaction
 
+////////////////////////////////////////
+
 .react-colorful-container
   position: absolute
   inset: auto 0 32px auto
-  //// inset: 0 0 auto auto
   z-index: 100
+
+////////////////////////////////////////
 
 .react-colorful
   border-radius: 12px

@@ -10,19 +10,18 @@ import {
 	Checkbox,
 	Checkboxes,
 	ColorPicker,
-	DebugCssEffect,
+	CssVarRange,
+	DEV_DebugCss,
+	ExportAsSelect,
 	Grid,
 	Main,
 	Radio,
-	Range,
 	SearchBar,
-	SelectExportAs,
 	Sidebar1,
 	Sidebar2,
 	SyntaxHighlighting,
 } from "@/components"
-import { useScrollProps } from "@/hooks"
-import { useVisibleDocumentTitle } from "@/hooks/document-title"
+import { useScrollProps, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	PaymentsRadio,
@@ -49,11 +48,11 @@ export function App() {
 	}, [setStarted])
 
 	return (
-		<DebugCssEffect>
+		<DEV_DebugCss>
 			<AppSidebar1 />
 			<AppSidebar2 />
 			<AppMain />
-		</DebugCssEffect>
+		</DEV_DebugCss>
 	)
 }
 
@@ -355,7 +354,7 @@ function AppSidebar2() {
 					<header className="section-header-header">
 						{/* <feather.MousePointer className="section-icon" /> */}
 						<h6 className="section-name">Selected</h6>
-						<SelectExportAs value={exportAs} setValue={setExportAs} />
+						<ExportAsSelect value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
 				<div className="section-header-body is-padding-bottom" {...scrollProps}>
@@ -396,7 +395,7 @@ function AppSidebar2() {
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
 					</header>
-					<Range value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+					<CssVarRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
 				<hr className="hr" />
 				<section className="section">
@@ -406,7 +405,13 @@ function AppSidebar2() {
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
 					</header>
-					<Range value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
+					<CssVarRange
+						value={strokeWidth}
+						setValue={setStrokeWidth}
+						min={STROKE_MIN}
+						max={STROKE_MAX}
+						step={STROKE_STEP}
+					/>
 				</section>
 				<hr className="hr" />
 			</div>

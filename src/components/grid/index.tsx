@@ -1,4 +1,4 @@
-import "./grid.sass"
+import "./index.sass"
 
 import { Icon, toKebabCase } from "@/lib"
 import { ClipboardContext, LayoutContext, SearchContext } from "@/state"

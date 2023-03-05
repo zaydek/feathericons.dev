@@ -26,11 +26,11 @@ function RenderLink({ children }: { children: string }) {
 const regex = /(.*)(?!http:\/\/www\.w3\.org\/2000\/svg)(@[^\s]+|https?:\/\/[^\s]+)(.*)/g
 
 function Token({ color, children }: { color?: string; children: string }) {
-	const matches = [...children.matchAll(regex)]
+	const arr = [...children.matchAll(regex)]
 	return (
 		<span style={{ color }}>
-			{matches.length > 0
-				? matches.map(([_, $1, $2, $3], index) => (
+			{arr.length > 0
+				? arr.map(([_, $1, $2, $3], index) => (
 						<Fragment key={index}>
 							{$1}
 							<RenderLink>{$2}</RenderLink>
