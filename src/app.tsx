@@ -35,7 +35,8 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useCallback, useContext, useEffect, useTransition } from "react"
+import { Dispatch, SetStateAction, useCallback, useContext, useEffect, useState, useTransition } from "react"
+import { HexAlphaColorPicker } from "react-colorful"
 import { Lang } from "shiki-es"
 
 export function App() {
@@ -324,6 +325,42 @@ function AppSidebar1() {
 	)
 }
 
+// TODO: Inline
+function ColorPicker() {
+	const [color, setColor] = useState("#000000")
+
+	return (
+		<div className="react-colorful-container">
+			<HexAlphaColorPicker color={color} onChange={setColor} />
+		</div>
+	)
+}
+
+function useClickAway({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }) {
+	useEffect(() => {
+		if (!open) return
+		function handleClick(e: MouseEvent) {
+			setOpen(false)
+		}
+		window.addEventListener("click", handleClick, false)
+		return () => window.removeEventListener("click", handleClick, false)
+	}, [open, setOpen])
+	return void 0
+}
+
+function useEscapeShortcut({ setOpen }: { setOpen: Dispatch<SetStateAction<boolean>> }) {
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				setOpen(false)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [setOpen])
+	return void 0
+}
+
 function AppSidebar2() {
 	const { exportAs, setExportAs, clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
@@ -331,6 +368,11 @@ function AppSidebar2() {
 	const { scrollProps } = useScrollProps()
 
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
+
+	// TODO
+	const [openColorPicker, setOpenColorPicker] = useState(false)
+	useClickAway({ open: openColorPicker, setOpen: setOpenColorPicker })
+	useEscapeShortcut({ setOpen: setOpenColorPicker })
 
 	return (
 		<Sidebar2>
@@ -352,7 +394,32 @@ function AppSidebar2() {
 					<header className="section-header-header">
 						<feather.Circle className="section-icon" fill="currentColor" strokeWidth={4} />
 						<h6 className="section-name">Color</h6>
+						<div
+							className="thing"
+							onClick={e => {
+								e.preventDefault()
+								e.stopPropagation()
+								setOpenColorPicker(true)
+							}}
+						>
+							{openColorPicker && (
+								<div className="thing-thing">
+									<HexAlphaColorPicker color="#000" />
+								</div>
+							)}
+						</div>
+						{/* <ColorPicker /> */}
+						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />
+						{/* <div> */}
 					</header>
+					<Checkboxes>
+						<Checkbox
+							name="Toggle monochrome"
+							//// icon={feather.Feather}
+							//// checked={showFeather}
+							//// setChecked={createTransition(setShowFeather)}
+						/>
+					</Checkboxes>
 				</section>
 				<hr className="hr" />
 				<section className="section">
