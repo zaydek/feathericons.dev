@@ -6,14 +6,14 @@ $height: 28px
 
 ////////////////////////////////////////
 
-label.select-export-as
+label.export-select
   display: inline-block // CSS reset
-.select-export-as
+.export-select
   position: relative
 
 ////////////////////////////////////////
 
-.select-export-as-button
+.export-select-button
   display: inline-flex
   justify-content: center
   align-items: center
@@ -25,7 +25,7 @@ label.select-export-as
 
 ////////////////////////////////////////
 
-.select-export-as-button-name
+.export-select-button-name
   font: 425 13px / 1.25 $sans
   text-align: center
   color: $slate-800
@@ -35,7 +35,7 @@ label.select-export-as
   //// text-transform: uppercase
   //// color: $slate-800
 
-.select-export-as-button-icon
+.export-select-button-icon
   margin-left: math.div($height - 12px, 2)
   height: 12px
   width: 12px
@@ -43,13 +43,13 @@ label.select-export-as
 
 ////////////////////////////////////////
 
-.select-export-as select
+.export-select select
   position: absolute
   height: 100% // Inherit
   width: 100%  // Inherit
   opacity: 0.01
   cursor: pointer
-  &:is(:hover, :focus-visible) + .select-export-as-button
+  &:is(:hover, :focus-visible) + .export-select-button
     background-color: $slate-100
-  &:hover:active + .select-export-as-button
+  &:hover:active + .export-select-button
     background-color: $slate-200

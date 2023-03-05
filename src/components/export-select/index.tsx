@@ -25,12 +25,12 @@ const names: Record<ExportAs, string> = {
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
 
-export function ExportAsSelect({ value, setValue }: { value: ExportAs; setValue: Dispatch<SetStateAction<ExportAs>> }) {
+export function ExportSelect({ value, setValue }: { value: ExportAs; setValue: Dispatch<SetStateAction<ExportAs>> }) {
 	const name = names[value]
 	const Icon = icons[value]
 
 	return (
-		<label className="select-export-as">
+		<label className="export-select">
 			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAs)}>
 				<optgroup label="HTML, Vue, Svelte">
 					<option value="svg">SVG</option>
@@ -52,9 +52,9 @@ export function ExportAsSelect({ value, setValue }: { value: ExportAs; setValue:
 					<option value="strict-tsx-rn">TypeScript React Native</option>
 				</optgroup> */}
 			</select>
-			<span className="select-export-as-button">
-				<span className="select-export-as-button-name">{name}</span>
-				<Icon className="select-export-as-button-icon" />
+			<span className="export-select-button">
+				<span className="export-select-button-name">{name}</span>
+				<Icon className="export-select-button-icon" />
 			</span>
 		</label>
 	)

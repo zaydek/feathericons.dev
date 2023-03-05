@@ -12,7 +12,7 @@ import {
 	ColorPicker,
 	CssVarRange,
 	DEV_DebugCss,
-	ExportAsSelect,
+	ExportSelect,
 	Grid,
 	Main,
 	Radio,
@@ -354,7 +354,7 @@ function AppSidebar2() {
 					<header className="section-header-header">
 						{/* <feather.MousePointer className="section-icon" /> */}
 						<h6 className="section-name">Selected</h6>
-						<ExportAsSelect value={exportAs} setValue={setExportAs} />
+						<ExportSelect value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
 				<div className="section-header-body is-padding-bottom" {...scrollProps}>
