@@ -8,7 +8,7 @@
 .section-header
   position: sticky
   top: 0
-  z-index: 10
+  z-index: 20
   display: flex
   flex-direction: column
   background-color: white
@@ -47,6 +47,7 @@
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
   &.is-start
+    isolation: isolate // Prevents clipping box-shadow on scroll
     padding-top: $sidebar-padding-y
     &:has(+ [data-scroll=true])
       box-shadow: $hairline-shadow-bottom
