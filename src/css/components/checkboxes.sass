@@ -51,5 +51,26 @@
 // - <input type="radio">
 // - <ColorPicker>
 //
-.checkbox :last-child
+.checkbox > *:last-child
     margin: 0 math.div($button-height - 24px, 2)
+
+.caps
+  //// margin: 0 4px
+  display: inline-flex
+  justify-content: center
+  //// width: 64px
+  align-items: center
+  height: 24px
+  padding: 0 math.div(28px, 4)
+  width: min-content
+  //// width: 64px
+  border-radius: 4px
+  //// box-shadow: $inset-hairline-shadow
+  background-color: $app-color
+  color: white
+  font: 500 11px / normal $code
+  //// letter-spacing: 0.05em
+  text-transform: uppercase
+  //// color: $slate-600
+  -webkit-user-select: all // Select all on click
+  user-select: all         // Select all on click

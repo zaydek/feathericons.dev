@@ -271,19 +271,26 @@ function AppSidebar2() {
 			<div className="section-body">
 				<hr className="hr" />
 				<section className="section">
-					{/* <header className="section-header-header">
-						<h6 className="section-name">Color</h6>
-						<ColorPicker color={color} setColor={setColor} />
-						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={e => setColor(null)} />
-					</header> */}
 					<header className="section-header-header">
-						{/* <feather.PenTool className="section-icon" /> */}
 						<h6 className="section-name">Color</h6>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							<span className="checkbox-name">Color</span>
+							<span className="checkbox-name">
+								{color !== null && (
+									<span className="caps">
+										{/* <span style={{ width: "1ch" }}>{color[0]}</span> */}
+										{/* <span style={{ width: "1ch" }}>{color[1]}</span> */}
+										{/* <span style={{ width: "1ch" }}>{color[2]}</span> */}
+										{/* <span style={{ width: "1ch" }}>{color[3]}</span> */}
+										{/* <span style={{ width: "1ch" }}>{color[4]}</span> */}
+										{/* <span style={{ width: "1ch" }}>{color[5]}</span> */}
+										{/* <span style={{ width: "1ch" }}>{color[6]}</span> */}
+										{color}
+									</span>
+								)}
+							</span>
 							<ColorPicker color={color} setColor={setColor} />
 						</label>
 						<label className="checkbox">
@@ -299,7 +306,6 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						{/* <feather.PenTool className="section-icon" /> */}
 						<h6 className="section-name">Size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetSize} />
@@ -309,7 +315,6 @@ function AppSidebar2() {
 				<hr className="hr" />
 				<section className="section">
 					<header className="section-header-header">
-						{/* <feather.PenTool className="section-icon" /> */}
 						<h6 className="section-name">Stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<feather.RotateCcw className="section-undo" strokeWidth={4} onClick={resetStrokeWidth} />

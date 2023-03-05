@@ -61,11 +61,12 @@
   //     <Checkboxes>
   //       <Checkbox>
   //       <Checkbox>
-  //       ...
+  //       <Checkbox>
   //     </Checkboxes>
   //   </div>
   //
-  > :not(:not([class]), .checkboxes, .resources)
+  //// > :not(:not([class]), .checkboxes, .resources)
+  > :not(.checkboxes, .resources)
     margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 ////////////////////////////////////////
@@ -79,7 +80,6 @@
 .section-name
   flex: 1 // Stretch x-axis
   font: 500 11px / normal $sans
-  font-feature-settings: 'tnum'
   letter-spacing: 0.05em
   text-transform: uppercase
   color: $slate-600
@@ -93,7 +93,6 @@
   border-radius: 1e3px
   box-shadow: $inset-hairline-shadow
   font: 500 11px / normal $sans
-  font-feature-settings: 'tnum'
   letter-spacing: 0.05em
   text-transform: uppercase
   color: $slate-600
