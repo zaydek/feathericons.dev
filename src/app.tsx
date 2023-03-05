@@ -267,19 +267,8 @@ function AppSidebar1() {
 					<nav className="resources">
 						<Resource name="Icons" icon={wkBrandsOriginal.Github} />
 						<Resource name="Website" icon={wkBrandsOriginal.Github} />
-						{/* <Resource
-							name="Star icons on GitHub"
-							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" {...p} />}
-						/> */}
-						{/* <Resource
-							name="Star app on GitHub"
-							icon={p => <feather.Star style={{ color: "orange" }} fill="currentColor" {...p} />}
-						/> */}
-						{/* <Resource name="Plugin" icon={wkBrandsOriginal.Figma} /> */}
+						<Resource name="Plugin" icon={wkBrandsOriginal.Figma} />
 						<Resource name="Social & payments file" icon={wkBrandsOriginal.Figma} />
-						{/* <Resource name="The Wolf Kit" icon={wkBrandsOriginal.Figma} /> */}
-						{/* <Resource name="The Wolf Kit Figma" icon={wkBrandsOriginal.Figma} /> */}
-						{/* <Resource name="The Wolf Kit" icon={TheWolfKit} /> */}
 						<Resource name="Share on Twitter" icon={wkBrandsOriginal.Twitter} />
 					</nav>
 				</section>
