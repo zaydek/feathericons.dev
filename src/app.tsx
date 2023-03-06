@@ -401,6 +401,7 @@ function AppMain() {
 
 	return (
 		<Main
+			// TODO: Change to onClickCapture?
 			onClick={e => {
 				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
 					removeAllNames()

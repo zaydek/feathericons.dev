@@ -4,12 +4,23 @@ import { Suspense, useContext } from "react"
 
 export function Grid() {
 	const { compactMode, results } = useContext(SearchContext)!
+	//// const { startIndex, endIndex, addOneOrMoreNames } = useContext(ClipboardContext)!
+
+	//// useEffect(() => {
+	//// 	if (startIndex === null || endIndex === null) return
+	//// 	const start = Math.min(startIndex, endIndex)
+	//// 	const end = Math.max(endIndex, startIndex) + 1
+	//// 	//// console.log(results.slice(start, end).map(([names]) => names[0]))
+	//// 	//// addOneOrMoreNames(...results.slice(start, end).map(([names]) => names[0]))
+	//// }, [addOneOrMoreNames, endIndex, results, startIndex])
 
 	return (
 		<div className={cx("grid", compactMode && "is-compact-mode")}>
 			<Suspense>
 				{results.map(([names, Icon]) =>
-					names.map(name => <GridItem key={name} name={name} icon={p => <Icon name={name} {...p} />} />),
+					names.map((name, nameIndex) => (
+						<GridItem key={name} nameIndex={nameIndex} name={name} icon={p => <Icon name={name} {...p} />} />
+					)),
 				)}
 			</Suspense>
 		</div>
@@ -21,10 +32,19 @@ function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
 
-export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
+export function GridItem({ nameIndex, name, icon: Icon }: { nameIndex: number; name: string; icon: Icon }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const { compactMode } = useContext(SearchContext)!
-	const { names, addOneOrMoreNames, removeOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
+	const {
+		//// startIndex,
+		//// setStartIndex,
+		//// endIndex,
+		//// setEndIndex,
+		names,
+		addOneOrMoreNames,
+		removeOneOrMoreNames,
+		removeAllNames,
+	} = useContext(ClipboardContext)!
 
 	// TODO
 	const id = toNameCase(name)
@@ -33,12 +53,10 @@ export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 		<article
 			id={id}
 			className="grid-item"
+			// TODO: Change to onClickCapture?
 			onClick={e => {
 				if (e.metaKey) {
-					// TODO
 					if (sidebar === "minimized") setSidebar("open")
-					//// e.stopPropagation()
-					//// e.preventDefault()
 					if (names.has(id)) {
 						removeOneOrMoreNames(id)
 					} else {
@@ -46,8 +64,6 @@ export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 					}
 				} else {
 					if (sidebar === "minimized") setSidebar("open")
-					//// e.stopPropagation()
-					//// e.preventDefault()
 					removeAllNames()
 					addOneOrMoreNames(id)
 				}

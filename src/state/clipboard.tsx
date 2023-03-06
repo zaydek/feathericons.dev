@@ -19,6 +19,10 @@ export const ClipboardContext =
 	createContext<{
 		exportAs:             ExportAsValue
 		setExportAs:          Dispatch<SetStateAction<ExportAsValue>>
+		startIndex:           number | null
+		setStartIndex:        Dispatch<SetStateAction<number | null>>
+		endIndex:             number | null
+		setEndIndex:          Dispatch<SetStateAction<number | null>>
 		names: 	              Set<string>
 		clipboard: 	          string
 		addOneOrMoreNames:    (...ids: string[]) => void
@@ -43,11 +47,16 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		},
 	})
 
-	const [names, setNames] = useState(() => new Set<string>())
+	const [startIndex, setStartIndex] = useState<number | null>(null)
+	const [endIndex, setEndIndex] = useState<number | null>(null)
+
+	// Mask _setNames
+	const [names, _setNames] = useState(() => new Set<string>())
+
 	const [clipboard, setClipboard] = useState("")
 
 	const addOneOrMoreNames = useCallback((...ids: string[]) => {
-		setNames(prev => {
+		_setNames(prev => {
 			const next = new Set(prev)
 			for (const id of ids) {
 				next.add(id)
@@ -57,7 +66,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	}, [])
 
 	const removeOneOrMoreNames = useCallback((...ids: string[]) => {
-		setNames(prev => {
+		_setNames(prev => {
 			const next = new Set(prev)
 			for (const id of ids) {
 				next.delete(id)
@@ -66,7 +75,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const removeAllNames = useCallback(() => setNames(new Set<string>()), [])
+	const removeAllNames = useCallback(() => _setNames(new Set<string>()), [])
 
 	// TODO: Change to click handler or useMemo?
 	useEffect(() => {
@@ -133,6 +142,10 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			value={{
 				exportAs,
 				setExportAs,
+				startIndex,
+				setStartIndex,
+				endIndex,
+				setEndIndex,
 				names,
 				clipboard,
 				addOneOrMoreNames,
