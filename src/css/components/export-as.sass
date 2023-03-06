@@ -2,13 +2,7 @@
 
 @use "../globals" as *
 
-// <label class="export-as">
-//   <select>…</select>
-//   <div class="export-as-button">
-//     <span class="export-as-button-name">…</span>
-//     <span class="export-as-button-icon">…</span>
-//   </div>
-// </label>
+$select-height: 28px
 
 label.export-as
   display: inline-block // CSS reset
@@ -26,24 +20,26 @@ label.export-as
   &:hover:active + .export-as-button
     background-color: $slate-200
 
-.export-as-button
-  display: inline-flex
-  justify-content: center
-  align-items: center
-  padding: 0 math.div(28px, 2)
-  height: 28px
-  border-radius: 1e3px
-  box-shadow: $inset-hairline-shadow
-  pointer-events: none // Passthrough to <select>
+  @at-root
+    .export-as-button
+      display: inline-flex
+      justify-content: center
+      align-items: center
+      padding: 0 math.div($select-height, 2)
+      height: $select-height
+      border-radius: 1e3px
+      box-shadow: $inset-hairline-shadow
+      pointer-events: none // Passthrough to <select>
 
-.export-as-button-name
-  font: 425 13px / 1.25 $sans
-  text-align: center
-  color: $slate-800
+      @at-root
+        .export-as-name
+          font: 425 13px / 1.25 $sans
+          text-align: center
+          color: $slate-800
 
-// TODO: Use :last-child here?
-.export-as-button-icon
-  margin-left: math.div(28px - 12px, 2)
-  height: 12px
-  width: 12px
-  color: $slate-800
+        // TODO: Change to align-frame pattern here
+        .export-as-icon
+          margin-left: math.div($select-height - $tiny-icon-height, 2)
+          height: $tiny-icon-height
+          width: $tiny-icon-height
+          color: $slate-800

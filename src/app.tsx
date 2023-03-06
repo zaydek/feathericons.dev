@@ -285,7 +285,7 @@ function AppSidebar2() {
 				<section className="section is-start">
 					<header className="section-header">
 						<div className="sidebar-align-name-frame u-flex-1">
-							<h6 className="section-name">Selected</h6>
+							<h6 className="section-name">Copy as</h6>
 						</div>
 						<div className="sidebar-align-name-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />

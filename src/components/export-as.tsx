@@ -57,8 +57,8 @@ export function ExportAs({
 				</optgroup> */}
 			</select>
 			<span className="export-as-button">
-				<span className="export-as-button-name">{name}</span>
-				<Icon className="export-as-button-icon" />
+				<span className="export-as-name">{name}</span>
+				<Icon className="export-as-icon" />
 			</span>
 		</label>
 	)
