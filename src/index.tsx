@@ -1,9 +1,6 @@
 import "the-new-css-reset"
 
 import "@/css/base.sass"
-
-//// import "@/css/section.sass"
-
 import "@/css/components/index.sass"
 import "@/css/form/index.sass"
 

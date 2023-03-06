@@ -182,7 +182,8 @@ function AppSidebar1() {
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							<DynamicIcon className="checkbox-icon" icon={showNames ? feather.ToggleRight : feather.ToggleLeft} />
+							{/* <DynamicIcon className="checkbox-icon" icon={showNames ? feather.ToggleRight : feather.ToggleLeft} /> */}
+							<feather.Grid className="checkbox-icon" />
 							<span className="checkbox-name">Show names</span>
 							<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
 						</label>
