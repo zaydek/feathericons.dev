@@ -1,47 +1,43 @@
-@use "sass:math"
-
-@use "../globals" as *
-
-// <div class="color-picker">
-//   <div class="react-colorful-container">
-//     <div class="react-colorful">…</div>
-//   </div>
-// </div>
-
-.react-colorful:focus-visible,
-.react-colorful:focus-visible
-  outline: none
-
-.color-picker
-  position: relative
-  //// margin: 0 4px // Compensate for box-shadow
-  //// height: 16px
-  //// width: 16px
-  //// background-image: linear-gradient(to right, #f00, #fc0, #ff0, #0f0, #0cf, #00f, #80f)
-  //// border-radius: 1e3px
-  //// box-shadow: 0 0 0 2px white, 0 0 0 4px var(--app-color, $brand-color)
-  //// cursor: pointer   // Interaction
-  //// user-select: none // Interaction
-  display: inline-flex
-  justify-content: center
-  align-items: center
-  padding: 0 math.div(28px, 4)
-  height: 24px
-  //// width: min-content
-  //// background-color: $app-color
-  background-color: $slate-800
-  border-radius: 1e3px
-  font: 500 11px / normal $code
-  text-transform: uppercase
-  color: white
-
-
-.react-colorful-container
-  position: absolute
-  //// inset: -4px 24px auto auto
-  inset: 32px 0 auto auto
-  z-index: 100
-
-.react-colorful
-  border-radius: 12px
-  box-shadow: $realistic-shadow
+//// @use "sass:math"
+////
+//// @use "../globals" as *
+////
+//// //// // TODO
+//// //// .react-colorful:focus-visible,
+//// //// .react-colorful :focus-visible
+//// ////   outline: none
+////
+//// .color-picker
+////   position: relative
+////   //// margin: 0 4px // Compensate for box-shadow
+////   //// height: 16px
+////   //// width: 16px
+////   //// background-image: linear-gradient(to right, #f00, #fc0, #ff0, #0f0, #0cf, #00f, #80f)
+////   //// border-radius: 1e3px
+////   //// box-shadow: 0 0 0 2px white, 0 0 0 4px var(--app-color, $brand-color)
+////   //// cursor: pointer   // Interaction
+////   //// user-select: none // Interaction
+////   //// display: inline-flex
+////   display: flex
+////   justify-content: center
+////   align-items: center
+////   padding: 0 math.div(28px, 4)
+////   height: 24px
+////   //// width: min-content
+////   //// background-color: $app-color
+////   background-color: $slate-800
+////   border-radius: 1e3px
+////   font: 500 11px / normal $code
+////   text-transform: uppercase
+////   color: white
+////
+////   @at-root
+////     .react-colorful-container
+////       position: absolute
+////       //// inset: -4px 24px auto auto
+////       inset: 32px 0 auto auto
+////       z-index: 100
+////       @at-root
+////         .react-colorful
+////           border-radius: 12px
+////           box-shadow: $realistic-shadow

@@ -15,7 +15,7 @@ import {
 	SearchBar,
 	Sidebar1,
 	Sidebar2,
-	SyntaxHighlighting,
+	SyntaxHighlighting
 } from "@/components"
 import { resources } from "@/data"
 import { DynamicIcon, useScrollProps, useVisibleDocumentTitle } from "@/lib"
@@ -29,7 +29,7 @@ import {
 	SIZE_STEP,
 	STROKE_MAX,
 	STROKE_MIN,
-	STROKE_STEP,
+	STROKE_STEP
 } from "@/state"
 import { useContext, useEffect, useState, useTransition } from "react"
 import { Lang } from "shiki-es"
@@ -93,7 +93,7 @@ function AppSidebar1() {
 				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
-							<div className="sidebar-align-name-frame u-flex-1">
+							<div className="sidebar-align-frame u-flex-1">
 								<h6 className="section-name">Icons</h6>
 							</div>
 							<div className="sidebar-align-icon-frame">
@@ -193,17 +193,6 @@ function AppSidebar1() {
 								</label>
 							</ul>
 						</ul>
-						{/* <ul className="checkboxes">
-							<label className="checkbox">
-								<div className="sidebar-align-icon-frame">
-									<feather.Grid className="checkbox-icon" />
-								</div>
-								<span className="checkbox-name u-flex-1">Show names</span>
-								<div className="sidebar-align-icon-frame">
-									<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
-								</div>
-							</label>
-						</ul> */}
 					</section>
 				</div>
 			</header>
@@ -211,7 +200,7 @@ function AppSidebar1() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-name-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Display</h6>
 						</div>
 						<div className="sidebar-align-icon-frame">
@@ -237,7 +226,7 @@ function AppSidebar1() {
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
-						<div className="sidebar-align-name-frame">
+						<div className="sidebar-align-frame">
 							<feather.Globe className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Resources</h6>
@@ -256,13 +245,6 @@ function AppSidebar1() {
 						))}
 					</nav>
 				</section>
-				{/* <hr className="hairline" />
-				<section className="section is-end">
-					<header className="section-header">
-						<feather.Smile className="section-icon" />
-						<h6 className="section-name u-flex-1">Sponsor</h6>
-					</header>
-				</section> */}
 			</footer>
 		</Sidebar1>
 	)
@@ -296,10 +278,10 @@ function AppSidebar2() {
 			<header className="sidebar-header">
 				<section className="section is-start">
 					<header className="section-header">
-						<div className="sidebar-align-name-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Copy as</h6>
 						</div>
-						<div className="sidebar-align-name-frame">
+						<div className="sidebar-align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</header>
@@ -309,47 +291,53 @@ function AppSidebar2() {
 				</div>
 			</header>
 			<div className="sidebar-body">
+				{false && (
+					<>
+						<hr className="hairline" />
+						<section className="section">
+							<header className="section-header">
+								<div className="sidebar-align-frame u-flex-1">
+									<h6 className="section-name">Variants</h6>
+								</div>
+								<div className="sidebar-align-icon-frame">
+									<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+								</div>
+							</header>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-frame u-flex-1">
+										<span className="checkbox-name u-flex-1">Monochrome (social & payments)</span>
+									</div>
+									<div className="sidebar-align-icon-frame">
+										<input
+											type="checkbox"
+											checked={preferMonochrome}
+											onChange={e => startTransition(() => setPreferMonochrome(e.currentTarget.checked))}
+										/>
+									</div>
+								</label>
+								{ && (
+									<label className="checkbox">
+										<div className="sidebar-align-frame u-flex-1" onClick={e => setShowReactColorful(curr => !curr)}>
+											{/* <span className="color-picker u-flex-1">{color ?? "#000000"}</span> */}
+											<ColorPicker
+												color={color}
+												setColor={setColor}
+												show={showReactColorful}
+												setShow={setShowReactColorful}
+											/>
+										</div>
+										{/* <ColorPicker color={color} setColor={setColor} /> */}
+									</label>
+								)}
+							</ul>
+						</section>
+					</>
+				)}
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-name-frame u-flex-1">
-							<h6 className="section-name">Variants</h6>
-						</div>
-						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
-						</div>
-					</header>
-					<ul className="checkboxes">
-						<label className="checkbox">
-							<div className="sidebar-align-name-frame u-flex-1">
-								<span className="checkbox-name u-flex-1">Monochrome (social & payments)</span>
-							</div>
-							<div className="sidebar-align-icon-frame">
-								<input
-									type="checkbox"
-									checked={preferMonochrome}
-									onChange={e => startTransition(() => setPreferMonochrome(e.currentTarget.checked))}
-								/>
-							</div>
-						</label>
-						<label className="checkbox">
-							<div className="sidebar-align-name-frame u-flex-1" onClick={e => setShowReactColorful(curr => !curr)}>
-								{/* <span className="color-picker u-flex-1">{color ?? "#000000"}</span> */}
-								<ColorPicker
-									color={color}
-									setColor={setColor}
-									show={showReactColorful}
-									setShow={setShowReactColorful}
-								/>
-							</div>
-							{/* <ColorPicker color={color} setColor={setColor} /> */}
-						</label>
-					</ul>
-				</section>
-				<hr className="hairline" />
-				<section className="section">
-					<header className="section-header">
-						<div className="sidebar-align-name-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Size</h6>
 						</div>
 						<span className="section-name">{size.toFixed(0)} PX</span>
@@ -362,7 +350,7 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-name-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Stroke width</h6>
 						</div>
 						<span className="section-name">{strokeWidth.toFixed(2)}</span>
@@ -380,16 +368,17 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			{/* <div className="u-flex-1"></div> */}
-			{/* <footer className="sidebar-footer">
+			<div className="u-flex-1"></div>
+			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
-						<feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} />
-						<h6 className="section-name u-flex-1">Sponsor</h6>
+						<div className="sidebar-align-frame u-flex-1">
+							<h6 className="section-name u-flex-1">Sponsor</h6>
+						</div>
 					</header>
 				</section>
-			</footer> */}
+			</footer>
 		</Sidebar2>
 	)
 }

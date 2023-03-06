@@ -59,7 +59,7 @@ export function ColorPicker({
 
 	return (
 		<div
-			// Use u-flex-1 because of sidebar-align-name-frame
+			// Use u-flex-1 because of sidebar-align-frame
 			className="color-picker u-flex-1"
 			onClick={e => {
 				// TODO
