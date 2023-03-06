@@ -69,14 +69,14 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				case "strict-tsx":
 					// prettier-ignore
 					setClipboard(detab(`
-						// Feather icons designed by @colebemis
+						// Feather icons by @colebemis
 						// Licensed as MIT
-						// Personal & commercial use allowed *without* attribution
+						// Reuse allowed *without* attribution
 						// https://github.com/feathericons/feather
 						//
-						// Logos designed by @thewolfkit
+						// Social & payment logos by @thewolfkit
 						// Licensed as CC BY 4.0
-						// Personal & commercial use allowed *with* attribution
+						// Reuse allowed *with* attribution
 						// https://thewolfkit.com
 					`, { spaces: true }))
 					break

@@ -9,7 +9,7 @@ export function useDocumentTitle(title: string) {
 	return void 0
 }
 
-export function useVisibleDocumentTitle({ active, inactive }: { active: string; inactive: string }) {
+export function useVisibleDocumentTitle([active, inactive]: readonly [string, string]) {
 	useEffect(() => {
 		const originalTitle = document.title
 		function handleVisibilityChange() {

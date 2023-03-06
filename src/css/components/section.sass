@@ -16,7 +16,7 @@
     // to [$sidebar-padding-y $sidebar-padding-x]
     padding: $sidebar-padding-y $sidebar-padding-x
 
-  > :not(.section-header, .checkboxes, .resources)
+  > :not(div:not([class]), .section-header, .checkboxes, .resources)
     margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
   @at-root
@@ -39,6 +39,21 @@
           color: $slate-600
 
         .section-range-desc
+
+          //// //// display: inline-flex
+          //// //// justify-content: center
+          //// //// align-items: center
+          //// //// height: 24px
+          //// //// width: 56px
+          //// //// border-radius: 1e3px
+          //// //// box-shadow: $inset-hairline-shadow
+          //// font: 500 11px / normal $sans
+          //// letter-spacing: 0.05em // TOOD
+          //// text-transform: uppercase
+          //// color: $slate-800
+          //// -webkit-user-select: all // Interaction
+          //// user-select: all         // Interaction
+
           display: inline-flex
           justify-content: center
           align-items: center

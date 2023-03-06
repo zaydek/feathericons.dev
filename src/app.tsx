@@ -1,4 +1,6 @@
 import * as feather from "@icons/feather/tsx"
+import * as wkBrandsMono from "@icons/wolfkit/brands/mono/tsx"
+import * as wkBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
 import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
 import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
@@ -30,7 +32,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useContext, useEffect, useState, useTransition } from "react"
+import { useContext, useEffect, useTransition } from "react"
 import { Lang } from "shiki-es"
 
 export function App() {
@@ -52,7 +54,7 @@ export function App() {
 }
 
 function AppSidebar1() {
-	const { scrollProps } = useScrollProps()
+	const scrollProps = useScrollProps()
 
 	const { setStarted } = useContext(ProgressBarContext)!
 	const {
@@ -74,7 +76,6 @@ function AppSidebar1() {
 
 	const [pending, startTransition] = useTransition()
 
-	// TODO: Extract to pattern
 	useEffect(() => {
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
@@ -102,50 +103,40 @@ function AppSidebar1() {
 								/>
 							</div>
 						</header>
-						<ul className="checkboxes">
-							<label className="checkbox">
-								<div className="sidebar-align-icon-frame">
-									<feather.Feather className="checkbox-icon" />
-								</div>
-								<span className="checkbox-name u-flex-1">Feather</span>
-								<div className="sidebar-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={showFeather}
-										onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
-									/>
-								</div>
-							</label>
-						</ul>
-						<ul className="checkboxes">
-							<label className="checkbox">
-								<div className="sidebar-align-icon-frame">
-									<feather.Twitter className="checkbox-icon" />
-								</div>
-								<span className="checkbox-name u-flex-1">Social</span>
-								<div className="sidebar-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={showSocial}
-										onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
-									/>
-								</div>
-							</label>
-						</ul>
-						<ul className="checkboxes">
-							<label className="checkbox">
-								<div className="sidebar-align-icon-frame">
-									<feather.CreditCard className="checkbox-icon" />
-								</div>
-								<span className="checkbox-name u-flex-1">Payments</span>
-								<div className="sidebar-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={showPayments}
-										onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
-									/>
-								</div>
-							</label>
+						<div>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-icon-frame">
+										<feather.Feather className="checkbox-icon" />
+									</div>
+									<span className="checkbox-name u-flex-1">Feather icons</span>
+									<div className="sidebar-align-icon-frame">
+										<input
+											type="checkbox"
+											checked={showFeather}
+											onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
+										/>
+									</div>
+								</label>
+							</ul>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-icon-frame">
+										<DynamicIcon
+											className="checkbox-icon"
+											icon={monochromaticMode ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
+										/>
+									</div>
+									<span className="checkbox-name u-flex-1">Social logos</span>
+									<div className="sidebar-align-icon-frame">
+										<input
+											type="checkbox"
+											checked={showSocial}
+											onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
+										/>
+									</div>
+								</label>
+							</ul>
 							<ul className="checkboxes">
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
@@ -154,47 +145,65 @@ function AppSidebar1() {
 											icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Original</span>
+									<span className="checkbox-name u-flex-1">Payment logos</span>
 									<div className="sidebar-align-icon-frame">
 										<input
-											name="payments"
-											type="radio"
-											checked={paymentsRadio === "normal"}
-											onChange={e =>
-												startTransition(() => {
-													setShowPayments(true)
-													setPaymentsRadio("normal")
-												})
-											}
+											type="checkbox"
+											checked={showPayments}
+											onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
+								<ul className="checkboxes">
+									<label className="checkbox">
+										<div className="sidebar-align-icon-frame">
+											<DynamicIcon
+												className="checkbox-icon"
+												icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+											/>
+										</div>
+										<span className="checkbox-name u-flex-1">Original</span>
+										<div className="sidebar-align-icon-frame">
+											<input
+												name="payments"
+												type="radio"
+												checked={paymentsRadio === "normal"}
+												onChange={e =>
+													startTransition(() => {
+														setShowPayments(true)
+														setPaymentsRadio("normal")
+													})
+												}
+											/>
+										</div>
+									</label>
+								</ul>
+								<ul className="checkboxes">
+									<label className="checkbox">
+										<div className="sidebar-align-icon-frame">
+											<DynamicIcon
+												className="checkbox-icon"
+												icon={monochromaticMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+											/>
+										</div>
+										<span className="checkbox-name u-flex-1">Filled</span>
+										<div className="sidebar-align-icon-frame">
+											<input
+												name="payments"
+												type="radio"
+												checked={paymentsRadio === "filled"}
+												onChange={e =>
+													startTransition(() => {
+														setShowPayments(true)
+														setPaymentsRadio("filled")
+													})
+												}
+											/>
+										</div>
+									</label>
+								</ul>
 							</ul>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											icon={monochromaticMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-										/>
-									</div>
-									<span className="checkbox-name u-flex-1">Filled</span>
-									<div className="sidebar-align-icon-frame">
-										<input
-											name="payments"
-											type="radio"
-											checked={paymentsRadio === "filled"}
-											onChange={e =>
-												startTransition(() => {
-													setShowPayments(true)
-													setPaymentsRadio("filled")
-												})
-											}
-										/>
-									</div>
-								</label>
-							</ul>
-						</ul>
+						</div>
 					</section>
 				</div>
 			</header>
@@ -275,27 +284,12 @@ function AppSidebar1() {
 }
 
 function AppSidebar2() {
-	const { scrollProps } = useScrollProps()
+	const scrollProps = useScrollProps()
 
-	const { setStarted } = useContext(ProgressBarContext)!
-	const { monochromaticMode: preferMonochrome, setMonochromaticMode: setPreferMonochrome } = useContext(SearchContext)!
 	const { exportAs, setExportAs, clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
 
-	const [pending, startTransition] = useTransition()
-
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
-
-	// TODO: Extract to some provider
-	const [showReactColorful, setShowReactColorful] = useState(false)
-	const [color, setColor] = useState<string | null>(null)
-
-	// TODO: Extract to pattern
-	useEffect(() => {
-		setStarted(true)
-		const d = window.setTimeout(() => setStarted(false), 100)
-		return () => window.clearTimeout(d)
-	}, [pending, setStarted])
 
 	return (
 		<Sidebar2>
@@ -322,7 +316,7 @@ function AppSidebar2() {
 						<div className="sidebar-align-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Size</h6>
+						<h6 className="section-name u-flex-1">size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<div className="sidebar-align-icon-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
@@ -336,7 +330,7 @@ function AppSidebar2() {
 						<div className="sidebar-align-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Stroke width</h6>
+						<h6 className="section-name u-flex-1">stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="sidebar-align-icon-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
@@ -388,11 +382,12 @@ function AppMain() {
 
 	const count = results.reduce((sum, [names]) => sum + names.length, 0)
 
+	//// active:   `Feather\u2002·\u2002${count} icons`,
 	// prettier-ignore
-	useVisibleDocumentTitle({
-		active:   `Feather\u2002·\u2002${count} icons`,
-		inactive: "Feather",
-	})
+	useVisibleDocumentTitle([
+		`${count} icons`,
+		"Feather",
+	])
 
 	useClearSelectedShortcut({ clearSelected })
 

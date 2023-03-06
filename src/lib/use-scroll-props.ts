@@ -10,5 +10,5 @@ export function useScrollProps() {
 		"data-scroll": scroll.toString(),
 	}
 
-	return { scrollProps }
+	return scrollProps
 }
