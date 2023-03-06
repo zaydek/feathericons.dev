@@ -131,9 +131,9 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		}
 		if (showSocial) {
 			if (monochromaticMode) {
-				arr.push(cache.get("wolfkit-brands-mono"))
+				arr.push(cache.get("wolfkit-social-mono"))
 			} else {
-				arr.push(cache.get("wolfkit-brands-original"))
+				arr.push(cache.get("wolfkit-social-original"))
 			}
 		}
 		if (showPayments) {

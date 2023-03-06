@@ -1,4 +1,4 @@
-import * as wkBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
+import * as wkSocialOriginal from "@icons/wolfkit/social/original/tsx"
 
 import { Icon } from "@/lib"
 
@@ -7,22 +7,22 @@ export type Resource = { name: string; icon: Icon; href: string }
 export const resources: Resource[] = [
 	{
 		name: "Icons",
-		icon: wkBrandsOriginal.Github,
+		icon: wkSocialOriginal.Github,
 		href: "TODO",
 	},
 	{
 		name: "Website",
-		icon: wkBrandsOriginal.Github,
+		icon: wkSocialOriginal.Github,
 		href: "TODO",
 	},
 	{
 		name: "Social & payments files",
-		icon: wkBrandsOriginal.Figma,
+		icon: wkSocialOriginal.Figma,
 		href: "TODO",
 	},
 	{
 		name: "Share on Twitter",
-		icon: wkBrandsOriginal.Twitter,
+		icon: wkSocialOriginal.Twitter,
 		href: "TODO",
 	},
 ]

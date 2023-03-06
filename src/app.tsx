@@ -1,10 +1,10 @@
 import * as feather from "@icons/feather/tsx"
-import * as wkBrandsMono from "@icons/wolfkit/brands/mono/tsx"
-import * as wkBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
 import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
 import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
 import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
+import * as wkSocialMono from "@icons/wolfkit/social/mono/tsx"
+import * as wkSocialOriginal from "@icons/wolfkit/social/original/tsx"
 
 import {
 	Anchor,
@@ -103,40 +103,57 @@ function AppSidebar1() {
 								/>
 							</div>
 						</header>
-						<div>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
-										<feather.Feather className="checkbox-icon" />
-									</div>
-									<span className="checkbox-name u-flex-1">Feather icons</span>
-									<div className="sidebar-align-icon-frame">
-										<input
-											type="checkbox"
-											checked={showFeather}
-											onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
-										/>
-									</div>
-								</label>
-							</ul>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											icon={monochromaticMode ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
-										/>
-									</div>
-									<span className="checkbox-name u-flex-1">Social logos</span>
-									<div className="sidebar-align-icon-frame">
-										<input
-											type="checkbox"
-											checked={showSocial}
-											onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
-										/>
-									</div>
-								</label>
-							</ul>
+						{/* <div> */}
+						<ul className="checkboxes">
+							<label className="checkbox">
+								<div className="sidebar-align-icon-frame">
+									<feather.Feather className="checkbox-icon" />
+								</div>
+								<span className="checkbox-name u-flex-1">Feather icons</span>
+								<div className="sidebar-align-icon-frame">
+									<input
+										type="checkbox"
+										checked={showFeather}
+										onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
+									/>
+								</div>
+							</label>
+						</ul>
+						<ul className="checkboxes">
+							<label className="checkbox">
+								<div className="sidebar-align-icon-frame">
+									<DynamicIcon
+										className="checkbox-icon"
+										icon={monochromaticMode ? wkSocialMono.Twitter : wkSocialOriginal.Twitter}
+									/>
+								</div>
+								<span className="checkbox-name u-flex-1">Social logos</span>
+								<div className="sidebar-align-icon-frame">
+									<input
+										type="checkbox"
+										checked={showSocial}
+										onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
+									/>
+								</div>
+							</label>
+						</ul>
+						<ul className="checkboxes">
+							<label className="checkbox">
+								<div className="sidebar-align-icon-frame">
+									<DynamicIcon
+										className="checkbox-icon"
+										icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+									/>
+								</div>
+								<span className="checkbox-name u-flex-1">Payment logos</span>
+								<div className="sidebar-align-icon-frame">
+									<input
+										type="checkbox"
+										checked={showPayments}
+										onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
+									/>
+								</div>
+							</label>
 							<ul className="checkboxes">
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
@@ -145,65 +162,48 @@ function AppSidebar1() {
 											icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Payment logos</span>
+									<span className="checkbox-name u-flex-1">Original</span>
 									<div className="sidebar-align-icon-frame">
 										<input
-											type="checkbox"
-											checked={showPayments}
-											onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
+											name="payments"
+											type="radio"
+											checked={paymentsRadio === "normal"}
+											onChange={e =>
+												startTransition(() => {
+													setShowPayments(true)
+													setPaymentsRadio("normal")
+												})
+											}
 										/>
 									</div>
 								</label>
-								<ul className="checkboxes">
-									<label className="checkbox">
-										<div className="sidebar-align-icon-frame">
-											<DynamicIcon
-												className="checkbox-icon"
-												icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-											/>
-										</div>
-										<span className="checkbox-name u-flex-1">Original</span>
-										<div className="sidebar-align-icon-frame">
-											<input
-												name="payments"
-												type="radio"
-												checked={paymentsRadio === "normal"}
-												onChange={e =>
-													startTransition(() => {
-														setShowPayments(true)
-														setPaymentsRadio("normal")
-													})
-												}
-											/>
-										</div>
-									</label>
-								</ul>
-								<ul className="checkboxes">
-									<label className="checkbox">
-										<div className="sidebar-align-icon-frame">
-											<DynamicIcon
-												className="checkbox-icon"
-												icon={monochromaticMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-											/>
-										</div>
-										<span className="checkbox-name u-flex-1">Filled</span>
-										<div className="sidebar-align-icon-frame">
-											<input
-												name="payments"
-												type="radio"
-												checked={paymentsRadio === "filled"}
-												onChange={e =>
-													startTransition(() => {
-														setShowPayments(true)
-														setPaymentsRadio("filled")
-													})
-												}
-											/>
-										</div>
-									</label>
-								</ul>
 							</ul>
-						</div>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-icon-frame">
+										<DynamicIcon
+											className="checkbox-icon"
+											icon={monochromaticMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+										/>
+									</div>
+									<span className="checkbox-name u-flex-1">Filled</span>
+									<div className="sidebar-align-icon-frame">
+										<input
+											name="payments"
+											type="radio"
+											checked={paymentsRadio === "filled"}
+											onChange={e =>
+												startTransition(() => {
+													setShowPayments(true)
+													setPaymentsRadio("filled")
+												})
+											}
+										/>
+									</div>
+								</label>
+							</ul>
+						</ul>
+						{/* </div> */}
 					</section>
 				</div>
 			</header>

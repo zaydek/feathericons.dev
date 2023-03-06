@@ -32,7 +32,7 @@ async function copyFilesWithRegex({
 	}
 }
 
-async function organizeBrands() {
+async function organizeSocial() {
 	// prettier-ignore
 	const args = [
 		{ target: "original" },
@@ -75,46 +75,46 @@ async function organizeBrands() {
 	for (const { target, replaceRegex } of args) {
 		console.log(`📋 Copying *.svg files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolfkit/figma/brands/${target}/svg`,
+			srcDir: `./icons/wolfkit/figma/social/${target}/all`,
+			dstDir: `./icons/wolfkit/figma/social/${target}/svg`,
 			patternRegex: /\.svg$/,
 			replaceRegex,
 		})
 		console.log(`📋 Copying *.png files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolfkit/figma/brands/${target}/png@1x`,
+			srcDir: `./icons/wolfkit/figma/social/${target}/all`,
+			dstDir: `./icons/wolfkit/figma/social/${target}/png@1x`,
 			patternRegex: /@1x\.png$/,
 			replaceRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolfkit/figma/brands/${target}/png@2x`,
+			srcDir: `./icons/wolfkit/figma/social/${target}/all`,
+			dstDir: `./icons/wolfkit/figma/social/${target}/png@2x`,
 			patternRegex: /@2x\.png$/,
 			replaceRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolfkit/figma/brands/${target}/png@4x`,
+			srcDir: `./icons/wolfkit/figma/social/${target}/all`,
+			dstDir: `./icons/wolfkit/figma/social/${target}/png@4x`,
 			patternRegex: /@4x\.png$/,
 			replaceRegex,
 		})
 		console.log(`📋 Copying *.jpg files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolfkit/figma/brands/${target}/jpg@1x`,
+			srcDir: `./icons/wolfkit/figma/social/${target}/all`,
+			dstDir: `./icons/wolfkit/figma/social/${target}/jpg@1x`,
 			patternRegex: /@1x\.jpg$/,
 			replaceRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolfkit/figma/brands/${target}/jpg@2x`,
+			srcDir: `./icons/wolfkit/figma/social/${target}/all`,
+			dstDir: `./icons/wolfkit/figma/social/${target}/jpg@2x`,
 			patternRegex: /@2x\.jpg$/,
 			replaceRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wolfkit/figma/brands/${target}/all`,
-			dstDir: `./icons/wolfkit/figma/brands/${target}/jpg@4x`,
+			srcDir: `./icons/wolfkit/figma/social/${target}/all`,
+			dstDir: `./icons/wolfkit/figma/social/${target}/jpg@4x`,
 			patternRegex: /@4x\.jpg$/,
 			replaceRegex,
 		})
@@ -165,7 +165,7 @@ async function organizePayments() {
 }
 
 async function main() {
-	await organizeBrands()
+	await organizeSocial()
 	await organizePayments()
 	console.log("🎉 Done")
 }

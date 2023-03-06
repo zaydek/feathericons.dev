@@ -1,17 +1,17 @@
 import { lazy, LazyExoticComponent } from "react"
 
 import featherManifest from "@icons/feather/manifest.json"
-import wkBrandsManifest from "@icons/wolfkit/brands/original/manifest.json"
 import wkPaymentsManifest from "@icons/wolfkit/payments/original/manifest.json"
+import wkSocialManifest from "@icons/wolfkit/social/original/manifest.json"
 
 type Iconset =
 	| "feather"
-	| "wolfkit-brands-original"
-	//// | "wolfkit-brands-original-circle"
-	//// | "wolfkit-brands-original-square"
-	| "wolfkit-brands-mono"
-	| "wolfkit-brands-mono-circle"
-	| "wolfkit-brands-mono-square"
+	| "wolfkit-social-original"
+	//// | "wolfkit-social-original-circle"
+	//// | "wolfkit-social-original-square"
+	| "wolfkit-social-mono"
+	//// | "wolfkit-social-mono-circle"
+	//// | "wolfkit-social-mono-square"
 	| "wolfkit-payments-original"
 	| "wolfkit-payments-original-filled"
 	| "wolfkit-payments-mono"
@@ -39,30 +39,30 @@ export function createCache() {
 				names = featherManifest
 				Icon = lazy(() => import("./stubs/feather"))
 				break
-			case "wolfkit-brands-original":
-				names = wkBrandsManifest
-				Icon = lazy(() => import("./stubs/wolfkit-brands-original"))
+			case "wolfkit-social-original":
+				names = wkSocialManifest
+				Icon = lazy(() => import("./stubs/wolfkit-social-original"))
 				break
-			//// case "wolfkit-brands-original-circle":
-			//// 	names = wkBrandsManifest
-			//// 	Icon = lazy(() => import("./stubs/wolfkit-brands-original-circle"))
+			//// case "wolfkit-social-original-circle":
+			//// 	names = wkSocialManifest
+			//// 	Icon = lazy(() => import("./stubs/wolfkit-social-original-circle"))
 			//// 	break
-			//// case "wolfkit-brands-original-square":
-			//// 	names = wkBrandsManifest
-			//// 	Icon = lazy(() => import("./stubs/wolfkit-brands-original-square"))
+			//// case "wolfkit-social-original-square":
+			//// 	names = wkSocialManifest
+			//// 	Icon = lazy(() => import("./stubs/wolfkit-social-original-square"))
 			//// 	break
-			case "wolfkit-brands-mono":
-				names = wkBrandsManifest
-				Icon = lazy(() => import("./stubs/wolfkit-brands-mono"))
+			case "wolfkit-social-mono":
+				names = wkSocialManifest
+				Icon = lazy(() => import("./stubs/wolfkit-social-mono"))
 				break
-			case "wolfkit-brands-mono-circle":
-				names = wkBrandsManifest
-				Icon = lazy(() => import("./stubs/wolfkit-brands-mono-circle"))
-				break
-			case "wolfkit-brands-mono-square":
-				names = wkBrandsManifest
-				Icon = lazy(() => import("./stubs/wolfkit-brands-mono-square"))
-				break
+			//// case "wolfkit-social-mono-circle":
+			//// 	names = wkSocialManifest
+			//// 	Icon = lazy(() => import("./stubs/wolfkit-social-mono-circle"))
+			//// 	break
+			//// case "wolfkit-social-mono-square":
+			//// 	names = wkSocialManifest
+			//// 	Icon = lazy(() => import("./stubs/wolfkit-social-mono-square"))
+			//// 	break
 			case "wolfkit-payments-original":
 				names = wkPaymentsManifest
 				Icon = lazy(() => import("./stubs/wolfkit-payments-original"))
