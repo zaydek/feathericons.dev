@@ -16,6 +16,18 @@
     // to [$sidebar-padding-y $sidebar-padding-x]
     padding: $sidebar-padding-y $sidebar-padding-x
 
+  // Use div:not([class]) to target:
+  //
+  // <div>
+  // ^^^^^
+  //   <div class="checkboxes">
+  //     <div class="checkbox">...</div>
+  //     <div class="checkbox">...</div>
+  //     ...
+  //   </div>
+  // </div>
+  // ^^^^^^
+  //
   > :not(div:not([class]), .section-header, .checkboxes, .resources)
     margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
