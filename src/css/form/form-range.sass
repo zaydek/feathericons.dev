@@ -28,9 +28,9 @@ input[type=range]
     background-color: white
     border-radius: 1e3px
     box-shadow: $hairline-shadow, $realistic-shadow
-    @at-root
-      input[type=range]:focus-visible::-webkit-slider-thumb
-        background-color: $slate-100
+    //// @at-root
+    ////   input[type=range]:focus-visible::-webkit-slider-thumb
+    ////     background-color: $slate-100
 
   // COMPAT/Gecko
   &::-moz-range-track
@@ -48,6 +48,6 @@ input[type=range]
     background-color: white
     border-radius: var(--progress, 50%)
     box-shadow: $hairline-shadow, $realistic-shadow
-    @at-root
-      input[type=range]:focus-visible::-moz-range-thumb
-        background-color: $slate-100
+    //// @at-root
+    ////   input[type=range]:focus-visible::-moz-range-thumb
+    ////     background-color: $slate-100
