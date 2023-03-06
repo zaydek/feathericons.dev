@@ -92,9 +92,12 @@ function AppSidebar1() {
 				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
-							{/* <feather.Package className="section-icon" /> */}
-							<h6 className="section-name u-flex-1">Icons</h6>
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetIcons} />
+							<div className="sidebar-icon-frame u-flex-1">
+								<h6 className="section-name">Icons</h6>
+							</div>
+							<div className="sidebar-icon-frame">
+								<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetIcons} />
+							</div>
 						</header>
 						<ul className="checkboxes">
 							<label className="checkbox">
@@ -176,9 +179,12 @@ function AppSidebar1() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						{/* <feather.Monitor className="section-icon" /> */}
-						<h6 className="section-name u-flex-1">Display</h6>
-						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetDisplay} />
+						<div className="sidebar-icon-frame u-flex-1">
+							<h6 className="section-name">Display</h6>
+						</div>
+						<div className="sidebar-icon-frame">
+							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetDisplay} />
+						</div>
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
@@ -196,17 +202,19 @@ function AppSidebar1() {
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
-						<feather.Globe className="section-icon" />
+						<div className="sidebar-icon-frame">
+							<feather.Globe className="section-icon" />
+						</div>
 						<h6 className="section-name u-flex-1">Resources</h6>
 					</header>
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
-								<div className="resource-icon-frame">
+								<div className="sidebar-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
 								<span className="resource-name u-flex-1">{resource.name}</span>
-								<div className="resource-icon-frame">
+								<div className="sidebar-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
@@ -252,9 +260,12 @@ function AppSidebar2() {
 			<header className="sidebar-header">
 				<section className="section is-start">
 					<header className="section-header">
-						{/* <feather.MousePointer className="section-icon" /> */}
-						<h6 className="section-name u-flex-1">Selected</h6>
-						<ExportAs value={exportAs} setValue={setExportAs} />
+						<div className="sidebar-icon-frame u-flex-1">
+							<h6 className="section-name">Selected</h6>
+						</div>
+						<div className="sidebar-icon-frame">
+							<ExportAs value={exportAs} setValue={setExportAs} />
+						</div>
 					</header>
 				</section>
 				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...scrollProps}>
@@ -265,8 +276,12 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<h6 className="section-name u-flex-1">Variants</h6>
-						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+						<div className="sidebar-icon-frame u-flex-1">
+							<h6 className="section-name">Variants</h6>
+						</div>
+						<div className="sidebar-icon-frame">
+							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+						</div>
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
@@ -286,18 +301,26 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<h6 className="section-name u-flex-1">Size</h6>
+						<div className="sidebar-icon-frame u-flex-1">
+							<h6 className="section-name">Size</h6>
+						</div>
 						<span className="section-name">{size.toFixed(0)} PX</span>
-						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+						<div className="sidebar-icon-frame">
+							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+						</div>
 					</header>
 					<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 				</section>
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<h6 className="section-name u-flex-1">Stroke width</h6>
+						<div className="sidebar-icon-frame u-flex-1">
+							<h6 className="section-name">Stroke width</h6>
+						</div>
 						<span className="section-name">{strokeWidth.toFixed(2)}</span>
-						<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+						<div className="sidebar-icon-frame">
+							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+						</div>
 					</header>
 					<ProgressRange
 						value={strokeWidth}

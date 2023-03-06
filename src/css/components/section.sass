@@ -2,20 +2,6 @@
 
 @use "../globals" as *
 
-// <section class="section">
-//   <header class="section-header">
-//     <span class="section-icon"></span>
-//     <span class="section-name u-flex-1">
-//       …
-//     </span>
-//     <span class="section-range-desc">
-//       …
-//     </span>
-//     <span class="section-reset-icon"></span>
-//   </header>
-//   …
-// </section>
-
 .section
   display: flex
   flex-direction: column
@@ -29,33 +15,32 @@
     // Change from [$sidebar-gap $sidebar-padding-x]
     // to [$sidebar-padding-y $sidebar-padding-x]
     padding: $sidebar-padding-y $sidebar-padding-x
-  // Optical alignment
-  > :not(.checkboxes, .resources)
+
+  > :not(.section-header, .checkboxes, .resources)
     margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
-.section-header
-  display: flex
-  align-items: center
-  height: math.div($button-height, 2)
-  background-color: white
-
-.section-icon
-  height: $tiny-icon-height
-  width: $tiny-icon-height
-  color: $slate-600
-
-.section-name
-  font: 500 11px / normal $sans
-  letter-spacing: 0.05em
-  text-transform: uppercase
-  color: $slate-600
-
-.section-reset-icon
-  height: $tiny-icon-height
-  width: $tiny-icon-height
-  color: $slate-300
-  cursor: pointer           // Interaction
-  -webkit-user-select: none // Interaction
-  user-select: none         // Interaction
-  &:hover
-    color: $slate-800
+  @at-root
+    .section-header
+      display: flex
+      align-items: center
+      height: math.div($button-height, 2)
+      background-color: white
+      @at-root
+        .section-icon
+          height: $tiny-icon-height
+          width: $tiny-icon-height
+          color: $slate-600
+        .section-reset-icon
+          height: $tiny-icon-height
+          width: $tiny-icon-height
+          color: $slate-300
+          cursor: pointer           // Interaction
+          -webkit-user-select: none // Interaction
+          user-select: none         // Interaction
+          &:hover
+            color: $slate-800
+        .section-name
+          font: 500 11px / normal $sans
+          letter-spacing: 0.05em
+          text-transform: uppercase
+          color: $slate-600

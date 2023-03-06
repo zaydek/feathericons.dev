@@ -2,17 +2,6 @@
 
 @use "../globals" as *
 
-// <header class="sidebar-header"
-//   …
-//   <div class="sidebar-header-scroll-area u-flex-1">
-//     …
-//   </div>
-// </header>
-// <div class="u-flex-1"></div>
-// <footer class="sidebar-header">
-//   …
-// </footer>
-
 .sidebar-header
   position: sticky
   top: 0
@@ -21,18 +10,20 @@
   flex-direction: column
   background-color: white
   overflow-y: auto
-
-.sidebar-header-scroll-area
-  //// flex: 1
-  overflow-y: auto
-  &.is-syntax-highlighting
-    padding-bottom: $sidebar-gap
-
-//// .sidebar-spacer
-////  app flex: 1
+  @at-root
+    .sidebar-header-scroll-area
+      overflow-y: auto
+      &.is-syntax-highlighting
+        padding-bottom: $sidebar-gap
 
 .sidebar-footer
   position: sticky
   bottom: 0
   z-index: 50
   background-color: white
+
+.sidebar-icon-frame
+  display: flex
+  align-items: center
+  padding: 0 math.div($button-height - $tiny-icon-height, 2)
+  height: $button-height
