@@ -10,7 +10,6 @@ import {
 	Anchor,
 	DEV_DebugCss,
 	ExportAs,
-	Grid,
 	Main,
 	ProgressRange,
 	SearchBar,
@@ -19,7 +18,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { DynamicIcon, useScrollProps, useVisibleDocumentTitle } from "@/lib"
+import { DynamicIcon, Icon, useScrollProps, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -32,6 +31,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
+import { useQuery } from "@tanstack/react-query"
 import { useContext, useEffect, useTransition } from "react"
 import { Lang } from "shiki-es"
 
@@ -376,6 +376,59 @@ function AppSidebar2() {
 //// 	return void 0
 //// }
 
+type Iconset =
+	| "@icons/feather"
+	| "@icons/wolfkit/social/original"
+	| "@icons/wolfkit/social/mono"
+	| "@icons/wolfkit/payments/original"
+	| "@icons/wolfkit/payments/original-filled"
+	| "@icons/wolfkit/payments/mono"
+	| "@icons/wolfkit/payments/mono-filled"
+
+async function fetchIconsets(iconset: Iconset) {
+	let imports: any
+	let names: string[]
+	let icons: Icon[]
+	switch (iconset) {
+		case "@icons/feather":
+			imports = await import("@icons/feather/tsx")
+			names = Object.keys(imports)
+			icons = Object.values(imports)
+			break
+		case "@icons/wolfkit/social/original":
+			imports = await import("@icons/wolfkit/social/original/tsx")
+			names = Object.keys(imports)
+			icons = Object.values(imports)
+			break
+		case "@icons/wolfkit/social/mono":
+			imports = await import("@icons/wolfkit/social/mono/tsx")
+			names = Object.keys(imports)
+			icons = Object.values(imports)
+			break
+		case "@icons/wolfkit/payments/original":
+			imports = await import("@icons/wolfkit/payments/original/tsx")
+			names = Object.keys(imports)
+			icons = Object.values(imports)
+			break
+		case "@icons/wolfkit/payments/original-filled":
+			imports = await import("@icons/wolfkit/payments/original-filled/tsx")
+			names = Object.keys(imports)
+			icons = Object.values(imports)
+			break
+		case "@icons/wolfkit/payments/mono":
+			imports = await import("@icons/wolfkit/payments/mono/tsx")
+			names = Object.keys(imports)
+			icons = Object.values(imports)
+			break
+		case "@icons/wolfkit/payments/mono-filled":
+			imports = await import("@icons/wolfkit/payments/mono-filled/tsx")
+			names = Object.keys(imports)
+			icons = Object.values(imports)
+			break
+	}
+	return [names, icons] as const
+}
+
 function AppMain() {
 	const { results } = useContext(SearchContext)!
 	const { removeAllNames } = useContext(ClipboardContext)!
@@ -399,16 +452,32 @@ function AppMain() {
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [removeAllNames])
 
-	return (
-		<Main
-			// TODO: Change to onClickCapture?
-			onClick={e => {
-				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
-					removeAllNames()
-				}
-			}}
-		>
-			<Grid />
-		</Main>
-	)
+	const { data, isSuccess } = useQuery(["iconsets"], () => fetchIconsets("@icons/feather"))
+
+	//// const [icons, setIcons] = useState<Icon[] | null>(null)
+	////
+	//// useEffect(() => {
+	//// 	async function run() {
+	//// 		const icons = await import("@icons/feather/tsx")
+	//// 		setIcons(Object.values(icons))
+	//// 	}
+	//// 	run()
+	//// }, [])
+	////
+	//// console.log(icons)
+
+	return <Main>{isSuccess && data[1].map((Icon, index) => <Icon key={data[0][index]} />)}</Main>
+
+	//// return (
+	//// 	<Main
+	//// 		// TODO: Change to onClickCapture?
+	//// 		onClick={e => {
+	//// 			if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
+	//// 				removeAllNames()
+	//// 			}
+	//// 		}}
+	//// 	>
+	//// 		<Grid />
+	//// 	</Main>
+	//// )
 }

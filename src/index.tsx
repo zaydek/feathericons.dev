@@ -14,41 +14,31 @@ import {
 	SearchProvider,
 	ShikiProvider,
 } from "@/state"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { createRoot } from "react-dom/client"
+
+export const queryClient = new QueryClient()
 
 function ProvidedApp() {
 	return (
-		<ProgressBarProvider>
-			<ProgresssBar />
-			<ShikiProvider>
-				<LayoutProvider>
-					<SearchProvider>
-						<RangeProvider>
-							<ClipboardProvider>
-								<App />
-							</ClipboardProvider>
-						</RangeProvider>
-					</SearchProvider>
-				</LayoutProvider>
-			</ShikiProvider>
-		</ProgressBarProvider>
+		<QueryClientProvider client={queryClient}>
+			<ProgressBarProvider>
+				<ProgresssBar />
+				<ShikiProvider>
+					<LayoutProvider>
+						<SearchProvider>
+							<RangeProvider>
+								<ClipboardProvider>
+									<App />
+								</ClipboardProvider>
+							</RangeProvider>
+						</SearchProvider>
+					</LayoutProvider>
+				</ShikiProvider>
+			</ProgressBarProvider>
+		</QueryClientProvider>
 	)
 }
 
-if (import.meta.env.DEV) {
-	// Vite hack
-	let container: HTMLElement | null = null
-	window.addEventListener(
-		"DOMContentLoaded",
-		e => {
-			if (!container) {
-				const root = createRoot(document.getElementById("root")!)
-				root.render(<ProvidedApp />)
-			}
-		},
-		false,
-	)
-} else {
-	const root = createRoot(document.getElementById("root")!)
-	root.render(<ProvidedApp />)
-}
+const root = createRoot(document.getElementById("root")!)
+root.render(<ProvidedApp />)
