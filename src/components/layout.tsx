@@ -107,25 +107,29 @@ export function Sidebar2({ children }: PropsWithChildren) {
 
 function _SidebarOverlay() {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
-	const handleClickClose = useCallback(() => {
-		if (sidebar === "maximized") {
-			setSidebar("open")
-		}
-	}, [setSidebar, sidebar])
-	return <div className="sidebar-overlay" onClick={handleClickClose}></div>
+
+	return (
+		<div
+			className="sidebar-overlay"
+			onClick={e => setSidebar("open")}
+			// @ts-expect-error
+			inert={sidebar !== "maximized" ? "true" : null}
+		></div>
+	)
 }
 
 function _Main({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
-	const { clearSelected } = useContext(ClipboardContext)!
+	const { removeAllFromSelection } = useContext(ClipboardContext)!
 
 	return (
 		<main
 			className="main"
 			onClick={e => {
+				// TODO
 				e.stopPropagation()
 				e.preventDefault()
-				clearSelected()
+				removeAllFromSelection()
 			}}
 			// @ts-expect-error
 			inert={sidebar === "maximized" ? "true" : null}

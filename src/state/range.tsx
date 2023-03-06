@@ -1,5 +1,5 @@
 import { useParam } from "@/lib"
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect } from "react"
 
 export const SIZE_MIN       = 16 // prettier-ignore
 export const SIZE_MAX       = 48 // prettier-ignore
@@ -54,17 +54,14 @@ export function RangeProvider({ children }: PropsWithChildren) {
 
 	return (
 		<RangeContext.Provider
-			value={useMemo(
-				() => ({
-					size,
-					setSize,
-					strokeWidth,
-					setStrokeWidth,
-					resetSize,
-					resetStrokeWidth,
-				}),
-				[resetSize, resetStrokeWidth, setSize, setStrokeWidth, size, strokeWidth],
-			)}
+			value={{
+				size,
+				setSize,
+				strokeWidth,
+				setStrokeWidth,
+				resetSize,
+				resetStrokeWidth,
+			}}
 		>
 			{children}
 		</RangeContext.Provider>

@@ -17,11 +17,12 @@ export type ExportAsValue =
 // prettier-ignore
 export const ClipboardContext =
 	createContext<{
-		exportAs:      ExportAsValue
-		setExportAs:   Dispatch<SetStateAction<ExportAsValue>>
-		selected:      Map<string, true>
-		addToSelected: (...ids: string[]) => void
-		clearSelected: () => void
+		exportAs:               ExportAsValue
+		setExportAs:            Dispatch<SetStateAction<ExportAsValue>>
+		selection:              Map<string, true>
+		addToSelection:         (...ids: string[]) => void
+		removeFromSelection:    () => void
+		removeAllFromSelection: () => void
 		clipboard: 		 string
 	} | null>(null)
 
@@ -41,11 +42,11 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return "svg"
 		},
 	})
-	const [selected, setSelected] = useState<Map<string, true>>(() => new Map())
+	const [selection, setSelection] = useState<Map<string, true>>(() => new Map())
 	const [clipboard, setClipboard] = useState("")
 
-	const addToSelected = useCallback((...ids: string[]) => {
-		setSelected(prev => {
+	const addToSelection = useCallback((...ids: string[]) => {
+		setSelection(prev => {
 			const next = new Map(prev)
 			for (const id of ids) {
 				next.set(id, true)
@@ -54,13 +55,23 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const clearSelected = useCallback(() => {
-		setSelected(new Map())
+	const removeFromSelection = useCallback((...ids: string[]) => {
+		setSelection(prev => {
+			const next = new Map(prev)
+			for (const id of ids) {
+				next.delete(id)
+			}
+			return next
+		})
+	}, [])
+
+	const removeAllFromSelection = useCallback(() => {
+		setSelection(new Map())
 	}, [])
 
 	// TOOD: Change to memo?
 	useEffect(() => {
-		if (selected.size === 0) {
+		if (selection.size === 0) {
 			switch (exportAs) {
 				case "svg":
 				case "jsx":
@@ -84,7 +95,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return
 		}
 		let clipboard = ""
-		const ids = [...selected.keys()]
+		const ids = [...selection.keys()]
 		for (const [index, id] of ids.entries()) {
 			if (index > 0) clipboard += "\n\n"
 			const svg = document.getElementById(id)!.querySelector("svg")!
@@ -116,16 +127,17 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			}
 		}
 		setClipboard(clipboard)
-	}, [exportAs, selected])
+	}, [exportAs, selection])
 
 	return (
 		<ClipboardContext.Provider
 			value={{
 				exportAs,
 				setExportAs,
-				selected,
-				addToSelected,
-				clearSelected,
+				selection,
+				addToSelection,
+				removeFromSelection,
+				removeAllFromSelection,
 				clipboard,
 			}}
 		>

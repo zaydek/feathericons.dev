@@ -378,18 +378,13 @@ function useClearSelectedShortcut({ clearSelected }: { clearSelected: () => void
 
 function AppMain() {
 	const { results } = useContext(SearchContext)!
-	const { clearSelected } = useContext(ClipboardContext)!
+	const { removeAllFromSelection } = useContext(ClipboardContext)!
 
 	const count = results.reduce((sum, [names]) => sum + names.length, 0)
+	useVisibleDocumentTitle([`${count} icons`, "Feather"])
 
-	//// active:   `Feather\u2002·\u2002${count} icons`,
-	// prettier-ignore
-	useVisibleDocumentTitle([
-		`${count} icons`,
-		"Feather",
-	])
-
-	useClearSelectedShortcut({ clearSelected })
+	// TODO
+	useClearSelectedShortcut({ clearSelected: removeAllFromSelection })
 
 	return (
 		<Main>
