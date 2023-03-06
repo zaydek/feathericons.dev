@@ -18,8 +18,10 @@ $aspect-ratio: 1.25
   display: grid
   grid-template-columns: repeat(auto-fill, $height)
   justify-content: center
-  //// gap: 24px
-  gap: 16px
+  &:not(.is-show-names)
+    gap: 16px
+  &.is-show-names
+    gap: 8px 16px
 
 .grid-item
   position: relative

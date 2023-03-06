@@ -1,13 +1,13 @@
-import { Icon, toKebabCase } from "@/lib"
+import { cx, Icon, toKebabCase } from "@/lib"
 import { ClipboardContext, LayoutContext, SearchContext } from "@/state"
 import { Suspense, useContext } from "react"
 
 // TODO: Add memo?
 export function Grid() {
-	const { results } = useContext(SearchContext)!
+	const { showNames, results } = useContext(SearchContext)!
 
 	return (
-		<div className="grid">
+		<div className={cx("grid", showNames && "is-show-names")}>
 			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map(name => (
