@@ -2,11 +2,6 @@
 
 @use "../globals" as *
 
-// <div class="search-bar">
-//   <span class="search-bar-icon"></span>
-//   <input class="u-flex-1" type="text" />
-// </div>
-
 .search-bar
   display: flex
   align-items: center
@@ -18,18 +13,17 @@
     background-color: white
     box-shadow: $inset-hairline-shadow
 
-.search-bar-icon
-  margin: 0 math.div($button-height - 16px, 2)
-  height: 16px
-  width: 16px
-  color: $slate-400
+  @at-root
+    .search-bar-icon
+      height: $icon-height
+      width: $icon-height
+      color: $slate-400
 
-.search-bar input[type=text]
-  align-self: stretch // Stretch y-axis
-  //// flex: 1             // Stretch x-axis
-  font: 425 16px / normal $sans
-  color: $slate-800
-  &::placeholder
-    color: $slate-500
-  &:focus-visible::placeholder
-    opacity: 0
+    .search-bar input[type=text]
+      align-self: stretch // Stretch y-axis
+      font: 425 16px / normal $sans
+      color: $slate-800
+      &::placeholder
+        color: $slate-500
+      &:focus-visible::placeholder
+        opacity: 0

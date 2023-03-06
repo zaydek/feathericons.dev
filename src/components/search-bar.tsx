@@ -77,7 +77,9 @@ export function SearchBar() {
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
-			<feather.Search className="search-bar-icon" strokeWidth={4} />
+			<div className="sidebar-align-frame">
+				<feather.Search className="search-bar-icon" strokeWidth={4} />
+			</div>
 			<input
 				ref={ref}
 				className="u-flex-1"
