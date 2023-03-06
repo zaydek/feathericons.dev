@@ -79,7 +79,7 @@ export function GridItem({
 			data-selected={selected.has(id)}
 		>
 			<figure className="grid-item-frame">
-				<Icon className="grid-item-frame-icon" />
+				<Icon className="grid-item-icon" />
 			</figure>
 			{showNames && <figcaption className="grid-item-name">{id}</figcaption>}
 		</article>
