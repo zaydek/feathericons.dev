@@ -378,7 +378,7 @@ function useClearSelectedShortcut({ clearSelected }: { clearSelected: () => void
 
 function AppMain() {
 	const { results } = useContext(SearchContext)!
-	const { removeAllFromSelection } = useContext(ClipboardContext)!
+	const { removeAllNames: removeAllFromSelection } = useContext(ClipboardContext)!
 
 	const count = results.reduce((sum, [names]) => sum + names.length, 0)
 	useVisibleDocumentTitle([`${count} icons`, "Feather"])

@@ -120,7 +120,7 @@ function _SidebarOverlay() {
 
 function _Main({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
-	const { removeAllFromSelection } = useContext(ClipboardContext)!
+	const { removeAllNames: removeAllFromSelection } = useContext(ClipboardContext)!
 
 	return (
 		<main

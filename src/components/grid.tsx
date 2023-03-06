@@ -24,8 +24,9 @@ function toNameCase(str: string) {
 export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const { compactMode } = useContext(SearchContext)!
-	const { selection, addToSelection, removeAllFromSelection } = useContext(ClipboardContext)!
+	const { names, addOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
 
+	// TODO
 	const id = toNameCase(name)
 
 	return (
@@ -38,17 +39,17 @@ export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 					if (sidebar === "minimized") setSidebar("open")
 					e.stopPropagation()
 					e.preventDefault()
-					addToSelection(id)
+					addOneOrMoreNames(id)
 				} else {
 					if (sidebar === "minimized") setSidebar("open")
 					e.stopPropagation()
 					e.preventDefault()
-					removeAllFromSelection()
-					addToSelection(id)
+					removeAllNames()
+					addOneOrMoreNames(id)
 				}
 			}}
 			tabIndex={0}
-			data-selected={selection.has(id)}
+			data-selected={names.has(id)}
 		>
 			<figure className="grid-item-frame">
 				<Icon className="grid-item-icon" />

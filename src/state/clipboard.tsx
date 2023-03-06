@@ -17,13 +17,13 @@ export type ExportAsValue =
 // prettier-ignore
 export const ClipboardContext =
 	createContext<{
-		exportAs:               ExportAsValue
-		setExportAs:            Dispatch<SetStateAction<ExportAsValue>>
-		selection:              Map<string, true>
-		addToSelection:         (...ids: string[]) => void
-		removeFromSelection:    () => void
-		removeAllFromSelection: () => void
-		clipboard: 		 string
+		exportAs:             ExportAsValue
+		setExportAs:          Dispatch<SetStateAction<ExportAsValue>>
+		names: 	              Set<string>
+		clipboard: 	          string
+		addOneOrMoreNames:    (...ids: string[]) => void
+		removeOneOrMoreNames: (...ids: string[]) => void
+		removeAllNames:       () => void
 	} | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
@@ -42,22 +42,23 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return "svg"
 		},
 	})
-	const [selection, setSelection] = useState<Map<string, true>>(() => new Map())
+
+	const [names, setNames] = useState(() => new Set<string>())
 	const [clipboard, setClipboard] = useState("")
 
-	const addToSelection = useCallback((...ids: string[]) => {
-		setSelection(prev => {
-			const next = new Map(prev)
+	const addOneOrMoreNames = useCallback((...ids: string[]) => {
+		setNames(prev => {
+			const next = new Set(prev)
 			for (const id of ids) {
-				next.set(id, true)
+				next.add(id)
 			}
 			return next
 		})
 	}, [])
 
-	const removeFromSelection = useCallback((...ids: string[]) => {
-		setSelection(prev => {
-			const next = new Map(prev)
+	const removeOneOrMoreNames = useCallback((...ids: string[]) => {
+		setNames(prev => {
+			const next = new Set(prev)
 			for (const id of ids) {
 				next.delete(id)
 			}
@@ -65,13 +66,11 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const removeAllFromSelection = useCallback(() => {
-		setSelection(new Map())
-	}, [])
+	const removeAllNames = useCallback(() => setNames(new Set<string>()), [])
 
-	// TOOD: Change to memo?
+	// TODO: Change to click handler or useMemo?
 	useEffect(() => {
-		if (selection.size === 0) {
+		if (names.size === 0) {
 			switch (exportAs) {
 				case "svg":
 				case "jsx":
@@ -95,7 +94,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return
 		}
 		let clipboard = ""
-		const ids = [...selection.keys()]
+		const ids = [...names.keys()]
 		for (const [index, id] of ids.entries()) {
 			if (index > 0) clipboard += "\n\n"
 			const svg = document.getElementById(id)!.querySelector("svg")!
@@ -127,18 +126,18 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			}
 		}
 		setClipboard(clipboard)
-	}, [exportAs, selection])
+	}, [exportAs, names])
 
 	return (
 		<ClipboardContext.Provider
 			value={{
 				exportAs,
 				setExportAs,
-				selection,
-				addToSelection,
-				removeFromSelection,
-				removeAllFromSelection,
+				names,
 				clipboard,
+				addOneOrMoreNames,
+				removeOneOrMoreNames,
+				removeAllNames,
 			}}
 		>
 			{children}

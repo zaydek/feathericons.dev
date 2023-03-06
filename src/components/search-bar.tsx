@@ -45,7 +45,7 @@ function useFocusShortcut({
 export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 	const { search, setSearch } = useContext(SearchContext)!
-	const { removeAllFromSelection } = useContext(ClipboardContext)!
+	const { removeAllNames: removeAllFromSelection } = useContext(ClipboardContext)!
 
 	useFocusOnMount({ ref })
 	useResetScrollOnSearch({ search })
