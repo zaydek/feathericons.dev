@@ -25,4 +25,19 @@ export const resources: Resource[] = [
 		icon: wkSocialOriginal.Twitter,
 		href: "TODO",
 	},
+	//// {
+	//// 	name: "Follow @colebemis",
+	//// 	icon: wkSocialOriginal.Twitter,
+	//// 	href: "TODO",
+	//// },
+	//// {
+	//// 	name: "Follow @thewolfkit",
+	//// 	icon: wkSocialOriginal.Twitter,
+	//// 	href: "TODO",
+	//// },
+	//// {
+	//// 	name: "Follow @username_ZAYDEK",
+	//// 	icon: wkSocialOriginal.Twitter,
+	//// 	href: "TODO",
+	//// },
 ]

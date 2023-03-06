@@ -2,24 +2,48 @@ import { cx, Icon, toKebabCase } from "@/lib"
 import { ClipboardContext, LayoutContext, SearchContext } from "@/state"
 import { Suspense, useContext } from "react"
 
+const BITS = 16
+const MAX_INDEX = (1 << BITS) - 1
+
+function encodeIndexes([a, b]: readonly [number, number]): number {
+	const encoded = (a << BITS) | (b & MAX_INDEX)
+	return encoded
+}
+
+function decodeIndexes(encoded: number): readonly [number, number] {
+	const a = encoded >> BITS
+	const b = encoded & MAX_INDEX
+	return [a, b] as const
+}
+
 export function Grid() {
 	const { compactMode, results } = useContext(SearchContext)!
-	//// const { startIndex, endIndex, addOneOrMoreNames } = useContext(ClipboardContext)!
+	const { startIndexes, endIndexes, addOneOrMoreNames } = useContext(ClipboardContext)!
 
 	//// useEffect(() => {
-	//// 	if (startIndex === null || endIndex === null) return
-	//// 	const start = Math.min(startIndex, endIndex)
-	//// 	const end = Math.max(endIndex, startIndex) + 1
+	//// 	if (startIndexes === null || endIndexes === null) return
+	//// 	const start = encodeIndexes(startIndexes)
+	//// 	const end = encodeIndexes(endIndexes)
+	//// 	let minIndexes: readonly [number, number]
+	//// 	let maxIndexes: readonly [number, number]
+	//// 	if (start < end) {
+	//// 		minIndexes = startIndexes
+	//// 		maxIndexes = endIndexes
+	//// 	} else {
+	//// 		minIndexes = endIndexes
+	//// 		maxIndexes = startIndexes
+	//// 	}
+	//// 	console.log(JSON.stringify({ minIndexes, maxIndexes }))
 	//// 	//// console.log(results.slice(start, end).map(([names]) => names[0]))
 	//// 	//// addOneOrMoreNames(...results.slice(start, end).map(([names]) => names[0]))
-	//// }, [addOneOrMoreNames, endIndex, results, startIndex])
+	//// }, [addOneOrMoreNames, endIndexes, results, startIndexes])
 
 	return (
 		<div className={cx("grid", compactMode && "is-compact-mode")}>
 			<Suspense>
-				{results.map(([names, Icon]) =>
-					names.map((name, nameIndex) => (
-						<GridItem key={name} nameIndex={nameIndex} name={name} icon={p => <Icon name={name} {...p} />} />
+				{results.map(([names, Icon], indexA) =>
+					names.map((name, indexB) => (
+						<GridItem key={name} indexes={[indexA, indexB]} name={name} icon={p => <Icon name={name} {...p} />} />
 					)),
 				)}
 			</Suspense>
@@ -32,14 +56,22 @@ function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
 
-export function GridItem({ nameIndex, name, icon: Icon }: { nameIndex: number; name: string; icon: Icon }) {
+export function GridItem({
+	indexes,
+	name,
+	icon: Icon,
+}: {
+	indexes: readonly [number, number]
+	name: string
+	icon: Icon
+}) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const { compactMode } = useContext(SearchContext)!
 	const {
-		//// startIndex,
-		//// setStartIndex,
-		//// endIndex,
-		//// setEndIndex,
+		startIndexes,
+		setStartIndexes,
+		endIndexes,
+		setEndIndexes,
 		names,
 		addOneOrMoreNames,
 		removeOneOrMoreNames,
@@ -55,18 +87,24 @@ export function GridItem({ nameIndex, name, icon: Icon }: { nameIndex: number; n
 			className="grid-item"
 			// TODO: Change to onClickCapture?
 			onClick={e => {
-				if (e.metaKey) {
-					if (sidebar === "minimized") setSidebar("open")
-					if (names.has(id)) {
-						removeOneOrMoreNames(id)
-					} else {
-						addOneOrMoreNames(id)
-					}
+				if (e.shiftKey) {
+					setStartIndexes(indexes)
 				} else {
-					if (sidebar === "minimized") setSidebar("open")
-					removeAllNames()
-					addOneOrMoreNames(id)
+					setEndIndexes(indexes)
 				}
+
+				//// if (e.metaKey) {
+				//// 	if (sidebar === "minimized") setSidebar("open")
+				//// 	if (names.has(id)) {
+				//// 		removeOneOrMoreNames(id)
+				//// 	} else {
+				//// 		addOneOrMoreNames(id)
+				//// 	}
+				//// } else {
+				//// 	if (sidebar === "minimized") setSidebar("open")
+				//// 	removeAllNames()
+				//// 	addOneOrMoreNames(id)
+				//// }
 			}}
 			tabIndex={0}
 			data-selected={names.has(id)}

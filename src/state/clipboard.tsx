@@ -19,10 +19,10 @@ export const ClipboardContext =
 	createContext<{
 		exportAs:             ExportAsValue
 		setExportAs:          Dispatch<SetStateAction<ExportAsValue>>
-		startIndex:           number | null
-		setStartIndex:        Dispatch<SetStateAction<number | null>>
-		endIndex:             number | null
-		setEndIndex:          Dispatch<SetStateAction<number | null>>
+		startIndexes:         readonly [number, number] | null
+		setStartIndexes:      Dispatch<SetStateAction<readonly [number, number] | null>>
+		endIndexes:           readonly [number, number] | null
+		setEndIndexes:        Dispatch<SetStateAction<readonly [number, number] | null>>
 		names: 	              Set<string>
 		clipboard: 	          string
 		addOneOrMoreNames:    (...ids: string[]) => void
@@ -47,8 +47,8 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		},
 	})
 
-	const [startIndex, setStartIndex] = useState<number | null>(null)
-	const [endIndex, setEndIndex] = useState<number | null>(null)
+	const [startIndexes, setStartIndexes] = useState<readonly [number, number] | null>(null)
+	const [endIndexes, setEndIndexes] = useState<readonly [number, number] | null>(null)
 
 	// Mask _setNames
 	const [names, _setNames] = useState(() => new Set<string>())
@@ -77,7 +77,8 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 
 	const removeAllNames = useCallback(() => _setNames(new Set<string>()), [])
 
-	// TODO: Change to click handler or useMemo?
+	// TODO: Change this interaction to a click handler e.g. clickName
+	// Ideally this would be clickOneOrMoreNames
 	useEffect(() => {
 		if (names.size === 0) {
 			switch (exportAs) {
@@ -97,6 +98,8 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 						// Licensed as CC BY 4.0
 						// Reuse allowed *with* attribution
 						// https://thewolfkit.com
+						//
+						// Website by @username_ZAYDEK
 					`, { spaces: true }))
 					break
 			}
@@ -142,10 +145,10 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			value={{
 				exportAs,
 				setExportAs,
-				startIndex,
-				setStartIndex,
-				endIndex,
-				setEndIndex,
+				startIndexes,
+				setStartIndexes,
+				endIndexes,
+				setEndIndexes,
 				names,
 				clipboard,
 				addOneOrMoreNames,
