@@ -120,7 +120,7 @@ function _SidebarOverlay() {
 
 function _Main({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
-	const { removeAllNames: removeAllFromSelection } = useContext(ClipboardContext)!
+	const { removeAllNames } = useContext(ClipboardContext)!
 
 	return (
 		<main
@@ -129,7 +129,7 @@ function _Main({ children }: PropsWithChildren) {
 				// TODO
 				e.stopPropagation()
 				e.preventDefault()
-				removeAllFromSelection()
+				removeAllNames()
 			}}
 			// @ts-expect-error
 			inert={sidebar === "maximized" ? "true" : null}
