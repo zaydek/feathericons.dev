@@ -92,7 +92,7 @@ function AppSidebar1() {
 				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
-							<div className="sidebar-align-frame u-flex-1">
+							<div className="sidebar-align-name-frame u-flex-1">
 								<h6 className="section-name">Icons</h6>
 							</div>
 							<div className="sidebar-align-icon-frame">
@@ -101,74 +101,94 @@ function AppSidebar1() {
 						</header>
 						<ul className="checkboxes">
 							<label className="checkbox">
-								<feather.Feather className="checkbox-icon" />
+								<div className="sidebar-align-icon-frame">
+									<feather.Feather className="checkbox-icon" />
+								</div>
 								<span className="checkbox-name u-flex-1">Feather</span>
-								<input
-									type="checkbox"
-									checked={showFeather}
-									onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
-								/>
+								<div className="sidebar-align-icon-frame">
+									<input
+										type="checkbox"
+										checked={showFeather}
+										onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
+									/>
+								</div>
 							</label>
 						</ul>
 						<ul className="checkboxes">
 							<label className="checkbox">
-								<feather.Twitter className="checkbox-icon" />
+								<div className="sidebar-align-icon-frame">
+									<feather.Twitter className="checkbox-icon" />
+								</div>
 								<span className="checkbox-name u-flex-1">Social</span>
-								<input
-									type="checkbox"
-									checked={showSocial}
-									onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
-								/>
+								<div className="sidebar-align-icon-frame">
+									<input
+										type="checkbox"
+										checked={showSocial}
+										onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
+									/>
+								</div>
 							</label>
 						</ul>
 						<ul className="checkboxes">
 							<label className="checkbox">
-								<feather.CreditCard className="checkbox-icon" />
+								<div className="sidebar-align-icon-frame">
+									<feather.CreditCard className="checkbox-icon" />
+								</div>
 								<span className="checkbox-name u-flex-1">Payments</span>
-								<input
-									type="checkbox"
-									checked={showPayments}
-									onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
-								/>
+								<div className="sidebar-align-icon-frame">
+									<input
+										type="checkbox"
+										checked={showPayments}
+										onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
+									/>
+								</div>
 							</label>
 							<ul className="checkboxes">
 								<label className="checkbox">
-									<DynamicIcon
-										className="checkbox-icon"
-										icon={preferMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-									/>
+									<div className="sidebar-align-icon-frame">
+										<DynamicIcon
+											className="checkbox-icon"
+											icon={preferMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+										/>
+									</div>
 									<span className="checkbox-name u-flex-1">Original</span>
-									<input
-										name="payments"
-										type="radio"
-										checked={paymentsRadio === "normal"}
-										onChange={e =>
-											startTransition(() => {
-												setShowPayments(true)
-												setPaymentsRadio("normal")
-											})
-										}
-									/>
+									<div className="sidebar-align-icon-frame">
+										<input
+											name="payments"
+											type="radio"
+											checked={paymentsRadio === "normal"}
+											onChange={e =>
+												startTransition(() => {
+													setShowPayments(true)
+													setPaymentsRadio("normal")
+												})
+											}
+										/>
+									</div>
 								</label>
 							</ul>
 							<ul className="checkboxes">
 								<label className="checkbox">
-									<DynamicIcon
-										className="checkbox-icon"
-										icon={preferMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-									/>
+									<div className="sidebar-align-icon-frame">
+										<DynamicIcon
+											className="checkbox-icon"
+											icon={preferMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+										/>
+									</div>
 									<span className="checkbox-name u-flex-1">Filled</span>
-									<input
-										name="payments"
-										type="radio"
-										checked={paymentsRadio === "filled"}
-										onChange={e =>
-											startTransition(() => {
-												setShowPayments(true)
-												setPaymentsRadio("filled")
-											})
-										}
-									/>
+									<div className="sidebar-align-icon-frame">
+										<input
+											name="payments"
+											type="radio"
+											checked={paymentsRadio === "filled"}
+											onChange={e =>
+												startTransition(() => {
+													setShowPayments(true)
+													setPaymentsRadio("filled")
+												})
+											}
+										/>
+									</div>
 								</label>
 							</ul>
 						</ul>
@@ -179,7 +199,7 @@ function AppSidebar1() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
+						<div className="sidebar-align-name-frame u-flex-1">
 							<h6 className="section-name">Display</h6>
 						</div>
 						<div className="sidebar-align-icon-frame">
@@ -189,9 +209,13 @@ function AppSidebar1() {
 					<ul className="checkboxes">
 						<label className="checkbox">
 							{/* <DynamicIcon className="checkbox-icon" icon={showNames ? feather.ToggleRight : feather.ToggleLeft} /> */}
-							<feather.Grid className="checkbox-icon" />
+							<div className="sidebar-align-icon-frame">
+								<feather.Grid className="checkbox-icon" />
+							</div>
 							<span className="checkbox-name u-flex-1">Show names</span>
-							<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
+							<div className="sidebar-align-icon-frame">
+								<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
+							</div>
 						</label>
 					</ul>
 				</section>
@@ -202,7 +226,7 @@ function AppSidebar1() {
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
-						<div className="sidebar-align-frame">
+						<div className="sidebar-align-name-frame">
 							<feather.Globe className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Resources</h6>
@@ -260,10 +284,10 @@ function AppSidebar2() {
 			<header className="sidebar-header">
 				<section className="section is-start">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
+						<div className="sidebar-align-name-frame u-flex-1">
 							<h6 className="section-name">Selected</h6>
 						</div>
-						<div className="sidebar-align-frame">
+						<div className="sidebar-align-name-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</header>
@@ -276,7 +300,7 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
+						<div className="sidebar-align-name-frame u-flex-1">
 							<h6 className="section-name">Variants</h6>
 						</div>
 						<div className="sidebar-align-icon-frame">
@@ -286,14 +310,18 @@ function AppSidebar2() {
 					<ul className="checkboxes">
 						<label className="checkbox">
 							<span className="checkbox-name u-flex-1">Monochrome</span>
-							<input
-								type="checkbox"
-								checked={preferMonochrome}
-								onChange={e => startTransition(() => setPreferMonochrome(e.currentTarget.checked))}
-							/>
+							<div className="sidebar-align-icon-frame">
+								<input
+									type="checkbox"
+									checked={preferMonochrome}
+									onChange={e => startTransition(() => setPreferMonochrome(e.currentTarget.checked))}
+								/>
+							</div>
 						</label>
 						<label className="checkbox">
-							<span className="checkbox-color-desc u-flex-1">{color ?? "#000"}</span>
+							<div className="sidebar-align-name-frame u-flex-1">
+								<span className="checkbox-color-desc">{color ?? "#000"}</span>
+							</div>
 							{/* <ColorPicker color={color} setColor={setColor} /> */}
 						</label>
 					</ul>
@@ -301,7 +329,7 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
+						<div className="sidebar-align-name-frame u-flex-1">
 							<h6 className="section-name">Size</h6>
 						</div>
 						<span className="section-name">{size.toFixed(0)} PX</span>
@@ -314,7 +342,7 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
+						<div className="sidebar-align-name-frame u-flex-1">
 							<h6 className="section-name">Stroke width</h6>
 						</div>
 						<span className="section-name">{strokeWidth.toFixed(2)}</span>

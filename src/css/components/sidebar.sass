@@ -22,22 +22,17 @@
   z-index: 50
   background-color: white
 
-// Creates a bounding box for icons for
-// optical alignment
-//
+// Creates an optically aligned bounding box for icons
 .sidebar-align-icon-frame
-  display: flex
+  display: inline-flex
   justify-content: center
   align-items: center
   height: $button-height
   width: $button-height
 
-// Creates a bounding box for names for
-// optical alignment
-//
-.sidebar-align-frame
-  display: flex
+// Creates an optically aligned bounding box for names
+.sidebar-align-name-frame
+  display: inline-flex
   align-items: center
-  // Use padding to inset x-axis
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
   height: $button-height

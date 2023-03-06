@@ -25,20 +25,25 @@
       align-items: center
       height: $icon-height
       background-color: white
+
       @at-root
         .section-icon
           height: $tiny-icon-height
           width: $tiny-icon-height
           color: $slate-600
+
+        // E.g. <feather.RotateCcw />
         .section-reset-icon
           height: $tiny-icon-height
           width: $tiny-icon-height
+          color: $slate-600
           color: $slate-300
           cursor: pointer           // Interaction
           -webkit-user-select: none // Interaction
           user-select: none         // Interaction
           &:hover
             color: $slate-800
+
         .section-name
           font: 500 11px / normal $sans
           letter-spacing: 0.05em
