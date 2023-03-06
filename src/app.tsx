@@ -1,5 +1,4 @@
 import * as feather from "@icons/feather/tsx"
-import * as wkBrandsOriginal from "@icons/wolfkit/brands/original/tsx"
 import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
 import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
 import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
@@ -17,6 +16,7 @@ import {
 	Sidebar2,
 	SyntaxHighlighting,
 } from "@/components"
+import { resources } from "@/data"
 import { DynamicIcon, useScrollProps, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
@@ -200,26 +200,17 @@ function AppSidebar1() {
 						<h6 className="section-name u-flex-1">Resources</h6>
 					</header>
 					<nav className="resources">
-						<Anchor className="resource" href="TODO">
-							<wkBrandsOriginal.Github className="resource-icon" />
-							<span className="resource-name u-flex-1">Icons</span>
-							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
-						</Anchor>
-						<Anchor className="resource" href="TODO">
-							<wkBrandsOriginal.Github className="resource-icon" />
-							<span className="resource-name u-flex-1">Website</span>
-							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
-						</Anchor>
-						<Anchor className="resource" href="TODO">
-							<wkBrandsOriginal.Figma className="resource-icon" />
-							<span className="resource-name u-flex-1">Social & payments files</span>
-							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
-						</Anchor>
-						<Anchor className="resource" href="TODO">
-							<wkBrandsOriginal.Twitter className="resource-icon" />
-							<span className="resource-name u-flex-1">Share on Twitter</span>
-							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
-						</Anchor>
+						{resources.map((resource, index) => (
+							<Anchor className="resource" href={resource.href} key={index}>
+								<div className="resource-icon-frame">
+									<resource.icon className="resource-icon" />
+								</div>
+								<span className="resource-name u-flex-1">{resource.name}</span>
+								<div className="resource-icon-frame">
+									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+								</div>
+							</Anchor>
+						))}
 					</nav>
 				</section>
 				{/* <hr className="hairline" />

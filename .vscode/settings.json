@@ -4,6 +4,7 @@
     "/src/lib",
     "/src/state",
     "/src/hooks",
-    "/scripts/utils"
+    "/scripts/utils",
+    "/src/data"
   ]
 }

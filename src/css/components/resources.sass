@@ -2,14 +2,6 @@
 
 @use "../globals" as *
 
-// <div class="resources">
-//   <div class="resource">
-//     <span class="resource-icon">
-//     <span class="resource-name u-flex-1">
-//     <span class="resource-icon">
-//   </div>
-// </div>
-
 .resource
   display: flex
   align-items: center
@@ -21,19 +13,24 @@
   &:hover:active
     background-color: $slate-200
 
-.resource-icon:first-child
-  margin: 0 math.div($button-height - $icon-height, 2)
-  height: $icon-height
-  width: $icon-height
-  color: $slate-800
+  @at-root
+    .resource-icon-frame
+      display: flex
+      justify-content: center // Center all
+      align-items: center     // Center all
+      height: $button-height
+      width: $button-height
+      .resource-icon
+        &:first-child
+          height: $icon-height
+          width: $icon-height
+          color: $slate-800
+        &:last-child
+          height: $icon-height
+          width: $icon-height
+          color: $slate-400
 
-.resource-name
-  //// flex: 1 // Stretch x-axis
-  font: 425 16px / normal $sans
-  color: $slate-800
-
-.resource-icon:last-child
-  margin: 0 math.div($button-height - $icon-height, 2)
-  height: $icon-height
-  width: $icon-height
-  color: $slate-400
+  @at-root
+    .resource-name
+      font: 425 16px / normal $sans
+      color: $slate-800
