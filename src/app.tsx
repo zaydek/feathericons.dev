@@ -92,10 +92,10 @@ function AppSidebar1() {
 				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
-							<div className="sidebar-icon-frame u-flex-1">
+							<div className="sidebar-align-frame u-flex-1">
 								<h6 className="section-name">Icons</h6>
 							</div>
-							<div className="sidebar-icon-frame">
+							<div className="sidebar-align-frame">
 								<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetIcons} />
 							</div>
 						</header>
@@ -179,10 +179,10 @@ function AppSidebar1() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-icon-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Display</h6>
 						</div>
-						<div className="sidebar-icon-frame">
+						<div className="sidebar-align-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetDisplay} />
 						</div>
 					</header>
@@ -202,7 +202,7 @@ function AppSidebar1() {
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
-						<div className="sidebar-icon-frame">
+						<div className="sidebar-align-frame">
 							<feather.Globe className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Resources</h6>
@@ -210,11 +210,11 @@ function AppSidebar1() {
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
-								<div className="sidebar-icon-frame">
+								<div className="sidebar-align-frame">
 									<resource.icon className="resource-icon" />
 								</div>
 								<span className="resource-name u-flex-1">{resource.name}</span>
-								<div className="sidebar-icon-frame">
+								<div className="sidebar-align-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
@@ -260,10 +260,10 @@ function AppSidebar2() {
 			<header className="sidebar-header">
 				<section className="section is-start">
 					<header className="section-header">
-						<div className="sidebar-icon-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Selected</h6>
 						</div>
-						<div className="sidebar-icon-frame">
+						<div className="sidebar-align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</header>
@@ -276,10 +276,10 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-icon-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Variants</h6>
 						</div>
-						<div className="sidebar-icon-frame">
+						<div className="sidebar-align-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
@@ -301,11 +301,11 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-icon-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Size</h6>
 						</div>
 						<span className="section-name">{size.toFixed(0)} PX</span>
-						<div className="sidebar-icon-frame">
+						<div className="sidebar-align-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
@@ -314,11 +314,11 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-icon-frame u-flex-1">
+						<div className="sidebar-align-frame u-flex-1">
 							<h6 className="section-name">Stroke width</h6>
 						</div>
 						<span className="section-name">{strokeWidth.toFixed(2)}</span>
-						<div className="sidebar-icon-frame">
+						<div className="sidebar-align-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
