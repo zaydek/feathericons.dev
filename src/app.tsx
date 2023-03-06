@@ -89,7 +89,7 @@ function AppSidebar1() {
 				<section className="section is-start">
 					<SearchBar />
 				</section>
-				<div className="sidebar-header-scroll-area" {...scrollProps}>
+				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
 							{/* <feather.Package className="section-icon" /> */}
@@ -99,7 +99,7 @@ function AppSidebar1() {
 						<ul className="checkboxes">
 							<label className="checkbox">
 								<feather.Feather className="checkbox-icon" />
-								<span className="checkbox-name">Feather</span>
+								<span className="checkbox-name u-flex-1">Feather</span>
 								<input
 									type="checkbox"
 									checked={showFeather}
@@ -110,7 +110,7 @@ function AppSidebar1() {
 						<ul className="checkboxes">
 							<label className="checkbox">
 								<feather.Twitter className="checkbox-icon" />
-								<span className="checkbox-name">Social</span>
+								<span className="checkbox-name u-flex-1">Social</span>
 								<input
 									type="checkbox"
 									checked={showSocial}
@@ -121,7 +121,7 @@ function AppSidebar1() {
 						<ul className="checkboxes">
 							<label className="checkbox">
 								<feather.CreditCard className="checkbox-icon" />
-								<span className="checkbox-name">Payments</span>
+								<span className="checkbox-name u-flex-1">Payments</span>
 								<input
 									type="checkbox"
 									checked={showPayments}
@@ -134,7 +134,7 @@ function AppSidebar1() {
 										className="checkbox-icon"
 										icon={preferMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
 									/>
-									<span className="checkbox-name">Original</span>
+									<span className="checkbox-name u-flex-1">Original</span>
 									<input
 										name="payments"
 										type="radio"
@@ -154,7 +154,7 @@ function AppSidebar1() {
 										className="checkbox-icon"
 										icon={preferMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
 									/>
-									<span className="checkbox-name">Filled</span>
+									<span className="checkbox-name u-flex-1">Filled</span>
 									<input
 										name="payments"
 										type="radio"
@@ -184,14 +184,14 @@ function AppSidebar1() {
 						<label className="checkbox">
 							{/* <DynamicIcon className="checkbox-icon" icon={showNames ? feather.ToggleRight : feather.ToggleLeft} /> */}
 							<feather.Grid className="checkbox-icon" />
-							<span className="checkbox-name">Show names</span>
+							<span className="checkbox-name u-flex-1">Show names</span>
 							<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
 						</label>
 					</ul>
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div className="sidebar-spacer"></div>
+			<div className="u-flex-1"></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
@@ -202,22 +202,22 @@ function AppSidebar1() {
 					<nav className="resources">
 						<Anchor className="resource" href="TODO">
 							<wkBrandsOriginal.Github className="resource-icon" />
-							<span className="resource-name">Icons</span>
+							<span className="resource-name u-flex-1">Icons</span>
 							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 						</Anchor>
 						<Anchor className="resource" href="TODO">
 							<wkBrandsOriginal.Github className="resource-icon" />
-							<span className="resource-name">Website</span>
+							<span className="resource-name u-flex-1">Website</span>
 							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 						</Anchor>
 						<Anchor className="resource" href="TODO">
 							<wkBrandsOriginal.Figma className="resource-icon" />
-							<span className="resource-name">Social & payments files</span>
+							<span className="resource-name u-flex-1">Social & payments files</span>
 							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 						</Anchor>
 						<Anchor className="resource" href="TODO">
 							<wkBrandsOriginal.Twitter className="resource-icon" />
-							<span className="resource-name">Share on Twitter</span>
+							<span className="resource-name u-flex-1">Share on Twitter</span>
 							<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 						</Anchor>
 					</nav>
@@ -266,7 +266,7 @@ function AppSidebar2() {
 						<ExportAs value={exportAs} setValue={setExportAs} />
 					</header>
 				</section>
-				<div className="sidebar-header-scroll-area is-padding-bottom" {...scrollProps}>
+				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...scrollProps}>
 					<SyntaxHighlighting lang={lang} code={clipboard} />
 				</div>
 			</header>
@@ -279,7 +279,7 @@ function AppSidebar2() {
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							<span className="checkbox-name">Monochrome</span>
+							<span className="checkbox-name u-flex-1">Monochrome</span>
 							<input
 								type="checkbox"
 								checked={preferMonochrome}
@@ -287,7 +287,7 @@ function AppSidebar2() {
 							/>
 						</label>
 						<label className="checkbox">
-							<span className="checkbox-color-desc">{color ?? "#000"}</span>
+							<span className="checkbox-color-desc u-flex-1">{color ?? "#000"}</span>
 							{/* <ColorPicker color={color} setColor={setColor} /> */}
 						</label>
 					</ul>
@@ -318,7 +318,7 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			{/* <div className="sidebar-spacer"></div> */}
+			{/* <div className="u-flex-1"></div> */}
 			{/* <footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">

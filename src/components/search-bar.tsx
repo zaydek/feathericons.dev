@@ -80,6 +80,7 @@ export function SearchBar() {
 			<feather.Search className="search-bar-icon" strokeWidth={4} />
 			<input
 				ref={ref}
+				className="u-flex-1"
 				type="text"
 				placeholder={isMac() ? "⌘P to focus" : "Ctrl-P to focus"}
 				value={search}

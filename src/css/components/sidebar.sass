@@ -1,6 +1,6 @@
 @use "sass:math"
 
-@use "../../css/globals" as *
+@use "../globals" as *
 
 // <header class="sidebar-header"
 //   …
@@ -23,16 +23,13 @@
   overflow-y: auto
 
 .sidebar-header-scroll-area
-  flex: 1
+  //// flex: 1
   overflow-y: auto
-  // Add .padding-bottom for .syntax-highlighting
-  //// &:has(.syntax-highlighting)
-  ////   padding-bottom: $sidebar-gap
-  &.is-padding-bottom
+  &.is-syntax-highlighting
     padding-bottom: $sidebar-gap
 
-.sidebar-spacer
-  flex: 1
+//// .sidebar-spacer
+////  app flex: 1
 
 .sidebar-footer
   position: sticky
