@@ -402,11 +402,7 @@ function AppMain() {
 	return (
 		<Main
 			onClick={e => {
-				if (
-					// prettier-ignore
-					e.target instanceof HTMLElement &&
-					e.target.closest(".grid-item") === null
-				) {
+				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
 					removeAllNames()
 				}
 			}}

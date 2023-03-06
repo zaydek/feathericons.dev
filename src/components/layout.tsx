@@ -123,12 +123,8 @@ function _Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
 	const { sidebar } = useContext(LayoutContext)!
 
 	return (
-		<main
-			className="main"
-			// @ts-expect-error
-			inert={sidebar === "maximized" ? "true" : null}
-			{...props}
-		>
+		// @ts-expect-error
+		<main className="main" inert={sidebar === "maximized" ? "true" : null} {...props}>
 			{children}
 		</main>
 	)
