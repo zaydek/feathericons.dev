@@ -4,6 +4,7 @@ import "@/css/base.sass"
 import "@/css/components/index.sass"
 import "@/css/form/index.sass"
 
+import { App } from "@/app"
 import { ProgresssBar } from "@/components"
 import {
 	ClipboardProvider,
@@ -14,7 +15,6 @@ import {
 	ShikiProvider,
 } from "@/state"
 import { createRoot } from "react-dom/client"
-import { App } from "./app"
 
 function ProvidedApp() {
 	return (

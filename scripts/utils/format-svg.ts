@@ -52,16 +52,7 @@ function formatSvgElement(ref: Element, nesting: number, { strictJsx }: { strict
 	} else {
 		str = "  ".repeat(nesting) + `<${tag}${attrs === "" ? "" : ` ${attrs}`}>`
 		for (const child of ref.children) {
-			//// if (child.tagName === "defs") continue
-			//// if (child.tagName === "g") {
-			//// 	// <g><path /><path /></g>
-			//// 	// -> <path /><path />
-			//// 	for (const c of child.children) {
-			//// 		str += "\n" + stringifyElement(c, nesting + 1)
-			//// 	}
-			//// } else {
 			str += "\n" + formatSvgElement(child, nesting + 1, { strictJsx })
-			//// }
 		}
 		str += "\n" + "  ".repeat(nesting) + `</${tag}>`
 	}

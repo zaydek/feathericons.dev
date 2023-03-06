@@ -1,4 +1,3 @@
-export * from "./-color-picker"
 export * from "./anchor"
 export * from "./debug-css"
 export * from "./export-as"

@@ -17,7 +17,6 @@ input[type=range]
   &::-webkit-slider-runnable-track
     appearance: none // CSS reset
     height: $track-height
-    //// background-color: $brand-color
     background-image: linear-gradient(to right, $brand-color var(--progress, 50%), $slate-200 var(--progress, 50%))
     border-radius: 1e3px
   &::-webkit-slider-thumb
@@ -28,15 +27,11 @@ input[type=range]
     background-color: white
     border-radius: 1e3px
     box-shadow: $hairline-shadow, $realistic-shadow
-    //// @at-root
-    ////   input[type=range]:focus-visible::-webkit-slider-thumb
-    ////     background-color: $slate-100
 
   // COMPAT/Gecko
   &::-moz-range-track
     appearance: none // CSS reset
     height: $track-height
-    //// background-color: $brand-color
     background-image: linear-gradient(to right, $brand-color var(--progress, 50%), $slate-200 var(--progress, 50%))
     border-radius: 1e3px
   &::-moz-range-thumb
@@ -48,6 +43,3 @@ input[type=range]
     background-color: white
     border-radius: var(--progress, 50%)
     box-shadow: $hairline-shadow, $realistic-shadow
-    //// @at-root
-    ////   input[type=range]:focus-visible::-moz-range-thumb
-    ////     background-color: $slate-100

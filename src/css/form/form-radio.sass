@@ -15,15 +15,11 @@ input[type=radio]
   cursor: pointer           // Interaction
   -webkit-user-select: none // Interaction
   user-select: none         // Interaction
-  //// &:checked
-  ////   box-shadow: $realistic-shadow
   &::before
     content: ""        // Pseudo reset
     position: absolute // Pseudo reset
     inset: 0           // Pseudo reset
     background-color: $brand-color
-    //// background-image: linear-gradient(to top right, $sky-400 -50%, $brand-color)
-    //// background-image: linear-gradient(to bottom left, $purple-400 -50%, $brand-color)
     border-radius: inherit
     transform: scale(0)
     opacity: 0
@@ -39,7 +35,6 @@ input[type=radio]
     margin: auto       // Pseudo reset
     height: 8px
     width: 8px
-    //// background: feather-chubby-check-base64($stroke-width: 10, $color: white) 0% 0% / 100% 100%
     background-color: white
     border-radius: 1e3px
     transform: scale(0)

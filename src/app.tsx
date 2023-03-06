@@ -6,7 +6,6 @@ import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Anchor,
-	ColorPicker,
 	DEV_DebugCss,
 	ExportAs,
 	Grid,
@@ -15,7 +14,7 @@ import {
 	SearchBar,
 	Sidebar1,
 	Sidebar2,
-	SyntaxHighlighting
+	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
 import { DynamicIcon, useScrollProps, useVisibleDocumentTitle } from "@/lib"
@@ -29,7 +28,7 @@ import {
 	SIZE_STEP,
 	STROKE_MAX,
 	STROKE_MIN,
-	STROKE_STEP
+	STROKE_STEP,
 } from "@/state"
 import { useContext, useEffect, useState, useTransition } from "react"
 import { Lang } from "shiki-es"
@@ -61,14 +60,11 @@ function AppSidebar1() {
 		setShowFeather,
 		showSocial,
 		setShowSocial,
-		//// socialRadio,
-		//// setSocialRadio,
 		showPayments,
 		setShowPayments,
 		paymentsRadio,
 		setPaymentsRadio,
 		preferMonochrome,
-		//// setPreferMonochrome,
 		showNames,
 		setShowNames,
 		resetIcons,
@@ -316,20 +312,6 @@ function AppSidebar2() {
 										/>
 									</div>
 								</label>
-								{ && (
-									<label className="checkbox">
-										<div className="sidebar-align-frame u-flex-1" onClick={e => setShowReactColorful(curr => !curr)}>
-											{/* <span className="color-picker u-flex-1">{color ?? "#000000"}</span> */}
-											<ColorPicker
-												color={color}
-												setColor={setColor}
-												show={showReactColorful}
-												setShow={setShowReactColorful}
-											/>
-										</div>
-										{/* <ColorPicker color={color} setColor={setColor} /> */}
-									</label>
-								)}
 							</ul>
 						</section>
 					</>
@@ -409,15 +391,6 @@ function AppMain() {
 	})
 
 	useClearSelectedShortcut({ clearSelected })
-
-	//// useEffect(() => {
-	//// 	function handleClick(e: MouseEvent) {
-	//// 		//// clearSelected()
-	//// 		console.log(e.target)
-	//// 	}
-	//// 	window.addEventListener("click", handleClick, false)
-	//// 	return () => window.removeEventListener("click", handleClick, false)
-	//// }, [clearSelected])
 
 	return (
 		<Main>

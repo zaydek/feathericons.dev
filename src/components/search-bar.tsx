@@ -40,19 +40,6 @@ function useFocusShortcut({
 	return void 0
 }
 
-//// function useClearShortcut({ setSearch }: { setSearch: Dispatch<SetStateAction<string>> }) {
-//// 	useEffect(() => {
-//// 		function handleKeyDown(e: KeyboardEvent) {
-//// 			if (e.key === "Escape") {
-//// 				setSearch("")
-//// 			}
-//// 		}
-//// 		window.addEventListener("keydown", handleKeyDown, false)
-//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-//// 	}, [setSearch])
-//// 	return void 0
-//// }
-
 ////////////////////////////////////////////////////////////////////////////////
 
 export function SearchBar() {
@@ -63,7 +50,6 @@ export function SearchBar() {
 	useFocusOnMount({ ref })
 	useResetScrollOnSearch({ search })
 	useFocusShortcut({ ref, setSearch })
-	//// useClearShortcut({ setSearch })
 
 	// Clear on search
 	const onceRef = useRef(false)

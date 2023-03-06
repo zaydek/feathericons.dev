@@ -2,7 +2,6 @@ import { cx, Icon, toKebabCase } from "@/lib"
 import { ClipboardContext, LayoutContext, SearchContext } from "@/state"
 import { Suspense, useContext } from "react"
 
-// TODO: Add memo?
 export function Grid() {
 	const { showNames, results } = useContext(SearchContext)!
 
@@ -10,15 +9,7 @@ export function Grid() {
 		<div className={cx("grid", showNames && "is-show-names")}>
 			<Suspense>
 				{results.map(([names, Icon]) =>
-					names.map(name => (
-						<GridItem
-							key={name}
-							name={name}
-							icon={p => <Icon name={name} {...p} />}
-							//// bookmark={index % 15 === 0}
-							//// selected={index === 0}
-						/>
-					)),
+					names.map(name => <GridItem key={name} name={name} icon={p => <Icon name={name} {...p} />} />),
 				)}
 			</Suspense>
 		</div>
@@ -26,20 +17,11 @@ export function Grid() {
 }
 
 // TODO: Add caching? Or use text-transform?
-// TODO
 function toNameCase(str: string) {
 	return toKebabCase(str).toLowerCase()
 }
 
-export function GridItem({
-	name,
-	icon: Icon,
-}: //// bookmark,
-{
-	name: string
-	icon: Icon
-	//// bookmark?: boolean
-}) {
+export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const { showNames } = useContext(SearchContext)!
 	const { selected, addToSelected, clearSelected } = useContext(ClipboardContext)!
@@ -47,19 +29,9 @@ export function GridItem({
 	const id = toNameCase(name)
 
 	return (
-		//// <li id={id} className="grid-item" data-bookmark={bookmark} data-selected={selected.has(id)}>
 		<article
 			id={id}
 			className="grid-item"
-			//// onFocus={e => {
-			//// 	const selection = window.getSelection()
-			//// 	selection?.removeAllRanges()
-			//// }}
-			//// // Enabling drag-paste
-			//// onDragStart={e => {
-			//// 	e.dataTransfer.setData("text/plain", "Hello, world!")
-			//// 	// TODO
-			//// }}
 			onClick={e => {
 				if (e.metaKey) {
 					if (sidebar === "minimized") setSidebar("open")
@@ -74,7 +46,6 @@ export function GridItem({
 					addToSelected(id)
 				}
 			}}
-			//// draggable
 			tabIndex={0}
 			data-selected={selected.has(id)}
 		>

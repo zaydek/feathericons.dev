@@ -1,7 +1,7 @@
+import { Reactjs, Svg, TypeScript } from "@/components/icons"
 import { Icon } from "@/lib"
 import { ExportAsValue } from "@/state"
 import { Dispatch, SetStateAction } from "react"
-import { Reactjs, Svg, TypeScript } from "./icons"
 
 const icons: Record<ExportAsValue, Icon> = {
 	svg: Svg,

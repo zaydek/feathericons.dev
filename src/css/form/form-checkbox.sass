@@ -21,15 +21,11 @@ input[type=checkbox]
   cursor: pointer           // Interaction
   -webkit-user-select: none // Interaction
   user-select: none         // Interaction
-  //// &:checked
-  ////   box-shadow: $realistic-shadow
   &::before
     content: ""        // Pseudo reset
     position: absolute // Pseudo reset
     inset: 0           // Pseudo reset
     background-color: $brand-color
-    //// background-image: linear-gradient(to top right, $sky-400 -50%, $brand-color)
-    //// background-image: linear-gradient(to bottom left, $purple-400 -50%, $brand-color)
     border-radius: inherit
     transform: scale(0)
     opacity: 0

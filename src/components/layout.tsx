@@ -115,16 +115,6 @@ function _SidebarOverlay() {
 	return <div className="sidebar-overlay" onClick={handleClickClose}></div>
 }
 
-//// function _Main({ children }: PropsWithChildren) {
-//// 	const { sidebar } = useContext(LayoutContext)!
-//// 	return (
-//// 		// @ts-expect-error
-//// 		<main className="main" inert={sidebar === "maximized" ? "true" : null}>
-//// 			{children}
-//// 		</main>
-//// 	)
-//// }
-
 function _Main({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
 	const { clearSelected } = useContext(ClipboardContext)!
