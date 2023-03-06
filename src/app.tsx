@@ -378,7 +378,7 @@ function AppSidebar2() {
 
 function AppMain() {
 	const { results } = useContext(SearchContext)!
-	//// const { removeAllNames } = useContext(ClipboardContext)!
+	const { removeAllNames } = useContext(ClipboardContext)!
 
 	const count = results.reduce((sum, [names]) => sum + names.length, 0)
 	useVisibleDocumentTitle([`${count} icons`, "Feather"])
@@ -386,8 +386,31 @@ function AppMain() {
 	//// // TODO
 	//// useClearSelectedShortcut({ clearSelected: removeAllNames })
 
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				removeAllNames()
+				if (document.activeElement instanceof HTMLElement) {
+					document.activeElement.blur()
+				}
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [removeAllNames])
+
 	return (
-		<Main>
+		<Main
+			onClick={e => {
+				if (
+					// prettier-ignore
+					e.target instanceof HTMLElement &&
+					e.target.closest(".grid-item") === null
+				) {
+					removeAllNames()
+				}
+			}}
+		>
 			<Grid />
 		</Main>
 	)

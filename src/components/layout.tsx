@@ -118,32 +118,28 @@ function _SidebarOverlay() {
 	)
 }
 
-function _Main({ children }: PropsWithChildren) {
+// Expose props for <main>
+function _Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
 	const { sidebar } = useContext(LayoutContext)!
-	//// const { removeAllNames } = useContext(ClipboardContext)!
 
 	return (
 		<main
 			className="main"
-			//// onClick={e => {
-			//// 	// TODO
-			//// 	e.stopPropagation()
-			//// 	e.preventDefault()
-			//// 	removeAllNames()
-			//// }}
 			// @ts-expect-error
 			inert={sidebar === "maximized" ? "true" : null}
+			{...props}
 		>
 			{children}
 		</main>
 	)
 }
 
-export function Main({ children }: PropsWithChildren) {
+// Expose props for <main>
+export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
 	return (
 		<>
 			<_SidebarOverlay />
-			<_Main>{children}</_Main>
+			<_Main {...props}>{children}</_Main>
 		</>
 	)
 }
