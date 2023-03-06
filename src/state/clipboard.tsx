@@ -74,7 +74,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 						// Personal & commercial use allowed *without* attribution
 						// https://github.com/feathericons/feather
 						//
-						// Logos sourced from The Wolf Kit
+						// Logos designed by @thewolfkit
 						// Licensed as CC BY 4.0
 						// Personal & commercial use allowed *with* attribution
 						// https://thewolfkit.com
