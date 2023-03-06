@@ -64,11 +64,12 @@ function AppSidebar1() {
 		setShowPayments,
 		paymentsRadio,
 		setPaymentsRadio,
-		preferMonochrome,
-		showNames,
-		setShowNames,
+		monochromaticMode,
+		setMonochromaticMode,
+		compactMode,
+		setCompactMode,
 		resetIcons,
-		resetDisplay,
+		resetIconSettings,
 	} = useContext(SearchContext)!
 
 	const [pending, startTransition] = useTransition()
@@ -89,11 +90,16 @@ function AppSidebar1() {
 				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
-							<div className="sidebar-align-frame u-flex-1">
-								<h6 className="section-name">Icons</h6>
-							</div>
 							<div className="sidebar-align-icon-frame">
-								<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetIcons} />
+								<feather.Package className="section-icon" />
+							</div>
+							<h6 className="section-name u-flex-1">Icons</h6>
+							<div className="sidebar-align-icon-frame">
+								<feather.RotateCcw
+									className="section-reset-icon"
+									strokeWidth={4}
+									onClick={() => startTransition(resetIcons)}
+								/>
 							</div>
 						</header>
 						<ul className="checkboxes">
@@ -145,7 +151,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											icon={preferMonochrome ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+											icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Original</span>
@@ -169,7 +175,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											icon={preferMonochrome ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+											icon={monochromaticMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Filled</span>
@@ -196,21 +202,43 @@ function AppSidebar1() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
-							<h6 className="section-name">Display</h6>
-						</div>
 						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetDisplay} />
+							<feather.Settings className="section-icon" />
+						</div>
+						<h6 className="section-name u-flex-1">Icon settings</h6>
+						<div className="sidebar-align-icon-frame">
+							<feather.RotateCcw
+								className="section-reset-icon"
+								strokeWidth={4}
+								onClick={() => startTransition(resetIconSettings)}
+							/>
 						</div>
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							<div className="sidebar-align-icon-frame">
+							{/* <div className="sidebar-align-icon-frame">
 								<feather.Grid className="checkbox-icon" />
+							</div> */}
+							<div className="sidebar-align-frame u-flex-1">
+								<span className="checkbox-name u-flex-1">Monochromatic mode</span>
 							</div>
-							<span className="checkbox-name u-flex-1">Show names</span>
 							<div className="sidebar-align-icon-frame">
-								<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
+								<input
+									type="checkbox"
+									checked={monochromaticMode}
+									onChange={e => startTransition(() => setMonochromaticMode(e.currentTarget.checked))}
+								/>
+							</div>
+						</label>
+						<label className="checkbox">
+							{/* <div className="sidebar-align-icon-frame">
+								<feather.Grid className="checkbox-icon" />
+							</div> */}
+							<div className="sidebar-align-frame u-flex-1">
+								<span className="checkbox-name u-flex-1">Compact mode</span>
+							</div>
+							<div className="sidebar-align-icon-frame">
+								<input type="checkbox" checked={compactMode} onChange={e => setCompactMode(e.currentTarget.checked)} />
 							</div>
 						</label>
 					</ul>
@@ -250,7 +278,7 @@ function AppSidebar2() {
 	const { scrollProps } = useScrollProps()
 
 	const { setStarted } = useContext(ProgressBarContext)!
-	const { preferMonochrome, setPreferMonochrome } = useContext(SearchContext)!
+	const { monochromaticMode: preferMonochrome, setMonochromaticMode: setPreferMonochrome } = useContext(SearchContext)!
 	const { exportAs, setExportAs, clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
 
@@ -274,9 +302,10 @@ function AppSidebar2() {
 			<header className="sidebar-header">
 				<section className="section is-start">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
-							<h6 className="section-name">Copy as</h6>
+						<div className="sidebar-align-icon-frame">
+							<feather.Clipboard className="section-icon" />
 						</div>
+						<h6 className="section-name u-flex-1">Copy as</h6>
 						<div className="sidebar-align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
@@ -287,42 +316,14 @@ function AppSidebar2() {
 				</div>
 			</header>
 			<div className="sidebar-body">
-				{false && (
-					<>
-						<hr className="hairline" />
-						<section className="section">
-							<header className="section-header">
-								<div className="sidebar-align-frame u-flex-1">
-									<h6 className="section-name">Variants</h6>
-								</div>
-								<div className="sidebar-align-icon-frame">
-									<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
-								</div>
-							</header>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-frame u-flex-1">
-										<span className="checkbox-name u-flex-1">Monochrome (social & payments)</span>
-									</div>
-									<div className="sidebar-align-icon-frame">
-										<input
-											type="checkbox"
-											checked={preferMonochrome}
-											onChange={e => startTransition(() => setPreferMonochrome(e.currentTarget.checked))}
-										/>
-									</div>
-								</label>
-							</ul>
-						</section>
-					</>
-				)}
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
-							<h6 className="section-name">Size</h6>
+						<div className="sidebar-align-icon-frame">
+							<feather.PenTool className="section-icon" />
 						</div>
-						<span className="section-name">{size.toFixed(0)} PX</span>
+						<h6 className="section-name u-flex-1">Size</h6>
+						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<div className="sidebar-align-icon-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
@@ -332,10 +333,11 @@ function AppSidebar2() {
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
-							<h6 className="section-name">Stroke width</h6>
+						<div className="sidebar-align-icon-frame">
+							<feather.PenTool className="section-icon" />
 						</div>
-						<span className="section-name">{strokeWidth.toFixed(2)}</span>
+						<h6 className="section-name u-flex-1">Stroke width</h6>
+						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="sidebar-align-icon-frame">
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
@@ -355,9 +357,11 @@ function AppSidebar2() {
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
-						<div className="sidebar-align-frame u-flex-1">
-							<h6 className="section-name u-flex-1">Sponsor</h6>
+						<div className="sidebar-align-icon-frame">
+							{/* <feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} /> */}
+							<feather.Shield className="section-icon" />
 						</div>
+						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
 				</section>
 			</footer>

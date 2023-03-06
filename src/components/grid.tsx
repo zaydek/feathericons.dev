@@ -3,10 +3,10 @@ import { ClipboardContext, LayoutContext, SearchContext } from "@/state"
 import { Suspense, useContext } from "react"
 
 export function Grid() {
-	const { showNames, results } = useContext(SearchContext)!
+	const { compactMode, results } = useContext(SearchContext)!
 
 	return (
-		<div className={cx("grid", showNames && "is-show-names")}>
+		<div className={cx("grid", compactMode && "is-compact-mode")}>
 			<Suspense>
 				{results.map(([names, Icon]) =>
 					names.map(name => <GridItem key={name} name={name} icon={p => <Icon name={name} {...p} />} />),
@@ -23,7 +23,7 @@ function toNameCase(str: string) {
 
 export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
-	const { showNames } = useContext(SearchContext)!
+	const { compactMode } = useContext(SearchContext)!
 	const { selected, addToSelected, clearSelected } = useContext(ClipboardContext)!
 
 	const id = toNameCase(name)
@@ -52,7 +52,7 @@ export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 			<figure className="grid-item-frame">
 				<Icon className="grid-item-icon" />
 			</figure>
-			{showNames && <figcaption className="grid-item-name">{id}</figcaption>}
+			{!compactMode && <figcaption className="grid-item-name">{id}</figcaption>}
 		</article>
 	)
 }
