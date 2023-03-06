@@ -363,28 +363,28 @@ function AppSidebar2() {
 	)
 }
 
-function useClearSelectedShortcut({ clearSelected }: { clearSelected: () => void }) {
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				clearSelected()
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clearSelected])
-	return void 0
-}
+//// function useClearSelectedShortcut({ clearSelected }: { clearSelected: () => void }) {
+//// 	useEffect(() => {
+//// 		function handleKeyDown(e: KeyboardEvent) {
+//// 			if (e.key === "Escape") {
+//// 				clearSelected()
+//// 			}
+//// 		}
+//// 		window.addEventListener("keydown", handleKeyDown, false)
+//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
+//// 	}, [clearSelected])
+//// 	return void 0
+//// }
 
 function AppMain() {
 	const { results } = useContext(SearchContext)!
-	const { removeAllNames } = useContext(ClipboardContext)!
+	//// const { removeAllNames } = useContext(ClipboardContext)!
 
 	const count = results.reduce((sum, [names]) => sum + names.length, 0)
 	useVisibleDocumentTitle([`${count} icons`, "Feather"])
 
-	// TODO
-	useClearSelectedShortcut({ clearSelected: removeAllNames })
+	//// // TODO
+	//// useClearSelectedShortcut({ clearSelected: removeAllNames })
 
 	return (
 		<Main>

@@ -1,5 +1,5 @@
 import { cx, isMac } from "@/lib"
-import { ClipboardContext, LayoutContext, SidebarState } from "@/state"
+import { LayoutContext, SidebarState } from "@/state"
 import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -120,17 +120,17 @@ function _SidebarOverlay() {
 
 function _Main({ children }: PropsWithChildren) {
 	const { sidebar } = useContext(LayoutContext)!
-	const { removeAllNames } = useContext(ClipboardContext)!
+	//// const { removeAllNames } = useContext(ClipboardContext)!
 
 	return (
 		<main
 			className="main"
-			onClick={e => {
-				// TODO
-				e.stopPropagation()
-				e.preventDefault()
-				removeAllNames()
-			}}
+			//// onClick={e => {
+			//// 	// TODO
+			//// 	e.stopPropagation()
+			//// 	e.preventDefault()
+			//// 	removeAllNames()
+			//// }}
 			// @ts-expect-error
 			inert={sidebar === "maximized" ? "true" : null}
 		>

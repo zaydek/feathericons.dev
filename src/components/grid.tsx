@@ -24,7 +24,7 @@ function toNameCase(str: string) {
 export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	const { compactMode } = useContext(SearchContext)!
-	const { names, addOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
+	const { names, addOneOrMoreNames, removeOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
 
 	// TODO
 	const id = toNameCase(name)
@@ -37,13 +37,17 @@ export function GridItem({ name, icon: Icon }: { name: string; icon: Icon }) {
 				if (e.metaKey) {
 					// TODO
 					if (sidebar === "minimized") setSidebar("open")
-					e.stopPropagation()
-					e.preventDefault()
-					addOneOrMoreNames(id)
+					//// e.stopPropagation()
+					//// e.preventDefault()
+					if (names.has(id)) {
+						removeOneOrMoreNames(id)
+					} else {
+						addOneOrMoreNames(id)
+					}
 				} else {
 					if (sidebar === "minimized") setSidebar("open")
-					e.stopPropagation()
-					e.preventDefault()
+					//// e.stopPropagation()
+					//// e.preventDefault()
 					removeAllNames()
 					addOneOrMoreNames(id)
 				}

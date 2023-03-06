@@ -1,7 +1,7 @@
 import * as feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
-import { ClipboardContext, SearchContext } from "@/state"
+import { SearchContext } from "@/state"
 import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useRef } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -45,21 +45,21 @@ function useFocusShortcut({
 export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 	const { search, setSearch } = useContext(SearchContext)!
-	const { removeAllNames } = useContext(ClipboardContext)!
+	//// const { removeAllNames } = useContext(ClipboardContext)!
 
 	useFocusOnMount({ ref })
 	useResetScrollOnSearch({ search })
 	useFocusShortcut({ ref, setSearch })
 
-	// Clear on search
-	const onceRef = useRef(false)
-	useEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		removeAllNames()
-	}, [removeAllNames, search])
+	//// // Clear on search
+	//// const onceRef = useRef(false)
+	//// useEffect(() => {
+	//// 	if (!onceRef.current) {
+	//// 		onceRef.current = true
+	//// 		return
+	//// 	}
+	//// 	removeAllNames()
+	//// }, [removeAllNames, search])
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
