@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 import { HexColorPicker } from "react-colorful"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,11 +33,15 @@ function useEscapeShortcutToClose({ setShow }: { setShow: Dispatch<SetStateActio
 export function ColorPicker({
 	color,
 	setColor,
+	show,
+	setShow,
 }: {
 	color: string | null
 	setColor: Dispatch<SetStateAction<string | null>>
+	show: boolean
+	setShow: Dispatch<SetStateAction<boolean>>
 }) {
-	const [show, setShow] = useState(false)
+	//// const [show, setShow] = useState(false)
 
 	useEffect(() => {
 		if (color === null) {
@@ -55,7 +59,8 @@ export function ColorPicker({
 
 	return (
 		<div
-			className="color-picker"
+			// Use u-flex-1 because of sidebar-align-name-frame
+			className="color-picker u-flex-1"
 			onClick={e => {
 				// TODO
 				e.preventDefault()
@@ -63,6 +68,7 @@ export function ColorPicker({
 				setShow(true)
 			}}
 		>
+			{color ?? "#000000"}
 			{show && (
 				<div className="react-colorful-container">
 					<HexColorPicker color={color ?? "#000"} onChange={setColor} />

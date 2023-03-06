@@ -6,6 +6,7 @@ import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
 
 import {
 	Anchor,
+	ColorPicker,
 	DEV_DebugCss,
 	ExportAs,
 	Grid,
@@ -192,6 +193,17 @@ function AppSidebar1() {
 								</label>
 							</ul>
 						</ul>
+						{/* <ul className="checkboxes">
+							<label className="checkbox">
+								<div className="sidebar-align-icon-frame">
+									<feather.Grid className="checkbox-icon" />
+								</div>
+								<span className="checkbox-name u-flex-1">Show names</span>
+								<div className="sidebar-align-icon-frame">
+									<input type="checkbox" checked={showNames} onChange={e => setShowNames(e.currentTarget.checked)} />
+								</div>
+							</label>
+						</ul> */}
 					</section>
 				</div>
 			</header>
@@ -208,7 +220,6 @@ function AppSidebar1() {
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							{/* <DynamicIcon className="checkbox-icon" icon={showNames ? feather.ToggleRight : feather.ToggleLeft} /> */}
 							<div className="sidebar-align-icon-frame">
 								<feather.Grid className="checkbox-icon" />
 							</div>
@@ -270,6 +281,7 @@ function AppSidebar2() {
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
 
 	// TODO: Extract to some provider
+	const [showReactColorful, setShowReactColorful] = useState(false)
 	const [color, setColor] = useState<string | null>(null)
 
 	// TODO: Extract to pattern
@@ -309,7 +321,9 @@ function AppSidebar2() {
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							<span className="checkbox-name u-flex-1">Monochrome</span>
+							<div className="sidebar-align-name-frame u-flex-1">
+								<span className="checkbox-name u-flex-1">Monochrome (social & payments)</span>
+							</div>
 							<div className="sidebar-align-icon-frame">
 								<input
 									type="checkbox"
@@ -319,8 +333,14 @@ function AppSidebar2() {
 							</div>
 						</label>
 						<label className="checkbox">
-							<div className="sidebar-align-name-frame u-flex-1">
-								<span className="checkbox-color-desc">{color ?? "#000"}</span>
+							<div className="sidebar-align-name-frame u-flex-1" onClick={e => setShowReactColorful(curr => !curr)}>
+								{/* <span className="color-picker u-flex-1">{color ?? "#000000"}</span> */}
+								<ColorPicker
+									color={color}
+									setColor={setColor}
+									show={showReactColorful}
+									setShow={setShowReactColorful}
+								/>
 							</div>
 							{/* <ColorPicker color={color} setColor={setColor} /> */}
 						</label>
