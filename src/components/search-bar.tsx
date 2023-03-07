@@ -1,4 +1,4 @@
-import * as feather from "@icons/feather/tsx"
+import * as Feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
 import { SearchContext } from "@/state"
@@ -64,7 +64,7 @@ export function SearchBar() {
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
 			<div className="sidebar-align-icon-frame">
-				<feather.Search className="search-bar-icon" strokeWidth={4} />
+				<Feather.Search className="search-bar-icon" strokeWidth={4} />
 			</div>
 			<input
 				ref={ref}

@@ -1,10 +1,10 @@
-import * as feather from "@icons/feather/tsx"
-import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
-import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
-import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
-import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
-import * as wkSocialMono from "@icons/wolfkit/social/mono/tsx"
-import * as wkSocialOriginal from "@icons/wolfkit/social/original/tsx"
+import * as Feather from "@icons/feather/tsx"
+import * as WkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
+import * as WkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
+import * as WkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
+import * as WkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
+import * as WkSocialMono from "@icons/wolfkit/social/mono/tsx"
+import * as WkSocialOriginal from "@icons/wolfkit/social/original/tsx"
 
 import {
 	Anchor,
@@ -57,14 +57,14 @@ function AppSidebar1() {
 
 	const { setStarted } = useContext(ProgressBarContext)!
 	const {
-		feather: showFeather,
-		setFeather: setShowFeather,
-		wkSocial: showSocial,
-		setWkSocial: setShowSocial,
-		wkPayments: showPayments,
-		setWkPayments: setShowPayments,
-		wkPaymentsValue: paymentsRadio,
-		setWkPaymentsValue: setPaymentsRadio,
+		feather,
+		setFeather,
+		wkSocial,
+		setWkSocial,
+		wkPayments,
+		setWkPayments,
+		wkPaymentsValue,
+		setWkPaymentsValue,
 		monochromaticMode,
 		setMonochromaticMode,
 		compactMode,
@@ -73,6 +73,7 @@ function AppSidebar1() {
 		resetIconSettings,
 	} = useContext(SearchContext)!
 
+	// TODO: Extract
 	const [pending, startTransition] = useTransition()
 
 	useEffect(() => {
@@ -91,11 +92,11 @@ function AppSidebar1() {
 					<section className="section">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
-								<feather.Package className="section-icon" />
+								<Feather.Package className="section-icon" />
 							</div>
 							<h6 className="section-name u-flex-1">Icons</h6>
 							<div className="sidebar-align-icon-frame">
-								<feather.RotateCcw
+								<Feather.RotateCcw
 									className="section-reset-icon"
 									strokeWidth={4}
 									onClick={() => startTransition(resetIcons)}
@@ -106,14 +107,14 @@ function AppSidebar1() {
 						<ul className="checkboxes">
 							<label className="checkbox">
 								<div className="sidebar-align-icon-frame">
-									<feather.Feather className="checkbox-icon" />
+									<Feather.Feather className="checkbox-icon" />
 								</div>
 								<span className="checkbox-name u-flex-1">Feather icons</span>
 								<div className="sidebar-align-icon-frame">
 									<input
 										type="checkbox"
-										checked={showFeather}
-										onChange={e => startTransition(() => setShowFeather(e.currentTarget.checked))}
+										checked={feather}
+										onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
 									/>
 								</div>
 							</label>
@@ -123,15 +124,15 @@ function AppSidebar1() {
 								<div className="sidebar-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
-										icon={monochromaticMode ? wkSocialMono.Twitter : wkSocialOriginal.Twitter}
+										icon={monochromaticMode ? WkSocialMono.Twitter : WkSocialOriginal.Twitter}
 									/>
 								</div>
 								<span className="checkbox-name u-flex-1">Social logos</span>
 								<div className="sidebar-align-icon-frame">
 									<input
 										type="checkbox"
-										checked={showSocial}
-										onChange={e => startTransition(() => setShowSocial(e.currentTarget.checked))}
+										checked={wkSocial}
+										onChange={e => startTransition(() => setWkSocial(e.currentTarget.checked))}
 									/>
 								</div>
 							</label>
@@ -140,16 +141,16 @@ function AppSidebar1() {
 							<label className="checkbox">
 								<div className="sidebar-align-icon-frame">
 									<DynamicIcon
-										className="checkbox-icon"
-										icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+										className="checkbox-icon is-card"
+										icon={monochromaticMode ? WkPaymentsMono.Stripe : WkPaymentsOriginal.Stripe}
 									/>
 								</div>
 								<span className="checkbox-name u-flex-1">Payment logos</span>
 								<div className="sidebar-align-icon-frame">
 									<input
 										type="checkbox"
-										checked={showPayments}
-										onChange={e => startTransition(() => setShowPayments(e.currentTarget.checked))}
+										checked={wkPayments}
+										onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
 									/>
 								</div>
 							</label>
@@ -157,8 +158,8 @@ function AppSidebar1() {
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
-											className="checkbox-icon"
-											icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
+											className="checkbox-icon is-card"
+											icon={monochromaticMode ? WkPaymentsMono.Stripe : WkPaymentsOriginal.Stripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Original</span>
@@ -166,11 +167,11 @@ function AppSidebar1() {
 										<input
 											name="payments"
 											type="radio"
-											checked={paymentsRadio === "normal"}
+											checked={wkPaymentsValue === "normal"}
 											onChange={e =>
 												startTransition(() => {
-													setShowPayments(true)
-													setPaymentsRadio("normal")
+													setWkPayments(true)
+													setWkPaymentsValue("normal")
 												})
 											}
 										/>
@@ -181,8 +182,8 @@ function AppSidebar1() {
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
-											className="checkbox-icon"
-											icon={monochromaticMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
+											className="checkbox-icon is-card"
+											icon={monochromaticMode ? WkPaymentsMonoFilled.Stripe : WkPaymentsOriginalFilled.Stripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Filled</span>
@@ -190,11 +191,11 @@ function AppSidebar1() {
 										<input
 											name="payments"
 											type="radio"
-											checked={paymentsRadio === "filled"}
+											checked={wkPaymentsValue === "filled"}
 											onChange={e =>
 												startTransition(() => {
-													setShowPayments(true)
-													setPaymentsRadio("filled")
+													setWkPayments(true)
+													setWkPaymentsValue("filled")
 												})
 											}
 										/>
@@ -211,11 +212,11 @@ function AppSidebar1() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.Settings className="section-icon" />
+							<Feather.Settings className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Icon settings</h6>
 						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw
+							<Feather.RotateCcw
 								className="section-reset-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIconSettings)}
@@ -224,12 +225,15 @@ function AppSidebar1() {
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							{/* <div className="sidebar-align-icon-frame">
-								<feather.Grid className="checkbox-icon" />
-							</div> */}
-							<div className="sidebar-align-frame u-flex-1">
-								<span className="checkbox-name u-flex-1">Monochromatic mode</span>
+							<div className="sidebar-align-icon-frame">
+								{/* <Feather.Droplet
+									className="checkbox-icon is-rainbow"
+									//// style={{ transform: "scale(1.125)" }}
+								/> */}
+								{/* Defer to CSS */}
+								<div className={cx("checkbox-icon monochromatic-mode", monochromaticMode && "is-enabled")}></div>
 							</div>
+							<span className="checkbox-name u-flex-1">Color icons</span>
 							<div className="sidebar-align-icon-frame">
 								<input
 									type="checkbox"
@@ -239,12 +243,12 @@ function AppSidebar1() {
 							</div>
 						</label>
 						<label className="checkbox">
-							{/* <div className="sidebar-align-icon-frame">
-								<feather.Grid className="checkbox-icon" />
-							</div> */}
-							<div className="sidebar-align-frame u-flex-1">
-								<span className="checkbox-name u-flex-1">Compact mode</span>
+							<div className="sidebar-align-icon-frame">
+								<Feather.Grid className="checkbox-icon" />
 							</div>
+							{/* <div className="sidebar-align-frame u-flex-1"> */}
+							<span className="checkbox-name u-flex-1">Compact mode</span>
+							{/* </div> */}
 							<div className="sidebar-align-icon-frame">
 								<input type="checkbox" checked={compactMode} onChange={e => setCompactMode(e.currentTarget.checked)} />
 							</div>
@@ -259,7 +263,7 @@ function AppSidebar1() {
 				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-frame">
-							<feather.Globe className="section-icon" />
+							<Feather.Globe className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Resources</h6>
 					</header>
@@ -271,7 +275,7 @@ function AppSidebar1() {
 								</div>
 								<span className="resource-name u-flex-1">{resource.name}</span>
 								<div className="sidebar-align-icon-frame">
-									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+									<Feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
 						))}
@@ -296,7 +300,7 @@ function AppSidebar2() {
 				<section className="section is-start">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.Clipboard className="section-icon" />
+							<Feather.Clipboard className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Copy as</h6>
 						<div className="sidebar-align-frame">
@@ -313,12 +317,12 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.PenTool className="section-icon" />
+							<Feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
 					<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
@@ -327,12 +331,12 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.PenTool className="section-icon" />
+							<Feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
 					<ProgressRange
@@ -351,8 +355,8 @@ function AppSidebar2() {
 				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							{/* <feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} /> */}
-							<feather.Shield className="section-icon" />
+							{/* <Feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} /> */}
+							<Feather.Shield className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
@@ -362,42 +366,16 @@ function AppSidebar2() {
 	)
 }
 
-//// function useClearSelectedShortcut({ clearSelected }: { clearSelected: () => void }) {
-//// 	useEffect(() => {
-//// 		function handleKeyDown(e: KeyboardEvent) {
-//// 			if (e.key === "Escape") {
-//// 				clearSelected()
-//// 			}
-//// 		}
-//// 		window.addEventListener("keydown", handleKeyDown, false)
-//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-//// 	}, [clearSelected])
-//// 	return void 0
-//// }
-
-//// useEffect(() => {
-//// 	if (startIndexes === null || endIndexes === null) return
-//// 	const start = encodeIndexes(startIndexes)
-//// 	const end = encodeIndexes(endIndexes)
-//// 	let minIndexes: readonly [number, number]
-//// 	let maxIndexes: readonly [number, number]
-//// 	if (start < end) {
-//// 		minIndexes = startIndexes
-//// 		maxIndexes = endIndexes
-//// 	} else {
-//// 		minIndexes = endIndexes
-//// 		maxIndexes = startIndexes
-//// 	}
-//// 	console.log(JSON.stringify({ minIndexes, maxIndexes }))
-//// 	//// console.log(results.slice(start, end).map(([names]) => names[0]))
-//// 	//// addOneOrMoreNames(...results.slice(start, end).map(([names]) => names[0]))
-//// }, [addOneOrMoreNames, endIndexes, results, startIndexes])
-
 ////////////////////////////////////////////////////////////////////////////////
 
+// This function adds a keyboard shortcut for selecting all items in the search context.
+// It listens for the "ctrl/cmd + a" key combination and sets the start and end indices to select all items.
 function useShortcutCtrlASelectAll() {
+	// Context variables
 	const { data } = useContext(SearchContext)!
 	const { setStartIndex, setEndIndex } = useContext(ClipboardContext)!
+
+	// Event listener
 	useEffect(() => {
 		if (data === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
@@ -410,67 +388,36 @@ function useShortcutCtrlASelectAll() {
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [data, setEndIndex, setStartIndex])
+
+	// Return nothing
 	return void 0
 }
 
+// This function adds a keyboard shortcut for clearing the selection and clipboard.
+// It listens for the "Escape" key and clears the selection and clipboard.
 function useShortcutEscapeClearAll() {
-	const { setStartIndex, setEndIndex, removeAllNames } = useContext(ClipboardContext)!
+	const { setStartIndex, setEndIndex, clearNames } = useContext(ClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
-				removeAllNames()
+				clearNames()
 				setStartIndex(null)
 				setEndIndex(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [removeAllNames, setEndIndex, setStartIndex])
+	}, [clearNames, setEndIndex, setStartIndex])
 	return void 0
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-function AppMain() {
-	const { compactMode, data } = useContext(SearchContext)!
-	const { startIndex, setStartIndex, endIndex, setEndIndex, names, clipboard, addNames, removeNames, removeAllNames } =
-		useContext(ClipboardContext)!
-	//// const { removeAllNames } = useContext(ClipboardContext)!
-
+// This function adds a keyboard shortcut for copying the clipboard.
+// It listens for the "ctrl/cmd + c" key combination and copies the clipboard to the system clipboard.
+function useShortcutCtrlCCopy() {
+	const { clipboard } = useContext(ClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				removeAllNames()
-				setStartIndex(null)
-				setEndIndex(null)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [removeAllNames, setEndIndex, setStartIndex])
-
-	useShortcutCtrlASelectAll()
-	useShortcutEscapeClearAll()
-
-	useEffect(() => {
-		if (data === undefined) return
-		if (startIndex === null || endIndex === null) return
-		const min = Math.min(startIndex, endIndex)
-		const max = Math.max(startIndex, endIndex)
-		addNames(...data!.slice(min, max + 1).map(([name]) => name))
-	}, [addNames, data, endIndex, startIndex])
-
-	//// useEffect(() => {
-	//// 	removeAllNames()
-	//// 	setStartIndex(null)
-	//// 	setEndIndex(null)
-	//// 	refetch()
-	//// }, [feather, refetch, removeAllNames, wkPayments, wkSocial])
-
-	// TODO: Add ctrl-c copy handler
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
+			if (!e.shiftKey && ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c"))) {
 				e.preventDefault()
 				navigator.clipboard.writeText(clipboard)
 			}
@@ -478,12 +425,41 @@ function AppMain() {
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [clipboard])
+	return void 0
+}
+
+// This function selects names from the search context based on start and end indices.
+// It listens for changes to the start and end indices and adds the selected names to the clipboard.
+function useSelectNamesByIndex() {
+	const { data } = useContext(SearchContext)!
+	const { startIndex, endIndex, addNames } = useContext(ClipboardContext)!
+	useEffect(() => {
+		if (data === undefined) return
+		if (startIndex === null || endIndex === null) return
+		const minIndex = Math.min(startIndex, endIndex)
+		const maxIndex = Math.max(startIndex, endIndex)
+		addNames(...data!.slice(minIndex, maxIndex + 1).map(([name]) => name))
+	}, [addNames, data, endIndex, startIndex])
+	return void 0
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+function AppMain() {
+	const { compactMode, data } = useContext(SearchContext)!
+	const { startIndex, setStartIndex, setEndIndex, names, addNames, removeNames, clearNames } =
+		useContext(ClipboardContext)!
+
+	useShortcutCtrlASelectAll()
+	useShortcutEscapeClearAll()
+	useShortcutCtrlCCopy()
+	useSelectNamesByIndex()
 
 	return (
 		<Main
 			onClick={e => {
 				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
-					removeAllNames()
+					clearNames()
 					setStartIndex(null)
 					setEndIndex(null)
 				}
@@ -512,7 +488,7 @@ function AppMain() {
 										addNames(name)
 									}
 								} else {
-									removeAllNames()
+									clearNames()
 									addNames(name)
 								}
 								setStartIndex(index)

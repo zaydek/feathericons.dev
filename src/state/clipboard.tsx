@@ -17,17 +17,17 @@ export type ExportAsValue =
 // prettier-ignore
 export const ClipboardContext =
 	createContext<{
-		exportAs:       ExportAsValue
-		setExportAs:    Dispatch<SetStateAction<ExportAsValue>>
-		startIndex:     number | null
-		setStartIndex:  Dispatch<SetStateAction<number | null>>
-		endIndex:       number | null
-		setEndIndex:    Dispatch<SetStateAction<number | null>>
-		names: 	        Set<string>
-		clipboard: 	    string
-		addNames:       (...names: string[]) => void
-		removeNames:    (...names: string[]) => void
-		removeAllNames: () => void
+		exportAs:      ExportAsValue
+		setExportAs:   Dispatch<SetStateAction<ExportAsValue>>
+		startIndex:    number | null
+		setStartIndex: Dispatch<SetStateAction<number | null>>
+		endIndex:      number | null
+		setEndIndex:   Dispatch<SetStateAction<number | null>>
+		names: 	       Set<string>
+		clipboard: 	   string
+		addNames:      (...names: string[]) => void
+		removeNames:   (...names: string[]) => void
+		clearNames:    () => void
 	} | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
@@ -73,7 +73,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const removeAllNames = useCallback(() => {
+	const clearNames = useCallback(() => {
 		_setNames(new Set<string>())
 	}, [])
 
@@ -105,14 +105,12 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		}
 		let clipboard = ""
 		const keyItr = names.keys()
-
 		const firstNames: string[] = []
 		for (let index = 0; index < 10; index++) {
 			const name = keyItr.next().value
 			if (name === undefined) break
 			firstNames.push(name)
 		}
-
 		for (const [index, name] of firstNames.entries()) {
 			if (index > 0) {
 				clipboard += "\n\n"
@@ -164,7 +162,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				clipboard,
 				addNames,
 				removeNames,
-				removeAllNames,
+				clearNames,
 			}}
 		>
 			{children}

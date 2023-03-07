@@ -75,7 +75,7 @@ export function GridItem({
 		names,
 		addNames: addOneOrMoreNames,
 		removeNames: removeOneOrMoreNames,
-		removeAllNames,
+		clearNames: removeAllNames,
 	} = useContext(ClipboardContext)!
 
 	// TODO
