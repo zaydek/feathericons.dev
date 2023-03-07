@@ -52,25 +52,25 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	//////////////////////////////////////////////////////////////////////////////
 
 	const [feather, setFeather] = useParamBoolean({
-		key: "show-feather",
+		key: "feather",
 		initialValue: FEATHER_DEFAULT,
 	})
 
 	//////////////////////////////////////////////////////////////////////////////
 
 	const [wkSocial, setWkSocial] = useParamBoolean({
-		key: "show-social",
+		key: "wk-social",
 		initialValue: WK_SOCIAL_DEFAULT,
 	})
 
 	//////////////////////////////////////////////////////////////////////////////
 
 	const [wkPayments, setWkPayments] = useParamBoolean({
-		key: "show-payments",
+		key: "wk-payments",
 		initialValue: WK_PAYMENTS_DEFAULT,
 	})
 	const [wkPaymentsValue, setWkPaymentsValue] = useParam<WkPaymentsValue>({
-		key: "payments-radio",
+		key: "wk-payments-value",
 		initialValue: WK_PAYMENTS_VALUE_DEFAULT,
 		parser: value => {
 			switch (value) {
@@ -85,11 +85,11 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	//////////////////////////////////////////////////////////////////////////////
 
 	const [monochromaticMode, setMonochromaticMode] = useParamBoolean({
-		key: "monochromatic-mode",
+		key: "mono-mode",
 		initialValue: MONOCHROMATIC_MODE_DEFAULT,
 	})
 	const [compactMode, setCompactMode] = useParamBoolean({
-		key: "compact-mode",
+		key: "grid-mode",
 		initialValue: COMPACT_MODE_DEFAULT,
 	})
 

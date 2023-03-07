@@ -18,7 +18,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { DynamicIcon, useScrollProps } from "@/lib"
+import { cx, DynamicIcon, useScrollProps } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -32,7 +32,7 @@ import {
 	STROKE_STEP,
 } from "@/state"
 import { useQuery } from "@tanstack/react-query"
-import { useContext, useEffect, useTransition } from "react"
+import { useContext, useEffect, useMemo, useTransition } from "react"
 import { Lang } from "shiki-es"
 import { fetchIconsets } from "./fetch-iconsets"
 
@@ -387,8 +387,8 @@ function AppSidebar2() {
 //// 	| "@icons/wolfkit/payments/mono-filled"
 
 function AppMain() {
-	const { feather, wkSocial, wkPayments, wkPaymentsValue } = useContext(SearchContext)!
-	const { removeAllNames } = useContext(ClipboardContext)!
+	const { feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode, compactMode } = useContext(SearchContext)!
+	//// const { removeAllNames } = useContext(ClipboardContext)!
 
 	//// const count = results.reduce((sum, [names]) => sum + names.length, 0)
 	//// useVisibleDocumentTitle([`${count} icons`, "Feather"])
@@ -450,7 +450,7 @@ function AppMain() {
 	////
 	//// console.log(icons)
 
-	const { isLoading, isSuccess, data } = useQuery(["iconsets"], () =>
+	const { isSuccess, data, refetch } = useQuery(["iconsets"], () =>
 		fetchIconsets(
 			{
 				feather,
@@ -458,21 +458,30 @@ function AppMain() {
 				wkPayments,
 				wkPaymentsValue,
 			},
-			false, // TODO
+			monochromaticMode,
 		),
 	)
 
+	// Create a dependency array
+	const refretchDeps = useMemo(
+		() => [feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode],
+		[feather, monochromaticMode, wkPayments, wkPaymentsValue, wkSocial],
+	)
+
+	useEffect(() => {
+		refetch()
+	}, [refetch, refretchDeps])
+
 	return (
 		<Main>
-			<div className="grid">
-				{!isLoading &&
-					isSuccess &&
-					data.map(([name, Icon]) => (
-						<div key={name} className="grid-item">
+			<div className={cx("grid", compactMode && "is-compact-mode")}>
+				{isSuccess &&
+					data.map(([name, Icon], index) => (
+						<div key={index} className="grid-item">
 							<div className="grid-item-icon-frame">
 								<Icon className="grid-item-icon" />
 							</div>
-							<div className="grid-item-name">{name}</div>
+							{!compactMode && <div className="grid-item-name">{name}</div>}
 						</div>
 					))}
 			</div>
