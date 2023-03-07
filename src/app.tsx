@@ -65,10 +65,10 @@ function AppSidebar1() {
 		setWkPayments,
 		wkPaymentsValue,
 		setWkPaymentsValue,
-		monochromaticMode,
-		setMonochromaticMode,
-		compactMode,
-		setCompactMode,
+		preferColor,
+		setPreferColor,
+		preferNames,
+		setPreferNames,
 		resetIcons,
 		resetIconSettings,
 	} = useContext(SearchContext)!
@@ -124,7 +124,7 @@ function AppSidebar1() {
 								<div className="sidebar-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
-										icon={monochromaticMode ? WkSocialMono.Twitter : WkSocialOriginal.Twitter}
+										icon={preferColor ? WkSocialOriginal.Twitter : WkSocialMono.Twitter}
 									/>
 								</div>
 								<span className="checkbox-name u-flex-1">Social logos</span>
@@ -141,8 +141,8 @@ function AppSidebar1() {
 							<label className="checkbox">
 								<div className="sidebar-align-icon-frame">
 									<DynamicIcon
-										className="checkbox-icon is-card"
-										icon={monochromaticMode ? WkPaymentsMono.Stripe : WkPaymentsOriginal.Stripe}
+										className="checkbox-icon payments"
+										icon={preferColor ? WkPaymentsOriginal.Stripe : WkPaymentsMono.Stripe}
 									/>
 								</div>
 								<span className="checkbox-name u-flex-1">Payment logos</span>
@@ -158,8 +158,8 @@ function AppSidebar1() {
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
-											className="checkbox-icon is-card"
-											icon={monochromaticMode ? WkPaymentsMono.Stripe : WkPaymentsOriginal.Stripe}
+											className="checkbox-icon payments"
+											icon={preferColor ? WkPaymentsOriginal.Stripe : WkPaymentsMono.Stripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Original</span>
@@ -182,8 +182,8 @@ function AppSidebar1() {
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
-											className="checkbox-icon is-card"
-											icon={monochromaticMode ? WkPaymentsMonoFilled.Stripe : WkPaymentsOriginalFilled.Stripe}
+											className="checkbox-icon payments"
+											icon={preferColor ? WkPaymentsOriginalFilled.Stripe : WkPaymentsMonoFilled.Stripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Filled</span>
@@ -226,31 +226,25 @@ function AppSidebar1() {
 					<ul className="checkboxes">
 						<label className="checkbox">
 							<div className="sidebar-align-icon-frame">
-								{/* <Feather.Droplet
-									className="checkbox-icon is-rainbow"
-									//// style={{ transform: "scale(1.125)" }}
-								/> */}
-								{/* Defer to CSS */}
-								<div className={cx("checkbox-icon monochromatic-mode", monochromaticMode && "is-enabled")}></div>
+								{/* Defer to CSS; no <svg> */}
+								<div className={cx("checkbox-icon chroma", preferColor && "is-prefer-color")}></div>
 							</div>
 							<span className="checkbox-name u-flex-1">Color icons</span>
 							<div className="sidebar-align-icon-frame">
 								<input
 									type="checkbox"
-									checked={monochromaticMode}
-									onChange={e => startTransition(() => setMonochromaticMode(e.currentTarget.checked))}
+									checked={preferColor}
+									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
 								/>
 							</div>
 						</label>
 						<label className="checkbox">
 							<div className="sidebar-align-icon-frame">
-								<Feather.Grid className="checkbox-icon" />
+								<DynamicIcon className="checkbox-icon" icon={preferNames ? Feather.ToggleRight : Feather.ToggleLeft} />
 							</div>
-							{/* <div className="sidebar-align-frame u-flex-1"> */}
-							<span className="checkbox-name u-flex-1">Compact mode</span>
-							{/* </div> */}
+							<span className="checkbox-name u-flex-1">Show icon names</span>
 							<div className="sidebar-align-icon-frame">
-								<input type="checkbox" checked={compactMode} onChange={e => setCompactMode(e.currentTarget.checked)} />
+								<input type="checkbox" checked={preferNames} onChange={e => setPreferNames(e.currentTarget.checked)} />
 							</div>
 						</label>
 					</ul>
@@ -446,7 +440,7 @@ function useSelectNamesByIndex() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppMain() {
-	const { compactMode, data } = useContext(SearchContext)!
+	const { preferNames, data } = useContext(SearchContext)!
 	const { startIndex, setStartIndex, setEndIndex, names, addNames, removeNames, clearNames } =
 		useContext(ClipboardContext)!
 
@@ -465,7 +459,7 @@ function AppMain() {
 				}
 			}}
 		>
-			<div className={cx("grid", compactMode && "is-compact-mode")}>
+			<div className={cx("grid", preferNames && "is-prefer-names")}>
 				{data?.map(([name, Icon], index) => (
 					<article
 						key={index}
@@ -500,7 +494,7 @@ function AppMain() {
 						<figure className="grid-item-icon-frame">
 							<Icon className="grid-item-icon" />
 						</figure>
-						{!compactMode && <figcaption className="grid-item-name">{name}</figcaption>}
+						{preferNames && <figcaption className="grid-item-name">{name}</figcaption>}
 					</article>
 				))}
 			</div>

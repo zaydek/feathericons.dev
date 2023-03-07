@@ -17,7 +17,7 @@ function decodeIndexes(encoded: number): readonly [number, number] {
 }
 
 export function Grid() {
-	const { compactMode, results } = useContext(SearchContext)!
+	const { preferNames: compactMode, results } = useContext(SearchContext)!
 	const { startIndexes, endIndexes, addNames: addOneOrMoreNames } = useContext(ClipboardContext)!
 
 	//// useEffect(() => {
@@ -66,7 +66,7 @@ export function GridItem({
 	icon: Icon
 }) {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
-	const { compactMode } = useContext(SearchContext)!
+	const { preferNames: compactMode } = useContext(SearchContext)!
 	const {
 		startIndexes,
 		setStartIndexes,

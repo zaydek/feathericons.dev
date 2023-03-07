@@ -3,40 +3,35 @@ import { useQuery } from "@tanstack/react-query"
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
 import { fetchIconsets } from "./fetch-iconsets"
 
-//// // prettier-ignore
-//// export type WkSocialValue =
-//// 	| "normal"
-
 export type WkPaymentsValue = "normal" | "filled"
 
-const FEATHER_DEFAULT            = !!1 // prettier-ignore
-const WK_SOCIAL_DEFAULT          = !!1 // prettier-ignore
-const WK_PAYMENTS_DEFAULT        = !!1 // prettier-ignore
-const WK_PAYMENTS_VALUE_DEFAULT  = "filled" // prettier-ignore
-const MONOCHROMATIC_MODE_DEFAULT = !!0 // prettier-ignore
-const COMPACT_MODE_DEFAULT       = !!0 // prettier-ignore
+const FEATHER_DEFAULT           = !!1 // prettier-ignore
+const WK_SOCIAL_DEFAULT         = !!1 // prettier-ignore
+const WK_PAYMENTS_DEFAULT       = !!1 // prettier-ignore
+const WK_PAYMENTS_VALUE_DEFAULT = "filled" // prettier-ignore
+const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
+const PREFER_NAMES_DEFAULT      = !!1 // prettier-ignore
 
 // prettier-ignore
 export const SearchContext =
 	createContext<{
-		search:               string
-		setSearch:            Dispatch<SetStateAction<string>>
-		feather:              boolean
-		setFeather:           Dispatch<SetStateAction<boolean>>
-		wkSocial:             boolean
-		setWkSocial:          Dispatch<SetStateAction<boolean>>
-		wkPayments:           boolean
-		setWkPayments:        Dispatch<SetStateAction<boolean>>
-		wkPaymentsValue:      WkPaymentsValue
-		setWkPaymentsValue:   Dispatch<SetStateAction<WkPaymentsValue>>
-		monochromaticMode:    boolean
-		setMonochromaticMode: Dispatch<SetStateAction<boolean>>
-		compactMode:          boolean
-		setCompactMode:       Dispatch<SetStateAction<boolean>>
-		//// isSuccess:            boolean
-		data:                 [string, Icon][] | undefined
-		resetIcons:           () => void
-		resetIconSettings:    () => void
+		search:             string
+		setSearch:          Dispatch<SetStateAction<string>>
+		feather:            boolean
+		setFeather:         Dispatch<SetStateAction<boolean>>
+		wkSocial:           boolean
+		setWkSocial:        Dispatch<SetStateAction<boolean>>
+		wkPayments:         boolean
+		setWkPayments:      Dispatch<SetStateAction<boolean>>
+		wkPaymentsValue:    WkPaymentsValue
+		setWkPaymentsValue: Dispatch<SetStateAction<WkPaymentsValue>>
+		preferColor:        boolean
+		setPreferColor:     Dispatch<SetStateAction<boolean>>
+		preferNames:        boolean
+		setPreferNames:     Dispatch<SetStateAction<boolean>>
+		data:               [string, Icon][] | undefined
+		resetIcons:         () => void
+		resetIconSettings:  () => void
 	} | null>(null)
 
 // prettier-ignore
@@ -50,34 +45,29 @@ function useQueryIcons({
 	wkSocial,
 	wkPayments,
 	wkPaymentsValue,
-	monochromaticMode,
+	preferColor,
 }: {
 	feather: boolean
 	wkSocial: boolean
 	wkPayments: boolean
 	wkPaymentsValue: WkPaymentsValue
-	monochromaticMode: boolean
+	preferColor: boolean
 }) {
 	const { data, refetch } = useQuery(["iconsets"], () =>
-		fetchIconsets(
-			{
-				feather,
-				wkSocial,
-				wkPayments,
-				wkPaymentsValue,
-			},
-			monochromaticMode,
-		),
+		fetchIconsets({ feather, wkSocial, wkPayments, wkPaymentsValue }, preferColor),
 	)
+
 	// When dependencies change...
 	const refretchDeps = useMemo(
-		() => [feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode],
-		[feather, monochromaticMode, wkPayments, wkPaymentsValue, wkSocial],
+		() => [feather, wkSocial, wkPayments, wkPaymentsValue, preferColor],
+		[feather, preferColor, wkPayments, wkPaymentsValue, wkSocial],
 	)
+
 	// ...refetch
 	useEffect(() => {
 		refetch()
 	}, [refetch, refretchDeps])
+
 	return data
 }
 
@@ -112,20 +102,20 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			return WK_PAYMENTS_VALUE_DEFAULT
 		},
 	})
-	const [monochromaticMode, setMonochromaticMode] = useParamBoolean({
-		key: "mono-mode",
-		initialValue: MONOCHROMATIC_MODE_DEFAULT,
+	const [preferColor, setPreferColor] = useParamBoolean({
+		key: "prefer-color",
+		initialValue: PREFER_COLOR_DEFAULT,
 	})
-	const [compactMode, setCompactMode] = useParamBoolean({
-		key: "grid-mode",
-		initialValue: COMPACT_MODE_DEFAULT,
+	const [preferNames, setPreferNames] = useParamBoolean({
+		key: "prefer-names",
+		initialValue: PREFER_NAMES_DEFAULT,
 	})
 	const data = useQueryIcons({
 		feather,
 		wkSocial,
 		wkPayments,
 		wkPaymentsValue,
-		monochromaticMode,
+		preferColor,
 	})
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -138,9 +128,9 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	}, [setWkPaymentsValue, setFeather, setWkPayments, setWkSocial])
 
 	const resetIconSettings = useCallback(() => {
-		setMonochromaticMode(MONOCHROMATIC_MODE_DEFAULT)
-		setCompactMode(COMPACT_MODE_DEFAULT)
-	}, [setCompactMode, setMonochromaticMode])
+		setPreferColor(PREFER_COLOR_DEFAULT)
+		setPreferNames(PREFER_NAMES_DEFAULT)
+	}, [setPreferNames, setPreferColor])
 
 	//////////////////////////////////////////////////////////////////////////////
 
@@ -157,11 +147,10 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setWkPayments,
 				wkPaymentsValue,
 				setWkPaymentsValue,
-				monochromaticMode,
-				setMonochromaticMode,
-				compactMode,
-				setCompactMode,
-				//// isSuccess,
+				preferColor,
+				setPreferColor,
+				preferNames,
+				setPreferNames,
 				data,
 				resetIcons,
 				resetIconSettings,

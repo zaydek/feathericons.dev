@@ -66,31 +66,31 @@ export async function fetchIconsets(
 		wkPayments: boolean
 		wkPaymentsValue: WkPaymentsValue
 	},
-	monochromatic: boolean,
+	preferColor: boolean,
 ) {
 	const promises: Promise<Record<string, Icon>>[] = []
 	if (iconsets.feather) {
 		promises.push(import("@icons/feather/tsx"))
 	}
 	if (iconsets.wkSocial) {
-		if (monochromatic) {
-			promises.push(import("@icons/wolfkit/social/mono/tsx"))
-		} else {
+		if (preferColor) {
 			promises.push(import("@icons/wolfkit/social/original/tsx"))
+		} else {
+			promises.push(import("@icons/wolfkit/social/mono/tsx"))
 		}
 	}
 	if (iconsets.wkPayments) {
-		if (monochromatic) {
+		if (preferColor) {
 			if (iconsets.wkPaymentsValue === "normal") {
-				promises.push(import("@icons/wolfkit/payments/mono/tsx"))
-			} else {
 				promises.push(import("@icons/wolfkit/payments/mono-filled/tsx"))
+			} else {
+				promises.push(import("@icons/wolfkit/payments/mono/tsx"))
 			}
 		} else {
 			if (iconsets.wkPaymentsValue === "normal") {
-				promises.push(import("@icons/wolfkit/payments/original/tsx"))
-			} else {
 				promises.push(import("@icons/wolfkit/payments/original-filled/tsx"))
+			} else {
+				promises.push(import("@icons/wolfkit/payments/original/tsx"))
 			}
 		}
 	}

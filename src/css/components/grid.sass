@@ -9,10 +9,10 @@ $aspect-ratio: 1.25
   display: grid
   grid-template-columns: repeat(auto-fill, $height)
   justify-content: center
-  &:not(.is-compact-mode)
-    gap: 8px 16px
-  &.is-compact-mode
+  &:not(.prefer-names)
     gap: 16px
+  &.prefer-names
+    gap: 8px 16px
 
   @at-root
     .grid-item
