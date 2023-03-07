@@ -90,12 +90,12 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 					_setClipboard(detab(`
 						// Feather icons by @colebemis
 						// Licensed as MIT
-						// Reuse allowed *without* attribution
+						// Reuse allowed without attribution
 						// https://github.com/feathericons/feather
 						//
 						// Social & payment logos by @thewolfkit
 						// Licensed as CC BY 4.0
-						// Reuse allowed *with* attribution
+						// Reuse allowed with attribution
 						// https://thewolfkit.com
 						//
 						// Website by @username_ZAYDEK
