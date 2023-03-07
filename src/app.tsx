@@ -10,6 +10,7 @@ import {
 	Anchor,
 	DEV_DebugCss,
 	ExportAs,
+	Main,
 	ProgressRange,
 	SearchBar,
 	Sidebar1,
@@ -30,8 +31,10 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
+import { useQuery } from "@tanstack/react-query"
 import { useContext, useEffect, useTransition } from "react"
 import { Lang } from "shiki-es"
+import { fetchIconsets } from "./fetch-iconsets"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -447,36 +450,34 @@ function AppMain() {
 	////
 	//// console.log(icons)
 
-	return <></>
+	const { isLoading, isSuccess, data } = useQuery(["iconsets"], () =>
+		fetchIconsets(
+			{
+				feather,
+				wkSocial,
+				wkPayments,
+				wkPaymentsValue,
+			},
+			false, // TODO
+		),
+	)
 
-	//// const { isLoading, isSuccess, data } = useQuery(["iconsets"], () =>
-	//// 	fetchIconsets(
-	//// 		{
-	//// 			feather,
-	//// 			wkSocial,
-	//// 			wkPayments,
-	//// 			wkPaymentsValue,
-	//// 		},
-	//// 		false, // TODO
-	//// 	),
-	//// )
-	////
-	//// return (
-	//// 	<Main>
-	//// 		<div className="grid">
-	//// 			{!isLoading &&
-	//// 				isSuccess &&
-	//// 				data.map(([name, Icon]) => (
-	//// 					<div key={name} className="grid-item">
-	//// 						<div className="grid-item-icon-frame">
-	//// 							<Icon className="grid-item-icon" />
-	//// 						</div>
-	//// 						<div className="grid-item-name">{name}</div>
-	//// 					</div>
-	//// 				))}
-	//// 		</div>
-	//// 	</Main>
-	//// )
+	return (
+		<Main>
+			<div className="grid">
+				{!isLoading &&
+					isSuccess &&
+					data.map(([name, Icon]) => (
+						<div key={name} className="grid-item">
+							<div className="grid-item-icon-frame">
+								<Icon className="grid-item-icon" />
+							</div>
+							<div className="grid-item-name">{name}</div>
+						</div>
+					))}
+			</div>
+		</Main>
+	)
 
 	//// return (
 	//// 	<Main
