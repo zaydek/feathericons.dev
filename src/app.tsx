@@ -376,57 +376,52 @@ function AppSidebar2() {
 //// 	return void 0
 //// }
 
-type Iconset =
-	| "@icons/feather"
-	| "@icons/wolfkit/social/original"
-	| "@icons/wolfkit/social/mono"
-	| "@icons/wolfkit/payments/original"
-	| "@icons/wolfkit/payments/original-filled"
-	| "@icons/wolfkit/payments/mono"
-	| "@icons/wolfkit/payments/mono-filled"
+//// type Iconset =
+//// 	| "@icons/feather"
+//// 	| "@icons/wolfkit/social/original"
+//// 	| "@icons/wolfkit/social/mono"
+//// 	| "@icons/wolfkit/payments/original"
+//// 	| "@icons/wolfkit/payments/original-filled"
+//// 	| "@icons/wolfkit/payments/mono"
+//// 	| "@icons/wolfkit/payments/mono-filled"
 
-async function fetchIconsets(iconset: Iconset) {
-	let imports: any
-	let names: string[]
-	let icons: Icon[]
-	switch (iconset) {
-		case "@icons/feather":
-			imports = await import("@icons/feather/tsx")
-			names = Object.keys(imports)
-			icons = Object.values(imports)
-			break
-		case "@icons/wolfkit/social/original":
-			imports = await import("@icons/wolfkit/social/original/tsx")
-			names = Object.keys(imports)
-			icons = Object.values(imports)
-			break
-		case "@icons/wolfkit/social/mono":
-			imports = await import("@icons/wolfkit/social/mono/tsx")
-			names = Object.keys(imports)
-			icons = Object.values(imports)
-			break
-		case "@icons/wolfkit/payments/original":
-			imports = await import("@icons/wolfkit/payments/original/tsx")
-			names = Object.keys(imports)
-			icons = Object.values(imports)
-			break
-		case "@icons/wolfkit/payments/original-filled":
-			imports = await import("@icons/wolfkit/payments/original-filled/tsx")
-			names = Object.keys(imports)
-			icons = Object.values(imports)
-			break
-		case "@icons/wolfkit/payments/mono":
-			imports = await import("@icons/wolfkit/payments/mono/tsx")
-			names = Object.keys(imports)
-			icons = Object.values(imports)
-			break
-		case "@icons/wolfkit/payments/mono-filled":
-			imports = await import("@icons/wolfkit/payments/mono-filled/tsx")
-			names = Object.keys(imports)
-			icons = Object.values(imports)
-			break
+async function fetchIconsets(
+	iconsets: {
+		feather: boolean
+		wkSocial: boolean
+		wkPayments: boolean
+		wkPaymentsRadio: "normal" | "filled"
+	},
+	monochromatic: boolean,
+) {
+	const promises: Promise<Record<string, Icon>>[] = []
+	if (iconsets.feather) {
+		promises.push(import("@icons/feather/tsx"))
 	}
-	return [names, icons] as const
+	if (iconsets.wkSocial) {
+		if (monochromatic) {
+			promises.push(import("@icons/wolfkit/social/mono/tsx"))
+		} else {
+			promises.push(import("@icons/wolfkit/social/original/tsx"))
+		}
+	}
+	if (iconsets.wkPayments) {
+		if (monochromatic) {
+			if (iconsets.wkPaymentsRadio === "normal") {
+				promises.push(import("@icons/wolfkit/payments/mono/tsx"))
+			} else {
+				promises.push(import("@icons/wolfkit/payments/mono-filled/tsx"))
+			}
+		} else {
+			if (iconsets.wkPaymentsRadio === "normal") {
+				promises.push(import("@icons/wolfkit/payments/original/tsx"))
+			} else {
+				promises.push(import("@icons/wolfkit/payments/original-filled/tsx"))
+			}
+		}
+	}
+	const resolved = await Promise.all(promises)
+	return resolved.map(module => Object.entries(module)).flat()
 }
 
 function AppMain() {
@@ -452,7 +447,17 @@ function AppMain() {
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [removeAllNames])
 
-	const { data, isSuccess } = useQuery(["iconsets"], () => fetchIconsets("@icons/feather"))
+	const { data, isSuccess } = useQuery(["iconsets"], () =>
+		fetchIconsets(
+			{
+				feather: true,
+				wkSocial: false,
+				wkPayments: true,
+				wkPaymentsRadio: "normal",
+			},
+			true,
+		),
+	)
 
 	//// const [icons, setIcons] = useState<Icon[] | null>(null)
 	////
@@ -466,7 +471,7 @@ function AppMain() {
 	////
 	//// console.log(icons)
 
-	return <Main>{isSuccess && data[1].map((Icon, index) => <Icon key={data[0][index]} />)}</Main>
+	return <Main>{isSuccess && data.map(([name, Icon]) => <Icon key={name} />)}</Main>
 
 	//// return (
 	//// 	<Main
