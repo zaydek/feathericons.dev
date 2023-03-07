@@ -32,7 +32,7 @@ import {
 	STROKE_STEP,
 } from "@/state"
 import { useQuery } from "@tanstack/react-query"
-import { useContext, useEffect, useMemo, useTransition } from "react"
+import { useContext, useEffect, useMemo, useState, useTransition } from "react"
 import { Lang } from "shiki-es"
 import { fetchIconsets } from "./fetch-iconsets"
 
@@ -400,6 +400,9 @@ function AppMain() {
 	const { names, addOneOrMoreNames, removeOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
 	//// const { removeAllNames } = useContext(ClipboardContext)!
 
+	const [startIndex, setStartIndex] = useState<number | null>(null)
+	const [endIndex, setEndIndex] = useState<number | null>(null)
+
 	const { isSuccess, data, refetch } = useQuery(["iconsets"], () =>
 		fetchIconsets(
 			{
@@ -418,6 +421,24 @@ function AppMain() {
 	)
 
 	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				removeAllNames()
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [removeAllNames])
+
+	useEffect(() => {
+		if (!isSuccess) return
+		if (startIndex === null || endIndex === null) return
+		const min = Math.min(startIndex, endIndex)
+		const max = Math.max(startIndex, endIndex)
+		addOneOrMoreNames(...data.slice(min, max + 1).map(([name]) => name))
+	}, [addOneOrMoreNames, data, endIndex, isSuccess, startIndex])
+
+	useEffect(() => {
 		refetch()
 	}, [refetch, refretchDeps])
 
@@ -432,14 +453,25 @@ function AppMain() {
 							id={name}
 							className="grid-item"
 							onClick={e => {
-								if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-									if (names.has(name)) {
-										removeOneOrMoreNames(name)
+								if (e.shiftKey) {
+									if (startIndex === null) {
+										setStartIndex(index)
 									} else {
-										addOneOrMoreNames(name)
+										setEndIndex(index)
 									}
 								} else {
-									addOneOrMoreNames(name)
+									if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
+										if (names.has(name)) {
+											removeOneOrMoreNames(name)
+										} else {
+											addOneOrMoreNames(name)
+											setStartIndex(index)
+										}
+									} else {
+										removeAllNames()
+										addOneOrMoreNames(name)
+										setStartIndex(index)
+									}
 								}
 							}}
 							data-selected={names.has(name)}
