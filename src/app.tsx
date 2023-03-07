@@ -142,7 +142,16 @@ function AppSidebar1() {
 								<div className="sidebar-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon payments"
-										icon={preferColor ? WkPaymentsOriginal.Stripe : WkPaymentsMono.Stripe}
+										icon={
+											// prettier-ignore
+											preferColor
+												? wkPaymentsValue === "normal"
+													? WkPaymentsOriginal.Stripe
+													: WkPaymentsOriginalFilled.Stripe
+												: wkPaymentsValue === "normal"
+													? WkPaymentsMono.Stripe
+													: WkPaymentsMonoFilled.Stripe
+										}
 									/>
 								</div>
 								<span className="checkbox-name u-flex-1">Payment logos</span>
