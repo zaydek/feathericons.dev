@@ -1,7 +1,6 @@
 export * from "./anchor"
 export * from "./debug-css"
 export * from "./export-as"
-export * from "./grid"
 export * from "./icons"
 export * from "./layout"
 export * from "./progress-bar"

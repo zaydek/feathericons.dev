@@ -444,9 +444,12 @@ function AppMain() {
 	const { startIndex, setStartIndex, setEndIndex, names, addNames, removeNames, clearNames } =
 		useContext(ClipboardContext)!
 
+	// Shorcuts
 	useShortcutCtrlASelectAll()
 	useShortcutEscapeClearAll()
 	useShortcutCtrlCCopy()
+
+	// Effects
 	useSelectNamesByIndex()
 
 	return (
