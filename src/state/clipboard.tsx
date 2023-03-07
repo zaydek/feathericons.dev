@@ -17,15 +17,13 @@ export type ExportAsValue =
 // prettier-ignore
 export const ClipboardContext =
 	createContext<{
-		exportAs:             ExportAsValue
-		setExportAs:          Dispatch<SetStateAction<ExportAsValue>>
-		names: 	              Set<string>
-		// TODO
-		clipboard: 	          string
-		// TODO
-		addOneOrMoreNames:    (...ids: string[]) => void
-		removeOneOrMoreNames: (...ids: string[]) => void
-		removeAllNames:       () => void
+		exportAs:       ExportAsValue
+		setExportAs:    Dispatch<SetStateAction<ExportAsValue>>
+		names: 	        Set<string>
+		clipboard: 	    string
+		addNames:       (...names: string[]) => void
+		removeNames:    (...names: string[]) => void
+		removeAllNames: () => void
 	} | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
@@ -48,30 +46,30 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	const [names, _setNames] = useState(() => new Set<string>())
 	const [clipboard, _setClipboard] = useState("")
 
-	const addOneOrMoreNames = useCallback((...ids: string[]) => {
+	const addNames = useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
-			for (const id of ids) {
-				next.add(id)
+			for (const name of names) {
+				next.add(name)
 			}
 			return next
 		})
 	}, [])
 
-	const removeOneOrMoreNames = useCallback((...ids: string[]) => {
+	const removeNames = useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
-			for (const id of ids) {
-				next.delete(id)
+			for (const name of names) {
+				next.delete(name)
 			}
 			return next
 		})
 	}, [])
 
-	const removeAllNames = useCallback(() => _setNames(new Set<string>()), [])
+	const removeAllNames = useCallback(() => {
+		_setNames(new Set<string>())
+	}, [])
 
-	// TODO: Change this interaction to a click handler e.g. clickName
-	// Ideally this would be clickOneOrMoreNames
 	useEffect(() => {
 		if (names.size === 0) {
 			switch (exportAs) {
@@ -101,55 +99,48 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		let clipboard = ""
 		const keyItr = names.keys()
 
-		// Get first 10 names
-		const ids: string[] = []
+		const firstNames: string[] = []
 		for (let index = 0; index < 10; index++) {
-			const id = keyItr.next().value
-			if (id === undefined) break
-			ids.push(id)
+			const name = keyItr.next().value
+			if (name === undefined) break
+			firstNames.push(name)
 		}
 
-		for (const [index, id] of ids.entries()) {
-			if (index > 0) clipboard += "\n\n"
-			const svg = document.getElementById(id)!.querySelector("svg")!
+		for (const [index, name] of firstNames.entries()) {
+			if (index > 0) {
+				clipboard += "\n\n"
+			}
+			const svg = document.getElementById(name)!.querySelector("svg")!
 			if (exportAs === "svg") {
 				clipboard += transformSvg(
-					toTitleCase(id),
+					toTitleCase(name),
 					formatSvg(svg, {
 						strictJsx: !!0,
 					}),
-					{ banner: `<!-- https://feathericons.dev/?search=${id} -->` },
+					{ banner: `<!-- https://feathericons.dev/?search=${name} -->` },
 				)
 			} else if (exportAs === "jsx") {
-				clipboard += transformJsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${id}&export-as=jsx`,
+				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
+					banner: `// https://feathericons.dev/?search=${name}&export-as=jsx`,
 				})
 			} else if (exportAs === "tsx") {
 				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
-				clipboard += transformTsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${id}&export-as=tsx`,
+				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
+					banner: `// https://feathericons.dev/?search=${name}&export-as=tsx`,
 				})
 			} else if (exportAs === "strict-jsx") {
-				clipboard += transformJsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${id}&export-as=strict-jsx`,
+				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
+					banner: `// https://feathericons.dev/?search=${name}&export-as=strict-jsx`,
 				})
 			} else if (exportAs === "strict-tsx") {
-				clipboard += transformTsx(toTitleCase(id), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${id}&export-as=strict-tsx`,
+				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
+					banner: `// https://feathericons.dev/?search=${name}&export-as=strict-tsx`,
 				})
 			}
 		}
-
-		// Add ellipsis if there are more than 10 names
 		if (!keyItr.next().done) {
-			//// if (exportAs === "svg") {
-			//// 	clipboard += `\n\n<!-- ${names.size - 10} more -->`
-			//// } else {
-			//// 	clipboard += `\n\n// ${names.size - 10} more`
-			//// }
 			clipboard += `\n\n...${names.size - 10} more`
 		}
-
 		_setClipboard(clipboard)
 	}, [exportAs, names])
 
@@ -160,8 +151,8 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				setExportAs,
 				names,
 				clipboard,
-				addOneOrMoreNames,
-				removeOneOrMoreNames,
+				addNames,
+				removeNames,
 				removeAllNames,
 			}}
 		>

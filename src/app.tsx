@@ -395,15 +395,14 @@ function AppSidebar2() {
 //// 	//// addOneOrMoreNames(...results.slice(start, end).map(([names]) => names[0]))
 //// }, [addOneOrMoreNames, endIndexes, results, startIndexes])
 
-function AppMain() {
-	const { feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode, compactMode } = useContext(SearchContext)!
-	const { names, clipboard, addOneOrMoreNames, removeOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
-	//// const { removeAllNames } = useContext(ClipboardContext)!
+function useQueryIcons() {
+	const { feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode } = useContext(SearchContext)!
 
-	const [startIndex, setStartIndex] = useState<number | null>(null)
-	const [endIndex, setEndIndex] = useState<number | null>(null)
-
-	const { isSuccess, data, refetch } = useQuery(["iconsets"], () =>
+	const {
+		isSuccess: success,
+		data: icons,
+		refetch,
+	} = useQuery(["iconsets"], () =>
 		fetchIconsets(
 			{
 				feather,
@@ -415,10 +414,29 @@ function AppMain() {
 		),
 	)
 
+	// When dependencies change...
 	const refretchDeps = useMemo(
 		() => [feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode],
 		[feather, monochromaticMode, wkPayments, wkPaymentsValue, wkSocial],
 	)
+
+	// ...refetch
+	useEffect(() => {
+		refetch()
+	}, [refetch, refretchDeps])
+
+	return { success, icons, refetch }
+}
+
+function AppMain() {
+	const { compactMode } = useContext(SearchContext)!
+	const { names, clipboard, addNames, removeNames, removeAllNames } = useContext(ClipboardContext)!
+	//// const { removeAllNames } = useContext(ClipboardContext)!
+
+	const [startIndex, setStartIndex] = useState<number | null>(null)
+	const [endIndex, setEndIndex] = useState<number | null>(null)
+
+	const { success, icons } = useQueryIcons()
 
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
@@ -445,16 +463,19 @@ function AppMain() {
 	}, [])
 
 	useEffect(() => {
-		if (!isSuccess) return
+		if (!success) return
 		if (startIndex === null || endIndex === null) return
 		const min = Math.min(startIndex, endIndex)
 		const max = Math.max(startIndex, endIndex)
-		addOneOrMoreNames(...data.slice(min, max + 1).map(([name]) => name))
-	}, [addOneOrMoreNames, data, endIndex, isSuccess, startIndex])
+		addNames(...icons!.slice(min, max + 1).map(([name]) => name))
+	}, [addNames, icons, endIndex, success, startIndex])
 
-	useEffect(() => {
-		refetch()
-	}, [refetch, refretchDeps])
+	//// useEffect(() => {
+	//// 	removeAllNames()
+	//// 	setStartIndex(null)
+	//// 	setEndIndex(null)
+	//// 	refetch()
+	//// }, [feather, refetch, removeAllNames, wkPayments, wkSocial])
 
 	// TODO: Add ctrl-c copy handler
 	useEffect(() => {
@@ -479,8 +500,8 @@ function AppMain() {
 			}}
 		>
 			<div className={cx("grid", compactMode && "is-compact-mode")}>
-				{isSuccess &&
-					data.map(([name, Icon], index) => (
+				{success &&
+					icons!.map(([name, Icon], index) => (
 						<article
 							key={index}
 							// FIXME
@@ -497,13 +518,13 @@ function AppMain() {
 								} else {
 									if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
 										if (names.has(name)) {
-											removeOneOrMoreNames(name)
+											removeNames(name)
 										} else {
-											addOneOrMoreNames(name)
+											addNames(name)
 										}
 									} else {
 										removeAllNames()
-										addOneOrMoreNames(name)
+										addNames(name)
 									}
 									setStartIndex(index)
 									setEndIndex(null)
@@ -521,16 +542,3 @@ function AppMain() {
 		</Main>
 	)
 }
-
-//// return (
-//// 	<Main
-//// 		// TODO: Change to onClickCapture?
-//// 		onClick={e => {
-//// 			if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
-//// 				removeAllNames()
-//// 			}
-//// 		}}
-//// 	>
-//// 		<Grid />
-//// 	</Main>
-//// )

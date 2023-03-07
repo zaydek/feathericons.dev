@@ -18,7 +18,7 @@ function decodeIndexes(encoded: number): readonly [number, number] {
 
 export function Grid() {
 	const { compactMode, results } = useContext(SearchContext)!
-	const { startIndexes, endIndexes, addOneOrMoreNames } = useContext(ClipboardContext)!
+	const { startIndexes, endIndexes, addNames: addOneOrMoreNames } = useContext(ClipboardContext)!
 
 	//// useEffect(() => {
 	//// 	if (startIndexes === null || endIndexes === null) return
@@ -73,8 +73,8 @@ export function GridItem({
 		endIndexes,
 		setEndIndexes,
 		names,
-		addOneOrMoreNames,
-		removeOneOrMoreNames,
+		addNames: addOneOrMoreNames,
+		removeNames: removeOneOrMoreNames,
 		removeAllNames,
 	} = useContext(ClipboardContext)!
 
