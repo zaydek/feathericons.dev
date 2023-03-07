@@ -469,6 +469,7 @@ function AppMain() {
 	)
 
 	useEffect(() => {
+		console.log("called refetch")
 		refetch()
 	}, [refetch, refretchDeps])
 
@@ -477,12 +478,12 @@ function AppMain() {
 			<div className={cx("grid", compactMode && "is-compact-mode")}>
 				{isSuccess &&
 					data.map(([name, Icon], index) => (
-						<div key={index} className="grid-item">
-							<div className="grid-item-icon-frame">
+						<article key={index} className="grid-item">
+							<figure className="grid-item-icon-frame">
 								<Icon className="grid-item-icon" />
-							</div>
-							{!compactMode && <div className="grid-item-name">{name}</div>}
-						</div>
+							</figure>
+							{!compactMode && <figcaption className="grid-item-name">{name}</figcaption>}
+						</article>
 					))}
 			</div>
 		</Main>

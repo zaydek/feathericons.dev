@@ -1,6 +1,64 @@
 import { Icon } from "@/lib"
 import { WkPaymentsValue } from "@/state"
 
+//// type ImportPath =
+//// 	| "@icons/feather/tsx"
+//// 	| "@icons/wolfkit/social/mono/tsx"
+//// 	| "@icons/wolfkit/social/original/tsx"
+//// 	| "@icons/wolfkit/payments/mono/tsx"
+//// 	| "@icons/wolfkit/payments/mono-filled/tsx"
+//// 	| "@icons/wolfkit/payments/original/tsx"
+//// 	| "@icons/wolfkit/payments/original-filled/tsx"
+////
+//// export function createCache() {
+//// 	const cache = new Map<ImportPath, Record<string, Icon>>()
+//// 	async function read(path: ImportPath): Promise<Record<string, Icon>> {
+//// 		if (cache.has(path)) {
+//// 			return new Promise(resolve => resolve(cache.get(path)!))
+//// 		}
+//// 		switch (path) {
+//// 			case "@icons/feather/tsx":
+//// 				return import("@icons/feather/tsx").then(mod => {
+//// 					cache.set(path, mod)
+//// 					return mod
+//// 				})
+//// 			case "@icons/wolfkit/social/mono/tsx":
+//// 				return import("@icons/wolfkit/social/mono/tsx").then(mod => {
+//// 					cache.set(path, mod)
+//// 					return mod
+//// 				})
+//// 			case "@icons/wolfkit/social/original/tsx":
+//// 				return import("@icons/wolfkit/social/original/tsx").then(mod => {
+//// 					cache.set(path, mod)
+//// 					return mod
+//// 				})
+//// 			case "@icons/wolfkit/payments/mono/tsx":
+//// 				return import("@icons/wolfkit/payments/mono/tsx").then(mod => {
+//// 					cache.set(path, mod)
+//// 					return mod
+//// 				})
+//// 			case "@icons/wolfkit/payments/mono-filled/tsx":
+//// 				return import("@icons/wolfkit/payments/mono-filled/tsx").then(mod => {
+//// 					cache.set(path, mod)
+//// 					return mod
+//// 				})
+//// 			case "@icons/wolfkit/payments/original/tsx":
+//// 				return import("@icons/wolfkit/payments/original/tsx").then(mod => {
+//// 					cache.set(path, mod)
+//// 					return mod
+//// 				})
+//// 			case "@icons/wolfkit/payments/original-filled/tsx":
+//// 				return import("@icons/wolfkit/payments/original-filled/tsx").then(mod => {
+//// 					cache.set(path, mod)
+//// 					return mod
+//// 				})
+//// 		}
+//// 	}
+//// 	return read
+//// }
+////
+//// const read = createCache()
+
 export async function fetchIconsets(
 	iconsets: {
 		feather: boolean
@@ -37,5 +95,5 @@ export async function fetchIconsets(
 		}
 	}
 	const resolved = await Promise.all(promises)
-	return resolved.map(module => Object.entries(module)).flat()
+	return resolved.map(mod => Object.entries(mod)).flat()
 }
