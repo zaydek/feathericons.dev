@@ -18,7 +18,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { cx, DynamicIcon, isMac, useScrollProps } from "@/lib"
+import { cx, DynamicIcon, isMac, toKebabCase, useScrollProps } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -363,45 +363,40 @@ function AppSidebar2() {
 ////////////////////////////////////////////////////////////////////////////////
 
 // This function adds a keyboard shortcut for selecting all items in the search context.
-// It listens for the "ctrl/cmd + a" key combination and sets the start and end indices to select all items.
+// It listens for the "ctrl/cmd + a" key combination and sets the start and end indexes to select all items.
 function useShortcutCtrlASelectAll() {
-	// Context variables
 	const { data } = useContext(SearchContext)!
-	const { setStartIndex, setEndIndex } = useContext(ClipboardContext)!
-
-	// Event listener
+	const { setIndex1, setIndex2 } = useContext(ClipboardContext)!
 	useEffect(() => {
 		if (data === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				e.preventDefault()
-				setStartIndex(0)
-				setEndIndex(Number.MAX_SAFE_INTEGER)
+				setIndex1(0)
+				setIndex2(Number.MAX_SAFE_INTEGER)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [data, setEndIndex, setStartIndex])
-
-	// Return nothing
+	}, [data, setIndex1, setIndex2])
 	return void 0
 }
 
 // This function adds a keyboard shortcut for clearing the selection and clipboard.
 // It listens for the "Escape" key and clears the selection and clipboard.
 function useShortcutEscapeClearAll() {
-	const { setStartIndex, setEndIndex, clearNames } = useContext(ClipboardContext)!
+	const { setIndex1, setIndex2, clearNames } = useContext(ClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
 				clearNames()
-				setStartIndex(null)
-				setEndIndex(null)
+				setIndex1(null)
+				setIndex2(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clearNames, setEndIndex, setStartIndex])
+	}, [clearNames, setIndex1, setIndex2])
 	return void 0
 }
 
@@ -422,18 +417,18 @@ function useShortcutCtrlCCopy() {
 	return void 0
 }
 
-// This function selects names from the search context based on start and end indices.
-// It listens for changes to the start and end indices and adds the selected names to the clipboard.
+// This function selects names from the search context based on start and end indexes.
+// It listens for changes to the start and end indexes and adds the selected names to the clipboard.
 function useSelectNamesByIndex() {
 	const { data } = useContext(SearchContext)!
-	const { startIndex, endIndex, addNames } = useContext(ClipboardContext)!
+	const { index1, index2, addNames } = useContext(ClipboardContext)!
 	useEffect(() => {
 		if (data === undefined) return
-		if (startIndex === null || endIndex === null) return
-		const minIndex = Math.min(startIndex, endIndex)
-		const maxIndex = Math.max(startIndex, endIndex)
+		if (index1 === null || index2 === null) return
+		const minIndex = Math.min(index1, index2)
+		const maxIndex = Math.max(index1, index2)
 		addNames(...data!.slice(minIndex, maxIndex + 1).map(([name]) => name))
-	}, [addNames, data, endIndex, startIndex])
+	}, [addNames, data, index1, index2])
 	return void 0
 }
 
@@ -441,7 +436,7 @@ function useSelectNamesByIndex() {
 
 function AppMain() {
 	const { preferNames, data } = useContext(SearchContext)!
-	const { startIndex, setStartIndex, setEndIndex, names, addNames, removeNames, clearNames } =
+	const { exportAs, index1, setIndex1, setIndex2, names, addNames, removeNames, clearNames } =
 		useContext(ClipboardContext)!
 
 	// Shorcuts
@@ -457,8 +452,8 @@ function AppMain() {
 			onClick={e => {
 				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
 					clearNames()
-					setStartIndex(null)
-					setEndIndex(null)
+					setIndex1(null)
+					setIndex2(null)
 				}
 			}}
 		>
@@ -471,11 +466,11 @@ function AppMain() {
 						className="grid-item"
 						onClick={e => {
 							if (e.shiftKey) {
-								if (startIndex === null) {
-									setStartIndex(index)
-									setEndIndex(index)
+								if (index1 === null) {
+									setIndex1(index)
+									setIndex2(index)
 								} else {
-									setEndIndex(index)
+									setIndex2(index)
 								}
 							} else {
 								if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
@@ -488,8 +483,8 @@ function AppMain() {
 									clearNames()
 									addNames(name)
 								}
-								setStartIndex(index)
-								setEndIndex(null)
+								setIndex1(index)
+								setIndex2(null)
 							}
 						}}
 						data-selected={names.has(name)}
@@ -497,7 +492,11 @@ function AppMain() {
 						<figure className="grid-item-icon-frame">
 							<Icon className="grid-item-icon" />
 						</figure>
-						{preferNames && <figcaption className="grid-item-name">{name}</figcaption>}
+						{preferNames && (
+							<figcaption className="grid-item-name">
+								{exportAs === "svg" ? toKebabCase(name).toLowerCase() : name}
+							</figcaption>
+						)}
 					</article>
 				))}
 			</div>

@@ -1,5 +1,7 @@
 import { Icon } from "@/lib"
 import { WkPaymentsValue } from "@/state"
+import { useQuery } from "@tanstack/react-query"
+import { useEffect, useMemo } from "react"
 
 //// type ImportPath =
 //// 	| "@icons/feather/tsx"
@@ -96,4 +98,32 @@ export async function fetchIconsets(
 	}
 	const resolved = await Promise.all(promises)
 	return resolved.map(mod => Object.entries(mod)).flat()
+}
+
+export function useQueryIcons({
+	feather,
+	wkSocial,
+	wkPayments,
+	wkPaymentsValue,
+	preferColor,
+}: {
+	feather: boolean
+	wkSocial: boolean
+	wkPayments: boolean
+	wkPaymentsValue: WkPaymentsValue
+	preferColor: boolean
+}) {
+	const { data, refetch } = useQuery(["iconsets"], () =>
+		fetchIconsets({ feather, wkSocial, wkPayments, wkPaymentsValue }, preferColor),
+	)
+	// When dependencies change...
+	const refretchDeps = useMemo(
+		() => [feather, wkSocial, wkPayments, wkPaymentsValue, preferColor],
+		[feather, preferColor, wkPayments, wkPaymentsValue, wkSocial],
+	)
+	// ...refetch
+	useEffect(() => {
+		refetch()
+	}, [refetch, refretchDeps])
+	return data
 }

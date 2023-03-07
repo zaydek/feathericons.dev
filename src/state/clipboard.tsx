@@ -17,17 +17,17 @@ export type ExportAsValue =
 // prettier-ignore
 export const ClipboardContext =
 	createContext<{
-		exportAs:      ExportAsValue
-		setExportAs:   Dispatch<SetStateAction<ExportAsValue>>
-		startIndex:    number | null
-		setStartIndex: Dispatch<SetStateAction<number | null>>
-		endIndex:      number | null
-		setEndIndex:   Dispatch<SetStateAction<number | null>>
-		names: 	       Set<string>
-		clipboard: 	   string
-		addNames:      (...names: string[]) => void
-		removeNames:   (...names: string[]) => void
-		clearNames:    () => void
+		exportAs:    ExportAsValue
+		setExportAs: Dispatch<SetStateAction<ExportAsValue>>
+		index1:      number | null
+		setIndex1:   Dispatch<SetStateAction<number | null>>
+		index2:      number | null
+		setIndex2:   Dispatch<SetStateAction<number | null>>
+		names: 	     Set<string>
+		clipboard: 	 string
+		addNames:    (...names: string[]) => void
+		removeNames: (...names: string[]) => void
+		clearNames:  () => void
 	} | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
@@ -47,8 +47,9 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		},
 	})
 
-	const [startIndex, setStartIndex] = useState<number | null>(null)
-	const [endIndex, setEndIndex] = useState<number | null>(null)
+	// Selection indexes
+	const [index1, setIndex1] = useState<number | null>(null)
+	const [index2, setIndex2] = useState<number | null>(null)
 
 	const [names, _setNames] = useState(() => new Set<string>())
 	const [clipboard, _setClipboard] = useState("")
@@ -154,10 +155,10 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			value={{
 				exportAs,
 				setExportAs,
-				startIndex,
-				setStartIndex,
-				endIndex,
-				setEndIndex,
+				index1,
+				setIndex1,
+				index2,
+				setIndex2,
 				names,
 				clipboard,
 				addNames,

@@ -1,7 +1,6 @@
 import { Icon, useParam, useParamBoolean } from "@/lib"
-import { useQuery } from "@tanstack/react-query"
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
-import { fetchIconsets } from "./fetch-iconsets"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback } from "react"
+import { useQueryIcons } from "./use-query-icons"
 
 export type WkPaymentsValue = "normal" | "filled"
 
@@ -39,37 +38,6 @@ const serializeSearch = (value: string) => value
 	.replace(/[^\w\s-]/g, "") // Remove bad characters
 	.replace(/\s+/g, " ")     // Remove excess spaces
 	.trim() // Trim start and end spaces
-
-function useQueryIcons({
-	feather,
-	wkSocial,
-	wkPayments,
-	wkPaymentsValue,
-	preferColor,
-}: {
-	feather: boolean
-	wkSocial: boolean
-	wkPayments: boolean
-	wkPaymentsValue: WkPaymentsValue
-	preferColor: boolean
-}) {
-	const { data, refetch } = useQuery(["iconsets"], () =>
-		fetchIconsets({ feather, wkSocial, wkPayments, wkPaymentsValue }, preferColor),
-	)
-
-	// When dependencies change...
-	const refretchDeps = useMemo(
-		() => [feather, wkSocial, wkPayments, wkPaymentsValue, preferColor],
-		[feather, preferColor, wkPayments, wkPaymentsValue, wkSocial],
-	)
-
-	// ...refetch
-	useEffect(() => {
-		refetch()
-	}, [refetch, refretchDeps])
-
-	return data
-}
 
 export function SearchProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useParam({
@@ -125,12 +93,12 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		setWkSocial(WK_SOCIAL_DEFAULT)
 		setWkPayments(WK_PAYMENTS_DEFAULT)
 		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
-	}, [setWkPaymentsValue, setFeather, setWkPayments, setWkSocial])
+	}, [setFeather, setWkPayments, setWkPaymentsValue, setWkSocial])
 
 	const resetIconSettings = useCallback(() => {
 		setPreferColor(PREFER_COLOR_DEFAULT)
 		setPreferNames(PREFER_NAMES_DEFAULT)
-	}, [setPreferNames, setPreferColor])
+	}, [setPreferColor, setPreferNames])
 
 	//////////////////////////////////////////////////////////////////////////////
 
