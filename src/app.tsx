@@ -1,16 +1,7 @@
-import * as feather from "@icons/feather/tsx"
-import * as wkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
-import * as wkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
-import * as wkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
-import * as wkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
-import * as wkSocialMono from "@icons/wolfkit/social/mono/tsx"
-import * as wkSocialOriginal from "@icons/wolfkit/social/original/tsx"
-
 import {
 	Anchor,
 	DEV_DebugCss,
 	ExportAs,
-	Main,
 	ProgressRange,
 	SearchBar,
 	Sidebar1,
@@ -18,7 +9,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { DynamicIcon, Icon, useScrollProps, useVisibleDocumentTitle } from "@/lib"
+import { DynamicIcon, useScrollProps } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -31,7 +22,21 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useQuery } from "@tanstack/react-query"
+import {
+	ArrowUpRight,
+	Clipboard,
+	Feather,
+	Globe,
+	Package,
+	PenTool,
+	RotateCcw,
+	Settings,
+	Shield,
+} from "@icons/feather/tsx"
+import { Stripe as StripeMono } from "@icons/wolfkit/payments/mono/tsx"
+import { Stripe } from "@icons/wolfkit/payments/original/tsx"
+import { Twitter as TwitterMono } from "@icons/wolfkit/social/mono/tsx"
+import { Twitter } from "@icons/wolfkit/social/original/tsx"
 import { useContext, useEffect, useTransition } from "react"
 import { Lang } from "shiki-es"
 
@@ -58,14 +63,14 @@ function AppSidebar1() {
 
 	const { setStarted } = useContext(ProgressBarContext)!
 	const {
-		showFeather,
-		setShowFeather,
-		showSocial,
-		setShowSocial,
-		showPayments,
-		setShowPayments,
-		paymentsRadio,
-		setPaymentsRadio,
+		feather: showFeather,
+		setFeather: setShowFeather,
+		wkSocial: showSocial,
+		setWkSocial: setShowSocial,
+		wkPayments: showPayments,
+		setWkPayments: setShowPayments,
+		wkPaymentsValue: paymentsRadio,
+		setWkPaymentsValue: setPaymentsRadio,
 		monochromaticMode,
 		setMonochromaticMode,
 		compactMode,
@@ -92,22 +97,18 @@ function AppSidebar1() {
 					<section className="section">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
-								<feather.Package className="section-icon" />
+								<Package className="section-icon" />
 							</div>
 							<h6 className="section-name u-flex-1">Icons</h6>
 							<div className="sidebar-align-icon-frame">
-								<feather.RotateCcw
-									className="section-reset-icon"
-									strokeWidth={4}
-									onClick={() => startTransition(resetIcons)}
-								/>
+								<RotateCcw className="section-reset-icon" strokeWidth={4} onClick={() => startTransition(resetIcons)} />
 							</div>
 						</header>
 						{/* <div> */}
 						<ul className="checkboxes">
 							<label className="checkbox">
 								<div className="sidebar-align-icon-frame">
-									<feather.Feather className="checkbox-icon" />
+									<Feather className="checkbox-icon" />
 								</div>
 								<span className="checkbox-name u-flex-1">Feather icons</span>
 								<div className="sidebar-align-icon-frame">
@@ -122,10 +123,7 @@ function AppSidebar1() {
 						<ul className="checkboxes">
 							<label className="checkbox">
 								<div className="sidebar-align-icon-frame">
-									<DynamicIcon
-										className="checkbox-icon"
-										icon={monochromaticMode ? wkSocialMono.Twitter : wkSocialOriginal.Twitter}
-									/>
+									<DynamicIcon className="checkbox-icon" icon={monochromaticMode ? TwitterMono : Twitter} />
 								</div>
 								<span className="checkbox-name u-flex-1">Social logos</span>
 								<div className="sidebar-align-icon-frame">
@@ -140,10 +138,7 @@ function AppSidebar1() {
 						<ul className="checkboxes">
 							<label className="checkbox">
 								<div className="sidebar-align-icon-frame">
-									<DynamicIcon
-										className="checkbox-icon"
-										icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-									/>
+									<DynamicIcon className="checkbox-icon" icon={monochromaticMode ? StripeMono : Stripe} />
 								</div>
 								<span className="checkbox-name u-flex-1">Payment logos</span>
 								<div className="sidebar-align-icon-frame">
@@ -157,10 +152,7 @@ function AppSidebar1() {
 							<ul className="checkboxes">
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											icon={monochromaticMode ? wkPaymentsMono.Stripe : wkPaymentsOriginal.Stripe}
-										/>
+										<DynamicIcon className="checkbox-icon" icon={monochromaticMode ? StripeMono : Stripe} />
 									</div>
 									<span className="checkbox-name u-flex-1">Original</span>
 									<div className="sidebar-align-icon-frame">
@@ -181,10 +173,7 @@ function AppSidebar1() {
 							<ul className="checkboxes">
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											icon={monochromaticMode ? wkPaymentsMonoFilled.Stripe : wkPaymentsOriginalFilled.Stripe}
-										/>
+										<DynamicIcon className="checkbox-icon" icon={monochromaticMode ? StripeMono : Stripe} />
 									</div>
 									<span className="checkbox-name u-flex-1">Filled</span>
 									<div className="sidebar-align-icon-frame">
@@ -212,11 +201,11 @@ function AppSidebar1() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.Settings className="section-icon" />
+							<Settings className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Icon settings</h6>
 						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw
+							<RotateCcw
 								className="section-reset-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIconSettings)}
@@ -226,7 +215,7 @@ function AppSidebar1() {
 					<ul className="checkboxes">
 						<label className="checkbox">
 							{/* <div className="sidebar-align-icon-frame">
-								<feather.Grid className="checkbox-icon" />
+								<Grid className="checkbox-icon" />
 							</div> */}
 							<div className="sidebar-align-frame u-flex-1">
 								<span className="checkbox-name u-flex-1">Monochromatic mode</span>
@@ -241,7 +230,7 @@ function AppSidebar1() {
 						</label>
 						<label className="checkbox">
 							{/* <div className="sidebar-align-icon-frame">
-								<feather.Grid className="checkbox-icon" />
+								<Grid className="checkbox-icon" />
 							</div> */}
 							<div className="sidebar-align-frame u-flex-1">
 								<span className="checkbox-name u-flex-1">Compact mode</span>
@@ -260,7 +249,7 @@ function AppSidebar1() {
 				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-frame">
-							<feather.Globe className="section-icon" />
+							<Globe className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Resources</h6>
 					</header>
@@ -272,7 +261,7 @@ function AppSidebar1() {
 								</div>
 								<span className="resource-name u-flex-1">{resource.name}</span>
 								<div className="sidebar-align-icon-frame">
-									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+									<ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
 						))}
@@ -297,7 +286,7 @@ function AppSidebar2() {
 				<section className="section is-start">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.Clipboard className="section-icon" />
+							<Clipboard className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Copy as</h6>
 						<div className="sidebar-align-frame">
@@ -314,12 +303,12 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.PenTool className="section-icon" />
+							<PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+							<RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
 					<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
@@ -328,12 +317,12 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<feather.PenTool className="section-icon" />
+							<PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="sidebar-align-icon-frame">
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+							<RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
 					<ProgressRange
@@ -352,8 +341,8 @@ function AppSidebar2() {
 				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							{/* <feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} /> */}
-							<feather.Shield className="section-icon" />
+							{/* <Shield className="section-icon" fill="currentColor" strokeWidth={4} /> */}
+							<Shield className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
@@ -385,79 +374,57 @@ function AppSidebar2() {
 //// 	| "@icons/wolfkit/payments/mono"
 //// 	| "@icons/wolfkit/payments/mono-filled"
 
-async function fetchIconsets(
-	iconsets: {
-		feather: boolean
-		wkSocial: boolean
-		wkPayments: boolean
-		wkPaymentsRadio: "normal" | "filled"
-	},
-	monochromatic: boolean,
-) {
-	const promises: Promise<Record<string, Icon>>[] = []
-	if (iconsets.feather) {
-		promises.push(import("@icons/feather/tsx"))
-	}
-	if (iconsets.wkSocial) {
-		if (monochromatic) {
-			promises.push(import("@icons/wolfkit/social/mono/tsx"))
-		} else {
-			promises.push(import("@icons/wolfkit/social/original/tsx"))
-		}
-	}
-	if (iconsets.wkPayments) {
-		if (monochromatic) {
-			if (iconsets.wkPaymentsRadio === "normal") {
-				promises.push(import("@icons/wolfkit/payments/mono/tsx"))
-			} else {
-				promises.push(import("@icons/wolfkit/payments/mono-filled/tsx"))
-			}
-		} else {
-			if (iconsets.wkPaymentsRadio === "normal") {
-				promises.push(import("@icons/wolfkit/payments/original/tsx"))
-			} else {
-				promises.push(import("@icons/wolfkit/payments/original-filled/tsx"))
-			}
-		}
-	}
-	const resolved = await Promise.all(promises)
-	return resolved.map(module => Object.entries(module)).flat()
-}
-
 function AppMain() {
-	const { results } = useContext(SearchContext)!
+	const { feather, wkSocial, wkPayments, wkPaymentsValue } = useContext(SearchContext)!
 	const { removeAllNames } = useContext(ClipboardContext)!
 
-	const count = results.reduce((sum, [names]) => sum + names.length, 0)
-	useVisibleDocumentTitle([`${count} icons`, "Feather"])
-
-	//// // TODO
-	//// useClearSelectedShortcut({ clearSelected: removeAllNames })
-
-	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				removeAllNames()
-				if (document.activeElement instanceof HTMLElement) {
-					document.activeElement.blur()
-				}
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [removeAllNames])
-
-	const { data, isSuccess } = useQuery(["iconsets"], () =>
-		fetchIconsets(
-			{
-				feather: true,
-				wkSocial: false,
-				wkPayments: true,
-				wkPaymentsRadio: "normal",
-			},
-			true,
-		),
-	)
+	//// const count = results.reduce((sum, [names]) => sum + names.length, 0)
+	//// useVisibleDocumentTitle([`${count} icons`, "Feather"])
+	////
+	//// //// // TODO
+	//// //// useClearSelectedShortcut({ clearSelected: removeAllNames })
+	////
+	//// useEffect(() => {
+	//// 	function handleKeyDown(e: KeyboardEvent) {
+	//// 		if (e.key === "Escape") {
+	//// 			removeAllNames()
+	//// 			if (document.activeElement instanceof HTMLElement) {
+	//// 				document.activeElement.blur()
+	//// 			}
+	//// 		}
+	//// 	}
+	//// 	window.addEventListener("keydown", handleKeyDown, false)
+	//// 	return () => window.removeEventListener("keydown", handleKeyDown, false)
+	//// }, [removeAllNames])
+	////
+	//// const [monochrome, setMonochrome] = useState(false)
+	////
+	//// const { data, isSuccess, refetch } = useQuery(["iconsets"], () =>
+	//// 	fetchIconsets(
+	//// 		{
+	//// 			feather: true,
+	//// 			wkSocial: false,
+	//// 			wkPayments: true,
+	//// 			wkPaymentsRadio: "normal",
+	//// 		},
+	//// 		//// true,
+	//// 		monochrome,
+	//// 	),
+	//// )
+	////
+	//// useEffect(() => {
+	//// 	function handleKeydown(e: KeyboardEvent) {
+	//// 		if (e.key === "a") {
+	//// 			setMonochrome(
+	//// 		}
+	//// 		if (e.key === "d") {
+	//// 			console.log("test")
+	//// 			refetch()
+	//// 		}
+	//// 	}
+	//// 	window.addEventListener("keydown", handleKeydown, false)
+	//// 	return () => window.addEventListener("keydown", handleKeydown, false)
+	//// }, [refetch])
 
 	//// const [icons, setIcons] = useState<Icon[] | null>(null)
 	////
@@ -471,7 +438,36 @@ function AppMain() {
 	////
 	//// console.log(icons)
 
-	return <Main>{isSuccess && data.map(([name, Icon]) => <Icon key={name} />)}</Main>
+	return <></>
+
+	//// const { isLoading, isSuccess, data } = useQuery(["iconsets"], () =>
+	//// 	fetchIconsets(
+	//// 		{
+	//// 			feather,
+	//// 			wkSocial,
+	//// 			wkPayments,
+	//// 			wkPaymentsValue,
+	//// 		},
+	//// 		false, // TODO
+	//// 	),
+	//// )
+	////
+	//// return (
+	//// 	<Main>
+	//// 		<div className="grid">
+	//// 			{!isLoading &&
+	//// 				isSuccess &&
+	//// 				data.map(([name, Icon]) => (
+	//// 					<div key={name} className="grid-item">
+	//// 						<div className="grid-item-icon-frame">
+	//// 							<Icon className="grid-item-icon" />
+	//// 						</div>
+	//// 						<div className="grid-item-name">{name}</div>
+	//// 					</div>
+	//// 				))}
+	//// 		</div>
+	//// 	</Main>
+	//// )
 
 	//// return (
 	//// 	<Main

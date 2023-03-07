@@ -1,30 +1,16 @@
 import { useParam, useParamBoolean } from "@/lib"
-import {
-	createContext,
-	Dispatch,
-	LazyExoticComponent,
-	PropsWithChildren,
-	SetStateAction,
-	useCallback,
-	useMemo,
-} from "react"
-import { createCache } from "./search-cache"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback } from "react"
 
-// prettier-ignore
-export type SocialRadioValue =
-	| "off"
-	| "normal"
+//// // prettier-ignore
+//// export type WkSocialValue =
+//// 	| "normal"
 
-// prettier-ignore
-export type PaymentsRadioValue =
-	| "off"
-	| "normal"
-	| "filled"
+export type WkPaymentsValue = "normal" | "filled"
 
-const SHOW_FEATHER_DEFAULT       = !!1 // prettier-ignore
-const SHOW_SOCIAL_DEFAULT        = !!1 // prettier-ignore
-const SHOW_PAYMENTS_DEFAULT      = !!1 // prettier-ignore
-const PAYMENTS_RADIO_DEFAULT     = "filled" // prettier-ignore
+const FEATHER_DEFAULT            = !!1 // prettier-ignore
+const WK_SOCIAL_DEFAULT          = !!1 // prettier-ignore
+const WK_PAYMENTS_DEFAULT        = !!1 // prettier-ignore
+const WK_PAYMENTS_VALUE_DEFAULT  = "filled" // prettier-ignore
 const MONOCHROMATIC_MODE_DEFAULT = !!0 // prettier-ignore
 const COMPACT_MODE_DEFAULT       = !!0 // prettier-ignore
 
@@ -33,24 +19,21 @@ export const SearchContext =
 	createContext<{
 		search:               string
 		setSearch:            Dispatch<SetStateAction<string>>
-		showFeather:          boolean
-		setShowFeather:       Dispatch<SetStateAction<boolean>>
-		showSocial:           boolean
-		setShowSocial:        Dispatch<SetStateAction<boolean>>
-		showPayments:         boolean
-		setShowPayments:      Dispatch<SetStateAction<boolean>>
-		paymentsRadio:        PaymentsRadioValue
-		setPaymentsRadio:     Dispatch<SetStateAction<PaymentsRadioValue>>
+		feather:              boolean
+		setFeather:           Dispatch<SetStateAction<boolean>>
+		wkSocial:             boolean
+		setWkSocial:          Dispatch<SetStateAction<boolean>>
+		wkPayments:           boolean
+		setWkPayments:        Dispatch<SetStateAction<boolean>>
+		wkPaymentsValue:      WkPaymentsValue
+		setWkPaymentsValue:   Dispatch<SetStateAction<WkPaymentsValue>>
 		monochromaticMode:    boolean
 		setMonochromaticMode: Dispatch<SetStateAction<boolean>>
 		compactMode:          boolean
 		setCompactMode:       Dispatch<SetStateAction<boolean>>
 		resetIcons:           () => void
 		resetIconSettings:    () => void
-		results:              (readonly [string[], LazyExoticComponent<any>])[]
 	} | null>(null)
-
-const cache = createCache()
 
 // prettier-ignore
 const serializeSearch = (value: string) => value
@@ -68,34 +51,34 @@ export function SearchProvider({ children }: PropsWithChildren) {
 
 	//////////////////////////////////////////////////////////////////////////////
 
-	const [showFeather, setShowFeather] = useParamBoolean({
+	const [feather, setFeather] = useParamBoolean({
 		key: "show-feather",
-		initialValue: SHOW_FEATHER_DEFAULT,
+		initialValue: FEATHER_DEFAULT,
 	})
 
 	//////////////////////////////////////////////////////////////////////////////
 
-	const [showSocial, setShowSocial] = useParamBoolean({
+	const [wkSocial, setWkSocial] = useParamBoolean({
 		key: "show-social",
-		initialValue: SHOW_SOCIAL_DEFAULT,
+		initialValue: WK_SOCIAL_DEFAULT,
 	})
 
 	//////////////////////////////////////////////////////////////////////////////
 
-	const [showPayments, setShowPayments] = useParamBoolean({
+	const [wkPayments, setWkPayments] = useParamBoolean({
 		key: "show-payments",
-		initialValue: SHOW_PAYMENTS_DEFAULT,
+		initialValue: WK_PAYMENTS_DEFAULT,
 	})
-	const [paymentsRadio, setPaymentsRadio] = useParam<PaymentsRadioValue>({
+	const [wkPaymentsValue, setWkPaymentsValue] = useParam<WkPaymentsValue>({
 		key: "payments-radio",
-		initialValue: PAYMENTS_RADIO_DEFAULT,
+		initialValue: WK_PAYMENTS_VALUE_DEFAULT,
 		parser: value => {
 			switch (value) {
 				case "normal":
 				case "filled":
 					return value
 			}
-			return PAYMENTS_RADIO_DEFAULT
+			return WK_PAYMENTS_VALUE_DEFAULT
 		},
 	})
 
@@ -113,67 +96,38 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	//////////////////////////////////////////////////////////////////////////////
 
 	const resetIcons = useCallback(() => {
-		setShowFeather(SHOW_FEATHER_DEFAULT)
-		setShowSocial(SHOW_SOCIAL_DEFAULT)
-		setShowPayments(SHOW_PAYMENTS_DEFAULT)
-		setPaymentsRadio(PAYMENTS_RADIO_DEFAULT)
-	}, [setPaymentsRadio, setShowFeather, setShowPayments, setShowSocial])
+		setFeather(FEATHER_DEFAULT)
+		setWkSocial(WK_SOCIAL_DEFAULT)
+		setWkPayments(WK_PAYMENTS_DEFAULT)
+		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
+	}, [setWkPaymentsValue, setFeather, setWkPayments, setWkSocial])
 
 	const resetIconSettings = useCallback(() => {
 		setMonochromaticMode(MONOCHROMATIC_MODE_DEFAULT)
 		setCompactMode(COMPACT_MODE_DEFAULT)
 	}, [setCompactMode, setMonochromaticMode])
 
-	const results = useMemo(() => {
-		const arr = []
-		if (showFeather) {
-			arr.push(cache.get("feather"))
-		}
-		if (showSocial) {
-			if (monochromaticMode) {
-				arr.push(cache.get("wolfkit-social-mono"))
-			} else {
-				arr.push(cache.get("wolfkit-social-original"))
-			}
-		}
-		if (showPayments) {
-			if (monochromaticMode) {
-				if (paymentsRadio === "normal") {
-					arr.push(cache.get("wolfkit-payments-mono"))
-				} else if (paymentsRadio === "filled") {
-					arr.push(cache.get("wolfkit-payments-mono-filled"))
-				}
-			} else {
-				if (paymentsRadio === "normal") {
-					arr.push(cache.get("wolfkit-payments-original"))
-				} else if (paymentsRadio === "filled") {
-					arr.push(cache.get("wolfkit-payments-original-filled"))
-				}
-			}
-		}
-		return arr
-	}, [showFeather, showSocial, showPayments, monochromaticMode, paymentsRadio])
+	//////////////////////////////////////////////////////////////////////////////
 
 	return (
 		<SearchContext.Provider
 			value={{
 				search,
 				setSearch,
-				showFeather,
-				setShowFeather,
-				showSocial,
-				setShowSocial,
-				showPayments,
-				setShowPayments,
-				paymentsRadio,
-				setPaymentsRadio,
+				feather,
+				setFeather,
+				wkSocial,
+				setWkSocial,
+				wkPayments,
+				setWkPayments,
+				wkPaymentsValue,
+				setWkPaymentsValue,
 				monochromaticMode,
 				setMonochromaticMode,
 				compactMode,
 				setCompactMode,
 				resetIcons,
 				resetIconSettings,
-				results,
 			}}
 		>
 			{children}
