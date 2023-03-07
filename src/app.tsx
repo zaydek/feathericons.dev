@@ -18,7 +18,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { cx, DynamicIcon, useScrollProps } from "@/lib"
+import { cx, DynamicIcon, isMac, useScrollProps } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -377,78 +377,28 @@ function AppSidebar2() {
 //// 	return void 0
 //// }
 
-//// type Iconset =
-//// 	| "@icons/feather"
-//// 	| "@icons/wolfkit/social/original"
-//// 	| "@icons/wolfkit/social/mono"
-//// 	| "@icons/wolfkit/payments/original"
-//// 	| "@icons/wolfkit/payments/original-filled"
-//// 	| "@icons/wolfkit/payments/mono"
-//// 	| "@icons/wolfkit/payments/mono-filled"
+//// useEffect(() => {
+//// 	if (startIndexes === null || endIndexes === null) return
+//// 	const start = encodeIndexes(startIndexes)
+//// 	const end = encodeIndexes(endIndexes)
+//// 	let minIndexes: readonly [number, number]
+//// 	let maxIndexes: readonly [number, number]
+//// 	if (start < end) {
+//// 		minIndexes = startIndexes
+//// 		maxIndexes = endIndexes
+//// 	} else {
+//// 		minIndexes = endIndexes
+//// 		maxIndexes = startIndexes
+//// 	}
+//// 	console.log(JSON.stringify({ minIndexes, maxIndexes }))
+//// 	//// console.log(results.slice(start, end).map(([names]) => names[0]))
+//// 	//// addOneOrMoreNames(...results.slice(start, end).map(([names]) => names[0]))
+//// }, [addOneOrMoreNames, endIndexes, results, startIndexes])
 
 function AppMain() {
 	const { feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode, compactMode } = useContext(SearchContext)!
+	const { names, addOneOrMoreNames, removeOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
 	//// const { removeAllNames } = useContext(ClipboardContext)!
-
-	//// const count = results.reduce((sum, [names]) => sum + names.length, 0)
-	//// useVisibleDocumentTitle([`${count} icons`, "Feather"])
-	////
-	//// //// // TODO
-	//// //// useClearSelectedShortcut({ clearSelected: removeAllNames })
-	////
-	//// useEffect(() => {
-	//// 	function handleKeyDown(e: KeyboardEvent) {
-	//// 		if (e.key === "Escape") {
-	//// 			removeAllNames()
-	//// 			if (document.activeElement instanceof HTMLElement) {
-	//// 				document.activeElement.blur()
-	//// 			}
-	//// 		}
-	//// 	}
-	//// 	window.addEventListener("keydown", handleKeyDown, false)
-	//// 	return () => window.removeEventListener("keydown", handleKeyDown, false)
-	//// }, [removeAllNames])
-	////
-	//// const [monochrome, setMonochrome] = useState(false)
-	////
-	//// const { data, isSuccess, refetch } = useQuery(["iconsets"], () =>
-	//// 	fetchIconsets(
-	//// 		{
-	//// 			feather: true,
-	//// 			wkSocial: false,
-	//// 			wkPayments: true,
-	//// 			wkPaymentsRadio: "normal",
-	//// 		},
-	//// 		//// true,
-	//// 		monochrome,
-	//// 	),
-	//// )
-	////
-	//// useEffect(() => {
-	//// 	function handleKeydown(e: KeyboardEvent) {
-	//// 		if (e.key === "a") {
-	//// 			setMonochrome(
-	//// 		}
-	//// 		if (e.key === "d") {
-	//// 			console.log("test")
-	//// 			refetch()
-	//// 		}
-	//// 	}
-	//// 	window.addEventListener("keydown", handleKeydown, false)
-	//// 	return () => window.addEventListener("keydown", handleKeydown, false)
-	//// }, [refetch])
-
-	//// const [icons, setIcons] = useState<Icon[] | null>(null)
-	////
-	//// useEffect(() => {
-	//// 	async function run() {
-	//// 		const icons = await import("@icons/feather/tsx")
-	//// 		setIcons(Object.values(icons))
-	//// 	}
-	//// 	run()
-	//// }, [])
-	////
-	//// console.log(icons)
 
 	const { isSuccess, data, refetch } = useQuery(["iconsets"], () =>
 		fetchIconsets(
@@ -462,14 +412,12 @@ function AppMain() {
 		),
 	)
 
-	// Create a dependency array
 	const refretchDeps = useMemo(
 		() => [feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode],
 		[feather, monochromaticMode, wkPayments, wkPaymentsValue, wkSocial],
 	)
 
 	useEffect(() => {
-		console.log("called refetch")
 		refetch()
 	}, [refetch, refretchDeps])
 
@@ -478,7 +426,24 @@ function AppMain() {
 			<div className={cx("grid", compactMode && "is-compact-mode")}>
 				{isSuccess &&
 					data.map(([name, Icon], index) => (
-						<article key={index} className="grid-item">
+						<article
+							key={index}
+							// FIXME
+							id={name}
+							className="grid-item"
+							onClick={e => {
+								if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
+									if (names.has(name)) {
+										removeOneOrMoreNames(name)
+									} else {
+										addOneOrMoreNames(name)
+									}
+								} else {
+									addOneOrMoreNames(name)
+								}
+							}}
+							data-selected={names.has(name)}
+						>
 							<figure className="grid-item-icon-frame">
 								<Icon className="grid-item-icon" />
 							</figure>
@@ -488,17 +453,17 @@ function AppMain() {
 			</div>
 		</Main>
 	)
-
-	//// return (
-	//// 	<Main
-	//// 		// TODO: Change to onClickCapture?
-	//// 		onClick={e => {
-	//// 			if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
-	//// 				removeAllNames()
-	//// 			}
-	//// 		}}
-	//// 	>
-	//// 		<Grid />
-	//// 	</Main>
-	//// )
 }
+
+//// return (
+//// 	<Main
+//// 		// TODO: Change to onClickCapture?
+//// 		onClick={e => {
+//// 			if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
+//// 				removeAllNames()
+//// 			}
+//// 		}}
+//// 	>
+//// 		<Grid />
+//// 	</Main>
+//// )

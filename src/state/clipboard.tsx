@@ -19,10 +19,10 @@ export const ClipboardContext =
 	createContext<{
 		exportAs:             ExportAsValue
 		setExportAs:          Dispatch<SetStateAction<ExportAsValue>>
-		startIndexes:         readonly [number, number] | null
-		setStartIndexes:      Dispatch<SetStateAction<readonly [number, number] | null>>
-		endIndexes:           readonly [number, number] | null
-		setEndIndexes:        Dispatch<SetStateAction<readonly [number, number] | null>>
+		//// startIndexes:         readonly [number, number] | null
+		//// setStartIndexes:      Dispatch<SetStateAction<readonly [number, number] | null>>
+		//// endIndexes:           readonly [number, number] | null
+		//// setEndIndexes:        Dispatch<SetStateAction<readonly [number, number] | null>>
 		names: 	              Set<string>
 		clipboard: 	          string
 		addOneOrMoreNames:    (...ids: string[]) => void
@@ -46,9 +46,6 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return "svg"
 		},
 	})
-
-	const [startIndexes, setStartIndexes] = useState<readonly [number, number] | null>(null)
-	const [endIndexes, setEndIndexes] = useState<readonly [number, number] | null>(null)
 
 	// Mask _setNames
 	const [names, _setNames] = useState(() => new Set<string>())
@@ -145,10 +142,6 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			value={{
 				exportAs,
 				setExportAs,
-				startIndexes,
-				setStartIndexes,
-				endIndexes,
-				setEndIndexes,
 				names,
 				clipboard,
 				addOneOrMoreNames,
