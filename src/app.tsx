@@ -397,7 +397,7 @@ function AppSidebar2() {
 
 function AppMain() {
 	const { feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode, compactMode } = useContext(SearchContext)!
-	const { names, addOneOrMoreNames, removeOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
+	const { names, clipboard, addOneOrMoreNames, removeOneOrMoreNames, removeAllNames } = useContext(ClipboardContext)!
 	//// const { removeAllNames } = useContext(ClipboardContext)!
 
 	const [startIndex, setStartIndex] = useState<number | null>(null)
@@ -455,6 +455,18 @@ function AppMain() {
 	useEffect(() => {
 		refetch()
 	}, [refetch, refretchDeps])
+
+	// TODO: Add ctrl-c copy handler
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
+				e.preventDefault()
+				navigator.clipboard.writeText(clipboard)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [clipboard])
 
 	return (
 		<Main

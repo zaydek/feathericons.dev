@@ -45,10 +45,8 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		},
 	})
 
-	// Mask _setNames
 	const [names, _setNames] = useState(() => new Set<string>())
-
-	const [clipboard, setClipboard] = useState("")
+	const [clipboard, _setClipboard] = useState("")
 
 	const addOneOrMoreNames = useCallback((...ids: string[]) => {
 		_setNames(prev => {
@@ -83,7 +81,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				case "strict-jsx":
 				case "strict-tsx":
 					// prettier-ignore
-					setClipboard(detab(`
+					_setClipboard(detab(`
 						// Feather icons by @colebemis
 						// Licensed as MIT
 						// Reuse allowed *without* attribution
@@ -152,7 +150,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			clipboard += `\n\n...${names.size - 10} more`
 		}
 
-		setClipboard(clipboard)
+		_setClipboard(clipboard)
 	}, [exportAs, names])
 
 	return (
