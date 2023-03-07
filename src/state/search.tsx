@@ -1,5 +1,7 @@
-import { useParam, useParamBoolean } from "@/lib"
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback } from "react"
+import { Icon, useParam, useParamBoolean } from "@/lib"
+import { useQuery } from "@tanstack/react-query"
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useEffect, useMemo } from "react"
+import { fetchIconsets } from "./fetch-iconsets"
 
 //// // prettier-ignore
 //// export type WkSocialValue =
@@ -31,6 +33,8 @@ export const SearchContext =
 		setMonochromaticMode: Dispatch<SetStateAction<boolean>>
 		compactMode:          boolean
 		setCompactMode:       Dispatch<SetStateAction<boolean>>
+		//// isSuccess:            boolean
+		data:                 [string, Icon][] | undefined
 		resetIcons:           () => void
 		resetIconSettings:    () => void
 	} | null>(null)
@@ -41,6 +45,42 @@ const serializeSearch = (value: string) => value
 	.replace(/\s+/g, " ")     // Remove excess spaces
 	.trim() // Trim start and end spaces
 
+function useQueryIcons({
+	feather,
+	wkSocial,
+	wkPayments,
+	wkPaymentsValue,
+	monochromaticMode,
+}: {
+	feather: boolean
+	wkSocial: boolean
+	wkPayments: boolean
+	wkPaymentsValue: WkPaymentsValue
+	monochromaticMode: boolean
+}) {
+	const { data, refetch } = useQuery(["iconsets"], () =>
+		fetchIconsets(
+			{
+				feather,
+				wkSocial,
+				wkPayments,
+				wkPaymentsValue,
+			},
+			monochromaticMode,
+		),
+	)
+	// When dependencies change...
+	const refretchDeps = useMemo(
+		() => [feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode],
+		[feather, monochromaticMode, wkPayments, wkPaymentsValue, wkSocial],
+	)
+	// ...refetch
+	useEffect(() => {
+		refetch()
+	}, [refetch, refretchDeps])
+	return data
+}
+
 export function SearchProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useParam({
 		key: "search",
@@ -48,23 +88,14 @@ export function SearchProvider({ children }: PropsWithChildren) {
 		parser: value => value,
 		serializer: serializeSearch,
 	})
-
-	//////////////////////////////////////////////////////////////////////////////
-
 	const [feather, setFeather] = useParamBoolean({
 		key: "feather",
 		initialValue: FEATHER_DEFAULT,
 	})
-
-	//////////////////////////////////////////////////////////////////////////////
-
 	const [wkSocial, setWkSocial] = useParamBoolean({
 		key: "wk-social",
 		initialValue: WK_SOCIAL_DEFAULT,
 	})
-
-	//////////////////////////////////////////////////////////////////////////////
-
 	const [wkPayments, setWkPayments] = useParamBoolean({
 		key: "wk-payments",
 		initialValue: WK_PAYMENTS_DEFAULT,
@@ -81,9 +112,6 @@ export function SearchProvider({ children }: PropsWithChildren) {
 			return WK_PAYMENTS_VALUE_DEFAULT
 		},
 	})
-
-	//////////////////////////////////////////////////////////////////////////////
-
 	const [monochromaticMode, setMonochromaticMode] = useParamBoolean({
 		key: "mono-mode",
 		initialValue: MONOCHROMATIC_MODE_DEFAULT,
@@ -91,6 +119,13 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	const [compactMode, setCompactMode] = useParamBoolean({
 		key: "grid-mode",
 		initialValue: COMPACT_MODE_DEFAULT,
+	})
+	const data = useQueryIcons({
+		feather,
+		wkSocial,
+		wkPayments,
+		wkPaymentsValue,
+		monochromaticMode,
 	})
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -126,6 +161,8 @@ export function SearchProvider({ children }: PropsWithChildren) {
 				setMonochromaticMode,
 				compactMode,
 				setCompactMode,
+				//// isSuccess,
+				data,
 				resetIcons,
 				resetIconSettings,
 			}}

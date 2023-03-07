@@ -1,4 +1,5 @@
 export * from "./clipboard"
+export * from "./fetch-iconsets"
 export * from "./layout"
 export * from "./progress-bar"
 export * from "./range"

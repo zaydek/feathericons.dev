@@ -19,6 +19,10 @@ export const ClipboardContext =
 	createContext<{
 		exportAs:       ExportAsValue
 		setExportAs:    Dispatch<SetStateAction<ExportAsValue>>
+		startIndex:     number | null
+		setStartIndex:  Dispatch<SetStateAction<number | null>>
+		endIndex:       number | null
+		setEndIndex:    Dispatch<SetStateAction<number | null>>
 		names: 	        Set<string>
 		clipboard: 	    string
 		addNames:       (...names: string[]) => void
@@ -42,6 +46,9 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return "svg"
 		},
 	})
+
+	const [startIndex, setStartIndex] = useState<number | null>(null)
+	const [endIndex, setEndIndex] = useState<number | null>(null)
 
 	const [names, _setNames] = useState(() => new Set<string>())
 	const [clipboard, _setClipboard] = useState("")
@@ -149,6 +156,10 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			value={{
 				exportAs,
 				setExportAs,
+				startIndex,
+				setStartIndex,
+				endIndex,
+				setEndIndex,
 				names,
 				clipboard,
 				addNames,

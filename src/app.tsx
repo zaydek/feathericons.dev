@@ -31,10 +31,8 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useQuery } from "@tanstack/react-query"
-import { useContext, useEffect, useMemo, useState, useTransition } from "react"
+import { useContext, useEffect, useTransition } from "react"
 import { Lang } from "shiki-es"
-import { fetchIconsets } from "./fetch-iconsets"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -395,48 +393,49 @@ function AppSidebar2() {
 //// 	//// addOneOrMoreNames(...results.slice(start, end).map(([names]) => names[0]))
 //// }, [addOneOrMoreNames, endIndexes, results, startIndexes])
 
-function useQueryIcons() {
-	const { feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode } = useContext(SearchContext)!
+////////////////////////////////////////////////////////////////////////////////
 
-	const {
-		isSuccess: success,
-		data: icons,
-		refetch,
-	} = useQuery(["iconsets"], () =>
-		fetchIconsets(
-			{
-				feather,
-				wkSocial,
-				wkPayments,
-				wkPaymentsValue,
-			},
-			monochromaticMode,
-		),
-	)
-
-	// When dependencies change...
-	const refretchDeps = useMemo(
-		() => [feather, wkSocial, wkPayments, wkPaymentsValue, monochromaticMode],
-		[feather, monochromaticMode, wkPayments, wkPaymentsValue, wkSocial],
-	)
-
-	// ...refetch
+function useShortcutCtrlASelectAll() {
+	const { data } = useContext(SearchContext)!
+	const { setStartIndex, setEndIndex } = useContext(ClipboardContext)!
 	useEffect(() => {
-		refetch()
-	}, [refetch, refretchDeps])
-
-	return { success, icons, refetch }
+		if (data === undefined) return
+		function handleKeyDown(e: KeyboardEvent) {
+			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
+				e.preventDefault()
+				setStartIndex(0)
+				setEndIndex(Number.MAX_SAFE_INTEGER)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [data, setEndIndex, setStartIndex])
+	return void 0
 }
 
+function useShortcutEscapeClearAll() {
+	const { setStartIndex, setEndIndex, removeAllNames } = useContext(ClipboardContext)!
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				removeAllNames()
+				setStartIndex(null)
+				setEndIndex(null)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [removeAllNames, setEndIndex, setStartIndex])
+	return void 0
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 function AppMain() {
-	const { compactMode } = useContext(SearchContext)!
-	const { names, clipboard, addNames, removeNames, removeAllNames } = useContext(ClipboardContext)!
+	const { compactMode, data } = useContext(SearchContext)!
+	const { startIndex, setStartIndex, endIndex, setEndIndex, names, clipboard, addNames, removeNames, removeAllNames } =
+		useContext(ClipboardContext)!
 	//// const { removeAllNames } = useContext(ClipboardContext)!
-
-	const [startIndex, setStartIndex] = useState<number | null>(null)
-	const [endIndex, setEndIndex] = useState<number | null>(null)
-
-	const { success, icons } = useQueryIcons()
 
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
@@ -448,27 +447,18 @@ function AppMain() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [removeAllNames])
+	}, [removeAllNames, setEndIndex, setStartIndex])
+
+	useShortcutCtrlASelectAll()
+	useShortcutEscapeClearAll()
 
 	useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
-				e.preventDefault()
-				setStartIndex(0)
-				setEndIndex(Number.MAX_SAFE_INTEGER)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [])
-
-	useEffect(() => {
-		if (!success) return
+		if (data === undefined) return
 		if (startIndex === null || endIndex === null) return
 		const min = Math.min(startIndex, endIndex)
 		const max = Math.max(startIndex, endIndex)
-		addNames(...icons!.slice(min, max + 1).map(([name]) => name))
-	}, [addNames, icons, endIndex, success, startIndex])
+		addNames(...data!.slice(min, max + 1).map(([name]) => name))
+	}, [addNames, data, endIndex, startIndex])
 
 	//// useEffect(() => {
 	//// 	removeAllNames()
@@ -500,44 +490,43 @@ function AppMain() {
 			}}
 		>
 			<div className={cx("grid", compactMode && "is-compact-mode")}>
-				{success &&
-					icons!.map(([name, Icon], index) => (
-						<article
-							key={index}
-							// FIXME
-							id={name}
-							className="grid-item"
-							onClick={e => {
-								if (e.shiftKey) {
-									if (startIndex === null) {
-										setStartIndex(index)
-										setEndIndex(index)
-									} else {
-										setEndIndex(index)
-									}
+				{data?.map(([name, Icon], index) => (
+					<article
+						key={index}
+						// FIXME
+						id={name}
+						className="grid-item"
+						onClick={e => {
+							if (e.shiftKey) {
+								if (startIndex === null) {
+									setStartIndex(index)
+									setEndIndex(index)
 								} else {
-									if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-										if (names.has(name)) {
-											removeNames(name)
-										} else {
-											addNames(name)
-										}
+									setEndIndex(index)
+								}
+							} else {
+								if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
+									if (names.has(name)) {
+										removeNames(name)
 									} else {
-										removeAllNames()
 										addNames(name)
 									}
-									setStartIndex(index)
-									setEndIndex(null)
+								} else {
+									removeAllNames()
+									addNames(name)
 								}
-							}}
-							data-selected={names.has(name)}
-						>
-							<figure className="grid-item-icon-frame">
-								<Icon className="grid-item-icon" />
-							</figure>
-							{!compactMode && <figcaption className="grid-item-name">{name}</figcaption>}
-						</article>
-					))}
+								setStartIndex(index)
+								setEndIndex(null)
+							}
+						}}
+						data-selected={names.has(name)}
+					>
+						<figure className="grid-item-icon-frame">
+							<Icon className="grid-item-icon" />
+						</figure>
+						{!compactMode && <figcaption className="grid-item-name">{name}</figcaption>}
+					</article>
+				))}
 			</div>
 		</Main>
 	)
