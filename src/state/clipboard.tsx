@@ -19,12 +19,10 @@ export const ClipboardContext =
 	createContext<{
 		exportAs:             ExportAsValue
 		setExportAs:          Dispatch<SetStateAction<ExportAsValue>>
-		//// startIndexes:         readonly [number, number] | null
-		//// setStartIndexes:      Dispatch<SetStateAction<readonly [number, number] | null>>
-		//// endIndexes:           readonly [number, number] | null
-		//// setEndIndexes:        Dispatch<SetStateAction<readonly [number, number] | null>>
 		names: 	              Set<string>
+		// TODO
 		clipboard: 	          string
+		// TODO
 		addOneOrMoreNames:    (...ids: string[]) => void
 		removeOneOrMoreNames: (...ids: string[]) => void
 		removeAllNames:       () => void
@@ -103,7 +101,16 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			return
 		}
 		let clipboard = ""
-		const ids = [...names.keys()]
+		const keyItr = names.keys()
+
+		// Get first 10 names
+		const ids: string[] = []
+		for (let index = 0; index < 10; index++) {
+			const id = keyItr.next().value
+			if (id === undefined) break
+			ids.push(id)
+		}
+
 		for (const [index, id] of ids.entries()) {
 			if (index > 0) clipboard += "\n\n"
 			const svg = document.getElementById(id)!.querySelector("svg")!
@@ -134,6 +141,17 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				})
 			}
 		}
+
+		// Add ellipsis if there are more than 10 names
+		if (!keyItr.next().done) {
+			//// if (exportAs === "svg") {
+			//// 	clipboard += `\n\n<!-- ${names.size - 10} more -->`
+			//// } else {
+			//// 	clipboard += `\n\n// ${names.size - 10} more`
+			//// }
+			clipboard += `\n\n...${names.size - 10} more`
+		}
+
 		setClipboard(clipboard)
 	}, [exportAs, names])
 

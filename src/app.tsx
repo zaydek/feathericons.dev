@@ -424,11 +424,25 @@ function AppMain() {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
 				removeAllNames()
+				setStartIndex(null)
+				setEndIndex(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
 	}, [removeAllNames])
+
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
+				e.preventDefault()
+				setStartIndex(0)
+				setEndIndex(Number.MAX_SAFE_INTEGER)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [])
 
 	useEffect(() => {
 		if (!isSuccess) return
@@ -443,7 +457,15 @@ function AppMain() {
 	}, [refetch, refretchDeps])
 
 	return (
-		<Main>
+		<Main
+			onClick={e => {
+				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
+					removeAllNames()
+					setStartIndex(null)
+					setEndIndex(null)
+				}
+			}}
+		>
 			<div className={cx("grid", compactMode && "is-compact-mode")}>
 				{isSuccess &&
 					data.map(([name, Icon], index) => (
@@ -456,6 +478,7 @@ function AppMain() {
 								if (e.shiftKey) {
 									if (startIndex === null) {
 										setStartIndex(index)
+										setEndIndex(index)
 									} else {
 										setEndIndex(index)
 									}
@@ -465,13 +488,13 @@ function AppMain() {
 											removeOneOrMoreNames(name)
 										} else {
 											addOneOrMoreNames(name)
-											setStartIndex(index)
 										}
 									} else {
 										removeAllNames()
 										addOneOrMoreNames(name)
-										setStartIndex(index)
 									}
+									setStartIndex(index)
+									setEndIndex(null)
 								}
 							}}
 							data-selected={names.has(name)}
