@@ -1,27 +1,43 @@
+import * as wkSocialOriginal from "@icons/wolfkit/social/original/tsx"
+
 import { Icon } from "@/lib"
-import { Figma, Github, Twitter } from "@icons/wolfkit/social/original/tsx"
 
 export type Resource = { name: string; icon: Icon; href: string }
 
 export const resources: Resource[] = [
 	{
 		name: "Icons",
-		icon: Github,
+		icon: wkSocialOriginal.Github,
 		href: "TODO",
 	},
 	{
 		name: "Website",
-		icon: Github,
+		icon: wkSocialOriginal.Github,
 		href: "TODO",
 	},
 	{
 		name: "Social & payments files",
-		icon: Figma,
+		icon: wkSocialOriginal.Figma,
 		href: "TODO",
 	},
 	{
 		name: "Share on Twitter",
-		icon: Twitter,
+		icon: wkSocialOriginal.Twitter,
 		href: "TODO",
 	},
+	//// {
+	//// 	name: "Follow @colebemis",
+	//// 	icon: wkSocialOriginal.Twitter,
+	//// 	href: "TODO",
+	//// },
+	//// {
+	//// 	name: "Follow @thewolfkit",
+	//// 	icon: wkSocialOriginal.Twitter,
+	//// 	href: "TODO",
+	//// },
+	//// {
+	//// 	name: "Follow @username_ZAYDEK",
+	//// 	icon: wkSocialOriginal.Twitter,
+	//// 	href: "TODO",
+	//// },
 ]
