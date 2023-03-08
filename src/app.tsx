@@ -422,19 +422,19 @@ function useShortcutCtrlCCopy() {
 	return void 0
 }
 
-function useEffectClearNamesOnToggle() {
-	const { feather, wkSocial, wkPayments } = useContext(SearchContext)!
-	const { clearNames } = useContext(ClipboardContext)!
-	const onceRef = useRef(false)
-	useEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		clearNames()
-	}, [clearNames, feather, wkPayments, wkSocial])
-	return void 0
-}
+//// function useEffectClearNamesOnToggle() {
+//// 	const { feather, wkSocial, wkPayments } = useContext(SearchContext)!
+//// 	const { clearNames } = useContext(ClipboardContext)!
+//// 	const onceRef = useRef(false)
+//// 	useEffect(() => {
+//// 		if (!onceRef.current) {
+//// 			onceRef.current = true
+//// 			return
+//// 		}
+//// 		clearNames()
+//// 	}, [clearNames, feather, wkPayments, wkSocial])
+//// 	return void 0
+//// }
 
 function useEffectSelectNamesByIndex() {
 	const { data } = useContext(SearchContext)!
@@ -453,15 +453,19 @@ function useEffectSelectNamesByIndex() {
 
 function Name({ exportAs, children: name }: { exportAs: ExportAsValue; children: string }) {
 	if (exportAs === "svg") {
-		return toKebabCase(name).toLowerCase()
+		return <>{toKebabCase(name).toLowerCase()}</>
 	} else {
 		const parts = name.split(/(?=[A-Z])/)
-		return parts.map((p, index) => (
-			<Fragment key={index}>
-				{index > 0 && <wbr />}
-				{p}
-			</Fragment>
-		))
+		return (
+			<>
+				{parts.map((p, index) => (
+					<Fragment key={index}>
+						{index > 0 && <wbr />}
+						{p}
+					</Fragment>
+				))}
+			</>
+		)
 	}
 }
 
@@ -485,7 +489,7 @@ function AppMain() {
 	useShortcutCtrlCCopy()
 
 	// Etc.
-	useEffectClearNamesOnToggle()
+	//// useEffectClearNamesOnToggle()
 	useEffectSelectNamesByIndex()
 
 	return (
