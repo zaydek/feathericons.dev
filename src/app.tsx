@@ -18,7 +18,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { cx, DynamicIcon, isMac, toKebabCase, useScrollProps } from "@/lib"
+import { cx, DynamicIcon, Icon, isMac, toKebabCase, useScrollProps } from "@/lib"
 import {
 	ClipboardContext,
 	ExportAsValue,
@@ -32,7 +32,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { Fragment, useContext, useEffect, useRef, useTransition } from "react"
+import { Fragment, memo, useContext, useEffect, useRef, useTransition } from "react"
 import { Lang } from "shiki-es"
 
 export function App() {
@@ -451,7 +451,7 @@ function useEffectSelectNamesByIndex() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function Name({ exportAs, children: name }: { exportAs: ExportAsValue; children: string }) {
+function GridItemName({ exportAs, children: name }: { exportAs: ExportAsValue; children: string }) {
 	if (exportAs === "svg") {
 		return <>{toKebabCase(name).toLowerCase()}</>
 	} else {
@@ -469,10 +469,55 @@ function Name({ exportAs, children: name }: { exportAs: ExportAsValue; children:
 	}
 }
 
-function AppMain() {
-	const { feather, wkSocial, wkPayments, preferNames, data } = useContext(SearchContext)!
+const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) => {
+	const { preferNames } = useContext(SearchContext)!
 	const { exportAs, index1, setIndex1, setIndex2, names, addNames, removeNames, clearNames } =
 		useContext(ClipboardContext)!
+
+	return (
+		<article
+			id={name}
+			className="grid-item"
+			onClick={e => {
+				if (e.shiftKey) {
+					if (index1 === null) {
+						setIndex1(index)
+						setIndex2(index)
+					} else {
+						setIndex2(index)
+					}
+				} else {
+					if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
+						if (names.has(name)) {
+							removeNames(name)
+						} else {
+							addNames(name)
+						}
+					} else {
+						clearNames()
+						addNames(name)
+					}
+					setIndex1(index)
+					setIndex2(null)
+				}
+			}}
+			data-selected={names.has(name)}
+		>
+			<figure className="grid-item-icon-frame">
+				<Icon className="grid-item-icon" />
+			</figure>
+			{preferNames && (
+				<figcaption className="grid-item-name">
+					<GridItemName exportAs={exportAs}>{name}</GridItemName>
+				</figcaption>
+			)}
+		</article>
+	)
+})
+
+function AppMain() {
+	const { feather, wkSocial, wkPayments, preferNames, data } = useContext(SearchContext)!
+	const { setIndex1, setIndex2, clearNames } = useContext(ClipboardContext)!
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -503,46 +548,8 @@ function AppMain() {
 			}}
 		>
 			<div className={cx("grid", preferNames && "is-prefer-names")}>
-				{data?.map(([name, Icon], index) => (
-					<article
-						key={index}
-						// FIXME
-						id={name}
-						className="grid-item"
-						onClick={e => {
-							if (e.shiftKey) {
-								if (index1 === null) {
-									setIndex1(index)
-									setIndex2(index)
-								} else {
-									setIndex2(index)
-								}
-							} else {
-								if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-									if (names.has(name)) {
-										removeNames(name)
-									} else {
-										addNames(name)
-									}
-								} else {
-									clearNames()
-									addNames(name)
-								}
-								setIndex1(index)
-								setIndex2(null)
-							}
-						}}
-						data-selected={names.has(name)}
-					>
-						<figure className="grid-item-icon-frame">
-							<Icon className="grid-item-icon" />
-						</figure>
-						{preferNames && (
-							<figcaption className="grid-item-name">
-								<Name exportAs={exportAs}>{name}</Name>
-							</figcaption>
-						)}
-					</article>
+				{data?.map(([name, icon], index) => (
+					<MemoizedGridItem key={name} index={index} name={name} icon={icon} />
 				))}
 			</div>
 		</Main>

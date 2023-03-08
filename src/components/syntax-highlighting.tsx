@@ -3,20 +3,23 @@ import { ShikiContext } from "@/state"
 import { Fragment, useContext, useEffect, useState } from "react"
 import { IThemedToken } from "shiki-es"
 
+// https://twitter.com/...
 function TwitterLink({ username, children }: { username: string; children: string }) {
 	const href = `https://twitter.com/${username}`
 	return <Anchor href={href}>{children}</Anchor>
 }
 
+// https://...
 function Link({ href, children }: { href: string; children: string }) {
 	return <Anchor href={href}>{children}</Anchor>
 }
 
-// prettier-ignore
 function RenderLink({ children }: { children: string }) {
-	return children.startsWith("@")
-		? <TwitterLink username={children.substring(1)}>{children}</TwitterLink>
-		: <Link href={children}>{children}</Link>
+	if (children.startsWith("@")) {
+		return <TwitterLink username={children.substring(1)}>{children}</TwitterLink>
+	} else {
+		return <Link href={children}>{children}</Link>
+	}
 }
 
 const urlRegex = /(.*)(?!http:\/\/www\.w3\.org\/2000\/svg)(@[^\s]+|https?:\/\/[^\s]+)(.*)/g
@@ -52,8 +55,7 @@ export function SyntaxHighlighting({ lang, code }: { lang: string; code: string 
 		<pre className="syntax-highlighting">
 			<code className="syntax-highlighting-code">
 				{tokens === null
-					? // No syntax highlighting
-					  // prettier-ignore
+					? // prettier-ignore
 					  code.split("\n").map((line, index) => (
 						<div key={index}>
 							{line.length > 0 ? (
@@ -63,8 +65,7 @@ export function SyntaxHighlighting({ lang, code }: { lang: string; code: string 
 							)}
 						</div>
 					))
-					: // Syntax highlighting
-					  // prettier-ignore
+					: // prettier-ignore
 					  tokens.map((lineTokens, index) => (
 						<div key={index}>
 							{lineTokens.length > 0 ? (
