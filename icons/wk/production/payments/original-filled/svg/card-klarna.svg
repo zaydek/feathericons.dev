@@ -1,11 +1,4 @@
-<!--
-
-Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-Licensed as CC BY 4.0
-
-https://feathericons.dev/?search=card-klarna
-
--->
+<!-- https://feathericons.com/?search=card-klarna -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#FFB3C7" height="32" rx="6" width="56" />
   <path d="M7 11h2.114v9.2H7V11ZM12.323 11h2.068a7.311 7.311 0 0 1-2.16 5.221l2.92 3.978h-2.605l-3.172-4.321.816-.612A5.293 5.293 0 0 0 12.323 11ZM17.757 11h-1.993v9.2h1.993V11ZM33.281 14.552c.483-.659 1.206-.89 1.966-.89 1.53 0 2.708 1.01 2.708 2.494v4.053h-1.9v-3.357c0-.928-.483-1.428-1.318-1.428-.779 0-1.428.472-1.428 1.437v3.338h-1.92v-6.361h1.892v.714Z" fill="#000" />

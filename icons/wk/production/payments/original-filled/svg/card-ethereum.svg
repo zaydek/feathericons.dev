@@ -1,11 +1,4 @@
-<!--
-
-Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-Licensed as CC BY 4.0
-
-https://feathericons.dev/?search=card-ethereum
-
--->
+<!-- https://feathericons.com/?search=card-ethereum -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#333" height="32" rx="6" width="56" />
   <path d="m27.753 5-.148.501v14.547l.148.147 6.752-3.991L27.752 5Z" fill="#E7E7E7" />

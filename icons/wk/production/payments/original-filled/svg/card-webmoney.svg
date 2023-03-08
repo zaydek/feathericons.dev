@@ -1,11 +1,4 @@
-<!--
-
-Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-Licensed as CC BY 4.0
-
-https://feathericons.dev/?search=card-webmoney
-
--->
+<!-- https://feathericons.com/?search=card-webmoney -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#137ABE" height="32" rx="6" width="56" />
   <path d="m30.85 15.614-2.174-2.368-2.415 2.126 2.174 2.415 2.415-2.173ZM24.522 11.314l2.174 2.367 2.415-2.125-2.174-2.368-2.415 2.126ZM32.541 19.72l-2.174-2.367-2.415 2.174 2.174 2.367 2.415-2.174Z" fill="#fff" />

@@ -1,7 +1,4 @@
-// Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-// Licensed as CC BY 4.0
-//
-// https://feathericons.dev/?search=brand-reddit
+// https://feathericons.com/?search=brand-reddit
 export function BrandReddit(props: JSX.IntrinsicElements["svg"]) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" {...props}>

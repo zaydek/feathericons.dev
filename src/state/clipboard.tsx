@@ -15,12 +15,12 @@ export type ExportAsValue =
 //// | "png"
 
 const READONLY_CLIPBOARD_DEFAULT = `
-// Feather icons by @colebemis
+// Feather by @colebemis
 // Licensed as MIT
 // Reuse allowed without attribution
 // https://github.com/feathericons/feather
 //
-// Social & payment logos by @thewolfkit
+// Logos by @thewolfkit
 // Licensed as CC BY 4.0
 // Reuse allowed with attribution
 // https://thewolfkit.com
@@ -110,24 +110,24 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			const svg = document.getElementById(name)!.querySelector("svg")!
 			if (exportAs === "svg") {
 				readOnlyClipboard += transformSvg(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `<!-- https://feathericons.dev/?search=${search} -->`,
+					banner: `<!-- https://feathericons.com/?search=${search} -->`,
 				})
 			} else if (exportAs === "jsx") {
 				readOnlyClipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=jsx`,
+					banner: `// https://feathericons.com/?search=${search}&export-as=jsx`,
 				})
 			} else if (exportAs === "tsx") {
 				if (index === 0) readOnlyClipboard += 'import { JSX } from "solid-js";\n\n'
 				readOnlyClipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=tsx`,
+					banner: `// https://feathericons.com/?search=${search}&export-as=tsx`,
 				})
 			} else if (exportAs === "strict-jsx") {
 				readOnlyClipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=strict-jsx`,
+					banner: `// https://feathericons.com/?search=${search}&export-as=strict-jsx`,
 				})
 			} else if (exportAs === "strict-tsx") {
 				readOnlyClipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=strict-tsx`,
+					banner: `// https://feathericons.com/?search=${search}&export-as=strict-tsx`,
 				})
 			}
 		}

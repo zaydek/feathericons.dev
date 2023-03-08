@@ -1,7 +1,4 @@
-// Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-// Licensed as CC BY 4.0
-//
-// https://feathericons.dev/?search=card-amazon
+// https://feathericons.com/?search=card-amazon
 export function CardAmazon(props: JSX.IntrinsicElements["svg"]) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none" {...props}>

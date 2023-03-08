@@ -1,11 +1,4 @@
-<!--
-
-Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-Licensed as CC BY 4.0
-
-https://feathericons.dev/?search=card-ideal-1
-
--->
+<!-- https://feathericons.com/?search=card-ideal-1 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#000" height="32" rx="6" width="56" />
   <path d="M12.472 11.601a4.965 4.965 0 0 1 1.55-.246c2.364 0 4.337 1.648 4.79 3.837l3.351-.67C21.394 10.8 18.041 8 14.021 8c-.92 0-1.806.147-2.633.418l1.084 3.183Z" fill="#FECA2F" />

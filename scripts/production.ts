@@ -13,35 +13,8 @@ import { transformSvg, transformTsx } from "./utils/transform-svg"
 
 const EOF = "\n"
 
-// prettier-ignore
-const featherSvgBanner = (name: string) => detab(`
-	<!-- https://feathericons.dev/${name} -->
-`)
-
-// prettier-ignore
-const featherTsxBanner = (name: string) => detab(`
-	// https://feathericons.dev/${name}
-`)
-
-// prettier-ignore
-const wolfKitSvgBanner = (name: string) => detab(`
-	<!--
-
-	Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-	Licensed as CC BY 4.0
-
-	https://feathericons.dev/?search=${name}
-
-	-->
-`)
-
-// prettier-ignore
-const wolfKitTsxBanner = (name: string) => detab(`
-	// Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-	// Licensed as CC BY 4.0
-	//
-	// https://feathericons.dev/?search=${name}
-`)
+const svgBanner = (name: string) => `<!-- https://feathericons.com/?search=${name} -->`
+const tsxBanner = (name: string) => `// https://feathericons.com/?search=${name}`
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -150,8 +123,8 @@ async function exportFeather() {
 		console.log()
 	}
 	// Source assets
-	await exportSvgAndZip(svgIcons, "icons/feather/production/svg", { banner: featherSvgBanner })
-	await exportTsx(tsxIcons, "icons/feather/production/tsx", { banner: featherTsxBanner })
+	await exportSvgAndZip(svgIcons, "icons/feather/production/svg", { banner: svgBanner })
+	await exportTsx(tsxIcons, "icons/feather/production/tsx", { banner: tsxBanner })
 	const names = Object.keys(svgIcons).map(name => toTitleCase(name))
 	await fs.writeFile("icons/feather/production/manifest.json", JSON.stringify(names, null, "  ") + EOF)
 	// Binary assets
@@ -178,8 +151,8 @@ async function exportWkBrands() {
 			console.log()
 		}
 		// Source assets
-		await exportSvgAndZip(svgIcons, `icons/wk/production/brands/${target}/svg`, { banner: wolfKitSvgBanner })
-		await exportTsx(tsxIcons, `icons/wk/production/brands/${target}/tsx`, { banner: wolfKitTsxBanner })
+		await exportSvgAndZip(svgIcons, `icons/wk/production/brands/${target}/svg`, { banner: svgBanner })
+		await exportTsx(tsxIcons, `icons/wk/production/brands/${target}/tsx`, { banner: tsxBanner })
 		const names = Object.keys(svgIcons).map(name => toTitleCase(name))
 		await fs.writeFile(`icons/wk/production/brands/${target}/manifest.json`, JSON.stringify(names, null, "  ") + EOF)
 		// Binary assets
@@ -206,8 +179,8 @@ async function exportWkPayments() {
 			console.log()
 		}
 		// Source assets
-		await exportSvgAndZip(svgIcons, `icons/wk/production/payments/${target}/svg`, { banner: wolfKitSvgBanner })
-		await exportTsx(tsxIcons, `icons/wk/production/payments/${target}/tsx`, { banner: wolfKitTsxBanner })
+		await exportSvgAndZip(svgIcons, `icons/wk/production/payments/${target}/svg`, { banner: svgBanner })
+		await exportTsx(tsxIcons, `icons/wk/production/payments/${target}/tsx`, { banner: tsxBanner })
 		const names = Object.keys(svgIcons).map(name => toTitleCase(name))
 		await fs.writeFile(`icons/wk/production/payments/${target}/manifest.json`, JSON.stringify(names, null, "  ") + EOF)
 		// Binary assets

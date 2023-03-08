@@ -1,11 +1,4 @@
-<!--
-
-Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-Licensed as CC BY 4.0
-
-https://feathericons.dev/?search=card-alipay
-
--->
+<!-- https://feathericons.com/?search=card-alipay -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#687076" height="31" rx="5.5" width="55" x=".5" y=".5" />
   <path d="M8.101 16.928c-.846.744-.34 2.104 1.372 2.104.994 0 1.989-.642 2.77-1.668-1.111-.547-2.053-.938-3.07-.837-.274.027-.79.15-1.072.401Z" fill="#fff" />

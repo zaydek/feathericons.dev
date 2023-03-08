@@ -1,11 +1,4 @@
-<!--
-
-Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-Licensed as CC BY 4.0
-
-https://feathericons.dev/?search=card-hiper
-
--->
+<!-- https://feathericons.com/?search=card-hiper -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#fff" height="31" rx="5.5" width="55" x=".5" y=".5" />
   <path d="M20.407 8a1.476 1.476 0 0 1 0 2.95 1.476 1.476 0 0 1 0-2.95ZM7 8.509v12.716h2.885v-5.32h4.738v5.32h2.87V8.509h-2.87v4.89H9.884v-4.89H7Z" fill="#687076" />

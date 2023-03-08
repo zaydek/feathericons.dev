@@ -1,11 +1,4 @@
-<!--
-
-Sourced from The Wolf Kit https://figma.com/community/file/1203393186896008602
-Licensed as CC BY 4.0
-
-https://feathericons.dev/?search=card-sepa
-
--->
+<!-- https://feathericons.com/?search=card-sepa -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none">
   <rect fill="#10298E" height="32" rx="6" width="56" />
   <path clip-rule="evenodd" d="M28.969 21.835V10h5.755c.79 0 1.392.066 1.805.2.947.305 1.582.931 1.907 1.878.168.496.252 1.244.252 2.243 0 1.2-.093 2.063-.277 2.588-.37 1.039-1.13 1.637-2.276 1.792-.136.023-.71.044-1.723.06l-.513.019h-1.841v3.055h-3.09Zm3.089-5.8h1.925c.611-.024.982-.072 1.116-.148.183-.103.305-.31.366-.621.04-.207.059-.515.059-.924 0-.5-.039-.871-.117-1.113-.111-.34-.377-.547-.799-.622a6.036 6.036 0 0 0-.598-.017h-1.952v3.444Z" fill="#fff" fill-rule="evenodd" />
