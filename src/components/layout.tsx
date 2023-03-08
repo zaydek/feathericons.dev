@@ -1,31 +1,21 @@
 import { cx, isMac } from "@/lib"
-import { LayoutContext, SidebarState } from "@/state"
-import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useEffect } from "react"
+import { LayoutContext } from "@/state"
+import { PropsWithChildren, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useDocumentAndBodyScrollLocking({ sidebar }: { sidebar: SidebarState }) {
-	useEffect(() => {
-		const targets = [document.documentElement, document.body]
-		for (const target of targets) {
-			target.style.overflow = sidebar === "maximized" ? "hidden" : ""
-		}
-		return () => {
-			for (const target of targets) {
-				target.style.overflow = ""
-			}
-		}
-	}, [sidebar])
-	return void 0
+export function Sidebar1({ children }: PropsWithChildren) {
+	return (
+		<aside className="sidebar">
+			<div className="sidebar-contents">{children}</div>
+		</aside>
+	)
 }
 
-function useCancelableShortcut({
-	sidebar,
-	setSidebar,
-}: {
-	sidebar: SidebarState
-	setSidebar: Dispatch<SetStateAction<SidebarState>>
-}) {
+////////////////////////////////////////////////////////////////////////////////
+
+function useShortcutEscCancel() {
+	const { sidebar, setSidebar } = useContext(LayoutContext)!
 	useEffect(() => {
 		if (sidebar !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
@@ -39,7 +29,8 @@ function useCancelableShortcut({
 	return void 0
 }
 
-function useToggleShortcut({ setSidebar }: { setSidebar: Dispatch<SetStateAction<SidebarState>> }) {
+function useShortcutCtrlBackslashCycle() {
+	const { setSidebar } = useContext(LayoutContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			// prettier-ignore
@@ -64,14 +55,20 @@ function useToggleShortcut({ setSidebar }: { setSidebar: Dispatch<SetStateAction
 	return void 0
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-export function Sidebar1({ children }: PropsWithChildren) {
-	return (
-		<aside className="sidebar">
-			<div className="sidebar-contents">{children}</div>
-		</aside>
-	)
+function useSideEffectHtmlAndBodyScrollLocking() {
+	const { sidebar } = useContext(LayoutContext)!
+	useEffect(() => {
+		const targets = [document.documentElement, document.body]
+		for (const target of targets) {
+			target.style.overflow = sidebar === "maximized" ? "hidden" : ""
+		}
+		return () => {
+			for (const target of targets) {
+				target.style.overflow = ""
+			}
+		}
+	}, [sidebar])
+	return void 0
 }
 
 export function Sidebar2({ children }: PropsWithChildren) {
@@ -91,9 +88,10 @@ export function Sidebar2({ children }: PropsWithChildren) {
 		})
 	}, [setSidebar])
 
-	useDocumentAndBodyScrollLocking({ sidebar })
-	useCancelableShortcut({ sidebar, setSidebar })
-	useToggleShortcut({ setSidebar })
+	useShortcutEscCancel()
+	useShortcutCtrlBackslashCycle()
+
+	useSideEffectHtmlAndBodyScrollLocking()
 
 	return (
 		<aside className={cx("sidebar", sidebar && `is-${sidebar}`)}>
@@ -104,6 +102,8 @@ export function Sidebar2({ children }: PropsWithChildren) {
 		</aside>
 	)
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 function _SidebarOverlay() {
 	const { sidebar, setSidebar } = useContext(LayoutContext)!
