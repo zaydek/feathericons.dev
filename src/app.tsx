@@ -146,11 +146,11 @@ function AppSidebar1() {
 											// prettier-ignore
 											preferColor
 												? wkPaymentsValue === "normal"
-													? WkPaymentsOriginal.Stripe
-													: WkPaymentsOriginalFilled.Stripe
+													? WkPaymentsOriginal.CardStripe
+													: WkPaymentsOriginalFilled.CardStripe
 												: wkPaymentsValue === "normal"
-													? WkPaymentsMono.Stripe
-													: WkPaymentsMonoFilled.Stripe
+													? WkPaymentsMono.CardStripe
+													: WkPaymentsMonoFilled.CardStripe
 										}
 									/>
 								</div>
@@ -168,7 +168,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon payments"
-											icon={preferColor ? WkPaymentsOriginal.Stripe : WkPaymentsMono.Stripe}
+											icon={preferColor ? WkPaymentsOriginal.CardStripe : WkPaymentsMono.CardStripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Original</span>
@@ -192,7 +192,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon payments"
-											icon={preferColor ? WkPaymentsOriginalFilled.Stripe : WkPaymentsMonoFilled.Stripe}
+											icon={preferColor ? WkPaymentsOriginalFilled.CardStripe : WkPaymentsMonoFilled.CardStripe}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Filled</span>

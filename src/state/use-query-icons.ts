@@ -70,33 +70,33 @@ export async function fetchIconsets(
 	},
 	preferColor: boolean,
 ) {
-	const promises: Promise<Record<string, Icon>>[] = []
+	const chain: Promise<Record<string, Icon>>[] = []
 	if (iconsets.feather) {
-		promises.push(import("@icons/feather/tsx"))
+		chain.push(import("@icons/feather/tsx"))
 	}
 	if (iconsets.wkSocial) {
 		if (preferColor) {
-			promises.push(import("@icons/wk/social/original/tsx"))
+			chain.push(import("@icons/wk/social/original/tsx"))
 		} else {
-			promises.push(import("@icons/wk/social/mono/tsx"))
+			chain.push(import("@icons/wk/social/mono/tsx"))
 		}
 	}
 	if (iconsets.wkPayments) {
 		if (preferColor) {
 			if (iconsets.wkPaymentsValue === "normal") {
-				promises.push(import("@icons/wk/payments/original-filled/tsx"))
+				chain.push(import("@icons/wk/payments/original/tsx"))
 			} else {
-				promises.push(import("@icons/wk/payments/original/tsx"))
+				chain.push(import("@icons/wk/payments/original-filled/tsx"))
 			}
 		} else {
 			if (iconsets.wkPaymentsValue === "normal") {
-				promises.push(import("@icons/wk/payments/mono-filled/tsx"))
+				chain.push(import("@icons/wk/payments/mono/tsx"))
 			} else {
-				promises.push(import("@icons/wk/payments/mono/tsx"))
+				chain.push(import("@icons/wk/payments/mono-filled/tsx"))
 			}
 		}
 	}
-	const resolved = await Promise.all(promises)
+	const resolved = await Promise.all(chain)
 	return resolved.map(mod => Object.entries(mod)).flat()
 }
 

@@ -93,10 +93,10 @@ async function organizeWkSocial() {
 async function organizeWkPayments() {
 	// prettier-ignore
 	const args = [
-		{ target: "original" },
-		{ target: "original-filled" },
-		{ target: "mono",        renameRegex: [/(-mono)(\.)/, "$2"] as const },
-		{ target: "mono-filled", renameRegex: [/(-mono)(\.)/, "$2"] as const },
+		{ target: "original",        renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
+		{ target: "original-filled", renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
+		{ target: "mono",            renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
+		{ target: "mono-filled",     renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
 	]
 	for (const { target, renameRegex } of args) {
 		// LOG

@@ -141,7 +141,6 @@ async function exportZip(srcdir: string, outdir: string) {
 async function exportAllFeather() {
 	await fs.rm("icons/feather/production", { recursive: true, force: true })
 	await sleep(100) // 😪
-
 	const icons = await readIcons("icons/feather/unpkg")
 	const svgIcons = formatIcons(icons, { strictJsx: false })
 	const tsxIcons = formatIcons(icons, { strictJsx: true })
@@ -150,13 +149,11 @@ async function exportAllFeather() {
 		console.log(icon)
 		console.log()
 	}
-
 	// Source assets
 	await exportSvgAndZip(svgIcons, "icons/feather/production/svg", { banner: featherSvgBanner })
 	await exportTsx(tsxIcons, "icons/feather/production/tsx", { banner: featherTsxBanner })
 	const names = Object.keys(svgIcons).map(name => toTitleCase(name))
 	await fs.writeFile("icons/feather/production/manifest.json", JSON.stringify(names, null, "  ") + EOF)
-
 	// Binary assets
 	await exportZip("icons/feather/figma/jpg@1x", "icons/feather/production/jpg@1x")
 	await exportZip("icons/feather/figma/jpg@2x", "icons/feather/production/jpg@2x")
