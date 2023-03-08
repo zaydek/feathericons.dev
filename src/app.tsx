@@ -20,11 +20,12 @@ import {
 import { resources } from "@/data"
 import { cx, DynamicIcon, Icon, isMac, toKebabCase, useScrollProps } from "@/lib"
 import {
-	ClipboardContext,
-	ExportAsValue,
+	ExportAsContext,
 	ProgressBarContext,
 	RangeContext,
+	ReadOnlyClipboardContext,
 	SearchContext,
+	SelectionContext,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
@@ -293,8 +294,9 @@ function AppSidebar1() {
 function AppSidebar2() {
 	const scrollProps = useScrollProps()
 
-	const { exportAs, setExportAs, clipboard } = useContext(ClipboardContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
+	const { exportAs, setExportAs } = useContext(ExportAsContext)!
+	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
 
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
 
@@ -313,7 +315,7 @@ function AppSidebar2() {
 					</header>
 				</section>
 				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...scrollProps}>
-					<SyntaxHighlighting lang={lang} code={clipboard} />
+					<SyntaxHighlighting lang={lang} code={readOnlyClipboard} />
 				</div>
 			</header>
 			<div className="sidebar-body">
@@ -374,51 +376,52 @@ function AppSidebar2() {
 
 function useShortcutCtrlASelectAll() {
 	const { data } = useContext(SearchContext)!
-	const { setIndex1, setIndex2 } = useContext(ClipboardContext)!
+	const { setStartIndex: setNamesIndex1, setEndIndex: setNamesIndex2 } = useContext(SelectionContext)!
 	useEffect(() => {
 		if (data === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.tagName !== "BODY") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				e.preventDefault()
-				setIndex1(0)
-				setIndex2(Number.MAX_SAFE_INTEGER)
+				setNamesIndex1(0)
+				setNamesIndex2(Number.MAX_SAFE_INTEGER)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [data, setIndex1, setIndex2])
+	}, [data, setNamesIndex1, setNamesIndex2])
 	return void 0
 }
 
 function useShortcutEscapeClearAll() {
-	const { setIndex1, setIndex2, clearNames } = useContext(ClipboardContext)!
+	const { setStartIndex: setNamesIndex1, setEndIndex: setNamesIndex2, clearNames } = useContext(SelectionContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
 				clearNames()
-				setIndex1(null)
-				setIndex2(null)
+				setNamesIndex1(null)
+				setNamesIndex2(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clearNames, setIndex1, setIndex2])
+	}, [clearNames, setNamesIndex1, setNamesIndex2])
 	return void 0
 }
 
 function useShortcutCtrlCCopy() {
-	const { clipboard } = useContext(ClipboardContext)!
+	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if (!e.shiftKey && ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c"))) {
+			if (e.shiftKey) return // Chrome shortcut
+			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
 				e.preventDefault()
-				navigator.clipboard.writeText(clipboard)
+				navigator.clipboard.writeText(readOnlyClipboard)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clipboard])
+	}, [readOnlyClipboard])
 	return void 0
 }
 
@@ -438,20 +441,23 @@ function useShortcutCtrlCCopy() {
 
 function useEffectSelectNamesByIndex() {
 	const { data } = useContext(SearchContext)!
-	const { index1, index2, addNames } = useContext(ClipboardContext)!
+	const { startIndex: namesIndex1, endIndex: namesIndex2, addNames } = useContext(SelectionContext)!
 	useEffect(() => {
+		// TODO
 		if (data === undefined) return
-		if (index1 === null || index2 === null) return
-		const minIndex = Math.min(index1, index2)
-		const maxIndex = Math.max(index1, index2)
+		if (namesIndex1 === null || namesIndex2 === null) return
+		const minIndex = Math.min(namesIndex1, namesIndex2)
+		const maxIndex = Math.max(namesIndex1, namesIndex2)
 		addNames(...data!.slice(minIndex, maxIndex + 1).map(([name]) => name))
-	}, [addNames, data, index1, index2])
+	}, [addNames, data, namesIndex1, namesIndex2])
 	return void 0
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function GridItemName({ exportAs, children: name }: { exportAs: ExportAsValue; children: string }) {
+function GridItemName({ children: name }: { children: string }) {
+	const { exportAs } = useContext(ExportAsContext)!
+
 	if (exportAs === "svg") {
 		return <>{toKebabCase(name).toLowerCase()}</>
 	} else {
@@ -471,8 +477,10 @@ function GridItemName({ exportAs, children: name }: { exportAs: ExportAsValue; c
 
 const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) => {
 	const { preferNames } = useContext(SearchContext)!
-	const { exportAs, index1, setIndex1, setIndex2, names, addNames, removeNames, clearNames } =
-		useContext(ClipboardContext)!
+	const { names, startIndex, setStartIndex, setEndIndex, addNames, removeNames, clearNames } =
+		useContext(SelectionContext)!
+
+	console.log("test")
 
 	return (
 		<article
@@ -480,11 +488,11 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 			className="grid-item"
 			onClick={e => {
 				if (e.shiftKey) {
-					if (index1 === null) {
-						setIndex1(index)
-						setIndex2(index)
+					if (startIndex === null) {
+						setStartIndex(index)
+						setEndIndex(index)
 					} else {
-						setIndex2(index)
+						setEndIndex(index)
 					}
 				} else {
 					if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
@@ -497,8 +505,8 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 						clearNames()
 						addNames(name)
 					}
-					setIndex1(index)
-					setIndex2(null)
+					setStartIndex(index)
+					setEndIndex(null)
 				}
 			}}
 			data-selected={names.has(name)}
@@ -508,7 +516,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 			</figure>
 			{preferNames && (
 				<figcaption className="grid-item-name">
-					<GridItemName exportAs={exportAs}>{name}</GridItemName>
+					<GridItemName>{name}</GridItemName>
 				</figcaption>
 			)}
 		</article>
@@ -517,7 +525,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 
 function AppMain() {
 	const { feather, wkSocial, wkPayments, preferNames, data } = useContext(SearchContext)!
-	const { setIndex1, setIndex2, clearNames } = useContext(ClipboardContext)!
+	const { setStartIndex, setEndIndex, clearNames } = useContext(SelectionContext)!
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -542,8 +550,8 @@ function AppMain() {
 			onClick={e => {
 				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
 					clearNames()
-					setIndex1(null)
-					setIndex2(null)
+					setStartIndex(null)
+					setEndIndex(null)
 				}
 			}}
 		>
