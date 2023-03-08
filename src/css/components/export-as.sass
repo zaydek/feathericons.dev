@@ -20,26 +20,31 @@ label.export-as
   &:hover:active + .export-as-button
     background-color: $slate-200
 
+.export-as-button
+  display: flex
+  justify-content: center
+  align-items: center
+  height: $select-height
+  border-radius: 1e3px
+  box-shadow: $inset-hairline-shadow
+  pointer-events: none // Passthrough to <select>
   @at-root
-    .export-as-button
-      display: inline-flex
+    .export-as-name
+      font: 425 13px / 1.25 $sans
+      text-align: center
+      color: $slate-800
+    .export-as-icon-frame
+      display: flex
       justify-content: center
       align-items: center
-      padding: 0 math.div($select-height, 2)
       height: $select-height
-      border-radius: 1e3px
-      box-shadow: $inset-hairline-shadow
-      pointer-events: none // Passthrough to <select>
-
+      width: $select-height
+      &:first-child
+        margin-left:  math.div($select-height, 8) // 🧐
+      &:last-child
+        margin-right: math.div($select-height, 8) // 🧐
       @at-root
-        .export-as-name
-          font: 425 13px / 1.25 $sans
-          text-align: center
-          color: $slate-800
-
-        // TODO: Change to align-frame pattern here
         .export-as-icon
-          margin-left: math.div($select-height - $tiny-icon-height, 2)
           height: $tiny-icon-height
           width: $tiny-icon-height
-          color: $slate-800
+          color: $slate-400

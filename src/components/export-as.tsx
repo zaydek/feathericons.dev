@@ -1,3 +1,5 @@
+import * as Feather from "@icons/feather/tsx"
+
 import { Reactjs, Svg, TypeScript } from "@/components/icons"
 import { Icon } from "@/lib"
 import { ExportAsValue } from "@/state"
@@ -15,10 +17,10 @@ const icons: Record<ExportAsValue, Icon> = {
 
 const names: Record<ExportAsValue, string> = {
 	svg: "SVG",
-	jsx: "Solid.js",
-	tsx: "Typescript Solid.js",
-	"strict-jsx": "React.js",
-	"strict-tsx": "Typescript React.js",
+	jsx: "Solid",
+	tsx: "Typescript Solid",
+	"strict-jsx": "React",
+	"strict-tsx": "Typescript React",
 	//// "strict-jsx-rn": "React Native",
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
@@ -43,23 +45,33 @@ export function ExportAs({
 					<option value="css">CSS</option>
 					<option value="scss">Sass (SCSS)</option>
 				</optgroup> */}
-				<optgroup label="Solid.js">
-					<option value="jsx">Solid.js</option>
-					<option value="tsx">TypeScript Solid.js</option>
+				<optgroup label="Solid">
+					<option value="jsx">Solid</option>
+					<option value="tsx">TypeScript Solid</option>
 				</optgroup>
-				<optgroup label="React.js, Qwik">
-					<option value="strict-jsx">React.js</option>
-					<option value="strict-tsx">TypeScript React.js</option>
+				<optgroup label="React, Qwik">
+					<option value="strict-jsx">React</option>
+					<option value="strict-tsx">TypeScript React</option>
 				</optgroup>
 				{/* <optgroup label="React Native">
 					<option value="strict-jsx-rn">React Native</option>
 					<option value="strict-tsx-rn">TypeScript React Native</option>
 				</optgroup> */}
 			</select>
-			<span className="export-as-button">
+			<div className="export-as-button">
+				<div className="export-as-icon-frame">
+					<Icon className="export-as-icon" />
+				</div>
 				<span className="export-as-name">{name}</span>
-				<Icon className="export-as-icon" />
-			</span>
+				<div className="export-as-icon-frame">
+					<Feather.ChevronDown
+						// prettier-ignore
+						className="export-as-icon"
+						//// style={{ transform: "scale(0.8)" }}
+						//// strokeWidth={6}
+					/>
+				</div>
+			</div>
 		</label>
 	)
 }
