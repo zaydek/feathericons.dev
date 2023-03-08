@@ -1,4 +1,4 @@
-import { detab, toTitleCase, useParam } from "@/lib"
+import { detab, toKebabCase, toTitleCase, useParam } from "@/lib"
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
 import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useState } from "react"
 
@@ -123,24 +123,24 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 					formatSvg(svg, {
 						strictJsx: !!0,
 					}),
-					{ banner: `<!-- https://feathericons.dev/?search=${name} -->` },
+					{ banner: `<!-- https://feathericons.dev/?search=${toKebabCase(name).toLowerCase()} -->` },
 				)
 			} else if (exportAs === "jsx") {
 				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${name}&export-as=jsx`,
+					banner: `// https://feathericons.dev/?search=${toKebabCase(name).toLowerCase()}&export-as=jsx`,
 				})
 			} else if (exportAs === "tsx") {
 				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
 				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${name}&export-as=tsx`,
+					banner: `// https://feathericons.dev/?search=${toKebabCase(name).toLowerCase()}&export-as=tsx`,
 				})
 			} else if (exportAs === "strict-jsx") {
 				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${name}&export-as=strict-jsx`,
+					banner: `// https://feathericons.dev/?search=${toKebabCase(name).toLowerCase()}&export-as=strict-jsx`,
 				})
 			} else if (exportAs === "strict-tsx") {
 				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${name}&export-as=strict-tsx`,
+					banner: `// https://feathericons.dev/?search=${toKebabCase(name).toLowerCase()}&export-as=strict-tsx`,
 				})
 			}
 		}
