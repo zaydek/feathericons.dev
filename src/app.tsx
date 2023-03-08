@@ -18,24 +18,26 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { cx, DynamicIcon, Icon, isMac, toKebabCase, useScrollProps } from "@/lib"
+import { cx, DynamicIcon, Icon, isMac, toKebabCase } from "@/lib"
 import {
 	ExportAsContext,
 	IconPreferencesContext,
 	IconsContext,
 	ProgressBarContext,
-	RangeContext,
 	ReadOnlyClipboardContext,
 	SelectionContext,
+	SizeContext,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
+	StrokeWidthContext,
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
 import { Fragment, memo, useContext, useEffect, useRef, useTransition } from "react"
 import { Lang } from "shiki-es"
+import { useTrackScrollProps } from "./use-track-scroll-props"
 
 export function App() {
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -56,7 +58,7 @@ export function App() {
 }
 
 function AppSidebar1() {
-	const scrollProps = useScrollProps()
+	const trackScrollProps = useTrackScrollProps()
 
 	// TODO
 	const { setStarted } = useContext(ProgressBarContext)!
@@ -90,7 +92,7 @@ function AppSidebar1() {
 				<section className="section is-start">
 					<SearchBar />
 				</section>
-				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
+				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
 					<section className="section">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
@@ -291,14 +293,29 @@ function AppSidebar1() {
 	)
 }
 
-function AppSidebar2() {
-	const scrollProps = useScrollProps()
+function useCssVariables() {
+	const { size } = useContext(SizeContext)!
+	const { strokeWidth } = useContext(StrokeWidthContext)!
+	useEffect(() => {
+		document.body.style.setProperty("--size", "" + size)
+	}, [size])
+	useEffect(() => {
+		document.body.style.setProperty("--stroke-width", "" + strokeWidth)
+	}, [strokeWidth])
+	return void 0
+}
 
-	const { size, setSize, strokeWidth, setStrokeWidth, resetSize, resetStrokeWidth } = useContext(RangeContext)!
+function AppSidebar2() {
+	const trackScrollProps = useTrackScrollProps()
+
+	const { size, setSize, resetSize } = useContext(SizeContext)!
+	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = useContext(StrokeWidthContext)!
 	const { exportAs, setExportAs } = useContext(ExportAsContext)!
 	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
 
 	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
+
+	useCssVariables()
 
 	return (
 		<Sidebar2>
@@ -314,7 +331,7 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...scrollProps}>
+				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...trackScrollProps}>
 					<SyntaxHighlighting lang={lang} code={readOnlyClipboard} />
 				</div>
 			</header>
