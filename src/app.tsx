@@ -36,32 +36,24 @@ import {
 	STROKE_STEP,
 } from "@/state"
 import { Fragment, memo, useContext, useEffect, useRef, useTransition } from "react"
-import { Lang } from "shiki-es"
 import { useTrackScrollProps } from "./use-track-scroll-props"
 
-export function App() {
-	const { setStarted } = useContext(ProgressBarContext)!
+////////////////////////////////////////////////////////////////////////////////
 
+function useProgressBar() {
+	const { setStarted } = useContext(ProgressBarContext)!
+	const [pending, startTransition] = useTransition()
 	useEffect(() => {
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
 		return () => window.clearTimeout(d)
-	}, [setStarted])
-
-	return (
-		<DEV_DebugCss>
-			<AppSidebar1 />
-			<AppSidebar2 />
-			<AppMain />
-		</DEV_DebugCss>
-	)
+	}, [pending, setStarted])
+	return startTransition
 }
 
 function AppSidebar1() {
-	const trackScrollProps = useTrackScrollProps()
+	const start = useProgressBar()
 
-	// TODO
-	const { setStarted } = useContext(ProgressBarContext)!
 	const {
 		feather,
 		setFeather,
@@ -76,15 +68,7 @@ function AppSidebar1() {
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
 		useContext(IconPreferencesContext)!
 
-	// TODO
-	const [pending, startTransition] = useTransition()
-	//
-	// TODO
-	useEffect(() => {
-		setStarted(true)
-		const d = window.setTimeout(() => setStarted(false), 100)
-		return () => window.clearTimeout(d)
-	}, [pending, setStarted])
+	const scrollProps = useTrackScrollProps()
 
 	return (
 		<Sidebar1>
@@ -92,7 +76,7 @@ function AppSidebar1() {
 				<section className="section is-start">
 					<SearchBar />
 				</section>
-				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
+				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
@@ -100,11 +84,7 @@ function AppSidebar1() {
 							</div>
 							<h6 className="section-name u-flex-1">Icons</h6>
 							<div className="sidebar-align-icon-frame">
-								<Feather.RotateCcw
-									className="section-reset-icon"
-									strokeWidth={4}
-									onClick={() => startTransition(resetIcons)}
-								/>
+								<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={() => start(resetIcons)} />
 							</div>
 						</header>
 						<div>
@@ -118,7 +98,7 @@ function AppSidebar1() {
 										<input
 											type="checkbox"
 											checked={feather}
-											onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+											onChange={e => start(() => setFeather(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
@@ -136,7 +116,7 @@ function AppSidebar1() {
 										<input
 											type="checkbox"
 											checked={wkSocial}
-											onChange={e => startTransition(() => setWkSocial(e.currentTarget.checked))}
+											onChange={e => start(() => setWkSocial(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
@@ -163,7 +143,7 @@ function AppSidebar1() {
 										<input
 											type="checkbox"
 											checked={wkPayments}
-											onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
+											onChange={e => start(() => setWkPayments(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
@@ -182,7 +162,7 @@ function AppSidebar1() {
 												type="radio"
 												checked={wkPaymentsValue === "normal"}
 												onChange={e =>
-													startTransition(() => {
+													start(() => {
 														setWkPayments(true)
 														setWkPaymentsValue("normal")
 													})
@@ -206,7 +186,7 @@ function AppSidebar1() {
 												type="radio"
 												checked={wkPaymentsValue === "filled"}
 												onChange={e =>
-													startTransition(() => {
+													start(() => {
 														setWkPayments(true)
 														setWkPaymentsValue("filled")
 													})
@@ -229,11 +209,7 @@ function AppSidebar1() {
 						</div>
 						<h6 className="section-name u-flex-1">Settings</h6>
 						<div className="sidebar-align-icon-frame">
-							<Feather.RotateCcw
-								className="section-reset-icon"
-								strokeWidth={4}
-								onClick={() => startTransition(resetIconPrefs)}
-							/>
+							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={() => start(resetIconPrefs)} />
 						</div>
 					</header>
 					<ul className="checkboxes">
@@ -247,7 +223,7 @@ function AppSidebar1() {
 								<input
 									type="checkbox"
 									checked={preferColor}
-									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
+									onChange={e => start(() => setPreferColor(e.currentTarget.checked))}
 								/>
 							</div>
 						</label>
@@ -293,7 +269,9 @@ function AppSidebar1() {
 	)
 }
 
-function useCssVariables() {
+////////////////////////////////////////////////////////////////////////////////
+
+function useRangeCssVariables() {
 	const { size } = useContext(SizeContext)!
 	const { strokeWidth } = useContext(StrokeWidthContext)!
 	useEffect(() => {
@@ -306,16 +284,14 @@ function useCssVariables() {
 }
 
 function AppSidebar2() {
-	const trackScrollProps = useTrackScrollProps()
-
 	const { size, setSize, resetSize } = useContext(SizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = useContext(StrokeWidthContext)!
 	const { exportAs, setExportAs } = useContext(ExportAsContext)!
 	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
 
-	const lang: Lang = exportAs === "svg" ? "html" : "tsx"
+	const scrollProps = useTrackScrollProps()
 
-	useCssVariables()
+	useRangeCssVariables()
 
 	return (
 		<Sidebar2>
@@ -331,8 +307,8 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...trackScrollProps}>
-					<SyntaxHighlighting lang={lang} code={readOnlyClipboard} />
+				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...scrollProps}>
+					<SyntaxHighlighting lang={exportAs === "svg" ? "html" : "tsx"} code={readOnlyClipboard} />
 				</div>
 			</header>
 			<div className="sidebar-body">
@@ -470,8 +446,6 @@ function useSelectNamesFromIndexes() {
 	return void 0
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 function GridItemName({ children: name }: { children: string }) {
 	const { exportAs } = useContext(ExportAsContext)!
 
@@ -496,8 +470,6 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 	const { preferNames } = useContext(IconPreferencesContext)!
 	const { names, startIndex, setStartIndex, setEndIndex, addNames, removeNames, clearNames } =
 		useContext(SelectionContext)!
-
-	console.log("test")
 
 	return (
 		<article
@@ -579,5 +551,17 @@ function AppMain() {
 				))}
 			</div>
 		</Main>
+	)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+export function App() {
+	return (
+		<DEV_DebugCss>
+			<AppSidebar1 />
+			<AppSidebar2 />
+			<AppMain />
+		</DEV_DebugCss>
 	)
 }

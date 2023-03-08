@@ -23,7 +23,7 @@ export function useParam<T>({
 	})
 
 	useEffect(() => {
-		const timeoutId = window.setTimeout(() => {
+		const d = window.setTimeout(() => {
 			const nextSearchParams = new URLSearchParams(window.location.search)
 			if (value === initialValue) {
 				nextSearchParams.delete(key)
@@ -38,7 +38,7 @@ export function useParam<T>({
 				window.history.replaceState(null, "", `?${str}`)
 			}
 		}, 100)
-		return () => clearTimeout(timeoutId)
+		return () => clearTimeout(d)
 	}, [value]) // eslint-disable-line react-hooks/exhaustive-deps
 
 	return [value, setValue] as const
