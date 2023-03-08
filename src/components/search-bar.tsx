@@ -28,9 +28,10 @@ function useShortcutCtrlPFocus(ref: RefObject<HTMLInputElement | null>) {
 }
 
 export function SearchBar() {
-	const ref = useRef<HTMLInputElement | null>(null)
 	const { search, setSearch } = useContext(SearchContext)!
 	const { clear } = useContext(SelectionContext)!
+
+	const ref = useRef<HTMLInputElement | null>(null)
 
 	useShortcutCtrlPFocus(ref)
 	useSideEffectFocusOnMount(ref)
