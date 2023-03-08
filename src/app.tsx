@@ -21,10 +21,11 @@ import { resources } from "@/data"
 import { cx, DynamicIcon, Icon, isMac, toKebabCase, useScrollProps } from "@/lib"
 import {
 	ExportAsContext,
+	IconPreferencesContext,
+	IconsContext,
 	ProgressBarContext,
 	RangeContext,
 	ReadOnlyClipboardContext,
-	SearchContext,
 	SelectionContext,
 	SIZE_MAX,
 	SIZE_MIN,
@@ -57,6 +58,7 @@ export function App() {
 function AppSidebar1() {
 	const scrollProps = useScrollProps()
 
+	// TODO
 	const { setStarted } = useContext(ProgressBarContext)!
 	const {
 		feather,
@@ -67,17 +69,15 @@ function AppSidebar1() {
 		setWkPayments,
 		wkPaymentsValue,
 		setWkPaymentsValue,
-		preferColor,
-		setPreferColor,
-		preferNames,
-		setPreferNames,
 		resetIcons,
-		resetIconSettings,
-	} = useContext(SearchContext)!
+	} = useContext(IconsContext)!
+	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
+		useContext(IconPreferencesContext)!
 
-	// TODO: Extract
+	// TODO
 	const [pending, startTransition] = useTransition()
-
+	//
+	// TODO
 	useEffect(() => {
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
@@ -105,116 +105,116 @@ function AppSidebar1() {
 								/>
 							</div>
 						</header>
-						{/* <div> */}
-						<ul className="checkboxes">
-							<label className="checkbox">
-								<div className="sidebar-align-icon-frame">
-									<Feather.Feather className="checkbox-icon" />
-								</div>
-								<span className="checkbox-name u-flex-1">Feather icons</span>
-								<div className="sidebar-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={feather}
-										onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
-									/>
-								</div>
-							</label>
-						</ul>
-						<ul className="checkboxes">
-							<label className="checkbox">
-								<div className="sidebar-align-icon-frame">
-									<DynamicIcon
-										className="checkbox-icon"
-										icon={preferColor ? WkSocialOriginal.Twitter : WkSocialMono.Twitter}
-									/>
-								</div>
-								<span className="checkbox-name u-flex-1">Social logos</span>
-								<div className="sidebar-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={wkSocial}
-										onChange={e => startTransition(() => setWkSocial(e.currentTarget.checked))}
-									/>
-								</div>
-							</label>
-						</ul>
-						<ul className="checkboxes">
-							<label className="checkbox">
-								<div className="sidebar-align-icon-frame">
-									<DynamicIcon
-										className="checkbox-icon payments"
-										icon={
-											// prettier-ignore
-											preferColor
+						<div>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-icon-frame">
+										<Feather.Feather className="checkbox-icon" />
+									</div>
+									<span className="checkbox-name u-flex-1">Feather icons</span>
+									<div className="sidebar-align-icon-frame">
+										<input
+											type="checkbox"
+											checked={feather}
+											onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+										/>
+									</div>
+								</label>
+							</ul>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-icon-frame">
+										<DynamicIcon
+											className="checkbox-icon"
+											icon={preferColor ? WkSocialOriginal.Twitter : WkSocialMono.Twitter}
+										/>
+									</div>
+									<span className="checkbox-name u-flex-1">Social logos</span>
+									<div className="sidebar-align-icon-frame">
+										<input
+											type="checkbox"
+											checked={wkSocial}
+											onChange={e => startTransition(() => setWkSocial(e.currentTarget.checked))}
+										/>
+									</div>
+								</label>
+							</ul>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-icon-frame">
+										<DynamicIcon
+											className="checkbox-icon payments"
+											icon={
+												// prettier-ignore
+												preferColor
 												? wkPaymentsValue === "normal"
 													? WkPaymentsOriginal.CardStripe
 													: WkPaymentsOriginalFilled.CardStripe
 												: wkPaymentsValue === "normal"
 													? WkPaymentsMono.CardStripe
 													: WkPaymentsMonoFilled.CardStripe
-										}
-									/>
-								</div>
-								<span className="checkbox-name u-flex-1">Payment logos</span>
-								<div className="sidebar-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={wkPayments}
-										onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
-									/>
-								</div>
-							</label>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon payments"
-											icon={preferColor ? WkPaymentsOriginal.CardStripe : WkPaymentsMono.CardStripe}
-										/>
-									</div>
-									<span className="checkbox-name u-flex-1">Original</span>
-									<div className="sidebar-align-icon-frame">
-										<input
-											name="payments"
-											type="radio"
-											checked={wkPaymentsValue === "normal"}
-											onChange={e =>
-												startTransition(() => {
-													setWkPayments(true)
-													setWkPaymentsValue("normal")
-												})
 											}
 										/>
 									</div>
-								</label>
-							</ul>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon payments"
-											icon={preferColor ? WkPaymentsOriginalFilled.CardStripe : WkPaymentsMonoFilled.CardStripe}
-										/>
-									</div>
-									<span className="checkbox-name u-flex-1">Filled</span>
+									<span className="checkbox-name u-flex-1">Payment logos</span>
 									<div className="sidebar-align-icon-frame">
 										<input
-											name="payments"
-											type="radio"
-											checked={wkPaymentsValue === "filled"}
-											onChange={e =>
-												startTransition(() => {
-													setWkPayments(true)
-													setWkPaymentsValue("filled")
-												})
-											}
+											type="checkbox"
+											checked={wkPayments}
+											onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
+								<ul className="checkboxes">
+									<label className="checkbox">
+										<div className="sidebar-align-icon-frame">
+											<DynamicIcon
+												className="checkbox-icon payments"
+												icon={preferColor ? WkPaymentsOriginal.CardStripe : WkPaymentsMono.CardStripe}
+											/>
+										</div>
+										<span className="checkbox-name u-flex-1">Original</span>
+										<div className="sidebar-align-icon-frame">
+											<input
+												name="payments"
+												type="radio"
+												checked={wkPaymentsValue === "normal"}
+												onChange={e =>
+													startTransition(() => {
+														setWkPayments(true)
+														setWkPaymentsValue("normal")
+													})
+												}
+											/>
+										</div>
+									</label>
+								</ul>
+								<ul className="checkboxes">
+									<label className="checkbox">
+										<div className="sidebar-align-icon-frame">
+											<DynamicIcon
+												className="checkbox-icon payments"
+												icon={preferColor ? WkPaymentsOriginalFilled.CardStripe : WkPaymentsMonoFilled.CardStripe}
+											/>
+										</div>
+										<span className="checkbox-name u-flex-1">Filled</span>
+										<div className="sidebar-align-icon-frame">
+											<input
+												name="payments"
+												type="radio"
+												checked={wkPaymentsValue === "filled"}
+												onChange={e =>
+													startTransition(() => {
+														setWkPayments(true)
+														setWkPaymentsValue("filled")
+													})
+												}
+											/>
+										</div>
+									</label>
+								</ul>
 							</ul>
-						</ul>
-						{/* </div> */}
+						</div>
 					</section>
 				</div>
 			</header>
@@ -230,7 +230,7 @@ function AppSidebar1() {
 							<Feather.RotateCcw
 								className="section-reset-icon"
 								strokeWidth={4}
-								onClick={() => startTransition(resetIconSettings)}
+								onClick={() => startTransition(resetIconPrefs)}
 							/>
 						</div>
 					</header>
@@ -375,10 +375,10 @@ function AppSidebar2() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutCtrlASelectAll() {
-	const { data } = useContext(SearchContext)!
+	const { icons } = useContext(IconsContext)!
 	const { setStartIndex: setNamesIndex1, setEndIndex: setNamesIndex2 } = useContext(SelectionContext)!
 	useEffect(() => {
-		if (data === undefined) return
+		if (icons === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.tagName !== "BODY") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
@@ -389,7 +389,7 @@ function useShortcutCtrlASelectAll() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [data, setNamesIndex1, setNamesIndex2])
+	}, [icons, setNamesIndex1, setNamesIndex2])
 	return void 0
 }
 
@@ -441,15 +441,15 @@ function useShortcutCtrlCCopy() {
 
 // TODO
 function useSelectNamesFromIndexes() {
-	const { data } = useContext(SearchContext)!
+	const { icons } = useContext(IconsContext)!
 	const { startIndex, endIndex, addNames } = useContext(SelectionContext)!
 	useEffect(() => {
-		if (data === undefined) return
+		if (icons === undefined) return
 		if (startIndex === null || endIndex === null) return
 		const minIndex = Math.min(startIndex, endIndex)
 		const maxIndex = Math.max(startIndex, endIndex)
-		addNames(...data!.slice(minIndex, maxIndex + 1).map(([name]) => name))
-	}, [addNames, data, startIndex, endIndex])
+		addNames(...icons!.slice(minIndex, maxIndex + 1).map(([name]) => name))
+	}, [addNames, icons, startIndex, endIndex])
 	return void 0
 }
 
@@ -476,7 +476,7 @@ function GridItemName({ children: name }: { children: string }) {
 }
 
 const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) => {
-	const { preferNames } = useContext(SearchContext)!
+	const { preferNames } = useContext(IconPreferencesContext)!
 	const { names, startIndex, setStartIndex, setEndIndex, addNames, removeNames, clearNames } =
 		useContext(SelectionContext)!
 
@@ -524,7 +524,8 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 })
 
 function AppMain() {
-	const { feather, wkSocial, wkPayments, preferNames, data } = useContext(SearchContext)!
+	const { feather, wkSocial, wkPayments, icons } = useContext(IconsContext)!
+	const { preferNames } = useContext(IconPreferencesContext)!
 	const { setStartIndex, setEndIndex, clearNames } = useContext(SelectionContext)!
 
 	const onceRef = useRef(false)
@@ -556,7 +557,7 @@ function AppMain() {
 			}}
 		>
 			<div className={cx("grid", preferNames && "is-prefer-names")}>
-				{data?.map(([name, icon], index) => (
+				{icons?.map(([name, icon], index) => (
 					<MemoizedGridItem key={name} index={index} name={name} icon={icon} />
 				))}
 			</div>
