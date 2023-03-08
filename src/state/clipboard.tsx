@@ -66,12 +66,12 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		},
 	})
 
-	const [names, __setNames] = useState(() => new Set<string>())
+	const [names, _setNames] = useState(() => new Set<string>())
 	const [startIndex, setStartIndex] = useState<number | null>(null)
 	const [endIndex, setEndIndex] = useState<number | null>(null)
 
 	const addNames = useCallback((...names: string[]) => {
-		__setNames(prev => {
+		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
 				next.add(name)
@@ -81,7 +81,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	}, [])
 
 	const removeNames = useCallback((...names: string[]) => {
-		__setNames(prev => {
+		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
 				next.delete(name)
@@ -91,14 +91,14 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	}, [])
 
 	const clearNames = useCallback(() => {
-		__setNames(new Set<string>())
+		_setNames(new Set<string>())
 	}, [])
 
-	const [readOnlyClipboard, __setReadOnlyClipboard] = useState("")
+	const [readOnlyClipboard, _setReadOnlyClipboard] = useState("")
 
 	useEffect(() => {
 		if (names.size === 0) {
-			__setReadOnlyClipboard(READONLY_CLIPBOARD_DEFAULT)
+			_setReadOnlyClipboard(READONLY_CLIPBOARD_DEFAULT)
 			return
 		}
 		let readOnlyClipboard = ""
@@ -135,7 +135,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		if (hasMore) {
 			readOnlyClipboard += `\n\n...${names.size - 10} more`
 		}
-		__setReadOnlyClipboard(readOnlyClipboard)
+		_setReadOnlyClipboard(readOnlyClipboard)
 	}, [exportAs, names])
 
 	return (
