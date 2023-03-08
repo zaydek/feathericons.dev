@@ -1,3 +1,4 @@
+export * from "./canonicalize"
 export * from "./cases"
 export * from "./cx"
 export * from "./document-title"

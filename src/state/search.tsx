@@ -1,4 +1,4 @@
-import { Icon, useParam, useParamBoolean } from "@/lib"
+import { canonicalize, Icon, useParam, useParamBoolean } from "@/lib"
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback } from "react"
 import { useQueryIcons } from "./use-query-icons"
 
@@ -33,18 +33,12 @@ export const SearchContext =
 		resetIconSettings:  () => void
 	} | null>(null)
 
-// prettier-ignore
-const serializeSearch = (value: string) => value
-	.replace(/[^\w\s-]/g, "") // Remove bad characters
-	.replace(/\s+/g, " ")     // Remove excess spaces
-	.trim() // Trim start and end spaces
-
 export function SearchProvider({ children }: PropsWithChildren) {
 	const [search, setSearch] = useParam({
 		key: "search",
 		initialValue: "",
 		parser: value => value,
-		serializer: serializeSearch,
+		serializer: canonicalize,
 	})
 	const [feather, setFeather] = useParamBoolean({
 		key: "feather",
