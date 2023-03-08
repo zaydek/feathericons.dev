@@ -224,7 +224,7 @@ function AppSidebar1() {
 						<div className="sidebar-align-icon-frame">
 							<Feather.Settings className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Icon settings</h6>
+						<h6 className="section-name u-flex-1">Settings</h6>
 						<div className="sidebar-align-icon-frame">
 							<Feather.RotateCcw
 								className="section-reset-icon"
@@ -239,7 +239,7 @@ function AppSidebar1() {
 								{/* Defer to CSS; no <svg> */}
 								<div className={cx("checkbox-icon chroma", preferColor && "is-prefer-color")}></div>
 							</div>
-							<span className="checkbox-name u-flex-1">Color icons</span>
+							<span className="checkbox-name u-flex-1">Colorize icons</span>
 							<div className="sidebar-align-icon-frame">
 								<input
 									type="checkbox"
