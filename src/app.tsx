@@ -18,7 +18,7 @@ import {
 	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
-import { cx, DynamicIcon, Icon, isMac, toKebabCase } from "@/lib"
+import { cx, DynamicIcon, Icon, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ExportAsContext,
 	IconPreferencesContext,
@@ -434,7 +434,7 @@ function useShortcutCtrlCCopy() {
 }
 
 function useSideEffectClearSelectionOnChange() {
-	const { feather, wkBrands: wkSocial, wkPayments } = useContext(IconsContext)!
+	const { feather, wkBrands, wkPayments } = useContext(IconsContext)!
 	const { clear } = useContext(SelectionContext)!
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -443,7 +443,7 @@ function useSideEffectClearSelectionOnChange() {
 			return
 		}
 		clear()
-	}, [clear, feather, wkPayments, wkSocial])
+	}, [clear, feather, wkBrands, wkPayments])
 	return void 0
 }
 
@@ -457,6 +457,17 @@ function useSideEffectSelectNamesFromIndexes() {
 		const max = Math.max(startIndex, endIndex)
 		add(...icons.slice(min, max + 1).map(([name]) => name))
 	}, [add, endIndex, icons, startIndex])
+	return void 0
+}
+
+function useSideEffectVisibleDocumentTitle() {
+	const { icons } = useContext(IconsContext)!
+	const count = (icons ?? []).length
+	// prettier-ignore
+	useVisibleDocumentTitle([
+		`${count} icon${count === 1 ? "" : "s"}`,
+		"Feather icons",
+	])
 	return void 0
 }
 
@@ -525,7 +536,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 })
 
 function AppMain() {
-	const { feather, wkBrands: wkSocial, wkPayments, icons } = useContext(IconsContext)!
+	const { feather, wkBrands, wkPayments, icons } = useContext(IconsContext)!
 	const { preferNames } = useContext(IconPreferencesContext)!
 	const { setStartIndex, setEndIndex, clear } = useContext(SelectionContext)!
 
@@ -536,7 +547,7 @@ function AppMain() {
 			return
 		}
 		clear()
-	}, [clear, feather, wkPayments, wkSocial])
+	}, [clear, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlASelectAll()
 	useShortcutCtrlCCopy()
@@ -544,6 +555,7 @@ function AppMain() {
 
 	useSideEffectClearSelectionOnChange()
 	useSideEffectSelectNamesFromIndexes()
+	useSideEffectVisibleDocumentTitle()
 
 	return (
 		<Main

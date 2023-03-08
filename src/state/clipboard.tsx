@@ -132,7 +132,11 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			}
 		}
 		if (hasMore) {
-			readOnlyClipboard += `\n\n...${names.size - 10} more`
+			if (exportAs === "svg") {
+				readOnlyClipboard += `\n\n<!-- ... -->`
+			} else {
+				readOnlyClipboard += `\n\n// ...`
+			}
 		}
 		_setReadOnlyClipboard(readOnlyClipboard)
 	}, [exportAs, names])
