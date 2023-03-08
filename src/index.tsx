@@ -46,23 +46,5 @@ function ProvidedApp() {
 	)
 }
 
-//// const root = createRoot(document.getElementById("root")!)
-//// root.render(<ProvidedApp />)
-
-// Vite hack
-if (import.meta.env.DEV) {
-	let container: HTMLElement | null = null
-	window.addEventListener(
-		"DOMContentLoaded",
-		e => {
-			if (!container) {
-				const root = createRoot(document.getElementById("root")!)
-				root.render(<ProvidedApp />)
-			}
-		},
-		false,
-	)
-} else {
-	const root = createRoot(document.getElementById("root")!)
-	root.render(<ProvidedApp />)
-}
+const root = createRoot(document.getElementById("root")!)
+root.render(<ProvidedApp />)
