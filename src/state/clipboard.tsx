@@ -1,4 +1,4 @@
-import { toKebabCase, toTitleCase, useParam } from "@/lib"
+import { getKeys, toKebabCase, toTitleCase, useParam } from "@/lib"
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
 import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useMemo, useState } from "react"
 
@@ -96,22 +96,14 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 
 	const [readOnlyClipboard, __setReadOnlyClipboard] = useState("")
 
-	// TODO: Make simpler
 	useEffect(() => {
 		if (names.size === 0) {
 			__setReadOnlyClipboard(READONLY_CLIPBOARD_DEFAULT)
 			return
 		}
 		let readOnlyClipboard = ""
-		// TODO
-		const keysIterator = names.keys()
-		const firstNames: string[] = []
-		for (let index = 0; index < 10; index++) {
-			const name = keysIterator.next().value
-			if (name === undefined) break
-			firstNames.push(name)
-		}
-		for (const [index, name] of firstNames.entries()) {
+		const [keys, hasMore] = getKeys(names, { limit: 10 })
+		for (const [index, name] of keys.entries()) {
 			if (index > 0) {
 				readOnlyClipboard += "\n\n"
 			}
@@ -140,7 +132,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 				})
 			}
 		}
-		if (!keysIterator.next().done) {
+		if (hasMore) {
 			readOnlyClipboard += `\n\n...${names.size - 10} more`
 		}
 		__setReadOnlyClipboard(readOnlyClipboard)

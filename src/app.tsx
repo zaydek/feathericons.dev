@@ -439,17 +439,17 @@ function useShortcutCtrlCCopy() {
 //// 	return void 0
 //// }
 
-function useEffectSelectNamesByIndex() {
+// TODO
+function useSelectNamesFromIndexes() {
 	const { data } = useContext(SearchContext)!
-	const { startIndex: namesIndex1, endIndex: namesIndex2, addNames } = useContext(SelectionContext)!
+	const { startIndex, endIndex, addNames } = useContext(SelectionContext)!
 	useEffect(() => {
-		// TODO
 		if (data === undefined) return
-		if (namesIndex1 === null || namesIndex2 === null) return
-		const minIndex = Math.min(namesIndex1, namesIndex2)
-		const maxIndex = Math.max(namesIndex1, namesIndex2)
+		if (startIndex === null || endIndex === null) return
+		const minIndex = Math.min(startIndex, endIndex)
+		const maxIndex = Math.max(startIndex, endIndex)
 		addNames(...data!.slice(minIndex, maxIndex + 1).map(([name]) => name))
-	}, [addNames, data, namesIndex1, namesIndex2])
+	}, [addNames, data, startIndex, endIndex])
 	return void 0
 }
 
@@ -543,7 +543,7 @@ function AppMain() {
 
 	// Etc.
 	//// useEffectClearNamesOnToggle()
-	useEffectSelectNamesByIndex()
+	useSelectNamesFromIndexes()
 
 	return (
 		<Main

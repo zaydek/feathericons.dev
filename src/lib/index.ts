@@ -1,5 +1,6 @@
 export * from "./canonicalize"
 export * from "./cases"
+export * from "./collection"
 export * from "./cx"
 export * from "./document-title"
 export * from "./download"
