@@ -5,7 +5,7 @@ import { useQueryIcons } from "./use-query-icons"
 export type WkPaymentsValue = "normal" | "filled"
 
 const FEATHER_DEFAULT           = !!1 // prettier-ignore
-const WK_SOCIAL_DEFAULT         = !!1 // prettier-ignore
+const WK_BRANDS_DEFAULT         = !!1 // prettier-ignore
 const WK_PAYMENTS_DEFAULT       = !!1 // prettier-ignore
 const WK_PAYMENTS_VALUE_DEFAULT = "filled" // prettier-ignore
 const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
@@ -21,8 +21,8 @@ export const SearchContext = createContext<{
 export const IconsContext = createContext<{
   feather:            boolean
   setFeather:         Dispatch<SetStateAction<boolean>>
-  wkSocial:           boolean
-  setWkSocial:        Dispatch<SetStateAction<boolean>>
+  wkBrands:           boolean
+  setWkBrands:        Dispatch<SetStateAction<boolean>>
   wkPayments:         boolean
   setWkPayments:      Dispatch<SetStateAction<boolean>>
   wkPaymentsValue:    WkPaymentsValue
@@ -49,7 +49,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 	})
 
 	const [feather, setFeather] = useParamBoolean({ key: "feather", initialValue: FEATHER_DEFAULT })
-	const [wkSocial, setWkSocial] = useParamBoolean({ key: "social", initialValue: WK_SOCIAL_DEFAULT })
+	const [wkBrands, setWkBrands] = useParamBoolean({ key: "brands", initialValue: WK_BRANDS_DEFAULT })
 	const [wkPayments, setWkPayments] = useParamBoolean({ key: "payments", initialValue: WK_PAYMENTS_DEFAULT })
 
 	const [wkPaymentsValue, setWkPaymentsValue] = useParam<WkPaymentsValue>({
@@ -70,7 +70,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 
 	const icons = useQueryIcons({
 		feather,
-		wkSocial,
+		wkBrands,
 		wkPayments,
 		wkPaymentsValue,
 		preferColor,
@@ -78,10 +78,10 @@ export function SearchProvider({ children }: PropsWithChildren) {
 
 	const resetIcons = useCallback(() => {
 		setFeather(FEATHER_DEFAULT)
-		setWkSocial(WK_SOCIAL_DEFAULT)
+		setWkBrands(WK_BRANDS_DEFAULT)
 		setWkPayments(WK_PAYMENTS_DEFAULT)
 		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
-	}, [setFeather, setWkPayments, setWkPaymentsValue, setWkSocial])
+	}, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
 
 	const resetIconPrefs = useCallback(() => {
 		setPreferColor(PREFER_COLOR_DEFAULT)
@@ -103,8 +103,8 @@ export function SearchProvider({ children }: PropsWithChildren) {
 					() => ({
 						feather,
 						setFeather,
-						wkSocial,
-						setWkSocial,
+						wkBrands,
+						setWkBrands,
 						wkPayments,
 						setWkPayments,
 						wkPaymentsValue,
@@ -113,7 +113,7 @@ export function SearchProvider({ children }: PropsWithChildren) {
 						resetIcons,
 					}),
 					// prettier-ignore
-					[feather, icons, resetIcons, setFeather, setWkPayments, setWkPaymentsValue, setWkSocial, wkPayments, wkPaymentsValue, wkSocial],
+					[feather, icons, resetIcons, setFeather, setWkBrands, setWkPayments, setWkPaymentsValue, wkBrands, wkPayments, wkPaymentsValue],
 				)}
 			>
 				<IconPreferencesContext.Provider

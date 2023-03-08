@@ -1,10 +1,10 @@
 import * as Feather from "@icons/feather/tsx"
+import * as WkBrandsMono from "@icons/wk/brands/mono/tsx"
+import * as WkBrandsOriginal from "@icons/wk/brands/original/tsx"
 import * as WkPaymentsMonoFilled from "@icons/wk/payments/mono-filled/tsx"
 import * as WkPaymentsMono from "@icons/wk/payments/mono/tsx"
 import * as WkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
 import * as WkPaymentsOriginal from "@icons/wk/payments/original/tsx"
-import * as WkSocialMono from "@icons/wk/social/mono/tsx"
-import * as WkSocialOriginal from "@icons/wk/social/original/tsx"
 
 import {
 	Anchor,
@@ -57,8 +57,8 @@ function AppSidebar1() {
 	const {
 		feather,
 		setFeather,
-		wkSocial,
-		setWkSocial,
+		wkBrands,
+		setWkBrands,
 		wkPayments,
 		setWkPayments,
 		wkPaymentsValue,
@@ -114,15 +114,15 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											icon={preferColor ? WkSocialOriginal.Twitter : WkSocialMono.Twitter}
+											icon={preferColor ? WkBrandsOriginal.BrandTwitter : WkBrandsMono.BrandTwitter}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Social logos</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
-											checked={wkSocial}
-											onChange={e => startTransition(() => setWkSocial(e.currentTarget.checked))}
+											checked={wkBrands}
+											onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
@@ -434,7 +434,7 @@ function useShortcutCtrlCCopy() {
 }
 
 function useSideEffectClearSelectionOnChange() {
-	const { feather, wkSocial, wkPayments } = useContext(IconsContext)!
+	const { feather, wkBrands: wkSocial, wkPayments } = useContext(IconsContext)!
 	const { clear } = useContext(SelectionContext)!
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -525,7 +525,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 })
 
 function AppMain() {
-	const { feather, wkSocial, wkPayments, icons } = useContext(IconsContext)!
+	const { feather, wkBrands: wkSocial, wkPayments, icons } = useContext(IconsContext)!
 	const { preferNames } = useContext(IconPreferencesContext)!
 	const { setStartIndex, setEndIndex, clear } = useContext(SelectionContext)!
 

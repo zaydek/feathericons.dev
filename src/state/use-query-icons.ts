@@ -5,8 +5,8 @@ import { useEffect, useMemo } from "react"
 
 //// type ImportPath =
 //// 	| "@icons/feather/tsx"
-//// 	| "@icons/wolfkit/social/mono/tsx"
-//// 	| "@icons/wolfkit/social/original/tsx"
+//// 	| "@icons/wolfkit/brands/mono/tsx"
+//// 	| "@icons/wolfkit/brands/original/tsx"
 //// 	| "@icons/wolfkit/payments/mono/tsx"
 //// 	| "@icons/wolfkit/payments/mono-filled/tsx"
 //// 	| "@icons/wolfkit/payments/original/tsx"
@@ -24,13 +24,13 @@ import { useEffect, useMemo } from "react"
 //// 					cache.set(path, mod)
 //// 					return mod
 //// 				})
-//// 			case "@icons/wolfkit/social/mono/tsx":
-//// 				return import("@icons/wolfkit/social/mono/tsx").then(mod => {
+//// 			case "@icons/wolfkit/brands/mono/tsx":
+//// 				return import("@icons/wolfkit/brands/mono/tsx").then(mod => {
 //// 					cache.set(path, mod)
 //// 					return mod
 //// 				})
-//// 			case "@icons/wolfkit/social/original/tsx":
-//// 				return import("@icons/wolfkit/social/original/tsx").then(mod => {
+//// 			case "@icons/wolfkit/brands/original/tsx":
+//// 				return import("@icons/wolfkit/brands/original/tsx").then(mod => {
 //// 					cache.set(path, mod)
 //// 					return mod
 //// 				})
@@ -64,7 +64,7 @@ import { useEffect, useMemo } from "react"
 export async function fetchIconsets(
 	iconsets: {
 		feather: boolean
-		wkSocial: boolean
+		wkBrands: boolean
 		wkPayments: boolean
 		wkPaymentsValue: WkPaymentsValue
 	},
@@ -74,11 +74,11 @@ export async function fetchIconsets(
 	if (iconsets.feather) {
 		chain.push(import("@icons/feather/tsx"))
 	}
-	if (iconsets.wkSocial) {
+	if (iconsets.wkBrands) {
 		if (preferColor) {
-			chain.push(import("@icons/wk/social/original/tsx"))
+			chain.push(import("@icons/wk/brands/original/tsx"))
 		} else {
-			chain.push(import("@icons/wk/social/mono/tsx"))
+			chain.push(import("@icons/wk/brands/mono/tsx"))
 		}
 	}
 	if (iconsets.wkPayments) {
@@ -102,24 +102,24 @@ export async function fetchIconsets(
 
 export function useQueryIcons({
 	feather,
-	wkSocial,
+	wkBrands,
 	wkPayments,
 	wkPaymentsValue,
 	preferColor,
 }: {
 	feather: boolean
-	wkSocial: boolean
+	wkBrands: boolean
 	wkPayments: boolean
 	wkPaymentsValue: WkPaymentsValue
 	preferColor: boolean
 }) {
 	const { data, refetch } = useQuery(["iconsets"], () =>
-		fetchIconsets({ feather, wkSocial, wkPayments, wkPaymentsValue }, preferColor),
+		fetchIconsets({ feather, wkBrands: wkBrands, wkPayments, wkPaymentsValue }, preferColor),
 	)
 	// When dependencies change...
 	const refretchDeps = useMemo(
-		() => [feather, wkSocial, wkPayments, wkPaymentsValue, preferColor],
-		[feather, preferColor, wkPayments, wkPaymentsValue, wkSocial],
+		() => [feather, wkBrands, wkPayments, wkPaymentsValue, preferColor],
+		[feather, preferColor, wkBrands, wkPayments, wkPaymentsValue],
 	)
 	// ...refetch
 	useEffect(() => {

@@ -1,4 +1,4 @@
-import * as WkSocialOriginal from "@icons/wk/social/original/tsx"
+import * as WkBrandsOriginal from "@icons/wk/brands/original/tsx"
 
 import { Icon } from "@/lib"
 
@@ -7,22 +7,22 @@ export type Resource = { name: string; icon: Icon; href: string }
 export const resources: Resource[] = [
 	{
 		name: "Icons",
-		icon: WkSocialOriginal.Github,
+		icon: WkBrandsOriginal.BrandGithub,
 		href: "TODO",
 	},
 	{
 		name: "Website",
-		icon: WkSocialOriginal.Github,
+		icon: WkBrandsOriginal.BrandGithub,
 		href: "TODO",
 	},
 	{
-		name: "Social & payments files",
-		icon: WkSocialOriginal.Figma,
+		name: "Brands & payments files",
+		icon: WkBrandsOriginal.BrandFigma,
 		href: "TODO",
 	},
 	{
 		name: "Share on Twitter",
-		icon: WkSocialOriginal.Twitter,
+		icon: WkBrandsOriginal.BrandTwitter,
 		href: "TODO",
 	},
 ]

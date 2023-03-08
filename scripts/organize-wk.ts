@@ -32,58 +32,58 @@ async function copyFilesWithRegex({
 	}
 }
 
-async function organizeWkSocial() {
+async function organizeWkBrands() {
 	// prettier-ignore
 	const args = [
-		{ target: "original" },
-		{ target: "mono", renameRegex: [/(-mono)(\.)/, "$2"] as const },
+		{ target: "original", renameRegex: [/^(.*\/)(.*)\.(.*)$/,      "$1brand-$2.$3"] as const },
+		{ target: "mono",     renameRegex: [/^(.*\/)(.*)-mono\.(.*)$/, "$1brand-$2.$3"] as const },
 	]
 	for (const { target, renameRegex } of args) {
 		// LOG
 		console.log(`📋 Copying *.svg files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wk/figma/social/${target}/all`,
-			dstDir: `./icons/wk/figma/social/${target}/svg`,
+			srcDir: `./icons/wk/figma/brands/${target}/all`,
+			dstDir: `./icons/wk/figma/brands/${target}/svg`,
 			nameRegex: /\.svg$/,
 			renameRegex,
 		})
 		// LOG
 		console.log(`📋 Copying *.png files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wk/figma/social/${target}/all`,
-			dstDir: `./icons/wk/figma/social/${target}/png@1x`,
+			srcDir: `./icons/wk/figma/brands/${target}/all`,
+			dstDir: `./icons/wk/figma/brands/${target}/png@1x`,
 			nameRegex: /@1x\.png$/,
 			renameRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wk/figma/social/${target}/all`,
-			dstDir: `./icons/wk/figma/social/${target}/png@2x`,
+			srcDir: `./icons/wk/figma/brands/${target}/all`,
+			dstDir: `./icons/wk/figma/brands/${target}/png@2x`,
 			nameRegex: /@2x\.png$/,
 			renameRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wk/figma/social/${target}/all`,
-			dstDir: `./icons/wk/figma/social/${target}/png@4x`,
+			srcDir: `./icons/wk/figma/brands/${target}/all`,
+			dstDir: `./icons/wk/figma/brands/${target}/png@4x`,
 			nameRegex: /@4x\.png$/,
 			renameRegex,
 		})
 		// LOG
 		console.log(`📋 Copying *.jpg files to ${target}...`)
 		await copyFilesWithRegex({
-			srcDir: `./icons/wk/figma/social/${target}/all`,
-			dstDir: `./icons/wk/figma/social/${target}/jpg@1x`,
+			srcDir: `./icons/wk/figma/brands/${target}/all`,
+			dstDir: `./icons/wk/figma/brands/${target}/jpg@1x`,
 			nameRegex: /@1x\.jpg$/,
 			renameRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wk/figma/social/${target}/all`,
-			dstDir: `./icons/wk/figma/social/${target}/jpg@2x`,
+			srcDir: `./icons/wk/figma/brands/${target}/all`,
+			dstDir: `./icons/wk/figma/brands/${target}/jpg@2x`,
 			nameRegex: /@2x\.jpg$/,
 			renameRegex,
 		})
 		await copyFilesWithRegex({
-			srcDir: `./icons/wk/figma/social/${target}/all`,
-			dstDir: `./icons/wk/figma/social/${target}/jpg@4x`,
+			srcDir: `./icons/wk/figma/brands/${target}/all`,
+			dstDir: `./icons/wk/figma/brands/${target}/jpg@4x`,
 			nameRegex: /@4x\.jpg$/,
 			renameRegex,
 		})
@@ -93,10 +93,10 @@ async function organizeWkSocial() {
 async function organizeWkPayments() {
 	// prettier-ignore
 	const args = [
-		{ target: "original",        renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
-		{ target: "original-filled", renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
-		{ target: "mono",            renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
-		{ target: "mono-filled",     renameRegex: [/^(.*\/)(.*)$/, "$1card-$2"] as const },
+		{ target: "original",        renameRegex: [/^(.*\/)(.*)\.(.*)$/, "$1card-$2.$3"] as const },
+		{ target: "original-filled", renameRegex: [/^(.*\/)(.*)\.(.*)$/, "$1card-$2.$3"] as const },
+		{ target: "mono",            renameRegex: [/^(.*\/)(.*)\.(.*)$/, "$1card-$2.$3"] as const },
+		{ target: "mono-filled",     renameRegex: [/^(.*\/)(.*)\.(.*)$/, "$1card-$2.$3"] as const },
 	]
 	for (const { target, renameRegex } of args) {
 		// LOG
@@ -151,7 +151,7 @@ async function organizeWkPayments() {
 }
 
 async function main() {
-	await organizeWkSocial()
+	await organizeWkBrands()
 	await organizeWkPayments()
 	console.log("🎉 Done")
 }
