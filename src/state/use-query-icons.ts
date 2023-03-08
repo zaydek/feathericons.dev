@@ -76,9 +76,9 @@ export async function fetchIconsets(
 	}
 	if (iconsets.wkSocial) {
 		if (preferColor) {
-			promises.push(import("@icons/wolfkit/social/mono/tsx"))
-		} else {
 			promises.push(import("@icons/wolfkit/social/original/tsx"))
+		} else {
+			promises.push(import("@icons/wolfkit/social/mono/tsx"))
 		}
 	}
 	if (iconsets.wkPayments) {

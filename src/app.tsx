@@ -31,7 +31,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useContext, useEffect, useTransition } from "react"
+import { useContext, useEffect, useRef, useTransition } from "react"
 import { Lang } from "shiki-es"
 
 export function App() {
@@ -371,8 +371,6 @@ function AppSidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// This function adds a keyboard shortcut for selecting all items in the search context.
-// It listens for the "ctrl/cmd + a" key combination and sets the start and end indexes to select all items.
 function useShortcutCtrlASelectAll() {
 	const { data } = useContext(SearchContext)!
 	const { setIndex1, setIndex2 } = useContext(ClipboardContext)!
@@ -391,8 +389,6 @@ function useShortcutCtrlASelectAll() {
 	return void 0
 }
 
-// This function adds a keyboard shortcut for clearing the selection and clipboard.
-// It listens for the "Escape" key and clears the selection and clipboard.
 function useShortcutEscapeClearAll() {
 	const { setIndex1, setIndex2, clearNames } = useContext(ClipboardContext)!
 	useEffect(() => {
@@ -409,8 +405,6 @@ function useShortcutEscapeClearAll() {
 	return void 0
 }
 
-// This function adds a keyboard shortcut for copying the clipboard.
-// It listens for the "ctrl/cmd + c" key combination and copies the clipboard to the system clipboard.
 function useShortcutCtrlCCopy() {
 	const { clipboard } = useContext(ClipboardContext)!
 	useEffect(() => {
@@ -426,9 +420,21 @@ function useShortcutCtrlCCopy() {
 	return void 0
 }
 
-// This function selects names from the search context based on start and end indexes.
-// It listens for changes to the start and end indexes and adds the selected names to the clipboard.
-function useSelectNamesByIndex() {
+function useEffectClearNamesOnToggle() {
+	const { feather, wkSocial, wkPayments } = useContext(SearchContext)!
+	const { clearNames } = useContext(ClipboardContext)!
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		clearNames()
+	}, [clearNames, feather, wkPayments, wkSocial])
+	return void 0
+}
+
+function useEffectSelectNamesByIndex() {
 	const { data } = useContext(SearchContext)!
 	const { index1, index2, addNames } = useContext(ClipboardContext)!
 	useEffect(() => {
@@ -444,17 +450,27 @@ function useSelectNamesByIndex() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppMain() {
-	const { preferNames, data } = useContext(SearchContext)!
+	const { feather, wkSocial, wkPayments, preferNames, data } = useContext(SearchContext)!
 	const { exportAs, index1, setIndex1, setIndex2, names, addNames, removeNames, clearNames } =
 		useContext(ClipboardContext)!
 
-	// Shorcuts
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		clearNames()
+	}, [clearNames, feather, wkPayments, wkSocial])
+
+	// Shortcuts
 	useShortcutCtrlASelectAll()
 	useShortcutEscapeClearAll()
 	useShortcutCtrlCCopy()
 
-	// Effects
-	useSelectNamesByIndex()
+	// Etc.
+	useEffectClearNamesOnToggle()
+	useEffectSelectNamesByIndex()
 
 	return (
 		<Main
@@ -503,7 +519,10 @@ function AppMain() {
 						</figure>
 						{preferNames && (
 							<figcaption className="grid-item-name">
+								{/* {"<"} */}
+								{/* {toKebabCase(name).toLowerCase()} */}
 								{exportAs === "svg" ? toKebabCase(name).toLowerCase() : name}
+								{/* {">"} */}
 							</figcaption>
 						)}
 					</article>
