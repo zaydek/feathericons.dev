@@ -281,7 +281,7 @@ function AppSidebar1() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useSetRangeCssVars() {
+function useSideEffectSetCssVars() {
 	const { size } = useContext(SizeContext)!
 	const { strokeWidth } = useContext(StrokeWidthContext)!
 	useEffect(() => {
@@ -301,7 +301,7 @@ function AppSidebar2() {
 
 	const trackScrollProps = useTrackScrollProps()
 
-	useSetRangeCssVars()
+	useSideEffectSetCssVars()
 
 	return (
 		<Sidebar2>
@@ -383,36 +383,37 @@ function AppSidebar2() {
 
 function useShortcutCtrlASelectAll() {
 	const { icons } = useContext(IconsContext)!
-	const { setStartIndex: setNamesIndex1, setEndIndex: setNamesIndex2 } = useContext(SelectionContext)!
+	const { setStartIndex, setEndIndex } = useContext(SelectionContext)!
 	useEffect(() => {
 		if (icons === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.tagName !== "BODY") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				e.preventDefault()
-				setNamesIndex1(0)
-				setNamesIndex2(Number.MAX_SAFE_INTEGER)
+				setStartIndex(0)
+				setEndIndex(Number.MAX_SAFE_INTEGER)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [icons, setNamesIndex1, setNamesIndex2])
+	}, [icons, setEndIndex, setStartIndex])
 	return void 0
 }
 
-function useShortcutEscapeClearAll() {
-	const { setStartIndex: setNamesIndex1, setEndIndex: setNamesIndex2, clearNames } = useContext(SelectionContext)!
+function useShortcutEscClearAll() {
+	const { setStartIndex, setEndIndex, clear } = useContext(SelectionContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
+			if (document.activeElement?.tagName !== "BODY") return
 			if (e.key === "Escape") {
-				clearNames()
-				setNamesIndex1(null)
-				setNamesIndex2(null)
+				clear()
+				setStartIndex(null)
+				setEndIndex(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clearNames, setNamesIndex1, setNamesIndex2])
+	}, [clear, setEndIndex, setStartIndex])
 	return void 0
 }
 
@@ -420,7 +421,7 @@ function useShortcutCtrlCCopy() {
 	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if (e.shiftKey) return // Chrome shortcut
+			if (e.shiftKey) return // No-op because of Chrome shortcut
 			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
 				e.preventDefault()
 				navigator.clipboard.writeText(readOnlyClipboard)
@@ -432,30 +433,30 @@ function useShortcutCtrlCCopy() {
 	return void 0
 }
 
-function useClearNamesOnChange() {
+function useSideEffectClearSelectionOnChange() {
 	const { feather, wkSocial, wkPayments } = useContext(IconsContext)!
-	const { clearNames } = useContext(SelectionContext)!
+	const { clear } = useContext(SelectionContext)!
 	const onceRef = useRef(false)
 	useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
-		clearNames()
-	}, [clearNames, feather, wkPayments, wkSocial])
+		clear()
+	}, [clear, feather, wkPayments, wkSocial])
 	return void 0
 }
 
-function useSelectNamesFromIndexes() {
+function useSideEffectSelectNamesFromIndexes() {
 	const { icons } = useContext(IconsContext)!
-	const { startIndex, endIndex, addNames } = useContext(SelectionContext)!
+	const { startIndex, endIndex, add } = useContext(SelectionContext)!
 	useEffect(() => {
 		if (icons === undefined) return
 		if (startIndex === null || endIndex === null) return
 		const min = Math.min(startIndex, endIndex)
 		const max = Math.max(startIndex, endIndex)
-		addNames(...icons.slice(min, max + 1).map(([name]) => name))
-	}, [addNames, icons, startIndex, endIndex])
+		add(...icons.slice(min, max + 1).map(([name]) => name))
+	}, [add, endIndex, icons, startIndex])
 	return void 0
 }
 
@@ -481,8 +482,7 @@ function GridItemName({ children: name }: { children: string }) {
 
 const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) => {
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const { names, startIndex, setStartIndex, setEndIndex, addNames, removeNames, clearNames } =
-		useContext(SelectionContext)!
+	const { names, startIndex, setStartIndex, setEndIndex, add, remove, clear } = useContext(SelectionContext)!
 
 	return (
 		<article
@@ -499,13 +499,13 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 				} else {
 					if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
 						if (names.has(name)) {
-							removeNames(name)
+							remove(name)
 						} else {
-							addNames(name)
+							add(name)
 						}
 					} else {
-						clearNames()
-						addNames(name)
+						clear()
+						add(name)
 					}
 					setStartIndex(index)
 					setEndIndex(null)
@@ -527,7 +527,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 function AppMain() {
 	const { feather, wkSocial, wkPayments, icons } = useContext(IconsContext)!
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const { setStartIndex, setEndIndex, clearNames } = useContext(SelectionContext)!
+	const { setStartIndex, setEndIndex, clear } = useContext(SelectionContext)!
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -535,23 +535,21 @@ function AppMain() {
 			onceRef.current = true
 			return
 		}
-		clearNames()
-	}, [clearNames, feather, wkPayments, wkSocial])
+		clear()
+	}, [clear, feather, wkPayments, wkSocial])
 
-	// Shortcuts
 	useShortcutCtrlASelectAll()
-	useShortcutEscapeClearAll()
 	useShortcutCtrlCCopy()
+	useShortcutEscClearAll()
 
-	// Side effects
-	useClearNamesOnChange()
-	useSelectNamesFromIndexes()
+	useSideEffectClearSelectionOnChange()
+	useSideEffectSelectNamesFromIndexes()
 
 	return (
 		<Main
 			onClick={e => {
 				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
-					clearNames()
+					clear()
 					setStartIndex(null)
 					setEndIndex(null)
 				}

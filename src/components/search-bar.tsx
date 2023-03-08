@@ -1,32 +1,29 @@
 import * as Feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
-import { SearchContext } from "@/state"
-import { Dispatch, RefObject, SetStateAction, useContext, useEffect, useRef } from "react"
+import { SearchContext, SelectionContext } from "@/state"
+import { RefObject, useContext, useEffect, useRef } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useFocusOnMount({ ref }: { ref: RefObject<HTMLInputElement | null> }) {
+function useSideEffectFocusOnMount(ref: RefObject<HTMLInputElement | null>) {
 	useEffect(() => {
 		ref.current!.focus()
-	}, []) // eslint-disable-line react-hooks/exhaustive-deps
+	}, [ref])
 	return void 0
 }
 
-function useResetScrollOnSearch({ search }: { search: string }) {
+function useSideEffectResetScrollAndClearSelectionOnSearch() {
+	const { search } = useContext(SearchContext)!
+	const { clear } = useContext(SelectionContext)!
 	useEffect(() => {
+		clear()
 		window.scrollTo(0, 0)
-	}, [search])
+	}, [clear, search])
 	return void 0
 }
 
-function useFocusShortcut({
-	ref,
-	setSearch,
-}: {
-	ref: RefObject<HTMLInputElement | null>
-	setSearch: Dispatch<SetStateAction<string>>
-}) {
+function useShortcutCtrlPFocus(ref: RefObject<HTMLInputElement | null>) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
@@ -36,21 +33,34 @@ function useFocusShortcut({
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setSearch]) // eslint-disable-line react-hooks/exhaustive-deps
+	}, [ref])
 	return void 0
 }
 
-////////////////////////////////////////////////////////////////////////////////
+function useShortcutEscResetSearch() {
+	const { setSearch } = useContext(SearchContext)!
+	useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			if (document.activeElement?.tagName !== "BODY") return
+			if (e.key === "Escape") {
+				setSearch("")
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [setSearch])
+	return void 0
+}
 
 export function SearchBar() {
 	const ref = useRef<HTMLInputElement | null>(null)
 	const { search, setSearch } = useContext(SearchContext)!
-	//// const { removeAllNames } = useContext(ClipboardContext)!
 
-	// TODO
-	useFocusOnMount({ ref })
-	useResetScrollOnSearch({ search })
-	useFocusShortcut({ ref, setSearch })
+	useShortcutEscResetSearch()
+	useShortcutCtrlPFocus(ref)
+
+	useSideEffectFocusOnMount(ref)
+	useSideEffectResetScrollAndClearSelectionOnSearch()
 
 	//// // Clear on search
 	//// const onceRef = useRef(false)

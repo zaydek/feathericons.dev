@@ -41,9 +41,9 @@ export const SelectionContext = createContext<{
 	setStartIndex: Dispatch<SetStateAction<number | null>>
 	endIndex:      number | null
 	setEndIndex:   Dispatch<SetStateAction<number | null>>
-	addNames:      (...names: string[]) => void
-	removeNames:   (...names: string[]) => void
-	clearNames:    () => void
+	add:           (...names: string[]) => void
+	remove:        (...names: string[]) => void
+	clear:         () => void
 } | null>(null)
 
 export const ReadOnlyClipboardContext = createContext<{ readOnlyClipboard: string } | null>(null)
@@ -69,7 +69,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	const [startIndex, setStartIndex] = useState<number | null>(null)
 	const [endIndex, setEndIndex] = useState<number | null>(null)
 
-	const addNames = useCallback((...names: string[]) => {
+	const add = useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -79,7 +79,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const removeNames = useCallback((...names: string[]) => {
+	const remove = useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -89,7 +89,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const clearNames = useCallback(() => {
+	const clear = useCallback(() => {
 		_setNames(new Set<string>())
 	}, [])
 
@@ -155,11 +155,11 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 						setStartIndex,
 						endIndex,
 						setEndIndex,
-						addNames,
-						removeNames,
-						clearNames,
+						add,
+						remove,
+						clear,
 					}),
-					[addNames, clearNames, endIndex, names, removeNames, startIndex],
+					[add, clear, endIndex, names, remove, startIndex],
 				)}
 			>
 				<ReadOnlyClipboardContext.Provider
