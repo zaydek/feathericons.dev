@@ -106,7 +106,12 @@ export function Item({ children, ...props }: JSX.IntrinsicElements["li"]) {
 ////////////////////////////////////////////////////////////////////////////////
 
 // TODO: What to do about style?
-export function CodeSnippet({ style: _, lang, children: code, ...props }: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
+export function CodeSnippet({
+	style: _,
+	lang,
+	children: code,
+	...props
+}: { lang: Lang; children: string } & Omit<JSX.IntrinsicElements["pre"], "lang">) {
 	const { highlighter } = useContext(ShikiContext)!
 
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
@@ -162,7 +167,7 @@ export function TextAnchor({ children, ...props }: AnchorProps) {
 
 export function TextIconAnchor({ icon, children, ...props }: { icon: Component } & AnchorProps) {
 	return (
-		<Anchor className="inline-flex items-center" {...props}>
+		<Anchor className="flex items-center" {...props}>
 			<span className="underline decoration-gray-400">{children}</span>&nbsp;
 			<Dynamic className="h-[1em] w-[1em] text-gray-800" component={icon} />
 		</Anchor>
