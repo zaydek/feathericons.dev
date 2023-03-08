@@ -279,7 +279,7 @@ function AppSidebar1() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useRangeCssVariables() {
+function useSetRangeCssVars() {
 	const { size } = useContext(SizeContext)!
 	const { strokeWidth } = useContext(StrokeWidthContext)!
 	useEffect(() => {
@@ -299,7 +299,7 @@ function AppSidebar2() {
 
 	const scrollProps = useTrackScrollProps()
 
-	useRangeCssVariables()
+	useSetRangeCssVars()
 
 	return (
 		<Sidebar2>
@@ -426,19 +426,19 @@ function useShortcutCtrlCCopy() {
 	return void 0
 }
 
-//// function useEffectClearNamesOnToggle() {
-//// 	const { feather, wkSocial, wkPayments } = useContext(SearchContext)!
-//// 	const { clearNames } = useContext(ClipboardContext)!
-//// 	const onceRef = useRef(false)
-//// 	useEffect(() => {
-//// 		if (!onceRef.current) {
-//// 			onceRef.current = true
-//// 			return
-//// 		}
-//// 		clearNames()
-//// 	}, [clearNames, feather, wkPayments, wkSocial])
-//// 	return void 0
-//// }
+function useClearNamesOnChange() {
+	const { feather, wkSocial, wkPayments } = useContext(IconsContext)!
+	const { clearNames } = useContext(SelectionContext)!
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		clearNames()
+	}, [clearNames, feather, wkPayments, wkSocial])
+	return void 0
+}
 
 // TODO
 function useSelectNamesFromIndexes() {
@@ -482,7 +482,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 	return (
 		<article
 			id={name}
-			className="grid-item"
+			className={cx("grid-item", names.has(name) && "is-selected")}
 			onClick={e => {
 				if (e.shiftKey) {
 					if (startIndex === null) {
@@ -506,7 +506,6 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 					setEndIndex(null)
 				}
 			}}
-			data-selected={names.has(name)}
 		>
 			<figure className="grid-item-icon-frame">
 				<Icon className="grid-item-icon" />
@@ -539,8 +538,8 @@ function AppMain() {
 	useShortcutEscapeClearAll()
 	useShortcutCtrlCCopy()
 
-	// Etc.
-	//// useEffectClearNamesOnToggle()
+	// Side effects
+	useClearNamesOnChange()
 	useSelectNamesFromIndexes()
 
 	return (
