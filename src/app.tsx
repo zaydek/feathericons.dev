@@ -377,6 +377,7 @@ function useShortcutCtrlASelectAll() {
 	useEffect(() => {
 		if (data === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
+			if (document.activeElement?.tagName !== "BODY") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				e.preventDefault()
 				setIndex1(0)
