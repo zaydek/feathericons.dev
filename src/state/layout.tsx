@@ -4,11 +4,10 @@ import { createContext, Dispatch, PropsWithChildren, SetStateAction } from "reac
 export type SidebarState = "minimized" | "open" | "maximized"
 
 // prettier-ignore
-export const LayoutContext =
-	createContext<{
-		sidebar:    SidebarState
-		setSidebar: Dispatch<SetStateAction<SidebarState>>
-	} | null>(null)
+export const LayoutContext = createContext<{
+	sidebar:    SidebarState
+	setSidebar: Dispatch<SetStateAction<SidebarState>>
+} | null>(null)
 
 export function LayoutProvider({ children }: PropsWithChildren) {
 	const [sidebar, setSidebar] = useParam<SidebarState>({

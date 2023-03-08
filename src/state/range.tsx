@@ -13,9 +13,9 @@ export const STROKE_DEFAULT = 2 // prettier-ignore
 
 // prettier-ignore
 export const SizeContext = createContext<{
-	size:      number
-	setSize:   Dispatch<SetStateAction<number>>
-	resetSize: () => void
+	size:             number
+	setSize:          Dispatch<SetStateAction<number>>
+	resetSize:        () => void
 } | null>(null)
 
 // prettier-ignore

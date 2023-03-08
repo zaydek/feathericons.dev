@@ -1,11 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react"
 import { getHighlighter, Highlighter } from "shiki-es"
 
-// prettier-ignore
-export const ShikiContext =
-	createContext<{
-		highlighter: Highlighter | null
-	} | null>(null)
+export const ShikiContext = createContext<{ highlighter: Highlighter | null } | null>(null)
 
 export function ShikiProvider({ children }: PropsWithChildren) {
 	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)

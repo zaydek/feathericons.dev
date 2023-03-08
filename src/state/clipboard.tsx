@@ -34,7 +34,6 @@ export const ExportAsContext = createContext<{
 	setExportAs:   Dispatch<SetStateAction<ExportAsValue>>
 } | null>(null)
 
-// TODO: We can change this to map of SVGSvgElement
 // prettier-ignore
 export const SelectionContext = createContext<{
 	names:         Set<string>

@@ -13,8 +13,8 @@ const PREFER_NAMES_DEFAULT      = !!1 // prettier-ignore
 
 // prettier-ignore
 export const SearchContext = createContext<{
-  search:    string
-  setSearch: Dispatch<SetStateAction<string>>
+  search:             string
+  setSearch:          Dispatch<SetStateAction<string>>
 } | null>(null)
 
 // prettier-ignore
@@ -33,11 +33,11 @@ export const IconsContext = createContext<{
 
 // prettier-ignore
 export const IconPreferencesContext = createContext<{
-  preferColor:    boolean
-  setPreferColor: Dispatch<SetStateAction<boolean>>
-  preferNames:    boolean
-  setPreferNames: Dispatch<SetStateAction<boolean>>
-  resetIconPrefs: () => void
+  preferColor:        boolean
+  setPreferColor:     Dispatch<SetStateAction<boolean>>
+  preferNames:        boolean
+  setPreferNames:     Dispatch<SetStateAction<boolean>>
+  resetIconPrefs:     () => void
 } | null>(null)
 
 export function SearchProvider({ children }: PropsWithChildren) {

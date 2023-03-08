@@ -1,7 +1,7 @@
 import * as Feather from "@icons/feather/tsx"
 
 import { Reactjs, Solidjs, Svg } from "@/components/icons"
-import { Icon } from "@/lib"
+import { DynamicIcon, Icon } from "@/lib"
 import { ExportAsValue } from "@/state"
 import { Dispatch, SetStateAction } from "react"
 
@@ -32,9 +32,6 @@ export function ExportAs({
 	value: ExportAsValue
 	setValue: Dispatch<SetStateAction<ExportAsValue>>
 }) {
-	const name = names[value]
-	const Icon = icons[value]
-
 	return (
 		<label className="export-as">
 			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAsValue)}>
@@ -60,9 +57,9 @@ export function ExportAs({
 			</select>
 			<div className="export-as-button">
 				<div className="export-as-button-icon-frame">
-					<Icon className="export-as-button-icon" />
+					<DynamicIcon className="export-as-button-icon" icon={icons[value]} />
 				</div>
-				<span className="export-as-button-name">{name}</span>
+				<span className="export-as-button-name">{names[value]}</span>
 				<div className="export-as-button-icon-frame">
 					<Feather.ChevronDown className="export-as-button-icon" />
 				</div>
