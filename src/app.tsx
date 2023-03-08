@@ -21,6 +21,7 @@ import { resources } from "@/data"
 import { cx, DynamicIcon, isMac, toKebabCase, useScrollProps } from "@/lib"
 import {
 	ClipboardContext,
+	ExportAsValue,
 	ProgressBarContext,
 	RangeContext,
 	SearchContext,
@@ -31,7 +32,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { useContext, useEffect, useRef, useTransition } from "react"
+import { Fragment, useContext, useEffect, useRef, useTransition } from "react"
 import { Lang } from "shiki-es"
 
 export function App() {
@@ -450,6 +451,20 @@ function useEffectSelectNamesByIndex() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+function Name({ exportAs, children: name }: { exportAs: ExportAsValue; children: string }) {
+	if (exportAs === "svg") {
+		return toKebabCase(name).toLowerCase()
+	} else {
+		const parts = name.split(/(?=[A-Z])/)
+		return parts.map((p, index) => (
+			<Fragment key={index}>
+				{index > 0 && <wbr />}
+				{p}
+			</Fragment>
+		))
+	}
+}
+
 function AppMain() {
 	const { feather, wkSocial, wkPayments, preferNames, data } = useContext(SearchContext)!
 	const { exportAs, index1, setIndex1, setIndex2, names, addNames, removeNames, clearNames } =
@@ -520,10 +535,7 @@ function AppMain() {
 						</figure>
 						{preferNames && (
 							<figcaption className="grid-item-name">
-								{/* {"<"} */}
-								{/* {toKebabCase(name).toLowerCase()} */}
-								{exportAs === "svg" ? toKebabCase(name).toLowerCase() : name}
-								{/* {">"} */}
+								<Name exportAs={exportAs}>{name}</Name>
 							</figcaption>
 						)}
 					</article>
