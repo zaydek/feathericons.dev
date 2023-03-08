@@ -28,7 +28,7 @@ export const SearchContext =
 		setPreferColor:     Dispatch<SetStateAction<boolean>>
 		preferNames:        boolean
 		setPreferNames:     Dispatch<SetStateAction<boolean>>
-		data:               [string, Icon][] | undefined
+		data:               (readonly [string, Icon])[] | undefined
 		resetIcons:         () => void
 		resetIconSettings:  () => void
 	} | null>(null)

@@ -1,18 +1,18 @@
 import * as fs from "node:fs/promises"
-import * as path from "path"
+import * as path from "node:path"
 
 import { sleep } from "@/lib"
 
 async function copyFilesWithRegex({
 	srcDir,
 	dstDir,
-	patternRegex,
-	replaceRegex,
+	nameRegex,
+	renameRegex,
 }: {
 	srcDir: string
 	dstDir: string
-	patternRegex: RegExp
-	replaceRegex?: readonly [RegExp, string]
+	nameRegex: RegExp
+	renameRegex?: readonly [RegExp, string]
 }) {
 	await fs.rm(dstDir, { recursive: true, force: true })
 	await sleep(100) // 😪
@@ -22,9 +22,9 @@ async function copyFilesWithRegex({
 	for (const file of files) {
 		const src = path.join(srcDir, file)
 		let dst = path.join(dstDir, file)
-		if (patternRegex.test(file) && (await fs.stat(src)).isFile()) {
-			if (replaceRegex !== undefined) {
-				dst = dst.replace(...replaceRegex)
+		if (nameRegex.test(file) && (await fs.stat(src)).isFile()) {
+			if (renameRegex !== undefined) {
+				dst = dst.replace(...renameRegex)
 			}
 			await fs.copyFile(src, dst)
 			console.log(`✅ Copied ${src} to ${dst}`)
@@ -32,141 +32,127 @@ async function copyFilesWithRegex({
 	}
 }
 
-async function organizeSocial() {
+async function organizeWkSocial() {
 	// prettier-ignore
 	const args = [
 		{ target: "original" },
-		{
-			target: "original-circle",
-			replaceRegex: [
-				/(-circle)(\.)/,
-				"$2",
-			] as const,
-		},
-		{
-			target: "original-square",
-			replaceRegex: [
-				/(-square)(\.)/,
-				"$2",
-			] as const,
-		},
-		{
-			target: "mono",
-			replaceRegex: [
-				/(-mono)(\.)/,
-				"$2",
-			] as const,
-		},
-		{
-			target: "mono-circle",
-			replaceRegex: [
-				/(-circle-mono)(\.)/,
-				"$2",
-			] as const,
-		},
-		{
-			target: "mono-square",
-			replaceRegex: [
-				/(-square-mono)(\.)/,
-				"$2",
-			] as const,
-		},
+		{ target: "mono", renameRegex: [/(-mono)(\.)/, "$2"] as const },
 	]
-	for (const { target, replaceRegex } of args) {
+	for (const { target, renameRegex } of args) {
+		// LOG
 		console.log(`📋 Copying *.svg files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/social/${target}/all`,
 			dstDir: `./icons/wk/figma/social/${target}/svg`,
-			patternRegex: /\.svg$/,
-			replaceRegex,
+			nameRegex: /\.svg$/,
+			renameRegex,
 		})
+		// LOG
 		console.log(`📋 Copying *.png files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/social/${target}/all`,
 			dstDir: `./icons/wk/figma/social/${target}/png@1x`,
-			patternRegex: /@1x\.png$/,
-			replaceRegex,
+			nameRegex: /@1x\.png$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/social/${target}/all`,
 			dstDir: `./icons/wk/figma/social/${target}/png@2x`,
-			patternRegex: /@2x\.png$/,
-			replaceRegex,
+			nameRegex: /@2x\.png$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/social/${target}/all`,
 			dstDir: `./icons/wk/figma/social/${target}/png@4x`,
-			patternRegex: /@4x\.png$/,
-			replaceRegex,
+			nameRegex: /@4x\.png$/,
+			renameRegex,
 		})
+		// LOG
 		console.log(`📋 Copying *.jpg files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/social/${target}/all`,
 			dstDir: `./icons/wk/figma/social/${target}/jpg@1x`,
-			patternRegex: /@1x\.jpg$/,
-			replaceRegex,
+			nameRegex: /@1x\.jpg$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/social/${target}/all`,
 			dstDir: `./icons/wk/figma/social/${target}/jpg@2x`,
-			patternRegex: /@2x\.jpg$/,
-			replaceRegex,
+			nameRegex: /@2x\.jpg$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/social/${target}/all`,
 			dstDir: `./icons/wk/figma/social/${target}/jpg@4x`,
-			patternRegex: /@4x\.jpg$/,
-			replaceRegex,
+			nameRegex: /@4x\.jpg$/,
+			renameRegex,
 		})
 	}
 }
 
-async function organizePayments() {
-	for (const target of ["original", "original-filled", "mono", "mono-filled"]) {
+async function organizeWkPayments() {
+	// prettier-ignore
+	const args = [
+		{ target: "original" },
+		{ target: "original-filled" },
+		{ target: "mono",        renameRegex: [/(-mono)(\.)/, "$2"] as const },
+		{ target: "mono-filled", renameRegex: [/(-mono)(\.)/, "$2"] as const },
+	]
+	for (const { target, renameRegex } of args) {
+		// LOG
 		console.log(`📋 Copying *.svg files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/payments/${target}/all`,
 			dstDir: `./icons/wk/figma/payments/${target}/svg`,
-			patternRegex: /\.svg$/,
+			nameRegex: /\.svg$/,
+			renameRegex,
 		})
+		// LOG
 		console.log(`📋 Copying *.png files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/payments/${target}/all`,
 			dstDir: `./icons/wk/figma/payments/${target}/png@1x`,
-			patternRegex: /@1x\.png$/,
+			nameRegex: /@1x\.png$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/payments/${target}/all`,
 			dstDir: `./icons/wk/figma/payments/${target}/png@2x`,
-			patternRegex: /@2x\.png$/,
+			nameRegex: /@2x\.png$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/payments/${target}/all`,
 			dstDir: `./icons/wk/figma/payments/${target}/png@4x`,
-			patternRegex: /@4x\.png$/,
+			nameRegex: /@4x\.png$/,
+			renameRegex,
 		})
+		// LOG
 		console.log(`📋 Copying *.jpg files to ${target}...`)
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/payments/${target}/all`,
 			dstDir: `./icons/wk/figma/payments/${target}/jpg@1x`,
-			patternRegex: /@1x\.jpg$/,
+			nameRegex: /@1x\.jpg$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/payments/${target}/all`,
 			dstDir: `./icons/wk/figma/payments/${target}/jpg@2x`,
-			patternRegex: /@2x\.jpg$/,
+			nameRegex: /@2x\.jpg$/,
+			renameRegex,
 		})
 		await copyFilesWithRegex({
 			srcDir: `./icons/wk/figma/payments/${target}/all`,
 			dstDir: `./icons/wk/figma/payments/${target}/jpg@4x`,
-			patternRegex: /@4x\.jpg$/,
+			nameRegex: /@4x\.jpg$/,
+			renameRegex,
 		})
 	}
 }
 
 async function main() {
-	await organizeSocial()
-	await organizePayments()
+	await organizeWkSocial()
+	await organizeWkPayments()
 	console.log("🎉 Done")
 }
 
