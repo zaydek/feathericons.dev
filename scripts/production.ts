@@ -167,10 +167,10 @@ async function exportAllFeather() {
 ////////////////////////////////////////////////////////////////////////////////
 
 async function exportAllWolfKitSocial() {
-	await fs.rm("icons/wolfkit/production/social", { recursive: true, force: true })
+	await fs.rm("icons/wk/production/social", { recursive: true, force: true })
 	await sleep(100) // 😪
 	for (const target of ["original", "original-circle", "original-square", "mono", "mono-circle", "mono-square"]) {
-		const icons = await readIcons(`icons/wolfkit/figma/social/${target}/svg`)
+		const icons = await readIcons(`icons/wk/figma/social/${target}/svg`)
 		const optimizedIcons = optimizeIcons(icons)
 		const svgIcons = formatIcons(optimizedIcons, { strictJsx: false })
 		const tsxIcons = formatIcons(optimizedIcons, { strictJsx: true })
@@ -180,28 +180,25 @@ async function exportAllWolfKitSocial() {
 			console.log()
 		}
 		// Source assets
-		await exportSvgAndZip(svgIcons, `icons/wolfkit/production/social/${target}/svg`, { banner: wolfKitSvgBanner })
-		await exportTsx(tsxIcons, `icons/wolfkit/production/social/${target}/tsx`, { banner: wolfKitTsxBanner })
+		await exportSvgAndZip(svgIcons, `icons/wk/production/social/${target}/svg`, { banner: wolfKitSvgBanner })
+		await exportTsx(tsxIcons, `icons/wk/production/social/${target}/tsx`, { banner: wolfKitTsxBanner })
 		const names = Object.keys(svgIcons).map(name => toTitleCase(name))
-		await fs.writeFile(
-			`icons/wolfkit/production/social/${target}/manifest.json`,
-			JSON.stringify(names, null, "  ") + EOF,
-		)
+		await fs.writeFile(`icons/wk/production/social/${target}/manifest.json`, JSON.stringify(names, null, "  ") + EOF)
 		// Binary assets
-		await exportZip(`icons/wolfkit/figma/social/${target}/jpg@1x`, `icons/wolfkit/production/social/${target}/jpg@1x`)
-		await exportZip(`icons/wolfkit/figma/social/${target}/jpg@2x`, `icons/wolfkit/production/social/${target}/jpg@2x`)
-		await exportZip(`icons/wolfkit/figma/social/${target}/png@1x`, `icons/wolfkit/production/social/${target}/png@1x`)
-		await exportZip(`icons/wolfkit/figma/social/${target}/png@2x`, `icons/wolfkit/production/social/${target}/png@2x`)
+		await exportZip(`icons/wk/figma/social/${target}/jpg@1x`, `icons/wk/production/social/${target}/jpg@1x`)
+		await exportZip(`icons/wk/figma/social/${target}/jpg@2x`, `icons/wk/production/social/${target}/jpg@2x`)
+		await exportZip(`icons/wk/figma/social/${target}/png@1x`, `icons/wk/production/social/${target}/png@1x`)
+		await exportZip(`icons/wk/figma/social/${target}/png@2x`, `icons/wk/production/social/${target}/png@2x`)
 	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 async function exportAllWolfKitPayments() {
-	await fs.rm("icons/wolfkit/production/payment", { recursive: true, force: true })
+	await fs.rm("icons/wk/production/payment", { recursive: true, force: true })
 	await sleep(100) // 😪
 	for (const target of ["original", "original-filled", "mono", "mono-filled"]) {
-		const icons = await readIcons(`icons/wolfkit/figma/payments/${target}/svg`)
+		const icons = await readIcons(`icons/wk/figma/payments/${target}/svg`)
 		const optimizedIcons = optimizeIcons(icons)
 		const svgIcons = formatIcons(optimizedIcons, { strictJsx: false })
 		const tsxIcons = formatIcons(optimizedIcons, { strictJsx: true })
@@ -211,30 +208,15 @@ async function exportAllWolfKitPayments() {
 			console.log()
 		}
 		// Source assets
-		await exportSvgAndZip(svgIcons, `icons/wolfkit/production/payments/${target}/svg`, { banner: wolfKitSvgBanner })
-		await exportTsx(tsxIcons, `icons/wolfkit/production/payments/${target}/tsx`, { banner: wolfKitTsxBanner })
+		await exportSvgAndZip(svgIcons, `icons/wk/production/payments/${target}/svg`, { banner: wolfKitSvgBanner })
+		await exportTsx(tsxIcons, `icons/wk/production/payments/${target}/tsx`, { banner: wolfKitTsxBanner })
 		const names = Object.keys(svgIcons).map(name => toTitleCase(name))
-		await fs.writeFile(
-			`icons/wolfkit/production/payments/${target}/manifest.json`,
-			JSON.stringify(names, null, "  ") + EOF,
-		)
+		await fs.writeFile(`icons/wk/production/payments/${target}/manifest.json`, JSON.stringify(names, null, "  ") + EOF)
 		// Binary assets
-		await exportZip(
-			`icons/wolfkit/figma/payments/${target}/jpg@1x`,
-			`icons/wolfkit/production/payments/${target}/jpg@1x`,
-		)
-		await exportZip(
-			`icons/wolfkit/figma/payments/${target}/jpg@2x`,
-			`icons/wolfkit/production/payments/${target}/jpg@2x`,
-		)
-		await exportZip(
-			`icons/wolfkit/figma/payments/${target}/png@1x`,
-			`icons/wolfkit/production/payments/${target}/png@1x`,
-		)
-		await exportZip(
-			`icons/wolfkit/figma/payments/${target}/png@2x`,
-			`icons/wolfkit/production/payments/${target}/png@2x`,
-		)
+		await exportZip(`icons/wk/figma/payments/${target}/jpg@1x`, `icons/wk/production/payments/${target}/jpg@1x`)
+		await exportZip(`icons/wk/figma/payments/${target}/jpg@2x`, `icons/wk/production/payments/${target}/jpg@2x`)
+		await exportZip(`icons/wk/figma/payments/${target}/png@1x`, `icons/wk/production/payments/${target}/png@1x`)
+		await exportZip(`icons/wk/figma/payments/${target}/png@2x`, `icons/wk/production/payments/${target}/png@2x`)
 	}
 }
 

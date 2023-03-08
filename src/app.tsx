@@ -1,10 +1,10 @@
 import * as Feather from "@icons/feather/tsx"
-import * as WkPaymentsMonoFilled from "@icons/wolfkit/payments/mono-filled/tsx"
-import * as WkPaymentsMono from "@icons/wolfkit/payments/mono/tsx"
-import * as WkPaymentsOriginalFilled from "@icons/wolfkit/payments/original-filled/tsx"
-import * as WkPaymentsOriginal from "@icons/wolfkit/payments/original/tsx"
-import * as WkSocialMono from "@icons/wolfkit/social/mono/tsx"
-import * as WkSocialOriginal from "@icons/wolfkit/social/original/tsx"
+import * as WkPaymentsMonoFilled from "@icons/wk/payments/mono-filled/tsx"
+import * as WkPaymentsMono from "@icons/wk/payments/mono/tsx"
+import * as WkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
+import * as WkPaymentsOriginal from "@icons/wk/payments/original/tsx"
+import * as WkSocialMono from "@icons/wk/social/mono/tsx"
+import * as WkSocialOriginal from "@icons/wk/social/original/tsx"
 
 import {
 	Anchor,

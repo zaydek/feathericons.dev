@@ -7,7 +7,7 @@ export default defineConfig({
 		alias: {
 			"@": "/src",
 			"@icons/feather": "/icons/feather/production",
-			"@icons/wolfkit": "/icons/wolfkit/production",
+			"@icons/wk": "/icons/wk/production",
 			"@scripts/utils": "/scripts/utils/index.ts",
 		},
 	},

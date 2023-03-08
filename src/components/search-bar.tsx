@@ -47,6 +47,7 @@ export function SearchBar() {
 	const { search, setSearch } = useContext(SearchContext)!
 	//// const { removeAllNames } = useContext(ClipboardContext)!
 
+	// TODO
 	useFocusOnMount({ ref })
 	useResetScrollOnSearch({ search })
 	useFocusShortcut({ ref, setSearch })

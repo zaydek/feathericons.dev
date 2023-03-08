@@ -1,4 +1,4 @@
-import * as WkSocialOriginal from "@icons/wolfkit/social/original/tsx"
+import * as WkSocialOriginal from "@icons/wk/social/original/tsx"
 
 import { Icon } from "@/lib"
 

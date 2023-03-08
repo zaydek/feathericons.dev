@@ -76,23 +76,23 @@ export async function fetchIconsets(
 	}
 	if (iconsets.wkSocial) {
 		if (preferColor) {
-			promises.push(import("@icons/wolfkit/social/original/tsx"))
+			promises.push(import("@icons/wk/social/original/tsx"))
 		} else {
-			promises.push(import("@icons/wolfkit/social/mono/tsx"))
+			promises.push(import("@icons/wk/social/mono/tsx"))
 		}
 	}
 	if (iconsets.wkPayments) {
 		if (preferColor) {
 			if (iconsets.wkPaymentsValue === "normal") {
-				promises.push(import("@icons/wolfkit/payments/original-filled/tsx"))
+				promises.push(import("@icons/wk/payments/original-filled/tsx"))
 			} else {
-				promises.push(import("@icons/wolfkit/payments/original/tsx"))
+				promises.push(import("@icons/wk/payments/original/tsx"))
 			}
 		} else {
 			if (iconsets.wkPaymentsValue === "normal") {
-				promises.push(import("@icons/wolfkit/payments/mono-filled/tsx"))
+				promises.push(import("@icons/wk/payments/mono-filled/tsx"))
 			} else {
-				promises.push(import("@icons/wolfkit/payments/mono/tsx"))
+				promises.push(import("@icons/wk/payments/mono/tsx"))
 			}
 		}
 	}
