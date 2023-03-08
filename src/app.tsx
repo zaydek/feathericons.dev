@@ -52,7 +52,7 @@ function useProgressBar() {
 }
 
 function AppSidebar1() {
-	const start = useProgressBar()
+	const startTransition = useProgressBar()
 
 	const {
 		feather,
@@ -84,7 +84,11 @@ function AppSidebar1() {
 							</div>
 							<h6 className="section-name u-flex-1">Icons</h6>
 							<div className="sidebar-align-icon-frame">
-								<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={() => start(resetIcons)} />
+								<Feather.RotateCcw
+									className="section-reset-icon"
+									strokeWidth={4}
+									onClick={() => startTransition(resetIcons)}
+								/>
 							</div>
 						</header>
 						<div>
@@ -98,7 +102,7 @@ function AppSidebar1() {
 										<input
 											type="checkbox"
 											checked={feather}
-											onChange={e => start(() => setFeather(e.currentTarget.checked))}
+											onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
@@ -116,7 +120,7 @@ function AppSidebar1() {
 										<input
 											type="checkbox"
 											checked={wkSocial}
-											onChange={e => start(() => setWkSocial(e.currentTarget.checked))}
+											onChange={e => startTransition(() => setWkSocial(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
@@ -143,7 +147,7 @@ function AppSidebar1() {
 										<input
 											type="checkbox"
 											checked={wkPayments}
-											onChange={e => start(() => setWkPayments(e.currentTarget.checked))}
+											onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
@@ -162,7 +166,7 @@ function AppSidebar1() {
 												type="radio"
 												checked={wkPaymentsValue === "normal"}
 												onChange={e =>
-													start(() => {
+													startTransition(() => {
 														setWkPayments(true)
 														setWkPaymentsValue("normal")
 													})
@@ -186,7 +190,7 @@ function AppSidebar1() {
 												type="radio"
 												checked={wkPaymentsValue === "filled"}
 												onChange={e =>
-													start(() => {
+													startTransition(() => {
 														setWkPayments(true)
 														setWkPaymentsValue("filled")
 													})
@@ -209,7 +213,11 @@ function AppSidebar1() {
 						</div>
 						<h6 className="section-name u-flex-1">Settings</h6>
 						<div className="sidebar-align-icon-frame">
-							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={() => start(resetIconPrefs)} />
+							<Feather.RotateCcw
+								className="section-reset-icon"
+								strokeWidth={4}
+								onClick={() => startTransition(resetIconPrefs)}
+							/>
 						</div>
 					</header>
 					<ul className="checkboxes">
@@ -223,7 +231,7 @@ function AppSidebar1() {
 								<input
 									type="checkbox"
 									checked={preferColor}
-									onChange={e => start(() => setPreferColor(e.currentTarget.checked))}
+									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
 								/>
 							</div>
 						</label>
