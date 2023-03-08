@@ -117,7 +117,7 @@ function AppSidebar1() {
 											icon={preferColor ? WkBrandsOriginal.BrandTwitter : WkBrandsMono.BrandTwitter}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Social logos</span>
+									<span className="checkbox-name u-flex-1">Brands</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -136,15 +136,15 @@ function AppSidebar1() {
 												// prettier-ignore
 												preferColor
 												? wkPaymentsValue === "normal"
-													? WkPaymentsOriginal.CardStripe
-													: WkPaymentsOriginalFilled.CardStripe
+													? WkPaymentsOriginal.CardMastercard
+													: WkPaymentsOriginalFilled.CardMastercard
 												: wkPaymentsValue === "normal"
-													? WkPaymentsMono.CardStripe
-													: WkPaymentsMonoFilled.CardStripe
+													? WkPaymentsMono.CardMastercard
+													: WkPaymentsMonoFilled.CardMastercard
 											}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Payment logos</span>
+									<span className="checkbox-name u-flex-1">Cards</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -158,7 +158,7 @@ function AppSidebar1() {
 										<div className="sidebar-align-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon payments"
-												icon={preferColor ? WkPaymentsOriginal.CardStripe : WkPaymentsMono.CardStripe}
+												icon={preferColor ? WkPaymentsOriginal.CardMastercard : WkPaymentsMono.CardMastercard}
 											/>
 										</div>
 										<span className="checkbox-name u-flex-1">Original</span>
@@ -182,7 +182,9 @@ function AppSidebar1() {
 										<div className="sidebar-align-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon payments"
-												icon={preferColor ? WkPaymentsOriginalFilled.CardStripe : WkPaymentsMonoFilled.CardStripe}
+												icon={
+													preferColor ? WkPaymentsOriginalFilled.CardMastercard : WkPaymentsMonoFilled.CardMastercard
+												}
 											/>
 										</div>
 										<span className="checkbox-name u-flex-1">Filled</span>
