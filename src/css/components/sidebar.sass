@@ -6,33 +6,30 @@
   position: sticky
   top: 0
   z-index: 50
-  display: flex
-  flex-direction: column
+  display: flex          // See .sidebar-header-scroll-area
+  flex-direction: column // See .sidebar-header-scroll-area
   background-color: white
-  overflow-y: auto
-  @at-root
-    .sidebar-header-scroll-area
-      overflow-y: auto
-      &.is-syntax-highlighting
-        padding-bottom: $sidebar-gap
-
+  overflow-y: auto       // See .sidebar-header-scroll-area
 .sidebar-footer
   position: sticky
   bottom: 0
   z-index: 50
   background-color: white
 
-// Creates an optically aligned bounding box
+.sidebar-header-scroll-area
+  overflow-y: auto
+  &.is-syntax-highlighting
+    padding-bottom: $sidebar-gap
+
 .sidebar-align-frame
   display: flex
-  align-items: center
+  flex-direction: column
+  justify-content: center // Center y-axis
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
-  height: $button-height
-
-// Creates an optically aligned bounding box for icons
+  //// height: $button-height
 .sidebar-align-icon-frame
   display: flex
-  justify-content: center
-  align-items: center
+  justify-content: center // Center x-axis
+  align-items: center     // Center y-axis
   height: $button-height
   width: $button-height

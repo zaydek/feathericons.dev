@@ -16,78 +16,42 @@
     // to [$sidebar-padding-y $sidebar-padding-x]
     padding: $sidebar-padding-y $sidebar-padding-x
 
-  // Use div:not([class]) to target:
-  //
-  // <div>
-  // ^^^^^
-  //   <div class="checkboxes">
-  //     <div class="checkbox">...</div>
-  //     <div class="checkbox">...</div>
-  //     ...
-  //   </div>
-  // </div>
-  // ^^^^^^
-  //
-  > :not(div:not([class]), .section-header, .checkboxes, .resources)
-    margin: 0 math.div($button-height - $tiny-icon-height, 2)
+.section-header
+  display: flex
+  align-items: center
+  height: $tiny-icon-height
+  background-color: white
 
-  @at-root
-    .section-header
-      display: flex
-      align-items: center
-      height: $tiny-icon-height
-      background-color: white
-
-      @at-root
-        .section-icon
-          height: $tiny-icon-height
-          width: $tiny-icon-height
-          color: $slate-600
-
-        .section-name
-          font: 500 11px / normal $sans
-          letter-spacing: 0.05em
-          text-transform: uppercase
-          color: $slate-600
-
-        .section-range-desc
-
-          //// //// display: flex
-          //// //// justify-content: center
-          //// //// align-items: center
-          //// //// height: 24px
-          //// //// width: 56px
-          //// //// border-radius: 1e3px
-          //// //// box-shadow: $inset-hairline-shadow
-          //// font: 500 11px / normal $sans
-          //// letter-spacing: 0.05em // TOOD
-          //// text-transform: uppercase
-          //// color: $slate-800
-          //// -webkit-user-select: all // Interaction
-          //// user-select: all         // Interaction
-
-          display: flex
-          justify-content: center
-          align-items: center
-          height: 24px
-          width: 56px
-          border-radius: 1e3px
-          box-shadow: $inset-hairline-shadow
-          font: 500 11px / normal $sans
-          letter-spacing: 0.05em // TOOD
-          text-transform: uppercase
-          color: $slate-800
-          -webkit-user-select: all // Interaction
-          user-select: all         // Interaction
-
-        // <feather.RotateCcw />
-        .section-reset-icon
-          height: $tiny-icon-height
-          width: $tiny-icon-height
-          color: $slate-600
-          color: $slate-300
-          cursor: pointer           // Interaction
-          -webkit-user-select: none // Interaction
-          user-select: none         // Interaction
-          &:hover
-            color: $slate-800
+.section-icon
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $slate-600
+.section-name
+  font: 500 11px / normal $sans
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-600
+.section-range-desc
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 24px
+  width: 56px
+  border-radius: 1e3px
+  box-shadow: $inset-hairline-shadow
+  font: 500 11px / normal $sans
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-800
+  -webkit-user-select: all // Interaction
+  user-select: all         // Interaction
+.section-reset-icon
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $slate-600
+  color: $slate-300
+  cursor: pointer           // Interaction
+  -webkit-user-select: none // Interaction
+  user-select: none         // Interaction
+  &:hover
+    color: $slate-800

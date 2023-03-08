@@ -12,16 +12,15 @@
   &:is(:hover, :focus-within)
     background-color: white
     box-shadow: $inset-hairline-shadow
-  @at-root
-    .search-bar-icon
-      height: 16px
-      width: 16px
-      color: $slate-400
-    .search-bar input[type=text]
-      align-self: stretch // Stretch y-axis
-      font: 425 16px / normal $sans
-      color: $slate-800
-      &::placeholder
-        color: $slate-500
-      &:focus-visible::placeholder
-        opacity: 0
+.search-bar-icon
+  height: 16px
+  width: 16px
+  color: $slate-400
+.search-bar input[type=text]
+  align-self: stretch // Stretch y-axis
+  font: 425 16px / normal $sans
+  color: $slate-800
+  &::placeholder
+    color: $slate-500
+  &:focus-visible::placeholder
+    opacity: 0

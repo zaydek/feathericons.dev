@@ -74,7 +74,9 @@ function AppSidebar1() {
 		<Sidebar1>
 			<header className="sidebar-header">
 				<section className="section is-start">
-					<SearchBar />
+					<div className="sidebar-align-frame">
+						<SearchBar />
+					</div>
 				</section>
 				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
 					<section className="section">
@@ -332,7 +334,9 @@ function AppSidebar2() {
 							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
-					<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+					<div className="sidebar-align-frame">
+						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+					</div>
 				</section>
 				<hr className="hairline" />
 				<section className="section">
@@ -346,13 +350,15 @@ function AppSidebar2() {
 							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
-					<ProgressRange
-						value={strokeWidth}
-						setValue={setStrokeWidth}
-						min={STROKE_MIN}
-						max={STROKE_MAX}
-						step={STROKE_STEP}
-					/>
+					<div className="sidebar-align-frame">
+						<ProgressRange
+							value={strokeWidth}
+							setValue={setStrokeWidth}
+							min={STROKE_MIN}
+							max={STROKE_MAX}
+							step={STROKE_STEP}
+						/>
+					</div>
 				</section>
 				<hr className="hairline" />
 			</div>

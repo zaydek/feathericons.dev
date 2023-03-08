@@ -59,14 +59,14 @@ export function ExportAs({
 				</optgroup> */}
 			</select>
 			<div className="export-as-button">
-				<div className="export-as-icon-frame">
-					<Icon className="export-as-icon" />
+				<div className="export-as-button-icon-frame">
+					<Icon className="export-as-button-icon" />
 				</div>
-				<span className="export-as-name">{name}</span>
-				<div className="export-as-icon-frame">
+				<span className="export-as-button-name">{name}</span>
+				<div className="export-as-button-icon-frame">
 					<Feather.ChevronDown
 						// prettier-ignore
-						className="export-as-icon"
+						className="export-as-button-icon"
 						//// style={{ transform: "scale(0.8)" }}
 						//// strokeWidth={6}
 					/>

@@ -19,7 +19,6 @@ $aspect-ratio: 1.25
   flex-direction: column
   gap: 8px
   width: $height
-
 .grid-item-icon-frame
   display: flex
   justify-content: center
@@ -33,10 +32,7 @@ $aspect-ratio: 1.25
   user-select: none            // Interaction
   .grid-item.is-selected &
     box-shadow: inset 0 0 0 4px $brand-color
-
 .grid-item-icon
-  //// height: 24px
-  //// max-width: 24px * 1.375
   min-height: 24px
   max-height: 24px * math.div(56, 32)
   min-width:  24px
@@ -44,7 +40,6 @@ $aspect-ratio: 1.25
   color: var(--app-color, $slate-800)
   transform: scale(calc(var(--size) / 24))
   stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
-
 .grid-item-name
   display: -webkit-box         // Clamp
   -webkit-line-clamp: 2        // Clamp
