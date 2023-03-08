@@ -68,7 +68,7 @@ function AppSidebar1() {
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
 		useContext(IconPreferencesContext)!
 
-	const scrollProps = useTrackScrollProps()
+	const trackScrollProps = useTrackScrollProps()
 
 	return (
 		<Sidebar1>
@@ -78,7 +78,7 @@ function AppSidebar1() {
 						<SearchBar />
 					</div>
 				</section>
-				<div className="sidebar-header-scroll-area u-flex-1" {...scrollProps}>
+				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
 					<section className="section">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
@@ -299,7 +299,7 @@ function AppSidebar2() {
 	const { exportAs, setExportAs } = useContext(ExportAsContext)!
 	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
 
-	const scrollProps = useTrackScrollProps()
+	const trackScrollProps = useTrackScrollProps()
 
 	useSetRangeCssVars()
 
@@ -317,7 +317,7 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...scrollProps}>
+				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...trackScrollProps}>
 					<SyntaxHighlighting lang={exportAs === "svg" ? "html" : "tsx"} code={readOnlyClipboard} />
 				</div>
 			</header>
@@ -446,16 +446,15 @@ function useClearNamesOnChange() {
 	return void 0
 }
 
-// TODO
 function useSelectNamesFromIndexes() {
 	const { icons } = useContext(IconsContext)!
 	const { startIndex, endIndex, addNames } = useContext(SelectionContext)!
 	useEffect(() => {
 		if (icons === undefined) return
 		if (startIndex === null || endIndex === null) return
-		const minIndex = Math.min(startIndex, endIndex)
-		const maxIndex = Math.max(startIndex, endIndex)
-		addNames(...icons!.slice(minIndex, maxIndex + 1).map(([name]) => name))
+		const min = Math.min(startIndex, endIndex)
+		const max = Math.max(startIndex, endIndex)
+		addNames(...icons.slice(min, max + 1).map(([name]) => name))
 	}, [addNames, icons, startIndex, endIndex])
 	return void 0
 }

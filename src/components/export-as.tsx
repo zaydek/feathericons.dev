@@ -1,16 +1,16 @@
 import * as Feather from "@icons/feather/tsx"
 
-import { Reactjs, Svg, TypeScript } from "@/components/icons"
+import { Reactjs, Solidjs, Svg } from "@/components/icons"
 import { Icon } from "@/lib"
 import { ExportAsValue } from "@/state"
 import { Dispatch, SetStateAction } from "react"
 
 const icons: Record<ExportAsValue, Icon> = {
 	svg: Svg,
-	jsx: Reactjs, // TODO
-	tsx: TypeScript,
+	jsx: Solidjs,
+	tsx: Solidjs,
 	"strict-jsx": Reactjs,
-	"strict-tsx": TypeScript,
+	"strict-tsx": Reactjs,
 	//// "strict-jsx-rn": ReactjsIcon,
 	//// "strict-tsx-rn": TypeScriptIcon,
 }
@@ -64,12 +64,7 @@ export function ExportAs({
 				</div>
 				<span className="export-as-button-name">{name}</span>
 				<div className="export-as-button-icon-frame">
-					<Feather.ChevronDown
-						// prettier-ignore
-						className="export-as-button-icon"
-						//// style={{ transform: "scale(0.8)" }}
-						//// strokeWidth={6}
-					/>
+					<Feather.ChevronDown className="export-as-button-icon" />
 				</div>
 			</div>
 		</label>
