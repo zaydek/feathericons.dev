@@ -25,6 +25,7 @@ import {
 	IconsContext,
 	ProgressBarContext,
 	ReadOnlyClipboardContext,
+	READONLY_CLIPBOARD_DEFAULT,
 	SelectionContext,
 	SizeContext,
 	SIZE_MAX,
@@ -319,8 +320,19 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="sidebar-header-scroll-area is-syntax-highlighting u-flex-1" {...trackScrollProps}>
-					<SyntaxHighlighting lang={exportAs === "svg" ? "html" : "tsx"} code={readOnlyClipboard} />
+				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
+					<section className="section syntax-highlighting">
+						<SyntaxHighlighting
+							lang={exportAs === "svg" ? "html" : "tsx"}
+							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
+						/>
+						{readOnlyClipboard !== "" && (
+							<div className="action-buttons">
+								<div className="copy-button">COPY</div>
+								<div className="save-button">SAVE</div>
+							</div>
+						)}
+					</section>
 				</div>
 			</header>
 			<div className="sidebar-body">

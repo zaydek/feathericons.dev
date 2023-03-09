@@ -14,7 +14,7 @@ export type ExportAsValue =
 //// | "jpg"
 //// | "png"
 
-const READONLY_CLIPBOARD_DEFAULT = `
+export const READONLY_CLIPBOARD_DEFAULT = `
 // Feather by @colebemis
 // Licensed as MIT
 // Reuse allowed without attribution
@@ -97,7 +97,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 
 	useEffect(() => {
 		if (names.size === 0) {
-			_setReadOnlyClipboard(READONLY_CLIPBOARD_DEFAULT)
+			_setReadOnlyClipboard("")
 			return
 		}
 		let readOnlyClipboard = ""

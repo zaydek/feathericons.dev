@@ -7,6 +7,9 @@
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
+  &.syntax-highlighting
+    padding: 0
+    padding-bottom: $sidebar-gap
   &.is-start
     padding-top: $sidebar-padding-y
     &:has(+ [data-scroll=true])
