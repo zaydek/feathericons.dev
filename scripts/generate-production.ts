@@ -45,6 +45,12 @@ function optimizeIcons(icons: Record<string, string>) {
 						prefix: name,
 					},
 				},
+				{
+					name: "convertColors",
+					params: {
+						currentColor: "#687076",
+					},
+				},
 			],
 		}).data
 		copy[name] = icon3
