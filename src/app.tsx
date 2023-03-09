@@ -87,6 +87,7 @@ function AppSidebar1() {
 							</div>
 							<h6 className="section-name u-flex-1">Icons</h6>
 							<div className="sidebar-align-icon-frame">
+								{/* TODO: Change to <button> */}
 								<Feather.RotateCcw
 									className="section-reset-icon"
 									strokeWidth={4}
@@ -218,6 +219,7 @@ function AppSidebar1() {
 						</div>
 						<h6 className="section-name u-flex-1">Settings</h6>
 						<div className="sidebar-align-icon-frame">
+							{/* TODO: Change to <button> */}
 							<Feather.RotateCcw
 								className="section-reset-icon"
 								strokeWidth={4}
@@ -328,8 +330,14 @@ function AppSidebar2() {
 						/>
 						{readOnlyClipboard !== "" && (
 							<div className="action-buttons">
-								<div className="copy-button">COPY</div>
-								<div className="save-button">SAVE</div>
+								<button className="copy-button">
+									<Feather.Copy className="copy-button-icon" />
+									Copy
+								</button>
+								<button className="save-button">
+									<Feather.Save className="save-button-icon" />
+									Download
+								</button>
 							</div>
 						)}
 					</section>
@@ -345,6 +353,7 @@ function AppSidebar2() {
 						<h6 className="section-name u-flex-1">size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<div className="sidebar-align-icon-frame">
+							{/* TODO: Change to <button> */}
 							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
@@ -361,6 +370,7 @@ function AppSidebar2() {
 						<h6 className="section-name u-flex-1">stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="sidebar-align-icon-frame">
+							{/* TODO: Change to <button> */}
 							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
@@ -537,13 +547,13 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 				}
 			}}
 		>
-			<figure className="grid-item-icon-frame">
+			<button className="grid-item-icon-frame">
 				<Icon className="grid-item-icon" />
-			</figure>
+			</button>
 			{preferNames && (
-				<figcaption className="grid-item-name">
+				<span className="grid-item-name">
 					<GridItemName>{name}</GridItemName>
-				</figcaption>
+				</span>
 			)}
 		</article>
 	)

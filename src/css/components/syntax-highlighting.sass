@@ -25,23 +25,47 @@ pre.syntax-highlighting
   display: flex
   justify-content: center
   align-items: center
-  height: 28px
-  background-color: gainsboro
+  height: 32px
+  //// background-color: $hairline-color
+  background-color: mix($slate-100, $slate-200)
   border-radius: 1e3px
-  font: 500 11px / normal $sans
-  letter-spacing: 0.05em
-  text-transform: uppercase
-  color: $slate-600
+  //// font: 500 11px / normal $sans
+  //// letter-spacing: 0.05em
+  //// text-transform: uppercase
+  //// color: $slate-600
+  font: 425 13px / 1.25 $sans
+  text-align: center
+  color: $slate-800
+
+.copy-button-icon
+  margin-right: math.div($button-height - $tiny-icon-height, 4)
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  //// background-color: orange
+  color: $slate-800
+  //// border-radius: 1e3px
 
 .save-button
   flex: 1
   display: flex
   justify-content: center
   align-items: center
-  height: 28px
-  background-color: gainsboro
+  height: 32px
+  //// background-color: $hairline-color
+  background-color: mix($slate-100, $slate-200)
   border-radius: 1e3px
-  font: 500 11px / normal $sans
-  letter-spacing: 0.05em
-  text-transform: uppercase
-  color: $slate-600
+  //// font: 500 11px / normal $sans
+  //// letter-spacing: 0.05em
+  //// text-transform: uppercase
+  //// color: $slate-600
+  font: 425 13px / 1.25 $sans
+  text-align: center
+  color: $slate-800
+
+.save-button-icon
+  margin-right: math.div($button-height - $tiny-icon-height, 4)
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  //// background-color: orange
+  color: $slate-800
+  //// border-radius: 1e3px

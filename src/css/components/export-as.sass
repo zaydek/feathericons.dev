@@ -14,12 +14,14 @@ label.export-as
   height: 100% // Inherit
   width: 100%  // Inherit
   opacity: 0.01
-  cursor: pointer
+  //// cursor: pointer
   &:hover + .export-as-button
     background-color: $slate-100
   &:hover:active + .export-as-button
     background-color: $slate-200
 
+// TODO: Defer to <button>
+// TODO: pointer-events?
 .export-as-button
   display: flex
   justify-content: center
@@ -27,7 +29,7 @@ label.export-as
   height: $select-height
   border-radius: 1e3px
   box-shadow: $inset-hairline-shadow
-  pointer-events: none // Passthrough to <select>
+  //// pointer-events: none // Passthrough to <select>
 .export-as-button-name
   font: 425 13px / 1.25 $sans
   text-align: center

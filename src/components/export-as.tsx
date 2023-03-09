@@ -55,7 +55,7 @@ export function ExportAs({
 					<option value="strict-tsx-rn">TypeScript React Native</option>
 				</optgroup> */}
 			</select>
-			<div className="export-as-button">
+			<button className="export-as-button">
 				<div className="export-as-button-icon-frame">
 					<DynamicIcon className="export-as-button-icon" icon={icons[value]} />
 				</div>
@@ -63,7 +63,7 @@ export function ExportAs({
 				<div className="export-as-button-icon-frame">
 					<Feather.ChevronDown className="export-as-button-icon" />
 				</div>
-			</div>
+			</button>
 		</label>
 	)
 }
