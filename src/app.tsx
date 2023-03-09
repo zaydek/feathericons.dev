@@ -36,7 +36,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { Fragment, memo, useContext, useEffect, useRef, useTransition } from "react"
+import { Fragment, memo, useCallback, useContext, useEffect, useRef, useTransition } from "react"
 import { useTrackScrollProps } from "./use-track-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -308,6 +308,14 @@ function AppSidebar2() {
 
 	useSideEffectSetCssVars()
 
+	const handleClickCopy = useCallback(() => {
+		navigator.clipboard.writeText(readOnlyClipboard)
+	}, [readOnlyClipboard])
+
+	const handleClickSave = useCallback(() => {
+		// ...
+	}, [])
+
 	return (
 		<Sidebar2>
 			<header className="sidebar-header">
@@ -328,15 +336,22 @@ function AppSidebar2() {
 							lang={exportAs === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
 						/>
-						{readOnlyClipboard !== "" && (
+						{/* TODO */}
+						{false && readOnlyClipboard !== "" && (
 							<div className="action-buttons">
-								<button className="copy-button">
-									<Feather.Copy className="copy-button-icon" />
-									Copy
+								<button className="action-button">
+									<div className="action-button-icon-frame">
+										{/* TODO: Change to <DynamicIcon> */}
+										<Feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
+									</div>
+									<span className="action-button-name">Copy</span>
 								</button>
-								<button className="save-button">
-									<Feather.Save className="save-button-icon" />
-									Download
+								<button className="action-button">
+									<div className="action-button-icon-frame">
+										{/* TODO: Change to <DynamicIcon> */}
+										<Feather.Download className="action-button-icon" />
+									</div>
+									<span className="action-button-name">Save</span>
 								</button>
 							</div>
 						)}
@@ -411,6 +426,7 @@ function useShortcutCtrlASelectAll() {
 	useEffect(() => {
 		if (icons === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
+			// FIXME: Doesn't work when .grid-item is focused, should use closest on .grid
 			if (document.activeElement?.tagName !== "BODY") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				e.preventDefault()

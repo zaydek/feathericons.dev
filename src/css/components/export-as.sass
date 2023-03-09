@@ -15,10 +15,10 @@ label.export-as
   width: 100%  // Inherit
   opacity: 0.01
   //// cursor: pointer
-  &:hover + .export-as-button
-    background-color: $slate-100
+  //// &:hover + .export-as-button
+  ////   background-color: $slate-100
   &:hover:active + .export-as-button
-    background-color: $slate-200
+    background-color: $slate-100
 
 // TODO: Defer to <button>
 // TODO: pointer-events?
@@ -32,7 +32,7 @@ label.export-as
   //// pointer-events: none // Passthrough to <select>
 .export-as-button-name
   font: 425 13px / 1.25 $sans
-  text-align: center
+  //// text-align: center
   color: $slate-800
 .export-as-button-icon-frame
   display: flex
