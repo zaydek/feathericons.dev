@@ -1,7 +1,7 @@
 import * as Feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
-import { SearchContext, SelectionContext } from "@/state"
+import { ClipboardContext, SearchContext } from "@/state"
 import { RefObject, useContext, useEffect, useRef } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -13,7 +13,7 @@ function useSideEffectFocusOnMount(ref: RefObject<HTMLInputElement | null>) {
 	return void 0
 }
 
-function useShortcutCtrlPFocus(ref: RefObject<HTMLInputElement | null>) {
+function useShortcutCtrlPToFocusSearchBar(ref: RefObject<HTMLInputElement | null>) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
@@ -30,11 +30,11 @@ function useShortcutCtrlPFocus(ref: RefObject<HTMLInputElement | null>) {
 
 export function SearchBar() {
 	const { search, setSearch } = useContext(SearchContext)!
-	const { clearSelection } = useContext(SelectionContext)!
+	const { clearSelection } = useContext(ClipboardContext)!
 
 	const ref = useRef<HTMLInputElement | null>(null)
 
-	useShortcutCtrlPFocus(ref)
+	useShortcutCtrlPToFocusSearchBar(ref)
 	useSideEffectFocusOnMount(ref)
 
 	return (

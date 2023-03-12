@@ -11,22 +11,20 @@ import {
 	DEV_DebugCss,
 	ExportAs,
 	Main,
+	Memo_SyntaxHighlighting,
 	ProgressRange,
 	SearchBar,
 	Sidebar1,
 	Sidebar2,
-	SyntaxHighlighting,
 } from "@/components"
 import { resources } from "@/data"
 import { cx, DynamicIcon, Icon, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
-	ExportAsContext,
+	ClipboardContext,
 	IconPreferencesContext,
 	IconsContext,
 	ProgressBarContext,
-	ReadOnlyClipboardContext,
 	READONLY_CLIPBOARD_DEFAULT,
-	SelectionContext,
 	SizeContext,
 	SIZE_MAX,
 	SIZE_MIN,
@@ -68,7 +66,7 @@ function AppSidebar1() {
 	} = useContext(IconsContext)!
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
 		useContext(IconPreferencesContext)!
-	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
+	const { setStartIndex, setEndIndex, clearSelection } = useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -309,9 +307,8 @@ function useSideEffectSetCssVars() {
 function AppSidebar2() {
 	const { size, setSize, resetSize } = useContext(SizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = useContext(StrokeWidthContext)!
-	const { exportAs, setExportAs } = useContext(ExportAsContext)!
-	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
-	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
+	const { exportAs, setExportAs, setStartIndex, setEndIndex, clearSelection, readOnlyClipboard } =
+		useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -343,7 +340,7 @@ function AppSidebar2() {
 				</section>
 				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
 					<section className="section syntax-highlighting">
-						<SyntaxHighlighting
+						<Memo_SyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
 						/>
@@ -438,22 +435,15 @@ function AppSidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useShortcutCtrlASelectAll() {
+function useShortcutCtrlAToSelectAll() {
 	const { icons } = useContext(IconsContext)!
-	const { setStartIndex, setEndIndex } = useContext(SelectionContext)!
+	const { setStartIndex, setEndIndex } = useContext(ClipboardContext)!
 	useEffect(() => {
 		if (icons === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
-			//// console.log(
-			//// 	document.activeElement,
-			//// 	(isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a"),
-			//// )
-			//// // FIXME: Doesn't work when .grid-item is focused, should use closest on .grid
-			//// if (document.activeElement?.tagName !== "BODY") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				// Call e.preventDefault() to prevent the browser from selecting all text
 				e.preventDefault()
-				console.log("Here")
 				setStartIndex(0)
 				setEndIndex(Number.MAX_SAFE_INTEGER)
 			}
@@ -464,8 +454,8 @@ function useShortcutCtrlASelectAll() {
 	return void 0
 }
 
-function useShortcutEscClearAll() {
-	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
+function useShortcutEscToClearAll() {
+	const { setStartIndex, setEndIndex, clearSelection } = useContext(ClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.tagName !== "BODY") return
@@ -481,8 +471,8 @@ function useShortcutEscClearAll() {
 	return void 0
 }
 
-function useShortcutCtrlCCopy() {
-	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
+function useShortcutCtrlCToCopy() {
+	const { readOnlyClipboard } = useContext(ClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.shiftKey) return // No-op because of Chrome shortcut
@@ -500,7 +490,7 @@ function useShortcutCtrlCCopy() {
 
 function useSideEffectClearSelectionOnChange() {
 	const { feather, wkBrands, wkPayments } = useContext(IconsContext)!
-	const { clearSelection } = useContext(SelectionContext)!
+	const { clearSelection } = useContext(ClipboardContext)!
 	const onceRef = useRef(false)
 	useEffect(() => {
 		if (!onceRef.current) {
@@ -514,14 +504,14 @@ function useSideEffectClearSelectionOnChange() {
 
 function useSideEffectSelectNamesFromIndexes() {
 	const { icons } = useContext(IconsContext)!
-	const { startIndex, endIndex, addToSelection: add } = useContext(SelectionContext)!
+	const { startIndex, endIndex, addToSelection } = useContext(ClipboardContext)!
 	useEffect(() => {
 		if (icons === undefined) return
 		if (startIndex === null || endIndex === null) return
 		const min = Math.min(startIndex, endIndex)
 		const max = Math.max(startIndex, endIndex)
-		add(...icons.slice(min, max + 1).map(([name]) => name))
-	}, [add, endIndex, icons, startIndex])
+		addToSelection(...icons.slice(min, max + 1).map(([name]) => name))
+	}, [addToSelection, endIndex, icons, startIndex])
 	return void 0
 }
 
@@ -537,7 +527,7 @@ function useSideEffectVisibleDocumentTitle() {
 }
 
 function GridItemName({ children: name }: { children: string }) {
-	const { exportAs } = useContext(ExportAsContext)!
+	const { exportAs } = useContext(ClipboardContext)!
 
 	if (exportAs === "svg") {
 		return <>{toKebabCase(name).toLowerCase()}</>
@@ -558,15 +548,8 @@ function GridItemName({ children: name }: { children: string }) {
 
 const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) => {
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const {
-		names,
-		startIndex,
-		setStartIndex,
-		setEndIndex,
-		addToSelection: add,
-		removeFromSelection: remove,
-		clearSelection,
-	} = useContext(SelectionContext)!
+	const { names, startIndex, setStartIndex, setEndIndex, addToSelection, removeFromSelection, clearSelection } =
+		useContext(ClipboardContext)!
 
 	return (
 		<article
@@ -583,13 +566,13 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 				} else {
 					if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
 						if (names.has(name)) {
-							remove(name)
+							removeFromSelection(name)
 						} else {
-							add(name)
+							addToSelection(name)
 						}
 					} else {
 						clearSelection()
-						add(name)
+						addToSelection(name)
 					}
 					setStartIndex(index)
 					setEndIndex(null)
@@ -611,7 +594,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 function AppMain() {
 	const { feather, wkBrands, wkPayments, icons } = useContext(IconsContext)!
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
+	const { setStartIndex, setEndIndex, clearSelection } = useContext(ClipboardContext)!
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -622,9 +605,9 @@ function AppMain() {
 		clearSelection()
 	}, [clearSelection, feather, wkBrands, wkPayments])
 
-	useShortcutCtrlASelectAll()
-	useShortcutCtrlCCopy()
-	useShortcutEscClearAll()
+	useShortcutCtrlAToSelectAll()
+	useShortcutCtrlCToCopy()
+	useShortcutEscToClearAll()
 
 	useSideEffectClearSelectionOnChange()
 	useSideEffectSelectNamesFromIndexes()

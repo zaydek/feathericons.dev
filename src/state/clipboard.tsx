@@ -1,6 +1,6 @@
 import { getKeys, toKebabCase, toTitleCase, useParam } from "@/lib"
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
-import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useMemo, useState } from "react"
+import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useState } from "react"
 
 // prettier-ignore
 export type ExportAsValue =
@@ -29,13 +29,10 @@ export const READONLY_CLIPBOARD_DEFAULT = `
 `.trim()
 
 // prettier-ignore
-export const ExportAsContext = createContext<{
+export const ClipboardContext = createContext<{
 	exportAs:            ExportAsValue
 	setExportAs:         Dispatch<SetStateAction<ExportAsValue>>
-} | null>(null)
 
-// prettier-ignore
-export const SelectionContext = createContext<{
 	names:               Set<string>
 	startIndex:          number | null
 	setStartIndex:       Dispatch<SetStateAction<number | null>>
@@ -44,9 +41,9 @@ export const SelectionContext = createContext<{
 	addToSelection:      (...names: string[]) => void
 	removeFromSelection: (...names: string[]) => void
 	clearSelection:      () => void
-} | null>(null)
 
-export const ReadOnlyClipboardContext = createContext<{ readOnlyClipboard: string } | null>(null)
+	readOnlyClipboard:   string
+} | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
 	const [exportAs, setExportAs] = useParam<ExportAsValue>({
@@ -90,6 +87,8 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	}, [])
 
 	const clearSelection = useCallback(() => {
+		setStartIndex(null)
+		setEndIndex(null)
 		_setNames(new Set<string>())
 	}, [])
 
@@ -143,41 +142,24 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	}, [exportAs, names])
 
 	return (
-		<ExportAsContext.Provider
-			value={useMemo(
-				() => ({
-					exportAs,
-					setExportAs,
-				}),
-				[exportAs, setExportAs],
-			)}
+		<ClipboardContext.Provider
+			value={{
+				exportAs,
+				setExportAs,
+
+				names,
+				startIndex,
+				setStartIndex,
+				endIndex,
+				setEndIndex,
+				addToSelection,
+				removeFromSelection,
+				clearSelection,
+
+				readOnlyClipboard,
+			}}
 		>
-			<SelectionContext.Provider
-				value={useMemo(
-					() => ({
-						names,
-						startIndex,
-						setStartIndex,
-						endIndex,
-						setEndIndex,
-						addToSelection,
-						removeFromSelection,
-						clearSelection,
-					}),
-					[addToSelection, clearSelection, endIndex, names, removeFromSelection, startIndex],
-				)}
-			>
-				<ReadOnlyClipboardContext.Provider
-					value={useMemo(
-						() => ({
-							readOnlyClipboard,
-						}),
-						[readOnlyClipboard],
-					)}
-				>
-					{children}
-				</ReadOnlyClipboardContext.Provider>
-			</SelectionContext.Provider>
-		</ExportAsContext.Provider>
+			{children}
+		</ClipboardContext.Provider>
 	)
 }

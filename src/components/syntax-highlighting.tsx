@@ -1,6 +1,6 @@
 import { Anchor } from "@/components"
 import { ShikiContext } from "@/state"
-import { Fragment, useContext, useEffect, useState } from "react"
+import { Fragment, memo, useContext, useEffect, useState } from "react"
 import { IThemedToken } from "shiki-es"
 
 // https://twitter.com/...
@@ -41,7 +41,7 @@ function Tokenize({ color, children }: { color?: string; children: string }) {
 	)
 }
 
-export function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
+function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 	const { highlighter } = useContext(ShikiContext)!
 	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
 
@@ -83,3 +83,5 @@ export function SyntaxHighlighting({ lang, code }: { lang: string; code: string 
 		</pre>
 	)
 }
+
+export const Memo_SyntaxHighlighting = memo(SyntaxHighlighting)
