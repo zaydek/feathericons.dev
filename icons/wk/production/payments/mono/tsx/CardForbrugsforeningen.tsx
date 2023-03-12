@@ -1,4 +1,4 @@
-// https://feathericons.com/?search=card-forbrugsforeningen
+// https://feathericons.dev/?search=card-forbrugsforeningen
 export function CardForbrugsforeningen(props: JSX.IntrinsicElements["svg"]) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 32" width="56" height="32" fill="none" {...props}>

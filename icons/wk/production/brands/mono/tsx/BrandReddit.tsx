@@ -1,4 +1,4 @@
-// https://feathericons.com/?search=brand-reddit
+// https://feathericons.dev/?search=brand-reddit
 export function BrandReddit(props: JSX.IntrinsicElements["svg"]) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" {...props}>

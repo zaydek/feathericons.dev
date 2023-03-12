@@ -1,4 +1,4 @@
-<!-- https://feathericons.com/?search=play-circle -->
+<!-- https://feathericons.dev/?search=play-circle -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-play-circle" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
   <circle cx="12" cy="12" r="10" />
   <polygon points="10 8 16 12 10 16 10 8" />

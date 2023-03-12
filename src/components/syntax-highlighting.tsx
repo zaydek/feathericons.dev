@@ -84,4 +84,4 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 	)
 }
 
-export const Memo_SyntaxHighlighting = memo(SyntaxHighlighting)
+export const MemoSyntaxHighlighting = memo(SyntaxHighlighting)

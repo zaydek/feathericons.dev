@@ -13,8 +13,8 @@ import { transformSvg, transformTsx } from "./utils/transform-svg"
 
 const EOF = "\n"
 
-const svgBanner = (name: string) => `<!-- https://feathericons.com/?search=${name} -->`
-const tsxBanner = (name: string) => `// https://feathericons.com/?search=${name}`
+const svgBanner = (name: string) => `<!-- https://feathericons.dev/?search=${name} -->`
+const tsxBanner = (name: string) => `// https://feathericons.dev/?search=${name}`
 
 ////////////////////////////////////////////////////////////////////////////////
 

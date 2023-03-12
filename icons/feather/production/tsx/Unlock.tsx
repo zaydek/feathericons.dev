@@ -1,4 +1,4 @@
-// https://feathericons.com/?search=unlock
+// https://feathericons.dev/?search=unlock
 export function Unlock(props: JSX.IntrinsicElements["svg"]) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" {...props}>

@@ -11,9 +11,8 @@ import {
 	DEV_DebugCss,
 	ExportAs,
 	Main,
-	Memo_SyntaxHighlighting,
+	MemoSyntaxHighlighting,
 	ProgressRange,
-	SearchBar,
 	Sidebar1,
 	Sidebar2,
 } from "@/components"
@@ -34,7 +33,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/state"
-import { Fragment, memo, useCallback, useContext, useEffect, useRef, useTransition } from "react"
+import { Fragment, memo, useContext, useEffect, useRef, useTransition } from "react"
 import { useTrackScrollProps } from "./use-track-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,13 +72,13 @@ function AppSidebar1() {
 	return (
 		<Sidebar1>
 			<header className="sidebar-header">
-				<section className="section is-start">
+				{/* <section className="section is-start">
 					<div className="sidebar-align-frame">
 						<SearchBar />
 					</div>
-				</section>
+				</section> */}
 				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
-					<section className="section">
+					<section className="section is-start">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
 								<Feather.Package className="section-icon" />
@@ -306,12 +305,19 @@ function AppSidebar2() {
 
 	useSideEffectSetCssVars()
 
-	// TODO
-	const handleClickCopy = useCallback(() => {
+	const onceRef = useRef(false)
+	useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
 		navigator.clipboard.writeText(readOnlyClipboard)
 	}, [readOnlyClipboard])
 
-	//// // TODO
+	//// const handleClickCopy = useCallback(() => {
+	//// 	navigator.clipboard.writeText(readOnlyClipboard)
+	//// }, [readOnlyClipboard])
+
 	//// const handleClickSave = useCallback(() => {
 	//// 	// ...
 	//// }, [])
@@ -332,29 +338,24 @@ function AppSidebar2() {
 				</section>
 				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
 					<section className="section syntax-highlighting">
-						<Memo_SyntaxHighlighting
+						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
 						/>
-						{/* TODO */}
-						{false && readOnlyClipboard !== "" && (
-							<div className="action-buttons">
-								<button className="action-button">
-									<div className="action-button-icon-frame">
-										{/* TODO: Change to <DynamicIcon> */}
-										<Feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
-									</div>
-									<span className="action-button-name">Copy</span>
-								</button>
-								<button className="action-button">
-									<div className="action-button-icon-frame">
-										{/* TODO: Change to <DynamicIcon> */}
-										<Feather.Download className="action-button-icon" />
-									</div>
-									<span className="action-button-name">Save</span>
-								</button>
-							</div>
-						)}
+						{/* <div className="action-buttons">
+							<button className="action-button">
+								<div className="action-button-icon-frame">
+									<Feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
+								</div>
+								<span className="action-button-name">Copy</span>
+							</button>
+							<button className="action-button">
+								<div className="action-button-icon-frame">
+									<Feather.Download className="action-button-icon" onClick={handleClickSave} />
+								</div>
+								<span className="action-button-name">Save</span>
+							</button>
+						</div> */}
 					</section>
 				</div>
 			</header>
@@ -402,18 +403,17 @@ function AppSidebar2() {
 				<hr className="hairline" />
 			</div>
 			<div className="u-flex-1" onClick={clearSelectedNames}></div>
-			<footer className="sidebar-footer">
+			{/* <footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							{/* <Feather.Shield className="section-icon" fill="currentColor" strokeWidth={4} /> */}
 							<Feather.Shield className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Sponsor</h6>
 					</header>
 				</section>
-			</footer>
+			</footer> */}
 		</Sidebar2>
 	)
 }
@@ -531,7 +531,7 @@ function GridItemName({ name }: { name: string }) {
 	}
 }
 
-const MemoizedGridItem = memo(({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) => {
+function GridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
 	const { preferNames } = useContext(IconPreferencesContext)!
 	const {
 		selectedNames,
@@ -581,7 +581,9 @@ const MemoizedGridItem = memo(({ index, name, Icon }: { index: number; name: str
 			)}
 		</article>
 	)
-})
+}
+
+const MemoGridItem = memo(GridItem)
 
 function AppMain() {
 	const { feather, wkBrands, wkPayments, icons } = useContext(IconsContext)!
@@ -617,7 +619,7 @@ function AppMain() {
 		>
 			<div className={cx("main-grid", preferNames && "is-prefer-names")}>
 				{icons?.map(([name, Icon], index) => (
-					<MemoizedGridItem key={name} index={index} name={name} Icon={Icon} />
+					<MemoGridItem key={name} index={index} name={name} Icon={Icon} />
 				))}
 			</div>
 		</Main>
