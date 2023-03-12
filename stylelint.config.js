@@ -77,7 +77,7 @@ const order = [
 ]
 
 module.exports = {
-	customSyntax: "postcss-sass",
+	customSyntax: "postcss-scss",
 	plugins: ["stylelint-order"],
 	rules: {
 		"order/properties-order": order,

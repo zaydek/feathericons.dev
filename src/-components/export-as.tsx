@@ -1,6 +1,6 @@
 import * as Feather from "@icons/feather/tsx"
 
-import { Reactjs, Solidjs, Svg } from "@/components/icons"
+import { Reactjs, Solidjs, Svg } from "@/-components/icons"
 import { DynamicIcon, IconComponent } from "@/lib"
 import { ExportAsValue } from "@/state"
 import { Dispatch, SetStateAction } from "react"

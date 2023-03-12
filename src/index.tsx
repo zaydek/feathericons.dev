@@ -1,11 +1,11 @@
 import "the-new-css-reset"
 
-import "@/css/base.sass"
-import "@/css/components/index.sass"
-import "@/css/form/index.sass"
+//// import "@/css/base.sass"
+//// import "@/css/components/index.sass"
+//// import "@/css/form/index.sass"
 
+import { ProgresssBar } from "@/-components"
 import { App } from "@/app"
-import { ProgresssBar } from "@/components"
 import {
 	ClipboardProvider,
 	LayoutProvider,
