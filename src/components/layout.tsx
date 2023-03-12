@@ -5,10 +5,9 @@ import { PropsWithChildren, useCallback, useContext, useEffect } from "react"
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Sidebar1({ children }: PropsWithChildren) {
-	const { sidebar2 } = useContext(LayoutContext)!
+	//// const { sidebar2 } = useContext(LayoutContext)!
 	return (
-		// @ts-expect-error
-		<aside className="sidebar" inert={sidebar2 ? "true" : null}>
+		<aside className="sidebar">
 			<div className="sidebar-contents">{children}</div>
 		</aside>
 	)
@@ -109,18 +108,12 @@ export function Sidebar2({ children }: PropsWithChildren) {
 
 // Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
-	const { sidebar2, setSidebar2 } = useContext(LayoutContext)!
+	const { setSidebar2 } = useContext(LayoutContext)!
 
 	return (
 		<>
-			<div
-				className="sidebar-overlay"
-				onClick={e => setSidebar2("open")}
-				// @ts-expect-error
-				inert={sidebar2 !== "maximized" ? "true" : null}
-			></div>
-			{/* @ts-expect-error */}
-			<main className="main" inert={sidebar2 === "maximized" ? "true" : null} {...props}>
+			<div className="sidebar-overlay" onClick={e => setSidebar2("open")}></div>
+			<main className="main" {...props}>
 				{children}
 			</main>
 		</>
