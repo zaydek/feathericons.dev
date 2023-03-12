@@ -75,7 +75,13 @@ $sidebar-2-extended-width: 512px;
 	margin-top: auto;
 	background-color: white;
 }
-
+//// .sidebar-overlay {
+////   position: fixed;
+////   inset: 0;
+////   z-index: $sidebar-overlay-z-index;
+////   background-color: hsl(0, 0%, 0%, 0.25);
+////   backdrop-filter: blur(2px);
+//// }
 .main {
 	position: absolute;
 	inset: 0 $sidebar-2-width 0 $sidebar-1-width;
