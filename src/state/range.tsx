@@ -2,7 +2,7 @@ import { useParam } from "@/lib"
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
 
 export const SIZE_MIN       = 16 // prettier-ignore
-export const SIZE_MAX       = 48 // prettier-ignore
+export const SIZE_MAX       = 32 // prettier-ignore
 export const SIZE_STEP      = 1 // prettier-ignore
 export const SIZE_DEFAULT   = 24 // prettier-ignore
 

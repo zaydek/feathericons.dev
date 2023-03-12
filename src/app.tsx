@@ -101,7 +101,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<Feather.Feather className="checkbox-icon" />
 									</div>
-									<span className="checkbox-name u-flex-1">Feather icons</span>
+									<span className="checkbox-name u-flex-1">Feather</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -119,7 +119,7 @@ function AppSidebar1() {
 											icon={preferColor ? WkBrandsOriginal.BrandTwitter : WkBrandsMono.BrandTwitter}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Brands</span>
+									<span className="checkbox-name u-flex-1">Logos</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -146,7 +146,7 @@ function AppSidebar1() {
 											}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Cards</span>
+									<span className="checkbox-name u-flex-1">Payment services</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -420,25 +420,25 @@ function AppSidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useShortcutCtrlASelectAll() {
-	const { icons } = useContext(IconsContext)!
-	const { setStartIndex, setEndIndex } = useContext(SelectionContext)!
-	useEffect(() => {
-		if (icons === undefined) return
-		function handleKeyDown(e: KeyboardEvent) {
-			// FIXME: Doesn't work when .grid-item is focused, should use closest on .grid
-			if (document.activeElement?.tagName !== "BODY") return
-			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
-				e.preventDefault()
-				setStartIndex(0)
-				setEndIndex(Number.MAX_SAFE_INTEGER)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [icons, setEndIndex, setStartIndex])
-	return void 0
-}
+//// function useShortcutCtrlASelectAll() {
+//// 	const { icons } = useContext(IconsContext)!
+//// 	const { setStartIndex, setEndIndex } = useContext(SelectionContext)!
+//// 	useEffect(() => {
+//// 		if (icons === undefined) return
+//// 		function handleKeyDown(e: KeyboardEvent) {
+//// 			// FIXME: Doesn't work when .grid-item is focused, should use closest on .grid
+//// 			if (document.activeElement?.tagName !== "BODY") return
+//// 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
+//// 				e.preventDefault()
+//// 				setStartIndex(0)
+//// 				setEndIndex(Number.MAX_SAFE_INTEGER)
+//// 			}
+//// 		}
+//// 		window.addEventListener("keydown", handleKeyDown, false)
+//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
+//// 	}, [icons, setEndIndex, setStartIndex])
+//// 	return void 0
+//// }
 
 function useShortcutEscClearAll() {
 	const { setStartIndex, setEndIndex, clear } = useContext(SelectionContext)!
@@ -589,7 +589,7 @@ function AppMain() {
 		clear()
 	}, [clear, feather, wkBrands, wkPayments])
 
-	useShortcutCtrlASelectAll()
+	//// useShortcutCtrlASelectAll()
 	useShortcutCtrlCCopy()
 	useShortcutEscClearAll()
 
