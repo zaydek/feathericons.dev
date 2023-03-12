@@ -1,7 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react";
 
-import { PropsWithChildren } from "react"
-import { iota } from "./lib"
+import { PropsWithChildren } from "react";
+import { iota } from "./lib";
 
 function SidebarOverlay() {
 	return <div className="sidebar-overlay"></div>
@@ -12,6 +12,8 @@ function Sidebar1({
 	footer,
 	children,
 }: PropsWithChildren<{ header: React.ReactNode; footer: React.ReactNode }>) {
+	const dragRef = React.useRef<HTMLDivElement | null>(null)
+
 	const [pointerIsDown, setPointerIsDown] = React.useState<boolean>(false)
 	const [startClientX, setStartClientX] = React.useState<number | null>(null)
 	const [clientX, setClientX] = React.useState<number | null>(null)
@@ -20,6 +22,37 @@ function Sidebar1({
 		startClientX === null || clientX === null
 			? "translateX(-128px)"
 			: `translateX(calc(-128px + ${clientX - startClientX}px))`
+
+	useEffect(() => {
+		function handlePointerDown(e: PointerEvent) {
+			if (e.button !== 0 && e.button !== 1) { return } // Guard mouse buttons
+			if (
+				dragRef.current !== null && e.target instanceof HTMLDivElement &&
+				!dragRef.current.contains(e.target)
+			) { return }
+			e.preventDefault() // Prevent text selection
+			setPointerIsDown(true)
+			setStartClientX(e.clientX)
+			setClientX(e.clientX)
+		}
+		function handlePointerMove(e: PointerEvent) {
+			if (!pointerIsDown) return
+			setClientX(e.clientX)
+		}
+		function handlePointerUp(e: PointerEvent) {
+			setPointerIsDown(false)
+			setStartClientX(null)
+			setClientX(null)
+		}
+		document.addEventListener("pointerdown", handlePointerDown, false)
+		document.addEventListener("pointermove", handlePointerMove, false)
+		document.addEventListener("pointerup", handlePointerUp, false) // prettier-ignore
+		return () => {
+			document.removeEventListener("pointerdown", handlePointerDown, false)
+			document.removeEventListener("pointermove", handlePointerMove, false)
+			document.removeEventListener("pointerup", handlePointerUp, false) // prettier-ignore
+		}
+	})
 
 	return (
 		<aside
@@ -30,23 +63,7 @@ function Sidebar1({
 				transform: translateX,
 			}}
 		>
-			<div
-				className="sidebar-1-drag-area"
-				onPointerDown={e => {
-					setPointerIsDown(true)
-					setStartClientX(e.clientX)
-					setClientX(e.clientX)
-				}}
-				onPointerMove={e => {
-					if (!pointerIsDown) return
-					setClientX(e.clientX)
-				}}
-				onPointerUp={e => {
-					setPointerIsDown(false)
-					setStartClientX(null)
-					setClientX(null)
-				}}
-			>
+			<div ref={dragRef} className="sidebar-1-drag-area">
 				<div className="sidebar-drag-handle"></div>
 			</div>
 			<div className="sidebar-1-card">
