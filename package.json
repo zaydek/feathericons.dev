@@ -3,7 +3,7 @@
     "dev": "vite",
     "build": "vite build",
     "build-preview": "vite build && vite preview",
-    "deploy": "vite build && netlify deploy --dir=dist --prod"
+    "deploy": "vite build && netlify deploy --dir=./dist --prod --site=feathericons.dev"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.26.1",

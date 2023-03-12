@@ -8,21 +8,23 @@ export const resources: Resource[] = [
 	{
 		name: "Icons",
 		icon: WkBrandsOriginal.BrandGithub,
-		href: "TODO",
+		href: "https://github.com/feathericons/feather",
 	},
 	{
 		name: "Website",
 		icon: WkBrandsOriginal.BrandGithub,
-		href: "TODO",
+		href: "https://github.com/zaydek/app-feathericons",
 	},
 	{
 		name: "Brands & payments files",
 		icon: WkBrandsOriginal.BrandFigma,
-		href: "TODO",
+		href: "https://figma.com/@thewolfkit",
 	},
 	{
 		name: "Share on Twitter",
 		icon: WkBrandsOriginal.BrandTwitter,
-		href: "TODO",
+		href: `http://twitter.com/intent/tweet?text=${encodeURI(
+			"Check out Feather 🪶\n\nThanks @colebemis for designing Feather and @username_ZAYDEK for feathericons.dev",
+		)}`,
 	},
 ]
