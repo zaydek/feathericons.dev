@@ -15,7 +15,7 @@ export function Sidebar1({ children }: PropsWithChildren) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useShortcutEscCloseSidebarOverlay() {
+function useShortcutEscToCloseSidebarOverlay() {
 	const { sidebar2, setSidebar2 } = useContext(LayoutContext)!
 	useEffect(() => {
 		if (sidebar2 !== "maximized") return
@@ -30,7 +30,7 @@ function useShortcutEscCloseSidebarOverlay() {
 	return void 0
 }
 
-function useShortcutCtrlBackslashCycleSidebar() {
+function useShortcutCtrlBackslashToCycleSidebar() {
 	const { setSidebar2 } = useContext(LayoutContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
@@ -89,8 +89,8 @@ export function Sidebar2({ children }: PropsWithChildren) {
 		})
 	}, [setSidebar2])
 
-	useShortcutEscCloseSidebarOverlay()
-	useShortcutCtrlBackslashCycleSidebar()
+	useShortcutEscToCloseSidebarOverlay()
+	useShortcutCtrlBackslashToCycleSidebar()
 
 	useSideEffectHtmlAndBodyScrollLocking()
 
