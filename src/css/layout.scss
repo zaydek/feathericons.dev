@@ -1,78 +1,82 @@
+$sidebar-1-width: 384px;
+$sidebar-1-extended-width: 512px;
+
+$sidebar-2-width: 384px;
+$sidebar-2-extended-width: 512px;
+
 .sidebar-1 {
-  position: fixed;
-  inset: 0 auto 0 0;
-  z-index: 10;
-  display: flex;               // Use to propagate height
-  flex-direction: row;         // Use to propagate height
-  justify-content: flex-end;   // Align to end
-  width: 512px;
-  transform: translateX(-128px);
+	position: fixed;
+	inset: 0 auto 0 0;
+	z-index: 10;
+	display: flex;               // Use to propagate height
+	flex-direction: row;         // Use to propagate height
+	justify-content: flex-end;   // Align to end
+	width: $sidebar-1-extended-width;
+	transform: translateX(-128px);
 }
 .sidebar-2 {
-  position: fixed;
-  inset: 0 0 0 auto;
-  z-index: 10;
-  display: flex;               // Use to propagate height (must use row)
-  flex-direction: row;         // Use to propagate height (must use row)
-  justify-content: flex-start; // Align to start
-  width: 512px;
-  transform: translateX(128px);
+	position: fixed;
+	inset: 0 0 0 auto;
+	z-index: 10;
+	display: flex;               // Use to propagate height (must use row)
+	flex-direction: row;         // Use to propagate height (must use row)
+	justify-content: flex-start; // Align to start
+	width: $sidebar-2-extended-width;
+	transform: translateX(128px);
 }
 .sidebar-1-card {
-  display: flex;               // Use to propagate height
-  flex-direction: column;      // Use to propagate height
-  width: 384px;
-  background-color: white;
-  box-shadow: 0 0 0 1px gainsboro;
+	display: flex;               // Use to propagate height
+	flex-direction: column;      // Use to propagate height
+	width: $sidebar-1-width;
+	background-color: white;
+	box-shadow: 0 0 0 1px gainsboro;
 }
 .sidebar-2-card {
-  display: flex;               // Use to propagate height
-  flex-direction: column;      // Use to propagate height
-  width: 384px;
-  background-color: white;
-  box-shadow: 0 0 0 1px gainsboro;
+	display: flex;               // Use to propagate height
+	flex-direction: column;      // Use to propagate height
+	width: $sidebar-2-width;
+	background-color: white;
+	box-shadow: 0 0 0 1px gainsboro;
 }
 .sidebar-1-drag-area {
-  position: absolute;
-  inset: 0 auto 0 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
+	position: absolute;
+	inset: 0 auto 0 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 24px;
 }
 .sidebar-2-drag-area {
-  position: absolute;
-  inset: 0 100% 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
+	position: absolute;
+	inset: 0 100% 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 24px;
 }
 .sidebar-drag-handle {
-  height: 6px * 10;
-  width: 6px;
-  background-color: gray;
-  border-radius: 1e3px;
+	height: 6px * 8;
+	width: 6px;
+	background-color: gray;
+	border-radius: 1e3px;
 }
 .sidebar-header {
-  position: sticky;
-  top: 0;
-  background-color: white;
+	position: sticky;
+	top: 0;
+	background-color: white;
 }
 .sidebar-scroll-area {
-  overflow-y: auto;
+	overflow-y: auto;
 }
 .sidebar-footer {
-  position: sticky;
-  bottom: 0;
-  z-index: 20;
-  margin-top: auto;
-  background-color: white;
+	position: sticky;
+	bottom: 0;
+	z-index: 20;
+	margin-top: auto;
+	background-color: white;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 .main {
-  position: absolute;
-  inset: 0 384px 0 384px;
+	position: absolute;
+	inset: 0 $sidebar-2-width 0 $sidebar-1-width;
 }
