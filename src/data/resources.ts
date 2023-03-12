@@ -1,8 +1,8 @@
 import * as WkBrandsOriginal from "@icons/wk/brands/original/tsx"
 
-import { Icon } from "@/lib"
+import { IconComponent } from "@/lib"
 
-export type Resource = { name: string; icon: Icon; href: string }
+export type Resource = { name: string; icon: IconComponent; href: string }
 
 export const resources: Resource[] = [
 	{

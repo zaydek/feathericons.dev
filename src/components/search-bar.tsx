@@ -30,7 +30,7 @@ function useShortcutCtrlPToFocusSearchBar(ref: RefObject<HTMLInputElement | null
 
 export function SearchBar() {
 	const { search, setSearch } = useContext(SearchContext)!
-	const { clearSelection } = useContext(ClipboardContext)!
+	const { clearSelectedNames } = useContext(ClipboardContext)!
 
 	const ref = useRef<HTMLInputElement | null>(null)
 
@@ -56,7 +56,7 @@ export function SearchBar() {
 				// prettier-ignore
 				onChange={e => {
 					window.scrollTo(0, 0) // Reset scroll
-					clearSelection()               // Clear selection
+					clearSelectedNames()               // Clear selection
 					setSearch(e.currentTarget.value)
 				}}
 			/>

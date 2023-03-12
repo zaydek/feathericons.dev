@@ -30,19 +30,17 @@ export const READONLY_CLIPBOARD_DEFAULT = `
 
 // prettier-ignore
 export const ClipboardContext = createContext<{
-	exportAs:            ExportAsValue
-	setExportAs:         Dispatch<SetStateAction<ExportAsValue>>
-
-	names:               Set<string>
-	startIndex:          number | null
-	setStartIndex:       Dispatch<SetStateAction<number | null>>
-	endIndex:            number | null
-	setEndIndex:         Dispatch<SetStateAction<number | null>>
-	addToSelection:      (...names: string[]) => void
-	removeFromSelection: (...names: string[]) => void
-	clearSelection:      () => void
-
-	readOnlyClipboard:   string
+	exportAs:                ExportAsValue
+	setExportAs:             Dispatch<SetStateAction<ExportAsValue>>
+	selectedNames:           Set<string>
+	selectedNamesStart:      number | null
+	setSelectedNamesStart:   Dispatch<SetStateAction<number | null>>
+	selectedNamesEnd:        number | null
+	setSelectedNamesEnd:     Dispatch<SetStateAction<number | null>>
+	addToSelectedNames:      (...names: string[]) => void
+	removeFromSelectedNames: (...names: string[]) => void
+	clearSelectedNames:      () => void
+	readOnlyClipboard:       string
 } | null>(null)
 
 export function ClipboardProvider({ children }: { children: ReactNode }) {
@@ -62,11 +60,11 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		},
 	})
 
-	const [names, _setNames] = useState(() => new Set<string>())
-	const [startIndex, setStartIndex] = useState<number | null>(null)
-	const [endIndex, setEndIndex] = useState<number | null>(null)
+	const [selectedNames, _setNames] = useState(() => new Set<string>())
+	const [selectedNamesStart, setSelectedNamesStart] = useState<number | null>(null)
+	const [selectedNamesEnd, setSelectedNamesEnd] = useState<number | null>(null)
 
-	const addToSelection = useCallback((...names: string[]) => {
+	const addToSelectedNames = useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -76,7 +74,7 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const removeFromSelection = useCallback((...names: string[]) => {
+	const removeFromSelectedNames = useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -86,9 +84,9 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 		})
 	}, [])
 
-	const clearSelection = useCallback(() => {
-		setStartIndex(null)
-		setEndIndex(null)
+	const clearSelectedNames = useCallback(() => {
+		setSelectedNamesStart(null)
+		setSelectedNamesEnd(null)
 		_setNames(new Set<string>())
 	}, [])
 
@@ -96,12 +94,12 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 	const [readOnlyClipboard, _setReadOnlyClipboard] = useState("")
 
 	useEffect(() => {
-		if (names.size === 0) {
+		if (selectedNames.size === 0) {
 			_setReadOnlyClipboard("")
 			return
 		}
 		let readOnlyClipboard = ""
-		const [keys, hasMore] = getKeys(names, { limit: 10 })
+		const [keys, hasMore] = getKeys(selectedNames, { limit: 10 })
 		for (const [index, name] of keys.entries()) {
 			if (index > 0) {
 				readOnlyClipboard += "\n\n"
@@ -139,23 +137,21 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
 			}
 		}
 		_setReadOnlyClipboard(readOnlyClipboard)
-	}, [exportAs, names])
+	}, [exportAs, selectedNames])
 
 	return (
 		<ClipboardContext.Provider
 			value={{
 				exportAs,
 				setExportAs,
-
-				names,
-				startIndex,
-				setStartIndex,
-				endIndex,
-				setEndIndex,
-				addToSelection,
-				removeFromSelection,
-				clearSelection,
-
+				selectedNames,
+				selectedNamesStart,
+				setSelectedNamesStart,
+				selectedNamesEnd,
+				setSelectedNamesEnd,
+				addToSelectedNames,
+				removeFromSelectedNames,
+				clearSelectedNames,
 				readOnlyClipboard,
 			}}
 		>

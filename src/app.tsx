@@ -18,7 +18,7 @@ import {
 	Sidebar2,
 } from "@/components"
 import { resources } from "@/data"
-import { cx, DynamicIcon, Icon, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import { cx, DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	IconPreferencesContext,
@@ -66,7 +66,7 @@ function AppSidebar1() {
 	} = useContext(IconsContext)!
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
 		useContext(IconPreferencesContext)!
-	const { clearSelection } = useContext(ClipboardContext)!
+	const { clearSelectedNames } = useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -115,7 +115,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											icon={preferColor ? WkBrandsOriginal.BrandTwitter : WkBrandsMono.BrandTwitter}
+											Icon={preferColor ? WkBrandsOriginal.BrandTwitter : WkBrandsMono.BrandTwitter}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Logos</span>
@@ -133,7 +133,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon payments"
-											icon={
+											Icon={
 												// prettier-ignore
 												preferColor
 												? wkPaymentsValue === "normal"
@@ -159,7 +159,7 @@ function AppSidebar1() {
 										<div className="sidebar-align-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon payments"
-												icon={preferColor ? WkPaymentsOriginal.CardMastercard : WkPaymentsMono.CardMastercard}
+												Icon={preferColor ? WkPaymentsOriginal.CardMastercard : WkPaymentsMono.CardMastercard}
 											/>
 										</div>
 										<span className="checkbox-name u-flex-1">Original</span>
@@ -183,7 +183,7 @@ function AppSidebar1() {
 										<div className="sidebar-align-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon payments"
-												icon={
+												Icon={
 													preferColor ? WkPaymentsOriginalFilled.CardMastercard : WkPaymentsMonoFilled.CardMastercard
 												}
 											/>
@@ -243,7 +243,7 @@ function AppSidebar1() {
 						</label>
 						<label className="checkbox">
 							<div className="sidebar-align-icon-frame">
-								<DynamicIcon className="checkbox-icon" icon={preferNames ? Feather.ToggleRight : Feather.ToggleLeft} />
+								<DynamicIcon className="checkbox-icon" Icon={preferNames ? Feather.ToggleRight : Feather.ToggleLeft} />
 							</div>
 							<span className="checkbox-name u-flex-1">Show icon names</span>
 							<div className="sidebar-align-icon-frame">
@@ -254,7 +254,7 @@ function AppSidebar1() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div className="u-flex-1" onClick={clearSelection}></div>
+			<div className="u-flex-1" onClick={clearSelectedNames}></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
@@ -300,7 +300,7 @@ function useSideEffectSetCssVars() {
 function AppSidebar2() {
 	const { size, setSize, resetSize } = useContext(SizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = useContext(StrokeWidthContext)!
-	const { exportAs, setExportAs, clearSelection, readOnlyClipboard } = useContext(ClipboardContext)!
+	const { exportAs, setExportAs, clearSelectedNames, readOnlyClipboard } = useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -401,7 +401,7 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div className="u-flex-1" onClick={clearSelection}></div>
+			<div className="u-flex-1" onClick={clearSelectedNames}></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
@@ -422,37 +422,37 @@ function AppSidebar2() {
 
 function useShortcutCtrlAToSelectAll() {
 	const { icons } = useContext(IconsContext)!
-	const { setStartIndex, setEndIndex } = useContext(ClipboardContext)!
+	const { setSelectedNamesStart, setSelectedNamesEnd } = useContext(ClipboardContext)!
 	useEffect(() => {
 		if (icons === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				// Call e.preventDefault() to prevent the browser from selecting all text
 				e.preventDefault()
-				setStartIndex(0)
-				setEndIndex(Number.MAX_SAFE_INTEGER)
+				setSelectedNamesStart(0)
+				setSelectedNamesEnd(Number.MAX_SAFE_INTEGER)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [icons, setEndIndex, setStartIndex])
+	}, [icons, setSelectedNamesEnd, setSelectedNamesStart])
 	return void 0
 }
 
 function useShortcutEscToClearAll() {
-	const { setStartIndex, setEndIndex, clearSelection } = useContext(ClipboardContext)!
+	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = useContext(ClipboardContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.tagName !== "BODY") return
 			if (e.key === "Escape") {
-				clearSelection()
-				setStartIndex(null)
-				setEndIndex(null)
+				clearSelectedNames()
+				setSelectedNamesStart(null)
+				setSelectedNamesEnd(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clearSelection, setEndIndex, setStartIndex])
+	}, [clearSelectedNames, setSelectedNamesEnd, setSelectedNamesStart])
 	return void 0
 }
 
@@ -475,28 +475,28 @@ function useShortcutCtrlCToCopy() {
 
 function useSideEffectClearSelectionOnChange() {
 	const { feather, wkBrands, wkPayments } = useContext(IconsContext)!
-	const { clearSelection } = useContext(ClipboardContext)!
+	const { clearSelectedNames } = useContext(ClipboardContext)!
 	const onceRef = useRef(false)
 	useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
-		clearSelection()
-	}, [clearSelection, feather, wkBrands, wkPayments])
+		clearSelectedNames()
+	}, [clearSelectedNames, feather, wkBrands, wkPayments])
 	return void 0
 }
 
 function useSideEffectSelectNamesFromIndexes() {
 	const { icons } = useContext(IconsContext)!
-	const { startIndex, endIndex, addToSelection } = useContext(ClipboardContext)!
+	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = useContext(ClipboardContext)!
 	useEffect(() => {
 		if (icons === undefined) return
-		if (startIndex === null || endIndex === null) return
-		const min = Math.min(startIndex, endIndex)
-		const max = Math.max(startIndex, endIndex)
-		addToSelection(...icons.slice(min, max + 1).map(([name]) => name))
-	}, [addToSelection, endIndex, icons, startIndex])
+		if (selectedNamesStart === null || selectedNamesEnd === null) return
+		const min = Math.min(selectedNamesStart, selectedNamesEnd)
+		const max = Math.max(selectedNamesStart, selectedNamesEnd)
+		addToSelectedNames(...icons.slice(min, max + 1).map(([name]) => name))
+	}, [addToSelectedNames, selectedNamesEnd, icons, selectedNamesStart])
 	return void 0
 }
 
@@ -511,7 +511,7 @@ function useSideEffectVisibleDocumentTitle() {
 	return void 0
 }
 
-function GridItemName({ children: name }: { children: string }) {
+function GridItemName({ name }: { name: string }) {
 	const { exportAs } = useContext(ClipboardContext)!
 
 	if (exportAs === "svg") {
@@ -531,36 +531,43 @@ function GridItemName({ children: name }: { children: string }) {
 	}
 }
 
-const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) => {
+const MemoizedGridItem = memo(({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) => {
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const { names, startIndex, setStartIndex, setEndIndex, addToSelection, removeFromSelection, clearSelection } =
-		useContext(ClipboardContext)!
+	const {
+		selectedNames,
+		selectedNamesStart,
+		setSelectedNamesStart,
+		setSelectedNamesEnd,
+		addToSelectedNames,
+		removeFromSelectedNames,
+		clearSelectedNames,
+	} = useContext(ClipboardContext)!
 
 	return (
 		<article
 			id={name}
-			className={cx("main-grid-item", names.has(name) && "is-selected")}
+			className={cx("main-grid-item", selectedNames.has(name) && "is-selected")}
 			onClick={e => {
 				if (e.shiftKey) {
-					if (startIndex === null) {
-						setStartIndex(index)
-						setEndIndex(index)
+					if (selectedNamesStart === null) {
+						setSelectedNamesStart(index)
+						setSelectedNamesEnd(index)
 					} else {
-						setEndIndex(index)
+						setSelectedNamesEnd(index)
 					}
 				} else {
 					if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-						if (names.has(name)) {
-							removeFromSelection(name)
+						if (selectedNames.has(name)) {
+							removeFromSelectedNames(name)
 						} else {
-							addToSelection(name)
+							addToSelectedNames(name)
 						}
 					} else {
-						clearSelection()
-						addToSelection(name)
+						clearSelectedNames()
+						addToSelectedNames(name)
 					}
-					setStartIndex(index)
-					setEndIndex(null)
+					setSelectedNamesStart(index)
+					setSelectedNamesEnd(null)
 				}
 			}}
 		>
@@ -569,7 +576,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 			</button>
 			{preferNames && (
 				<span className="main-grid-item-name">
-					<GridItemName>{name}</GridItemName>
+					<GridItemName name={name} />
 				</span>
 			)}
 		</article>
@@ -579,7 +586,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 function AppMain() {
 	const { feather, wkBrands, wkPayments, icons } = useContext(IconsContext)!
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const { setStartIndex, setEndIndex, clearSelection } = useContext(ClipboardContext)!
+	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = useContext(ClipboardContext)!
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -587,8 +594,8 @@ function AppMain() {
 			onceRef.current = true
 			return
 		}
-		clearSelection()
-	}, [clearSelection, feather, wkBrands, wkPayments])
+		clearSelectedNames()
+	}, [clearSelectedNames, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlAToSelectAll()
 	useShortcutCtrlCToCopy()
@@ -602,15 +609,15 @@ function AppMain() {
 		<Main
 			onClick={e => {
 				if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item") === null) {
-					clearSelection()
-					setStartIndex(null)
-					setEndIndex(null)
+					clearSelectedNames()
+					setSelectedNamesStart(null)
+					setSelectedNamesEnd(null)
 				}
 			}}
 		>
 			<div className={cx("main-grid", preferNames && "is-prefer-names")}>
-				{icons?.map(([name, icon], index) => (
-					<MemoizedGridItem key={name} index={index} name={name} icon={icon} />
+				{icons?.map(([name, Icon], index) => (
+					<MemoizedGridItem key={name} index={index} name={name} Icon={Icon} />
 				))}
 			</div>
 		</Main>

@@ -1,4 +1,4 @@
-import { Icon } from "@/lib"
+import { IconComponent } from "@/lib"
 import { WkPaymentsValue } from "@/state"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect, useMemo } from "react"
@@ -70,7 +70,7 @@ export async function fetchIconsets(
 	},
 	preferColor: boolean,
 ) {
-	const chain: Promise<Record<string, Icon>>[] = []
+	const chain: Promise<Record<string, IconComponent>>[] = []
 	if (iconsets.feather) {
 		chain.push(import("@icons/feather/tsx"))
 	}

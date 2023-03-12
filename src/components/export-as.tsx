@@ -1,11 +1,11 @@
 import * as Feather from "@icons/feather/tsx"
 
 import { Reactjs, Solidjs, Svg } from "@/components/icons"
-import { DynamicIcon, Icon } from "@/lib"
+import { DynamicIcon, IconComponent } from "@/lib"
 import { ExportAsValue } from "@/state"
 import { Dispatch, SetStateAction } from "react"
 
-const icons: Record<ExportAsValue, Icon> = {
+const icons: Record<ExportAsValue, IconComponent> = {
 	svg: Svg,
 	jsx: Solidjs,
 	tsx: Solidjs,
@@ -57,7 +57,7 @@ export function ExportAs({
 			</select>
 			<button className="export-as-button">
 				<div className="export-as-button-icon-frame">
-					<DynamicIcon className="export-as-button-icon" icon={icons[value]} />
+					<DynamicIcon className="export-as-button-icon" Icon={icons[value]} />
 				</div>
 				<span className="export-as-button-name">{names[value]}</span>
 				<div className="export-as-button-icon-frame">

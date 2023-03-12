@@ -3,7 +3,7 @@
   "extends": ["react-app"],
   "plugins": ["destructuring"],
   "rules": {
-    "react/jsx-pascal-case": 0
-    //// "destructuring/no-rename": "error"
+    "react/jsx-pascal-case": 0,
+    "destructuring/no-rename": "error"
   }
 }

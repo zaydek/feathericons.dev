@@ -1,4 +1,4 @@
-import { canonicalize, Icon, useParam, useParamBoolean } from "@/lib"
+import { canonicalize, IconComponent, useParam, useParamBoolean } from "@/lib"
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
 import { useQueryIcons } from "./use-query-icons"
 
@@ -27,7 +27,7 @@ export const IconsContext = createContext<{
   setWkPayments:      Dispatch<SetStateAction<boolean>>
   wkPaymentsValue:    WkPaymentsValue
   setWkPaymentsValue: Dispatch<SetStateAction<WkPaymentsValue>>
-  icons:              (readonly [string, Icon])[] | undefined
+  icons:              (readonly [string, IconComponent])[] | undefined
   resetIcons: () => void
 } | null>(null)
 
