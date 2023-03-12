@@ -68,6 +68,7 @@ function AppSidebar1() {
 	} = useContext(IconsContext)!
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
 		useContext(IconPreferencesContext)!
+	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -255,7 +256,14 @@ function AppSidebar1() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div className="u-flex-1"></div>
+			<div
+				className="u-flex-1"
+				onClick={e => {
+					clearSelection()
+					setStartIndex(null)
+					setEndIndex(null)
+				}}
+			></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
@@ -302,16 +310,19 @@ function AppSidebar2() {
 	const { size, setSize, resetSize } = useContext(SizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = useContext(StrokeWidthContext)!
 	const { exportAs, setExportAs } = useContext(ExportAsContext)!
+	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
 	const { readOnlyClipboard } = useContext(ReadOnlyClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
 	useSideEffectSetCssVars()
 
+	// TODO
 	const handleClickCopy = useCallback(() => {
 		navigator.clipboard.writeText(readOnlyClipboard)
 	}, [readOnlyClipboard])
 
+	// TODO
 	const handleClickSave = useCallback(() => {
 		// ...
 	}, [])
@@ -401,7 +412,14 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div className="u-flex-1"></div>
+			<div
+				className="u-flex-1"
+				onClick={e => {
+					clearSelection()
+					setStartIndex(null)
+					setEndIndex(null)
+				}}
+			></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
@@ -420,40 +438,46 @@ function AppSidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// function useShortcutCtrlASelectAll() {
-//// 	const { icons } = useContext(IconsContext)!
-//// 	const { setStartIndex, setEndIndex } = useContext(SelectionContext)!
-//// 	useEffect(() => {
-//// 		if (icons === undefined) return
-//// 		function handleKeyDown(e: KeyboardEvent) {
-//// 			// FIXME: Doesn't work when .grid-item is focused, should use closest on .grid
-//// 			if (document.activeElement?.tagName !== "BODY") return
-//// 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
-//// 				e.preventDefault()
-//// 				setStartIndex(0)
-//// 				setEndIndex(Number.MAX_SAFE_INTEGER)
-//// 			}
-//// 		}
-//// 		window.addEventListener("keydown", handleKeyDown, false)
-//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-//// 	}, [icons, setEndIndex, setStartIndex])
-//// 	return void 0
-//// }
+function useShortcutCtrlASelectAll() {
+	const { icons } = useContext(IconsContext)!
+	const { setStartIndex, setEndIndex } = useContext(SelectionContext)!
+	useEffect(() => {
+		if (icons === undefined) return
+		function handleKeyDown(e: KeyboardEvent) {
+			//// console.log(
+			//// 	document.activeElement,
+			//// 	(isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a"),
+			//// )
+			//// // FIXME: Doesn't work when .grid-item is focused, should use closest on .grid
+			//// if (document.activeElement?.tagName !== "BODY") return
+			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
+				// Call e.preventDefault() to prevent the browser from selecting all text
+				e.preventDefault()
+				console.log("Here")
+				setStartIndex(0)
+				setEndIndex(Number.MAX_SAFE_INTEGER)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [icons, setEndIndex, setStartIndex])
+	return void 0
+}
 
 function useShortcutEscClearAll() {
-	const { setStartIndex, setEndIndex, clear } = useContext(SelectionContext)!
+	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.tagName !== "BODY") return
 			if (e.key === "Escape") {
-				clear()
+				clearSelection()
 				setStartIndex(null)
 				setEndIndex(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clear, setEndIndex, setStartIndex])
+	}, [clearSelection, setEndIndex, setStartIndex])
 	return void 0
 }
 
@@ -463,6 +487,7 @@ function useShortcutCtrlCCopy() {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.shiftKey) return // No-op because of Chrome shortcut
 			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
+				// Call e.preventDefault() to prevent the browser from copying selected text
 				e.preventDefault()
 				navigator.clipboard.writeText(readOnlyClipboard)
 			}
@@ -475,21 +500,21 @@ function useShortcutCtrlCCopy() {
 
 function useSideEffectClearSelectionOnChange() {
 	const { feather, wkBrands, wkPayments } = useContext(IconsContext)!
-	const { clear } = useContext(SelectionContext)!
+	const { clearSelection } = useContext(SelectionContext)!
 	const onceRef = useRef(false)
 	useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
-		clear()
-	}, [clear, feather, wkBrands, wkPayments])
+		clearSelection()
+	}, [clearSelection, feather, wkBrands, wkPayments])
 	return void 0
 }
 
 function useSideEffectSelectNamesFromIndexes() {
 	const { icons } = useContext(IconsContext)!
-	const { startIndex, endIndex, add } = useContext(SelectionContext)!
+	const { startIndex, endIndex, addToSelection: add } = useContext(SelectionContext)!
 	useEffect(() => {
 		if (icons === undefined) return
 		if (startIndex === null || endIndex === null) return
@@ -533,7 +558,15 @@ function GridItemName({ children: name }: { children: string }) {
 
 const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) => {
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const { names, startIndex, setStartIndex, setEndIndex, add, remove, clear } = useContext(SelectionContext)!
+	const {
+		names,
+		startIndex,
+		setStartIndex,
+		setEndIndex,
+		addToSelection: add,
+		removeFromSelection: remove,
+		clearSelection,
+	} = useContext(SelectionContext)!
 
 	return (
 		<article
@@ -555,7 +588,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 							add(name)
 						}
 					} else {
-						clear()
+						clearSelection()
 						add(name)
 					}
 					setStartIndex(index)
@@ -578,7 +611,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 function AppMain() {
 	const { feather, wkBrands, wkPayments, icons } = useContext(IconsContext)!
 	const { preferNames } = useContext(IconPreferencesContext)!
-	const { setStartIndex, setEndIndex, clear } = useContext(SelectionContext)!
+	const { setStartIndex, setEndIndex, clearSelection } = useContext(SelectionContext)!
 
 	const onceRef = useRef(false)
 	useEffect(() => {
@@ -586,10 +619,10 @@ function AppMain() {
 			onceRef.current = true
 			return
 		}
-		clear()
-	}, [clear, feather, wkBrands, wkPayments])
+		clearSelection()
+	}, [clearSelection, feather, wkBrands, wkPayments])
 
-	//// useShortcutCtrlASelectAll()
+	useShortcutCtrlASelectAll()
 	useShortcutCtrlCCopy()
 	useShortcutEscClearAll()
 
@@ -601,7 +634,7 @@ function AppMain() {
 		<Main
 			onClick={e => {
 				if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item") === null) {
-					clear()
+					clearSelection()
 					setStartIndex(null)
 					setEndIndex(null)
 				}

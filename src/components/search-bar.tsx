@@ -17,7 +17,8 @@ function useShortcutCtrlPFocus(ref: RefObject<HTMLInputElement | null>) {
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
-				e.preventDefault() // Printers 💀
+				// Call preventDefault() to prevent the browser from opening the print dialog
+				e.preventDefault()
 				ref.current!.focus()
 			}
 		}
@@ -29,7 +30,7 @@ function useShortcutCtrlPFocus(ref: RefObject<HTMLInputElement | null>) {
 
 export function SearchBar() {
 	const { search, setSearch } = useContext(SearchContext)!
-	const { clear } = useContext(SelectionContext)!
+	const { clearSelection } = useContext(SelectionContext)!
 
 	const ref = useRef<HTMLInputElement | null>(null)
 
@@ -49,14 +50,13 @@ export function SearchBar() {
 				value={search}
 				onKeyDown={e => {
 					if (e.key === "Escape") {
-						e.preventDefault()
 						setSearch("")
 					}
 				}}
 				// prettier-ignore
 				onChange={e => {
 					window.scrollTo(0, 0) // Reset scroll
-					clear()               // Clear selection
+					clearSelection()               // Clear selection
 					setSearch(e.currentTarget.value)
 				}}
 			/>
