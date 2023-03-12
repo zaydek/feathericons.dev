@@ -22,6 +22,7 @@
     "esbuild": "^0.17.10",
     "eslint": "^8.34.0",
     "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-destructuring": "^2.2.1",
     "jsdom": "^21.1.0",
     "jszip": "^3.10.1",
     "playwright": "^1.30.0",

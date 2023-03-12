@@ -66,7 +66,7 @@ function AppSidebar1() {
 	} = useContext(IconsContext)!
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
 		useContext(IconPreferencesContext)!
-	const { setStartIndex, setEndIndex, clearSelection } = useContext(ClipboardContext)!
+	const { clearSelection } = useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -254,14 +254,7 @@ function AppSidebar1() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div
-				className="u-flex-1"
-				onClick={e => {
-					clearSelection()
-					setStartIndex(null)
-					setEndIndex(null)
-				}}
-			></div>
+			<div className="u-flex-1" onClick={clearSelection}></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
@@ -307,8 +300,7 @@ function useSideEffectSetCssVars() {
 function AppSidebar2() {
 	const { size, setSize, resetSize } = useContext(SizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = useContext(StrokeWidthContext)!
-	const { exportAs, setExportAs, setStartIndex, setEndIndex, clearSelection, readOnlyClipboard } =
-		useContext(ClipboardContext)!
+	const { exportAs, setExportAs, clearSelection, readOnlyClipboard } = useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -319,10 +311,10 @@ function AppSidebar2() {
 		navigator.clipboard.writeText(readOnlyClipboard)
 	}, [readOnlyClipboard])
 
-	// TODO
-	const handleClickSave = useCallback(() => {
-		// ...
-	}, [])
+	//// // TODO
+	//// const handleClickSave = useCallback(() => {
+	//// 	// ...
+	//// }, [])
 
 	return (
 		<Sidebar2>
@@ -409,14 +401,7 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div
-				className="u-flex-1"
-				onClick={e => {
-					clearSelection()
-					setStartIndex(null)
-					setEndIndex(null)
-				}}
-			></div>
+			<div className="u-flex-1" onClick={clearSelection}></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
 				<section className="section is-end">
