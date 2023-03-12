@@ -5,8 +5,10 @@ import { PropsWithChildren, useCallback, useContext, useEffect } from "react"
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Sidebar1({ children }: PropsWithChildren) {
+	const { sidebar2 } = useContext(LayoutContext)!
 	return (
-		<aside className="sidebar">
+		// @ts-expect-error
+		<aside className="sidebar" inert={sidebar2 ? "true" : null}>
 			<div className="sidebar-contents">{children}</div>
 		</aside>
 	)
@@ -14,23 +16,23 @@ export function Sidebar1({ children }: PropsWithChildren) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useShortcutEscCancel() {
-	const { sidebar, setSidebar } = useContext(LayoutContext)!
+function useShortcutEscCloseSidebarOverlay() {
+	const { sidebar2, setSidebar2 } = useContext(LayoutContext)!
 	useEffect(() => {
-		if (sidebar !== "maximized") return
+		if (sidebar2 !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
-				setSidebar("open")
+				setSidebar2("open")
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setSidebar, sidebar])
+	}, [setSidebar2, sidebar2])
 	return void 0
 }
 
-function useShortcutCtrlBackslashCycle() {
-	const { setSidebar } = useContext(LayoutContext)!
+function useShortcutCtrlBackslashCycleSidebar() {
+	const { setSidebar2 } = useContext(LayoutContext)!
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			// prettier-ignore
@@ -38,7 +40,7 @@ function useShortcutCtrlBackslashCycle() {
 				(isMac() ? e.metaKey : e.ctrlKey) &&
 				e.key === "\\"
 			)) return
-			setSidebar(curr => {
+			setSidebar2(curr => {
 				switch (curr) {
 					case "minimized":
 						return "open"
@@ -51,32 +53,32 @@ function useShortcutCtrlBackslashCycle() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setSidebar])
+	}, [setSidebar2])
 	return void 0
 }
 
 function useSideEffectHtmlAndBodyScrollLocking() {
-	const { sidebar } = useContext(LayoutContext)!
+	const { sidebar2 } = useContext(LayoutContext)!
 	useEffect(() => {
 		const targets = [document.documentElement, document.body]
 		for (const target of targets) {
-			target.style.overflow = sidebar === "maximized" ? "hidden" : ""
+			target.style.overflow = sidebar2 === "maximized" ? "hidden" : ""
 		}
 		return () => {
 			for (const target of targets) {
 				target.style.overflow = ""
 			}
 		}
-	}, [sidebar])
+	}, [sidebar2])
 	return void 0
 }
 
 export function Sidebar2({ children }: PropsWithChildren) {
-	const { sidebar, setSidebar } = useContext(LayoutContext)!
+	const { sidebar2, setSidebar2 } = useContext(LayoutContext)!
 
 	// DEBUG
 	const DEBUG_cycleSidebar = useCallback(() => {
-		setSidebar(curr => {
+		setSidebar2(curr => {
 			switch (curr) {
 				case "minimized":
 					return "open"
@@ -86,15 +88,15 @@ export function Sidebar2({ children }: PropsWithChildren) {
 					return "minimized"
 			}
 		})
-	}, [setSidebar])
+	}, [setSidebar2])
 
-	useShortcutEscCancel()
-	useShortcutCtrlBackslashCycle()
+	useShortcutEscCloseSidebarOverlay()
+	useShortcutCtrlBackslashCycleSidebar()
 
 	useSideEffectHtmlAndBodyScrollLocking()
 
 	return (
-		<aside className={cx("sidebar", sidebar && `is-${sidebar}`)}>
+		<aside className={cx("sidebar", sidebar2 && `is-${sidebar2}`)}>
 			<div className="drag-area" onClick={DEBUG_cycleSidebar}>
 				<div className="handle"></div>
 			</div>
@@ -105,37 +107,22 @@ export function Sidebar2({ children }: PropsWithChildren) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function _SidebarOverlay() {
-	const { sidebar, setSidebar } = useContext(LayoutContext)!
-
-	return (
-		<div
-			className="sidebar-overlay"
-			onClick={e => setSidebar("open")}
-			// @ts-expect-error
-			inert={sidebar !== "maximized" ? "true" : null}
-		></div>
-	)
-}
-
-// Expose props for <main>
-function _Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
-	const { sidebar } = useContext(LayoutContext)!
-
-	return (
-		// @ts-expect-error
-		<main className="main" inert={sidebar === "maximized" ? "true" : null} {...props}>
-			{children}
-		</main>
-	)
-}
-
-// Expose props for <main>
+// Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
+	const { sidebar2, setSidebar2 } = useContext(LayoutContext)!
+
 	return (
 		<>
-			<_SidebarOverlay />
-			<_Main {...props}>{children}</_Main>
+			<div
+				className="sidebar-overlay"
+				onClick={e => setSidebar2("open")}
+				// @ts-expect-error
+				inert={sidebar2 !== "maximized" ? "true" : null}
+			></div>
+			{/* @ts-expect-error */}
+			<main className="main" inert={sidebar2 === "maximized" ? "true" : null} {...props}>
+				{children}
+			</main>
 		</>
 	)
 }

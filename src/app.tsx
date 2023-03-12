@@ -538,7 +538,7 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 	return (
 		<article
 			id={name}
-			className={cx("grid-item", names.has(name) && "is-selected")}
+			className={cx("main-grid-item", names.has(name) && "is-selected")}
 			onClick={e => {
 				if (e.shiftKey) {
 					if (startIndex === null) {
@@ -563,11 +563,11 @@ const MemoizedGridItem = memo(({ index, name, icon: Icon }: { index: number; nam
 				}
 			}}
 		>
-			<button className="grid-item-icon-frame">
-				<Icon className="grid-item-icon" />
+			<button className="main-grid-item-icon-frame">
+				<Icon className="main-grid-item-icon" />
 			</button>
 			{preferNames && (
-				<span className="grid-item-name">
+				<span className="main-grid-item-name">
 					<GridItemName>{name}</GridItemName>
 				</span>
 			)}
@@ -600,14 +600,14 @@ function AppMain() {
 	return (
 		<Main
 			onClick={e => {
-				if (e.target instanceof HTMLElement && e.target.closest(".grid-item") === null) {
+				if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item") === null) {
 					clear()
 					setStartIndex(null)
 					setEndIndex(null)
 				}
 			}}
 		>
-			<div className={cx("grid", preferNames && "is-prefer-names")}>
+			<div className={cx("main-grid", preferNames && "is-prefer-names")}>
 				{icons?.map(([name, icon], index) => (
 					<MemoizedGridItem key={name} index={index} name={name} icon={icon} />
 				))}
