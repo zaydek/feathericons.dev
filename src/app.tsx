@@ -23,6 +23,18 @@ function Sidebar({
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
 
+	const getCssVar = React.useCallback((varName: string) => {
+		return parseInt(window.getComputedStyle(ref.current!).getPropertyValue(varName))
+	}, [])
+
+	// Cache maxw on state changes because of rerenders. Use an effect because of
+	// SSR concerns.
+	const [cachedMaxw, setCachedMaxw] = React.useState<number | null>(null)
+	React.useEffect(() => {
+		void state
+		setCachedMaxw(getCssVar("--maximized-width"))
+	}, [getCssVar, state])
+
 	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
 			if (e.button !== 0 && e.button !== 1) return
@@ -37,8 +49,8 @@ function Sidebar({
 			setClientX(e.clientX)
 		}
 		function handlePointerUp(e: PointerEvent) {
-			const w = parseInt(window.getComputedStyle(ref.current!).getPropertyValue("--width"))
-			const maxw = parseInt(window.getComputedStyle(ref.current!).getPropertyValue("--maximized-width"))
+			const w = getCssVar("--width")
+			const maxw = getCssVar("--maximized-width")
 			const d = maxw - w
 			if (pos === "start") {
 				if (state === null) {
@@ -109,7 +121,10 @@ function Sidebar({
 				<div className="sidebar-drag-area-handle"></div>
 			</div>
 			<div className="sidebar-card">
-				<div className="sidebar-card-content">
+				<div
+					className="sidebar-card-content"
+					style={{ width: state === "maximized" ? cachedMaxw ?? undefined : undefined }}
+				>
 					<header className="sidebar-header">
 						{header}
 						<hr className="collapse" />
