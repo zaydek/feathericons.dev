@@ -16,7 +16,8 @@ $max-width: var(--__max-width)
 
 	//// &:not(:is([data-state=maximized], [data-transition]))
 
-	z-index: $min-z-index
+	&:not(:is([data-state=maximized], [data-transition]))
+		z-index: $min-z-index
 	&:is([data-state=maximized], [data-transition])
 		z-index: $max-z-index
 
