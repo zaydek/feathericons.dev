@@ -65,15 +65,11 @@ function Sidebar({
 	pos,
 	minWidth,
 	maxWidth,
-	header,
-	footer,
 	children,
 }: react.PropsWithChildren<{
 	pos: "start" | "end"
 	minWidth: number
 	maxWidth: number
-	header: react.ReactNode
-	footer: react.ReactNode
 }>) {
 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
 
@@ -231,15 +227,7 @@ function Sidebar({
 			</div>
 			<div className="sidebar-card">
 				<div className="sidebar-card-content" style={{ width: state === "maximized" ? maxWidth : undefined }}>
-					<header className="sidebar-header">
-						{/* {header}
-						<hr className="collapse" /> */}
-					</header>
-					<div className="sidebar-scroll-area">{/* {children} */}</div>
-					<footer className="sidebar-footer">
-						{/* <hr className="collapse" />
-						{footer} */}
-					</footer>
+					{children}
 				</div>
 			</div>
 		</aside>
@@ -259,8 +247,6 @@ function InternalApp() {
 				pos="start"
 				minWidth={320}
 				maxWidth={320 * 1.5}
-				header={<div>foo bar</div>}
-				footer={<div>foo bar</div>}
 			>
 				{iota(20).map(index => (
 					<react.Fragment key={index}>
@@ -279,8 +265,6 @@ function InternalApp() {
 				pos="end"
 				minWidth={320}
 				maxWidth={320 * 1.5}
-				header={<div>foo bar</div>}
-				footer={<div>foo bar</div>}
 			>
 				{iota(20).map(index => (
 					<react.Fragment key={index}>

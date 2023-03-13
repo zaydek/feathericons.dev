@@ -22,7 +22,7 @@ function useShortcutEscToCloseSidebarOverlay() {
 		if (sidebar2 !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
-				setSidebar2("open")
+				setSidebar2(null)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
@@ -43,8 +43,8 @@ function useShortcutCtrlBackslashToCycleSidebar() {
 			setSidebar2(curr => {
 				switch (curr) {
 					case "minimized":
-						return "open"
-					case "open":
+						return null
+					case null:
 						return "maximized"
 					case "maximized":
 						return "minimized"
@@ -81,8 +81,8 @@ export function Sidebar2({ children }: react.PropsWithChildren) {
 		setSidebar2(curr => {
 			switch (curr) {
 				case "minimized":
-					return "open"
-				case "open":
+					return null
+				case null:
 					return "maximized"
 				case "maximized":
 					return "minimized"
@@ -113,7 +113,7 @@ export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
 
 	return (
 		<>
-			<div className="sidebar-overlay" onClick={e => setSidebar2("open")}></div>
+			<div className="sidebar-overlay" onClick={e => setSidebar2(null)}></div>
 			<main className="main" {...props}>
 				{children}
 			</main>
