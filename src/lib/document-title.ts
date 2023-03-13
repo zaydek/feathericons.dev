@@ -1,7 +1,7 @@
-import React from "react"
+import react from "react"
 
 export function useDocumentTitle(title: string) {
-	React.useEffect(() => {
+	react.useEffect(() => {
 		const originalTitle = document.title
 		document.title = title
 		return () => void (document.title = originalTitle)
@@ -10,7 +10,7 @@ export function useDocumentTitle(title: string) {
 }
 
 export function useVisibleDocumentTitle([active, inactive]: readonly [string, string]) {
-	React.useEffect(() => {
+	react.useEffect(() => {
 		const originalTitle = document.title
 		function handleVisibilityChange() {
 			document.title = document.visibilityState === "visible" ? active : inactive

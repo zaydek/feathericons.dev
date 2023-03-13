@@ -1,3 +1,4 @@
+export * from "./attr"
 export * from "./canonicalize"
 export * from "./cases"
 export * from "./collection"

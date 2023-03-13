@@ -1,20 +1,21 @@
-import React from "react"
+import react from "react"
 
-import { iota, round } from "@/lib"
+import { attr, iota, round } from "@/lib"
 
+// TODO: Change to [data-open]?
 type SidebarState = "maximized" | "minimized" | null
 
 // prettier-ignore
-const LayoutContext = React.createContext<{
+const LayoutContext = react.createContext<{
 	sidebar1:    SidebarState
-	setSidebar1: React.Dispatch<React.SetStateAction<SidebarState>>
+	setSidebar1: react.Dispatch<react.SetStateAction<SidebarState>>
 	sidebar2:    SidebarState
-	setSidebar2: React.Dispatch<React.SetStateAction<SidebarState>>
+	setSidebar2: react.Dispatch<react.SetStateAction<SidebarState>>
 } | null>(null)
 
-function LayoutProvider({ children }: React.PropsWithChildren) {
-	const [sidebar1, setSidebar1] = React.useState<SidebarState>(null)
-	const [sidebar2, setSidebar2] = React.useState<SidebarState>(null)
+function LayoutProvider({ children }: react.PropsWithChildren) {
+	const [sidebar1, setSidebar1] = react.useState<SidebarState>(null)
+	const [sidebar2, setSidebar2] = react.useState<SidebarState>(null)
 
 	return (
 		<LayoutContext.Provider
@@ -32,16 +33,8 @@ function LayoutProvider({ children }: React.PropsWithChildren) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function attr<T>(value: T) {
-	if (typeof value === "boolean") {
-		return value ? "" : undefined
-	} else {
-		return value ?? undefined
-	}
-}
-
 function SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
 
 	//// let state: SidebarState
 	//// let setState: React.Dispatch<React.SetStateAction<SidebarState>>
@@ -75,17 +68,17 @@ function Sidebar({
 	header,
 	footer,
 	children,
-}: React.PropsWithChildren<{
+}: react.PropsWithChildren<{
 	pos: "start" | "end"
 	minWidth: number
 	maxWidth: number
-	header: React.ReactNode
-	footer: React.ReactNode
+	header: react.ReactNode
+	footer: react.ReactNode
 }>) {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
 
 	let state: SidebarState
-	let setState: React.Dispatch<React.SetStateAction<SidebarState>>
+	let setState: react.Dispatch<react.SetStateAction<SidebarState>>
 	if (pos === "start") {
 		state = sidebar1
 		setState = setSidebar1
@@ -94,17 +87,17 @@ function Sidebar({
 		setState = setSidebar2
 	}
 
-	const ref = React.useRef<HTMLDivElement | null>(null)
-	const dragAreaRef = React.useRef<HTMLDivElement | null>(null)
+	const ref = react.useRef<HTMLDivElement | null>(null)
+	const dragAreaRef = react.useRef<HTMLDivElement | null>(null)
 
-	const [transition, setTransition] = React.useState(false)
-	const [pointerDown, setPointerDown] = React.useState<boolean>(false)
-	const [startClientX, setStartClientX] = React.useState<number | null>(null)
-	const [clientX, setClientX] = React.useState<number | null>(null)
+	const [transition, setTransition] = react.useState(false)
+	const [pointerDown, setPointerDown] = react.useState<boolean>(false)
+	const [startClientX, setStartClientX] = react.useState<number | null>(null)
+	const [clientX, setClientX] = react.useState<number | null>(null)
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
 
-	React.useEffect(() => {
+	react.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
 			// Guards
 			if (e.button !== 0 && e.button !== 1) return
@@ -188,8 +181,8 @@ function Sidebar({
 	}, [maxWidth, minWidth, pointerDown, pos, setState, state, x])
 
 	// Synchronously (useLayoutEffect) sync state changes -> transition
-	const onceRef = React.useRef(false)
-	React.useLayoutEffect(() => {
+	const onceRef = react.useRef(false)
+	react.useLayoutEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
@@ -210,7 +203,7 @@ function Sidebar({
 					"--__x": `${x}px`,
 					"--__min-width": `${minWidth}px`,
 					"--__max-width": `${maxWidth}px`,
-				} as React.CSSProperties
+				} as react.CSSProperties
 			}
 			onTransitionEnd={e => setTransition(false)}
 		>
@@ -253,7 +246,7 @@ function Sidebar({
 	)
 }
 
-function Main({ children }: React.PropsWithChildren) {
+function Main({ children }: react.PropsWithChildren) {
 	return <main className="main">{/* {children} */}</main>
 }
 
@@ -270,9 +263,9 @@ function InternalApp() {
 				footer={<div>foo bar</div>}
 			>
 				{iota(20).map(index => (
-					<React.Fragment key={index}>
+					<react.Fragment key={index}>
 						<div>foo bar</div>
-					</React.Fragment>
+					</react.Fragment>
 				))}
 			</Sidebar>
 			<Main>
@@ -290,9 +283,9 @@ function InternalApp() {
 				footer={<div>foo bar</div>}
 			>
 				{iota(20).map(index => (
-					<React.Fragment key={index}>
+					<react.Fragment key={index}>
 						<div>foo bar</div>
-					</React.Fragment>
+					</react.Fragment>
 				))}
 			</Sidebar>
 		</>
