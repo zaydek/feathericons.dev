@@ -1,25 +1,31 @@
-$sidebar-1-width: 384px;
-$sidebar-1-maximized-width: 512px;
+$sidebar-width: 384px;
+$sidebar-maximized-width: 512px;
 
-$sidebar-2-width: 384px;
-$sidebar-2-maximized-width: 512px;
+//// $sidebar-2-width: 384px;
+//// $sidebar-2-maximized-width: 512px;
 
 html { color-scheme: dark; }
 
 .sidebar {
-	--width: #{$sidebar-1-width};
-	--maximized-width: #{$sidebar-1-maximized-width};
+	--width: #{$sidebar-width};
+	--maximized-width: #{$sidebar-maximized-width};
 	--x: 0px;
-
 	position: fixed;
 	&[data-pos=start] { inset: 0 auto 0 0; }
 	&[data-pos=end]   { inset: 0 0 0 auto; }
 	z-index: 10;
 	display: flex;          // Forward height
 	flex-direction: row;    // Forward height
-	transform: translateX(calc(-1 * ($sidebar-1-maximized-width - $sidebar-1-width) + var(--x)));
-	&[data-state=maximized] { transform: translateX(var(--x)); }
-	&[data-state=minimized] { transform: translateX(calc(-1 * $sidebar-1-maximized-width + var(--x)));  }
+
+	// Start
+	&[data-pos=start] { transform: translateX(calc(-1 * ($sidebar-maximized-width - $sidebar-width) + var(--x))); }
+	&[data-pos=start][data-state=maximized] { transform: translateX(var(--x)); }
+	&[data-pos=start][data-state=minimized] { transform: translateX(calc(-1 * $sidebar-maximized-width + var(--x)));  }
+
+	// End
+	&[data-pos=end] { transform: translateX(calc($sidebar-maximized-width - $sidebar-width + var(--x))); }
+	&[data-pos=end][data-state=maximized] { transform: translateX(var(--x)); }
+	&[data-pos=end][data-state=minimized] { transform: translateX(calc($sidebar-maximized-width + var(--x))); }
 }
 
 .sidebar-drag-area {
@@ -43,15 +49,16 @@ html { color-scheme: dark; }
 
 .sidebar-card {
 	display: flex;
-	justify-content: flex-end;
-	width: $sidebar-1-maximized-width;
+	.sidebar[data-pos=start] & { justify-content: flex-end;   }
+	.sidebar[data-pos=end]   & { justify-content: flex-start; }
+	width: $sidebar-maximized-width;
 	background-color: black;
 	box-shadow: 0 0 0 1px gainsboro;
 }
 .sidebar-card-content {
 	display: flex;          // Forward height
 	flex-direction: column; // Forward height
-	width: $sidebar-1-width;
+	width: $sidebar-width;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -83,5 +90,5 @@ html { color-scheme: dark; }
 //// }
 .main {
 	position: absolute;
-	inset: 0 $sidebar-2-width 0 $sidebar-1-width;
+	inset: 0 $sidebar-width 0 $sidebar-width;
 }

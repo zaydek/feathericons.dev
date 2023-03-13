@@ -6,11 +6,12 @@ function SidebarOverlay() {
 	return <div className="sidebar-overlay"></div>
 }
 
-function Sidebar1({
+function Sidebar({
+	pos,
 	header,
 	footer,
 	children,
-}: React.PropsWithChildren<{ header: React.ReactNode; footer: React.ReactNode }>) {
+}: React.PropsWithChildren<{ pos: "start" | "end"; header: React.ReactNode; footer: React.ReactNode }>) {
 	const ref = React.useRef<HTMLDivElement | null>(null)
 	const dragAreaRef = React.useRef<HTMLDivElement | null>(null)
 
@@ -25,11 +26,7 @@ function Sidebar1({
 	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
 			if (e.button !== 0 && e.button !== 1) return
-			// prettier-ignore
-			if (
-				dragAreaRef.current !== null && e.target instanceof HTMLDivElement &&
-				!dragAreaRef.current.contains(e.target)) return
-
+			if (!dragAreaRef.current!.contains(e.target as HTMLDivElement)) return
 			e.preventDefault() // Prevent text selection
 			setPointerDown(true)
 			setStartClientX(round(e.clientX, { precision: 4 }))
@@ -43,27 +40,47 @@ function Sidebar1({
 			const w = parseInt(window.getComputedStyle(ref.current!).getPropertyValue("--width"))
 			const maxw = parseInt(window.getComputedStyle(ref.current!).getPropertyValue("--maximized-width"))
 			const d = maxw - w
-			//// if (start) {
-			if (state === null) {
-				if (x > 0) {
-					setState("maximized")
-				} else if (x < 0) {
-					setState("minimized")
+			if (pos === "start") {
+				if (state === null) {
+					if (x > 0) {
+						setState("maximized")
+					} else if (x < 0) {
+						setState("minimized")
+					}
+				} else if (state === "maximized") {
+					if (x < -d) {
+						setState("minimized")
+					} else if (x < 0) {
+						setState(null)
+					}
+				} else if (state === "minimized") {
+					if (x > w) {
+						setState("maximized")
+					} else if (x > 0) {
+						setState(null)
+					}
 				}
-			} else if (state === "maximized") {
-				if (x < -d) {
-					setState("minimized")
-				} else if (x < 0) {
-					setState(null)
-				}
-			} else if (state === "minimized") {
-				if (x > w) {
-					setState("maximized")
-				} else if (x > 0) {
-					setState(null)
+			} else {
+				if (state === null) {
+					if (x < 0) {
+						setState("maximized")
+					} else if (x > 0) {
+						setState("minimized")
+					}
+				} else if (state === "maximized") {
+					if (x > d) {
+						setState("minimized")
+					} else if (x > 0) {
+						setState(null)
+					}
+				} else if (state === "minimized") {
+					if (x < -w) {
+						setState("maximized")
+					} else if (x < 0) {
+						setState(null)
+					}
 				}
 			}
-			//// }
 			setPointerDown(false)
 			setStartClientX(null)
 			setClientX(null)
@@ -83,7 +100,7 @@ function Sidebar1({
 			ref={ref}
 			// Styling
 			className="sidebar"
-			data-pos="start"
+			data-pos={pos}
 			data-state={state}
 			data-pointer-down={pointerDown || undefined} // Serialize
 			style={{ "--x": `${x}px` } as React.CSSProperties}
@@ -108,31 +125,6 @@ function Sidebar1({
 	)
 }
 
-function Sidebar2({
-	header,
-	footer,
-	children,
-}: React.PropsWithChildren<{ header: React.ReactNode; footer: React.ReactNode }>) {
-	return (
-		<aside className="sidebar-2">
-			<div className="sidebar-2-drag-area">
-				<div className="sidebar-drag-handle"></div>
-			</div>
-			<div className="sidebar-2-card">
-				{/* <header className="sidebar-header">
-					{header}
-					<hr className="collapse" />
-				</header> */}
-				<div className="sidebar-scroll-area">{children}</div>
-				{/* <footer className="sidebar-footer">
-					<hr className="collapse" />
-					{footer}
-				</footer> */}
-			</div>
-		</aside>
-	)
-}
-
 function Main({ children }: React.PropsWithChildren) {
 	return <main className="main">{children}</main>
 }
@@ -141,8 +133,9 @@ export function App() {
 	return (
 		<>
 			<SidebarOverlay />
-			<Sidebar1
+			<Sidebar
 				// prettier-ignore
+				pos="start"
 				header={<div>foo bar</div>}
 				footer={<div>foo bar</div>}
 			>
@@ -151,15 +144,16 @@ export function App() {
 						<div>foo bar</div>
 					</React.Fragment>
 				))}
-			</Sidebar1>
+			</Sidebar>
 			<Main>
 				<div>foo bar</div>
 				<div>foo bar</div>
 				<div>foo bar</div>
 				<div>foo bar</div>
 			</Main>
-			{/* <Sidebar2
+			<Sidebar
 				// prettier-ignore
+				pos="end"
 				header={<div>foo bar</div>}
 				footer={<div>foo bar</div>}
 			>
@@ -168,7 +162,7 @@ export function App() {
 						<div>foo bar</div>
 					</React.Fragment>
 				))}
-			</Sidebar2> */}
+			</Sidebar>
 		</>
 	)
 }
