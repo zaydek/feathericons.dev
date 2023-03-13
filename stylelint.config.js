@@ -55,6 +55,7 @@ const order = [
 	"border-bottom-right-radius",
 	"border-bottom-left-radius",
 	"box-shadow",
+	"backdrop-filter",
 	"stroke-width",
 	"font",
 	"font-weight",

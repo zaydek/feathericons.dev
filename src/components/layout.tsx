@@ -72,7 +72,7 @@ export function SidebarOverlay() {
 
 	//// let state: SidebarState
 	//// let setState: React.Dispatch<React.SetStateAction<SidebarState>>
-	//// if (pos === "start") {
+	//// if (pos === "a") {
 	//// 	state = sidebar1
 	//// 	setState = setSidebar1
 	//// } else {
@@ -146,7 +146,7 @@ export function Sidebar({
 	maxWidth,
 	children,
 }: react.PropsWithChildren<{
-	pos: "start" | "end"
+	pos: "a" | "b"
 	minWidth: number
 	maxWidth: number
 }>) {
@@ -154,7 +154,7 @@ export function Sidebar({
 
 	let state: SidebarState
 	let setState: react.Dispatch<react.SetStateAction<SidebarState>>
-	if (pos === "start") {
+	if (pos === "a") {
 		state = sidebar1
 		setState = setSidebar1
 	} else {
@@ -199,7 +199,7 @@ export function Sidebar({
 			if (!pointerDown) return
 			// Starts here
 			const d = maxWidth - minWidth
-			if (pos === "start") {
+			if (pos === "a") {
 				if (state === null) {
 					if (x > 0) {
 						setState("maximized")
@@ -287,13 +287,13 @@ export function Sidebar({
 				className="sidebar-drag-area"
 				onKeyDown={e => {
 					if (e.key === "ArrowLeft") {
-						if (pos === "start") {
+						if (pos === "a") {
 							// ...
 						} else {
 							// ...
 						}
 					} else if (e.key === "ArrowRight") {
-						if (pos === "start") {
+						if (pos === "a") {
 							// ...
 						} else {
 							// ...
