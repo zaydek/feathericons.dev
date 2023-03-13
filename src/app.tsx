@@ -1,6 +1,6 @@
 import React from "react"
 
-import { iota, round } from "@/lib"
+import { getCssVarAsNumber, iota, round } from "@/lib"
 
 function SidebarOverlay() {
 	return <div className="sidebar-overlay"></div>
@@ -16,6 +16,7 @@ function Sidebar({
 	const dragAreaRef = React.useRef<HTMLDivElement | null>(null)
 
 	const [state, setState] = React.useState<"maximized" | "minimized" | null>(null)
+	const [transition, setTransition] = React.useState(false)
 
 	const [pointerDown, setPointerDown] = React.useState<boolean>(false)
 	const [startClientX, setStartClientX] = React.useState<number | null>(null)
@@ -23,17 +24,11 @@ function Sidebar({
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
 
-	const getCssVar = React.useCallback((varName: string) => {
-		return parseInt(window.getComputedStyle(ref.current!).getPropertyValue(varName))
-	}, [])
-
-	// Cache maxw on state changes because of rerenders. Use an effect because of
-	// SSR concerns.
-	const [cachedMaxw, setCachedMaxw] = React.useState<number | null>(null)
+	const [maximizedWidth, setMaximizedWidth] = React.useState<number | null>(null)
 	React.useEffect(() => {
 		void state
-		setCachedMaxw(getCssVar("--maximized-width"))
-	}, [getCssVar, state])
+		setMaximizedWidth(getCssVarAsNumber("--maximized-width", { scope: ref.current! }))
+	}, [state])
 
 	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
@@ -46,11 +41,11 @@ function Sidebar({
 		}
 		function handlePointerMove(e: PointerEvent) {
 			if (!pointerDown) return
-			setClientX(e.clientX)
+			setClientX(round(e.clientX, { precision: 4 }))
 		}
 		function handlePointerUp(e: PointerEvent) {
-			const w = getCssVar("--width")
-			const maxw = getCssVar("--maximized-width")
+			const w = getCssVarAsNumber("--width", { scope: ref.current! })
+			const maxw = getCssVarAsNumber("--maximized-width", { scope: ref.current! })
 			const d = maxw - w
 			if (pos === "start") {
 				if (state === null) {
@@ -93,6 +88,7 @@ function Sidebar({
 					}
 				}
 			}
+			setTransition(true)
 			setPointerDown(false)
 			setStartClientX(null)
 			setClientX(null)
@@ -114,8 +110,12 @@ function Sidebar({
 			className="sidebar"
 			data-pos={pos}
 			data-state={state}
-			data-pointer-down={pointerDown || undefined} // Serialize
+			data-transition={transition || undefined} // Serialize non-truthy values
+			data-pointer-down={pointerDown || undefined} // Serialize non-truthy values
 			style={{ "--x": `${x}px` } as React.CSSProperties}
+			onTransitionEnd={e => {
+				setTransition(false)
+			}}
 		>
 			<div ref={dragAreaRef} className="sidebar-drag-area">
 				<div className="sidebar-drag-area-handle"></div>
@@ -123,7 +123,7 @@ function Sidebar({
 			<div className="sidebar-card">
 				<div
 					className="sidebar-card-content"
-					style={{ width: state === "maximized" ? cachedMaxw ?? undefined : undefined }}
+					style={{ width: state === "maximized" ? maximizedWidth ?? undefined : undefined }}
 				>
 					<header className="sidebar-header">
 						{header}
