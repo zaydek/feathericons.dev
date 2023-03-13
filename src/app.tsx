@@ -32,7 +32,7 @@ import {
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
-} from "@/state"
+} from "@/providers"
 import { Fragment, memo, useContext, useEffect, useRef, useTransition } from "react"
 import { useTrackScrollProps } from "./use-track-scroll-props"
 

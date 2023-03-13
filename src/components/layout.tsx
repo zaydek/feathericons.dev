@@ -1,5 +1,5 @@
 import { cx, isMac } from "@/lib"
-import { LayoutContext } from "@/state"
+import { LayoutContext } from "@/providers"
 import { PropsWithChildren, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////

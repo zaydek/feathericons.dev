@@ -1,4 +1,4 @@
-import { ProgressBarContext } from "@/state"
+import { ProgressBarContext } from "@/providers"
 import { useContext, useEffect, useRef, useState } from "react"
 
 const TICK_MS = 100

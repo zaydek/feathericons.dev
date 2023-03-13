@@ -1,5 +1,5 @@
 import { IconComponent } from "@/lib"
-import { WkPaymentsValue } from "@/state"
+import { WkPaymentsValue } from "@/providers"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect, useMemo } from "react"
 

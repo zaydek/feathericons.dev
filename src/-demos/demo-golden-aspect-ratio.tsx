@@ -4,8 +4,8 @@ import { useContext } from "react"
 import { manifest } from "../../data/manifest"
 import { sizeInitial } from "../constants"
 import { Hoverable } from "../hoverable"
+import { SliderContext } from "../providers/state"
 import { ResizableIcon } from "../resizable-icon"
-import { SliderContext } from "../state/state"
 import { Container } from "./shared"
 
 export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest }) {
@@ -31,22 +31,34 @@ export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest })
 			<div className="flex h-100% items-center justify-center">
 				<Hoverable pos="center" content={`SIZE: ${(16 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--icon-size-4)] w-[var(--icon-size-1-container-w)] cursor-help items-center justify-center">
-						<ResizableIcon className="rounded text-700 h-[var(--icon-size-1)] w-[var(--icon-size-1)]" component={feather[name]} />
+						<ResizableIcon
+							className="rounded text-700 h-[var(--icon-size-1)] w-[var(--icon-size-1)]"
+							component={feather[name]}
+						/>
 					</div>
 				</Hoverable>
 				<Hoverable pos="center" content={`SIZE: ${(32 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--icon-size-4)] w-[var(--icon-size-2-container-w)] cursor-help items-center justify-center">
-						<ResizableIcon className="rounded text-700 h-[var(--icon-size-2)] w-[var(--icon-size-2)]" component={feather[name]} />
+						<ResizableIcon
+							className="rounded text-700 h-[var(--icon-size-2)] w-[var(--icon-size-2)]"
+							component={feather[name]}
+						/>
 					</div>
 				</Hoverable>
 				<Hoverable pos="center" content={`SIZE: ${(48 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--icon-size-4)] w-[var(--icon-size-3-container-w)] cursor-help items-center justify-center">
-						<ResizableIcon className="rounded text-700 h-[var(--icon-size-3)] w-[var(--icon-size-3)]" component={feather[name]} />
+						<ResizableIcon
+							className="rounded text-700 h-[var(--icon-size-3)] w-[var(--icon-size-3)]"
+							component={feather[name]}
+						/>
 					</div>
 				</Hoverable>
 				<Hoverable pos="center" content={`SIZE: ${(64 * size) / sizeInitial} PX`}>
 					<div className="flex h-[var(--icon-size-4)] w-[var(--icon-size-4-container-w)] cursor-help items-center justify-center">
-						<ResizableIcon className="rounded text-700 h-[var(--icon-size-4)] w-[var(--icon-size-4)]" component={feather[name]} />
+						<ResizableIcon
+							className="rounded text-700 h-[var(--icon-size-4)] w-[var(--icon-size-4)]"
+							component={feather[name]}
+						/>
 					</div>
 				</Hoverable>
 			</div>

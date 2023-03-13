@@ -1,7 +1,7 @@
 import * as Feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
-import { ClipboardContext, SearchContext } from "@/state"
+import { ClipboardContext, SearchContext } from "@/providers"
 import { RefObject, useContext, useEffect, useRef } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
