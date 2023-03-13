@@ -1,0 +1,114 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+$sidebar-1-width:          300px
+$sidebar-1-expanded-width: 300px + math.div(288px, 2)
+$sidebar-1-z-index:        50
+
+$sidebar-2-width:          350px
+$sidebar-2-expanded-width: 600px
+$sidebar-2-z-index:        100
+
+$sidebar-overlay-z-index: 75
+
+$drag-area-width: 6px * 4
+$handle-height:   6px * 8
+$handle-width:    6px
+
+.sidebar
+  &:nth-of-type(1)
+    --translate-x: #{-1 * ($sidebar-1-expanded-width - $sidebar-1-width)}
+    position: fixed
+    inset: 0 auto 0 0
+    z-index: $sidebar-1-z-index
+    display: flex
+    justify-content: flex-end
+    width: $sidebar-1-expanded-width
+    background-color: white
+    box-shadow: $hairline-shadow-right
+    transform: translateX(var(--translate-x))
+    &.is-minimized
+      --translate-x: #{-1 * $sidebar-1-expanded-width}
+    &.is-maximized
+      --translate-x: 0px
+  &:nth-of-type(2)
+    --translate-x: #{$sidebar-2-expanded-width - $sidebar-2-width}
+    position: fixed
+    inset: 0 0 0 auto
+    z-index: $sidebar-2-z-index
+    display: flex
+    justify-content: flex-start
+    width: $sidebar-2-expanded-width
+    background-color: white
+    box-shadow: $hairline-shadow-left
+    transform: translateX(var(--translate-x))
+    &.is-minimized
+      --translate-x: #{$sidebar-2-expanded-width}
+    &.is-maximized
+      --translate-x: 0px
+      //// box-shadow: none
+  .drag-area
+    position: absolute
+    @at-root
+      .sidebar:nth-of-type(1) .drag-area
+        inset: 0 auto 0 100%
+    @at-root
+      .sidebar:nth-of-type(2) .drag-area
+        inset: 0 100% 0 auto
+    display: flex
+    justify-content: center
+    align-items: center
+    width: $drag-area-width
+    cursor: grab              // Interaction
+    -webkit-user-select: none // Interaction
+    user-select: none         // Interaction
+    &:hover:active            // Interaction
+      cursor: grabbing        // Interaction
+    .handle
+      height: $handle-height
+      width: $handle-width
+      background-color: hsl(0, 0%, 0%, 0.25)
+      border-radius: 1e3px
+      @at-root
+        .drag-area:hover .handle
+          background-color: hsl(0, 0%, 0%, 0.5)
+        //// .drag-area:hover:active .handle
+        ////   background-color: hsl(0, 0%, 0%, 0.75)
+
+  &:nth-of-type(1) .sidebar-contents
+    display: flex
+    flex-direction: column
+    width: $sidebar-1-width
+    @at-root
+      .sidebar:nth-of-type(1).is-maximized .sidebar-contents
+        width: $sidebar-1-expanded-width
+
+  &:nth-of-type(2) .sidebar-contents
+    display: flex
+    flex-direction: column
+    width: $sidebar-2-width
+    @at-root
+      .sidebar:nth-of-type(2).is-maximized .sidebar-contents
+        width: $sidebar-2-expanded-width
+
+.sidebar.is-maximized ~ .sidebar-overlay
+  position: fixed
+  inset: 0
+  z-index: $sidebar-overlay-z-index
+  background-color: hsl(0, 0%, 0%, 0.25)
+  backdrop-filter: blur(2px)
+
+.main
+  --left:  #{$sidebar-1-width}
+  --right: #{$sidebar-2-width}
+  //// --right: 0
+  position: absolute
+  inset: 0 var(--right) auto var(--left)
+  //// padding: $sidebar-padding-y $sidebar-padding-x * 2
+  padding: $sidebar-padding-y $drag-area-width + $sidebar-padding-x
+  .sidebar:nth-of-type(1).is-minimized ~ &
+    --left:  0
+  .sidebar:nth-of-type(2).is-minimized ~ &
+    //// --right: 0
+    --right: #{$drag-area-width}

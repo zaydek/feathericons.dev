@@ -1,114 +1,129 @@
 @use "sass:math"
 
-@use "../globals" as *
+$min-z-index: 50
+$max-z-index: 100
 
-$sidebar-1-width:          300px
-$sidebar-1-expanded-width: 300px + math.div(288px, 2)
-$sidebar-1-z-index:        50
-
-$sidebar-2-width:          350px
-$sidebar-2-expanded-width: 600px
-$sidebar-2-z-index:        100
-
-$sidebar-overlay-z-index: 75
-
-$drag-area-width: 6px * 4
-$handle-height:   6px * 8
-$handle-width:    6px
+$x:         var(--__x)
+$min-width: var(--__min-width)
+$max-width: var(--__max-width)
 
 .sidebar
-  &:nth-of-type(1)
-    --translate-x: #{-1 * ($sidebar-1-expanded-width - $sidebar-1-width)}
-    position: fixed
-    inset: 0 auto 0 0
-    z-index: $sidebar-1-z-index
-    display: flex
-    justify-content: flex-end
-    width: $sidebar-1-expanded-width
-    background-color: white
-    box-shadow: $hairline-shadow-right
-    transform: translateX(var(--translate-x))
-    &.is-minimized
-      --translate-x: #{-1 * $sidebar-1-expanded-width}
-    &.is-maximized
-      --translate-x: 0px
-  &:nth-of-type(2)
-    --translate-x: #{$sidebar-2-expanded-width - $sidebar-2-width}
-    position: fixed
-    inset: 0 0 0 auto
-    z-index: $sidebar-2-z-index
-    display: flex
-    justify-content: flex-start
-    width: $sidebar-2-expanded-width
-    background-color: white
-    box-shadow: $hairline-shadow-left
-    transform: translateX(var(--translate-x))
-    &.is-minimized
-      --translate-x: #{$sidebar-2-expanded-width}
-    &.is-maximized
-      --translate-x: 0px
-      //// box-shadow: none
-  .drag-area
-    position: absolute
-    @at-root
-      .sidebar:nth-of-type(1) .drag-area
-        inset: 0 auto 0 100%
-    @at-root
-      .sidebar:nth-of-type(2) .drag-area
-        inset: 0 100% 0 auto
-    display: flex
-    justify-content: center
-    align-items: center
-    width: $drag-area-width
-    cursor: grab              // Interaction
-    -webkit-user-select: none // Interaction
-    user-select: none         // Interaction
-    &:hover:active            // Interaction
-      cursor: grabbing        // Interaction
-    .handle
-      height: $handle-height
-      width: $handle-width
-      background-color: hsl(0, 0%, 0%, 0.25)
-      border-radius: 1e3px
-      @at-root
-        .drag-area:hover .handle
-          background-color: hsl(0, 0%, 0%, 0.5)
-        //// .drag-area:hover:active .handle
-        ////   background-color: hsl(0, 0%, 0%, 0.75)
+	position: fixed
+	&[data-pos=start]
+		inset: 0 auto 0 0
+	&[data-pos=end]
+		inset: 0 0 0 auto
 
-  &:nth-of-type(1) .sidebar-contents
-    display: flex
-    flex-direction: column
-    width: $sidebar-1-width
-    @at-root
-      .sidebar:nth-of-type(1).is-maximized .sidebar-contents
-        width: $sidebar-1-expanded-width
+	//// &:not(:is([data-state=maximized], [data-transition]))
 
-  &:nth-of-type(2) .sidebar-contents
-    display: flex
-    flex-direction: column
-    width: $sidebar-2-width
-    @at-root
-      .sidebar:nth-of-type(2).is-maximized .sidebar-contents
-        width: $sidebar-2-expanded-width
+	&:not(:is([data-state=maximized], [data-transition]))
+		z-index: $min-z-index
+	&:is([data-state=maximized], [data-transition])
+		z-index: $max-z-index
 
-.sidebar.is-maximized ~ .sidebar-overlay
-  position: fixed
-  inset: 0
-  z-index: $sidebar-overlay-z-index
-  background-color: hsl(0, 0%, 0%, 0.25)
-  backdrop-filter: blur(2px)
+	//// &:is([data-state=maximized], [data-transition])
+	//// 	z-index: $max-z-index
 
-.main
-  --left:  #{$sidebar-1-width}
-  --right: #{$sidebar-2-width}
-  //// --right: 0
-  position: absolute
-  inset: 0 var(--right) auto var(--left)
-  //// padding: $sidebar-padding-y $sidebar-padding-x * 2
-  padding: $sidebar-padding-y $drag-area-width + $sidebar-padding-x
-  .sidebar:nth-of-type(1).is-minimized ~ &
-    --left:  0
-  .sidebar:nth-of-type(2).is-minimized ~ &
-    //// --right: 0
-    --right: #{$drag-area-width}
+	display: flex          // Forward height
+	flex-direction: row    // Forward height
+
+	// Start
+	&[data-pos=start]
+		transform: translateX(calc(-1 * ($max-width - $min-width) + $x))
+	&[data-pos=start][data-state=maximized]
+		transform: translateX($x)
+	&[data-pos=start][data-state=minimized]
+		transform: translateX(calc(-1 * $max-width + $x))
+
+	// End
+	&[data-pos=end]
+		transform: translateX(calc($max-width - $min-width + $x))
+	&[data-pos=end][data-state=maximized]
+		transform: translateX($x)
+	&[data-pos=end][data-state=minimized]
+		transform: translateX(calc($max-width + $x))
+
+.sidebar[data-transition]
+	transition: transform 600ms cubic-bezier(0, 1, 0.25, 1)
+
+////////////////////////////////////////////////////////////////////////////////
+
+.sidebar-drag-area
+	position: absolute
+	.sidebar[data-pos=start] &
+		inset: 0 auto 0 100%
+	.sidebar[data-pos=end] &
+		inset: 0 100% 0 auto
+	display: flex
+	justify-content: center
+	align-items: center
+	width: 32px
+	&:not(:hover:active)
+		cursor: grab
+	&:hover:active
+		cursor: grabbing
+	-webkit-user-select: none
+	user-select: none
+
+.sidebar-drag-area-handle
+	height: 6px * 8
+	width: 6px
+	background-color: hsl(0, 0%, 0%, 0.25)
+	border-radius: 1e3px
+
+////////////////////////////////////////////////////////////////////////////////
+
+.sidebar-card
+	display: flex
+	.sidebar[data-pos=start] &
+		justify-content: flex-end
+	.sidebar[data-pos=end] &
+		justify-content: flex-start
+	width: $max-width
+	background-color: white
+	/// .sidebar:not([data-state=maximized]) &
+	box-shadow: 0 0 0 1px hsl(0, 0%, 0%, 0.1)
+	//// .sidebar[data-state=maximized] &
+	//// 	box-shadow: null
+.sidebar-card-content
+	display: flex          // Forward height
+	flex-direction: column // Forward height
+	width: $min-width
+
+////////////////////////////////////////////////////////////////////////////////
+
+.sidebar-header
+	position: sticky
+	top: 0
+	background-color: white
+.sidebar-scroll-area
+	overflow-y: auto
+.sidebar-footer
+	position: sticky
+	bottom: 0
+	z-index: 20
+	margin-top: auto
+	background-color: white
+
+////////////////////////////////////////////////////////////////////////////////
+
+.sidebar-overlay
+	position: fixed
+	inset: 0
+	z-index: math.div($min-z-index + $max-z-index, 2)
+	background-color: hsl(0, 0%, 0%, 0.25)
+	&:not([data-open])
+		opacity: 0
+		cursor: null
+		pointer-events: none
+	&[data-open]
+		opacity: 1
+		cursor: pointer
+		pointer-events: null
+
+	//// transition: opacity 600ms ease
+	transition: opacity 600ms cubic-bezier(0, 1, 0.25, 1)
+
+//// main
+//// 	position: absolute;
+//// 	inset: 0 $min-width 0 $min-width;

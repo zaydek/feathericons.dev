@@ -15,8 +15,8 @@ import {
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressRange,
-	Sidebar1,
-	Sidebar2,
+	Sidebar,
+	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
 import { cx, DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
@@ -54,6 +54,7 @@ function AppSidebar1() {
 	const startTransition = useProgressBar()
 
 	const {
+		// eslint-disable-next-line destructuring/no-rename
 		feather: $feather,
 		setFeather,
 		wkBrands,
@@ -71,7 +72,12 @@ function AppSidebar1() {
 	const trackScrollProps = useTrackScrollProps()
 
 	return (
-		<Sidebar1>
+		<Sidebar
+			// prettier-ignore
+			pos="start"
+			minWidth={320}
+			maxWidth={320 * 1.5}
+		>
 			<header className="sidebar-header">
 				{/* <section className="section is-start">
 					<div className="sidebar-align-frame">
@@ -279,7 +285,7 @@ function AppSidebar1() {
 					</nav>
 				</section>
 			</footer>
-		</Sidebar1>
+		</Sidebar>
 	)
 }
 
@@ -324,7 +330,12 @@ function AppSidebar2() {
 	//// }, [])
 
 	return (
-		<Sidebar2>
+		<Sidebar
+			// prettier-ignore
+			pos="end"
+			minWidth={320}
+			maxWidth={320 * 1.5}
+		>
 			<header className="sidebar-header">
 				<section className="section is-start">
 					<header className="section-header">
@@ -415,7 +426,7 @@ function AppSidebar2() {
 					</header>
 				</section>
 			</footer> */}
-		</Sidebar2>
+		</Sidebar>
 	)
 }
 
@@ -632,6 +643,7 @@ function AppMain() {
 export function App() {
 	return (
 		<DEV_DebugCss>
+			<SidebarOverlay />
 			<AppSidebar1 />
 			<AppSidebar2 />
 			<AppMain />
