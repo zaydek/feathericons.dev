@@ -1,0 +1,23 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+.resource
+  display: flex
+  align-items: center
+  margin: -4px 0
+  height: $button-height
+  border-radius: 1e3px
+  &:hover
+    background-color: $slate-100
+  &:hover:active
+    background-color: $slate-200
+.resource-icon
+  height: $icon-height
+  width: $icon-height
+  color: $slate-800
+  &:last-child
+    color: $slate-400
+.resource-name
+  font: 425 16px / normal $sans
+  color: $slate-800

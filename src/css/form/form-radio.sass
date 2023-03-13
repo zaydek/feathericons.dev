@@ -1,0 +1,46 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+$height:              24px
+$transition-duration: 75ms
+
+input[type=radio]
+  position: relative
+  height: $height
+  width: $height
+  background-color: white
+  border-radius: 1e3px
+  box-shadow: $inset-hairline-shadow, $realistic-shadow
+  cursor: pointer           // Interaction
+  -webkit-user-select: none // Interaction
+  user-select: none         // Interaction
+  &::before
+    content: ""        // Pseudo reset
+    position: absolute // Pseudo reset
+    inset: 0           // Pseudo reset
+    background-color: $brand-color
+    border-radius: inherit
+    transform: scale(0)
+    opacity: 0
+    transition: transform $transition-duration cubic-bezier(0, 1, 0, 1.25), opacity $transition-duration cubic-bezier(0, 1, 0, 1.25)
+    @at-root
+      input[type=radio]:checked::before
+        transform: scale(1)
+        opacity: 1
+  &::after
+    content: ""        // Pseudo reset
+    position: absolute // Pseudo reset
+    inset: 0           // Pseudo reset
+    margin: auto       // Pseudo reset
+    height: 8px
+    width: 8px
+    background-color: white
+    border-radius: 1e3px
+    transform: scale(0)
+    opacity: 0
+    transition: transform $transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25), opacity $transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25)
+    @at-root
+      input[type=radio]:checked::after
+        transform: scale(1)
+        opacity: 1

@@ -1,0 +1,36 @@
+@use "sass:color"
+
+$base-color:            var(--base-color)
+$hairline-color:        var(--hairline-color)
+$primary-text-color:    var(--primary-text-color)
+$secondary-text-color:  var(--secondary-text-color)
+$inactive-icon-color:   var(--inactive-icon-color)
+$active-icon-color:     var(--active-icon-color)
+$decorative-icon-color: var(--decorative-icon-color)
+
+:root:not([data-theme=dark])
+  color-scheme: light
+:root[data-theme=dark]
+  color-scheme: dark
+
+:root:not([data-theme="dark"])
+  --app-color:             red
+
+  --base-color:            $white
+  --hairline-color:        color.mix($gray-200, $gray-300)
+  --primary-text-color:    $gray-800
+  --secondary-text-color:  $gray-600
+  --inactive-icon-color:   $gray-400
+  --active-icon-color:     $gray-800
+  --decorative-icon-color: $gray-500
+
+:root[data-theme="dark"]
+  --app-color:             blue
+
+  --base-color:            $gray-900
+  --hairline-color:        color.mix($gray-400, $gray-500)
+  --primary-text-color:    $gray-100
+  --secondary-text-color:  $gray-700
+  --inactive-icon-color:   $gray-500
+  --active-icon-color:     $gray-100
+  --decorative-icon-color: $gray-500

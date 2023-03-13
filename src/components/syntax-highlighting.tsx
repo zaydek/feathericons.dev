@@ -1,4 +1,4 @@
-import { Anchor } from "@/-components"
+import { Anchor } from "@/components"
 import { ShikiContext } from "@/state"
 import { Fragment, memo, useContext, useEffect, useState } from "react"
 import { IThemedToken } from "shiki-es"

@@ -1,0 +1,60 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+.section
+  display: flex
+  flex-direction: column
+  gap: $sidebar-gap
+  padding: $sidebar-gap $sidebar-padding-x
+  &.syntax-highlighting
+    padding: 0
+    padding-bottom: $sidebar-gap
+  &.is-start
+    padding-top: $sidebar-padding-y
+    &:has(+ [data-scroll=true])
+      box-shadow: $hairline-shadow-bottom
+  &.is-end
+    // Change from [$sidebar-gap $sidebar-padding-x]
+    // to [$sidebar-padding-y $sidebar-padding-x]
+    padding: $sidebar-padding-y $sidebar-padding-x
+
+.section-header
+  display: flex
+  align-items: center
+  height: $tiny-icon-height
+  background-color: white
+
+.section-icon
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $slate-600
+.section-name
+  font: 500 11px / normal $sans
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-600
+.section-range-desc
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 24px
+  width: 56px
+  border-radius: 1e3px
+  box-shadow: $inset-hairline-shadow
+  font: 500 11px / normal $sans
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  color: $slate-800
+  -webkit-user-select: all // Interaction
+  user-select: all         // Interaction
+.section-reset-icon
+  height: $tiny-icon-height
+  width: $tiny-icon-height
+  color: $slate-300
+  // TODO: Defer to <button>
+  //// cursor: pointer           // Interaction
+  //// -webkit-user-select: none // Interaction
+  //// user-select: none         // Interaction
+  &:hover
+    color: $slate-800

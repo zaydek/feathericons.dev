@@ -1,0 +1,55 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+$height:       128px
+$aspect-ratio: 1.25
+
+.main-grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, $height)
+  justify-content: center
+  gap: 16px
+  &.is-prefer-names
+    gap: 8px 16px
+
+.main-grid-item
+  position: relative
+  display: flex
+  flex-direction: column
+  gap: 8px
+  width: $height
+// TODO: Defer to <button>
+.main-grid-item-icon-frame
+  display: flex
+  justify-content: center
+  align-items: center
+  aspect-ratio: $aspect-ratio
+  background-color: white
+  border-radius: 4px
+  box-shadow: $inset-hairline-shadow
+  //// cursor: pointer              // Interaction
+  //// -webkit-user-select: none    // Interaction
+  //// user-select: none            // Interaction
+  //// cursor: copy
+  .main-grid-item.is-selected &
+    box-shadow: inset 0 0 0 4px $brand-color
+.main-grid-item-icon
+  min-height: 24px
+  max-height: 24px * math.div(56, 32)
+  min-width:  24px
+  max-width:  24px * math.div(56, 32)
+  color: var(--app-color, $slate-800)
+  transform: scale(calc(var(--size) / 24))
+  stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
+.main-grid-item-name
+  display: -webkit-box         // Clamp
+  -webkit-line-clamp: 2        // Clamp
+  -webkit-box-orient: vertical // Clamp
+  overflow: hidden             // Clamp
+  height: 32px
+  font: 425 13px / 1.25 $sans
+  text-align: center
+  color: $slate-800
+  -webkit-user-select: all     // Interaction
+  user-select: all             // Interaction
