@@ -1,8 +1,9 @@
 import react from "react"
 
+import * as shiki from "shiki-es"
+
 import { Anchor } from "@/components"
 import { ShikiContext } from "@/providers"
-import { IThemedToken } from "shiki-es"
 
 // https://twitter.com/...
 function TwitterLink({ username, children }: { username: string; children: string }) {
@@ -44,7 +45,7 @@ function Tokenize({ color, children }: { color?: string; children: string }) {
 
 function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 	const { highlighter } = react.useContext(ShikiContext)!
-	const [tokens, setTokens] = react.useState<IThemedToken[][] | null>(null)
+	const [tokens, setTokens] = react.useState<shiki.IThemedToken[][] | null>(null)
 
 	react.useEffect(() => {
 		if (highlighter === null) return

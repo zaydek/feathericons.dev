@@ -1,6 +1,6 @@
 import react from "react"
 
-import * as Feather from "@icons/feather/tsx"
+import * as feather from "@icons/feather/tsx"
 
 import { Reactjs, Solidjs, Svg } from "@/components/icons"
 import { DynamicIcon, IconComponent } from "@/lib"
@@ -62,7 +62,7 @@ export function ExportAs({
 				</div>
 				<span className="export-as-button-name">{names[value]}</span>
 				<div className="export-as-button-icon-frame">
-					<Feather.ChevronDown className="export-as-button-icon" />
+					<feather.ChevronDown className="export-as-button-icon" />
 				</div>
 			</button>
 		</label>

@@ -1,6 +1,6 @@
 import react from "react"
 
-import * as Feather from "@icons/feather/tsx"
+import * as feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
 import { ClipboardContext, SearchContext } from "@/providers"
@@ -41,7 +41,7 @@ export function SearchBar() {
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
 			<div className="sidebar-align-icon-frame">
-				<Feather.Search className="search-bar-icon" strokeWidth={4} />
+				<feather.Search className="search-bar-icon" strokeWidth={4} />
 			</div>
 			<input
 				ref={ref}

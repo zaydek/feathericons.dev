@@ -1,12 +1,12 @@
 import react from "react"
 
-import * as Feather from "@icons/feather/tsx"
-import * as WkBrandsMono from "@icons/wk/brands/mono/tsx"
-import * as WkBrandsOriginal from "@icons/wk/brands/original/tsx"
-import * as WkPaymentsMonoFilled from "@icons/wk/payments/mono-filled/tsx"
-import * as WkPaymentsMono from "@icons/wk/payments/mono/tsx"
-import * as WkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
-import * as WkPaymentsOriginal from "@icons/wk/payments/original/tsx"
+import * as feather from "@icons/feather/tsx"
+import * as wkBrandsMono from "@icons/wk/brands/mono/tsx"
+import * as wkBrandsOriginal from "@icons/wk/brands/original/tsx"
+import * as wkPaymentsMonoFilled from "@icons/wk/payments/mono-filled/tsx"
+import * as wkPaymentsMono from "@icons/wk/payments/mono/tsx"
+import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
+import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
 import {
 	Anchor,
@@ -54,7 +54,7 @@ function AppSidebar1() {
 	const startTransition = useProgressBar()
 
 	const {
-		feather,
+		feather: $feather,
 		setFeather,
 		wkBrands,
 		setWkBrands,
@@ -82,12 +82,12 @@ function AppSidebar1() {
 					<section className="section is-start">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
-								<Feather.Package className="section-icon" />
+								<feather.Package className="section-icon" />
 							</div>
 							<h6 className="section-name u-flex-1">Icons</h6>
 							<div className="sidebar-align-icon-frame">
 								{/* TODO: Change to <button> */}
-								<Feather.RotateCcw
+								<feather.RotateCcw
 									className="section-reset-icon"
 									strokeWidth={4}
 									onClick={() => startTransition(resetIcons)}
@@ -98,13 +98,13 @@ function AppSidebar1() {
 							<ul className="checkboxes">
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
-										<Feather.Feather className="checkbox-icon" />
+										<feather.Feather className="checkbox-icon" />
 									</div>
 									<span className="checkbox-name u-flex-1">Feather</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
-											checked={feather}
+											checked={$feather}
 											onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
 										/>
 									</div>
@@ -115,7 +115,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											Icon={preferColor ? WkBrandsOriginal.BrandTwitter : WkBrandsMono.BrandTwitter}
+											Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 										/>
 									</div>
 									<span className="checkbox-name u-flex-1">Logos</span>
@@ -137,11 +137,11 @@ function AppSidebar1() {
 												// prettier-ignore
 												preferColor
 												? wkPaymentsValue === "normal"
-													? WkPaymentsOriginal.CardMastercard
-													: WkPaymentsOriginalFilled.CardMastercard
+													? wkPaymentsOriginal.CardMastercard
+													: wkPaymentsOriginalFilled.CardMastercard
 												: wkPaymentsValue === "normal"
-													? WkPaymentsMono.CardMastercard
-													: WkPaymentsMonoFilled.CardMastercard
+													? wkPaymentsMono.CardMastercard
+													: wkPaymentsMonoFilled.CardMastercard
 											}
 										/>
 									</div>
@@ -159,7 +159,7 @@ function AppSidebar1() {
 										<div className="sidebar-align-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon payments"
-												Icon={preferColor ? WkPaymentsOriginal.CardMastercard : WkPaymentsMono.CardMastercard}
+												Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
 											/>
 										</div>
 										<span className="checkbox-name u-flex-1">Original</span>
@@ -184,7 +184,7 @@ function AppSidebar1() {
 											<DynamicIcon
 												className="checkbox-icon payments"
 												Icon={
-													preferColor ? WkPaymentsOriginalFilled.CardMastercard : WkPaymentsMonoFilled.CardMastercard
+													preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard
 												}
 											/>
 										</div>
@@ -214,12 +214,12 @@ function AppSidebar1() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<Feather.Settings className="section-icon" />
+							<feather.Settings className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Settings</h6>
 						<div className="sidebar-align-icon-frame">
 							{/* TODO: Change to <button> */}
-							<Feather.RotateCcw
+							<feather.RotateCcw
 								className="section-reset-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIconPrefs)}
@@ -243,7 +243,7 @@ function AppSidebar1() {
 						</label>
 						<label className="checkbox">
 							<div className="sidebar-align-icon-frame">
-								<DynamicIcon className="checkbox-icon" Icon={preferNames ? Feather.ToggleRight : Feather.ToggleLeft} />
+								<DynamicIcon className="checkbox-icon" Icon={preferNames ? feather.ToggleRight : feather.ToggleLeft} />
 							</div>
 							<span className="checkbox-name u-flex-1">Show icon names</span>
 							<div className="sidebar-align-icon-frame">
@@ -260,7 +260,7 @@ function AppSidebar1() {
 				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-frame">
-							<Feather.Globe className="section-icon" />
+							<feather.Globe className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Resources</h6>
 					</header>
@@ -272,7 +272,7 @@ function AppSidebar1() {
 								</div>
 								<span className="resource-name u-flex-1">{resource.name}</span>
 								<div className="sidebar-align-icon-frame">
-									<Feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
 						))}
@@ -329,7 +329,7 @@ function AppSidebar2() {
 				<section className="section is-start">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<Feather.Clipboard className="section-icon" />
+							<feather.Clipboard className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">Copy as</h6>
 						<div className="sidebar-align-frame">
@@ -365,13 +365,13 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<Feather.PenTool className="section-icon" />
+							<feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<div className="sidebar-align-icon-frame">
 							{/* TODO: Change to <button> */}
-							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
 					<div className="sidebar-align-frame">
@@ -382,13 +382,13 @@ function AppSidebar2() {
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
-							<Feather.PenTool className="section-icon" />
+							<feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name u-flex-1">stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="sidebar-align-icon-frame">
 							{/* TODO: Change to <button> */}
-							<Feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
 					<div className="sidebar-align-frame">
