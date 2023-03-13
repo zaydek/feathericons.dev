@@ -1,12 +1,13 @@
-import { createContext, PropsWithChildren, useEffect, useState } from "react"
+import react from "react"
+
 import { getHighlighter, Highlighter } from "shiki-es"
 
-export const ShikiContext = createContext<{ highlighter: Highlighter | null } | null>(null)
+export const ShikiContext = react.createContext<{ highlighter: Highlighter | null } | null>(null)
 
-export function ShikiProvider({ children }: PropsWithChildren) {
-	const [highlighter, setHighlighter] = useState<Highlighter | null>(null)
+export function ShikiProvider({ children }: react.PropsWithChildren) {
+	const [highlighter, setHighlighter] = react.useState<Highlighter | null>(null)
 
-	useEffect(() => {
+	react.useEffect(() => {
 		async function init() {
 			const highlighter = await getHighlighter({
 				themes: ["github-light", "github-dark"],

@@ -1,11 +1,12 @@
+import react from "react"
+
 import { cx, isMac } from "@/lib"
 import { LayoutContext } from "@/providers"
-import { PropsWithChildren, useCallback, useContext, useEffect } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Sidebar1({ children }: PropsWithChildren) {
-	//// const { sidebar2 } = useContext(LayoutContext)!
+export function Sidebar1({ children }: react.PropsWithChildren) {
+	//// const { sidebar2 } = React.useContext(LayoutContext)!
 	return (
 		<aside className="sidebar">
 			<div className="sidebar-contents">{children}</div>
@@ -16,8 +17,8 @@ export function Sidebar1({ children }: PropsWithChildren) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutEscToCloseSidebarOverlay() {
-	const { sidebar2, setSidebar2 } = useContext(LayoutContext)!
-	useEffect(() => {
+	const { sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
+	react.useEffect(() => {
 		if (sidebar2 !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape") {
@@ -31,8 +32,8 @@ function useShortcutEscToCloseSidebarOverlay() {
 }
 
 function useShortcutCtrlBackslashToCycleSidebar() {
-	const { setSidebar2 } = useContext(LayoutContext)!
-	useEffect(() => {
+	const { setSidebar2 } = react.useContext(LayoutContext)!
+	react.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			// prettier-ignore
 			if (!(
@@ -57,8 +58,8 @@ function useShortcutCtrlBackslashToCycleSidebar() {
 }
 
 function useSideEffectHtmlAndBodyScrollLocking() {
-	const { sidebar2 } = useContext(LayoutContext)!
-	useEffect(() => {
+	const { sidebar2 } = react.useContext(LayoutContext)!
+	react.useEffect(() => {
 		const targets = [document.documentElement, document.body]
 		for (const target of targets) {
 			target.style.overflow = sidebar2 === "maximized" ? "hidden" : ""
@@ -72,11 +73,11 @@ function useSideEffectHtmlAndBodyScrollLocking() {
 	return void 0
 }
 
-export function Sidebar2({ children }: PropsWithChildren) {
-	const { sidebar2, setSidebar2 } = useContext(LayoutContext)!
+export function Sidebar2({ children }: react.PropsWithChildren) {
+	const { sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
 
 	// DEBUG
-	const DEBUG_cycleSidebar = useCallback(() => {
+	const DEBUG_cycleSidebar = react.useCallback(() => {
 		setSidebar2(curr => {
 			switch (curr) {
 				case "minimized":
@@ -108,7 +109,7 @@ export function Sidebar2({ children }: PropsWithChildren) {
 
 // Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
-	const { setSidebar2 } = useContext(LayoutContext)!
+	const { setSidebar2 } = react.useContext(LayoutContext)!
 
 	return (
 		<>

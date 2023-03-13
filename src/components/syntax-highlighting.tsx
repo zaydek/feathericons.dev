@@ -1,6 +1,7 @@
+import react from "react"
+
 import { Anchor } from "@/components"
 import { ShikiContext } from "@/providers"
-import { Fragment, memo, useContext, useEffect, useState } from "react"
 import { IThemedToken } from "shiki-es"
 
 // https://twitter.com/...
@@ -30,11 +31,11 @@ function Tokenize({ color, children }: { color?: string; children: string }) {
 		<span style={{ color }}>
 			{arr.length > 0
 				? arr.map(([_, $1, $2, $3], index) => (
-						<Fragment key={index}>
+						<react.Fragment key={index}>
 							{$1}
 							<RenderLink>{$2}</RenderLink>
 							{$3}
-						</Fragment>
+						</react.Fragment>
 				  ))
 				: children}
 		</span>
@@ -42,10 +43,10 @@ function Tokenize({ color, children }: { color?: string; children: string }) {
 }
 
 function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
-	const { highlighter } = useContext(ShikiContext)!
-	const [tokens, setTokens] = useState<IThemedToken[][] | null>(null)
+	const { highlighter } = react.useContext(ShikiContext)!
+	const [tokens, setTokens] = react.useState<IThemedToken[][] | null>(null)
 
-	useEffect(() => {
+	react.useEffect(() => {
 		if (highlighter === null) return
 		const tokens = highlighter.codeToThemedTokens(code, code.startsWith("//") ? "js" : lang, "github-light")
 		setTokens(tokens)
@@ -84,4 +85,4 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 	)
 }
 
-export const MemoSyntaxHighlighting = memo(SyntaxHighlighting)
+export const MemoSyntaxHighlighting = react.memo(SyntaxHighlighting)

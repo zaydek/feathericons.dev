@@ -1,22 +1,23 @@
+import react from "react"
+
 import { ProgressBarContext } from "@/providers"
-import { useContext, useEffect, useRef, useState } from "react"
 
 const TICK_MS = 100
 const TICK_END_MS = 200
 
 export function ProgresssBar() {
-	const { started } = useContext(ProgressBarContext)!
+	const { started } = react.useContext(ProgressBarContext)!
 
-	const [progress, setProgress] = useState(0)
+	const [progress, setProgress] = react.useState(0)
 	const working = progress > 0 && progress < 1
 
-	const progressRef = useRef(progress)
-	useEffect(() => {
+	const progressRef = react.useRef(progress)
+	react.useEffect(() => {
 		progressRef.current = progress
 	}, [progress])
 
-	const onceRef = useRef(false)
-	useEffect(() => {
+	const onceRef = react.useRef(false)
+	react.useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return

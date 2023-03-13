@@ -1,20 +1,21 @@
+import react from "react"
+
 import * as Feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
 import { ClipboardContext, SearchContext } from "@/providers"
-import { RefObject, useContext, useEffect, useRef } from "react"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useSideEffectFocusOnMount(ref: RefObject<HTMLInputElement | null>) {
-	useEffect(() => {
+function useSideEffectFocusOnMount(ref: react.RefObject<HTMLInputElement | null>) {
+	react.useEffect(() => {
 		ref.current!.focus()
 	}, [ref])
 	return void 0
 }
 
-function useShortcutCtrlPToFocusSearchBar(ref: RefObject<HTMLInputElement | null>) {
-	useEffect(() => {
+function useShortcutCtrlPToFocusSearchBar(ref: react.RefObject<HTMLInputElement | null>) {
+	react.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
 				// Call preventDefault() to prevent the browser from opening the print dialog
@@ -29,10 +30,10 @@ function useShortcutCtrlPToFocusSearchBar(ref: RefObject<HTMLInputElement | null
 }
 
 export function SearchBar() {
-	const { search, setSearch } = useContext(SearchContext)!
-	const { clearSelectedNames } = useContext(ClipboardContext)!
+	const { search, setSearch } = react.useContext(SearchContext)!
+	const { clearSelectedNames } = react.useContext(ClipboardContext)!
 
-	const ref = useRef<HTMLInputElement | null>(null)
+	const ref = react.useRef<HTMLInputElement | null>(null)
 
 	useShortcutCtrlPToFocusSearchBar(ref)
 	useSideEffectFocusOnMount(ref)

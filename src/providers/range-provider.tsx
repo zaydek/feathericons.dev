@@ -1,5 +1,6 @@
+import react from "react"
+
 import { useParam } from "@/lib"
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useMemo } from "react"
 
 export const SIZE_MIN       = 16 // prettier-ignore
 export const SIZE_MAX       = 32 // prettier-ignore
@@ -12,20 +13,20 @@ export const STROKE_STEP    = 0.125 // prettier-ignore
 export const STROKE_DEFAULT = 2 // prettier-ignore
 
 // prettier-ignore
-export const SizeContext = createContext<{
+export const RangeSizeContext = react.createContext<{
 	size:             number
-	setSize:          Dispatch<SetStateAction<number>>
+	setSize:          react.Dispatch<react.SetStateAction<number>>
 	resetSize:        () => void
 } | null>(null)
 
 // prettier-ignore
-export const StrokeWidthContext = createContext<{
+export const RangeStrokeWidthContext = react.createContext<{
 	strokeWidth:      number
-	setStrokeWidth:   Dispatch<SetStateAction<number>>
+	setStrokeWidth:   react.Dispatch<react.SetStateAction<number>>
 	resetStrokeWidth: () => void
 } | null>(null)
 
-export function RangeProvider({ children }: PropsWithChildren) {
+export function RangeProvider({ children }: react.PropsWithChildren) {
 	const [size, setSize] = useParam({
 		key: "size",
 		initialValue: SIZE_DEFAULT,
@@ -39,7 +40,7 @@ export function RangeProvider({ children }: PropsWithChildren) {
 		},
 	})
 
-	const resetSize = useCallback(() => {
+	const resetSize = react.useCallback(() => {
 		setSize(SIZE_DEFAULT)
 	}, [setSize])
 
@@ -56,13 +57,13 @@ export function RangeProvider({ children }: PropsWithChildren) {
 		},
 	})
 
-	const resetStrokeWidth = useCallback(() => {
+	const resetStrokeWidth = react.useCallback(() => {
 		setStrokeWidth(STROKE_DEFAULT)
 	}, [setStrokeWidth])
 
 	return (
-		<SizeContext.Provider
-			value={useMemo(
+		<RangeSizeContext.Provider
+			value={react.useMemo(
 				() => ({
 					size,
 					setSize,
@@ -71,8 +72,8 @@ export function RangeProvider({ children }: PropsWithChildren) {
 				[resetSize, setSize, size],
 			)}
 		>
-			<StrokeWidthContext.Provider
-				value={useMemo(
+			<RangeStrokeWidthContext.Provider
+				value={react.useMemo(
 					() => ({
 						strokeWidth,
 						setStrokeWidth,
@@ -82,7 +83,7 @@ export function RangeProvider({ children }: PropsWithChildren) {
 				)}
 			>
 				{children}
-			</StrokeWidthContext.Provider>
-		</SizeContext.Provider>
+			</RangeStrokeWidthContext.Provider>
+		</RangeSizeContext.Provider>
 	)
 }

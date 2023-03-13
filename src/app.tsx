@@ -1,3 +1,5 @@
+import react from "react"
+
 import * as Feather from "@icons/feather/tsx"
 import * as WkBrandsMono from "@icons/wk/brands/mono/tsx"
 import * as WkBrandsOriginal from "@icons/wk/brands/original/tsx"
@@ -23,25 +25,24 @@ import {
 	IconPreferencesContext,
 	IconsContext,
 	ProgressBarContext,
+	RangeSizeContext,
+	RangeStrokeWidthContext,
 	READONLY_CLIPBOARD_DEFAULT,
-	SizeContext,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
-	StrokeWidthContext,
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { Fragment, memo, useContext, useEffect, useRef, useTransition } from "react"
 import { useTrackScrollProps } from "./use-track-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 function useProgressBar() {
-	const { setStarted } = useContext(ProgressBarContext)!
-	const [pending, startTransition] = useTransition()
-	useEffect(() => {
+	const { setStarted } = react.useContext(ProgressBarContext)!
+	const [pending, startTransition] = react.useTransition()
+	react.useEffect(() => {
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
 		return () => window.clearTimeout(d)
@@ -62,10 +63,10 @@ function AppSidebar1() {
 		wkPaymentsValue,
 		setWkPaymentsValue,
 		resetIcons,
-	} = useContext(IconsContext)!
+	} = react.useContext(IconsContext)!
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
-		useContext(IconPreferencesContext)!
-	const { clearSelectedNames } = useContext(ClipboardContext)!
+		react.useContext(IconPreferencesContext)!
+	const { clearSelectedNames } = react.useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -285,28 +286,28 @@ function AppSidebar1() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function useSideEffectSetCssVars() {
-	const { size } = useContext(SizeContext)!
-	const { strokeWidth } = useContext(StrokeWidthContext)!
-	useEffect(() => {
+	const { size } = react.useContext(RangeSizeContext)!
+	const { strokeWidth } = react.useContext(RangeStrokeWidthContext)!
+	react.useEffect(() => {
 		document.body.style.setProperty("--size", "" + size)
 	}, [size])
-	useEffect(() => {
+	react.useEffect(() => {
 		document.body.style.setProperty("--stroke-width", "" + strokeWidth)
 	}, [strokeWidth])
 	return void 0
 }
 
 function AppSidebar2() {
-	const { size, setSize, resetSize } = useContext(SizeContext)!
-	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = useContext(StrokeWidthContext)!
-	const { exportAs, setExportAs, clearSelectedNames, readOnlyClipboard } = useContext(ClipboardContext)!
+	const { size, setSize, resetSize } = react.useContext(RangeSizeContext)!
+	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = react.useContext(RangeStrokeWidthContext)!
+	const { exportAs, setExportAs, clearSelectedNames, readOnlyClipboard } = react.useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
 	useSideEffectSetCssVars()
 
-	const onceRef = useRef(false)
-	useEffect(() => {
+	const onceRef = react.useRef(false)
+	react.useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
@@ -421,9 +422,9 @@ function AppSidebar2() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutCtrlAToSelectAll() {
-	const { icons } = useContext(IconsContext)!
-	const { setSelectedNamesStart, setSelectedNamesEnd } = useContext(ClipboardContext)!
-	useEffect(() => {
+	const { icons } = react.useContext(IconsContext)!
+	const { setSelectedNamesStart, setSelectedNamesEnd } = react.useContext(ClipboardContext)!
+	react.useEffect(() => {
 		if (icons === undefined) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
@@ -440,8 +441,8 @@ function useShortcutCtrlAToSelectAll() {
 }
 
 function useShortcutEscToClearAll() {
-	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = useContext(ClipboardContext)!
-	useEffect(() => {
+	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = react.useContext(ClipboardContext)!
+	react.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.tagName !== "BODY") return
 			if (e.key === "Escape") {
@@ -457,8 +458,8 @@ function useShortcutEscToClearAll() {
 }
 
 function useShortcutCtrlCToCopy() {
-	const { readOnlyClipboard } = useContext(ClipboardContext)!
-	useEffect(() => {
+	const { readOnlyClipboard } = react.useContext(ClipboardContext)!
+	react.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.shiftKey) return // No-op because of Chrome shortcut
 			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
@@ -474,10 +475,10 @@ function useShortcutCtrlCToCopy() {
 }
 
 function useSideEffectClearSelectionOnChange() {
-	const { feather, wkBrands, wkPayments } = useContext(IconsContext)!
-	const { clearSelectedNames } = useContext(ClipboardContext)!
-	const onceRef = useRef(false)
-	useEffect(() => {
+	const { feather, wkBrands, wkPayments } = react.useContext(IconsContext)!
+	const { clearSelectedNames } = react.useContext(ClipboardContext)!
+	const onceRef = react.useRef(false)
+	react.useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
@@ -488,9 +489,9 @@ function useSideEffectClearSelectionOnChange() {
 }
 
 function useSideEffectSelectNamesFromIndexes() {
-	const { icons } = useContext(IconsContext)!
-	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = useContext(ClipboardContext)!
-	useEffect(() => {
+	const { icons } = react.useContext(IconsContext)!
+	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = react.useContext(ClipboardContext)!
+	react.useEffect(() => {
 		if (icons === undefined) return
 		if (selectedNamesStart === null || selectedNamesEnd === null) return
 		const min = Math.min(selectedNamesStart, selectedNamesEnd)
@@ -501,7 +502,7 @@ function useSideEffectSelectNamesFromIndexes() {
 }
 
 function useSideEffectVisibleDocumentTitle() {
-	const { icons } = useContext(IconsContext)!
+	const { icons } = react.useContext(IconsContext)!
 	const count = (icons ?? []).length
 	// prettier-ignore
 	useVisibleDocumentTitle([
@@ -512,7 +513,7 @@ function useSideEffectVisibleDocumentTitle() {
 }
 
 function GridItemName({ name }: { name: string }) {
-	const { exportAs } = useContext(ClipboardContext)!
+	const { exportAs } = react.useContext(ClipboardContext)!
 
 	if (exportAs === "svg") {
 		return <>{toKebabCase(name).toLowerCase()}</>
@@ -521,10 +522,10 @@ function GridItemName({ name }: { name: string }) {
 		return (
 			<>
 				{parts.map((p, index) => (
-					<Fragment key={index}>
+					<react.Fragment key={index}>
 						{index > 0 && <wbr />}
 						{p}
-					</Fragment>
+					</react.Fragment>
 				))}
 			</>
 		)
@@ -532,7 +533,7 @@ function GridItemName({ name }: { name: string }) {
 }
 
 function GridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
-	const { preferNames } = useContext(IconPreferencesContext)!
+	const { preferNames } = react.useContext(IconPreferencesContext)!
 	const {
 		selectedNames,
 		selectedNamesStart,
@@ -541,7 +542,7 @@ function GridItem({ index, name, Icon }: { index: number; name: string; Icon: Ic
 		addToSelectedNames,
 		removeFromSelectedNames,
 		clearSelectedNames,
-	} = useContext(ClipboardContext)!
+	} = react.useContext(ClipboardContext)!
 
 	return (
 		<article
@@ -583,15 +584,15 @@ function GridItem({ index, name, Icon }: { index: number; name: string; Icon: Ic
 	)
 }
 
-const MemoGridItem = memo(GridItem)
+const MemoGridItem = react.memo(GridItem)
 
 function AppMain() {
-	const { feather, wkBrands, wkPayments, icons } = useContext(IconsContext)!
-	const { preferNames } = useContext(IconPreferencesContext)!
-	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = useContext(ClipboardContext)!
+	const { feather, wkBrands, wkPayments, icons } = react.useContext(IconsContext)!
+	const { preferNames } = react.useContext(IconPreferencesContext)!
+	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = react.useContext(ClipboardContext)!
 
-	const onceRef = useRef(false)
-	useEffect(() => {
+	const onceRef = react.useRef(false)
+	react.useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return

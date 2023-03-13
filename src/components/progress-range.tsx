@@ -1,9 +1,9 @@
-import { CSSProperties, Dispatch, SetStateAction } from "react"
+import react from "react"
 
 // prettier-ignore
 export type ProgressRangeProps = {
 	value:    number
-	setValue: Dispatch<SetStateAction<number>>
+	setValue: react.Dispatch<react.SetStateAction<number>>
 	min:      number
 	max:      number
 	step:     number
@@ -12,7 +12,7 @@ export type ProgressRangeProps = {
 export function ProgressRange({ value, setValue, min, max, step }: ProgressRangeProps) {
 	return (
 		<input
-			style={{ "--progress": ((value - min) / (max - min)) * 100 + "%" } as CSSProperties}
+			style={{ "--progress": ((value - min) / (max - min)) * 100 + "%" } as react.CSSProperties}
 			type="range"
 			min={min}
 			max={max}

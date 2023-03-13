@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import react from "react"
 
 const searchParams = new URLSearchParams(typeof window === "undefined" ? "" : window.location.search)
 
@@ -17,12 +17,12 @@ export function useParam<T>({
 	parser: Parser<T>
 	serializer?: Serializer<T>
 }) {
-	const [value, setValue] = useState(() => {
+	const [value, setValue] = react.useState(() => {
 		const param = searchParams.get(key)
 		return param === null ? initialValue : parser(param)
 	})
 
-	useEffect(() => {
+	react.useEffect(() => {
 		const d = window.setTimeout(() => {
 			const nextSearchParams = new URLSearchParams(window.location.search)
 			if (value === initialValue) {

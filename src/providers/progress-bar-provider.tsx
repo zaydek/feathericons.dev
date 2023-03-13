@@ -1,13 +1,13 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from "react"
+import react from "react"
 
 // prettier-ignore
-export const ProgressBarContext = createContext<{
+export const ProgressBarContext = react.createContext<{
 	started:    boolean
-	setStarted: Dispatch<SetStateAction<boolean>>
+	setStarted: react.Dispatch<react.SetStateAction<boolean>>
 } | null>(null)
 
-export function ProgressBarProvider({ children }: PropsWithChildren) {
-	const [started, setStarted] = useState(false)
+export function ProgressBarProvider({ children }: react.PropsWithChildren) {
+	const [started, setStarted] = react.useState(false)
 
 	return (
 		<ProgressBarContext.Provider

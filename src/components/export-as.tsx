@@ -1,9 +1,10 @@
+import react from "react"
+
 import * as Feather from "@icons/feather/tsx"
 
 import { Reactjs, Solidjs, Svg } from "@/components/icons"
 import { DynamicIcon, IconComponent } from "@/lib"
 import { ExportAsValue } from "@/providers"
-import { Dispatch, SetStateAction } from "react"
 
 const icons: Record<ExportAsValue, IconComponent> = {
 	svg: Svg,
@@ -30,7 +31,7 @@ export function ExportAs({
 	setValue,
 }: {
 	value: ExportAsValue
-	setValue: Dispatch<SetStateAction<ExportAsValue>>
+	setValue: react.Dispatch<react.SetStateAction<ExportAsValue>>
 }) {
 	return (
 		<label className="export-as">

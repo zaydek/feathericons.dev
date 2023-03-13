@@ -1,7 +1,8 @@
+import react from "react"
+
 import { IconComponent } from "@/lib"
 import { WkPaymentsValue } from "@/providers"
 import { useQuery } from "@tanstack/react-query"
-import { useEffect, useMemo } from "react"
 
 //// type ImportPath =
 //// 	| "@icons/feather/tsx"
@@ -117,12 +118,12 @@ export function useQueryIcons({
 		fetchIconsets({ feather, wkBrands: wkBrands, wkPayments, wkPaymentsValue }, preferColor),
 	)
 	// When dependencies change...
-	const refretchDeps = useMemo(
+	const refretchDeps = react.useMemo(
 		() => [feather, wkBrands, wkPayments, wkPaymentsValue, preferColor],
 		[feather, preferColor, wkBrands, wkPayments, wkPaymentsValue],
 	)
 	// ...refetch
-	useEffect(() => {
+	react.useEffect(() => {
 		refetch()
 	}, [refetch, refretchDeps])
 	return data
