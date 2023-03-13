@@ -2,9 +2,6 @@ $x:         var(--__x);
 $min-width: var(--__min-width);
 $max-width: var(--__max-width);
 
-//// :focus-visible { outline: revert; }
-//// [tabindex] { outline: solid 2px blue; }
-
 .sidebar {
 	position: fixed;
 	&[data-pos=start] { inset: 0 auto 0 0; }
@@ -37,22 +34,16 @@ $max-width: var(--__max-width);
 	justify-content: center;
 	align-items: center;
 	width: 32px;
-	&:not(:hover:active) { cursor: grab; }
+	cursor: grab;
 	&:hover:active       { cursor: grabbing; }
 	-webkit-user-select: none;
 	user-select: none;
 }
-//// .sidebar-drag-area { transition: background-color 100ms ease; }
-//// .sidebar-drag-area:hover { background-color: hsl(0, 0%, 0%, 0.025); }
-
 .sidebar-drag-area-handle {
 	height: 6px * 8;
 	width: 6px;
 	background-color: hsl(0, 0%, 0%, 0.25);
-	border-radius: 1e3px;
-	//// .sidebar-drag-area:hover        & { background-color: hsl(0, 0%, 0%, 0.50); }
-	//// .sidebar-drag-area:hover:active & { background-color: hsl(0, 0%, 0%, 0.75); }
-}
+	border-radius: 1e3px;}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -89,14 +80,6 @@ $max-width: var(--__max-width);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
-//// .sidebar-overlay {
-////   position: fixed;
-////   inset: 0;
-////   z-index: $sidebar-overlay-z-index;
-////   background-color: hsl(0, 0%, 0%, 0.25);
-////   backdrop-filter: blur(2px);
-//// }
 .main {
 	position: absolute;
 	inset: 0 $min-width 0 $min-width;
