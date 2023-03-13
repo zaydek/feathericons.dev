@@ -1,6 +1,6 @@
 import React from "react"
 
-import { getCssVarAsNumber, iota, round } from "@/lib"
+import { iota, round } from "@/lib"
 
 function SidebarOverlay() {
 	return <div className="sidebar-overlay"></div>
@@ -8,13 +8,22 @@ function SidebarOverlay() {
 
 function Sidebar({
 	pos,
+	minWidth,
+	maxWidth,
 	header,
 	footer,
 	children,
-}: React.PropsWithChildren<{ pos: "start" | "end"; header: React.ReactNode; footer: React.ReactNode }>) {
+}: React.PropsWithChildren<{
+	pos: "start" | "end"
+	minWidth: number
+	maxWidth: number
+	header: React.ReactNode
+	footer: React.ReactNode
+}>) {
 	const ref = React.useRef<HTMLDivElement | null>(null)
 	const dragAreaRef = React.useRef<HTMLDivElement | null>(null)
 
+	// Attributes e.g. [data-state], [data-transition]
 	const [state, setState] = React.useState<"maximized" | "minimized" | null>(null)
 	const [transition, setTransition] = React.useState(false)
 
@@ -24,29 +33,28 @@ function Sidebar({
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
 
-	const [maximizedWidth, setMaximizedWidth] = React.useState<number | null>(null)
-	React.useEffect(() => {
-		void state
-		setMaximizedWidth(getCssVarAsNumber("--maximized-width", { scope: ref.current! }))
-	}, [state])
-
 	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
+			// Guards
 			if (e.button !== 0 && e.button !== 1) return
-			if (!dragAreaRef.current!.contains(e.target as HTMLDivElement)) return
+			if (!dragAreaRef.current!.contains(e.target as HTMLElement)) return
+			// Starts here
 			e.preventDefault() // Prevent text selection
+			// COMPAT/Safari: Typically we don't need to setTransition(false) here but
+			// Safari onTransitionEnd doesn't always fire? (╯°□°)╯︵ ┻━┻
+			setTransition(false)
 			setPointerDown(true)
-			setStartClientX(round(e.clientX, { precision: 4 }))
-			setClientX(round(e.clientX, { precision: 4 }))
+			setStartClientX(round(e.clientX, { precision: 2 }))
+			setClientX(round(e.clientX, { precision: 2 }))
 		}
 		function handlePointerMove(e: PointerEvent) {
+			// Guards
 			if (!pointerDown) return
-			setClientX(round(e.clientX, { precision: 4 }))
+			// Starts here
+			setClientX(round(e.clientX, { precision: 2 }))
 		}
 		function handlePointerUp(e: PointerEvent) {
-			const w = getCssVarAsNumber("--width", { scope: ref.current! })
-			const maxw = getCssVarAsNumber("--maximized-width", { scope: ref.current! })
-			const d = maxw - w
+			const d = maxWidth - minWidth
 			if (pos === "start") {
 				if (state === null) {
 					if (x > 0) {
@@ -61,7 +69,7 @@ function Sidebar({
 						setState(null)
 					}
 				} else if (state === "minimized") {
-					if (x > w) {
+					if (x > minWidth) {
 						setState("maximized")
 					} else if (x > 0) {
 						setState(null)
@@ -81,7 +89,7 @@ function Sidebar({
 						setState(null)
 					}
 				} else if (state === "minimized") {
-					if (x < -w) {
+					if (x < -minWidth) {
 						setState("maximized")
 					} else if (x < 0) {
 						setState(null)
@@ -101,38 +109,56 @@ function Sidebar({
 			document.removeEventListener("pointermove", handlePointerMove, false)
 			document.removeEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
 		}
-	})
+	}, [maxWidth, minWidth, pointerDown, pos, state, x])
 
 	return (
 		<aside
 			ref={ref}
-			// Styling
 			className="sidebar"
 			data-pos={pos}
 			data-state={state}
-			data-transition={transition || undefined} // Serialize non-truthy values
-			data-pointer-down={pointerDown || undefined} // Serialize non-truthy values
-			style={{ "--x": `${x}px` } as React.CSSProperties}
-			onTransitionEnd={e => {
-				setTransition(false)
-			}}
+			data-transition={transition || undefined}
+			style={
+				{
+					"--__x": `${x}px`,
+					"--__min-width": `${minWidth}px`,
+					"--__max-width": `${maxWidth}px`,
+				} as React.CSSProperties
+			}
+			onTransitionEnd={e => setTransition(false)}
 		>
-			<div ref={dragAreaRef} className="sidebar-drag-area">
+			<div
+				ref={dragAreaRef}
+				className="sidebar-drag-area"
+				onKeyDown={e => {
+					if (e.key === "ArrowLeft") {
+						if (pos === "start") {
+							// ...
+						} else {
+							// ...
+						}
+					} else if (e.key === "ArrowRight") {
+						if (pos === "start") {
+							// ...
+						} else {
+							// ...
+						}
+					}
+				}}
+				tabIndex={0}
+			>
 				<div className="sidebar-drag-area-handle"></div>
 			</div>
 			<div className="sidebar-card">
-				<div
-					className="sidebar-card-content"
-					style={{ width: state === "maximized" ? maximizedWidth ?? undefined : undefined }}
-				>
+				<div className="sidebar-card-content" style={{ width: state === "maximized" ? maxWidth : undefined }}>
 					<header className="sidebar-header">
-						{header}
-						<hr className="collapse" />
+						{/* {header}
+						<hr className="collapse" /> */}
 					</header>
-					<div className="sidebar-scroll-area">{children}</div>
+					<div className="sidebar-scroll-area">{/* {children} */}</div>
 					<footer className="sidebar-footer">
-						<hr className="collapse" />
-						{footer}
+						{/* <hr className="collapse" />
+						{footer} */}
 					</footer>
 				</div>
 			</div>
@@ -148,9 +174,11 @@ export function App() {
 	return (
 		<>
 			<SidebarOverlay />
-			<Sidebar
+			{/* <Sidebar
 				// prettier-ignore
 				pos="start"
+				minWidth={384}
+				maxWidth={384 * 2}
 				header={<div>foo bar</div>}
 				footer={<div>foo bar</div>}
 			>
@@ -159,16 +187,18 @@ export function App() {
 						<div>foo bar</div>
 					</React.Fragment>
 				))}
-			</Sidebar>
+			</Sidebar> */}
 			<Main>
+				{/* <div>foo bar</div>
 				<div>foo bar</div>
 				<div>foo bar</div>
-				<div>foo bar</div>
-				<div>foo bar</div>
+				<div>foo bar</div> */}
 			</Main>
 			<Sidebar
 				// prettier-ignore
 				pos="end"
+				minWidth={384}
+				maxWidth={384 * 2}
 				header={<div>foo bar</div>}
 				footer={<div>foo bar</div>}
 			>

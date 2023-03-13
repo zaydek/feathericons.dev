@@ -1,16 +1,11 @@
-$sidebar-width: 384px;
-$sidebar-maximized-width: 512px;
+$x:         var(--__x);
+$min-width: var(--__min-width);
+$max-width: var(--__max-width);
 
-//// $sidebar-2-width: 384px;
-//// $sidebar-2-maximized-width: 512px;
-
-//// html { color-scheme: dark; }
+//// :focus-visible { outline: revert; }
+//// [tabindex] { outline: solid 2px blue; }
 
 .sidebar {
-	--width: #{$sidebar-width};
-	--maximized-width: #{$sidebar-maximized-width};
-	--x: 0px;
-
 	position: fixed;
 	&[data-pos=start] { inset: 0 auto 0 0; }
 	&[data-pos=end]   { inset: 0 0 0 auto; }
@@ -19,14 +14,14 @@ $sidebar-maximized-width: 512px;
 	flex-direction: row;    // Forward height
 
 	// Start
-	&[data-pos=start]                       { transform: translateX(calc(-1 * ($sidebar-maximized-width - $sidebar-width) + var(--x))); }
-	&[data-pos=start][data-state=maximized] { transform: translateX(var(--x)); }
-	&[data-pos=start][data-state=minimized] { transform: translateX(calc(-1 * $sidebar-maximized-width + var(--x))); }
+	&[data-pos=start]                       { transform: translateX(calc(-1 * ($max-width - $min-width) + $x)); }
+	&[data-pos=start][data-state=maximized] { transform: translateX($x); }
+	&[data-pos=start][data-state=minimized] { transform: translateX(calc(-1 * $max-width + $x)); }
 
 	// End
-	&[data-pos=end]                       { transform: translateX(calc($sidebar-maximized-width - $sidebar-width + var(--x))); }
-	&[data-pos=end][data-state=maximized] { transform: translateX(var(--x)); }
-	&[data-pos=end][data-state=minimized] { transform: translateX(calc($sidebar-maximized-width + var(--x))); }
+	&[data-pos=end]                       { transform: translateX(calc($max-width - $min-width + $x)); }
+	&[data-pos=end][data-state=maximized] { transform: translateX($x); }
+	&[data-pos=end][data-state=minimized] { transform: translateX(calc($max-width + $x)); }
 }
 .sidebar[data-transition] {
 	transition: transform 600ms cubic-bezier(0, 1, .25, 1);
@@ -41,18 +36,22 @@ $sidebar-maximized-width: 512px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 24px;
-	.sidebar:not([data-pointer-down]) & { cursor: grab;     }
-	.sidebar[data-pointer-down]       & { cursor: grabbing; }
-	touch-action: pan-x;
+	width: 32px;
+	&:not(:hover:active) { cursor: grab; }
+	&:hover:active       { cursor: grabbing; }
+	-webkit-user-select: none;
+	user-select: none;
 }
+//// .sidebar-drag-area { transition: background-color 100ms ease; }
+//// .sidebar-drag-area:hover { background-color: hsl(0, 0%, 0%, 0.025); }
+
 .sidebar-drag-area-handle {
 	height: 6px * 8;
 	width: 6px;
 	background-color: hsl(0, 0%, 0%, 0.25);
 	border-radius: 1e3px;
-	.sidebar-drag-area:hover    & { background-color: hsl(0, 0%, 0%, 0.50); }
-	.sidebar[data-pointer-down] & { background-color: hsl(0, 0%, 0%, 0.75); }
+	//// .sidebar-drag-area:hover        & { background-color: hsl(0, 0%, 0%, 0.50); }
+	//// .sidebar-drag-area:hover:active & { background-color: hsl(0, 0%, 0%, 0.75); }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,14 +60,14 @@ $sidebar-maximized-width: 512px;
 	display: flex;
 	.sidebar[data-pos=start] & { justify-content: flex-end;   }
 	.sidebar[data-pos=end]   & { justify-content: flex-start; }
-	width: $sidebar-maximized-width;
+	width: $max-width;
 	background-color: white;
 	box-shadow: 0 0 0 1px gainsboro;
 }
 .sidebar-card-content {
 	display: flex;          // Forward height
 	flex-direction: column; // Forward height
-	width: $sidebar-width;
+	width: $min-width;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -100,5 +99,5 @@ $sidebar-maximized-width: 512px;
 //// }
 .main {
 	position: absolute;
-	inset: 0 $sidebar-width 0 $sidebar-width;
+	inset: 0 $min-width 0 $min-width;
 }
