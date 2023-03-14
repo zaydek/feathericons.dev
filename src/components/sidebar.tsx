@@ -1,28 +1,7 @@
 import React from "react"
 
-import { attr, round } from "@/lib"
+import { cx, round } from "@/lib"
 import { sidebarContext, SidebarState } from "@/providers"
-
-////////////////////////////////////////////////////////////////////////////////
-
-//// function useShortcutFigmaStyleToggleSidebars() {
-//// 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
-//// 	React.useEffect(() => {
-//// 		function handleKeyDown(e: KeyboardEvent) {
-//// 			if (!(e.metaKey && e.key === "\\")) return
-//// 			// prettier-ignore
-//// 			const oneOrMoreOpen =
-//// 				(sidebar1 === null || sidebar1 === "maximized") ||
-//// 				(sidebar2 === null || sidebar2 === "maximized")
-//// 			const next = oneOrMoreOpen ? "minimized" : null
-//// 			setSidebar1(next)
-//// 			setSidebar2(next)
-//// 		}
-//// 		window.addEventListener("keydown", handleKeyDown, false)
-//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-//// 	}, [setSidebar1, setSidebar2, sidebar1, sidebar2])
-//// 	return void 0
-//// }
 
 function useSideEffectHtmlAndBodyScrollLocking() {
 	const { sidebar1, sidebar2 } = React.useContext(sidebarContext)!
@@ -55,80 +34,14 @@ function useSideEffectHtmlAndBodyScrollLocking() {
 	return void 0
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 export function SidebarOverlay() {
 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
-
-	//// let state: SidebarState
-	//// let setState: React.Dispatch<React.SetStateAction<SidebarState>>
-	//// if (pos === "start") {
-	//// 	state = sidebar1
-	//// 	setState = setSidebar1
-	//// } else {
-	//// 	state = sidebar2
-	//// 	setState = setSidebar2
-	//// }
 
 	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
 	const setState = sidebar1 === "maximized" ? setSidebar1 : setSidebar2
 
-	return (
-		<div
-			className="sidebar-overlay"
-			data-open={attr(open)}
-			onClick={e => {
-				console.log("Test")
-				setState(null)
-			}}
-		></div>
-	)
+	return <div className={cx("sidebar-overlay", open && "open")} onClick={e => setState(null)}></div>
 }
-
-//// ////////////////////////////////////////////////////////////////////////////////
-////
-//// //// export function Sidebar1({ children }: React.PropsWithChildren) {
-//// //// 	//// const { sidebar2 } = React.useContext(LayoutContext)!
-//// //// 	return (
-//// //// 		<aside className="sidebar">
-//// //// 			<div className="sidebar-contents">{children}</div>
-//// //// 		</aside>
-//// //// 	)
-//// //// }
-////
-//// ////////////////////////////////////////////////////////////////////////////////
-////
-//// //// export function Sidebar2({ children }: React.PropsWithChildren) {
-//// //// 	const { sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
-//// ////
-//// //// 	// DEBUG
-//// //// 	const DEBUG_cycleSidebar = React.useCallback(() => {
-//// //// 		setSidebar2(curr => {
-//// //// 			switch (curr) {
-//// //// 				case "minimized":
-//// //// 					return null
-//// //// 				case null:
-//// //// 					return "maximized"
-//// //// 				case "maximized":
-//// //// 					return "minimized"
-//// //// 			}
-//// //// 		})
-//// //// 	}, [setSidebar2])
-//// ////
-//// //// 	useShortcutEscToCloseSidebarOverlay()
-//// //// 	useShortcutCtrlBackslashToCycleSidebar()
-//// ////
-//// //// 	useSideEffectHtmlAndBodyScrollLocking()
-//// ////
-//// //// 	return (
-//// //// 		<aside className={cx("sidebar", sidebar2 && `is-${sidebar2}`)}>
-//// //// 			<div className="drag-area" onClick={DEBUG_cycleSidebar}>
-//// //// 				<div className="handle"></div>
-//// //// 			</div>
-//// //// 			<div className="sidebar-contents">{children}</div>
-//// //// 		</aside>
-//// //// 	)
-//// //// }
 
 export function Sidebar({
 	pos,
@@ -259,10 +172,7 @@ export function Sidebar({
 	return (
 		<aside
 			ref={ref}
-			className="sidebar"
-			data-pos={attr(pos)}
-			data-state={attr(state)}
-			data-transition={attr(transition)}
+			className={cx("sidebar", pos, state, transition && "transition")}
 			style={
 				{
 					"--__x": `${x}px`,
@@ -302,8 +212,6 @@ export function Sidebar({
 		</aside>
 	)
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 // Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {

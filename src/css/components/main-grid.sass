@@ -9,9 +9,9 @@ $aspect-ratio: 1.25
   display: grid
   grid-template-columns: repeat(auto-fill, $height)
   justify-content: center
-  &:not([data-prefer-names])
+  &:not(.prefer-names)
     gap: 16px
-  &[data-prefer-names]
+  &.prefer-names
     gap: 8px 16px
   padding: $sidebar-padding-x * 2 32px
 
