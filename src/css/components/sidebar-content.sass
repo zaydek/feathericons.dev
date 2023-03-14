@@ -2,27 +2,28 @@
 
 @use "../globals" as *
 
-// TODO
+// <div class="sidebar-header">
+//   ...
+// </div>
+// <div class="sidebar-scroll-area">
+//   ...
+// </div>
+// <div class="sidebar-footer">
+//   ...
+// </div>
+//
 .sidebar-header
   position: sticky
   top: 0
-  z-index: 50
-  display: flex          // See .sidebar-header-scroll-area
-  flex-direction: column // See .sidebar-header-scroll-area
   background-color: white
-  overflow-y: auto       // See .sidebar-header-scroll-area
+.sidebar-scroll-area
+  overflow-y: auto
 .sidebar-footer
   position: sticky
   bottom: 0
-  z-index: 50
+  z-index: 20
+  margin-top: auto
   background-color: white
-
-.sidebar-header-scroll-area
-  //// display: flex
-  //// flex-direction: column
-  overflow-y: auto
-  //// &.is-syntax-highlighting
-  ////   padding-bottom: $sidebar-gap
 
 .sidebar-align-frame
   display: flex

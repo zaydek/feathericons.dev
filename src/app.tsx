@@ -67,7 +67,6 @@ function AppSidebar1() {
 	} = React.useContext(IconsContext)!
 	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
 		React.useContext(IconPreferencesContext)!
-	const { clearSelectedNames } = React.useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -215,7 +214,7 @@ function AppSidebar1() {
 					</section>
 				</div>
 			</header>
-			<div className="sidebar-body">
+			<div className="sidebar-scroll-area">
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
@@ -260,7 +259,7 @@ function AppSidebar1() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div className="u-flex-1" onClick={clearSelectedNames}></div>
+			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
 			<footer className="sidebar-footer">
 				<hr className="hairline collapse" />
 				<section className="section end">
@@ -306,7 +305,7 @@ function useSideEffectSetCssVars() {
 function AppSidebar2() {
 	const { size, setSize, resetSize } = React.useContext(RangeSizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = React.useContext(RangeStrokeWidthContext)!
-	const { exportAs, setExportAs, clearSelectedNames, readOnlyClipboard } = React.useContext(ClipboardContext)!
+	const { exportAs, setExportAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
 
 	const trackScrollProps = useTrackScrollProps()
 
@@ -371,7 +370,7 @@ function AppSidebar2() {
 					</section>
 				</div>
 			</header>
-			<div className="sidebar-body">
+			<div className="sidebar-scroll-area">
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
@@ -414,7 +413,7 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			<div className="u-flex-1" onClick={clearSelectedNames}></div>
+			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
 			{/* <footer className="sidebar-footer">
 				<hr className="hairline collapse" />
 				<section className="section end">
