@@ -262,7 +262,7 @@ function AppSidebar1() {
 			</div>
 			<div className="u-flex-1" onClick={clearSelectedNames}></div>
 			<footer className="sidebar-footer">
-				<hr className="hairline is-collapsible" />
+				<hr className="hairline collapse" />
 				<section className="section" data-end>
 					<header className="section-header">
 						<div className="sidebar-align-frame">
@@ -416,7 +416,7 @@ function AppSidebar2() {
 			</div>
 			<div className="u-flex-1" onClick={clearSelectedNames}></div>
 			{/* <footer className="sidebar-footer">
-				<hr className="hairline is-collapsible" />
+				<hr className="hairline collapse" />
 				<section className="section" data-end>
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
