@@ -78,9 +78,7 @@ export function Sidebar({
 			if (!dragAreaRef.current!.contains(e.target as HTMLElement)) return
 			// Starts here
 			e.preventDefault() // Prevent text selection
-			// COMPAT/Safari: Typically we don't need to setTransition(false) here but
-			// Safari onTransitionEnd doesn't always fire? (╯°□°)╯︵ ┻━┻
-			setTransition(false)
+			setTransition(false) // FORCE transition=false
 			setPointerDown(true)
 			//// const boundingBox = dragAreaRef.current!.getBoundingClientRect()
 			//// setStartClientX(boundingBox.x + boundingBox.width / 2)
@@ -165,9 +163,14 @@ export function Sidebar({
 		}
 		void state
 		setTransition(true)
-		const d = window.setTimeout(() => setTransition(false), 600)
-		return () => window.clearTimeout(d)
 	}, [state])
+
+	// Use setTimeout to ensure transitio=false. Preferred over onTransitionEnd.
+	React.useEffect(() => {
+		if (!transition) return
+		const d = window.setTimeout(() => setTransition(false), 1e3)
+		return () => window.clearTimeout(d)
+	}, [transition])
 
 	return (
 		<aside

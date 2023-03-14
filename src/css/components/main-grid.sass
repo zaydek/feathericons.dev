@@ -2,32 +2,32 @@
 
 @use "../globals" as *
 
-$height:       128px
-$aspect-ratio: 1.25
+$grid-item-height:       128px
+$grid-item-aspect-ratio: 1.25
 
 .main-grid
   display: grid
-  grid-template-columns: repeat(auto-fill, $height)
+  grid-template-columns: repeat(auto-fill, $grid-item-height)
   justify-content: center
   &[data-prefer-names=false]
     gap: 16px
   &[data-prefer-names=true]
     gap: 8px 16px
-  padding: $sidebar-padding-x * 2 32px
+  padding: $sidebar-padding-y 24px // E.g. .sidebar-drag-area
 
 .main-grid-item
   position: relative
   display: flex
   flex-direction: column
   gap: 8px
-  width: $height
+  width: $grid-item-height
 
 // TODO: Defer to <button>
 .main-grid-item-icon-frame
   display: flex
   justify-content: center
   align-items: center
-  aspect-ratio: $aspect-ratio
+  aspect-ratio: $grid-item-aspect-ratio
   background-color: white
   border-radius: 4px
   .main-grid-item[data-selected=false] &
