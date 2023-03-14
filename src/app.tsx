@@ -65,7 +65,7 @@ function AppSidebar1() {
 		setWkPaymentsValue,
 		resetIcons,
 	} = React.useContext(IconsContext)!
-	const { preferColor, setPreferColor, preferNames, setPreferNames, resetIconPrefs } =
+	const { preferColor, setPreferColor, /* preferNames, setPreferNames, */ resetIconPrefs } =
 		React.useContext(IconPreferencesContext)!
 
 	const trackScrollProps = useTrackScrollProps()
@@ -244,7 +244,7 @@ function AppSidebar1() {
 								/>
 							</div>
 						</label>
-						<label className="checkbox">
+						{/* <label className="checkbox">
 							<div className="sidebar-align-icon-frame">
 								<DynamicIcon className="checkbox-icon" Icon={preferNames ? feather.ToggleRight : feather.ToggleLeft} />
 							</div>
@@ -252,7 +252,7 @@ function AppSidebar1() {
 							<div className="sidebar-align-icon-frame">
 								<input type="checkbox" checked={preferNames} onChange={e => setPreferNames(e.currentTarget.checked)} />
 							</div>
-						</label>
+						</label> */}
 					</ul>
 				</section>
 				<hr className="hairline" />
@@ -463,22 +463,22 @@ function useShortcutEscToClearAll() {
 	return void 0
 }
 
-function useShortcutCtrlCToCopy() {
-	const { readOnlyClipboard } = React.useContext(ClipboardContext)!
-	React.useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.shiftKey) return // No-op because of Chrome shortcut
-			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
-				// Call e.preventDefault() to prevent the browser from copying selected text
-				e.preventDefault()
-				navigator.clipboard.writeText(readOnlyClipboard)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [readOnlyClipboard])
-	return void 0
-}
+//// function useShortcutCtrlCToCopy() {
+//// 	const { readOnlyClipboard } = React.useContext(ClipboardContext)!
+//// 	React.useEffect(() => {
+//// 		function handleKeyDown(e: KeyboardEvent) {
+//// 			if (e.shiftKey) return // No-op because of Chrome shortcut
+//// 			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
+//// 				// Call e.preventDefault() to prevent the browser from copying selected text
+//// 				e.preventDefault()
+//// 				navigator.clipboard.writeText(readOnlyClipboard)
+//// 			}
+//// 		}
+//// 		window.addEventListener("keydown", handleKeyDown, false)
+//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
+//// 	}, [readOnlyClipboard])
+//// 	return void 0
+//// }
 
 function useSideEffectClearSelectionOnChange() {
 	const { feather, wkBrands, wkPayments } = React.useContext(IconsContext)!
@@ -538,7 +538,7 @@ function GridItemName({ name }: { name: string }) {
 	}
 }
 
-function GridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
+function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
 	const { preferNames } = React.useContext(IconPreferencesContext)!
 	const {
 		selectedNames,
@@ -590,20 +590,20 @@ function GridItem({ index, name, Icon }: { index: number; name: string; Icon: Ic
 			<button className="main-grid-item-icon-frame">
 				<Icon className="main-grid-item-icon" />
 			</button>
-			{preferNames && (
-				<span className="main-grid-item-name">
-					<GridItemName name={name} />
-				</span>
-			)}
+			{/* {preferNames && ( */}
+			<span className="main-grid-item-name">
+				<GridItemName name={name} />
+			</span>
+			{/* )} */}
 		</article>
 	)
 }
 
-const MemoGridItem = React.memo(GridItem)
+const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
 	const { feather, wkBrands, wkPayments, icons } = React.useContext(IconsContext)!
-	const { preferNames } = React.useContext(IconPreferencesContext)!
+	//// const { preferNames } = React.useContext(IconPreferencesContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
 
 	const onceRef = React.useRef(false)
@@ -616,7 +616,7 @@ function AppMain() {
 	}, [clearSelectedNames, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlAToSelectAll()
-	useShortcutCtrlCToCopy()
+	//// useShortcutCtrlCToCopy()
 	useShortcutEscToClearAll()
 
 	useSideEffectClearSelectionOnChange()
@@ -633,9 +633,12 @@ function AppMain() {
 				}
 			}}
 		>
-			<div className="main-grid" data-prefer-names={preferNames}>
+			<div
+				className="main-grid"
+				//// data-prefer-names={preferNames}
+			>
 				{icons?.map(([name, Icon], index) => (
-					<MemoGridItem key={name} index={index} name={name} Icon={Icon} />
+					<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />
 				))}
 			</div>
 		</Main>
