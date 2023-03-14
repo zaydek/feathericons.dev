@@ -74,7 +74,7 @@ function AppSidebar1() {
 	return (
 		<Sidebar
 			// prettier-ignore
-			pos="a"
+			pos="start"
 			minWidth={320}
 			maxWidth={320 * 1.5}
 		>
@@ -332,7 +332,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar
 			// prettier-ignore
-			pos="b"
+			pos="end"
 			minWidth={320}
 			maxWidth={320 * 1.5}
 		>

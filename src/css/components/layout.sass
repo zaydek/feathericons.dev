@@ -16,9 +16,9 @@ $sidebar-max-width: var(--__max-width)
 
 .sidebar
   position: fixed
-  &[data-pos=a]
+  &[data-pos=start]
     inset: 0 auto 0 0
-  &[data-pos=b]
+  &[data-pos=end]
     inset: 0 0 0 auto
 
   &:not(:is([data-state=maximized], [data-transition]))
@@ -30,19 +30,19 @@ $sidebar-max-width: var(--__max-width)
   flex-direction: row    // Forward height
 
   // Start
-  &[data-pos=a]
+  &[data-pos=start]
     transform: translateX(calc(-1 * ($sidebar-max-width - $sidebar-min-width) + $sidebar-x))
-  &[data-pos=a][data-state=maximized]
+  &[data-pos=start][data-state=maximized]
     transform: translateX($sidebar-x)
-  &[data-pos=a][data-state=minimized]
+  &[data-pos=start][data-state=minimized]
     transform: translateX(calc(-1 * $sidebar-max-width + $sidebar-x))
 
   // End
-  &[data-pos=b]
+  &[data-pos=end]
     transform: translateX(calc($sidebar-max-width - $sidebar-min-width + $sidebar-x))
-  &[data-pos=b][data-state=maximized]
+  &[data-pos=end][data-state=maximized]
     transform: translateX($sidebar-x)
-  &[data-pos=b][data-state=minimized]
+  &[data-pos=end][data-state=minimized]
     transform: translateX(calc($sidebar-max-width + $sidebar-x))
 
 .sidebar[data-transition]
@@ -52,9 +52,9 @@ $sidebar-max-width: var(--__max-width)
 
 .sidebar-drag-area
   position: absolute
-  .sidebar[data-pos=a] &
+  .sidebar[data-pos=start] &
     inset: 0 auto 0 100%
-  .sidebar[data-pos=b] &
+  .sidebar[data-pos=end] &
     inset: 0 100% 0 auto
   display: flex
   justify-content: center
@@ -77,9 +77,9 @@ $sidebar-max-width: var(--__max-width)
 
 .sidebar-card
   display: flex
-  .sidebar[data-pos=a] &
+  .sidebar[data-pos=start] &
     justify-content: flex-end
-  .sidebar[data-pos=b] &
+  .sidebar[data-pos=end] &
     justify-content: flex-start
   width: $sidebar-max-width
   background-color: white
@@ -111,7 +111,7 @@ $sidebar-max-width: var(--__max-width)
   inset: 0
   z-index: math.div($sidebar-min-z-index + $sidebar-max-z-index, 2)
   background-color: hsl(0, 0%, 0%, 0.25)
-  //// backdrop-filter: blur(1px)
+  //// backdrop-filter: blur(2px)
   &:not([data-open])
     opacity: 0
     cursor: null
@@ -133,11 +133,7 @@ $right: var(--__right)
   --__right: #{$sidebar-2-width}
   position: absolute
   inset: 0 $right auto $left
-  //// padding: $sidebar-padding-y $sidebar-padding-x * 2
-  //// padding: $sidebar-padding-y $drag-area-width + $sidebar-padding-x
-  //// // TODO
-  .sidebar[data-pos=a][data-state=minimized] ~ &
+  .sidebar[data-pos=start][data-state=minimized] ~ &
     --__left:  0
-  .sidebar[data-pos=b][data-state=minimized] ~ &
+  .sidebar[data-pos=end][data-state=minimized] ~ &
     --__right: 0
-    //// --right: #{$drag-area-width}
