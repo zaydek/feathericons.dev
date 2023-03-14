@@ -1,10 +1,10 @@
 import React from "react"
 
 import { getCssVarAsNumber, round } from "@/lib"
-import { sidebarContext, SidebarState } from "@/providers"
+import { LayoutContext, SidebarState } from "@/providers"
 
 function useSideEffectHtmlAndBodyScrollLocking() {
-	const { sidebar1, sidebar2 } = React.useContext(sidebarContext)!
+	const { sidebar1, sidebar2 } = React.useContext(LayoutContext)!
 	React.useEffect(() => {
 		const hasMaximized = [sidebar1, sidebar2].some(s => s === "maximized")
 		if (hasMaximized) {
@@ -35,7 +35,7 @@ function useSideEffectHtmlAndBodyScrollLocking() {
 }
 
 export function SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
 
 	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
 	const setState = sidebar1 === "maximized" ? setSidebar1 : setSidebar2
@@ -49,7 +49,7 @@ export function Sidebar({
 }: React.PropsWithChildren<{
 	pos: "start" | "end"
 }>) {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
 
 	let state: SidebarState
 	let setState: React.Dispatch<React.SetStateAction<SidebarState>>
