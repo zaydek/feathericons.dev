@@ -15,6 +15,7 @@ import {
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressRange,
+	SearchBar,
 	Sidebar,
 	SidebarOverlay,
 } from "@/components"
@@ -35,7 +36,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { useTrackScrollProps } from "./use-track-scroll-props"
+import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -68,18 +69,18 @@ function AppSidebar1() {
 	const { preferColor, setPreferColor, /* preferNames, setPreferNames, */ resetIconPrefs } =
 		React.useContext(IconPreferencesContext)!
 
-	const trackScrollProps = useTrackScrollProps()
+	const scrollProps = useScrollProps()
 
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-header">
-				{/* <section className="section" data-pos="start">
+				<section className="section" data-pos="start">
 					<div className="sidebar-align-frame">
 						<SearchBar />
 					</div>
-				</section> */}
-				<div className="u-flex-1 u-overflow-y" {...trackScrollProps}>
-					<section className="section" data-pos="start">
+				</section>
+				<div className="u-flex-1 u-overflow-y" {...scrollProps}>
+					<section className="section" data-pos="checkboxes">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
 								<feather.Package className="section-icon" />
@@ -305,7 +306,7 @@ function AppSidebar2() {
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = React.useContext(RangeStrokeWidthContext)!
 	const { exportAs, setExportAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
 
-	const trackScrollProps = useTrackScrollProps()
+	const scrollProps = useScrollProps()
 
 	useSideEffectSetCssVars()
 
@@ -340,7 +341,7 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="u-flex-1 u-overflow-y" {...trackScrollProps}>
+				<div className="u-flex-1 u-overflow-y" {...scrollProps}>
 					<section className="section" data-pos="syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}

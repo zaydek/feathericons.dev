@@ -15,7 +15,9 @@
     &:has(+ [data-scroll=true])
       box-shadow: $hairline-shadow-bottom
   // TODO: This can be changed to use :has(...) (depends on FF support)
-  &[data-pos=syntax-highlighting] // Heh
+  &[data-pos=checkboxes]
+    padding-top: 0
+  &[data-pos=syntax-highlighting]
     padding: 0
     padding-bottom: $sidebar-gap
   &[data-pos=end]
