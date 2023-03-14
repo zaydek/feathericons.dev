@@ -341,7 +341,7 @@ function AppSidebar2() {
 					</header>
 				</section>
 				<div className="u-flex-1 u-overflow-y" {...trackScrollProps}>
-					<section className="section" data-custom="syntax-highlighting">
+					<section className="section" data-pos="syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}

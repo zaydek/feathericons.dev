@@ -6,7 +6,7 @@
   display: flex
   flex-direction: column
   gap: $sidebar-gap
-  //// &:not(:is([data-pos=start], [data-custom=syntax-highlighting], [data-pos=end]))
+  //// &:not(:is([data-pos=start], [data-pos=syntax-highlighting], [data-pos=end]))
   padding: $sidebar-gap $sidebar-padding-x
 
   // Overrides -- don't use (:not(:is(...)))
@@ -15,7 +15,7 @@
     &:has(+ [data-scroll=true])
       box-shadow: $hairline-shadow-bottom
   // TODO: This can be changed to use :has(...) (depends on FF support)
-  &[data-custom=syntax-highlighting] // Heh
+  &[data-pos=syntax-highlighting] // Heh
     padding: 0
     padding-bottom: $sidebar-gap
   &[data-pos=end]
