@@ -334,7 +334,7 @@ function AppSidebar2() {
 						<div className="sidebar-align-icon-frame">
 							<feather.Clipboard className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Copy as</h6>
+						<h6 className="section-name u-flex-1">Clipboard</h6>
 						<div className="sidebar-align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
