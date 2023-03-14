@@ -165,12 +165,12 @@ export function Sidebar({
 		setTransition(true)
 	}, [state])
 
-	// Use setTimeout to ensure transitio=false. Preferred over onTransitionEnd.
-	React.useEffect(() => {
-		if (!transition) return
-		const d = window.setTimeout(() => setTransition(false), 1e3)
-		return () => window.clearTimeout(d)
-	}, [transition])
+	//// // Use setTimeout to ensure transition=false. Preferred over onTransitionEnd.
+	//// React.useEffect(() => {
+	//// 	if (!transition) return
+	//// 	const d = window.setTimeout(() => setTransition(false), 1e3)
+	//// 	return () => window.clearTimeout(d)
+	//// }, [transition])
 
 	return (
 		<aside
@@ -180,7 +180,7 @@ export function Sidebar({
 			data-state={state}
 			data-transition={transition}
 			style={{ "--__x": `${x}px` } as React.CSSProperties}
-			//// onTransitionEnd={e => setTransition(false)}
+			onTransitionEnd={e => setTransition(false)}
 		>
 			<div
 				ref={dragAreaRef}
