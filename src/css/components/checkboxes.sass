@@ -19,26 +19,26 @@
   &:hover:active
     background-color: $slate-200
 
-.checkbox-icon:not(:is(.payments, .chroma))
+.checkbox-icon:not(:is(.is-payments, .is-chroma))
   height: $icon-height
   width: $icon-height
   color: $slate-800
-.checkbox-icon.payments
+.checkbox-icon.is-payments
   height: $icon-height
   max-width: $icon-height * 1.25
   color: $slate-800
-.checkbox-icon.chroma
+.checkbox-icon.is-chroma
   height: $icon-height
   width: $icon-height
   color: $slate-800
-  &:not(.prefer-color)
+  &:not(.is-prefer-color)
     background-color: $slate-800
     // WebKit
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
     -webkit-mask-size: cover
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
     mask-size: cover
-  &.prefer-color
+  &.is-prefer-color
     background-image: linear-gradient(to right, #ff2e2e, #ffaa00, #f7ff00, #32ff00, #00ffd7, #3d00ff, #a900ff)
     // WebKit
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")

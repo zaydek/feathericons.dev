@@ -11,53 +11,53 @@ $sidebar-max-z-index: 100
 
 .sidebar
   // Expose CSS variables for getCssVarAsNumber
-  &.start
+  &.is-start
     --__width:     var(--sidebar-1-width)
     --__max-width: var(--sidebar-1-max-width)
-  &.end
+  &.is-end
     --__width:     var(--sidebar-2-width)
     --__max-width: var(--sidebar-2-max-width)
 
   position: fixed
-  &.start
+  &.is-start
     inset: 0 auto 0 0
-  &.end
+  &.is-end
     inset: 0 0 0 auto
 
-  &:not(:is(.maximized, .transition))
+  &:not(:is(.is-maximized, .is-transition))
     z-index: $sidebar-z-index
-  &:is(.maximized, .transition)
+  &:is(.is-maximized, .is-transition)
     z-index: $sidebar-max-z-index
 
   display: flex          // Forward height
   flex-direction: row    // Forward height
 
   // Start
-  &.start:not(:is(.minimized, .maximized))
+  &.is-start:not(:is(.is-minimized, .is-maximized))
     transform: translateX(calc(-1 * ($sidebar-1-max-width - $sidebar-1-width) + var(--__x)))
-  &.start.minimized
+  &.is-start.is-minimized
     transform: translateX(calc(-1 * $sidebar-1-max-width + var(--__x)))
-  &.start.maximized
+  &.is-start.is-maximized
     transform: translateX(var(--__x))
 
   // End
-  &.end:not(:is(.minimized, .maximized))
+  &.is-end:not(:is(.is-minimized, .is-maximized))
     transform: translateX(calc($sidebar-2-max-width - $sidebar-2-width + var(--__x)))
-  &.end.minimized
+  &.is-end.is-minimized
     transform: translateX(calc($sidebar-2-max-width + var(--__x)))
-  &.end.maximized
+  &.is-end.is-maximized
     transform: translateX(var(--__x))
 
-.sidebar.transition
+.sidebar.is-transition
   transition: transform 600ms cubic-bezier(0, 1, 0.25, 1)
 
 ////////////////////////////////////////////////////////////////////////////////
 
 .sidebar-drag-area
   position: absolute
-  .sidebar.start &
+  .sidebar.is-start &
     inset: 0 auto 0 100%
-  .sidebar.end &
+  .sidebar.is-end &
     inset: 0 100% 0 auto
   display: flex
   justify-content: center
@@ -80,10 +80,10 @@ $sidebar-max-z-index: 100
 
 .sidebar-card
   display: flex
-  .sidebar.start &
+  .sidebar.is-start &
     justify-content: flex-end
     width: $sidebar-1-max-width
-  .sidebar.end &
+  .sidebar.is-end &
     justify-content: flex-start
     width: $sidebar-2-max-width
   background-color: white
@@ -93,15 +93,15 @@ $sidebar-max-z-index: 100
   flex-direction: column // Forward height
 
   // Start
-  .sidebar.start:not(.maximized) &
+  .sidebar.is-start:not(.is-maximized) &
     width: $sidebar-1-width
-  .sidebar.start.maximized &
+  .sidebar.is-start.is-maximized &
     width: $sidebar-1-max-width
 
   // End
-  .sidebar.end:not(.maximized) &
+  .sidebar.is-end:not(.is-maximized) &
     width: $sidebar-2-width
-  .sidebar.end.maximized &
+  .sidebar.is-end.is-maximized &
     width: $sidebar-2-max-width
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,11 +112,11 @@ $sidebar-max-z-index: 100
   z-index: math.div($sidebar-z-index + $sidebar-max-z-index, 2)
   background-color: hsl(0, 0%, 0%, 0.25)
   //// backdrop-filter: blur(2px)
-  &:not(.open)
+  &:not(.is-open)
     opacity: 0
     cursor: null
     pointer-events: none
-  &.open
+  &.is-open
     opacity: 1
     cursor: pointer
     pointer-events: null
@@ -133,7 +133,7 @@ $right: var(--__right)
   --__right: #{$sidebar-2-width}
   position: absolute
   inset: 0 $right auto $left
-  .sidebar.start.minimized ~ &
+  .sidebar.is-start.is-minimized ~ &
     --__left:  0
-  .sidebar.end.minimized ~ &
+  .sidebar.is-end.is-minimized ~ &
     --__right: 0

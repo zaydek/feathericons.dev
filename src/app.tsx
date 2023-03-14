@@ -73,13 +73,13 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-header">
-				{/* <section className="section start">
+				{/* <section className="section is-start">
 					<div className="sidebar-align-frame">
 						<SearchBar />
 					</div>
 				</section> */}
 				<div className="u-flex-1 u-overflow-y" {...trackScrollProps}>
-					<section className="section start">
+					<section className="section is-start">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
 								<feather.Package className="section-icon" />
@@ -132,7 +132,7 @@ function AppSidebar1() {
 								<label className="checkbox">
 									<div className="sidebar-align-icon-frame">
 										<DynamicIcon
-											className="checkbox-icon payments"
+											className="checkbox-icon is-payments"
 											Icon={
 												// prettier-ignore
 												preferColor
@@ -158,7 +158,7 @@ function AppSidebar1() {
 									<label className="checkbox">
 										<div className="sidebar-align-icon-frame">
 											<DynamicIcon
-												className="checkbox-icon payments"
+												className="checkbox-icon is-payments"
 												Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
 											/>
 										</div>
@@ -182,7 +182,7 @@ function AppSidebar1() {
 									<label className="checkbox">
 										<div className="sidebar-align-icon-frame">
 											<DynamicIcon
-												className="checkbox-icon payments"
+												className="checkbox-icon is-payments"
 												Icon={
 													preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard
 												}
@@ -230,7 +230,7 @@ function AppSidebar1() {
 						<label className="checkbox">
 							<div className="sidebar-align-icon-frame">
 								{/* Defer to CSS; no <svg> */}
-								<div className={cx("checkbox-icon chroma", preferColor && "prefer-color")}></div>
+								<div className={cx("checkbox-icon is-chroma", preferColor && "is-prefer-color")}></div>
 							</div>
 							<span className="checkbox-name u-flex-1">Colorize icons</span>
 							<div className="sidebar-align-icon-frame">
@@ -256,8 +256,8 @@ function AppSidebar1() {
 			</div>
 			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
 			<footer className="sidebar-footer">
-				<hr className="hairline collapse" />
-				<section className="section end">
+				<hr className="hairline is-collapse" />
+				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-frame">
 							<feather.Globe className="section-icon" />
@@ -326,7 +326,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-header">
-				<section className="section start">
+				<section className="section is-start">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
 							<feather.Clipboard className="section-icon" />
@@ -338,7 +338,7 @@ function AppSidebar2() {
 					</header>
 				</section>
 				<div className="u-flex-1 u-overflow-y" {...trackScrollProps}>
-					<section className="section syntax-highlighting">
+					<section className="section is-syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
@@ -405,8 +405,8 @@ function AppSidebar2() {
 			</div>
 			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
 			{/* <footer className="sidebar-footer">
-				<hr className="hairline collapse" />
-				<section className="section end">
+				<hr className="hairline is-collapse" />
+				<section className="section is-end">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
 							<Feather.Shield className="section-icon" />
@@ -618,7 +618,7 @@ function AppMain() {
 				}
 			}}
 		>
-			<div className={cx("main-grid", preferNames && "prefer-names")}>
+			<div className={cx("main-grid", preferNames && "is-prefer-names")}>
 				{icons?.map(([name, Icon], index) => (
 					<MemoGridItem key={name} index={index} name={name} Icon={Icon} />
 				))}
