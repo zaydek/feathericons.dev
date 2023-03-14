@@ -61,7 +61,7 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 					  code.split("\n").map((line, index) => (
 						<div key={index}>
 							{line.length > 0 ? (
-								<Tokenize>{line}</Tokenize>
+								<Tokenize color="rgb(110, 119, 129)">{line}</Tokenize>
 							) : (
 								<br />
 							)}
