@@ -447,11 +447,14 @@ function useShortcutEscToClearAll() {
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if (document.activeElement?.tagName !== "BODY") return
+			//// if (document.activeElement?.tagName !== "BODY") return
 			if (e.key === "Escape") {
 				clearSelectedNames()
 				setSelectedNamesStart(null)
 				setSelectedNamesEnd(null)
+				if (document.activeElement instanceof HTMLElement) {
+					document.activeElement.blur()
+				}
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
@@ -573,6 +576,14 @@ function GridItem({ index, name, Icon }: { index: number; name: string; Icon: Ic
 					}
 					setSelectedNamesStart(index)
 					setSelectedNamesEnd(null)
+				}
+			}}
+			onKeyDown={e => {
+				if (e.shiftKey) {
+					// Remove focus styles
+					if (document.activeElement instanceof HTMLElement) {
+						document.activeElement.blur()
+					}
 				}
 			}}
 		>
