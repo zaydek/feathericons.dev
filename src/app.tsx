@@ -118,7 +118,7 @@ function AppSidebar1() {
 											Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Logos</span>
+									<span className="checkbox-name u-flex-1">Social media</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -146,7 +146,7 @@ function AppSidebar1() {
 											}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Payment services</span>
+									<span className="checkbox-name u-flex-1">Cards</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
