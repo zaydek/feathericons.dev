@@ -8,8 +8,9 @@
   outline: revert
 
 :root
-  +font-smoothing
-  font-feature-settings: 'tnum'
+  -webkit-font-smoothing:  antialiased // E.g. font-smoothing
+  -moz-osx-font-smoothing: grayscale   // E.g. font-smoothing
+
   overflow-y: scroll // COMPAT/Windows
 
 :root, ::before, ::after
