@@ -7,16 +7,16 @@
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
-  &.syntax-highlighting
-    padding: 0
-    padding-bottom: $sidebar-gap
-  &.is-start
+
+  // Overrides (don't use &:not(...))
+  &[data-start]
     padding-top: $sidebar-padding-y
     &:has(+ [data-scroll=true])
       box-shadow: $hairline-shadow-bottom
-  &.is-end
-    // Change from [$sidebar-gap $sidebar-padding-x]
-    // to [$sidebar-padding-y $sidebar-padding-x]
+  &[data-syntax-highlighting]
+    padding: 0
+    padding-bottom: $sidebar-gap
+  &[data-end]
     padding: $sidebar-padding-y $sidebar-padding-x
 
 .section-header

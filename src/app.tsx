@@ -79,13 +79,13 @@ function AppSidebar1() {
 			maxWidth={320 * 1.5}
 		>
 			<header className="sidebar-header">
-				{/* <section className="section is-start">
+				{/* <section className="section" data-start>
 					<div className="sidebar-align-frame">
 						<SearchBar />
 					</div>
 				</section> */}
 				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
-					<section className="section is-start">
+					<section className="section" data-start>
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
 								<feather.Package className="section-icon" />
@@ -263,7 +263,7 @@ function AppSidebar1() {
 			<div className="u-flex-1" onClick={clearSelectedNames}></div>
 			<footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
-				<section className="section is-end">
+				<section className="section" data-end>
 					<header className="section-header">
 						<div className="sidebar-align-frame">
 							<feather.Globe className="section-icon" />
@@ -337,7 +337,7 @@ function AppSidebar2() {
 			maxWidth={320 * 1.5}
 		>
 			<header className="sidebar-header">
-				<section className="section is-start">
+				<section className="section" data-start>
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
 							<feather.Clipboard className="section-icon" />
@@ -349,7 +349,7 @@ function AppSidebar2() {
 					</header>
 				</section>
 				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
-					<section className="section syntax-highlighting">
+					<section className="section" data-syntax-highlighting>
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
@@ -417,7 +417,7 @@ function AppSidebar2() {
 			<div className="u-flex-1" onClick={clearSelectedNames}></div>
 			{/* <footer className="sidebar-footer">
 				<hr className="hairline is-collapsible" />
-				<section className="section is-end">
+				<section className="section" data-end>
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
 							<Feather.Shield className="section-icon" />
