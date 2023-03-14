@@ -10,16 +10,12 @@ const WK_BRANDS_DEFAULT         = !!1 // prettier-ignore
 const WK_PAYMENTS_DEFAULT       = !!1 // prettier-ignore
 const WK_PAYMENTS_VALUE_DEFAULT = "filled" // prettier-ignore
 const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
-const PREFER_NAMES_DEFAULT      = !!1 // prettier-ignore
+//// const PREFER_NAMES_DEFAULT      = !!1 // prettier-ignore
 
 // prettier-ignore
 export const SearchContext = React.createContext<{
   search:             string
   setSearch:          React.Dispatch<React.SetStateAction<string>>
-} | null>(null)
-
-// prettier-ignore
-export const IconsContext = React.createContext<{
   feather:            boolean
   setFeather:         React.Dispatch<React.SetStateAction<boolean>>
   wkBrands:           boolean
@@ -36,8 +32,8 @@ export const IconsContext = React.createContext<{
 export const IconPreferencesContext = React.createContext<{
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
-  preferNames:        boolean
-  setPreferNames:     React.Dispatch<React.SetStateAction<boolean>>
+  //// preferNames:        boolean
+  //// setPreferNames:     React.Dispatch<React.SetStateAction<boolean>>
   resetIconPrefs:     () => void
 } | null>(null)
 
@@ -67,8 +63,9 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	})
 
 	const [preferColor, setPreferColor] = useParamBoolean({ key: "prefer-color", initialValue: PREFER_COLOR_DEFAULT })
-	const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
+	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
+	// TODO
 	const icons = useQueryIcons({
 		feather,
 		wkBrands,
@@ -86,8 +83,9 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 
 	const resetIconPrefs = React.useCallback(() => {
 		setPreferColor(PREFER_COLOR_DEFAULT)
-		setPreferNames(PREFER_NAMES_DEFAULT)
-	}, [setPreferColor, setPreferNames])
+		//// setPreferNames(PREFER_NAMES_DEFAULT)
+		//// }, [setPreferColor, setPreferNames])
+	}, [setPreferColor])
 
 	return (
 		<SearchContext.Provider
@@ -95,43 +93,35 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 				() => ({
 					search,
 					setSearch,
+					feather,
+					setFeather,
+					wkBrands,
+					setWkBrands,
+					wkPayments,
+					setWkPayments,
+					wkPaymentsValue,
+					setWkPaymentsValue,
+					icons,
+					resetIcons,
 				}),
-				[search, setSearch],
+				// prettier-ignore
+				[feather, icons, resetIcons, search, setFeather, setSearch, setWkBrands, setWkPayments, setWkPaymentsValue, wkBrands, wkPayments, wkPaymentsValue],
 			)}
 		>
-			<IconsContext.Provider
+			<IconPreferencesContext.Provider
 				value={React.useMemo(
 					() => ({
-						feather,
-						setFeather,
-						wkBrands,
-						setWkBrands,
-						wkPayments,
-						setWkPayments,
-						wkPaymentsValue,
-						setWkPaymentsValue,
-						icons,
-						resetIcons,
+						preferColor,
+						setPreferColor,
+						//// preferNames,
+						//// setPreferNames,
+						resetIconPrefs,
 					}),
-					// prettier-ignore
-					[feather, icons, resetIcons, setFeather, setWkBrands, setWkPayments, setWkPaymentsValue, wkBrands, wkPayments, wkPaymentsValue],
+					[preferColor, resetIconPrefs, setPreferColor],
 				)}
 			>
-				<IconPreferencesContext.Provider
-					value={React.useMemo(
-						() => ({
-							preferColor,
-							setPreferColor,
-							preferNames,
-							setPreferNames,
-							resetIconPrefs,
-						}),
-						[preferColor, preferNames, resetIconPrefs, setPreferColor, setPreferNames],
-					)}
-				>
-					{children}
-				</IconPreferencesContext.Provider>
-			</IconsContext.Provider>
+				{children}
+			</IconPreferencesContext.Provider>
 		</SearchContext.Provider>
 	)
 }

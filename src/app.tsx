@@ -24,11 +24,11 @@ import { DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle
 import {
 	ClipboardContext,
 	IconPreferencesContext,
-	IconsContext,
 	ProgressBarContext,
 	RangeSizeContext,
 	RangeStrokeWidthContext,
 	READONLY_CLIPBOARD_DEFAULT,
+	SearchContext,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
@@ -65,7 +65,7 @@ function AppSidebar1() {
 		wkPaymentsValue,
 		setWkPaymentsValue,
 		resetIcons,
-	} = React.useContext(IconsContext)!
+	} = React.useContext(SearchContext)!
 	const { preferColor, setPreferColor, /* preferNames, setPreferNames, */ resetIconPrefs } =
 		React.useContext(IconPreferencesContext)!
 
@@ -426,7 +426,7 @@ function AppSidebar2() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutCtrlAToSelectAll() {
-	const { icons } = React.useContext(IconsContext)!
+	const { icons } = React.useContext(SearchContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		if (icons === undefined) return
@@ -482,7 +482,7 @@ function useShortcutEscToClearAll() {
 //// }
 
 function useSideEffectClearSelectionOnChange() {
-	const { feather, wkBrands, wkPayments } = React.useContext(IconsContext)!
+	const { feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
 	const { clearSelectedNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
 	React.useEffect(() => {
@@ -496,7 +496,7 @@ function useSideEffectClearSelectionOnChange() {
 }
 
 function useSideEffectSelectNamesFromIndexes() {
-	const { icons } = React.useContext(IconsContext)!
+	const { icons } = React.useContext(SearchContext)!
 	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		if (icons === undefined) return
@@ -509,7 +509,7 @@ function useSideEffectSelectNamesFromIndexes() {
 }
 
 function useSideEffectVisibleDocumentTitle() {
-	const { icons } = React.useContext(IconsContext)!
+	const { icons } = React.useContext(SearchContext)!
 	const count = (icons ?? []).length
 	// prettier-ignore
 	useVisibleDocumentTitle([
@@ -540,7 +540,6 @@ function GridItemName({ name }: { name: string }) {
 }
 
 function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
-	const { preferNames } = React.useContext(IconPreferencesContext)!
 	const {
 		selectedNames,
 		selectedNamesStart,
@@ -603,7 +602,7 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	const { feather, wkBrands, wkPayments, icons } = React.useContext(IconsContext)!
+	const { feather, wkBrands, wkPayments, icons } = React.useContext(SearchContext)!
 	//// const { preferNames } = React.useContext(IconPreferencesContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
 
