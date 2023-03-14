@@ -19,7 +19,7 @@ import {
 	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
-import { cx, DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import { attr, cx, DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	IconPreferencesContext,
@@ -629,7 +629,7 @@ function AppMain() {
 				}
 			}}
 		>
-			<div className={cx("main-grid", preferNames && "is-prefer-names")}>
+			<div className="main-grid" data-prefer-names={attr(preferNames)}>
 				{icons?.map(([name, Icon], index) => (
 					<MemoGridItem key={name} index={index} name={name} Icon={Icon} />
 				))}
