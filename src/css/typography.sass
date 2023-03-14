@@ -1,0 +1,27 @@
+=font-smoothing
+  -webkit-font-smoothing:  antialiased
+  -moz-osx-font-smoothing: grayscale
+
+=no-font-smoothing
+  -webkit-font-smoothing:  auto
+  -moz-osx-font-smoothing: auto
+
+=typography-sans
+  font: 425 16px / normal $sans
+  font-feature-settings: 'tnum'
+
+// Uses line-height
+=typography-reduced-sans
+  font: 425 13px / 1.25 $sans
+  font-feature-settings: 'tnum'
+
+=typography-caps
+  font: 500 11px / normal $sans
+  letter-spacing: 0.05em
+  text-transform: uppercase
+  font-feature-settings: 'tnum'
+
+// Uses line-height
+=typography-code
+  font: 500 13px / 1.375 $code
+  font-feature-settings: 'tnum'

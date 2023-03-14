@@ -7,8 +7,6 @@
 
 @use "tailwind-colors" as *
 
-////////////////////////////////////////////////////////////////////////////////
-
 =font-smoothing
   -webkit-font-smoothing:  antialiased
   -moz-osx-font-smoothing: grayscale
@@ -37,12 +35,8 @@
   font: 500 13px / 1.375 $code
   font-feature-settings: 'tnum'
 
-////////////////////////////////////////////////////////////////////////////////
-
-//// $WINDOWS_SCROLLBAR_WIDTH: 16px
-
 $sans: 'Inter var experimental', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
-$code: 'Recursive Monospace Casual', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
+$code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
 
 $sidebar-padding-y: 32px
 $sidebar-padding-x: 16px
@@ -52,13 +46,10 @@ $button-height:     40px
 $icon-height:       18px
 $tiny-icon-height:  14px
 
-////////////////////////////////////////////////////////////////////////////////
+$hairline-height:   1px
+$hairline-color:    color.mix($slate-200, $slate-300)
 
-$hairline-height: 1px
-$hairline-color:  color.mix($slate-200, $slate-300)
-
-//// $brand-color: dodgerblue
-$brand-color: dodgerblue
+$brand-color:       dodgerblue
 
 $inset-hairline-shadow:        inset  0                     0                    0 $hairline-height $hairline-color
 $inset-hairline-shadow-top:    inset  0                    -1 * $hairline-height 0 0                $hairline-color
