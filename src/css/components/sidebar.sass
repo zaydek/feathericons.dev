@@ -11,53 +11,53 @@ $sidebar-max-z-index: 100
 
 .sidebar
   // Expose CSS variables for getCssVarAsNumber
-  &.is-start
+  &[data-pos=start]
     --__width:     var(--sidebar-1-width)
     --__max-width: var(--sidebar-1-max-width)
-  &.is-end
+  &[data-pos=end]
     --__width:     var(--sidebar-2-width)
     --__max-width: var(--sidebar-2-max-width)
 
   position: fixed
-  &.is-start
+  &[data-pos=start]
     inset: 0 auto 0 0
-  &.is-end
+  &[data-pos=end]
     inset: 0 0 0 auto
 
-  &:not(:is(.is-maximized, .is-transition))
+  &:not(:is([data-state=maximized], [data-transition]))
     z-index: $sidebar-z-index
-  &:is(.is-maximized, .is-transition)
+  &:is([data-state=maximized], [data-transition])
     z-index: $sidebar-max-z-index
 
   display: flex          // Forward height
   flex-direction: row    // Forward height
 
   // Start
-  &.is-start:not(:is(.is-minimized, .is-maximized))
+  &[data-pos=start]:not(:is([data-state=minimized], [data-state=maximized]))
     transform: translateX(calc(-1 * ($sidebar-1-max-width - $sidebar-1-width) + var(--__x)))
-  &.is-start.is-minimized
+  &[data-pos=start][data-state=minimized]
     transform: translateX(calc(-1 * $sidebar-1-max-width + var(--__x)))
-  &.is-start.is-maximized
+  &[data-pos=start][data-state=maximized]
     transform: translateX(var(--__x))
 
   // End
-  &.is-end:not(:is(.is-minimized, .is-maximized))
+  &[data-pos=end]:not(:is([data-state=minimized], [data-state=maximized]))
     transform: translateX(calc($sidebar-2-max-width - $sidebar-2-width + var(--__x)))
-  &.is-end.is-minimized
+  &[data-pos=end][data-state=minimized]
     transform: translateX(calc($sidebar-2-max-width + var(--__x)))
-  &.is-end.is-maximized
+  &[data-pos=end][data-state=maximized]
     transform: translateX(var(--__x))
 
-.sidebar.is-transition
+.sidebar[data-transition]
   transition: transform 600ms cubic-bezier(0, 1, 0.25, 1)
 
 ////////////////////////////////////////////////////////////////////////////////
 
 .sidebar-drag-area
   position: absolute
-  .sidebar.is-start &
+  .sidebar[data-pos=start] &
     inset: 0 auto 0 100%
-  .sidebar.is-end &
+  .sidebar[data-pos=end] &
     inset: 0 100% 0 auto
   display: flex
   justify-content: center
@@ -80,10 +80,10 @@ $sidebar-max-z-index: 100
 
 .sidebar-card
   display: flex
-  .sidebar.is-start &
+  .sidebar[data-pos=start] &
     justify-content: flex-end
     width: $sidebar-1-max-width
-  .sidebar.is-end &
+  .sidebar[data-pos=end] &
     justify-content: flex-start
     width: $sidebar-2-max-width
   background-color: white
@@ -93,15 +93,15 @@ $sidebar-max-z-index: 100
   flex-direction: column // Forward height
 
   // Start
-  .sidebar.is-start:not(.is-maximized) &
+  .sidebar[data-pos=start]:not([data-state=maximized]) &
     width: $sidebar-1-width
-  .sidebar.is-start.is-maximized &
+  .sidebar[data-pos=start][data-state=maximized] &
     width: $sidebar-1-max-width
 
   // End
-  .sidebar.is-end:not(.is-maximized) &
+  .sidebar[data-pos=end]:not([data-state=maximized]) &
     width: $sidebar-2-width
-  .sidebar.is-end.is-maximized &
+  .sidebar[data-pos=end][data-state=maximized] &
     width: $sidebar-2-max-width
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,11 +112,11 @@ $sidebar-max-z-index: 100
   z-index: math.div($sidebar-z-index + $sidebar-max-z-index, 2)
   background-color: hsl(0, 0%, 0%, 0.25)
   //// backdrop-filter: blur(2px)
-  &:not(.is-open)
+  &:not([data-open])
     opacity: 0
     cursor: null
     pointer-events: none
-  &.is-open
+  &[data-open]
     opacity: 1
     cursor: pointer
     pointer-events: null
@@ -133,7 +133,7 @@ $right: var(--__right)
   --__right: #{$sidebar-2-width}
   position: absolute
   inset: 0 $right auto $left
-  .sidebar.is-start.is-minimized ~ &
+  .sidebar[data-pos=start][data-state=minimized] ~ &
     --__left:  0
-  .sidebar.is-end.is-minimized ~ &
+  .sidebar[data-pos=end][data-state=minimized] ~ &
     --__right: 0
