@@ -8,13 +8,18 @@ export const resources: { name: string; icon: IconComponent; href: string }[] = 
 		icon: wkBrandsOriginal.BrandGithub,
 		href: "https://github.com/feathericons/feather",
 	},
+	// {
+	// 	name: "Original Feather website",
+	// 	icon: wkBrandsOriginal.BrandGithub,
+	// 	href: "https://github.com/feathericons/feather",
+	// },
 	{
 		name: "Website",
 		icon: wkBrandsOriginal.BrandGithub,
-		href: "https://github.com/zaydek/app-feathericons",
+		href: "https://github.com/zaydek/feathericons.dev",
 	},
 	{
-		name: "Brands & payments files",
+		name: "Wolf Kit resources",
 		icon: wkBrandsOriginal.BrandFigma,
 		href: "https://figma.com/@thewolfkit",
 	},

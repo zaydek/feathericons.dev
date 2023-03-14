@@ -1,6 +1,6 @@
 import React from "react"
 
-import { cx, round } from "@/lib"
+import { cx, getCssVarAsNumber, round } from "@/lib"
 import { sidebarContext, SidebarState } from "@/providers"
 
 function useSideEffectHtmlAndBodyScrollLocking() {
@@ -45,13 +45,9 @@ export function SidebarOverlay() {
 
 export function Sidebar({
 	pos,
-	minWidth,
-	maxWidth,
 	children,
 }: React.PropsWithChildren<{
 	pos: "start" | "end"
-	minWidth: number
-	maxWidth: number
 }>) {
 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
 
@@ -101,7 +97,9 @@ export function Sidebar({
 			// Guards
 			if (!pointerDown) return
 			// Starts here
-			const d = maxWidth - minWidth
+			const width = getCssVarAsNumber("--__width", { scope: ref.current! })
+			const maxWidth = getCssVarAsNumber("--__max-width", { scope: ref.current! })
+			const d = maxWidth - width
 			if (pos === "start") {
 				if (state === null) {
 					if (x > 0) {
@@ -116,7 +114,7 @@ export function Sidebar({
 						setState(null)
 					}
 				} else if (state === "minimized") {
-					if (x > minWidth) {
+					if (x > width) {
 						setState("maximized")
 					} else if (x > 0) {
 						setState(null)
@@ -136,7 +134,7 @@ export function Sidebar({
 						setState(null)
 					}
 				} else if (state === "minimized") {
-					if (x < -minWidth) {
+					if (x < -width) {
 						setState("maximized")
 					} else if (x < 0) {
 						setState(null)
@@ -156,7 +154,7 @@ export function Sidebar({
 			document.removeEventListener("pointermove", handlePointerMove, false)
 			document.removeEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
 		}
-	}, [maxWidth, minWidth, pointerDown, pos, setState, state, x])
+	}, [pointerDown, pos, setState, state, x])
 
 	// Synchronously (useLayoutEffect) sync state changes -> transition
 	const onceRef = React.useRef(false)
@@ -173,13 +171,7 @@ export function Sidebar({
 		<aside
 			ref={ref}
 			className={cx("sidebar", pos, state, transition && "transition")}
-			style={
-				{
-					"--__x": `${x}px`,
-					"--__min-width": `${minWidth}px`,
-					"--__max-width": `${maxWidth}px`,
-				} as React.CSSProperties
-			}
+			style={{ "--__x": `${x}px` } as React.CSSProperties}
 			onTransitionEnd={e => setTransition(false)}
 		>
 			<div
@@ -205,9 +197,7 @@ export function Sidebar({
 				<div className="sidebar-drag-area-handle"></div>
 			</div>
 			<div className="sidebar-card">
-				<div className="sidebar-card-content" style={{ width: state === "maximized" ? maxWidth : undefined }}>
-					{children}
-				</div>
+				<div className="sidebar-card-body">{children}</div>
 			</div>
 		</aside>
 	)
