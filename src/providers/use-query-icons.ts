@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 
 import { IconComponent } from "@/lib"
 import { WkPaymentsValue } from "@/providers"
@@ -118,12 +118,12 @@ export function useQueryIcons({
 		fetchIconsets({ feather, wkBrands: wkBrands, wkPayments, wkPaymentsValue }, preferColor),
 	)
 	// When dependencies change...
-	const refretchDeps = react.useMemo(
+	const refretchDeps = React.useMemo(
 		() => [feather, wkBrands, wkPayments, wkPaymentsValue, preferColor],
 		[feather, preferColor, wkBrands, wkPayments, wkPaymentsValue],
 	)
 	// ...refetch
-	react.useEffect(() => {
+	React.useEffect(() => {
 		refetch()
 	}, [refetch, refretchDeps])
 	return data

@@ -1,11 +1,11 @@
-import react from "react"
+import React from "react"
 
-export function DEV_DebugCss({ children }: react.PropsWithChildren) {
-	const [showOutline, setShowOutline] = react.useState(false)
+export function DEV_DebugCss({ children }: React.PropsWithChildren) {
+	const [showOutline, setShowOutline] = React.useState(false)
 
 	if (import.meta.env.DEV) {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		react.useEffect(() => {
+		React.useEffect(() => {
 			function handleKeyDown(e: KeyboardEvent) {
 				if (e.key === "`") {
 					setShowOutline(curr => !curr)
@@ -18,7 +18,7 @@ export function DEV_DebugCss({ children }: react.PropsWithChildren) {
 
 	if (import.meta.env.DEV) {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		react.useEffect(() => {
+		React.useEffect(() => {
 			if (showOutline) {
 				document.body.setAttribute("data-debug-css", "true")
 			} else {

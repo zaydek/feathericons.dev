@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 
 import { getKeys, toKebabCase, toTitleCase, useParam } from "@/lib"
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
@@ -30,21 +30,21 @@ export const READONLY_CLIPBOARD_DEFAULT = `
 `.trim()
 
 // prettier-ignore
-export const ClipboardContext = react.createContext<{
+export const ClipboardContext = React.createContext<{
 	exportAs:                ExportAsValue
-	setExportAs:             react.Dispatch<react.SetStateAction<ExportAsValue>>
+	setExportAs:             React.Dispatch<React.SetStateAction<ExportAsValue>>
 	selectedNames:           Set<string>
 	selectedNamesStart:      number | null
-	setSelectedNamesStart:   react.Dispatch<react.SetStateAction<number | null>>
+	setSelectedNamesStart:   React.Dispatch<React.SetStateAction<number | null>>
 	selectedNamesEnd:        number | null
-	setSelectedNamesEnd:     react.Dispatch<react.SetStateAction<number | null>>
+	setSelectedNamesEnd:     React.Dispatch<React.SetStateAction<number | null>>
 	addToSelectedNames:      (...names: string[]) => void
 	removeFromSelectedNames: (...names: string[]) => void
 	clearSelectedNames:      () => void
 	readOnlyClipboard:       string
 } | null>(null)
 
-export function ClipboardProvider({ children }: { children: react.ReactNode }) {
+export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 	const [exportAs, setExportAs] = useParam<ExportAsValue>({
 		key: "export-as",
 		initialValue: "svg",
@@ -61,11 +61,11 @@ export function ClipboardProvider({ children }: { children: react.ReactNode }) {
 		},
 	})
 
-	const [selectedNames, _setNames] = react.useState(() => new Set<string>())
-	const [selectedNamesStart, setSelectedNamesStart] = react.useState<number | null>(null)
-	const [selectedNamesEnd, setSelectedNamesEnd] = react.useState<number | null>(null)
+	const [selectedNames, _setNames] = React.useState(() => new Set<string>())
+	const [selectedNamesStart, setSelectedNamesStart] = React.useState<number | null>(null)
+	const [selectedNamesEnd, setSelectedNamesEnd] = React.useState<number | null>(null)
 
-	const addToSelectedNames = react.useCallback((...names: string[]) => {
+	const addToSelectedNames = React.useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -75,7 +75,7 @@ export function ClipboardProvider({ children }: { children: react.ReactNode }) {
 		})
 	}, [])
 
-	const removeFromSelectedNames = react.useCallback((...names: string[]) => {
+	const removeFromSelectedNames = React.useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -85,16 +85,16 @@ export function ClipboardProvider({ children }: { children: react.ReactNode }) {
 		})
 	}, [])
 
-	const clearSelectedNames = react.useCallback(() => {
+	const clearSelectedNames = React.useCallback(() => {
 		setSelectedNamesStart(null)
 		setSelectedNamesEnd(null)
 		_setNames(new Set<string>())
 	}, [])
 
 	// TODO: Change to a click event?
-	const [readOnlyClipboard, _setReadOnlyClipboard] = react.useState("")
+	const [readOnlyClipboard, _setReadOnlyClipboard] = React.useState("")
 
-	react.useEffect(() => {
+	React.useEffect(() => {
 		if (selectedNames.size === 0) {
 			_setReadOnlyClipboard("")
 			return

@@ -1,9 +1,9 @@
-import react from "react"
+import React from "react"
 
 export function useTrackScrollProps() {
-	const [scroll, setScroll] = react.useState(false)
+	const [scroll, setScroll] = React.useState(false)
 	const props = {
-		onScroll(e: react.UIEvent<HTMLElement>) {
+		onScroll(e: React.UIEvent<HTMLElement>) {
 			setScroll(e.currentTarget.scrollTop > 0)
 		},
 		"data-scroll": scroll.toString(),

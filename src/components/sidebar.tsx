@@ -1,74 +1,80 @@
-import react from "react"
+import React from "react"
 
-import { attr, isMac, round } from "@/lib"
+import { attr, round } from "@/lib"
 import { sidebarContext, SidebarState } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Make aware of both sidebars
-function useShortcutEscToCloseSidebarOverlay() {
-	const { sidebar2, setSidebar2 } = react.useContext(sidebarContext)!
-	react.useEffect(() => {
-		if (sidebar2 !== "maximized") return
+function useShortcutFigmaStyleToggleSidebars() {
+	const { setSidebar1, setSidebar2 } = React.useContext(sidebarContext)!
+	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				setSidebar2(null)
+			if (!(e.ctrlKey && e.key === "\\")) return
+			if (e.shiftKey) {
+				setSidebar2(curr => {
+					switch (curr) {
+						case "minimized":
+							return "maximized"
+						case null:
+							return "minimized"
+						case "maximized":
+							return null
+					}
+				})
+			} else {
+				setSidebar1(curr => {
+					switch (curr) {
+						case "minimized":
+							return "maximized"
+						case null:
+							return "minimized"
+						case "maximized":
+							return null
+					}
+				})
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setSidebar2, sidebar2])
+	}, [setSidebar1, setSidebar2])
 	return void 0
 }
 
-// TODO: Make aware of both sidebars
-function useShortcutCtrlBackslashToCycleSidebar() {
-	const { setSidebar2 } = react.useContext(sidebarContext)!
-	react.useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			// prettier-ignore
-			if (!(
-				(isMac() ? e.metaKey : e.ctrlKey) &&
-				e.key === "\\"
-			)) return
-			setSidebar2(curr => {
-				switch (curr) {
-					case "minimized":
-						return null
-					case null:
-						return "maximized"
-					case "maximized":
-						return "minimized"
-				}
-			})
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setSidebar2])
-	return void 0
-}
-
-// TODO: Make aware of both sidebars
 function useSideEffectHtmlAndBodyScrollLocking() {
-	const { sidebar2 } = react.useContext(sidebarContext)!
-	react.useEffect(() => {
-		const targets = [document.documentElement, document.body]
-		for (const target of targets) {
-			target.style.overflow = sidebar2 === "maximized" ? "hidden" : ""
-		}
-		return () => {
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
+	React.useEffect(() => {
+		const hasMaximized = [sidebar1, sidebar2].some(s => s === "maximized")
+		if (hasMaximized) {
+			const targets = [document.documentElement, document.body]
+			for (const target of targets) {
+				target.style.overflow = "hidden"
+			}
+		} else {
+			const targets = [document.documentElement, document.body]
 			for (const target of targets) {
 				target.style.overflow = ""
+				if (target.style.length === 0) {
+					target.removeAttribute("style")
+				}
 			}
 		}
-	}, [sidebar2])
+		return () => {
+			const targets = [document.documentElement, document.body]
+			for (const target of targets) {
+				target.style.overflow = ""
+				if (target.style.length === 0) {
+					target.removeAttribute("style")
+				}
+			}
+		}
+	}, [sidebar1, sidebar2])
 	return void 0
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 export function SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(sidebarContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
 
 	//// let state: SidebarState
 	//// let setState: React.Dispatch<React.SetStateAction<SidebarState>>
@@ -97,7 +103,7 @@ export function SidebarOverlay() {
 
 //// ////////////////////////////////////////////////////////////////////////////////
 ////
-//// //// export function Sidebar1({ children }: react.PropsWithChildren) {
+//// //// export function Sidebar1({ children }: React.PropsWithChildren) {
 //// //// 	//// const { sidebar2 } = React.useContext(LayoutContext)!
 //// //// 	return (
 //// //// 		<aside className="sidebar">
@@ -108,11 +114,11 @@ export function SidebarOverlay() {
 ////
 //// ////////////////////////////////////////////////////////////////////////////////
 ////
-//// //// export function Sidebar2({ children }: react.PropsWithChildren) {
-//// //// 	const { sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
+//// //// export function Sidebar2({ children }: React.PropsWithChildren) {
+//// //// 	const { sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
 //// ////
 //// //// 	// DEBUG
-//// //// 	const DEBUG_cycleSidebar = react.useCallback(() => {
+//// //// 	const DEBUG_cycleSidebar = React.useCallback(() => {
 //// //// 		setSidebar2(curr => {
 //// //// 			switch (curr) {
 //// //// 				case "minimized":
@@ -145,15 +151,15 @@ export function Sidebar({
 	minWidth,
 	maxWidth,
 	children,
-}: react.PropsWithChildren<{
+}: React.PropsWithChildren<{
 	pos: "start" | "end"
 	minWidth: number
 	maxWidth: number
 }>) {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(sidebarContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
 
 	let state: SidebarState
-	let setState: react.Dispatch<react.SetStateAction<SidebarState>>
+	let setState: React.Dispatch<React.SetStateAction<SidebarState>>
 	if (pos === "start") {
 		state = sidebar1
 		setState = setSidebar1
@@ -162,17 +168,20 @@ export function Sidebar({
 		setState = setSidebar2
 	}
 
-	const ref = react.useRef<HTMLDivElement | null>(null)
-	const dragAreaRef = react.useRef<HTMLDivElement | null>(null)
+	const ref = React.useRef<HTMLDivElement | null>(null)
+	const dragAreaRef = React.useRef<HTMLDivElement | null>(null)
 
-	const [transition, setTransition] = react.useState(false)
-	const [pointerDown, setPointerDown] = react.useState<boolean>(false)
-	const [startClientX, setStartClientX] = react.useState<number | null>(null)
-	const [clientX, setClientX] = react.useState<number | null>(null)
+	const [transition, setTransition] = React.useState(false)
+	const [pointerDown, setPointerDown] = React.useState<boolean>(false)
+	const [startClientX, setStartClientX] = React.useState<number | null>(null)
+	const [clientX, setClientX] = React.useState<number | null>(null)
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
 
-	react.useEffect(() => {
+	useShortcutFigmaStyleToggleSidebars()
+	useSideEffectHtmlAndBodyScrollLocking()
+
+	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
 			// Guards
 			if (e.button !== 0 && e.button !== 1) return
@@ -256,8 +265,8 @@ export function Sidebar({
 	}, [maxWidth, minWidth, pointerDown, pos, setState, state, x])
 
 	// Synchronously (useLayoutEffect) sync state changes -> transition
-	const onceRef = react.useRef(false)
-	react.useLayoutEffect(() => {
+	const onceRef = React.useRef(false)
+	React.useLayoutEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
@@ -278,7 +287,7 @@ export function Sidebar({
 					"--__x": `${x}px`,
 					"--__min-width": `${minWidth}px`,
 					"--__max-width": `${maxWidth}px`,
-				} as react.CSSProperties
+				} as React.CSSProperties
 			}
 			onTransitionEnd={e => setTransition(false)}
 		>

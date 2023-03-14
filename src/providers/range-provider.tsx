@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 
 import { useParam } from "@/lib"
 
@@ -13,20 +13,20 @@ export const STROKE_STEP    = 0.125 // prettier-ignore
 export const STROKE_DEFAULT = 2 // prettier-ignore
 
 // prettier-ignore
-export const RangeSizeContext = react.createContext<{
+export const RangeSizeContext = React.createContext<{
 	size:             number
-	setSize:          react.Dispatch<react.SetStateAction<number>>
+	setSize:          React.Dispatch<React.SetStateAction<number>>
 	resetSize:        () => void
 } | null>(null)
 
 // prettier-ignore
-export const RangeStrokeWidthContext = react.createContext<{
+export const RangeStrokeWidthContext = React.createContext<{
 	strokeWidth:      number
-	setStrokeWidth:   react.Dispatch<react.SetStateAction<number>>
+	setStrokeWidth:   React.Dispatch<React.SetStateAction<number>>
 	resetStrokeWidth: () => void
 } | null>(null)
 
-export function RangeProvider({ children }: react.PropsWithChildren) {
+export function RangeProvider({ children }: React.PropsWithChildren) {
 	const [size, setSize] = useParam({
 		key: "size",
 		initialValue: SIZE_DEFAULT,
@@ -40,7 +40,7 @@ export function RangeProvider({ children }: react.PropsWithChildren) {
 		},
 	})
 
-	const resetSize = react.useCallback(() => {
+	const resetSize = React.useCallback(() => {
 		setSize(SIZE_DEFAULT)
 	}, [setSize])
 
@@ -57,13 +57,13 @@ export function RangeProvider({ children }: react.PropsWithChildren) {
 		},
 	})
 
-	const resetStrokeWidth = react.useCallback(() => {
+	const resetStrokeWidth = React.useCallback(() => {
 		setStrokeWidth(STROKE_DEFAULT)
 	}, [setStrokeWidth])
 
 	return (
 		<RangeSizeContext.Provider
-			value={react.useMemo(
+			value={React.useMemo(
 				() => ({
 					size,
 					setSize,
@@ -73,7 +73,7 @@ export function RangeProvider({ children }: react.PropsWithChildren) {
 			)}
 		>
 			<RangeStrokeWidthContext.Provider
-				value={react.useMemo(
+				value={React.useMemo(
 					() => ({
 						strokeWidth,
 						setStrokeWidth,

@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 
 import * as feather from "@icons/feather/tsx"
 
@@ -31,7 +31,7 @@ export function ExportAs({
 	setValue,
 }: {
 	value: ExportAsValue
-	setValue: react.Dispatch<react.SetStateAction<ExportAsValue>>
+	setValue: React.Dispatch<React.SetStateAction<ExportAsValue>>
 }) {
 	return (
 		<label className="export-as">

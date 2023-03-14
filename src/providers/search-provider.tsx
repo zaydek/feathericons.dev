@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 
 import { canonicalize, IconComponent, useParam, useParamBoolean } from "@/lib"
 import { useQueryIcons } from "./use-query-icons"
@@ -13,35 +13,35 @@ const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
 const PREFER_NAMES_DEFAULT      = !!1 // prettier-ignore
 
 // prettier-ignore
-export const SearchContext = react.createContext<{
+export const SearchContext = React.createContext<{
   search:             string
-  setSearch:          react.Dispatch<react.SetStateAction<string>>
+  setSearch:          React.Dispatch<React.SetStateAction<string>>
 } | null>(null)
 
 // prettier-ignore
-export const IconsContext = react.createContext<{
+export const IconsContext = React.createContext<{
   feather:            boolean
-  setFeather:         react.Dispatch<react.SetStateAction<boolean>>
+  setFeather:         React.Dispatch<React.SetStateAction<boolean>>
   wkBrands:           boolean
-  setWkBrands:        react.Dispatch<react.SetStateAction<boolean>>
+  setWkBrands:        React.Dispatch<React.SetStateAction<boolean>>
   wkPayments:         boolean
-  setWkPayments:      react.Dispatch<react.SetStateAction<boolean>>
+  setWkPayments:      React.Dispatch<React.SetStateAction<boolean>>
   wkPaymentsValue:    WkPaymentsValue
-  setWkPaymentsValue: react.Dispatch<react.SetStateAction<WkPaymentsValue>>
+  setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
   icons:              (readonly [string, IconComponent])[] | undefined
   resetIcons: () => void
 } | null>(null)
 
 // prettier-ignore
-export const IconPreferencesContext = react.createContext<{
+export const IconPreferencesContext = React.createContext<{
   preferColor:        boolean
-  setPreferColor:     react.Dispatch<react.SetStateAction<boolean>>
+  setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
   preferNames:        boolean
-  setPreferNames:     react.Dispatch<react.SetStateAction<boolean>>
+  setPreferNames:     React.Dispatch<React.SetStateAction<boolean>>
   resetIconPrefs:     () => void
 } | null>(null)
 
-export function SearchProvider({ children }: react.PropsWithChildren) {
+export function SearchProvider({ children }: React.PropsWithChildren) {
 	const [search, setSearch] = useParam({
 		key: "search",
 		initialValue: "",
@@ -77,21 +77,21 @@ export function SearchProvider({ children }: react.PropsWithChildren) {
 		preferColor,
 	})
 
-	const resetIcons = react.useCallback(() => {
+	const resetIcons = React.useCallback(() => {
 		setFeather(FEATHER_DEFAULT)
 		setWkBrands(WK_BRANDS_DEFAULT)
 		setWkPayments(WK_PAYMENTS_DEFAULT)
 		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
 	}, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
 
-	const resetIconPrefs = react.useCallback(() => {
+	const resetIconPrefs = React.useCallback(() => {
 		setPreferColor(PREFER_COLOR_DEFAULT)
 		setPreferNames(PREFER_NAMES_DEFAULT)
 	}, [setPreferColor, setPreferNames])
 
 	return (
 		<SearchContext.Provider
-			value={react.useMemo(
+			value={React.useMemo(
 				() => ({
 					search,
 					setSearch,
@@ -100,7 +100,7 @@ export function SearchProvider({ children }: react.PropsWithChildren) {
 			)}
 		>
 			<IconsContext.Provider
-				value={react.useMemo(
+				value={React.useMemo(
 					() => ({
 						feather,
 						setFeather,
@@ -118,7 +118,7 @@ export function SearchProvider({ children }: react.PropsWithChildren) {
 				)}
 			>
 				<IconPreferencesContext.Provider
-					value={react.useMemo(
+					value={React.useMemo(
 						() => ({
 							preferColor,
 							setPreferColor,

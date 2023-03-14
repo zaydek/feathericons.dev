@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 
 import { attr, iota, round } from "@/lib"
 
@@ -6,16 +6,16 @@ import { attr, iota, round } from "@/lib"
 type SidebarState = "maximized" | "minimized" | null
 
 // prettier-ignore
-const LayoutContext = react.createContext<{
+const LayoutContext = React.createContext<{
 	sidebar1:    SidebarState
-	setSidebar1: react.Dispatch<react.SetStateAction<SidebarState>>
+	setSidebar1: React.Dispatch<React.SetStateAction<SidebarState>>
 	sidebar2:    SidebarState
-	setSidebar2: react.Dispatch<react.SetStateAction<SidebarState>>
+	setSidebar2: React.Dispatch<React.SetStateAction<SidebarState>>
 } | null>(null)
 
-function LayoutProvider({ children }: react.PropsWithChildren) {
-	const [sidebar1, setSidebar1] = react.useState<SidebarState>(null)
-	const [sidebar2, setSidebar2] = react.useState<SidebarState>(null)
+function LayoutProvider({ children }: React.PropsWithChildren) {
+	const [sidebar1, setSidebar1] = React.useState<SidebarState>(null)
+	const [sidebar2, setSidebar2] = React.useState<SidebarState>(null)
 
 	return (
 		<LayoutContext.Provider
@@ -34,7 +34,7 @@ function LayoutProvider({ children }: react.PropsWithChildren) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
 
 	//// let state: SidebarState
 	//// let setState: React.Dispatch<React.SetStateAction<SidebarState>>
@@ -66,15 +66,15 @@ function Sidebar({
 	minWidth,
 	maxWidth,
 	children,
-}: react.PropsWithChildren<{
+}: React.PropsWithChildren<{
 	pos: "start" | "end"
 	minWidth: number
 	maxWidth: number
 }>) {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
 
 	let state: SidebarState
-	let setState: react.Dispatch<react.SetStateAction<SidebarState>>
+	let setState: React.Dispatch<React.SetStateAction<SidebarState>>
 	if (pos === "start") {
 		state = sidebar1
 		setState = setSidebar1
@@ -83,17 +83,17 @@ function Sidebar({
 		setState = setSidebar2
 	}
 
-	const ref = react.useRef<HTMLDivElement | null>(null)
-	const dragAreaRef = react.useRef<HTMLDivElement | null>(null)
+	const ref = React.useRef<HTMLDivElement | null>(null)
+	const dragAreaRef = React.useRef<HTMLDivElement | null>(null)
 
-	const [transition, setTransition] = react.useState(false)
-	const [pointerDown, setPointerDown] = react.useState<boolean>(false)
-	const [startClientX, setStartClientX] = react.useState<number | null>(null)
-	const [clientX, setClientX] = react.useState<number | null>(null)
+	const [transition, setTransition] = React.useState(false)
+	const [pointerDown, setPointerDown] = React.useState<boolean>(false)
+	const [startClientX, setStartClientX] = React.useState<number | null>(null)
+	const [clientX, setClientX] = React.useState<number | null>(null)
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
 
-	react.useEffect(() => {
+	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
 			// Guards
 			if (e.button !== 0 && e.button !== 1) return
@@ -177,8 +177,8 @@ function Sidebar({
 	}, [maxWidth, minWidth, pointerDown, pos, setState, state, x])
 
 	// Synchronously (useLayoutEffect) sync state changes -> transition
-	const onceRef = react.useRef(false)
-	react.useLayoutEffect(() => {
+	const onceRef = React.useRef(false)
+	React.useLayoutEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
@@ -199,7 +199,7 @@ function Sidebar({
 					"--__x": `${x}px`,
 					"--__min-width": `${minWidth}px`,
 					"--__max-width": `${maxWidth}px`,
-				} as react.CSSProperties
+				} as React.CSSProperties
 			}
 			onTransitionEnd={e => setTransition(false)}
 		>
@@ -234,7 +234,7 @@ function Sidebar({
 	)
 }
 
-function Main({ children }: react.PropsWithChildren) {
+function Main({ children }: React.PropsWithChildren) {
 	return <main className="main">{/* {children} */}</main>
 }
 
@@ -249,9 +249,9 @@ function InternalApp() {
 				maxWidth={320 * 1.5}
 			>
 				{iota(20).map(index => (
-					<react.Fragment key={index}>
+					<React.Fragment key={index}>
 						<div>foo bar</div>
-					</react.Fragment>
+					</React.Fragment>
 				))}
 			</Sidebar>
 			<Main>
@@ -267,9 +267,9 @@ function InternalApp() {
 				maxWidth={320 * 1.5}
 			>
 				{iota(20).map(index => (
-					<react.Fragment key={index}>
+					<React.Fragment key={index}>
 						<div>foo bar</div>
-					</react.Fragment>
+					</React.Fragment>
 				))}
 			</Sidebar>
 		</>
