@@ -5,43 +5,27 @@ import { sidebarContext, SidebarState } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useShortcutFigmaStyleToggleSidebars() {
-	const { setSidebar1, setSidebar2 } = React.useContext(sidebarContext)!
-	React.useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			if (!(e.ctrlKey && e.key === "\\")) return
-			if (e.shiftKey) {
-				setSidebar2(curr => {
-					switch (curr) {
-						case "minimized":
-							return "maximized"
-						case null:
-							return "minimized"
-						case "maximized":
-							return null
-					}
-				})
-			} else {
-				setSidebar1(curr => {
-					switch (curr) {
-						case "minimized":
-							return "maximized"
-						case null:
-							return "minimized"
-						case "maximized":
-							return null
-					}
-				})
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [setSidebar1, setSidebar2])
-	return void 0
-}
+//// function useShortcutFigmaStyleToggleSidebars() {
+//// 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
+//// 	React.useEffect(() => {
+//// 		function handleKeyDown(e: KeyboardEvent) {
+//// 			if (!(e.metaKey && e.key === "\\")) return
+//// 			// prettier-ignore
+//// 			const oneOrMoreOpen =
+//// 				(sidebar1 === null || sidebar1 === "maximized") ||
+//// 				(sidebar2 === null || sidebar2 === "maximized")
+//// 			const next = oneOrMoreOpen ? "minimized" : null
+//// 			setSidebar1(next)
+//// 			setSidebar2(next)
+//// 		}
+//// 		window.addEventListener("keydown", handleKeyDown, false)
+//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
+//// 	}, [setSidebar1, setSidebar2, sidebar1, sidebar2])
+//// 	return void 0
+//// }
 
 function useSideEffectHtmlAndBodyScrollLocking() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(sidebarContext)!
+	const { sidebar1, sidebar2 } = React.useContext(sidebarContext)!
 	React.useEffect(() => {
 		const hasMaximized = [sidebar1, sidebar2].some(s => s === "maximized")
 		if (hasMaximized) {
@@ -177,9 +161,6 @@ export function Sidebar({
 	const [clientX, setClientX] = React.useState<number | null>(null)
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
-
-	useShortcutFigmaStyleToggleSidebars()
-	useSideEffectHtmlAndBodyScrollLocking()
 
 	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
@@ -326,6 +307,10 @@ export function Sidebar({
 
 // Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
+	// Register effects once
+	//// useShortcutFigmaStyleToggleSidebars()
+	useSideEffectHtmlAndBodyScrollLocking()
+
 	return (
 		<>
 			<main className="main" {...props}>
