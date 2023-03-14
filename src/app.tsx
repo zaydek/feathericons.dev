@@ -558,7 +558,7 @@ function GridItem({ index, name, Icon }: { index: number; name: string; Icon: Ic
 	return (
 		<article
 			id={name}
-			className={cx("main-grid-item", selectedNames.has(name) && "is-selected")}
+			className={cx("main-grid-item", selectedNames.has(name) && "selected")}
 			onClick={e => {
 				if (e.shiftKey) {
 					if (selectedNamesStart === null) {
