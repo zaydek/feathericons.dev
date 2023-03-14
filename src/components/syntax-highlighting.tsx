@@ -57,30 +57,32 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 		<pre className="syntax-highlighting">
 			<code className="syntax-highlighting-code">
 				{tokens === null
-					? // prettier-ignore
-					  code.split("\n").map((line, index) => (
-						<div key={index}>
-							{line.length > 0 ? (
-								<Tokenize color="rgb(110, 119, 129)">{line}</Tokenize>
-							) : (
-								<br />
-							)}
-						</div>
-					))
-					: // prettier-ignore
-					  tokens.map((lineTokens, index) => (
-						<div key={index}>
-							{lineTokens.length > 0 ? (
-								lineTokens.map((token, index) => (
-									<Tokenize key={index} color={token.color}>
-										{token.content}
-									</Tokenize>
-								))
-							) : (
-								<br />
-							)}
-						</div>
-					))}
+					? code.split("\n").map((line, index) => (
+							// Lines
+							<div key={index}>
+								{line.length > 0 ? (
+									// Tokens
+									<Tokenize color="rgb(110, 119, 129)">{line}</Tokenize>
+								) : (
+									<br />
+								)}
+							</div>
+					  ))
+					: tokens.map((lineTokens, index) => (
+							// Lines
+							<div key={index}>
+								{lineTokens.length > 0 ? (
+									lineTokens.map((token, index) => (
+										// Tokens
+										<Tokenize key={index} color={token.color}>
+											{token.content}
+										</Tokenize>
+									))
+								) : (
+									<br />
+								)}
+							</div>
+					  ))}
 			</code>
 		</pre>
 	)
