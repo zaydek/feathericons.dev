@@ -9,9 +9,9 @@ $aspect-ratio: 1.25
   display: grid
   grid-template-columns: repeat(auto-fill, $height)
   justify-content: center
-  &:not(.is-prefer-names)
+  &[data-prefer-names=false]
     gap: 16px
-  &.is-prefer-names
+  &[data-prefer-names=true]
     gap: 8px 16px
   padding: $sidebar-padding-x * 2 32px
 
@@ -30,12 +30,12 @@ $aspect-ratio: 1.25
   aspect-ratio: $aspect-ratio
   background-color: white
   border-radius: 4px
-  .main-grid-item:not(.selected) &
+  .main-grid-item[data-selected=false] &
     box-shadow: $inset-hairline-shadow
     //// -webkit-user-select: none    // Interaction
     //// user-select: none            // Interaction
     //// cursor: copy                 // Interaction
-  .main-grid-item.selected &
+  .main-grid-item[data-selected=true] &
     box-shadow: inset 0 0 0 4px $brand-color
 
 .main-grid-item-icon

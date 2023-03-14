@@ -1,6 +1,6 @@
 import React from "react"
 
-import { attr, getCssVarAsNumber, round } from "@/lib"
+import { getCssVarAsNumber, round } from "@/lib"
 import { sidebarContext, SidebarState } from "@/providers"
 
 function useSideEffectHtmlAndBodyScrollLocking() {
@@ -40,7 +40,7 @@ export function SidebarOverlay() {
 	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
 	const setState = sidebar1 === "maximized" ? setSidebar1 : setSidebar2
 
-	return <div className="sidebar-overlay" data-open={attr(open)} onClick={e => setState(null)}></div>
+	return <div className="sidebar-overlay" data-open={open} onClick={e => setState(null)}></div>
 }
 
 export function Sidebar({
@@ -171,9 +171,9 @@ export function Sidebar({
 		<aside
 			ref={ref}
 			className="sidebar"
-			data-pos={attr(pos)}
-			data-state={attr(state)}
-			data-transition={attr(transition)}
+			data-pos={pos}
+			data-state={state}
+			data-transition={transition}
 			style={{ "--__x": `${x}px` } as React.CSSProperties}
 			onTransitionEnd={e => setTransition(false)}
 		>
