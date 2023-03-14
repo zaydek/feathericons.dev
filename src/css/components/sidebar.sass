@@ -1,37 +1,139 @@
 @use "sass:math"
 
-@use "../globals" as *
+$sidebar-1-width:     320px
+$sidebar-1-max-width: $sidebar-1-width * 1.5
+
+$sidebar-2-width:     320px
+$sidebar-2-max-width: $sidebar-2-width * 1.5
+
+$sidebar-min-z-index: 50
+$sidebar-max-z-index: 100
+
+// Safe CSS variables
+$sidebar-x:         var(--__x)
+$sidebar-min-width: var(--__min-width)
+$sidebar-max-width: var(--__max-width)
+
+.sidebar
+  position: fixed
+  &[data-pos=start]
+    inset: 0 auto 0 0
+  &[data-pos=end]
+    inset: 0 0 0 auto
+
+  &:not(:is([data-state=maximized], [data-transition]))
+    z-index: $sidebar-min-z-index
+  &:is([data-state=maximized], [data-transition])
+    z-index: $sidebar-max-z-index
+
+  display: flex          // Forward height
+  flex-direction: row    // Forward height
+
+  // Start
+  &[data-pos=start]
+    transform: translateX(calc(-1 * ($sidebar-max-width - $sidebar-min-width) + $sidebar-x))
+  &[data-pos=start][data-state=maximized]
+    transform: translateX($sidebar-x)
+  &[data-pos=start][data-state=minimized]
+    transform: translateX(calc(-1 * $sidebar-max-width + $sidebar-x))
+
+  // End
+  &[data-pos=end]
+    transform: translateX(calc($sidebar-max-width - $sidebar-min-width + $sidebar-x))
+  &[data-pos=end][data-state=maximized]
+    transform: translateX($sidebar-x)
+  &[data-pos=end][data-state=minimized]
+    transform: translateX(calc($sidebar-max-width + $sidebar-x))
+
+.sidebar[data-transition]
+  transition: transform 600ms cubic-bezier(0, 1, 0.25, 1)
+
+////////////////////////////////////////////////////////////////////////////////
+
+.sidebar-drag-area
+  position: absolute
+  .sidebar[data-pos=start] &
+    inset: 0 auto 0 100%
+  .sidebar[data-pos=end] &
+    inset: 0 100% 0 auto
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 32px
+  &:not(:hover:active)
+    cursor: grab
+  &:hover:active
+    cursor: grabbing
+  -webkit-user-select: none
+  user-select: none
+
+.sidebar-drag-area-handle
+  height: 6px * 8
+  width: 6px
+  background-color: hsl(0, 0%, 0%, 0.25)
+  border-radius: 1e3px
+
+////////////////////////////////////////////////////////////////////////////////
+
+.sidebar-card
+  display: flex
+  .sidebar[data-pos=start] &
+    justify-content: flex-end
+  .sidebar[data-pos=end] &
+    justify-content: flex-start
+  width: $sidebar-max-width
+  background-color: white
+  box-shadow: 0 0 0 1px hsl(0, 0%, 0%, 0.1)
+.sidebar-card-content
+  display: flex          // Forward height
+  flex-direction: column // Forward height
+  width: $sidebar-min-width
+
+////////////////////////////////////////////////////////////////////////////////
 
 .sidebar-header
   position: sticky
   top: 0
-  z-index: 50
-  display: flex          // See .sidebar-header-scroll-area
-  flex-direction: column // See .sidebar-header-scroll-area
   background-color: white
-  overflow-y: auto       // See .sidebar-header-scroll-area
+.sidebar-scroll-area
+  overflow-y: auto
 .sidebar-footer
   position: sticky
   bottom: 0
-  z-index: 50
+  z-index: 20
+  margin-top: auto
   background-color: white
 
-.sidebar-header-scroll-area
-  //// display: flex
-  //// flex-direction: column
-  overflow-y: auto
-  //// &.is-syntax-highlighting
-  ////   padding-bottom: $sidebar-gap
+////////////////////////////////////////////////////////////////////////////////
 
-.sidebar-align-frame
-  display: flex
-  flex-direction: column
-  justify-content: center // Center y-axis
-  padding: 0 math.div($button-height - $tiny-icon-height, 2)
-  //// height: $button-height
-.sidebar-align-icon-frame
-  display: flex
-  justify-content: center // Center x-axis
-  align-items: center     // Center y-axis
-  height: $button-height
-  width: $button-height
+.sidebar-overlay
+  position: fixed
+  inset: 0
+  z-index: math.div($sidebar-min-z-index + $sidebar-max-z-index, 2)
+  background-color: hsl(0, 0%, 0%, 0.25)
+  //// backdrop-filter: blur(2px)
+  &:not([data-open])
+    opacity: 0
+    cursor: null
+    pointer-events: none
+  &[data-open]
+    opacity: 1
+    cursor: pointer
+    pointer-events: null
+
+  transition: opacity 600ms cubic-bezier(0, 1, 0.25, 1)
+
+////////////////////////////////////////////////////////////////////////////////
+
+$left:  var(--__left)
+$right: var(--__right)
+
+.main
+  --__left:  #{$sidebar-1-width}
+  --__right: #{$sidebar-2-width}
+  position: absolute
+  inset: 0 $right auto $left
+  .sidebar[data-pos=start][data-state=minimized] ~ &
+    --__left:  0
+  .sidebar[data-pos=end][data-state=minimized] ~ &
+    --__right: 0

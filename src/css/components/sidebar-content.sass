@@ -1,0 +1,38 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+// TODO
+.sidebar-header
+  position: sticky
+  top: 0
+  z-index: 50
+  display: flex          // See .sidebar-header-scroll-area
+  flex-direction: column // See .sidebar-header-scroll-area
+  background-color: white
+  overflow-y: auto       // See .sidebar-header-scroll-area
+.sidebar-footer
+  position: sticky
+  bottom: 0
+  z-index: 50
+  background-color: white
+
+.sidebar-header-scroll-area
+  //// display: flex
+  //// flex-direction: column
+  overflow-y: auto
+  //// &.is-syntax-highlighting
+  ////   padding-bottom: $sidebar-gap
+
+.sidebar-align-frame
+  display: flex
+  flex-direction: column
+  justify-content: center // Center y-axis
+  padding: 0 math.div($button-height - $tiny-icon-height, 2)
+  //// height: $button-height
+.sidebar-align-icon-frame
+  display: flex
+  justify-content: center // Center x-axis
+  align-items: center     // Center y-axis
+  height: $button-height
+  width: $button-height
