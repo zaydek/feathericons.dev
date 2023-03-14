@@ -236,7 +236,7 @@ function AppSidebar1() {
 						<label className="checkbox">
 							<div className="sidebar-align-icon-frame">
 								{/* Defer to CSS; no <svg> */}
-								<div className={cx("checkbox-icon chroma", preferColor && "is-prefer-color")}></div>
+								<div className={cx("checkbox-icon chroma", preferColor && "prefer-color")}></div>
 							</div>
 							<span className="checkbox-name u-flex-1">Colorize icons</span>
 							<div className="sidebar-align-icon-frame">
