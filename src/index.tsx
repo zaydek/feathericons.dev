@@ -8,11 +8,11 @@ import { App } from "@/app"
 import { ProgresssBar } from "@/components"
 import {
 	ClipboardProvider,
-	LayoutProvider,
 	ProgressBarProvider,
 	RangeProvider,
 	SearchProvider,
 	ShikiProvider,
+	SidebarProvider,
 } from "@/providers"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { createRoot } from "react-dom/client"
@@ -31,7 +31,7 @@ function ProvidedApp() {
 			<ProgressBarProvider>
 				<ProgresssBar />
 				<ShikiProvider>
-					<LayoutProvider>
+					<SidebarProvider>
 						<SearchProvider>
 							<RangeProvider>
 								<ClipboardProvider>
@@ -39,7 +39,7 @@ function ProvidedApp() {
 								</ClipboardProvider>
 							</RangeProvider>
 						</SearchProvider>
-					</LayoutProvider>
+					</SidebarProvider>
 				</ShikiProvider>
 			</ProgressBarProvider>
 		</QueryClientProvider>

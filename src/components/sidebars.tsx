@@ -1,13 +1,13 @@
 import react from "react"
 
 import { attr, isMac, round } from "@/lib"
-import { LayoutContext, SidebarState } from "@/providers"
+import { sidebarContext, SidebarState } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 // TODO: Make aware of both sidebars
 function useShortcutEscToCloseSidebarOverlay() {
-	const { sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
+	const { sidebar2, setSidebar2 } = react.useContext(sidebarContext)!
 	react.useEffect(() => {
 		if (sidebar2 !== "maximized") return
 		function handleKeyDown(e: KeyboardEvent) {
@@ -23,7 +23,7 @@ function useShortcutEscToCloseSidebarOverlay() {
 
 // TODO: Make aware of both sidebars
 function useShortcutCtrlBackslashToCycleSidebar() {
-	const { setSidebar2 } = react.useContext(LayoutContext)!
+	const { setSidebar2 } = react.useContext(sidebarContext)!
 	react.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			// prettier-ignore
@@ -50,7 +50,7 @@ function useShortcutCtrlBackslashToCycleSidebar() {
 
 // TODO: Make aware of both sidebars
 function useSideEffectHtmlAndBodyScrollLocking() {
-	const { sidebar2 } = react.useContext(LayoutContext)!
+	const { sidebar2 } = react.useContext(sidebarContext)!
 	react.useEffect(() => {
 		const targets = [document.documentElement, document.body]
 		for (const target of targets) {
@@ -68,7 +68,7 @@ function useSideEffectHtmlAndBodyScrollLocking() {
 ////////////////////////////////////////////////////////////////////////////////
 
 export function SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(sidebarContext)!
 
 	//// let state: SidebarState
 	//// let setState: React.Dispatch<React.SetStateAction<SidebarState>>
@@ -150,7 +150,7 @@ export function Sidebar({
 	minWidth: number
 	maxWidth: number
 }>) {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(LayoutContext)!
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = react.useContext(sidebarContext)!
 
 	let state: SidebarState
 	let setState: react.Dispatch<react.SetStateAction<SidebarState>>
