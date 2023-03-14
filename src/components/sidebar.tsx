@@ -101,7 +101,13 @@ export function Sidebar({
 			const maxWidth = getCssVarAsNumber("--__max-width", { scope: ref.current! })
 			const d = maxWidth - width
 			if (pos === "start") {
-				if (state === null) {
+				if (state === "minimized") {
+					if (x > width) {
+						setState("maximized")
+					} else if (x > 0) {
+						setState(null)
+					}
+				} else if (state === null) {
 					if (x > 0) {
 						setState("maximized")
 					} else if (x < 0) {
@@ -113,15 +119,15 @@ export function Sidebar({
 					} else if (x < 0) {
 						setState(null)
 					}
-				} else if (state === "minimized") {
-					if (x > width) {
-						setState("maximized")
-					} else if (x > 0) {
-						setState(null)
-					}
 				}
 			} else {
-				if (state === null) {
+				if (state === "minimized") {
+					if (x < -width) {
+						setState("maximized")
+					} else if (x < 0) {
+						setState(null)
+					}
+				} else if (state === null) {
 					if (x < 0) {
 						setState("maximized")
 					} else if (x > 0) {
@@ -131,12 +137,6 @@ export function Sidebar({
 					if (x > d) {
 						setState("minimized")
 					} else if (x > 0) {
-						setState(null)
-					}
-				} else if (state === "minimized") {
-					if (x < -width) {
-						setState("maximized")
-					} else if (x < 0) {
 						setState(null)
 					}
 				}
@@ -180,21 +180,21 @@ export function Sidebar({
 			<div
 				ref={dragAreaRef}
 				className="sidebar-drag-area"
-				onKeyDown={e => {
-					if (e.key === "ArrowLeft") {
-						if (pos === "start") {
-							// ...
-						} else {
-							// ...
-						}
-					} else if (e.key === "ArrowRight") {
-						if (pos === "start") {
-							// ...
-						} else {
-							// ...
-						}
-					}
-				}}
+				//// onKeyDown={e => {
+				//// 	if (e.key === "ArrowLeft") {
+				//// 		if (pos === "start") {
+				//// 			// ...
+				//// 		} else {
+				//// 			// ...
+				//// 		}
+				//// 	} else if (e.key === "ArrowRight") {
+				//// 		if (pos === "start") {
+				//// 			// ...
+				//// 		} else {
+				//// 			// ...
+				//// 		}
+				//// 	}
+				//// }}
 				tabIndex={0}
 			>
 				<div className="sidebar-drag-area-handle"></div>

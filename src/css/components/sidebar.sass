@@ -12,11 +12,11 @@ $sidebar-max-z-index: 100
 .sidebar
   // Expose CSS variables for getCssVarAsNumber
   &[data-pos=start]
-    --__width:     var(--sidebar-1-width)
-    --__max-width: var(--sidebar-1-max-width)
+    --__width:     #{$sidebar-1-width}
+    --__max-width: #{$sidebar-1-max-width}
   &[data-pos=end]
-    --__width:     var(--sidebar-2-width)
-    --__max-width: var(--sidebar-2-max-width)
+    --__width:     #{$sidebar-2-width}
+    --__max-width: #{$sidebar-2-max-width}
 
   position: fixed
   &[data-pos=start]
