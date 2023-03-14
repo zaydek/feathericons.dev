@@ -71,19 +71,14 @@ function AppSidebar1() {
 	const trackScrollProps = useTrackScrollProps()
 
 	return (
-		<Sidebar
-			// prettier-ignore
-			pos="start"
-			minWidth={320}
-			maxWidth={320 * 1.5}
-		>
+		<Sidebar pos="start">
 			<header className="sidebar-header">
 				{/* <section className="section start">
 					<div className="sidebar-align-frame">
 						<SearchBar />
 					</div>
 				</section> */}
-				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
+				<div className="u-flex-1 u-overflow-y" {...trackScrollProps}>
 					<section className="section start">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
@@ -214,7 +209,7 @@ function AppSidebar1() {
 					</section>
 				</div>
 			</header>
-			<div className="sidebar-scroll-area">
+			<div className="u-overflow-y">
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
@@ -329,12 +324,7 @@ function AppSidebar2() {
 	//// }, [])
 
 	return (
-		<Sidebar
-			// prettier-ignore
-			pos="end"
-			minWidth={320}
-			maxWidth={320 * 1.5}
-		>
+		<Sidebar pos="end">
 			<header className="sidebar-header">
 				<section className="section start">
 					<header className="section-header">
@@ -347,7 +337,7 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="sidebar-header-scroll-area u-flex-1" {...trackScrollProps}>
+				<div className="u-flex-1 u-overflow-y" {...trackScrollProps}>
 					<section className="section syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
@@ -370,7 +360,7 @@ function AppSidebar2() {
 					</section>
 				</div>
 			</header>
-			<div className="sidebar-scroll-area">
+			<div className="u-overflow-y">
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">

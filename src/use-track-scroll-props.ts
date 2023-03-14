@@ -6,7 +6,7 @@ export function useTrackScrollProps() {
 		onScroll(e: React.UIEvent<HTMLElement>) {
 			setScroll(e.currentTarget.scrollTop > 0)
 		},
-		"data-scroll": scroll.toString(),
+		"data-scroll": JSON.stringify(scroll),
 	}
 	return props
 }
