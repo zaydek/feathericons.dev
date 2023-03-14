@@ -165,6 +165,8 @@ export function Sidebar({
 		}
 		void state
 		setTransition(true)
+		const d = window.setTimeout(() => setTransition(false), 600)
+		return () => window.clearTimeout(d)
 	}, [state])
 
 	return (
@@ -175,7 +177,7 @@ export function Sidebar({
 			data-state={state}
 			data-transition={transition}
 			style={{ "--__x": `${x}px` } as React.CSSProperties}
-			onTransitionEnd={e => setTransition(false)}
+			//// onTransitionEnd={e => setTransition(false)}
 		>
 			<div
 				ref={dragAreaRef}
