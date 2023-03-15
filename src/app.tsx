@@ -21,8 +21,9 @@ import {
 import { resources } from "@/data"
 import { DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
+	cache,
 	ClipboardContext,
-	IconPreferencesContext,
+	IconAliasPath,
 	ProgressBarContext,
 	RangeSizeContext,
 	RangeStrokeWidthContext,
@@ -129,15 +130,31 @@ function useSideEffectVisibleDocumentTitle() {
 	return void 0
 }
 
-function useTransitionProgressBar() {
+function useProgressBarTransition() {
 	const { setStarted } = React.useContext(ProgressBarContext)!
 	const [pending, startTransition] = React.useTransition()
+
 	React.useEffect(() => {
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
 		return () => window.clearTimeout(d)
 	}, [pending, setStarted])
-	return startTransition
+
+	const startTransitionIfNeeded = React.useCallback((args: IconAliasPath[] | null, fn: () => void) => {
+		// prettier-ignore
+		args = args ?? [
+			"@icons/feather/tsx",
+			"@icons/wk/brands/original/tsx",
+			"@icons/wk/payments/original/tsx",
+		]
+		if (args.every(arg => cache.has(arg))) {
+			fn()
+		} else {
+			startTransition(fn)
+		}
+	}, [])
+
+	return startTransitionIfNeeded
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -145,9 +162,11 @@ function useTransitionProgressBar() {
 function AppSidebar1() {
 	const scrollProps = useScrollProps()
 
-	const startTransition = useTransitionProgressBar()
+	const startTransitionIfNeeded = useProgressBarTransition()
 
 	const {
+		//// search,
+		//// setSearch,
 		// eslint-disable-next-line destructuring/no-rename
 		feather: $feather,
 		setFeather,
@@ -157,9 +176,13 @@ function AppSidebar1() {
 		setWkPayments,
 		wkPaymentsValue,
 		setWkPaymentsValue,
+		preferColor,
+		setPreferColor,
+		//// iconsAreCached,
+		//// icons,
 		resetIcons,
+		resetIconPrefs,
 	} = React.useContext(SearchContext)!
-	const { preferColor, setPreferColor, resetIconPrefs } = React.useContext(IconPreferencesContext)!
 
 	return (
 		<Sidebar pos="start">
@@ -177,7 +200,7 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIcons)}>
+						<button className="widget-align-icon-frame" onClick={() => startTransitionIfNeeded(null, resetIcons)}>
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
 						</button>
 					</div>
@@ -192,7 +215,7 @@ function AppSidebar1() {
 									<input
 										type="checkbox"
 										checked={$feather}
-										onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+										onChange={e => startTransitionIfNeeded(null, () => setFeather(e.currentTarget.checked))}
 									/>
 								</div>
 							</label>
@@ -210,7 +233,7 @@ function AppSidebar1() {
 									<input
 										type="checkbox"
 										checked={wkBrands}
-										onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
+										onChange={e => startTransitionIfNeeded(null, () => setWkBrands(e.currentTarget.checked))}
 									/>
 								</div>
 							</label>
@@ -238,7 +261,7 @@ function AppSidebar1() {
 									<input
 										type="checkbox"
 										checked={wkPayments}
-										onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
+										onChange={e => startTransitionIfNeeded(null, () => setWkPayments(e.currentTarget.checked))}
 									/>
 								</div>
 							</label>
@@ -258,7 +281,7 @@ function AppSidebar1() {
 											type="radio"
 											checked={wkPaymentsValue === "normal"}
 											onChange={e =>
-												startTransition(() => {
+												startTransitionIfNeeded(null, () => {
 													setWkPayments(true)
 													setWkPaymentsValue("normal")
 												})
@@ -283,7 +306,7 @@ function AppSidebar1() {
 											type="radio"
 											checked={wkPaymentsValue === "filled"}
 											onChange={e =>
-												startTransition(() => {
+												startTransitionIfNeeded(null, () => {
 													setWkPayments(true)
 													setWkPaymentsValue("filled")
 												})
@@ -304,7 +327,7 @@ function AppSidebar1() {
 							<feather.Settings className="widget-name-icon-1" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
+						<button className="widget-align-icon-frame" onClick={() => startTransitionIfNeeded(null, resetIconPrefs)}>
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
 						</button>
 					</div>
@@ -320,7 +343,7 @@ function AppSidebar1() {
 								<input
 									type="checkbox"
 									checked={preferColor}
-									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
+									onChange={e => startTransitionIfNeeded(null, () => setPreferColor(e.currentTarget.checked))}
 								/>
 							</div>
 						</label>
@@ -546,9 +569,11 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	const { feather, wkBrands, wkPayments, icons } = React.useContext(SearchContext)!
+	// TODO: Associate iconsAreCached to progress bar
+	const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
 
+	// TODO: Extract to a named hook
 	const onceRef = React.useRef(false)
 	React.useEffect(() => {
 		if (!onceRef.current) {

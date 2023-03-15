@@ -1,7 +1,7 @@
 import React from "react"
 
 import { canonicalize, IconComponent, useParam, useParamBoolean } from "@/lib"
-import { fetchIconsets } from "./use-query-icons"
+import { queryCache } from "./cache"
 
 export type WkPaymentsValue = "normal" | "filled"
 
@@ -24,17 +24,11 @@ export const SearchContext = React.createContext<{
   setWkPayments:      React.Dispatch<React.SetStateAction<boolean>>
   wkPaymentsValue:    WkPaymentsValue
   setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
-  icons:              ([string, IconComponent])[]
-  resetIcons:         () => void
-} | null>(null)
-
-// TODO: Combine contexts? What we have now seems dumb
-// prettier-ignore
-export const IconPreferencesContext = React.createContext<{
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
-  //// preferNames:        boolean
-  //// setPreferNames:     React.Dispatch<React.SetStateAction<boolean>>
+	iconsAreCached:     boolean
+  icons:              ([string, IconComponent])[]
+  resetIcons:         () => void
   resetIconPrefs:     () => void
 } | null>(null)
 
@@ -66,35 +60,23 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	const [preferColor, setPreferColor] = useParamBoolean({ key: "prefer-color", initialValue: PREFER_COLOR_DEFAULT })
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
+	const [iconsAreCached, setIconsAreCached] = React.useState(false)
 	const [icons, setIcons] = React.useState<[string, IconComponent][]>([])
 
 	React.useEffect(() => {
-		async function run() {
-			setIcons(
-				await fetchIconsets({
-					feather,
-					wkBrands,
-					wkPayments,
-					wkPaymentsValue,
-					monochrome: preferColor,
-				}),
-			)
+		async function fn() {
+			const [cached, icons] = await queryCache({
+				feather,
+				wkBrands,
+				wkPayments,
+				wkPaymentsValue,
+				monochrome: preferColor,
+			})
+			setIconsAreCached(cached)
+			setIcons(icons)
 		}
-		run()
+		fn()
 	}, [feather, preferColor, wkBrands, wkPayments, wkPaymentsValue])
-
-	//// React.useEffect(() => {
-	//// 	// ...
-	//// }, [])
-
-	//// // TODO
-	//// const icons = useQueryIcons({
-	//// 	feather,
-	//// 	wkBrands,
-	//// 	wkPayments,
-	//// 	wkPaymentsValue,
-	//// 	preferColor,
-	//// })
 
 	const resetIcons = React.useCallback(() => {
 		setFeather(FEATHER_DEFAULT)
@@ -111,39 +93,26 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 
 	return (
 		<SearchContext.Provider
-			value={React.useMemo(
-				() => ({
-					search,
-					setSearch,
-					feather,
-					setFeather,
-					wkBrands,
-					setWkBrands,
-					wkPayments,
-					setWkPayments,
-					wkPaymentsValue,
-					setWkPaymentsValue,
-					icons,
-					resetIcons,
-				}),
-				// prettier-ignore
-				[feather, icons, resetIcons, search, setFeather, setSearch, setWkBrands, setWkPayments, setWkPaymentsValue, wkBrands, wkPayments, wkPaymentsValue],
-			)}
+			value={{
+				search,
+				setSearch,
+				feather,
+				setFeather,
+				wkBrands,
+				setWkBrands,
+				wkPayments,
+				setWkPayments,
+				wkPaymentsValue,
+				setWkPaymentsValue,
+				preferColor,
+				setPreferColor,
+				iconsAreCached,
+				icons,
+				resetIcons,
+				resetIconPrefs,
+			}}
 		>
-			<IconPreferencesContext.Provider
-				value={React.useMemo(
-					() => ({
-						preferColor,
-						setPreferColor,
-						//// preferNames,
-						//// setPreferNames,
-						resetIconPrefs,
-					}),
-					[preferColor, resetIconPrefs, setPreferColor],
-				)}
-			>
-				{children}
-			</IconPreferencesContext.Provider>
+			{children}
 		</SearchContext.Provider>
 	)
 }
