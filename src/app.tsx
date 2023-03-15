@@ -39,7 +39,97 @@ import {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useProgressBar() {
+function useShortcutCtrlAToSelectAll() {
+	const { icons } = React.useContext(SearchContext)!
+	const { setSelectedNamesStart, setSelectedNamesEnd } = React.useContext(ClipboardContext)!
+	React.useEffect(() => {
+		if (icons === undefined) return
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.target instanceof Element && e.target.tagName === "INPUT") return
+			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
+				// Call e.preventDefault() to prevent the browser from selecting all text
+				e.preventDefault()
+				setSelectedNamesStart(0)
+				setSelectedNamesEnd(Number.MAX_SAFE_INTEGER)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [icons, setSelectedNamesEnd, setSelectedNamesStart])
+	return void 0
+}
+
+function useShortcutEscToClearAll() {
+	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
+	React.useEffect(() => {
+		function handleKeyDown(e: KeyboardEvent) {
+			//// if (document.activeElement?.tagName !== "BODY") return
+			if (e.key === "Escape") {
+				clearSelectedNames()
+				setSelectedNamesStart(null)
+				setSelectedNamesEnd(null)
+				if (document.activeElement instanceof HTMLElement) {
+					document.activeElement.blur()
+				}
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [clearSelectedNames, setSelectedNamesEnd, setSelectedNamesStart])
+	return void 0
+}
+
+function useSideEffectClearSelectionOnChange() {
+	const { feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
+	const { clearSelectedNames } = React.useContext(ClipboardContext)!
+	const onceRef = React.useRef(false)
+	React.useEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		clearSelectedNames()
+	}, [clearSelectedNames, feather, wkBrands, wkPayments])
+	return void 0
+}
+
+function useSideEffectSelectNamesFromIndexes() {
+	const { icons } = React.useContext(SearchContext)!
+	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = React.useContext(ClipboardContext)!
+	React.useEffect(() => {
+		if (icons === undefined) return
+		if (selectedNamesStart === null || selectedNamesEnd === null) return
+		const min = Math.min(selectedNamesStart, selectedNamesEnd)
+		const max = Math.max(selectedNamesStart, selectedNamesEnd)
+		addToSelectedNames(...icons.slice(min, max + 1).map(([name]) => name))
+	}, [addToSelectedNames, selectedNamesEnd, icons, selectedNamesStart])
+	return void 0
+}
+
+function useSideEffectSetCssVars() {
+	const { size } = React.useContext(RangeSizeContext)!
+	const { strokeWidth } = React.useContext(RangeStrokeWidthContext)!
+	React.useEffect(() => {
+		document.body.style.setProperty("--size", "" + size)
+	}, [size])
+	React.useEffect(() => {
+		document.body.style.setProperty("--stroke-width", "" + strokeWidth)
+	}, [strokeWidth])
+	return void 0
+}
+
+function useSideEffectVisibleDocumentTitle() {
+	const { icons } = React.useContext(SearchContext)!
+	const count = (icons ?? []).length
+	// prettier-ignore
+	useVisibleDocumentTitle([
+		`${count} icon${count === 1 ? "" : "s"}`,
+		"Feather icons",
+	])
+	return void 0
+}
+
+function useTransitionProgressBar() {
 	const { setStarted } = React.useContext(ProgressBarContext)!
 	const [pending, startTransition] = React.useTransition()
 	React.useEffect(() => {
@@ -50,8 +140,10 @@ function useProgressBar() {
 	return startTransition
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 function AppSidebar1() {
-	const startTransition = useProgressBar()
+	const startTransition = useTransitionProgressBar()
 
 	const {
 		// eslint-disable-next-line destructuring/no-rename
@@ -65,8 +157,7 @@ function AppSidebar1() {
 		setWkPaymentsValue,
 		resetIcons,
 	} = React.useContext(SearchContext)!
-	const { preferColor, setPreferColor, /* preferNames, setPreferNames, */ resetIconPrefs } =
-		React.useContext(IconPreferencesContext)!
+	const { preferColor, setPreferColor, resetIconPrefs } = React.useContext(IconPreferencesContext)!
 
 	return (
 		<Sidebar pos="start">
@@ -82,7 +173,6 @@ function AppSidebar1() {
 							<feather.Package className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Icons</h6>
-						{/* TODO: Don't change this to a <button> yet because of height */}
 						<div className="align-icon-frame">
 							<feather.RotateCcw
 								className="heading-icon-2"
@@ -210,11 +300,9 @@ function AppSidebar1() {
 				<hr />
 				<div className="section-head">
 					<div className="heading">
-						{/* Icon */}
 						<div className="align-icon-frame">
 							<feather.Settings className="heading-icon-1" />
 						</div>
-						{/* Type */}
 						<span className="heading-type">Settings</span>
 						<button className="align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
 							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} />
@@ -272,18 +360,6 @@ function AppSidebar1() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useSideEffectSetCssVars() {
-	const { size } = React.useContext(RangeSizeContext)!
-	const { strokeWidth } = React.useContext(RangeStrokeWidthContext)!
-	React.useEffect(() => {
-		document.body.style.setProperty("--size", "" + size)
-	}, [size])
-	React.useEffect(() => {
-		document.body.style.setProperty("--stroke-width", "" + strokeWidth)
-	}, [strokeWidth])
-	return void 0
-}
-
 function AppSidebar2() {
 	const { size, setSize, resetSize } = React.useContext(RangeSizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = React.useContext(RangeStrokeWidthContext)!
@@ -300,18 +376,10 @@ function AppSidebar2() {
 		navigator.clipboard.writeText(readOnlyClipboard)
 	}, [readOnlyClipboard])
 
-	//// const handleClickCopy = useCallback(() => {
-	//// 	navigator.clipboard.writeText(readOnlyClipboard)
-	//// }, [readOnlyClipboard])
-
-	//// const handleClickSave = useCallback(() => {
-	//// 	// ...
-	//// }, [])
-
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<div className="section-head">
+				<div className="section-head" data-pos="start">
 					<div className="heading">
 						<div className="align-icon-frame">
 							<feather.Clipboard className="heading-icon-1" />
@@ -322,7 +390,7 @@ function AppSidebar2() {
 						</div>
 					</div>
 				</div>
-				<div className="section-body" data-type="syntax-highlighting">
+				<div className="section-body" data-override="syntax-highlighting">
 					<MemoSyntaxHighlighting
 						lang={exportAs === "svg" ? "html" : "tsx"}
 						code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
@@ -406,101 +474,6 @@ function AppSidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useShortcutCtrlAToSelectAll() {
-	const { icons } = React.useContext(SearchContext)!
-	const { setSelectedNamesStart, setSelectedNamesEnd } = React.useContext(ClipboardContext)!
-	React.useEffect(() => {
-		if (icons === undefined) return
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.target instanceof Element && e.target.tagName === "INPUT") return
-			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
-				// Call e.preventDefault() to prevent the browser from selecting all text
-				e.preventDefault()
-				setSelectedNamesStart(0)
-				setSelectedNamesEnd(Number.MAX_SAFE_INTEGER)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [icons, setSelectedNamesEnd, setSelectedNamesStart])
-	return void 0
-}
-
-function useShortcutEscToClearAll() {
-	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
-	React.useEffect(() => {
-		function handleKeyDown(e: KeyboardEvent) {
-			//// if (document.activeElement?.tagName !== "BODY") return
-			if (e.key === "Escape") {
-				clearSelectedNames()
-				setSelectedNamesStart(null)
-				setSelectedNamesEnd(null)
-				if (document.activeElement instanceof HTMLElement) {
-					document.activeElement.blur()
-				}
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clearSelectedNames, setSelectedNamesEnd, setSelectedNamesStart])
-	return void 0
-}
-
-//// function useShortcutCtrlCToCopy() {
-//// 	const { readOnlyClipboard } = React.useContext(ClipboardContext)!
-//// 	React.useEffect(() => {
-//// 		function handleKeyDown(e: KeyboardEvent) {
-//// 			if (e.shiftKey) return // No-op because of Chrome shortcut
-//// 			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
-//// 				// Call e.preventDefault() to prevent the browser from copying selected text
-//// 				e.preventDefault()
-//// 				navigator.clipboard.writeText(readOnlyClipboard)
-//// 			}
-//// 		}
-//// 		window.addEventListener("keydown", handleKeyDown, false)
-//// 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-//// 	}, [readOnlyClipboard])
-//// 	return void 0
-//// }
-
-function useSideEffectClearSelectionOnChange() {
-	const { feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
-	const { clearSelectedNames } = React.useContext(ClipboardContext)!
-	const onceRef = React.useRef(false)
-	React.useEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		clearSelectedNames()
-	}, [clearSelectedNames, feather, wkBrands, wkPayments])
-	return void 0
-}
-
-function useSideEffectSelectNamesFromIndexes() {
-	const { icons } = React.useContext(SearchContext)!
-	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = React.useContext(ClipboardContext)!
-	React.useEffect(() => {
-		if (icons === undefined) return
-		if (selectedNamesStart === null || selectedNamesEnd === null) return
-		const min = Math.min(selectedNamesStart, selectedNamesEnd)
-		const max = Math.max(selectedNamesStart, selectedNamesEnd)
-		addToSelectedNames(...icons.slice(min, max + 1).map(([name]) => name))
-	}, [addToSelectedNames, selectedNamesEnd, icons, selectedNamesStart])
-	return void 0
-}
-
-function useSideEffectVisibleDocumentTitle() {
-	const { icons } = React.useContext(SearchContext)!
-	const count = (icons ?? []).length
-	// prettier-ignore
-	useVisibleDocumentTitle([
-		`${count} icon${count === 1 ? "" : "s"}`,
-		"Feather icons",
-	])
-	return void 0
-}
-
 function GridItemName({ name }: { name: string }) {
 	const { exportAs } = React.useContext(ClipboardContext)!
 
@@ -562,9 +535,8 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 			}}
 			onKeyDown={e => {
 				if (e.shiftKey) {
-					// Remove focus styles
 					if (document.activeElement instanceof HTMLElement) {
-						document.activeElement.blur()
+						document.activeElement.blur() // Remove focus styles
 					}
 				}
 			}}
@@ -572,11 +544,9 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 			<button className="main-grid-item-icon-frame">
 				<Icon className="main-grid-item-icon" />
 			</button>
-			{/* {preferNames && ( */}
 			<span className="main-grid-item-name">
 				<GridItemName name={name} />
 			</span>
-			{/* )} */}
 		</article>
 	)
 }
@@ -585,7 +555,6 @@ const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
 	const { feather, wkBrands, wkPayments, icons } = React.useContext(SearchContext)!
-	//// const { preferNames } = React.useContext(IconPreferencesContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
 
 	const onceRef = React.useRef(false)
@@ -598,7 +567,6 @@ function AppMain() {
 	}, [clearSelectedNames, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlAToSelectAll()
-	//// useShortcutCtrlCToCopy()
 	useShortcutEscToClearAll()
 
 	useSideEffectClearSelectionOnChange()
@@ -615,10 +583,7 @@ function AppMain() {
 				}
 			}}
 		>
-			<div
-				className="main-grid"
-				//// data-prefer-names={preferNames}
-			>
+			<div className="main-grid">
 				{icons?.map(([name, Icon], index) => (
 					<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />
 				))}
