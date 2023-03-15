@@ -2,8 +2,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build-preview": "vite build && vite preview",
-    "deploy": "vite build && netlify deploy --dir=./dist --prod --site=feathericons.dev"
+    "build-preview": "npm run build && vite preview",
+    "deploy": "npm run build && netlify deploy --dir=./dist --message=\"$(git log -1 --pretty=format:'(%h) %s%n%n%bAuthor: %an <%ae>%nDate: %ad%nBranch: %D')\" --prod --site=feathericons.dev"
   },
   "dependencies": {
     "react": "^18.2.0",
