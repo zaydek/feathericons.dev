@@ -3,6 +3,7 @@ import React from "react"
 import * as shiki from "shiki-es"
 
 import { Anchor } from "@/components"
+import { getDarkMode } from "@/lib"
 import { ShikiContext } from "@/providers"
 
 // https://twitter.com/...
@@ -49,8 +50,7 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 
 	React.useEffect(() => {
 		if (highlighter === null) return
-		const dark = document.documentElement.getAttribute("data-theme") === "dark"
-		const mode = dark ? "github-dark" : "github-light"
+		const mode = getDarkMode() ? "github-dark" : "github-light"
 		const tokens = highlighter.codeToThemedTokens(code, code.startsWith("//") ? "js" : lang, mode)
 		setTokens(tokens)
 	}, [code, highlighter, lang])
@@ -64,7 +64,15 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 							<div key={index}>
 								{line.length > 0 ? (
 									// Tokens
-									<Tokenize color="rgb(110, 119, 129)">{line}</Tokenize>
+									<Tokenize
+										// prettier-ignore
+										color={getDarkMode()
+											? "rgb(139, 148, 158)"
+											: "rgb(110, 119, 129)"
+										}
+									>
+										{line}
+									</Tokenize>
 								) : (
 									<br />
 								)}
