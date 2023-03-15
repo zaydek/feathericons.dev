@@ -107,7 +107,7 @@ $sidebar-max-z-index: 100
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Nested components e.g. head, body, and foot
+// Nested components e.g. .sidebar-head, .sidebar-body, and .sidebar-foot
 // https://codepen.io/zaydek/pen/gOdeVWJ?editors=1100
 //
 .sidebar-head
@@ -117,9 +117,14 @@ $sidebar-max-z-index: 100
   flex-direction: column
   background-color: white
   overflow-y: auto
+
+.sidebar-head-body
+  overflow-y: auto
+
 .sidebar-body
   display: flex
   flex-direction: column
+
 .sidebar-foot
   position: sticky
   bottom: 0

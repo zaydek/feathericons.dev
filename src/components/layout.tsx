@@ -2,6 +2,7 @@ import React from "react"
 
 import { getCssVarAsNumber, round } from "@/lib"
 import { LayoutContext, SidebarState } from "@/providers"
+import { useScrollProps } from "@/use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -211,9 +212,20 @@ export function Sidebar({
 export function SidebarHead({ children }: React.PropsWithChildren) {
 	return <header className="sidebar-head">{children}</header>
 }
+
+export function SidebarHeadBody({ children }: React.PropsWithChildren) {
+	const scrollProps = useScrollProps()
+	return (
+		<div className="sidebar-head-body" {...scrollProps}>
+			{children}
+		</div>
+	)
+}
+
 export function SidebarBody({ children }: React.PropsWithChildren) {
 	return <div className="sidebar-body">{children}</div>
 }
+
 export function SidebarFoot({ children }: React.PropsWithChildren) {
 	return <footer className="sidebar-foot">{children}</footer>
 }

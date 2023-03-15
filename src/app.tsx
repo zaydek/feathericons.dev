@@ -20,6 +20,7 @@ import {
 	SidebarBody,
 	SidebarFoot,
 	SidebarHead,
+	SidebarHeadBody,
 	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
@@ -40,7 +41,6 @@ import {
 	STROKE_STEP,
 } from "@/providers"
 import { Hairline, Section } from "./section-components"
-import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -73,8 +73,6 @@ function AppSidebar1() {
 	const { preferColor, setPreferColor, /* preferNames, setPreferNames, */ resetIconPrefs } =
 		React.useContext(IconPreferencesContext)!
 
-	const scrollProps = useScrollProps()
-
 	return (
 		<Sidebar pos="start">
 			<SidebarHead>
@@ -83,7 +81,7 @@ function AppSidebar1() {
 						<SearchBar />
 					</div>
 				</section>
-				<div className="TEST_section-body" {...scrollProps}>
+				<SidebarHeadBody>
 					<section className="section" data-pos="checkboxes">
 						<header className="section-head">
 							<div className="sidebar-align-icon-frame">
@@ -215,7 +213,7 @@ function AppSidebar1() {
 							</ul>
 						</div>
 					</section>
-				</div>
+				</SidebarHeadBody>
 			</SidebarHead>
 			<SidebarBody>
 				<Hairline />
@@ -309,8 +307,6 @@ function AppSidebar2() {
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = React.useContext(RangeStrokeWidthContext)!
 	const { exportAs, setExportAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
 
-	const scrollProps = useScrollProps()
-
 	useSideEffectSetCssVars()
 
 	const onceRef = React.useRef(false)
@@ -344,7 +340,7 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="TEST_section-body" {...scrollProps}>
+				<SidebarHeadBody>
 					<section className="section" data-pos="syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
@@ -365,7 +361,7 @@ function AppSidebar2() {
 							</button>
 						</div> */}
 					</section>
-				</div>
+				</SidebarHeadBody>
 			</header>
 			<div className="sidebar-body">
 				<Hairline />
