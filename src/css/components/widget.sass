@@ -4,7 +4,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Optical alignment frames
 .widget-align-frame
   display: flex
   flex-direction: column
@@ -22,12 +21,10 @@
 
 .widget-head
   padding: $sidebar-gap $sidebar-padding-x
-  // Overrides, don't use these :not([data-has])
   &[data-has=start]
+    isolation: isolate // For box-shadow (see .checkboxes)
     padding-top: $sidebar-padding-y
-  // Don't use has here (because of FF) but no choice
-  &:has(+ [data-scroll=true])
-    isolation: isolate // Needed for box-shadow (see .checkboxes)
+  &:has(+ [data-scroll=true]) // Don't use :has (because of FF) but no choice
     box-shadow: $hairline-shadow-bottom
 
 .widget-body
@@ -35,16 +32,15 @@
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
-  // Overrides, don't use these :not([data-has])
   &[data-has=syntax-highlighting]
     padding: 0
   &[data-has=end]
     padding-bottom: $sidebar-padding-y
   padding-top: 0
-  overflow-y: auto
+  .sidebar-head &
+    overflow-y: auto
 
-// Create a container because of added padding-bottom (overflow-y must be
-// separated)
+// Create a container because of added padding-bottom (overflow-y must be separated)
 .widget-syntax-highlighting-container
   padding-bottom: $sidebar-gap
 
