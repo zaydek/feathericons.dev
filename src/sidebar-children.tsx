@@ -1,15 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 export function SidebarHead({ children }: React.PropsWithChildren) {
-	return <header className="sidebar-head">{children}</header>
+	return <header className="sidebar__card__body__head">{children}</header>
 }
 
 export function SidebarBody({ children }: React.PropsWithChildren) {
-	return <div className="sidebar-body">{children}</div>
+	return <div className="sidebar__card__body__body">{children}</div>
 }
 
 export function SidebarFoot({ children }: React.PropsWithChildren) {
-	return <footer className="sidebar-foot">{children}</footer>
+	return <footer className="sidebar__card__body__foot">{children}</footer>
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -3,6 +3,8 @@ import React from "react"
 import { getCssVarAsNumber, round } from "@/lib"
 import { LayoutContext, SidebarState } from "@/providers"
 
+////////////////////////////////////////////////////////////////////////////////
+
 function useSideEffectHtmlAndBodyScrollLocking() {
 	const { sidebar1, sidebar2 } = React.useContext(LayoutContext)!
 	React.useEffect(() => {
@@ -34,14 +36,7 @@ function useSideEffectHtmlAndBodyScrollLocking() {
 	return void 0
 }
 
-export function SidebarOverlay() {
-	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
-
-	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
-	const setState = sidebar1 === "maximized" ? setSidebar1 : setSidebar2
-
-	return <div className="sidebar-overlay" data-open={open} onClick={e => setState(null)}></div>
-}
+////////////////////////////////////////////////////////////////////////////////
 
 export function Sidebar({
 	pos,
@@ -184,7 +179,7 @@ export function Sidebar({
 		>
 			<div
 				ref={dragAreaRef}
-				className="sidebar-drag-area"
+				className="sidebar__drag-area"
 				//// onKeyDown={e => {
 				//// 	if (e.key === "ArrowLeft") {
 				//// 		if (pos === "start") {
@@ -202,13 +197,22 @@ export function Sidebar({
 				//// }}
 				tabIndex={0}
 			>
-				<div className="sidebar-drag-area-handle"></div>
+				<div className="sidebar__drag-area__grip"></div>
 			</div>
-			<div className="sidebar-card">
-				<div className="sidebar-card-body">{children}</div>
+			<div className="sidebar__card">
+				<div className="sidebar__card__body">{children}</div>
 			</div>
 		</aside>
 	)
+}
+
+export function SidebarOverlay() {
+	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
+
+	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
+	const setState = sidebar1 === "maximized" ? setSidebar1 : setSidebar2
+
+	return <div className="sidebar-overlay" data-open={open} onClick={e => setState(null)}></div>
 }
 
 // Expose props for app.tsx (TODO)
