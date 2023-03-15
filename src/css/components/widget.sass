@@ -4,13 +4,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.optical-alignment-frame
+// Optical alignment frames
+.widget-align-frame
   display: flex
   flex-direction: column
   justify-content: center // Center y-axis
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
 
-.optical-alignment-icon-frame
+.widget-align-icon-frame
   display: flex
   justify-content: center // Center x-axis
   align-items: center     // Center y-axis
@@ -21,7 +22,8 @@
 
 .widget-head
   padding: $sidebar-gap $sidebar-padding-x
-  &[data-pos=start]
+  // Overrides, don't use these :not([data-has])
+  &[data-has=start]
     padding-top: $sidebar-padding-y
 
 .widget-body
@@ -29,13 +31,18 @@
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
-  padding-top: 0
-  &[data-override=syntax-highlighting]
+  // Overrides, don't use these :not([data-has])
+  &[data-has=syntax-highlighting]
     padding: 0
+  &[data-has=end]
+    padding-bottom: $sidebar-padding-y
+  padding-top: 0
+  overflow-y: auto
 
-  // TODO: Add data-pos overrides here
-  // TODO: Rename to data-override?
-  overflow-y: auto // TOOD
+// Create a container because of added padding-bottom (overflow-y must be
+// separated)
+.widget-syntax-highlighting-container
+  padding-bottom: $sidebar-gap
 
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -162,18 +162,18 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
-				<div className="widget-head" data-pos="start">
-					<div className="optical-alignment-frame">
+				<div className="widget-head" data-has="start">
+					<div className="widget-align-frame">
 						<SearchBar />
 					</div>
 				</div>
 				<div className="widget-body">
 					<div className="widget-name">
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.Package className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.RotateCcw
 								className="widget-name-icon-2"
 								strokeWidth={4}
@@ -184,11 +184,11 @@ function AppSidebar1() {
 					<div>
 						<div className="checkboxes">
 							<label className="checkbox">
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<feather.Feather className="checkbox-icon" />
 								</div>
 								<span className="checkbox-name">Feather</span>
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<input
 										type="checkbox"
 										checked={$feather}
@@ -199,14 +199,14 @@ function AppSidebar1() {
 						</div>
 						<div className="checkboxes">
 							<label className="checkbox">
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
 										Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 									/>
 								</div>
 								<span className="checkbox-name">Social media</span>
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<input
 										type="checkbox"
 										checked={wkBrands}
@@ -217,7 +217,7 @@ function AppSidebar1() {
 						</div>
 						<div className="checkboxes">
 							<label className="checkbox">
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
 										data-type="payments"
@@ -234,7 +234,7 @@ function AppSidebar1() {
 									/>
 								</div>
 								<span className="checkbox-name">Cards</span>
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<input
 										type="checkbox"
 										checked={wkPayments}
@@ -244,7 +244,7 @@ function AppSidebar1() {
 							</label>
 							<div className="checkboxes">
 								<label className="checkbox">
-									<div className="optical-alignment-icon-frame">
+									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
@@ -252,7 +252,7 @@ function AppSidebar1() {
 										/>
 									</div>
 									<span className="checkbox-name">Original</span>
-									<div className="optical-alignment-icon-frame">
+									<div className="widget-align-icon-frame">
 										<input
 											name="payments"
 											type="radio"
@@ -269,7 +269,7 @@ function AppSidebar1() {
 							</div>
 							<div className="checkboxes">
 								<label className="checkbox">
-									<div className="optical-alignment-icon-frame">
+									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
@@ -277,7 +277,7 @@ function AppSidebar1() {
 										/>
 									</div>
 									<span className="checkbox-name">Filled</span>
-									<div className="optical-alignment-icon-frame">
+									<div className="widget-align-icon-frame">
 										<input
 											name="payments"
 											type="radio"
@@ -300,11 +300,11 @@ function AppSidebar1() {
 				<hr />
 				<div className="widget-head">
 					<div className="widget-name">
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.Settings className="widget-name-icon-1" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button className="optical-alignment-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
+						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
 						</button>
 					</div>
@@ -312,11 +312,11 @@ function AppSidebar1() {
 				<div className="widget-body">
 					<div className="checkboxes">
 						<label className="checkbox">
-							<div className="optical-alignment-icon-frame">
+							<div className="widget-align-icon-frame">
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
 							<span className="checkbox-name">Colorize icons</span>
-							<div className="optical-alignment-icon-frame">
+							<div className="widget-align-icon-frame">
 								<input
 									type="checkbox"
 									checked={preferColor}
@@ -332,21 +332,21 @@ function AppSidebar1() {
 				<hr data-collapse />
 				<div className="widget-head">
 					<div className="widget-name">
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.Globe className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Resources</h6>
 					</div>
 				</div>
-				<div className="widget-body">
+				<div className="widget-body" data-has="end">
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
 								<span className="resource-name">{resource.name}</span>
-								<div className="optical-alignment-icon-frame">
+								<div className="widget-align-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
@@ -379,22 +379,24 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<div className="widget-head" data-pos="start">
+				<div className="widget-head" data-has="start">
 					<div className="widget-name">
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.Clipboard className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Clipboard</h6>
-						<div className="optical-alignment-frame">
+						<div className="widget-align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</div>
 				</div>
-				<div className="widget-body" data-override="syntax-highlighting">
-					<MemoSyntaxHighlighting
-						lang={exportAs === "svg" ? "html" : "tsx"}
-						code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
-					/>
+				<div className="widget-body" data-has="syntax-highlighting">
+					<div className="widget-syntax-highlighting-container">
+						<MemoSyntaxHighlighting
+							lang={exportAs === "svg" ? "html" : "tsx"}
+							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
+						/>
+					</div>
 					{/* <div className="action-buttons">
 						<button className="action-button">
 							<div className="action-button-icon-frame">
@@ -416,36 +418,36 @@ function AppSidebar2() {
 				<hr />
 				<div className="widget-head">
 					<div className="widget-name">
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.PenTool className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">size</h6>
 						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</div>
 				</div>
 				<div className="widget-body">
-					<div className="optical-alignment-frame">
+					<div className="widget-align-frame">
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</div>
 				<hr />
 				<div className="widget-head">
 					<div className="widget-name">
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.PenTool className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">stroke width</h6>
 						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
-						<div className="optical-alignment-icon-frame">
+						<div className="widget-align-icon-frame">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</div>
 				</div>
 				<div className="widget-body">
-					<div className="optical-alignment-frame">
+					<div className="widget-align-frame">
 						<ProgressRange
 							value={strokeWidth}
 							setValue={setStrokeWidth}
@@ -457,17 +459,6 @@ function AppSidebar2() {
 				</div>
 				<hr />
 			</div>
-			{/* <footer className="sidebar-foot">
-				<hr data-collapse />
-				<section className="DEPRECATE_section" data-pos="end">
-					<div className="widget-name">
-						<div className="optical-alignment-icon-frame">
-							<Feather.Shield className="widget-name-icon-1" />
-						</div>
-						<h6 className="widget-name-type">Sponsor</h6>
-					</header>
-				</section>
-			</footer> */}
 		</Sidebar>
 	)
 }
