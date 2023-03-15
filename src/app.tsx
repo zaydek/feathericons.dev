@@ -76,7 +76,7 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<SidebarHead>
-				{/* <section className="section" data-pos="start">
+				{/* <section className="DEPRECATE_section" data-pos="start">
 					<div className="align-frame">
 						<SearchBar />
 					</div>
@@ -221,7 +221,7 @@ function AppSidebar1() {
 
 			<SidebarBody>
 				<Hairline />
-				<section className="section">
+				<section className="DEPRECATE_section">
 					<header className="section-heading">
 						<div className="align-icon-frame">
 							<feather.Settings className="section-heading-icon" />
@@ -333,7 +333,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<section className="section" data-pos="start">
+				<section className="DEPRECATE_section" data-pos="start">
 					<header className="section-heading">
 						<div className="align-icon-frame">
 							<feather.Clipboard className="section-heading-icon" />
@@ -345,7 +345,7 @@ function AppSidebar2() {
 					</header>
 				</section>
 				<SidebarHeadBody>
-					<section className="section" data-pos="syntax-highlighting">
+					<section className="DEPRECATE_section" data-pos="syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
@@ -369,7 +369,7 @@ function AppSidebar2() {
 			</header>
 			<div className="sidebar-body">
 				<Hairline />
-				<section className="section">
+				<section className="DEPRECATE_section">
 					<header className="section-heading">
 						<div className="align-icon-frame">
 							<feather.PenTool className="section-heading-icon" />
@@ -386,7 +386,7 @@ function AppSidebar2() {
 					</div>
 				</section>
 				<Hairline />
-				<section className="section">
+				<section className="DEPRECATE_section">
 					<header className="section-heading">
 						<div className="align-icon-frame">
 							<feather.PenTool className="section-heading-icon" />
@@ -412,7 +412,7 @@ function AppSidebar2() {
 			</div>
 			{/* <footer className="sidebar-foot">
 				<Hairline collapse />
-				<section className="section" data-pos="end">
+				<section className="DEPRECATE_section" data-pos="end">
 					<header className="section-heading">
 						<div className="align-icon-frame">
 							<Feather.Shield className="section-heading-icon" />

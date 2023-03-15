@@ -1,19 +1,17 @@
-export function Hairline({ collapse = undefined }: { collapse?: boolean }) {
-	return <hr className="hairline" data-collapse={collapse} />
-}
+import * as feather from "@icons/feather/tsx"
 
-// TODO: DEPRECATE
-export function Section({
-	pos,
-	children,
-}: React.PropsWithChildren<{
-	// prettier-ignore
-	pos:
-		| "start"
-		| "checkboxes"
-		| "syntax-highlighting"
-		| "end"
-}>) {
+import { IconComponent } from "./lib"
+
+////////////////////////////////////////////////////////////////////////////////
+
+// prettier-ignore
+export type Pos =
+	| "start"
+	| "checkboxes"
+	| "syntax-highlighting"
+	| "end"
+
+export function Section({ pos, children }: React.PropsWithChildren<{ pos: Pos }>) {
 	return (
 		<section className="section" data-pos={pos}>
 			{children}
@@ -21,30 +19,59 @@ export function Section({
 	)
 }
 
+export function Hairline({ collapse = undefined }: { collapse?: boolean }) {
+	return <hr className="hairline" data-collapse={collapse} />
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
-export function SectionHead({
-	pos,
-	children,
-}: React.PropsWithChildren<{
-	// prettier-ignore
-	pos:
-		| "start"
-		| "checkboxes"
-		| "syntax-highlighting"
-		| "end"
-}>) {
+export function SectionHeading({
+	Icon,
+	text,
+	canReset,
+	onClick,
+}: {
+	text: string
+	Icon: IconComponent
+	canReset?: boolean
+	onClick?: JSX.IntrinsicElements["button"]["onClick"]
+}) {
 	return (
-		<header className="section-head" data-pos={pos}>
-			{children}
-		</header>
+		<div className="section-heading">
+			<Icon />
+			<span className="section-heading-type">{text}</span>
+			{canReset && (
+				<button className="align-icon-frame" onClick={onClick}>
+					<feather.RotateCcw className="section-heading-icon" />
+				</button>
+			)}
+		</div>
 	)
 }
 
-export function SectionBody({ children }: React.PropsWithChildren) {
-	return <div className="section-body">{children}</div>
-}
-
-export function SectionFoot({ children }: React.PropsWithChildren) {
-	return <footer className="section-foot">{children}</footer>
+export function SectionHeadingRangeValue({
+	Icon,
+	text,
+	value,
+	canReset,
+	onClick,
+}: {
+	Icon: IconComponent
+	text: string
+	value: string
+	canReset?: boolean
+	onClick?: JSX.IntrinsicElements["button"]["onClick"]
+}) {
+	return (
+		<div className="section-heading">
+			<Icon />
+			<span className="section-heading-type">{text}</span>
+			<span className="section-heading-number-type">{value}</span>
+			{canReset && (
+				<button className="align-icon-frame" onClick={onClick}>
+					<feather.RotateCcw className="section-heading-icon" />
+				</button>
+			)}
+		</div>
+	)
 }
