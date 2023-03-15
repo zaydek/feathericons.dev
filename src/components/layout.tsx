@@ -113,9 +113,9 @@ export function Sidebar({
 					if (x > width) {
 						setState("maximized")
 					} else if (x > 0) {
-						setState(null)
+						setState("open")
 					}
-				} else if (state === null) {
+				} else if (state === "open") {
 					if (x > 0) {
 						setState("maximized")
 					} else if (x < 0) {
@@ -125,7 +125,7 @@ export function Sidebar({
 					if (x < -d) {
 						setState("minimized")
 					} else if (x < 0) {
-						setState(null)
+						setState("open")
 					}
 				}
 			} else {
@@ -133,9 +133,9 @@ export function Sidebar({
 					if (x < -width) {
 						setState("maximized")
 					} else if (x < 0) {
-						setState(null)
+						setState("open")
 					}
-				} else if (state === null) {
+				} else if (state === "open") {
 					if (x < 0) {
 						setState("maximized")
 					} else if (x > 0) {
@@ -145,7 +145,7 @@ export function Sidebar({
 					if (x > d) {
 						setState("minimized")
 					} else if (x > 0) {
-						setState(null)
+						setState("open")
 					}
 				}
 			}
@@ -169,7 +169,8 @@ export function Sidebar({
 			ref={ref}
 			className="sidebar"
 			data-pos={pos}
-			data-state={state}
+			// Omit state from [data-state] for CSS
+			data-state={state === "open" ? undefined : state}
 			data-transition={transition}
 			style={{ "--__x": `${x}px` } as React.CSSProperties}
 			onTransitionEnd={e => setTransition(false)}
@@ -187,19 +188,19 @@ export function Sidebar({
 								case "minimized":
 									// No-op
 									break
-								case null:
+								case "open":
 									setState("minimized")
 									break
 								case "maximized":
-									setState(null)
+									setState("open")
 									break
 							}
 						} else if (e.key === "ArrowRight") {
 							switch (state) {
 								case "minimized":
-									setState(null)
+									setState("open")
 									break
-								case null:
+								case "open":
 									setState("maximized")
 									break
 								case "maximized":
@@ -212,9 +213,9 @@ export function Sidebar({
 						if (e.key === "ArrowLeft") {
 							switch (state) {
 								case "minimized":
-									setState(null)
+									setState("open")
 									break
-								case null:
+								case "open":
 									setState("maximized")
 									break
 								case "maximized":
@@ -226,11 +227,11 @@ export function Sidebar({
 								case "minimized":
 									// No-op
 									break
-								case null:
+								case "open":
 									setState("minimized")
 									break
 								case "maximized":
-									setState(null)
+									setState("open")
 									break
 							}
 						}
@@ -263,7 +264,7 @@ export function SidebarOverlay() {
 		<div
 			className="sidebar-overlay"
 			data-open={open}
-			onClick={e => setState(null)}
+			onClick={e => setState("open")}
 			// @ts-expect-error
 			inert={!open ? "true" : undefined}
 		></div>

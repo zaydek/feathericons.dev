@@ -1,6 +1,6 @@
 import React from "react"
 
-export type SidebarState = "maximized" | "minimized" | null
+export type SidebarState = "minimized" | "open" | "maximized"
 
 // prettier-ignore
 export const LayoutContext = React.createContext<{
@@ -11,8 +11,8 @@ export const LayoutContext = React.createContext<{
 } | null>(null)
 
 export function LayoutProvider({ children }: React.PropsWithChildren) {
-	const [sidebar1, setSidebar1] = React.useState<SidebarState>(null)
-	const [sidebar2, setSidebar2] = React.useState<SidebarState>(null)
+	const [sidebar1, setSidebar1] = React.useState<SidebarState>("open")
+	const [sidebar2, setSidebar2] = React.useState<SidebarState>("open")
 
 	return (
 		<LayoutContext.Provider
