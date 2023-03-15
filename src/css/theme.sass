@@ -1,36 +1,39 @@
-// TODO
+@use "tailwind-colors" as *
+
+$include: false !default
 
 $base-color:            var(--base-color)
-$hairline-color:        var(--hairline-color)
+$brand-color:           var(--brand-color)
 $primary-text-color:    var(--primary-text-color)
 $secondary-text-color:  var(--secondary-text-color)
 $inactive-icon-color:   var(--inactive-icon-color)
 $active-icon-color:     var(--active-icon-color)
 $decorative-icon-color: var(--decorative-icon-color)
 
-:root:not([data-theme=dark])
-  color-scheme: light
-:root[data-theme=dark]
-  color-scheme: dark
+@if $include
+  :root:not([data-theme=dark])
+    color-scheme: light
+  :root[data-theme=dark]
+    color-scheme: dark
 
-:root:not([data-theme="dark"])
-  --app-color:             red
+  :root:not([data-theme="dark"])
+    --app-color:             red
 
-  --base-color:            $white
-  --hairline-color:        $slate-300
-  --primary-text-color:    $slate-800
-  --secondary-text-color:  $slate-600
-  --inactive-icon-color:   $slate-400
-  --active-icon-color:     $slate-800
-  --decorative-icon-color: $slate-500
+    --base-color:            white
+    --brand-color:           dodger-blue
+    --primary-text-color:    $slate-800
+    --secondary-text-color:  $slate-600
+    --inactive-icon-color:   $slate-400
+    --active-icon-color:     $slate-800
+    --decorative-icon-color: $slate-500
 
-:root[data-theme="dark"]
-  --app-color:             blue
+  :root[data-theme="dark"]
+    --app-color:             blue
 
-  --base-color:            $slate-900
-  --hairline-color:        $slate-500
-  --primary-text-color:    $slate-100
-  --secondary-text-color:  $slate-700
-  --inactive-icon-color:   $slate-500
-  --active-icon-color:     $slate-100
-  --decorative-icon-color: $slate-500
+    --base-color:            $slate-900
+    --brand-color:           dodger-blue
+    --primary-text-color:    $slate-100
+    --secondary-text-color:  $slate-700
+    --inactive-icon-color:   $slate-500
+    --active-icon-color:     $slate-100
+    --decorative-icon-color: $slate-500

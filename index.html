@@ -36,17 +36,15 @@
 
     <!-- Dark mode -->
     <script>
-      const media = window.matchMedia("(prefers-color-scheme: dark)")
-      if (media.matches) {
-        document.documentElement.setAttribute("data-theme", "dark")
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      function handleThemeChange(matches) {
+        const theme = matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
       }
-      media.addEventListener("change", e => {
-        if (e.matches) {
-          document.documentElement.setAttribute("data-theme", "dark")
-        } else {
-          document.documentElement.setAttribute("data-theme", "dark")
-        }
-      }, false)
+      handleThemeChange(media.matches);
+      media.addEventListener("change", (e) => {
+        handleThemeChange(e.matches);
+      }, false);
     </script>
   </head>
   <!-- TODO: Use fallback instead of inline styles here? -->

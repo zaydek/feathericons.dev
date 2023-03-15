@@ -1,7 +1,7 @@
-@forward "hairline-and-box-shadow"
+@forward "box-shadow"
 @forward "tailwind-colors"
+@forward "theme" with ($include: true)
 @forward "typography"
-@forward "vars"
 
 $sidebar-padding-y: 32px
 $sidebar-padding-x: 16px
@@ -11,4 +11,5 @@ $button-height:     40px
 $icon-height:       18px
 $tiny-icon-height:  14px
 
+// TODO: Move to theme.sass
 $brand-color:       dodgerblue
