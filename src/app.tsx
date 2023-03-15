@@ -73,7 +73,7 @@ function AppSidebar1() {
 
 	return (
 		<Sidebar pos="start">
-			<header className="sidebar-header">
+			<header className="sidebar-head">
 				<section className="section" data-pos="start">
 					<div className="sidebar-align-frame">
 						<SearchBar />
@@ -213,7 +213,7 @@ function AppSidebar1() {
 					</section>
 				</div>
 			</header>
-			<div className="u-overflow-y">
+			<div className="sidebar-body">
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
@@ -259,7 +259,7 @@ function AppSidebar1() {
 				<hr className="hairline" />
 			</div>
 			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
-			<footer className="sidebar-footer">
+			<footer className="sidebar-foot">
 				<hr className="hairline" data-collapse />
 				<section className="section" data-pos="end">
 					<header className="section-header">
@@ -329,7 +329,7 @@ function AppSidebar2() {
 
 	return (
 		<Sidebar pos="end">
-			<header className="sidebar-header">
+			<header className="sidebar-head">
 				<section className="section" data-pos="start">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
@@ -364,7 +364,7 @@ function AppSidebar2() {
 					</section>
 				</div>
 			</header>
-			<div className="u-overflow-y">
+			<div className="sidebar-body">
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
@@ -408,7 +408,7 @@ function AppSidebar2() {
 				<hr className="hairline" />
 			</div>
 			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
-			{/* <footer className="sidebar-footer">
+			{/* <footer className="sidebar-foot">
 				<hr className="hairline" data-collapse />
 				<section className="section" data-pos="end">
 					<header className="section-header">

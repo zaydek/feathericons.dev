@@ -2,32 +2,27 @@
 
 @use "../globals" as *
 
-// <div class="sidebar-header">
-//   ...
-// </div>
-// <div class="sidebar-scroll-area">
-//   ...
-// </div>
-// <div class="sidebar-footer">
-//   ...
-// </div>
-//
-.sidebar-header
+////////////////////////////////////////////////
+
+// https://codepen.io/zaydek/pen/gOdeVWJ?editors=1100
+.sidebar-head
   position: sticky
   top: 0
+  z-index: 10
   display: flex
   flex-direction: column
   background-color: white
   overflow-y: auto
-
-//// .sidebar-scroll-area
-////   overflow-y: auto
-.sidebar-footer
+.sidebar-body
+  display: flex
+  flex-direction: column
+.sidebar-foot
   position: sticky
   bottom: 0
   z-index: 20
   margin-top: auto
-  background-color: white
+
+////////////////////////////////////////////////////////////////////////////////
 
 .sidebar-align-frame
   display: flex
