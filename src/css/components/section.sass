@@ -14,6 +14,7 @@
   // Overrides -- don't use (:not(:is(...)))
   &[data-pos=start]
     padding-top: $sidebar-padding-y
+    // TOOD: This shadow keeps getting clipped
     &:has(+ [data-scroll=true])
       box-shadow: $hairline-shadow-bottom
   // TODO: This can be changed to use :has(...) (depends on FF support)
