@@ -77,26 +77,27 @@ function AppSidebar1() {
 		<Sidebar pos="start">
 			<SidebarHead>
 				{/* <section className="section" data-pos="start">
-					<div className="section-frame">
+					<div className="align-frame">
 						<SearchBar />
 					</div>
 				</section> */}
 
 				<header className="TEST_section-head" data-pos="start">
-					<div className="section-frame">
+					<div className="align-frame">
 						<SearchBar />
 					</div>
 				</header>
 				<div className="TEST_section-body">
-					<header className="section-head">
-						<div className="section-icon-frame">
-							<feather.Package className="section-icon" />
+					{/* TODO: Rename */}
+					<header className="section-heading">
+						<div className="align-icon-frame">
+							<feather.Package className="section-heading-icon" />
 						</div>
-						<h6 className="section-name">Icons</h6>
-						<div className="section-icon-frame">
+						<h6 className="section-heading-name">Icons</h6>
+						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
-								className="section-reset-icon"
+								className="section-heading-reset-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIcons)}
 							/>
@@ -105,11 +106,11 @@ function AppSidebar1() {
 					<div>
 						<ul className="checkboxes">
 							<label className="checkbox">
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<feather.Feather className="checkbox-icon" />
 								</div>
 								<span className="checkbox-name">Feather</span>
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<input
 										type="checkbox"
 										checked={$feather}
@@ -120,14 +121,14 @@ function AppSidebar1() {
 						</ul>
 						<ul className="checkboxes">
 							<label className="checkbox">
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
 										Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 									/>
 								</div>
 								<span className="checkbox-name">Social media</span>
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<input
 										type="checkbox"
 										checked={wkBrands}
@@ -138,7 +139,7 @@ function AppSidebar1() {
 						</ul>
 						<ul className="checkboxes">
 							<label className="checkbox">
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
 										data-type="payments"
@@ -155,7 +156,7 @@ function AppSidebar1() {
 									/>
 								</div>
 								<span className="checkbox-name">Cards</span>
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<input
 										type="checkbox"
 										checked={wkPayments}
@@ -165,7 +166,7 @@ function AppSidebar1() {
 							</label>
 							<ul className="checkboxes">
 								<label className="checkbox">
-									<div className="section-icon-frame">
+									<div className="align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
@@ -173,7 +174,7 @@ function AppSidebar1() {
 										/>
 									</div>
 									<span className="checkbox-name">Original</span>
-									<div className="section-icon-frame">
+									<div className="align-icon-frame">
 										<input
 											name="payments"
 											type="radio"
@@ -190,7 +191,7 @@ function AppSidebar1() {
 							</ul>
 							<ul className="checkboxes">
 								<label className="checkbox">
-									<div className="section-icon-frame">
+									<div className="align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
@@ -198,7 +199,7 @@ function AppSidebar1() {
 										/>
 									</div>
 									<span className="checkbox-name">Filled</span>
-									<div className="section-icon-frame">
+									<div className="align-icon-frame">
 										<input
 											name="payments"
 											type="radio"
@@ -216,156 +217,20 @@ function AppSidebar1() {
 						</ul>
 					</div>
 				</div>
-				{/* <footer className="TEST_section-foot">Hello</footer> */}
-
-				{false && (
-					<SidebarHeadBody>
-						<section className="section" data-pos="checkboxes">
-							<header className="section-head">
-								<div className="section-icon-frame">
-									<feather.Package className="section-icon" />
-								</div>
-								<h6 className="section-name">Icons</h6>
-								<div className="section-icon-frame">
-									{/* TODO: Change to <button> */}
-									<feather.RotateCcw
-										className="section-reset-icon"
-										strokeWidth={4}
-										onClick={() => startTransition(resetIcons)}
-									/>
-								</div>
-							</header>
-							<div>
-								<ul className="checkboxes">
-									<label className="checkbox">
-										<div className="section-icon-frame">
-											<feather.Feather className="checkbox-icon" />
-										</div>
-										<span className="checkbox-name">Feather</span>
-										<div className="section-icon-frame">
-											<input
-												type="checkbox"
-												checked={$feather}
-												onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
-											/>
-										</div>
-									</label>
-								</ul>
-								<ul className="checkboxes">
-									<label className="checkbox">
-										<div className="section-icon-frame">
-											<DynamicIcon
-												className="checkbox-icon"
-												Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
-											/>
-										</div>
-										<span className="checkbox-name">Social media</span>
-										<div className="section-icon-frame">
-											<input
-												type="checkbox"
-												checked={wkBrands}
-												onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
-											/>
-										</div>
-									</label>
-								</ul>
-								<ul className="checkboxes">
-									<label className="checkbox">
-										<div className="section-icon-frame">
-											<DynamicIcon
-												className="checkbox-icon"
-												data-type="payments"
-												Icon={
-													// prettier-ignore
-													preferColor
-														? wkPaymentsValue === "normal"
-															? wkPaymentsOriginal.CardMastercard
-															: wkPaymentsOriginalFilled.CardMastercard
-														: wkPaymentsValue === "normal"
-															? wkPaymentsMono.CardMastercard
-															: wkPaymentsMonoFilled.CardMastercard
-												}
-											/>
-										</div>
-										<span className="checkbox-name">Cards</span>
-										<div className="section-icon-frame">
-											<input
-												type="checkbox"
-												checked={wkPayments}
-												onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
-											/>
-										</div>
-									</label>
-									<ul className="checkboxes">
-										<label className="checkbox">
-											<div className="section-icon-frame">
-												<DynamicIcon
-													className="checkbox-icon"
-													data-type="payments"
-													Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
-												/>
-											</div>
-											<span className="checkbox-name">Original</span>
-											<div className="section-icon-frame">
-												<input
-													name="payments"
-													type="radio"
-													checked={wkPaymentsValue === "normal"}
-													onChange={e =>
-														startTransition(() => {
-															setWkPayments(true)
-															setWkPaymentsValue("normal")
-														})
-													}
-												/>
-											</div>
-										</label>
-									</ul>
-									<ul className="checkboxes">
-										<label className="checkbox">
-											<div className="section-icon-frame">
-												<DynamicIcon
-													className="checkbox-icon"
-													data-type="payments"
-													Icon={
-														preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard
-													}
-												/>
-											</div>
-											<span className="checkbox-name">Filled</span>
-											<div className="section-icon-frame">
-												<input
-													name="payments"
-													type="radio"
-													checked={wkPaymentsValue === "filled"}
-													onChange={e =>
-														startTransition(() => {
-															setWkPayments(true)
-															setWkPaymentsValue("filled")
-														})
-													}
-												/>
-											</div>
-										</label>
-									</ul>
-								</ul>
-							</div>
-						</section>
-					</SidebarHeadBody>
-				)}
 			</SidebarHead>
+
 			<SidebarBody>
 				<Hairline />
 				<section className="section">
-					<header className="section-head">
-						<div className="section-icon-frame">
-							<feather.Settings className="section-icon" />
+					<header className="section-heading">
+						<div className="align-icon-frame">
+							<feather.Settings className="section-heading-icon" />
 						</div>
-						<h6 className="section-name">Settings</h6>
-						<div className="section-icon-frame">
+						<h6 className="section-heading-name">Settings</h6>
+						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
-								className="section-reset-icon"
+								className="section-heading-reset-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIconPrefs)}
 							/>
@@ -373,12 +238,12 @@ function AppSidebar1() {
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							<div className="section-icon-frame">
+							<div className="align-icon-frame">
 								{/* Defer to CSS; no <svg> */}
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
 							<span className="checkbox-name">Colorize icons</span>
-							<div className="section-icon-frame">
+							<div className="align-icon-frame">
 								<input
 									type="checkbox"
 									checked={preferColor}
@@ -387,11 +252,11 @@ function AppSidebar1() {
 							</div>
 						</label>
 						{/* <label className="checkbox">
-							<div className="section-icon-frame">
+							<div className="align-icon-frame">
 								<DynamicIcon className="checkbox-icon" Icon={preferNames ? feather.ToggleRight : feather.ToggleLeft} />
 							</div>
 							<span className="checkbox-name">Show icon names</span>
-							<div className="section-icon-frame">
+							<div className="align-icon-frame">
 								<input type="checkbox" checked={preferNames} onChange={e => setPreferNames(e.currentTarget.checked)} />
 							</div>
 						</label> */}
@@ -402,20 +267,20 @@ function AppSidebar1() {
 			<SidebarFoot>
 				<Hairline collapse />
 				<Section pos="end">
-					<header className="section-head">
-						<div className="section-frame">
-							<feather.Globe className="section-icon" />
+					<header className="section-heading">
+						<div className="align-frame">
+							<feather.Globe className="section-heading-icon" />
 						</div>
-						<h6 className="section-name">Resources</h6>
+						<h6 className="section-heading-name">Resources</h6>
 					</header>
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
 								<span className="resource-name">{resource.name}</span>
-								<div className="section-icon-frame">
+								<div className="align-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
@@ -469,12 +334,12 @@ function AppSidebar2() {
 		<Sidebar pos="end">
 			<header className="sidebar-head">
 				<section className="section" data-pos="start">
-					<header className="section-head">
-						<div className="section-icon-frame">
-							<feather.Clipboard className="section-icon" />
+					<header className="section-heading">
+						<div className="align-icon-frame">
+							<feather.Clipboard className="section-heading-icon" />
 						</div>
-						<h6 className="section-name">Clipboard</h6>
-						<div className="section-frame">
+						<h6 className="section-heading-name">Clipboard</h6>
+						<div className="align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</header>
@@ -505,35 +370,35 @@ function AppSidebar2() {
 			<div className="sidebar-body">
 				<Hairline />
 				<section className="section">
-					<header className="section-head">
-						<div className="section-icon-frame">
-							<feather.PenTool className="section-icon" />
+					<header className="section-heading">
+						<div className="align-icon-frame">
+							<feather.PenTool className="section-heading-icon" />
 						</div>
-						<h6 className="section-name">size</h6>
+						<h6 className="section-heading-name">size</h6>
 						<span className="section-number-desc">{size.toFixed(0)} PX</span>
-						<div className="section-icon-frame">
+						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
+							<feather.RotateCcw className="section-heading-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
-					<div className="section-frame">
+					<div className="align-frame">
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</section>
 				<Hairline />
 				<section className="section">
-					<header className="section-head">
-						<div className="section-icon-frame">
-							<feather.PenTool className="section-icon" />
+					<header className="section-heading">
+						<div className="align-icon-frame">
+							<feather.PenTool className="section-heading-icon" />
 						</div>
-						<h6 className="section-name">stroke width</h6>
+						<h6 className="section-heading-name">stroke width</h6>
 						<span className="section-number-desc">{strokeWidth.toFixed(2)}</span>
-						<div className="section-icon-frame">
+						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
-							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+							<feather.RotateCcw className="section-heading-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
-					<div className="section-frame">
+					<div className="align-frame">
 						<ProgressRange
 							value={strokeWidth}
 							setValue={setStrokeWidth}
@@ -548,11 +413,11 @@ function AppSidebar2() {
 			{/* <footer className="sidebar-foot">
 				<Hairline collapse />
 				<section className="section" data-pos="end">
-					<header className="section-head">
-						<div className="section-icon-frame">
-							<Feather.Shield className="section-icon" />
+					<header className="section-heading">
+						<div className="align-icon-frame">
+							<Feather.Shield className="section-heading-icon" />
 						</div>
-						<h6 className="section-name">Sponsor</h6>
+						<h6 className="section-heading-name">Sponsor</h6>
 					</header>
 				</section>
 			</footer> */}

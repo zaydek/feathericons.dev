@@ -4,6 +4,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO: DEPRECATE
 .section
   display: flex
   flex-direction: column
@@ -25,20 +26,10 @@
   &[data-pos=end]
     padding-bottom: $sidebar-gap
 
-.section-head
-  display: flex
-  align-items: center
-  height: 24px
-  background-color: white
-
 .TEST_section-head
   padding: $sidebar-gap $sidebar-padding-x
   &[data-pos=start]
     padding-top: $sidebar-padding-y
-
-  // TODO: Add data-pos overrides here
-  // TODO: Rename to data-override?
-  //// padding-bottom: 0
 
 .TEST_section-body
   display: flex
@@ -49,13 +40,7 @@
   padding-top: 0
   // TODO: Add data-pos overrides here
   // TODO: Rename to data-override?
-  overflow-y: scroll
-
-//// .TEST_section-foot
-////   padding: $sidebar-gap $sidebar-padding-x
-////   // TODO: Add data-pos overrides here
-////   // TODO: Rename to data-override?
-////   padding-top: 0
+  overflow-y: auto // TOOD
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -63,7 +48,7 @@
 // aligned.
 //
 //// // TODO: Rename to .section-align-frame?
-.section-frame
+.align-frame
   display: flex
   flex-direction: column
   justify-content: center // Center y-axis
@@ -72,7 +57,7 @@
   //// height: $button-height
 
 //// // TODO: Rename to .section-align-icon-frame?
-.section-icon-frame
+.align-icon-frame
   display: flex
   justify-content: center // Center x-axis
   align-items: center     // Center y-axis
@@ -81,18 +66,28 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.section-icon
+//// .section-heading
+.section-heading
+  display: flex
+  align-items: center
+  height: 24px
+  background-color: white
+
+//// .section-heading-icon
+.section-heading-icon
   height: $tiny-icon-height
   width: $tiny-icon-height
   color: $slate-600
 
-.section-name
+//// .section-heading-name
+.section-heading-name
   flex: 1
   +typography-caps
   color: $slate-600
 
 // Rename to section-number?
-.section-number-desc
+//// .section-heading-number-desc
+.section-heading-number-desc
   display: flex
   justify-content: center
   align-items: center
@@ -106,7 +101,8 @@
   user-select: all         // Interaction
 
 // TODO: Wrap <button>
-.section-reset-icon
+//// .section-heading-reset-icon
+.section-heading-reset-icon
   height: $tiny-icon-height
   width: $tiny-icon-height
   color: $slate-300
