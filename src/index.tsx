@@ -14,35 +14,24 @@ import {
 	SearchProvider,
 	ShikiProvider,
 } from "@/providers"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { createRoot } from "react-dom/client"
-
-export const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			networkMode: "offlineFirst",
-		},
-	},
-})
 
 function ProvidedApp() {
 	return (
-		<QueryClientProvider client={queryClient}>
-			<ProgressBarProvider>
-				<ProgresssBar />
-				<ShikiProvider>
-					<LayoutProvider>
-						<SearchProvider>
-							<RangeProvider>
-								<ClipboardProvider>
-									<App />
-								</ClipboardProvider>
-							</RangeProvider>
-						</SearchProvider>
-					</LayoutProvider>
-				</ShikiProvider>
-			</ProgressBarProvider>
-		</QueryClientProvider>
+		<ProgressBarProvider>
+			<ProgresssBar />
+			<ShikiProvider>
+				<LayoutProvider>
+					<SearchProvider>
+						<RangeProvider>
+							<ClipboardProvider>
+								<App />
+							</ClipboardProvider>
+						</RangeProvider>
+					</SearchProvider>
+				</LayoutProvider>
+			</ShikiProvider>
+		</ProgressBarProvider>
 	)
 }
 
