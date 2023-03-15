@@ -163,17 +163,17 @@ function AppSidebar1() {
 		<Sidebar pos="start">
 			<header className="sidebar-head">
 				<div className="section-head" data-pos="start">
-					<div className="align-frame">
+					<div className="optical-alignment-frame">
 						<SearchBar />
 					</div>
 				</div>
 				<div className="section-body">
 					<div className="heading">
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.Package className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Icons</h6>
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.RotateCcw
 								className="heading-icon-2"
 								strokeWidth={4}
@@ -184,11 +184,11 @@ function AppSidebar1() {
 					<div>
 						<div className="checkboxes">
 							<label className="checkbox">
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<feather.Feather className="checkbox-icon" />
 								</div>
 								<span className="checkbox-name">Feather</span>
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<input
 										type="checkbox"
 										checked={$feather}
@@ -199,14 +199,14 @@ function AppSidebar1() {
 						</div>
 						<div className="checkboxes">
 							<label className="checkbox">
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
 										Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 									/>
 								</div>
 								<span className="checkbox-name">Social media</span>
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<input
 										type="checkbox"
 										checked={wkBrands}
@@ -217,7 +217,7 @@ function AppSidebar1() {
 						</div>
 						<div className="checkboxes">
 							<label className="checkbox">
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
 										data-type="payments"
@@ -234,7 +234,7 @@ function AppSidebar1() {
 									/>
 								</div>
 								<span className="checkbox-name">Cards</span>
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<input
 										type="checkbox"
 										checked={wkPayments}
@@ -244,7 +244,7 @@ function AppSidebar1() {
 							</label>
 							<div className="checkboxes">
 								<label className="checkbox">
-									<div className="align-icon-frame">
+									<div className="optical-alignment-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
@@ -252,7 +252,7 @@ function AppSidebar1() {
 										/>
 									</div>
 									<span className="checkbox-name">Original</span>
-									<div className="align-icon-frame">
+									<div className="optical-alignment-icon-frame">
 										<input
 											name="payments"
 											type="radio"
@@ -269,7 +269,7 @@ function AppSidebar1() {
 							</div>
 							<div className="checkboxes">
 								<label className="checkbox">
-									<div className="align-icon-frame">
+									<div className="optical-alignment-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
@@ -277,7 +277,7 @@ function AppSidebar1() {
 										/>
 									</div>
 									<span className="checkbox-name">Filled</span>
-									<div className="align-icon-frame">
+									<div className="optical-alignment-icon-frame">
 										<input
 											name="payments"
 											type="radio"
@@ -300,11 +300,11 @@ function AppSidebar1() {
 				<hr />
 				<div className="section-head">
 					<div className="heading">
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.Settings className="heading-icon-1" />
 						</div>
 						<span className="heading-type">Settings</span>
-						<button className="align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
+						<button className="optical-alignment-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
 							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} />
 						</button>
 					</div>
@@ -312,11 +312,11 @@ function AppSidebar1() {
 				<div className="section-body">
 					<div className="checkboxes">
 						<label className="checkbox">
-							<div className="align-icon-frame">
+							<div className="optical-alignment-icon-frame">
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
 							<span className="checkbox-name">Colorize icons</span>
-							<div className="align-icon-frame">
+							<div className="optical-alignment-icon-frame">
 								<input
 									type="checkbox"
 									checked={preferColor}
@@ -332,7 +332,7 @@ function AppSidebar1() {
 				<hr data-collapse />
 				<div className="section-head">
 					<div className="heading">
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.Globe className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Resources</h6>
@@ -342,11 +342,11 @@ function AppSidebar1() {
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
 								<span className="resource-name">{resource.name}</span>
-								<div className="align-icon-frame">
+								<div className="optical-alignment-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
@@ -381,11 +381,11 @@ function AppSidebar2() {
 			<header className="sidebar-head">
 				<div className="section-head" data-pos="start">
 					<div className="heading">
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.Clipboard className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Clipboard</h6>
-						<div className="align-frame">
+						<div className="optical-alignment-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</div>
@@ -416,36 +416,36 @@ function AppSidebar2() {
 				<hr />
 				<div className="section-head">
 					<div className="heading">
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.PenTool className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">size</h6>
 						<span className="heading-number-type">{size.toFixed(0)} PX</span>
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</div>
 				</div>
 				<div className="section-body">
-					<div className="align-frame">
+					<div className="optical-alignment-frame">
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</div>
 				<hr />
 				<div className="section-head">
 					<div className="heading">
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.PenTool className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">stroke width</h6>
 						<span className="heading-number-type">{strokeWidth.toFixed(2)}</span>
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</div>
 				</div>
 				<div className="section-body">
-					<div className="align-frame">
+					<div className="optical-alignment-frame">
 						<ProgressRange
 							value={strokeWidth}
 							setValue={setStrokeWidth}
@@ -461,7 +461,7 @@ function AppSidebar2() {
 				<hr data-collapse />
 				<section className="DEPRECATE_section" data-pos="end">
 					<div className="heading">
-						<div className="align-icon-frame">
+						<div className="optical-alignment-icon-frame">
 							<Feather.Shield className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Sponsor</h6>

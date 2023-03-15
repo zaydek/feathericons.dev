@@ -24,22 +24,13 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Can we combine these?
-//
-// These are optical alignment utilities. They align children to be optically
-// aligned.
-//
-//// // TODO: Rename to .section-align-frame?
-.align-frame
+.optical-alignment-frame
   display: flex
   flex-direction: column
   justify-content: center // Center y-axis
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
-  // TODO: Why omit height here?
-  //// height: $button-height
 
-//// // TODO: Rename to .section-align-icon-frame?
-.align-icon-frame
+.optical-alignment-icon-frame
   display: flex
   justify-content: center // Center x-axis
   align-items: center     // Center y-axis
