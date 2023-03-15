@@ -40,7 +40,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { Hairline, Section } from "./section"
+import { Hairline, Section, SectionBody, SectionHead } from "./section"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -76,33 +76,27 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<SidebarHead>
-				{/* <section className="DEPRECATE_section" data-pos="start">
+				<SectionHead pos="start">
 					<div className="align-frame">
 						<SearchBar />
 					</div>
-				</section> */}
-
-				<header className="TEST_section-head" data-pos="start">
-					<div className="align-frame">
-						<SearchBar />
-					</div>
-				</header>
-				<div className="TEST_section-body">
-					{/* TODO: Rename */}
-					<header className="section-heading">
+				</SectionHead>
+				<SectionBody>
+					<div className="section-heading">
 						<div className="align-icon-frame">
 							<feather.Package className="section-heading-icon" />
 						</div>
 						<h6 className="section-heading-type">Icons</h6>
+						{/* TODO: Don't change this to a <button> yet because of height */}
+						{/* TODO: Change to <button> */}
 						<div className="align-icon-frame">
-							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
 								className="section-heading-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIcons)}
 							/>
 						</div>
-					</header>
+					</div>
 					<div>
 						<ul className="checkboxes">
 							<label className="checkbox">
@@ -216,30 +210,29 @@ function AppSidebar1() {
 							</ul>
 						</ul>
 					</div>
-				</div>
+				</SectionBody>
 			</SidebarHead>
-
 			<SidebarBody>
 				<Hairline />
-				<section className="DEPRECATE_section">
-					<header className="section-heading">
+				<SectionHead>
+					<div className="section-heading">
 						<div className="align-icon-frame">
 							<feather.Settings className="section-heading-icon" />
 						</div>
 						<h6 className="section-heading-type">Settings</h6>
 						<div className="align-icon-frame">
-							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
 								className="section-heading-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIconPrefs)}
 							/>
 						</div>
-					</header>
+					</div>
+				</SectionHead>
+				<SectionBody>
 					<ul className="checkboxes">
 						<label className="checkbox">
 							<div className="align-icon-frame">
-								{/* Defer to CSS; no <svg> */}
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
 							<span className="checkbox-name">Colorize icons</span>
@@ -251,28 +244,19 @@ function AppSidebar1() {
 								/>
 							</div>
 						</label>
-						{/* <label className="checkbox">
-							<div className="align-icon-frame">
-								<DynamicIcon className="checkbox-icon" Icon={preferNames ? feather.ToggleRight : feather.ToggleLeft} />
-							</div>
-							<span className="checkbox-name">Show icon names</span>
-							<div className="align-icon-frame">
-								<input type="checkbox" checked={preferNames} onChange={e => setPreferNames(e.currentTarget.checked)} />
-							</div>
-						</label> */}
 					</ul>
-				</section>
+				</SectionBody>
 				<Hairline />
 			</SidebarBody>
 			<SidebarFoot>
 				<Hairline collapse />
 				<Section pos="end">
-					<header className="section-heading">
+					<div className="section-heading">
 						<div className="align-frame">
 							<feather.Globe className="section-heading-icon" />
 						</div>
 						<h6 className="section-heading-type">Resources</h6>
-					</header>
+					</div>
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
@@ -334,7 +318,7 @@ function AppSidebar2() {
 		<Sidebar pos="end">
 			<header className="sidebar-head">
 				<section className="DEPRECATE_section" data-pos="start">
-					<header className="section-heading">
+					<div className="section-heading">
 						<div className="align-icon-frame">
 							<feather.Clipboard className="section-heading-icon" />
 						</div>
@@ -342,7 +326,7 @@ function AppSidebar2() {
 						<div className="align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
-					</header>
+					</div>
 				</section>
 				<SidebarHeadBody>
 					<section className="DEPRECATE_section" data-pos="syntax-highlighting">
@@ -370,7 +354,7 @@ function AppSidebar2() {
 			<div className="sidebar-body">
 				<Hairline />
 				<section className="DEPRECATE_section">
-					<header className="section-heading">
+					<div className="section-heading">
 						<div className="align-icon-frame">
 							<feather.PenTool className="section-heading-icon" />
 						</div>
@@ -380,14 +364,14 @@ function AppSidebar2() {
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw className="section-heading-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
-					</header>
+					</div>
 					<div className="align-frame">
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</section>
 				<Hairline />
 				<section className="DEPRECATE_section">
-					<header className="section-heading">
+					<div className="section-heading">
 						<div className="align-icon-frame">
 							<feather.PenTool className="section-heading-icon" />
 						</div>
@@ -397,7 +381,7 @@ function AppSidebar2() {
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw className="section-heading-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
-					</header>
+					</div>
 					<div className="align-frame">
 						<ProgressRange
 							value={strokeWidth}
@@ -413,7 +397,7 @@ function AppSidebar2() {
 			{/* <footer className="sidebar-foot">
 				<Hairline collapse />
 				<section className="DEPRECATE_section" data-pos="end">
-					<header className="section-heading">
+					<div className="section-heading">
 						<div className="align-icon-frame">
 							<Feather.Shield className="section-heading-icon" />
 						</div>
