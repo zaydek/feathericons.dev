@@ -4,26 +4,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.section-head
-  padding: $sidebar-gap $sidebar-padding-x
-  &[data-pos=start]
-    padding-top: $sidebar-padding-y
-
-.section-body
-  display: flex
-  flex-direction: column
-  gap: $sidebar-gap
-  padding: $sidebar-gap $sidebar-padding-x
-  padding-top: 0
-  &[data-override=syntax-highlighting]
-    padding: 0
-
-  // TODO: Add data-pos overrides here
-  // TODO: Rename to data-override?
-  overflow-y: auto // TOOD
-
-////////////////////////////////////////////////////////////////////////////////
-
 .optical-alignment-frame
   display: flex
   flex-direction: column
@@ -39,23 +19,43 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.heading
+.widget-head
+  padding: $sidebar-gap $sidebar-padding-x
+  &[data-pos=start]
+    padding-top: $sidebar-padding-y
+
+.widget-body
+  display: flex
+  flex-direction: column
+  gap: $sidebar-gap
+  padding: $sidebar-gap $sidebar-padding-x
+  padding-top: 0
+  &[data-override=syntax-highlighting]
+    padding: 0
+
+  // TODO: Add data-pos overrides here
+  // TODO: Rename to data-override?
+  overflow-y: auto // TOOD
+
+////////////////////////////////////////////////////////////////////////////////
+
+.widget-name
   display: flex
   align-items: center
   height: 24px
   background-color: white
 
-.heading-icon-1
+.widget-name-icon-1
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $slate-600
 
-.heading-type
+.widget-name-type
   flex: 1
   +typography-caps
   color: $slate-600
 
-.heading-number-type
+.widget-name-number-type
   display: flex
   justify-content: center
   align-items: center
@@ -69,7 +69,7 @@
   user-select: all         // Interaction
 
 // TODO
-.heading-icon-2
+.widget-name-icon-2
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $slate-300

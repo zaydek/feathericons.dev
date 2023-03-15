@@ -162,20 +162,20 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
-				<div className="section-head" data-pos="start">
+				<div className="widget-head" data-pos="start">
 					<div className="optical-alignment-frame">
 						<SearchBar />
 					</div>
 				</div>
-				<div className="section-body">
-					<div className="heading">
+				<div className="widget-body">
+					<div className="widget-name">
 						<div className="optical-alignment-icon-frame">
-							<feather.Package className="heading-icon-1" />
+							<feather.Package className="widget-name-icon-1" />
 						</div>
-						<h6 className="heading-type">Icons</h6>
+						<h6 className="widget-name-type">Icons</h6>
 						<div className="optical-alignment-icon-frame">
 							<feather.RotateCcw
-								className="heading-icon-2"
+								className="widget-name-icon-2"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIcons)}
 							/>
@@ -298,18 +298,18 @@ function AppSidebar1() {
 			</header>
 			<div className="sidebar-body">
 				<hr />
-				<div className="section-head">
-					<div className="heading">
+				<div className="widget-head">
+					<div className="widget-name">
 						<div className="optical-alignment-icon-frame">
-							<feather.Settings className="heading-icon-1" />
+							<feather.Settings className="widget-name-icon-1" />
 						</div>
-						<span className="heading-type">Settings</span>
+						<span className="widget-name-type">Settings</span>
 						<button className="optical-alignment-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
-							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} />
+							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
 						</button>
 					</div>
 				</div>
-				<div className="section-body">
+				<div className="widget-body">
 					<div className="checkboxes">
 						<label className="checkbox">
 							<div className="optical-alignment-icon-frame">
@@ -330,15 +330,15 @@ function AppSidebar1() {
 			</div>
 			<footer className="sidebar-foot">
 				<hr data-collapse />
-				<div className="section-head">
-					<div className="heading">
+				<div className="widget-head">
+					<div className="widget-name">
 						<div className="optical-alignment-icon-frame">
-							<feather.Globe className="heading-icon-1" />
+							<feather.Globe className="widget-name-icon-1" />
 						</div>
-						<h6 className="heading-type">Resources</h6>
+						<h6 className="widget-name-type">Resources</h6>
 					</div>
 				</div>
-				<div className="section-body">
+				<div className="widget-body">
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
@@ -379,18 +379,18 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<div className="section-head" data-pos="start">
-					<div className="heading">
+				<div className="widget-head" data-pos="start">
+					<div className="widget-name">
 						<div className="optical-alignment-icon-frame">
-							<feather.Clipboard className="heading-icon-1" />
+							<feather.Clipboard className="widget-name-icon-1" />
 						</div>
-						<h6 className="heading-type">Clipboard</h6>
+						<h6 className="widget-name-type">Clipboard</h6>
 						<div className="optical-alignment-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</div>
 				</div>
-				<div className="section-body" data-override="syntax-highlighting">
+				<div className="widget-body" data-override="syntax-highlighting">
 					<MemoSyntaxHighlighting
 						lang={exportAs === "svg" ? "html" : "tsx"}
 						code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
@@ -414,37 +414,37 @@ function AppSidebar2() {
 			</header>
 			<div className="sidebar-body">
 				<hr />
-				<div className="section-head">
-					<div className="heading">
+				<div className="widget-head">
+					<div className="widget-name">
 						<div className="optical-alignment-icon-frame">
-							<feather.PenTool className="heading-icon-1" />
+							<feather.PenTool className="widget-name-icon-1" />
 						</div>
-						<h6 className="heading-type">size</h6>
-						<span className="heading-number-type">{size.toFixed(0)} PX</span>
+						<h6 className="widget-name-type">size</h6>
+						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
 						<div className="optical-alignment-icon-frame">
-							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} onClick={resetSize} />
+							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</div>
 				</div>
-				<div className="section-body">
+				<div className="widget-body">
 					<div className="optical-alignment-frame">
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</div>
 				<hr />
-				<div className="section-head">
-					<div className="heading">
+				<div className="widget-head">
+					<div className="widget-name">
 						<div className="optical-alignment-icon-frame">
-							<feather.PenTool className="heading-icon-1" />
+							<feather.PenTool className="widget-name-icon-1" />
 						</div>
-						<h6 className="heading-type">stroke width</h6>
-						<span className="heading-number-type">{strokeWidth.toFixed(2)}</span>
+						<h6 className="widget-name-type">stroke width</h6>
+						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
 						<div className="optical-alignment-icon-frame">
-							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} onClick={resetStrokeWidth} />
+							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</div>
 				</div>
-				<div className="section-body">
+				<div className="widget-body">
 					<div className="optical-alignment-frame">
 						<ProgressRange
 							value={strokeWidth}
@@ -460,11 +460,11 @@ function AppSidebar2() {
 			{/* <footer className="sidebar-foot">
 				<hr data-collapse />
 				<section className="DEPRECATE_section" data-pos="end">
-					<div className="heading">
+					<div className="widget-name">
 						<div className="optical-alignment-icon-frame">
-							<Feather.Shield className="heading-icon-1" />
+							<Feather.Shield className="widget-name-icon-1" />
 						</div>
-						<h6 className="heading-type">Sponsor</h6>
+						<h6 className="widget-name-type">Sponsor</h6>
 					</header>
 				</section>
 			</footer> */}
