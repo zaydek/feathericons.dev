@@ -1,3 +1,6 @@
+$sans: 'Inter var experimental', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
+$code: 'Recursive Monospace', ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace
+
 ////////////////////////////////////////////////////////////////////////////////
 
 =font-smoothing
@@ -11,29 +14,22 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 =typography-sans
-  font-weight:    425
-  font-size:      16px
-  line-height:    normal
-  font-family:    $sans
+  font: 425 16px / normal $sans
+  font-feature-settings: "tnum"
 
 // Uses line-height
 =typography-reduced-sans
-  font-weight:    425
-  font-size:      13px
-  line-height:    1.25
-  font-family:    $sans
+  font: 425 13px / 1.25 $sans
+  font-feature-settings: "tnum"
 
 =typography-caps
-  font-weight:    500
-  font-size:      11px
-  line-height:    normal
-  font-family:    $sans
+  font: 500 11px / normal $sans
+  font-feature-settings: "tnum"
   letter-spacing: 0.05em    // Added
   text-transform: uppercase // Added
 
 // Uses line-height
 =typography-code
-  font-weight:    500
-  font-size:      13px
-  line-height:    1.375
-  font-family:    $code
+  +no-font-smoothing
+  font: 500 13px / 1.375 $code
+  font-feature-settings: "tnum"
