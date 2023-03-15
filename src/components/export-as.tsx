@@ -19,9 +19,9 @@ const icons: Record<ExportAsValue, IconComponent> = {
 const names: Record<ExportAsValue, string> = {
 	svg: "SVG",
 	jsx: "Solid",
-	tsx: "Typescript Solid",
+	tsx: "TypeScript Solid",
 	"strict-jsx": "React",
-	"strict-tsx": "Typescript React",
+	"strict-tsx": "TypeScript React",
 	//// "strict-jsx-rn": "React Native",
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
