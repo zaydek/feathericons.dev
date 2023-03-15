@@ -38,6 +38,7 @@ function useSideEffectHtmlAndBodyScrollLocking() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO: This should be a general purpose component not integrated to a context
 export function Sidebar({
 	pos,
 	children,
@@ -47,12 +48,15 @@ export function Sidebar({
 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
 
 	let state: SidebarState
+	let otherState: SidebarState
 	let setState: React.Dispatch<React.SetStateAction<SidebarState>>
 	if (pos === "start") {
 		state = sidebar1
+		otherState = sidebar2
 		setState = setSidebar1
 	} else {
 		state = sidebar2
+		otherState = sidebar1
 		setState = setSidebar2
 	}
 
@@ -65,6 +69,17 @@ export function Sidebar({
 	const [clientX, setClientX] = React.useState<number | null>(null)
 
 	const x = startClientX === null || clientX === null ? 0 : clientX - startClientX
+
+	// Sync state changes -> transition
+	const onceRef = React.useRef(false)
+	React.useLayoutEffect(() => {
+		if (!onceRef.current) {
+			onceRef.current = true
+			return
+		}
+		void state
+		setTransition(true)
+	}, [state])
 
 	React.useEffect(() => {
 		function handlePointerDown(e: PointerEvent) {
@@ -149,24 +164,6 @@ export function Sidebar({
 		}
 	}, [pointerDown, pos, setState, state, x])
 
-	// Synchronously (useLayoutEffect) sync state changes -> transition
-	const onceRef = React.useRef(false)
-	React.useLayoutEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		void state
-		setTransition(true)
-	}, [state])
-
-	//// // Use setTimeout to ensure transition=false. Preferred over onTransitionEnd.
-	//// React.useEffect(() => {
-	//// 	if (!transition) return
-	//// 	const d = window.setTimeout(() => setTransition(false), 1e3)
-	//// 	return () => window.clearTimeout(d)
-	//// }, [transition])
-
 	return (
 		<aside
 			ref={ref}
@@ -176,26 +173,70 @@ export function Sidebar({
 			data-transition={transition}
 			style={{ "--__x": `${x}px` } as React.CSSProperties}
 			onTransitionEnd={e => setTransition(false)}
+			// @ts-expect-error
+			inert={otherState === "maximized" ? "true" : undefined}
 		>
 			<div
 				ref={dragAreaRef}
 				className="sidebar-drag-area"
-				//// onKeyDown={e => {
-				//// 	if (e.key === "ArrowLeft") {
-				//// 		if (pos === "start") {
-				//// 			// ...
-				//// 		} else {
-				//// 			// ...
-				//// 		}
-				//// 	} else if (e.key === "ArrowRight") {
-				//// 		if (pos === "start") {
-				//// 			// ...
-				//// 		} else {
-				//// 			// ...
-				//// 		}
-				//// 	}
-				//// }}
-				//// tabIndex={0}
+				onKeyDown={e => {
+					if (pos === "start") {
+						// pos=start
+						if (e.key === "ArrowLeft") {
+							switch (state) {
+								case "minimized":
+									// No-op
+									break
+								case null:
+									setState("minimized")
+									break
+								case "maximized":
+									setState(null)
+									break
+							}
+						} else if (e.key === "ArrowRight") {
+							switch (state) {
+								case "minimized":
+									setState(null)
+									break
+								case null:
+									setState("maximized")
+									break
+								case "maximized":
+									// No-op
+									break
+							}
+						}
+					} else {
+						// pos=end
+						if (e.key === "ArrowLeft") {
+							switch (state) {
+								case "minimized":
+									setState(null)
+									break
+								case null:
+									setState("maximized")
+									break
+								case "maximized":
+									// No-op
+									break
+							}
+						} else if (e.key === "ArrowRight") {
+							switch (state) {
+								case "minimized":
+									// No-op
+									break
+								case null:
+									setState("minimized")
+									break
+								case "maximized":
+									setState(null)
+									break
+							}
+						}
+					}
+				}}
+				tabIndex={0}
 			>
 				<div className="sidebar-drag-area-grip"></div>
 			</div>
@@ -214,20 +255,37 @@ export function SidebarOverlay() {
 	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
 	const setState = sidebar1 === "maximized" ? setSidebar1 : setSidebar2
 
-	return <div className="sidebar-overlay" data-open={open} onClick={e => setState(null)}></div>
+	return (
+		<div
+			className="sidebar-overlay"
+			data-open={open}
+			onClick={e => setState(null)}
+			// @ts-expect-error
+			inert={!open ? "true" : undefined}
+		></div>
+	)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 // Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
+	const { sidebar1, sidebar2 } = React.useContext(LayoutContext)!!
+
 	// Register effects once
 	//// useShortcutFigmaStyleToggleSidebars()
 	useSideEffectHtmlAndBodyScrollLocking()
 
+	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
+
 	return (
 		<>
-			<main className="main" {...props}>
+			<main
+				className="main"
+				// @ts-expect-error
+				inert={open ? "true" : undefined}
+				{...props}
+			>
 				{children}
 			</main>
 		</>
