@@ -14,14 +14,27 @@ export function SidebarFoot({ children }: React.PropsWithChildren) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function SectionHead({ children }: React.PropsWithChildren) {
-	return <header className="section-head">{children}</header>
+export function Hairline({ collapse = undefined }: { collapse?: boolean }) {
+	return <hr className="hairline" data-collapse={collapse} />
 }
 
-export function SectionBody({ children }: React.PropsWithChildren) {
-	return <div className="section-body">{children}</div>
-}
-
-export function SectionFoot({ children }: React.PropsWithChildren) {
-	return <footer className="section-foot">{children}</footer>
+export function Section({
+	pos,
+	head,
+	children,
+}: React.PropsWithChildren<{
+	// prettier-ignore
+	pos:
+		| "start"
+		| "checkboxes"
+		| "syntax-highlighting"
+		| "end"
+	head: React.ReactNode
+}>) {
+	return (
+		<section className="section" data-pos={pos}>
+			<header className="section-head">{head}</header>
+			<div className="section-body">{children}</div>
+		</section>
+	)
 }

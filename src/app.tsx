@@ -36,7 +36,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { SidebarBody, SidebarFoot, SidebarHead } from "./sidebar-children"
+import { Hairline, SidebarBody, SidebarFoot, SidebarHead } from "./sidebar-children"
 import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -215,7 +215,7 @@ function AppSidebar1() {
 				</div>
 			</SidebarHead>
 			<SidebarBody>
-				<hr className="hairline" />
+				<Hairline />
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
@@ -257,10 +257,10 @@ function AppSidebar1() {
 						</label> */}
 					</ul>
 				</section>
-				<hr className="hairline" />
+				<Hairline />
 			</SidebarBody>
 			<SidebarFoot>
-				<hr className="hairline" data-collapse />
+				<Hairline collapse />
 				<section className="section" data-pos="end">
 					<header className="section-header">
 						<div className="sidebar-align-frame">
@@ -365,7 +365,7 @@ function AppSidebar2() {
 				</div>
 			</header>
 			<div className="sidebar-body">
-				<hr className="hairline" />
+				<Hairline />
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
@@ -382,7 +382,7 @@ function AppSidebar2() {
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</section>
-				<hr className="hairline" />
+				<Hairline />
 				<section className="section">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
@@ -405,10 +405,10 @@ function AppSidebar2() {
 						/>
 					</div>
 				</section>
-				<hr className="hairline" />
+				<Hairline />
 			</div>
 			{/* <footer className="sidebar-foot">
-				<hr className="hairline" data-collapse />
+				<Hairline collapse />
 				<section className="section" data-pos="end">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
