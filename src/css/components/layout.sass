@@ -75,7 +75,8 @@ $sidebar-max-z-index: 100
 .sidebar-drag-area-grip
   height: 4px * 12
   width: 4px
-  background-color: hsl(0, 0%, 0%, 0.25)
+  //// background-color: hsl(0, 0%, 0%, 0.25)
+  background-color: $hairline-color
   border-radius: 1e3px
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,12 +90,13 @@ $sidebar-max-z-index: 100
     justify-content: flex-start
     width: $sidebar-2-max-width
   background-color: $base-color
+  box-shadow: $hairline-shadow
 
-  // Custom box-shadow
-  .sidebar:not([data-state=maximized]) &
-    box-shadow: $hairline-shadow
-  .sidebar[data-state=maximized] &
-    box-shadow: 0 0 0 1px hsl(0, 0%, 0%, 0.25) // 😎
+  //// // Custom box-shadow
+  //// .sidebar:not([data-state=maximized]) &
+  ////   box-shadow: $hairline-shadow
+  //// .sidebar[data-state=maximized] &
+  ////   box-shadow: 0 0 0 1px hsl(0, 0%, 0%, 0.25) // 😎
 
 .sidebar-card-body
   display: flex          // Forward height
