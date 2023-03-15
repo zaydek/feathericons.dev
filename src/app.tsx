@@ -40,7 +40,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { Hairline, Section } from "./section-components"
+import { Hairline, Section } from "./section"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -77,18 +77,18 @@ function AppSidebar1() {
 		<Sidebar pos="start">
 			<SidebarHead>
 				<section className="section" data-pos="start">
-					<div className="sidebar-align-frame">
+					<div className="section-frame">
 						<SearchBar />
 					</div>
 				</section>
 				<SidebarHeadBody>
 					<section className="section" data-pos="checkboxes">
 						<header className="section-head">
-							<div className="sidebar-align-icon-frame">
+							<div className="section-icon-frame">
 								<feather.Package className="section-icon" />
 							</div>
 							<h6 className="section-name">Icons</h6>
-							<div className="sidebar-align-icon-frame">
+							<div className="section-icon-frame">
 								{/* TODO: Change to <button> */}
 								<feather.RotateCcw
 									className="section-reset-icon"
@@ -100,11 +100,11 @@ function AppSidebar1() {
 						<div>
 							<ul className="checkboxes">
 								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
+									<div className="section-icon-frame">
 										<feather.Feather className="checkbox-icon" />
 									</div>
 									<span className="checkbox-name">Feather</span>
-									<div className="sidebar-align-icon-frame">
+									<div className="section-icon-frame">
 										<input
 											type="checkbox"
 											checked={$feather}
@@ -115,14 +115,14 @@ function AppSidebar1() {
 							</ul>
 							<ul className="checkboxes">
 								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
+									<div className="section-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 										/>
 									</div>
 									<span className="checkbox-name">Social media</span>
-									<div className="sidebar-align-icon-frame">
+									<div className="section-icon-frame">
 										<input
 											type="checkbox"
 											checked={wkBrands}
@@ -133,7 +133,7 @@ function AppSidebar1() {
 							</ul>
 							<ul className="checkboxes">
 								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
+									<div className="section-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
@@ -150,7 +150,7 @@ function AppSidebar1() {
 										/>
 									</div>
 									<span className="checkbox-name">Cards</span>
-									<div className="sidebar-align-icon-frame">
+									<div className="section-icon-frame">
 										<input
 											type="checkbox"
 											checked={wkPayments}
@@ -160,7 +160,7 @@ function AppSidebar1() {
 								</label>
 								<ul className="checkboxes">
 									<label className="checkbox">
-										<div className="sidebar-align-icon-frame">
+										<div className="section-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon"
 												data-type="payments"
@@ -168,7 +168,7 @@ function AppSidebar1() {
 											/>
 										</div>
 										<span className="checkbox-name">Original</span>
-										<div className="sidebar-align-icon-frame">
+										<div className="section-icon-frame">
 											<input
 												name="payments"
 												type="radio"
@@ -185,7 +185,7 @@ function AppSidebar1() {
 								</ul>
 								<ul className="checkboxes">
 									<label className="checkbox">
-										<div className="sidebar-align-icon-frame">
+										<div className="section-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon"
 												data-type="payments"
@@ -195,7 +195,7 @@ function AppSidebar1() {
 											/>
 										</div>
 										<span className="checkbox-name">Filled</span>
-										<div className="sidebar-align-icon-frame">
+										<div className="section-icon-frame">
 											<input
 												name="payments"
 												type="radio"
@@ -219,11 +219,11 @@ function AppSidebar1() {
 				<Hairline />
 				<section className="section">
 					<header className="section-head">
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							<feather.Settings className="section-icon" />
 						</div>
 						<h6 className="section-name">Settings</h6>
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
 								className="section-reset-icon"
@@ -234,12 +234,12 @@ function AppSidebar1() {
 					</header>
 					<ul className="checkboxes">
 						<label className="checkbox">
-							<div className="sidebar-align-icon-frame">
+							<div className="section-icon-frame">
 								{/* Defer to CSS; no <svg> */}
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
 							<span className="checkbox-name">Colorize icons</span>
-							<div className="sidebar-align-icon-frame">
+							<div className="section-icon-frame">
 								<input
 									type="checkbox"
 									checked={preferColor}
@@ -248,11 +248,11 @@ function AppSidebar1() {
 							</div>
 						</label>
 						{/* <label className="checkbox">
-							<div className="sidebar-align-icon-frame">
+							<div className="section-icon-frame">
 								<DynamicIcon className="checkbox-icon" Icon={preferNames ? feather.ToggleRight : feather.ToggleLeft} />
 							</div>
 							<span className="checkbox-name">Show icon names</span>
-							<div className="sidebar-align-icon-frame">
+							<div className="section-icon-frame">
 								<input type="checkbox" checked={preferNames} onChange={e => setPreferNames(e.currentTarget.checked)} />
 							</div>
 						</label> */}
@@ -264,7 +264,7 @@ function AppSidebar1() {
 				<Hairline collapse />
 				<Section pos="end">
 					<header className="section-head">
-						<div className="sidebar-align-frame">
+						<div className="section-frame">
 							<feather.Globe className="section-icon" />
 						</div>
 						<h6 className="section-name">Resources</h6>
@@ -272,11 +272,11 @@ function AppSidebar1() {
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
-								<div className="sidebar-align-icon-frame">
+								<div className="section-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
 								<span className="resource-name">{resource.name}</span>
-								<div className="sidebar-align-icon-frame">
+								<div className="section-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
 							</Anchor>
@@ -331,11 +331,11 @@ function AppSidebar2() {
 			<header className="sidebar-head">
 				<section className="section" data-pos="start">
 					<header className="section-head">
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							<feather.Clipboard className="section-icon" />
 						</div>
 						<h6 className="section-name">Clipboard</h6>
-						<div className="sidebar-align-frame">
+						<div className="section-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</header>
@@ -367,34 +367,34 @@ function AppSidebar2() {
 				<Hairline />
 				<section className="section">
 					<header className="section-head">
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name">size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
-					<div className="sidebar-align-frame">
+					<div className="section-frame">
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</section>
 				<Hairline />
 				<section className="section">
 					<header className="section-head">
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name">stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
-					<div className="sidebar-align-frame">
+					<div className="section-frame">
 						<ProgressRange
 							value={strokeWidth}
 							setValue={setStrokeWidth}
@@ -410,7 +410,7 @@ function AppSidebar2() {
 				<Hairline collapse />
 				<section className="section" data-pos="end">
 					<header className="section-head">
-						<div className="sidebar-align-icon-frame">
+						<div className="section-icon-frame">
 							<Feather.Shield className="section-icon" />
 						</div>
 						<h6 className="section-name">Sponsor</h6>
