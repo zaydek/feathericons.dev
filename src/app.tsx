@@ -328,7 +328,7 @@ function AppSidebar1() {
 				</div>
 				<hr />
 			</div>
-			{/* <div className="sidebar-spacer"></div> */}
+
 			<footer className="sidebar-foot">
 				<hr data-collapse />
 				<div className="widget-head">
@@ -462,7 +462,6 @@ function AppSidebar2() {
 				</div>
 				<hr />
 			</div>
-			{/* <div className="sidebar-spacer"></div> */}
 		</Sidebar>
 	)
 }
