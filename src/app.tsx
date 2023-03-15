@@ -177,13 +177,9 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<div className="widget-align-icon-frame">
-							<feather.RotateCcw
-								className="widget-name-icon-2"
-								strokeWidth={4}
-								onClick={() => startTransition(resetIcons)}
-							/>
-						</div>
+						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIcons)}>
+							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
+						</button>
 					</div>
 					<div>
 						<div className="checkboxes">
@@ -429,9 +425,9 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">size</h6>
 						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
-						<div className="widget-align-icon-frame">
-							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} onClick={resetSize} />
-						</div>
+						<button className="widget-align-icon-frame" onClick={resetSize}>
+							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
+						</button>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -447,9 +443,9 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">stroke width</h6>
 						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
-						<div className="widget-align-icon-frame">
-							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} onClick={resetStrokeWidth} />
-						</div>
+						<button className="widget-align-icon-frame" onClick={resetStrokeWidth}>
+							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
+						</button>
 					</div>
 				</div>
 				<div className="widget-body">

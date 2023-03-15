@@ -195,7 +195,7 @@ export function Sidebar({
 				//// 		}
 				//// 	}
 				//// }}
-				tabIndex={0}
+				//// tabIndex={0}
 			>
 				<div className="sidebar-drag-area-grip"></div>
 			</div>
