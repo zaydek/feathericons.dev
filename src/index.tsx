@@ -1,5 +1,3 @@
-//// import "the-new-css-reset"
-
 import "@/css/index.sass"
 
 import { App } from "@/app"
