@@ -2,19 +2,23 @@
 
 @use "globals" as *
 
+////////////////////////////////////////////////////////////////////////////////
+
 //// :focus
 ////   outline: none
 :focus-visible:not(input[type=text])
   outline: revert
 
 :root
-  -webkit-font-smoothing:  antialiased // E.g. font-smoothing
-  -moz-osx-font-smoothing: grayscale   // E.g. font-smoothing
+  +font-smoothing
+  font-feature-settings: 'tnum'
 
   overflow-y: scroll // COMPAT/Windows
 
 :root, ::before, ::after
   color: RED // DEBUG
+
+////////////////////////////////////////////////////////////////////////////////
 
 svg
   overflow: visible
@@ -30,6 +34,8 @@ button
   &[data-collapse=true]
     position: relative
     top: -1px
+
+////////////////////////////////////////////////////////////////////////////////
 
 .u-flex-1
   flex: 1
