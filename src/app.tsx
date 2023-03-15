@@ -15,7 +15,6 @@ import {
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressRange,
-	SearchBar,
 	Sidebar,
 	SidebarOverlay,
 } from "@/components"
@@ -165,11 +164,13 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
-				<div className="widget-head" data-has="start">
+				{/* <div className="widget-head" data-has="start">
 					<div className="widget-align-frame">
 						<SearchBar />
 					</div>
-				</div>
+				</div> */}
+				{/* FIXME */}
+				<div className="widget-head"></div>
 				<div className="widget-body" {...scrollProps}>
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
