@@ -215,7 +215,9 @@ function AppSidebar1() {
 									<input
 										type="checkbox"
 										checked={$feather}
-										onChange={e => startTransitionIfNeeded(null, () => setFeather(e.currentTarget.checked))}
+										onChange={e =>
+											startTransitionIfNeeded(["@icons/feather/tsx"], () => setFeather(e.currentTarget.checked))
+										}
 									/>
 								</div>
 							</label>
@@ -233,7 +235,12 @@ function AppSidebar1() {
 									<input
 										type="checkbox"
 										checked={wkBrands}
-										onChange={e => startTransitionIfNeeded(null, () => setWkBrands(e.currentTarget.checked))}
+										onChange={e =>
+											startTransitionIfNeeded(
+												[preferColor ? "@icons/wk/brands/original/tsx" : "@icons/wk/brands/mono/tsx"],
+												() => setWkBrands(e.currentTarget.checked),
+											)
+										}
 									/>
 								</div>
 							</label>
@@ -261,7 +268,13 @@ function AppSidebar1() {
 									<input
 										type="checkbox"
 										checked={wkPayments}
-										onChange={e => startTransitionIfNeeded(null, () => setWkPayments(e.currentTarget.checked))}
+										onChange={e =>
+											startTransitionIfNeeded(
+												// TODO: Add filled?
+												[preferColor ? "@icons/wk/payments/original/tsx" : "@icons/wk/payments/mono/tsx"],
+												() => setWkPayments(e.currentTarget.checked),
+											)
+										}
 									/>
 								</div>
 							</label>
