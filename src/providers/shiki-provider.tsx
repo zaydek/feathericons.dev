@@ -10,8 +10,7 @@ export function ShikiProvider({ children }: React.PropsWithChildren) {
 	React.useEffect(() => {
 		async function init() {
 			const highlighter = await shiki.getHighlighter({
-				//// themes: ["github-light", "github-dark"],
-				themes: ["github-light"],
+				themes: ["github-light", "github-dark"],
 				langs: ["html", "tsx"],
 			})
 			setHighlighter(highlighter)

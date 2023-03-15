@@ -12,7 +12,7 @@ label.export-as
 .export-as select
   position: absolute
   height: 100% // Inherit
-  width: 100%  // Inherit
+  width:  100% // Inherit
   opacity: 0.01
   //// cursor: pointer
   //// &:hover + .export-as-button
@@ -33,18 +33,18 @@ label.export-as
 .export-as-button-name
   +typography-reduced-sans
   //// text-align: center
-  color: $slate-800
+  color: $primary-text-color
 .export-as-button-icon-frame
   display: flex
   justify-content: center
   align-items: center
   height: $select-height
-  width: $select-height
+  width:  $select-height
   &:first-child
     margin-left:  math.div($select-height, 8) // 🧐
   &:last-child
     margin-right: math.div($select-height, 8) // 🧐
 .export-as-button-icon
   height: $tiny-icon-height
-  width: $tiny-icon-height
-  color: $slate-400
+  width:  $tiny-icon-height
+  color:  $slate-400

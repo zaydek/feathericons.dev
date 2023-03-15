@@ -49,7 +49,9 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 
 	React.useEffect(() => {
 		if (highlighter === null) return
-		const tokens = highlighter.codeToThemedTokens(code, code.startsWith("//") ? "js" : lang, "github-light")
+		const dark = document.documentElement.getAttribute("data-theme") === "dark"
+		const mode = dark ? "github-dark" : "github-light"
+		const tokens = highlighter.codeToThemedTokens(code, code.startsWith("//") ? "js" : lang, mode)
 		setTokens(tokens)
 	}, [code, highlighter, lang])
 

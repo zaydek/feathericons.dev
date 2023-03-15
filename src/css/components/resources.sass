@@ -12,13 +12,16 @@
     background-color: $slate-100
   &:hover:active
     background-color: $slate-200
+
 .resource-icon
   height: $icon-height
-  width: $icon-height
-  color: $slate-800
+  width:  $icon-height
+  color:  $primary-text-color
   &:last-child
-    color: $slate-400
+    color: $tertiary-text-color
+
+// TODO: Rename -name to -type
 .resource-name
   flex: 1
   +typography-sans
-  color: $slate-800
+  color: $primary-text-color

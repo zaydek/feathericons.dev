@@ -178,7 +178,7 @@ function AppSidebar1() {
 								<div className="widget-align-icon-frame">
 									<feather.Feather className="checkbox-icon" />
 								</div>
-								<span className="checkbox-name">Feather</span>
+								<span className="checkbox-type">Feather</span>
 								<div className="widget-align-icon-frame">
 									<input
 										type="checkbox"
@@ -196,7 +196,7 @@ function AppSidebar1() {
 										Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 									/>
 								</div>
-								<span className="checkbox-name">Social media</span>
+								<span className="checkbox-type">Social media</span>
 								<div className="widget-align-icon-frame">
 									<input
 										type="checkbox"
@@ -224,7 +224,7 @@ function AppSidebar1() {
 										}
 									/>
 								</div>
-								<span className="checkbox-name">Cards</span>
+								<span className="checkbox-type">Cards</span>
 								<div className="widget-align-icon-frame">
 									<input
 										type="checkbox"
@@ -242,7 +242,7 @@ function AppSidebar1() {
 											Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
 										/>
 									</div>
-									<span className="checkbox-name">Original</span>
+									<span className="checkbox-type">Original</span>
 									<div className="widget-align-icon-frame">
 										<input
 											name="payments"
@@ -267,7 +267,7 @@ function AppSidebar1() {
 											Icon={preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard}
 										/>
 									</div>
-									<span className="checkbox-name">Filled</span>
+									<span className="checkbox-type">Filled</span>
 									<div className="widget-align-icon-frame">
 										<input
 											name="payments"
@@ -306,7 +306,7 @@ function AppSidebar1() {
 							<div className="widget-align-icon-frame">
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
-							<span className="checkbox-name">Colorize icons</span>
+							<span className="checkbox-type">Colorize icons</span>
 							<div className="widget-align-icon-frame">
 								<input
 									type="checkbox"
