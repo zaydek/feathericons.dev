@@ -4,36 +4,34 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: DEPRECATE
-.DEPRECATE_section
-  display: flex
-  flex-direction: column
-  gap: $sidebar-gap
-  //// &:not(:is([data-pos=start], [data-pos=syntax-highlighting], [data-pos=end]))
-  padding: $sidebar-gap $sidebar-padding-x
+//// // TODO: DEPRECATE
+//// .DEPRECATE_section
+////   display: flex
+////   flex-direction: column
+////   gap: $sidebar-gap
+////   //// &:not(:is([data-pos=start], [data-pos=syntax-highlighting], [data-pos=end]))
+////   padding: $sidebar-gap $sidebar-padding-x
+////
+////   // Overrides -- don't use (:not(:is(...)))
+////   &[data-pos=start]
+////     isolation: isolate // Needed because of box-shadow
+////     padding-top: $sidebar-padding-y
+////     &:has(+ [data-scroll=true])
+////       box-shadow: $hairline-shadow-bottom
+////   &[data-pos=checkboxes]
+////     padding-top: 0
+////   &[data-pos=syntax-highlighting]
+////     padding: 0
+////     padding-bottom: $sidebar-gap
+////   &[data-pos=end]
+////     padding-bottom: $sidebar-gap
 
-  // Overrides -- don't use (:not(:is(...)))
-  &[data-pos=start]
-    isolation: isolate // Needed because of box-shadow
-    padding-top: $sidebar-padding-y
-    &:has(+ [data-scroll=true])
-      box-shadow: $hairline-shadow-bottom
-  &[data-pos=checkboxes]
-    padding-top: 0
-  &[data-pos=syntax-highlighting]
-    padding: 0
-    padding-bottom: $sidebar-gap
-  &[data-pos=end]
-    padding-bottom: $sidebar-gap
-
-////////////////////////////////////////////////////////////////////////////////
-
-.TEST_section-head
+.section-head
   padding: $sidebar-gap $sidebar-padding-x
   &[data-pos=start]
     padding-top: $sidebar-padding-y
 
-.TEST_section-body
+.section-body
   display: flex
   flex-direction: column
   gap: $sidebar-gap
@@ -68,14 +66,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.section-heading
+.heading
   display: flex
   align-items: center
   height: 24px
   background-color: white
 
 // Scope .align-icon-frame because parenting breaks :first-child and :last-child
-.align-icon-frame:first-child .section-heading-icon
+.align-icon-frame:first-child .heading-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $slate-600
@@ -83,7 +81,7 @@
 // Scope .align-icon-frame because parenting breaks :first-child and :last-child
 //
 // TODO: Wrap <button>
-.align-icon-frame:last-child .section-heading-icon
+.align-icon-frame:last-child .heading-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $slate-300
@@ -91,12 +89,12 @@
   &:hover
     color: $slate-800
 
-.section-heading-type
+.heading-type
   flex: 1
   +typography-caps
   color: $slate-600
 
-.section-heading-number-type
+.heading-number-type
   display: flex
   justify-content: center
   align-items: center
