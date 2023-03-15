@@ -240,7 +240,11 @@ export function Sidebar({
 			>
 				<div className="sidebar-drag-area-grip"></div>
 			</div>
-			<div className="sidebar-card">
+			<div
+				className="sidebar-card"
+				// @ts-expect-error
+				inert={state === "minimized" ? "true" : undefined}
+			>
 				<div className="sidebar-card-body">{children}</div>
 			</div>
 		</aside>
