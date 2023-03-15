@@ -2,12 +2,12 @@
 
 @use "../globals" as *
 
-$grid-item-height:       112px
-$grid-item-aspect-ratio: 1.375
+$main-grid-item-height:       112px
+$main-grid-item-aspect-ratio: 1.375
 
 .main-grid
   display: grid
-  grid-template-columns: repeat(auto-fill, $grid-item-height)
+  grid-template-columns: repeat(auto-fill, $main-grid-item-height)
   justify-content: center
   gap: 8px 16px
   //// &[data-prefer-names=false]
@@ -28,7 +28,7 @@ $grid-item-aspect-ratio: 1.375
   display: flex
   justify-content: center
   align-items: center
-  aspect-ratio: $grid-item-aspect-ratio
+  aspect-ratio: $main-grid-item-aspect-ratio
   background-color: $form-color
   border-radius: 4px
   box-shadow: $inset-hairline-shadow
@@ -66,7 +66,7 @@ $grid-item-aspect-ratio: 1.375
   display: flex
   justify-content: center
   align-items: center
-  aspect-ratio: $grid-item-aspect-ratio
+  aspect-ratio: $main-grid-item-aspect-ratio
   background-color: $form-color
   border-radius: 4px
   .main-grid-item[data-selected=false] &
