@@ -25,6 +25,10 @@
   // Overrides, don't use these :not([data-has])
   &[data-has=start]
     padding-top: $sidebar-padding-y
+  // Don't use has here (because of FF) but no choice
+  &:has(+ [data-scroll=true])
+    isolation: isolate // Needed for box-shadow (see .checkboxes)
+    box-shadow: $hairline-shadow-bottom
 
 .widget-body
   display: flex

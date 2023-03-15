@@ -36,6 +36,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
+import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -143,6 +144,8 @@ function useTransitionProgressBar() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppSidebar1() {
+	const scrollProps = useScrollProps()
+
 	const startTransition = useTransitionProgressBar()
 
 	const {
@@ -167,7 +170,7 @@ function AppSidebar1() {
 						<SearchBar />
 					</div>
 				</div>
-				<div className="widget-body">
+				<div className="widget-body" {...scrollProps}>
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
 							<feather.Package className="widget-name-icon-1" />
@@ -361,6 +364,8 @@ function AppSidebar1() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppSidebar2() {
+	const scrollProps = useScrollProps()
+
 	const { size, setSize, resetSize } = React.useContext(RangeSizeContext)!
 	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = React.useContext(RangeStrokeWidthContext)!
 	const { exportAs, setExportAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
@@ -390,7 +395,7 @@ function AppSidebar2() {
 						</div>
 					</div>
 				</div>
-				<div className="widget-body" data-has="syntax-highlighting">
+				<div className="widget-body" data-has="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
