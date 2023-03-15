@@ -60,7 +60,7 @@ export function ExportAs({
 				<div className="export-as-button-icon-frame">
 					<DynamicIcon className="export-as-button-icon" Icon={icons[value]} />
 				</div>
-				<span className="export-as-button-name">{names[value]}</span>
+				<span className="export-as-button-type">{names[value]}</span>
 				<div className="export-as-button-icon-frame">
 					<feather.ChevronDown className="export-as-button-icon" />
 				</div>

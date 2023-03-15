@@ -61,9 +61,40 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
 	const [cached, setCached] = React.useState(false)
-
-	//// const [loading, setLoading] = React.useState(false)
 	const [icons, setIcons] = React.useState<[string, IconComponent][]>([])
+
+	//// const $$search = useMemo(() => {
+	//// 	return search.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
+	//// }, [search])
+	////
+	//// const searchResultsFallback = useMemo(() => {
+	//// 	const ref: Partial<Record<keyof typeof manifest, readonly [number, number] | null>> = {}
+	//// 	for (const name of Object.keys(manifest)) {
+	//// 		ref[name as keyof typeof manifest] = null
+	//// 	}
+	//// 	return ref
+	//// }, [])
+	////
+	//// const searchResults = useMemo(() => {
+	//// 	if ($$search === "") {
+	//// 		return searchResultsFallback
+	//// 	}
+	//// 	const refA: Partial<Record<keyof typeof manifest, readonly [number, number] | null>> = {}
+	//// 	const refB: Partial<Record<keyof typeof manifest, readonly [number, number] | null>> = {}
+	//// 	for (const [name, info] of Object.entries(manifest)) {
+	//// 		const indexes = getSubstringIndexes(name.toLowerCase(), $$search)
+	//// 		if (indexes !== null) {
+	//// 			refA[name as keyof typeof manifest] = indexes
+	//// 		} else {
+	//// 			for (const tag of info.tags) {
+	//// 				if (tag.startsWith($$search)) {
+	//// 					refB[name as keyof typeof manifest] = null
+	//// 				}
+	//// 			}
+	//// 		}
+	//// 	}
+	//// 	return { ...refA, ...refB }
+	//// }, [$$search, searchResultsFallback])
 
 	React.useEffect(() => {
 		async function fn() {

@@ -30,10 +30,12 @@ label.export-as
   border-radius: 1e3px
   box-shadow: $inset-hairline-shadow
   //// pointer-events: none // Passthrough to <select>
-.export-as-button-name
+
+.export-as-button-type
   +typography-reduced-sans
   //// text-align: center
   color: $primary-text-color
+
 .export-as-button-icon-frame
   display: flex
   justify-content: center
@@ -44,6 +46,7 @@ label.export-as
     margin-left:  math.div($select-height, 8) // 🧐
   &:last-child
     margin-right: math.div($select-height, 8) // 🧐
+
 .export-as-button-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height

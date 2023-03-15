@@ -318,7 +318,6 @@ function AppSidebar1() {
 				</div>
 				<hr />
 			</div>
-
 			<footer className="sidebar-foot">
 				<hr data-collapse />
 				<div className="widget-head">
@@ -336,7 +335,7 @@ function AppSidebar1() {
 								<div className="widget-align-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
-								<span className="resource-name">{resource.name}</span>
+								<span className="resource-type">{resource.name}</span>
 								<div className="widget-align-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
@@ -526,7 +525,7 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 			>
 				<Icon className="main-grid-item-icon" />
 			</button>
-			<span className="main-grid-item-name">
+			<span className="main-grid-item-type">
 				<GridItemName name={name} />
 			</span>
 		</article>
