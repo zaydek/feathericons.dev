@@ -13,21 +13,18 @@
 
   // Overrides -- don't use (:not(:is(...)))
   &[data-pos=start]
+    isolation: isolate // Needed because of box-shadow
     padding-top: $sidebar-padding-y
-    // TOOD: This shadow keeps getting clipped
     &:has(+ [data-scroll=true])
       box-shadow: $hairline-shadow-bottom
-  // TODO: This can be changed to use :has(...) (depends on FF support)
   &[data-pos=checkboxes]
     padding-top: 0
   &[data-pos=syntax-highlighting]
     padding: 0
     padding-bottom: $sidebar-gap
   &[data-pos=end]
-    //// padding: $sidebar-padding-y $sidebar-padding-x
     padding-bottom: $sidebar-gap
 
-// TODO: Rename to section-head? Add .section-body and .section-foot?
 .section-head
   display: flex
   align-items: center
