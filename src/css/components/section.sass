@@ -33,11 +33,15 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// These are optical alignment utilities. They align children to be optically
+// aligned.
+//
 .section-frame
   display: flex
   flex-direction: column
   justify-content: center // Center y-axis
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
+  // TODO: Why omit height here?
   //// height: $button-height
 
 .section-icon-frame
@@ -60,7 +64,7 @@
   color: $slate-600
 
 // Rename to section-number?
-.section-range-desc
+.section-number-desc
   display: flex
   justify-content: center
   align-items: center

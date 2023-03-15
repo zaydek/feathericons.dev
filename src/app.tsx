@@ -371,7 +371,7 @@ function AppSidebar2() {
 							<feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name">size</h6>
-						<span className="section-range-desc">{size.toFixed(0)} PX</span>
+						<span className="section-number-desc">{size.toFixed(0)} PX</span>
 						<div className="section-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetSize} />
@@ -388,7 +388,7 @@ function AppSidebar2() {
 							<feather.PenTool className="section-icon" />
 						</div>
 						<h6 className="section-name">stroke width</h6>
-						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
+						<span className="section-number-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="section-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw className="section-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
