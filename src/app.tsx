@@ -36,7 +36,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { Hairline, SidebarBody, SidebarFoot, SidebarHead } from "./sidebar-children"
+import { Hairline, Section, SidebarBody, SidebarFoot, SidebarHead } from "./sidebar-children"
 import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ function AppSidebar1() {
 				</section>
 				<div className="TEST_section-body" {...scrollProps}>
 					<section className="section" data-pos="checkboxes">
-						<header className="section-header">
+						<header className="section-head">
 							<div className="sidebar-align-icon-frame">
 								<feather.Package className="section-icon" />
 							</div>
@@ -217,7 +217,7 @@ function AppSidebar1() {
 			<SidebarBody>
 				<Hairline />
 				<section className="section">
-					<header className="section-header">
+					<header className="section-head">
 						<div className="sidebar-align-icon-frame">
 							<feather.Settings className="section-icon" />
 						</div>
@@ -261,8 +261,8 @@ function AppSidebar1() {
 			</SidebarBody>
 			<SidebarFoot>
 				<Hairline collapse />
-				<section className="section" data-pos="end">
-					<header className="section-header">
+				<Section pos="end">
+					<header className="section-head">
 						<div className="sidebar-align-frame">
 							<feather.Globe className="section-icon" />
 						</div>
@@ -281,7 +281,7 @@ function AppSidebar1() {
 							</Anchor>
 						))}
 					</nav>
-				</section>
+				</Section>
 			</SidebarFoot>
 		</Sidebar>
 	)
@@ -331,7 +331,7 @@ function AppSidebar2() {
 		<Sidebar pos="end">
 			<header className="sidebar-head">
 				<section className="section" data-pos="start">
-					<header className="section-header">
+					<header className="section-head">
 						<div className="sidebar-align-icon-frame">
 							<feather.Clipboard className="section-icon" />
 						</div>
@@ -367,7 +367,7 @@ function AppSidebar2() {
 			<div className="sidebar-body">
 				<Hairline />
 				<section className="section">
-					<header className="section-header">
+					<header className="section-head">
 						<div className="sidebar-align-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
@@ -384,7 +384,7 @@ function AppSidebar2() {
 				</section>
 				<Hairline />
 				<section className="section">
-					<header className="section-header">
+					<header className="section-head">
 						<div className="sidebar-align-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
@@ -410,7 +410,7 @@ function AppSidebar2() {
 			{/* <footer className="sidebar-foot">
 				<Hairline collapse />
 				<section className="section" data-pos="end">
-					<header className="section-header">
+					<header className="section-head">
 						<div className="sidebar-align-icon-frame">
 							<Feather.Shield className="section-icon" />
 						</div>

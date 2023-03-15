@@ -20,7 +20,6 @@ export function Hairline({ collapse = undefined }: { collapse?: boolean }) {
 
 export function Section({
 	pos,
-	head,
 	children,
 }: React.PropsWithChildren<{
 	// prettier-ignore
@@ -29,12 +28,10 @@ export function Section({
 		| "checkboxes"
 		| "syntax-highlighting"
 		| "end"
-	head: React.ReactNode
 }>) {
 	return (
 		<section className="section" data-pos={pos}>
-			<header className="section-head">{head}</header>
-			<div className="section-body">{children}</div>
+			{children}
 		</section>
 	)
 }
