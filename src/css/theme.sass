@@ -1,12 +1,14 @@
-@use "tailwind-colors" as *
-
 $include: false !default
 
-$base-color:            var(--base-color)
-$form-base-color:       var(--form-base-color)
-$hairline-color:        var(--hairline-color)
-$brand-color:           var(--brand-color)
+// Colors
+$base-color:              var(--base-color)
+$hover-base-color:        var(--hover-base-color)
+$hover-active-base-color: var(--hover-active-base-color)
+$form-base-color:         var(--form-base-color)
+$hairline-color:          var(--hairline-color)
+$brand-color:             var(--brand-color)
 
+// Typography
 $primary-text-color:    var(--primary-text-color)
 $secondary-text-color:  var(--secondary-text-color)
 $tertiary-text-color:   var(--tertiary-text-color)
@@ -25,24 +27,28 @@ $tertiary-text-color:   var(--tertiary-text-color)
     color-scheme: dark
 
   :root[data-theme=light]
-    --base-color:            hsl(200, 100%, 100%)
-    --form-base-color:       hsl(200, 100%,  50%)
-    --hairline-color:        hsl(200, 100%,  50%)
-    --brand-color:           dodgerblue
-    --primary-text-color:    hsl(200,  10%,  10%)
-    --secondary-text-color:  hsl(200,  10%,  25%)
-    --tertiary-text-color:   hsl(200,  10%,  50%)
+    --base-color:              hsl(200, 100%, 100%)
+    --hover-base-color:        hsl(200, 100%,  90%)
+    --hover-active-base-color: hsl(200, 100%,  85%)
+    --form-base-color:         hsl(200, 100%,  50%)
+    --hairline-color:          hsl(200, 100%,  50%)
+    --brand-color:             dodgerblue
+    --primary-text-color:      hsl(200,  10%,  10%)
+    --secondary-text-color:    hsl(200,  10%,  25%)
+    --tertiary-text-color:     hsl(200,  10%,  50%)
     //// --inactive-icon-color:   hsl(200, 100%,  50%)
     //// --active-icon-color:     hsl(200, 100%,  50%)
     //// --decorative-icon-color: hsl(200, 100%,  50%)
   :root[data-theme="dark"]
-    --base-color:            hsl(200,  10%,   5%)
-    --form-base-color:       hsl(200,  10%,  10%)
-    --hairline-color:        hsl(200,  10%,  25%)
-    --brand-color:           dodgerblue
-    --primary-text-color:    hsl(200,  10%,  90%)
-    --secondary-text-color:  hsl(200,  10%,  75%)
-    --tertiary-text-color:   hsl(200,  10%,  25%)
+    --base-color:              hsl(200,  10%,   5%)
+    --hover-base-color:        hsl(200,  10%,  10%)
+    --hover-active-base-color: hsl(200,  10%,  15%)
+    --form-base-color:         hsl(200,  10%,  10%)
+    --hairline-color:          hsl(200,  10%,  25%)
+    --brand-color:             dodgerblue
+    --primary-text-color:      hsl(200,  10%,  90%)
+    --secondary-text-color:    hsl(200,  10%,  75%)
+    --tertiary-text-color:     hsl(200,  10%,  25%)
     //// --inactive-icon-color:   hsl(200, 100%,  50%)
     //// --active-icon-color:     hsl(200, 100%,  50%)
     //// --decorative-icon-color: hsl(200, 100%,  50%)
