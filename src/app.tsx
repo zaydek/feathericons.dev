@@ -36,6 +36,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
+import { SidebarChildren } from "./sidebar-contents"
 import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,179 +74,185 @@ function AppSidebar1() {
 
 	return (
 		<Sidebar pos="start">
-			<header className="sidebar-head">
-				<section className="section" data-pos="start">
-					<div className="sidebar-align-frame">
-						<SearchBar />
-					</div>
-				</section>
-				<div className="section-body" {...scrollProps}>
-					<section className="section" data-pos="checkboxes">
-						<header className="section-header">
-							<div className="sidebar-align-icon-frame">
-								<feather.Package className="section-icon" />
+			<SidebarChildren
+				head={
+					<>
+						<section className="section" data-pos="start">
+							<div className="sidebar-align-frame">
+								<SearchBar />
 							</div>
-							<h6 className="section-name">Icons</h6>
-							<div className="sidebar-align-icon-frame">
-								{/* TODO: Change to <button> */}
-								<feather.RotateCcw
-									className="section-reset-icon"
-									strokeWidth={4}
-									onClick={() => startTransition(resetIcons)}
-								/>
-							</div>
-						</header>
-						<div>
-							<ul className="checkboxes">
-								<label className="checkbox">
+						</section>
+						<div className="TEST_section__body" {...scrollProps}>
+							<section className="section" data-pos="checkboxes">
+								<header className="section-header">
 									<div className="sidebar-align-icon-frame">
-										<feather.Feather className="checkbox-icon" />
+										<feather.Package className="section-icon" />
 									</div>
-									<span className="checkbox-name">Feather</span>
+									<h6 className="section-name">Icons</h6>
 									<div className="sidebar-align-icon-frame">
-										<input
-											type="checkbox"
-											checked={$feather}
-											onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+										{/* TODO: Change to <button> */}
+										<feather.RotateCcw
+											className="section-reset-icon"
+											strokeWidth={4}
+											onClick={() => startTransition(resetIcons)}
 										/>
 									</div>
-								</label>
-							</ul>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
-										/>
-									</div>
-									<span className="checkbox-name">Social media</span>
-									<div className="sidebar-align-icon-frame">
-										<input
-											type="checkbox"
-											checked={wkBrands}
-											onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
-										/>
-									</div>
-								</label>
-							</ul>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="sidebar-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											data-type="payments"
-											Icon={
-												// prettier-ignore
-												preferColor
+								</header>
+								<div>
+									<ul className="checkboxes">
+										<label className="checkbox">
+											<div className="sidebar-align-icon-frame">
+												<feather.Feather className="checkbox-icon" />
+											</div>
+											<span className="checkbox-name">Feather</span>
+											<div className="sidebar-align-icon-frame">
+												<input
+													type="checkbox"
+													checked={$feather}
+													onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+												/>
+											</div>
+										</label>
+									</ul>
+									<ul className="checkboxes">
+										<label className="checkbox">
+											<div className="sidebar-align-icon-frame">
+												<DynamicIcon
+													className="checkbox-icon"
+													Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
+												/>
+											</div>
+											<span className="checkbox-name">Social media</span>
+											<div className="sidebar-align-icon-frame">
+												<input
+													type="checkbox"
+													checked={wkBrands}
+													onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
+												/>
+											</div>
+										</label>
+									</ul>
+									<ul className="checkboxes">
+										<label className="checkbox">
+											<div className="sidebar-align-icon-frame">
+												<DynamicIcon
+													className="checkbox-icon"
+													data-type="payments"
+													Icon={
+														// prettier-ignore
+														preferColor
 												? wkPaymentsValue === "normal"
 													? wkPaymentsOriginal.CardMastercard
 													: wkPaymentsOriginalFilled.CardMastercard
 												: wkPaymentsValue === "normal"
 													? wkPaymentsMono.CardMastercard
 													: wkPaymentsMonoFilled.CardMastercard
-											}
-										/>
+													}
+												/>
+											</div>
+											<span className="checkbox-name">Cards</span>
+											<div className="sidebar-align-icon-frame">
+												<input
+													type="checkbox"
+													checked={wkPayments}
+													onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
+												/>
+											</div>
+										</label>
+										<ul className="checkboxes">
+											<label className="checkbox">
+												<div className="sidebar-align-icon-frame">
+													<DynamicIcon
+														className="checkbox-icon"
+														data-type="payments"
+														Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
+													/>
+												</div>
+												<span className="checkbox-name">Original</span>
+												<div className="sidebar-align-icon-frame">
+													<input
+														name="payments"
+														type="radio"
+														checked={wkPaymentsValue === "normal"}
+														onChange={e =>
+															startTransition(() => {
+																setWkPayments(true)
+																setWkPaymentsValue("normal")
+															})
+														}
+													/>
+												</div>
+											</label>
+										</ul>
+										<ul className="checkboxes">
+											<label className="checkbox">
+												<div className="sidebar-align-icon-frame">
+													<DynamicIcon
+														className="checkbox-icon"
+														data-type="payments"
+														Icon={
+															preferColor
+																? wkPaymentsOriginalFilled.CardMastercard
+																: wkPaymentsMonoFilled.CardMastercard
+														}
+													/>
+												</div>
+												<span className="checkbox-name">Filled</span>
+												<div className="sidebar-align-icon-frame">
+													<input
+														name="payments"
+														type="radio"
+														checked={wkPaymentsValue === "filled"}
+														onChange={e =>
+															startTransition(() => {
+																setWkPayments(true)
+																setWkPaymentsValue("filled")
+															})
+														}
+													/>
+												</div>
+											</label>
+										</ul>
+									</ul>
+								</div>
+							</section>
+						</div>
+					</>
+				}
+				body={
+					<>
+						<hr className="hairline" />
+						<section className="section">
+							<header className="section-header">
+								<div className="sidebar-align-icon-frame">
+									<feather.Settings className="section-icon" />
+								</div>
+								<h6 className="section-name">Settings</h6>
+								<div className="sidebar-align-icon-frame">
+									{/* TODO: Change to <button> */}
+									<feather.RotateCcw
+										className="section-reset-icon"
+										strokeWidth={4}
+										onClick={() => startTransition(resetIconPrefs)}
+									/>
+								</div>
+							</header>
+							<ul className="checkboxes">
+								<label className="checkbox">
+									<div className="sidebar-align-icon-frame">
+										{/* Defer to CSS; no <svg> */}
+										<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 									</div>
-									<span className="checkbox-name">Cards</span>
+									<span className="checkbox-name">Colorize icons</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
-											checked={wkPayments}
-											onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
+											checked={preferColor}
+											onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
 										/>
 									</div>
 								</label>
-								<ul className="checkboxes">
-									<label className="checkbox">
-										<div className="sidebar-align-icon-frame">
-											<DynamicIcon
-												className="checkbox-icon"
-												data-type="payments"
-												Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
-											/>
-										</div>
-										<span className="checkbox-name">Original</span>
-										<div className="sidebar-align-icon-frame">
-											<input
-												name="payments"
-												type="radio"
-												checked={wkPaymentsValue === "normal"}
-												onChange={e =>
-													startTransition(() => {
-														setWkPayments(true)
-														setWkPaymentsValue("normal")
-													})
-												}
-											/>
-										</div>
-									</label>
-								</ul>
-								<ul className="checkboxes">
-									<label className="checkbox">
-										<div className="sidebar-align-icon-frame">
-											<DynamicIcon
-												className="checkbox-icon"
-												data-type="payments"
-												Icon={
-													preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard
-												}
-											/>
-										</div>
-										<span className="checkbox-name">Filled</span>
-										<div className="sidebar-align-icon-frame">
-											<input
-												name="payments"
-												type="radio"
-												checked={wkPaymentsValue === "filled"}
-												onChange={e =>
-													startTransition(() => {
-														setWkPayments(true)
-														setWkPaymentsValue("filled")
-													})
-												}
-											/>
-										</div>
-									</label>
-								</ul>
-							</ul>
-						</div>
-					</section>
-				</div>
-			</header>
-			<div className="sidebar-body">
-				<hr className="hairline" />
-				<section className="section">
-					<header className="section-header">
-						<div className="sidebar-align-icon-frame">
-							<feather.Settings className="section-icon" />
-						</div>
-						<h6 className="section-name">Settings</h6>
-						<div className="sidebar-align-icon-frame">
-							{/* TODO: Change to <button> */}
-							<feather.RotateCcw
-								className="section-reset-icon"
-								strokeWidth={4}
-								onClick={() => startTransition(resetIconPrefs)}
-							/>
-						</div>
-					</header>
-					<ul className="checkboxes">
-						<label className="checkbox">
-							<div className="sidebar-align-icon-frame">
-								{/* Defer to CSS; no <svg> */}
-								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
-							</div>
-							<span className="checkbox-name">Colorize icons</span>
-							<div className="sidebar-align-icon-frame">
-								<input
-									type="checkbox"
-									checked={preferColor}
-									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
-								/>
-							</div>
-						</label>
-						{/* <label className="checkbox">
+								{/* <label className="checkbox">
 							<div className="sidebar-align-icon-frame">
 								<DynamicIcon className="checkbox-icon" Icon={preferNames ? feather.ToggleRight : feather.ToggleLeft} />
 							</div>
@@ -254,34 +261,38 @@ function AppSidebar1() {
 								<input type="checkbox" checked={preferNames} onChange={e => setPreferNames(e.currentTarget.checked)} />
 							</div>
 						</label> */}
-					</ul>
-				</section>
-				<hr className="hairline" />
-			</div>
-			<footer className="sidebar-foot">
-				<hr className="hairline" data-collapse />
-				<section className="section" data-pos="end">
-					<header className="section-header">
-						<div className="sidebar-align-frame">
-							<feather.Globe className="section-icon" />
-						</div>
-						<h6 className="section-name">Resources</h6>
-					</header>
-					<nav className="resources">
-						{resources.map((resource, index) => (
-							<Anchor className="resource" href={resource.href} key={index}>
-								<div className="sidebar-align-icon-frame">
-									<resource.icon className="resource-icon" />
+							</ul>
+						</section>
+						<hr className="hairline" />
+					</>
+				}
+				foot={
+					<>
+						<hr className="hairline" data-collapse />
+						<section className="section" data-pos="end">
+							<header className="section-header">
+								<div className="sidebar-align-frame">
+									<feather.Globe className="section-icon" />
 								</div>
-								<span className="resource-name">{resource.name}</span>
-								<div className="sidebar-align-icon-frame">
-									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
-								</div>
-							</Anchor>
-						))}
-					</nav>
-				</section>
-			</footer>
+								<h6 className="section-name">Resources</h6>
+							</header>
+							<nav className="resources">
+								{resources.map((resource, index) => (
+									<Anchor className="resource" href={resource.href} key={index}>
+										<div className="sidebar-align-icon-frame">
+											<resource.icon className="resource-icon" />
+										</div>
+										<span className="resource-name">{resource.name}</span>
+										<div className="sidebar-align-icon-frame">
+											<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
+										</div>
+									</Anchor>
+								))}
+							</nav>
+						</section>
+					</>
+				}
+			/>
 		</Sidebar>
 	)
 }
@@ -328,7 +339,7 @@ function AppSidebar2() {
 
 	return (
 		<Sidebar pos="end">
-			<header className="sidebar-head">
+			<header className="sidebar__head">
 				<section className="section" data-pos="start">
 					<header className="section-header">
 						<div className="sidebar-align-icon-frame">
@@ -340,7 +351,7 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="section-body" {...scrollProps}>
+				<div className="TEST_section__body" {...scrollProps}>
 					<section className="section" data-pos="syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
@@ -363,7 +374,7 @@ function AppSidebar2() {
 					</section>
 				</div>
 			</header>
-			<div className="sidebar-body">
+			<div className="sidebar__body">
 				<hr className="hairline" />
 				<section className="section">
 					<header className="section-header">
@@ -406,7 +417,7 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			{/* <footer className="sidebar-foot">
+			{/* <footer className="sidebar__foot">
 				<hr className="hairline" data-collapse />
 				<section className="section" data-pos="end">
 					<header className="section-header">
