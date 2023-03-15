@@ -11,12 +11,13 @@
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
 
 .widget-align-icon-frame
-  //// background-color: orange
   display: flex
   justify-content: center // Center x-axis
   align-items: center     // Center y-axis
+  margin: 0 math.div($button-height - 24px, 2)
   height: 24px
-  width: $button-height
+  width: 24px
+  border-radius: 1e3px
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,6 +48,17 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// <div class="widget-name">
+//   <div class="widget-align-icon-frame">
+//     <div class="widget-name-icon-1"></div>
+//   </div>
+//   <div class="widget-name-type">…</div>
+//   [<div class="widget-name-number-type">…</div>]
+//   [<div class="widget-align-icon-frame">
+//     <div class="widget-name-icon-2"></div>
+//   </div>]
+// </div>
+//
 .widget-name
   display: flex
   align-items: center
