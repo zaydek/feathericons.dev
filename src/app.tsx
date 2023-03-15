@@ -15,7 +15,6 @@ import {
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressRange,
-	SearchBar,
 	Sidebar,
 	SidebarBody,
 	SidebarFoot,
@@ -76,13 +75,13 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<SidebarHead>
-				<section className="section" data-pos="start">
+				{/* <section className="section" data-pos="start">
 					<div className="sidebar-align-frame">
 						<SearchBar />
 					</div>
-				</section>
+				</section> */}
 				<SidebarHeadBody>
-					<section className="section" data-pos="checkboxes">
+					<section className="section" data-pos="start">
 						<header className="section-head">
 							<div className="sidebar-align-icon-frame">
 								<feather.Package className="section-icon" />

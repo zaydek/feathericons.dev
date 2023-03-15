@@ -153,14 +153,11 @@ $sidebar-max-z-index: 100
 
 ////////////////////////////////////////////////////////////////////////////////
 
-$left:  var(--__left)
-$right: var(--__right)
-
 .main
   --__left:  #{$sidebar-1-width}
   --__right: #{$sidebar-2-width}
   position: absolute
-  inset: 0 $right 0 $left
+  inset: 0 var(--__right) 0 var(--__left)
   .sidebar[data-pos=start][data-state=minimized] ~ &
     --__left:  0
   .sidebar[data-pos=end][data-state=minimized] ~ &
