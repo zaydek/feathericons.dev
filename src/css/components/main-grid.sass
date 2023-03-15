@@ -17,12 +17,49 @@ $grid-item-aspect-ratio: 1.375
   //// padding: $sidebar-padding-y 24px // E.g. .sidebar-drag-area
   padding: $sidebar-padding-y 24px + $sidebar-padding-x // E.g. .sidebar-drag-area
 
-.main-grid-item
-  position: relative
+////////////////////////////////////////////////////////////////////////////////
+
+.sk-main-grid-item
   display: flex
   flex-direction: column
   gap: 8px
-  width: $grid-item-height
+
+.sk-main-grid-item-frame
+  display: flex
+  justify-content: center
+  align-items: center
+  aspect-ratio: $grid-item-aspect-ratio
+  background-color: $form-color
+  border-radius: 4px
+  box-shadow: $inset-hairline-shadow
+
+.sk-main-grid-item-icon
+  height: 24px
+  width:  24px
+  background-color: $tertiary-text-color
+  border-radius: 1e3px
+  transform: scale(calc(var(--size) / 24))
+  stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
+
+.sk-main-grid-item-type-container
+  display: flex
+  justify-content: center // Center x-axis
+  align-items: center     // Center y-axis
+  height: 32px
+
+.sk-main-grid-item-type
+  margin-top: -1 * math.div(32px - 4px, 2)
+  height: 4px
+  width:  8px * 6
+  background-color: $tertiary-text-color
+  border-radius: 1e3px
+
+////////////////////////////////////////////////////////////////////////////////
+
+.main-grid-item
+  display: flex
+  flex-direction: column
+  gap: 8px
 
 // TODO: Defer to <button>
 .main-grid-item-icon-frame

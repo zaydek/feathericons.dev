@@ -18,7 +18,7 @@ import {
 	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
-import { anchorAttrs, DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import { anchorAttrs, DynamicIcon, IconComponent, iota, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -574,9 +574,20 @@ function AppMain() {
 			}}
 		>
 			<div className="main-grid">
-				{icons?.map(([name, Icon], index) => (
-					<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />
-				))}
+				{icons === null
+					? iota(96).map(index => (
+							<div className="sk-main-grid-item">
+								<div className="sk-main-grid-item-frame">
+									<div className="sk-main-grid-item-icon"></div>
+								</div>
+								<div className="sk-main-grid-item-type-container">
+									<div className="sk-main-grid-item-type"></div>
+								</div>
+							</div>
+					  ))
+					: // prettier-ignore
+					  icons.map(([name, Icon], index) =>
+							<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />)}
 			</div>
 		</Main>
 	)

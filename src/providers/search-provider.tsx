@@ -27,7 +27,7 @@ export const SearchContext = React.createContext<{
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
 	cached:             boolean
-  icons:              ([string, IconComponent])[]
+  icons:              ([string, IconComponent])[] | null
   resetIcons:         () => void
   resetIconPrefs:     () => void
 } | null>(null)
@@ -61,7 +61,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
 	const [cached, setCached] = React.useState(false)
-	const [icons, setIcons] = React.useState<[string, IconComponent][]>([])
+	const [icons, setIcons] = React.useState<[string, IconComponent][] | null>(null)
 
 	//// const $$search = useMemo(() => {
 	//// 	return search.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
