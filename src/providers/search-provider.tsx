@@ -61,19 +61,20 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
 	const [cached, setCached] = React.useState(false)
+
+	//// const [loading, setLoading] = React.useState(false)
 	const [icons, setIcons] = React.useState<[string, IconComponent][]>([])
 
 	React.useEffect(() => {
 		async function fn() {
-			setCached(false)
-			const icons = await queryCache({
+			const [cached, icons] = await queryCache({
 				feather,
 				wkBrands,
 				wkPayments,
 				wkPaymentsValue,
 				monochrome: preferColor,
 			})
-			setCached(true)
+			setCached(cached)
 			setIcons(icons)
 		}
 		fn()

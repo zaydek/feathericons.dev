@@ -12,7 +12,7 @@ import {
 	ProgressBarProvider,
 	RangeProvider,
 	SearchProvider,
-	ShikiProvider,
+	ShikiProvider
 } from "@/providers"
 import { createRoot } from "react-dom/client"
 

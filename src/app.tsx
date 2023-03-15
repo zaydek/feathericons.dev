@@ -542,11 +542,10 @@ function AppMain() {
 
 	const { setStarted } = React.useContext(ProgressBarContext)!
 	React.useEffect(() => {
-		if (cached) {
-			setStarted(false)
-		} else {
-			setStarted(true)
-		}
+		if (cached) return
+		setStarted(true)
+		const d = window.setTimeout(() => setStarted(false), 100)
+		return () => window.clearTimeout(d)
 	}, [cached, setStarted])
 
 	// TODO: Extract to a named hook
