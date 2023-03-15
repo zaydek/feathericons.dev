@@ -1,4 +1,3 @@
-export * from "./anchor"
 export * from "./debug-css"
 export * from "./export-as"
 export * from "./icons"

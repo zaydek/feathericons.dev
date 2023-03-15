@@ -2,46 +2,51 @@ import React from "react"
 
 import * as shiki from "shiki-es"
 
-import { Anchor } from "@/components"
-import { getDarkMode } from "@/lib"
+import { anchorAttrs, getDarkMode } from "@/lib"
 import { ShikiContext } from "@/providers"
 
-// https://twitter.com/...
-function TwitterLink({ username, children }: { username: string; children: string }) {
+function TwitterUsername({ username, children }: { username: string; children: string }) {
 	const href = `https://twitter.com/${username}`
-	return <Anchor href={href}>{children}</Anchor>
+	return (
+		<a href={href} {...anchorAttrs}>
+			{children}
+		</a>
+	)
 }
 
-// https://...
-function Link({ href, children }: { href: string; children: string }) {
-	return <Anchor href={href}>{children}</Anchor>
+function Anchor({ href, children }: { href: string; children: string }) {
+	return (
+		<a href={href} {...anchorAttrs}>
+			{children}
+		</a>
+	)
 }
 
-function RenderLink({ children }: { children: string }) {
-	if (children.startsWith("@")) {
-		return <TwitterLink username={children.substring(1)}>{children}</TwitterLink>
-	} else {
-		return <Link href={children}>{children}</Link>
-	}
-}
-
-const urlRegex = /(.*)(?!http:\/\/www\.w3\.org\/2000\/svg)(@[^\s]+|https?:\/\/[^\s]+)(.*)/g
+// Negates http://www.w3.org/2000/svg
+// Matches @… OR https://…
+const re = /(.*)(?!http:\/\/www\.w3\.org\/2000\/svg)(@[^\s]+|https?:\/\/[^\s]+)(.*)/g
 
 function Tokenize({ color, children }: { color?: string; children: string }) {
-	const arr = [...children.matchAll(urlRegex)]
-	return (
-		<span style={{ color }}>
-			{arr.length > 0
-				? arr.map(([_, $1, $2, $3], index) => (
-						<React.Fragment key={index}>
-							{$1}
-							<RenderLink>{$2}</RenderLink>
-							{$3}
-						</React.Fragment>
-				  ))
-				: children}
-		</span>
-	)
+	const arr = [...children.matchAll(re)]
+	if (arr.length === 0) {
+		return <span style={{ color }}>{children}</span>
+	} else {
+		return (
+			<span style={{ color }}>
+				{arr.map(([_, $1, $2, $3], index) => (
+					<React.Fragment key={index}>
+						{$1}
+						{children.startsWith("@") ? (
+							<TwitterUsername username={$2.slice(1)}>{$2}</TwitterUsername>
+						) : (
+							<Anchor href={$2}>{$2}</Anchor>
+						)}
+						{$3}
+					</React.Fragment>
+				))}
+			</span>
+		)
+	}
 }
 
 function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {

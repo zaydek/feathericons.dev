@@ -9,7 +9,6 @@ import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/ts
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
 import {
-	Anchor,
 	DEV_DebugCss,
 	ExportAs,
 	Main,
@@ -19,7 +18,7 @@ import {
 	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
-import { DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import { anchorAttrs, DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -333,7 +332,7 @@ function AppSidebar1() {
 				<div className="widget-body" data-has="end">
 					<nav className="resources">
 						{resources.map((resource, index) => (
-							<Anchor className="resource" href={resource.href} key={index}>
+							<a key={resource.href} className="resource" href={resource.href} {...anchorAttrs}>
 								<div className="widget-align-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
@@ -341,7 +340,7 @@ function AppSidebar1() {
 								<div className="widget-align-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
-							</Anchor>
+							</a>
 						))}
 					</nav>
 				</div>
