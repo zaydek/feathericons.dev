@@ -79,7 +79,7 @@ function AppSidebar1() {
 						<SearchBar />
 					</div>
 				</section>
-				<div className="u-flex-1 u-overflow-y" {...scrollProps}>
+				<div className="section-body" {...scrollProps}>
 					<section className="section" data-pos="checkboxes">
 						<header className="section-header">
 							<div className="sidebar-align-icon-frame">
@@ -340,7 +340,7 @@ function AppSidebar2() {
 						</div>
 					</header>
 				</section>
-				<div className="u-flex-1 u-overflow-y" {...scrollProps}>
+				<div className="section-body" {...scrollProps}>
 					<section className="section" data-pos="syntax-highlighting">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}
