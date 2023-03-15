@@ -13,29 +13,28 @@ $active-icon-color:     var(--active-icon-color)
 $decorative-icon-color: var(--decorative-icon-color)
 
 @if $include
-  :root:not([data-theme=dark])
+  :root[data-theme=light]
     color-scheme: light
   :root[data-theme=dark]
     color-scheme: dark
 
-  :root:not([data-theme="dark"])
-    --base-color:            white
-    --form-base-color:       white
-    --hairline-color:        $slate-300
-    --brand-color:           dodger-blue
-    --primary-text-color:    $slate-800
-    --secondary-text-color:  $slate-600
-    --inactive-icon-color:   $slate-400
-    --active-icon-color:     $slate-800
-    --decorative-icon-color: $slate-500
-
+  :root[data-theme=light]
+    --base-color:            #{white}
+    --form-base-color:       #{white}
+    --hairline-color:        #{$slate-300}
+    --brand-color:           #{dodger-blue}
+    --primary-text-color:    #{$slate-800}
+    --secondary-text-color:  #{$slate-600}
+    --inactive-icon-color:   #{$slate-400}
+    --active-icon-color:     #{$slate-800}
+    --decorative-icon-color: #{$slate-500}
   :root[data-theme="dark"]
-    --base-color:            $slate-900
-    --form-base-color:       white
-    --hairline-color:        $slate-300
-    --brand-color:           dodger-blue
-    --primary-text-color:    $slate-100
-    --secondary-text-color:  $slate-700
-    --inactive-icon-color:   $slate-500
-    --active-icon-color:     $slate-100
-    --decorative-icon-color: $slate-500
+    --base-color:            #{$slate-900}
+    --form-base-color:       #{$slate-800}
+    --hairline-color:        #{$slate-300}
+    --brand-color:           #{dodger-blue}
+    --primary-text-color:    #{$slate-100}
+    --secondary-text-color:  #{$slate-700}
+    --inactive-icon-color:   #{$slate-500}
+    --active-icon-color:     #{$slate-100}
+    --decorative-icon-color: #{$slate-500}

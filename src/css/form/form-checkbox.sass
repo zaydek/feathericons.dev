@@ -15,7 +15,7 @@ input[type=checkbox]
   position: relative
   height: $height
   width: $height
-  background-color: $base-color
+  background-color: $form-base-color
   border-radius: 1e3px
   box-shadow: $inset-hairline-shadow, $realistic-shadow
   cursor: pointer           // Interaction
@@ -41,7 +41,7 @@ input[type=checkbox]
     margin: auto       // Pseudo reset
     height: $tiny-icon-height
     width: $tiny-icon-height
-    background: feather-chubby-check-base64($stroke-width: 10, $color: $base-color) 0% 0% / 100% 100%
+    background: feather-chubby-check-base64($stroke-width: 10, $color: $form-base-color) 0% 0% / 100% 100%
     transform: scale(0)
     opacity: 0
     transition: transform $transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25), opacity $transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25)
