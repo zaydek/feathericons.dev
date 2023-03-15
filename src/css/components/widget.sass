@@ -26,7 +26,7 @@
   &[data-has=start]
     padding-top: $sidebar-padding-y
   &:has(+ [data-scroll=true]) // Don't use :has (because of FF) but no choice
-    isolation: isolate // For box-shadow (see .checkboxes)
+    isolation: isolate        // For box-shadow (see .checkboxes)
     box-shadow: $hairline-shadow-bottom
 
 .widget-body
