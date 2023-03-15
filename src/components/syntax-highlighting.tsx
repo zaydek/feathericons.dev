@@ -67,8 +67,8 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 									<Tokenize
 										// prettier-ignore
 										color={getDarkMode()
-											? "rgb(139, 148, 158)"
-											: "rgb(110, 119, 129)"
+											? "rgb(139, 148, 158)" // E.g. github-dark
+											: "rgb(110, 119, 129)" // E.g. github-light
 										}
 									>
 										{line}
