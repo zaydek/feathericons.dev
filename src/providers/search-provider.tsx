@@ -26,7 +26,7 @@ export const SearchContext = React.createContext<{
   setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
-	iconsAreCached:     boolean
+	cached:             boolean
   icons:              ([string, IconComponent])[]
   resetIcons:         () => void
   resetIconPrefs:     () => void
@@ -60,19 +60,20 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	const [preferColor, setPreferColor] = useParamBoolean({ key: "prefer-color", initialValue: PREFER_COLOR_DEFAULT })
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
-	const [iconsAreCached, setIconsAreCached] = React.useState(false)
+	const [cached, setCached] = React.useState(false)
 	const [icons, setIcons] = React.useState<[string, IconComponent][]>([])
 
 	React.useEffect(() => {
 		async function fn() {
-			const [cached, icons] = await queryCache({
+			setCached(false)
+			const icons = await queryCache({
 				feather,
 				wkBrands,
 				wkPayments,
 				wkPaymentsValue,
 				monochrome: preferColor,
 			})
-			setIconsAreCached(cached)
+			setCached(true)
 			setIcons(icons)
 		}
 		fn()
@@ -106,7 +107,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 				setWkPaymentsValue,
 				preferColor,
 				setPreferColor,
-				iconsAreCached,
+				cached,
 				icons,
 				resetIcons,
 				resetIconPrefs,

@@ -22,6 +22,7 @@ import { resources } from "@/data"
 import { DynamicIcon, IconComponent, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
+	ProgressBarContext,
 	RangeSizeContext,
 	RangeStrokeWidthContext,
 	READONLY_CLIPBOARD_DEFAULT,
@@ -127,44 +128,14 @@ function useSideEffectVisibleDocumentTitle() {
 	return void 0
 }
 
-//// function useProgressBarTransition() {
-//// 	const { setStarted } = React.useContext(ProgressBarContext)!
-//// 	const [pending, startTransition] = React.useTransition()
-////
-//// 	React.useEffect(() => {
-//// 		setStarted(true)
-//// 		const d = window.setTimeout(() => setStarted(false), 100)
-//// 		return () => window.clearTimeout(d)
-//// 	}, [pending, setStarted])
-////
-//// 	const startTransition = React.useCallback((args: IconAliasPath[] | null, fn: () => void) => {
-//// 		// prettier-ignore
-//// 		args = args ?? [
-//// 			"@icons/feather/tsx",
-//// 			"@icons/wk/brands/original/tsx",
-//// 			"@icons/wk/payments/original/tsx",
-//// 		]
-//// 		if (args.every(arg => cache.has(arg))) {
-//// 			fn()
-//// 		} else {
-//// 			startTransition(fn)
-//// 		}
-//// 	}, [])
-////
-//// 	return startTransition
-//// }
-
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppSidebar1() {
 	const scrollProps = useScrollProps()
 
-	//// const startTransition = useProgressBarTransition()
 	const [, startTransition] = React.useTransition()
 
 	const {
-		//// search,
-		//// setSearch,
 		// eslint-disable-next-line destructuring/no-rename
 		feather: $feather,
 		setFeather,
@@ -176,8 +147,6 @@ function AppSidebar1() {
 		setWkPaymentsValue,
 		preferColor,
 		setPreferColor,
-		//// iconsAreCached,
-		//// icons,
 		resetIcons,
 		resetIconPrefs,
 	} = React.useContext(SearchContext)!
@@ -185,6 +154,7 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
+				{/* TODO: Pass search as state? */}
 				{/* <div className="widget-head" data-has="start">
 					<div className="widget-align-frame">
 						<SearchBar />
@@ -567,9 +537,17 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	// TODO: Associate iconsAreCached to progress bar
-	const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
+	const { feather, wkBrands, wkPayments, cached, icons } = React.useContext(SearchContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
+
+	const { setStarted } = React.useContext(ProgressBarContext)!
+	React.useEffect(() => {
+		if (cached) {
+			setStarted(false)
+		} else {
+			setStarted(true)
+		}
+	}, [cached, setStarted])
 
 	// TODO: Extract to a named hook
 	const onceRef = React.useRef(false)

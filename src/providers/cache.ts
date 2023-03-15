@@ -58,7 +58,8 @@ function createCache() {
 			}
 			return acc
 		}, [])
-		return [cached, normalized] as const
+		//// return [cached, normalized] as const
+		return normalized
 	}
 	return { has, read }
 }

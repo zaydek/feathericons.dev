@@ -8,11 +8,11 @@ export const resources: { name: string; icon: IconComponent; href: string }[] = 
 		icon: wkBrandsOriginal.BrandGithub,
 		href: "https://github.com/feathericons/feather",
 	},
-	// {
-	// 	name: "Original Feather website",
-	// 	icon: wkBrandsOriginal.BrandGithub,
-	// 	href: "https://github.com/feathericons/feather",
-	// },
+	//// {
+	//// 	name: "Original Feather website",
+	//// 	icon: wkBrandsOriginal.BrandGithub,
+	//// 	href: "https://github.com/feathericons/feather",
+	//// },
 	{
 		name: "Website",
 		icon: wkBrandsOriginal.BrandGithub,
