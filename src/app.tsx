@@ -76,57 +76,114 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<SidebarHead>
-				<section className="section" data-pos="start">
+				{/* <section className="section" data-pos="start">
 					<div className="section-frame">
 						<SearchBar />
 					</div>
-				</section>
-				<SidebarHeadBody>
-					<section className="section" data-pos="checkboxes">
-						<header className="section-head">
-							<div className="section-icon-frame">
-								<feather.Package className="section-icon" />
-							</div>
-							<h6 className="section-name">Icons</h6>
-							<div className="section-icon-frame">
-								{/* TODO: Change to <button> */}
-								<feather.RotateCcw
-									className="section-reset-icon"
-									strokeWidth={4}
-									onClick={() => startTransition(resetIcons)}
-								/>
-							</div>
-						</header>
-						<div>
-							<ul className="checkboxes">
-								<label className="checkbox">
-									<div className="section-icon-frame">
-										<feather.Feather className="checkbox-icon" />
-									</div>
-									<span className="checkbox-name">Feather</span>
-									<div className="section-icon-frame">
-										<input
-											type="checkbox"
-											checked={$feather}
-											onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
-										/>
-									</div>
-								</label>
-							</ul>
+				</section> */}
+
+				<header className="TEST_section-head" data-pos="start">
+					<div className="section-frame">
+						<SearchBar />
+					</div>
+				</header>
+				<div className="TEST_section-body">
+					<header className="section-head">
+						<div className="section-icon-frame">
+							<feather.Package className="section-icon" />
+						</div>
+						<h6 className="section-name">Icons</h6>
+						<div className="section-icon-frame">
+							{/* TODO: Change to <button> */}
+							<feather.RotateCcw
+								className="section-reset-icon"
+								strokeWidth={4}
+								onClick={() => startTransition(resetIcons)}
+							/>
+						</div>
+					</header>
+					<div>
+						<ul className="checkboxes">
+							<label className="checkbox">
+								<div className="section-icon-frame">
+									<feather.Feather className="checkbox-icon" />
+								</div>
+								<span className="checkbox-name">Feather</span>
+								<div className="section-icon-frame">
+									<input
+										type="checkbox"
+										checked={$feather}
+										onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+									/>
+								</div>
+							</label>
+						</ul>
+						<ul className="checkboxes">
+							<label className="checkbox">
+								<div className="section-icon-frame">
+									<DynamicIcon
+										className="checkbox-icon"
+										Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
+									/>
+								</div>
+								<span className="checkbox-name">Social media</span>
+								<div className="section-icon-frame">
+									<input
+										type="checkbox"
+										checked={wkBrands}
+										onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
+									/>
+								</div>
+							</label>
+						</ul>
+						<ul className="checkboxes">
+							<label className="checkbox">
+								<div className="section-icon-frame">
+									<DynamicIcon
+										className="checkbox-icon"
+										data-type="payments"
+										Icon={
+											// prettier-ignore
+											preferColor
+												? wkPaymentsValue === "normal"
+													? wkPaymentsOriginal.CardMastercard
+													: wkPaymentsOriginalFilled.CardMastercard
+												: wkPaymentsValue === "normal"
+													? wkPaymentsMono.CardMastercard
+													: wkPaymentsMonoFilled.CardMastercard
+										}
+									/>
+								</div>
+								<span className="checkbox-name">Cards</span>
+								<div className="section-icon-frame">
+									<input
+										type="checkbox"
+										checked={wkPayments}
+										onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
+									/>
+								</div>
+							</label>
 							<ul className="checkboxes">
 								<label className="checkbox">
 									<div className="section-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
+											data-type="payments"
+											Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
 										/>
 									</div>
-									<span className="checkbox-name">Social media</span>
+									<span className="checkbox-name">Original</span>
 									<div className="section-icon-frame">
 										<input
-											type="checkbox"
-											checked={wkBrands}
-											onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
+											name="payments"
+											type="radio"
+											checked={wkPaymentsValue === "normal"}
+											onChange={e =>
+												startTransition(() => {
+													setWkPayments(true)
+													setWkPaymentsValue("normal")
+												})
+											}
 										/>
 									</div>
 								</label>
@@ -137,48 +194,77 @@ function AppSidebar1() {
 										<DynamicIcon
 											className="checkbox-icon"
 											data-type="payments"
-											Icon={
-												// prettier-ignore
-												preferColor
-													? wkPaymentsValue === "normal"
-														? wkPaymentsOriginal.CardMastercard
-														: wkPaymentsOriginalFilled.CardMastercard
-													: wkPaymentsValue === "normal"
-														? wkPaymentsMono.CardMastercard
-														: wkPaymentsMonoFilled.CardMastercard
+											Icon={preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard}
+										/>
+									</div>
+									<span className="checkbox-name">Filled</span>
+									<div className="section-icon-frame">
+										<input
+											name="payments"
+											type="radio"
+											checked={wkPaymentsValue === "filled"}
+											onChange={e =>
+												startTransition(() => {
+													setWkPayments(true)
+													setWkPaymentsValue("filled")
+												})
 											}
 										/>
 									</div>
-									<span className="checkbox-name">Cards</span>
-									<div className="section-icon-frame">
-										<input
-											type="checkbox"
-											checked={wkPayments}
-											onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
-										/>
-									</div>
 								</label>
+							</ul>
+						</ul>
+					</div>
+				</div>
+				{/* <footer className="TEST_section-foot">Hello</footer> */}
+
+				{false && (
+					<SidebarHeadBody>
+						<section className="section" data-pos="checkboxes">
+							<header className="section-head">
+								<div className="section-icon-frame">
+									<feather.Package className="section-icon" />
+								</div>
+								<h6 className="section-name">Icons</h6>
+								<div className="section-icon-frame">
+									{/* TODO: Change to <button> */}
+									<feather.RotateCcw
+										className="section-reset-icon"
+										strokeWidth={4}
+										onClick={() => startTransition(resetIcons)}
+									/>
+								</div>
+							</header>
+							<div>
+								<ul className="checkboxes">
+									<label className="checkbox">
+										<div className="section-icon-frame">
+											<feather.Feather className="checkbox-icon" />
+										</div>
+										<span className="checkbox-name">Feather</span>
+										<div className="section-icon-frame">
+											<input
+												type="checkbox"
+												checked={$feather}
+												onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+											/>
+										</div>
+									</label>
+								</ul>
 								<ul className="checkboxes">
 									<label className="checkbox">
 										<div className="section-icon-frame">
 											<DynamicIcon
 												className="checkbox-icon"
-												data-type="payments"
-												Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
+												Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 											/>
 										</div>
-										<span className="checkbox-name">Original</span>
+										<span className="checkbox-name">Social media</span>
 										<div className="section-icon-frame">
 											<input
-												name="payments"
-												type="radio"
-												checked={wkPaymentsValue === "normal"}
-												onChange={e =>
-													startTransition(() => {
-														setWkPayments(true)
-														setWkPaymentsValue("normal")
-													})
-												}
+												type="checkbox"
+												checked={wkBrands}
+												onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
 											/>
 										</div>
 									</label>
@@ -190,30 +276,83 @@ function AppSidebar1() {
 												className="checkbox-icon"
 												data-type="payments"
 												Icon={
-													preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard
+													// prettier-ignore
+													preferColor
+														? wkPaymentsValue === "normal"
+															? wkPaymentsOriginal.CardMastercard
+															: wkPaymentsOriginalFilled.CardMastercard
+														: wkPaymentsValue === "normal"
+															? wkPaymentsMono.CardMastercard
+															: wkPaymentsMonoFilled.CardMastercard
 												}
 											/>
 										</div>
-										<span className="checkbox-name">Filled</span>
+										<span className="checkbox-name">Cards</span>
 										<div className="section-icon-frame">
 											<input
-												name="payments"
-												type="radio"
-												checked={wkPaymentsValue === "filled"}
-												onChange={e =>
-													startTransition(() => {
-														setWkPayments(true)
-														setWkPaymentsValue("filled")
-													})
-												}
+												type="checkbox"
+												checked={wkPayments}
+												onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
 											/>
 										</div>
 									</label>
+									<ul className="checkboxes">
+										<label className="checkbox">
+											<div className="section-icon-frame">
+												<DynamicIcon
+													className="checkbox-icon"
+													data-type="payments"
+													Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
+												/>
+											</div>
+											<span className="checkbox-name">Original</span>
+											<div className="section-icon-frame">
+												<input
+													name="payments"
+													type="radio"
+													checked={wkPaymentsValue === "normal"}
+													onChange={e =>
+														startTransition(() => {
+															setWkPayments(true)
+															setWkPaymentsValue("normal")
+														})
+													}
+												/>
+											</div>
+										</label>
+									</ul>
+									<ul className="checkboxes">
+										<label className="checkbox">
+											<div className="section-icon-frame">
+												<DynamicIcon
+													className="checkbox-icon"
+													data-type="payments"
+													Icon={
+														preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard
+													}
+												/>
+											</div>
+											<span className="checkbox-name">Filled</span>
+											<div className="section-icon-frame">
+												<input
+													name="payments"
+													type="radio"
+													checked={wkPaymentsValue === "filled"}
+													onChange={e =>
+														startTransition(() => {
+															setWkPayments(true)
+															setWkPaymentsValue("filled")
+														})
+													}
+												/>
+											</div>
+										</label>
+									</ul>
 								</ul>
-							</ul>
-						</div>
-					</section>
-				</SidebarHeadBody>
+							</div>
+						</section>
+					</SidebarHeadBody>
+				)}
 			</SidebarHead>
 			<SidebarBody>
 				<Hairline />

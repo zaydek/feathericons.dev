@@ -31,11 +31,38 @@
   height: 24px
   background-color: white
 
+.TEST_section-head
+  padding: $sidebar-gap $sidebar-padding-x
+  &[data-pos=start]
+    padding-top: $sidebar-padding-y
+
+  // TODO: Add data-pos overrides here
+  // TODO: Rename to data-override?
+  //// padding-bottom: 0
+
+.TEST_section-body
+  display: flex
+  flex-direction: column
+  gap: $sidebar-gap
+  //// padding: 0 $sidebar-padding-x
+  padding: $sidebar-gap $sidebar-padding-x
+  padding-top: 0
+  // TODO: Add data-pos overrides here
+  // TODO: Rename to data-override?
+  overflow-y: scroll
+
+//// .TEST_section-foot
+////   padding: $sidebar-gap $sidebar-padding-x
+////   // TODO: Add data-pos overrides here
+////   // TODO: Rename to data-override?
+////   padding-top: 0
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // These are optical alignment utilities. They align children to be optically
 // aligned.
 //
+//// // TODO: Rename to .section-align-frame?
 .section-frame
   display: flex
   flex-direction: column
@@ -44,6 +71,7 @@
   // TODO: Why omit height here?
   //// height: $button-height
 
+//// // TODO: Rename to .section-align-icon-frame?
 .section-icon-frame
   display: flex
   justify-content: center // Center x-axis
