@@ -3,6 +3,8 @@
 $include: false !default
 
 $base-color:            var(--base-color)
+$form-base-color:       var(--form-base-color)
+$hairline-color:        var(--hairline-color)
 $brand-color:           var(--brand-color)
 $primary-text-color:    var(--primary-text-color)
 $secondary-text-color:  var(--secondary-text-color)
@@ -17,9 +19,9 @@ $decorative-icon-color: var(--decorative-icon-color)
     color-scheme: dark
 
   :root:not([data-theme="dark"])
-    --app-color:             red
-
     --base-color:            white
+    --form-base-color:       white
+    --hairline-color:        $slate-300
     --brand-color:           dodger-blue
     --primary-text-color:    $slate-800
     --secondary-text-color:  $slate-600
@@ -28,9 +30,9 @@ $decorative-icon-color: var(--decorative-icon-color)
     --decorative-icon-color: $slate-500
 
   :root[data-theme="dark"]
-    --app-color:             blue
-
     --base-color:            $slate-900
+    --form-base-color:       white
+    --hairline-color:        $slate-300
     --brand-color:           dodger-blue
     --primary-text-color:    $slate-100
     --secondary-text-color:  $slate-700
