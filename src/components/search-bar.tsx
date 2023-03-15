@@ -45,7 +45,6 @@ export function SearchBar() {
 			</div>
 			<input
 				ref={ref}
-				className="u-flex-1"
 				type="text"
 				placeholder={isMac() ? "⌘P to focus" : "Ctrl-P to focus"}
 				value={search}

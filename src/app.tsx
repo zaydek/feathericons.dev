@@ -85,7 +85,7 @@ function AppSidebar1() {
 							<div className="sidebar-align-icon-frame">
 								<feather.Package className="section-icon" />
 							</div>
-							<h6 className="section-name u-flex-1">Icons</h6>
+							<h6 className="section-name">Icons</h6>
 							<div className="sidebar-align-icon-frame">
 								{/* TODO: Change to <button> */}
 								<feather.RotateCcw
@@ -101,7 +101,7 @@ function AppSidebar1() {
 									<div className="sidebar-align-icon-frame">
 										<feather.Feather className="checkbox-icon" />
 									</div>
-									<span className="checkbox-name u-flex-1">Feather</span>
+									<span className="checkbox-name">Feather</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -119,7 +119,7 @@ function AppSidebar1() {
 											Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Social media</span>
+									<span className="checkbox-name">Social media</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -147,7 +147,7 @@ function AppSidebar1() {
 											}
 										/>
 									</div>
-									<span className="checkbox-name u-flex-1">Cards</span>
+									<span className="checkbox-name">Cards</span>
 									<div className="sidebar-align-icon-frame">
 										<input
 											type="checkbox"
@@ -165,7 +165,7 @@ function AppSidebar1() {
 												Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
 											/>
 										</div>
-										<span className="checkbox-name u-flex-1">Original</span>
+										<span className="checkbox-name">Original</span>
 										<div className="sidebar-align-icon-frame">
 											<input
 												name="payments"
@@ -192,7 +192,7 @@ function AppSidebar1() {
 												}
 											/>
 										</div>
-										<span className="checkbox-name u-flex-1">Filled</span>
+										<span className="checkbox-name">Filled</span>
 										<div className="sidebar-align-icon-frame">
 											<input
 												name="payments"
@@ -220,7 +220,7 @@ function AppSidebar1() {
 						<div className="sidebar-align-icon-frame">
 							<feather.Settings className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Settings</h6>
+						<h6 className="section-name">Settings</h6>
 						<div className="sidebar-align-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
@@ -236,7 +236,7 @@ function AppSidebar1() {
 								{/* Defer to CSS; no <svg> */}
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
-							<span className="checkbox-name u-flex-1">Colorize icons</span>
+							<span className="checkbox-name">Colorize icons</span>
 							<div className="sidebar-align-icon-frame">
 								<input
 									type="checkbox"
@@ -249,7 +249,7 @@ function AppSidebar1() {
 							<div className="sidebar-align-icon-frame">
 								<DynamicIcon className="checkbox-icon" Icon={preferNames ? feather.ToggleRight : feather.ToggleLeft} />
 							</div>
-							<span className="checkbox-name u-flex-1">Show icon names</span>
+							<span className="checkbox-name">Show icon names</span>
 							<div className="sidebar-align-icon-frame">
 								<input type="checkbox" checked={preferNames} onChange={e => setPreferNames(e.currentTarget.checked)} />
 							</div>
@@ -258,7 +258,6 @@ function AppSidebar1() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
 			<footer className="sidebar-foot">
 				<hr className="hairline" data-collapse />
 				<section className="section" data-pos="end">
@@ -266,7 +265,7 @@ function AppSidebar1() {
 						<div className="sidebar-align-frame">
 							<feather.Globe className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Resources</h6>
+						<h6 className="section-name">Resources</h6>
 					</header>
 					<nav className="resources">
 						{resources.map((resource, index) => (
@@ -274,7 +273,7 @@ function AppSidebar1() {
 								<div className="sidebar-align-icon-frame">
 									<resource.icon className="resource-icon" />
 								</div>
-								<span className="resource-name u-flex-1">{resource.name}</span>
+								<span className="resource-name">{resource.name}</span>
 								<div className="sidebar-align-icon-frame">
 									<feather.ArrowUpRight className="resource-icon" strokeWidth={4} />
 								</div>
@@ -335,7 +334,7 @@ function AppSidebar2() {
 						<div className="sidebar-align-icon-frame">
 							<feather.Clipboard className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Clipboard</h6>
+						<h6 className="section-name">Clipboard</h6>
 						<div className="sidebar-align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
@@ -371,7 +370,7 @@ function AppSidebar2() {
 						<div className="sidebar-align-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">size</h6>
+						<h6 className="section-name">size</h6>
 						<span className="section-range-desc">{size.toFixed(0)} PX</span>
 						<div className="sidebar-align-icon-frame">
 							{/* TODO: Change to <button> */}
@@ -388,7 +387,7 @@ function AppSidebar2() {
 						<div className="sidebar-align-icon-frame">
 							<feather.PenTool className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">stroke width</h6>
+						<h6 className="section-name">stroke width</h6>
 						<span className="section-range-desc">{strokeWidth.toFixed(2)}</span>
 						<div className="sidebar-align-icon-frame">
 							{/* TODO: Change to <button> */}
@@ -407,7 +406,6 @@ function AppSidebar2() {
 				</section>
 				<hr className="hairline" />
 			</div>
-			{/* <div className="u-flex-1" onClick={clearSelectedNames}></div> */}
 			{/* <footer className="sidebar-foot">
 				<hr className="hairline" data-collapse />
 				<section className="section" data-pos="end">
@@ -415,7 +413,7 @@ function AppSidebar2() {
 						<div className="sidebar-align-icon-frame">
 							<Feather.Shield className="section-icon" />
 						</div>
-						<h6 className="section-name u-flex-1">Sponsor</h6>
+						<h6 className="section-name">Sponsor</h6>
 					</header>
 				</section>
 			</footer> */}
