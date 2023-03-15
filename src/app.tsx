@@ -270,8 +270,16 @@ function AppSidebar1() {
 										checked={wkPayments}
 										onChange={e =>
 											startTransitionIfNeeded(
-												// TODO: Add filled?
-												[preferColor ? "@icons/wk/payments/original/tsx" : "@icons/wk/payments/mono/tsx"],
+												[
+													// prettier-ignore
+													preferColor
+														? wkPaymentsValue === "normal"
+															? "@icons/wk/payments/original/tsx"
+															: "@icons/wk/payments/mono/tsx"
+														: wkPaymentsValue === "normal"
+															? "@icons/wk/payments/original-filled/tsx"
+															: "@icons/wk/payments/mono-filled/tsx",
+												],
 												() => setWkPayments(e.currentTarget.checked),
 											)
 										}
