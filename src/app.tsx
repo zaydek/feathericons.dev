@@ -499,42 +499,40 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 	} = React.useContext(ClipboardContext)!
 
 	return (
-		<article
-			id={name}
-			className="main-grid-item"
-			data-selected={selectedNames.has(name)}
-			onClick={e => {
-				if (e.shiftKey) {
-					if (selectedNamesStart === null) {
-						setSelectedNamesStart(index)
-						setSelectedNamesEnd(index)
-					} else {
-						setSelectedNamesEnd(index)
-					}
-				} else {
-					if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-						if (selectedNames.has(name)) {
-							removeFromSelectedNames(name)
+		<article id={name} className="main-grid-item" data-selected={selectedNames.has(name)}>
+			<button
+				className="main-grid-item-icon-frame"
+				onClick={e => {
+					if (e.shiftKey) {
+						if (selectedNamesStart === null) {
+							setSelectedNamesStart(index)
+							setSelectedNamesEnd(index)
 						} else {
-							addToSelectedNames(name)
+							setSelectedNamesEnd(index)
 						}
 					} else {
-						clearSelectedNames()
-						addToSelectedNames(name)
+						if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
+							if (selectedNames.has(name)) {
+								removeFromSelectedNames(name)
+							} else {
+								addToSelectedNames(name)
+							}
+						} else {
+							clearSelectedNames()
+							addToSelectedNames(name)
+						}
+						setSelectedNamesStart(index)
+						setSelectedNamesEnd(null)
 					}
-					setSelectedNamesStart(index)
-					setSelectedNamesEnd(null)
-				}
-			}}
-			onKeyDown={e => {
-				if (e.shiftKey) {
-					if (document.activeElement instanceof HTMLElement) {
-						document.activeElement.blur() // Remove focus styles
+				}}
+				onKeyDown={e => {
+					if (e.shiftKey) {
+						if (document.activeElement instanceof HTMLElement) {
+							document.activeElement.blur() // Remove focus styles
+						}
 					}
-				}
-			}}
-		>
-			<button className="main-grid-item-icon-frame">
+				}}
+			>
 				<Icon className="main-grid-item-icon" />
 			</button>
 			<span className="main-grid-item-name">
@@ -569,7 +567,7 @@ function AppMain() {
 	return (
 		<Main
 			onClick={e => {
-				if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item") === null) {
+				if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item-icon-frame") === null) {
 					clearSelectedNames()
 					setSelectedNamesStart(null)
 					setSelectedNamesEnd(null)
