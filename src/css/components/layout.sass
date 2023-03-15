@@ -89,7 +89,12 @@ $sidebar-max-z-index: 100
     justify-content: flex-start
     width: $sidebar-2-max-width
   background-color: white
-  box-shadow: 0 0 0 1px hsl(0, 0%, 0%, 0.1)
+
+  // Custom box-shadow
+  .sidebar:not([data-state=maximized]) &
+    box-shadow: $hairline-shadow
+  .sidebar[data-state=maximized] &
+    box-shadow: 0 0 0 1px hsl(0, 0%, 0%, 0.25) // 😎
 
 .sidebar-card-body
   display: flex          // Forward height
