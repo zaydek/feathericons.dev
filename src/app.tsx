@@ -17,6 +17,9 @@ import {
 	ProgressRange,
 	SearchBar,
 	Sidebar,
+	SidebarBody,
+	SidebarFoot,
+	SidebarHead,
 	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
@@ -36,7 +39,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { Hairline, Section, SidebarBody, SidebarFoot, SidebarHead } from "./sidebar-children"
+import { Hairline, Section } from "./section-components"
 import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////

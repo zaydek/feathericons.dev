@@ -179,7 +179,7 @@ export function Sidebar({
 		>
 			<div
 				ref={dragAreaRef}
-				className="sidebar__drag-area"
+				className="sidebar-drag-area"
 				//// onKeyDown={e => {
 				//// 	if (e.key === "ArrowLeft") {
 				//// 		if (pos === "start") {
@@ -197,14 +197,28 @@ export function Sidebar({
 				//// }}
 				tabIndex={0}
 			>
-				<div className="sidebar__drag-area__grip"></div>
+				<div className="sidebar-drag-area-grip"></div>
 			</div>
-			<div className="sidebar__card">
-				<div className="sidebar__card__body">{children}</div>
+			<div className="sidebar-card">
+				<div className="sidebar-card-body">{children}</div>
 			</div>
 		</aside>
 	)
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+export function SidebarHead({ children }: React.PropsWithChildren) {
+	return <header className="sidebar-head">{children}</header>
+}
+export function SidebarBody({ children }: React.PropsWithChildren) {
+	return <div className="sidebar-body">{children}</div>
+}
+export function SidebarFoot({ children }: React.PropsWithChildren) {
+	return <footer className="sidebar-foot">{children}</footer>
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 export function SidebarOverlay() {
 	const { sidebar1, setSidebar1, sidebar2, setSidebar2 } = React.useContext(LayoutContext)!
@@ -214,6 +228,8 @@ export function SidebarOverlay() {
 
 	return <div className="sidebar-overlay" data-open={open} onClick={e => setState(null)}></div>
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 // Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {

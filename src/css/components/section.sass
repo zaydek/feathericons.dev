@@ -4,6 +4,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+.TEST_section-body
+  overflow-y: scroll
+
 .section
   display: flex
   flex-direction: column
@@ -43,6 +46,7 @@
   justify-content: center // Center y-axis
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
   //// height: $button-height
+
 .sidebar-align-icon-frame
   display: flex
   justify-content: center // Center x-axis
@@ -62,6 +66,7 @@
   +typography-caps
   color: $slate-600
 
+// Rename to section-number?
 .section-range-desc
   display: flex
   justify-content: center

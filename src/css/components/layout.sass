@@ -53,7 +53,7 @@ $sidebar-max-z-index: 100
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.sidebar__drag-area
+.sidebar-drag-area
   position: absolute
   .sidebar[data-pos=start] &
     inset: 0 auto 0 100%
@@ -70,7 +70,7 @@ $sidebar-max-z-index: 100
   -webkit-user-select: none
   user-select: none
 
-.sidebar__drag-area__grip
+.sidebar-drag-area-grip
   height: 4px * 12
   width: 4px
   background-color: hsl(0, 0%, 0%, 0.25)
@@ -78,7 +78,7 @@ $sidebar-max-z-index: 100
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.sidebar__card
+.sidebar-card
   display: flex
   .sidebar[data-pos=start] &
     justify-content: flex-end
@@ -89,7 +89,7 @@ $sidebar-max-z-index: 100
   background-color: white
   box-shadow: 0 0 0 1px hsl(0, 0%, 0%, 0.1)
 
-.sidebar__card__body
+.sidebar-card-body
   display: flex          // Forward height
   flex-direction: column // Forward height
 
@@ -110,17 +110,17 @@ $sidebar-max-z-index: 100
 // Nested components e.g. head, body, and foot
 // https://codepen.io/zaydek/pen/gOdeVWJ?editors=1100
 //
-.sidebar__card__body__head
+.sidebar-head
   position: sticky
   top: 0
   display: flex
   flex-direction: column
   background-color: white
   overflow-y: auto
-.sidebar__card__body__body
+.sidebar-body
   display: flex
   flex-direction: column
-.sidebar__card__body__foot
+.sidebar-foot
   position: sticky
   bottom: 0
   z-index: 20
