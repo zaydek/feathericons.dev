@@ -66,28 +66,35 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// .section-heading
 .section-heading
   display: flex
   align-items: center
   height: 24px
   background-color: white
 
-//// .section-heading-icon
-.section-heading-icon
+// Scope .align-icon-frame because parenting breaks :first-child and :last-child
+.align-icon-frame:first-child .section-heading-icon
   height: $tiny-icon-height
-  width: $tiny-icon-height
-  color: $slate-600
+  width:  $tiny-icon-height
+  color:  $slate-600
 
-//// .section-heading-name
-.section-heading-name
+// Scope .align-icon-frame because parenting breaks :first-child and :last-child
+//
+// TODO: Wrap <button>
+.align-icon-frame:last-child .section-heading-icon
+  height: $tiny-icon-height
+  width:  $tiny-icon-height
+  color:  $slate-300
+  // TODO
+  &:hover
+    color: $slate-800
+
+.section-heading-type
   flex: 1
   +typography-caps
   color: $slate-600
 
-// Rename to section-number?
-//// .section-heading-number-desc
-.section-heading-number-desc
+.section-heading-number-type
   display: flex
   justify-content: center
   align-items: center
@@ -99,16 +106,3 @@
   color: $slate-800
   -webkit-user-select: all // Interaction
   user-select: all         // Interaction
-
-// TODO: Wrap <button>
-//// .section-heading-reset-icon
-.section-heading-reset-icon
-  height: $tiny-icon-height
-  width: $tiny-icon-height
-  color: $slate-300
-  // TODO: Defer to <button>
-  //// cursor: pointer           // Interaction
-  //// -webkit-user-select: none // Interaction
-  //// user-select: none         // Interaction
-  &:hover
-    color: $slate-800

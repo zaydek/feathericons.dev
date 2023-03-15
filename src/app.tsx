@@ -93,11 +93,11 @@ function AppSidebar1() {
 						<div className="align-icon-frame">
 							<feather.Package className="section-heading-icon" />
 						</div>
-						<h6 className="section-heading-name">Icons</h6>
+						<h6 className="section-heading-type">Icons</h6>
 						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
-								className="section-heading-reset-icon"
+								className="section-heading-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIcons)}
 							/>
@@ -226,11 +226,11 @@ function AppSidebar1() {
 						<div className="align-icon-frame">
 							<feather.Settings className="section-heading-icon" />
 						</div>
-						<h6 className="section-heading-name">Settings</h6>
+						<h6 className="section-heading-type">Settings</h6>
 						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
 							<feather.RotateCcw
-								className="section-heading-reset-icon"
+								className="section-heading-icon"
 								strokeWidth={4}
 								onClick={() => startTransition(resetIconPrefs)}
 							/>
@@ -271,7 +271,7 @@ function AppSidebar1() {
 						<div className="align-frame">
 							<feather.Globe className="section-heading-icon" />
 						</div>
-						<h6 className="section-heading-name">Resources</h6>
+						<h6 className="section-heading-type">Resources</h6>
 					</header>
 					<nav className="resources">
 						{resources.map((resource, index) => (
@@ -338,7 +338,7 @@ function AppSidebar2() {
 						<div className="align-icon-frame">
 							<feather.Clipboard className="section-heading-icon" />
 						</div>
-						<h6 className="section-heading-name">Clipboard</h6>
+						<h6 className="section-heading-type">Clipboard</h6>
 						<div className="align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
@@ -374,11 +374,11 @@ function AppSidebar2() {
 						<div className="align-icon-frame">
 							<feather.PenTool className="section-heading-icon" />
 						</div>
-						<h6 className="section-heading-name">size</h6>
-						<span className="section-heading-number-desc">{size.toFixed(0)} PX</span>
+						<h6 className="section-heading-type">size</h6>
+						<span className="section-heading-number-type">{size.toFixed(0)} PX</span>
 						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
-							<feather.RotateCcw className="section-heading-reset-icon" strokeWidth={4} onClick={resetSize} />
+							<feather.RotateCcw className="section-heading-icon" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</header>
 					<div className="align-frame">
@@ -391,11 +391,11 @@ function AppSidebar2() {
 						<div className="align-icon-frame">
 							<feather.PenTool className="section-heading-icon" />
 						</div>
-						<h6 className="section-heading-name">stroke width</h6>
-						<span className="section-heading-number-desc">{strokeWidth.toFixed(2)}</span>
+						<h6 className="section-heading-type">stroke width</h6>
+						<span className="section-heading-number-type">{strokeWidth.toFixed(2)}</span>
 						<div className="align-icon-frame">
 							{/* TODO: Change to <button> */}
-							<feather.RotateCcw className="section-heading-reset-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+							<feather.RotateCcw className="section-heading-icon" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</header>
 					<div className="align-frame">
@@ -417,7 +417,7 @@ function AppSidebar2() {
 						<div className="align-icon-frame">
 							<Feather.Shield className="section-heading-icon" />
 						</div>
-						<h6 className="section-heading-name">Sponsor</h6>
+						<h6 className="section-heading-type">Sponsor</h6>
 					</header>
 				</section>
 			</footer> */}
