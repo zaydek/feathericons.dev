@@ -1,7 +1,7 @@
 import React from "react"
 
 import { canonicalize, IconComponent, useParam, useParamBoolean } from "@/lib"
-import { useQueryIcons } from "./use-query-icons"
+import { fetchIconsets } from "./use-query-icons"
 
 export type WkPaymentsValue = "normal" | "filled"
 
@@ -24,10 +24,11 @@ export const SearchContext = React.createContext<{
   setWkPayments:      React.Dispatch<React.SetStateAction<boolean>>
   wkPaymentsValue:    WkPaymentsValue
   setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
-  icons:              (readonly [string, IconComponent])[] | undefined
-  resetIcons: () => void
+  icons:              ([string, IconComponent])[]
+  resetIcons:         () => void
 } | null>(null)
 
+// TODO: Combine contexts? What we have now seems dumb
 // prettier-ignore
 export const IconPreferencesContext = React.createContext<{
   preferColor:        boolean
@@ -65,14 +66,35 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	const [preferColor, setPreferColor] = useParamBoolean({ key: "prefer-color", initialValue: PREFER_COLOR_DEFAULT })
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
-	// TODO
-	const icons = useQueryIcons({
-		feather,
-		wkBrands,
-		wkPayments,
-		wkPaymentsValue,
-		preferColor,
-	})
+	const [icons, setIcons] = React.useState<[string, IconComponent][]>([])
+
+	React.useEffect(() => {
+		async function run() {
+			setIcons(
+				await fetchIconsets({
+					feather,
+					wkBrands,
+					wkPayments,
+					wkPaymentsValue,
+					monochrome: preferColor,
+				}),
+			)
+		}
+		run()
+	}, [feather, preferColor, wkBrands, wkPayments, wkPaymentsValue])
+
+	//// React.useEffect(() => {
+	//// 	// ...
+	//// }, [])
+
+	//// // TODO
+	//// const icons = useQueryIcons({
+	//// 	feather,
+	//// 	wkBrands,
+	//// 	wkPayments,
+	//// 	wkPaymentsValue,
+	//// 	preferColor,
+	//// })
 
 	const resetIcons = React.useCallback(() => {
 		setFeather(FEATHER_DEFAULT)

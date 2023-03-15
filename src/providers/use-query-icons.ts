@@ -1,8 +1,8 @@
-import React from "react"
+//// import React from "react"
 
 import { IconComponent } from "@/lib"
 import { WkPaymentsValue } from "@/providers"
-import { useQuery } from "@tanstack/react-query"
+//// import { useQuery } from "@tanstack/react-query"
 
 type ImportPath =
 	| "@icons/feather/tsx"
@@ -63,75 +63,120 @@ export function createCache() {
 	return { read }
 }
 
-//// async function run() {
-//// 	const { read } = createCache()
-//// 	console.log(await read("@icons/feather/tsx"))
-//// }
-//// run()
+const cache = createCache()
 
-export async function fetchIconsets(
-	iconsets: {
-		feather: boolean
-		wkBrands: boolean
-		wkPayments: boolean
-		wkPaymentsValue: WkPaymentsValue
-	},
-	preferColor: boolean,
-) {
-	const chain: Promise<Record<string, IconComponent>>[] = []
-	if (iconsets.feather) {
-		chain.push(import("@icons/feather/tsx"))
-	}
-	if (iconsets.wkBrands) {
-		if (preferColor) {
-			chain.push(import("@icons/wk/brands/original/tsx"))
-		} else {
-			chain.push(import("@icons/wk/brands/mono/tsx"))
-		}
-	}
-	if (iconsets.wkPayments) {
-		if (preferColor) {
-			if (iconsets.wkPaymentsValue === "normal") {
-				chain.push(import("@icons/wk/payments/original/tsx"))
-			} else {
-				chain.push(import("@icons/wk/payments/original-filled/tsx"))
-			}
-		} else {
-			if (iconsets.wkPaymentsValue === "normal") {
-				chain.push(import("@icons/wk/payments/mono/tsx"))
-			} else {
-				chain.push(import("@icons/wk/payments/mono-filled/tsx"))
-			}
-		}
-	}
-	const resolved = await Promise.all(chain)
-	return resolved.map(mod => Object.entries(mod)).flat()
-}
-
-export function useQueryIcons({
+export async function fetchIconsets({
 	feather,
 	wkBrands,
 	wkPayments,
 	wkPaymentsValue,
-	preferColor,
+	monochrome,
 }: {
 	feather: boolean
 	wkBrands: boolean
 	wkPayments: boolean
 	wkPaymentsValue: WkPaymentsValue
-	preferColor: boolean
+	monochrome: boolean
 }) {
-	const { data, refetch } = useQuery(["iconsets"], () =>
-		fetchIconsets({ feather, wkBrands: wkBrands, wkPayments, wkPaymentsValue }, preferColor),
-	)
-	// When dependencies change...
-	const refretchDeps = React.useMemo(
-		() => [feather, wkBrands, wkPayments, wkPaymentsValue, preferColor],
-		[feather, preferColor, wkBrands, wkPayments, wkPaymentsValue],
-	)
-	// ...refetch
-	React.useEffect(() => {
-		refetch()
-	}, [refetch, refretchDeps])
-	return data
+	const args: ImportPath[] = []
+	if (feather) {
+		args.push("@icons/feather/tsx")
+	}
+	if (wkBrands) {
+		if (monochrome) {
+			args.push("@icons/wk/brands/original/tsx")
+		} else {
+			args.push("@icons/wk/brands/mono/tsx")
+		}
+	}
+	if (wkPayments) {
+		if (monochrome) {
+			if (wkPaymentsValue === "normal") {
+				args.push("@icons/wk/payments/original/tsx")
+			} else {
+				args.push("@icons/wk/payments/original-filled/tsx")
+			}
+		} else {
+			if (wkPaymentsValue === "normal") {
+				args.push("@icons/wk/payments/mono/tsx")
+			} else {
+				args.push("@icons/wk/payments/mono-filled/tsx")
+			}
+		}
+	}
+	// TODO: Return cached
+	return (await cache.read(...args))[1]
 }
+
+//// //// async function run() {
+//// //// 	const { read } = createCache()
+//// //// 	console.log(await read("@icons/feather/tsx"))
+//// //// }
+//// //// run()
+////
+//// export async function fetchIconsets(
+//// 	iconsets: {
+//// 		feather: boolean
+//// 		wkBrands: boolean
+//// 		wkPayments: boolean
+//// 		wkPaymentsValue: WkPaymentsValue
+//// 	},
+//// 	preferColor: boolean,
+//// ) {
+//// 	const chain: Promise<Record<string, IconComponent>>[] = []
+//// 	if (iconsets.feather) {
+//// 		chain.push(import("@icons/feather/tsx"))
+//// 	}
+//// 	if (iconsets.wkBrands) {
+//// 		if (preferColor) {
+//// 			chain.push(import("@icons/wk/brands/original/tsx"))
+//// 		} else {
+//// 			chain.push(import("@icons/wk/brands/mono/tsx"))
+//// 		}
+//// 	}
+//// 	if (iconsets.wkPayments) {
+//// 		if (preferColor) {
+//// 			if (iconsets.wkPaymentsValue === "normal") {
+//// 				chain.push(import("@icons/wk/payments/original/tsx"))
+//// 			} else {
+//// 				chain.push(import("@icons/wk/payments/original-filled/tsx"))
+//// 			}
+//// 		} else {
+//// 			if (iconsets.wkPaymentsValue === "normal") {
+//// 				chain.push(import("@icons/wk/payments/mono/tsx"))
+//// 			} else {
+//// 				chain.push(import("@icons/wk/payments/mono-filled/tsx"))
+//// 			}
+//// 		}
+//// 	}
+//// 	const resolved = await Promise.all(chain)
+//// 	return resolved.map(mod => Object.entries(mod)).flat()
+//// }
+////
+//// export function useQueryIcons({
+//// 	feather,
+//// 	wkBrands,
+//// 	wkPayments,
+//// 	wkPaymentsValue,
+//// 	preferColor,
+//// }: {
+//// 	feather: boolean
+//// 	wkBrands: boolean
+//// 	wkPayments: boolean
+//// 	wkPaymentsValue: WkPaymentsValue
+//// 	preferColor: boolean
+//// }) {
+//// 	const { data, refetch } = useQuery(["iconsets"], () =>
+//// 		fetchIconsets({ feather, wkBrands: wkBrands, wkPayments, wkPaymentsValue }, preferColor),
+//// 	)
+//// 	// When dependencies change...
+//// 	const refretchDeps = React.useMemo(
+//// 		() => [feather, wkBrands, wkPayments, wkPaymentsValue, preferColor],
+//// 		[feather, preferColor, wkBrands, wkPayments, wkPaymentsValue],
+//// 	)
+//// 	// ...refetch
+//// 	React.useEffect(() => {
+//// 		refetch()
+//// 	}, [refetch, refretchDeps])
+//// 	return data
+//// }
