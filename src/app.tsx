@@ -36,7 +36,6 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers"
-import { Section } from "./section"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -80,13 +79,16 @@ function AppSidebar1() {
 				<div className="section-body">
 					<div className="heading">
 						<div className="align-icon-frame">
-							<feather.Package className="heading-icon" />
+							<feather.Package className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Icons</h6>
 						{/* TODO: Don't change this to a <button> yet because of height */}
-						{/* TODO: Change to <button> */}
 						<div className="align-icon-frame">
-							<feather.RotateCcw className="heading-icon" strokeWidth={4} onClick={() => startTransition(resetIcons)} />
+							<feather.RotateCcw
+								className="heading-icon-2"
+								strokeWidth={4}
+								onClick={() => startTransition(resetIcons)}
+							/>
 						</div>
 					</div>
 					<div>
@@ -208,10 +210,14 @@ function AppSidebar1() {
 				<hr />
 				<div className="section-head">
 					<div className="heading">
-						<feather.Settings className="heading-icon" />
+						{/* Icon */}
+						<div className="align-icon-frame">
+							<feather.Settings className="heading-icon-1" />
+						</div>
+						{/* Type */}
 						<span className="heading-type">Settings</span>
 						<button className="align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
-							<feather.RotateCcw className="heading-icon" strokeWidth={4} />
+							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} />
 						</button>
 					</div>
 				</div>
@@ -236,13 +242,15 @@ function AppSidebar1() {
 			</div>
 			<footer className="sidebar-foot">
 				<hr data-collapse />
-				<Section pos="end">
+				<div className="section-head">
 					<div className="heading">
-						<div className="align-frame">
-							<feather.Globe className="heading-icon" />
+						<div className="align-icon-frame">
+							<feather.Globe className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Resources</h6>
 					</div>
+				</div>
+				<div className="section-body">
 					<nav className="resources">
 						{resources.map((resource, index) => (
 							<Anchor className="resource" href={resource.href} key={index}>
@@ -256,7 +264,7 @@ function AppSidebar1() {
 							</Anchor>
 						))}
 					</nav>
-				</Section>
+				</div>
 			</footer>
 		</Sidebar>
 	)
@@ -303,72 +311,72 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<section className="DEPRECATE_section" data-pos="start">
+				<div className="section-head">
 					<div className="heading">
 						<div className="align-icon-frame">
-							<feather.Clipboard className="heading-icon" />
+							<feather.Clipboard className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Clipboard</h6>
 						<div className="align-frame">
 							<ExportAs value={exportAs} setValue={setExportAs} />
 						</div>
 					</div>
-				</section>
-				{/* TODO */}
-				<div className="section-body">
-					<section className="DEPRECATE_section" data-pos="syntax-highlighting">
-						<MemoSyntaxHighlighting
-							lang={exportAs === "svg" ? "html" : "tsx"}
-							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
-						/>
-						{/* <div className="action-buttons">
-							<button className="action-button">
-								<div className="action-button-icon-frame">
-									<Feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
-								</div>
-								<span className="action-button-name">Copy</span>
-							</button>
-							<button className="action-button">
-								<div className="action-button-icon-frame">
-									<Feather.Download className="action-button-icon" onClick={handleClickSave} />
-								</div>
-								<span className="action-button-name">Save</span>
-							</button>
-						</div> */}
-					</section>
+				</div>
+				<div className="section-body" data-type="syntax-highlighting">
+					<MemoSyntaxHighlighting
+						lang={exportAs === "svg" ? "html" : "tsx"}
+						code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
+					/>
+					{/* <div className="action-buttons">
+						<button className="action-button">
+							<div className="action-button-icon-frame">
+								<Feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
+							</div>
+							<span className="action-button-name">Copy</span>
+						</button>
+						<button className="action-button">
+							<div className="action-button-icon-frame">
+								<Feather.Download className="action-button-icon" onClick={handleClickSave} />
+							</div>
+							<span className="action-button-name">Save</span>
+						</button>
+					</div> */}
+					{/* </section> */}
 				</div>
 			</header>
 			<div className="sidebar-body">
 				<hr />
-				<section className="DEPRECATE_section">
+				<div className="section-head">
 					<div className="heading">
 						<div className="align-icon-frame">
-							<feather.PenTool className="heading-icon" />
+							<feather.PenTool className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">size</h6>
 						<span className="heading-number-type">{size.toFixed(0)} PX</span>
 						<div className="align-icon-frame">
-							{/* TODO: Change to <button> */}
-							<feather.RotateCcw className="heading-icon" strokeWidth={4} onClick={resetSize} />
+							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} onClick={resetSize} />
 						</div>
 					</div>
+				</div>
+				<div className="section-body">
 					<div className="align-frame">
 						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
-				</section>
+				</div>
 				<hr />
-				<section className="DEPRECATE_section">
+				<div className="section-head">
 					<div className="heading">
 						<div className="align-icon-frame">
-							<feather.PenTool className="heading-icon" />
+							<feather.PenTool className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">stroke width</h6>
 						<span className="heading-number-type">{strokeWidth.toFixed(2)}</span>
 						<div className="align-icon-frame">
-							{/* TODO: Change to <button> */}
-							<feather.RotateCcw className="heading-icon" strokeWidth={4} onClick={resetStrokeWidth} />
+							<feather.RotateCcw className="heading-icon-2" strokeWidth={4} onClick={resetStrokeWidth} />
 						</div>
 					</div>
+				</div>
+				<div className="section-body">
 					<div className="align-frame">
 						<ProgressRange
 							value={strokeWidth}
@@ -378,7 +386,7 @@ function AppSidebar2() {
 							step={STROKE_STEP}
 						/>
 					</div>
-				</section>
+				</div>
 				<hr />
 			</div>
 			{/* <footer className="sidebar-foot">
@@ -386,7 +394,7 @@ function AppSidebar2() {
 				<section className="DEPRECATE_section" data-pos="end">
 					<div className="heading">
 						<div className="align-icon-frame">
-							<Feather.Shield className="heading-icon" />
+							<Feather.Shield className="heading-icon-1" />
 						</div>
 						<h6 className="heading-type">Sponsor</h6>
 					</header>

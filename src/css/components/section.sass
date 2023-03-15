@@ -4,28 +4,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// // TODO: DEPRECATE
-//// .DEPRECATE_section
-////   display: flex
-////   flex-direction: column
-////   gap: $sidebar-gap
-////   //// &:not(:is([data-pos=start], [data-pos=syntax-highlighting], [data-pos=end]))
-////   padding: $sidebar-gap $sidebar-padding-x
-////
-////   // Overrides -- don't use (:not(:is(...)))
-////   &[data-pos=start]
-////     isolation: isolate // Needed because of box-shadow
-////     padding-top: $sidebar-padding-y
-////     &:has(+ [data-scroll=true])
-////       box-shadow: $hairline-shadow-bottom
-////   &[data-pos=checkboxes]
-////     padding-top: 0
-////   &[data-pos=syntax-highlighting]
-////     padding: 0
-////     padding-bottom: $sidebar-gap
-////   &[data-pos=end]
-////     padding-bottom: $sidebar-gap
-
 .section-head
   padding: $sidebar-gap $sidebar-padding-x
   &[data-pos=start]
@@ -35,15 +13,19 @@
   display: flex
   flex-direction: column
   gap: $sidebar-gap
-  //// padding: 0 $sidebar-padding-x
   padding: $sidebar-gap $sidebar-padding-x
   padding-top: 0
+  &[data-type=syntax-highlighting]
+    padding: 0
+
   // TODO: Add data-pos overrides here
   // TODO: Rename to data-override?
   overflow-y: auto // TOOD
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO: Can we combine these?
+//
 // These are optical alignment utilities. They align children to be optically
 // aligned.
 //
@@ -72,22 +54,10 @@
   height: 24px
   background-color: white
 
-// Scope .align-icon-frame because parenting breaks :first-child and :last-child
-.align-icon-frame:first-child .heading-icon
+.heading-icon-1
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $slate-600
-
-// Scope .align-icon-frame because parenting breaks :first-child and :last-child
-//
-// TODO: Wrap <button>
-.align-icon-frame:last-child .heading-icon
-  height: $tiny-icon-height
-  width:  $tiny-icon-height
-  color:  $slate-300
-  // TODO
-  &:hover
-    color: $slate-800
 
 .heading-type
   flex: 1
@@ -106,3 +76,11 @@
   color: $slate-800
   -webkit-user-select: all // Interaction
   user-select: all         // Interaction
+
+// TODO
+.heading-icon-2
+  height: $tiny-icon-height
+  width:  $tiny-icon-height
+  color:  $slate-300
+  &:hover
+    color: $slate-800
