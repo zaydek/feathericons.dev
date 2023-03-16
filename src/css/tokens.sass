@@ -1,0 +1,108 @@
+$include: false !default
+
+////////////////////////////////////////////////////////////////////////////////
+
+$sidebar-padding-y:            32px
+$sidebar-padding-x:            16px
+$sidebar-gap:                  16px
+
+$button-height:                40px
+$icon-height:                  18px
+$tiny-icon-height:             14px
+
+$hairline-height:              1px
+
+////////////////////////////////////////////////////////////////////////////////
+
+$base-color:                   var(--base-color)
+$form-color:                   var(--form-color)
+$hover-color:                  var(--hover-color)
+$hover-active-color:           var(--hover-active-color)
+$brand-color:                  var(--brand-color)
+$hairline-color:               var(--hairline-color)
+
+////////////////////////////////////////////////////////////////////////////////
+
+$primary-text-color:           var(--primary-text-color)
+$secondary-text-color:         var(--secondary-text-color)
+$tertiary-text-color:          var(--tertiary-text-color)
+
+////////////////////////////////////////////////////////////////////////////////
+
+$inset-hairline-shadow:        var(--inset-hairline-shadow)
+$inset-hairline-shadow-top:    var(--inset-hairline-shadow-top)
+$inset-hairline-shadow-right:  var(--inset-hairline-shadow-right)
+$inset-hairline-shadow-bottom: var(--inset-hairline-shadow-bottom)
+$inset-hairline-shadow-left:   var(--inset-hairline-shadow-left)
+$hairline-shadow:              var(--hairline-shadow)
+$hairline-shadow-top:          var(--hairline-shadow-top)
+$hairline-shadow-right:        var(--hairline-shadow-right)
+$hairline-shadow-bottom:       var(--hairline-shadow-bottom)
+$hairline-shadow-left:         var(--hairline-shadow-left)
+$realistic-shadow:             var(--realistic-shadow)
+$realistic-shadow-1:           var(--realistic-shadow-1)
+$realistic-shadow-2:           var(--realistic-shadow-2)
+$realistic-shadow-3:           var(--realistic-shadow-3)
+$realistic-shadow-4:           var(--realistic-shadow-4)
+$realistic-shadow-5:           var(--realistic-shadow-5)
+$realistic-shadow-6:           var(--realistic-shadow-6)
+
+////////////////////////////////////////////////////////////////////////////////
+
+@if $include
+  :root
+    background-color: $base-color
+  :root[data-theme=light]
+    color-scheme: light
+  :root[data-theme="dark"]
+    color-scheme: dark
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  :root
+    --inset-hairline-shadow:        #{inset  0                     0                    0 $hairline-height $hairline-color}
+    --inset-hairline-shadow-top:    #{inset  0                    -1 * $hairline-height 0 0                $hairline-color}
+    --inset-hairline-shadow-right:  #{inset  $hairline-height      0                    0 0                $hairline-color}
+    --inset-hairline-shadow-bottom: #{inset  0                     $hairline-height     0 0                $hairline-color}
+    --inset-hairline-shadow-left:   #{inset -1 * $hairline-height  0                    0 0                $hairline-color}
+    --hairline-shadow:              #{       0                     0                    0 $hairline-height $hairline-color}
+    --hairline-shadow-top:          #{       0                    -1 * $hairline-height 0 0                $hairline-color}
+    --hairline-shadow-right:        #{       $hairline-height      0                    0 0                $hairline-color}
+    --hairline-shadow-bottom:       #{       0                     $hairline-height     0 0                $hairline-color}
+    --hairline-shadow-left:         #{      -1 * $hairline-height  0                    0 0                $hairline-color}
+
+    --realistic-shadow:             #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color, 0 32px 64px -32px $hairline-color}
+    --realistic-shadow-1:           #{0 1px 2px -1px $hairline-color}
+    --realistic-shadow-2:           #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color}
+    --realistic-shadow-3:           #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color}
+    --realistic-shadow-4:           #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color}
+    --realistic-shadow-5:           #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color}
+    --realistic-shadow-6:           #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color, 0 32px 64px -32px $hairline-color}
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  :root[data-theme=light]
+    --base-color:           hsl(210, 18.75%, 100%)
+    --form-color:           hsl(210, 18.75%, 100%)
+    --hover-color:          hsl(210, 18.75%,  95%)
+    --hover-active-color:   hsl(210, 18.75%,  90%)
+    --brand-color:          dodgerblue
+    --hairline-color:       hsl(210, 18.75%,  85%)
+
+    --primary-text-color:   hsl(210, 18.75%,  10%)
+    --secondary-text-color: hsl(210, 18.75%,  25%)
+    --tertiary-text-color:  hsl(210, 18.75%,  75%)
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  :root[data-theme="dark"]
+    --base-color:           hsl(210, 18.75%,   5%)
+    --form-color:           hsl(210, 18.75%,  10%)
+    --hover-color:          hsl(210, 18.75%,  10%)
+    --hover-active-color:   hsl(210, 18.75%,  15%)
+    --brand-color:          dodgerblue
+    --hairline-color:       hsl(210, 18.75%,  20%)
+
+    --primary-text-color:   hsl(210, 18.75%,  90%)
+    --secondary-text-color: hsl(210, 18.75%,  75%)
+    --tertiary-text-color:  hsl(210, 18.75%,  25%)
