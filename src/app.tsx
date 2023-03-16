@@ -8,17 +8,18 @@ import * as wkPaymentsMono from "@icons/wk/payments/mono/tsx"
 import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
-import {
-	DEV_DebugCss,
-	ExportAs,
-	Main,
-	MemoSyntaxHighlighting,
-	ProgressSlider,
-	Sidebar,
-	SidebarOverlay,
-} from "@/components"
+import { ExportAs, Main, MemoSyntaxHighlighting, ProgressSlider, Sidebar } from "@/components"
 import { resources } from "@/data"
-import { anchorAttrs, DynamicIcon, IconComponent, iota, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import {
+	anchorAttrs,
+	DynamicIcon,
+	IconComponent,
+	iota,
+	isMac,
+	toKebabCase,
+	useOnMount,
+	useVisibleDocumentTitle,
+} from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -615,13 +616,92 @@ function AppMain() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function App() {
+// prettier-ignore
+const AriaSelectContext = React.createContext<{
+	open:            boolean
+	setOpen:         React.Dispatch<React.SetStateAction<boolean>>
+	currentValue:    string
+	setCurrentValue: React.Dispatch<React.SetStateAction<string>>
+	values:          string[]
+	setValues:       React.Dispatch<React.SetStateAction<string[]>>
+} | null>(null)
+
+function AriaSelect({
+	open,
+	setOpen,
+	currentValue,
+	setCurrentValue,
+	children,
+}: React.PropsWithChildren<{
+	open: boolean
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+	currentValue: string
+	setCurrentValue: React.Dispatch<React.SetStateAction<string>>
+}>) {
+	const [values, setValues] = React.useState<string[]>([])
+
 	return (
-		<DEV_DebugCss>
-			<SidebarOverlay />
-			<AppSidebar1 />
-			<AppSidebar2 />
-			<AppMain />
-		</DEV_DebugCss>
+		<AriaSelectContext.Provider
+			value={{
+				open,
+				setOpen,
+				currentValue,
+				setCurrentValue,
+				values,
+				setValues,
+			}}
+		>
+			{children}
+		</AriaSelectContext.Provider>
 	)
+}
+
+function Option({ value, children }: React.PropsWithChildren<{ value: string }>) {
+	const { setOpen, setCurrentValue, setValues } = React.useContext(AriaSelectContext)!
+
+	useOnMount(() => {
+		setValues(curr => [...curr, value])
+	})
+
+	return (
+		<div
+			onClick={e => {
+				setCurrentValue(value)
+				setOpen(false)
+			}}
+		>
+			{children}
+		</div>
+	)
+}
+
+export function App() {
+	const [open, setOpen] = React.useState(false)
+	const [currentValue, setCurrentValue] = React.useState("foo")
+
+	return (
+		<AriaSelect open={open} setOpen={setOpen} currentValue={currentValue} setCurrentValue={setCurrentValue}>
+			<div onClick={e => setOpen(curr => !curr)}>Hello, world! ({currentValue})</div>
+			<div style={{ opacity: open ? 1 : 0 }}>
+				<Option value="foo">
+					<span>Hello</span>
+				</Option>
+				<Option value="bar">
+					<span>Hello</span>
+				</Option>
+				<Option value="baz">
+					<span>Hello</span>
+				</Option>
+			</div>
+		</AriaSelect>
+	)
+
+	//// return (
+	//// 	<DEV_DebugCss>
+	//// 		<SidebarOverlay />
+	//// 		<AppSidebar1 />
+	//// 		<AppSidebar2 />
+	//// 		<AppMain />
+	//// 	</DEV_DebugCss>
+	//// )
 }

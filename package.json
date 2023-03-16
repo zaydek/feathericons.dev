@@ -6,7 +6,6 @@
     "deploy": "npm run build && netlify deploy --dir=./dist --message=\"$(git log -1 --pretty=format:'(%h) %s%n%n%bAuthor: %an <%ae>%nDate: %ad%nBranch: %D')\" --prod --site=feathericons.dev"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "shiki-es": "^0.2.0",
