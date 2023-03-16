@@ -154,6 +154,7 @@ export function Sidebar({
 			setStartClientX(null)
 			setClientX(null)
 		}
+		// TODO: Use window here?
 		document.addEventListener("pointerdown", handlePointerDown, false)
 		document.addEventListener("pointermove", handlePointerMove, false)
 		document.addEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore

@@ -689,13 +689,23 @@ type AriaSelectProps = JSX.IntrinsicElements["div"]
 
 function AriaSelect({ children, ...props }: AriaSelectProps) {
 	const ctx = React.useContext(AriaSelectContext)!
-
 	const ref = React.useRef<HTMLDivElement | null>(null)
 
 	React.useEffect(() => {
 		if (ctx.open) return
 		ref.current!.focus()
-	}, [ctx.open])
+	}, [ctx])
+
+	React.useEffect(() => {
+		if (!ctx.open) return
+		function handleKeyDown(e: KeyboardEvent) {
+			if (e.key === "Escape") {
+				ctx.setOpen(false)
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown, false)
+	}, [ctx])
 
 	return (
 		<div
@@ -750,7 +760,6 @@ type AriaSelectOptionProps = JSX.IntrinsicElements["div"] & { value: string }
 
 function SelectOption({ value, children, ...props }: AriaSelectOptionProps) {
 	const ctx = React.useContext(AriaSelectContext)!
-
 	const ref = React.useRef<HTMLDivElement | null>(null)
 
 	useOnMount(() => {
