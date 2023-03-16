@@ -300,6 +300,11 @@ function AppSidebar1() {
 											name="payments"
 											type="radio"
 											checked={wkPaymentsValue === "normal"}
+											onClick={e =>
+												startTransition(() => {
+													setWkPayments(true)
+												})
+											}
 											onChange={e =>
 												startTransition(() => {
 													setWkPayments(true)
@@ -340,6 +345,11 @@ function AppSidebar1() {
 											name="payments"
 											type="radio"
 											checked={wkPaymentsValue === "filled"}
+											onClick={e =>
+												startTransition(() => {
+													setWkPayments(true)
+												})
+											}
 											onChange={e =>
 												startTransition(() => {
 													setWkPayments(true)
