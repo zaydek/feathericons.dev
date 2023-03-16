@@ -136,14 +136,14 @@ $sidebar-max-z-index: 100
   position: fixed
   inset: 0
   z-index: math.div($sidebar-z-index + $sidebar-max-z-index, 2)
-  background-color: hsl(0, 0%, 0%, 0.25)
+  background-color: hsl(0, 0%, 0%, 0.1)
   &[data-open=false]
     //// backdrop-filter: blur(0px)
     opacity: 0
     cursor: null
     pointer-events: none
   &[data-open=true]
-    //// backdrop-filter: blur(2px)
+    //// backdrop-filter: blur(1px)
     opacity: 1
     cursor: pointer
     pointer-events: null
