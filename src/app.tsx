@@ -173,7 +173,19 @@ function AppSidebar1() {
 					</div>
 					<div>
 						<div className="checkboxes">
-							<label className="checkbox" tabIndex={0}>
+							<label
+								className="checkbox"
+								onClick={e =>
+									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+								}
+								onKeyDown={e => {
+									if (e.key === " ") {
+										e.preventDefault()
+										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+									}
+								}}
+								tabIndex={0}
+							>
 								<div className="widget-align-icon-frame">
 									<feather.Feather className="checkbox-icon" />
 								</div>
@@ -189,7 +201,19 @@ function AppSidebar1() {
 							</label>
 						</div>
 						<div className="checkboxes">
-							<label className="checkbox" tabIndex={0}>
+							<label
+								className="checkbox"
+								onClick={e =>
+									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+								}
+								onKeyDown={e => {
+									if (e.key === " ") {
+										e.preventDefault()
+										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+									}
+								}}
+								tabIndex={0}
+							>
 								<div className="widget-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
@@ -208,7 +232,19 @@ function AppSidebar1() {
 							</label>
 						</div>
 						<div className="checkboxes">
-							<label className="checkbox" tabIndex={0}>
+							<label
+								className="checkbox"
+								onClick={e =>
+									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+								}
+								onKeyDown={e => {
+									if (e.key === " ") {
+										e.preventDefault()
+										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+									}
+								}}
+								tabIndex={0}
+							>
 								<div className="widget-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
@@ -236,7 +272,21 @@ function AppSidebar1() {
 								</div>
 							</label>
 							<div className="checkboxes">
-								<label className="checkbox" tabIndex={0}>
+								<label
+									className="checkbox"
+									onClick={e =>
+										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+									}
+									onKeyDown={e => {
+										if (e.key === " ") {
+											e.preventDefault()
+											e.currentTarget
+												.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!
+												.click()
+										}
+									}}
+									tabIndex={0}
+								>
 									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
@@ -262,7 +312,21 @@ function AppSidebar1() {
 								</label>
 							</div>
 							<div className="checkboxes">
-								<label className="checkbox" tabIndex={0}>
+								<label
+									className="checkbox"
+									onClick={e =>
+										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+									}
+									onKeyDown={e => {
+										if (e.key === " ") {
+											e.preventDefault()
+											e.currentTarget
+												.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!
+												.click()
+										}
+									}}
+									tabIndex={0}
+								>
 									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
@@ -306,7 +370,19 @@ function AppSidebar1() {
 				</div>
 				<div className="widget-body">
 					<div className="checkboxes">
-						<label className="checkbox" tabIndex={0}>
+						<label
+							className="checkbox"
+							onClick={e =>
+								e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+							}
+							onKeyDown={e => {
+								if (e.key === " ") {
+									e.preventDefault()
+									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
+								}
+							}}
+							tabIndex={0}
+						>
 							<div className="widget-align-icon-frame">
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
