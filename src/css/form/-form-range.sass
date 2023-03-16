@@ -2,11 +2,11 @@
 
 @use "../globals" as *
 
-$track-height: 6px
-$thumb-height: 32px
+$slider-track-height: 6px
+$slider-thumb-height: 32px
 
 input[type=range]
-  height: $thumb-height
+  height: $slider-thumb-height
   cursor: grab              // Interaction
   -webkit-user-select: none // Interaction
   user-select: none         // Interaction
@@ -16,14 +16,14 @@ input[type=range]
   // COMPAT/WebKit
   &::-webkit-slider-runnable-track
     appearance: none // CSS reset
-    height: $track-height
+    height: $slider-track-height
     background-image: linear-gradient(to right, $brand-color var(--progress, 50%), $hairline-color var(--progress, 50%))
     border-radius: 1e3px
   &::-webkit-slider-thumb
     appearance: none // CSS reset
-    margin-top: -1 * math.div($thumb-height - $track-height, 2)
-    height: $thumb-height
-    width: $thumb-height
+    margin-top: -1 * math.div($slider-thumb-height - $slider-track-height, 2)
+    height: $slider-thumb-height
+    width: $slider-thumb-height
     background-color: $form-color
     border-radius: 1e3px
     box-shadow: $hairline-shadow, $realistic-shadow
@@ -31,15 +31,15 @@ input[type=range]
   // COMPAT/Gecko
   &::-moz-range-track
     appearance: none // CSS reset
-    height: $track-height
+    height: $slider-track-height
     background-image: linear-gradient(to right, $brand-color var(--progress, 50%), $hairline-color var(--progress, 50%))
     border-radius: 1e3px
   &::-moz-range-thumb
     appearance: none // CSS reset
     border: none     // CSS reset
-    margin-top: -1 * math.div($thumb-height - $track-height, 2)
-    height: $thumb-height
-    width: $thumb-height
+    margin-top: -1 * math.div($slider-thumb-height - $slider-track-height, 2)
+    height: $slider-thumb-height
+    width: $slider-thumb-height
     background-color: $form-color
     border-radius: var(--progress, 50%)
     box-shadow: $hairline-shadow, $realistic-shadow
