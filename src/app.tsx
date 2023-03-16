@@ -22,13 +22,14 @@ import { anchorAttrs, DynamicIcon, IconComponent, iota, isMac, toKebabCase, useV
 import {
 	ClipboardContext,
 	ProgressBarContext,
-	RangeSizeContext,
-	RangeStrokeWidthContext,
+	RangeContext,
 	READONLY_CLIPBOARD_DEFAULT,
 	SearchContext,
+	SIZE_DEFAULT,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
+	STROKE_DEFAULT,
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
@@ -105,8 +106,7 @@ function useSideEffectSelectNamesFromIndexes() {
 }
 
 function useSideEffectSetCssVars() {
-	const { size } = React.useContext(RangeSizeContext)!
-	const { strokeWidth } = React.useContext(RangeStrokeWidthContext)!
+	const { size, strokeWidth } = React.useContext(RangeContext)!
 	React.useEffect(() => {
 		document.body.style.setProperty("--size", "" + size)
 	}, [size])
@@ -371,8 +371,7 @@ function AppSidebar1() {
 function AppSidebar2() {
 	const scrollProps = useScrollProps()
 
-	const { size, setSize, resetSize } = React.useContext(RangeSizeContext)!
-	const { strokeWidth, setStrokeWidth, resetStrokeWidth } = React.useContext(RangeStrokeWidthContext)!
+	const { size, setSize, strokeWidth, setStrokeWidth } = React.useContext(RangeContext)!
 	const { exportAs, setExportAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
 
 	useSideEffectSetCssVars()
@@ -434,21 +433,16 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Size</h6>
 						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
-						<button className="widget-align-icon-frame" onClick={resetSize} aria-label="Reset size">
+						{/* prettier-ignore */}
+						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)} aria-label="Reset size">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
 						</button>
 					</div>
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
-						<ProgressSlider
-							value={size}
-							setValue={setSize}
-							min={SIZE_MIN}
-							max={SIZE_MAX}
-							step={SIZE_STEP}
-							aria-label="Slider for size"
-						/>
+						{/* prettier-ignore */}
+						<ProgressSlider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} aria-label="Slider for size" />
 					</div>
 				</div>
 				<hr />
@@ -459,21 +453,16 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
 						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
-						<button className="widget-align-icon-frame" onClick={resetStrokeWidth} aria-label="Reset stroke width">
+						{/* prettier-ignore */}
+						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)} aria-label="Reset stroke width">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
 						</button>
 					</div>
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
-						<ProgressSlider
-							value={strokeWidth}
-							setValue={setStrokeWidth}
-							min={STROKE_MIN}
-							max={STROKE_MAX}
-							step={STROKE_STEP}
-							aria-label="Slider for stroke-width"
-						/>
+						{/* prettier-ignore */}
+						<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} aria-label="Slider for stroke-width" />
 					</div>
 				</div>
 				<hr />
@@ -616,8 +605,9 @@ function AppMain() {
 							</div>
 					  ))
 					: // prettier-ignore
-					  icons.map(([name, Icon], index) =>
-							<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />)}
+					  icons.map(([name, Icon], index) => (
+							<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />
+						))}
 			</div>
 		</Main>
 	)
