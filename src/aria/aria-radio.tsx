@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { Accessible } from "./a11y"
+import { Accessible } from "./accessible"
 
 // prettier-ignore
 const InternalRadiogroupContext =
@@ -29,7 +29,7 @@ export function AriaRadiogroup({ groupValue, setGroupValue, children, ...props }
 					values,
 					setValues,
 				}),
-				[groupValue, setGroupValue, values]
+				[groupValue, setGroupValue, values],
 			)}
 		>
 			<div

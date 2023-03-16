@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
-import { Accessible } from "./a11y"
+import { Accessible } from "./accessible"
 
 // prettier-ignore
 export type AriaCheckboxProps = {

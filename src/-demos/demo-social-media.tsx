@@ -3,7 +3,7 @@ import * as feather from "../../data/react-feather"
 import { useState } from "react"
 import { manifest } from "../../data/manifest"
 import { Component } from "../../utils/icon"
-import { Accessible } from "../aria/a11y"
+import { Accessible } from "../aria/accessible"
 import { ResizableIcon } from "../resizable-icon"
 import { Container } from "./shared"
 
@@ -30,7 +30,10 @@ function InteractiveButton({ icon, ...props }: { icon: Component } & Accessible<
 
 function DecorativeButton({ icon, ...props }: { icon: Component }) {
 	return (
-		<div className="flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3" {...props}>
+		<div
+			className="flex h-[var(--hover-icon-size)] w-[var(--hover-icon-size)] items-center justify-center rounded-1e3"
+			{...props}
+		>
 			<ResizableIcon className="h-[var(--icon-size)] w-[var(--icon-size)] text-gray-800" component={icon} />
 		</div>
 	)

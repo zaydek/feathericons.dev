@@ -1,53 +1,47 @@
 import React from "react"
+import { Accessible } from "./accessible"
 
-// prettier-ignore
-export type AriaButtonProps = React.PropsWithChildren<{
-	onPress: (
-		event:
-			| React.MouseEvent<HTMLDivElement>
-			| React.KeyboardEvent<HTMLDivElement>
-		) => void
-	label:     string
-	disabled?: boolean
-}>
+export type AriaButtonProps = Accessible<JSX.IntrinsicElements["div"]> & { disabled?: boolean }
 
 export function AriaButton({
 	// prettier-ignore
-	onPress,
-	label,
 	disabled = false,
+	onClick,
+	onKeyDown,
+	onKeyUp,
 	children,
+	...props
 }: AriaButtonProps) {
 	const [keyboardActive, setKeyboardActive] = React.useState(false)
 
 	return (
 		<div
-			// A11y
-			role="button"
-			aria-label={label}
-			aria-disabled={disabled}
-			tabIndex={disabled ? -1 : 0}
-			// /A11y
-			onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+			{...props}
+			onClick={e => {
 				if (disabled) return
-				onPress(e)
+				onClick?.(e)
 			}}
-			onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+			onKeyDown={e => {
 				if (disabled) return
 				if (e.key === " " || e.key === "Enter") {
-					e.preventDefault()
-					onPress(e)
+					e.preventDefault() // Prevent scrolling
+					e.currentTarget.click()
 					setKeyboardActive(true)
 				}
+				onKeyDown?.(e)
 			}}
-			onKeyUp={(e: React.KeyboardEvent<HTMLDivElement>) => {
+			onKeyUp={e => {
 				if (disabled) return
 				if (e.key === " " || e.key === "Enter") {
-					e.preventDefault()
+					e.preventDefault() // Prevent scrolling
 					setKeyboardActive(false)
 				}
+				onKeyUp?.(e)
 			}}
-			// Adds support for keyboard :hover:focus
+			// A11y
+			role="button"
+			tabIndex={disabled ? -1 : 0}
+			// /A11y
 			data-keyboard-active={keyboardActive}
 		>
 			{children}

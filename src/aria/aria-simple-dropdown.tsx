@@ -1,8 +1,18 @@
 // https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
 
-import { createContext, Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import {
+	createContext,
+	Dispatch,
+	SetStateAction,
+	useCallback,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react"
 import { queue } from "../lib/queue"
-import { Accessible } from "./a11y"
+import { Accessible } from "./accessible"
 import { getStringFromChildren, useCancelable } from "./utils"
 
 type Item<T extends string> = { id: T; str: string }
@@ -31,7 +41,14 @@ export type AriaSimpleDropDownProps<T extends string> = {
 	setCurrentId: Dispatch<SetStateAction<T>>
 } & Accessible<JSX.IntrinsicElements["div"]>
 
-export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId, setCurrentId, children, ...props }: AriaSimpleDropDownProps<T>) {
+export function AriaSimpleDropDown<T extends string>({
+	show,
+	setShow,
+	currentId,
+	setCurrentId,
+	children,
+	...props
+}: AriaSimpleDropDownProps<T>) {
 	const ref = useRef<HTMLDivElement | null>(null)
 	const [items, setItems] = useState<Item<T>[]>([])
 
@@ -55,7 +72,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 				setCurrentId(items[Math.max(0, index - by)].id)
 			}
 		},
-		[currentId, items, setCurrentId]
+		[currentId, items, setCurrentId],
 	)
 
 	const increment = useCallback(
@@ -67,7 +84,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 				setCurrentId(items[Math.min(items.length - 1, index + by)].id)
 			}
 		},
-		[currentId, items, setCurrentId]
+		[currentId, items, setCurrentId],
 	)
 
 	const decrementRef = useRef(decrement)
@@ -114,7 +131,7 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 					increment,
 					decrement,
 				}),
-				[add, currentId, decrement, increment, items, remove, setCurrentId, setShow, show]
+				[add, currentId, decrement, increment, items, remove, setCurrentId, setShow, show],
 			)}
 		>
 			<div
@@ -162,7 +179,9 @@ export function AriaSimpleDropDown<T extends string>({ show, setShow, currentId,
 	)
 }
 
-export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Accessible<Omit<JSX.IntrinsicElements["div"], "id">>
+export type AriaSimpleDropDownItemProps<T extends string> = { id: T } & Accessible<
+	Omit<JSX.IntrinsicElements["div"], "id">
+>
 
 export function AriaSimpleDropDownItem<T extends string>({ id, children, ...props }: AriaSimpleDropDownItemProps<T>) {
 	const { setShow, currentId, setCurrentId, add, remove, decrement, increment } = useContext(_SimpleDropDownContext)!

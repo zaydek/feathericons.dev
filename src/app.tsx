@@ -8,6 +8,7 @@ import * as wkPaymentsMono from "@icons/wk/payments/mono/tsx"
 import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
+import { AriaButton } from "@/aria"
 import {
 	DEV_DebugCss,
 	ExportAs,
@@ -490,7 +491,7 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 
 	return (
 		<article id={name} className="main-grid-item" data-selected={selectedNames.has(name)}>
-			<button
+			<AriaButton
 				className="main-grid-item-icon-frame"
 				onClick={e => {
 					if (e.shiftKey) {
@@ -522,9 +523,10 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 						}
 					}
 				}}
+				aria-label={`Select ${name}`}
 			>
 				<Icon className="main-grid-item-icon" />
-			</button>
+			</AriaButton>
 			<span className="main-grid-item-type">
 				<GridItemName name={name} />
 			</span>
@@ -576,7 +578,7 @@ function AppMain() {
 			<div className="main-grid">
 				{icons === null
 					? iota(96).map(index => (
-							<div className="sk-main-grid-item">
+							<div key={index} className="sk-main-grid-item">
 								<div className="sk-main-grid-item-frame">
 									<div className="sk-main-grid-item-icon"></div>
 								</div>
