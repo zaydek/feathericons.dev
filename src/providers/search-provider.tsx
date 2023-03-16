@@ -47,11 +47,12 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 
 	const searchResults = React.useMemo(() => {
 		if (_icons === null) return null
-		if (search === "") {
+		const canon = canonicalize(search)
+		if (canon === "") {
 			return _icons
 		} else {
 			// TODO
-			return _icons?.filter(([name]) => name.toLowerCase().includes(search.toLowerCase()))
+			return _icons?.filter(([name]) => name.toLowerCase().includes(canon.toLowerCase()))
 		}
 	}, [_icons, search])
 
