@@ -554,25 +554,25 @@ function AppSidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function GridItemName({ name }: { name: string }) {
-	const { format } = React.useContext(ClipboardContext)!
-
-	if (format === "svg") {
-		return <>{toKebabCase(name).toLowerCase()}</>
-	} else {
-		const parts = name.split(/(?=[A-Z])/)
-		return (
-			<>
-				{parts.map((p, index) => (
-					<React.Fragment key={index}>
-						{index > 0 && <wbr />}
-						{p}
-					</React.Fragment>
-				))}
-			</>
-		)
-	}
-}
+//// function GridItemName({ name }: { name: string }) {
+//// 	const { format } = React.useContext(ClipboardContext)!
+////
+//// 	if (format === "svg") {
+//// 		return <>{toKebabCase(name).toLowerCase()}</>
+//// 	} else {
+//// 		const parts = name.split(/(?=[A-Z])/)
+//// 		return (
+//// 			<>
+//// 				{parts.map((p, index) => (
+//// 					<React.Fragment key={index}>
+//// 						{index > 0 && <wbr />}
+//// 						{p}
+//// 					</React.Fragment>
+//// 				))}
+//// 			</>
+//// 		)
+//// 	}
+//// }
 
 function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
 	const { names, namesStart, setNamesStart, setNamesEnd, addNames, removeNames, removeAllNames } =
@@ -633,7 +633,8 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 					//// }}
 					onClick={handleClick}
 				>
-					<GridItemName name={name} />
+					{/* <GridItemName name={name} /> */}
+					{toKebabCase(name).toLowerCase()}
 				</span>
 			</span>
 		</article>

@@ -81,9 +81,9 @@ $main-grid-item-aspect-ratio: 1.375
 
 .main-grid-item-icon
   min-height: 24px
-  max-height: 24px * math.div(56, 32)
+  max-height: 24px * math.div(56, 32) // Card aspect-ratio
   min-width:  24px
-  max-width:  24px * math.div(56, 32)
+  max-width:  24px * math.div(56, 32) // Card aspect-ratio
   color: $text-100-color
   transform: scale(calc(var(--size) / 24))
   stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
