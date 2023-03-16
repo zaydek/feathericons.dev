@@ -1,6 +1,6 @@
 import React from "react"
 
-import { canonicalize, IconComponent, useParam, useParamBoolean } from "@/lib"
+import { canonicalize, IconComponent, useOnMount, useParam, useParamBoolean } from "@/lib"
 import { queryCache } from "./cache"
 
 export type WkPaymentsValue = "normal" | "filled"
@@ -96,6 +96,25 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	//// 	return { ...refA, ...refB }
 	//// }, [$$search, searchResultsFallback])
 
+	const resetIcons = React.useCallback(() => {
+		setFeather(FEATHER_DEFAULT)
+		setWkBrands(WK_BRANDS_DEFAULT)
+		setWkPayments(WK_PAYMENTS_DEFAULT)
+		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
+	}, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
+
+	const resetIconPrefs = React.useCallback(() => {
+		setPreferColor(PREFER_COLOR_DEFAULT)
+		//// setPreferNames(PREFER_NAMES_DEFAULT)
+		//// }, [setPreferColor, setPreferNames])
+	}, [setPreferColor])
+
+	// Ensure feather OR wkBrands OR wkPayments is checked
+	useOnMount(() => {
+		if (!(!feather && !wkBrands && !wkPayments)) return
+		resetIcons()
+	})
+
 	React.useEffect(() => {
 		async function fn() {
 			const [cached, icons] = await queryCache({
@@ -110,19 +129,6 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 		}
 		fn()
 	}, [feather, preferColor, wkBrands, wkPayments, wkPaymentsValue])
-
-	const resetIcons = React.useCallback(() => {
-		setFeather(FEATHER_DEFAULT)
-		setWkBrands(WK_BRANDS_DEFAULT)
-		setWkPayments(WK_PAYMENTS_DEFAULT)
-		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
-	}, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
-
-	const resetIconPrefs = React.useCallback(() => {
-		setPreferColor(PREFER_COLOR_DEFAULT)
-		//// setPreferNames(PREFER_NAMES_DEFAULT)
-		//// }, [setPreferColor, setPreferNames])
-	}, [setPreferColor])
 
 	return (
 		<SearchContext.Provider
