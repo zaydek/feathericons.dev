@@ -10,10 +10,10 @@ import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
 import {
 	DEV_DebugCss,
-	ExportAs,
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressSlider,
+	Select,
 	Sidebar,
 	SidebarOverlay,
 } from "@/components"
@@ -384,7 +384,7 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Clipboard</h6>
 						<div className="widget-align-frame">
-							<ExportAs value={exportAs} setValue={setExportAs} />
+							<Select value={exportAs} setValue={setExportAs} />
 						</div>
 					</div>
 				</div>

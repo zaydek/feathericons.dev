@@ -26,7 +26,7 @@ const names: Record<ExportAsValue, string> = {
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
 
-export function ExportAs({
+export function Select({
 	value,
 	setValue,
 }: {
