@@ -168,9 +168,13 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIcons)}>
+						<AriaButton
+							className="widget-align-icon-frame"
+							onClick={() => startTransition(resetIcons)}
+							aria-label="Reset icons"
+						>
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</button>
+						</AriaButton>
 					</div>
 					<div>
 						<div className="checkboxes">
@@ -295,9 +299,13 @@ function AppSidebar1() {
 							<feather.Settings className="widget-name-icon-1" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
+						<AriaButton
+							className="widget-align-icon-frame"
+							onClick={() => startTransition(resetIconPrefs)}
+							aria-label="Reset settings"
+						>
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</button>
+						</AriaButton>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -414,11 +422,11 @@ function AppSidebar2() {
 						<div className="widget-align-icon-frame">
 							<feather.PenTool className="widget-name-icon-1" />
 						</div>
-						<h6 className="widget-name-type">size</h6>
+						<h6 className="widget-name-type">Size</h6>
 						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
-						<button className="widget-align-icon-frame" onClick={resetSize}>
+						<AriaButton className="widget-align-icon-frame" onClick={resetSize} aria-label="Reset size">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</button>
+						</AriaButton>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -432,11 +440,11 @@ function AppSidebar2() {
 						<div className="widget-align-icon-frame">
 							<feather.PenTool className="widget-name-icon-1" />
 						</div>
-						<h6 className="widget-name-type">stroke width</h6>
+						<h6 className="widget-name-type">Stroke width</h6>
 						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
-						<button className="widget-align-icon-frame" onClick={resetStrokeWidth}>
+						<AriaButton className="widget-align-icon-frame" onClick={resetStrokeWidth} aria-label="Reset stroke width">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</button>
+						</AriaButton>
 					</div>
 				</div>
 				<div className="widget-body">
