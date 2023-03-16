@@ -4,7 +4,6 @@ export function roundValue(value: number, { precision }: { precision: number } =
 	return Math.round((value + Number.EPSILON) * maxValue) / maxValue
 }
 
-export function clampValue(value: number, { min, max, precision }: { min: number; max: number; precision?: number }) {
-	const nextValue = Math.min(Math.max(value, min), max)
-	return precision === undefined ? nextValue : roundValue(nextValue, { precision })
+export function clampValue(value: number, { min, max }: { min: number; max: number }) {
+	return Math.min(Math.max(value, min), max)
 }

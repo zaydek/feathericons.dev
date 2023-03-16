@@ -75,7 +75,7 @@ export function AriaSlider({
 			const trackClient = track!.getBoundingClientRect()
 			const v1 = (e.clientX - trackClient.x - thumbClient.width / 4) / (trackClient.width - thumbClient.width)
 			const v2 = clampValue(v1, { min: 0, max: 1 })
-			const v3 = roundValue(v2, { precision: 2 })
+			const v3 = roundValue(v2, { precision: 4 })
 			const v4 = v3 * (max - min) + min
 			const v5 = v4 - (v4 % step)
 			setValue(v5)
@@ -87,7 +87,7 @@ export function AriaSlider({
 			const trackClient = track!.getBoundingClientRect()
 			const v1 = (e.clientX - trackClient.x - thumbClient.width / 4) / (trackClient.width - thumbClient.width)
 			const v2 = clampValue(v1, { min: 0, max: 1 })
-			const v3 = roundValue(v2, { precision: 2 })
+			const v3 = roundValue(v2, { precision: 4 })
 			const v4 = v3 * (max - min) + min
 			const v5 = v4 - (v4 % step)
 			setValue(v5)
