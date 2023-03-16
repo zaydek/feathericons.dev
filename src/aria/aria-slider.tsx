@@ -45,10 +45,23 @@ export function AriaSlider({
 		return (value - min) / (max - min)
 	}, [max, min, value])
 
-	const x = React.useMemo(() => {
-		if (thumb === null || visuallyHidden(thumb)) return null
-		if (track === null || visuallyHidden(track)) return null
-		return progress * (track.getBoundingClientRect().width - thumb.getBoundingClientRect().width)
+	React.useEffect(() => {
+		if (thumb === null || visuallyHidden(thumb)) return // TODO
+		if (track === null || visuallyHidden(track)) return // TODO
+		const thumbObserver = new ResizeObserver(() => {
+			const translateX = progress * (track.getBoundingClientRect().width - thumb.getBoundingClientRect().width)
+			thumb.style.transform = `translateX(${translateX}px)`
+		})
+		const trackObserver = new ResizeObserver(() => {
+			const translateX = progress * (track.getBoundingClientRect().width - thumb.getBoundingClientRect().width)
+			thumb.style.transform = `translateX(${translateX}px)`
+		})
+		thumbObserver.observe(thumb)
+		trackObserver.observe(track)
+		return () => {
+			thumbObserver.disconnect()
+			trackObserver.disconnect()
+		}
 	}, [progress, thumb, track])
 
 	React.useEffect(() => {
@@ -56,7 +69,7 @@ export function AriaSlider({
 		if (track === null || visuallyHidden(track)) return
 		function handlePointerDown(e: PointerEvent) {
 			if (!(e.button === 0 && e.composedPath().includes(sliderRef.current!))) return
-			//// e.preventDefault()
+			e.preventDefault() // COMPAT/Safari: Prevent text selection
 			pointerDownRef.current = true
 			const thumbClient = thumb!.getBoundingClientRect()
 			const trackClient = track!.getBoundingClientRect()
@@ -69,7 +82,7 @@ export function AriaSlider({
 		}
 		function handlePointerMove(e: PointerEvent) {
 			if (!pointerDownRef.current) return
-			//// e.preventDefault()
+			e.preventDefault() // COMPAT/Safari: Prevent text selection
 			const thumbClient = thumb!.getBoundingClientRect()
 			const trackClient = track!.getBoundingClientRect()
 			const v1 = (e.clientX - trackClient.x - thumbClient.width / 4) / (trackClient.width - thumbClient.width)
@@ -80,7 +93,7 @@ export function AriaSlider({
 			setValue(v5)
 		}
 		function handlePointerUp(e: PointerEvent) {
-			//// e.preventDefault()
+			e.preventDefault() // COMPAT/Safari: Prevent text selection
 			pointerDownRef.current = false
 		}
 		document.addEventListener("pointerdown", handlePointerDown, false)
@@ -92,13 +105,6 @@ export function AriaSlider({
 			document.removeEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
 		}
 	}, [max, min, setValue, step, thumb, track])
-
-	React.useEffect(() => {
-		if (thumb === null || visuallyHidden(thumb)) return
-		if (track === null || visuallyHidden(track)) return
-		if (x === null) return
-		thumb.style.transform = `translateX(${x}px)`
-	}, [thumb, track, x])
 
 	return (
 		<div
