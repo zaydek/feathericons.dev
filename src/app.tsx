@@ -167,7 +167,7 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIcons)}>
+						<button className="widget-align-icon-frame" onClick={e => startTransition(resetIcons)}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
@@ -363,7 +363,7 @@ function AppSidebar1() {
 							<feather.Settings className="widget-name-start-icon" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
+						<button className="widget-align-icon-frame" onClick={e => startTransition(resetIconPrefs)}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
