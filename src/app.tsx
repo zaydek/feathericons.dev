@@ -212,7 +212,7 @@ function AppSidebar1() {
 								<div className="widget-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
-										data-type="payments"
+										data-type="card"
 										Icon={
 											// prettier-ignore
 											preferColor
@@ -240,7 +240,7 @@ function AppSidebar1() {
 									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											data-type="payments"
+											data-type="card"
 											Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
 										/>
 									</div>
@@ -266,7 +266,7 @@ function AppSidebar1() {
 									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
-											data-type="payments"
+											data-type="card"
 											Icon={preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard}
 										/>
 									</div>
