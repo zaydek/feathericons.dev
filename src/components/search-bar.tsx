@@ -14,13 +14,16 @@ function useSideEffectFocusOnMount(ref: React.RefObject<HTMLInputElement | null>
 	return void 0
 }
 
-function useShortcutCtrlPOrKToFocusSearchBar(ref: React.RefObject<HTMLInputElement | null>) {
+function useShortcutCtrlPOrKToToggleSearch(ref: React.RefObject<HTMLInputElement | null>) {
 	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && (e.key === "p" || e.key === "k")) {
-				// Call preventDefault() to prevent the browser from opening the print dialog
-				e.preventDefault()
-				ref.current!.focus()
+				e.preventDefault() // 🖨️
+				if (document.activeElement === ref.current) {
+					ref.current!.blur()
+				} else {
+					ref.current!.focus()
+				}
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
@@ -35,7 +38,7 @@ export function SearchBar() {
 
 	const ref = React.useRef<HTMLInputElement | null>(null)
 
-	useShortcutCtrlPOrKToFocusSearchBar(ref)
+	useShortcutCtrlPOrKToToggleSearch(ref)
 	useSideEffectFocusOnMount(ref)
 
 	return (

@@ -58,18 +58,18 @@ function useShortcutCtrlAToSelectAll() {
 	return void 0
 }
 
-function useShortcutEscToClearAll() {
+function useShortcutEscToRemoveNamesStartAndEnd() {
 	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			//// if (document.activeElement?.tagName !== "BODY") return
+			if (document.activeElement?.tagName !== "BODY") return
 			if (e.key === "Escape") {
 				removeAllNames()
 				setNamesStart(null)
 				setNamesEnd(null)
-				if (document.activeElement instanceof HTMLElement) {
-					document.activeElement.blur()
-				}
+				//// if (document.activeElement instanceof HTMLElement) {
+				//// 	document.activeElement.blur()
+				//// }
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
@@ -666,7 +666,7 @@ function AppMain() {
 	}, [removeAllNames, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlAToSelectAll()
-	useShortcutEscToClearAll()
+	useShortcutEscToRemoveNamesStartAndEnd()
 
 	useSideEffectClearSelectionOnChange()
 	useSideEffectSelectNamesFromIndexes()
