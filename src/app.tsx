@@ -617,7 +617,7 @@ function AppMain() {
 ////////////////////////////////////////////////////////////////////////////////
 
 // prettier-ignore
-const AriaSelectContext = React.createContext<{
+const SelectContext = React.createContext<{
 	open:             boolean
 	setOpen:          React.Dispatch<React.SetStateAction<boolean>>
 	currentValue:     string
@@ -631,14 +631,14 @@ const AriaSelectContext = React.createContext<{
 } | null>(null)
 
 // prettier-ignore
-type AriaSelectProviderProps = React.PropsWithChildren<{
+type SelectProviderProps = React.PropsWithChildren<{
 	open:            boolean
 	setOpen:         React.Dispatch<React.SetStateAction<boolean>>
 	currentValue:    string
 	setCurrentValue: React.Dispatch<React.SetStateAction<string>>
 }>
 
-function AriaSelectProvider({ open, setOpen, currentValue, setCurrentValue, children }: AriaSelectProviderProps) {
+function SelectProvider({ open, setOpen, currentValue, setCurrentValue, children }: SelectProviderProps) {
 	const [values, setValues] = React.useState<string[]>([])
 
 	const decrementToStart = React.useCallback(() => {
@@ -666,7 +666,7 @@ function AriaSelectProvider({ open, setOpen, currentValue, setCurrentValue, chil
 	}, [setCurrentValue, values])
 
 	return (
-		<AriaSelectContext.Provider
+		<SelectContext.Provider
 			value={{
 				open,
 				setOpen,
@@ -681,14 +681,14 @@ function AriaSelectProvider({ open, setOpen, currentValue, setCurrentValue, chil
 			}}
 		>
 			{children}
-		</AriaSelectContext.Provider>
+		</SelectContext.Provider>
 	)
 }
 
-type AriaSelectProps = JSX.IntrinsicElements["div"]
+type SelectProps = JSX.IntrinsicElements["div"]
 
-function AriaSelect({ children, ...props }: AriaSelectProps) {
-	const ctx = React.useContext(AriaSelectContext)!
+function Select({ children, ...props }: SelectProps) {
+	const ctx = React.useContext(SelectContext)!
 	const ref = React.useRef<HTMLDivElement | null>(null)
 
 	React.useEffect(() => {
@@ -756,10 +756,10 @@ function AriaSelect({ children, ...props }: AriaSelectProps) {
 	)
 }
 
-type AriaSelectOptionProps = JSX.IntrinsicElements["div"] & { value: string }
+type OptionProps = JSX.IntrinsicElements["div"] & { value: string }
 
-function SelectOption({ value, children, ...props }: AriaSelectOptionProps) {
-	const ctx = React.useContext(AriaSelectContext)!
+function Option({ value, children, ...props }: OptionProps) {
+	const ctx = React.useContext(SelectContext)!
 	const ref = React.useRef<HTMLDivElement | null>(null)
 
 	useOnMount(() => {
@@ -782,7 +782,7 @@ function SelectOption({ value, children, ...props }: AriaSelectOptionProps) {
 			aria-selected={ctx.currentValue === value}
 			// /A11y
 			onClick={e => {
-				e.stopPropagation() // Stop propagation to <AriaSelect>
+				e.stopPropagation() // Added
 				ctx.setOpen(false)
 				ctx.setCurrentValue(value)
 				// Preserve
@@ -834,27 +834,27 @@ export function App() {
 	const [currentValue, setCurrentValue] = React.useState("foo")
 
 	return (
-		<AriaSelectProvider open={open} setOpen={setOpen} currentValue={currentValue} setCurrentValue={setCurrentValue}>
-			<AriaSelect>
+		<SelectProvider open={open} setOpen={setOpen} currentValue={currentValue} setCurrentValue={setCurrentValue}>
+			<Select>
 				<span>Hello, world! ({currentValue})</span>
-			</AriaSelect>
+			</Select>
 			<div
 				style={{
 					opacity: open ? 1 : 0,
 					pointerEvents: open ? "auto" : "none",
 				}}
 			>
-				<SelectOption value="foo">
+				<Option value="foo">
 					<span>Hello</span>
-				</SelectOption>
-				<SelectOption value="bar">
+				</Option>
+				<Option value="bar">
 					<span>Hello</span>
-				</SelectOption>
-				<SelectOption value="baz">
+				</Option>
+				<Option value="baz">
 					<span>Hello</span>
-				</SelectOption>
+				</Option>
 			</div>
-		</AriaSelectProvider>
+		</SelectProvider>
 	)
 
 	//// return (
