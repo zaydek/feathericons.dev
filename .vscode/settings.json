@@ -1,10 +1,11 @@
 {
   "exportall.config.folderListener": [
     "/scripts/utils",
+    "/src/aria",
     "/src/components",
     "/src/data",
     "/src/hooks",
     "/src/lib",
-    "/src/state",
+    "/src/state"
   ]
 }

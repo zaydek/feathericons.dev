@@ -1,6 +1,6 @@
 import React from "react"
 
-import { canonicalize, IconComponent, useOnMount, useParam, useParamBoolean } from "@/lib"
+import { canonicalize, IconComponent, useMount, useParam, useParamBoolean } from "@/lib"
 import { queryCache } from "./cache"
 
 export type WkPaymentsValue = "normal" | "filled"
@@ -110,7 +110,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	}, [setPreferColor])
 
 	// Ensure feather OR wkBrands OR wkPayments is checked
-	useOnMount(() => {
+	useMount(() => {
 		if (!(!feather && !wkBrands && !wkPayments)) return
 		resetIcons()
 	})

@@ -8,18 +8,17 @@ import * as wkPaymentsMono from "@icons/wk/payments/mono/tsx"
 import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
-import { ExportAs, Main, MemoSyntaxHighlighting, ProgressSlider, Sidebar } from "@/components"
-import { resources } from "@/data"
 import {
-	anchorAttrs,
-	DynamicIcon,
-	IconComponent,
-	iota,
-	isMac,
-	toKebabCase,
-	useOnMount,
-	useVisibleDocumentTitle,
-} from "@/lib"
+	DEV_DebugCss,
+	ExportAs,
+	Main,
+	MemoSyntaxHighlighting,
+	ProgressSlider,
+	Sidebar,
+	SidebarOverlay,
+} from "@/components"
+import { resources } from "@/data"
+import { anchorAttrs, DynamicIcon, IconComponent, iota, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -616,253 +615,40 @@ function AppMain() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// prettier-ignore
-const SelectContext = React.createContext<{
-	open:             boolean
-	setOpen:          React.Dispatch<React.SetStateAction<boolean>>
-	currentValue:     string
-	setCurrentValue:  React.Dispatch<React.SetStateAction<string>>
-	values:           string[]
-	setValues:        React.Dispatch<React.SetStateAction<string[]>>
-	decrementToStart: () => void
-	decrement:        () => void
-	increment:        () => void
-	incrementToEnd:   () => void
-} | null>(null)
-
-// prettier-ignore
-type SelectProviderProps = React.PropsWithChildren<{
-	open:            boolean
-	setOpen:         React.Dispatch<React.SetStateAction<boolean>>
-	currentValue:    string
-	setCurrentValue: React.Dispatch<React.SetStateAction<string>>
-}>
-
-function SelectProvider({ open, setOpen, currentValue, setCurrentValue, children }: SelectProviderProps) {
-	const [values, setValues] = React.useState<string[]>([])
-
-	const decrementToStart = React.useCallback(() => {
-		setCurrentValue(values[0])
-	}, [setCurrentValue, values])
-
-	const decrement = React.useCallback(() => {
-		setCurrentValue(curr => {
-			const index = values.indexOf(curr)
-			if (index === -1) return curr // ¯\_(ツ)_/¯
-			return values[(index - 1 + values.length) % values.length]
-		})
-	}, [setCurrentValue, values])
-
-	const increment = React.useCallback(() => {
-		setCurrentValue(curr => {
-			const index = values.indexOf(curr)
-			if (index === -1) return curr // ¯\_(ツ)_/¯
-			return values[(index + 1) % values.length]
-		})
-	}, [setCurrentValue, values])
-
-	const incrementToEnd = React.useCallback(() => {
-		setCurrentValue(values[values.length - 1])
-	}, [setCurrentValue, values])
-
-	return (
-		<SelectContext.Provider
-			value={{
-				open,
-				setOpen,
-				currentValue,
-				setCurrentValue,
-				values,
-				setValues,
-				decrementToStart,
-				decrement,
-				increment,
-				incrementToEnd,
-			}}
-		>
-			{children}
-		</SelectContext.Provider>
-	)
-}
-
-type SelectProps = JSX.IntrinsicElements["div"]
-
-function Select({ children, ...props }: SelectProps) {
-	const ctx = React.useContext(SelectContext)!
-	const ref = React.useRef<HTMLDivElement | null>(null)
-
-	React.useEffect(() => {
-		if (ctx.open) return
-		ref.current!.focus()
-	}, [ctx])
-
-	React.useEffect(() => {
-		if (!ctx.open) return
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key === "Escape") {
-				ctx.setOpen(false)
-			}
-		}
-		window.addEventListener("keydown", handleKeyDown, false)
-		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [ctx])
-
-	return (
-		<div
-			{...props}
-			ref={ref}
-			// A11y
-			role="combobox"
-			aria-controls="listbox1"
-			aria-expanded={ctx.open}
-			// /A11y
-			onClick={e => {
-				ctx.setOpen(curr => !curr)
-				// Preserve
-				props.onClick?.(e)
-			}}
-			onKeyDown={e => {
-				switch (e.key) {
-					case " ":
-					case "Enter":
-						ctx.setOpen(curr => !curr)
-						break
-					case "ArrowUp":
-						ctx.setOpen(true)
-						ctx.decrement()
-						break
-					case "ArrowDown":
-						ctx.setOpen(true)
-						ctx.increment()
-						break
-					case "PageUp":
-					case "Home":
-						ctx.setOpen(true)
-						ctx.decrementToStart()
-						break
-					case "PageDown":
-					case "End":
-						ctx.setOpen(true)
-						ctx.incrementToEnd()
-						break
-				}
-				// Preserve
-				props.onKeyDown?.(e)
-			}}
-			tabIndex={0}
-		>
-			{children}
-		</div>
-	)
-}
-
-type OptionProps = JSX.IntrinsicElements["div"] & { value: string }
-
-function Option({ value, children, ...props }: OptionProps) {
-	const ctx = React.useContext(SelectContext)!
-	const ref = React.useRef<HTMLDivElement | null>(null)
-
-	useOnMount(() => {
-		ctx.setValues(curr => [...curr, value])
-	})
-
-	React.useEffect(() => {
-		if (!ctx.open) return
-		if (ctx.currentValue === value) {
-			ref.current!.focus()
-		}
-	}, [ctx.currentValue, ctx.open, value])
-
-	return (
-		<div
-			{...props}
-			ref={ref}
-			// A11y
-			role="option"
-			aria-selected={ctx.currentValue === value}
-			// /A11y
-			onClick={e => {
-				e.stopPropagation() // Added
-				ctx.setOpen(false)
-				ctx.setCurrentValue(value)
-				// Preserve
-				props.onClick?.(e)
-			}}
-			onKeyDown={e => {
-				switch (e.key) {
-					case " ":
-					case "Enter":
-						e.stopPropagation() // Added
-						ctx.setOpen(false)
-						ctx.setCurrentValue(value)
-						break
-					case "ArrowUp":
-						e.stopPropagation() // Added
-						ctx.setOpen(true)
-						ctx.decrement()
-						break
-					case "ArrowDown":
-						e.stopPropagation() // Added
-						ctx.setOpen(true)
-						ctx.increment()
-						break
-					case "PageUp":
-					case "Home":
-						e.stopPropagation() // Added
-						ctx.setOpen(true)
-						ctx.decrementToStart()
-						break
-					case "PageDown":
-					case "End":
-						e.stopPropagation() // Added
-						ctx.setOpen(true)
-						ctx.incrementToEnd()
-						break
-				}
-				// Preserve
-				props.onKeyDown?.(e)
-			}}
-			tabIndex={0}
-		>
-			{children}
-		</div>
-	)
-}
+//// const [open, setOpen] = React.useState(false)
+//// const [value, setValue] = React.useState("foo")
+////
+//// return (
+//// 	<SelectProvider open={open} setOpen={setOpen} value={value} setValue={setValue}>
+//// 		<Select>
+//// 			<span>Hello, world! ({value})</span>
+//// 		</Select>
+//// 		<div
+//// 			style={{
+//// 				opacity: open ? 1 : 0,
+//// 				pointerEvents: open ? "auto" : "none",
+//// 			}}
+//// 		>
+//// 			<Option value="foo">
+//// 				<span>Hello</span>
+//// 			</Option>
+//// 			<Option value="bar">
+//// 				<span>Hello</span>
+//// 			</Option>
+//// 			<Option value="baz">
+//// 				<span>Hello</span>
+//// 			</Option>
+//// 		</div>
+//// 	</SelectProvider>
+//// )
 
 export function App() {
-	const [open, setOpen] = React.useState(false)
-	const [currentValue, setCurrentValue] = React.useState("foo")
-
 	return (
-		<SelectProvider open={open} setOpen={setOpen} currentValue={currentValue} setCurrentValue={setCurrentValue}>
-			<Select>
-				<span>Hello, world! ({currentValue})</span>
-			</Select>
-			<div
-				style={{
-					opacity: open ? 1 : 0,
-					pointerEvents: open ? "auto" : "none",
-				}}
-			>
-				<Option value="foo">
-					<span>Hello</span>
-				</Option>
-				<Option value="bar">
-					<span>Hello</span>
-				</Option>
-				<Option value="baz">
-					<span>Hello</span>
-				</Option>
-			</div>
-		</SelectProvider>
+		<DEV_DebugCss>
+			<SidebarOverlay />
+			<AppSidebar1 />
+			<AppSidebar2 />
+			<AppMain />
+		</DEV_DebugCss>
 	)
-
-	//// return (
-	//// 	<DEV_DebugCss>
-	//// 		<SidebarOverlay />
-	//// 		<AppSidebar1 />
-	//// 		<AppSidebar2 />
-	//// 		<AppMain />
-	//// 	</DEV_DebugCss>
-	//// )
 }
