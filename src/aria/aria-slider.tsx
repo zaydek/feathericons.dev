@@ -14,11 +14,6 @@ export type AriaSliderProps = Accessible<JSX.IntrinsicElements["div"]> & {
 	step:     number
 }
 
-//// // https://stackoverflow.com/a/21696585
-//// function oneOrMoreElementsVisuallyHidden(...args: HTMLElement[]) {
-//// 	return args.some(arg => arg.offsetParent === null)
-//// }
-
 // https://stackoverflow.com/a/21696585
 function visuallyHidden(arg: HTMLElement) {
 	return arg.offsetParent === null
@@ -38,16 +33,15 @@ export function AriaSlider({
 }: AriaSliderProps) {
 	const sliderRef = React.useRef<HTMLDivElement>(null)
 
-	// TODO: Hmm, yeah pointerDown can be a ref
-	const pointerDownRef = React.useRef(false)
+	const [pointerDown, setPointerDown] = React.useState(false)
 
 	const progress = React.useMemo(() => {
 		return (value - min) / (max - min)
 	}, [max, min, value])
 
 	React.useEffect(() => {
-		if (thumb === null || visuallyHidden(thumb)) return // TODO
-		if (track === null || visuallyHidden(track)) return // TODO
+		if (thumb === null || visuallyHidden(thumb)) return
+		if (track === null || visuallyHidden(track)) return
 		const thumbObserver = new ResizeObserver(() => {
 			const translateX = progress * (track.getBoundingClientRect().width - thumb.getBoundingClientRect().width)
 			thumb.style.transform = `translateX(${translateX}px)`
@@ -69,8 +63,7 @@ export function AriaSlider({
 		if (track === null || visuallyHidden(track)) return
 		function handlePointerDown(e: PointerEvent) {
 			if (!(e.button === 0 && e.composedPath().includes(sliderRef.current!))) return
-			e.preventDefault() // COMPAT/Safari: Prevent text selection
-			pointerDownRef.current = true
+			setPointerDown(true)
 			const thumbClient = thumb!.getBoundingClientRect()
 			const trackClient = track!.getBoundingClientRect()
 			const v1 = (e.clientX - trackClient.x - thumbClient.width / 4) / (trackClient.width - thumbClient.width)
@@ -81,8 +74,7 @@ export function AriaSlider({
 			setValue(v5)
 		}
 		function handlePointerMove(e: PointerEvent) {
-			if (!pointerDownRef.current) return
-			e.preventDefault() // COMPAT/Safari: Prevent text selection
+			if (!pointerDown) return
 			const thumbClient = thumb!.getBoundingClientRect()
 			const trackClient = track!.getBoundingClientRect()
 			const v1 = (e.clientX - trackClient.x - thumbClient.width / 4) / (trackClient.width - thumbClient.width)
@@ -93,8 +85,7 @@ export function AriaSlider({
 			setValue(v5)
 		}
 		function handlePointerUp(e: PointerEvent) {
-			e.preventDefault() // COMPAT/Safari: Prevent text selection
-			pointerDownRef.current = false
+			setPointerDown(false)
 		}
 		document.addEventListener("pointerdown", handlePointerDown, false)
 		document.addEventListener("pointermove", handlePointerMove, false)
@@ -104,21 +95,37 @@ export function AriaSlider({
 			document.removeEventListener("pointermove", handlePointerMove, false)
 			document.removeEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
 		}
-	}, [max, min, setValue, step, thumb, track])
+	}, [max, min, pointerDown, setValue, step, thumb, track])
+
+	React.useEffect(() => {
+		if (!pointerDown) return
+		document.body.classList.add("grabbing")
+		return () => {
+			document.body.classList.remove("grabbing")
+			if (document.body.classList.length === 0) {
+				document.body.removeAttribute("class")
+			}
+		}
+	}, [pointerDown])
 
 	return (
 		<div
 			ref={sliderRef}
 			{...props}
 			style={{ "--progress": `${progress * 100}%` } as React.CSSProperties}
+			onPointerDown={e => {
+				// COMPAT/Safari: [-webkit-user-select: none] and [user-select: none]
+				// doesn't work
+				e.preventDefault()
+				// Preserve
+				props.onPointerDown?.(e)
+			}}
 			onKeyDown={e => {
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-					e.preventDefault()
 					const nextValue = value - step
 					const clampedNextValue = clampValue(nextValue, { min, max })
 					setValue(clampedNextValue)
 				} else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-					e.preventDefault()
 					const nextValue = value + step
 					const clampedNextValue = clampValue(nextValue, { min, max })
 					setValue(clampedNextValue)
