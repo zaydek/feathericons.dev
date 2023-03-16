@@ -41,7 +41,7 @@ function useShortcutCtrlAToSelectAll() {
 	const { icons } = React.useContext(SearchContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (icons === undefined) return
+		if (icons === null) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.target instanceof Element && e.target.tagName === "INPUT") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
@@ -95,7 +95,7 @@ function useSideEffectSelectNamesFromIndexes() {
 	const { icons } = React.useContext(SearchContext)!
 	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (icons === undefined) return
+		if (icons === null) return
 		if (selectedNamesStart === null || selectedNamesEnd === null) return
 		const min = Math.min(selectedNamesStart, selectedNamesEnd)
 		const max = Math.max(selectedNamesStart, selectedNamesEnd)
