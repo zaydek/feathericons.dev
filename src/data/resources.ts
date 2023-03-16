@@ -3,30 +3,30 @@ import * as wkBrandsOriginal from "@icons/wk/brands/original/tsx"
 
 import { IconComponent } from "@/lib"
 
-export const resources: { name: string; icon: IconComponent; href: string }[] = [
+export const resources: { Icon: IconComponent; name: string; href: string }[] = [
 	{
+		Icon: wkBrandsMono.BrandGithub,
 		name: "Icons",
-		icon: wkBrandsMono.BrandGithub,
 		href: "https://github.com/feathericons/feather",
 	},
 	//// {
+	//// 	Icon: wkBrandsMono.BrandGithub,
 	//// 	name: "Original Feather website",
-	//// 	icon: wkBrandsMono.BrandGithub,
 	//// 	href: "https://github.com/feathericons/feather",
 	//// },
 	{
+		Icon: wkBrandsMono.BrandGithub,
 		name: "Website",
-		icon: wkBrandsMono.BrandGithub,
 		href: "https://github.com/zaydek/feathericons.dev",
 	},
 	{
+		Icon: wkBrandsOriginal.BrandFigma,
 		name: "Wolf Kit resources",
-		icon: wkBrandsOriginal.BrandFigma,
 		href: "https://figma.com/@thewolfkit",
 	},
 	{
+		Icon: wkBrandsOriginal.BrandTwitter,
 		name: "Share on Twitter",
-		icon: wkBrandsOriginal.BrandTwitter,
 		href: `http://twitter.com/intent/tweet?text=${encodeURI(
 			"Check out Feather 🪶\n\nThanks @colebemis for designing Feather and @username_ZAYDEK for feathericons.dev",
 		)}`,

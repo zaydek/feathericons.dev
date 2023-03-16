@@ -2,13 +2,13 @@ import React from "react"
 
 import * as shiki from "shiki-es"
 
-import { anchorAttrs, getDarkMode } from "@/lib"
+import { getDarkMode, safeAnchorAttrs } from "@/lib"
 import { ShikiContext } from "@/providers"
 
 function TwitterUsername({ username, children }: { username: string; children: string }) {
 	const href = `https://twitter.com/${username}`
 	return (
-		<a href={href} {...anchorAttrs}>
+		<a href={href} {...safeAnchorAttrs}>
 			{children}
 		</a>
 	)
@@ -16,7 +16,7 @@ function TwitterUsername({ username, children }: { username: string; children: s
 
 function Anchor({ href, children }: { href: string; children: string }) {
 	return (
-		<a href={href} {...anchorAttrs}>
+		<a href={href} {...safeAnchorAttrs}>
 			{children}
 		</a>
 	)

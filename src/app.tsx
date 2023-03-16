@@ -18,7 +18,7 @@ import {
 	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
-import { anchorAttrs, DynamicIcon, IconComponent, iota, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import { DynamicIcon, IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	ProgressBarContext,
@@ -412,10 +412,10 @@ function AppSidebar1() {
 				</div>
 				<div className="widget-body" data-has="end">
 					<nav className="resources">
-						{resources.map((resource, index) => (
-							<a key={resource.href} className="resource" href={resource.href} {...anchorAttrs}>
+						{resources.map(resource => (
+							<a key={resource.href} className="resource" href={resource.href} {...safeAnchorAttrs}>
 								<div className="widget-align-icon-frame">
-									<resource.icon className="resource-start-icon" />
+									<resource.Icon className="resource-start-icon" />
 								</div>
 								<span className="resource-type">{resource.name}</span>
 								<div className="widget-align-icon-frame">
