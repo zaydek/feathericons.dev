@@ -618,12 +618,16 @@ function AppMain() {
 
 // prettier-ignore
 const AriaSelectContext = React.createContext<{
-	open:            boolean
-	setOpen:         React.Dispatch<React.SetStateAction<boolean>>
-	currentValue:    string
-	setCurrentValue: React.Dispatch<React.SetStateAction<string>>
-	values:          string[]
-	setValues:       React.Dispatch<React.SetStateAction<string[]>>
+	open:             boolean
+	setOpen:          React.Dispatch<React.SetStateAction<boolean>>
+	currentValue:     string
+	setCurrentValue:  React.Dispatch<React.SetStateAction<string>>
+	values:           string[]
+	setValues:        React.Dispatch<React.SetStateAction<string[]>>
+	decrementToStart: () => void
+	decrement:        () => void
+	increment:        () => void
+	incrementToEnd:   () => void
 } | null>(null)
 
 // prettier-ignore
@@ -637,6 +641,30 @@ type AriaSelectProviderProps = React.PropsWithChildren<{
 function AriaSelectProvider({ open, setOpen, currentValue, setCurrentValue, children }: AriaSelectProviderProps) {
 	const [values, setValues] = React.useState<string[]>([])
 
+	const decrementToStart = React.useCallback(() => {
+		setCurrentValue(values[0])
+	}, [setCurrentValue, values])
+
+	const decrement = React.useCallback(() => {
+		setCurrentValue(curr => {
+			const index = values.indexOf(curr)
+			if (index === -1) return curr // ¯\_(ツ)_/¯
+			return values[(index - 1 + values.length) % values.length]
+		})
+	}, [setCurrentValue, values])
+
+	const increment = React.useCallback(() => {
+		setCurrentValue(curr => {
+			const index = values.indexOf(curr)
+			if (index === -1) return curr // ¯\_(ツ)_/¯
+			return values[(index + 1) % values.length]
+		})
+	}, [setCurrentValue, values])
+
+	const incrementToEnd = React.useCallback(() => {
+		setCurrentValue(values[values.length - 1])
+	}, [setCurrentValue, values])
+
 	return (
 		<AriaSelectContext.Provider
 			value={{
@@ -646,6 +674,10 @@ function AriaSelectProvider({ open, setOpen, currentValue, setCurrentValue, chil
 				setCurrentValue,
 				values,
 				setValues,
+				decrementToStart,
+				decrement,
+				increment,
+				incrementToEnd,
 			}}
 		>
 			{children}
@@ -658,9 +690,17 @@ type AriaSelectProps = JSX.IntrinsicElements["div"]
 function AriaSelect({ children, ...props }: AriaSelectProps) {
 	const ctx = React.useContext(AriaSelectContext)!
 
+	const ref = React.useRef<HTMLDivElement | null>(null)
+
+	React.useEffect(() => {
+		if (ctx.open) return
+		ref.current!.focus()
+	}, [ctx.open])
+
 	return (
 		<div
 			{...props}
+			ref={ref}
 			// A11y
 			role="combobox"
 			aria-controls="listbox1"
@@ -671,7 +711,34 @@ function AriaSelect({ children, ...props }: AriaSelectProps) {
 				// Preserve
 				props.onClick?.(e)
 			}}
-			// TODO: Add onKeyDown
+			onKeyDown={e => {
+				switch (e.key) {
+					case " ":
+					case "Enter":
+						ctx.setOpen(curr => !curr)
+						break
+					case "ArrowUp":
+						ctx.setOpen(true)
+						ctx.decrement()
+						break
+					case "ArrowDown":
+						ctx.setOpen(true)
+						ctx.increment()
+						break
+					case "PageUp":
+					case "Home":
+						ctx.setOpen(true)
+						ctx.decrementToStart()
+						break
+					case "PageDown":
+					case "End":
+						ctx.setOpen(true)
+						ctx.incrementToEnd()
+						break
+				}
+				// Preserve
+				props.onKeyDown?.(e)
+			}}
 			tabIndex={0}
 		>
 			{children}
@@ -684,25 +751,68 @@ type AriaSelectOptionProps = JSX.IntrinsicElements["div"] & { value: string }
 function SelectOption({ value, children, ...props }: AriaSelectOptionProps) {
 	const ctx = React.useContext(AriaSelectContext)!
 
+	const ref = React.useRef<HTMLDivElement | null>(null)
+
 	useOnMount(() => {
 		ctx.setValues(curr => [...curr, value])
 	})
 
+	React.useEffect(() => {
+		if (!ctx.open) return
+		if (ctx.currentValue === value) {
+			ref.current!.focus()
+		}
+	}, [ctx.currentValue, ctx.open, value])
+
 	return (
 		<div
 			{...props}
+			ref={ref}
 			// A11y
 			role="option"
 			aria-selected={ctx.currentValue === value}
 			// /A11y
 			onClick={e => {
 				e.stopPropagation() // Stop propagation to <AriaSelect>
-				ctx.setCurrentValue(value)
 				ctx.setOpen(false)
+				ctx.setCurrentValue(value)
 				// Preserve
 				props.onClick?.(e)
 			}}
-			// TODO: Add onKeyDown
+			onKeyDown={e => {
+				switch (e.key) {
+					case " ":
+					case "Enter":
+						e.stopPropagation() // Added
+						ctx.setOpen(false)
+						ctx.setCurrentValue(value)
+						break
+					case "ArrowUp":
+						e.stopPropagation() // Added
+						ctx.setOpen(true)
+						ctx.decrement()
+						break
+					case "ArrowDown":
+						e.stopPropagation() // Added
+						ctx.setOpen(true)
+						ctx.increment()
+						break
+					case "PageUp":
+					case "Home":
+						e.stopPropagation() // Added
+						ctx.setOpen(true)
+						ctx.decrementToStart()
+						break
+					case "PageDown":
+					case "End":
+						e.stopPropagation() // Added
+						ctx.setOpen(true)
+						ctx.incrementToEnd()
+						break
+				}
+				// Preserve
+				props.onKeyDown?.(e)
+			}}
 			tabIndex={0}
 		>
 			{children}
