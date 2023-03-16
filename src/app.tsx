@@ -13,6 +13,7 @@ import {
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressSlider,
+	SearchBar,
 	Select,
 	Sidebar,
 	SidebarOverlay,
@@ -153,14 +154,11 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
-				{/* TODO: Pass search as state? */}
-				{/* <div className="widget-head" data-has="start">
+				<div className="widget-head" data-pos="start">
 					<div className="widget-align-frame">
 						<SearchBar />
 					</div>
-				</div> */}
-				{/* FIXME */}
-				<div className="widget-head"></div>
+				</div>
 				<div className="widget-body" {...scrollProps}>
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
@@ -420,7 +418,7 @@ function AppSidebar1() {
 						<h6 className="widget-name-type">Resources</h6>
 					</div>
 				</div>
-				<div className="widget-body" data-has="end">
+				<div className="widget-body" data-pos="end">
 					<nav className="resources">
 						{resources.map(resource => (
 							<a key={resource.href} className="resource" href={resource.href} {...safeAnchorAttrs}>
@@ -463,7 +461,7 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<div className="widget-head" data-has="start">
+				<div className="widget-head" data-pos="start">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
 							<feather.Clipboard className="widget-name-start-icon" />
@@ -474,7 +472,7 @@ function AppSidebar2() {
 						</div>
 					</div>
 				</div>
-				<div className="widget-body" data-has="syntax-highlighting" {...scrollProps}>
+				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting
 							lang={exportAs === "svg" ? "html" : "tsx"}

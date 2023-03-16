@@ -23,7 +23,7 @@
 
 .widget-head
   padding: $sidebar-gap $sidebar-padding-x
-  &[data-has=start]
+  &[data-pos=start]
     padding-top: $sidebar-padding-y
   &:has(+ [data-scroll=true]) // Don't use :has (because of FF) but no choice
     isolation: isolate        // For box-shadow (see .checkboxes)
@@ -34,9 +34,9 @@
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
-  &[data-has=syntax-highlighting]
+  &[data-pos=syntax-highlighting]
     padding: 0
-  &[data-has=end]
+  &[data-pos=end]
     padding-bottom: $sidebar-padding-y
   padding-top: 0
   .sidebar-head &

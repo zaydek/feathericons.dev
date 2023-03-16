@@ -6,7 +6,7 @@
   display: flex
   align-items: center
   height: $button-height
-  background-color: $hover-color
+  background-color: $hover-active-color
   border-radius: 1e3px
   cursor: text // Interaction
   &:is(:hover, :focus-within)
@@ -16,7 +16,7 @@
 .search-bar-icon
   height: 16px
   width:  16px
-  color:  $tertiary-text-color
+  color:  $secondary-text-color
 
 .search-bar input[type=text]
   flex: 1             // Stretch x-axis
@@ -24,6 +24,6 @@
   +typography-sans
   color: $primary-text-color
   &::placeholder
-    color: $tertiary-text-color
+    color: $secondary-text-color
   &:focus-visible::placeholder
     opacity: 0
