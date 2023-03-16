@@ -1,33 +1,31 @@
-import { Dispatch, SetStateAction } from "react"
+import React from "react"
+
 import { Accessible } from "./accessible"
 
 // prettier-ignore
-export type AriaCheckboxProps = {
+export type AriaCheckboxProps = Accessible<JSX.IntrinsicElements["div"]> & {
 	checked:    boolean
-	setChecked: Dispatch<SetStateAction<boolean>>
-} & Accessible<JSX.IntrinsicElements["div"]>
+	setChecked: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 export function AriaCheckbox({ checked, setChecked, children, ...props }: AriaCheckboxProps) {
 	return (
 		<div
+			{...props}
 			onClick={e => {
-				e.preventDefault()
 				setChecked(curr => !curr)
-				// Preserve props events
+				// Preserve
 				props.onClick?.(e)
 			}}
 			onKeyDown={e => {
 				if (e.key === "ArrowRight") {
-					e.preventDefault()
 					setChecked(true)
 				} else if (e.key === "ArrowLeft") {
-					e.preventDefault()
 					setChecked(false)
 				} else if (e.key === " ") {
-					e.preventDefault()
 					e.currentTarget.click()
 				}
-				// Preserve props events
+				// Preserve
 				props.onKeyDown?.(e)
 			}}
 			// A11y
@@ -35,7 +33,6 @@ export function AriaCheckbox({ checked, setChecked, children, ...props }: AriaCh
 			aria-checked={checked}
 			tabIndex={0}
 			// /A11y
-			{...props}
 		>
 			{children}
 		</div>

@@ -2,19 +2,16 @@
 
 @use "../globals" as *
 
-$height:              24px
-$transition-duration: 75ms
+$radio-height:              24px
+$radio-transition-duration: 75ms
 
 input[type=radio]
   position: relative
-  height: $height
-  width: $height
+  height: $radio-height
+  width: $radio-height
   background-color: $form-color
   border-radius: 1e3px
   box-shadow: $inset-hairline-shadow, $realistic-shadow
-  cursor: pointer           // Interaction
-  -webkit-user-select: none // Interaction
-  user-select: none         // Interaction
   &::before
     content: ""        // Pseudo reset
     position: absolute // Pseudo reset
@@ -23,7 +20,7 @@ input[type=radio]
     border-radius: inherit
     transform: scale(0)
     opacity: 0
-    transition: transform $transition-duration cubic-bezier(0, 1, 0, 1.25), opacity $transition-duration cubic-bezier(0, 1, 0, 1.25)
+    transition: transform $radio-transition-duration cubic-bezier(0, 1, 0, 1.25), opacity $radio-transition-duration cubic-bezier(0, 1, 0, 1.25)
     @at-root
       input[type=radio]:checked::before
         transform: scale(1)
@@ -39,7 +36,7 @@ input[type=radio]
     border-radius: 1e3px
     transform: scale(0)
     opacity: 0
-    transition: transform $transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25), opacity $transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25)
+    transition: transform $radio-transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25), opacity $radio-transition-duration * 1.5 cubic-bezier(0, 1, 0, 1.25)
     @at-root
       input[type=radio]:checked::after
         transform: scale(1)

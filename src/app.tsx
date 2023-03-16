@@ -9,7 +9,15 @@ import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/ts
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
 import { AriaButton } from "@/aria"
-import { DEV_DebugCss, ExportAs, Main, MemoSyntaxHighlighting, Sidebar, SidebarOverlay, Slider } from "@/components"
+import {
+	DEV_DebugCss,
+	ExportAs,
+	Main,
+	MemoSyntaxHighlighting,
+	ProgressSlider,
+	Sidebar,
+	SidebarOverlay,
+} from "@/components"
 import { resources } from "@/data"
 import { anchorAttrs, DynamicIcon, IconComponent, iota, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
@@ -170,7 +178,7 @@ function AppSidebar1() {
 					</div>
 					<div>
 						<div className="checkboxes">
-							<label className="checkbox">
+							<label className="checkbox" tabIndex={0}>
 								<div className="widget-align-icon-frame">
 									<feather.Feather className="checkbox-icon" />
 								</div>
@@ -180,12 +188,14 @@ function AppSidebar1() {
 										type="checkbox"
 										checked={$feather}
 										onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
+										aria-label="Toggle Feather icons"
+										tabIndex={-1}
 									/>
 								</div>
 							</label>
 						</div>
 						<div className="checkboxes">
-							<label className="checkbox">
+							<label className="checkbox" tabIndex={0}>
 								<div className="widget-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
@@ -198,12 +208,14 @@ function AppSidebar1() {
 										type="checkbox"
 										checked={wkBrands}
 										onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
+										aria-label="Toggle social media icons"
+										tabIndex={-1}
 									/>
 								</div>
 							</label>
 						</div>
 						<div className="checkboxes">
-							<label className="checkbox">
+							<label className="checkbox" tabIndex={0}>
 								<div className="widget-align-icon-frame">
 									<DynamicIcon
 										className="checkbox-icon"
@@ -226,11 +238,13 @@ function AppSidebar1() {
 										type="checkbox"
 										checked={wkPayments}
 										onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
+										aria-label="Toggle card icons"
+										tabIndex={-1}
 									/>
 								</div>
 							</label>
 							<div className="checkboxes">
-								<label className="checkbox">
+								<label className="checkbox" tabIndex={0}>
 									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
@@ -250,12 +264,13 @@ function AppSidebar1() {
 													setWkPaymentsValue("normal")
 												})
 											}
+											tabIndex={-1}
 										/>
 									</div>
 								</label>
 							</div>
 							<div className="checkboxes">
-								<label className="checkbox">
+								<label className="checkbox" tabIndex={0}>
 									<div className="widget-align-icon-frame">
 										<DynamicIcon
 											className="checkbox-icon"
@@ -275,6 +290,7 @@ function AppSidebar1() {
 													setWkPaymentsValue("filled")
 												})
 											}
+											tabIndex={-1}
 										/>
 									</div>
 								</label>
@@ -302,7 +318,7 @@ function AppSidebar1() {
 				</div>
 				<div className="widget-body">
 					<div className="checkboxes">
-						<label className="checkbox">
+						<label className="checkbox" tabIndex={0}>
 							<div className="widget-align-icon-frame">
 								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
 							</div>
@@ -312,6 +328,8 @@ function AppSidebar1() {
 									type="checkbox"
 									checked={preferColor}
 									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
+									aria-label="Toggle colorize icons"
+									tabIndex={-1}
 								/>
 							</div>
 						</label>
@@ -424,8 +442,14 @@ function AppSidebar2() {
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
-						{/* prettier-ignore */}
-						<Slider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} aria-label="Slider for size" />
+						<ProgressSlider
+							value={size}
+							setValue={setSize}
+							min={SIZE_MIN}
+							max={SIZE_MAX}
+							step={SIZE_STEP}
+							aria-label="Slider for size"
+						/>
 					</div>
 				</div>
 				<hr />
@@ -443,8 +467,14 @@ function AppSidebar2() {
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
-						{/* prettier-ignore */}
-						<Slider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} aria-label="Slider for stroke-width" />
+						<ProgressSlider
+							value={strokeWidth}
+							setValue={setStrokeWidth}
+							min={STROKE_MIN}
+							max={STROKE_MAX}
+							step={STROKE_STEP}
+							aria-label="Slider for stroke-width"
+						/>
 					</div>
 				</div>
 				<hr />

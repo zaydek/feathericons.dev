@@ -36,19 +36,28 @@ hr
 
 ////////////////////////////////////////////////////////////////////////////////
 
-[role=slider]
+// <button>
+button
+  cursor: pointer
+  -webkit-user-select: none
+  user-select: none
+
+// <input type="checkbox">
+input[type=checkbox]
+  cursor: pointer
+  -webkit-user-select: none
+  user-select: none
+
+// <input type="radio">
+input[type=radio]
+  cursor: pointer
+  -webkit-user-select: none
+  user-select: none
+
+// <input type="range">
+input[type=range]
   cursor: grab
-  touch-action: pan-x // EXPERIMENTAL
   -webkit-user-select: none
   user-select: none
   &:hover:active
     cursor: grabbing
-
-// Yikes!
-.grabbing *
-  cursor: grabbing !important
-
-[role=button]
-  cursor: pointer
-  -webkit-user-select: none
-  user-select: none
