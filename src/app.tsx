@@ -605,39 +605,22 @@ function AppMain() {
 					  icons.map(([name, Icon], index) => (
 							<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />
 						))}
+				{/* {iota(96).map(index => (
+					<div key={index} className="sk-main-grid-item">
+						<div className="sk-main-grid-item-frame">
+							<div className="sk-main-grid-item-icon"></div>
+						</div>
+						<div className="sk-main-grid-item-type-container">
+							<div className="sk-main-grid-item-type"></div>
+						</div>
+					</div>
+				))} */}
 			</div>
 		</Main>
 	)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
-//// const [open, setOpen] = React.useState(false)
-//// const [value, setValue] = React.useState("foo")
-////
-//// return (
-//// 	<SelectProvider open={open} setOpen={setOpen} value={value} setValue={setValue}>
-//// 		<Select>
-//// 			<span>Hello, world! ({value})</span>
-//// 		</Select>
-//// 		<div
-//// 			style={{
-//// 				opacity: open ? 1 : 0,
-//// 				pointerEvents: open ? "auto" : "none",
-//// 			}}
-//// 		>
-//// 			<Option value="foo">
-//// 				<span>Hello</span>
-//// 			</Option>
-//// 			<Option value="bar">
-//// 				<span>Hello</span>
-//// 			</Option>
-//// 			<Option value="baz">
-//// 				<span>Hello</span>
-//// 			</Option>
-//// 		</div>
-//// 	</SelectProvider>
-//// )
 
 export function App() {
 	return (
