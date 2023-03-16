@@ -7,8 +7,8 @@ export const SIZE_MAX       = 32 // prettier-ignore
 export const SIZE_STEP      =  1 // prettier-ignore
 export const SIZE_DEFAULT   = 24 // prettier-ignore
 
-export const STROKE_MIN     =  1 // prettier-ignore
-export const STROKE_MAX     =  3 // prettier-ignore
+export const STROKE_MIN     =  0.5 // prettier-ignore
+export const STROKE_MAX     =  3.5 // prettier-ignore
 export const STROKE_STEP    =  0.125 // prettier-ignore
 export const STROKE_DEFAULT =  2 // prettier-ignore
 
