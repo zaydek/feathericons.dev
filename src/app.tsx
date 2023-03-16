@@ -528,7 +528,9 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 				<Icon className="main-grid-item-icon" />
 			</AriaButton>
 			<span className="main-grid-item-type">
-				<GridItemName name={name} />
+				<span className="main-grid-item-type-select-all">
+					<GridItemName name={name} />
+				</span>
 			</span>
 		</article>
 	)
