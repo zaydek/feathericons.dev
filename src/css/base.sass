@@ -4,8 +4,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// :focus
-////   outline: none
 :focus-visible:not(input[type=text])
   outline: revert
 
@@ -13,13 +11,14 @@
   +font-smoothing
   overflow-y: scroll // COMPAT/Windows
 
+// DEBUG
 :root, ::before, ::after
-  color: RED // DEBUG
+  color: RED
 
 ////////////////////////////////////////////////////////////////////////////////
 
-svg
-  overflow: visible
+//// svg
+////   overflow: visible
 
 hr
   border-top: $hairline-height solid $hairline-color
@@ -29,26 +28,22 @@ hr
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// :focus-visible
-////   outline: 2px solid red
-
-// TODO: <select>
-
-button
-  cursor: pointer
-  -webkit-user-select: none
-  user-select: none
-
 label
   cursor: pointer
   -webkit-user-select: none
   user-select: none
-
+button
+  cursor: pointer
+  -webkit-user-select: none
+  user-select: none
+select
+  cursor: pointer
+  -webkit-user-select: none
+  user-select: none
 input[type=checkbox]
   cursor: pointer
   -webkit-user-select: none
   user-select: none
-
 input[type=radio]
   cursor: pointer
   -webkit-user-select: none

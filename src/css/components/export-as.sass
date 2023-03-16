@@ -4,49 +4,42 @@
 
 $select-height: 32px
 
-label.export-as
-  display: inline-block // CSS reset
-.export-as
+.select
   position: relative
 
-.export-as select
+// <select>…</select>
+//
+.select select
   position: absolute
-  height: 100% // Inherit
-  width:  100% // Inherit
-  opacity: 0.01
-  //// cursor: pointer
-  //// &:hover + .export-as-button
-  ////   background-color: $slate-100
-  &:hover:active + .export-as-button
-    //// background-color: $slate-100
+  height: 100%       // Inherit
+  width:  100%       // Inherit
+  border-radius: 1e3px
+  color: transparent // 👻
 
-// TODO: Defer to <button>
-// TODO: pointer-events?
-.export-as-button
+// <select>…</select>
+// <button>…</button>
+//
+.select-button
   display: flex
   justify-content: center
   align-items: center
+  padding: 0 4px // Nudge
   height: $select-height
   border-radius: 1e3px
   box-shadow: $inset-hairline-shadow
-  //// pointer-events: none // Passthrough to <select>
 
-.export-as-button-type
+.select-button-type
   +typography-reduced-sans
   color: $primary-text-color
 
-.export-as-button-icon-frame
+.select-button-icon-frame
   display: flex
   justify-content: center
   align-items: center
   height: $select-height
   width:  $select-height
-  &:first-child
-    margin-left:  math.div($select-height, 8) // 🧐 // TODO: Change to padding
-  &:last-child
-    margin-right: math.div($select-height, 8) // 🧐 // TODO: Change to padding
 
-.export-as-button-icon
+.select-button-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $tertiary-text-color

@@ -34,7 +34,7 @@ export function ExportAs({
 	setValue: React.Dispatch<React.SetStateAction<ExportAsValue>>
 }) {
 	return (
-		<label className="export-as">
+		<label className="select">
 			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAsValue)}>
 				<optgroup label="HTML, Vue, Svelte">
 					<option value="svg">SVG</option>
@@ -56,13 +56,13 @@ export function ExportAs({
 					<option value="strict-tsx-rn">TypeScript React Native</option>
 				</optgroup> */}
 			</select>
-			<button className="export-as-button">
-				<div className="export-as-button-icon-frame">
-					<DynamicIcon className="export-as-button-icon" Icon={icons[value]} />
+			<button className="select-button" tabIndex={-1}>
+				<div className="select-button-icon-frame">
+					<DynamicIcon className="select-button-icon" Icon={icons[value]} />
 				</div>
-				<span className="export-as-button-type">{names[value]}</span>
-				<div className="export-as-button-icon-frame">
-					<feather.ChevronDown className="export-as-button-icon" />
+				<span className="select-button-type">{names[value]}</span>
+				<div className="select-button-icon-frame">
+					<feather.ChevronDown className="select-button-icon" />
 				</div>
 			</button>
 		</label>

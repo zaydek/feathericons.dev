@@ -167,11 +167,7 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<button
-							className="widget-align-icon-frame"
-							onClick={() => startTransition(resetIcons)}
-							aria-label="Reset icons"
-						>
+						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIcons)}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
@@ -187,7 +183,6 @@ function AppSidebar1() {
 										type="checkbox"
 										checked={$feather}
 										onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
-										aria-label="Toggle Feather icons"
 										tabIndex={-1}
 									/>
 								</div>
@@ -207,7 +202,6 @@ function AppSidebar1() {
 										type="checkbox"
 										checked={wkBrands}
 										onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
-										aria-label="Toggle social media icons"
 										tabIndex={-1}
 									/>
 								</div>
@@ -237,7 +231,6 @@ function AppSidebar1() {
 										type="checkbox"
 										checked={wkPayments}
 										onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
-										aria-label="Toggle card icons"
 										tabIndex={-1}
 									/>
 								</div>
@@ -306,11 +299,7 @@ function AppSidebar1() {
 							<feather.Settings className="widget-name-start-icon" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button
-							className="widget-align-icon-frame"
-							onClick={() => startTransition(resetIconPrefs)}
-							aria-label="Reset settings"
-						>
+						<button className="widget-align-icon-frame" onClick={() => startTransition(resetIconPrefs)}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
@@ -327,7 +316,6 @@ function AppSidebar1() {
 									type="checkbox"
 									checked={preferColor}
 									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
-									aria-label="Toggle colorize icons"
 									tabIndex={-1}
 								/>
 							</div>
@@ -433,8 +421,7 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Size</h6>
 						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
-						{/* prettier-ignore */}
-						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)} aria-label="Reset size">
+						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
@@ -442,7 +429,13 @@ function AppSidebar2() {
 				<div className="widget-body">
 					<div className="widget-align-frame">
 						{/* prettier-ignore */}
-						<ProgressSlider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} aria-label="Slider for size" />
+						<ProgressSlider
+							value={size}
+							setValue={setSize}
+							min={SIZE_MIN}
+							max={SIZE_MAX}
+							step={SIZE_STEP}
+						/>
 					</div>
 				</div>
 				<hr />
@@ -453,8 +446,7 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
 						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
-						{/* prettier-ignore */}
-						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)} aria-label="Reset stroke width">
+						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
@@ -462,7 +454,13 @@ function AppSidebar2() {
 				<div className="widget-body">
 					<div className="widget-align-frame">
 						{/* prettier-ignore */}
-						<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} aria-label="Slider for stroke-width" />
+						<ProgressSlider
+							value={strokeWidth}
+							setValue={setStrokeWidth}
+							min={STROKE_MIN}
+							max={STROKE_MAX}
+							step={STROKE_STEP}
+						/>
 					</div>
 				</div>
 				<hr />
@@ -538,7 +536,6 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 						}
 					}
 				}}
-				aria-label={`Select ${name}`}
 			>
 				<Icon className="main-grid-item-icon" />
 			</button>
