@@ -1,6 +1,6 @@
 import React from "react"
 
-import { canonicalize, IconComponent, useMount, useParam, useParamBoolean } from "@/lib"
+import { canonicalize, IconComponent, toKebabCase, useMount, useParam, useParamBoolean } from "@/lib"
 import { queryCache } from "./cache"
 
 export type WkPaymentsValue = "normal" | "filled"
@@ -51,7 +51,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 		if (canon === "") {
 			return _icons
 		} else {
-			return _icons?.filter(([name]) => canonicalize(name).includes(canon))
+			return _icons?.filter(([name]) => toKebabCase(name).toLowerCase().includes(canon))
 		}
 	}, [_icons, search])
 
