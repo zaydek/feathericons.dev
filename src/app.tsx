@@ -9,15 +9,7 @@ import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/ts
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
 import { AriaButton } from "@/aria"
-import {
-	DEV_DebugCss,
-	ExportAs,
-	Main,
-	MemoSyntaxHighlighting,
-	ProgressRange,
-	Sidebar,
-	SidebarOverlay,
-} from "@/components"
+import { DEV_DebugCss, ExportAs, Main, MemoSyntaxHighlighting, Sidebar, SidebarOverlay, Slider } from "@/components"
 import { resources } from "@/data"
 import { anchorAttrs, DynamicIcon, IconComponent, iota, isMac, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
@@ -374,6 +366,7 @@ function AppSidebar2() {
 			onceRef.current = true
 			return
 		}
+		if (document.visibilityState === "hidden") return // DEV
 		navigator.clipboard.writeText(readOnlyClipboard)
 	}, [readOnlyClipboard])
 
@@ -431,7 +424,8 @@ function AppSidebar2() {
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
-						<ProgressRange value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
+						{/* prettier-ignore */}
+						<Slider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} aria-label="Slider for size" />
 					</div>
 				</div>
 				<hr />
@@ -449,13 +443,8 @@ function AppSidebar2() {
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
-						<ProgressRange
-							value={strokeWidth}
-							setValue={setStrokeWidth}
-							min={STROKE_MIN}
-							max={STROKE_MAX}
-							step={STROKE_STEP}
-						/>
+						{/* prettier-ignore */}
+						<Slider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} aria-label="Slider for stroke-width" />
 					</div>
 				</div>
 				<hr />

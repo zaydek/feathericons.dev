@@ -1,72 +1,87 @@
-import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react"
-import { clamp } from "../lib/precision"
+import React from "react"
+
+import { clampValue, roundValue } from "@/lib/precision"
 import { Accessible } from "./accessible"
 
 // prettier-ignore
-export type AriaSliderProps = {
-	track:    HTMLDivElement | null
+export type AriaSliderProps = Accessible<JSX.IntrinsicElements["div"]> & {
 	thumb:    HTMLDivElement | null
+	track:    HTMLDivElement | null
+	value:    number
+	setValue: React.Dispatch<React.SetStateAction<number>>
 	min:      number
 	max:      number
 	step:     number
-	value:    number
-	setValue: Dispatch<SetStateAction<number>>
-} & Accessible<JSX.IntrinsicElements["div"]>
-
-// https://stackoverflow.com/a/21696585
-function someHidden(...args: HTMLElement[]) {
-	return args.some(arg => arg.offsetParent === null)
 }
 
-export function AriaSlider({ track, thumb, min, max, step, value, setValue, children, ...props }: AriaSliderProps) {
-	const pointerDownRef = useRef(false)
+//// // https://stackoverflow.com/a/21696585
+//// function oneOrMoreElementsVisuallyHidden(...args: HTMLElement[]) {
+//// 	return args.some(arg => arg.offsetParent === null)
+//// }
 
-	const progress = useMemo(() => {
+// https://stackoverflow.com/a/21696585
+function visuallyHidden(arg: HTMLElement) {
+	return arg.offsetParent === null
+}
+
+export function AriaSlider({
+	// prettier-ignore
+	thumb,
+	track,
+	value,
+	setValue,
+	min,
+	max,
+	step,
+	children,
+	...props
+}: AriaSliderProps) {
+	const sliderRef = React.useRef<HTMLDivElement>(null)
+
+	// TODO: Hmm, yeah pointerDown can be a ref
+	const pointerDownRef = React.useRef(false)
+
+	const progress = React.useMemo(() => {
 		return (value - min) / (max - min)
 	}, [max, min, value])
 
-	const translateX = useMemo(() => {
-		if (track === null || thumb === null) { return null } // prettier-ignore
-		if (someHidden(track, thumb)) { return null } // prettier-ignore
+	const x = React.useMemo(() => {
+		if (thumb === null || visuallyHidden(thumb)) return null
+		if (track === null || visuallyHidden(track)) return null
 		return progress * (track.getBoundingClientRect().width - thumb.getBoundingClientRect().width)
 	}, [progress, thumb, track])
 
-	useEffect(() => {
-		if (track === null || thumb === null) { return } // prettier-ignore
+	React.useEffect(() => {
+		if (thumb === null || visuallyHidden(thumb)) return
+		if (track === null || visuallyHidden(track)) return
 		function handlePointerDown(e: PointerEvent) {
-			if (!(e.button === 0 && e.composedPath().includes(track!))) { return } // prettier-ignore
-			pointerDownRef.current = true
-			// FIXME: Temporarily disable; this breaks Next.js navigation when using
-			// mouse side buttons
+			if (!(e.button === 0 && e.composedPath().includes(sliderRef.current!))) return
 			//// e.preventDefault()
-			const trackClient = track!.getBoundingClientRect()
+			pointerDownRef.current = true
 			const thumbClient = thumb!.getBoundingClientRect()
-			const range = clamp(
-				(e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width),
-				{ min: 0, max: 1 },
-			)
-			const value = range * (max - min) + min
-			setValue(value - (value % step))
+			const trackClient = track!.getBoundingClientRect()
+			const v1 = (e.clientX - trackClient.x - thumbClient.width / 4) / (trackClient.width - thumbClient.width)
+			const v2 = clampValue(v1, { min: 0, max: 1 })
+			const v3 = roundValue(v2, { precision: 2 })
+			const v4 = v3 * (max - min) + min
+			const v5 = v4 - (v4 % step)
+			setValue(v5)
 		}
 		function handlePointerMove(e: PointerEvent) {
-			if (!pointerDownRef.current) { return } // prettier-ignore
-			// FIXME: Temporarily disable; this breaks Next.js navigation when using
-			// mouse side buttons
+			if (!pointerDownRef.current) return
 			//// e.preventDefault()
-			const trackClient = track!.getBoundingClientRect()
 			const thumbClient = thumb!.getBoundingClientRect()
-			const range = clamp(
-				(e.clientX - trackClient.x - thumbClient.width / 2) / (trackClient.width - thumbClient.width),
-				{ min: 0, max: 1 },
-			)
-			const value = range * (max - min) + min
-			setValue(value - (value % step))
+			const trackClient = track!.getBoundingClientRect()
+			const v1 = (e.clientX - trackClient.x - thumbClient.width / 4) / (trackClient.width - thumbClient.width)
+			const v2 = clampValue(v1, { min: 0, max: 1 })
+			const v3 = roundValue(v2, { precision: 2 })
+			const v4 = v3 * (max - min) + min
+			const v5 = v4 - (v4 % step)
+			setValue(v5)
 		}
 		function handlePointerUp(e: PointerEvent) {
-			pointerDownRef.current = false
-			// FIXME: Temporarily disable; this breaks Next.js navigation when using
-			// mouse side buttons
 			//// e.preventDefault()
+			pointerDownRef.current = false
 		}
 		document.addEventListener("pointerdown", handlePointerDown, false)
 		document.addEventListener("pointermove", handlePointerMove, false)
@@ -78,27 +93,31 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 		}
 	}, [max, min, setValue, step, thumb, track])
 
-	useEffect(() => {
-		if (thumb === null || translateX === null) { return } // prettier-ignore
-		thumb.style.transform = `translateX(${translateX}px)`
-	}, [thumb, translateX])
+	React.useEffect(() => {
+		if (thumb === null || visuallyHidden(thumb)) return
+		if (track === null || visuallyHidden(track)) return
+		if (x === null) return
+		thumb.style.transform = `translateX(${x}px)`
+	}, [thumb, track, x])
 
 	return (
 		<div
-			style={{ "--progress": progress } as any}
+			ref={sliderRef}
+			{...props}
+			style={{ "--progress": `${progress * 100}%` } as React.CSSProperties}
 			onKeyDown={e => {
 				if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
 					e.preventDefault()
 					const nextValue = value - step
-					const clampedNextValue = clamp(nextValue, { min, max })
+					const clampedNextValue = clampValue(nextValue, { min, max })
 					setValue(clampedNextValue)
 				} else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
 					e.preventDefault()
 					const nextValue = value + step
-					const clampedNextValue = clamp(nextValue, { min, max })
+					const clampedNextValue = clampValue(nextValue, { min, max })
 					setValue(clampedNextValue)
 				}
-				// Preserve props events
+				// Preserve
 				props.onKeyDown?.(e)
 			}}
 			// A11y
@@ -108,7 +127,6 @@ export function AriaSlider({ track, thumb, min, max, step, value, setValue, chil
 			aria-valuenow={value}
 			tabIndex={0}
 			// /A11y
-			{...props}
 		>
 			{children}
 		</div>

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { getCssVarAsNumber, round } from "@/lib"
+import { getCssVarAsNumber, roundValue } from "@/lib"
 import { LayoutContext, SidebarState } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -92,14 +92,14 @@ export function Sidebar({
 			setPointerDown(true)
 			//// const boundingBox = dragAreaRef.current!.getBoundingClientRect()
 			//// setStartClientX(boundingBox.x + boundingBox.width / 2)
-			setStartClientX(round(e.clientX, { precision: 2 }))
-			setClientX(round(e.clientX, { precision: 2 }))
+			setStartClientX(roundValue(e.clientX, { precision: 2 }))
+			setClientX(roundValue(e.clientX, { precision: 2 }))
 		}
 		function handlePointerMove(e: PointerEvent) {
 			// Guards
 			if (!pointerDown) return
 			// Starts here
-			setClientX(round(e.clientX, { precision: 2 }))
+			setClientX(roundValue(e.clientX, { precision: 2 }))
 		}
 		function handlePointerUp(e: PointerEvent) {
 			// Guards

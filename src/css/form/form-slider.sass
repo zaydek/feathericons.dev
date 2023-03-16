@@ -1,0 +1,26 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+$slider-track-height: 6px
+$slider-thumb-height: 32px
+
+.form-slider
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: $slider-thumb-height
+
+.form-slider-track
+  display: flex
+  align-items: center
+  height: $slider-track-height
+  background-image: linear-gradient(to right, $brand-color var(--progress, 50%), $hairline-color var(--progress, 50%))
+  border-radius: 1e3px
+
+.form-slider-thumb
+  height: $slider-thumb-height
+  width:  $slider-thumb-height
+  background-color: $form-color
+  border-radius: 1e3px
+  box-shadow: $hairline-shadow, $realistic-shadow

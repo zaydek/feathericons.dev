@@ -3,15 +3,7 @@ import { Accessible } from "./accessible"
 
 export type AriaButtonProps = Accessible<JSX.IntrinsicElements["div"]> & { disabled?: boolean }
 
-export function AriaButton({
-	// prettier-ignore
-	disabled = false,
-	onClick,
-	onKeyDown,
-	onKeyUp,
-	children,
-	...props
-}: AriaButtonProps) {
+export function AriaButton({ disabled = false, children, ...props }: AriaButtonProps) {
 	const [keyboardActive, setKeyboardActive] = React.useState(false)
 
 	return (
@@ -19,7 +11,8 @@ export function AriaButton({
 			{...props}
 			onClick={e => {
 				if (disabled) return
-				onClick?.(e)
+				// Preserve
+				props.onClick?.(e)
 			}}
 			onKeyDown={e => {
 				if (disabled) return
@@ -28,7 +21,8 @@ export function AriaButton({
 					e.currentTarget.click()
 					setKeyboardActive(true)
 				}
-				onKeyDown?.(e)
+				// Preserve
+				props.onKeyDown?.(e)
 			}}
 			onKeyUp={e => {
 				if (disabled) return
@@ -36,7 +30,8 @@ export function AriaButton({
 					e.preventDefault() // Prevent scrolling
 					setKeyboardActive(false)
 				}
-				onKeyUp?.(e)
+				// Preserve
+				props.onKeyUp?.(e)
 			}}
 			// A11y
 			role="button"
