@@ -22,7 +22,6 @@ import { resources } from "@/data"
 import { DynamicIcon, IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
-	ProgressBarContext,
 	RangeContext,
 	READONLY_CLIPBOARD_DEFAULT,
 	SearchContext,
@@ -40,10 +39,10 @@ import { useScrollProps } from "./use-scroll-props"
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutCtrlAToSelectAll() {
-	const { icons } = React.useContext(SearchContext)!
+	const { searchResults } = React.useContext(SearchContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (icons === null) return
+		if (searchResults === null) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.target instanceof Element && e.target.tagName === "INPUT") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
@@ -55,7 +54,7 @@ function useShortcutCtrlAToSelectAll() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [icons, setSelectedNamesEnd, setSelectedNamesStart])
+	}, [searchResults, setSelectedNamesEnd, setSelectedNamesStart])
 	return void 0
 }
 
@@ -94,15 +93,15 @@ function useSideEffectClearSelectionOnChange() {
 }
 
 function useSideEffectSelectNamesFromIndexes() {
-	const { icons } = React.useContext(SearchContext)!
+	const { searchResults } = React.useContext(SearchContext)!
 	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (icons === null) return
+		if (searchResults === null) return
 		if (selectedNamesStart === null || selectedNamesEnd === null) return
 		const min = Math.min(selectedNamesStart, selectedNamesEnd)
 		const max = Math.max(selectedNamesStart, selectedNamesEnd)
-		addToSelectedNames(...icons.slice(min, max + 1).map(([name]) => name))
-	}, [addToSelectedNames, selectedNamesEnd, icons, selectedNamesStart])
+		addToSelectedNames(...searchResults.slice(min, max + 1).map(([name]) => name))
+	}, [addToSelectedNames, searchResults, selectedNamesEnd, selectedNamesStart])
 	return void 0
 }
 
@@ -118,8 +117,8 @@ function useSideEffectSetCssVars() {
 }
 
 function useSideEffectVisibleDocumentTitle() {
-	const { icons } = React.useContext(SearchContext)!
-	const count = (icons ?? []).length
+	const { searchResults } = React.useContext(SearchContext)!
+	const count = (searchResults ?? []).length
 	// prettier-ignore
 	useVisibleDocumentTitle([
 		`${count} icon${count === 1 ? "" : "s"}`,
@@ -635,16 +634,17 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
+	//// const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
+	const { searchResults, feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
 
-	const { setStarted } = React.useContext(ProgressBarContext)!
-	React.useEffect(() => {
-		if (iconsAreCached) return
-		setStarted(true)
-		const d = window.setTimeout(() => setStarted(false), 100)
-		return () => window.clearTimeout(d)
-	}, [iconsAreCached, setStarted])
+	//// const { setStarted } = React.useContext(ProgressBarContext)!
+	//// React.useEffect(() => {
+	//// 	if (iconsAreCached) return
+	//// 	setStarted(true)
+	//// 	const d = window.setTimeout(() => setStarted(false), 100)
+	//// 	return () => window.clearTimeout(d)
+	//// }, [iconsAreCached, setStarted])
 
 	// TODO: Extract to a named hook
 	const onceRef = React.useRef(false)
@@ -674,7 +674,7 @@ function AppMain() {
 			}}
 		>
 			<div className="main-grid">
-				{icons === null
+				{searchResults === null
 					? iota(96).map(index => (
 							<div key={index} className="sk-main-grid-item">
 								<div className="sk-main-grid-item-frame">
@@ -686,7 +686,7 @@ function AppMain() {
 							</div>
 					  ))
 					: // prettier-ignore
-					  icons.map(([name, Icon], index) => (
+					  searchResults.map(([name, Icon], index) => (
 							<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />
 						))}
 				{/* {iota(96).map(index => (

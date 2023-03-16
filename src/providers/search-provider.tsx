@@ -16,6 +16,9 @@ const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
 export const SearchContext = React.createContext<{
   search:             string
   setSearch:          React.Dispatch<React.SetStateAction<string>>
+	//// iconsAreCached:     boolean
+  //// icons:              ([string, IconComponent])[] | null
+	searchResults:      ([string, IconComponent])[] | null
   feather:            boolean
   setFeather:         React.Dispatch<React.SetStateAction<boolean>>
   wkBrands:           boolean
@@ -24,11 +27,9 @@ export const SearchContext = React.createContext<{
   setWkPayments:      React.Dispatch<React.SetStateAction<boolean>>
   wkPaymentsValue:    WkPaymentsValue
   setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
+  resetIcons:         () => void
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
-	iconsAreCached:     boolean
-  icons:              ([string, IconComponent])[] | null
-  resetIcons:         () => void
   resetIconPrefs:     () => void
 } | null>(null)
 
@@ -39,6 +40,22 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 		parser: value => value,
 		serializer: canonicalize,
 	})
+
+	//// // TODO: Move up? To search?
+	//// const [iconsAreCached, setCached] = React.useState(false)
+	const [_icons, _setIcons] = React.useState<[string, IconComponent][] | null>(null)
+
+	const searchResults = React.useMemo(() => {
+		if (_icons === null) return null
+		if (search === "") {
+			return _icons
+		} else {
+			// TODO
+			return _icons?.filter(([name]) => name.toLowerCase().includes(search.toLowerCase()))
+		}
+	}, [_icons, search])
+
+	//////////////////////////////////////////////////////////////////////////////
 
 	const [feather, setFeather] = useParamBoolean({ key: "feather", initialValue: FEATHER_DEFAULT })
 	const [wkBrands, setWkBrands] = useParamBoolean({ key: "brands", initialValue: WK_BRANDS_DEFAULT })
@@ -57,11 +74,17 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 		},
 	})
 
+	const resetIcons = React.useCallback(() => {
+		setFeather(FEATHER_DEFAULT)
+		setWkBrands(WK_BRANDS_DEFAULT)
+		setWkPayments(WK_PAYMENTS_DEFAULT)
+		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
+	}, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
+
+	//////////////////////////////////////////////////////////////////////////////
+
 	const [preferColor, setPreferColor] = useParamBoolean({ key: "prefer-color", initialValue: PREFER_COLOR_DEFAULT })
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
-
-	const [iconsAreCached, setCached] = React.useState(false)
-	const [icons, setIcons] = React.useState<[string, IconComponent][] | null>(null)
 
 	//// const $$search = useMemo(() => {
 	//// 	return search.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
@@ -94,14 +117,6 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	//// 		}
 	//// 	}
 	//// 	return { ...refA, ...refB }
-	//// }, [$$search, searchResultsFallback])
-
-	const resetIcons = React.useCallback(() => {
-		setFeather(FEATHER_DEFAULT)
-		setWkBrands(WK_BRANDS_DEFAULT)
-		setWkPayments(WK_PAYMENTS_DEFAULT)
-		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
-	}, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
 
 	const resetIconPrefs = React.useCallback(() => {
 		setPreferColor(PREFER_COLOR_DEFAULT)
@@ -117,15 +132,16 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 
 	React.useEffect(() => {
 		async function fn() {
-			const [cached, icons] = await queryCache({
+			//// const [cached, icons] = await queryCache({
+			const [, icons] = await queryCache({
 				feather,
 				wkBrands,
 				wkPayments,
 				wkPaymentsValue,
 				monochrome: preferColor,
 			})
-			setCached(cached)
-			setIcons(icons)
+			//// setCached(cached)
+			_setIcons(icons)
 		}
 		fn()
 	}, [feather, preferColor, wkBrands, wkPayments, wkPaymentsValue])
@@ -133,8 +149,12 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	return (
 		<SearchContext.Provider
 			value={{
+				// Search
 				search,
 				setSearch,
+				searchResults,
+
+				// Icons
 				feather,
 				setFeather,
 				wkBrands,
@@ -143,11 +163,11 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 				setWkPayments,
 				wkPaymentsValue,
 				setWkPaymentsValue,
+				resetIcons,
+
+				// Preferences
 				preferColor,
 				setPreferColor,
-				iconsAreCached,
-				icons,
-				resetIcons,
 				resetIconPrefs,
 			}}
 		>
