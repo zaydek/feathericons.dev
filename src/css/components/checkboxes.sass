@@ -19,17 +19,17 @@
 .checkbox-icon:not([data-type])
   height: $button-icon-height
   width:  $button-icon-height
-  color:  $primary-text-color
+  color:  $text-100-color
 .checkbox-icon[data-type=card]
   height: $button-icon-height
   max-width: $button-icon-height * 1.375
-  color:  $primary-text-color
+  color:  $text-100-color
 .checkbox-icon[data-type=chroma]
   height: $button-icon-height
   width:  $button-icon-height
-  color:  $primary-text-color
+  color:  $text-100-color
   &[data-prefer-color=false]
-    background-color: $primary-text-color
+    background-color: $text-100-color
     // WebKit
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
     -webkit-mask-size: cover
@@ -46,4 +46,4 @@
 .checkbox-type
   flex: 1
   +typography-sans
-  color: $primary-text-color
+  color: $text-100-color

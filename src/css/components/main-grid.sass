@@ -35,7 +35,7 @@ $main-grid-item-aspect-ratio: 1.375
 .sk-main-grid-item-icon
   height: 24px
   width:  24px
-  background-color: $quaternary-text-color
+  background-color: $text-400-color
   border-radius: 1e3px
   transform: scale(calc(var(--size) / 24))
   stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
@@ -50,7 +50,7 @@ $main-grid-item-aspect-ratio: 1.375
   margin-top: -1 * math.div(32px - 6px, 2)
   height: 6px
   width:  8px * 6
-  background-color: $quaternary-text-color
+  background-color: $text-400-color
   border-radius: 1e3px
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@ $main-grid-item-aspect-ratio: 1.375
   max-height: 24px * math.div(56, 32)
   min-width:  24px
   max-width:  24px * math.div(56, 32)
-  color: $primary-text-color
+  color: $text-100-color
   transform: scale(calc(var(--size) / 24))
   stroke-width: var(--stroke-width) // stylelint-disable-line order/properties-order
 
@@ -96,7 +96,7 @@ $main-grid-item-aspect-ratio: 1.375
   height: 32px
   +typography-reduced-sans
   text-align: center
-  color: $secondary-text-color
+  color: $text-200-color
   & > span
     -webkit-user-select: all   // Interaction
     user-select: all           // Interaction
