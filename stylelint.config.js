@@ -73,6 +73,7 @@ const order = [
 	"transition",
 	"cursor",
 	"pointer-events",
+	"touch-action",
 	"-webkit-user-select",
 	"user-select",
 ]
