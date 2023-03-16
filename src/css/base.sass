@@ -21,13 +21,6 @@
 svg
   overflow: visible
 
-// TODO: DEPRECATE
-select,
-button
-  cursor: pointer           // Interaction
-  -webkit-user-select: none // Interaction
-  user-select: none         // Interaction
-
 hr
   border-top: $hairline-height solid $hairline-color
   &[data-collapse=true]
@@ -36,25 +29,28 @@ hr
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// <button>
+// TODO: <select>
+
 button
   cursor: pointer
   -webkit-user-select: none
   user-select: none
 
-// <input type="checkbox">
+label
+  cursor: pointer
+  -webkit-user-select: none
+  user-select: none
+
 input[type=checkbox]
   cursor: pointer
   -webkit-user-select: none
   user-select: none
 
-// <input type="radio">
 input[type=radio]
   cursor: pointer
   -webkit-user-select: none
   user-select: none
 
-// <input type="range">
 input[type=range]
   cursor: grab
   -webkit-user-select: none
