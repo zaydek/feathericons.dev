@@ -4,7 +4,7 @@ import { getKeys, toKebabCase, toTitleCase, useParam } from "@/lib"
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
 
 // prettier-ignore
-export type ExportAsValue =
+export type FormatValue =
 	| "svg"
 	| "jsx" // TODO
 	| "tsx" // TODO
@@ -31,21 +31,21 @@ export const READONLY_CLIPBOARD_DEFAULT = `
 
 // prettier-ignore
 export const ClipboardContext = React.createContext<{
-	exportAs:                ExportAsValue
-	setExportAs:             React.Dispatch<React.SetStateAction<ExportAsValue>>
-	selectedNames:           Set<string>
-	selectedNamesStart:      number | null
-	setSelectedNamesStart:   React.Dispatch<React.SetStateAction<number | null>>
-	selectedNamesEnd:        number | null
-	setSelectedNamesEnd:     React.Dispatch<React.SetStateAction<number | null>>
-	addToSelectedNames:      (...names: string[]) => void
-	removeFromSelectedNames: (...names: string[]) => void
-	clearSelectedNames:      () => void
-	readOnlyClipboard:       string
+	format:            FormatValue
+	setFormatAs:       React.Dispatch<React.SetStateAction<FormatValue>>
+	names:             Set<string>
+	namesStart:        number | null
+	setNamesStart:     React.Dispatch<React.SetStateAction<number | null>>
+	namesEnd:          number | null
+	setNamesEnd:       React.Dispatch<React.SetStateAction<number | null>>
+	addNames:          (...names: string[]) => void
+	removeNames:       (...names: string[]) => void
+	removeAllNames:    () => void
+	readOnlyClipboard: string
 } | null>(null)
 
 export function ClipboardProvider({ children }: { children: React.ReactNode }) {
-	const [exportAs, setExportAs] = useParam<ExportAsValue>({
+	const [format, setFormatAs] = useParam<FormatValue>({
 		key: "export-as",
 		initialValue: "svg",
 		parser: value => {
@@ -61,12 +61,12 @@ export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 		},
 	})
 
-	const [selectedNames, _setNames] = React.useState(() => new Set<string>())
+	const [names, _setNames] = React.useState(() => new Set<string>())
 
-	const [selectedNamesStart, setSelectedNamesStart] = React.useState<number | null>(null)
-	const [selectedNamesEnd, setSelectedNamesEnd] = React.useState<number | null>(null)
+	const [namesStart, setNamesStart] = React.useState<number | null>(null)
+	const [namesEnd, setNamesEnd] = React.useState<number | null>(null)
 
-	const addToSelectedNames = React.useCallback((...names: string[]) => {
+	const addNames = React.useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -76,7 +76,7 @@ export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 		})
 	}, [])
 
-	const removeFromSelectedNames = React.useCallback((...names: string[]) => {
+	const removeNames = React.useCallback((...names: string[]) => {
 		_setNames(prev => {
 			const next = new Set(prev)
 			for (const name of names) {
@@ -86,9 +86,9 @@ export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 		})
 	}, [])
 
-	const clearSelectedNames = React.useCallback(() => {
-		setSelectedNamesStart(null)
-		setSelectedNamesEnd(null)
+	const removeAllNames = React.useCallback(() => {
+		setNamesStart(null)
+		setNamesEnd(null)
 		_setNames(new Set<string>())
 	}, [])
 
@@ -96,64 +96,64 @@ export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 	const [readOnlyClipboard, _setReadOnlyClipboard] = React.useState("")
 
 	React.useEffect(() => {
-		if (selectedNames.size === 0) {
+		if (names.size === 0) {
 			_setReadOnlyClipboard("")
 			return
 		}
 		let readOnlyClipboard = ""
-		const [keys, hasMore] = getKeys(selectedNames, { limit: 10 })
+		const [keys, hasMore] = getKeys(names, { limit: 10 })
 		for (const [index, name] of keys.entries()) {
 			if (index > 0) {
 				readOnlyClipboard += "\n\n"
 			}
 			const search = toKebabCase(name).toLowerCase()
 			const svg = document.getElementById(name)!.querySelector("svg")!
-			if (exportAs === "svg") {
+			if (format === "svg") {
 				readOnlyClipboard += transformSvg(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
 					banner: `<!-- https://feathericons.dev/?search=${search} -->`,
 				})
-			} else if (exportAs === "jsx") {
+			} else if (format === "jsx") {
 				readOnlyClipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
 					banner: `// https://feathericons.dev/?search=${search}&export-as=jsx`,
 				})
-			} else if (exportAs === "tsx") {
+			} else if (format === "tsx") {
 				if (index === 0) readOnlyClipboard += 'import { JSX } from "solid-js";\n\n'
 				readOnlyClipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
 					banner: `// https://feathericons.dev/?search=${search}&export-as=tsx`,
 				})
-			} else if (exportAs === "strict-jsx") {
+			} else if (format === "strict-jsx") {
 				readOnlyClipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
 					banner: `// https://feathericons.dev/?search=${search}&export-as=strict-jsx`,
 				})
-			} else if (exportAs === "strict-tsx") {
+			} else if (format === "strict-tsx") {
 				readOnlyClipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
 					banner: `// https://feathericons.dev/?search=${search}&export-as=strict-tsx`,
 				})
 			}
 		}
 		if (hasMore) {
-			if (exportAs === "svg") {
+			if (format === "svg") {
 				readOnlyClipboard += `\n\n<!-- ... -->`
 			} else {
 				readOnlyClipboard += `\n\n// ...`
 			}
 		}
 		_setReadOnlyClipboard(readOnlyClipboard)
-	}, [exportAs, selectedNames])
+	}, [format, names])
 
 	return (
 		<ClipboardContext.Provider
 			value={{
-				exportAs,
-				setExportAs,
-				selectedNames,
-				selectedNamesStart,
-				setSelectedNamesStart,
-				selectedNamesEnd,
-				setSelectedNamesEnd,
-				addToSelectedNames,
-				removeFromSelectedNames,
-				clearSelectedNames,
+				format,
+				setFormatAs,
+				names,
+				namesStart,
+				setNamesStart,
+				namesEnd,
+				setNamesEnd,
+				addNames,
+				removeNames,
+				removeAllNames,
 				readOnlyClipboard,
 			}}
 		>

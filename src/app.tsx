@@ -40,7 +40,7 @@ import { useScrollProps } from "./use-scroll-props"
 
 function useShortcutCtrlAToSelectAll() {
 	const { searchResults } = React.useContext(SearchContext)!
-	const { setSelectedNamesStart, setSelectedNamesEnd } = React.useContext(ClipboardContext)!
+	const { setNamesStart, setNamesEnd } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		if (searchResults === null) return
 		function handleKeyDown(e: KeyboardEvent) {
@@ -48,25 +48,25 @@ function useShortcutCtrlAToSelectAll() {
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				// Call e.preventDefault() to prevent the browser from selecting all text
 				e.preventDefault()
-				setSelectedNamesStart(0)
-				setSelectedNamesEnd(Number.MAX_SAFE_INTEGER)
+				setNamesStart(0)
+				setNamesEnd(Number.MAX_SAFE_INTEGER)
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [searchResults, setSelectedNamesEnd, setSelectedNamesStart])
+	}, [searchResults, setNamesEnd, setNamesStart])
 	return void 0
 }
 
 function useShortcutEscToClearAll() {
-	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
+	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			//// if (document.activeElement?.tagName !== "BODY") return
 			if (e.key === "Escape") {
-				clearSelectedNames()
-				setSelectedNamesStart(null)
-				setSelectedNamesEnd(null)
+				removeAllNames()
+				setNamesStart(null)
+				setNamesEnd(null)
 				if (document.activeElement instanceof HTMLElement) {
 					document.activeElement.blur()
 				}
@@ -74,34 +74,34 @@ function useShortcutEscToClearAll() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [clearSelectedNames, setSelectedNamesEnd, setSelectedNamesStart])
+	}, [removeAllNames, setNamesEnd, setNamesStart])
 	return void 0
 }
 
 function useSideEffectClearSelectionOnChange() {
 	const { feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
-	const { clearSelectedNames } = React.useContext(ClipboardContext)!
+	const { removeAllNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
 	React.useEffect(() => {
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
-		clearSelectedNames()
-	}, [clearSelectedNames, feather, wkBrands, wkPayments])
+		removeAllNames()
+	}, [removeAllNames, feather, wkBrands, wkPayments])
 	return void 0
 }
 
 function useSideEffectSelectNamesFromIndexes() {
 	const { searchResults } = React.useContext(SearchContext)!
-	const { selectedNamesStart, selectedNamesEnd, addToSelectedNames } = React.useContext(ClipboardContext)!
+	const { namesStart, namesEnd, addNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		if (searchResults === null) return
-		if (selectedNamesStart === null || selectedNamesEnd === null) return
-		const min = Math.min(selectedNamesStart, selectedNamesEnd)
-		const max = Math.max(selectedNamesStart, selectedNamesEnd)
-		addToSelectedNames(...searchResults.slice(min, max + 1).map(([name]) => name))
-	}, [addToSelectedNames, searchResults, selectedNamesEnd, selectedNamesStart])
+		if (namesStart === null || namesEnd === null) return
+		const min = Math.min(namesStart, namesEnd)
+		const max = Math.max(namesStart, namesEnd)
+		addNames(...searchResults.slice(min, max + 1).map(([name]) => name))
+	}, [addNames, searchResults, namesEnd, namesStart])
 	return void 0
 }
 
@@ -443,7 +443,7 @@ function AppSidebar2() {
 	const scrollProps = useScrollProps()
 
 	const { size, setSize, strokeWidth, setStrokeWidth } = React.useContext(RangeContext)!
-	const { exportAs, setExportAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
+	const { format, setFormatAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
 
 	useSideEffectSetCssVars()
 
@@ -467,14 +467,14 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Clipboard</h6>
 						<div className="widget-align-frame">
-							<Select value={exportAs} setValue={setExportAs} />
+							<Select value={format} setValue={setFormatAs} />
 						</div>
 					</div>
 				</div>
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting
-							lang={exportAs === "svg" ? "html" : "tsx"}
+							lang={format === "svg" ? "html" : "tsx"}
 							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
 						/>
 					</div>
@@ -555,9 +555,9 @@ function AppSidebar2() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function GridItemName({ name }: { name: string }) {
-	const { exportAs } = React.useContext(ClipboardContext)!
+	const { format } = React.useContext(ClipboardContext)!
 
-	if (exportAs === "svg") {
+	if (format === "svg") {
 		return <>{toKebabCase(name).toLowerCase()}</>
 	} else {
 		const parts = name.split(/(?=[A-Z])/)
@@ -575,57 +575,40 @@ function GridItemName({ name }: { name: string }) {
 }
 
 function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
-	const {
-		selectedNames,
-		selectedNamesStart,
-		setSelectedNamesStart,
-		setSelectedNamesEnd,
-		addToSelectedNames,
-		removeFromSelectedNames,
-		clearSelectedNames,
-	} = React.useContext(ClipboardContext)!
+	const { names, namesStart, setNamesStart, setNamesEnd, addNames, removeNames, removeAllNames } =
+		React.useContext(ClipboardContext)!
 
 	const handleClick = React.useCallback(
 		// Use HTMLElement because of <figure> and <span>
 		(e: React.MouseEvent<HTMLElement>) => {
 			e.stopPropagation() // Call e.stopPropagation() because of <main>
 			if (e.shiftKey) {
-				if (selectedNamesStart === null) {
-					setSelectedNamesStart(index)
-					setSelectedNamesEnd(index)
+				if (namesStart === null) {
+					setNamesStart(index)
+					setNamesEnd(index)
 				} else {
-					setSelectedNamesEnd(index)
+					setNamesEnd(index)
 				}
 			} else {
 				if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-					if (selectedNames.has(name)) {
-						removeFromSelectedNames(name)
+					if (names.has(name)) {
+						removeNames(name)
 					} else {
-						addToSelectedNames(name)
+						addNames(name)
 					}
 				} else {
-					clearSelectedNames()
-					addToSelectedNames(name)
+					removeAllNames()
+					addNames(name)
 				}
-				setSelectedNamesStart(index)
-				setSelectedNamesEnd(null)
+				setNamesStart(index)
+				setNamesEnd(null)
 			}
 		},
-		[
-			addToSelectedNames,
-			clearSelectedNames,
-			index,
-			name,
-			removeFromSelectedNames,
-			selectedNames,
-			selectedNamesStart,
-			setSelectedNamesEnd,
-			setSelectedNamesStart,
-		],
+		[addNames, removeAllNames, index, name, removeNames, names, namesStart, setNamesEnd, setNamesStart],
 	)
 
 	return (
-		<article id={name} className="main-grid-item" data-selected={selectedNames.has(name)}>
+		<article id={name} className="main-grid-item" data-selected={names.has(name)}>
 			<button
 				className="main-grid-item-icon-frame"
 				onClick={handleClick}
@@ -662,7 +645,7 @@ const MemoMainGridItem = React.memo(MainGridItem)
 function AppMain() {
 	//// const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
 	const { searchResults, feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
-	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
+	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
 
 	//// const { setStarted } = React.useContext(ProgressBarContext)!
 	//// React.useEffect(() => {
@@ -679,8 +662,8 @@ function AppMain() {
 			onceRef.current = true
 			return
 		}
-		clearSelectedNames()
-	}, [clearSelectedNames, feather, wkBrands, wkPayments])
+		removeAllNames()
+	}, [removeAllNames, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlAToSelectAll()
 	useShortcutEscToClearAll()
@@ -694,9 +677,9 @@ function AppMain() {
 			onClick={e => {
 				//// if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item-icon-frame") === null) {
 				//// if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item-icon-frame") === null) {
-				clearSelectedNames()
-				setSelectedNamesStart(null)
-				setSelectedNamesEnd(null)
+				removeAllNames()
+				setNamesStart(null)
+				setNamesEnd(null)
 				//// }
 			}}
 		>

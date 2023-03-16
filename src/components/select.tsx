@@ -4,9 +4,9 @@ import * as feather from "@icons/feather/tsx"
 
 import { Reactjs, Solidjs, Svg } from "@/components/icons"
 import { DynamicIcon, IconComponent } from "@/lib"
-import { ExportAsValue } from "@/providers"
+import { FormatValue } from "@/providers"
 
-const icons: Record<ExportAsValue, IconComponent> = {
+const icons: Record<FormatValue, IconComponent> = {
 	svg: Svg,
 	jsx: Solidjs,
 	tsx: Solidjs,
@@ -16,7 +16,7 @@ const icons: Record<ExportAsValue, IconComponent> = {
 	//// "strict-tsx-rn": TypeScriptIcon,
 }
 
-const names: Record<ExportAsValue, string> = {
+const names: Record<FormatValue, string> = {
 	svg: "SVG",
 	jsx: "Solid",
 	tsx: "TypeScript Solid",
@@ -30,12 +30,12 @@ export function Select({
 	value,
 	setValue,
 }: {
-	value: ExportAsValue
-	setValue: React.Dispatch<React.SetStateAction<ExportAsValue>>
+	value: FormatValue
+	setValue: React.Dispatch<React.SetStateAction<FormatValue>>
 }) {
 	return (
 		<label className="select">
-			<select value={value} onChange={e => setValue(e.currentTarget.value as ExportAsValue)}>
+			<select value={value} onChange={e => setValue(e.currentTarget.value as FormatValue)}>
 				<optgroup label="HTML, Vue, Svelte">
 					<option value="svg">SVG</option>
 				</optgroup>

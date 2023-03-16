@@ -31,7 +31,7 @@ function useShortcutCtrlPOrKToFocusSearchBar(ref: React.RefObject<HTMLInputEleme
 
 export function SearchBar() {
 	const { search, setSearch } = React.useContext(SearchContext)!
-	const { clearSelectedNames } = React.useContext(ClipboardContext)!
+	const { removeAllNames } = React.useContext(ClipboardContext)!
 
 	const ref = React.useRef<HTMLInputElement | null>(null)
 
@@ -56,7 +56,7 @@ export function SearchBar() {
 				// prettier-ignore
 				onChange={e => {
 					window.scrollTo(0, 0) // Reset scroll
-					clearSelectedNames()               // Clear selection
+					removeAllNames()               // Clear selection
 					setSearch(e.currentTarget.value)
 				}}
 			/>
