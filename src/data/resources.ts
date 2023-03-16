@@ -1,3 +1,4 @@
+import * as wkBrandsMono from "@icons/wk/brands/mono/tsx"
 import * as wkBrandsOriginal from "@icons/wk/brands/original/tsx"
 
 import { IconComponent } from "@/lib"
@@ -5,17 +6,17 @@ import { IconComponent } from "@/lib"
 export const resources: { name: string; icon: IconComponent; href: string }[] = [
 	{
 		name: "Icons",
-		icon: wkBrandsOriginal.BrandGithub,
+		icon: wkBrandsMono.BrandGithub,
 		href: "https://github.com/feathericons/feather",
 	},
 	//// {
 	//// 	name: "Original Feather website",
-	//// 	icon: wkBrandsOriginal.BrandGithub,
+	//// 	icon: wkBrandsMono.BrandGithub,
 	//// 	href: "https://github.com/feathericons/feather",
 	//// },
 	{
 		name: "Website",
-		icon: wkBrandsOriginal.BrandGithub,
+		icon: wkBrandsMono.BrandGithub,
 		href: "https://github.com/zaydek/feathericons.dev",
 	},
 	{
