@@ -1,7 +1,7 @@
 // prettier-ignore
 export function canonicalize(str: string) {
-	return str
-		.replace(/[^\w\s-]/g, "") // Remove bad characters
-		.replace(/\s+/g, " ")     // Remove excess spaces
-		.trim()                   // Trim start and end spaces
+	return str.replace(/([a-z\d])([A-Z])/g, "$1-$2")
+	          .replace(/\s+|_+|-+/g, "-")
+	          .toLowerCase()
+	          .replace(/(^-+|-+$)/g, "");
 }

@@ -51,8 +51,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 		if (canon === "") {
 			return _icons
 		} else {
-			// TODO
-			return _icons?.filter(([name]) => name.toLowerCase().includes(canon.toLowerCase()))
+			return _icons?.filter(([name]) => canonicalize(name).includes(canon))
 		}
 	}, [_icons, search])
 
