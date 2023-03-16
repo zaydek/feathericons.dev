@@ -626,18 +626,15 @@ const AriaSelectContext = React.createContext<{
 	setValues:       React.Dispatch<React.SetStateAction<string[]>>
 } | null>(null)
 
-function AriaSelect({
-	open,
-	setOpen,
-	currentValue,
-	setCurrentValue,
-	children,
-}: React.PropsWithChildren<{
-	open: boolean
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>
-	currentValue: string
+// prettier-ignore
+type AriaSelectProviderProps = React.PropsWithChildren<{
+	open:            boolean
+	setOpen:         React.Dispatch<React.SetStateAction<boolean>>
+	currentValue:    string
 	setCurrentValue: React.Dispatch<React.SetStateAction<string>>
-}>) {
+}>
+
+function AriaSelectProvider({ open, setOpen, currentValue, setCurrentValue, children }: AriaSelectProviderProps) {
 	const [values, setValues] = React.useState<string[]>([])
 
 	return (
@@ -656,19 +653,57 @@ function AriaSelect({
 	)
 }
 
-function Option({ value, children }: React.PropsWithChildren<{ value: string }>) {
-	const { setOpen, setCurrentValue, setValues } = React.useContext(AriaSelectContext)!
+type AriaSelectProps = JSX.IntrinsicElements["div"]
+
+function AriaSelect({ children, ...props }: AriaSelectProps) {
+	const ctx = React.useContext(AriaSelectContext)!
+
+	return (
+		<div
+			{...props}
+			// A11y
+			role="combobox"
+			aria-controls="listbox1"
+			aria-expanded={ctx.open}
+			// /A11y
+			onClick={e => {
+				ctx.setOpen(curr => !curr)
+				// Preserve
+				props.onClick?.(e)
+			}}
+			// TODO: Add onKeyDown
+			tabIndex={0}
+		>
+			{children}
+		</div>
+	)
+}
+
+type AriaSelectOptionProps = JSX.IntrinsicElements["div"] & { value: string }
+
+function SelectOption({ value, children, ...props }: AriaSelectOptionProps) {
+	const ctx = React.useContext(AriaSelectContext)!
 
 	useOnMount(() => {
-		setValues(curr => [...curr, value])
+		ctx.setValues(curr => [...curr, value])
 	})
 
 	return (
 		<div
+			{...props}
+			// A11y
+			role="option"
+			aria-selected={ctx.currentValue === value}
+			// /A11y
 			onClick={e => {
-				setCurrentValue(value)
-				setOpen(false)
+				e.stopPropagation() // Stop propagation to <AriaSelect>
+				ctx.setCurrentValue(value)
+				ctx.setOpen(false)
+				// Preserve
+				props.onClick?.(e)
 			}}
+			// TODO: Add onKeyDown
+			tabIndex={0}
 		>
 			{children}
 		</div>
@@ -680,20 +715,27 @@ export function App() {
 	const [currentValue, setCurrentValue] = React.useState("foo")
 
 	return (
-		<AriaSelect open={open} setOpen={setOpen} currentValue={currentValue} setCurrentValue={setCurrentValue}>
-			<div onClick={e => setOpen(curr => !curr)}>Hello, world! ({currentValue})</div>
-			<div style={{ opacity: open ? 1 : 0 }}>
-				<Option value="foo">
+		<AriaSelectProvider open={open} setOpen={setOpen} currentValue={currentValue} setCurrentValue={setCurrentValue}>
+			<AriaSelect>
+				<span>Hello, world! ({currentValue})</span>
+			</AriaSelect>
+			<div
+				style={{
+					opacity: open ? 1 : 0,
+					pointerEvents: open ? "auto" : "none",
+				}}
+			>
+				<SelectOption value="foo">
 					<span>Hello</span>
-				</Option>
-				<Option value="bar">
+				</SelectOption>
+				<SelectOption value="bar">
 					<span>Hello</span>
-				</Option>
-				<Option value="baz">
+				</SelectOption>
+				<SelectOption value="baz">
 					<span>Hello</span>
-				</Option>
+				</SelectOption>
 			</div>
-		</AriaSelect>
+		</AriaSelectProvider>
 	)
 
 	//// return (
