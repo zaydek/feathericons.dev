@@ -18,8 +18,8 @@ export const SelectContext = React.createContext<{
 
 // prettier-ignore
 export type SelectProviderProps = React.PropsWithChildren<{
-	open:            boolean
-	setOpen:         React.Dispatch<React.SetStateAction<boolean>>
+	open:     boolean
+	setOpen:  React.Dispatch<React.SetStateAction<boolean>>
 	value:    string
 	setValue: React.Dispatch<React.SetStateAction<string>>
 }>
