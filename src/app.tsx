@@ -8,7 +8,6 @@ import * as wkPaymentsMono from "@icons/wk/payments/mono/tsx"
 import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/tsx"
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
-import { AriaButton } from "@/aria"
 import {
 	DEV_DebugCss,
 	ExportAs,
@@ -168,13 +167,13 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<AriaButton
+						<button
 							className="widget-align-icon-frame"
 							onClick={() => startTransition(resetIcons)}
 							aria-label="Reset icons"
 						>
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</AriaButton>
+						</button>
 					</div>
 					<div>
 						<div className="checkboxes">
@@ -307,13 +306,13 @@ function AppSidebar1() {
 							<feather.Settings className="widget-name-icon-1" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<AriaButton
+						<button
 							className="widget-align-icon-frame"
 							onClick={() => startTransition(resetIconPrefs)}
 							aria-label="Reset settings"
 						>
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</AriaButton>
+						</button>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -435,9 +434,9 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Size</h6>
 						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
-						<AriaButton className="widget-align-icon-frame" onClick={resetSize} aria-label="Reset size">
+						<button className="widget-align-icon-frame" onClick={resetSize} aria-label="Reset size">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</AriaButton>
+						</button>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -460,9 +459,9 @@ function AppSidebar2() {
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
 						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
-						<AriaButton className="widget-align-icon-frame" onClick={resetStrokeWidth} aria-label="Reset stroke width">
+						<button className="widget-align-icon-frame" onClick={resetStrokeWidth} aria-label="Reset stroke width">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
-						</AriaButton>
+						</button>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -518,7 +517,7 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 
 	return (
 		<article id={name} className="main-grid-item" data-selected={selectedNames.has(name)}>
-			<AriaButton
+			<button
 				className="main-grid-item-icon-frame"
 				onClick={e => {
 					if (e.shiftKey) {
@@ -553,7 +552,7 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 				aria-label={`Select ${name}`}
 			>
 				<Icon className="main-grid-item-icon" />
-			</AriaButton>
+			</button>
 			<span className="main-grid-item-type">
 				<span className="main-grid-item-type-select-all">
 					<GridItemName name={name} />
