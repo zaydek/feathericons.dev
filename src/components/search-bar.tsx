@@ -14,10 +14,10 @@ function useSideEffectFocusOnMount(ref: React.RefObject<HTMLInputElement | null>
 	return void 0
 }
 
-function useShortcutCtrlPToFocusSearchBar(ref: React.RefObject<HTMLInputElement | null>) {
+function useShortcutCtrlPOrKToFocusSearchBar(ref: React.RefObject<HTMLInputElement | null>) {
 	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if ((isMac() ? e.metaKey : e.ctrlKey) && e.key === "p") {
+			if ((isMac() ? e.metaKey : e.ctrlKey) && (e.key === "p" || e.key === "k")) {
 				// Call preventDefault() to prevent the browser from opening the print dialog
 				e.preventDefault()
 				ref.current!.focus()
@@ -35,7 +35,7 @@ export function SearchBar() {
 
 	const ref = React.useRef<HTMLInputElement | null>(null)
 
-	useShortcutCtrlPToFocusSearchBar(ref)
+	useShortcutCtrlPOrKToFocusSearchBar(ref)
 	useSideEffectFocusOnMount(ref)
 
 	return (
@@ -46,7 +46,7 @@ export function SearchBar() {
 			<input
 				ref={ref}
 				type="text"
-				placeholder={isMac() ? "⌘P to focus" : "Ctrl-P to focus"}
+				//// placeholder={isMac() ? "⌘P to focus" : "Ctrl-P to focus"}
 				value={search}
 				onKeyDown={e => {
 					if (e.key === "Escape") {

@@ -62,6 +62,7 @@ export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 	})
 
 	const [selectedNames, _setNames] = React.useState(() => new Set<string>())
+
 	const [selectedNamesStart, setSelectedNamesStart] = React.useState<number | null>(null)
 	const [selectedNamesEnd, setSelectedNamesEnd] = React.useState<number | null>(null)
 

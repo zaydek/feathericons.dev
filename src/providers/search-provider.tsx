@@ -124,6 +124,8 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 		//// }, [setPreferColor, setPreferNames])
 	}, [setPreferColor])
 
+	//////////////////////////////////////////////////////////////////////////////
+
 	// Ensure feather OR wkBrands OR wkPayments is checked
 	useMount(() => {
 		if (!(!feather && !wkBrands && !wkPayments)) return
