@@ -45,6 +45,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	//// const [iconsAreCached, setCached] = React.useState(false)
 	const [_icons, _setIcons] = React.useState<[string, IconComponent][] | null>(null)
 
+	// TODO: Search tags
 	const searchResults = React.useMemo(() => {
 		if (_icons === null) return null
 		const canon = canonicalize(search)
