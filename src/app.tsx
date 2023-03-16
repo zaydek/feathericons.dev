@@ -164,7 +164,7 @@ function AppSidebar1() {
 				<div className="widget-body" {...scrollProps}>
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.Package className="widget-name-icon-start" />
+							<feather.Package className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
 						<button
@@ -172,7 +172,7 @@ function AppSidebar1() {
 							onClick={() => startTransition(resetIcons)}
 							aria-label="Reset icons"
 						>
-							<feather.RotateCcw className="widget-name-icon-end" strokeWidth={4} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
 					<div>
@@ -303,7 +303,7 @@ function AppSidebar1() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.Settings className="widget-name-icon-start" />
+							<feather.Settings className="widget-name-start-icon" />
 						</div>
 						<span className="widget-name-type">Settings</span>
 						<button
@@ -311,7 +311,7 @@ function AppSidebar1() {
 							onClick={() => startTransition(resetIconPrefs)}
 							aria-label="Reset settings"
 						>
-							<feather.RotateCcw className="widget-name-icon-end" strokeWidth={4} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
 				</div>
@@ -341,7 +341,7 @@ function AppSidebar1() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.Globe className="widget-name-icon-start" />
+							<feather.Globe className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Resources</h6>
 					</div>
@@ -351,11 +351,11 @@ function AppSidebar1() {
 						{resources.map((resource, index) => (
 							<a key={resource.href} className="resource" href={resource.href} {...anchorAttrs}>
 								<div className="widget-align-icon-frame">
-									<resource.icon className="resource-icon-start" />
+									<resource.icon className="resource-start-icon" />
 								</div>
 								<span className="resource-type">{resource.name}</span>
 								<div className="widget-align-icon-frame">
-									<feather.ArrowUpRight className="resource-icon-end" strokeWidth={4} />
+									<feather.ArrowUpRight className="resource-end-icon" strokeWidth={4} />
 								</div>
 							</a>
 						))}
@@ -392,7 +392,7 @@ function AppSidebar2() {
 				<div className="widget-head" data-has="start">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.Clipboard className="widget-name-icon-start" />
+							<feather.Clipboard className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Clipboard</h6>
 						<div className="widget-align-frame">
@@ -429,13 +429,13 @@ function AppSidebar2() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.PenTool className="widget-name-icon-start" />
+							<feather.PenTool className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Size</h6>
 						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
 						{/* prettier-ignore */}
 						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)} aria-label="Reset size">
-							<feather.RotateCcw className="widget-name-icon-end" strokeWidth={4} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
 				</div>
@@ -449,13 +449,13 @@ function AppSidebar2() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.PenTool className="widget-name-icon-start" />
+							<feather.PenTool className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
 						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
 						{/* prettier-ignore */}
 						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)} aria-label="Reset stroke width">
-							<feather.RotateCcw className="widget-name-icon-end" strokeWidth={4} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={4} />
 						</button>
 					</div>
 				</div>
