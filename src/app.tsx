@@ -433,7 +433,7 @@ function AppSidebar2() {
 							<feather.PenTool className="widget-name-icon-1" />
 						</div>
 						<h6 className="widget-name-type">Size</h6>
-						<span className="widget-name-number-type">{size.toFixed(0)}PX</span>
+						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
 						<button className="widget-align-icon-frame" onClick={resetSize} aria-label="Reset size">
 							<feather.RotateCcw className="widget-name-icon-2" strokeWidth={4} />
 						</button>
