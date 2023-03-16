@@ -26,7 +26,7 @@ export const SearchContext = React.createContext<{
   setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
-	cached:             boolean
+	iconsAreCached:     boolean
   icons:              ([string, IconComponent])[] | null
   resetIcons:         () => void
   resetIconPrefs:     () => void
@@ -60,7 +60,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	const [preferColor, setPreferColor] = useParamBoolean({ key: "prefer-color", initialValue: PREFER_COLOR_DEFAULT })
 	//// const [preferNames, setPreferNames] = useParamBoolean({ key: "prefer-names", initialValue: PREFER_NAMES_DEFAULT })
 
-	const [cached, setCached] = React.useState(false)
+	const [iconsAreCached, setCached] = React.useState(false)
 	const [icons, setIcons] = React.useState<[string, IconComponent][] | null>(null)
 
 	//// const $$search = useMemo(() => {
@@ -145,7 +145,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 				setWkPaymentsValue,
 				preferColor,
 				setPreferColor,
-				cached,
+				iconsAreCached,
 				icons,
 				resetIcons,
 				resetIconPrefs,

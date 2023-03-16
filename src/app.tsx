@@ -627,16 +627,16 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	const { feather, wkBrands, wkPayments, cached, icons } = React.useContext(SearchContext)!
+	const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
 	const { setSelectedNamesStart, setSelectedNamesEnd, clearSelectedNames } = React.useContext(ClipboardContext)!
 
 	const { setStarted } = React.useContext(ProgressBarContext)!
 	React.useEffect(() => {
-		if (cached) return
+		if (iconsAreCached) return
 		setStarted(true)
 		const d = window.setTimeout(() => setStarted(false), 100)
 		return () => window.clearTimeout(d)
-	}, [cached, setStarted])
+	}, [iconsAreCached, setStarted])
 
 	// TODO: Extract to a named hook
 	const onceRef = React.useRef(false)
