@@ -1,3 +1,13 @@
+const re1 = /([a-z\d])([A-Z])|[\s_]+/g
+const re2 = /^-+|-+$/g
+
+// prettier-ignore
+export function toCanonCase(str: string) {
+	return str.replace(re1, "$1-$2")
+	          .toLowerCase()
+	          .replace(re2, "");
+}
+
 // prettier-ignore
 export function toKebabCase(str: string) {
 	return str.replace(/([a-zA-Z0-9])([A-Z])/g, "$1-$2")

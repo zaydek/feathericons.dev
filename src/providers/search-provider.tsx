@@ -1,6 +1,6 @@
 import React from "react"
 
-import { canonicalize, IconComponent, toKebabCase, useMount, useParam, useParamBoolean } from "@/lib"
+import { IconComponent, toCanonCase, toKebabCase, useMount, useParam, useParamBoolean } from "@/lib"
 import { queryCache } from "./cache"
 
 export type WkPaymentsValue = "normal" | "filled"
@@ -33,12 +33,20 @@ export const SearchContext = React.createContext<{
   resetIconPrefs:     () => void
 } | null>(null)
 
+//// // prettier-ignore
+//// export function canonicalize(str: string) {
+//// 	return str
+//// 		.replace(/[^\w\s-]/g, "") // Remove bad characters
+//// 		.replace(/\s+/g, " ")     // Remove excess spaces
+//// 		.trim()                   // Trim start and end spaces
+//// }
+
 export function SearchProvider({ children }: React.PropsWithChildren) {
 	const [search, setSearch] = useParam({
 		key: "search",
 		initialValue: "",
 		parser: value => value,
-		serializer: canonicalize,
+		serializer: toCanonCase,
 	})
 
 	//// // TODO: Move up? To search?
@@ -48,7 +56,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	// TODO: Search tags
 	const searchResults = React.useMemo(() => {
 		if (_icons === null) return null
-		const canon = canonicalize(search)
+		const canon = toCanonCase(search)
 		if (canon === "") {
 			return _icons
 		} else {
