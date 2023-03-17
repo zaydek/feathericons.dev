@@ -8,35 +8,12 @@
   height: $button-height
   background-color: $hover-active-color
   border-radius: 1e3px
-  //// box-shadow: 0 0 0 1px hsl(0, 0%, 100%, 0.1)
-  //// box-shadow: $inset-hairline-shadow
   cursor: text // Interaction
-
-  //// // Light mode only
-  //// //// :root[data-theme=light]
-  //// &:focus-within
-  ////   background-color: $base-color
-  ////   box-shadow: $inset-hairline-shadow
-  ////   //// cursor: text // Interaction
-
-  //// // Overrides
-  //// @at-root
-  ////   :root[data-theme=light] .search-bar
-  ////     &:focus
-  ////       background-color: none
-  ////     box-shadow: $inset-hairline-shadow
-  ////   :root[data-theme=dark]  &
-  ////     box-shadow: inset 0 0 0 1px hsl(0, 0%, 100%, 0.1)
 
 .search-bar-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $text-200-color
-
-  //// // Light mode only
-  //// //// :root[data-theme=light]
-  //// .search-bar:focus-within &
-  ////   color: $text-100-color
 
 .search-bar input[type=text]
   flex: 1             // Stretch x-axis
@@ -44,7 +21,3 @@
   // TYPOGRAPHY
   +typography-sans
   color: $text-100-color
-  //// &::placeholder
-  ////   color: $text-300-color
-  //// &:focus-visible::placeholder
-  ////   color: transparent

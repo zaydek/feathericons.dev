@@ -9,11 +9,6 @@ export const resources: { name: string; icon: IconComponent; href: string }[] = 
 		icon: wkBrandsMono.Github,
 		href: "https://github.com/feathericons/feather",
 	},
-	//// {
-	//// 	name: "Original Feather website",
-	//// 	icon: wkBrandsMono.Github,
-	//// 	href: "https://github.com/feathericons/feather",
-	//// },
 	{
 		name: "Website",
 		icon: wkBrandsMono.Github,
