@@ -1,7 +1,7 @@
 import { IconComponent } from "@/lib"
-import { WkPaymentsValue } from "@/providers"
+import { IconValue } from "@/providers"
 
-export type IconAliasPath =
+export type TsConfigImportPath =
 	| "@icons/feather/tsx"
 	| "@icons/wk/brands/mono/tsx"
 	| "@icons/wk/brands/original/tsx"
@@ -11,11 +11,11 @@ export type IconAliasPath =
 	| "@icons/wk/payments/original-filled/tsx"
 
 function createCache() {
-	const cache = new Map<IconAliasPath, Record<string, IconComponent>>()
-	function has(arg: IconAliasPath) {
+	const cache = new Map<TsConfigImportPath, Record<string, IconComponent>>()
+	function has(arg: TsConfigImportPath) {
 		return cache.has(arg)
 	}
-	async function read(...args: IconAliasPath[]) {
+	async function read(...args: TsConfigImportPath[]) {
 		let cached = true
 		const chain: Promise<Record<string, IconComponent>>[] = []
 		for (const arg of args) {
@@ -66,44 +66,75 @@ function createCache() {
 
 export const cache = createCache()
 
-export async function queryCache({
-	feather,
-	wkBrands,
-	wkPayments,
-	wkPaymentsValue,
-	monochrome,
-}: {
-	feather: boolean
-	wkBrands: boolean
-	wkPayments: boolean
-	wkPaymentsValue: WkPaymentsValue
-	monochrome: boolean
-}) {
-	const args: IconAliasPath[] = []
-	if (feather) {
-		args.push("@icons/feather/tsx")
-	}
-	if (wkBrands) {
-		if (monochrome) {
-			args.push("@icons/wk/brands/original/tsx")
-		} else {
-			args.push("@icons/wk/brands/mono/tsx")
-		}
-	}
-	if (wkPayments) {
-		if (monochrome) {
-			if (wkPaymentsValue === "normal") {
+//// export async function queryCache({
+//// 	feather,
+//// 	wkBrands,
+//// 	wkPayments,
+//// 	wkPaymentsValue,
+//// 	monochrome,
+//// }: {
+//// 	feather: boolean
+//// 	wkBrands: boolean
+//// 	wkPayments: boolean
+//// 	wkPaymentsValue: WkPaymentsValue
+//// 	monochrome: boolean
+//// }) {
+//// 	const args: IconAliasPath[] = []
+//// 	if (feather) {
+//// 		args.push("@icons/feather/tsx")
+//// 	}
+//// 	if (wkBrands) {
+//// 		if (monochrome) {
+//// 			args.push("@icons/wk/brands/original/tsx")
+//// 		} else {
+//// 			args.push("@icons/wk/brands/mono/tsx")
+//// 		}
+//// 	}
+//// 	if (wkPayments) {
+//// 		if (monochrome) {
+//// 			if (wkPaymentsValue === "normal") {
+//// 				args.push("@icons/wk/payments/original/tsx")
+//// 			} else {
+//// 				args.push("@icons/wk/payments/original-filled/tsx")
+//// 			}
+//// 		} else {
+//// 			if (wkPaymentsValue === "normal") {
+//// 				args.push("@icons/wk/payments/mono/tsx")
+//// 			} else {
+//// 				args.push("@icons/wk/payments/mono-filled/tsx")
+//// 			}
+//// 		}
+//// 	}
+//// 	return await cache.read(...args)
+//// }
+
+export async function queryCache2(iconValue: IconValue, { monochrome }: { monochrome: boolean }) {
+	const args: TsConfigImportPath[] = []
+	switch (iconValue) {
+		case "feather":
+			args.push("@icons/feather/tsx")
+			break
+		case "wk-brands":
+			if (monochrome) {
+				args.push("@icons/wk/brands/mono/tsx")
+			} else {
+				args.push("@icons/wk/brands/original/tsx")
+			}
+			break
+		case "wk-payments":
+			if (monochrome) {
+				args.push("@icons/wk/payments/mono/tsx")
+			} else {
 				args.push("@icons/wk/payments/original/tsx")
+			}
+			break
+		case "wk-payments-filled":
+			if (monochrome) {
+				args.push("@icons/wk/payments/mono-filled/tsx")
 			} else {
 				args.push("@icons/wk/payments/original-filled/tsx")
 			}
-		} else {
-			if (wkPaymentsValue === "normal") {
-				args.push("@icons/wk/payments/mono/tsx")
-			} else {
-				args.push("@icons/wk/payments/mono-filled/tsx")
-			}
-		}
+			break
 	}
 	return await cache.read(...args)
 }

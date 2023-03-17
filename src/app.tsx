@@ -22,6 +22,9 @@ import { resources } from "@/data"
 import { DynamicIcon, IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
+	IconValue,
+	ICON_VALUE_DEFAULT,
+	PREFER_COLOR_DEFAULT,
 	RangeContext,
 	READONLY_CLIPBOARD_DEFAULT,
 	SearchContext,
@@ -78,17 +81,18 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 	return void 0
 }
 
-function useSideEffectClearSelectionOnChange() {
-	const { feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
+function useSideEffectRemoveAllNamesOnChange() {
+	const { iconValue } = React.useContext(SearchContext)!
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
 	React.useEffect(() => {
+		void iconValue
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
 		removeAllNames()
-	}, [removeAllNames, feather, wkBrands, wkPayments])
+	}, [iconValue, removeAllNames])
 	return void 0
 }
 
@@ -129,25 +133,84 @@ function useSideEffectVisibleDocumentTitle() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+function Radio<T extends string>({
+	Icon,
+	children,
+	...props
+}: JSX.IntrinsicElements["input"] & React.PropsWithChildren & { Icon: IconComponent; value: T }) {
+	return (
+		<label
+			className="checkbox"
+			onClick={e => e.currentTarget.querySelector<HTMLInputElement>("input[type=radio])")!.click()}
+			onKeyDown={e => {
+				if (e.key === " ") {
+					e.preventDefault()
+					e.currentTarget.querySelector<HTMLInputElement>("input[type=radio])")!.click()
+				}
+			}}
+			tabIndex={0}
+		>
+			<div className="widget-align-icon-frame">
+				<DynamicIcon className="checkbox-icon" Icon={Icon} />
+			</div>
+			<span className="checkbox-type">{children}</span>
+			<div className="widget-align-icon-frame">
+				<input type="checkbox" {...props} tabIndex={-1} />
+			</div>
+		</label>
+	)
+}
+
+function Checkbox({
+	Icon,
+	children,
+	...props
+}: JSX.IntrinsicElements["input"] &
+	React.PropsWithChildren & { Icon: <P extends React.HTMLAttributes<HTMLDivElement>>(_: P) => JSX.Element }) {
+	return (
+		<label
+			className="checkbox"
+			onClick={e => e.currentTarget.querySelector<HTMLInputElement>("input[type=checkbox])")!.click()}
+			onKeyDown={e => {
+				if (e.key === " ") {
+					e.preventDefault()
+					e.currentTarget.querySelector<HTMLInputElement>("input[type=checkbox])")!.click()
+				}
+			}}
+			tabIndex={0}
+		>
+			<div className="widget-align-icon-frame">
+				<Icon className="checkbox-icon" />
+			</div>
+			<span className="checkbox-type">{children}</span>
+			<div className="widget-align-icon-frame">
+				<input type="checkbox" {...props} tabIndex={-1} />
+			</div>
+		</label>
+	)
+}
+
 function AppSidebar1() {
 	const scrollProps = useScrollProps()
 
 	const [, startTransition] = React.useTransition()
 
 	const {
+		iconValue,
+		setIconValue,
 		// eslint-disable-next-line destructuring/no-rename
-		feather: $feather,
-		setFeather,
-		wkBrands,
-		setWkBrands,
-		wkPayments,
-		setWkPayments,
-		wkPaymentsValue,
-		setWkPaymentsValue,
+		//// feather: $feather,
+		//// setFeather,
+		//// wkBrands,
+		//// setWkBrands,
+		//// wkPayments,
+		//// setWkPayments,
+		//// wkPaymentsValue,
+		//// setWkPaymentsValue,
 		preferColor,
 		setPreferColor,
-		resetIcons,
-		resetIconPrefs,
+		//// resetIcons,
+		//// resetIconPrefs,
 	} = React.useContext(SearchContext)!
 
 	return (
@@ -164,251 +227,90 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<button className="widget-align-icon-frame" onClick={e => startTransition(resetIcons)}>
+						<button
+							className="widget-align-icon-frame"
+							onClick={e => startTransition(() => setIconValue(ICON_VALUE_DEFAULT))}
+						>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 					<div>
-						<div className="checkboxes">
-							<label
-								className="checkbox"
-								onClick={e =>
-									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-								}
-								onKeyDown={e => {
-									if (e.key === " ") {
-										e.preventDefault()
-										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-									}
-								}}
-								tabIndex={0}
-							>
-								<div className="widget-align-icon-frame">
-									<feather.Feather className="checkbox-icon" />
-								</div>
-								<span className="checkbox-type">Feather</span>
-								<div className="widget-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={$feather}
-										onChange={e => startTransition(() => setFeather(e.currentTarget.checked))}
-										tabIndex={-1}
-									/>
-								</div>
-							</label>
-						</div>
-						<div className="checkboxes">
-							<label
-								className="checkbox"
-								onClick={e =>
-									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-								}
-								onKeyDown={e => {
-									if (e.key === " ") {
-										e.preventDefault()
-										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-									}
-								}}
-								tabIndex={0}
-							>
-								<div className="widget-align-icon-frame">
-									<DynamicIcon
-										className="checkbox-icon"
-										Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
-									/>
-								</div>
-								<span className="checkbox-type">Brands</span>
-								<div className="widget-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={wkBrands}
-										onChange={e => startTransition(() => setWkBrands(e.currentTarget.checked))}
-										tabIndex={-1}
-									/>
-								</div>
-							</label>
-						</div>
-						<div className="checkboxes">
-							<label
-								className="checkbox"
-								onClick={e =>
-									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-								}
-								onKeyDown={e => {
-									if (e.key === " ") {
-										e.preventDefault()
-										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-									}
-								}}
-								tabIndex={0}
-							>
-								<div className="widget-align-icon-frame">
-									<DynamicIcon
-										className="checkbox-icon"
-										data-type="card"
-										Icon={
-											// prettier-ignore
-											preferColor
-												? wkPaymentsValue === "normal"
-													? wkPaymentsOriginal.CardMastercard
-													: wkPaymentsOriginalFilled.CardMastercard
-												: wkPaymentsValue === "normal"
-													? wkPaymentsMono.CardMastercard
-													: wkPaymentsMonoFilled.CardMastercard
-										}
-									/>
-								</div>
-								<span className="checkbox-type">Cards</span>
-								<div className="widget-align-icon-frame">
-									<input
-										type="checkbox"
-										checked={wkPayments}
-										onChange={e => startTransition(() => setWkPayments(e.currentTarget.checked))}
-										tabIndex={-1}
-									/>
-								</div>
-							</label>
-							<div className="checkboxes">
-								<label
-									className="checkbox"
-									onClick={e =>
-										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-									}
-									onKeyDown={e => {
-										if (e.key === " ") {
-											e.preventDefault()
-											e.currentTarget
-												.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!
-												.click()
-										}
-									}}
-									tabIndex={0}
-								>
-									<div className="widget-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											data-type="card"
-											Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
-										/>
-									</div>
-									<span className="checkbox-type">Original</span>
-									<div className="widget-align-icon-frame">
-										<input
-											name="payments"
-											type="radio"
-											checked={wkPaymentsValue === "normal"}
-											onClick={e =>
-												startTransition(() => {
-													setWkPayments(true)
-												})
-											}
-											onChange={e =>
-												startTransition(() => {
-													setWkPayments(true)
-													setWkPaymentsValue("normal")
-												})
-											}
-											tabIndex={-1}
-										/>
-									</div>
-								</label>
-							</div>
-							<div className="checkboxes">
-								<label
-									className="checkbox"
-									onClick={e =>
-										e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-									}
-									onKeyDown={e => {
-										if (e.key === " ") {
-											e.preventDefault()
-											e.currentTarget
-												.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!
-												.click()
-										}
-									}}
-									tabIndex={0}
-								>
-									<div className="widget-align-icon-frame">
-										<DynamicIcon
-											className="checkbox-icon"
-											data-type="card"
-											Icon={preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard}
-										/>
-									</div>
-									<span className="checkbox-type">Filled</span>
-									<div className="widget-align-icon-frame">
-										<input
-											name="payments"
-											type="radio"
-											checked={wkPaymentsValue === "filled"}
-											onClick={e =>
-												startTransition(() => {
-													setWkPayments(true)
-												})
-											}
-											onChange={e =>
-												startTransition(() => {
-													setWkPayments(true)
-													setWkPaymentsValue("filled")
-												})
-											}
-											tabIndex={-1}
-										/>
-									</div>
-								</label>
-							</div>
-						</div>
+						<Radio<IconValue>
+							Icon={feather.Feather}
+							type="radio"
+							name="icon-value"
+							value="feather"
+							checked={iconValue === "feather"}
+							onChange={e => startTransition(() => setIconValue("feather"))}
+						>
+							Feather
+						</Radio>
+						<Radio<IconValue>
+							Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
+							type="radio"
+							name="icon-value"
+							value="wk-brands"
+							checked={iconValue === "wk-brands"}
+							onChange={e => startTransition(() => setIconValue("wk-brands"))}
+						>
+							Brands
+						</Radio>
+						<Radio<IconValue>
+							Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
+							type="radio"
+							name="icon-value"
+							value="wk-payments"
+							checked={iconValue === "wk-payments"}
+							onChange={e => startTransition(() => setIconValue("wk-payments"))}
+						>
+							Payments
+						</Radio>
+						<Radio<IconValue>
+							Icon={preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard}
+							type="radio"
+							name="icon-value"
+							value="wk-payments-filled"
+							checked={iconValue === "wk-payments-filled"}
+							onChange={e => startTransition(() => setIconValue("wk-payments-filled"))}
+						>
+							Payments (filled)
+						</Radio>
 					</div>
 				</div>
 			</header>
 			<div className="sidebar-body">
 				<hr />
+				{/* Widget */}
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
 							<feather.Settings className="widget-name-start-icon" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button className="widget-align-icon-frame" onClick={e => startTransition(resetIconPrefs)}>
+						<button
+							className="widget-align-icon-frame"
+							onClick={e => startTransition(() => setPreferColor(PREFER_COLOR_DEFAULT))}
+						>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 				</div>
 				<div className="widget-body">
-					<div className="checkboxes">
-						<label
-							className="checkbox"
-							onClick={e =>
-								e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-							}
-							onKeyDown={e => {
-								if (e.key === " ") {
-									e.preventDefault()
-									e.currentTarget.querySelector<HTMLInputElement>("input:is([type=checkbox], [type=radio])")!.click()
-								}
-							}}
-							tabIndex={0}
+					<div>
+						<Checkbox
+							Icon={p => <div {...p} data-type="chroma" data-prefer-color={preferColor}></div>}
+							checked={preferColor}
+							onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
 						>
-							<div className="widget-align-icon-frame">
-								<div className="checkbox-icon" data-type="chroma" data-prefer-color={preferColor}></div>
-							</div>
-							<span className="checkbox-type">Colorize icons</span>
-							<div className="widget-align-icon-frame">
-								<input
-									type="checkbox"
-									checked={preferColor}
-									onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
-									tabIndex={-1}
-								/>
-							</div>
-						</label>
+							Colorize
+						</Checkbox>
 					</div>
 				</div>
 				<hr />
 			</div>
 			<footer className="sidebar-foot">
 				<hr data-collapse />
+				{/* Widget */}
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
@@ -497,6 +399,7 @@ function AppSidebar2() {
 			</header>
 			<div className="sidebar-body">
 				<hr />
+				{/* Widget */}
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
@@ -522,6 +425,7 @@ function AppSidebar2() {
 					</div>
 				</div>
 				<hr />
+				{/* Widget */}
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
@@ -668,7 +572,7 @@ const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
 	//// const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
-	const { searchResults, feather, wkBrands, wkPayments } = React.useContext(SearchContext)!
+	const { searchResults } = React.useContext(SearchContext)!
 	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
 
 	//// const { setStarted } = React.useContext(ProgressBarContext)!
@@ -679,20 +583,20 @@ function AppMain() {
 	//// 	return () => window.clearTimeout(d)
 	//// }, [iconsAreCached, setStarted])
 
-	// TODO: Extract to a named hook
-	const onceRef = React.useRef(false)
-	React.useEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		removeAllNames()
-	}, [removeAllNames, feather, wkBrands, wkPayments])
+	//// // TODO: Extract to a named hook
+	//// const onceRef = React.useRef(false)
+	//// React.useEffect(() => {
+	//// 	if (!onceRef.current) {
+	//// 		onceRef.current = true
+	//// 		return
+	//// 	}
+	//// 	removeAllNames()
+	//// }, [removeAllNames, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlAToSelectAll()
 	useShortcutEscToRemoveNamesStartAndEnd()
 
-	useSideEffectClearSelectionOnChange()
+	useSideEffectRemoveAllNamesOnChange()
 	useSideEffectSelectNamesFromIndexes()
 	useSideEffectVisibleDocumentTitle()
 

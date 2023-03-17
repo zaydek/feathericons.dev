@@ -1,16 +1,25 @@
 import React from "react"
 
-import { IconComponent, toCanonCase, toKebabCase, useMount, useParam, useParamBoolean } from "@/lib"
-import { queryCache } from "./cache"
+import { IconComponent, toCanonCase, toKebabCase, useParam, useParamBoolean } from "@/lib"
+import { queryCache2 } from "./cache"
 
 export type WkPaymentsValue = "normal" | "filled"
 
-const FEATHER_DEFAULT           = !!1 // prettier-ignore
-const WK_BRANDS_DEFAULT         = !!1 // prettier-ignore
-const WK_PAYMENTS_DEFAULT       = !!1 // prettier-ignore
-const WK_PAYMENTS_VALUE_DEFAULT = "filled" // prettier-ignore
-const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
+//// const FEATHER_DEFAULT           = !!1 // prettier-ignore
+//// const WK_BRANDS_DEFAULT         = !!1 // prettier-ignore
+//// const WK_PAYMENTS_DEFAULT       = !!1 // prettier-ignore
+//// const WK_PAYMENTS_VALUE_DEFAULT = "filled" // prettier-ignore
+export const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
 //// const PREFER_NAMES_DEFAULT      = !!1 // prettier-ignore
+
+// prettier-ignore
+export type IconValue =
+	| "feather"
+	| "wk-brands"
+	| "wk-payments"
+	| "wk-payments-filled"
+
+export const ICON_VALUE_DEFAULT: IconValue = "feather"
 
 // prettier-ignore
 export const SearchContext = React.createContext<{
@@ -22,20 +31,23 @@ export const SearchContext = React.createContext<{
 	searchResults:      ([string, IconComponent])[] | null
 
 	// Icons
-  feather:            boolean
-  setFeather:         React.Dispatch<React.SetStateAction<boolean>>
-  wkBrands:           boolean
-  setWkBrands:        React.Dispatch<React.SetStateAction<boolean>>
-  wkPayments:         boolean
-  setWkPayments:      React.Dispatch<React.SetStateAction<boolean>>
-  wkPaymentsValue:    WkPaymentsValue
-  setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
-  resetIcons:         () => void
+	iconValue:          IconValue
+	setIconValue:       React.Dispatch<React.SetStateAction<IconValue>>
+
+  //// feather:            boolean
+  //// setFeather:         React.Dispatch<React.SetStateAction<boolean>>
+  //// wkBrands:           boolean
+  //// setWkBrands:        React.Dispatch<React.SetStateAction<boolean>>
+  //// wkPayments:         boolean
+  //// setWkPayments:      React.Dispatch<React.SetStateAction<boolean>>
+  //// wkPaymentsValue:    WkPaymentsValue
+  //// setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
+  //// resetIcons:         () => void
 
 	// Preferences
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
-  resetIconPrefs:     () => void
+  //// resetIconPrefs:     () => void
 } | null>(null)
 
 //// // prettier-ignore
@@ -71,29 +83,59 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 
 	//////////////////////////////////////////////////////////////////////////////
 
-	const [feather, setFeather] = useParamBoolean({ key: "feather", initialValue: FEATHER_DEFAULT })
-	const [wkBrands, setWkBrands] = useParamBoolean({ key: "brands", initialValue: WK_BRANDS_DEFAULT })
-	const [wkPayments, setWkPayments] = useParamBoolean({ key: "payments", initialValue: WK_PAYMENTS_DEFAULT })
+	//// const [feather, setFeather] = useParamBoolean({ key: "feather", initialValue: FEATHER_DEFAULT })
+	//// const [wkBrands, setWkBrands] = useParamBoolean({ key: "brands", initialValue: WK_BRANDS_DEFAULT })
+	//// const [wkPayments, setWkPayments] = useParamBoolean({ key: "payments", initialValue: WK_PAYMENTS_DEFAULT })
+	////
+	//// const [wkPaymentsValue, setWkPaymentsValue] = useParam<WkPaymentsValue>({
+	//// 	key: "payments-value",
+	//// 	initialValue: WK_PAYMENTS_VALUE_DEFAULT,
+	//// 	parser: value => {
+	//// 		switch (value) {
+	//// 			case "normal":
+	//// 			case "filled":
+	//// 				return value
+	//// 		}
+	//// 		return WK_PAYMENTS_VALUE_DEFAULT
+	//// 	},
+	//// })
+	////
+	//// const resetIcons = React.useCallback(() => {
+	//// 	setFeather(FEATHER_DEFAULT)
+	//// 	setWkBrands(WK_BRANDS_DEFAULT)
+	//// 	setWkPayments(WK_PAYMENTS_DEFAULT)
+	//// 	setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
+	//// }, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
 
-	const [wkPaymentsValue, setWkPaymentsValue] = useParam<WkPaymentsValue>({
-		key: "payments-value",
-		initialValue: WK_PAYMENTS_VALUE_DEFAULT,
+	const [iconValue, setIconValue] = useParam<IconValue>({
+		key: "icon-value",
+		initialValue: ICON_VALUE_DEFAULT,
 		parser: value => {
 			switch (value) {
-				case "normal":
-				case "filled":
+				case "feather":
+				case "wk-brands":
+				case "wk-payments":
+				case "wk-payments-filled":
 					return value
 			}
-			return WK_PAYMENTS_VALUE_DEFAULT
+			return ICON_VALUE_DEFAULT
 		},
 	})
 
-	const resetIcons = React.useCallback(() => {
-		setFeather(FEATHER_DEFAULT)
-		setWkBrands(WK_BRANDS_DEFAULT)
-		setWkPayments(WK_PAYMENTS_DEFAULT)
-		setWkPaymentsValue(WK_PAYMENTS_VALUE_DEFAULT)
-	}, [setFeather, setWkBrands, setWkPayments, setWkPaymentsValue])
+	//// const [iconValue, setIconValue] = useParam<IconValue>({
+	//// 	key: "icon-value",
+	//// 	initialValue: ICON_VALUE_DEFAULT,
+	//// 	parser: value => {
+	//// 		switch (value) {
+	//// 			case "feather":
+	//// 			case "wk-brands":
+	//// 			case "wk-payments":
+	//// 			case "wk-payments-filled":
+	//// 				return value
+	//// 		}
+	//// 		return WK_PAYMENTS_VALUE_DEFAULT
+	//// 	},
+	//// })
 
 	//////////////////////////////////////////////////////////////////////////////
 
@@ -132,35 +174,29 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 	//// 	}
 	//// 	return { ...refA, ...refB }
 
-	const resetIconPrefs = React.useCallback(() => {
-		setPreferColor(PREFER_COLOR_DEFAULT)
-		//// setPreferNames(PREFER_NAMES_DEFAULT)
-		//// }, [setPreferColor, setPreferNames])
-	}, [setPreferColor])
+	//// const resetIconPrefs = React.useCallback(() => {
+	//// 	setPreferColor(PREFER_COLOR_DEFAULT)
+	//// 	//// setPreferNames(PREFER_NAMES_DEFAULT)
+	//// 	//// }, [setPreferColor, setPreferNames])
+	//// }, [setPreferColor])
 
 	//////////////////////////////////////////////////////////////////////////////
 
-	// Ensure feather OR wkBrands OR wkPayments is checked
-	useMount(() => {
-		if (!(!feather && !wkBrands && !wkPayments)) return
-		resetIcons()
-	})
+	//// // Ensure feather OR wkBrands OR wkPayments is checked
+	//// useMount(() => {
+	//// 	if (!(!feather && !wkBrands && !wkPayments)) return
+	//// 	resetIcons()
+	//// })
 
 	React.useEffect(() => {
 		async function fn() {
 			//// const [cached, icons] = await queryCache({
-			const [, icons] = await queryCache({
-				feather,
-				wkBrands,
-				wkPayments,
-				wkPaymentsValue,
-				monochrome: preferColor,
-			})
+			const [, icons] = await queryCache2(iconValue, { monochrome: preferColor })
 			//// setCached(cached)
 			_setIcons(icons)
 		}
 		fn()
-	}, [feather, preferColor, wkBrands, wkPayments, wkPaymentsValue])
+	}, [iconValue, preferColor])
 
 	return (
 		<SearchContext.Provider
@@ -171,20 +207,24 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 				searchResults,
 
 				// Icons
-				feather,
-				setFeather,
-				wkBrands,
-				setWkBrands,
-				wkPayments,
-				setWkPayments,
-				wkPaymentsValue,
-				setWkPaymentsValue,
-				resetIcons,
+				iconValue,
+				setIconValue,
+
+				//// // Icons
+				//// feather,
+				//// setFeather,
+				//// wkBrands,
+				//// setWkBrands,
+				//// wkPayments,
+				//// setWkPayments,
+				//// wkPaymentsValue,
+				//// setWkPaymentsValue,
+				//// resetIcons,
 
 				// Preferences
 				preferColor,
 				setPreferColor,
-				resetIconPrefs,
+				//// resetIconPrefs,
 			}}
 		>
 			{children}

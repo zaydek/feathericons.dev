@@ -1,16 +1,16 @@
 import React from "react"
 
-import { clampValue, useParam } from "@/lib"
+import { clamp, useParam } from "@/lib"
 
-export const SIZE_MIN       = 16 // prettier-ignore
-export const SIZE_MAX       = 32 // prettier-ignore
-export const SIZE_STEP      =  1 // prettier-ignore
-export const SIZE_DEFAULT   = 24 // prettier-ignore
+export const SIZE_MIN       = 16.0 // prettier-ignore
+export const SIZE_MAX       = 32.0 // prettier-ignore
+export const SIZE_STEP      =  1.0 // prettier-ignore
+export const SIZE_DEFAULT   = 24.0 // prettier-ignore
 
 export const STROKE_MIN     =  0.5 // prettier-ignore
 export const STROKE_MAX     =  3.5 // prettier-ignore
 export const STROKE_STEP    =  0.1 // prettier-ignore
-export const STROKE_DEFAULT =  2 // prettier-ignore
+export const STROKE_DEFAULT =  2.0 // prettier-ignore
 
 // prettier-ignore
 export const RangeContext = React.createContext<{
@@ -25,8 +25,8 @@ export function RangeProvider({ children }: React.PropsWithChildren) {
 		key: "size",
 		initialValue: SIZE_DEFAULT,
 		parser: value => {
-			const parsedValue = +value
-			return clampValue(parsedValue, { min: SIZE_MIN, max: SIZE_MAX })
+			const parsed = +value
+			return clamp(parsed, { min: SIZE_MIN, max: SIZE_MAX })
 		},
 	})
 
@@ -34,8 +34,8 @@ export function RangeProvider({ children }: React.PropsWithChildren) {
 		key: "stroke-width",
 		initialValue: STROKE_DEFAULT,
 		parser: value => {
-			const parsedValue = +value
-			return clampValue(parsedValue, { min: STROKE_MIN, max: STROKE_MAX })
+			const parsed = +value
+			return clamp(parsed, { min: STROKE_MIN, max: STROKE_MAX })
 		},
 	})
 
