@@ -1,3 +1,4 @@
 export function sleep(durationMs: number) {
-	return new Promise(resolve => window.setTimeout(resolve, durationMs))
+	// Omit window because of Node.js
+	return new Promise(resolve => setTimeout(resolve, durationMs))
 }

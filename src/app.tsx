@@ -179,7 +179,7 @@ function AppSidebar1() {
 							Feather
 						</Radio>
 						<Radio<IconValue>
-							icon={monochrome ? wkBrandsMono.BrandTwitter : wkBrandsOriginal.BrandTwitter}
+							icon={monochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
 							type="radio"
 							name="icon-value"
 							value="wk-brands"
@@ -191,8 +191,8 @@ function AppSidebar1() {
 						<Radio<IconValue>
 							// prettier-ignore
 							icon={p => monochrome
-								? <wkPaymentsMono.CardMastercard {...p} data-type="payments" />
-								: <wkPaymentsOriginal.CardMastercard {...p} data-type="payments" />
+								? <wkPaymentsMono.Mastercard {...p} data-type="payments" />
+								: <wkPaymentsOriginal.Mastercard {...p} data-type="payments" />
 							}
 							type="radio"
 							name="icon-value"
@@ -205,8 +205,8 @@ function AppSidebar1() {
 						<Radio<IconValue>
 							// prettier-ignore
 							icon={p => monochrome
-								? <wkPaymentsMonoFilled.CardMastercard {...p} data-type="payments" />
-								: <wkPaymentsOriginalFilled.CardMastercard {...p} data-type="payments" />
+								? <wkPaymentsMonoFilled.Mastercard {...p} data-type="payments" />
+								: <wkPaymentsOriginalFilled.Mastercard {...p} data-type="payments" />
 							}
 							type="radio"
 							name="icon-value"
