@@ -19,6 +19,7 @@ $hover-color:              var(--hover-color)
 $hover-active-color:       var(--hover-active-color)
 $hairline-color:           var(--hairline-color)
 $soft-hairline-color:      var(--soft-hairline-color)
+$realistic-shadow-color:   var(--realistic-shadow-color)
 $text-100-color:           var(--text-100-color)
 $text-200-color:           var(--text-200-color)
 $text-300-color:           var(--text-300-color)
@@ -45,30 +46,32 @@ $realistic-shadow:         var(--realistic-shadow)
     --inset-hairline-shadow:  #{inset 0 0 0 $hairline-height $hairline-color}
     --hairline-shadow:        #{0 0 0 $hairline-height $hairline-color}
     --hairline-shadow-bottom: #{0 $hairline-height 0 0 $hairline-color}
-    --realistic-shadow:       #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $hairline-color, 0 4px 8px -4px $hairline-color, 0 8px 16px -8px $hairline-color, 0 16px 32px -16px $hairline-color, 0 32px 64px -32px $hairline-color}
+    --realistic-shadow:       #{0 1px 2px -1px $hairline-color, 0 2px 4px -2px $realistic-shadow-color, 0 4px 8px -4px $realistic-shadow-color, 0 8px 16px -8px $realistic-shadow-color, 0 16px 32px -16px $realistic-shadow-color, 0 32px 64px -32px $realistic-shadow-color}
 
   :root[data-theme=light]
-    --brand-color:         #{dodgerblue}
-    --base-color:          #{hsl(210,  50%, 100%)   /*   -    */}
-    --form-color:          #{hsl(210,  50%, 100%)   /*   -    */}
-    --hover-color:         #{hsl(210,  50%,  95%)   /*  -5%   */}
-    --hover-active-color:  #{hsl(210,  50%,  90%)   /*  -5%   */}
-    --hairline-color:      #{hsl(210,  50%,  85%)   /*  -5%   */}
-    --soft-hairline-color: #{hsl(210,  50%,  90%)   /*  +5%   */}
-    --text-100-color:      #{hsl(210,  50%,  25%)   /*   -    */}
-    --text-200-color:      #{hsl(210,  50%,  37.5%) /* +12.5% */}
-    --text-300-color:      #{hsl(210,  50%,  50%)   /* +12.5% */}
-    --text-400-color:      #{hsl(210,  50%,  62.5%) /* +12.5% */}
+    --brand-color:            #{dodgerblue}
+    --base-color:             #{hsl(210,  50%, 100%)   /*   -    */}
+    --form-color:             #{hsl(210,  50%, 100%)   /*   -    */}
+    --hover-color:            #{hsl(210,  50%,  95%)   /*  -5%   */}
+    --hover-active-color:     #{hsl(210,  50%,  90%)   /*  -5%   */}
+    --hairline-color:         #{hsl(210,  50%,  85%)   /*  -5%   */}
+    --soft-hairline-color:    #{hsl(210,  50%,  90%)   /*  +5%   */}
+    --realistic-shadow-color: #{hsl(210,  50%,  85%)   /*   -    */}
+    --text-100-color:         #{hsl(210,  50%,  25%)   /*   -    */}
+    --text-200-color:         #{hsl(210,  50%,  37.5%) /* +12.5% */}
+    --text-300-color:         #{hsl(210,  50%,  50%)   /* +12.5% */}
+    --text-400-color:         #{hsl(210,  50%,  62.5%) /* +12.5% */}
 
   :root[data-theme=dark]
-    --brand-color:         #{dodgerblue}
-    --base-color:          #{hsl(210,  10%,   7.5%) /*   -    */}
-    --form-color:          #{hsl(210,  10%,  12.5%) /*  +5%   */}
-    --hover-color:         #{hsl(210,  10%,  12.5%) /*  +5%   */}
-    --hover-active-color:  #{hsl(210,  10%,  17.5%) /*  +5%   */}
-    --hairline-color:      #{hsl(210,  10%,  20%)   /*  +5%   */}
-    --soft-hairline-color: #{hsl(210,  10%,  15%)   /*  -5%   */}
-    --text-100-color:      #{hsl(210,  10%,  87.5%) /*   -    */}
-    --text-200-color:      #{hsl(210,  10%,  75%)   /* -12.5% */}
-    --text-300-color:      #{hsl(210,  10%,  62.5%) /* -12.5% */}
-    --text-400-color:      #{hsl(210,  10%,  50%)   /* -12.5% */}
+    --brand-color:            #{dodgerblue}
+    --base-color:             #{hsl(210,  10%,   7.5%) /*   -    */}
+    --form-color:             #{hsl(210,  10%,  12.5%) /*  +5%   */}
+    --hover-color:            #{hsl(210,  10%,  12.5%) /*  +5%   */}
+    --hover-active-color:     #{hsl(210,  10%,  17.5%) /*  +5%   */}
+    --hairline-color:         #{hsl(210,  10%,  20%)   /*  +5%   */}
+    --soft-hairline-color:    #{hsl(210,  10%,  15%)   /*  -5%   */}
+    --realistic-shadow-color: #{hsl(210,  10%,   2.5%) /*   -    */}
+    --text-100-color:         #{hsl(210,  10%,  87.5%) /*   -    */}
+    --text-200-color:         #{hsl(210,  10%,  75%)   /* -12.5% */}
+    --text-300-color:         #{hsl(210,  10%,  62.5%) /* -12.5% */}
+    --text-400-color:         #{hsl(210,  10%,  50%)   /* -12.5% */}
