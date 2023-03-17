@@ -12,10 +12,11 @@
   //// box-shadow: $inset-hairline-shadow
   cursor: text // Interaction
 
-  //// :root[data-theme=light] &:focus-within
-  ////   background-color: $base-color
-  ////   box-shadow: $inset-hairline-shadow
-  ////   //// cursor: text // Interaction
+  // Light mode only
+  :root[data-theme=light] &:focus-within
+    background-color: $base-color
+    box-shadow: $inset-hairline-shadow
+    //// cursor: text // Interaction
 
   //// // Overrides
   //// @at-root
@@ -30,7 +31,9 @@
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $text-200-color
-  .search-bar:focus-within &
+
+  // Light mode only
+  :root[data-theme=light] .search-bar:focus-within &
     color: $text-100-color
 
 .search-bar input[type=text]
