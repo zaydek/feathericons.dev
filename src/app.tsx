@@ -9,22 +9,24 @@ import * as wkPaymentsOriginalFilled from "@icons/wk/payments/original-filled/ts
 import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
 import {
+	Checkbox,
 	DEV_DebugCss,
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressSlider,
+	Radio,
 	SearchBar,
 	Select,
 	Sidebar,
 	SidebarOverlay,
 } from "@/components"
 import { resources } from "@/data"
-import { DynamicIcon, IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import { IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase, useVisibleDocumentTitle } from "@/lib"
 import {
 	ClipboardContext,
 	IconValue,
-	ICON_VALUE_DEFAULT,
-	PREFER_COLOR_DEFAULT,
+	MONOCHROME_DEFAULT,
+	RADIO_VALUE_DEFAULT,
 	RangeContext,
 	READONLY_CLIPBOARD_DEFAULT,
 	SearchContext,
@@ -42,10 +44,10 @@ import { useScrollProps } from "./use-scroll-props"
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutCtrlAToSelectAll() {
-	const { searchResults } = React.useContext(SearchContext)!
+	const { results } = React.useContext(SearchContext)!
 	const { setNamesStart, setNamesEnd } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (searchResults === null) return
+		if (results === null) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.target instanceof Element && e.target.tagName === "INPUT") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
@@ -57,7 +59,7 @@ function useShortcutCtrlAToSelectAll() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [searchResults, setNamesEnd, setNamesStart])
+	}, [results, setNamesEnd, setNamesStart])
 	return void 0
 }
 
@@ -70,9 +72,6 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 				removeAllNames()
 				setNamesStart(null)
 				setNamesEnd(null)
-				//// if (document.activeElement instanceof HTMLElement) {
-				//// 	document.activeElement.blur()
-				//// }
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
@@ -82,30 +81,30 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 }
 
 function useSideEffectRemoveAllNamesOnChange() {
-	const { iconValue } = React.useContext(SearchContext)!
+	const { radioValue } = React.useContext(SearchContext)!
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
 	React.useEffect(() => {
-		void iconValue
+		void radioValue
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
 		removeAllNames()
-	}, [iconValue, removeAllNames])
+	}, [radioValue, removeAllNames])
 	return void 0
 }
 
 function useSideEffectSelectNamesFromIndexes() {
-	const { searchResults } = React.useContext(SearchContext)!
+	const { results } = React.useContext(SearchContext)!
 	const { namesStart, namesEnd, addNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (searchResults === null) return
+		if (results === null) return
 		if (namesStart === null || namesEnd === null) return
 		const min = Math.min(namesStart, namesEnd)
 		const max = Math.max(namesStart, namesEnd)
-		addNames(...searchResults.slice(min, max + 1).map(([name]) => name))
-	}, [addNames, searchResults, namesEnd, namesStart])
+		addNames(...results.slice(min, max + 1).map(([name]) => name))
+	}, [addNames, namesEnd, namesStart, results])
 	return void 0
 }
 
@@ -121,8 +120,9 @@ function useSideEffectSetCssVars() {
 }
 
 function useSideEffectVisibleDocumentTitle() {
-	const { searchResults } = React.useContext(SearchContext)!
-	const count = (searchResults ?? []).length
+	const { results } = React.useContext(SearchContext)!
+	const count = (results ?? []).length
+	// TODO
 	// prettier-ignore
 	useVisibleDocumentTitle([
 		`${count} icon${count === 1 ? "" : "s"}`,
@@ -133,85 +133,12 @@ function useSideEffectVisibleDocumentTitle() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function Radio<T extends string>({
-	Icon,
-	children,
-	...props
-}: JSX.IntrinsicElements["input"] & React.PropsWithChildren & { Icon: IconComponent; value: T }) {
-	return (
-		<label
-			className="checkbox"
-			onClick={e => e.currentTarget.querySelector<HTMLInputElement>("input[type=radio])")!.click()}
-			onKeyDown={e => {
-				if (e.key === " ") {
-					e.preventDefault()
-					e.currentTarget.querySelector<HTMLInputElement>("input[type=radio])")!.click()
-				}
-			}}
-			tabIndex={0}
-		>
-			<div className="widget-align-icon-frame">
-				<DynamicIcon className="checkbox-icon" Icon={Icon} />
-			</div>
-			<span className="checkbox-type">{children}</span>
-			<div className="widget-align-icon-frame">
-				<input type="checkbox" {...props} tabIndex={-1} />
-			</div>
-		</label>
-	)
-}
-
-function Checkbox({
-	Icon,
-	children,
-	...props
-}: JSX.IntrinsicElements["input"] &
-	React.PropsWithChildren & { Icon: <P extends React.HTMLAttributes<HTMLDivElement>>(_: P) => JSX.Element }) {
-	return (
-		<label
-			className="checkbox"
-			onClick={e => e.currentTarget.querySelector<HTMLInputElement>("input[type=checkbox])")!.click()}
-			onKeyDown={e => {
-				if (e.key === " ") {
-					e.preventDefault()
-					e.currentTarget.querySelector<HTMLInputElement>("input[type=checkbox])")!.click()
-				}
-			}}
-			tabIndex={0}
-		>
-			<div className="widget-align-icon-frame">
-				<Icon className="checkbox-icon" />
-			</div>
-			<span className="checkbox-type">{children}</span>
-			<div className="widget-align-icon-frame">
-				<input type="checkbox" {...props} tabIndex={-1} />
-			</div>
-		</label>
-	)
-}
-
 function AppSidebar1() {
-	const scrollProps = useScrollProps()
-
 	const [, startTransition] = React.useTransition()
 
-	const {
-		iconValue,
-		setIconValue,
-		// eslint-disable-next-line destructuring/no-rename
-		//// feather: $feather,
-		//// setFeather,
-		//// wkBrands,
-		//// setWkBrands,
-		//// wkPayments,
-		//// setWkPayments,
-		//// wkPaymentsValue,
-		//// setWkPaymentsValue,
-		preferColor,
-		setPreferColor,
-		//// resetIcons,
-		//// resetIconPrefs,
-	} = React.useContext(SearchContext)!
+	const { radioValue, setRadioValue, monochrome, setMonochrome } = React.useContext(SearchContext)!
+
+	const scrollProps = useScrollProps()
 
 	return (
 		<Sidebar pos="start">
@@ -229,49 +156,57 @@ function AppSidebar1() {
 						<h6 className="widget-name-type">Icons</h6>
 						<button
 							className="widget-align-icon-frame"
-							onClick={e => startTransition(() => setIconValue(ICON_VALUE_DEFAULT))}
+							onClick={e => startTransition(() => setRadioValue(RADIO_VALUE_DEFAULT))}
 						>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 					<div>
 						<Radio<IconValue>
-							Icon={feather.Feather}
+							icon={feather.Feather}
 							type="radio"
 							name="icon-value"
 							value="feather"
-							checked={iconValue === "feather"}
-							onChange={e => startTransition(() => setIconValue("feather"))}
+							checked={radioValue === "feather"}
+							onChange={e => startTransition(() => setRadioValue("feather"))}
 						>
 							Feather
 						</Radio>
 						<Radio<IconValue>
-							Icon={preferColor ? wkBrandsOriginal.BrandTwitter : wkBrandsMono.BrandTwitter}
+							icon={monochrome ? wkBrandsMono.BrandTwitter : wkBrandsOriginal.BrandTwitter}
 							type="radio"
 							name="icon-value"
 							value="wk-brands"
-							checked={iconValue === "wk-brands"}
-							onChange={e => startTransition(() => setIconValue("wk-brands"))}
+							checked={radioValue === "wk-brands"}
+							onChange={e => startTransition(() => setRadioValue("wk-brands"))}
 						>
 							Brands
 						</Radio>
 						<Radio<IconValue>
-							Icon={preferColor ? wkPaymentsOriginal.CardMastercard : wkPaymentsMono.CardMastercard}
+							// prettier-ignore
+							icon={p => monochrome
+								? <wkPaymentsMono.CardMastercard {...p} data-type="payments" />
+								: <wkPaymentsOriginal.CardMastercard {...p} data-type="payments" />
+							}
 							type="radio"
 							name="icon-value"
 							value="wk-payments"
-							checked={iconValue === "wk-payments"}
-							onChange={e => startTransition(() => setIconValue("wk-payments"))}
+							checked={radioValue === "wk-payments"}
+							onChange={e => startTransition(() => setRadioValue("wk-payments"))}
 						>
 							Payments
 						</Radio>
 						<Radio<IconValue>
-							Icon={preferColor ? wkPaymentsOriginalFilled.CardMastercard : wkPaymentsMonoFilled.CardMastercard}
+							// prettier-ignore
+							icon={p => monochrome
+								? <wkPaymentsMonoFilled.CardMastercard {...p} data-type="payments" />
+								: <wkPaymentsOriginalFilled.CardMastercard {...p} data-type="payments" />
+							}
 							type="radio"
 							name="icon-value"
 							value="wk-payments-filled"
-							checked={iconValue === "wk-payments-filled"}
-							onChange={e => startTransition(() => setIconValue("wk-payments-filled"))}
+							checked={radioValue === "wk-payments-filled"}
+							onChange={e => startTransition(() => setRadioValue("wk-payments-filled"))}
 						>
 							Payments (filled)
 						</Radio>
@@ -289,7 +224,7 @@ function AppSidebar1() {
 						<span className="widget-name-type">Settings</span>
 						<button
 							className="widget-align-icon-frame"
-							onClick={e => startTransition(() => setPreferColor(PREFER_COLOR_DEFAULT))}
+							onClick={e => startTransition(() => setMonochrome(MONOCHROME_DEFAULT))}
 						>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
@@ -298,11 +233,11 @@ function AppSidebar1() {
 				<div className="widget-body">
 					<div>
 						<Checkbox
-							Icon={p => <div {...p} data-type="chroma" data-prefer-color={preferColor}></div>}
-							checked={preferColor}
-							onChange={e => startTransition(() => setPreferColor(e.currentTarget.checked))}
+							icon={p => <div {...p} data-type="monochrome" data-monochrome={monochrome}></div>}
+							checked={monochrome}
+							onChange={e => startTransition(() => setMonochrome(e.currentTarget.checked))}
 						>
-							Colorize
+							Monochrome
 						</Checkbox>
 					</div>
 				</div>
@@ -324,7 +259,7 @@ function AppSidebar1() {
 						{resources.map(resource => (
 							<a key={resource.href} className="resource" href={resource.href} {...safeAnchorAttrs}>
 								<div className="widget-align-icon-frame">
-									<resource.Icon className="resource-start-icon" />
+									<resource.icon className="resource-start-icon" />
 								</div>
 								<span className="resource-type">{resource.name}</span>
 								<div className="widget-align-icon-frame">
@@ -342,10 +277,10 @@ function AppSidebar1() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppSidebar2() {
-	const scrollProps = useScrollProps()
-
 	const { size, setSize, strokeWidth, setStrokeWidth } = React.useContext(RangeContext)!
 	const { format, setFormatAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
+
+	const scrollProps = useScrollProps()
 
 	useSideEffectSetCssVars()
 
@@ -415,13 +350,7 @@ function AppSidebar2() {
 				<div className="widget-body">
 					<div className="widget-align-frame">
 						{/* prettier-ignore */}
-						<ProgressSlider
-							value={size}
-							setValue={setSize}
-							min={SIZE_MIN}
-							max={SIZE_MAX}
-							step={SIZE_STEP}
-						/>
+						<ProgressSlider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</div>
 				<hr />
@@ -441,13 +370,7 @@ function AppSidebar2() {
 				<div className="widget-body">
 					<div className="widget-align-frame">
 						{/* prettier-ignore */}
-						<ProgressSlider
-							value={strokeWidth}
-							setValue={setStrokeWidth}
-							min={STROKE_MIN}
-							max={STROKE_MAX}
-							step={STROKE_STEP}
-						/>
+						<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 					</div>
 				</div>
 				<hr />
@@ -458,58 +381,10 @@ function AppSidebar2() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// function GridItemName({ name }: { name: string }) {
-//// 	const { format } = React.useContext(ClipboardContext)!
-////
-//// 	if (format === "svg") {
-//// 		return <>{toKebabCase(name).toLowerCase()}</>
-//// 	} else {
-//// 		const parts = name.split(/(?=[A-Z])/)
-//// 		return (
-//// 			<>
-//// 				{parts.map((p, index) => (
-//// 					<React.Fragment key={index}>
-//// 						{index > 0 && <wbr />}
-//// 						{p}
-//// 					</React.Fragment>
-//// 				))}
-//// 			</>
-//// 		)
-//// 	}
-//// }
-
-function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon: IconComponent }) {
+// eslint-disable-next-line destructuring/no-rename
+function MainGridItem({ index, name, icon: Icon }: { index: number; name: string; icon: IconComponent }) {
 	const { names, namesStart, setNamesStart, setNamesEnd, addNames, removeNames, removeAllNames } =
 		React.useContext(ClipboardContext)!
-
-	//// const handleClick = React.useCallback(
-	//// 	// Use HTMLElement because of <figure> and <span>
-	//// 	(e: React.MouseEvent<HTMLElement>) => {
-	//// 		e.stopPropagation() // Call e.stopPropagation() because of <main>
-	//// 		if (e.shiftKey) {
-	//// 			if (namesStart === null) {
-	//// 				setNamesStart(index)
-	//// 				setNamesEnd(index)
-	//// 			} else {
-	//// 				setNamesEnd(index)
-	//// 			}
-	//// 		} else {
-	//// 			if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-	//// 				if (names.has(name)) {
-	//// 					removeNames(name)
-	//// 				} else {
-	//// 					addNames(name)
-	//// 				}
-	//// 			} else {
-	//// 				removeAllNames()
-	//// 				addNames(name)
-	//// 			}
-	//// 			setNamesStart(index)
-	//// 			setNamesEnd(null)
-	//// 		}
-	//// 	},
-	//// 	[addNames, removeAllNames, index, name, removeNames, names, namesStart, setNamesEnd, setNamesStart],
-	//// )
 
 	return (
 		<article id={name} className="main-grid-item" data-selected={names.has(name)}>
@@ -549,21 +424,7 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 			>
 				<Icon className="main-grid-item-icon" />
 			</button>
-			<span className="main-grid-item-type">
-				{/* <span
-					//// onPointerDown={e => {
-					//// 	e.preventDefault()
-					//// }}
-					//// onClick={e => {
-					//// 	e.preventDefault() // Call e.preventDefault() because of text
-					//// 	handleClick(e)
-					//// }}
-					onClick={handleClick}
-				> */}
-				{/* <GridItemName name={name} /> */}
-				{toKebabCase(name).toLowerCase()}
-				{/* </span> */}
-			</span>
+			<span className="main-grid-item-type">{toKebabCase(name).toLowerCase()}</span>
 		</article>
 	)
 }
@@ -571,27 +432,8 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	//// const { feather, wkBrands, wkPayments, iconsAreCached, icons } = React.useContext(SearchContext)!
-	const { searchResults } = React.useContext(SearchContext)!
+	const { results } = React.useContext(SearchContext)!
 	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
-
-	//// const { setStarted } = React.useContext(ProgressBarContext)!
-	//// React.useEffect(() => {
-	//// 	if (iconsAreCached) return
-	//// 	setStarted(true)
-	//// 	const d = window.setTimeout(() => setStarted(false), 100)
-	//// 	return () => window.clearTimeout(d)
-	//// }, [iconsAreCached, setStarted])
-
-	//// // TODO: Extract to a named hook
-	//// const onceRef = React.useRef(false)
-	//// React.useEffect(() => {
-	//// 	if (!onceRef.current) {
-	//// 		onceRef.current = true
-	//// 		return
-	//// 	}
-	//// 	removeAllNames()
-	//// }, [removeAllNames, feather, wkBrands, wkPayments])
 
 	useShortcutCtrlAToSelectAll()
 	useShortcutEscToRemoveNamesStartAndEnd()
@@ -603,16 +445,13 @@ function AppMain() {
 	return (
 		<Main
 			onClick={e => {
-				//// if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item-icon-frame") === null) {
-				//// if (e.target instanceof HTMLElement && e.target.closest(".main-grid-item-icon-frame") === null) {
 				removeAllNames()
 				setNamesStart(null)
 				setNamesEnd(null)
-				//// }
 			}}
 		>
 			<div className="main-grid">
-				{searchResults === null
+				{results === null
 					? iota(64).map(index => (
 							<div key={index} className="sk-main-grid-item">
 								<div className="sk-main-grid-item-frame">
@@ -624,19 +463,9 @@ function AppMain() {
 							</div>
 					  ))
 					: // prettier-ignore
-					  searchResults.map(([name, Icon], index) => (
-							<MemoMainGridItem key={name} index={index} name={name} Icon={Icon} />
+					  results.map(([name, icon], index) => (
+							<MemoMainGridItem key={name} index={index} name={name} icon={icon} />
 						))}
-				{/* {iota(96).map(index => (
-					<div key={index} className="sk-main-grid-item">
-						<div className="sk-main-grid-item-frame">
-							<div className="sk-main-grid-item-icon"></div>
-						</div>
-						<div className="sk-main-grid-item-type-container">
-							<div className="sk-main-grid-item-type"></div>
-						</div>
-					</div>
-				))} */}
 			</div>
 		</Main>
 	)

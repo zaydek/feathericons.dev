@@ -2,10 +2,7 @@
 
 @use "../globals" as *
 
-//// .checkboxes .checkboxes
-////   margin-left: math.div($button-height, 2)
-
-.checkbox
+.radio
   display: flex
   align-items: center
   margin: -4px 0
@@ -16,34 +13,37 @@
   &:hover:active
     background-color: $hover-active-color
 
-.checkbox-icon:not([data-type])
+.radio-icon:not([data-type])
   height: $button-icon-height
   width:  $button-icon-height
   color:  $text-100-color
-.checkbox-icon[data-type=card]
+
+.radio-icon[data-type=payments]
   height: $button-icon-height
   max-width: $button-icon-height * 1.375
   color:  $text-100-color
-.checkbox-icon[data-type=chroma]
+
+.radio-icon[data-type=monochrome]
   height: $button-icon-height
   width:  $button-icon-height
-  color:  $text-100-color
-  &[data-prefer-color=false]
-    background-color: $text-100-color
-    // WebKit
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
-    -webkit-mask-size: cover
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
-    mask-size:  cover
-  &[data-prefer-color=true]
+  &[data-monochrome=false]
     background-image: linear-gradient(to right, #ff2e2e, #ffaa00, #f7ff00, #32ff00, #00ffd7, #3d00ff, #a900ff)
     // WebKit
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
-    -webkit-mask-size: cover
+    -webkit-mask-size:  cover
+    // Non-vendor
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
+    mask-size:  cover
+  &[data-monochrome=true]
+    background-color: $text-100-color
+    // WebKit
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
+    -webkit-mask-size:  cover
+    // Non-vendor
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='feather feather-circle' fill='currentColor' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10' /%3E%3C/svg%3E")
     mask-size:  cover
 
-.checkbox-type
+.radio-type
   flex: 1
   // TYPOGRAPHY
   +typography-sans

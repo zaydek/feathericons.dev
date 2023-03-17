@@ -58,7 +58,7 @@ export function Select({
 			</select>
 			<button className="select-button" tabIndex={-1}>
 				<div className="select-button-icon-frame">
-					<DynamicIcon className="select-button-icon" Icon={icons[value]} />
+					<DynamicIcon className="select-button-icon" icon={icons[value]} />
 				</div>
 				<span className="select-button-type">{names[value]}</span>
 				<div className="select-button-icon-frame">

@@ -1,5 +1,6 @@
 export type IconComponent = (_: JSX.IntrinsicElements["svg"]) => JSX.Element
 
-export function DynamicIcon({ Icon, ...props }: { Icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
+// eslint-disable-next-line destructuring/no-rename
+export function DynamicIcon({ icon: Icon, ...props }: { icon: IconComponent } & JSX.IntrinsicElements["svg"]) {
 	return <Icon {...props} />
 }

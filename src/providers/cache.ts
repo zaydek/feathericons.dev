@@ -1,5 +1,5 @@
 import { IconComponent } from "@/lib"
-import { IconValue } from "@/providers"
+import { IconValue as RadioValue } from "@/providers"
 
 export type TsConfigImportPath =
 	| "@icons/feather/tsx"
@@ -66,51 +66,9 @@ function createCache() {
 
 export const cache = createCache()
 
-//// export async function queryCache({
-//// 	feather,
-//// 	wkBrands,
-//// 	wkPayments,
-//// 	wkPaymentsValue,
-//// 	monochrome,
-//// }: {
-//// 	feather: boolean
-//// 	wkBrands: boolean
-//// 	wkPayments: boolean
-//// 	wkPaymentsValue: WkPaymentsValue
-//// 	monochrome: boolean
-//// }) {
-//// 	const args: IconAliasPath[] = []
-//// 	if (feather) {
-//// 		args.push("@icons/feather/tsx")
-//// 	}
-//// 	if (wkBrands) {
-//// 		if (monochrome) {
-//// 			args.push("@icons/wk/brands/original/tsx")
-//// 		} else {
-//// 			args.push("@icons/wk/brands/mono/tsx")
-//// 		}
-//// 	}
-//// 	if (wkPayments) {
-//// 		if (monochrome) {
-//// 			if (wkPaymentsValue === "normal") {
-//// 				args.push("@icons/wk/payments/original/tsx")
-//// 			} else {
-//// 				args.push("@icons/wk/payments/original-filled/tsx")
-//// 			}
-//// 		} else {
-//// 			if (wkPaymentsValue === "normal") {
-//// 				args.push("@icons/wk/payments/mono/tsx")
-//// 			} else {
-//// 				args.push("@icons/wk/payments/mono-filled/tsx")
-//// 			}
-//// 		}
-//// 	}
-//// 	return await cache.read(...args)
-//// }
-
-export async function queryCache2(iconValue: IconValue, { monochrome }: { monochrome: boolean }) {
+export async function queryCache(radioValue: RadioValue, { monochrome }: { monochrome: boolean }) {
 	const args: TsConfigImportPath[] = []
-	switch (iconValue) {
+	switch (radioValue) {
 		case "feather":
 			args.push("@icons/feather/tsx")
 			break
