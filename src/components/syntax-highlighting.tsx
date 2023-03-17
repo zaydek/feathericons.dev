@@ -53,6 +53,7 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 	const { highlighter } = React.useContext(ShikiContext)!
 	const [tokens, setTokens] = React.useState<shiki.IThemedToken[][] | null>(null)
 
+	// TODO: Make dark mode dynamic
 	React.useEffect(() => {
 		if (highlighter === null) return
 		const mode = getDarkMode() ? "github-dark" : "github-light"
