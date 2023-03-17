@@ -686,7 +686,7 @@ function AppMain() {
 		>
 			<div className="main-grid">
 				{searchResults === null
-					? iota(96).map(index => (
+					? iota(64).map(index => (
 							<div key={index} className="sk-main-grid-item">
 								<div className="sk-main-grid-item-frame">
 									<div className="sk-main-grid-item-icon"></div>

@@ -6,12 +6,24 @@
   display: flex
   align-items: center
   height: $button-height
-  background-color: $hover-active-color
+  background-color: $hover-color
   border-radius: 1e3px
+  //// box-shadow: 0 0 0 1px hsl(0, 0%, 100%, 0.1)
+  //// box-shadow: $inset-hairline-shadow
   cursor: text // Interaction
-  &:is(:hover, :focus-within)
+
+  :root[data-theme=light] &:is(:hover, :focus-within)
     background-color: $base-color
     box-shadow: $inset-hairline-shadow
+
+  //// // Overrides
+  //// @at-root
+  ////   :root[data-theme=light] .search-bar
+  ////     &:focus
+  ////       background-color: none
+  ////     box-shadow: $inset-hairline-shadow
+  ////   :root[data-theme=dark]  &
+  ////     box-shadow: inset 0 0 0 1px hsl(0, 0%, 100%, 0.1)
 
 .search-bar-icon
   height: 16px
