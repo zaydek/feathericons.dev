@@ -5,40 +5,6 @@ import { LayoutContext, SidebarState } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useSideEffectHtmlAndBodyScrollLocking() {
-	const { sidebar1, sidebar2 } = React.useContext(LayoutContext)!
-	React.useEffect(() => {
-		const hasMaximized = [sidebar1, sidebar2].some(s => s === "maximized")
-		if (hasMaximized) {
-			const targets = [document.documentElement, document.body]
-			for (const target of targets) {
-				target.style.overflow = "hidden"
-			}
-		} else {
-			const targets = [document.documentElement, document.body]
-			for (const target of targets) {
-				target.style.overflow = ""
-				if (target.style.length === 0) {
-					target.removeAttribute("style")
-				}
-			}
-		}
-		return () => {
-			const targets = [document.documentElement, document.body]
-			for (const target of targets) {
-				target.style.overflow = ""
-				if (target.style.length === 0) {
-					target.removeAttribute("style")
-				}
-			}
-		}
-	}, [sidebar1, sidebar2])
-	return void 0
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-// TODO: This should be a general purpose component not integrated to a context
 export function Sidebar({
 	pos,
 	children,
@@ -274,18 +240,53 @@ export function SidebarOverlay() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+function useEffectScrollLocking() {
+	const { sidebar1, sidebar2 } = React.useContext(LayoutContext)!
+	React.useEffect(() => {
+		const hasMaximized = [sidebar1, sidebar2].some(s => s === "maximized")
+		if (hasMaximized) {
+			const targets = [document.documentElement, document.body]
+			for (const target of targets) {
+				target.style.overflow = "hidden"
+			}
+		} else {
+			const targets = [document.documentElement, document.body]
+			for (const target of targets) {
+				target.style.overflow = ""
+				if (target.style.length === 0) {
+					target.removeAttribute("style")
+				}
+			}
+		}
+		return () => {
+			const targets = [document.documentElement, document.body]
+			for (const target of targets) {
+				target.style.overflow = ""
+				if (target.style.length === 0) {
+					target.removeAttribute("style")
+				}
+			}
+		}
+	}, [sidebar1, sidebar2])
+	return void 0
+}
+
+function Effects() {
+	useEffectScrollLocking()
+	return <></>
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 // Expose props for app.tsx (TODO)
 export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
 	const { sidebar1, sidebar2 } = React.useContext(LayoutContext)!!
-
-	// Register effects once
-	//// useShortcutFigmaStyleToggleSidebars()
-	useSideEffectHtmlAndBodyScrollLocking()
 
 	const open = sidebar1 === "maximized" || sidebar2 === "maximized"
 
 	return (
 		<>
+			<Effects />
 			<main
 				className="main"
 				// @ts-expect-error

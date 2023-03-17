@@ -37,7 +37,7 @@ import {
 	STROKE_MIN,
 	STROKE_STEP,
 } from "@/providers/constants"
-import { SideEffects } from "./side-effects"
+import { Effects } from "./effects"
 import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -376,7 +376,7 @@ function AppMain() {
 export function App() {
 	return (
 		<DEV_DebugCss>
-			<SideEffects />
+			<Effects />
 			<SidebarOverlay />
 			<AppSidebar1 />
 			<AppSidebar2 />

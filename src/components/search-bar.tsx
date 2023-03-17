@@ -7,7 +7,7 @@ import { ClipboardContext, SearchContext } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useSideEffectFocusOnMount(ref: React.RefObject<HTMLInputElement | null>) {
+function useEffectFocusOnMount(ref: React.RefObject<HTMLInputElement | null>) {
 	React.useEffect(() => {
 		ref.current!.focus()
 	}, [ref])
@@ -39,7 +39,7 @@ export function SearchBar() {
 	const ref = React.useRef<HTMLInputElement | null>(null)
 
 	useShortcutCtrlPOrKToToggleSearch(ref)
-	useSideEffectFocusOnMount(ref)
+	useEffectFocusOnMount(ref)
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
