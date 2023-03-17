@@ -43,7 +43,7 @@ import { useScrollProps } from "./use-scroll-props"
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppSidebar1() {
-	const [, startTransition] = React.useTransition()
+	const [, start] = React.useTransition()
 
 	const { setStarted } = React.useContext(ProgressBarContext)!
 	const { loading, iconset, setIconset, monochrome, setMonochrome } = React.useContext(SearchContext)!
@@ -57,7 +57,7 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
-				<div className="widget-head" data-pos="start">
+				<div className="widget-head" data-pos="search-bar">
 					<div className="widget-align-frame">
 						<SearchBar />
 					</div>
@@ -68,10 +68,7 @@ function AppSidebar1() {
 							<feather.Package className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
-						<button
-							className="widget-align-icon-frame"
-							onClick={e => startTransition(() => setIconset(ICONSET_VALUE_DEFAULT))}
-						>
+						<button className="widget-align-icon-frame" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
@@ -82,7 +79,7 @@ function AppSidebar1() {
 							name="icon-value"
 							value="feather"
 							checked={iconset === "feather"}
-							onChange={e => startTransition(() => setIconset("feather"))}
+							onChange={e => start(() => setIconset("feather"))}
 						>
 							Feather
 						</Radio>
@@ -92,7 +89,7 @@ function AppSidebar1() {
 							name="icon-value"
 							value="brands"
 							checked={iconset === "brands"}
-							onChange={e => startTransition(() => setIconset("brands"))}
+							onChange={e => start(() => setIconset("brands"))}
 						>
 							Brands
 						</Radio>
@@ -106,7 +103,7 @@ function AppSidebar1() {
 							name="icon-value"
 							value="payments"
 							checked={iconset === "payments"}
-							onChange={e => startTransition(() => setIconset("payments"))}
+							onChange={e => start(() => setIconset("payments"))}
 						>
 							Payments
 						</Radio>
@@ -120,7 +117,7 @@ function AppSidebar1() {
 							name="icon-value"
 							value="payments-filled"
 							checked={iconset === "payments-filled"}
-							onChange={e => startTransition(() => setIconset("payments-filled"))}
+							onChange={e => start(() => setIconset("payments-filled"))}
 						>
 							Payments (filled)
 						</Radio>
@@ -136,10 +133,7 @@ function AppSidebar1() {
 							<feather.Settings className="widget-name-start-icon" />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button
-							className="widget-align-icon-frame"
-							onClick={e => startTransition(() => setMonochrome(MONOCHROME_DEFAULT))}
-						>
+						<button className="widget-align-icon-frame" onClick={e => start(() => setMonochrome(MONOCHROME_DEFAULT))}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
@@ -149,7 +143,7 @@ function AppSidebar1() {
 						<Checkbox
 							icon={p => <div {...p} data-type="monochrome" data-monochrome={monochrome}></div>}
 							checked={!monochrome}
-							onChange={e => startTransition(() => setMonochrome(!e.currentTarget.checked))}
+							onChange={e => start(() => setMonochrome(!e.currentTarget.checked))}
 						>
 							Colorize
 						</Checkbox>
@@ -160,7 +154,7 @@ function AppSidebar1() {
 			<footer className="sidebar-foot">
 				<hr data-collapse />
 				{/* Widget */}
-				<div className="widget-head">
+				<div className="widget-head" data-pos="start">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
 							<feather.Globe className="widget-name-start-icon" />

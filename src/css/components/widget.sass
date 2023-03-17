@@ -22,9 +22,17 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 .widget-head
+  display: flex
+  flex-direction: column
+  gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
+
+  // Overrides
   &[data-pos=start]
     padding-top: $sidebar-padding-y
+  &[data-pos=search-bar]
+    padding-top: $sidebar-padding-y
+    padding-bottom: $sidebar-gap + 4px // 🧐
   &:has(+ [data-scroll=true]) // TODO: Change to [data-has]
     isolation: isolate // Preserve box-shadow
     box-shadow: $hairline-shadow-bottom
@@ -34,11 +42,15 @@
   flex-direction: column
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
+  padding-top: 0
+
+  // Overrides
+  &[data-pos=start]
+    padding-top: $sidebar-padding-y
   &[data-pos=syntax-highlighting]
     padding: 0
   &[data-pos=end]
     padding-bottom: $sidebar-padding-y
-  padding-top: 0
   .sidebar-head &
     overflow-y: auto
 
