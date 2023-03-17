@@ -1,12 +1,12 @@
 import React from "react"
 
 // prettier-ignore
-export const DarkModeContext = React.createContext<{
+export const ThemeContext = React.createContext<{
 	dark:    boolean
 	setDark: React.Dispatch<React.SetStateAction<boolean>>
 } | null>(null)
 
-export function DarkModeProvider({ children }: React.PropsWithChildren) {
+export function ThemeProvider({ children }: React.PropsWithChildren) {
 	const ref = React.useRef(window.matchMedia("(prefers-color-scheme: dark)"))
 	const [dark, setDark] = React.useState(ref.current.matches)
 
@@ -29,13 +29,13 @@ export function DarkModeProvider({ children }: React.PropsWithChildren) {
 	}, [dark])
 
 	return (
-		<DarkModeContext.Provider
+		<ThemeContext.Provider
 			value={{
 				dark,
 				setDark,
 			}}
 		>
 			{children}
-		</DarkModeContext.Provider>
+		</ThemeContext.Provider>
 	)
 }

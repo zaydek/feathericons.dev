@@ -6,6 +6,7 @@
     "/src/data",
     "/src/hooks",
     "/src/lib",
+    "/src/providers",
     "/src/state"
   ]
 }

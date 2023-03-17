@@ -2,21 +2,23 @@ import "@/css/index.sass"
 
 import { App } from "@/app"
 import { ProgresssBar } from "@/components"
-import { AppStateProvider, LayoutProvider, ProgressBarProvider, ShikiProvider } from "@/providers"
+import { AppStateProvider, LayoutProvider, ProgressBarProvider, ShikiProvider, ThemeProvider } from "@/providers"
 import { createRoot } from "react-dom/client"
 
 function ProvidedApp() {
 	return (
-		<ProgressBarProvider>
-			<ProgresssBar />
-			<ShikiProvider>
-				<LayoutProvider>
-					<AppStateProvider>
-						<App />
-					</AppStateProvider>
-				</LayoutProvider>
-			</ShikiProvider>
-		</ProgressBarProvider>
+		<ThemeProvider>
+			<ProgressBarProvider>
+				<ProgresssBar />
+				<ShikiProvider>
+					<LayoutProvider>
+						<AppStateProvider>
+							<App />
+						</AppStateProvider>
+					</LayoutProvider>
+				</ShikiProvider>
+			</ProgressBarProvider>
+		</ThemeProvider>
 	)
 }
 
