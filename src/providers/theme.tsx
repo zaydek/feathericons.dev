@@ -17,7 +17,6 @@ export function ThemeProvider({ children }: React.PropsWithChildren) {
 		ref.current.addEventListener("change", handleDarkMode, false)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		return () => ref.current.removeEventListener("change", handleDarkMode, false)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	React.useEffect(() => {

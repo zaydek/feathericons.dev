@@ -13,7 +13,6 @@ export function DEV_DebugCss({ children }: React.PropsWithChildren) {
 			}
 			window.addEventListener("keydown", handleKeyDown, false)
 			return () => window.removeEventListener("keydown", handleKeyDown, false)
-			// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, [])
 	}
 
