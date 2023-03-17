@@ -24,10 +24,10 @@ import { resources } from "@/data"
 import { IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase } from "@/lib"
 import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } from "@/providers"
 import {
+	CLIPBOARD_DEFAULT,
 	IconsetValue,
 	ICONSET_VALUE_DEFAULT,
 	MONOCHROME_DEFAULT,
-	READONLY_CLIPBOARD_DEFAULT,
 	SIZE_DEFAULT,
 	SIZE_MAX,
 	SIZE_MIN,
@@ -211,10 +211,7 @@ function AppSidebar2() {
 				</div>
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
-						<MemoSyntaxHighlighting
-							lang={format === "svg" ? "html" : "tsx"}
-							code={clipboard || READONLY_CLIPBOARD_DEFAULT}
-						/>
+						<MemoSyntaxHighlighting lang={format === "svg" ? "html" : "tsx"} code={clipboard || CLIPBOARD_DEFAULT} />
 					</div>
 					{/* <div className="action-buttons">
 						<button className="action-button">

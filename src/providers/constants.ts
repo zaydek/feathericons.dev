@@ -10,6 +10,7 @@ export const ICONSET_VALUE_DEFAULT: IconsetValue = "feather"
 export const MONOCHROME_DEFAULT = false
 
 ////////////////////////////////////////////////////////////////////////////////
+
 export const SIZE_MIN       = 16.0 // prettier-ignore
 export const SIZE_MAX       = 32.0 // prettier-ignore
 export const SIZE_STEP      =  1.0 // prettier-ignore
@@ -34,16 +35,17 @@ export type FormatValue =
 //// | "jpg"
 //// | "png"
 
-export const READONLY_CLIPBOARD_DEFAULT = `
-// Feather by @colebemis
+export const CLIPBOARD_DEFAULT = `
+// Feather icons by @colebemis
 // Licensed as MIT
 // Reuse allowed without attribution
 // https://github.com/feathericons/feather
 //
-// Logos by @thewolfkit
+// Brand & payment icons by @thewolfkit
 // Licensed as CC BY 4.0
 // Reuse allowed with attribution
 // https://thewolfkit.com
 //
 // Website by @username_ZAYDEK
+// https://github.com/zaydek/feathericons.dev
 `.trim()
