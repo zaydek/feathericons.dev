@@ -53,7 +53,7 @@
 //     <div class="widget-name-start-icon"></div>
 //   </div>
 //   <div class="widget-name-type">…</div>
-//   [<div class="widget-name-number-type">…</div>]
+//   [<div class="widget-name-range-type">…</div>]
 //   [<div class="widget-align-icon-frame">
 //     <div class="widget-name-end-icon"></div>
 //   </div>]
@@ -73,16 +73,16 @@
 .widget-name-end-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
-  color:  $text-300-color
+  color:  $text-400-color
   button:hover &
-    color: $text-200-color
+    color: $text-100-color
 
 .widget-name-type
   flex: 1
   +typography-caps
   color: $text-200-color
 
-.widget-name-number-type
+.widget-name-range-type
   display: flex
   justify-content: center
   align-items: center

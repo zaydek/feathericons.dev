@@ -165,7 +165,7 @@ function AppSidebar1() {
 						</div>
 						<h6 className="widget-name-type">Icons</h6>
 						<button className="widget-align-icon-frame" onClick={e => startTransition(resetIcons)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 					<div>
@@ -371,7 +371,7 @@ function AppSidebar1() {
 						</div>
 						<span className="widget-name-type">Settings</span>
 						<button className="widget-align-icon-frame" onClick={e => startTransition(resetIconPrefs)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 				</div>
@@ -426,7 +426,7 @@ function AppSidebar1() {
 								</div>
 								<span className="resource-type">{resource.name}</span>
 								<div className="widget-align-icon-frame">
-									<feather.ArrowUpRight className="resource-end-icon" strokeWidth={3.5} />
+									<feather.ArrowUpRight className="resource-end-icon" strokeWidth={3} />
 								</div>
 							</a>
 						))}
@@ -503,9 +503,9 @@ function AppSidebar2() {
 							<feather.PenTool className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Size</h6>
-						<span className="widget-name-number-type">{size.toFixed(0)} PX</span>
+						<span className="widget-name-range-type">{size.toFixed(0)} PX</span>
 						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 				</div>
@@ -528,9 +528,9 @@ function AppSidebar2() {
 							<feather.PenTool className="widget-name-start-icon" />
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
-						<span className="widget-name-number-type">{strokeWidth.toFixed(2)}</span>
+						<span className="widget-name-range-type">{strokeWidth.toFixed(2)}</span>
 						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 				</div>

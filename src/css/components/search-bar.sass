@@ -12,9 +12,10 @@
   //// box-shadow: $inset-hairline-shadow
   cursor: text // Interaction
 
-  :root[data-theme=light] &:is(:hover, :focus-within)
+  :root[data-theme=light] &:focus-within
     background-color: $base-color
     box-shadow: $inset-hairline-shadow
+    //// cursor: text // Interaction
 
   //// // Overrides
   //// @at-root
@@ -28,7 +29,7 @@
 .search-bar-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
-  color:  $text-400-color
+  color:  $text-200-color
   .search-bar:focus-within &
     color: $text-100-color
 
