@@ -5,7 +5,7 @@ import { ClipboardContext, RangeContext, SearchContext } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useEffectResetSearchAndNamesOnIconsetChanges() {
+function useEffectResetSearchAndSelectionOnIconset() {
 	const { setSearch, iconset } = React.useContext(SearchContext)!
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
@@ -45,16 +45,14 @@ function useEffectSetCssVars() {
 	return void 0
 }
 
-//// function useEffectSetSearchDataAttributes() {
-//// 	const {  } = React.useContext(RangeContext)!
-//// 	React.useEffect(() => {
-//// 		document.body.style.setProperty("--size", "" + size)
-//// 	}, [size])
-//// 	React.useEffect(() => {
-//// 		document.body.style.setProperty("--stroke-width", "" + strokeWidth)
-//// 	}, [strokeWidth])
-//// 	return void 0
-//// }
+// See main-grid.sass
+function useEffectSetIconsetAttribute() {
+	const { iconset } = React.useContext(SearchContext)!
+	React.useEffect(() => {
+		document.documentElement.setAttribute("data-iconset", iconset)
+	}, [iconset])
+	return void 0
+}
 
 function useEffectVisibleDocumentTitle() {
 	const { loading, searchResults } = React.useContext(SearchContext)!
@@ -108,9 +106,10 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Effects() {
-	useEffectResetSearchAndNamesOnIconsetChanges()
+	useEffectResetSearchAndSelectionOnIconset()
 	useEffectSelectNamesFromIndexes()
 	useEffectSetCssVars()
+	useEffectSetIconsetAttribute()
 	useEffectVisibleDocumentTitle()
 
 	useShortcutCtrlAToSelectAll()
