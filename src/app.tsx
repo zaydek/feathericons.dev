@@ -578,40 +578,63 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 	const { names, namesStart, setNamesStart, setNamesEnd, addNames, removeNames, removeAllNames } =
 		React.useContext(ClipboardContext)!
 
-	const handleClick = React.useCallback(
-		// Use HTMLElement because of <figure> and <span>
-		(e: React.MouseEvent<HTMLElement>) => {
-			e.stopPropagation() // Call e.stopPropagation() because of <main>
-			if (e.shiftKey) {
-				if (namesStart === null) {
-					setNamesStart(index)
-					setNamesEnd(index)
-				} else {
-					setNamesEnd(index)
-				}
-			} else {
-				if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
-					if (names.has(name)) {
-						removeNames(name)
-					} else {
-						addNames(name)
-					}
-				} else {
-					removeAllNames()
-					addNames(name)
-				}
-				setNamesStart(index)
-				setNamesEnd(null)
-			}
-		},
-		[addNames, removeAllNames, index, name, removeNames, names, namesStart, setNamesEnd, setNamesStart],
-	)
+	//// const handleClick = React.useCallback(
+	//// 	// Use HTMLElement because of <figure> and <span>
+	//// 	(e: React.MouseEvent<HTMLElement>) => {
+	//// 		e.stopPropagation() // Call e.stopPropagation() because of <main>
+	//// 		if (e.shiftKey) {
+	//// 			if (namesStart === null) {
+	//// 				setNamesStart(index)
+	//// 				setNamesEnd(index)
+	//// 			} else {
+	//// 				setNamesEnd(index)
+	//// 			}
+	//// 		} else {
+	//// 			if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
+	//// 				if (names.has(name)) {
+	//// 					removeNames(name)
+	//// 				} else {
+	//// 					addNames(name)
+	//// 				}
+	//// 			} else {
+	//// 				removeAllNames()
+	//// 				addNames(name)
+	//// 			}
+	//// 			setNamesStart(index)
+	//// 			setNamesEnd(null)
+	//// 		}
+	//// 	},
+	//// 	[addNames, removeAllNames, index, name, removeNames, names, namesStart, setNamesEnd, setNamesStart],
+	//// )
 
 	return (
 		<article id={name} className="main-grid-item" data-selected={names.has(name)}>
 			<button
 				className="main-grid-item-icon-frame"
-				onClick={handleClick}
+				onClick={e => {
+					e.stopPropagation() // Call e.stopPropagation() because of <main>
+					if (e.shiftKey) {
+						if (namesStart === null) {
+							setNamesStart(index)
+							setNamesEnd(index)
+						} else {
+							setNamesEnd(index)
+						}
+					} else {
+						if ((isMac() && e.metaKey) || (!isMac() && e.ctrlKey)) {
+							if (names.has(name)) {
+								removeNames(name)
+							} else {
+								addNames(name)
+							}
+						} else {
+							removeAllNames()
+							addNames(name)
+						}
+						setNamesStart(index)
+						setNamesEnd(null)
+					}
+				}}
 				onKeyDown={e => {
 					if (e.shiftKey) {
 						if (document.activeElement instanceof HTMLElement) {
@@ -623,7 +646,7 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 				<Icon className="main-grid-item-icon" />
 			</button>
 			<span className="main-grid-item-type">
-				<span
+				{/* <span
 					//// onPointerDown={e => {
 					//// 	e.preventDefault()
 					//// }}
@@ -632,10 +655,10 @@ function MainGridItem({ index, name, Icon }: { index: number; name: string; Icon
 					//// 	handleClick(e)
 					//// }}
 					onClick={handleClick}
-				>
-					{/* <GridItemName name={name} /> */}
-					{toKebabCase(name).toLowerCase()}
-				</span>
+				> */}
+				{/* <GridItemName name={name} /> */}
+				{toKebabCase(name).toLowerCase()}
+				{/* </span> */}
 			</span>
 		</article>
 	)
