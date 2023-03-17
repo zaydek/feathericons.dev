@@ -222,7 +222,7 @@ function AppSidebar2() {
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting lang={format === "svg" ? "html" : "tsx"} code={clipboard || CLIPBOARD_DEFAULT} />
-						<div className="action-buttons">
+						{/* <div className="action-buttons">
 							<button className="action-button">
 								<div className="action-button-icon-frame">
 									<feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
@@ -235,7 +235,7 @@ function AppSidebar2() {
 								</div>
 								<span className="action-button-name">Save</span>
 							</button>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</header>
