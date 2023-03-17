@@ -143,17 +143,7 @@ function AppSidebar1() {
 	const scrollProps = useScrollProps()
 
 	React.useEffect(() => {
-		if (fetchingResults) {
-			setStarted(true)
-		} else {
-			setStarted(false)
-		}
-		//// console.log({ resultsAreCached: fetchingResults })
-		//// if (fetchingResults) return
-		//// setStarted(true)
-		//// //// const d = window.setTimeout(() => setStarted(false), 100)
-		//// //// return () => window.clearTimeout(d)
-		//// return () => setStarted(false)
+		setStarted(fetchingResults)
 	}, [fetchingResults, setStarted])
 
 	return (

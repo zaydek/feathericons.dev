@@ -1,7 +1,7 @@
 import React from "react"
 
 import { IconComponent, toCanonCase, toKebabCase, useParam, useParamBoolean } from "@/lib"
-import { queryCache as queryIconset } from "./cache"
+import { cache, queryCache as queryIconset } from "./cache"
 
 // prettier-ignore
 export type IconValue =
@@ -84,9 +84,12 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 
 	React.useEffect(() => {
 		async function fn() {
-			_setFetchingResults(true)
+			if (cache.has(radioValue, { monochrome })) {
+				_setFetchingResults(false)
+			} else {
+				_setFetchingResults(true)
+			}
 			const [, iconset] = await queryIconset(radioValue, { monochrome })
-			//// _setFetchingResults(cached)
 			_setFetchingResults(false)
 			_setIconset(iconset)
 		}

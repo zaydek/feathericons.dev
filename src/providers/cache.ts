@@ -1,7 +1,9 @@
 import { IconComponent } from "@/lib"
 import { IconValue as RadioValue } from "@/providers"
 
-export type TsConfigImportPath =
+////////////////////////////////////////////////////////////////////////////////
+
+export type Iconset =
 	| "@icons/feather/tsx"
 	| "@icons/wk/brands/mono/tsx"
 	| "@icons/wk/brands/original/tsx"
@@ -11,11 +13,34 @@ export type TsConfigImportPath =
 	| "@icons/wk/payments/original-filled/tsx"
 
 function createCache() {
-	const cache = new Map<TsConfigImportPath, Record<string, IconComponent>>()
-	function has(arg: TsConfigImportPath) {
-		return cache.has(arg)
+	const cache = new Map<Iconset, Record<string, IconComponent>>()
+
+	function has(radioValue: RadioValue, { monochrome }: { monochrome: boolean }) {
+		switch (radioValue) {
+			case "feather":
+				return cache.has("@icons/feather/tsx")
+			case "wk-brands":
+				if (monochrome) {
+					return cache.has("@icons/wk/brands/mono/tsx")
+				} else {
+					return cache.has("@icons/wk/brands/original/tsx")
+				}
+			case "wk-payments":
+				if (monochrome) {
+					return cache.has("@icons/wk/payments/mono/tsx")
+				} else {
+					return cache.has("@icons/wk/payments/original/tsx")
+				}
+			case "wk-payments-filled":
+				if (monochrome) {
+					return cache.has("@icons/wk/payments/mono-filled/tsx")
+				} else {
+					return cache.has("@icons/wk/payments/original-filled/tsx")
+				}
+		}
 	}
-	async function read(...args: TsConfigImportPath[]) {
+
+	async function fetch(...args: Iconset[]) {
 		let cached = true
 		const chain: Promise<Record<string, IconComponent>>[] = []
 		for (const arg of args) {
@@ -60,13 +85,16 @@ function createCache() {
 		}, [])
 		return [cached, normalized] as const
 	}
-	return { has, read }
+
+	return { has, fetch }
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 export const cache = createCache()
 
 export async function queryCache(radioValue: RadioValue, { monochrome }: { monochrome: boolean }) {
-	const args: TsConfigImportPath[] = []
+	const args: Iconset[] = []
 	switch (radioValue) {
 		case "feather":
 			args.push("@icons/feather/tsx")
@@ -93,5 +121,5 @@ export async function queryCache(radioValue: RadioValue, { monochrome }: { monoc
 			}
 			break
 	}
-	return await cache.read(...args)
+	return await cache.fetch(...args)
 }
