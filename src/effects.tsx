@@ -45,6 +45,17 @@ function useEffectSetCssVars() {
 	return void 0
 }
 
+//// function useEffectSetSearchDataAttributes() {
+//// 	const {  } = React.useContext(RangeContext)!
+//// 	React.useEffect(() => {
+//// 		document.body.style.setProperty("--size", "" + size)
+//// 	}, [size])
+//// 	React.useEffect(() => {
+//// 		document.body.style.setProperty("--stroke-width", "" + strokeWidth)
+//// 	}, [strokeWidth])
+//// 	return void 0
+//// }
+
 function useEffectVisibleDocumentTitle() {
 	const { loading, searchResults } = React.useContext(SearchContext)!
 	const count = (searchResults ?? []).length

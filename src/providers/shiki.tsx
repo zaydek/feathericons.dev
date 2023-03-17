@@ -16,6 +16,7 @@ export function ShikiProvider({ children }: React.PropsWithChildren) {
 			setHighlighter(highlighter)
 		}
 		init()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (

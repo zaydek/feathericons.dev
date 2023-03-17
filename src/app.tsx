@@ -67,7 +67,7 @@ function AppSidebar1() {
 						<div className="widget-align-icon-frame">
 							<feather.Package className="widget-name-start-icon" />
 						</div>
-						<h6 className="widget-name-type">Icons</h6>
+						<h6 className="widget-name-type">Iconsets</h6>
 						<button className="widget-align-icon-frame" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>

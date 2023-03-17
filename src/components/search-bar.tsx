@@ -2,24 +2,25 @@ import React from "react"
 
 import * as feather from "@icons/feather/tsx"
 
-import { isMac, useStrictlyMount } from "@/lib"
+import { isMac } from "@/lib"
 import { ClipboardContext, SearchContext } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 function useEffectFocusAndSelectOnMount(ref: React.RefObject<HTMLInputElement | null>) {
 	const { search } = React.useContext(SearchContext)!
-	useStrictlyMount(() => {
+	React.useEffect(() => {
 		ref.current!.focus()
 		if (search !== "") {
 			ref.current!.select()
 		}
-	})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 	return void 0
 }
 
 function useShortcutCtrlPOrKToToggleSearch(ref: React.RefObject<HTMLInputElement | null>) {
-	useStrictlyMount(() => {
+	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && (e.key === "p" || e.key === "k")) {
 				e.preventDefault() // 🖨️
@@ -32,7 +33,8 @@ function useShortcutCtrlPOrKToToggleSearch(ref: React.RefObject<HTMLInputElement
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 	return void 0
 }
 

@@ -1,7 +1,5 @@
 import React from "react"
 
-import { useStrictlyMount } from "@/lib"
-
 // prettier-ignore
 export const SelectContext = React.createContext<{
 	open:             boolean
@@ -157,9 +155,10 @@ export function Option({ value, children, ...props }: OptionProps) {
 	const ctx = React.useContext(SelectContext)!
 	const ref = React.useRef<HTMLDivElement | null>(null)
 
-	useStrictlyMount(() => {
+	React.useEffect(() => {
 		ctx.setValues(curr => [...curr, value])
-	})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	React.useEffect(() => {
 		if (!ctx.open) return
