@@ -44,7 +44,7 @@ export function SearchBar() {
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
 			<div className="widget-align-icon-frame">
-				<feather.Search className="search-bar-icon" strokeWidth={3} />
+				<feather.Search className="search-bar-icon" strokeWidth={3.5} />
 			</div>
 			<input
 				ref={ref}

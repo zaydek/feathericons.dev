@@ -22,6 +22,7 @@ $soft-hairline-color:      var(--soft-hairline-color)
 $text-100-color:           var(--text-100-color)
 $text-200-color:           var(--text-200-color)
 $text-300-color:           var(--text-300-color)
+$text-400-color:           var(--text-400-color)
 
 // TODO: Add shadow-color?
 $inset-hairline-shadow:    var(--inset-hairline-shadow)
@@ -50,13 +51,14 @@ $realistic-shadow:         var(--realistic-shadow)
     --brand-color:         #{dodgerblue}
     --base-color:          #{hsl(210,  50%, 100%)}
     --form-color:          #{hsl(210,  50%, 100%)}
-    --hover-color:         #{hsl(210,  50%,  95%) /* -5% */}
-    --hover-active-color:  #{hsl(210,  50%,  90%) /* -5% */}
-    --hairline-color:      #{hsl(210,  50%,  85%) /* -5% */}
-    --soft-hairline-color: #{hsl(210,  50%,  90%) /* +5% */}
+    --hover-color:         #{hsl(210,  50%,  95%)   /*  -5%   */}
+    --hover-active-color:  #{hsl(210,  50%,  90%)   /*  -5%   */}
+    --hairline-color:      #{hsl(210,  50%,  85%)   /*  -5%   */}
+    --soft-hairline-color: #{hsl(210,  50%,  90%)   /*  +5%   */}
     --text-100-color:      #{hsl(210,  50%,  25%)}
-    --text-200-color:      #{hsl(210,  50%,  37.5%)}
-    --text-300-color:      #{hsl(210,  50%,  50%)}
+    --text-200-color:      #{hsl(210,  50%,  37.5%) /* +12.5% */}
+    --text-300-color:      #{hsl(210,  50%,  50%)   /* +12.5% */}
+    --text-400-color:      #{hsl(210,  50%,  62.5%) /* +12.5% */}
 
   :root[data-theme=dark]
     --brand-color:         #{dodgerblue}
@@ -69,3 +71,4 @@ $realistic-shadow:         var(--realistic-shadow)
     --text-100-color:      #{hsl(210,  25%,  90%)}
     --text-200-color:      #{hsl(210,  25%,  90%)}
     --text-300-color:      #{hsl(210,  25%,  75%)}
+    --text-400-color:      #{hsl(210,  25%,  75%)}
