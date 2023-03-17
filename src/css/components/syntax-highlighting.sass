@@ -29,30 +29,35 @@ pre.syntax-highlighting
   justify-content: center
   align-items: center
   height: 32px
-  background-color: red // TODO
+  background-color: $form-color
   //// background-color: $base-color
   border-radius: 1e3px
-  //// box-shadow: $inset-hairline-shadow, $realistic-shadow
+  box-shadow: $hairline-shadow, $realistic-shadow
   /// box-shadow: $inset-hairline-shadow
   //// &:hover
   ////   background-color: orange
+  &:hover
+    background-color: $hover-color
   &:hover:active
-    background-color: orange
+    background-color: $hover-active-color
+
 .action-button-icon-frame
   display: flex
   justify-content: flex-start
   align-items: center
   height: 32px
   width: 32px - math.div($tiny-icon-height, 1.5)
+
 .action-button-icon
   height: $tiny-icon-height
-  width: $tiny-icon-height
-  color: green
+  width:  $tiny-icon-height
+  color:  $text-100-color
+
 .action-button-name
-  font: 425 13px / 1.25 $sans
-  font-feature-settings: 'tnum'
+  // TYPOGRAPHY
+  +typography-caps
   //// text-align: center
-  color: green
+  color: $text-100-color
   //// font: 500 11px / normal $sans
   //// letter-spacing: 0.05em
   //// text-transform: uppercase
