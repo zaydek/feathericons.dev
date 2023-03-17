@@ -39,17 +39,8 @@
 
     <!-- Dark mode -->
     <script>
-      //// const media = window.matchMedia("(prefers-color-scheme: dark)");
-      //// function handleThemeChange(matches) {
-      ////   const theme = matches ? "dark" : "light";
-      ////   document.documentElement.setAttribute("data-theme", theme);
-      //// }
-      //// handleThemeChange(media.matches);
-      //// media.addEventListener("change", (e) => {
-      ////   handleThemeChange(e.matches);
-      //// }, false);
       const media = window.matchMedia("(prefers-color-scheme: dark)");
-      const theme = matches ? "dark" : "light";
+      const theme = media.matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", theme);
     </script>
   </head>
