@@ -333,8 +333,22 @@ function MainGridItem({ index, name, icon: Icon }: { index: number; name: string
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	const { searchResults } = React.useContext(SearchContext)!
+	const { iconset, searchResults } = React.useContext(SearchContext)!
 	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
+
+	let count: number
+	switch (iconset) {
+		case "feather":
+			count = 287
+			break
+		case "brands":
+			count = 30
+			break
+		case "payments":
+		case "payments-filled":
+			count = 40
+			break
+	}
 
 	return (
 		<Main
@@ -346,7 +360,7 @@ function AppMain() {
 		>
 			<div className="main-grid">
 				{searchResults === null
-					? iota(64).map(index => (
+					? iota(count).map(index => (
 							<div key={index} className="sk-main-grid-item">
 								<div className="sk-main-grid-item-frame">
 									<div className="sk-main-grid-item-icon"></div>

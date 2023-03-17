@@ -194,7 +194,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 			return
 		}
 		let clipboard = ""
-		const [keys, hasMore] = getKeys(names, { limit: 10 })
+		const { keys, more } = getKeys(names, { limit: 20 })
 		for (const [index, name] of keys.entries()) {
 			if (index > 0) {
 				clipboard += "\n\n"
@@ -224,7 +224,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 				})
 			}
 		}
-		if (hasMore) {
+		if (more) {
 			if (format === "svg") {
 				clipboard += `\n\n<!-- ... -->`
 			} else {
