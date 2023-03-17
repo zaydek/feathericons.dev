@@ -43,9 +43,10 @@ export function SearchBar() {
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 
 	const ref = React.useRef<HTMLInputElement | null>(null)
+	const [focus, setFocus] = React.useState(false)
 
-	useShortcutCtrlPOrKToToggleSearch(ref)
 	useEffectFocusAndSelectOnMount(ref)
+	useShortcutCtrlPOrKToToggleSearch(ref)
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
@@ -55,9 +56,16 @@ export function SearchBar() {
 			<input
 				ref={ref}
 				type="text"
-				//// placeholder={isMac() ? "⌘P to focus" : "Ctrl-P to focus"}
-				//// placeholder="Search"
+				//// // prettier-ignore
+				//// placeholder={focus
+				//// 	? "Esc to clear"
+				//// 	: isMac() ? "⌘P to focus" : "Ctrl-P to focus"
+				//// }
+				// prettier-ignore
+				placeholder={isMac() ? "⌘P to focus" : "Ctrl-P to focus"}
 				value={search}
+				onFocus={e => setFocus(true)}
+				onBlur={e => setFocus(false)}
 				onKeyDown={e => {
 					if (e.key === "Escape") {
 						setSearch("")
