@@ -148,10 +148,10 @@ function AppSidebar1() {
 					<div>
 						<Checkbox
 							icon={p => <div {...p} data-type="monochrome" data-monochrome={monochrome}></div>}
-							checked={monochrome}
-							onChange={e => startTransition(() => setMonochrome(e.currentTarget.checked))}
+							checked={!monochrome}
+							onChange={e => startTransition(() => setMonochrome(!e.currentTarget.checked))}
 						>
-							Monochrome
+							Colorize
 						</Checkbox>
 					</div>
 				</div>
