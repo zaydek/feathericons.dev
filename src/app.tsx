@@ -22,15 +22,12 @@ import {
 } from "@/components"
 import { resources } from "@/data"
 import { IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase, useVisibleDocumentTitle } from "@/lib"
+import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } from "@/providers"
 import {
-	ClipboardContext,
-	IconValue,
+	IconsetValue,
+	ICONSET_VALUE_DEFAULT,
 	MONOCHROME_DEFAULT,
-	ProgressBarContext,
-	RADIO_VALUE_DEFAULT,
-	RangeContext,
 	READONLY_CLIPBOARD_DEFAULT,
-	SearchContext,
 	SIZE_DEFAULT,
 	SIZE_MAX,
 	SIZE_MIN,
@@ -39,16 +36,16 @@ import {
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
-} from "@/providers"
+} from "@/providers/constants"
 import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutCtrlAToSelectAll() {
-	const { results } = React.useContext(SearchContext)!
+	const { searchResults } = React.useContext(SearchContext)!
 	const { setNamesStart, setNamesEnd } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (results === null) return
+		if (searchResults === null) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (e.target instanceof Element && e.target.tagName === "INPUT") return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
@@ -60,7 +57,7 @@ function useShortcutCtrlAToSelectAll() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [results, setNamesEnd, setNamesStart])
+	}, [searchResults, setNamesEnd, setNamesStart])
 	return void 0
 }
 
@@ -82,30 +79,30 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 }
 
 function useSideEffectRemoveAllNamesOnChange() {
-	const { radioValue } = React.useContext(SearchContext)!
+	const { iconset } = React.useContext(SearchContext)!
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
 	React.useEffect(() => {
-		void radioValue
+		void iconset
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
 		removeAllNames()
-	}, [radioValue, removeAllNames])
+	}, [iconset, removeAllNames])
 	return void 0
 }
 
 function useSideEffectSelectNamesFromIndexes() {
-	const { results } = React.useContext(SearchContext)!
+	const { searchResults } = React.useContext(SearchContext)!
 	const { namesStart, namesEnd, addNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (results === null) return
+		if (searchResults === null) return
 		if (namesStart === null || namesEnd === null) return
 		const min = Math.min(namesStart, namesEnd)
 		const max = Math.max(namesStart, namesEnd)
-		addNames(...results.slice(min, max + 1).map(([name]) => name))
-	}, [addNames, namesEnd, namesStart, results])
+		addNames(...searchResults.slice(min, max + 1).map(([name]) => name))
+	}, [addNames, namesEnd, namesStart, searchResults])
 	return void 0
 }
 
@@ -121,8 +118,8 @@ function useSideEffectSetCssVars() {
 }
 
 function useSideEffectVisibleDocumentTitle() {
-	const { results } = React.useContext(SearchContext)!
-	const count = (results ?? []).length
+	const { searchResults } = React.useContext(SearchContext)!
+	const count = (searchResults ?? []).length
 	// TODO
 	// prettier-ignore
 	useVisibleDocumentTitle([
@@ -138,13 +135,13 @@ function AppSidebar1() {
 	const [, startTransition] = React.useTransition()
 
 	const { setStarted } = React.useContext(ProgressBarContext)!
-	const { fetchingResults, radioValue, setRadioValue, monochrome, setMonochrome } = React.useContext(SearchContext)!
+	const { loading, iconset, setIconset, monochrome, setMonochrome } = React.useContext(SearchContext)!
 
 	const scrollProps = useScrollProps()
 
 	React.useEffect(() => {
-		setStarted(fetchingResults)
-	}, [fetchingResults, setStarted])
+		setStarted(loading)
+	}, [loading, setStarted])
 
 	return (
 		<Sidebar pos="start">
@@ -162,33 +159,33 @@ function AppSidebar1() {
 						<h6 className="widget-name-type">Icons</h6>
 						<button
 							className="widget-align-icon-frame"
-							onClick={e => startTransition(() => setRadioValue(RADIO_VALUE_DEFAULT))}
+							onClick={e => startTransition(() => setIconset(ICONSET_VALUE_DEFAULT))}
 						>
 							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 					<div>
-						<Radio<IconValue>
+						<Radio<IconsetValue>
 							icon={feather.Feather}
 							type="radio"
 							name="icon-value"
 							value="feather"
-							checked={radioValue === "feather"}
-							onChange={e => startTransition(() => setRadioValue("feather"))}
+							checked={iconset === "feather"}
+							onChange={e => startTransition(() => setIconset("feather"))}
 						>
 							Feather
 						</Radio>
-						<Radio<IconValue>
+						<Radio<IconsetValue>
 							icon={monochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
 							type="radio"
 							name="icon-value"
 							value="wk-brands"
-							checked={radioValue === "wk-brands"}
-							onChange={e => startTransition(() => setRadioValue("wk-brands"))}
+							checked={iconset === "wk-brands"}
+							onChange={e => startTransition(() => setIconset("wk-brands"))}
 						>
 							Brands
 						</Radio>
-						<Radio<IconValue>
+						<Radio<IconsetValue>
 							// prettier-ignore
 							icon={p => monochrome
 								? <wkPaymentsMono.Mastercard {...p} data-type="payments" />
@@ -197,12 +194,12 @@ function AppSidebar1() {
 							type="radio"
 							name="icon-value"
 							value="wk-payments"
-							checked={radioValue === "wk-payments"}
-							onChange={e => startTransition(() => setRadioValue("wk-payments"))}
+							checked={iconset === "wk-payments"}
+							onChange={e => startTransition(() => setIconset("wk-payments"))}
 						>
 							Payments
 						</Radio>
-						<Radio<IconValue>
+						<Radio<IconsetValue>
 							// prettier-ignore
 							icon={p => monochrome
 								? <wkPaymentsMonoFilled.Mastercard {...p} data-type="payments" />
@@ -211,8 +208,8 @@ function AppSidebar1() {
 							type="radio"
 							name="icon-value"
 							value="wk-payments-filled"
-							checked={radioValue === "wk-payments-filled"}
-							onChange={e => startTransition(() => setRadioValue("wk-payments-filled"))}
+							checked={iconset === "wk-payments-filled"}
+							onChange={e => startTransition(() => setIconset("wk-payments-filled"))}
 						>
 							Payments (filled)
 						</Radio>
@@ -284,21 +281,16 @@ function AppSidebar1() {
 
 function AppSidebar2() {
 	const { size, setSize, strokeWidth, setStrokeWidth } = React.useContext(RangeContext)!
-	const { format, setFormatAs, readOnlyClipboard } = React.useContext(ClipboardContext)!
+	const { format, setFormatAs, clipboard } = React.useContext(ClipboardContext)!
 
 	const scrollProps = useScrollProps()
 
 	useSideEffectSetCssVars()
 
-	const onceRef = React.useRef(false)
 	React.useEffect(() => {
-		if (!onceRef.current) {
-			onceRef.current = true
-			return
-		}
-		if (document.visibilityState === "hidden") return // DEV
-		navigator.clipboard.writeText(readOnlyClipboard)
-	}, [readOnlyClipboard])
+		if (clipboard === "") return
+		navigator.clipboard.writeText(clipboard)
+	}, [clipboard])
 
 	return (
 		<Sidebar pos="end">
@@ -318,7 +310,7 @@ function AppSidebar2() {
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting
 							lang={format === "svg" ? "html" : "tsx"}
-							code={readOnlyClipboard || READONLY_CLIPBOARD_DEFAULT}
+							code={clipboard || READONLY_CLIPBOARD_DEFAULT}
 						/>
 					</div>
 					{/* <div className="action-buttons">
@@ -438,7 +430,7 @@ function MainGridItem({ index, name, icon: Icon }: { index: number; name: string
 const MemoMainGridItem = React.memo(MainGridItem)
 
 function AppMain() {
-	const { results } = React.useContext(SearchContext)!
+	const { searchResults } = React.useContext(SearchContext)!
 	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
 
 	useShortcutCtrlAToSelectAll()
@@ -457,7 +449,7 @@ function AppMain() {
 			}}
 		>
 			<div className="main-grid">
-				{results === null
+				{searchResults === null
 					? iota(64).map(index => (
 							<div key={index} className="sk-main-grid-item">
 								<div className="sk-main-grid-item-frame">
@@ -469,7 +461,7 @@ function AppMain() {
 							</div>
 					  ))
 					: // prettier-ignore
-					  results.map(([name, icon], index) => (
+					  searchResults.map(([name, icon], index) => (
 							<MemoMainGridItem key={name} index={index} name={name} icon={icon} />
 						))}
 			</div>

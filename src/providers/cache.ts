@@ -1,5 +1,5 @@
 import { IconComponent } from "@/lib"
-import { IconValue as RadioValue } from "@/providers"
+import { IconsetValue as RadioValue } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 

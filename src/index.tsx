@@ -2,14 +2,7 @@ import "@/css/index.sass"
 
 import { App } from "@/app"
 import { ProgresssBar } from "@/components"
-import {
-	ClipboardProvider,
-	LayoutProvider,
-	ProgressBarProvider,
-	RangeProvider,
-	SearchProvider,
-	ShikiProvider,
-} from "@/providers"
+import { AppStateProvider, LayoutProvider, ProgressBarProvider, ShikiProvider } from "@/providers"
 import { createRoot } from "react-dom/client"
 
 function ProvidedApp() {
@@ -18,13 +11,9 @@ function ProvidedApp() {
 			<ProgresssBar />
 			<ShikiProvider>
 				<LayoutProvider>
-					<SearchProvider>
-						<RangeProvider>
-							<ClipboardProvider>
-								<App />
-							</ClipboardProvider>
-						</RangeProvider>
-					</SearchProvider>
+					<AppStateProvider>
+						<App />
+					</AppStateProvider>
 				</LayoutProvider>
 			</ShikiProvider>
 		</ProgressBarProvider>
