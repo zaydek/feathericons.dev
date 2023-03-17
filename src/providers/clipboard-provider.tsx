@@ -6,8 +6,8 @@ import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/ut
 // prettier-ignore
 export type FormatValue =
 	| "svg"
-	| "jsx" // TODO
-	| "tsx" // TODO
+	| "jsx"
+	| "tsx"
 	| "strict-jsx"
 	| "strict-tsx"
 //// | "strict-jsx-rn"
@@ -31,8 +31,11 @@ export const READONLY_CLIPBOARD_DEFAULT = `
 
 // prettier-ignore
 export const ClipboardContext = React.createContext<{
+	// Format
 	format:            FormatValue
 	setFormatAs:       React.Dispatch<React.SetStateAction<FormatValue>>
+
+	// Names
 	names:             Set<string>
 	namesStart:        number | null
 	setNamesStart:     React.Dispatch<React.SetStateAction<number | null>>
@@ -41,6 +44,8 @@ export const ClipboardContext = React.createContext<{
 	addNames:          (...names: string[]) => void
 	removeNames:       (...names: string[]) => void
 	removeAllNames:    () => void
+
+	// Clipboard
 	readOnlyClipboard: string
 } | null>(null)
 
@@ -144,8 +149,11 @@ export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 	return (
 		<ClipboardContext.Provider
 			value={{
+				// Format
 				format,
 				setFormatAs,
+
+				// Names
 				names,
 				namesStart,
 				setNamesStart,
@@ -154,6 +162,8 @@ export function ClipboardProvider({ children }: { children: React.ReactNode }) {
 				addNames,
 				removeNames,
 				removeAllNames,
+
+				// Clipboard
 				readOnlyClipboard,
 			}}
 		>
