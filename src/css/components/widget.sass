@@ -27,7 +27,6 @@
   gap: $sidebar-gap
   padding: $sidebar-gap $sidebar-padding-x
 
-  // Overrides
   &[data-pos=start]
     padding-top: $sidebar-padding-y
   &[data-pos=search-bar]
@@ -44,7 +43,6 @@
   padding: $sidebar-gap $sidebar-padding-x
   padding-top: 0
 
-  // Overrides
   &[data-pos=start]
     padding-top: $sidebar-padding-y
   &[data-pos=syntax-highlighting]
@@ -56,6 +54,9 @@
 
 // Create a container because of added padding-bottom (overflow-y must be separated)
 .widget-syntax-highlighting-container
+  display: flex
+  flex-direction: column
+  gap: $sidebar-gap
   padding-bottom: $sidebar-gap
 
 ////////////////////////////////////////////////////////////////////////////////

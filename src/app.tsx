@@ -195,6 +195,16 @@ function AppSidebar2() {
 		navigator.clipboard.writeText(clipboard)
 	}, [clipboard])
 
+	// TODO: Inline?
+	const handleClickCopy = React.useCallback(() => {
+		navigator.clipboard.writeText(clipboard)
+	}, [clipboard])
+
+	// TODO: Inline?
+	const handleClickSave = React.useCallback(() => {
+		// ...
+	}, [])
+
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
@@ -212,22 +222,21 @@ function AppSidebar2() {
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting lang={format === "svg" ? "html" : "tsx"} code={clipboard || CLIPBOARD_DEFAULT} />
+						<div className="action-buttons">
+							<button className="action-button">
+								<div className="action-button-icon-frame">
+									<feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
+								</div>
+								<span className="action-button-name">Copy</span>
+							</button>
+							<button className="action-button">
+								<div className="action-button-icon-frame">
+									<feather.Download className="action-button-icon" onClick={handleClickSave} />
+								</div>
+								<span className="action-button-name">Save</span>
+							</button>
+						</div>
 					</div>
-					{/* <div className="action-buttons">
-						<button className="action-button">
-							<div className="action-button-icon-frame">
-								<Feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
-							</div>
-							<span className="action-button-name">Copy</span>
-						</button>
-						<button className="action-button">
-							<div className="action-button-icon-frame">
-								<Feather.Download className="action-button-icon" onClick={handleClickSave} />
-							</div>
-							<span className="action-button-name">Save</span>
-						</button>
-					</div> */}
-					{/* </section> */}
 				</div>
 			</header>
 			<div className="sidebar-body">
