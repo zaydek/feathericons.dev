@@ -2,20 +2,24 @@ import React from "react"
 
 import * as feather from "@icons/feather/tsx"
 
-import { isMac } from "@/lib"
+import { isMac, useStrictlyMount } from "@/lib"
 import { ClipboardContext, SearchContext } from "@/providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useEffectFocusOnMount(ref: React.RefObject<HTMLInputElement | null>) {
-	React.useEffect(() => {
+function useEffectFocusAndSelectOnMount(ref: React.RefObject<HTMLInputElement | null>) {
+	const { search } = React.useContext(SearchContext)!
+	useStrictlyMount(() => {
 		ref.current!.focus()
-	}, [ref])
+		if (search !== "") {
+			ref.current!.select()
+		}
+	})
 	return void 0
 }
 
 function useShortcutCtrlPOrKToToggleSearch(ref: React.RefObject<HTMLInputElement | null>) {
-	React.useEffect(() => {
+	useStrictlyMount(() => {
 		function handleKeyDown(e: KeyboardEvent) {
 			if ((isMac() ? e.metaKey : e.ctrlKey) && (e.key === "p" || e.key === "k")) {
 				e.preventDefault() // 🖨️
@@ -28,7 +32,7 @@ function useShortcutCtrlPOrKToToggleSearch(ref: React.RefObject<HTMLInputElement
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [ref])
+	})
 	return void 0
 }
 
@@ -39,7 +43,7 @@ export function SearchBar() {
 	const ref = React.useRef<HTMLInputElement | null>(null)
 
 	useShortcutCtrlPOrKToToggleSearch(ref)
-	useEffectFocusOnMount(ref)
+	useEffectFocusAndSelectOnMount(ref)
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>

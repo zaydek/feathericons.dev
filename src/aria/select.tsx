@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useMount } from "@/lib"
+import { useStrictlyMount } from "@/lib"
 
 // prettier-ignore
 export const SelectContext = React.createContext<{
@@ -157,7 +157,7 @@ export function Option({ value, children, ...props }: OptionProps) {
 	const ctx = React.useContext(SelectContext)!
 	const ref = React.useRef<HTMLDivElement | null>(null)
 
-	useMount(() => {
+	useStrictlyMount(() => {
 		ctx.setValues(curr => [...curr, value])
 	})
 

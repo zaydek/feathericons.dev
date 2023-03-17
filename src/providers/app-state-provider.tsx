@@ -139,7 +139,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 	//////////////////////////////////////////////////////////////////////////////
 
 	const [format, setFormatAs] = useParam<FormatValue>({
-		key: "export-as",
+		key: "format",
 		initialValue: "svg",
 		parser: value => {
 			switch (value) {
@@ -207,20 +207,20 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 				})
 			} else if (format === "jsx") {
 				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=jsx`,
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=jsx`,
 				})
 			} else if (format === "tsx") {
 				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
 				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=tsx`,
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
 				})
 			} else if (format === "strict-jsx") {
 				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=strict-jsx`,
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-jsx`,
 				})
 			} else if (format === "strict-tsx") {
 				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=strict-tsx`,
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-tsx`,
 				})
 			}
 		}
