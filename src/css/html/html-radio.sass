@@ -11,7 +11,10 @@ input[type=radio]
   width: $radio-height
   background-color: $form-color
   border-radius: 1e3px
-  box-shadow: $hairline-shadow, $realistic-shadow
+  &:not(:checked)
+    box-shadow: $hairline-shadow, $realistic-shadow
+  &:checked
+    box-shadow: $realistic-shadow
   &::before
     content: ""        // Pseudo reset
     position: absolute // Pseudo reset
