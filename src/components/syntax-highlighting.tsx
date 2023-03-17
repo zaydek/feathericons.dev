@@ -3,7 +3,7 @@ import React from "react"
 import * as shiki from "shiki-es"
 
 import { getDarkMode, safeAnchorAttrs } from "@/lib"
-import { ShikiContext } from "@/providers"
+import { ShikiContext, ThemeContext } from "@/providers"
 
 function TwitterUsername({ username, children }: { username: string; children: string }) {
 	const href = `https://twitter.com/${username}`
@@ -50,16 +50,16 @@ function Tokenize({ color, children }: { color?: string; children: string }) {
 }
 
 function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
+	const { dark } = React.useContext(ThemeContext)!
 	const { highlighter } = React.useContext(ShikiContext)!
 	const [tokens, setTokens] = React.useState<shiki.IThemedToken[][] | null>(null)
 
-	// TODO: Make dark mode dynamic
 	React.useEffect(() => {
 		if (highlighter === null) return
-		const mode = getDarkMode() ? "github-dark" : "github-light"
-		const tokens = highlighter.codeToThemedTokens(code, code.startsWith("//") ? "js" : lang, mode)
+		const theme = dark ? "github-dark" : "github-light"
+		const tokens = highlighter.codeToThemedTokens(code, code.startsWith("//") ? "js" : lang, theme)
 		setTokens(tokens)
-	}, [code, highlighter, lang])
+	}, [code, dark, highlighter, lang])
 
 	return (
 		<pre className="syntax-highlighting">
@@ -73,8 +73,8 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 									<Tokenize
 										// prettier-ignore
 										color={getDarkMode()
-											? "rgb(139, 148, 158)" // E.g. github-dark
-											: "rgb(110, 119, 129)" // E.g. github-light
+											? "rgb(139, 148, 158)"
+											: "rgb(110, 119, 129)"
 										}
 									>
 										{line}
