@@ -2,13 +2,11 @@
 
 @use "../globals" as *
 
-$select-height: 32px
+$select-height: 28px
 
 .select
   position: relative
 
-// <select>…</select>
-//
 .select select
   position: absolute
   height: 100%       // Inherit
@@ -16,9 +14,6 @@ $select-height: 32px
   border-radius: 1e3px
   color: transparent // 👻
 
-// <select>…</select>
-// <button>…</button>
-//
 .select-button
   display: flex
   justify-content: center

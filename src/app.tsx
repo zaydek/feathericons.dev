@@ -308,7 +308,7 @@ function AppSidebar2() {
 						<div className="widget-align-icon-frame">
 							<feather.Clipboard className="widget-name-start-icon" />
 						</div>
-						<h6 className="widget-name-type">Clipboard</h6>
+						<h6 className="widget-name-type">Copy as</h6>
 						<div className="widget-align-frame">
 							<Select value={format} setValue={setFormatAs} />
 						</div>
