@@ -1,7 +1,7 @@
 import React from "react"
 
 import { IconComponent, toCanonCase, toKebabCase, useParam, useParamBoolean } from "@/lib"
-import { queryCache } from "./cache"
+import { queryCache as queryIconset } from "./cache"
 
 // prettier-ignore
 export type IconValue =
@@ -16,17 +16,18 @@ export const MONOCHROME_DEFAULT = false
 // prettier-ignore
 export const SearchContext = React.createContext<{
 	// Search
-  search:        string
-  setSearch:     React.Dispatch<React.SetStateAction<string>>
-	results:       ([string, IconComponent])[] | null
+  search:          string
+  setSearch:       React.Dispatch<React.SetStateAction<string>>
+	fetchingResults: boolean
+	results:         ([string, IconComponent])[] | null
 
 	// Icons
-	radioValue:    IconValue
-	setRadioValue: React.Dispatch<React.SetStateAction<IconValue>>
+	radioValue:      IconValue
+	setRadioValue:   React.Dispatch<React.SetStateAction<IconValue>>
 
 	// Preferences
-  monochrome:    boolean
-  setMonochrome: React.Dispatch<React.SetStateAction<boolean>>
+  monochrome:      boolean
+  setMonochrome:   React.Dispatch<React.SetStateAction<boolean>>
 } | null>(null)
 
 //// export function canonicalize(str: string) {
@@ -44,20 +45,19 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 		serializer: toCanonCase,
 	})
 
-	//// // TODO: Move up? To search?
-	//// const [iconsAreCached, setCached] = React.useState(false)
-	const [_icons, _setIcons] = React.useState<[string, IconComponent][] | null>(null)
+	const [fetchingResults, _setFetchingResults] = React.useState(false)
+	const [_iconset, _setIconset] = React.useState<[string, IconComponent][] | null>(null)
 
 	// TODO: Search tags
 	const results = React.useMemo(() => {
-		if (_icons === null) return null
+		if (_iconset === null) return null
 		const canon = toCanonCase(search)
 		if (canon === "") {
-			return _icons
+			return _iconset
 		} else {
-			return _icons?.filter(([name]) => toKebabCase(name).toLowerCase().includes(canon))
+			return _iconset?.filter(([name]) => toKebabCase(name).toLowerCase().includes(canon))
 		}
-	}, [_icons, search])
+	}, [_iconset, search])
 
 	//////////////////////////////////////////////////////////////////////////////
 
@@ -84,10 +84,11 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 
 	React.useEffect(() => {
 		async function fn() {
-			//// const [cached, icons] = await queryCache({
-			const [, icons] = await queryCache(radioValue, { monochrome })
-			//// setCached(cached)
-			_setIcons(icons)
+			_setFetchingResults(true)
+			const [, iconset] = await queryIconset(radioValue, { monochrome })
+			//// _setFetchingResults(cached)
+			_setFetchingResults(false)
+			_setIconset(iconset)
 		}
 		fn()
 	}, [monochrome, radioValue])
@@ -98,6 +99,7 @@ export function SearchProvider({ children }: React.PropsWithChildren) {
 				// Search
 				search,
 				setSearch,
+				fetchingResults,
 				results,
 
 				// Icons

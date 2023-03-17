@@ -26,6 +26,7 @@ import {
 	ClipboardContext,
 	IconValue,
 	MONOCHROME_DEFAULT,
+	ProgressBarContext,
 	RADIO_VALUE_DEFAULT,
 	RangeContext,
 	READONLY_CLIPBOARD_DEFAULT,
@@ -136,9 +137,24 @@ function useSideEffectVisibleDocumentTitle() {
 function AppSidebar1() {
 	const [, startTransition] = React.useTransition()
 
-	const { radioValue, setRadioValue, monochrome, setMonochrome } = React.useContext(SearchContext)!
+	const { setStarted } = React.useContext(ProgressBarContext)!
+	const { fetchingResults, radioValue, setRadioValue, monochrome, setMonochrome } = React.useContext(SearchContext)!
 
 	const scrollProps = useScrollProps()
+
+	React.useEffect(() => {
+		if (fetchingResults) {
+			setStarted(true)
+		} else {
+			setStarted(false)
+		}
+		//// console.log({ resultsAreCached: fetchingResults })
+		//// if (fetchingResults) return
+		//// setStarted(true)
+		//// //// const d = window.setTimeout(() => setStarted(false), 100)
+		//// //// return () => window.clearTimeout(d)
+		//// return () => setStarted(false)
+	}, [fetchingResults, setStarted])
 
 	return (
 		<Sidebar pos="start">
