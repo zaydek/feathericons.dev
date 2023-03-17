@@ -77,9 +77,9 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 		parser: value => {
 			switch (value) {
 				case "feather":
-				case "wk-brands":
-				case "wk-payments":
-				case "wk-payments-filled":
+				case "brands":
+				case "payments":
+				case "payments-filled":
 					return value
 			}
 			return ICONSET_VALUE_DEFAULT
@@ -202,25 +202,25 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 			const search = toKebabCase(name).toLowerCase()
 			const svg = document.getElementById(name)!.querySelector("svg")!
 			if (format === "svg") {
-				clipboard += transformSvg(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `<!-- https://feathericons.dev/?search=${search} -->`,
+				clipboard += transformSvg(formatSvg(svg, { strictJsx: false }), {
+					banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
 				})
 			} else if (format === "jsx") {
-				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=jsx`,
+				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=jsx`,
 				})
 			} else if (format === "tsx") {
 				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
-				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!0 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=tsx`,
+				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=tsx`,
 				})
 			} else if (format === "strict-jsx") {
-				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=strict-jsx`,
+				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=strict-jsx`,
 				})
 			} else if (format === "strict-tsx") {
-				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: !!1 }), {
-					banner: `// https://feathericons.dev/?search=${search}&export-as=strict-tsx`,
+				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&export-as=strict-tsx`,
 				})
 			}
 		}
@@ -232,7 +232,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 			}
 		}
 		_setClipboard(clipboard)
-	}, [format, names])
+	}, [format, iconset, names])
 
 	//////////////////////////////////////////////////////////////////////////////
 

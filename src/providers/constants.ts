@@ -1,9 +1,9 @@
 // prettier-ignore
 export type IconsetValue =
 	| "feather"
-	| "wk-brands"
-	| "wk-payments"
-	| "wk-payments-filled"
+	| "brands"
+	| "payments"
+	| "payments-filled"
 
 export const ICONSET_VALUE_DEFAULT: IconsetValue = "feather"
 

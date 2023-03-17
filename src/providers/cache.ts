@@ -1,5 +1,5 @@
 import { IconComponent } from "@/lib"
-import { IconsetValue as RadioValue } from "@/providers"
+import { IconsetValue } from "./constants"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -15,23 +15,23 @@ export type Iconset =
 function createCache() {
 	const cache = new Map<Iconset, Record<string, IconComponent>>()
 
-	function has(radioValue: RadioValue, { monochrome }: { monochrome: boolean }) {
+	function has(radioValue: IconsetValue, { monochrome }: { monochrome: boolean }) {
 		switch (radioValue) {
 			case "feather":
 				return cache.has("@icons/feather/tsx")
-			case "wk-brands":
+			case "brands":
 				if (monochrome) {
 					return cache.has("@icons/wk/brands/mono/tsx")
 				} else {
 					return cache.has("@icons/wk/brands/original/tsx")
 				}
-			case "wk-payments":
+			case "payments":
 				if (monochrome) {
 					return cache.has("@icons/wk/payments/mono/tsx")
 				} else {
 					return cache.has("@icons/wk/payments/original/tsx")
 				}
-			case "wk-payments-filled":
+			case "payments-filled":
 				if (monochrome) {
 					return cache.has("@icons/wk/payments/mono-filled/tsx")
 				} else {
@@ -93,27 +93,27 @@ function createCache() {
 
 export const cache = createCache()
 
-export async function queryCache(radioValue: RadioValue, { monochrome }: { monochrome: boolean }) {
+export async function queryCache(radioValue: IconsetValue, { monochrome }: { monochrome: boolean }) {
 	const args: Iconset[] = []
 	switch (radioValue) {
 		case "feather":
 			args.push("@icons/feather/tsx")
 			break
-		case "wk-brands":
+		case "brands":
 			if (monochrome) {
 				args.push("@icons/wk/brands/mono/tsx")
 			} else {
 				args.push("@icons/wk/brands/original/tsx")
 			}
 			break
-		case "wk-payments":
+		case "payments":
 			if (monochrome) {
 				args.push("@icons/wk/payments/mono/tsx")
 			} else {
 				args.push("@icons/wk/payments/original/tsx")
 			}
 			break
-		case "wk-payments-filled":
+		case "payments-filled":
 			if (monochrome) {
 				args.push("@icons/wk/payments/mono-filled/tsx")
 			} else {

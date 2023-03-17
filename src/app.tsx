@@ -90,9 +90,9 @@ function AppSidebar1() {
 							icon={monochrome ? wkBrandsMono.Twitter : wkBrandsOriginal.Twitter}
 							type="radio"
 							name="icon-value"
-							value="wk-brands"
-							checked={iconset === "wk-brands"}
-							onChange={e => startTransition(() => setIconset("wk-brands"))}
+							value="brands"
+							checked={iconset === "brands"}
+							onChange={e => startTransition(() => setIconset("brands"))}
 						>
 							Brands
 						</Radio>
@@ -104,9 +104,9 @@ function AppSidebar1() {
 							}
 							type="radio"
 							name="icon-value"
-							value="wk-payments"
-							checked={iconset === "wk-payments"}
-							onChange={e => startTransition(() => setIconset("wk-payments"))}
+							value="payments"
+							checked={iconset === "payments"}
+							onChange={e => startTransition(() => setIconset("payments"))}
 						>
 							Payments
 						</Radio>
@@ -118,9 +118,9 @@ function AppSidebar1() {
 							}
 							type="radio"
 							name="icon-value"
-							value="wk-payments-filled"
-							checked={iconset === "wk-payments-filled"}
-							onChange={e => startTransition(() => setIconset("wk-payments-filled"))}
+							value="payments-filled"
+							checked={iconset === "payments-filled"}
+							onChange={e => startTransition(() => setIconset("payments-filled"))}
 						>
 							Payments (filled)
 						</Radio>

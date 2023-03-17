@@ -1,7 +1,7 @@
 import { detab, tab } from "@/lib"
 
 // prettier-ignore
-export function transformSvg(_: string, icon: string, { banner = "" }: { banner?: string } = {}) {
+export function transformSvg(icon: string, { banner = "" }: { banner?: string } = {}) {
 	icon = icon
 		.trim()
 		.replace(/<svg ([^>]+)>/, `<svg $1>`) // No-op
