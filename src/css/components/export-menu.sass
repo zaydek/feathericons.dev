@@ -1,0 +1,80 @@
+@use "sass:math"
+
+@use "../globals" as *
+
+$select-height: 24px
+
+.export-menu
+  display: flex
+  align-items: center
+
+////////////////////////////////////////////////////////////////////////////////
+
+.select
+  position: relative
+
+.select select
+  position: absolute
+  height: 100%       // Inherit
+  width:  100%       // Inherit
+  border-radius: 1e3px
+  color: transparent // 👻
+
+.select-button
+  display: flex
+  justify-content: center
+  align-items: center
+  //// padding-right: 16px
+  //// padding: 0 4px // Nudge
+  //// padding-right: 4px
+  height: $select-height
+  background-color: $form-color
+  border-radius: 1e3px
+  box-shadow: $hairline-shadow
+  //// box-shadow: $hairline-shadow, $realistic-shadow
+
+.select-button-icon-frame
+  display: flex
+  justify-content: center
+  align-items: center
+  height: $select-height
+  width:  $select-height
+  &:first-of-type
+    margin-left: 4px // 🧐
+
+.select-button-start-icon
+  height: $tiny-icon-height
+  width:  $tiny-icon-height
+  // 🫢
+  //// color:  $text-200-color
+
+.select-button-end-icon
+  height: 10px
+  width:  10px
+  color:  $text-400-color
+
+.select-button-type
+  // TYPOGRAPHY
+  //// +typography-reduced-sans
+  +typography-caps
+  color: $text-200-color
+
+////////////////////////////////////////////////////////////////////////////////
+
+.action-button-icon-frame
+  display: flex
+  justify-content: center
+  align-items: center
+  height: $select-height
+  width:  $select-height
+  border-radius: 1e3px
+  &:first-of-type
+    margin-left: math.div($select-height - $tiny-icon-height, 2)
+
+.action-button-icon
+  height: $tiny-icon-height
+  width:  $tiny-icon-height
+  color:  $text-300-color
+  button:hover &
+    color: $text-100-color
+  //// background-color: gray
