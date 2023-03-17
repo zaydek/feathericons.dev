@@ -63,7 +63,7 @@ function SyntaxHighlighting({ lang, code }: { lang: string; code: string }) {
 
 	return (
 		<pre className="syntax-highlighting">
-			<code className="syntax-highlighting-code">
+			<code>
 				{tokens === null
 					? code.split("\n").map((line, index) => (
 							// Lines

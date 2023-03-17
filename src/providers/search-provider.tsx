@@ -14,11 +14,14 @@ const PREFER_COLOR_DEFAULT      = !!1 // prettier-ignore
 
 // prettier-ignore
 export const SearchContext = React.createContext<{
+	// Search
   search:             string
   setSearch:          React.Dispatch<React.SetStateAction<string>>
 	//// iconsAreCached:     boolean
   //// icons:              ([string, IconComponent])[] | null
 	searchResults:      ([string, IconComponent])[] | null
+
+	// Icons
   feather:            boolean
   setFeather:         React.Dispatch<React.SetStateAction<boolean>>
   wkBrands:           boolean
@@ -28,6 +31,8 @@ export const SearchContext = React.createContext<{
   wkPaymentsValue:    WkPaymentsValue
   setWkPaymentsValue: React.Dispatch<React.SetStateAction<WkPaymentsValue>>
   resetIcons:         () => void
+
+	// Preferences
   preferColor:        boolean
   setPreferColor:     React.Dispatch<React.SetStateAction<boolean>>
   resetIconPrefs:     () => void
