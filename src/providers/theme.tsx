@@ -20,11 +20,7 @@ export function ThemeProvider({ children }: React.PropsWithChildren) {
 	}, [])
 
 	React.useEffect(() => {
-		if (dark) {
-			document.body.setAttribute("dark", "true")
-		} else {
-			document.body.removeAttribute("dark")
-		}
+		document.documentElement.setAttribute("data-theme", dark ? "dark" : "light")
 	}, [dark])
 
 	return (
