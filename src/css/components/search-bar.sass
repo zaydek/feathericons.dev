@@ -26,9 +26,11 @@
   ////     box-shadow: inset 0 0 0 1px hsl(0, 0%, 100%, 0.1)
 
 .search-bar-icon
-  height: 16px
-  width:  16px
-  color:  $text-200-color
+  height: $tiny-icon-height
+  width:  $tiny-icon-height
+  color:  $text-400-color
+  .search-bar:focus-within &
+    color: $text-100-color
 
 .search-bar input[type=text]
   flex: 1             // Stretch x-axis
@@ -36,6 +38,6 @@
   +typography-sans
   color: $text-100-color
   //// &::placeholder
-  ////   opacity: 0.5
+  ////   color: $text-300-color
   //// &:focus-visible::placeholder
-  ////   opacity: 0
+  ////   color: transparent
