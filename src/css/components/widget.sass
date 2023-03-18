@@ -7,7 +7,10 @@
 // EXPERIMENTAL
 .widget-alignment-frame
   display: flex
-  align-items: center
+  &:not([data-col])
+    align-items: center
+  &[data-col]
+    flex-direction: column
   margin: 0 math.div($button-height - $tiny-icon-height, 2)
   & + :is(.widget-alignment-frame, .widget-alignment-icon-frame)
     margin-left:  0
@@ -21,40 +24,39 @@
   align-items: center
   height: $button-height
   width:  $button-height
-
   & + :is(.widget-alignment-frame, .widget-alignment-icon-frame)
     margin-left:  0
   &[data-clip=end]
     margin-right: 0
 
-// TODO: DEPRECATE
-.widget-align-frame
-  display: flex
-  flex-direction: column
-  justify-content: center // Center y-axis
-  padding: 0 math.div($button-height - $tiny-icon-height, 2)
-
-// TODO: DEPRECATE
-.widget-align-icon-frame
-  display: flex
-  justify-content: center // Center x-axis
-  align-items: center     // Center y-axis
-  margin: 0 math.div($button-height - 24px, 2)
-  height: 24px
-  width:  24px
-  border-radius: 1e3px
+//// // TODO: DEPRECATE
+//// .widget-align-frame
+////   display: flex
+////   flex-direction: column
+////   justify-content: center // Center y-axis
+////   padding: 0 math.div($button-height - $tiny-icon-height, 2)
+////
+//// // TODO: DEPRECATE
+//// .widget-align-icon-frame
+////   display: flex
+////   justify-content: center // Center x-axis
+////   align-items: center     // Center y-axis
+////   margin: 0 math.div($button-height - 24px, 2)
+////   height: 24px
+////   width:  24px
+////   border-radius: 1e3px
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.idea
-  display: flex
-  align-items: center
-  margin: 0 math.div($button-height - $tiny-icon-height, 2)
-  //// border-radius: 1e3px
-  & + &
-    margin-left: 0
+//// .idea
+////   display: flex
+////   align-items: center
+////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
+////   //// border-radius: 1e3px
+////   & + &
+////     margin-left: 0
 
-.widget-head-padding
+.widget-head
   //// display: flex
   //// //// justify-content: space-between
   //// align-items: center
@@ -71,7 +73,21 @@
     isolation: isolate // Preserve box-shadow
     box-shadow: $hairline-shadow-bottom
 
-.widget-head
+// <div class="widget-head">
+//   <div class="widget-name">
+//     ...
+//   </div>
+// </div>
+//
+// OR
+//
+// <div class="widget-body">
+//   <div class="widget-name">
+//     ...
+//   </div>
+// </div>
+//
+.widget-name
   display: flex
   //// justify-content: space-between
   align-items: center
@@ -120,7 +136,7 @@
   display: flex
   align-items: center
   height: 24px
-  background-color: $base-color
+  //// background-color: $base-color
 
 .widget-name-start-icon
   height: $tiny-icon-height

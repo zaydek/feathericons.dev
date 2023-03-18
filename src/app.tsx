@@ -213,8 +213,8 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<div className="widget-head-padding" data-pos="start">
-					<div className="widget-head">
+				<div className="widget-head" data-pos="start">
+					<div className="widget-name">
 						<div className="widget-alignment-frame">
 							<FormatButton value={format} setValue={setFormatAs} />
 						</div>
@@ -234,8 +234,8 @@ function AppSidebar2() {
 			<div className="sidebar-body">
 				<hr />
 				{/* WIDGET */}
-				<div className="widget-head-padding">
-					<div className="widget-head">
+				<div className="widget-head">
+					<div className="widget-name">
 						<div className="widget-alignment-frame">
 							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
 						</div>
@@ -249,16 +249,17 @@ function AppSidebar2() {
 					</div>
 				</div>
 				<div className="widget-body">
-					<div className="widget-align-frame">
+					{/* Use [data-col] because of <input type="range"> */}
+					<div className="widget-alignment-frame" data-col>
 						{/* prettier-ignore */}
 						<ProgressSlider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
 				</div>
 				<hr />
 				{/* WIDGET */}
-				<div className="widget-head-padding">
-					<div className="widget-head">
-						<div className="widget-alignment-frame">
+				<div className="widget-head">
+					<div className="widget-name">
+						<div className="widget-alignment-frame" data-col>
 							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
@@ -271,7 +272,8 @@ function AppSidebar2() {
 					</div>
 				</div>
 				<div className="widget-body">
-					<div className="widget-align-frame">
+					{/* Use [data-col] because of <input type="range"> */}
+					<div className="widget-alignment-frame" data-col>
 						{/* prettier-ignore */}
 						<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 					</div>
