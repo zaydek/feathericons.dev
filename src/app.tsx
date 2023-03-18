@@ -31,11 +31,12 @@ import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } fro
 import {
 	CLIPBOARD_DEFAULT,
 	IconsetValue,
-	ICONSET_VALUE_DEFAULT,
 	MONOCHROME_DEFAULT,
+	SIZE_DEFAULT,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
+	STROKE_DEFAULT,
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
@@ -66,14 +67,25 @@ function AppSidebar1() {
 					</div>
 				</div>
 				<div className="widget-body" {...scrollProps}>
-					<div className="widget-name">
+					{/* <div className="widget-name">
 						<div className="widget-align-icon-frame">
 							<StrokeIcon className="widget-name-start-icon" icon={feather.Package} />
 						</div>
-						<h6 className="widget-name-type">Iconsets</h6>
+						<h6 className="widget-name-type">Icons</h6>
 						<button className="widget-align-icon-frame" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
 							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
 						</button>
+					</div> */}
+					<div className="widget-head">
+						<div className="idea">
+							<StrokeIcon className="widget-name-start-icon" icon={feather.Package} />
+						</div>
+						<h6 className="widget-name-type">Stroke width</h6>
+						{/* <div className="idea"> */}
+						<button className="widget-reset-button">
+							<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+						</button>
+						{/* </div> */}
 					</div>
 					<div>
 						<Radio<IconsetValue>
@@ -129,7 +141,7 @@ function AppSidebar1() {
 			</header>
 			<div className="sidebar-body">
 				<hr />
-				{/* Widget */}
+				{/* WIDGET */}
 				<div className="widget-head-padding">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
@@ -156,10 +168,10 @@ function AppSidebar1() {
 			</div>
 			<footer className="sidebar-foot">
 				<hr data-collapse />
-				{/* Widget */}
+				{/* WIDGET */}
 				<div className="widget-head-padding" data-pos="start">
 					<div className="widget-name">
-						<div className="widget-align-icon-frame">
+						<div className="idea">
 							<StrokeIcon className="widget-name-start-icon" icon={feather.Globe} />
 						</div>
 						<h6 className="widget-name-type">Resources</h6>
@@ -203,11 +215,11 @@ function AppSidebar2() {
 			<header className="sidebar-head">
 				<div className="widget-head-padding" data-pos="start">
 					<div className="widget-head">
-						<div className="idea">
+						<div className="widget-alignment-frame">
 							<FormatButton value={format} setValue={setFormatAs} />
 						</div>
 						<div className="spacer"></div>
-						<div className="idea">
+						<div className="widget-alignment-frame">
 							<CopyButton />
 							<SaveButton />
 						</div>
@@ -221,18 +233,16 @@ function AppSidebar2() {
 			</header>
 			<div className="sidebar-body">
 				<hr />
-				{/* Widget */}
+				{/* WIDGET */}
 				<div className="widget-head-padding">
 					<div className="widget-head">
-						<div className="idea">
+						<div className="widget-alignment-frame">
 							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Size</h6>
-						<div className="idea">
-							<span className="widget-range-type">{strokeWidth.toFixed(0)} PX</span>
-						</div>
-						<div className="idea">
-							<button className="widget-reset-button">
+						<div className="widget-alignment-frame" data-clip="end">
+							<span className="widget-range-type">{size.toFixed(0)} PX</span>
+							<button className="widget-reset-button" onClick={e => setSize(SIZE_DEFAULT)}>
 								<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 							</button>
 						</div>
@@ -245,18 +255,16 @@ function AppSidebar2() {
 					</div>
 				</div>
 				<hr />
-				{/* Widget */}
+				{/* WIDGET */}
 				<div className="widget-head-padding">
 					<div className="widget-head">
-						<div className="idea">
+						<div className="widget-alignment-frame">
 							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
-						<div className="idea">
+						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
-						</div>
-						<div className="idea">
-							<button className="widget-reset-button">
+							<button className="widget-reset-button" onClick={e => setSize(STROKE_DEFAULT)}>
 								<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 							</button>
 						</div>

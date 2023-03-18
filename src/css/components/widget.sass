@@ -4,6 +4,29 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// EXPERIMENTAL
+.widget-alignment-frame
+  display: flex
+  align-items: center
+  margin: 0 math.div($button-height - $tiny-icon-height, 2)
+  & + :is(.widget-alignment-frame, .widget-alignment-icon-frame)
+    margin-left:  0
+  &[data-clip=end]
+    margin-right: 0
+
+// EXPERIMENTAL
+.widget-alignment-icon-frame
+  display: flex
+  justify-content: center
+  align-items: center
+  height: $button-height
+  width:  $button-height
+
+  & + :is(.widget-alignment-frame, .widget-alignment-icon-frame)
+    margin-left:  0
+  &[data-clip=end]
+    margin-right: 0
+
 // TODO: DEPRECATE
 .widget-align-frame
   display: flex
@@ -52,6 +75,7 @@
   display: flex
   //// justify-content: space-between
   align-items: center
+  height: 24px
   //// gap: math.div($button-height - $tiny-icon-height, 2)
   //// margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
@@ -71,7 +95,7 @@
   .sidebar-head &
     overflow-y: auto
 
-// Create a container because of added padding-bottom (overflow-y must be separated)
+// Create a aacontainer because of added padding-bottom (overflow-y must be separated)
 .widget-syntax-highlighting-container
   //// display: flex
   //// flex-direction: column
@@ -129,8 +153,8 @@
   display: flex
   justify-content: center
   align-items: center
-  height: 28px
-  width:  28px
+  height: $button-height
+  width:  $button-height
 
 .widget-reset-button-icon
   height: $tiny-icon-height
