@@ -208,11 +208,8 @@ export function Sidebar({
 			>
 				<div className="sidebar-drag-area-grip"></div>
 			</div>
-			<div
-				className="sidebar-card"
-				// @ts-expect-error
-				inert={state === "minimized" ? "true" : undefined}
-			>
+			{/* @ts-expect-error */}
+			<div className="sidebar-card" inert={state === "minimized" ? "true" : undefined}>
 				<div className="sidebar-card-body">{children}</div>
 			</div>
 		</aside>
@@ -287,12 +284,8 @@ export function Main({ children, ...props }: JSX.IntrinsicElements["main"]) {
 	return (
 		<>
 			{/* <Effects /> */}
-			<main
-				className="main"
-				// @ts-expect-error
-				inert={open ? "true" : undefined}
-				{...props}
-			>
+			{/* @ts-expect-error */}
+			<main className="main" inert={open ? "true" : undefined} {...props}>
 				{children}
 			</main>
 		</>
