@@ -1,4 +1,4 @@
-export function downloadText(filename: string, text: string) {
+export function html5DownloadAsText(filename: string, text: string) {
 	const a = document.createElement("a")
 	a.style.display = "none"
 	a.setAttribute("download", filename)
@@ -8,7 +8,7 @@ export function downloadText(filename: string, text: string) {
 	a.remove()
 }
 
-export function downloadFile(filename: string, href: string) {
+export function html5DownloadAsFile(filename: string, href: string) {
 	const a = document.createElement("a")
 	a.style.display = "none"
 	a.setAttribute("download", filename)
