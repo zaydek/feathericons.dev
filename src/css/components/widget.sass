@@ -25,7 +25,7 @@
   display: flex
   align-items: center
   margin: 0 math.div($button-height - $tiny-icon-height, 2)
-  border-radius: 1e3px
+  //// border-radius: 1e3px
   & + &
     margin-left: 0
 
@@ -113,7 +113,7 @@
 //     <div class="widget-name-start-icon"></div>
 //   </div>
 //   <div class="widget-name-type">…</div>
-//   [<div class="widget-name-range-type">…</div>]
+//   [<div class="widget-range-type">…</div>]
 //   [<div class="widget-align-icon-frame">
 //     <div class="widget-name-end-icon"></div>
 //   </div>]
@@ -131,13 +131,7 @@
   width:  $tiny-icon-height
   color:  $text-200-color
 
-.widget-name-end-icon
-  height: $tiny-icon-height
-  width:  $tiny-icon-height
-  color:  $text-400-color
-  button:hover &
-    color: $text-100-color
-
+// TODO: Rename (use range)
 .widget-name-type
   flex: 1
   // TYPOGRAPHY
@@ -145,7 +139,8 @@
   white-space: pre
   color: $text-200-color
 
-.widget-name-range-type
+// TODO: Rename (use range)
+.widget-range-type
   display: flex
   justify-content: center
   align-items: center
@@ -157,3 +152,18 @@
   +typography-caps
   white-space: pre
   color: $text-200-color
+
+.widget-reset-button
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 28px
+  width:  28px
+
+.widget-reset-button-icon
+  height: $tiny-icon-height
+  width:  $tiny-icon-height
+  //// color:  $text-400-color
+  color:  $text-200-color
+  button:hover &
+    color: $text-100-color

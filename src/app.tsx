@@ -33,11 +33,9 @@ import {
 	IconsetValue,
 	ICONSET_VALUE_DEFAULT,
 	MONOCHROME_DEFAULT,
-	SIZE_DEFAULT,
 	SIZE_MAX,
 	SIZE_MIN,
 	SIZE_STEP,
-	STROKE_DEFAULT,
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
@@ -223,14 +221,16 @@ function AppSidebar2() {
 				<hr />
 				{/* Widget */}
 				<div className="widget-head">
-					<div className="widget-name">
-						<div className="widget-align-icon-frame">
-							<StrokeIcon className="widget-name-start-icon" icon={feather.PenTool} />
-						</div>
-						<h6 className="widget-name-type">Size</h6>
-						<span className="widget-name-range-type">{size.toFixed(0)} PX</span>
-						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)}>
-							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
+					<div className="idea">
+						<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
+					</div>
+					<h6 className="widget-name-type">Size</h6>
+					<div className="idea">
+						<span className="widget-range-type">{size.toFixed(0)} PX</span>
+					</div>
+					<div className="idea">
+						<button className="widget-reset-button">
+							<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 						</button>
 					</div>
 				</div>
@@ -243,18 +243,18 @@ function AppSidebar2() {
 				<hr />
 				{/* Widget */}
 				<div className="widget-head">
-					{/* <div className="widget-alignment-icon-frame"> */}
 					<div className="idea">
 						<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
 					</div>
-					{/* </div> */}
-
 					<h6 className="widget-name-type">Stroke width</h6>
-					<div className="spacer"></div>
-					<span className="widget-name-range-type">{strokeWidth.toFixed(2)}</span>
-					<button className="idea" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
-						<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
-					</button>
+					<div className="idea">
+						<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
+					</div>
+					<div className="idea">
+						<button className="widget-reset-button">
+							<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+						</button>
+					</div>
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
