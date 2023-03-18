@@ -191,6 +191,7 @@ function AppSidebar1() {
 ////////////////////////////////////////////////////////////////////////////////
 
 function AppSidebar2() {
+	const { iconset } = React.useContext(SearchContext)!
 	const { size, setSize, strokeWidth, setStrokeWidth } = React.useContext(RangeContext)!
 	const { format, setFormatAs, clipboard } = React.useContext(ClipboardContext)!
 
@@ -249,29 +250,33 @@ function AppSidebar2() {
 				</div>
 				<hr />
 				{/* WIDGET */}
-				<div className="widget-head">
-					<div className="widget-name">
-						<div className="widget-alignment-icon-frame">
-							<DynamicIcon className="widget-name-icon" icon={feather.PenTool} />
+				{iconset !== "brands" && (
+					<>
+						<div className="widget-head">
+							<div className="widget-name">
+								<div className="widget-alignment-icon-frame">
+									<DynamicIcon className="widget-name-icon" icon={feather.PenTool} />
+								</div>
+								<h6 className="widget-name-type u-flex-1">Stroke width</h6>
+								<div className="widget-alignment-frame" data-clip="end">
+									<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
+								</div>
+								<div className="widget-alignment-icon-frame">
+									<button className="widget-reset-button" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
+										<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+									</button>
+								</div>
+							</div>
 						</div>
-						<h6 className="widget-name-type u-flex-1">Stroke width</h6>
-						<div className="widget-alignment-frame" data-clip="end">
-							<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
+						<div className="widget-body">
+							<div className="widget-alignment-frame" data-dir="column">
+								{/* prettier-ignore */}
+								<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
+							</div>
 						</div>
-						<div className="widget-alignment-icon-frame">
-							<button className="widget-reset-button" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
-								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
-							</button>
-						</div>
-					</div>
-				</div>
-				<div className="widget-body">
-					<div className="widget-alignment-frame" data-dir="column">
-						{/* prettier-ignore */}
-						<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
-					</div>
-				</div>
-				<hr />
+						<hr />
+					</>
+				)}
 			</div>
 		</Sidebar>
 	)
