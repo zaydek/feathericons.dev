@@ -2,19 +2,7 @@
 
 @use "../globals" as *
 
-$select-height: 24px
-
-////////////////////////////////////////////////////////////////////////////////
-
-.thing
-  display: flex
-  justify-content: center
-  align-items: center
-  margin: 0 math.div($button-height - 24px, 2)
-
-.export-menu
-  display: flex
-  align-items: center
+$select-height: 28px
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -78,8 +66,8 @@ $select-height: 24px
   height: $select-height
   width:  $select-height
   border-radius: 1e3px
-  &:first-of-type
-    margin-left: $select-height - $tiny-icon-height
+  //// &:first-of-type
+  ////   margin-left: $select-height - $tiny-icon-height
 
 .action-button-icon
   height: $tiny-icon-height

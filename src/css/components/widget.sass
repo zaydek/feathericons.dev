@@ -21,10 +21,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+//// .spacer
+////   flex: 1
+
+// TODO: RENAME
+.widget-framing-2
+  //// flex: 1
+  display: flex
+  align-items: center
+  margin: 0 math.div($button-height - $tiny-icon-height, 2)
+
 .widget-head
   display: flex
-  flex-direction: column
-  gap: $sidebar-gap
+  justify-content: space-between
+  align-items: center
   padding: $sidebar-gap $sidebar-padding-x
 
   &[data-pos=start]
@@ -72,6 +82,7 @@
 //   </div>]
 // </div>
 //
+// TODO: DEPRECATE
 .widget-name
   display: flex
   align-items: center

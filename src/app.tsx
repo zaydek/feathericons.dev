@@ -10,12 +10,14 @@ import * as wkPaymentsOriginal from "@icons/wk/payments/original/tsx"
 
 import {
 	Checkbox,
+	CopyButton,
 	DEV_DebugCss,
-	ExportMenu,
+	FormatButton,
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressSlider,
 	Radio,
+	SaveButton,
 	SearchBar,
 	Sidebar,
 	SidebarOverlay,
@@ -199,21 +201,13 @@ function AppSidebar2() {
 		<Sidebar pos="end">
 			<header className="sidebar-head">
 				<div className="widget-head" data-pos="start">
-					{/* <div className="widget-name"> */}
-					{/* <div style={{ height: 16, width: 16, backgroundColor: "orange" }}></div>
-						<div style={{ flex: 1 }}></div>
-						<div style={{ height: 16, width: 16, backgroundColor: "orange" }}></div>
-						<div style={{ height: 16, width: 16, backgroundColor: "orange" }}></div> */}
-					{/* <feather.Clipboard className="widget-name-start-icon" /> */}
-					{/* <div className="widget-align-icon-frame">
-							<feather.MousePointer className="widget-name-start-icon" />
-						</div> */}
-					<div className="thing">
-						<h6 className="widget-name-type">Selection</h6>
-						<div style={{ flex: 1 }}></div>
-						<ExportMenu value={format} setValue={setFormatAs} />
+					<div className="widget-framing-2">
+						<FormatButton value={format} setValue={setFormatAs} />
 					</div>
-					{/* </div> */}
+					<div className="widget-framing-2">
+						<CopyButton />
+						<SaveButton />
+					</div>
 				</div>
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
