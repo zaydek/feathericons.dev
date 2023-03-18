@@ -86,7 +86,7 @@ export function CopyButton() {
 	}, [clipboard, pressed])
 
 	return (
-		<button className="action-button-icon-frame" onClick={e => setPressed(true)}>
+		<button className="action-button" onClick={e => setPressed(true)}>
 			<StrokeIcon
 				// prettier-ignore
 				className="action-button-icon"
@@ -111,7 +111,7 @@ export function SaveButton() {
 	}, [clipboard, pressed])
 
 	return (
-		<button className="action-button-icon-frame" onClick={e => setPressed(true)}>
+		<button className="action-button" onClick={e => setPressed(true)}>
 			<StrokeIcon
 				// prettier-ignore
 				className="action-button-icon"

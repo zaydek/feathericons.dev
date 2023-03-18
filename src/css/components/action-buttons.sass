@@ -20,14 +20,10 @@ $select-height: 28px
   display: flex
   justify-content: center
   align-items: center
-  //// padding-right: 16px
-  //// padding: 0 4px // Nudge
-  //// padding-right: 4px
   height: $select-height
-  background-color: $form-color
+  background-color: $base-color
   border-radius: 1e3px
   box-shadow: $hairline-shadow
-  //// box-shadow: $hairline-shadow, $realistic-shadow
 
 .select-button-icon-frame
   display: flex
@@ -41,10 +37,7 @@ $select-height: 28px
 .select-button-start-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
-  //// &:first-child
-  ////   margin-left: 20px
-  // 🫢
-  //// color:  $text-200-color
+  // Defer to [fill=...]
 
 .select-button-end-icon
   height: 14px
@@ -54,25 +47,21 @@ $select-height: 28px
 .select-button-type
   // TYPOGRAPHY
   +typography-reduced-sans
-  //// +typography-caps
   color: $text-200-color
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.action-button-icon-frame
+.action-button
   display: flex
   justify-content: center
   align-items: center
   height: $select-height
   width:  $select-height
   border-radius: 1e3px
-  //// &:first-of-type
-  ////   margin-left: $select-height - $tiny-icon-height
 
 .action-button-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
-  color:  $text-300-color
+  color:  $text-200-color
   button:hover &
     color: $text-100-color
-  //// background-color: gray
