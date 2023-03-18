@@ -56,6 +56,7 @@ export function SearchBar() {
 			</div>
 			<input
 				ref={ref}
+				className="u-flex-1"
 				type="text"
 				//// // prettier-ignore
 				//// placeholder={focus

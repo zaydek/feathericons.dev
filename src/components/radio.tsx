@@ -22,7 +22,7 @@ export function Radio<T extends string>({ icon, children, ...props }: RadioProps
 			<div className="widget-alignment-icon-frame">
 				<DynamicIcon className="radio-icon" icon={icon} />
 			</div>
-			<span className="radio-type">{children}</span>
+			<span className="radio-type u-flex-1">{children}</span>
 			<div className="widget-alignment-icon-frame">
 				<input ref={ref} type="checkbox" {...props} tabIndex={-1} />
 			</div>
@@ -52,7 +52,7 @@ export function Checkbox({ icon: Icon, children, ...props }: CheckboxProps) {
 			<div className="widget-alignment-icon-frame">
 				<Icon className="radio-icon" />
 			</div>
-			<span className="radio-type">{children}</span>
+			<span className="radio-type u-flex-1">{children}</span>
 			<div className="widget-alignment-icon-frame">
 				<input ref={ref} type="checkbox" {...props} tabIndex={-1} />
 			</div>

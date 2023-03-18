@@ -70,7 +70,7 @@ function AppSidebar1() {
 							<DynamicIcon className="widget-name-icon" icon={feather.Package} />
 						</div> */}
 						<div className="widget-alignment-frame">
-							<h6 className="widget-name-type">Icons</h6>
+							<h6 className="widget-name-type u-flex-1">Icons</h6>
 						</div>
 						{/* <div className="widget-alignment-icon-frame"> */}
 						<button className="widget-reset-button" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
@@ -138,7 +138,7 @@ function AppSidebar1() {
 						<div className="widget-alignment-icon-frame">
 							<DynamicIcon className="widget-name-icon" icon={feather.Settings} />
 						</div>
-						<span className="widget-name-type">Settings</span>
+						<span className="widget-name-type u-flex-1">Settings</span>
 						<button className="widget-reset-button" onClick={e => setMonochrome(MONOCHROME_DEFAULT)}>
 							<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 						</button>
@@ -165,7 +165,7 @@ function AppSidebar1() {
 						<div className="widget-alignment-icon-frame">
 							<DynamicIcon className="widget-name-icon" icon={feather.Globe} />
 						</div>
-						<h6 className="widget-name-type">Resources</h6>
+						<h6 className="widget-name-type u-flex-1">Resources</h6>
 					</div>
 				</div>
 				<div className="widget-body" data-pos="end">
@@ -175,7 +175,7 @@ function AppSidebar1() {
 								<div className="widget-alignment-icon-frame">
 									<DynamicIcon className="resource-start-icon" icon={resource.icon} />
 								</div>
-								<span className="resource-type">{resource.name}</span>
+								<span className="resource-type u-flex-1">{resource.name}</span>
 								<div className="widget-alignment-icon-frame">
 									<DynamicIcon className="resource-end-icon" icon={feather.ArrowUpRight} />
 								</div>
@@ -206,10 +206,10 @@ function AppSidebar2() {
 			<header className="sidebar-head">
 				<div className="widget-head" data-pos="start">
 					<div className="widget-name">
-						<div className="widget-alignment-frame">
+						<div className="widget-alignment-frame u-flex-1">
 							<FormatButton value={format} setValue={setFormatAs} />
 						</div>
-						<div className="spacer"></div>
+						{/* <div className="spacer"></div> */}
 						<div className="widget-alignment-frame">
 							<CopyButton />
 							<SaveButton />
@@ -227,10 +227,10 @@ function AppSidebar2() {
 				{/* WIDGET */}
 				<div className="widget-head">
 					<div className="widget-name">
-						<div className="widget-alignment-frame">
+						<div className="widget-alignment-icon-frame">
 							<DynamicIcon className="widget-name-icon" icon={feather.PenTool} />
 						</div>
-						<h6 className="widget-name-type">Size</h6>
+						<h6 className="widget-name-type u-flex-1">Size</h6>
 						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{size.toFixed(0)} PX</span>
 							<button className="widget-reset-button" onClick={e => setSize(SIZE_DEFAULT)}>
@@ -249,10 +249,10 @@ function AppSidebar2() {
 				{/* WIDGET */}
 				<div className="widget-head">
 					<div className="widget-name">
-						<div className="widget-alignment-frame" data-column>
+						<div className="widget-alignment-icon-frame">
 							<DynamicIcon className="widget-name-icon" icon={feather.PenTool} />
 						</div>
-						<h6 className="widget-name-type">Stroke width</h6>
+						<h6 className="widget-name-type u-flex-1">Stroke width</h6>
 						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
 							<button className="widget-reset-button" onClick={e => setSize(STROKE_DEFAULT)}>
