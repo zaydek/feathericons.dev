@@ -66,15 +66,17 @@ function AppSidebar1() {
 				</div>
 				<div className="widget-body" {...scrollProps}>
 					<div className="widget-name">
-						<div className="widget-alignment-icon-frame">
-							<DynamicIcon className="widget-name-start-icon" icon={feather.Package} />
+						{/* <div className="widget-alignment-icon-frame">
+							<DynamicIcon className="widget-name-icon" icon={feather.Package} />
+						</div> */}
+						<div className="widget-alignment-frame">
+							<h6 className="widget-name-type">Icons</h6>
 						</div>
-						<h6 className="widget-name-type">Iconsets</h6>
-						<div className="widget-alignment-icon-frame">
-							<button className="widget-reset-button" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
-								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
-							</button>
-						</div>
+						{/* <div className="widget-alignment-icon-frame"> */}
+						<button className="widget-reset-button" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
+							<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+						</button>
+						{/* </div> */}
 					</div>
 					<div>
 						<Radio<IconsetValue>
@@ -134,7 +136,7 @@ function AppSidebar1() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-alignment-icon-frame">
-							<DynamicIcon className="widget-name-start-icon" icon={feather.Settings} />
+							<DynamicIcon className="widget-name-icon" icon={feather.Settings} />
 						</div>
 						<span className="widget-name-type">Settings</span>
 						<button className="widget-reset-button" onClick={e => setMonochrome(MONOCHROME_DEFAULT)}>
@@ -161,7 +163,7 @@ function AppSidebar1() {
 				<div className="widget-head" data-pos="start">
 					<div className="widget-name">
 						<div className="widget-alignment-icon-frame">
-							<DynamicIcon className="widget-name-start-icon" icon={feather.Globe} />
+							<DynamicIcon className="widget-name-icon" icon={feather.Globe} />
 						</div>
 						<h6 className="widget-name-type">Resources</h6>
 					</div>
@@ -226,7 +228,7 @@ function AppSidebar2() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-alignment-frame">
-							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
+							<DynamicIcon className="widget-name-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Size</h6>
 						<div className="widget-alignment-frame" data-clip="end">
@@ -248,7 +250,7 @@ function AppSidebar2() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-alignment-frame" data-column>
-							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
+							<DynamicIcon className="widget-name-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
 						<div className="widget-alignment-frame" data-clip="end">
