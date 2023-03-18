@@ -14,7 +14,11 @@ $select-height: 28px
   height: 100%         // Inherit
   width:  100%         // Inherit
   border-radius: 1e3px // For focus styles
-  color: transparent   // 👻
+
+  // This is a hack
+  color: transparent // 👻
+  & *
+    color: $text-100-color
 
 .select-button
   display: flex
