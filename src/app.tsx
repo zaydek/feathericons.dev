@@ -66,12 +66,10 @@ function AppSidebar1() {
 				</div>
 				<div className="widget-body" {...scrollProps}>
 					<div className="widget-name">
-						{/* <div className="widget-alignment-icon-frame">
+						<div className="widget-alignment-icon-frame">
 							<DynamicIcon className="widget-name-icon" icon={feather.Package} />
-						</div> */}
-						<div className="widget-alignment-frame">
-							<h6 className="widget-name-type u-flex-1">Icons</h6>
 						</div>
+						<h6 className="widget-name-type u-flex-1">Icons</h6>
 						{/* <div className="widget-alignment-icon-frame"> */}
 						<button className="widget-reset-button" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
 							<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
@@ -206,10 +204,10 @@ function AppSidebar2() {
 			<header className="sidebar-head">
 				<div className="widget-head" data-pos="start">
 					<div className="widget-name">
+						{/* Use u-flex-1 here because there's no <h6> */}
 						<div className="widget-alignment-frame u-flex-1">
 							<FormatButton value={format} setValue={setFormatAs} />
 						</div>
-						{/* <div className="spacer"></div> */}
 						<div className="widget-alignment-frame">
 							<CopyButton />
 							<SaveButton />
