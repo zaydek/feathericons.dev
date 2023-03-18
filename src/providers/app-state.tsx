@@ -49,8 +49,8 @@ export const ClipboardContext = React.createContext<{
 	addNames:       (...names: string[]) => void
 	removeNames:    (...names: string[]) => void
 	removeAllNames: () => void
-	clipboard:      string
-	setClipboard:   React.Dispatch<React.SetStateAction<string>>
+	clipboard:      string[]
+	setClipboard:   React.Dispatch<React.SetStateAction<string[]>>
 } | null>(null)
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -185,7 +185,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 		_setNames(new Set<string>())
 	}, [])
 
-	const [clipboard, setClipboard] = React.useState("")
+	const [clipboard, setClipboard] = React.useState<string[]>([])
 
 	//////////////////////////////////////////////////////////////////////////////
 

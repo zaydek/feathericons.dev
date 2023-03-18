@@ -53,44 +53,56 @@ function useSetClipboardOnIconsetChanges() {
 	React.useEffect(() => {
 		if (searchResultsLoading) return
 		if (searchResults === null || searchResults.length === 0) return
-		let clipboard = ""
+		//// let clipboard = ""
+		const clipboard: string[] = []
 		const { keys, more } = getKeys(names, { limit: 20 })
 		for (const [index, name] of keys.entries()) {
-			if (index > 0) {
-				clipboard += "\n\n"
-			}
+			//// if (index > 0) {
+			//// 	clipboard += "\n\n"
+			//// }
 			const search = toKebabCase(name).toLowerCase()
 			const svg = document.getElementById(name)?.querySelector("svg")!
 			if (format === "svg") {
-				clipboard += transformSvg(formatSvg(svg, { strictJsx: false }), {
-					banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
-				})
+				clipboard.push(
+					transformSvg(formatSvg(svg, { strictJsx: false }), {
+						banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
+					}),
+				)
 			} else if (format === "jsx") {
-				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=jsx`,
-				})
+				clipboard.push(
+					transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
+						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=jsx`,
+					}),
+				)
 			} else if (format === "tsx") {
-				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
-				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
+				let str = ""
+				if (index === 0) str = 'import { JSX } from "solid-js";\n\n'
+				str += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
 					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
 				})
+				clipboard.push(str)
 			} else if (format === "strict-jsx") {
-				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-jsx`,
-				})
+				clipboard.push(
+					transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-jsx`,
+					}),
+				)
 			} else if (format === "strict-tsx") {
-				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-tsx`,
-				})
+				clipboard.push(
+					transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-tsx`,
+					}),
+				)
 			}
 		}
-		if (more) {
-			if (format === "svg") {
-				clipboard += `\n\n<!-- ... -->`
-			} else {
-				clipboard += `\n\n// ...`
-			}
-		}
+		// TODO
+		//// if (more) {
+		//// 	if (format === "svg") {
+		//// 		clipboard += `\n\n<!-- ... -->`
+		//// 	} else {
+		//// 		clipboard += `\n\n// ...`
+		//// 	}
+		//// }
 		setClipboard(clipboard)
 	}, [format, iconset, names, searchResults, searchResultsLoading, setClipboard])
 	return void 0
