@@ -37,15 +37,33 @@
     <!-- Plausible -->
     <script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js"></script>
 
-    <!-- Dark mode -->
+    <!-- Recover dark mode -->
     <script>
+      "use strict";
       const media = window.matchMedia("(prefers-color-scheme: dark)");
       const theme = media.matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", theme);
     </script>
+
+    <!-- Recover size -->
+    <script>
+      "use strict";
+      let size = 0
+      const params = new URLSearchParams(window.location.search)
+      const parsed = +params.get("size")
+      if (parsed < 16) {
+        size = 16
+      } else if (parsed > 32) {
+        size = 32
+      } else {
+        size = parsed
+      }
+      document.body.style.style =
+        `--size: ${size}; ` +
+        `--stroke-width: ${2};`
+    </script>
   </head>
-  <!-- TODO: Use fallback instead of inline styles here? -->
-  <body style="--size: 32; --stroke-width: 2;">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
