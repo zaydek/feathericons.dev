@@ -158,7 +158,7 @@ function useShortcutCtrlCToCopyClipboard() {
 		if (searchResults === null || searchResults.length === 0) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.matches('.search-bar input[type="text"]')) return
-			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
+			if (!e.shiftKey && ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c"))) {
 				e.preventDefault()
 				navigator.clipboard.writeText([...clipboard.values()].join("\n"))
 			}
