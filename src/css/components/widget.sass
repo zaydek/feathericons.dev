@@ -6,6 +6,7 @@
 
 // EXPERIMENTAL
 .widget-alignment-frame
+  flex: 1 // Stretch x-axis
   display: flex
   &:not([data-column])
     align-items: center
@@ -94,6 +95,7 @@
 // </div>
 //
 .widget-name
+  //// flex: 1
   display: flex
   //// justify-content: space-between
   align-items: center
@@ -103,7 +105,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-.widget-name-start-icon
+.widget-name-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
   color:  $text-200-color
@@ -116,7 +118,6 @@
   white-space: pre
   color: $text-200-color
 
-// TODO: Rename (use range)
 .widget-range-type
   display: flex
   justify-content: center
