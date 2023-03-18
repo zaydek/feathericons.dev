@@ -78,7 +78,7 @@ async function exportSvgAndZip(
 	await fs.mkdir(outdir, { recursive: true })
 	const zip = new JSZip()
 	for (const [name, icon] of Object.entries(icons)) {
-		const icon2 = transformSvg(toTitleCase(name), icon, { banner: banner(name) })
+		const icon2 = transformSvg(icon, { banner: banner(name) })
 		await fs.writeFile(path.join(outdir, `${name}.svg`), icon2 + EOF)
 		zip.file(name, icon)
 	}
