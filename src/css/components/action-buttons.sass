@@ -11,9 +11,10 @@ $select-height: 28px
 
 .select select
   position: absolute
-  height: 100%       // Inherit
-  width:  100%       // Inherit
-  color: transparent // 👻
+  height: 100%         // Inherit
+  width:  100%         // Inherit
+  border-radius: 1e3px // For focus styles
+  color: transparent   // 👻
 
 .select-button
   display: flex
@@ -41,12 +42,12 @@ $select-height: 28px
 .select-button-end-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
-  color:  $text-200-color
+  color:  $text-100-color
 
 .select-button-type
   // TYPOGRAPHY
   +typography-reduced-sans
-  color: $text-200-color
+  color: $text-100-color
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -56,11 +57,9 @@ $select-height: 28px
   align-items: center
   height: $select-height
   width:  $select-height
-  //// border-radius: 1e3px
+  border-radius: 1e3px // For focus styles
 
 .action-button-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
-  color:  $text-200-color
-  button:hover &
-    color: $text-100-color
+  color:  $text-100-color

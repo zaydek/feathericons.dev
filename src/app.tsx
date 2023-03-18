@@ -70,11 +70,11 @@ function AppSidebar1() {
 							<DynamicIcon className="widget-name-icon" icon={feather.Package} />
 						</div>
 						<h6 className="widget-name-type u-flex-1">Icons</h6>
-						{/* <div className="widget-alignment-icon-frame"> */}
-						<button className="widget-reset-button" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
-							<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
-						</button>
-						{/* </div> */}
+						<div className="widget-alignment-icon-frame">
+							<button className="widget-reset-button" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
+								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+							</button>
+						</div>
 					</div>
 					<div>
 						<Radio<IconsetValue>
@@ -137,9 +137,11 @@ function AppSidebar1() {
 							<DynamicIcon className="widget-name-icon" icon={feather.Settings} />
 						</div>
 						<span className="widget-name-type u-flex-1">Settings</span>
-						<button className="widget-reset-button" onClick={e => setMonochrome(MONOCHROME_DEFAULT)}>
-							<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
-						</button>
+						<div className="widget-alignment-icon-frame">
+							<button className="widget-reset-button" onClick={e => setMonochrome(MONOCHROME_DEFAULT)}>
+								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+							</button>
+						</div>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -231,6 +233,8 @@ function AppSidebar2() {
 						<h6 className="widget-name-type u-flex-1">Size</h6>
 						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{size.toFixed(0)} PX</span>
+						</div>
+						<div className="widget-alignment-icon-frame">
 							<button className="widget-reset-button" onClick={e => setSize(SIZE_DEFAULT)}>
 								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 							</button>
@@ -253,6 +257,8 @@ function AppSidebar2() {
 						<h6 className="widget-name-type u-flex-1">Stroke width</h6>
 						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
+						</div>
+						<div className="widget-alignment-icon-frame">
 							<button className="widget-reset-button" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
 								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 							</button>
