@@ -48,13 +48,13 @@ function AppSidebar1() {
 	const [, start] = React.useTransition()
 
 	const { setStarted } = React.useContext(ProgressBarContext)!
-	const { loading, iconset, setIconset, monochrome, setMonochrome } = React.useContext(SearchContext)!
+	const { searchResultsLoading, iconset, setIconset, monochrome, setMonochrome } = React.useContext(SearchContext)!
 
 	const scrollProps = useScrollProps()
 
 	React.useEffect(() => {
-		setStarted(loading)
-	}, [loading, setStarted])
+		setStarted(searchResultsLoading)
+	}, [searchResultsLoading, setStarted])
 
 	return (
 		<Sidebar pos="start">

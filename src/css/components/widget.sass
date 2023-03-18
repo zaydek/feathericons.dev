@@ -38,7 +38,8 @@
     padding-top: $sidebar-padding-y
     padding-bottom: $sidebar-gap + 4px // 🧐
   &:has(+ [data-scroll=true]) // TODO: Change to [data-has]
-    isolation: isolate // Preserve box-shadow
+    position: relative
+    z-index: 10
     box-shadow: $hairline-shadow-bottom
 
 .widget-body

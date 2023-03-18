@@ -19,14 +19,14 @@ import {
 
 // prettier-ignore
 export const SearchContext = React.createContext<{
-	search:         string
-	setSearch:      React.Dispatch<React.SetStateAction<string>>
-	iconset:        IconsetValue
-	setIconset:     React.Dispatch<React.SetStateAction<IconsetValue>>
-	monochrome:     boolean
-	setMonochrome:  React.Dispatch<React.SetStateAction<boolean>>
-	loading:        boolean
-	searchResults:  [string, Icon][] | null
+	search:               string
+	setSearch:            React.Dispatch<React.SetStateAction<string>>
+	iconset:              IconsetValue
+	setIconset:           React.Dispatch<React.SetStateAction<IconsetValue>>
+	monochrome:           boolean
+	setMonochrome:        React.Dispatch<React.SetStateAction<boolean>>
+	searchResultsLoading: boolean
+	searchResults:        [string, Icon][] | null
 } | null>(null)
 
 // prettier-ignore
@@ -88,7 +88,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 
 	const [monochrome, setMonochrome] = useParamBoolean({ key: "monochrome", initialValue: MONOCHROME_DEFAULT })
 
-	const [loading, setLoading] = React.useState(true)
+	const [searchResultsLoading, setSearchResultsLoading] = React.useState(true)
 	const [_results, _setResults] = React.useState<[string, Icon][] | null>(null)
 
 	// TODO: Search tags
@@ -105,12 +105,12 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 	React.useEffect(() => {
 		async function fn() {
 			if (cache.has(iconset, { monochrome })) {
-				setLoading(false)
+				setSearchResultsLoading(false)
 			} else {
-				setLoading(true)
+				setSearchResultsLoading(true)
 			}
 			const [, data] = await queryIconset(iconset, { monochrome })
-			setLoading(false)
+			setSearchResultsLoading(false)
 			_setResults(data)
 		}
 		fn()
@@ -199,10 +199,10 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 					setIconset,
 					monochrome,
 					setMonochrome,
-					loading,
+					searchResultsLoading,
 					searchResults,
 				}),
-				[search, setSearch, iconset, setIconset, monochrome, setMonochrome, loading, searchResults],
+				[search, setSearch, iconset, setIconset, monochrome, setMonochrome, searchResultsLoading, searchResults],
 			)}
 		>
 			<RangeContext.Provider

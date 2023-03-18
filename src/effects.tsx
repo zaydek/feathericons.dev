@@ -1,12 +1,12 @@
 import React from "react"
-import { formatSvg, transformJsx, transformSvg, transformTsx } from "scripts/utils"
 
+import { formatSvg, transformJsx, transformSvg, transformTsx } from "../scripts/utils"
 import { getKeys, isMac, toKebabCase, toTitleCase, useVisibleDocumentTitle } from "./lib"
 import { ClipboardContext, RangeContext, SearchContext } from "./providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useResetSearchAndSelectionOnIconset() {
+function useResetSearchAndNamesOnIconsetChanges() {
 	const { setSearch, iconset } = React.useContext(SearchContext)!
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
@@ -23,28 +23,36 @@ function useResetSearchAndSelectionOnIconset() {
 }
 
 function useSelectNamesFromIndexes() {
-	const { searchResults } = React.useContext(SearchContext)!
+	const { searchResultsLoading, searchResults } = React.useContext(SearchContext)!
 	const { namesStart, namesEnd, addNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (searchResults === null) return
+		if (searchResultsLoading) return
+		if (searchResults === null || searchResults.length === 0) return
 		if (namesStart === null || namesEnd === null) return
 		const min = Math.min(namesStart, namesEnd)
 		const max = Math.max(namesStart, namesEnd)
 		addNames(...searchResults.slice(min, max + 1).map(([name]) => name))
-	}, [addNames, namesEnd, namesStart, searchResults])
+	}, [addNames, namesEnd, namesStart, searchResults, searchResultsLoading])
 	return void 0
 }
 
-function useSetClipboardOnIconset() {
-	const { iconset, loading } = React.useContext(SearchContext)!
+function useSearchResultsCountVisibleTitle() {
+	const { searchResultsLoading, searchResults } = React.useContext(SearchContext)!
+	const count = (searchResults ?? []).length
+	// prettier-ignore
+	useVisibleDocumentTitle([
+		searchResultsLoading ? "Loading…" : `${count} icon${count === 1 ? "" : "s"}`,
+		"Feather icons",
+	])
+	return void 0
+}
+
+function useSetClipboardOnIconsetChanges() {
+	const { iconset, searchResultsLoading, searchResults } = React.useContext(SearchContext)!
 	const { format, names, setClipboard } = React.useContext(ClipboardContext)!
-	// TODO: Move to app.tsx or effetcs.tsx
 	React.useEffect(() => {
-		if (loading) return
-		//// if (names.size === 0) {
-		//// 	setClipboard("")
-		//// 	return
-		//// }
+		if (searchResultsLoading) return
+		if (searchResults === null || searchResults.length === 0) return
 		let clipboard = ""
 		const { keys, more } = getKeys(names, { limit: 20 })
 		for (const [index, name] of keys.entries()) {
@@ -52,7 +60,7 @@ function useSetClipboardOnIconset() {
 				clipboard += "\n\n"
 			}
 			const search = toKebabCase(name).toLowerCase()
-			const svg = document.getElementById(name)!.querySelector("svg")!
+			const svg = document.getElementById(name)?.querySelector("svg")!
 			if (format === "svg") {
 				clipboard += transformSvg(formatSvg(svg, { strictJsx: false }), {
 					banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
@@ -84,7 +92,8 @@ function useSetClipboardOnIconset() {
 			}
 		}
 		setClipboard(clipboard)
-	}, [format, iconset, names])
+	}, [format, iconset, names, searchResults, searchResultsLoading, setClipboard])
+	return void 0
 }
 
 function useSetCssVars() {
@@ -107,24 +116,14 @@ function useSetIconsetAttribute() {
 	return void 0
 }
 
-function useVisibleDocumentTitle() {
-	const { loading, searchResults } = React.useContext(SearchContext)!
-	const count = (searchResults ?? []).length
-	// prettier-ignore
-	useVisibleDocumentTitle([
-		loading ? "Loading…" : `${count} icon${count === 1 ? "" : "s"}`,
-		"Feather icons",
-	])
-	return void 0
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 
 function useShortcutCtrlAToSelectAll() {
-	const { searchResults } = React.useContext(SearchContext)!
+	const { searchResultsLoading, searchResults } = React.useContext(SearchContext)!
 	const { setNamesStart, setNamesEnd } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
-		if (searchResults === null) return
+		if (searchResultsLoading === null) return
+		if (searchResults === null || searchResults.length === 0) return
 		function handleKeyDown(e: KeyboardEvent) {
 			if (document.activeElement?.matches('.search-bar input[type="text"]')) return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
@@ -135,7 +134,7 @@ function useShortcutCtrlAToSelectAll() {
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
 		return () => window.removeEventListener("keydown", handleKeyDown, false)
-	}, [searchResults, setNamesEnd, setNamesStart])
+	}, [searchResults, searchResultsLoading, setNamesEnd, setNamesStart])
 	return void 0
 }
 
@@ -162,12 +161,12 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Effects() {
-	useResetSearchAndSelectionOnIconset()
+	useSearchResultsCountVisibleTitle()
+	useResetSearchAndNamesOnIconsetChanges()
 	useSelectNamesFromIndexes()
-	useSetClipboardOnIconset()
+	useSetClipboardOnIconsetChanges()
 	useSetCssVars()
 	useSetIconsetAttribute()
-	useVisibleDocumentTitle()
 
 	useShortcutCtrlAToSelectAll()
 	useShortcutEscToRemoveNamesStartAndEnd()
