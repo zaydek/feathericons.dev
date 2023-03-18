@@ -12,6 +12,7 @@ import {
 	Checkbox,
 	CopyButton,
 	DEV_DebugCss,
+	DynamicIcon,
 	FormatButton,
 	Icon,
 	Main,
@@ -203,10 +204,11 @@ function AppSidebar2() {
 		<Sidebar pos="end">
 			<header className="sidebar-head">
 				<div className="widget-head" data-pos="start">
-					<div className="widget-framing-2">
+					<div className="idea">
 						<FormatButton value={format} setValue={setFormatAs} />
 					</div>
-					<div className="widget-framing-2">
+					<div className="spacer"></div>
+					<div className="idea">
 						<CopyButton />
 						<SaveButton />
 					</div>
@@ -241,16 +243,18 @@ function AppSidebar2() {
 				<hr />
 				{/* Widget */}
 				<div className="widget-head">
-					<div className="widget-name">
-						<div className="widget-align-icon-frame">
-							<StrokeIcon className="widget-name-start-icon" icon={feather.PenTool} />
-						</div>
-						<h6 className="widget-name-type">Stroke width</h6>
-						<span className="widget-name-range-type">{strokeWidth.toFixed(2)}</span>
-						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
-							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
-						</button>
+					{/* <div className="widget-alignment-icon-frame"> */}
+					<div className="idea">
+						<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
 					</div>
+					{/* </div> */}
+
+					<h6 className="widget-name-type">Stroke width</h6>
+					<div className="spacer"></div>
+					<span className="widget-name-range-type">{strokeWidth.toFixed(2)}</span>
+					<button className="idea" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
+						<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
+					</button>
 				</div>
 				<div className="widget-body">
 					<div className="widget-align-frame">
