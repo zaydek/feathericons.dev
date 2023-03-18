@@ -122,7 +122,7 @@ export function SaveButton() {
 			for (const [filename, content] of clipboard) {
 				files.push({ filename: `${filename}.${ext(format)}`, content })
 			}
-			downloadZipArchive(`${iconset}.zip`, files)
+			downloadZipArchive(`${iconset}-${ext(format)}`, files)
 		}
 		const d = window.setTimeout(() => setPressed(false), 1e3)
 		return () => window.clearTimeout(d)
