@@ -1,7 +1,7 @@
 import React from "react"
 
-import { isMac, useVisibleDocumentTitle } from "@/lib"
-import { ClipboardContext, RangeContext, SearchContext } from "@/providers"
+import { isMac, useVisibleDocumentTitle } from "./lib"
+import { ClipboardContext, RangeContext, SearchContext } from "./providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 

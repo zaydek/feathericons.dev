@@ -2,9 +2,9 @@ import React from "react"
 
 import * as feather from "@icons/feather/tsx"
 
-import { isMac } from "@/lib"
-import { ClipboardContext, SearchContext } from "@/providers"
-import { StrokeIcon } from "./icons"
+import { isMac } from "../lib"
+import { DynamicIcon } from "../lib/dynamic-icon"
+import { ClipboardContext, SearchContext } from "../providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -51,8 +51,8 @@ export function SearchBar() {
 
 	return (
 		<div className="search-bar" onClick={e => ref.current!.focus()}>
-			<div className="widget-align-icon-frame">
-				<StrokeIcon className="search-bar-icon" icon={feather.Search} />
+			<div className="widget-alignment-icon-frame">
+				<DynamicIcon className="search-bar-icon" icon={feather.Search} strokeWidth={4} />
 			</div>
 			<input
 				ref={ref}

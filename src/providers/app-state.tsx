@@ -1,7 +1,7 @@
 import React from "react"
 
-import { clamp, getKeys, IconComponent, toCanonCase, toKebabCase, toTitleCase, useParam, useParamBoolean } from "@/lib"
-import { formatSvg, transformJsx, transformSvg, transformTsx } from "@scripts/utils"
+import { formatSvg, transformJsx, transformSvg, transformTsx } from "../../scripts/utils"
+import { clamp, getKeys, Icon, toCanonCase, toKebabCase, toTitleCase, useParam, useParamBoolean } from "../lib"
 import { cache, queryCache as queryIconset } from "./cache"
 import {
 	FormatValue,
@@ -27,7 +27,7 @@ export const SearchContext = React.createContext<{
 	monochrome:     boolean
 	setMonochrome:  React.Dispatch<React.SetStateAction<boolean>>
 	loading:        boolean
-	searchResults:  [string, IconComponent][] | null
+	searchResults:  [string, Icon][] | null
 } | null>(null)
 
 // prettier-ignore
@@ -89,7 +89,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 	const [monochrome, setMonochrome] = useParamBoolean({ key: "monochrome", initialValue: MONOCHROME_DEFAULT })
 
 	const [loading, setLoading] = React.useState(false)
-	const [_results, _setResults] = React.useState<[string, IconComponent][] | null>(null)
+	const [_results, _setResults] = React.useState<[string, Icon][] | null>(null)
 
 	// TODO: Search tags
 	const searchResults = React.useMemo(() => {

@@ -1,4 +1,4 @@
-import { toCamelCase } from "@/lib"
+import { toCamelCase } from "../../src/lib"
 
 const svgStartAttrs = ["xmlns", "viewBox", "width", "height"] // prettier-ignore
 const svgEndAttrs   = ["aria-hidden"] // prettier-ignore

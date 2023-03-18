@@ -1,4 +1,4 @@
-import { IconComponent } from "@/lib"
+import { Icon } from "../lib"
 import { IconsetValue } from "./constants"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -13,7 +13,7 @@ export type Iconset =
 	| "@icons/wk/payments/original-filled/tsx"
 
 function createCache() {
-	const cache = new Map<Iconset, Record<string, IconComponent>>()
+	const cache = new Map<Iconset, Record<string, Icon>>()
 
 	function has(radioValue: IconsetValue, { monochrome }: { monochrome: boolean }) {
 		switch (radioValue) {
@@ -42,7 +42,7 @@ function createCache() {
 
 	async function fetch(...args: Iconset[]) {
 		let cached = true
-		const chain: Promise<Record<string, IconComponent>>[] = []
+		const chain: Promise<Record<string, Icon>>[] = []
 		for (const arg of args) {
 			if (cache.has(arg)) {
 				chain.push(new Promise(resolve => resolve(cache.get(arg)!)))
@@ -77,7 +77,7 @@ function createCache() {
 		for (const [index, path] of args.entries()) {
 			cache.set(path, done[index])
 		}
-		const normalized = done.reduce<[string, IconComponent][]>((acc, sum) => {
+		const normalized = done.reduce<[string, Icon][]>((acc, sum) => {
 			for (const entry of Object.entries(sum)) {
 				acc.push(entry)
 			}

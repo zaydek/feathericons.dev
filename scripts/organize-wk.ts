@@ -1,7 +1,7 @@
 import * as fs from "node:fs/promises"
 import * as path from "node:path"
 
-import { sleep } from "@/lib"
+import { sleep } from "../src/lib"
 
 async function copyFilesWithRegex({
 	srcDir,

@@ -1,7 +1,7 @@
 import React from "react"
 
-import { getCssVarAsNumber, round } from "@/lib"
-import { LayoutContext, SidebarState } from "@/providers"
+import { getCssVarAsNumber, round } from "../lib"
+import { LayoutContext, SidebarState } from "../providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 

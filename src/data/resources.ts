@@ -1,9 +1,9 @@
 import * as wkBrandsMono from "@icons/wk/brands/mono/tsx"
 import * as wkBrandsOriginal from "@icons/wk/brands/original/tsx"
 
-import { IconComponent } from "@/lib"
+import { Icon } from "../lib"
 
-export const resources: { name: string; icon: IconComponent; href: string }[] = [
+export const resources: { name: string; icon: Icon; href: string }[] = [
 	{
 		name: "Icons",
 		icon: wkBrandsMono.Github,

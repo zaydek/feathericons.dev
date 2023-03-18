@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ProgressBarContext } from "@/providers"
+import { ProgressBarContext } from "../providers"
 
 const TICK_MS = 100
 const TICK_END_MS = 200

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { DynamicIcon, Icon } from "./icons"
+import { DynamicIcon, Icon } from "../lib/dynamic-icon"
 
 type RadioProps<T> = JSX.IntrinsicElements["input"] & React.PropsWithChildren & { icon: Icon; value: T }
 
@@ -19,11 +19,11 @@ export function Radio<T extends string>({ icon, children, ...props }: RadioProps
 			}}
 			tabIndex={0}
 		>
-			<div className="widget-align-icon-frame">
+			<div className="widget-alignment-icon-frame">
 				<DynamicIcon className="radio-icon" icon={icon} />
 			</div>
 			<span className="radio-type">{children}</span>
-			<div className="widget-align-icon-frame">
+			<div className="widget-alignment-icon-frame">
 				<input ref={ref} type="checkbox" {...props} tabIndex={-1} />
 			</div>
 		</label>
@@ -49,11 +49,11 @@ export function Checkbox({ icon: Icon, children, ...props }: CheckboxProps) {
 			}}
 			tabIndex={0}
 		>
-			<div className="widget-align-icon-frame">
+			<div className="widget-alignment-icon-frame">
 				<Icon className="radio-icon" />
 			</div>
 			<span className="radio-type">{children}</span>
-			<div className="widget-align-icon-frame">
+			<div className="widget-alignment-icon-frame">
 				<input ref={ref} type="checkbox" {...props} tabIndex={-1} />
 			</div>
 		</label>

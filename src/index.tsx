@@ -1,9 +1,9 @@
-import "@/css/index.sass"
+import "./css/index.sass"
 
-import { App } from "@/app"
-import { ProgresssBar } from "@/components"
-import { AppStateProvider, LayoutProvider, ProgressBarProvider, ShikiProvider, ThemeProvider } from "@/providers"
 import { createRoot } from "react-dom/client"
+import { App } from "./app"
+import { ProgresssBar } from "./components"
+import { AppStateProvider, LayoutProvider, ProgressBarProvider, ShikiProvider, ThemeProvider } from "./providers"
 
 function ProvidedApp() {
 	return (

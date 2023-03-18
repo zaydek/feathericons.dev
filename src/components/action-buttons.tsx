@@ -2,10 +2,10 @@ import React from "react"
 
 import * as feather from "@icons/feather/tsx"
 
-import { Reactjs, Solidjs, Svg, TypeScript } from "@/components/vendor-icons"
-import { sleep } from "@/lib"
-import { ClipboardContext, FormatValue } from "@/providers"
-import { DynamicIcon, Icon, StrokeIcon } from "./icons"
+import { Reactjs, Solidjs, Svg, TypeScript } from "../components/vendor-icons"
+import { sleep } from "../lib"
+import { DynamicIcon, Icon } from "../lib/dynamic-icon"
+import { ClipboardContext, FormatValue } from "../providers"
 
 const names: Record<FormatValue, string> = {
 	svg: "SVG",
@@ -87,7 +87,7 @@ export function CopyButton() {
 
 	return (
 		<button className="action-button" onClick={e => setPressed(true)}>
-			<StrokeIcon
+			<DynamicIcon
 				// prettier-ignore
 				className="action-button-icon"
 				icon={pressed ? feather.Check : feather.Clipboard}
@@ -112,7 +112,7 @@ export function SaveButton() {
 
 	return (
 		<button className="action-button" onClick={e => setPressed(true)}>
-			<StrokeIcon
+			<DynamicIcon
 				// prettier-ignore
 				className="action-button-icon"
 				icon={pressed ? feather.Check : feather.Download}

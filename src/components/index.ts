@@ -1,6 +1,5 @@
 export * from "./action-buttons"
 export * from "./debug-css"
-export * from "./icons"
 export * from "./layout"
 export * from "./progress-bar"
 export * from "./progress-slider"

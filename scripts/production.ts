@@ -7,7 +7,7 @@ import { JSDOM } from "jsdom"
 import JSZip from "jszip"
 import SVGO from "svgo"
 
-import { detab, sleep, toTitleCase } from "@/lib"
+import { detab, sleep, toTitleCase } from "../src/lib"
 import { formatSvg } from "./utils/format-svg"
 import { transformSvg, transformTsx } from "./utils/transform-svg"
 

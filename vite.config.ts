@@ -5,10 +5,8 @@ export default defineConfig({
 	plugins: [react()],
 	resolve: {
 		alias: {
-			"@": "/src",
 			"@icons/feather": "/icons/feather/production",
 			"@icons/wk": "/icons/wk/production",
-			"@scripts/utils": "/scripts/utils/index.ts",
 		},
 	},
 	preview: { host: true, port: 3000 },

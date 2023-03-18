@@ -12,9 +12,7 @@ import {
 	Checkbox,
 	CopyButton,
 	DEV_DebugCss,
-	DynamicIcon,
 	FormatButton,
-	Icon,
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressSlider,
@@ -23,14 +21,15 @@ import {
 	SearchBar,
 	Sidebar,
 	SidebarOverlay,
-	StrokeIcon,
-} from "@/components"
-import { resources } from "@/data"
-import { iota, isMac, safeAnchorAttrs, toKebabCase } from "@/lib"
-import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } from "@/providers"
+} from "./components"
+import { resources } from "./data"
+import { Effects } from "./effects"
+import { DynamicIcon, Icon, iota, isMac, safeAnchorAttrs, toKebabCase } from "./lib"
+import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } from "./providers"
 import {
 	CLIPBOARD_DEFAULT,
 	IconsetValue,
+	ICONSET_VALUE_DEFAULT,
 	MONOCHROME_DEFAULT,
 	SIZE_DEFAULT,
 	SIZE_MAX,
@@ -40,8 +39,7 @@ import {
 	STROKE_MAX,
 	STROKE_MIN,
 	STROKE_STEP,
-} from "@/providers/constants"
-import { Effects } from "./effects"
+} from "./providers/constants"
 import { useScrollProps } from "./use-scroll-props"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,31 +59,22 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
-				<div className="widget-head-padding" data-pos="search-bar">
-					<div className="widget-align-frame">
+				<div className="widget-head" data-pos="search-bar">
+					<div className="widget-alignment-frame" data-column>
 						<SearchBar />
 					</div>
 				</div>
 				<div className="widget-body" {...scrollProps}>
-					{/* <div className="widget-name">
-						<div className="widget-align-icon-frame">
-							<StrokeIcon className="widget-name-start-icon" icon={feather.Package} />
+					<div className="widget-name">
+						<div className="widget-alignment-icon-frame">
+							<DynamicIcon className="widget-name-start-icon" icon={feather.Package} />
 						</div>
-						<h6 className="widget-name-type">Icons</h6>
-						<button className="widget-align-icon-frame" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
-							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
-						</button>
-					</div> */}
-					<div className="widget-head">
-						<div className="idea">
-							<StrokeIcon className="widget-name-start-icon" icon={feather.Package} />
+						<h6 className="widget-name-type">Iconsets</h6>
+						<div className="widget-alignment-icon-frame">
+							<button className="widget-reset-button" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
+								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+							</button>
 						</div>
-						<h6 className="widget-name-type">Stroke width</h6>
-						{/* <div className="idea"> */}
-						<button className="widget-reset-button">
-							<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
-						</button>
-						{/* </div> */}
 					</div>
 					<div>
 						<Radio<IconsetValue>
@@ -142,14 +131,14 @@ function AppSidebar1() {
 			<div className="sidebar-body">
 				<hr />
 				{/* WIDGET */}
-				<div className="widget-head-padding">
+				<div className="widget-head">
 					<div className="widget-name">
-						<div className="widget-align-icon-frame">
-							<StrokeIcon className="widget-name-start-icon" icon={feather.Settings} />
+						<div className="widget-alignment-icon-frame">
+							<DynamicIcon className="widget-name-start-icon" icon={feather.Settings} />
 						</div>
 						<span className="widget-name-type">Settings</span>
-						<button className="widget-align-icon-frame" onClick={e => start(() => setMonochrome(MONOCHROME_DEFAULT))}>
-							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
+						<button className="widget-reset-button" onClick={e => setMonochrome(MONOCHROME_DEFAULT)}>
+							<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 						</button>
 					</div>
 				</div>
@@ -169,10 +158,10 @@ function AppSidebar1() {
 			<footer className="sidebar-foot">
 				<hr data-collapse />
 				{/* WIDGET */}
-				<div className="widget-head-padding" data-pos="start">
+				<div className="widget-head" data-pos="start">
 					<div className="widget-name">
-						<div className="idea">
-							<StrokeIcon className="widget-name-start-icon" icon={feather.Globe} />
+						<div className="widget-alignment-icon-frame">
+							<DynamicIcon className="widget-name-start-icon" icon={feather.Globe} />
 						</div>
 						<h6 className="widget-name-type">Resources</h6>
 					</div>
@@ -181,12 +170,12 @@ function AppSidebar1() {
 					<nav className="resources">
 						{resources.map(resource => (
 							<a key={resource.href} className="resource" href={resource.href} {...safeAnchorAttrs}>
-								<div className="widget-align-icon-frame">
-									<StrokeIcon className="resource-start-icon" icon={resource.icon} />
+								<div className="widget-alignment-icon-frame">
+									<DynamicIcon className="resource-start-icon" icon={resource.icon} />
 								</div>
 								<span className="resource-type">{resource.name}</span>
-								<div className="widget-align-icon-frame">
-									<StrokeIcon className="resource-end-icon" icon={feather.ArrowUpRight} />
+								<div className="widget-alignment-icon-frame">
+									<DynamicIcon className="resource-end-icon" icon={feather.ArrowUpRight} />
 								</div>
 							</a>
 						))}
@@ -243,14 +232,13 @@ function AppSidebar2() {
 						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{size.toFixed(0)} PX</span>
 							<button className="widget-reset-button" onClick={e => setSize(SIZE_DEFAULT)}>
-								<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 							</button>
 						</div>
 					</div>
 				</div>
 				<div className="widget-body">
-					{/* Use [data-col] because of <input type="range"> */}
-					<div className="widget-alignment-frame" data-col>
+					<div className="widget-alignment-frame" data-column>
 						{/* prettier-ignore */}
 						<ProgressSlider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
@@ -259,21 +247,20 @@ function AppSidebar2() {
 				{/* WIDGET */}
 				<div className="widget-head">
 					<div className="widget-name">
-						<div className="widget-alignment-frame" data-col>
+						<div className="widget-alignment-frame" data-column>
 							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
 						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
 							<button className="widget-reset-button" onClick={e => setSize(STROKE_DEFAULT)}>
-								<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 							</button>
 						</div>
 					</div>
 				</div>
 				<div className="widget-body">
-					{/* Use [data-col] because of <input type="range"> */}
-					<div className="widget-alignment-frame" data-col>
+					<div className="widget-alignment-frame" data-column>
 						{/* prettier-ignore */}
 						<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 					</div>

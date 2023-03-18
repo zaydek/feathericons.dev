@@ -2,8 +2,8 @@ import React from "react"
 
 import * as shiki from "shiki-es"
 
-import { getDarkMode, safeAnchorAttrs } from "@/lib"
-import { ShikiContext, ThemeContext } from "@/providers"
+import { getDarkMode, safeAnchorAttrs } from "../lib"
+import { ShikiContext, ThemeContext } from "../providers"
 
 function TwitterUsername({ username, children }: { username: string; children: string }) {
 	const href = `https://twitter.com/${username}`
