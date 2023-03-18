@@ -21,6 +21,7 @@ import {
 	SearchBar,
 	Sidebar,
 	SidebarOverlay,
+	StrokeIcon,
 } from "@/components"
 import { resources } from "@/data"
 import { IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase } from "@/lib"
@@ -67,11 +68,11 @@ function AppSidebar1() {
 				<div className="widget-body" {...scrollProps}>
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.Package className="widget-name-start-icon" />
+							<StrokeIcon className="widget-name-start-icon" icon={feather.Package} />
 						</div>
 						<h6 className="widget-name-type">Iconsets</h6>
 						<button className="widget-align-icon-frame" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
 						</button>
 					</div>
 					<div>
@@ -132,11 +133,11 @@ function AppSidebar1() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.Settings className="widget-name-start-icon" />
+							<StrokeIcon className="widget-name-start-icon" icon={feather.Settings} />
 						</div>
 						<span className="widget-name-type">Settings</span>
 						<button className="widget-align-icon-frame" onClick={e => start(() => setMonochrome(MONOCHROME_DEFAULT))}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
 						</button>
 					</div>
 				</div>
@@ -159,7 +160,7 @@ function AppSidebar1() {
 				<div className="widget-head" data-pos="start">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.Globe className="widget-name-start-icon" />
+							<StrokeIcon className="widget-name-start-icon" icon={feather.Globe} />
 						</div>
 						<h6 className="widget-name-type">Resources</h6>
 					</div>
@@ -169,11 +170,11 @@ function AppSidebar1() {
 						{resources.map(resource => (
 							<a key={resource.href} className="resource" href={resource.href} {...safeAnchorAttrs}>
 								<div className="widget-align-icon-frame">
-									<resource.icon className="resource-start-icon" />
+									<StrokeIcon className="resource-start-icon" icon={resource.icon} />
 								</div>
 								<span className="resource-type">{resource.name}</span>
 								<div className="widget-align-icon-frame">
-									<feather.ArrowUpRight className="resource-end-icon" strokeWidth={2.5} />
+									<StrokeIcon className="resource-end-icon" icon={feather.ArrowUpRight} />
 								</div>
 							</a>
 						))}
@@ -212,20 +213,6 @@ function AppSidebar2() {
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting lang={format === "svg" ? "html" : "tsx"} code={clipboard || CLIPBOARD_DEFAULT} />
-						{/* <div className="action-buttons">
-							<button className="action-button">
-								<div className="action-button-icon-frame">
-									<feather.Clipboard className="action-button-icon" onClick={handleClickCopy} />
-								</div>
-								<span className="action-button-name">Copy</span>
-							</button>
-							<button className="action-button">
-								<div className="action-button-icon-frame">
-									<feather.Download className="action-button-icon" onClick={handleClickSave} />
-								</div>
-								<span className="action-button-name">Save</span>
-							</button>
-						</div> */}
 					</div>
 				</div>
 			</header>
@@ -235,12 +222,12 @@ function AppSidebar2() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.PenTool className="widget-name-start-icon" />
+							<StrokeIcon className="widget-name-start-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Size</h6>
 						<span className="widget-name-range-type">{size.toFixed(0)} PX</span>
 						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
 						</button>
 					</div>
 				</div>
@@ -255,12 +242,12 @@ function AppSidebar2() {
 				<div className="widget-head">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
-							<feather.PenTool className="widget-name-start-icon" />
+							<StrokeIcon className="widget-name-start-icon" icon={feather.PenTool} />
 						</div>
 						<h6 className="widget-name-type">Stroke width</h6>
 						<span className="widget-name-range-type">{strokeWidth.toFixed(2)}</span>
 						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<StrokeIcon className="widget-name-end-icon" icon={feather.RotateCcw} />
 						</button>
 					</div>
 				</div>
