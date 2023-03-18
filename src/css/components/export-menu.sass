@@ -4,6 +4,14 @@
 
 $select-height: 24px
 
+////////////////////////////////////////////////////////////////////////////////
+
+.thing
+  display: flex
+  justify-content: center
+  align-items: center
+  margin: 0 math.div($button-height - 24px, 2)
+
 .export-menu
   display: flex
   align-items: center
@@ -39,12 +47,14 @@ $select-height: 24px
   align-items: center
   height: $select-height
   width:  $select-height
-  &:first-of-type
-    margin-left: 4px // 🧐
+  &:first-child
+    margin: 0 4px // 🧐
 
 .select-button-start-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
+  //// &:first-child
+  ////   margin-left: 20px
   // 🫢
   //// color:  $text-200-color
 
@@ -55,8 +65,8 @@ $select-height: 24px
 
 .select-button-type
   // TYPOGRAPHY
-  //// +typography-reduced-sans
-  +typography-caps
+  +typography-reduced-sans
+  //// +typography-caps
   color: $text-200-color
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +79,7 @@ $select-height: 24px
   width:  $select-height
   border-radius: 1e3px
   &:first-of-type
-    margin-left: math.div($select-height - $tiny-icon-height, 2)
+    margin-left: $select-height - $tiny-icon-height
 
 .action-button-icon
   height: $tiny-icon-height

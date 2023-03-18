@@ -69,7 +69,7 @@ function AppSidebar1() {
 						</div>
 						<h6 className="widget-name-type">Iconsets</h6>
 						<button className="widget-align-icon-frame" onClick={e => start(() => setIconset(ICONSET_VALUE_DEFAULT))}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 					<div>
@@ -134,7 +134,7 @@ function AppSidebar1() {
 						</div>
 						<span className="widget-name-type">Settings</span>
 						<button className="widget-align-icon-frame" onClick={e => start(() => setMonochrome(MONOCHROME_DEFAULT))}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 				</div>
@@ -171,7 +171,7 @@ function AppSidebar1() {
 								</div>
 								<span className="resource-type">{resource.name}</span>
 								<div className="widget-align-icon-frame">
-									<feather.ArrowUpRight className="resource-end-icon" strokeWidth={2.5} />
+									<feather.ArrowUpRight className="resource-end-icon" strokeWidth={3} />
 								</div>
 							</a>
 						))}
@@ -199,18 +199,21 @@ function AppSidebar2() {
 		<Sidebar pos="end">
 			<header className="sidebar-head">
 				<div className="widget-head" data-pos="start">
-					<div className="widget-name">
-						<div className="widget-align-icon-frame">
-							{/* <feather.Clipboard className="widget-name-start-icon" /> */}
+					{/* <div className="widget-name"> */}
+					{/* <div style={{ height: 16, width: 16, backgroundColor: "orange" }}></div>
+						<div style={{ flex: 1 }}></div>
+						<div style={{ height: 16, width: 16, backgroundColor: "orange" }}></div>
+						<div style={{ height: 16, width: 16, backgroundColor: "orange" }}></div> */}
+					{/* <feather.Clipboard className="widget-name-start-icon" /> */}
+					{/* <div className="widget-align-icon-frame">
 							<feather.MousePointer className="widget-name-start-icon" />
-						</div>
+						</div> */}
+					<div className="thing">
 						<h6 className="widget-name-type">Selection</h6>
-						{/* <div style={{ flex: 1 }}></div> */}
-						{/* TODO */}
-						<div className="widget-align-frame">
-							<ExportMenu value={format} setValue={setFormatAs} />
-						</div>
+						<div style={{ flex: 1 }}></div>
+						<ExportMenu value={format} setValue={setFormatAs} />
 					</div>
+					{/* </div> */}
 				</div>
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
 					<div className="widget-syntax-highlighting-container">
@@ -243,7 +246,7 @@ function AppSidebar2() {
 						<h6 className="widget-name-type">Size</h6>
 						<span className="widget-name-range-type">{size.toFixed(0)} PX</span>
 						<button className="widget-align-icon-frame" onClick={() => setSize(SIZE_DEFAULT)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 				</div>
@@ -263,7 +266,7 @@ function AppSidebar2() {
 						<h6 className="widget-name-type">Stroke width</h6>
 						<span className="widget-name-range-type">{strokeWidth.toFixed(2)}</span>
 						<button className="widget-align-icon-frame" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
-							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={2.5} />
+							<feather.RotateCcw className="widget-name-end-icon" strokeWidth={3} />
 						</button>
 					</div>
 				</div>
