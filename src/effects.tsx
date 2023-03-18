@@ -78,10 +78,10 @@ function useSetClipboardOnIconsetChanges() {
 				let code = ""
 				if (index === 0) code = 'import { JSX } from "solid-js";\n\n'
 				code +=
-					transformTsx(toKebabCase(name), formatSvg(svg, { strictJsx: false }), {
+					transformTsx(name, formatSvg(svg, { strictJsx: false }), {
 						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
 					}) + EOF
-				clipboard.set(name, code)
+				clipboard.set(toKebabCase(name), code)
 			} else if (format === "strict-jsx") {
 				const code =
 					transformJsx(name, formatSvg(svg, { strictJsx: true }), {

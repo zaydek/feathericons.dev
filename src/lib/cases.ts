@@ -22,11 +22,11 @@ export function toSnakeCase(str: string) {
 						.toLowerCase()
 }
 
-// prettier-ignore
-export function toSpaceCase(str: string) {
-	return str.replace(/([a-zA-Z0-9])([A-Z])/g, "$1 $2")
-	          .replace(/([a-zA-Z])([0-9])/g, "$1 $2")
-}
+//// // prettier-ignore
+//// export function toSpaceCase(str: string) {
+//// 	return str.replace(/([a-zA-Z0-9])([A-Z])/g, "$1 $2")
+//// 	          .replace(/([a-zA-Z])([0-9])/g, "$1 $2")
+//// }
 
 export function toCamelCase(str: string) {
 	return str.replace(/-([a-zA-Z0-9])/g, (_, $1) => $1.toUpperCase())
