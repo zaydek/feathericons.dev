@@ -6,7 +6,7 @@ import { sizeInitial } from "../constants"
 import { Hoverable } from "../hoverable"
 import { SliderContext } from "../providers/state"
 import { ResizableIcon } from "../resizable-icon"
-import { Container } from "./shared"
+import { Container } from "./-shared"
 
 export function DemoGoldenAspectRatio({ name }: { name: keyof typeof manifest }) {
 	const { size } = useContext(SliderContext)!

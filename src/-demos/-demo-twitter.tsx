@@ -6,7 +6,7 @@ import { Anchor } from "../anchor"
 import { twitterShareUrl } from "../constants"
 import { TwitterIcon } from "../icon-config"
 import { ResizableIcon } from "../resizable-icon"
-import { Container } from "./shared"
+import { Container } from "./-shared"
 
 function ShareButton({ icon }: { icon: Component }) {
 	return (

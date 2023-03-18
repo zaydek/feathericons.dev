@@ -1,7 +1,7 @@
 import React from "react"
 
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "../scripts/utils"
-import { getKeys, isMac, toKebabCase, useVisibleDocumentTitle } from "./lib"
+import { getKeys, isMac, toCanonCase, toKebabCase, useVisibleDocumentTitle } from "./lib"
 import { ClipboardContext, RangeContext, SearchContext } from "./providers"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ function useSetClipboardOnIconsetChanges() {
 		const clipboard = new Map<string, string>()
 		const { keys } = getKeys(names, { limit: 20 })
 		for (const [index, name] of keys.entries()) {
-			const search = toKebabCase(name).toLowerCase()
+			const search = toCanonCase(name)
 			const svg = document.getElementById(name)?.querySelector("svg")!
 			if (format === "svg") {
 				const code =

@@ -5,7 +5,7 @@ import { manifest } from "../../data/manifest"
 import { Component } from "../../utils/icon"
 import { cx } from "../lib/cx"
 import { ResizableIcon } from "../resizable-icon"
-import { Container } from "./shared"
+import { Container } from "./-shared"
 
 function IconContainer({ children }: PropsWithChildren) {
 	return <div className="flex h-[var(--field-h)] w-[var(--field-h)] items-center justify-center">{children}</div>
@@ -72,7 +72,11 @@ export function DemoLogin({ name }: { name: keyof typeof manifest }) {
 				<div className="w-[var(--field-w)] rounded-[calc(var(--field-h)_*_0.375)] bg-white shadow-[var(--shadow-2)]">
 					<UsernameField icon={feather[name]} />
 					<hr />
-					<PasswordField icon={({ className, ...props }) => <feather.Lock className={cx(className, "[&_>_rect]:fill-current")} {...props} />} />
+					<PasswordField
+						icon={({ className, ...props }) => (
+							<feather.Lock className={cx(className, "[&_>_rect]:fill-current")} {...props} />
+						)}
+					/>
 				</div>
 			</div>
 		</Container>

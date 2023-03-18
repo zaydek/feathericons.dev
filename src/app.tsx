@@ -330,7 +330,7 @@ function MainGridItem({ index, name, icon: Icon }: { index: number; name: string
 			>
 				<Icon className="main-grid-item-icon" />
 			</button>
-			<span className="main-grid-item-type">{toKebabCase(name).toLowerCase()}</span>
+			<span className="main-grid-item-type">{toKebabCase(name)}</span>
 		</article>
 	)
 }

@@ -5,7 +5,7 @@ import { manifest } from "../../data/manifest"
 import { Component } from "../../utils/icon"
 import { Accessible } from "../aria/accessible"
 import { ResizableIcon } from "../resizable-icon"
-import { Container } from "./shared"
+import { Container } from "./-shared"
 
 function InteractiveButton({ icon, ...props }: { icon: Component } & Accessible<JSX.IntrinsicElements["button"]>) {
 	const [active, setActive] = useState(false)

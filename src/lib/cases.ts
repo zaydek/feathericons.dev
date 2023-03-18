@@ -4,20 +4,22 @@ const re2 = /^-+|-+$/g
 // prettier-ignore
 export function toCanonCase(str: string) {
 	return str.replace(re1, "$1-$2")
+	          .replace(re2, "")
 	          .toLowerCase()
-	          .replace(re2, "");
 }
 
 // prettier-ignore
 export function toKebabCase(str: string) {
 	return str.replace(/([a-zA-Z0-9])([A-Z])/g, "$1-$2")
-	          .replace(/([a-zA-Z])([0-9])/g, "$1-$2").toLowerCase()
+	          .replace(/([a-zA-Z])([0-9])/g, "$1-$2")
+						.toLowerCase()
 }
 
 // prettier-ignore
 export function toSnakeCase(str: string) {
 	return str.replace(/([a-zA-Z0-9])([A-Z])/g, "$1_$2")
-	          .replace(/([a-zA-Z])([0-9])/g, "$1_$2").toLowerCase()
+	          .replace(/([a-zA-Z])([0-9])/g, "$1_$2")
+						.toLowerCase()
 }
 
 // prettier-ignore

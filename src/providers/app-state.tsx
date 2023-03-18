@@ -98,7 +98,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 		if (canon === "") {
 			return _results
 		} else {
-			return _results?.filter(([name]) => toKebabCase(name).toLowerCase().includes(canon))
+			return _results?.filter(([name]) => toKebabCase(name).includes(canon))
 		}
 	}, [_results, search])
 
