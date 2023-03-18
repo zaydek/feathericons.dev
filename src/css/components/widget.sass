@@ -4,12 +4,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// TODO: DEPRECATE
 .widget-align-frame
   display: flex
   flex-direction: column
   justify-content: center // Center y-axis
   padding: 0 math.div($button-height - $tiny-icon-height, 2)
 
+// TODO: DEPRECATE
 .widget-align-icon-frame
   display: flex
   justify-content: center // Center x-axis
@@ -29,49 +31,12 @@
   & + &
     margin-left: 0
 
-.spacer
-  flex: 1
-
-// TODO: Move to base.sass?
-.widget-spacer
-  flex: 1
-  margin: 0 math.div($button-height - $tiny-icon-height, 2)
-.widget-fixed-spacer
-  width: math.div($button-height - $tiny-icon-height, 2)
-
-//// // TODO: RENAME
-//// .widget-framing-2
-////   //// flex: 1
-////   display: flex
-////   align-items: center
-////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
-
-//// .widget-spacer
-////   //// flex: 1
-////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
-
-//// .widget-head > span:not([class])
-////   //// flex: 1
-////   width: math.div($button-height - $tiny-icon-height, 2)
-////
-//// .widget-gap
-////   width: math.div($button-height - $tiny-icon-height, 2)
-
-.widget-head-break
-  width: math.div($button-height - $tiny-icon-height, 2)
-
-//// .widget-alignment-icon-frame
-////   display: flex
-////   justify-content: center
-////   align-items: center
-////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
-
-.widget-head
-  display: flex
-  //// justify-content: space-between
-  align-items: center
-  //// gap: math.div($button-height - $tiny-icon-height, 2)
-  //// margin: 0 math.div($button-height - $tiny-icon-height, 2)
+.widget-head-padding
+  //// display: flex
+  //// //// justify-content: space-between
+  //// align-items: center
+  //// //// gap: math.div($button-height - $tiny-icon-height, 2)
+  //// //// margin: 0 math.div($button-height - $tiny-icon-height, 2)
   padding: $sidebar-gap $sidebar-padding-x
 
   &[data-pos=start]
@@ -82,6 +47,13 @@
   &:has(+ [data-scroll=true]) // TODO: Change to [data-has]
     isolation: isolate // Preserve box-shadow
     box-shadow: $hairline-shadow-bottom
+
+.widget-head
+  display: flex
+  //// justify-content: space-between
+  align-items: center
+  //// gap: math.div($button-height - $tiny-icon-height, 2)
+  //// margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 .widget-body
   display: flex

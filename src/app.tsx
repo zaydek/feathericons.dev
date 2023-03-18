@@ -60,7 +60,7 @@ function AppSidebar1() {
 	return (
 		<Sidebar pos="start">
 			<header className="sidebar-head">
-				<div className="widget-head" data-pos="search-bar">
+				<div className="widget-head-padding" data-pos="search-bar">
 					<div className="widget-align-frame">
 						<SearchBar />
 					</div>
@@ -130,7 +130,7 @@ function AppSidebar1() {
 			<div className="sidebar-body">
 				<hr />
 				{/* Widget */}
-				<div className="widget-head">
+				<div className="widget-head-padding">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
 							<StrokeIcon className="widget-name-start-icon" icon={feather.Settings} />
@@ -157,7 +157,7 @@ function AppSidebar1() {
 			<footer className="sidebar-foot">
 				<hr data-collapse />
 				{/* Widget */}
-				<div className="widget-head" data-pos="start">
+				<div className="widget-head-padding" data-pos="start">
 					<div className="widget-name">
 						<div className="widget-align-icon-frame">
 							<StrokeIcon className="widget-name-start-icon" icon={feather.Globe} />
@@ -201,14 +201,16 @@ function AppSidebar2() {
 	return (
 		<Sidebar pos="end">
 			<header className="sidebar-head">
-				<div className="widget-head" data-pos="start">
-					<div className="idea">
-						<FormatButton value={format} setValue={setFormatAs} />
-					</div>
-					<div className="spacer"></div>
-					<div className="idea">
-						<CopyButton />
-						<SaveButton />
+				<div className="widget-head-padding" data-pos="start">
+					<div className="widget-head">
+						<div className="idea">
+							<FormatButton value={format} setValue={setFormatAs} />
+						</div>
+						<div className="spacer"></div>
+						<div className="idea">
+							<CopyButton />
+							<SaveButton />
+						</div>
 					</div>
 				</div>
 				<div className="widget-body" data-pos="syntax-highlighting" {...scrollProps}>
@@ -220,18 +222,20 @@ function AppSidebar2() {
 			<div className="sidebar-body">
 				<hr />
 				{/* Widget */}
-				<div className="widget-head">
-					<div className="idea">
-						<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
-					</div>
-					<h6 className="widget-name-type">Size</h6>
-					<div className="idea">
-						<span className="widget-range-type">{size.toFixed(0)} PX</span>
-					</div>
-					<div className="idea">
-						<button className="widget-reset-button">
-							<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
-						</button>
+				<div className="widget-head-padding">
+					<div className="widget-head">
+						<div className="idea">
+							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
+						</div>
+						<h6 className="widget-name-type">Size</h6>
+						<div className="idea">
+							<span className="widget-range-type">{strokeWidth.toFixed(0)} PX</span>
+						</div>
+						<div className="idea">
+							<button className="widget-reset-button">
+								<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+							</button>
+						</div>
 					</div>
 				</div>
 				<div className="widget-body">
@@ -242,18 +246,20 @@ function AppSidebar2() {
 				</div>
 				<hr />
 				{/* Widget */}
-				<div className="widget-head">
-					<div className="idea">
-						<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
-					</div>
-					<h6 className="widget-name-type">Stroke width</h6>
-					<div className="idea">
-						<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
-					</div>
-					<div className="idea">
-						<button className="widget-reset-button">
-							<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
-						</button>
+				<div className="widget-head-padding">
+					<div className="widget-head">
+						<div className="idea">
+							<DynamicIcon className="widget-name-start-icon" icon={feather.PenTool} />
+						</div>
+						<h6 className="widget-name-type">Stroke width</h6>
+						<div className="idea">
+							<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
+						</div>
+						<div className="idea">
+							<button className="widget-reset-button">
+								<StrokeIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
+							</button>
+						</div>
 					</div>
 				</div>
 				<div className="widget-body">
