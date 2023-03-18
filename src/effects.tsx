@@ -1,8 +1,12 @@
 import React from "react"
 
 import { formatSvg, transformJsx, transformSvg, transformTsx } from "../scripts/utils"
-import { getKeys, isMac, toKebabCase, toTitleCase, useVisibleDocumentTitle } from "./lib"
+import { getKeys, isMac, toKebabCase, useVisibleDocumentTitle } from "./lib"
 import { ClipboardContext, RangeContext, SearchContext } from "./providers"
+
+////////////////////////////////////////////////////////////////////////////////
+
+const EOF = "\n"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -53,53 +57,45 @@ function useSetClipboardOnIconsetChanges() {
 	React.useEffect(() => {
 		if (searchResultsLoading) return
 		if (searchResults === null || searchResults.length === 0) return
-		//// let clipboard = ""
 		const clipboard = new Map<string, string>()
-		const { keys, more } = getKeys(names, { limit: 20 })
+		const { keys } = getKeys(names, { limit: 20 })
 		for (const [index, name] of keys.entries()) {
-			//// if (index > 0) {
-			//// 	clipboard += "\n\n"
-			//// }
 			const search = toKebabCase(name).toLowerCase()
 			const svg = document.getElementById(name)?.querySelector("svg")!
 			if (format === "svg") {
-				clipboard.set(
-					name,
+				const code =
 					transformSvg(formatSvg(svg, { strictJsx: false }), {
 						banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
-					}),
-				)
+					}) + EOF
+				clipboard.set(toKebabCase(name), code)
 			} else if (format === "jsx") {
-				clipboard.set(
-					name,
-					transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
+				const code =
+					transformJsx(name, formatSvg(svg, { strictJsx: false }), {
 						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=jsx`,
-					}),
-				)
+					}) + EOF
+				clipboard.set(toKebabCase(name), code)
 			} else if (format === "tsx") {
-				let str = ""
-				if (index === 0) str = 'import { JSX } from "solid-js";\n\n'
-				str += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
-				})
-				clipboard.set(name, str)
+				let code = ""
+				if (index === 0) code = 'import { JSX } from "solid-js";\n\n'
+				code +=
+					transformTsx(toKebabCase(name), formatSvg(svg, { strictJsx: false }), {
+						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
+					}) + EOF
+				clipboard.set(name, code)
 			} else if (format === "strict-jsx") {
-				clipboard.set(
-					name,
-					transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+				const code =
+					transformJsx(name, formatSvg(svg, { strictJsx: true }), {
 						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-jsx`,
-					}),
-				)
+					}) + EOF
+				clipboard.set(toKebabCase(name), code)
 			} else if (format === "strict-tsx") {
-				clipboard.set(
-					name,
-					transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+				const code =
+					transformTsx(name, formatSvg(svg, { strictJsx: true }), {
 						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-tsx`,
-					}),
-				)
+					}) + EOF
+				clipboard.set(toKebabCase(name), code)
 			}
 		}
-		// TODO
 		//// if (more) {
 		//// 	if (format === "svg") {
 		//// 		clipboard += `\n\n<!-- ... -->`
@@ -154,6 +150,25 @@ function useShortcutCtrlAToSelectAll() {
 	return void 0
 }
 
+function useShortcutCtrlCToCopyClipboard() {
+	const { searchResultsLoading, searchResults } = React.useContext(SearchContext)!
+	const { clipboard } = React.useContext(ClipboardContext)!
+	React.useEffect(() => {
+		if (searchResultsLoading === null) return
+		if (searchResults === null || searchResults.length === 0) return
+		function handleKeyDown(e: KeyboardEvent) {
+			if (document.activeElement?.matches('.search-bar input[type="text"]')) return
+			if ((isMac() && e.metaKey && e.key === "c") || (!isMac() && e.ctrlKey && e.key === "c")) {
+				e.preventDefault()
+				navigator.clipboard.writeText([...clipboard.values()].join("\n"))
+			}
+		}
+		window.addEventListener("keydown", handleKeyDown, false)
+		return () => window.removeEventListener("keydown", handleKeyDown)
+	}, [clipboard, searchResults, searchResultsLoading])
+	return void 0
+}
+
 function useShortcutEscToRemoveNamesStartAndEnd() {
 	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
@@ -185,6 +200,7 @@ export function Effects() {
 	useSetIconsetAttribute()
 
 	useShortcutCtrlAToSelectAll()
+	useShortcutCtrlCToCopyClipboard()
 	useShortcutEscToRemoveNamesStartAndEnd()
 
 	return <></>

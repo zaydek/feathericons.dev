@@ -34,15 +34,17 @@
     <!-- Plausible -->
     <script defer data-domain="feathericons.dev" src="https://plausible.io/js/script.outbound-links.js"></script>
 
-    <!-- Recover dark mode -->
+    <!-- Dark mode -->
     <script>
       "use strict";
       const media = window.matchMedia("(prefers-color-scheme: dark)");
       const theme = media.matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", theme);
     </script>
-
-    <!-- Recover size -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Size -->
     <script>
       "use strict";
       let size = 0
@@ -55,13 +57,10 @@
       } else {
         size = parsed
       }
-      document.body.style.style =
+      document.body.style =
         `--size: ${size}; ` +
         `--stroke-width: ${2};`
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

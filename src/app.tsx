@@ -199,7 +199,7 @@ function AppSidebar2() {
 
 	React.useEffect(() => {
 		if (clipboard.size === 0) return
-		navigator.clipboard.writeText([...clipboard.values()].join("\n\n"))
+		navigator.clipboard.writeText([...clipboard.values()].join("\n"))
 	}, [clipboard])
 
 	return (
@@ -221,7 +221,7 @@ function AppSidebar2() {
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting
 							lang={format === "svg" ? "html" : "tsx"}
-							code={[...clipboard.values()].join("\n\n") || CLIPBOARD_DEFAULT}
+							code={[...clipboard.values()].join("\n").trimEnd() || CLIPBOARD_DEFAULT}
 						/>
 					</div>
 				</div>

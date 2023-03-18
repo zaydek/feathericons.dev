@@ -11,6 +11,8 @@ import { detab, sleep, toTitleCase } from "../src/lib"
 import { formatSvg } from "./utils/format-svg"
 import { transformSvg, transformTsx } from "./utils/transform-svg"
 
+////////////////////////////////////////////////////////////////////////////////
+
 const EOF = "\n"
 
 const svgBanner = (name: string) => `<!-- https://feathericons.dev/?search=${name} -->`

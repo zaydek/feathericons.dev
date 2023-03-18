@@ -3,11 +3,11 @@ import React from "react"
 import * as feather from "@icons/feather/tsx"
 
 import { Reactjs, Solidjs, Svg, TypeScript } from "../components/vendor-icons"
-import { sleep } from "../lib"
+import { downloadText, downloadZipArchive } from "../lib"
 import { DynamicIcon, Icon } from "../lib/dynamic-icon"
-import { ClipboardContext, FormatValue } from "../providers"
+import { ClipboardContext, FormatValue, SearchContext } from "../providers"
 
-const names: Record<FormatValue, string> = {
+const formatNames: Record<FormatValue, string> = {
 	svg: "SVG",
 	jsx: "Solid",
 	tsx: "TypeScript Solid",
@@ -17,7 +17,7 @@ const names: Record<FormatValue, string> = {
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
 
-const icons: Record<FormatValue, Icon> = {
+const formatIcons: Record<FormatValue, Icon> = {
 	svg: Svg,
 	jsx: Solidjs,
 	tsx: TypeScript,
@@ -59,9 +59,9 @@ export function FormatButton({
 			</select>
 			<button className="select-button" tabIndex={-1}>
 				<div className="select-button-icon-frame">
-					<DynamicIcon className="select-button-start-icon" icon={icons[value]} />
+					<DynamicIcon className="select-button-start-icon" icon={formatIcons[value]} />
 				</div>
-				<span className="select-button-type">{names[value]}</span>
+				<span className="select-button-type">{formatNames[value]}</span>
 				<div className="select-button-icon-frame">
 					{/* Don't use <StrokeIcon> here */}
 					<DynamicIcon className="select-button-end-icon" icon={feather.ChevronDown} />
@@ -77,12 +77,9 @@ export function CopyButton() {
 
 	React.useEffect(() => {
 		if (!pressed) return
-		async function fn() {
-			await navigator.clipboard.writeText([...clipboard.values()].join("\n\n"))
-			await sleep(1e3)
-			setPressed(false)
-		}
-		fn()
+		navigator.clipboard.writeText([...clipboard.values()].join("\n"))
+		const d = window.setTimeout(() => setPressed(false), 1e3)
+		return () => window.clearTimeout(d)
 	}, [clipboard, pressed])
 
 	return (
@@ -96,19 +93,40 @@ export function CopyButton() {
 	)
 }
 
+function ext(format: FormatValue) {
+	switch (format) {
+		case "svg":
+		case "jsx":
+		case "tsx":
+			return format
+		case "strict-jsx":
+			return "jsx"
+		case "strict-tsx":
+			return "tsx"
+	}
+}
+
 export function SaveButton() {
-	const { clipboard } = React.useContext(ClipboardContext)!
+	const { iconset } = React.useContext(SearchContext)!
+	const { format, clipboard } = React.useContext(ClipboardContext)!
+
 	const [pressed, setPressed] = React.useState(false)
 
 	React.useEffect(() => {
 		if (!pressed) return
-		async function fn() {
-			//// await navigator.clipboard.writeText(clipboard)
-			await sleep(1e3)
-			setPressed(false)
+		if (clipboard.size === 1) {
+			const [[name, content]] = clipboard.entries()
+			downloadText({ filename: `${name}.${ext(format)}`, content })
+		} else if (clipboard.size > 1) {
+			const files: { filename: string; content: string }[] = []
+			for (const [filename, content] of clipboard) {
+				files.push({ filename: `${filename}.${ext(format)}`, content })
+			}
+			downloadZipArchive(`${iconset}.zip`, files)
 		}
-		fn()
-	}, [clipboard, pressed])
+		const d = window.setTimeout(() => setPressed(false), 1e3)
+		return () => window.clearTimeout(d)
+	}, [clipboard, format, iconset, pressed])
 
 	return (
 		<button className="action-button" onClick={e => setPressed(true)}>
