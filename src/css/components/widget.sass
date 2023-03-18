@@ -8,9 +8,9 @@
 .widget-alignment-frame
   // flex: 1 // OOPS // Stretch x-axis
   display: flex
-  &:not([data-column])
+  &:not([data-dir])
     align-items: center
-  &[data-column]
+  &[data-dir=column]
     flex-direction: column
   margin: 0 math.div($button-height - $tiny-icon-height, 2)
   & + :is(.widget-alignment-frame, .widget-alignment-icon-frame)

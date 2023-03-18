@@ -60,7 +60,7 @@ function AppSidebar1() {
 		<Sidebar pos="start">
 			<header className="sidebar-head">
 				<div className="widget-head" data-pos="search-bar">
-					<div className="widget-alignment-frame" data-column>
+					<div className="widget-alignment-frame" data-dir="column">
 						<SearchBar />
 					</div>
 				</div>
@@ -240,7 +240,7 @@ function AppSidebar2() {
 					</div>
 				</div>
 				<div className="widget-body">
-					<div className="widget-alignment-frame" data-column>
+					<div className="widget-alignment-frame" data-dir="column">
 						{/* prettier-ignore */}
 						<ProgressSlider value={size} setValue={setSize} min={SIZE_MIN} max={SIZE_MAX} step={SIZE_STEP} />
 					</div>
@@ -255,14 +255,14 @@ function AppSidebar2() {
 						<h6 className="widget-name-type u-flex-1">Stroke width</h6>
 						<div className="widget-alignment-frame" data-clip="end">
 							<span className="widget-range-type">{strokeWidth.toFixed(2)}</span>
-							<button className="widget-reset-button" onClick={e => setSize(STROKE_DEFAULT)}>
+							<button className="widget-reset-button" onClick={e => setStrokeWidth(STROKE_DEFAULT)}>
 								<DynamicIcon className="widget-reset-button-icon" icon={feather.RotateCcw} />
 							</button>
 						</div>
 					</div>
 				</div>
 				<div className="widget-body">
-					<div className="widget-alignment-frame" data-column>
+					<div className="widget-alignment-frame" data-dir="column">
 						{/* prettier-ignore */}
 						<ProgressSlider value={strokeWidth} setValue={setStrokeWidth} min={STROKE_MIN} max={STROKE_MAX} step={STROKE_STEP} />
 					</div>
