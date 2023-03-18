@@ -1,11 +1,12 @@
 import React from "react"
+import { formatSvg, transformJsx, transformSvg, transformTsx } from "scripts/utils"
 
-import { isMac, useVisibleDocumentTitle } from "./lib"
+import { getKeys, isMac, toKebabCase, toTitleCase, useVisibleDocumentTitle } from "./lib"
 import { ClipboardContext, RangeContext, SearchContext } from "./providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useEffectResetSearchAndSelectionOnIconset() {
+function useResetSearchAndSelectionOnIconset() {
 	const { setSearch, iconset } = React.useContext(SearchContext)!
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 	const onceRef = React.useRef(false)
@@ -21,7 +22,7 @@ function useEffectResetSearchAndSelectionOnIconset() {
 	return void 0
 }
 
-function useEffectSelectNamesFromIndexes() {
+function useSelectNamesFromIndexes() {
 	const { searchResults } = React.useContext(SearchContext)!
 	const { namesStart, namesEnd, addNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
@@ -34,7 +35,59 @@ function useEffectSelectNamesFromIndexes() {
 	return void 0
 }
 
-function useEffectSetCssVars() {
+function useSetClipboardOnIconset() {
+	const { iconset, loading } = React.useContext(SearchContext)!
+	const { format, names, setClipboard } = React.useContext(ClipboardContext)!
+	// TODO: Move to app.tsx or effetcs.tsx
+	React.useEffect(() => {
+		if (loading) return
+		//// if (names.size === 0) {
+		//// 	setClipboard("")
+		//// 	return
+		//// }
+		let clipboard = ""
+		const { keys, more } = getKeys(names, { limit: 20 })
+		for (const [index, name] of keys.entries()) {
+			if (index > 0) {
+				clipboard += "\n\n"
+			}
+			const search = toKebabCase(name).toLowerCase()
+			const svg = document.getElementById(name)!.querySelector("svg")!
+			if (format === "svg") {
+				clipboard += transformSvg(formatSvg(svg, { strictJsx: false }), {
+					banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
+				})
+			} else if (format === "jsx") {
+				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=jsx`,
+				})
+			} else if (format === "tsx") {
+				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
+				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
+				})
+			} else if (format === "strict-jsx") {
+				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-jsx`,
+				})
+			} else if (format === "strict-tsx") {
+				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
+					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-tsx`,
+				})
+			}
+		}
+		if (more) {
+			if (format === "svg") {
+				clipboard += `\n\n<!-- ... -->`
+			} else {
+				clipboard += `\n\n// ...`
+			}
+		}
+		setClipboard(clipboard)
+	}, [format, iconset, names])
+}
+
+function useSetCssVars() {
 	const { size, strokeWidth } = React.useContext(RangeContext)!
 	React.useEffect(() => {
 		document.body.style.setProperty("--size", "" + size)
@@ -46,7 +99,7 @@ function useEffectSetCssVars() {
 }
 
 // See main-grid.sass
-function useEffectSetIconsetAttribute() {
+function useSetIconsetAttribute() {
 	const { iconset } = React.useContext(SearchContext)!
 	React.useEffect(() => {
 		document.documentElement.setAttribute("data-iconset", iconset)
@@ -54,7 +107,7 @@ function useEffectSetIconsetAttribute() {
 	return void 0
 }
 
-function useEffectVisibleDocumentTitle() {
+function useVisibleDocumentTitle() {
 	const { loading, searchResults } = React.useContext(SearchContext)!
 	const count = (searchResults ?? []).length
 	// prettier-ignore
@@ -73,7 +126,7 @@ function useShortcutCtrlAToSelectAll() {
 	React.useEffect(() => {
 		if (searchResults === null) return
 		function handleKeyDown(e: KeyboardEvent) {
-			if (e.target instanceof Element && e.target.tagName === "INPUT") return
+			if (document.activeElement?.matches('.search-bar input[type="text"]')) return
 			if ((isMac() && e.metaKey && e.key === "a") || (!isMac() && e.ctrlKey && e.key === "a")) {
 				e.preventDefault()
 				setNamesStart(0)
@@ -90,11 +143,14 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 	const { setNamesStart, setNamesEnd, removeAllNames } = React.useContext(ClipboardContext)!
 	React.useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			if (document.activeElement?.tagName !== "BODY") return
+			if (document.activeElement?.matches('.search-bar input[type="text"]')) return
 			if (e.key === "Escape") {
 				removeAllNames()
 				setNamesStart(null)
 				setNamesEnd(null)
+				if (document.activeElement instanceof HTMLElement) {
+					document.activeElement.blur()
+				}
 			}
 		}
 		window.addEventListener("keydown", handleKeyDown, false)
@@ -106,11 +162,12 @@ function useShortcutEscToRemoveNamesStartAndEnd() {
 ////////////////////////////////////////////////////////////////////////////////
 
 export function Effects() {
-	useEffectResetSearchAndSelectionOnIconset()
-	useEffectSelectNamesFromIndexes()
-	useEffectSetCssVars()
-	useEffectSetIconsetAttribute()
-	useEffectVisibleDocumentTitle()
+	useResetSearchAndSelectionOnIconset()
+	useSelectNamesFromIndexes()
+	useSetClipboardOnIconset()
+	useSetCssVars()
+	useSetIconsetAttribute()
+	useVisibleDocumentTitle()
 
 	useShortcutCtrlAToSelectAll()
 	useShortcutEscToRemoveNamesStartAndEnd()

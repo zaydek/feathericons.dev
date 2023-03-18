@@ -1,7 +1,6 @@
 import React from "react"
 
-import { formatSvg, transformJsx, transformSvg, transformTsx } from "../../scripts/utils"
-import { clamp, getKeys, Icon, toCanonCase, toKebabCase, toTitleCase, useParam, useParamBoolean } from "../lib"
+import { clamp, Icon, toCanonCase, toKebabCase, useParam, useParamBoolean } from "../lib"
 import { cache, queryCache as queryIconset } from "./cache"
 import {
 	FormatValue,
@@ -51,6 +50,7 @@ export const ClipboardContext = React.createContext<{
 	removeNames:    (...names: string[]) => void
 	removeAllNames: () => void
 	clipboard:      string
+	setClipboard:   React.Dispatch<React.SetStateAction<string>>
 } | null>(null)
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -88,7 +88,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 
 	const [monochrome, setMonochrome] = useParamBoolean({ key: "monochrome", initialValue: MONOCHROME_DEFAULT })
 
-	const [loading, setLoading] = React.useState(false)
+	const [loading, setLoading] = React.useState(true)
 	const [_results, _setResults] = React.useState<[string, Icon][] | null>(null)
 
 	// TODO: Search tags
@@ -185,54 +185,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 		_setNames(new Set<string>())
 	}, [])
 
-	// TODO: Change to a click event?
-	const [clipboard, _setClipboard] = React.useState("")
-
-	React.useEffect(() => {
-		if (names.size === 0) {
-			_setClipboard("")
-			return
-		}
-		let clipboard = ""
-		const { keys, more } = getKeys(names, { limit: 20 })
-		for (const [index, name] of keys.entries()) {
-			if (index > 0) {
-				clipboard += "\n\n"
-			}
-			const search = toKebabCase(name).toLowerCase()
-			const svg = document.getElementById(name)!.querySelector("svg")!
-			if (format === "svg") {
-				clipboard += transformSvg(formatSvg(svg, { strictJsx: false }), {
-					banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
-				})
-			} else if (format === "jsx") {
-				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=jsx`,
-				})
-			} else if (format === "tsx") {
-				if (index === 0) clipboard += 'import { JSX } from "solid-js";\n\n'
-				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
-				})
-			} else if (format === "strict-jsx") {
-				clipboard += transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-jsx`,
-				})
-			} else if (format === "strict-tsx") {
-				clipboard += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
-					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-tsx`,
-				})
-			}
-		}
-		if (more) {
-			if (format === "svg") {
-				clipboard += `\n\n<!-- ... -->`
-			} else {
-				clipboard += `\n\n// ...`
-			}
-		}
-		_setClipboard(clipboard)
-	}, [format, iconset, names])
+	const [clipboard, setClipboard] = React.useState("")
 
 	//////////////////////////////////////////////////////////////////////////////
 
@@ -277,9 +230,10 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 							removeNames,
 							removeAllNames,
 							clipboard,
+							setClipboard,
 						}),
 						// prettier-ignore
-						[format, setFormatAs, names, namesStart, setNamesStart, namesEnd, setNamesEnd, addNames, removeNames, removeAllNames, clipboard],
+						[format, setFormatAs, names, namesStart, setNamesStart, namesEnd, setNamesEnd, addNames, removeNames, removeAllNames, clipboard, setClipboard],
 					)}
 				>
 					{children}

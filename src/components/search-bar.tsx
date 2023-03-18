@@ -8,7 +8,7 @@ import { ClipboardContext, SearchContext } from "../providers"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function useEffectFocusAndSelectOnMount(ref: React.RefObject<HTMLInputElement | null>) {
+function useSelectOnMount(ref: React.RefObject<HTMLInputElement | null>) {
 	const { search } = React.useContext(SearchContext)!
 	React.useEffect(() => {
 		ref.current!.focus()
@@ -44,9 +44,8 @@ export function SearchBar() {
 	const { removeAllNames } = React.useContext(ClipboardContext)!
 
 	const ref = React.useRef<HTMLInputElement | null>(null)
-	//// const [focus, setFocus] = React.useState(false)
 
-	useEffectFocusAndSelectOnMount(ref)
+	useSelectOnMount(ref)
 	useShortcutCtrlPOrKToToggleSearch(ref)
 
 	return (
