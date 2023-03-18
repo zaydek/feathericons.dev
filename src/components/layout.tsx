@@ -39,11 +39,11 @@ export function Sidebar({
 	// Sync state changes -> transition
 	const onceRef = React.useRef(false)
 	React.useLayoutEffect(() => {
+		void state
 		if (!onceRef.current) {
 			onceRef.current = true
 			return
 		}
-		void state
 		setTransition(true)
 	}, [state])
 
@@ -120,14 +120,13 @@ export function Sidebar({
 			setStartClientX(null)
 			setClientX(null)
 		}
-		// TODO: Use window here?
-		document.addEventListener("pointerdown", handlePointerDown, false)
-		document.addEventListener("pointermove", handlePointerMove, false)
-		document.addEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
+		window.addEventListener("pointerdown", handlePointerDown, false)
+		window.addEventListener("pointermove", handlePointerMove, false)
+		window.addEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
 		return () => {
-			document.removeEventListener("pointerdown", handlePointerDown, false)
-			document.removeEventListener("pointermove", handlePointerMove, false)
-			document.removeEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
+			window.removeEventListener("pointerdown", handlePointerDown, false)
+			window.removeEventListener("pointermove", handlePointerMove, false)
+			window.removeEventListener("pointerup",   handlePointerUp,   false) // prettier-ignore
 		}
 	}, [pointerDown, pos, setState, state, x])
 
