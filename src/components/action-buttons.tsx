@@ -5,8 +5,9 @@ import * as feather from "@icons/feather/tsx"
 import { Reactjs, Solidjs, Svg, TypeScript } from "@/components/icons"
 import { DynamicIcon, IconComponent, sleep } from "@/lib"
 import { ClipboardContext, FormatValue } from "@/providers"
+import { StrokeIcon } from "./stroke-icon"
 
-const formatNames: Record<FormatValue, string> = {
+const names: Record<FormatValue, string> = {
 	svg: "SVG",
 	jsx: "Solid",
 	tsx: "TypeScript Solid",
@@ -16,7 +17,7 @@ const formatNames: Record<FormatValue, string> = {
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
 
-const fomatIcons: Record<FormatValue, IconComponent> = {
+const icons: Record<FormatValue, IconComponent> = {
 	svg: Svg,
 	jsx: Solidjs,
 	tsx: TypeScript,
@@ -33,31 +34,6 @@ export function FormatButton({
 	value: FormatValue
 	setValue: React.Dispatch<React.SetStateAction<FormatValue>>
 }) {
-	const { clipboard } = React.useContext(ClipboardContext)!
-
-	const [copy, setCopy] = React.useState(false)
-	const [save, setSave] = React.useState(false)
-
-	React.useEffect(() => {
-		if (!copy) return
-		async function fn() {
-			await navigator.clipboard.writeText(clipboard)
-			await sleep(500)
-			setCopy(false)
-		}
-		fn()
-	}, [clipboard, copy])
-
-	React.useEffect(() => {
-		if (!save) return
-		async function fn() {
-			await navigator.clipboard.writeText(clipboard)
-			await sleep(500)
-			setSave(false)
-		}
-		fn()
-	}, [clipboard, save])
-
 	return (
 		<label className="select">
 			<select value={value} onChange={e => setValue(e.currentTarget.value as FormatValue)}>
@@ -83,11 +59,12 @@ export function FormatButton({
 			</select>
 			<button className="select-button" tabIndex={-1}>
 				<div className="select-button-icon-frame">
-					<DynamicIcon className="select-button-start-icon" icon={fomatIcons[value]} />
+					<DynamicIcon className="select-button-start-icon" icon={icons[value]} />
 				</div>
-				<span className="select-button-type">{formatNames[value]}</span>
+				<span className="select-button-type">{names[value]}</span>
 				<div className="select-button-icon-frame">
-					<feather.ChevronDown className="select-button-end-icon" strokeWidth={3} />
+					{/* Don't use <StrokeIcon> here */}
+					<DynamicIcon className="select-button-end-icon" icon={feather.ChevronDown} />
 				</div>
 			</button>
 		</label>
@@ -96,14 +73,13 @@ export function FormatButton({
 
 export function CopyButton() {
 	const { clipboard } = React.useContext(ClipboardContext)!
-
 	const [pressed, setPressed] = React.useState(false)
 
 	React.useEffect(() => {
 		if (!pressed) return
 		async function fn() {
 			await navigator.clipboard.writeText(clipboard)
-			await sleep(500)
+			await sleep(1e3)
 			setPressed(false)
 		}
 		fn()
@@ -111,11 +87,10 @@ export function CopyButton() {
 
 	return (
 		<button className="action-button-icon-frame" onClick={e => setPressed(true)}>
-			<DynamicIcon
+			<StrokeIcon
 				// prettier-ignore
-				icon={pressed ? feather.Check : feather.Clipboard}
 				className="action-button-icon"
-				strokeWidth={2.5}
+				icon={pressed ? feather.Check : feather.Clipboard}
 			/>
 		</button>
 	)
@@ -123,14 +98,13 @@ export function CopyButton() {
 
 export function SaveButton() {
 	const { clipboard } = React.useContext(ClipboardContext)!
-
 	const [pressed, setPressed] = React.useState(false)
 
 	React.useEffect(() => {
 		if (!pressed) return
 		async function fn() {
 			await navigator.clipboard.writeText(clipboard)
-			await sleep(500)
+			await sleep(1e3)
 			setPressed(false)
 		}
 		fn()
@@ -138,11 +112,10 @@ export function SaveButton() {
 
 	return (
 		<button className="action-button-icon-frame" onClick={e => setPressed(true)}>
-			<DynamicIcon
+			<StrokeIcon
 				// prettier-ignore
-				icon={pressed ? feather.Check : feather.Download}
 				className="action-button-icon"
-				strokeWidth={2.5}
+				icon={pressed ? feather.Check : feather.Download}
 			/>
 		</button>
 	)
