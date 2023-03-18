@@ -198,8 +198,8 @@ function AppSidebar2() {
 	const scrollProps = useScrollProps()
 
 	React.useEffect(() => {
-		if (clipboard.length === 0) return
-		navigator.clipboard.writeText(clipboard.join("\n\n"))
+		if (clipboard.size === 0) return
+		navigator.clipboard.writeText([...clipboard.values()].join("\n\n"))
 	}, [clipboard])
 
 	return (
@@ -221,7 +221,7 @@ function AppSidebar2() {
 					<div className="widget-syntax-highlighting-container">
 						<MemoSyntaxHighlighting
 							lang={format === "svg" ? "html" : "tsx"}
-							code={clipboard.join("\n\n") || CLIPBOARD_DEFAULT}
+							code={[...clipboard.values()].join("\n\n") || CLIPBOARD_DEFAULT}
 						/>
 					</div>
 				</div>

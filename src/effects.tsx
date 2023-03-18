@@ -54,7 +54,7 @@ function useSetClipboardOnIconsetChanges() {
 		if (searchResultsLoading) return
 		if (searchResults === null || searchResults.length === 0) return
 		//// let clipboard = ""
-		const clipboard: string[] = []
+		const clipboard = new Map<string, string>()
 		const { keys, more } = getKeys(names, { limit: 20 })
 		for (const [index, name] of keys.entries()) {
 			//// if (index > 0) {
@@ -63,13 +63,15 @@ function useSetClipboardOnIconsetChanges() {
 			const search = toKebabCase(name).toLowerCase()
 			const svg = document.getElementById(name)?.querySelector("svg")!
 			if (format === "svg") {
-				clipboard.push(
+				clipboard.set(
+					name,
 					transformSvg(formatSvg(svg, { strictJsx: false }), {
 						banner: `<!-- https://feathericons.dev/?search=${search}&iconset=${iconset} -->`,
 					}),
 				)
 			} else if (format === "jsx") {
-				clipboard.push(
+				clipboard.set(
+					name,
 					transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
 						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=jsx`,
 					}),
@@ -80,15 +82,17 @@ function useSetClipboardOnIconsetChanges() {
 				str += transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: false }), {
 					banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=tsx`,
 				})
-				clipboard.push(str)
+				clipboard.set(name, str)
 			} else if (format === "strict-jsx") {
-				clipboard.push(
+				clipboard.set(
+					name,
 					transformJsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
 						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-jsx`,
 					}),
 				)
 			} else if (format === "strict-tsx") {
-				clipboard.push(
+				clipboard.set(
+					name,
 					transformTsx(toTitleCase(name), formatSvg(svg, { strictJsx: true }), {
 						banner: `// https://feathericons.dev/?search=${search}&iconset=${iconset}&format=strict-tsx`,
 					}),

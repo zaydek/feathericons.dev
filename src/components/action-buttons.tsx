@@ -78,7 +78,7 @@ export function CopyButton() {
 	React.useEffect(() => {
 		if (!pressed) return
 		async function fn() {
-			await navigator.clipboard.writeText(clipboard)
+			await navigator.clipboard.writeText([...clipboard.values()].join("\n\n"))
 			await sleep(1e3)
 			setPressed(false)
 		}
@@ -103,7 +103,7 @@ export function SaveButton() {
 	React.useEffect(() => {
 		if (!pressed) return
 		async function fn() {
-			await navigator.clipboard.writeText(clipboard)
+			//// await navigator.clipboard.writeText(clipboard)
 			await sleep(1e3)
 			setPressed(false)
 		}
