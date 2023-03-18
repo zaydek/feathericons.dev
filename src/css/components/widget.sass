@@ -4,9 +4,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// EXPERIMENTAL
 .widget-alignment-frame
-  // flex: 1 // OOPS // Stretch x-axis
   display: flex
   &:not([data-dir])
     align-items: center
@@ -18,10 +16,7 @@
   &[data-clip=end]
     margin-right: 0
 
-// EXPERIMENTAL
 .widget-alignment-icon-frame
-  //// background-color: red
-
   display: flex
   justify-content: center
   align-items: center
@@ -34,20 +29,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//// .idea
-////   display: flex
-////   align-items: center
-////   margin: 0 math.div($button-height - $tiny-icon-height, 2)
-////   //// border-radius: 1e3px
-////   & + &
-////     margin-left: 0
-
 .widget-head
-  //// display: flex
-  //// //// justify-content: space-between
-  //// align-items: center
-  //// //// gap: math.div($button-height - $tiny-icon-height, 2)
-  //// //// margin: 0 math.div($button-height - $tiny-icon-height, 2)
   padding: $sidebar-gap $sidebar-padding-x
 
   &[data-pos=start]
@@ -77,9 +59,6 @@
 
 // Create a aacontainer because of added padding-bottom (overflow-y must be separated)
 .widget-syntax-highlighting-container
-  //// display: flex
-  //// flex-direction: column
-  //// gap: $sidebar-gap
   padding-bottom: $sidebar-gap
 
 // <div class="widget-head">
@@ -97,13 +76,9 @@
 // </div>
 //
 .widget-name
-  //// flex: 1
   display: flex
-  //// justify-content: space-between
   align-items: center
   height: 24px
-  //// gap: math.div($button-height - $tiny-icon-height, 2)
-  //// margin: 0 math.div($button-height - $tiny-icon-height, 2)
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -112,9 +87,7 @@
   width:  $tiny-icon-height
   color:  $text-200-color
 
-// TODO: Rename (use range)
 .widget-name-type
-  // flex: 1 // OOPS
   // TYPOGRAPHY
   +typography-caps
   white-space: pre
@@ -143,7 +116,6 @@
 .widget-reset-button-icon
   height: $tiny-icon-height
   width:  $tiny-icon-height
-  //// color:  $text-400-color
   color:  $text-200-color
   button:hover &
     color: $text-100-color
