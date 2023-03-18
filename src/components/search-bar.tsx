@@ -4,7 +4,7 @@ import * as feather from "@icons/feather/tsx"
 
 import { isMac } from "@/lib"
 import { ClipboardContext, SearchContext } from "@/providers"
-import { StrokeIcon } from "./stroke-icon"
+import { StrokeIcon } from "./icons"
 
 ////////////////////////////////////////////////////////////////////////////////
 

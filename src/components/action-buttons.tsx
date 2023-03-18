@@ -2,10 +2,10 @@ import React from "react"
 
 import * as feather from "@icons/feather/tsx"
 
-import { Reactjs, Solidjs, Svg, TypeScript } from "@/components/icons"
-import { DynamicIcon, IconComponent, sleep } from "@/lib"
+import { Reactjs, Solidjs, Svg, TypeScript } from "@/components/vendor-icons"
+import { sleep } from "@/lib"
 import { ClipboardContext, FormatValue } from "@/providers"
-import { StrokeIcon } from "./stroke-icon"
+import { DynamicIcon, Icon, StrokeIcon } from "./icons"
 
 const names: Record<FormatValue, string> = {
 	svg: "SVG",
@@ -17,7 +17,7 @@ const names: Record<FormatValue, string> = {
 	//// "strict-tsx-rn": "TypeScript React Native",
 }
 
-const icons: Record<FormatValue, IconComponent> = {
+const icons: Record<FormatValue, Icon> = {
 	svg: Svg,
 	jsx: Solidjs,
 	tsx: TypeScript,

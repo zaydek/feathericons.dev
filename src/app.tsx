@@ -13,6 +13,7 @@ import {
 	CopyButton,
 	DEV_DebugCss,
 	FormatButton,
+	Icon,
 	Main,
 	MemoSyntaxHighlighting,
 	ProgressSlider,
@@ -24,7 +25,7 @@ import {
 	StrokeIcon,
 } from "@/components"
 import { resources } from "@/data"
-import { IconComponent, iota, isMac, safeAnchorAttrs, toKebabCase } from "@/lib"
+import { iota, isMac, safeAnchorAttrs, toKebabCase } from "@/lib"
 import { ClipboardContext, ProgressBarContext, RangeContext, SearchContext } from "@/providers"
 import {
 	CLIPBOARD_DEFAULT,
@@ -266,7 +267,7 @@ function AppSidebar2() {
 ////////////////////////////////////////////////////////////////////////////////
 
 // eslint-disable-next-line destructuring/no-rename
-function MainGridItem({ index, name, icon: Icon }: { index: number; name: string; icon: IconComponent }) {
+function MainGridItem({ index, name, icon: Icon }: { index: number; name: string; icon: Icon }) {
 	const { names, namesStart, setNamesStart, setNamesEnd, addNames, removeNames, removeAllNames } =
 		React.useContext(ClipboardContext)!
 

@@ -1,8 +1,8 @@
 import React from "react"
 
-import { DynamicIcon, IconComponent } from "@/lib"
+import { DynamicIcon, Icon } from "./icons"
 
-type RadioProps<T> = JSX.IntrinsicElements["input"] & React.PropsWithChildren & { icon: IconComponent; value: T }
+type RadioProps<T> = JSX.IntrinsicElements["input"] & React.PropsWithChildren & { icon: Icon; value: T }
 
 export function Radio<T extends string>({ icon, children, ...props }: RadioProps<T>) {
 	const ref = React.useRef<HTMLInputElement | null>(null)
