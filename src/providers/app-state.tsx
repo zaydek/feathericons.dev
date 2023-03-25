@@ -15,6 +15,8 @@ import {
 	STROKE_MIN,
 } from "./constants"
 
+import TAGS from "../data/feather-tags.json"
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // prettier-ignore
@@ -91,14 +93,32 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 	const [searchResultsLoading, setSearchResultsLoading] = React.useState(true)
 	const [_results, _setResults] = React.useState<[string, Icon][] | null>(null)
 
-	// TODO: Search tags
 	const searchResults = React.useMemo(() => {
 		if (_results === null) return null
-		const canon = toCanonCase(search)
-		if (canon === "") {
+		const canonSearch = toCanonCase(search)
+		if (canonSearch === "") {
 			return _results
 		} else {
-			return _results?.filter(([name]) => toKebabCase(name).includes(canon))
+			const a: [string, Icon][] = []
+			const b: [string, Icon][] = []
+			for (const [name, icon] of _results) {
+				const kebabName = toKebabCase(name)
+				if (kebabName.includes(canonSearch)) {
+					a.push([name, icon])
+				} else {
+					const tags = TAGS[kebabName as keyof typeof TAGS]
+					// Must check
+					if (tags !== undefined) {
+						for (const tag of tags) {
+							if (tag.includes(canonSearch)) {
+								b.push([name, icon])
+								break
+							}
+						}
+					}
+				}
+			}
+			return [...a, ...b]
 		}
 	}, [_results, search])
 
