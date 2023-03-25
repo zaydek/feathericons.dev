@@ -110,7 +110,7 @@ export function AppStateProvider({ children }: React.PropsWithChildren) {
 					// Must check
 					if (tags !== undefined) {
 						for (const tag of tags) {
-							if (tag.includes(canonSearch)) {
+							if (tag.startsWith(canonSearch)) {
 								b.push([name, icon])
 								break
 							}
