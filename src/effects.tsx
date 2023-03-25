@@ -20,6 +20,8 @@ function useResetSearchAndNamesOnIconsetChanges() {
 			onceRef.current = true
 			return
 		}
+		// TODO: Only reset search IF the iconset has changed. I suppose we can
+		// cache the previous value (using a ref) then compare.
 		setSearch("")
 		removeAllNames()
 	}, [iconset, removeAllNames, setSearch])
